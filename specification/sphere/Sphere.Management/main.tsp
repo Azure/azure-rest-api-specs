@@ -1,30 +1,33 @@
-import "./common.tsp";
-import "./catalog.tsp";
-import "./image.tsp";
-import "./deviceGroup.tsp";
-import "./certificate.tsp";
-import "./deployment.tsp";
-import "./device.tsp";
-import "./deviceGroup.tsp";
-import "./product.tsp";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./models.tsp";
+import "./catalog.tsp";
+import "./certificate.tsp";
+import "./image.tsp";
+import "./product.tsp";
+import "./deviceGroup.tsp";
+import "./deployment.tsp";
+import "./device.tsp";
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
+using TypeSpec.Http;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
-  title: "AzureSphereProviderClient",
-  version: "2022-09-01-preview",
+  title: "AzureSphereManagementClient",
 })
+@versioned(Versions)
 @doc("Azure Sphere resource management API.")
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.AzureSphere;
+
+@doc("The available API versions.")
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2022_09_01_preview: "2022-09-01-preview",
+}

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "AzureSphereProviderClient",
+    "title": "AzureSphereManagementClient",
     "version": "2022-09-01-preview",
     "description": "Azure Sphere resource management API.",
     "x-typespec-generated": [
@@ -46,22 +46,22 @@
       "name": "Catalogs"
     },
     {
+      "name": "Certificates"
+    },
+    {
       "name": "Images"
     },
     {
-      "name": "DeviceGroups"
+      "name": "Products"
     },
     {
-      "name": "Certificates"
+      "name": "DeviceGroups"
     },
     {
       "name": "Deployments"
     },
     {
       "name": "Devices"
-    },
-    {
-      "name": "Products"
     }
   ],
   "paths": {
@@ -89,11 +89,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/GetOperations.json"
           }
         },
         "x-ms-pageable": {
@@ -128,11 +123,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Catalogs_ListBySubscription": {
-            "$ref": "./examples/GetCatalogsSub.json"
           }
         },
         "x-ms-pageable": {
@@ -170,11 +160,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Catalogs_ListByResourceGroup": {
-            "$ref": "./examples/GetCatalogsRG.json"
           }
         },
         "x-ms-pageable": {
@@ -220,11 +205,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Catalogs_Get": {
-            "$ref": "./examples/GetCatalog.json"
           }
         }
       },
@@ -289,11 +269,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Catalogs_CreateOrUpdate": {
-            "$ref": "./examples/PutCatalog.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -329,7 +304,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CatalogUpdate"
+              "$ref": "#/definitions/CatalogTagsUpdate"
             }
           }
         ],
@@ -345,11 +320,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Catalogs_Update": {
-            "$ref": "./examples/PatchCatalog.json"
           }
         }
       },
@@ -406,11 +376,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Catalogs_Delete": {
-            "$ref": "./examples/DeleteCatalog.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -426,18 +391,6 @@
         "description": "List Certificate resources by Catalog",
         "parameters": [
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomTopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -445,6 +398,41 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
           },
           {
             "name": "catalogName",
@@ -467,11 +455,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Certificates_ListByCatalog": {
-            "$ref": "./examples/GetCertificates.json"
           }
         },
         "x-ms-pageable": {
@@ -525,11 +508,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Certificates_Get": {
-            "$ref": "./examples/GetCertificate.json"
-          }
         }
       }
     },
@@ -564,6 +542,15 @@
             "description": "Serial number of the certificate. Use '.default' to get current active certificate.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
@@ -578,11 +565,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Certificates_RetrieveCertChain": {
-            "$ref": "./examples/PostRetrieveCatalogCertChain.json"
           }
         }
       }
@@ -620,9 +602,9 @@
             "type": "string"
           },
           {
-            "name": "proofOfPossessionNonceRequest",
+            "name": "body",
             "in": "body",
-            "description": "Proof of possession nonce request body ",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ProofOfPossessionNonceRequest"
@@ -641,11 +623,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Certificates_RetrieveProofOfPossessionNonce": {
-            "$ref": "./examples/PostRetrieveProofOfPossessionNonce.json"
           }
         }
       }
@@ -674,6 +651,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
@@ -689,11 +675,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Catalogs_CountDevices": {
-            "$ref": "./examples/PostCountDevicesCatalog.json"
-          }
         }
       }
     },
@@ -706,18 +687,6 @@
         "description": "List Image resources by Catalog",
         "parameters": [
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomTopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -725,6 +694,41 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
           },
           {
             "name": "catalogName",
@@ -747,11 +751,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Images_ListByCatalog": {
-            "$ref": "./examples/GetImages.json"
           }
         },
         "x-ms-pageable": {
@@ -804,11 +803,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Images_Get": {
-            "$ref": "./examples/GetImage.json"
           }
         }
       },
@@ -880,11 +874,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Image_CreateOrUpdate": {
-            "$ref": "./examples/PutImage.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -950,11 +939,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Images_Delete": {
-            "$ref": "./examples/DeleteImage.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -979,6 +963,41 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
             "name": "catalogName",
             "in": "path",
             "description": "Name of catalog",
@@ -987,16 +1006,13 @@
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomTopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
@@ -1011,11 +1027,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Catalogs_ListDeployments": {
-            "$ref": "./examples/PostListDeploymentsByCatalog.json"
           }
         },
         "x-ms-pageable": {
@@ -1041,6 +1052,41 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
             "name": "catalogName",
             "in": "path",
             "description": "Name of catalog",
@@ -1049,21 +1095,9 @@
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomTopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
-          },
-          {
-            "name": "listDeviceGroupsRequest",
+            "name": "body",
             "in": "body",
-            "description": "List device groups for catalog.",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ListDeviceGroupsRequest"
@@ -1082,11 +1116,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Catalogs_ListDeviceGroups": {
-            "$ref": "./examples/PostListDeviceGroupsCatalog.json"
           }
         },
         "x-ms-pageable": {
@@ -1112,6 +1141,41 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
             "name": "catalogName",
             "in": "path",
             "description": "Name of catalog",
@@ -1120,16 +1184,13 @@
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomTopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
@@ -1144,11 +1205,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Catalogs_ListDeviceInsights": {
-            "$ref": "./examples/PostListDeviceInsightsCatalog.json"
           }
         },
         "x-ms-pageable": {
@@ -1174,6 +1230,41 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
+          },
+          {
             "name": "catalogName",
             "in": "path",
             "description": "Name of catalog",
@@ -1182,16 +1273,13 @@
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomTopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
@@ -1206,11 +1294,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Catalogs_ListDevices": {
-            "$ref": "./examples/PostListDevicesByCatalog.json"
           }
         },
         "x-ms-pageable": {
@@ -1256,11 +1339,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Products_ListByCatalog": {
-            "$ref": "./examples/GetProducts.json"
           }
         },
         "x-ms-pageable": {
@@ -1314,11 +1392,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Products_Get": {
-            "$ref": "./examples/GetProduct.json"
           }
         }
       },
@@ -1389,11 +1462,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Products_CreateOrUpdate": {
-            "$ref": "./examples/PutProduct.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1471,11 +1539,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Products_Update": {
-            "$ref": "./examples/PatchProduct.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1542,11 +1605,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Products_Delete": {
-            "$ref": "./examples/DeleteProduct.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1585,6 +1643,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
@@ -1600,11 +1667,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Products_CountDevices": {
-            "$ref": "./examples/PostCountDevicesProduct.json"
-          }
         }
       }
     },
@@ -1617,18 +1679,6 @@
         "description": "List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.",
         "parameters": [
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomTopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1636,6 +1686,41 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
           },
           {
             "name": "catalogName",
@@ -1666,11 +1751,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DeviceGroups_ListByProduct": {
-            "$ref": "./examples/GetDeviceGroups.json"
           }
         },
         "x-ms-pageable": {
@@ -1732,11 +1812,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DeviceGroups_Get": {
-            "$ref": "./examples/GetDeviceGroup.json"
           }
         }
       },
@@ -1815,11 +1890,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DeviceGroups_CreateOrUpdate": {
-            "$ref": "./examples/PutDeviceGroup.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1905,11 +1975,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "DeviceGroups_Update": {
-            "$ref": "./examples/PatchDeviceGroup.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1984,11 +2049,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "DeviceGroups_Delete": {
-            "$ref": "./examples/DeleteDeviceGroup.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2037,9 +2097,9 @@
             "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
-            "name": "claimDevicesRequest",
+            "name": "body",
             "in": "body",
-            "description": "Bulk claim devices request body.",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClaimDevicesRequest"
@@ -2054,6 +2114,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2062,11 +2126,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DeviceGroups_ClaimDevices": {
-            "$ref": "./examples/PostClaimDevices.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2115,6 +2174,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
@@ -2130,11 +2198,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "DeviceGroups_CountDevices": {
-            "$ref": "./examples/PostCountDevicesDeviceGroup.json"
-          }
         }
       }
     },
@@ -2147,18 +2210,6 @@
         "description": "List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
         "parameters": [
           {
-            "$ref": "#/parameters/CustomFilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomTopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomSkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -2166,6 +2217,41 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter the result list using the given expression",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "description": "The maximum number of result items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "maxpagesize"
           },
           {
             "name": "catalogName",
@@ -2204,11 +2290,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Deployments_ListByDeviceGroup": {
-            "$ref": "./examples/GetDeployments.json"
           }
         },
         "x-ms-pageable": {
@@ -2277,11 +2358,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Deployments_Get": {
-            "$ref": "./examples/GetDeployment.json"
           }
         }
       },
@@ -2369,11 +2445,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Deployments_CreateOrUpdate": {
-            "$ref": "./examples/PutDeployment.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -2455,11 +2526,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Deployments_Delete": {
-            "$ref": "./examples/DeleteDeployment.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2520,11 +2586,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Devices_ListByDeviceGroup": {
-            "$ref": "./examples/GetDevices.json"
           }
         },
         "x-ms-pageable": {
@@ -2594,11 +2655,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Devices_Get": {
-            "$ref": "./examples/GetDevice.json"
           }
         }
       },
@@ -2687,11 +2743,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Devices_CreateOrUpdate": {
-            "$ref": "./examples/PutDevice.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -2769,6 +2820,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2777,11 +2832,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Devices_Update": {
-            "$ref": "./examples/PatchDevice.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2866,11 +2916,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Devices_Delete": {
-            "$ref": "./examples/DeleteDevice.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2927,9 +2972,9 @@
             "pattern": "^[a-zA-Z0-9-]{128}$"
           },
           {
-            "name": "generateDeviceCapabilityRequest",
+            "name": "body",
             "in": "body",
-            "description": "Generate capability image request body.",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/GenerateCapabilityImageRequest"
@@ -2950,6 +2995,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2958,11 +3007,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Devices_GenerateCapabilityImage": {
-            "$ref": "./examples/PostGenerateDeviceCapabilityImage.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3003,6 +3047,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
           }
         ],
         "responses": {
@@ -3019,11 +3072,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Products_GenerateDefaultDeviceGroups": {
-            "$ref": "./examples/PostGenerateDefaultDeviceGroups.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3031,9 +3079,18 @@
     }
   },
   "definitions": {
+    "ActionType": {
+      "type": "string",
+      "enum": [
+        "Internal"
+      ],
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true
+      }
+    },
     "AllowCrashDumpCollection": {
       "type": "string",
-      "description": "Allow crash dumps values.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -3057,7 +3114,6 @@
     },
     "CapabilityType": {
       "type": "string",
-      "description": "Capability image type",
       "enum": [
         "ApplicationDevelopment",
         "FieldServicing"
@@ -3131,9 +3187,9 @@
         }
       }
     },
-    "CatalogUpdate": {
+    "CatalogTagsUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Catalog.",
+      "description": "The type used for updating tags in Catalog resources.",
       "properties": {
         "tags": {
           "type": "object",
@@ -3241,7 +3297,6 @@
     },
     "CertificateStatus": {
       "type": "string",
-      "description": "Certificate status values.",
       "enum": [
         "Active",
         "Inactive",
@@ -3294,10 +3349,15 @@
     "CountDeviceResponse": {
       "type": "object",
       "description": "Response to the action call for count devices in a catalog.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CountElementsResponse"
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of children resources in parent resource."
         }
+      },
+      "required": [
+        "value"
       ]
     },
     "CountElementsResponse": {
@@ -3313,6 +3373,19 @@
       "required": [
         "value"
       ]
+    },
+    "CreatedByType": {
+      "type": "string",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true
+      }
     },
     "Deployment": {
       "type": "object",
@@ -3657,23 +3730,7 @@
     },
     "DeviceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Device.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DeviceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DeviceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Device.",
-      "properties": {
-        "deviceGroupId": {
-          "type": "string",
-          "description": "Device group id"
-        }
-      }
+      "description": "The type used for update operations of the Device."
     },
     "GenerateCapabilityImageRequest": {
       "type": "object",
@@ -3794,7 +3851,6 @@
     },
     "ImageType": {
       "type": "string",
-      "description": "Image type values.",
       "enum": [
         "InvalidImageType",
         "OneBl",
@@ -3973,7 +4029,6 @@
     },
     "OSFeedType": {
       "type": "string",
-      "description": "OS feed type values.",
       "enum": [
         "Retail",
         "RetailEval"
@@ -3993,6 +4048,18 @@
             "description": "Retail evaluation OS feed type."
           }
         ]
+      }
+    },
+    "Origin": {
+      "type": "string",
+      "enum": [
+        "user",
+        "system",
+        "user,system"
+      ],
+      "x-ms-enum": {
+        "name": "Origin",
+        "modelAsString": true
       }
     },
     "PagedDeviceInsight": {
@@ -4112,15 +4179,48 @@
     "ProofOfPossessionNonceResponse": {
       "type": "object",
       "description": "Result of the action to generate a proof of possession nonce",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CertificateProperties"
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "description": "The certificate as a UTF-8 encoded base 64 string.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CertificateStatus",
+          "description": "The certificate status.",
+          "readOnly": true
+        },
+        "subject": {
+          "type": "string",
+          "description": "The certificate subject.",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "The certificate thumbprint.",
+          "readOnly": true
+        },
+        "expiryUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The certificate expiry date.",
+          "readOnly": true
+        },
+        "notBeforeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The certificate not before date.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
-      ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the resource.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -4174,7 +4274,6 @@
     },
     "RegionalDataBoundary": {
       "type": "string",
-      "description": "Regional data boundary values.",
       "enum": [
         "None",
         "EU"
@@ -4209,7 +4308,6 @@
     },
     "UpdatePolicy": {
       "type": "string",
-      "description": "Update policy values.",
       "enum": [
         "UpdateAll",
         "No3rdPartyAppUpdates"
@@ -4230,47 +4328,24 @@
           }
         ]
       }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2022-09-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_09_01_preview",
+            "value": "2022-09-01-preview"
+          }
+        ]
+      }
     }
   },
-  "parameters": {
-    "CustomFilterQueryParameter": {
-      "name": "$filter",
-      "in": "query",
-      "description": "Filter the result list using the given expression",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "filter"
-    },
-    "CustomMaxPageSizeQueryParameter": {
-      "name": "$maxpagesize",
-      "in": "query",
-      "description": "The maximum number of result items per page.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "maxpagesize"
-    },
-    "CustomSkipQueryParameter": {
-      "name": "$skip",
-      "in": "query",
-      "description": "The number of result items to skip.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "skip"
-    },
-    "CustomTopQueryParameter": {
-      "name": "$top",
-      "in": "query",
-      "description": "The number of result items to return.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "top"
-    }
-  }
+  "parameters": {}
 }

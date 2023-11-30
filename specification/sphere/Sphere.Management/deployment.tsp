@@ -1,63 +1,54 @@
-import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./deviceGroup.tsp";
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
 
 namespace Microsoft.AzureSphere;
-
-// Deployment
 @doc("An deployment resource belonging to a device group resource.")
 @parentResource(DeviceGroup)
 model Deployment is ProxyResource<DeploymentProperties> {
   @doc("Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.")
-  @key("deploymentName")
   @path
+  @key("deploymentName")
   @segment("deployments")
   name: string;
 }
 
-interface ProxyResourceOperationsDeployments<
-  TResource extends ArmResource,
-  TListParameters extends {} = {}
-> {
+@armResourceOperations
+interface Deployments {
   @doc("Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   get is ArmResourceRead<Deployment>;
-  @doc("List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  list is ArmResourceListByParent<
-    TResource,
-    ListQueryParameters & BaseParameters<TResource>
-  >;
   @doc("Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Deployment>;
   @doc("Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   delete is ArmResourceDeleteAsync<Deployment>;
-}
+  @doc("List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  listByDeviceGroup is ArmResourceListByParent<
+    Deployment,
+    {
+      ...BaseParameters<Deployment>;
 
-@armResourceOperations
-interface Deployments extends ProxyResourceOperationsDeployments<Deployment> {}
+      @doc("Filter the result list using the given expression")
+      @query("$filter")
+      filter?: string;
 
-@doc("The properties of deployment")
-model DeploymentProperties {
-  @visibility("create", "read")
-  @doc("Deployment ID")
-  deploymentId?: string;
+      @doc("The number of result items to return.")
+      @query("$top")
+      top?: int32;
 
-  @doc("Images deployed")
-  @visibility("create", "read")
-  deployedImages?: Image[];
+      @doc("The number of result items to skip.")
+      @query("$skip")
+      skip?: int32;
 
-  @doc("Deployment date UTC")
-  @visibility("read")
-  deploymentDateUtc?: utcDateTime;
-
-  @visibility("read")
-  @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
+      @doc("The maximum number of result items per page.")
+      @query("$maxpagesize")
+      maxpagesize?: int32;
+    }
+  >;
 }
