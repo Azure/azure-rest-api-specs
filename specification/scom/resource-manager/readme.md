@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2021-06-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-06-30-preview'
 input-file:
-  - Microsoft.SCOM/preview/2021-06-30-preview/scom.json
+  - Microsoft.Scom/preview/2021-06-30-preview/scom.json
 ```
 
 ### Tag: package-2022-04-30-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2022-04-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-04-30-preview'
 input-file:
-  - Microsoft.SCOM/preview/2022-04-30-preview/scom.json
+  - Microsoft.Scom/preview/2022-04-30-preview/scom.json
 ```
 
 ### Tag: package-2022-09-13-preview
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2022-09-13-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-09-13-preview'
 input-file:
-  - Microsoft.SCOM/preview/2022-09-13-preview/scom.json
+  - Microsoft.Scom/preview/2022-09-13-preview/scom.json
 ```
 
 ### Tag: package-2023-06-30
@@ -63,7 +63,7 @@ These settings apply only when `--tag=package-2023-06-30` is specified on the co
 
 ```yaml $(tag) == 'package-2023-06-30'
 input-file:
-  - Microsoft.SCOM/stable/2023-06-30/scom.json
+  - Microsoft.Scom/stable/2023-06-30/scom.json
 ```
 
 ### Tag: package-2023-07-07-preview
@@ -72,10 +72,22 @@ These settings apply only when `--tag=package-2023-07-07-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-07-07-preview'
 input-file:
-  - Microsoft.SCOM/preview/2023-07-07-preview/scom.json
-  - Microsoft.SCOM/preview/2023-07-07-preview/monitoredResources.json
-  - Microsoft.SCOM/preview/2023-07-07-preview/managedGateways.json
-  - Microsoft.SCOM/preview/2023-07-07-preview/commonTypes.json
+  - Microsoft.Scom/preview/2023-07-07-preview/scom.json
+  - Microsoft.Scom/preview/2023-07-07-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2023-07-07-preview/managedGateways.json
+  - Microsoft.Scom/preview/2023-07-07-preview/commonTypes.json
+```
+
+### Tag: package-2023-10-30
+
+These settings apply only when `--tag=package-2023-10-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-30'
+input-file:
+  - Microsoft.Scom/stable/2023-10-30/scom.json
+  - Microsoft.Scom/stable/2023-10-30/monitoredResources.json
+  - Microsoft.Scom/stable/2023-10-30/managedGateways.json
+  - Microsoft.Scom/stable/2023-10-30/commonTypes.json
 ```
 ---
 
@@ -121,12 +133,4 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-### Suppress lint rules
 
-These errors need to be suppressed since they do not apply to the SCOM spec.
-
-``` yaml
-suppressions:
-  - code: PathResourceProviderMatchNamespace
-  - reason: The spec folder name is Microsoft.SCOM, but in spec files we have defined Microsoft.Scom in previous versions. This error is coming up because we want to use Microsoft.Scom in latest API versions. If we use Microsoft.SCOM in the latest version, we get PathResourceProviderNamePascalCase error, and also we get Swagger MISSING_APIS_IN_DEFAULT_TAG Avocado error, since in the previous version we used Microsoft.Scom. To avoid all this, we are suppressing this one alert to solve all these issues.
-```
