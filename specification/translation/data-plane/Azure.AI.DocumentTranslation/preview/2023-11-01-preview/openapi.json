@@ -249,10 +249,10 @@
             "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/TranslateDocumentParameters.from"
+            "$ref": "#/parameters/TranslateDocumentParameters.sourceLanguage"
           },
           {
-            "$ref": "#/parameters/TranslateDocumentParameters.to"
+            "$ref": "#/parameters/TranslateDocumentParameters.targetLanguage"
           },
           {
             "$ref": "#/parameters/TranslateDocumentParameters.category"
@@ -523,23 +523,23 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "category"
     },
-    "TranslateDocumentParameters.from": {
-      "name": "From",
+    "TranslateDocumentParameters.sourceLanguage": {
+      "name": "SourceLanguage",
       "in": "query",
       "description": "Specifies the language of the input document. If the from parameter isn't specified, \n    automatic language detection is applied to determine the source language.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "x-ms-client-name": "from"
+      "x-ms-client-name": "sourceLanguage"
     },
-    "TranslateDocumentParameters.to": {
-      "name": "To",
+    "TranslateDocumentParameters.targetLanguage": {
+      "name": "TargetLanguage",
       "in": "query",
       "description": "Specifies the language of the output document. The target language must be one of the supported languages included \n    in the translation scope. For example, use to=de to translate to German.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "x-ms-client-name": "to"
+      "x-ms-client-name": "targetLanguage"
     }
   }
 }

@@ -130,13 +130,13 @@ model TranslateDocumentParameters {
 
   /** Specifies the language of the input document. If the from parameter isn't specified, 
     automatic language detection is applied to determine the source language. */
-  @query("From")
-  from?: string;
+  @query("SourceLanguage")
+  sourceLanguage?: string;
 
   /** Specifies the language of the output document. The target language must be one of the supported languages included 
     in the translation scope. For example, use to=de to translate to German. */
-  @query("To")
-  to: string;
+  @query("TargetLanguage")
+  targetLanguage: string;
 
   /** A string specifying the category (domain) of the translation. This parameter is used to get translations 
     from a customized system built with Custom Translator. Add the Category ID from your Custom Translator 
