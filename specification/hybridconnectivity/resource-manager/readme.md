@@ -82,6 +82,7 @@ These settings apply only when `--tag=package-2023-12-01-preview` is specified o
 ``` yaml $(tag) == 'package-2023-12-01-preview'
 input-file:
   - Microsoft.HybridConnectivity/preview/2023-12-01-preview/publicCloud.json
+  - Microsoft.HybridConnectivity/stable/2023-03-15/hybridconnectivity.json
 ```
 
 ---
