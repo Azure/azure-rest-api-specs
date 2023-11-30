@@ -12,3 +12,6 @@ model TcpReceiver {
   @pattern("^[a-zA-Z0-9-\\.]+:[0-9]+$")
   endpoint: string;
 }
+
+@doc("Receiver using UDP as transport protocol.")
+model UdpReceiver is TcpReceiver;

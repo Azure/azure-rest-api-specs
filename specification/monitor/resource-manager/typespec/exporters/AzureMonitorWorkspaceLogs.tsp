@@ -7,7 +7,7 @@ using OpenAPI;
 namespace Microsoft.Monitor;
 
 @doc("Azure Monitor Workspace Logs specific configurations.")
-model AzureMonitorWorkspaceLogsConfig {
+model AzureMonitorWorkspaceLogsExporter {
   @doc("API configurations for Azure Monitor workspace exporter.")
   api: AzureMonitorWorkspaceLogsApiConfig;
 

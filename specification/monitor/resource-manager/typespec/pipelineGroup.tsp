@@ -9,6 +9,7 @@ import "./exporters/AzureMonitorWorkspaceLogs.tsp";
 import "./exporters/TcpExporters.tsp";
 import "./receivers/TcpReceivers.tsp";
 import "./receivers/OtlpReceiver.tsp";
+import "./receivers/SyslogReceiver.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -69,11 +70,14 @@ model Receiver {
   @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
   name: string;
 
-  @doc("TCP service configurations. This field is mandatory for syslog type receivers.")
-  tcpReceiver?: TcpReceiver;
+  @doc("Syslog configurations. This field is mandatory for syslog type receivers.")
+  syslog?: SyslogReceiver;
 
   @doc("OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers.")
-  otlpReceiver?: OtlpReceiver;
+  otlp?: OtlpReceiver;
+
+  @doc("UDP receiver configurations. This field is mandatory for UDP receivers.")
+  udp?: UdpReceiver;
 }
 
 @doc("The receiver type.")
@@ -89,6 +93,9 @@ enum ReceiverType {
 
   @doc("Receives data from a OTLP collector.")
   OTLP,
+
+  @doc("Receives data from an UDP collector.")
+  UDP,
 }
 
 @doc("Processor Info.")
@@ -117,10 +124,10 @@ model Exporter {
   name: string;
 
   @doc("Azure Monitor Workspace Logs specific configurations.")
-  azureMonitorWorkspaceLogsConfig?: AzureMonitorWorkspaceLogsConfig;
+  azureMonitorWorkspaceLogs?: AzureMonitorWorkspaceLogsExporter;
 
   @doc("TCP based exporter. Used for pipelineGroup exporter.")
-  tcpExporter?: TcpExporter;
+  tcp?: TcpExporter;
 }
 
 @doc("The exporter type.")
