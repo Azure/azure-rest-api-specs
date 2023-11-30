@@ -1356,7 +1356,7 @@
         },
         "indexName": {
           "type": "string",
-          "description": "The index name name of Azure Cosmos DB."
+          "description": "The index name of Azure Cosmos DB."
         },
         "fieldsMapping": {
           "$ref": "#/definitions/AzureCosmosDBFieldMappingOptions",
@@ -1532,7 +1532,7 @@
         },
         "projectResourceId": {
           "type": "string",
-          "description": "The resource id of the Azure Machine Learning project."
+          "description": "The resource ID of the Azure Machine Learning project."
         },
         "name": {
           "type": "string",
@@ -3077,7 +3077,7 @@
     },
     "OnYourDataApiKeyAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication option using API key.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an API key.",
       "properties": {
         "key": {
           "type": "string",
@@ -3096,11 +3096,11 @@
     },
     "OnYourDataAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication options for Azure OpenAI on your data.",
+      "description": "The authentication options for Azure OpenAI On Your Data.",
       "properties": {
         "type": {
           "$ref": "#/definitions/OnYourDataAuthenticationType",
-          "description": "The Authentication type."
+          "description": "The authentication type."
         }
       },
       "discriminator": "type",
@@ -3110,7 +3110,7 @@
     },
     "OnYourDataAuthenticationType": {
       "type": "string",
-      "description": "  Authentication types supported by with Azure OpenAI on your data.",
+      "description": "The authentication types supported with Azure OpenAI On Your Data.",
       "enum": [
         "APIKey",
         "ConnectionString",
@@ -3125,34 +3125,34 @@
           {
             "name": "apiKey",
             "value": "APIKey",
-            "description": "API key."
+            "description": "Authentication via API key."
           },
           {
             "name": "connectionString",
             "value": "ConnectionString",
-            "description": "Connection string."
+            "description": "Authentication via connection string."
           },
           {
             "name": "keyAndKeyId",
             "value": "KeyAndKeyId",
-            "description": "Key and keyId pair."
+            "description": "Authentication via key and key ID pair."
           },
           {
             "name": "systemAssignedManagedIdentity",
             "value": "SystemAssignedManagedIdentity",
-            "description": "System-assigned managed identity."
+            "description": "Authentication via system-assigned managed identity."
           },
           {
             "name": "userAssignedManagedIdentity",
             "value": "UserAssignedManagedIdentity",
-            "description": "User-assigned managed identity."
+            "description": "Authentication via user-assigned managed identity."
           }
         ]
       }
     },
     "OnYourDataConnectionStringAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication option using connection string.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a connection string.",
       "properties": {
         "connectionString": {
           "type": "string",
@@ -3208,7 +3208,7 @@
           {
             "name": "modelId",
             "value": "ModelId",
-            "description": "The embedding model id defined in the search service. Currently only supported by Elasticsearch."
+            "description": "The embedding model ID defined in the search service. Currently only supported by Elasticsearch."
           }
         ]
       }
@@ -3263,7 +3263,7 @@
       "properties": {
         "modelId": {
           "type": "string",
-          "description": "The embedding model id build inside the search service. Currently only supported by Elasticsearch."
+          "description": "The embedding model ID build inside the search service. Currently only supported by Elasticsearch."
         }
       },
       "required": [
@@ -3278,7 +3278,7 @@
     },
     "OnYourDataKeyAndKeyIdAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication option using Elasticsearch key and keyId pair.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an Elasticsearch key and key ID pair.",
       "properties": {
         "key": {
           "type": "string",
@@ -3302,7 +3302,7 @@
     },
     "OnYourDataSystemAssignedManagedIdentityAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication option using system-assigned managed identity.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a system-assigned managed identity.",
       "allOf": [
         {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions"
@@ -3312,7 +3312,7 @@
     },
     "OnYourDataUserAssignedManagedIdentityAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication option using user-assigned managed identity.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a user-assigned managed identity.",
       "properties": {
         "managedIdentityResourceId": {
           "type": "string",

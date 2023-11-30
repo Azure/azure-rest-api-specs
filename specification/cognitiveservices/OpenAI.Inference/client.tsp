@@ -35,15 +35,7 @@ interface OpenAIClient {
   getChatCompletions is Azure.OpenAI.getChatCompletions;
   getChatCompletionsWithAzureExtensions is Azure.OpenAI.getChatCompletionsWithAzureExtensions;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
-  beginImageGenerations is Azure.OpenAI.beginAzureBatchImageGeneration;
-  #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "MUST fix in next update"
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
-  getAzureBatchImageGenerationOperationStatus is Azure.OpenAI.getAzureBatchImageGenerationOperationStatus;
   getImageGenerations is Azure.OpenAI.getImageGenerations;
 
   getEmbeddings is Azure.OpenAI.getEmbeddings;
 }
-
-@@access(OpenAIClient.beginImageGenerations, Access.internal);
-@@access(OpenAIClient.getAzureBatchImageGenerationOperationStatus, Access.internal);
