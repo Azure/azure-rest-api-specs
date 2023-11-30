@@ -492,7 +492,7 @@
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "The authentication option to access the data."
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
         "topNDocuments": {
           "type": "integer",
@@ -1617,7 +1617,7 @@
           "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
         },
         "parameters": {
-          "description": "The parameters the functions accepts, described as a JSON Schema object."
+          "description": "The parameters the function accepts, described as a JSON Schema object."
         }
       },
       "required": [
@@ -1646,7 +1646,7 @@
       "properties": {
         "model": {
           "type": "string",
-          "description": "The model to use for image generation."
+          "description": "The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be\ninferred as a default."
         },
         "prompt": {
           "type": "string",

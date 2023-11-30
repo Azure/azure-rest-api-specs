@@ -6,32 +6,47 @@ namespace Azure.OpenAI;
 using TypeSpec.Versioning;
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("Embedding dependency types for vector search.")
-enum OnYourDataEmbeddingDependencyType {
-  @doc("Azure OpenAI Embedding endpoint URL.")
+@doc("""
+Represents the available sources Azure OpenAI On Your Data can use to configure vectorization of data for use with
+vector search.
+""")
+enum OnYourDataVectorizationSourceType {
+  @doc("""
+  Represents vectorization performed by public service calls to an Azure OpenAI embedding model.
+  """)
   endpoint: "Endpoint",
 
-  @doc("Azure OpenAI Embedding deployment name.")
+  @doc("""
+  Represents an Ada model deployment name to use. This model deployment must be in the same Azure OpenAI resource, but
+  On Your Data will use this model deployment via an internal call rather than a public one, which enables vector
+  search even in private networks.
+  """)
   deploymentName: "DeploymentName",
 
-  @doc("The embedding model ID defined in the search service. Currently only supported by Elasticsearch.")
+  @doc("""
+  Represents a specific embedding model ID as defined in the search service.
+  Currently only supported by Elasticsearch®.
+  """)
   modelId: "ModelId",
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
 @discriminator("type")
-@doc("Embedding dependency for vector search.")
-model OnYourDataEmbeddingDependency {
-  @doc("Embedding dependency types for vector search.")
-  type: OnYourDataEmbeddingDependencyType;
+@doc("An abstract representation of a vectorization source for Azure OpenAI On Your Data with vector search.")
+model OnYourDataVectorizationSource {
+  @doc("The type of vectorization source to use.")
+  type: OnYourDataVectorizationSourceType;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("The embedding dependency based on endpoint URL")
-model OnYourDataEmbeddingEndpointDependency
-  extends OnYourDataEmbeddingDependency {
-  @doc("The embedding dependency based on endpoint URL")
-  type: OnYourDataEmbeddingDependencyType.endpoint;
+@doc("""
+The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based
+on a public Azure OpenAI endpoint call for embeddings.
+""")
+model OnYourDataEndpointVectorizationSource
+  extends OnYourDataVectorizationSource {
+  @doc("The type of vectorization source to use. Always 'Endpoint' for this type.")
+  type: OnYourDataVectorizationSourceType.endpoint;
 
   @doc("Specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings. The api-version query parameter is not allowed.")
   endpoint: url;
@@ -41,23 +56,29 @@ model OnYourDataEmbeddingEndpointDependency
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("The embedding dependency based on deployment name")
-model OnYourDataEmbeddingDeploymentNameDependency
-  extends OnYourDataEmbeddingDependency {
-  @doc("The embedding dependency based on deployment name")
-  type: OnYourDataEmbeddingDependencyType.deploymentName;
+@doc("""
+The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based
+on an internal embeddings model deployment name in the same Azure OpenAI resource.
+""")
+model OnYourDataDeploymentNameVectorizationSource
+  extends OnYourDataVectorizationSource {
+  @doc("The type of vectorization source to use. Always 'DeploymentName' for this type.")
+  type: OnYourDataVectorizationSourceType.deploymentName;
 
   @doc("The embedding model deployment name within the same Azure OpenAI resource. This enables you to use vector search without Azure OpenAI api-key and without Azure OpenAI public network access.")
   deploymentName: string;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("The embedding dependency based on model id")
-model OnYourDataEmbeddingModelIdDependency
-  extends OnYourDataEmbeddingDependency {
-  @doc("The embedding dependency based on model id")
-  type: OnYourDataEmbeddingDependencyType.modelId;
+@doc("""
+The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based
+on a search service model ID. Currently only supported by Elasticsearch®.
+""")
+model OnYourDataModelIdVectorizationSource
+  extends OnYourDataVectorizationSource {
+  @doc("The type of vectorization source to use. Always 'ModelId' for this type.")
+  type: OnYourDataVectorizationSourceType.modelId;
 
-  @doc("The embedding model ID build inside the search service. Currently only supported by Elasticsearch.")
+  @doc("The embedding model ID build inside the search service. Currently only supported by Elasticsearch®.")
   modelId: string;
 }

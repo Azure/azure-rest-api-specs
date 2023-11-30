@@ -67,7 +67,7 @@ model AzureCognitiveSearchChatExtensionParameters {
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("The embedding dependency for vector search.")
-  embeddingDependency?: OnYourDataEmbeddingDependency;
+  embeddingDependency?: OnYourDataVectorizationSource;
 }
 
 @doc("Optional settings to control how fields are processed when using a configured Azure Cognitive Search resource.")

@@ -95,7 +95,10 @@ enum ImageGenerationResponseFormat {
 @doc("Represents the request data used to generate images.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageGenerationOptions {
-  @doc("The model to use for image generation.")
+  @doc("""
+  The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be
+  inferred as a default.
+  """)
   `model`?: string;
 
   @doc("A description of the desired images.")

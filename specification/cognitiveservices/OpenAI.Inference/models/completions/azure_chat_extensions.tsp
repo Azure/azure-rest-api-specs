@@ -11,20 +11,6 @@ namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
 
-// Explanatory notes for Azure OpenAI chat extensions (as of 2023-08-01-preview):
-//  - Although the REST API serves this capability via a distinct /extensions/chat/completions route, client libraries
-//    should abstract that detail and dynamically dispatch this on the normal chat completions path, using the
-//    specification of extensions in the options (request body payload) as the decision mechanism
-//  - A future service API version will merge /extensions/chat/completions into /chat/completions and, at that time,
-//    the above ensures there's no customer-facing change or disruption
-//  - The current schema for specifying extensions uses a supplementary `dataSources` array at the top level of the
-//    request payload. This can be problematic for dynamic selection in some languages (minimally, ambiguous or
-//    confusing) and so libraries should instead wrap this in a custom "sub-options" type: wire format will realize as
-//    ChatCompletionsOptions.DataSources, but libraries should present that instead as
-//    ChatCompletionsOptions.AzureExtensionsOptions.Extensions
-//  - Another future service API version (TBD, perhaps the same that merges into /chat/completions) should reflect the
-//    structural and naming changes in the wire format
-
 @added(ServiceApiVersions.v2023_08_01_Preview)
 @doc("""
   A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
@@ -65,14 +51,6 @@ model AzureChatExtensionConfiguration {
     Azure chat extensions are only compatible with Azure OpenAI.
   """)
   type: AzureChatExtensionType;
-
-  // #suppress "@azure-tools/typespec-azure-core/no-unknown" "API explicitly uses arbitrary JSON structure"
-  // @doc("""
-  //   The configuration payload used for the Azure chat extension. The structure payload details are specific to the
-  //   extension being configured.
-  //   Azure chat extensions are only compatible with Azure OpenAI.
-  // """)
-  // parameters: unknown;
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)

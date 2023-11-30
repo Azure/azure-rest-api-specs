@@ -31,11 +31,10 @@ model PineconeChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
   @doc("The environment name of Pinecone.")
-  @projectedName("csharp", "Environment")
+  @projectedName("csharp", "EnvironmentName")
   environment: string;
 
-  @doc("The index name name of Pinecone.")
-  @projectedName("csharp", "IndexName")
+  @doc("The name of the Pinecone database index.")
   indexName: string;
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
@@ -43,7 +42,7 @@ model PineconeChatExtensionParameters {
   fieldsMapping: PineconeFieldMappingOptions;
 
   @doc("The embedding dependency for vector search.")
-  embeddingDependency?: OnYourDataEmbeddingDependency;
+  embeddingDependency?: OnYourDataVectorizationSource;
 }
 
 @doc("Optional settings to control how fields are processed when using a configured Pinecone resource.")

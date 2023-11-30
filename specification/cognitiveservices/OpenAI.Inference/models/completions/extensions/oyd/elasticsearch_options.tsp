@@ -15,37 +15,37 @@ model ElasticsearchChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
-  default value for Elasticsearch.
+  default value for Elasticsearch®.
   """)
   type: AzureChatExtensionType.elasticsearch;
 
-  @doc("The parameters to use when configuring Elasticsearch.")
+  @doc("The parameters to use when configuring Elasticsearch®.")
   parameters: ElasticsearchChatExtensionParameters;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("Parameters to use when configuring Elasticsearch as an Azure OpenAI chat extension.")
+@doc("Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension.")
 model ElasticsearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
-  @doc("The endpoint of Elasticsearch.")
+  @doc("The endpoint of Elasticsearch®.")
   endpoint: url;
 
-  @doc("The index name of Elasticsearch.")
+  @doc("The index name of Elasticsearch®.")
   indexName: string;
 
-  @doc("The index field mapping options of Elasticsearch.")
+  @doc("The index field mapping options of Elasticsearch®.")
   @projectedName("csharp", "FieldMappingOptions")
   fieldsMapping?: ElasticsearchIndexFieldMappingOptions;
 
-  @doc("The query type of Elasticsearch.")
+  @doc("The query type of Elasticsearch®.")
   queryType?: ElasticsearchQueryType;
 
   @doc("The embedding dependency for vector search.")
-  embeddingDependency?: OnYourDataEmbeddingDependency;
+  embeddingDependency?: OnYourDataVectorizationSource;
 }
 
-@doc("Optional settings to control how fields are processed when using a configured Elasticsearch resource.")
+@doc("Optional settings to control how fields are processed when using a configured Elasticsearch® resource.")
 @added(ServiceApiVersions.v2023_12_01_Preview)
 model ElasticsearchIndexFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
@@ -74,7 +74,7 @@ model ElasticsearchIndexFieldMappingOptions {
 }
 
 @doc("""
-The type of Elasticsearch retrieval query that should be executed when using it as an Azure OpenAI chat extension.
+The type of Elasticsearch® retrieval query that should be executed when using it as an Azure OpenAI chat extension.
 """)
 @added(ServiceApiVersions.v2023_12_01_Preview)
 enum ElasticsearchQueryType {

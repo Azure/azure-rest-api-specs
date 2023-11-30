@@ -108,7 +108,7 @@ model ContentFilterResultDetailsForPrompt {
 
   @doc("Whether a jailbreak attempt was detected in the prompt.")
   @added(ServiceApiVersions.v2023_12_01_Preview)
-  jailbreak: ContentFilterDetectionResult;
+  jailbreak?: ContentFilterDetectionResult;
 }
 
 @added(ServiceApiVersions.v2023_06_01_Preview)

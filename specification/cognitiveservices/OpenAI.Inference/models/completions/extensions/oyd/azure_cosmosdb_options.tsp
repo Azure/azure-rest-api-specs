@@ -27,19 +27,22 @@ model AzureCosmosDBChatExtensionConfiguration
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("Parameters to use when configuring Azure OpenAI CosmosDB chat extensions.")
+@doc("""
+Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for
+MongoDB vCore.
+""")
 model AzureCosmosDBChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
-  @doc("The database name of Azure Cosmos DB.")
+  @doc("The MongoDB vCore database name to use with Azure Cosmos DB.")
   @projectedName("csharp", "DatabaseName")
   databaseName: string;
 
-  @doc("The container name name of Azure Cosmos DB.")
+  @doc("The name of the Azure Cosmos DB resource container.")
   @projectedName("csharp", "ContainerName")
   containerName: string;
 
-  @doc("The index name of Azure Cosmos DB.")
+  @doc("The MongoDB vCore index name to use with Azure Cosmos DB.")
   @projectedName("csharp", "IndexName")
   indexName: string;
 
@@ -48,7 +51,7 @@ model AzureCosmosDBChatExtensionParameters {
   fieldsMapping: AzureCosmosDBFieldMappingOptions;
 
   @doc("The embedding dependency for vector search.")
-  embeddingDependency?: OnYourDataEmbeddingDependency;
+  embeddingDependency?: OnYourDataVectorizationSource;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
