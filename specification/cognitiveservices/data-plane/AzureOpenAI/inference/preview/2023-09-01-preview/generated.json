@@ -484,6 +484,9 @@
             "$ref": "#/parameters/AudioTranscriptionOptions.file"
           },
           {
+            "$ref": "#/parameters/AudioTranscriptionOptions.filename"
+          },
+          {
             "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
           },
           {
@@ -546,6 +549,9 @@
           },
           {
             "$ref": "#/parameters/AudioTranslationOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.filename"
           },
           {
             "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
@@ -696,6 +702,10 @@
           "type": "string",
           "format": "byte",
           "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The optional filename or descriptive identifier to associate with with the audio data."
         },
         "response_format": {
           "$ref": "#/definitions/AudioTranscriptionFormat",
@@ -880,6 +890,10 @@
           "type": "string",
           "format": "byte",
           "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The optional filename or descriptive identifier to associate with with the audio data."
         },
         "response_format": {
           "$ref": "#/definitions/AudioTranslationFormat",
@@ -2368,7 +2382,7 @@
     },
     "OnYourDataApiKeyAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication option using API key.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an API key.",
       "properties": {
         "key": {
           "type": "string",
@@ -2387,11 +2401,11 @@
     },
     "OnYourDataAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication options for Azure OpenAI on your data.",
+      "description": "The authentication options for Azure OpenAI On Your Data.",
       "properties": {
         "type": {
           "$ref": "#/definitions/OnYourDataAuthenticationType",
-          "description": "The Authentication type."
+          "description": "The authentication type."
         }
       },
       "discriminator": "type",
@@ -2401,7 +2415,7 @@
     },
     "OnYourDataAuthenticationType": {
       "type": "string",
-      "description": "  Authentication types supported by with Azure OpenAI on your data.",
+      "description": "The authentication types supported with Azure OpenAI On Your Data.",
       "enum": [
         "APIKey",
         "ConnectionString",
@@ -2416,34 +2430,34 @@
           {
             "name": "apiKey",
             "value": "APIKey",
-            "description": "API key."
+            "description": "Authentication via API key."
           },
           {
             "name": "connectionString",
             "value": "ConnectionString",
-            "description": "Connection string."
+            "description": "Authentication via connection string."
           },
           {
             "name": "keyAndKeyId",
             "value": "KeyAndKeyId",
-            "description": "Key and keyId pair."
+            "description": "Authentication via key and key ID pair."
           },
           {
             "name": "systemAssignedManagedIdentity",
             "value": "SystemAssignedManagedIdentity",
-            "description": "System-assigned managed identity."
+            "description": "Authentication via system-assigned managed identity."
           },
           {
             "name": "userAssignedManagedIdentity",
             "value": "UserAssignedManagedIdentity",
-            "description": "User-assigned managed identity."
+            "description": "Authentication via user-assigned managed identity."
           }
         ]
       }
     },
     "OnYourDataConnectionStringAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication option using connection string.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a connection string.",
       "properties": {
         "connectionString": {
           "type": "string",
@@ -2462,7 +2476,7 @@
     },
     "OnYourDataKeyAndKeyIdAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication option using Elasticsearch key and keyId pair.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an Elasticsearch key and key ID pair.",
       "properties": {
         "key": {
           "type": "string",
@@ -2486,7 +2500,7 @@
     },
     "OnYourDataSystemAssignedManagedIdentityAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication option using system-assigned managed identity.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a system-assigned managed identity.",
       "allOf": [
         {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions"
@@ -2496,7 +2510,7 @@
     },
     "OnYourDataUserAssignedManagedIdentityAuthenticationOptions": {
       "type": "object",
-      "description": "The authentication option using user-assigned managed identity.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a user-assigned managed identity.",
       "properties": {
         "managedIdentityResourceId": {
           "type": "string",
@@ -2520,8 +2534,15 @@
       "in": "formData",
       "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
+      "type": "file",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.filename": {
+      "name": "filename",
+      "in": "formData",
+      "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+      "required": false,
       "type": "string",
-      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranscriptionOptions.language": {
@@ -2609,8 +2630,15 @@
       "in": "formData",
       "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
+      "type": "file",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.filename": {
+      "name": "filename",
+      "in": "formData",
+      "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+      "required": false,
       "type": "string",
-      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranslationOptions.model": {

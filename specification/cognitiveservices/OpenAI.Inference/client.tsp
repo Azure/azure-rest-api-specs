@@ -6,19 +6,21 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
-@TypeSpec.Versioning.useDependency(Azure.OpenAI.ServiceApiVersions.v2023_12_01_Preview)
+@TypeSpec.Versioning.useDependency(
+  Azure.OpenAI.ServiceApiVersions.v2023_12_01_Preview
+)
 namespace Client;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @client({
   name: "OpenAIClient",
-  service: Azure.OpenAI
+  service: Azure.OpenAI,
 })
 interface OpenAIClient {
   #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
   getAudioTranscriptionAsPlainText is Azure.OpenAI.getAudioTranscriptionAsPlainText;
-  
+
   #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
   getAudioTranscriptionAsResponseObject is Azure.OpenAI.getAudioTranscriptionAsResponseObject;
@@ -26,7 +28,7 @@ interface OpenAIClient {
   #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
   getAudioTranslationAsPlainText is Azure.OpenAI.getAudioTranslationAsPlainText;
-  
+
   #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
   getAudioTranslationAsResponseObject is Azure.OpenAI.getAudioTranslationAsResponseObject;
@@ -46,4 +48,6 @@ interface OpenAIClient {
 }
 
 @@access(OpenAIClient.beginImageGenerations, Access.internal);
-@@access(OpenAIClient.getAzureBatchImageGenerationOperationStatus, Access.internal);
+@@access(OpenAIClient.getAzureBatchImageGenerationOperationStatus,
+  Access.internal
+);

@@ -59,7 +59,7 @@ enum AzureChatExtensionType {
   completions request that should use Azure OpenAI chat extensions to augment the response behavior.
   The use of this configuration is compatible only with Azure OpenAI.
 """)
-model AzureChatExtensionConfiguration{
+model AzureChatExtensionConfiguration {
   @doc("""
     The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.
     Azure chat extensions are only compatible with Azure OpenAI.

@@ -13,7 +13,6 @@ extension.
 """)
 model ElasticsearchChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
-
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
   default value for Elasticsearch.

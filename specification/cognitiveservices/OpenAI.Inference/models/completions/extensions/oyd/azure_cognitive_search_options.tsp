@@ -15,7 +15,6 @@ extension.
 @added(ServiceApiVersions.v2023_08_01_Preview)
 model AzureCognitiveSearchChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
-
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
   default value for Azure Cognitive Search.

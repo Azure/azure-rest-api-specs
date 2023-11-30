@@ -181,7 +181,7 @@ model ImageGenerations {
 
 // Note2: the Java emitter currently does not support versioning annotations
 // To prevent code generation from picking this up we have to flat out remove it
-// We need to check in an arch board meeting, whether @removed indeed should prevent 
+// We need to check in an arch board meeting, whether @removed indeed should prevent
 // models from being generated. It might not be the case, it should probably enforce a "maximum"
 // version, but not prevent generation of models for older versions.
 

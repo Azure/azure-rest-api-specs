@@ -15,7 +15,6 @@ extension.
 """)
 model PineconeChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
-
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
   default value for Pinecone.
@@ -30,7 +29,6 @@ model PineconeChatExtensionConfiguration
 @doc("Parameters for configuring Azure OpenAI Pinecone chat extensions.")
 model PineconeChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
-
 
   @doc("The environment name of Pinecone.")
   @projectedName("csharp", "Environment")
