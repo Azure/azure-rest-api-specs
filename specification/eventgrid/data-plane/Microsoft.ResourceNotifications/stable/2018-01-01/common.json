@@ -29,7 +29,10 @@
         },
         "tags": {
           "description": "the tags on the resource for which the event is being emitted",
-          "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
           "description": "properties in the payload of the resource for which the event is being emitted",
@@ -60,14 +63,14 @@
           "$ref": "#/definitions/ResourceNotificationsResourceUpdatedDetails",
           "x-ms-client-name": "resourceDetails"
         },
-        "apiVersion": {
-          "description": "api version of the resource properties bag",
-          "type": "string"
-        },
         "operationalInfo": {
           "description": "details about operational info",
           "$ref": "#/definitions/ResourceNotificationsOperationalDetails",
           "x-ms-client-name": "operationalDetails"
+        },
+        "apiVersion": {
+          "description": "api version of the resource properties bag",
+          "type": "string"
         }
       }
     },

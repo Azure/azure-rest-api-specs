@@ -147,11 +147,11 @@
           "Promote a replica server as a Standalone server as forced, i.e. it will promote a replica server immediately without waiting for primary and replica to be in sync.": {
             "$ref": "./examples/PromoteReplicaAsForcedStandaloneServer.json"
           },
-          "Siteswap a replica server as planned, i.e. it will wait for replication to complete before promoting replica as Primary and original primary as replica.": {
-            "$ref": "./examples/PromoteReplicaAsPlannedSiteswap.json"
+          "SwitchOver a replica server as planned, i.e. it will wait for replication to complete before promoting replica as Primary and original primary as replica.": {
+            "$ref": "./examples/PromoteReplicaAsPlannedSwitchover.json"
           },
-          "Siteswap a replica server as forced, i.e. it will replica as Primary and original primary as replica immediately without waiting for primary and replica to be in sync.": {
-            "$ref": "./examples/PromoteReplicaAsForcedSiteswap.json"
+          "SwitchOver a replica server as forced, i.e. it will replica as Primary and original primary as replica immediately without waiting for primary and replica to be in sync.": {
+            "$ref": "./examples/PromoteReplicaAsForcedSwitchover.json"
           }
         },
         "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
@@ -417,7 +417,7 @@
           "description": "Replicas allowed for a server.",
           "readOnly": true
         },
-        "linkState": {
+        "replicationState": {
           "type": "string",
           "enum": [
             "Active",
@@ -428,10 +428,10 @@
             "Reconfiguring"
           ],
           "x-ms-enum": {
-            "name": "ReplicaLinkState",
+            "name": "ReplicationState",
             "modelAsString": true
           },
-          "description": "Gets the link state of a replica server. This property is returned only for replicas api call. Supported values are Active, Catchup, Provisioning, Updating, Broken, Reconfiguring",
+          "description": "Gets the replication state of a replica server. This property is returned only for replicas api call. Supported values are Active, Catchup, Provisioning, Updating, Broken, Reconfiguring",
           "readOnly": true
         },
         "promoteMode": {
@@ -439,10 +439,10 @@
           "description": "Sets the promote mode for a replica server. This is a write only property.",
           "enum": [
             "standalone",
-            "siteswap"
+            "switchover"
           ],
           "x-ms-enum": {
-            "name": "ReplicationPromoteMode",
+            "name": "ReadReplicaPromoteMode",
             "modelAsString": true
           },
           "x-ms-mutability": [
