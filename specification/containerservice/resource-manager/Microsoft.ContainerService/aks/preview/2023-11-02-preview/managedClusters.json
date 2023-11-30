@@ -7146,6 +7146,14 @@
         "sshAccess": {
           "$ref": "#/definitions/AgentPoolSSHAccess",
           "description": "SSH access method of an agent pool."
+        },
+        "enableVTPM": {
+          "type": "boolean",
+          "description": "vTPM is a Trusted Launch feature for configuring a dedicated secure vault for keys and measurements held locally on the node. For more details, see aka.ms/aks/trustedlaunch. If not specified, the default is false."
+        },
+        "enableSecureBoot": {
+          "type": "boolean",
+          "description": "Secure Boot is a feature of Trusted Launch which ensures that only signed operating systems and drivers can boot. For more details, see aka.ms/aks/trustedlaunch.  If not specified, the default is false."
         }
       },
       "description": "The security settings of an agent pool."
