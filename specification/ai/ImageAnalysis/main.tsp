@@ -18,10 +18,10 @@ using Azure.Core;
 @useAuth(BearerAuth)
 @server(
   "{endpoint}/unifiedvision",
-  "Analyze an image to generate a description of its content.",
+  "Analyze an image to generate a description of its content, detect text, objects and more.",
   {
     @doc("""
-Supported Cognitive Services endpoints (protocol and hostname, for example:
+Azure AI Computer Vision endpoint (protocol and hostname, for example:
 https://<resource-name>.cognitiveservices.azure.com).
 """)
     endpoint: url,
