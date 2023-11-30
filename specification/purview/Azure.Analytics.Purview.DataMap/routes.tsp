@@ -36,15 +36,6 @@ model DataMapApiVersionParameter {
   apiVersion: string;
 }
 
-@doc("The path for name.")
-@resource("name")
-model NameInPath {
-  @key("name")
-  @visibility("read")
-  @doc("name")
-  name: string;
-}
-
 model OkResponse<T> {
   @statusCode
   status: 200;
