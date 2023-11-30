@@ -42,11 +42,9 @@ input-file:
   - Creator/stable/2023-07-01/alias.json
   - Creator/stable/2023-07-01/dataset.json
   - Creator/stable/2023-07-01/dwgconversion.json
-  - Creator/stable/2023-07-01/features.json
   - Creator/stable/2023-07-01/featurestate.json
-  - Creator/stable/2023-07-01/mapconfiguration.json
-  - Creator/stable/2023-07-01/style.json
   - Creator/stable/2023-07-01/tileset.json
+  - Creator/stable/2023-07-01/wfs.json
 
 ```
 
