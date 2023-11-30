@@ -39,6 +39,14 @@ These settings apply only when `--tag=package-2022-09-01-preview` is specified o
 input-file:
 - Microsoft.AzureSphere/preview/2022-09-01-preview/azuresphere.json
 ```
+### Tag: package-2024-03-01
+
+These settings apply only when `--tag=package-2024-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-01'
+input-file:
+- Microsoft.AzureSphere/preview/2024-03-01/azuresphere.json
+```
 
 # Code Generation
 
@@ -108,6 +116,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.AzureSphere/preview/2022-09-01-preview/azuresphere.json
+    - $(this-folder)/Microsoft.AzureSphere/preview/2024-03-01/azuresphere.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
