@@ -529,16 +529,16 @@ model GptResource {
 @added(ContentSafety.Versions.v2023_11_30_Preview)
 @doc("domain category.")
 enum Domain {
-  Medical,
   Generic,
+  Medical,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2023_11_30_Preview)
 @doc("task type.")
 enum Task {
-  QA,
   Summarization,
+  QnA,
 }
 
 @added(Versions.v2023_11_30_Preview)
