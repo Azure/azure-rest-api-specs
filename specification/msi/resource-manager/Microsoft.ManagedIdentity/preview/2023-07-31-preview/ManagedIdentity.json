@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-01-31",
+    "version": "2023-07-31-preview",
     "title": "ManagedServiceIdentityClient",
     "description": "The Managed Service Identity Client."
   },
@@ -339,6 +339,42 @@
           },
           "204": {
             "description": "The specified identity does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{revokeTokenResourceName}/revokeTokens": {
+      "post": {
+        "operationId": "UserAssignedIdentities_RevokeTokens",
+        "description": "Revoke all tokens issued in the past for a specified user assigned identity.",
+        "x-ms-examples": {
+          "TokenRevocation": {
+            "$ref": "./examples/TokenRevocation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RevokeTokensResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Accepted request to revoke all tokens issued for a specified user assigned identity before the current time."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -927,6 +963,15 @@
       "name": "federatedIdentityCredentialResourceName",
       "in": "path",
       "description": "The name of the federated identity credential resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$",
+      "x-ms-parameter-location": "method"
+    },
+    "RevokeTokensResourceNameParameter": {
+      "name": "revokeTokenResourceName",
+      "in": "path",
+      "description": "The name of the identity resource for revoking token",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$",
