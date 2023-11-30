@@ -6,10 +6,10 @@ import { FormatRule } from "./rules/format.js";
 import { GitDiffRule } from "./rules/git-diff.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
-import path from "path";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
 
 export async function main() {
+  const host = new TsvRunnerHost();
   const args = process.argv.slice(2);
   const options = {
     folder: {
@@ -19,11 +19,9 @@ export async function main() {
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
   const folder = parsedArgs.positionals[0];
-  const absolutePath = path.resolve(folder).split(path.sep).join("/");
+  const absolutePath = host.normalizePath(folder);
 
   console.log("Running TypeSpecValidation on folder:", absolutePath);
-
-  const host = new TsvRunnerHost();
 
   const rules = [
     new FolderStructureRule(),

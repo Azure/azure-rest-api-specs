@@ -1,4 +1,3 @@
-import { globby } from "globby";
 import path from "path";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
@@ -11,7 +10,7 @@ export class FolderStructureRule implements Rule {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
-    let gitRoot = path.normalize(await host.gitOperation(folder).revparse("--show-toplevel"));
+    let gitRoot = host.normalizePath(await host.gitOperation(folder).revparse("--show-toplevel"));
     let relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
 
     stdOutput += `folder: ${folder}\n`;
@@ -23,7 +22,7 @@ export class FolderStructureRule implements Rule {
       };
     }
 
-    const tspConfigs = await globby([`${folder}/**tspconfig.*`]);
+    const tspConfigs = await host.globby([`${folder}/**tspconfig.*`]);
     stdOutput += `config files: ${JSON.stringify(tspConfigs)}\n`;
     tspConfigs.forEach((file: string) => {
       if (!file.endsWith("tspconfig.yaml")) {
