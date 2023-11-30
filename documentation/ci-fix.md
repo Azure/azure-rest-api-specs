@@ -39,7 +39,11 @@ npx prettier --write **/*.json
 
 Then please commit and push changes made by prettier.
 
-Reference: [prettier](https://www.npmjs.com/package/prettier).
+### Prettier reference
+
+- [`prettier` npm package](https://www.npmjs.com/package/prettier).
+- [Source: Swagger-Prettier-Check.ps1](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/scripts/Swagger-Prettier-Check.ps1)
+- [Pipeline: Swagger PrettierCheck](https://dev.azure.com/azure-sdk/public/_build?definitionId=6405)
 
 ## Model Validation
 
