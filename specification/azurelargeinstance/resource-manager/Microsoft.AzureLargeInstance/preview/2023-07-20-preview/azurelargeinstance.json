@@ -277,13 +277,14 @@
             "pattern": ".*"
           },
           {
-            "name": "properties",
+            "name": "tagsParameter",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AzureLargeInstanceTagsUpdate"
-            }
+            },
+            "x-ms-client-name": "tagsParameter"
           }
         ],
         "responses": {
@@ -662,16 +663,6 @@
     }
   },
   "definitions": {
-    "ActionType": {
-      "type": "string",
-      "enum": [
-        "Internal"
-      ],
-      "x-ms-enum": {
-        "name": "ActionType",
-        "modelAsString": true
-      }
-    },
     "AzureLargeInstance": {
       "type": "object",
       "description": "Azure Large Instance info on Azure (ARM properties and AzureLargeInstance\nproperties)",
@@ -1022,7 +1013,8 @@
           },
           {
             "name": "S112",
-            "value": "S112"
+            "value": "S112",
+            "description": "No longer offerred or used."
           },
           {
             "name": "S224",
@@ -1156,7 +1148,8 @@
           },
           {
             "name": "S768",
-            "value": "S768"
+            "value": "S768",
+            "description": "No longer offerred or used."
           },
           {
             "name": "S768m",
@@ -1331,7 +1324,7 @@
           "type": "string",
           "description": "The disk name."
         },
-        "diskSizeGB": {
+        "diskSizeGb": {
           "type": "integer",
           "format": "int32",
           "description": "Specifies the size of an empty data disk in gigabytes."
@@ -1397,18 +1390,6 @@
           "description": "Specifies the circuit id for connecting to express route.",
           "readOnly": true
         }
-      }
-    },
-    "Origin": {
-      "type": "string",
-      "enum": [
-        "user",
-        "system",
-        "user,system"
-      ],
-      "x-ms-enum": {
-        "name": "Origin",
-        "modelAsString": true
       }
     },
     "OsProfile": {

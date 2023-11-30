@@ -35,7 +35,7 @@ and instance name.
 Patches the Tags field of an Azure Large Instance for the specified
 subscription, resource group, and instance name.
 """)
-  update is ArmTagsPatchSync<AzureLargeInstance>;
+  update is ArmCustomPatchSync<AzureLargeInstance>;
   
   @doc("""
 Gets a list of Azure Large Instances in the specified subscription and resource
@@ -101,3 +101,12 @@ op ArmResourceActionNoBody<
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
   ...TRequest,
 ): ArmAcceptedLroResponse | TResponse | ErrorResponse;
+
+@@projectedName(AzureLargeInstances.update::parameters.properties,
+  "json",
+  "tagsParameter"
+);
+@@OpenAPI.extension(AzureLargeInstances.update::parameters.properties,
+  "x-ms-client-name",
+  "tagsParameter"
+);
