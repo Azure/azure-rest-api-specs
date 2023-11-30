@@ -591,8 +591,11 @@
           }
         },
         "x-ms-examples": {
-          "Create a PipelineGroup instance": {
-            "$ref": "./examples/PipelineGroupCreate.json"
+          "Create a PipelineGroup instance using UDP receiver": {
+            "$ref": "./examples/PipelineGroupCreateUdp.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver": {
+            "$ref": "./examples/PipelineGroupCreateSyslogs.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -738,6 +741,21 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.PrivateEndpointConnection": {
+      "type": "object",
+      "description": "The private endpoint connection resource",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The private endpoint connection properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "AzureMonitorWorkspace": {
       "type": "object",
       "description": "An Azure Monitor Workspace definition.",
@@ -810,7 +828,7 @@
         "schema"
       ]
     },
-    "AzureMonitorWorkspaceLogsConfig": {
+    "AzureMonitorWorkspaceLogsExporter": {
       "type": "object",
       "description": "Azure Monitor Workspace Logs specific configurations.",
       "properties": {
@@ -849,10 +867,9 @@
           "type": "array",
           "description": "List of private endpoint connections.",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
@@ -935,11 +952,11 @@
           "description": "The name of exporter.",
           "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
         },
-        "azureMonitorWorkspaceLogsConfig": {
-          "$ref": "#/definitions/AzureMonitorWorkspaceLogsConfig",
+        "azureMonitorWorkspaceLogs": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceLogsExporter",
           "description": "Azure Monitor Workspace Logs specific configurations."
         },
-        "tcpExporter": {
+        "tcp": {
           "$ref": "#/definitions/TcpExporter",
           "description": "TCP based exporter. Used for pipelineGroup exporter."
         }
@@ -1368,13 +1385,17 @@
           "description": "The name of receiver.",
           "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
         },
-        "tcpReceiver": {
-          "$ref": "#/definitions/TcpReceiver",
-          "description": "TCP service configurations. This field is mandatory for syslog type receivers."
+        "syslog": {
+          "$ref": "#/definitions/SyslogReceiver",
+          "description": "Syslog configurations. This field is mandatory for syslog type receivers."
         },
-        "otlpReceiver": {
+        "otlp": {
           "$ref": "#/definitions/OtlpReceiver",
           "description": "OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers."
+        },
+        "udp": {
+          "$ref": "#/definitions/UdpReceiver",
+          "description": "UDP receiver configurations. This field is mandatory for UDP receivers."
         }
       },
       "required": [
@@ -1389,7 +1410,8 @@
         "Syslog",
         "Ama",
         "PipelineGroup",
-        "OTLP"
+        "OTLP",
+        "UDP"
       ],
       "x-ms-enum": {
         "name": "ReceiverType",
@@ -1414,6 +1436,11 @@
             "name": "OTLP",
             "value": "OTLP",
             "description": "Receives data from a OTLP collector."
+          },
+          {
+            "name": "UDP",
+            "value": "UDP",
+            "description": "Receives data from an UDP collector."
           }
         ]
       }
@@ -1536,6 +1563,49 @@
         }
       }
     },
+    "SyslogProtocol": {
+      "type": "string",
+      "description": "The syslog protocol to parse messages.",
+      "enum": [
+        "rfc3164",
+        "rfc5424"
+      ],
+      "x-ms-enum": {
+        "name": "SyslogProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "rfc3164",
+            "value": "rfc3164",
+            "description": "rfc3164"
+          },
+          {
+            "name": "rfc5424",
+            "value": "rfc5424",
+            "description": "rfc5424"
+          }
+        ]
+      }
+    },
+    "SyslogReceiver": {
+      "type": "object",
+      "description": "Base receiver using TCP as transport protocol.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Syslog receiver endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
+        },
+        "protocol": {
+          "$ref": "#/definitions/SyslogProtocol",
+          "description": "Protocol to parse syslog messages. Default rfc3164",
+          "default": "rfc3164"
+        }
+      },
+      "required": [
+        "endpoint"
+      ]
+    },
     "TcpExporter": {
       "type": "object",
       "description": "Base exporter using TCP as transport protocol.",
@@ -1553,6 +1623,20 @@
     "TcpReceiver": {
       "type": "object",
       "description": "Base receiver using TCP as transport protocol.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
+        }
+      },
+      "required": [
+        "endpoint"
+      ]
+    },
+    "UdpReceiver": {
+      "type": "object",
+      "description": "Receiver using UDP as transport protocol.",
       "properties": {
         "endpoint": {
           "type": "string",

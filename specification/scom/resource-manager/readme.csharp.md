@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.SCOM
-  output-folder: $(csharp-sdks-folder)/scom/management/Microsoft.SCOM/GeneratedProtocol
+  namespace: Microsoft.Scom
+  output-folder: $(csharp-sdks-folder)/scom/management/Microsoft.Scom/GeneratedProtocol
 ```
