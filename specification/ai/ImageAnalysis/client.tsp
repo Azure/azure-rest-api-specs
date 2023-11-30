@@ -51,4 +51,3 @@ using Azure.ClientGenerator.Core;
 @@access(ImageAnalysis.SmartCropsResult, Access.public, "java");
 @@access(ImageAnalysis.TagsResult, Access.public, "java");
 @@access(ImageAnalysis.VisualFeatures, Access.public, "java");
-
