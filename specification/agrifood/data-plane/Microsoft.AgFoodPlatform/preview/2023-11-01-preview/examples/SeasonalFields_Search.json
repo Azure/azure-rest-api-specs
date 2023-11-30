@@ -1,9 +1,8 @@
 {
   "parameters": {
     "api-version": "2023-11-01-preview",
-    "body": {
-      "maxPageSize": 50,
-      "minArea": 0,
+    "maxPageSize": 50,
+    "searchSeasonalFieldQuery": {
       "intersectsWithGeometry": {
         "type": "Polygon",
         "coordinates": [
@@ -47,20 +46,11 @@
         "value": [
           {
             "id": "SEASONALFIELD123",
-            "farmerId": "FARMER123",
+            "partyId": "FARMER123",
             "farmId": "FARM123",
             "fieldId": "FIELD123",
             "seasonId": "WINTER_WHEAT_2021",
             "cropId": "WHEAT",
-            "cropVarietyIds": [
-              "WHEAT_VARIETY_123",
-              "WHEAT_VARIETY_456"
-            ],
-            "avgYieldValue": 321.6,
-            "avgYieldUnit": "Bushels per acre",
-            "avgSeedPopulationValue": 45,
-            "avgSeedPopulationUnit": "Kilogram per acre",
-            "plantingDateTime": "2021-04-21T06:49:30Z",
             "name": "John Smith's Seasonal Field",
             "status": "Active",
             "description": "Some description",
@@ -73,8 +63,8 @@
             "eTag": "0f8fad5b-d9cb-469f-a165-70867728950e"
           }
         ],
-        "$skipToken": "string",
-        "nextLink": "https://{{resourceName}}.farmbeats.azure.net/farmers/{{farmerId}}/seasonalFields/{{seasonalFieldId}}?api-version={{apiVersion}}&$skipToken=%5b%7b%22token%22%3a%22%2bRID%3a%7e23TRC%3a10%23ISA%3d%22%2c%22range%22%3a%7b%22min%22%3a%22%22%2c%22max%22%3a%22FF%22%7d%7d%5d"
+        "skipToken": "string",
+        "nextLink": "https://{{resourceName}}.farmbeats.azure.net/farmers/{{partyId}}/seasonalFields/{{seasonalFieldId}}?api-version={{apiVersion}}&skipToken=%5b%7b%22token%22%3a%22%2bRID%3a%7e23TRC%3a10%23ISA%3d%22%2c%22range%22%3a%7b%22min%22%3a%22%22%2c%22max%22%3a%22FF%22%7d%7d%5d"
       }
     }
   }

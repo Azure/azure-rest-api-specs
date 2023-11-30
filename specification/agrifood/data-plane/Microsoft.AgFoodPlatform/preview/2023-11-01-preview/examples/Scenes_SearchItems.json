@@ -1,24 +1,37 @@
-﻿{
+{
   "parameters": {
-    "collectionId": "sentinel_2_l2a",
+    "collectionId": "sentinel-2-l2a",
     "api-version": "2023-11-01-preview",
-    "body": {
+    "searchItemsQuery": {
       "startDateTime": "2022-01-26T14:53:23.825Z",
       "endDateTime": "2023-01-26T14:53:23.825Z",
       "intersects": {
         "type": "Polygon",
         "coordinates": [
           [
-            [ 7.662878883920398, 47.845905986476225 ],
-            [ 7.687601396600625, 46.85818510350441 ],
-            [ 9.12804406196848, 46.86563725992561 ],
-            [ 9.130456971517189, 47.85361872819965 ],
-            [ 7.662878883920398, 47.845905986476225 ]
+            [
+              7.662878883920398,
+              47.845905986476225
+            ],
+            [
+              7.687601396600625,
+              46.85818510350441
+            ],
+            [
+              9.12804406196848,
+              46.86563725992561
+            ],
+            [
+              9.130456971517189,
+              47.85361872819965
+            ],
+            [
+              7.662878883920398,
+              47.845905986476225
+            ]
           ]
         ]
-      },
-      "limit": 2,
-      "next": 15
+      }
     }
   },
   "responses": {
@@ -418,8 +431,7 @@
             }
           }
         ],
-        "next": 17,
-        "returned": 2
+        "nextLink": "https://{{resourceName}}.farmbeats.azure.net/scenes/stac-collection/{{collectionId}}:search?api-version={{apiVersion}}&skipToken=%5b%7b%22token%22%3a%22%2bRID%3a%7e23TRC%3a10%23ISA%3d%22%2c%22range%22%3a%7b%22min%22%3a%22%22%2c%22max%22%3a%22FF%22%7d%7d%5d"
       }
     }
   }
