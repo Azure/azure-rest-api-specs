@@ -16,6 +16,9 @@ with open('pyscript/log.txt', 'r') as f:
 for i in range(len(lines)):
     lines[i] = lines[i][29:]
 
+columns = set()
+rows = set()
+
 results = {}
 for line in lines:
     try:
@@ -31,8 +34,8 @@ for line in lines:
             source_file = data['source'][0]['document']
             pt1, pt2 = extract_service_and_provider(source_file)
             service = f"{pt1}/{pt2}"
-            if service == "None/None":
-                test = "best"
+            rows.add(service)
+            columns.add(code)
             item = results.get(service, None) or { code: { "level": level, "count": 0 } }
             if code not in item:
                 item[code] = { "level": level, "count": 0 }
@@ -46,3 +49,16 @@ for line in lines:
 # pprint errors using double quotes around keys
 with open("pyscript/results.json", "w") as f:
     f.write(json.dumps(results, indent=4, sort_keys=True))
+
+# write a CSV file with the rows and columns looking up the value from results
+with open("pyscript/results.csv", "w") as f:
+    f.write("Service")
+    for column in columns:
+        f.write(f",{column}")
+    f.write("\n")
+    for row in rows:
+        f.write(f"{row}")
+        for column in columns:
+            value = results.get(row, {}).get(column, {}).get("count", 0)
+            f.write(f",{value}")
+        f.write("\n")
