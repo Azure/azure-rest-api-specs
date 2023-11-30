@@ -19,82 +19,82 @@ interface Operations extends Azure.ResourceManager.Operations {}
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator."
 interface ScheduledActions {
   // -------------- Routes -------------
-  /** submitDeallocate for a virtual machine */
+  /** virtualMachinesSubmitDeallocateAction: submitDeallocate action for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/submitDeallocate")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.ComputeSchedule/virtualMachinesSubmitDeallocateAction")
   @post
   @action
-  submitDeallocate(
+  virtualMachinesSubmitDeallocateAction(
     ...Params,
     @body @doc("The request body") requestBody: SubmitDeallocateRequest,
   ): ArmResponse<DeallocateResourceOperationResponse> | RequestLevelError;
 
-  /** submitHibernate for a virtual machine */
+  /** virtualMachinesSubmitHibernateAction: submitHibernate action for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/submitHibernate")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.ComputeSchedule/virtualMachinesSubmitHibernateAction")
   @post
   @action
-  submitHibernate(
+  virtualMachinesSubmitHibernateAction(
     ...Params,
     @body @doc("The request body") requestBody: SubmitHibernateRequest,
   ): ArmResponse<HibernateResourceOperationResponse> | RequestLevelError;
 
-  /** submitStart for a virtual machine */
+  /** virtualMachinesSubmitStartAction: submitStart action for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/submitStart")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.ComputeSchedule/virtualMachinesSubmitStartAction")
   @post
   @action
-  submitStart(
+  virtualMachinesSubmitStartAction(
     ...Params,
     @body @doc("The request body") requestBody: SubmitStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | RequestLevelError;
 
-  /** executeDeallocate for a virtual machine */
+  /** virtualMachinesExecuteDeallocateAction: executeDeallocate action for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/executeDeallocate")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.ComputeSchedule/virtualMachinesExecuteDeallocateAction")
   @post
   @action
-  executeDeallocate(
+  virtualMachinesExecuteDeallocateAction(
     ...Params,
     @body @doc("The request body") requestBody: ExecuteDeallocateRequest,
   ): ArmResponse<DeallocateResourceOperationResponse> | RequestLevelError;
 
-  /** executeHibernate for a virtual machine */
+  /** virtualMachinesExecuteHibernateAction: executeHibernate action for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/executeHibernate")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.ComputeSchedule/virtualMachinesExecuteHibernateAction")
   @post
   @action
-  executeHibernate(
+  virtualMachinesExecuteHibernateAction(
     ...Params,
     @body @doc("The request body") requestBody: ExecuteHibernateRequest,
   ): ArmResponse<HibernateResourceOperationResponse> | RequestLevelError;
 
-  /** executeStart for a virtual machine */
+  /** virtualMachinesExecuteStartAction: executeHibernate action for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/executeStart")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.ComputeSchedule/virtualMachinesExecuteStartAction")
   @post
   @action
-  executeStart(
+  virtualMachinesExecuteStartAction(
     ...Params,
     @body @doc("The request body") requestBody: ExecuteStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | RequestLevelError;
 
-  /** getOperationStatus for a virtual machine */
+  /** virtualMachinesGetOperationStatusAction: getOperationStatus action for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/getOperationStatus")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.ComputeSchedule/virtualMachinesGetOperationStatusAction")
   @post
   @action
-  getoperationstatus(
+  virtualMachinesGetOperationStatusAction(
     ...Params,
     @body @doc("The request body") requestBody: GetOperationStatusRequest,
   ): ArmResponse<GetOperationStatusResponse> | RequestLevelError;
 
-  /** cancelOperations on a virtual machine */
+  /** virtualMachinesCancelOperationsAction: cancelOperations action for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/cancelOperations")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.ComputeSchedule/virtualMachinesCancelOperationsAction")
   @post
   @action
-  cancelops(
+  virtualMachinesCancelOperationsAction(
     ...Params,
     @body @doc("The request body") requestBody: CancelOperationsRequest,
   ): ArmResponse<CancelOperationsResponse> | RequestLevelError;
