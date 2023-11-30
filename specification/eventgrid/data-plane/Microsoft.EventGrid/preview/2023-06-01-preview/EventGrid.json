@@ -55,10 +55,10 @@
   "paths": {
     "/topics/{topicName}:publish": {
       "post": {
-        "operationId": "PublishCloudEvents",
-        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "operationId": "PublishCloudEvent",
+        "description": "Publish Single Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
         "consumes": [
-          "application/cloudevents-batch+json; charset=utf-8"
+          "application/cloudevents+json; charset=utf-8"
         ],
         "parameters": [
           {
@@ -72,15 +72,12 @@
             "type": "string"
           },
           {
-            "name": "events",
+            "name": "event",
             "in": "body",
-            "description": "Array of Cloud Events being published.",
+            "description": "Single Cloud Event being published.",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CloudEvent"
-              }
+              "$ref": "#/definitions/CloudEvent"
             }
           }
         ],
@@ -102,11 +99,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Publish Cloud Event": {
-            "$ref": "./examples/publish.json"
           }
         }
       }
@@ -262,51 +254,6 @@
             "type": "string"
           },
           {
-            "name": "releaseDelayInSeconds",
-            "in": "query",
-            "description": "Release cloud events with the specified delay in seconds.",
-            "required": false,
-            "type": "number",
-            "enum": [
-              0,
-              10,
-              60,
-              600,
-              3600
-            ],
-            "x-ms-enum": {
-              "name": "ReleaseDelay",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "By0Seconds",
-                  "value": 0,
-                  "description": "Release the event after 0 seconds."
-                },
-                {
-                  "name": "By10Seconds",
-                  "value": 10,
-                  "description": "Release the event after 10 seconds."
-                },
-                {
-                  "name": "By60Seconds",
-                  "value": 60,
-                  "description": "Release the event after 60 seconds."
-                },
-                {
-                  "name": "By600Seconds",
-                  "value": 600,
-                  "description": "Release the event after 600 seconds."
-                },
-                {
-                  "name": "By3600Seconds",
-                  "value": 3600,
-                  "description": "Release the event after 3600 seconds."
-                }
-              ]
-            }
-          },
-          {
             "name": "releaseOptions",
             "in": "body",
             "description": "ReleaseOptions",
@@ -401,11 +348,16 @@
           }
         }
       }
-    },
-    "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock": {
+    }
+  },
+  "x-ms-paths": {
+    "/topics/{topicName}:publish?_overload=publishCloudEvents": {
       "post": {
-        "operationId": "RenewCloudEventLocks",
-        "description": "Renew lock for batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information.",
+        "operationId": "PublishCloudEvents",
+        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "consumes": [
+          "application/cloudevents-batch+json; charset=utf-8"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -418,19 +370,15 @@
             "type": "string"
           },
           {
-            "name": "eventSubscriptionName",
-            "in": "path",
-            "description": "Event Subscription Name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "renewLockOptions",
+            "name": "events",
             "in": "body",
-            "description": "RenewLockOptions",
+            "description": "Array of Cloud Events being published.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RenewLockOptions"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudEvent"
+              }
             }
           }
         ],
@@ -438,7 +386,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RenewCloudEventLocksResult"
+              "$ref": "#/definitions/PublishResult"
             }
           },
           "default": {
@@ -452,6 +400,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Publish Cloud Event": {
+            "$ref": "./examples/publish.json"
           }
         }
       }
@@ -769,47 +722,6 @@
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
-      ]
-    },
-    "RenewCloudEventLocksResult": {
-      "type": "object",
-      "description": "The result of the RenewLock operation.",
-      "properties": {
-        "failedLockTokens": {
-          "type": "array",
-          "description": "Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).",
-          "items": {
-            "$ref": "#/definitions/FailedLockToken"
-          },
-          "x-ms-identifiers": []
-        },
-        "succeededLockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens for the successfully renewed locks.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "failedLockTokens",
-        "succeededLockTokens"
-      ]
-    },
-    "RenewLockOptions": {
-      "type": "object",
-      "description": "Array of lock tokens for the corresponding received Cloud Events to be renewed.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
       ]
     }
   },
