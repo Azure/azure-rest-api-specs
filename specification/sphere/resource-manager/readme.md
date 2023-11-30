@@ -116,7 +116,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.AzureSphere/preview/2022-09-01-preview/azuresphere.json
-    - $(this-folder)/Microsoft.AzureSphere/preview/2024-03-01/azuresphere.json
+    - $(this-folder)/Microsoft.AzureSphere/stable/2024-03-01/azuresphere.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
