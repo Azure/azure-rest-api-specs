@@ -1,0 +1,144 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM",
+    "virtualMachineInstance": {
+      "extendedLocation": {
+        "type": "CustomLocation",
+        "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location"
+      },
+      "properties": {
+        "storageProfile": {
+          "imageReference": {
+            "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/galleryImages/test-gallery-image"
+          },
+          "vmConfigStoragePathId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-container"
+        },
+        "hardwareProfile": {
+          "vmSize": "Default"
+        },
+        "osProfile": {
+          "computerName": "luamaster",
+          "adminUsername": "localadmin",
+          "adminPassword": "password",
+          "windowsConfiguration": {
+            "provisionVMConfigAgent": true
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "test-nic"
+            }
+          ]
+        },
+        "securityProfile": {
+          "enableTPM": true,
+          "uefiSettings": {
+            "secureBootEnabled": true
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location"
+        },
+        "properties": {
+          "storageProfile": {
+            "imageReference": {
+              "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/galleryImages/test-gallery-image"
+            },
+            "vmConfigStoragePathId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-container"
+          },
+          "hardwareProfile": {
+            "vmSize": "Default"
+          },
+          "osProfile": {
+            "computerName": "luamaster",
+            "adminUsername": "localadmin"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "test-nic"
+              }
+            ]
+          },
+          "securityProfile": {
+            "enableTPM": true,
+            "uefiSettings": {
+              "secureBootEnabled": true
+            }
+          },
+          "provisioningState": "Accepted",
+          "instanceView": {
+            "vmAgent": {
+              "vmConfigAgentVersion": "1.0.0",
+              "statuses": [
+                {
+                  "code": "Ok",
+                  "level": "Info",
+                  "displayStatus": "Ok",
+                  "message": "The agent is healthy",
+                  "time": "2009-06-15T13:45:30"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location"
+        },
+        "properties": {
+          "storageProfile": {
+            "imageReference": {
+              "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/galleryImages/test-gallery-image"
+            },
+            "vmConfigStoragePathId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-container"
+          },
+          "hardwareProfile": {
+            "vmSize": "Default"
+          },
+          "osProfile": {
+            "computerName": "luamaster",
+            "adminUsername": "localadmin"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "test-nic"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "instanceView": {
+            "vmAgent": {
+              "vmConfigAgentVersion": "1.0.0",
+              "statuses": [
+                {
+                  "code": "Ok",
+                  "level": "Info",
+                  "displayStatus": "Ok",
+                  "message": "The agent is healthy",
+                  "time": "2009-06-15T13:45:30"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
