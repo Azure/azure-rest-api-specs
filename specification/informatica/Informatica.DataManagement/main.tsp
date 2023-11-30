@@ -481,8 +481,8 @@ model ServerlessRuntimeTag {
 
 @doc("Informatica Serverless Runtime User context properties")
 model ServerlessRuntimeUserContextProperties {
-   @doc("User context token for OBO flow.")
-   userContextToken: string;
+  @doc("User context token for OBO flow.")
+  userContextToken: string;
 }
 
 @doc("Informatica Serverless Runtime Application type Metadata")
