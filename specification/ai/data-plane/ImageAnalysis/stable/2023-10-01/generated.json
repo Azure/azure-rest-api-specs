@@ -196,7 +196,7 @@
           }
         },
         "x-ms-examples": {
-          "AnalyzeFromBuffer_MaximumSet_Gen": {
+          "AnalyzeFromBuffer": {
             "$ref": "./examples/AnalyzeFromBuffer_MaximumSet_Gen.json"
           }
         }
@@ -843,7 +843,7 @@
       "type": "object",
       "description": "The results of a Read (OCR) operation.",
       "properties": {
-        "pages": {
+        "blocks": {
           "type": "array",
           "description": "A list of text blocks in the image. At the moment only one block is returned, containing all the text detected in the image.",
           "minItems": 1,
@@ -855,7 +855,7 @@
         }
       },
       "required": [
-        "pages"
+        "blocks"
       ]
     },
     "SmartCropsResult": {

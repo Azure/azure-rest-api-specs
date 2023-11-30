@@ -235,7 +235,7 @@ model ReadResult {
   @doc("A list of text blocks in the image. At the moment only one block is returned, containing all the text detected in the image.")
   @minItems(1)
   @maxItems(1)
-  pages: Array<DetectedTextBlock>;
+  blocks: Array<DetectedTextBlock>;
 }
 
 @doc("""
