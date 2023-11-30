@@ -81,13 +81,13 @@ model AnalyzeTextResult {
   @doc("Analysis result for categories.")
   categoriesAnalysis: TextCategoriesAnalysis[];
 
+  @added(ContentSafety.Versions.v2023_12_30_Preview)
+  @doc("The chunks detected as harmful content. Chunk means some phrase or sentence in text. Analysis result and scores are caused by these chunks. ")
+  harmfulChunks?: string[];
+
   @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("The incident match details.")
   incidentMatches?: IncidentMatch[];
-
-  @added(ContentSafety.Versions.v2023_12_30_Preview)
-  @doc("Sentences detected as harmful content.")
-  reason?: string[];
 }
 
 @doc("The result of blocklist match.")
