@@ -173,7 +173,7 @@ model TranslateDocumentResult {
 
   /** response conent type */
   @header
-  contentType: "application/octet-stream" | "text/csv" | "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+  contentType: "application/octet-stream";
 
   /** Request response is a document */
   @body
