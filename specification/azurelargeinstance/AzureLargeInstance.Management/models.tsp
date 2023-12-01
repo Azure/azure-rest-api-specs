@@ -14,8 +14,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
 enum AzureLargeInstanceHardwareTypeNamesEnum {
   @doc("Hardware type of UCS from vendor Cisco")
   Cisco_UCS,
+
   @doc("Hardware type of HPE from vendor Hewlett Packard Enterprise")
   HPE,
+
   @doc("Hardware type of SDFLEX")
   SDFLEX,
 }
@@ -24,92 +26,136 @@ enum AzureLargeInstanceHardwareTypeNamesEnum {
 enum AzureLargeInstanceSizeNamesEnum {
   @doc("Type I class SKU that can't be purchased anymore")
   S72m,
+
   @doc("Type I class SKU that can't be purchased anymore")
   S144m,
+
   @doc("Type I class SKU that can't be purchased anymore")
   S72,
+
   @doc("Type I class SKU that can't be purchased anymore")
   S144,
+
   @doc("Type I class SKU that can't be purchased anymore")
   S192,
+
   @doc("Type I class SKU that can't be purchased anymore")
   S192m,
+
   @doc("Type I class SKU that can't be purchased anymore")
   S192xm,
+
   @doc("2 sockets, 96 CPU threads, 48 CPU cores, 768 GB total memory, 768 GB DRAM, 3.0 TB storage, Cisco_UCS hardware type")
   S96,
+
   @doc("No longer offerred or used.")
   S112,
+
   @doc("4 sockets, 224 CPU threads, 112 CPU cores, 3 TB total memory, 3 TB DRAM, 6.3 TB storage, Cisco_UCS hardware type")
   S224,
+
   @doc("4 sockets, 224 CPU threads, 112 CPU cores, 6 TB total memory, 6 TB DRAM, 10.5 TB storage, Cisco_UCS hardware type")
   S224m,
+
   @doc("4 sockets, 224 CPU threads, 112 CPU cores, 6 TB total memory, 3 TB DRAM, 3 TB memory optane, 10.5 TB storage, Cisco_UCS hardware type")
   S224om,
+
   @doc("4 sockets, 224 CPU threads, 112 CPU cores, 4.5 TB total memory, 1.5 TB DRAM, 3 TB memory optane, 8.4 TB storage, Cisco_UCS hardware type")
   S224oo,
+
   @doc("4 sockets, 224 CPU threads, 112 CPU cores, 9 TB total memory, 3 TB DRAM, 6 TB memory optane, 14.8 TB storage, Cisco_UCS hardware type")
   S224oom,
+
   @doc("4 sockets, 224 CPU threads, 112 CPU cores, 7.5TB total memory, 1.5 TB DRAM, 6 TB memory optane, 12.7 TB storage, Cisco_UCS hardware type")
   S224ooo,
+
   @doc("4 sockets, 448 CPU threads, 6 TB total memory, SDFLEX hardware type")
   S224se,
+
   @doc("8 sockets, 384 CPU threads, 192 CPU cores, 4 TB total memory, 4 TB DRAM, 16 TB storage, HPEMc990x hardware type")
   S384,
+
   @doc("8 sockets, 384 CPU threads, 192 CPU cores, 6 TB total memory, 6 TB DRAM, 18 TB storage, HPEMc990x hardware type")
   S384m,
+
   @doc("8 sockets, 384 CPU threads, 192 CPU cores, 8 TB total memory, 8 TB DRAM, 22 TB storage, HPEMc990x hardware type")
   S384xm,
+
   @doc("8 sockets, 384 CPU threads, 12 TB total memory, HPEMc990x hardware type")
   S384xxm,
+
   @doc("8 sockets, 448 CPU threads, 224 CPU cores, 6 TB total memory, 6 TB DRAM, 10.5 TB storage, SDFLEX hardware type")
   S448,
+
   @doc("8 sockets, 448 CPU threads, 224 CPU cores, 12 TB total memory, 12 TB DRAM, 18.9 TB storage, SDFLEX hardware type")
   S448m,
+
   @doc("8 sockets, 448 CPU threads, 224 CPU cores, 12 TB total memory, 6 TB DRAM, 6 TB memory optane, 18.9 TB storage, SDFLEX hardware type")
   S448om,
+
   @doc("8 sockets, 448 CPU threads, 224 CPU cores, 9 TB total memory, 3 TB DRAM, 6 TB memory optane, 14.8 TB storage, SDFLEX hardware type")
   S448oo,
+
   @doc("8 sockets, 448 CPU threads, 224 CPU cores, 18 TB total memory, 6 TB DRAM, 12 memory optane, 27.4 TB storage, SDFLEX hardware type")
   S448oom,
+
   @doc("8 sockets, 448 CPU threads, 224 CPU cores, 15 TB total memory, 3 TB DRAM, 12 memory optane, 23.2 TB storage, SDFLEX hardware type")
   S448ooo,
+
   @doc("8 sockets, 448 CPU threads, 12 TB total memory, SDFLEX hardware type")
   S448se,
+
   @doc("12 sockets, 576 CPU threads, 288 CPU cores, 12 TB total memory, 12 TB DRAM, 28 TB storage, HPEMc990x hardware type")
   S576m,
+
   @doc("12 sockets, 576 CPU threads, 288 CPU cores, 18 TB total memory, HPEMc990x hardware type")
   S576xm,
+
   @doc("12 sockets, 672 CPU threads, 336 CPU cores, 9 TB total memory, 9 TB DRAM, 14.7 TB storage, SDFLEX hardware type")
   S672,
+
   @doc("12 sockets, 672 CPU threads, 336 CPU cores, 18 TB total memory, 18 TB DRAM, 27.4 TB storage, SDFLEX hardware type")
   S672m,
+
   @doc("12 sockets, 672 CPU threads, 336 CPU cores, 18 TB total memory, 9 TB DRAM, 9 TB memory optane, 27.4 TB storage, SDFLEX hardware type")
   S672om,
+
   @doc("12 sockets, 672 CPU threads, 336 CPU cores, 13.5 TB total memory, 4.5 TB DRAM, 9 TB memory optane, 21.1 TB storage, SDFLEX hardware type")
   S672oo,
+
   @doc("12 sockets, 672 CPU threads, 336 CPU cores, 27 TB total memory, 9 TB DRAM, 18 TB memory optane, 40 TB storage, SDFLEX hardware type")
   S672oom,
+
   @doc("12 sockets, 672 CPU threads, 336 CPU cores, 22.5 TB total memory, 4.5 TB DRAM, 18 TB memory optane, 33.7 TB storage, SDFLEX hardware type")
   S672ooo,
+
   @doc("No longer offerred or used.")
   S768,
+
   @doc("16 sockets, 768 CPU threads, 384 CPU cores, 16 TB total memory, 16 TB DRAM, 36 TB storage, HPEMc990x hardware type")
   S768m,
+
   @doc("16 sockets, 768 CPU threads, 384 CPU cores, 24 TB total memory, 24 TB DRAM, 56 TB storage, HPEMc990x hardware type")
   S768xm,
+
   @doc("16 sockets, 896 CPU threads, 448 CPU cores, 12 TB total memory, 12 TB DRAM, 18.9 TB storage, SDFLEX hardware type")
   S896,
+
   @doc("16 sockets, 896 CPU threads, 448 CPU cores, 24 TB	total memory, 24 TB DRAM, 35.8 TB storage, SDFLEX hardware type")
   S896m,
+
   @doc("16 sockets, 896 CPU threads, 448 CPU cores, 24 TB	total memory, 12 TB DRAM, 12 TB memory optane, 35.8 TB storage, SDFLEX hardware type")
   S896om,
+
   @doc("16 sockets, 896 CPU threads, 448 CPU cores, 18 TB  total memory, 6 TB DRAM, 12 TB memory optane, 27.4 TB storage, SDFLEX hardware type")
   S896oo,
+
   @doc("16 sockets, 896 CPU threads, 448 CPU cores, 36 TB total memory, 12 TB DRAM, 24 TB memory optane, 52.7 TB storage, SDFLEX hardware type")
   S896oom,
+
   @doc("16 sockets, 896 CPU threads, 448 CPU cores, 30 TB total memory, 6 TB DRAM, 24 TB memory optane, 44.3 TB storage, SDFLEX hardware type")
   S896ooo,
+
   @doc("20 sockets, 960 CPU threads, 480 CPU cores, 20 TB total memory, 20 TB DRAM, 46 TB storage, HPEMc990x hardware type")
   S960m,
 }
@@ -118,14 +164,19 @@ enum AzureLargeInstanceSizeNamesEnum {
 enum AzureLargeInstancePowerStateEnum {
   @doc("Starting means that the Azure Large Instance resource is turning on.")
   starting,
+
   @doc("Started means that the Azure Large Instance resource has been powered on.")
   started,
+
   @doc("Stopping means that the Azure Large Instance resource is shutting down.")
   stopping,
+
   @doc("Stopped means that the Azure Large Instance resource has shut down.")
   stopped,
+
   @doc("Restarting means that the Azure Large Instance resource is restarting.")
   restarting,
+
   @doc("Unknown means that the state of the Azure Large Instance is unknown.")
   `unknown`,
 }
@@ -134,18 +185,25 @@ enum AzureLargeInstancePowerStateEnum {
 enum AzureLargeInstanceProvisioningStatesEnum {
   @doc("Accepted means Azure Large Instance resource provisioning has been accepted.")
   Accepted,
+
   @doc("Creating means Azure Large Instance resource is being created.")
   Creating,
+
   @doc("Updating means an existing Azure Large Instance resource is being updated")
   Updating,
+
   @doc("Failed means Azure Large Instance resource is in failed state")
   Failed,
+
   @doc("Succeeded means Azure Large Instance resource creation succeeded during last create/update")
   Succeeded,
+
   @doc("Deleting means Azure Large Instance resource is in the process of being deleted")
   Deleting,
+
   @doc("Migrating means Azure Large Instance resource is being migrated from one subscription or resource group to another")
   Migrating,
+
   @doc("Cancelled Azure Large Instance resource operation has been cancelled")
   Canceled,
 }
@@ -154,10 +212,13 @@ enum AzureLargeInstanceProvisioningStatesEnum {
 enum CreatedByType {
   @doc("An AAD user. The createdByType/lastModifiedBy property will be a user principal name (email address).")
   User,
+
   @doc("An AAD application. The createdByType/lastModifiedBy property will be the Application Id.")
   Application,
+
   @doc("A Managed Identity. The createdByType/lastModifiedBy property will be the ManagedIdentity resource Id")
   ManagedIdentity,
+
   @doc("A key")
   Key,
 }
@@ -166,6 +227,7 @@ enum CreatedByType {
 enum AzureLargeInstanceForcePowerState {
   @doc("Active means that the restart operation will terminate and halt existing processes that may be running on the server")
   active,
+
   @doc("Inactive means that the restart operation will not terminate and halt existing processes that may be running on the server")
   inactive,
 }
@@ -174,22 +236,30 @@ enum AzureLargeInstanceForcePowerState {
 enum ProvisioningState {
   @doc("Accepted means ARM resource has been accepted.")
   Accepted,
+
   @doc("Creating means ARM resource is being created.")
   Creating,
+
   @doc("Updating means an existing ARM resource is being updated")
   Updating,
+
   @doc("Failed means resource is in failed state")
   Failed,
+
   @doc("Succeeded means resource creation succeeded during last create/update")
   Succeeded,
+
   @doc("Deleting means resource is in the process of being deleted")
   Deleting,
+
   @doc("Cancelled means resource operation has been cancelled")
   Canceled,
+
   @doc("Migrating means resource is being migrated from one subscription or resource group to another")
   Migrating,
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "legacy API"
 @doc("Describes the properties of an Azure Large Instance.")
 model AzureLargeInstanceProperties {
   @doc("Specifies the hardware settings for the Azure Large Instance.")
@@ -260,8 +330,8 @@ model Disk {
   @doc("The disk name.")
   name?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Avoiding name change to prevent compatibility issues with existing bareMetalInfrastructure service and apis"
   @doc("Specifies the size of an empty data disk in gigabytes.")
-  #suppress"@azure-tools/typespec-azure-core/casing-style" "Avoiding name change to prevent compatibility issues with existing bareMetalInfrastructure service and apis"
   diskSizeGB?: int32;
 
   @doc("""
