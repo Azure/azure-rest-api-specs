@@ -3621,16 +3621,16 @@
       }
     },
     "FunctionsAlwaysReadyConfig": {
-      "description": "TBD",
+      "description": "Sets the number of 'Always Ready' instances for a specific Azure Function or a specific trigger type.",
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "TBD"
+          "description": "Either an Azure Functions trigger or an Azure Function name."
         },
         "instanceCount": {
           "type": "number",
-          "description": "TBD"
+          "description": "Sets the number of 'Always Ready' instances for a given trigger or a specific Azure Function."
         }
       }
     },
@@ -3639,14 +3639,14 @@
       "type": "object",
       "properties": {
         "alwaysReady": {
-          "description": "TBD",
+          "description": "'Always Ready' configuration for an Azure Function app.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FunctionsAlwaysReadyConfig"
           }
         },
         "maximumInstanceCount": {
-          "description": "TBD",
+          "description": "The maximum number of VM instances for the Azure Functions app.",
           "type": "number"
         },
         "instanceMemoryMB": {
@@ -3655,7 +3655,7 @@
         },
         "triggers": {
           "type": "object",
-          "description": "Scale and concurrency settigns for Azure Functions triggers.",
+          "description": "Scale and concurrency settings for Azure Functions triggers.",
           "properties": {
             "http": {
               "type": "object",
@@ -3663,7 +3663,7 @@
               "properties": {
                 "perInstanceConcurrency": {
                   "type": "number",
-                  "description": "TBD"
+                  "description": "The maximum number of concurrent HTTP trigger invocations per VM instance."
                 }
               }
             }
