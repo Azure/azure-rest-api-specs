@@ -42,8 +42,7 @@ directive:
     from: search.json
     where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get
     reason: The reason for this suppression is the API is already released and introducing new LRO properties will not function and are not supported today and will only be developed for the next version of this API.
-``` 
-
+```
 
 ### Tag: package-stable-2023-07-01
 
@@ -64,33 +63,13 @@ input-file:
   - Weather/stable/1.1/weather.json
 ```
 
-### Tag: package-preview-2.0
+### Tag: package-2023-06-01-preview
 
-These settings apply only when `--tag=package-preview-2.0` is specified on the command line.
+These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2.0'
+```yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
   - Microsoft.Maps/Data/preview/2.0/data.json
-  - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
-  - Microsoft.Maps/Render/preview/1.0/render.json
-  - Microsoft.Maps/Render/preview/2.0/render.json
-  - Microsoft.Maps/Route/preview/1.0/route.json
-  - Microsoft.Maps/Search/preview/1.0/search.json
-  - Microsoft.Maps/Spatial/preview/1.0/spatial.json
-  - Microsoft.Maps/Timezone/preview/1.0/timezone.json
-  - Microsoft.Maps/Traffic/preview/1.0/traffic.json
-  - Microsoft.Maps/Weather/preview/1.0/weather.json
-```
-
-### Tag: package-1.0-preview
-
-These settings apply only when `--tag=package-1.0-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-1.0-preview'
-input-file:
-  - Microsoft.Maps/Data/preview/1.0/data.json
-  - Microsoft.Maps/DEM/preview/1.0/elevation.json
-  - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
   - Microsoft.Maps/Render/preview/1.0/render.json
   - Microsoft.Maps/Render/preview/2.0/render.json
