@@ -259,7 +259,6 @@ enum ProvisioningState {
   Migrating,
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "legacy API"
 @doc("Describes the properties of an Azure Large Instance.")
 model AzureLargeInstanceProperties {
   @doc("Specifies the hardware settings for the Azure Large Instance.")
@@ -394,6 +393,7 @@ model Tags {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "legacy API"
 @doc("Describes the properties of an AzureLargeStorageInstance.")
 model AzureLargeStorageInstanceProperties {
   @doc("Specifies the AzureLargeStorageInstance unique ID.")
