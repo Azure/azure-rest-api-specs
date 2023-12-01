@@ -33,18 +33,18 @@ credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
 ```
 
-### Tag: package-stable-2023-07
+### Tag: package-stable-V2
 
-These settings apply only when `--tag=package-2023-07` is specified on the command line.
+These settings apply only when `--tag=package-V2` is specified on the command line.
 
 ```yaml $(tag) == 'package-2023-07'
 input-file:
-  - Creator/stable/2023-07-01/alias.json
-  - Creator/stable/2023-07-01/dataset.json
-  - Creator/stable/2023-07-01/dwgconversion.json
-  - Creator/stable/2023-07-01/featurestate.json
-  - Creator/stable/2023-07-01/tileset.json
-  - Creator/stable/2023-07-01/wfs.json
+  - Creator/preview/2.0/alias.json
+  - Creator/preview/2.0/dataset.json
+  - Creator/preview/2.0/dwgconversion.json
+  - Creator/preview/2.0/featurestate.json
+  - Creator/preview/2.0/tileset.json
+  - Creator/preview/2.0/wfs.json
 
 ```
 
