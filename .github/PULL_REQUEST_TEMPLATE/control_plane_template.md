@@ -1,6 +1,6 @@
 # ARM (Control Plane) API Specification Update Pull Request 
 
-> Tip: overwhelmed with all this guidance? See the `Getting Help` section at the bottom of this PR description.
+> Tip: overwhelmed by all this guidance? See the `Getting Help` section at the bottom of this PR description.
 
 ## PR review workflow diagram
 
