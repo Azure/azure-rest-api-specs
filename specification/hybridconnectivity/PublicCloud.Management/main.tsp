@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @armProviderNamespace
 @service({
-  title: "Public Cloud Asset Management API",
+  title: "Hybrid Connectivity Management API",
   version: "2023-12-01-preview",
 })
 @doc("REST API for public clouds.")
