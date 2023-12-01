@@ -35,7 +35,7 @@ group, and instance name.
 Patches the Tags field of a Azure Large Storage Instance for the specified
 subscription, resource group, and instance name.
 """)
-  update is ArmTagsPatchSync<AzureLargeStorageInstance>;
+  update is ArmCustomPatchSync<AzureLargeStorageInstance>;
   @doc("""
 Gets a list of AzureLargeStorageInstances in the specified subscription and
 resource group. The operations returns various properties of each Azure
@@ -48,3 +48,8 @@ operations returns various properties of each Azure LargeStorage instance.
 """)
   listBySubscription is ArmListBySubscription<AzureLargeStorageInstance>;
 }
+
+@@OpenAPI.extension(AzureLargeStorageInstances.update::parameters.properties,
+  "x-ms-client-name",
+  "tagsParameter"
+);
