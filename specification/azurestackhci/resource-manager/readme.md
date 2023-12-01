@@ -133,14 +133,6 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateRuns.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updates.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/common.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/galleryImages.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/logicalNetworks.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/marketplaceGalleryImages.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/networkInterfaces.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/storageContainers.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualHardDisks.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualMachineInstances.json
 ```
 
 ### Tag: package-2023-09
