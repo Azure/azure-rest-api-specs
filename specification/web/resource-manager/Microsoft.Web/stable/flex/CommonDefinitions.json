@@ -3620,6 +3620,20 @@
         }
       }
     },
+    "FunctionsAlwaysReadyConfig": {
+      "description": "TBD",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "TBD"
+        },
+        "instanceCount": {
+          "type": "number",
+          "description": "TBD"
+        }
+      }
+    },
     "FunctionsScaleAndConcurrency": {
       "description": "TBD",
       "type": "object",
@@ -3628,15 +3642,32 @@
           "description": "TBD",
           "type": "array",
           "items": {
-            // TBD
+            "$ref": "#/definitions/FunctionsAlwaysReadyConfig"
           }
+        },
+        "maximumInstanceCount": {
+          "description": "TBD",
+          "type": "number"
         },
         "instanceMemoryMB": {
           "description": "TBD",
           "type": "number"
         },
         "triggers": {
-          // TBD
+          "type": "object",
+          "description": "TBD",
+          "properties": {
+            "http": {
+              "type": "object",
+              "description": "TBD",
+              "properties": {
+                "perInstanceConcurrency": {
+                  "type": "number",
+                  "description": "TBD"
+                }
+              }
+            }
+          }
         }
 
       }
