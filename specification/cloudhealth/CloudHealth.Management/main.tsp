@@ -120,16 +120,11 @@ model SignalDefinitionProperties {
   )
   signalKind: string; // Cannot use enum directly due to bug https://github.com/Azure/typespec-azure/issues/3574
 
-  @doc("Interval in which the signal is being evaluated.")
-  refreshInterval?: RefreshInterval;
+  @doc("Interval in which the signal is being evaluated. Defaults to PT1M.")
+  refreshInterval: RefreshInterval = RefreshInterval.PT1M;
 
   @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
-
-  @doc("Time range of signal. ISO duration format like PT10M.")
-  @minLength(1)
-  @maxLength(100)
-  timeGrain?: string;
 
   @doc("Unit of the signal result (e.g. Bytes, MilliSeconds, Percent, Count))")
   @minLength(1)
@@ -175,14 +170,34 @@ model DynamicDetectionRule {
   @doc("Operator")
   dynamicThresholdModel: DynamicThresholdModel;
 
-  @doc("ML model sensitivity")
-  modelSensitivity?: int32;
+  @doc("ML model sensitivity. Lowest value = high sensitivity. Supported step size = 0.5")
+  @minValue(0.0)
+  @maxValue(5.0)
+  modelSensitivity: float32;
+
+  @doc("Threshold direction")
+  dynamicThresholdDirection: DynamicThresholdDirection;
+
+  @doc("Start time of the training in UTC.")
+  trainingStartTime?: utcDateTime;
 }
 
 @doc("ML-based model variants")
 enum DynamicThresholdModel {
   @doc("Anomaly detection model")
   AnomalyDetection,
+}
+
+@doc("Threshold direction for dynamic thresholds")
+enum DynamicThresholdDirection {
+  @doc("Lower than")
+  LowerThan,
+
+  @doc("Greater than")
+  GreaterThan,
+
+  @doc("Greater or Lower Than")
+  GreaterOrLowerThan
 }
 
 @doc("Refresh interval in ISO duration format")
@@ -222,6 +237,11 @@ model ResourceMetricSignalDefinitionProperties
   @maxLength(256)
   metricName: string;
 
+  @doc("Time range of signal. ISO duration format like PT10M.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain: string;
+
   @doc("Type of aggregation to apply to the metric")
   aggregationType: MetricAggregationType;
 
@@ -247,6 +267,11 @@ model LogAnalyticsQuerySignalDefinitionProperties
   @maxLength(5000)
   queryText: string;
 
+  @doc("Time range of signal. ISO duration format like PT10M. If not specified, the KQL query must define a time range.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain?: string;
+
   @doc("Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified.")
   @minLength(1)
   @maxLength(100)
@@ -266,6 +291,11 @@ model PrometheusMetricsSignalDefinitionProperties
   @minLength(1)
   @maxLength(5000)
   queryText: string;
+
+  @doc("Time range of signal. ISO duration format like PT10M.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain?: string;
 }
 
 @doc("Signal operator")
@@ -432,11 +462,8 @@ model IconDefinition {
 
 @doc("Contains various signal groups that can be assigned to an entity")
 model SignalGroup {
-  @doc("Azure Resource Signal Group. Can only be defined if dynamicAzureResourceDefinition is not defined.")
+  @doc("Azure Resource Signal Group")
   azureResource?: AzureResourceSignalGroup;
-
-  @doc("Dynamic Azure Resource Signal Group. Can only be defined if azureResource is not defined.")
-  dynamicAzureResources?: DynamicAzureResourcesSignalGroup;
 
   @doc("Log Analytics Signal Group")
   azureLogAnalytics?: LogAnalyticsSignalGroup;
@@ -469,7 +496,9 @@ model SignalAssignmentGroup {
 @doc("Group of signal definition assignments")
 model SignalAssignment {
   @doc("Signal definitions referenced by their names. All definitions are combined with an AND operator.")
-  @maxItems(50)
+  // @maxItems(50) - until the backend supports correlation, we need to limit this to 1
+  @maxItems(1)
+  @minItems(1)
   signalDefinitions: stringResourceName[];
 }
 
@@ -494,14 +523,6 @@ model LogAnalyticsSignalGroup is SignalAssignmentGroup {
 model AzureMonitorWorkspaceSignalGroup is SignalAssignmentGroup {
   @doc("Azure Monitor workspace resource ID")
   azureMonitorWorkspaceResourceId: AzureMonitorWorkspaceResourceId;
-}
-
-@doc("A grouping of signal assignments for dynamic Azure Resources")
-model DynamicAzureResourcesSignalGroup is SignalAssignmentGroup {
-  @doc("Azure Resource Graph query in KQL syntax to select a dynamic set of Azure resources")
-  @minLength(1)
-  @maxLength(5000)
-  azureResourceGraphQuery: string;
 }
 
 @doc("Type of impact an entity has on health state propagation")
