@@ -184,7 +184,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ActionGroupPatchBody"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ActionGroupPatchBody"
             },
             "description": "Parameters supplied to the operation."
           }
@@ -1357,35 +1357,6 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
-        }
-      }
-    },
-    "ActionGroupPatchBody": {
-      "description": "An action group object for the body of patch operations.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ActionGroupPatch",
-          "description": "The action group settings for an update operation."
-        }
-      }
-    },
-    "ActionGroupPatch": {
-      "description": "An Azure action group for patch operations.",
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "default": true,
-          "description": "Indicates whether this action group is enabled. If an action group is not enabled, then none of its actions will be activated."
         }
       }
     }
