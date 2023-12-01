@@ -30,32 +30,32 @@ Gets an Azure Large Instance for the specified subscription, resource group,
 and instance name.
 """)
   get is ArmResourceRead<AzureLargeInstance>;
-  
+
   @doc("""
 Patches the Tags field of an Azure Large Instance for the specified
 subscription, resource group, and instance name.
 """)
   update is ArmCustomPatchSync<AzureLargeInstance>;
-  
+
   @doc("""
 Gets a list of Azure Large Instances in the specified subscription and resource
 group. The operations returns various properties of each Azure Large Instance.
 """)
   listByResourceGroup is ArmResourceListByParent<AzureLargeInstance>;
-  
+
   @doc("""
 Gets a list of Azure Large Instances in the specified subscription. The
 operations returns various properties of each Azure Large Instance.
 """)
   listBySubscription is ArmListBySubscription<AzureLargeInstance>;
-  
+
   @doc("The operation to start an Azure Large Instance (only for compute instances)")
   start is ArmResourceActionNoBody<
     AzureLargeInstance,
     {},
     OperationStatusResult
   >;
-  
+
   @doc("The operation to restart an Azure Large Instance (only for compute instances)")
   restart is ArmResourceActionNoBody<
     AzureLargeInstance,
@@ -65,7 +65,7 @@ operations returns various properties of each Azure Large Instance.
     },
     OperationStatusResult
   >;
-  
+
   @doc("The operation to shutdown an Azure Large Instance (only for compute instances)")
   shutdown is ArmResourceActionNoBody<
     AzureLargeInstance,
