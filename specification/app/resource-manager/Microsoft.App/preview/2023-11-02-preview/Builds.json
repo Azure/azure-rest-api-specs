@@ -310,7 +310,7 @@
         "environmentVariables": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EnvironmentVariable"
+            "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVariable"
           },
           "x-ms-identifiers": [
             "name"
@@ -457,24 +457,6 @@
           "readOnly": true
         }
       }
-    },
-    "EnvironmentVariable": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Environment variable name."
-        },
-        "value": {
-          "type": "string",
-          "description": "Environment variable value."
-        }
-      },
-      "description": "Model representing an environment variable.",
-      "required": [
-        "name",
-        "value"
-      ]
     },
     "HttpGet": {
       "type": "object",

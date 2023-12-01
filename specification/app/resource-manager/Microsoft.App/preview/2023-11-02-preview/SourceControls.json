@@ -350,6 +350,16 @@
         "runtimeVersion": {
           "description": "Runtime version",
           "type": "string"
+        },
+        "environmentVariables": {
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVariable"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "List of environment variables to be passed to the build."
         }
       }
     },
