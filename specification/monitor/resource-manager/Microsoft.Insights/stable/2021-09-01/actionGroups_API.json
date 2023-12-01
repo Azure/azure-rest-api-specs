@@ -831,7 +831,7 @@
         "azureAppPushReceivers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AzureAppPushReceiver"
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/AzureAppPushReceiver"
           },
           "x-ms-identifiers": [
             "name"
@@ -960,7 +960,7 @@
         "azureAppPushReceivers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AzureAppPushReceiver"
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/AzureAppPushReceiver"
           },
           "x-ms-identifiers": [
             "name"
@@ -1197,24 +1197,6 @@
         "eventHubNameSpace",
         "eventHubName",
         "subscriptionId"
-      ]
-    },
-    "AzureAppPushReceiver": {
-      "description": "The Azure mobile App push notification receiver.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the Azure mobile app push receiver. Names must be unique across all receivers within an action group."
-        },
-        "emailAddress": {
-          "type": "string",
-          "description": "The email address registered for the Azure mobile app."
-        }
-      },
-      "required": [
-        "name",
-        "emailAddress"
       ]
     },
     "AutomationRunbookReceiver": {

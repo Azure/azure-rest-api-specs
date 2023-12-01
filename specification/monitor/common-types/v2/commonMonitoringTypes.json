@@ -302,6 +302,24 @@
           "description": "Indicates whether this action group is enabled. If an action group is not enabled, then none of its actions will be activated."
         }
       }
+    },
+    "AzureAppPushReceiver": {
+      "description": "The Azure mobile App push notification receiver.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Azure mobile app push receiver. Names must be unique across all receivers within an action group."
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "The email address registered for the Azure mobile app."
+        }
+      },
+      "required": [
+        "name",
+        "emailAddress"
+      ]
     }
   },
   "parameters": {

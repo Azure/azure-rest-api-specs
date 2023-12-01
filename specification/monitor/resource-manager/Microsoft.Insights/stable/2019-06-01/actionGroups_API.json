@@ -448,7 +448,7 @@
         "azureAppPushReceivers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AzureAppPushReceiver"
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/AzureAppPushReceiver"
           },
           "description": "The list of AzureAppPush receivers that are part of this action group."
         },
@@ -616,23 +616,6 @@
         "connectionId",
         "ticketConfiguration",
         "region"
-      ]
-    },
-    "AzureAppPushReceiver": {
-      "description": "The Azure mobile App push notification receiver.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the Azure mobile app push receiver. Names must be unique across all receivers within an action group."
-        },
-        "emailAddress": {
-          "type": "string",
-          "description": "The email address registered for the Azure mobile app."
-        }
-      },
-      "required": [
-        "name",
-        "emailAddress"
       ]
     },
     "AutomationRunbookReceiver": {
