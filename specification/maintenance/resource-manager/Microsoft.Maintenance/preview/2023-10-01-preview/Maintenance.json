@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/zones/{availabilityZone}/acknowledge": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/acknowledge": {
       "post": {
         "tags": [
           "ScheduledEvents"
@@ -29,12 +29,15 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceType",
             "in": "path",
-            "description": "Resource group name",
+            "description": "Resource parent identifier",
             "required": true,
             "type": "string"
           },
@@ -48,19 +51,13 @@
           {
             "name": "scheduledEventId",
             "in": "path",
-            "description": "Scheduled Event Id",
+            "description": "Scheduled Event Id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
-            "name": "availabilityZone",
-            "in": "path",
-            "description": "Availability zone of scheduledEvent",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
