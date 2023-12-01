@@ -10,9 +10,31 @@ Most guides here require for you to have `npm` installed, which you can get by i
 
 ## Spell check
 
-Please add your words to `./custom-words.txt` if you think you have the correct spell.
+If you receive a spelling failure either fix the spelling to match or if there are words that need to be suppressed for your service then add the word to the override list in [cspell.json](https://github.com/Azure/azure-rest-api-specs/blob/main/cSpell.json). Either
+add to your existing section or create a new section for your specific spec or service family if the work is more generally used in losts of files under your service.
+```
+ "overrides": [
+    ... example of specific file override
+    {
+        "filename": "**/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json",
+        "words": [
+            "saskey"
+        ]
+    }
+    ... example of specific service family override
+    {
+        "filename": "**/specification/cognitiveservices/**/*.json",
+        "words": [
+            "flac",
+            "mpga"
+        ]
+    }
+```
+Words are case-insensitive so use lower case for the word list.
 
-If your problem is some existing error name that is not a word and need to suppress the error in that file (and don't want to add to custom-words.txt), you can add it to `./cSpell.txt`.
+If you need more information on see [cspell configuration](https://cspell.org/configuration/). 
+
+*Note*: We are trying to move away from one shared dictionary file so try and avoid editing custom-words.txt in the root as it will likely go away in the future.
 
 ## Prettier check
 
