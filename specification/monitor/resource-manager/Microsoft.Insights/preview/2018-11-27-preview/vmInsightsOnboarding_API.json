@@ -92,27 +92,6 @@
     }
   },
   "definitions": {
-    "ProxyResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
-    },
     "ResponseWithError": {
       "type": "object",
       "description": "An error response from the API.",
@@ -193,7 +172,7 @@
       "description": "VM Insights onboarding status for a resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
