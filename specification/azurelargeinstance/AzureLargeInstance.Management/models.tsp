@@ -48,7 +48,7 @@ enum AzureLargeInstanceSizeNamesEnum {
   @doc("2 sockets, 96 CPU threads, 48 CPU cores, 768 GB total memory, 768 GB DRAM, 3.0 TB storage, Cisco_UCS hardware type")
   S96,
 
-  @doc("No longer offerred or used.")
+  @doc("No longer offered or used.")
   S112,
 
   @doc("4 sockets, 224 CPU threads, 112 CPU cores, 3 TB total memory, 3 TB DRAM, 6.3 TB storage, Cisco_UCS hardware type")
@@ -129,7 +129,7 @@ enum AzureLargeInstanceSizeNamesEnum {
   @doc("12 sockets, 672 CPU threads, 336 CPU cores, 22.5 TB total memory, 4.5 TB DRAM, 18 TB memory optane, 33.7 TB storage, SDFLEX hardware type")
   S672ooo,
 
-  @doc("No longer offerred or used.")
+  @doc("No longer offered or used.")
   S768,
 
   @doc("16 sockets, 768 CPU threads, 384 CPU cores, 16 TB total memory, 16 TB DRAM, 36 TB storage, HPEMc990x hardware type")
