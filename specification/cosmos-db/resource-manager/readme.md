@@ -48,6 +48,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2023-11-15-preview/rbac.json
   - Microsoft.DocumentDB/preview/2023-11-15-preview/restorable.json
   - Microsoft.DocumentDB/preview/2023-11-15-preview/services.json
+  - Microsoft.DocumentDB/preview/2023-11-15-preview/throughputpool.json
 ```
 ### Tag: package-2023-09
 
