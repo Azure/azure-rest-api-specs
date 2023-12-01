@@ -197,7 +197,7 @@ enum DynamicThresholdDirection {
   GreaterThan,
 
   @doc("Greater or Lower Than")
-  GreaterOrLowerThan
+  GreaterOrLowerThan,
 }
 
 @doc("Refresh interval in ISO duration format")
