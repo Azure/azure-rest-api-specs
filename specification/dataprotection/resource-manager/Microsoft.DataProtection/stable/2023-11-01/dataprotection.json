@@ -1540,25 +1540,22 @@
           "FetchSecondaryRecoveryPoints"
         ],
         "description": "Returns a list of Secondary Recovery Points for a DataSource in a vault, that can be used for Cross Region Restore.",
-        "operationId": "SecondaryRPs_Fetch",
+        "operationId": "FetchSecondaryRecoveryPoints_List",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "parameters",
@@ -1614,25 +1611,23 @@
         "tags": [
           "BackupInstances"
         ],
+        "description": "Triggers Cross Region Restore for BackupInstance.",
         "operationId": "BackupInstances_TriggerCrossRegionRestore",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "parameters",
@@ -1672,7 +1667,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1692,25 +1687,23 @@
         "tags": [
           "BackupInstances"
         ],
+        "description": "Validates whether Cross Region Restore can be triggered for DataSource.",
         "operationId": "BackupInstances_ValidateCrossRegionRestore",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "parameters",
@@ -1750,7 +1743,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1770,25 +1763,23 @@
         "tags": [
           "DppJob"
         ],
-        "operationId": "CrossRegionRestoreJob_Get",
+        "description": "Fetches the Cross Region Restore Job",
+        "operationId": "FetchCrossRegionRestoreJob_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "parameters",
@@ -1826,25 +1817,23 @@
         "tags": [
           "DppJob"
         ],
-        "operationId": "CrossRegionRestoreJobs_List",
+        "description": "Fetches list of Cross Region Restore job belonging to the vault",
+        "operationId": "FetchCrossRegionRestoreJobs_List",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "$filter",
@@ -4514,6 +4503,7 @@
       "type": "object"
     },
     "CrossRegionRestoreJobRequest": {
+      "description": "Details of CRR Job to be fetched",
       "required": [
         "sourceRegion",
         "sourceBackupVaultId",
@@ -4533,6 +4523,7 @@
       }
     },
     "CrossRegionRestoreJobsRequest": {
+      "description": "Details of Backup Vault for which CRR Jobs are to be fetched",
       "required": [
         "sourceRegion",
         "sourceBackupVaultId"
