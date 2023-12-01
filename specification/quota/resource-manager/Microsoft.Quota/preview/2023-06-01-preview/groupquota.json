@@ -290,7 +290,7 @@
           "GroupQuotasSubscriptions"
         ],
         "summary": "Adds subscription to the GroupQuotas.",
-        "description": "Adds a subscription to GroupQuotas.",
+        "description": "Adds a subscription to GroupQuotas. The subscriptions will be validated if additionalAttributes are defined in the GroupQuota. The request's TenantId is validated against the subscription's TenantId.",
         "operationId": "GroupQuotaSubscriptions_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Put_Subscriptions": {
@@ -353,7 +353,7 @@
           "GroupQuotasSubscriptions"
         ],
         "summary": "Updates the GroupQuotas with the subscription to add to the subscriptions list.",
-        "description": "Updates the GroupQuotas with the subscription to add to the subscriptions list.",
+        "description": "Updates the GroupQuotas with the subscription to add to the subscriptions list. The subscriptions will be validated if additionalAttributes are defined in the GroupQuota. The request's TenantId is validated against the subscription's TenantId.",
         "operationId": "GroupQuotaSubscriptions_Update",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Patch_Subscriptions": {
@@ -416,7 +416,7 @@
           "GroupQuotasSubscriptions"
         ],
         "summary": "Removes the subscription from GroupQuotas.",
-        "description": "Removes the subscription from GroupQuotas.",
+        "description": "Removes the subscription from GroupQuotas. The request's TenantId is validated against the subscription's TenantId.",
         "operationId": "GroupQuotaSubscriptions_Delete",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Delete_Subscriptions": {
@@ -456,8 +456,8 @@
         "tags": [
           "GroupQuotasSubscriptions"
         ],
-        "summary": "Returns the subscriptionId along with its provisioning state for being associated with the GroupQuotasEntity.",
-        "description": "Returns the subscriptionId along with its provisioning state for being associated with the GroupQuotasEntity.",
+        "summary": "Returns the subscriptionId along with its provisioning state for being associated with the GroupQuotas.",
+        "description": "Returns the subscriptionIds along with its provisioning state for being associated with the GroupQuota. If the subscription is not fmember of GroupQuota, it will return 404, else 200.",
         "operationId": "GroupQuotaSubscriptions_Get",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Get_Subscriptions": {
@@ -502,8 +502,8 @@
         "tags": [
           "GroupQuotasSubscriptions"
         ],
-        "summary": "Returns a list of the subscriptionIds associated with the GroupQuotasEntity.",
-        "description": "Returns a list of the subscriptionIds associated with the GroupQuotasEntity.",
+        "summary": "Returns a list of the subscriptionIds for the GroupQuotas.",
+        "description": "Returns a list of the subscriptionIds associated with the GroupQuotas.",
         "operationId": "GroupQuotaSubscriptions_List",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_List_Subscriptions": {
@@ -628,8 +628,8 @@
         "tags": [
           "GroupQuotaLimits"
         ],
-        "summary": "Updates the GroupQuotaLimits for the specific resource under a Management Group.",
-        "description": "Updates the GroupQuotaLimits for the specific resource under a Management Group. The resourceProviderScope will be provided in the request body, as resourceProviderScope. GroupQuotaLimitRequestId will be returned by the Service in the response. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI for groupQuotaRequests and full details can be checked from the Get API for groupQuotaRequests.",
+        "summary": "Updates the GroupQuotaLimits for the specific resource.",
+        "description": "Updates the GroupQuotaLimits for the specific resource for a specific resource based on the resourceProviderScope. The resourceProviderScope will be provided in the request body, as resourceProviderScope. Example of resourceProviderScope for compute - /providers/{Microsoft.Compute}/locations/{eastus}. GroupQuotaLimitRequestId will be returned by the Service in the response. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI for groupQuotaRequests and full details can be checked from the Get API for groupQuotaRequests.",
         "operationId": "GroupQuotaLimits_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
@@ -700,7 +700,7 @@
           "GroupQuotaLimits"
         ],
         "summary": "Updates the GroupQuotaLimits for the specific resource under a Management Group.",
-        "description": "Updates the GroupQuotaLimits for the specific resource under a Management Group. The resourceProviderScope will be provided in the request body, as resourceProviderScope field. A groupQuotaLimitRequestId will be returned by the Service. The status will be updated periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
+        "description": "Updates the GroupQuotaLimits for the specific resource. The resourceProviderScope will be provided in the request body, as resourceProviderScope field. A groupQuotaLimitRequestId will be returned by the Service. The status will be updated periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
         "operationId": "GroupQuotaLimits_Update",
         "x-ms-examples": {
           "GroupQuotaLimits_Patch_Request_ForCompute": {
@@ -771,7 +771,7 @@
           "GroupQuotaLimits"
         ],
         "summary": "Gets the resource groupQuotaLimits for the MGId for a resource.",
-        "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the groupQuota.",
+        "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The $filter is a required paramater to filter out the specific resource based on the ResourceProvider/Location. It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the groupQuota.",
         "operationId": "GroupQuotaLimits_Get",
         "x-ms-examples": {
           "GroupQuotaLimits_Get_Request_ForCompute": {
@@ -866,7 +866,7 @@
           "GroupQuotaLimitsRequests"
         ],
         "summary": "List the status of all GroupQuota requests.",
-        "description": "List API to check the status of a GroupQuota requests by requestId. The groupQuotaRequest history is maintained for 1 year.",
+        "description": "List API to check the status of a GroupQuota requests by requestId. The groupQuotaRequest history is maintained for 1 year. Use the $filter paramater to filter out the specific resource based on the ResourceProvider/Location. ",
         "operationId": "GroupQuotaLimitsRequests_List",
         "x-ms-examples": {
           "GroupQuotaLimitsRequests_List": {
@@ -958,7 +958,7 @@
           "SubscriptionQuotaAllocation"
         ],
         "summary": "Gets all the quota allocated to a subscription for the specific Resource Provider, Location.",
-        "description": "Gets all the quota allocated to a subscription for the specific Resource Provider, Location. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota.",
+        "description": "Gets all the quota allocated to a subscription for the specific Resource Provider, Location. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota. Use the $filter paramater to filter out the specific resource based on the ResourceProvider/Location. $filter is a required parameter. ",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_List",
         "x-ms-examples": {
           "SubscriptionQuotaAllocation_List_Request_ForCompute": {
