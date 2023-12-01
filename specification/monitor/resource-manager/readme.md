@@ -84,7 +84,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-04'
+``` yaml $(tag) == 'package-2023-04'
 input-file:
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
   - Microsoft.Monitor/stable/2023-04-03/operations_API.json
