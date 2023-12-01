@@ -88,23 +88,6 @@
     }
   },
   "definitions": {
-    "LocalizableString": {
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "the invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "the locale specific value."
-        }
-      },
-      "description": "The localizable string class."
-    },
     "Unit": {
       "type": "string",
       "description": "Number representing the unit of the metric. 0=Count, 1=Bytes, 2=Seconds, 3=CountPerSecond, 4=BytesPerSecond, 5=Percent, 6=MilliSeconds, 7=ByteSeconds"
@@ -165,7 +148,7 @@
           "description": "the resource type of the metric resource."
         },
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "the name and the display name of the metric, i.e. it is localizable string."
         },
         "unit": {

@@ -299,23 +299,6 @@
         }
       }
     },
-    "LocalizableString": {
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "The display name."
-        }
-      },
-      "description": "The localizable string class."
-    },
     "MetricUnit": {
       "type": "string",
       "description": "The unit of the metric.",
@@ -436,7 +419,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "The name of the metadata."
         },
         "value": {
@@ -454,7 +437,7 @@
           "description": "The metric Id."
         },
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "The name and the display name of the metric, i.e. it is localizable string."
         },
         "displayDescription": {
