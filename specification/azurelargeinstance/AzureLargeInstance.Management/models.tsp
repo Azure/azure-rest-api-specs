@@ -261,7 +261,8 @@ model Disk {
   name?: string;
 
   @doc("Specifies the size of an empty data disk in gigabytes.")
-  diskSizeGb?: int32;
+  #suppress"@azure-tools/typespec-azure-core/casing-style" "Avoiding name change to prevent compatibility issues with existing bareMetalInfrastructure service and apis"
+  diskSizeGB?: int32;
 
   @doc("""
 Specifies the logical unit number of the data disk. This value is used to
