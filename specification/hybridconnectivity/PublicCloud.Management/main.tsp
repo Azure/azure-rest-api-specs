@@ -12,6 +12,7 @@ using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
 @service({
   title: "Hybrid Connectivity Management API",
@@ -45,8 +46,6 @@ model GenerateAwsTemplateRequest {
 }
 
 //---------------------------------------------- Operations ----------------------------------------------
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/")
