@@ -50,10 +50,6 @@ model LocationVerifyRequest {
   @maxValue(100)
   accuracy: int32;
 
-  @doc("Maximum age before a response is stale")
-  @minValue(60)
-  maxAge: int32;
-
   ...LocationDevice;
 }
 
