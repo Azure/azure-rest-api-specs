@@ -1225,6 +1225,20 @@
         }
       }
     },
+    "AppServicePlanSku": {
+      "description": "Sku details of app service plan",
+      "type": "object",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "description": "Tier information of app service plan"
+        },
+        "capacity": {
+          "type": "string",
+          "description": "Capacity for app service plan"
+        }
+      }
+    },
     "Tags": {
       "type": "object",
       "properties": {
@@ -1336,6 +1350,10 @@
         "monitorSubnet": {
           "type": "string",
           "description": "The subnet which the SAP monitor will be deployed in"
+        },
+        "appServicePlanSku": {
+          "description": "Sku details for app service plan",
+          "$ref": "#/definitions/AppServicePlanSku"
         },
         "msiArmId": {
           "readOnly": true,
