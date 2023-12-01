@@ -57,55 +57,13 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "OperationListResult": {
-      "description": "Result of the request to list Microsoft.Insights operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "List of operations supported by the Microsoft.Insights provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "Microsoft Insights API operation definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Insights",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: AlertRules, Autoscale, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }

@@ -46,7 +46,7 @@ input-file:
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
   - Microsoft.Monitor/stable/2023-04-03/operations_API.json
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
-  - Microsoft.Insights/stable/2023-10-01/operations_API.json
+  - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
