@@ -18,8 +18,10 @@ namespace Microsoft.AzureSphere;
 model Image is ProxyResource<ImageProperties> {
   @doc("Image name. Use .default for image creation.")
   @key("imageName")
+  @pattern("^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^\\.default$")
   @path
   @segment("images")
+  @added(Microsoft.AzureSphere.Versions.v2024_03_01)
   name: string;
 }
 
@@ -71,7 +73,7 @@ model ImageProperties {
 
 @doc("Image upload request body.")
 model ImageUploadRequestBody {
-  @doc(".")
+  @doc("Image as a UTF-8 encoded base 64 string.")
   images: string;
 }
 

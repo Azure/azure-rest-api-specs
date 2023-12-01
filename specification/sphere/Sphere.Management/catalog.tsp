@@ -25,6 +25,12 @@ model Catalog is TrackedResource<CatalogProperties> {
 
 @doc("Catalog properties")
 model CatalogProperties {
+
+  @visibility("read")
+  @doc("The Azure Sphere tenant ID associated with the catalog.")
+  @added(Microsoft.AzureSphere.Versions.v2024_03_01)
+  tenantId?: string;
+
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -68,6 +74,7 @@ interface Catalogs
       Catalog,
       CatalogProperties
     > {
+  @removed(Versions.v2024_03_01)
   @autoRoute
   @doc("Counts devices in catalog.")
   @armResourceAction(Catalog)
@@ -75,6 +82,16 @@ interface Catalogs
   countDevices(
     ...ResourceInstanceParameters<Catalog>,
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @autoRoute
+  @doc("Counts devices in catalog.")
+  @armResourceAction(Catalog)
+  @added(Microsoft.AzureSphere.Versions.v2024_03_01)
+  @post
+  countDevices(
+    ...ResourceInstanceParameters<Catalog>,
+  ): ArmResponse<CountDevicesResponse> | ErrorResponse;
 
   @autoRoute
   @doc("Lists device insights for catalog.")
