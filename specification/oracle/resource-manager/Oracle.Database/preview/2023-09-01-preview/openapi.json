@@ -4850,7 +4850,7 @@
           ]
         },
         "plan": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan",
+          "$ref": "#/definitions/ResourcePlanTypeWithTermUnit",
           "description": "Details of the resource plan."
         }
       },
@@ -4942,7 +4942,7 @@
       "description": "The type used for update operations of the OracleSubscription.",
       "properties": {
         "plan": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan",
+          "$ref": "#/definitions/ResourcePlanTypeWithTermUnitUpdate",
           "description": "Details of the resource plan."
         }
       }
@@ -5077,6 +5077,36 @@
       "required": [
         "subnetId",
         "vnicId"
+      ]
+    },
+    "ResourcePlanTypeWithTermUnit": {
+      "type": "object",
+      "description": "Details of the resource plan.",
+      "properties": {
+        "termUnit": {
+          "type": "string",
+          "description": "Term Unit. P1Y, P3Y, etc, see Durations https://en.wikipedia.org/wiki/ISO_8601"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan"
+        }
+      ]
+    },
+    "ResourcePlanTypeWithTermUnitUpdate": {
+      "type": "object",
+      "description": "Details of the resource plan.",
+      "properties": {
+        "termUnit": {
+          "type": "string",
+          "description": "Term Unit. P1Y, P3Y, etc, see Durations https://en.wikipedia.org/wiki/ISO_8601"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan"
+        }
       ]
     },
     "SaasSubscriptionDetails": {
