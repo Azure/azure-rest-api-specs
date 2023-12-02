@@ -19,6 +19,16 @@ pr:
     - eng
     - specification/common-types
 
+resources:
+  pipelines:
+  - pipeline: test
+    source: mikeharder.AzurePipelineTests
+    project: playground
+    trigger:
+      branches:
+        include:
+        - test-fast
+
 jobs:
 - job: Validate_All_Specs
 
