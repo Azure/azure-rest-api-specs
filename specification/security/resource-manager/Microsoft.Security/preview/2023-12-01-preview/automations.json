@@ -211,6 +211,49 @@
           }
         }
       },
+      "patch": {
+        "x-ms-examples": {
+          "Update a security automation": {
+            "$ref": "./examples/Automations/PatchAutomation_example.json"
+          }
+        },
+        "tags": [
+          "Automations"
+        ],
+        "description": "Updates a security automation",
+        "operationId": "Automations_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/AutomationName"
+          },
+          {
+            "$ref": "#/parameters/AutomationInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Automation"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
       "delete": {
         "x-ms-examples": {
           "Delete a security automation": {
@@ -699,6 +742,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern":"",
       "description": "The security automation name.",
       "x-ms-parameter-location": "method"
     },
