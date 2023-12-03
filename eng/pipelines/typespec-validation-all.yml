@@ -19,6 +19,23 @@ pr:
     - eng
     - specification/common-types
 
+resources:
+  pipelines:
+  - pipeline: typespec
+    source: typespec - CI
+    project: internal
+    trigger:
+      branches:
+        include:
+        - main
+  - pipeline: typespec-azure
+    source: typespec-azure - CI
+    project: internal
+    trigger:
+      branches:
+        include:
+        - main
+
 jobs:
 - job: Validate_All_Specs
 
