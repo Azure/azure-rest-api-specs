@@ -15,7 +15,7 @@ using Azure.ResourceManager;
   title: "Microsoft Inventory",
   version: "2024-01-01-preview",
 })
-@doc("Microsoft Inventoey Resource Provider management API.")
+@doc("Microsoft Inventory Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.Inventory;
 
