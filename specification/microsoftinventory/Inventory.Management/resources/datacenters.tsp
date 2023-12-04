@@ -17,6 +17,7 @@ using Azure.ResourceManager;
   version: "2024-01-01-preview",
 })
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.Inventory;
 
 @tenantResource
