@@ -26,7 +26,7 @@ enum Versions {
 alias CommonParameters = {
   /** Mandatory API version parameter */
   @query("api-version")
-  apiVersion: string;
+  apiVersion: string = "2023-11-01-preview";
 
   /** The value is the region of the translator resource. This value is optional if when custom endpoint is used.
    * The value can be found in Azure portal. Translator resource => Resource Management => Keys and Endpoint => Location/Region  */
