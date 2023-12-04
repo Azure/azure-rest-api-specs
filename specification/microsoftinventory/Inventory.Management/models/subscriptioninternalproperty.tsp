@@ -50,6 +50,7 @@ model SubscriptionInternalProperties {
 @doc("List of promotions")
 model PromotionsList  {
    @doc("Promotion")
+   @OpenAPI.extension("x-ms-identifiers", [])
    value: PromotionData[];
 }
 
