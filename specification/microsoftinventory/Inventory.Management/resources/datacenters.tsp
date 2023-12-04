@@ -32,7 +32,7 @@ model DatacenterResource is ProxyResource<DatacenterProperties> {
 
 @armResourceOperations
 interface Datacenters {
-  getDatacenter is ArmLocResourceRead<DatacenterResource>;
-  listDatacenters is ArmLocResourceListByParent<DatacenterResource>;
+  get is ArmLocResourceRead<DatacenterResource>;
+  list is ArmLocResourceListByParent<DatacenterResource>;
 }
 
