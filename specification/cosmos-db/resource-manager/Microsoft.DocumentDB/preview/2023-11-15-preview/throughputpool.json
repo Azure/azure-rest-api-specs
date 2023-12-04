@@ -82,6 +82,15 @@
             },
             {
                 "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+                "name": "updateParameters",
+                "in": "body",
+                "required": false,
+                "schema": {
+                "$ref": "#/definitions/ThroughputPoolCreateUpdateParameters"
+                },
+                "description": "The parameters to provide for the current Throughput Pool."
             }
             ],
             "responses": {
@@ -309,6 +318,15 @@
             },
             {
                 "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "name": "updateParameters",
+              "in": "body",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/ThroughputPoolAccountCreateParameters"
+              },
+              "description": "The parameters to provide for the current ThroughputPoolAccount."
             }
             ],
             "responses": {
@@ -488,6 +506,10 @@
       "ThroughputPoolUpdateProperties": {
         "description": "Properties to update Azure Cosmos DB throughput pool.",
         "type": "object",
+        "x-ms-mutability": [
+            "update",
+            "create"
+        ],
         "properties": {
           "maxThroughput": {
             "type": "integer",
@@ -511,6 +533,9 @@
       "ThroughputPoolAccountCreateParameters": {
         "description": "Parameters for creating a Azure Cosmos DB throughput pool account.",
         "type": "object",
+        "x-ms-mutability": [
+            "create"
+        ],
         "properties": {
           "tags": {
             "$ref": "#/definitions/Tags"
