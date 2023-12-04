@@ -3,7 +3,7 @@ import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
 
 describe("folder-structure", function () {
-  it("should fail if no tspconfig has incorrect extension", async function () {
+  it("should fail if tspconfig has incorrect extension", async function () {
     let host = new TsvTestHost();
     host.globby = async () => {
       return ["/foo/bar/tspconfig.yml"];
