@@ -35,11 +35,13 @@ model SubscriptionInternalProperties {
   @doc("Tenant Id")
   tenantId: string;
 
-  @doc("Changed Time")
+  @doc("Created Time")
   changedTime?: string;
+  @format("date-time")
 
   @doc("Created Time")
   createdTime?: string;
+  @format("date-time")
 
   @doc("Provisioning state")
   provisioningState?: ProvisioningState;
@@ -59,6 +61,7 @@ model PromotionData {
 
   @doc("promotion end date time")
   endDateTime: string
+  @format("date-time")
 }
 
 
