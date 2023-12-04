@@ -248,7 +248,7 @@ model ChatChoice {
   provided in the request. This supplementary information is only available when using Azure OpenAI and only when the
   request is configured to use enhancements.
   """)
-  enhancements: AzureChatEnhancements;
+  enhancements?: AzureChatEnhancements;
 }
 
 @doc("""
