@@ -31,7 +31,7 @@ tag: package-preview-2023-12
 ```
 
 
-### Tag: package-preview-2023-12
+### Tag: package-preview-2023-12-01-preview
 
 These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
 

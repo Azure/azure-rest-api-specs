@@ -1225,17 +1225,39 @@
         }
       }
     },
-    "AppServicePlanSku": {
-      "description": "Sku details of app service plan",
+    "AppServicePlanConfiguration": {
+      "description": "Configuration details of app service plan",
       "type": "object",
       "properties": {
         "tier": {
           "type": "string",
-          "description": "Tier information of app service plan"
+          "description": "The App Service plan tier.",
+          "enum": [
+            "ElasticPremium",
+            "PremiumV3"
+          ],
+          "x-ms-enum": {
+            "name": "AppServicePlanTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ElasticPremium",
+                "value": "ElasticPremium",
+                "description": "Elastic Premium plan"
+              },
+              {
+                "name": "PremiumV3",
+                "value": "PremiumV3",
+                "description": "Dedicated Premium v3 plan"
+              }
+            ]
+          }
         },
         "capacity": {
-          "type": "string",
-          "description": "Capacity for app service plan"
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of workers in app service plan. If this is not set or set to 0, auto scale will be configured for the app service plan, otherwise, instance count is set to this number.",
+          "minimum": 0
         }
       }
     },
