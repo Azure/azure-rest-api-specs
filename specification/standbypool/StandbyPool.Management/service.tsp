@@ -22,6 +22,7 @@ using OpenAPI;
   title: "Microsoft.StandbyPool",
 })
 @versioned(Microsoft.StandbyPool.Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.StandbyPool;
 
 @doc("Supported API Versions for Microsoft.StandbyPool")
