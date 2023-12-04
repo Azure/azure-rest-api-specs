@@ -56,7 +56,7 @@ describe("folder-structure", function () {
 
     const result = await new FolderStructureRule().execute(
       host,
-      "/gitroot/specification/Foo/Foo.foo",
+      "/gitroot/specification/foo/Foo.foo",
     );
     assert(result.errorOutput);
     assert(result.errorOutput.includes("must be capitalized"));
