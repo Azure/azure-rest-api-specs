@@ -33,6 +33,6 @@ model SubscriptionInternalPropertyResource is ProxyResource<SubscriptionInternal
 @armResourceOperations
 interface SubscriptionInternalPropertyResources {
   @doc("Gets Subscription's internal properties.")
-  getSubscriptionInternalPropertyResource is ArmResourceRead<SubscriptionInternalPropertyResource>;
-  listSubscriptionInternalPropertyResources is ArmResourceListByParent<SubscriptionInternalPropertyResource>;
+  get is ArmResourceRead<SubscriptionInternalPropertyResource>;
+  list is ArmResourceListByParent<SubscriptionInternalPropertyResource>;
 }

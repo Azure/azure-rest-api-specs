@@ -20,7 +20,7 @@ model SubscriptionInternalProperties {
   @doc("offer Type")
   offerType?: string;
 
-  @doc("Promotions")
+  @doc("Promotions offered to the subscription")
   promotions?: PromotionsList;
 
   @doc("Current state of subscription")
