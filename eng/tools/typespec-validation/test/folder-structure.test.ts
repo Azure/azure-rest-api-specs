@@ -73,7 +73,7 @@ describe("folder-structure", function () {
 
     const result = await new FolderStructureRule().execute(
       host,
-      "/gitroot/specification/Foo/Foo.Management.Foo.Shared",
+      "/gitroot/specification/foo/Foo.Management.Foo.Shared",
     );
     assert(result.errorOutput);
     assert(result.errorOutput.includes("should follow"));
