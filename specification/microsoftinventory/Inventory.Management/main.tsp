@@ -1,0 +1,10 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "./resources/subscriptionInternalProperties.tsp";
+import "./resources/azurehosts.tsp";
+import "./resources/datacenters.tsp";
+import "./resources/clusters.tsp";
