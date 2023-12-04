@@ -42,8 +42,10 @@ interface JobRouterAdministrationRestClient {
   @access(Access.internal, "java")
   upsertExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertExceptionPolicy;
 
+  @access(Access.internal, "java")
   getExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.getExceptionPolicy;
 
+  @access(Access.internal, "java")
   @access(Access.internal, "csharp")
   listExceptionPolicies is AzureCommunicationRoutingService.JobRouterAdministrationOperations.listExceptionPolicies;
 
