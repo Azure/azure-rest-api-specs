@@ -29,6 +29,7 @@ interface NumberInterface {
     NumberVerifyResponse
   >;
 
+  // TODO - GET or POST?
   retrieve is Operations.ResourceAction<
     NumberEndpoint,
     {},

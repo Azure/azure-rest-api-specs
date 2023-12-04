@@ -7,6 +7,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+// TODO - how do we implement errors properly?
 // TODO - understand if this is the right way to set up auth
 @useAuth(
   [
@@ -24,6 +25,7 @@ using Azure.Core;
   version: "2023-11-14-preview",
 })
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+// TODO - what is this?
 @server(
   "{endpoint}",
   "Azure Programmable Connectivity Endpoint.",

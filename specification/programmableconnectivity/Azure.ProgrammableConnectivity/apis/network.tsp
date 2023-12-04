@@ -11,6 +11,7 @@ namespace Azure.ProgrammableConnectivity;
 /// Interfaces
 
 interface Networks {
+  // TODO - do we need this?
   list is Operations.ResourceList<Network>;
 
   retrieve is Operations.ResourceAction<
