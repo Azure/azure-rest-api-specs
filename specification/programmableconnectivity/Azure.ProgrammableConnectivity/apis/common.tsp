@@ -18,6 +18,7 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
+// TODO - This Enum only exists to stop linting yelling at us. Can we do this better?
 @doc("Enum to provide static action endpoint")
 enum CommonActionEnum {
   @doc("Static endpoint")

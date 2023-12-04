@@ -67,7 +67,7 @@ model LocationVerifyResponse {
 
 /// Common models
 
-// TODO - implement maxProperties = 2 and minProperties = 2
+// TODO - implement maxProperties = 1 and minProperties = 1
 @doc("Device information needed by CAMARA Location API")
 model LocationDevice {
   @doc("External identifier or network access identifier of the device")
