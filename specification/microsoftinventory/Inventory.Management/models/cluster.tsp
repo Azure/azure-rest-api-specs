@@ -11,6 +11,6 @@ model ClusterProperties {
     @doc("Datacenter Resource Id")
     datacenterId: DatacenterResourceId;
 
-    @doc("Provisionsing state")
+    @doc("Provisioning state")
     provisioningState?: ProvisioningState;
 }

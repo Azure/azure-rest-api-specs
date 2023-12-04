@@ -8,10 +8,10 @@ model SubscriptionInternalProperties {
   @doc("Subscription Id")
   subscriptionId: string;
 
-  @doc("Subscription diplay name")
+  @doc("Subscription display name")
   displayName?: string;
 
-  @doc("Entitilement start date")
+  @doc("Entitlement start date")
   entitlementStartDate?: string;
 
   @doc("Offer Category")
@@ -41,17 +41,17 @@ model SubscriptionInternalProperties {
   @doc("Created Time")
   createdTime?: string;
 
-  @doc("Provisionsing state")
+  @doc("Provisioning state")
   provisioningState?: ProvisioningState;
 }
 
 @doc("List of promotions")
 model PromotionsList  {
-   @doc("Promtion")
+   @doc("Promotion")
    value: PromotionData[];
 }
 
-@doc("Promtion")
+@doc("Promotion")
 model PromotionData {
 
   @doc("promotion category free vs pay-as-you-go")
@@ -171,7 +171,7 @@ enum Tier {
 enum WorkloadType {    
   @doc("None workload type")  
   None,
-  @doc("devtest workload type")  
+  @doc("Development test workload type")  
   DevTest,
   @doc("Production workload type")  
   Production

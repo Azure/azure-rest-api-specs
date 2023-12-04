@@ -1,4 +1,4 @@
-# oneinventory
+# microsoftinventory
 
 > see https://aka.ms/autorest
 
@@ -22,10 +22,11 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the oneinventory.
+These are the global settings for the microsoftinventory.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2023-08-16-preview
 ```
 
@@ -35,5 +36,5 @@ These settings apply only when `--tag=package-2023-08-16-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-08-16-preview'
 input-file:
-  - Microsoft.Inventory/preview/2023-08-16-preview/OneInventory.json
+  - Microsoft.Inventory/preview/2023-08-16-preview/microsoftinventory.json
 ```

@@ -1,5 +1,5 @@
 
-@doc("Provisionsingin state enum")
+@doc("Provisioning state enum")
 enum ProvisioningState {
   @doc("The resource is being provisioned.")
   Provisioning,

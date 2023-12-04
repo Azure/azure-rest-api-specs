@@ -20,6 +20,6 @@ model DatacenterProperties {
   @doc("Azure Region Id")
   azureRegionId: AzureRegionResourceId;
 
-  @doc("Provisionsing state")
+  @doc("Provisioning state")
   provisioningState?: ProvisioningState;
 }

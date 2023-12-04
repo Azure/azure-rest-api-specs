@@ -11,6 +11,6 @@ model AzureHostProperties {
   @doc("Physical server Id")
   serverId: ServerResourceId;
 
-  @doc("Provisionsing state")
+  @doc("Provisioning state")
   provisioningState?: ProvisioningState;
 }
