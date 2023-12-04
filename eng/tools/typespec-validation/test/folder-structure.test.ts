@@ -98,7 +98,7 @@ describe("folder-structure", function () {
 
     const result = await new FolderStructureRule().execute(
       host,
-      "/gitroot/specification/Foo/Foo.Management",
+      "/gitroot/specification/foo/Foo.Management",
     );
 
     assert(result.errorOutput);
