@@ -14,7 +14,7 @@ describe("folder-structure", function () {
     assert(result.errorOutput.includes("Invalid config file"));
   });
 
-  it("should fail if no folder under specification/ is capitalized", async function () {
+  it("should fail if folder under specification/ is capitalized", async function () {
     let host = new TsvTestHost();
     host.globby = async () => {
       return ["/foo/bar/tspconfig.yaml"];
