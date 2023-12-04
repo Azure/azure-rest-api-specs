@@ -39,7 +39,7 @@ describe("folder-structure", function () {
 
     const result = await new FolderStructureRule().execute(
       host,
-      "/gitroot/specification/Foo/Foo/Foo/Foo",
+      "/gitroot/specification/foo/Foo/Foo/Foo",
     );
     assert(result.errorOutput);
     assert(result.errorOutput.includes("3 levels or less"));
