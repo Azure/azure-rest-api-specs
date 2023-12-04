@@ -40,6 +40,6 @@ model AADToken is OAuth2Auth<[
   {
     type: OAuth2FlowType.implicit;
     authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
-    scopes: ["user_impersonation"];
+    scopes: ["https://purview.azure.net/.default"];
   }
 ]>;
