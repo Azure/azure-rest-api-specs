@@ -13,6 +13,7 @@ describe("normalize", function () {
   it("should succeed if /foo/bar/ is normalized", async function () {
     let host = new TsvTestHost();
     const result = host.normalizePath("/foo/bar/");
+    console.log(result);
     assert(result === "/foo/bar");
   });
 
