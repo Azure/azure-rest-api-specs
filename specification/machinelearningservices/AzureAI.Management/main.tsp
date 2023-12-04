@@ -14,61 +14,46 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft.MachineLearningServices management service",
-  version: "2021-10-01-preview",
+  version: "2024-01-01-preview",
 })
 @doc("Microsoft.MachineLearningServices Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.MachineLearningServices;
 
-@doc("Employee resource")
-model Employee is TrackedResource<EmployeeProperties> {
-  @doc("Name of employee")
+@doc("Index resource")
+model Index is ProxyResource<IndexProperties> {
+  @doc("Name of the index")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("employeeName")
+  @key("indexName")
   @path
-  @segment("employees")
+  @segment("indexes")
   name: string;
 }
 
-@doc("Employee properties")
-model EmployeeProperties {
-  @doc("Age of employee")
-  age?: int32;
+@doc("Index properties")
+model IndexProperties {
+  @doc("Reference to the Index this index was versioned off of. Null implies creation of a new versioned set.")
+  previousVersionIndexId: string;
 
-  @doc("City of employee")
-  city?: string;
+  @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
+  storageUri: string;
 
-  @doc("Profile of employee")
-  @encode("base64url")
-  profile?: bytes;
-
+  @doc("Set by system: format {Major-Version}.{Minor-Version}. Example 3.5, major version 3 minor version 5.")
   @visibility("read")
-  @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
-}
+  version: string;
 
-@lroStatus
-@doc("The resource provisioning state.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
-  @doc("The resource is being provisioned.")
-  Provisioning,
-  @doc("The resource is being updated.")
-  Updating,
-  @doc("The resource is being deleted.")
-  Deleting,
-  @doc("The resource provisioning request has been accepted.")
-  Accepted,
+  @doc("Placeholder for extras.")
+  indexConfigurations: Record<string>
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface Employees {
-  get is ArmResourceRead<Employee>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Employee>;
-  update is ArmResourcePatchSync<Employee, EmployeeProperties>;
-  delete is ArmResourceDeleteSync<Employee>;
-  listByResourceGroup is ArmResourceListByParent<Employee>;
-  listBySubscription is ArmListBySubscription<Employee>;
+interface Indexes {
+  get is ArmResourceRead<Index>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Index>;
+  update is ArmResourcePatchSync<Index, IndexProperties>;
+  delete is ArmResourceDeleteSync<Index>;
+  listByResourceGroup is ArmResourceListByParent<Index>;
+  listBySubscription is ArmListBySubscription<Index>;
 }
