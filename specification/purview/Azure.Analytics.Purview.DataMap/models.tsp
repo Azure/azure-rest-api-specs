@@ -345,7 +345,7 @@ model AtlasStruct {
 
   @doc("The name of the type.")
   typeName?: string;
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "It follows the rule"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "It is an Atlas model"
   @doc("ETag for concurrency control.")
   lastModifiedTS?: string;
 }
@@ -487,7 +487,7 @@ model AtlasClassifications {
   ...PList;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "It follows the rule"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "It is an Atlas model"
 @doc("Paginated-list, for returning search results.")
 model PList {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object>"
@@ -625,7 +625,7 @@ model AtlasGlossaryBaseObject {
   @doc("The short version of description.")
   shortDescription?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "It follows the rule"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "It is an Atlas model"
   @doc("ETag for concurrency control.")
   lastModifiedTS?: string;
 
@@ -1449,7 +1449,6 @@ model AtlasConstraintDef {
   type?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "It follows the rule"
 @doc("Base class that captures common-attributes for all types.")
 model AtlasBaseTypeDef {
   @doc("The enum of type category.")
@@ -1491,6 +1490,7 @@ model AtlasBaseTypeDef {
   @doc("The version of the record.")
   version?: int64;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "It is an Atlas model"
   @doc("ETag for concurrency control.")
   lastModifiedTS?: string;
 }
