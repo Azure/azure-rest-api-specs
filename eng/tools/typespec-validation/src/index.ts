@@ -21,7 +21,7 @@ export async function main() {
   const folder = parsedArgs.positionals[0];
   const absolutePath = host.normalizePath(folder);
 
-  console.log("Running TypeSpecValidation on folder:", absolutePath);
+  console.log("Running TypeSpecValidation on folder: ", absolutePath);
 
   const rules = [
     new FolderStructureRule(),
