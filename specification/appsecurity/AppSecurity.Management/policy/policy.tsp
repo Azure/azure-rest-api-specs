@@ -27,7 +27,7 @@ model PolicyProperties {
   provisioningState?: ProvisioningState;
 
   @doc("Global settings for the policy")
-  policySettings: PolicySettings;
+  policySettings?: PolicySettings;
 
   @doc("The list of endpoints this policy protects")
   @extension("x-ms-identifiers", ["endpointId"])
@@ -74,6 +74,8 @@ interface Policies {
   listByParent is ArmResourceListByParent<Policy>;
   listBySubscription is ArmListBySubscription<Policy>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Policy>;
-  update is ArmResourcePatchAsync<Policy, PolicyProperties>;
+  // Although ARM recommends providing update (PATCH) support for all top-level properties, if LRO update is required it must be implemented with POST.
+  // See <https://github.com/microsoft/api-guidelines/blob/15fefbaf192b73523c247b29c2266dc432fc90a4/azure/Guidelines.md?plain=1#L854>
+  tagsUpdate is ArmTagsPatchSync<Policy>;
   delete is ArmResourceDeleteAsync<Policy>;
 }

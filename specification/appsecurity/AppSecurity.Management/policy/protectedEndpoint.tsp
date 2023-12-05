@@ -18,7 +18,8 @@ model ProtectedEndpoint {
 
   @doc("The status of the last attachment operation between the policy and the endpoint")
   @visibility("read")
-  attachmentState?: ProvisioningState;
+  @knownValues(ProvisioningState)
+  attachmentState?: string;
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information")
   @visibility("read")

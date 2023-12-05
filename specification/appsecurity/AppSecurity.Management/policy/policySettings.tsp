@@ -5,7 +5,6 @@ namespace Microsoft.AppSecurity;
 alias MinRedirectUrlLength = 3;
 alias MaxRedirectUrlLength = 2048;
 alias CustomBlockResponsePattern = "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$";
-alias MaxCustomBlockResponseBodyLength = 32768;
 
 @doc("Defines top-level policy settings")
 model PolicySettings {
@@ -18,7 +17,7 @@ model PolicySettings {
   @doc("If action type is redirect, this field represents redirect URL for the client")
   @minLength(MinRedirectUrlLength)
   @maxLength(MaxRedirectUrlLength)
-  redirectUrl?: string = ""; // TODO - didn't find a url built-in type in /workspace/src/API/node_modules/@typespec/compiler/lib/lib.tsp
+  redirectUrl?: string; // TODO - didn't find a url built-in type in /workspace/src/API/node_modules/@typespec/compiler/lib/lib.tsp
 
   @doc("Custom block response configuration, if action type is block")
   customBlockResponse?: CustomBlockResponse;
@@ -33,7 +32,7 @@ model PolicySettings {
 
   @doc("File upload size limitation settings overrides for endpoint types")
   @extension("x-ms-identifiers", ["endpointType"])
-  fileUploadSizeLimitations: FileUploadSizeLimitation[];
+  fileUploadSizeLimitations?: FileUploadSizeLimitation[];
 }
 
 @doc("Supported policy modes")
@@ -52,7 +51,6 @@ model CustomBlockResponse {
 
   @doc("Response body. The body must be specified in base64 encoding")
   @pattern(CustomBlockResponsePattern)
-  @maxLength(MaxCustomBlockResponseBodyLength)
   body: string;
 }
 
