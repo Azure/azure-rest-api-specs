@@ -50,13 +50,25 @@ interface DeviceGroups
       DeviceGroup,
       ListQueryParameters
     > {
-  @autoRoute
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  @removed(Versions.v2024_04_01)
+  @autoRoute
+  @renamedFrom(Versions.v2024_04_01, "countDevices")
+  @armResourceAction(DeviceGroup)
+  @post
+  deprecated(
+    ...ResourceInstanceParameters<DeviceGroup>,
+  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  @added(Versions.v2024_04_01)
+  @autoRoute
   @armResourceAction(DeviceGroup)
   @post
   countDevices(
     ...ResourceInstanceParameters<DeviceGroup>,
-  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+  ): ArmResponse<CountDevicesResponse> | ErrorResponse;
 
   @autoRoute
   @armResourceAction(DeviceGroup)

@@ -28,7 +28,7 @@ model CatalogProperties {
 
   @visibility("read")
   @doc("The Azure Sphere tenant ID associated with the catalog.")
-  @added(Microsoft.AzureSphere.Versions.v2024_03_01)
+  @added(Microsoft.AzureSphere.Versions.v2024_04_01)
   tenantId?: string;
 
   @visibility("read")
@@ -74,20 +74,21 @@ interface Catalogs
       Catalog,
       CatalogProperties
     > {
-  @removed(Versions.v2024_03_01)
+  @removed(Versions.v2024_04_01)
   @autoRoute
   @doc("Counts devices in catalog.")
   @armResourceAction(Catalog)
+  @renamedFrom(Versions.v2024_04_01, "countDevices")
   @post
-  countDevices(
+  deprecated(
     ...ResourceInstanceParameters<Catalog>,
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @added(Versions.v2024_04_01)
   @autoRoute
   @doc("Counts devices in catalog.")
   @armResourceAction(Catalog)
-  @added(Microsoft.AzureSphere.Versions.v2024_03_01)
   @post
   countDevices(
     ...ResourceInstanceParameters<Catalog>,
