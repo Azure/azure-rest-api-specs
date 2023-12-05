@@ -73,7 +73,7 @@ enum FileType {
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a JSON config file to define the requests for a URL test.")
-  URL_TEST_CONFIG,
+  URL_TEST_CONFIG_JSON,
 }
 
 @doc("File status.")
@@ -312,11 +312,11 @@ model AutoStopCriteria {
   autoStopDisabled?: boolean = false;
 
   @doc("Threshold percentage of errors on which test run should be automatically stopped. Allowed values are in range of 0.0-100.0")
-  errorRate?: float32;
+  errorRate?: float32 = 90;
 
   @doc("Time window during which the error percentage should be evaluated in seconds.")
   // adding time unit in name
-  errorRateTimeWindowInSeconds?: int32;
+  errorRateTimeWindowInSeconds?: int32 = 60;
 }
 
 @doc("Configurations for the load test.")
@@ -326,7 +326,7 @@ The number of engine instances to execute load test. Supported values are in ran
 """)
   engineInstances?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" //CSV is an abbervation and should be all caps
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "CSV is an abbervation and should be all caps"
   @doc("""
 If false, Azure Load Testing copies and processes your input files unmodified
 across all test engine instances. If true, Azure Load Testing splits the CSV
@@ -409,7 +409,7 @@ model FileInfo {
   @visibility("read")
   fileType?: FileType;
 
-  @doc("Expiry time of the file (RFC3339 literal format)")
+  @doc("Expiry time of the file (RFC 3339 literal format)")
   @visibility("read")
   expireDateTime?: utcDateTime;
 
@@ -585,11 +585,11 @@ SECRET_VALUE.
   @visibility("read")
   status?: Status;
 
-  @doc("The test run start DateTime(RFC3339 literal format).")
+  @doc("The test run start DateTime(RFC 3339 literal format).")
   @visibility("read")
   startDateTime?: utcDateTime;
 
-  @doc("The test run end DateTime(RFC3339 literal format).")
+  @doc("The test run end DateTime(RFC 3339 literal format).")
   @visibility("read")
   endDateTime?: utcDateTime;
 
@@ -711,7 +711,7 @@ model TestRunInputArtifacts {
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("The config json file for url based test")
-  urlTestsConfigFileInfo?: TestRunFileInfo;
+  urlTestConfigFileInfo?: TestRunFileInfo;
 
   @doc("Additional supported files for the test run")
   @visibility("read")
@@ -738,7 +738,7 @@ model ContainerInfo {
   @doc("Container URL.")
   url?: url;
 
-  @doc("Expiry time of the container (RFC3339 literal format)")
+  @doc("Expiry time of the container (RFC 3339 literal format)")
   expireDateTime?: utcDateTime;
 }
 
@@ -847,7 +847,7 @@ model TimeSeriesElement {
 
 @doc("Represents a metric value.")
 model MetricValue {
-  @doc("The timestamp for the metric value in RFC3339 format.")
+  @doc("The timestamp for the metric value in RFC 3339 format.")
   timestamp?: utcDateTime;
 
   @doc("The metric value.")
@@ -964,11 +964,11 @@ the search parameter can be 500.
   @query
   testId?: string;
 
-  @doc("Start DateTime(RFC3339 literal format) of test-run execution time filter range.")
+  @doc("Start DateTime(RFC 3339 literal format) of test-run execution time filter range.")
   @query
   executionFrom?: utcDateTime;
 
-  @doc("End DateTime(RFC3339 literal format) of test-run execution time filter range.")
+  @doc("End DateTime(RFC 3339 literal format) of test-run execution time filter range.")
   @query
   executionTo?: utcDateTime;
 
@@ -999,13 +999,13 @@ the search parameter can be Login.
   search?: string;
 
   @doc("""
-Start DateTime(RFC3339 literal format) of the last updated time range to filter tests.
+Start DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
 """)
   @query
   lastModifiedStartTime?: utcDateTime;
 
   @doc("""
-End DateTime(RFC3339 literal format) of the last updated time range to filter tests.
+End DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
 """)
   @query
   lastModifiedEndTime?: utcDateTime;
@@ -1017,7 +1017,7 @@ End DateTime(RFC3339 literal format) of the last updated time range to filter te
 
 @doc("System metadata.")
 model SystemMetaData {
-  @doc("The creation datetime(RFC3339 literal format).")
+  @doc("The creation datetime(RFC 3339 literal format).")
   @visibility("read")
   createdDateTime?: utcDateTime;
 
@@ -1025,7 +1025,7 @@ model SystemMetaData {
   @visibility("read")
   createdBy?: string;
 
-  @doc("The last Modified datetime(RFC3339 literal format).")
+  @doc("The last Modified datetime(RFC 3339 literal format).")
   @visibility("read")
   lastModifiedDateTime?: utcDateTime;
 
