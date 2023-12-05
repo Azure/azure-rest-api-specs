@@ -167,7 +167,7 @@ model ThresholdRule {
 
 @doc("ML-based evaluation rule for a signal definition")
 model DynamicDetectionRule {
-  @doc("Operator")
+  @doc("ML model to use for dynamic thresholds")
   dynamicThresholdModel: DynamicThresholdModel;
 
   @doc("ML model sensitivity. Lowest value = high sensitivity. Supported step size = 0.5")
