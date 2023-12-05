@@ -521,7 +521,7 @@ model AnalyzeImageWithTextResult {
 
 @added(Versions.v2023_11_30_Preview)
 @doc("Connection information for GPT resource.")
-model DetectUngroundednessGptxResource {
+model GptResource {
   @doc("Endpoint of Azure OpenAI resource.")
   azureOpenAIEndpoint: string;
 
@@ -531,79 +531,64 @@ model DetectUngroundednessGptxResource {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2023_11_30_Preview)
-@doc("Text analyze domain category.")
-enum TextDomainCategory {
-  Office,
-  Medical,
+@doc("domain category.")
+enum Domain {
   Generic,
+  Medical,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2023_11_30_Preview)
-@doc("Text analyze task.")
-enum TextTask {
-  QNA,
-  Chat,
+@doc("task type.")
+enum Task {
   Summarization,
+  QnA,
 }
 
 @added(Versions.v2023_11_30_Preview)
 @doc("The request of ungroudedness detection.")
 model DetectUngroundednessOptions {
   @doc("Domain of the text to be analyzed.")
-  domainCategory: TextDomainCategory;
+  domain?: Domain;
 
   @doc("Task type of the text to be analyzed.")
-  task?: TextTask;
+  task?: Task;
 
-  @doc("This is optional and only used for QnA or chat task.")
-  qaQuery?: string;
+  @doc("This is optional and only required for QnA task.")
+  query?: string;
 
-  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @doc("The text needs to be analyzed.")
   text: string;
 
-  @doc("Source information that serves as grounding source. We support a maximum of 10k Unicode characters (Unicode code points) in all grounding sources of one request.")
+  @doc("Source information that serves as grounding source.")
   groundingSources: string[];
 
-  @doc("GPT resources connection information for BYO scenario.")
-  gptxResource?: DetectUngroundednessGptxResource;
-}
-
-@added(Versions.v2023_11_30_Preview)
-@doc("The detection result of ungroudedness.")
-model UngroundednessAnalysis {
-  @doc("Detection result for ungrouded text.")
-  isUngrounded: boolean;
-
-  @doc("Model confidence store in the analysis results.")
-  confidenceScore: float32;
-
-  @doc("Percentage of Ungrounded Text.")
-  ungroundednessPercentage: float32;
-
-  @doc("The detailed information about a text identified as ungroundness.")
-  ungroundedTextDetails: UngroundedTextDetails[];
+  @doc("GPT resource connection information.")
+  gptResource?: GptResource;
 }
 
 @added(Versions.v2023_11_30_Preview)
 @doc("The detailed information about a text identified as ungroundness.")
-model UngroundedTextDetails {
-  @doc("The index of the ungrounded text from the beginning of the original text.")
-  ungroundedTextOffset: int32;
-
-  @doc("The length of the ungrounded text.")
-  ungroundedTextLength: int32;
-
+model UngroundedDetails {
   @doc("The ungrounded text.")
-  ungroundedText: string;
+  text: string;
 
   @doc("The reason or explanation for identifying the text as ungrounded.")
-  ungroundedTextReason: string;
+  reason: string;
 }
 
 @added(Versions.v2023_11_30_Preview)
 @doc("The response of ungroudedness detection.")
 model DetectUngroundednessResult {
-  @doc("Ungroudedness detection result.")
-  ungroundednessAnalysis: UngroundednessAnalysis[];
+  @doc("Detection result for ungrouded text.")
+  ungrounded: boolean;
+
+  @doc("Model confidence store in the analysis results.")
+  confidenceScore: float32;
+
+  @doc("Percentage of Ungrounded Text.")
+  ungroundedPercentage: float32;
+
+  @doc("The detailed information about a text identified as ungroundness.")
+  ungroundedDetails: UngroundedDetails[];
 }
