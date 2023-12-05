@@ -294,7 +294,7 @@
         }
       }
     },
-    "Cluster": {
+    "DeploymentCluster": {
       "type": "object",
       "description": "AzureStackHCI Cluster deployment properties.",
       "properties": {
@@ -354,7 +354,7 @@
           "description": "Observability config to deploy AzureStackHCI Cluster."
         },
         "cluster": {
-          "$ref": "#/definitions/Cluster",
+          "$ref": "#/definitions/DeploymentCluster",
           "description": "Observability config to deploy AzureStackHCI Cluster."
         },
         "storage": {
@@ -523,7 +523,7 @@
           "type": "array",
           "description": "List of steps of AzureStackHCI Cluster Deployment.",
           "items": {
-            "$ref": "#/definitions/Step"
+            "$ref": "#/definitions/DeploymentStep"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -876,7 +876,7 @@
         }
       }
     },
-    "Step": {
+    "DeploymentStep": {
       "type": "object",
       "description": "The Step of AzureStackHCI Cluster.",
       "properties": {
@@ -914,7 +914,7 @@
           "type": "array",
           "description": "List of nested steps of AzureStackHCI Cluster Deployment.",
           "items": {
-            "$ref": "#/definitions/Step"
+            "$ref": "#/definitions/DeploymentStep"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -972,7 +972,7 @@
           "type": "array",
           "description": "List of steps of AzureStackHCI Cluster Deployment.",
           "items": {
-            "$ref": "#/definitions/Step"
+            "$ref": "#/definitions/DeploymentStep"
           },
           "readOnly": true,
           "x-ms-identifiers": []
