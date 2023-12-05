@@ -31,7 +31,7 @@ export class FolderStructureRule implements Rule {
       }
     });
 
-    // Verify top level folder is lower case
+    // Verify top level folder is lower case and remove empty entries when splitting by slash
     let folderStruct = relativePath.split("/").filter(Boolean);
     if (folderStruct[1].match(/[A-Z]/g)) {
       success = false;
