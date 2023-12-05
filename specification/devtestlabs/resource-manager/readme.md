@@ -77,11 +77,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -261,6 +262,7 @@ directive:
   - suppress: R4015 # NestedResourcesMustHaveListOperation
     from: types.json
     where:
+      - $.definitions.LabCost
       - $.definitions.KeyVaultProperties
       - $.definitions.Operation.properties.isDataAction
       - $.definitions.ResourceModelWithAllowedPropertySet.properties.identity
@@ -280,6 +282,7 @@ directive:
     from: DTL.json
     where:
        - $.definitions.ComputeVmProperties.properties.statuses
+       - $.definitions.SharedImageProperties.properties.versions
     reason: No natural id property
   - suppress: R4041 # XmsIdentifierValidation
     from: types.json

@@ -13949,7 +13949,10 @@
       "description": "The name of the artifact source.",
       "type": "string",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-z0-9_\\-]+$",
+      "minLength": 1,
+      "maxLength": 260
     },
     "labName": {
       "name": "labName",
@@ -13957,15 +13960,21 @@
       "description": "The name of the lab.",
       "type": "string",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-z0-9_\\-]+$",
+      "minLength": 1,
+      "maxLength": 50
     },
     "locationName": {
       "name": "locationName",
       "in": "path",
       "description": "The name of the location.",
+      "x-ms-parameter-location": "method",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "pattern": "^[a-z0-9_\\-]+$",
+      "minLength": 1,
+      "maxLength": 260
     },
     "policySetName": {
       "name": "policySetName",
@@ -14028,7 +14037,10 @@
       "description": "The name of the virtual network.",
       "type": "string",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-z0-9_\\-]+$",
+      "minLength": 1,
+      "maxLength": 260
     }
   }
 }
