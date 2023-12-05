@@ -11,23 +11,29 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
-@armProviderNamespace("Microsoft.CloudHealth")
+@armProviderNamespace(ProviderName)
 @service({
-  title: "Microsoft.CloudHealth",
+  title: ProviderName,
   version: "2023-10-01-preview",
 })
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.CloudHealth;
+
+alias ProviderName = "Microsoft.CloudHealth";
 
 // Regex for all our resource name validations
 alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,58}[a-zA-Z0-9]$";
 
 @pattern(resourceNameRegex)
+@doc("String with regex validation to match the resource name requirements")
 scalar stringResourceName extends string;
 
 @maxLength(4096)
+@doc("String with max length validation of 4096 characters")
 scalar string4096 extends string;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -479,7 +485,9 @@ model LogAnalyticsSignalGroup is SignalAssignmentGroup {
   logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
 
   @doc("Log Analytics workspace ID") // Ideally, we dont need this since we also have the Resource Id. But at the moment we need this ID for querying
-  logAnalyticsWorkspaceId: uuid;
+  @minLength(36)
+  @maxLength(36)
+  logAnalyticsWorkspaceId: string;
 }
 
 @doc("A grouping of signal assignments for a Azure Monitor Workspace")
@@ -567,6 +575,12 @@ model RelationshipProperties {
   deletionDate?: utcDateTime;
 }
 
+alias TimestampQueryParam = {
+  @doc("Timestamp to use for the operation. When specified, the version of the resource at this point in time is retrieved. If not specified, the latest version is used.")
+  @query
+  timestamp?: utcDateTime;
+};
+
 @armResourceOperations
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
@@ -580,16 +594,19 @@ interface HealthModels {
 @armResourceOperations
 interface SignalDefinitions {
   get is ArmResourceRead<SignalDefinition>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<SignalDefinition>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
   delete is ArmResourceDeleteSync<SignalDefinition>;
 
-  listByParent is ArmResourceListByParent<SignalDefinition>;
+  listByParent is ArmResourceListByParent<
+    SignalDefinition,
+    BaseParameters<SignalDefinition> & TimestampQueryParam
+  >;
 }
 
 @armResourceOperations
 interface AuthenticationSettings {
   get is ArmResourceRead<AuthenticationSetting>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<AuthenticationSetting>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<AuthenticationSetting>;
   delete is ArmResourceDeleteSync<AuthenticationSetting>;
 
   listByParent is ArmResourceListByParent<AuthenticationSetting>;
@@ -598,17 +615,23 @@ interface AuthenticationSettings {
 @armResourceOperations
 interface Entities {
   get is ArmResourceRead<Entity>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<Entity>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Entity>;
   delete is ArmResourceDeleteSync<Entity>;
 
-  listByParent is ArmResourceListByParent<Entity>;
+  listByParent is ArmResourceListByParent<
+    Entity,
+    BaseParameters<Entity> & TimestampQueryParam
+  >;
 }
 
 @armResourceOperations
 interface Relationships {
   get is ArmResourceRead<Relationship>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<Relationship>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Relationship>;
   delete is ArmResourceDeleteSync<Relationship>;
 
-  listByParent is ArmResourceListByParent<Relationship>;
+  listByParent is ArmResourceListByParent<
+    Relationship,
+    BaseParameters<Relationship> & TimestampQueryParam
+  >;
 }

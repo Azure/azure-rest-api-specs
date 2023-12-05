@@ -1320,6 +1320,30 @@
               }
             ]
           }
+        },
+        "outboundType": {
+          "type": "string",
+          "enum": [
+            "loadBalancer",
+            "userDefinedRouting"
+          ],
+          "x-ms-enum": {
+            "name": "outboundType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "loadBalancer",
+                "description": "The load balancer is used for egress through an AKS assigned public IP. This supports Kubernetes services of type 'loadBalancer'. "
+              },
+              {
+                "value": "userDefinedRouting",
+                "description": "Egress paths must be defined by the user. This is an advanced scenario and requires proper network configuration. "
+              }
+            ]
+          },
+          "default": "loadBalancer",
+          "title": "The outbound (egress) routing method.",
+          "description": "This can only be set at cluster pool creation time and cannot be changed later. "
         }
       }
     },
@@ -1799,6 +1823,19 @@
       },
       "readOnly": true
     },
+    "ClusterAccessProfile": {
+      "type": "object",
+      "description": "Cluster access profile.",
+      "required": [
+        "enableInternalIngress"
+      ],
+      "properties": {
+        "enableInternalIngress": {
+          "type": "boolean",
+          "description": "Whether to create cluster using private IP instead of public IP."
+        }
+      }
+    },
     "WebConnectivityEndpoint": {
       "type": "object",
       "description": "Web connectivity endpoint details.",
@@ -1865,6 +1902,9 @@
         },
         "connectivityProfile": {
           "$ref": "#/definitions/ConnectivityProfile"
+        },
+        "clusterAccessProfile": {
+          "$ref": "#/definitions/ClusterAccessProfile"
         },
         "logAnalyticsProfile": {
           "$ref": "#/definitions/ClusterLogAnalyticsProfile"

@@ -4904,6 +4904,10 @@
           "$ref": "#/definitions/CloudAccountProvisioningState",
           "description": "Cloud Account provisioning state.",
           "readOnly": true
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Term Unit. P1Y, P3Y, etc, see Durations https://en.wikipedia.org/wiki/ISO_8601"
         }
       }
     },
@@ -4944,6 +4948,20 @@
         "plan": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan",
           "description": "Details of the resource plan."
+        },
+        "properties": {
+          "$ref": "#/definitions/OracleSubscriptionUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OracleSubscriptionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the OracleSubscription.",
+      "properties": {
+        "termUnit": {
+          "type": "string",
+          "description": "Term Unit. P1Y, P3Y, etc, see Durations https://en.wikipedia.org/wiki/ISO_8601"
         }
       }
     },
