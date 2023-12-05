@@ -12,14 +12,13 @@ describe("normalize", function () {
 
   it("should succeed if /foo/bar/ is normalized", async function () {
     let host = new TsvTestHost();
-    const result = host.normalizePath("/foo/bar/");
-    console.log(result);
+    const result = host.normalizePath("/foo/bar/").replace("^[a-zA-Z]:", "");
     assert(result === "/foo/bar");
   });
 
   it("should succeed if /foo/bar is normalized", async function () {
     let host = new TsvTestHost();
-    const result = host.normalizePath("/foo/bar");
+    const result = host.normalizePath("/foo/bar").replace("^[a-zA-Z]:", "");
     assert(result === "/foo/bar");
   });
 });
