@@ -31,16 +31,22 @@ enum Versions {
 enum ProvisioningState {
   /** Represents a succeeded operation. */
   Succeeded,
+
   /** Represents a failed operation. */
   Failed,
+
   /** Represents a canceled operation. */
   Canceled,
+
   /** Represents a pending operation. */
   Provisioning,
+
   /** Represents a pending operation. */
   Updating,
+
   /** Represents an operation under deletion. */
   Deleting,
+
   /** Represents an accepted operation. */
   Accepted,
 }
@@ -292,12 +298,10 @@ model ConsumptionEndpointsProperties {
 @added(Versions.v2023_11_15)
 model AccountSas {
   @doc("Sas token start timestamp.")
-  @format("date-time")
-  startTimeStamp: string;
+  startTimeStamp: utcDateTime;
 
   @doc("Sas token expiry timestamp.")
-  @format("date-time")
-  expiryTimeStamp: string;
+  expiryTimeStamp: utcDateTime;
 
   @doc("Ip Address")
   ipAddress: string;
