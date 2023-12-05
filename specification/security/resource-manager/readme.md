@@ -76,13 +76,13 @@ directive:
 ``` yaml
 suppressions:
   - code: ResourceNameRestriction
-    from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
+    from: Microsoft.Security\preview\2024-01-01\pricings.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
   - code: PutRequestResponseSchemeArm
-    from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
+    from: Microsoft.Security\preview\2024-01-01\pricings.json
     reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configrations.
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: Microsoft.Security\preview\2023-08-01-preview\pricings.json
+    from: Microsoft.Security\preview\2024-01-01\pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
 ```
 ### Basic Information
@@ -122,13 +122,13 @@ suppressions:
     reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
 ```
 
-### Tag: package-preview-2023-08
+### Tag: package-2024-01
 
-These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-08'
+```yaml $(tag) == 'package-2024-01'
 input-file:
-  - Microsoft.Security/preview/2023-08-01-preview/pricings.json
+  - Microsoft.Security/preview/2024-01-01/pricings.json
 ```
 
 ### Tag: package-preview-2023-05
@@ -402,7 +402,7 @@ input-file:
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
-- Microsoft.Security/preview/2023-08-01-preview/pricings.json
+- Microsoft.Security/preview/2024-01-01/pricings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
