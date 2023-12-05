@@ -1,0 +1,1036 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Jobs",
+    "version": "2023-12-15-preview",
+    "description": "Azure Stack HCI Jobs.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Jobs"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Private.AzureStackHCI/clusters/{clusterName}/jobs": {
+      "get": {
+        "operationId": "Jobs_ListByClusters",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "List Job resources by Clusters",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Name of Cluster",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Private.AzureStackHCI/clusters/{clusterName}/jobs/{jobsName}": {
+      "get": {
+        "operationId": "Jobs_Get",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Get a Job",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Name of Cluster",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of Job",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Jobs_CreateOrUpdate",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Create a Job",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Name of Cluster",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of Job",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Job' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "201": {
+            "description": "Resource 'Job' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Jobs_Delete",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Delete a Job",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Name of Cluster",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of Job",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Private.AzureStackHCI/clusters/{clusterName}/runjob": {
+      "post": {
+        "operationId": "Jobs_Runjob",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Name of Cluster",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AddServerJob": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AddServerJobProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "x-ms-discriminator-value": "AddServer"
+    },
+    "AddServerJobProperties": {
+      "type": "object",
+      "properties": {
+        "ServerName": {
+          "type": "string",
+          "description": "Name of server to be added to Azure stack HCI Cluster."
+        },
+        "hostIpv4Address": {
+          "type": "string",
+          "description": "Ip address of server to be added to Azure stack HCI Cluster."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
+      ]
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "A ClusterProperties"
+    },
+    "Clusters": {
+      "type": "object",
+      "description": "A Cluster",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of Cluster",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EceJobStatus": {
+      "type": "object",
+      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of AzureStackHCI Cluster job.",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of steps of AzureStackHCI Cluster Deployment.",
+          "items": {
+            "$ref": "#/definitions/JobStep"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Job": {
+      "type": "object",
+      "description": "Jobs resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "kind": {
+          "$ref": "#/definitions/JobType",
+          "description": "Job Type to support polymorphic resource."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobErrorDetails": {
+      "type": "object",
+      "description": "The job error information containing the list of job errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The code intended for programmatic access.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The message that describes the error in detail.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "type": "array",
+          "description": "The message that describes the error in detail.",
+          "items": {
+            "$ref": "#/definitions/JobErrorItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "JobErrorItem": {
+      "type": "object",
+      "description": "The job error items.",
+      "properties": {
+        "recommendations": {
+          "type": "array",
+          "description": "The recommended actions.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "code": {
+          "type": "string",
+          "description": "The code intended for programmatic access.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The message that describes the error in detail.",
+          "readOnly": true
+        }
+      }
+    },
+    "JobListResult": {
+      "type": "object",
+      "description": "The response of a Job list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Job items on this page",
+          "items": {
+            "$ref": "#/definitions/Job"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobParameters": {
+      "type": "object",
+      "description": "Job parameters.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Job property name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Job property value."
+        }
+      }
+    },
+    "JobProtectedParameters": {
+      "type": "object",
+      "description": "Job protected parameters list stored in keyvault.",
+      "properties": {
+        "kvId": {
+          "type": "string",
+          "description": "keyvault URI to store protected secrets."
+        },
+        "secretNames": {
+          "type": "array",
+          "description": "List of secret names stored in keyvault.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "JobStatus": {
+      "type": "object",
+      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of AzureStackHCI Cluster job.",
+          "readOnly": true
+        },
+        "statusCode": {
+          "type": "string",
+          "description": "Status code of AzureStackHCI Cluster job.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "Top level error code of AzureStackHCI Cluster job.",
+          "readOnly": true
+        },
+        "eceStatus": {
+          "$ref": "#/definitions/EceJobStatus",
+          "description": "use ECE status property to show job status run using ECE toolchain in HCI cluster.",
+          "readOnly": true
+        },
+        "outputBlobUri": {
+          "type": "string",
+          "description": "Store external blob link to output.",
+          "readOnly": true
+        },
+        "errorBlobUri": {
+          "type": "string",
+          "description": "Store external blob link to error details.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "name of target cluster.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/JobErrorDetails",
+          "description": "The job error details",
+          "readOnly": true
+        }
+      }
+    },
+    "JobStep": {
+      "type": "object",
+      "description": "The Step of AzureStackHCI Cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of step.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of step.",
+          "readOnly": true
+        },
+        "fullStepIndex": {
+          "type": "string",
+          "description": "FullStepIndex of step.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "description": "Start time of step.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "description": "End time of step.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of nested steps of AzureStackHCI Cluster Deployment.",
+          "items": {
+            "$ref": "#/definitions/JobStep"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "exception": {
+          "type": "array",
+          "description": "List of exceptions in AzureStackHCI Cluster Deployment.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "JobType": {
+      "type": "string",
+      "description": "Job Type supported.",
+      "enum": [
+        "AddServer",
+        "RemoveServer",
+        "RepairServer",
+        "ResumeServer",
+        "SetInformation",
+        "RunCmd"
+      ],
+      "x-ms-enum": {
+        "name": "JobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AddServer",
+            "value": "AddServer",
+            "description": "AddServer"
+          },
+          {
+            "name": "RemoveServer",
+            "value": "RemoveServer",
+            "description": "RemoveServer"
+          },
+          {
+            "name": "RepairServer",
+            "value": "RepairServer",
+            "description": "RepairServer"
+          },
+          {
+            "name": "ResumeServer",
+            "value": "ResumeServer",
+            "description": "ResumeServer"
+          },
+          {
+            "name": "SetInformation",
+            "value": "SetInformation",
+            "description": "SetInformation"
+          },
+          {
+            "name": "RunCmd",
+            "value": "RunCmd",
+            "description": "RunCmd"
+          }
+        ]
+      }
+    },
+    "JobsProperties": {
+      "type": "object",
+      "description": "Job properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Job provisioning state",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job started.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job completed.",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "array",
+          "description": "List of parameters to pass to trigger job for Azure Stack HCI cluster.",
+          "items": {
+            "$ref": "#/definitions/JobParameters"
+          },
+          "x-ms-identifiers": []
+        },
+        "protectedParameters": {
+          "type": "array",
+          "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
+          "items": {
+            "$ref": "#/definitions/JobProtectedParameters"
+          },
+          "x-ms-identifiers": []
+        },
+        "arcNodeResourceIds": {
+          "type": "array",
+          "description": "List of ARM resource ids of Arc machines part of Azure Stack HCI cluster for which job will be trigerred.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The current status of the job.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "arcNodeResourceIds"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "NotSpecified",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource provision state is not specified"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      }
+    },
+    "RepairServerJob": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RepairServerJobProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "x-ms-discriminator-value": "RepairServer"
+    },
+    "RepairServerJobProperties": {
+      "type": "object",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Name of server to be repaired in Azure stack HCI Cluster."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
+      ]
+    },
+    "ResumeServerJob": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResumeServerJobProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "x-ms-discriminator-value": "ResumeServer"
+    },
+    "ResumeServerJobProperties": {
+      "type": "object",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Trigger resume action plan for given server name in Azure stack HCI Cluster."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
+      ]
+    },
+    "RunCmd": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/RunCmdSource"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunCmdParameters"
+          },
+          "x-ms-identifiers": []
+        },
+        "protectedParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunCmdParameters"
+          },
+          "x-ms-identifiers": []
+        },
+        "credential": {
+          "type": "string"
+        },
+        "asyncExecution": {
+          "type": "boolean"
+        },
+        "outputBlobUri": {
+          "type": "string"
+        },
+        "errorBlobUri": {
+          "type": "string"
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "source",
+        "parameters",
+        "protectedParameters",
+        "credential",
+        "asyncExecution",
+        "outputBlobUri",
+        "errorBlobUri",
+        "timeoutInSeconds"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "x-ms-discriminator-value": "RunCmd"
+    },
+    "RunCmdParameters": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "RunCmdSource": {
+      "type": "object",
+      "properties": {
+        "script": {
+          "type": "string"
+        },
+        "scriptUri": {
+          "type": "string"
+        },
+        "commandId": {
+          "type": "string"
+        },
+        "referenceId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "script",
+        "scriptUri",
+        "commandId",
+        "referenceId"
+      ]
+    },
+    "SetInformationJob": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SetInformationJobProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "x-ms-discriminator-value": "SetInformation"
+    },
+    "SetInformationJobProperties": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Trigger resume action plan for given server name in Azure stack HCI Cluster.",
+          "enum": [
+            "SetInformation"
+          ]
+        },
+        "switchless": {
+          "type": "boolean"
+        },
+        "jumboPacket": {
+          "type": "string"
+        },
+        "vlanId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}
