@@ -138,7 +138,7 @@ model ContentFilterResultsForPrompt {
 
   @doc("Content filtering results for this prompt")
   @projectedName("json", "content_filter_results")
-  contentFilterResults?: ContentFilterResultDetailsForPrompt;
+  contentFilterResults: ContentFilterResultDetailsForPrompt;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
