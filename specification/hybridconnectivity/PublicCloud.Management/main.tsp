@@ -47,6 +47,8 @@ model GenerateAwsTemplateRequest {
 
 //---------------------------------------------- Operations ----------------------------------------------
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/")
 interface GenerateAwsTemplate {
