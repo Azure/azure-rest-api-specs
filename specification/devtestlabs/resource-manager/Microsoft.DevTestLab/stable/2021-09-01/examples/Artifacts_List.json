@@ -1,10 +1,10 @@
 {
   "parameters": {
     "api-version": "2021-09-01",
-    "subscriptionId": "{subscriptionId}",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
     "resourceGroupName": "resourceGroupName",
-    "labName": "{labName}",
-    "artifactSourceName": "{artifactSourceName}"
+    "labName": "exampleLab",
+    "artifactSourceName": "artifactSourceName"
   },
   "responses": {
     "200": {
@@ -15,19 +15,19 @@
               "title": "Sample Artifact Title",
               "description": "Sample artifact description.",
               "publisher": "Microsoft",
-              "filePath": "{artifactsPath}/{artifactName}",
+              "filePath": "{artifactsPath}/exampleArtifact",
               "targetOsType": "Windows",
               "parameters": {
                 "uri": {
                   "type": "string",
                   "displayName": "Sample Parameter 1",
                   "description": "Sample parameter 1 description.",
-                  "defaultValue": "https://{labStorageAccount}.blob.core.windows.net/{artifactName}/..."
+                  "defaultValue": "https://{labStorageAccount}.blob.core.windows.net/exampleArtifact/..."
                 }
               }
             },
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/artifactSources/{artifactSourceName}/artifacts/{artifactName}",
-            "name": "{artifactName}",
+            "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/exampleLab/artifactSources/artifactSourceName/artifacts/exampleArtifact",
+            "name": "exampleArtifact",
             "type": "Microsoft.DevTestLab/labs/artifactSources/artifacts"
           }
         ]

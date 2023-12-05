@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2021-09-01",
-    "subscriptionId": "{subscriptionId}",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
     "resourceGroupName": "resourceGroupName",
-    "labName": "{labName}",
+    "labName": "exampleLab",
     "name": "{formulaName}",
     "formula": {
       "tags": {
@@ -14,10 +14,10 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/formulas/{formulaName}",
+        "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/exampleLab/formulas/{formulaName}",
         "name": "{formulaName}",
         "type": "Microsoft.DevTestLab/labs/formulas",
-        "location": "{location}",
+        "location": "westcentralus",
         "properties": {
           "description": "Formula using a Linux base",
           "author": "username@contoso.com",
@@ -28,12 +28,12 @@
               "size": "Standard_B1ms",
               "userName": "user",
               "isAuthenticationWithSshKey": false,
-              "labSubnetName": "Dtl{labName}Subnet",
-              "labVirtualNetworkId": "/virtualnetworks/dtl{labName}",
+              "labSubnetName": "DtlexampleLabSubnet",
+              "labVirtualNetworkId": "/virtualnetworks/dtlexampleLab",
               "disallowPublicIpAddress": true,
               "artifacts": [
                 {
-                  "artifactId": "/artifactsources/{artifactSourceName}/artifacts/linux-install-nodejs",
+                  "artifactId": "/artifactsources/artifactSourceName/artifacts/linux-install-nodejs",
                   "parameters": []
                 }
               ],
@@ -57,7 +57,7 @@
               "allowClaim": false,
               "storageType": "Standard"
             },
-            "location": "{location}"
+            "location": "westcentralus"
           },
           "provisioningState": "Succeeded",
           "uniqueIdentifier": "{uniqueIdentifier}"
