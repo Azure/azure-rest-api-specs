@@ -132,6 +132,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateRuns.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
 ```
 
 ### Tag: package-preview-2023-11
