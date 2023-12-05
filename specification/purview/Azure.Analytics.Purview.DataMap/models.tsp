@@ -231,12 +231,11 @@ model AtlasEntityWithExtInfo {
   entity?: AtlasEntity;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
 @doc("An instance of an entity - like hive_table, hive_database.")
 model AtlasEntity {
   ...AtlasStruct;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Recode<unknow> to model Map<String,Object>"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   @doc("Business attributes")
   businessAttributes?: Record<unknown>;
 
@@ -277,7 +276,7 @@ model AtlasEntity {
   @doc("Determines if there's a proxy.")
   proxy?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Recode<unknow> to model Map<String,Object>"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   @doc("The attributes of relationship.")
   relationshipAttributes?: Record<unknown>;
 
@@ -335,13 +334,12 @@ model TimeBoundary {
   timeZone?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
 @doc("""
 Captures details of struct contents. Not instantiated directly, used only via
 AtlasEntity, AtlasClassification.
 """)
 model AtlasStruct {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Recode<unknow> to model Map<String,Object>"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   @doc("The attributes of the struct.")
   attributes?: Record<unknown>;
 
@@ -370,7 +368,7 @@ model AtlasTermAssignmentHeader {
   expression?: string;
 
   @doc("The GUID of the relationship.")
-  relationGuid?: string;
+  relationGuid?: Azure.Core.uuid;
 
   @doc("The status of terms assignment.")
   status?: AtlasTermAssignmentStatus;
@@ -379,7 +377,7 @@ model AtlasTermAssignmentHeader {
   steward?: string;
 
   @doc("The GUID of the term.")
-  termGuid?: string;
+  termGuid?: Azure.Core.uuid;
 }
 
 @doc("ContactBasic")
@@ -426,7 +424,7 @@ model AtlasEntityHeader {
   displayText?: string;
 
   @doc("The GUID of the record.")
-  guid?: string;
+  guid: Azure.Core.uuid;
 
   @doc("Whether it is a shell entity")
   isIncomplete?: boolean;
@@ -490,9 +488,9 @@ model AtlasClassifications {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It follows the rule"
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
 @doc("Paginated-list, for returning search results.")
 model PList {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object>"
   @doc("An array of objects.")
   list?: unknown[];
 
@@ -607,7 +605,7 @@ model AtlasRelatedTermHeader {
   termGuid?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "It follows the rule"
+
 @doc("The glossary base object.")
 model AtlasGlossaryBaseObject {
   ...AtlasBaseModelObject;
@@ -627,6 +625,7 @@ model AtlasGlossaryBaseObject {
   @doc("The short version of description.")
   shortDescription?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "It follows the rule"
   @doc("ETag for concurrency control.")
   lastModifiedTS?: string;
 
@@ -678,7 +677,7 @@ model AtlasGlossaryHeader {
   relationGuid?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
+
 @doc("The glossary term.")
 model AtlasGlossaryTerm {
   ...AtlasGlossaryBaseObject;
@@ -686,6 +685,7 @@ model AtlasGlossaryTerm {
   @doc("The abbreviation of the term.")
   abbreviation?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
   @doc("The name of the template.")
   templateName?: unknown[];
 
@@ -791,7 +791,7 @@ model PurviewObjectId {
 @doc("Reference to an object-instance of a type - like entity.")
 model AtlasObjectId {
   @doc("The GUID of the object.")
-  guid?: string;
+  guid?: Azure.Core.uuid;
 
   @doc("The name of the type.")
   typeName?: string;
@@ -836,7 +836,7 @@ AtlasEntity, AtlasClassification.
   relationshipAttributes?: AtlasStruct;
 
   @doc("The GUID of the relationship.")
-  relationshipGuid?: string;
+  relationshipGuid?: Azure.Core.uuid;
 
   @doc("The enum of relationship status.")
   relationshipStatus?: StatusAtlasRelationship;
@@ -845,7 +845,7 @@ AtlasEntity, AtlasClassification.
 @doc("The basic information for term categorization.")
 model AtlasTermCategorizationHeader {
   @doc("The GUID of the category.")
-  categoryGuid?: string;
+  categoryGuid?: Azure.Core.uuid;
 
   @doc("The description of the record.")
   description?: string;
@@ -854,7 +854,7 @@ model AtlasTermCategorizationHeader {
   displayText?: string;
 
   @doc("The GUID of the relationship.")
-  relationGuid?: string;
+  relationGuid?: Azure.Core.uuid;
 
   @doc("The status of term relationship.")
   status?: AtlasTermRelationshipStatus;
@@ -871,7 +871,7 @@ model AtlasGlossaryExtInfo {
   termInfo?: Record<AtlasGlossaryTerm>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
+
 @doc("The search query of advanced search request.")
 model SearchRequest {
   @doc("The keywords applied to all searchable fields.")
@@ -893,6 +893,7 @@ batch, and will return new token in each response unless there's no more data.
   @doc("The sort order of search results, can specify multiple fields.")
   orderby?: unknown[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("The filter for the search. See examples for the usage of supported filters.")
   filter?: unknown;
 
@@ -903,7 +904,6 @@ batch, and will return new token in each response unless there's no more data.
   taxonomySetting?: SearchRequestTaxonomySetting;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
 @doc("The content of a search facet result item.")
 model SearchFacetItem {
 
@@ -1136,7 +1136,7 @@ Expert or Steward for a glossary term.
   contactType?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
+
 @doc("The query of suggest request.")
 model SuggestRequest {
   @doc("""
@@ -1154,7 +1154,7 @@ must be a number between 1 and 100.
   limit?: int32;
 
   @doc("The filter for the search.")
-  filter?: unknown;
+  filter?: SearchFilter;
 }
 
 @doc("The result item of the search suggest.")
@@ -1246,7 +1246,6 @@ AtlasGlossaryCategory.
   longDescription?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
 @doc("The query of autocomplete request.")
 model AutoCompleteRequest {
   @doc("""
@@ -1262,7 +1261,7 @@ The value must be a number between 1 and 100.
   limit?: int32;
 
   @doc("The filter for the autocomplete request.")
-  filter?: unknown;
+  filter?: SearchFilter;
 }
 
 @doc("The result of the autocomplete request.")
@@ -1280,7 +1279,6 @@ model AutoCompleteResultValue {
   queryPlusText?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
 @doc("The lineage information.")
 model AtlasLineageInfo {
   @doc("The GUID of the base entity.")
@@ -1289,7 +1287,7 @@ model AtlasLineageInfo {
   @doc("The GUID entity map.")
   guidEntityMap?: Record<AtlasEntityHeader>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Recode<unknow> to model Map<String,Object>"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   @doc("The entity count in specific direction.")
   widthCounts?: Record<Record<unknown>>;
 

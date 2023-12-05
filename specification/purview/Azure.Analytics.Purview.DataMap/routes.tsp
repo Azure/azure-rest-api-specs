@@ -19,23 +19,6 @@ using Azure.ClientGenerator.Core;
 })
 namespace PurviewDataMap;
 
-
-@doc("The ApiVersion query parameter.")
-model ApiVersionParameter {
-  @query("api-version")
-  @minLength(1)
-  @doc("The API version to use for this operation.")
-  apiVersion?: string;
-}
-
-@doc("The ApiVersion query parameter for DataMap service.")
-model DataMapApiVersionParameter {
-  @query("api-version")
-  @minLength(1)
-  @doc("The API version to use for this operation.")
-  apiVersion: string;
-}
-
 model OkResponse<T> {
   @statusCode
   status: 200;
@@ -43,47 +26,18 @@ model OkResponse<T> {
   data: T;
 }
 
-@doc("Operation for Atlas service")
-op AtlasBaseOperation<
-  TParams extends TypeSpec.Reflection.Model,
-  TResponse,
-  Traits extends TypeSpec.Reflection.Model = {},
-  TErrorResponse = ErrorResponse
->(
-  ...TraitProperties<
-    Traits & VersionParameterTrait<ApiVersionParameter>,
-    TraitLocation.ApiVersionParameter
-  >,
-  ...TParams,
-): TResponse | TErrorResponse;
-
-
-@doc("Operation for DataMap service")
-op DataMapBaseOperation<
-  TParams extends TypeSpec.Reflection.Model,
-  TResponse,
-  Traits extends TypeSpec.Reflection.Model = {},
-  TErrorResponse = ErrorResponse
->(
-  ...TraitProperties<
-    Traits & VersionParameterTrait<DataMapApiVersionParameter>,
-    TraitLocation.ApiVersionParameter
-  >,
-  ...TParams,
-): TResponse | TErrorResponse;
-
 op AtlasImportOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model,
   Traits extends TypeSpec.Reflection.Model = {}, 
   TraitContexts extends TraitContext = TraitContext.Undefined
-> is AtlasBaseOperation<
+> is Azure.Core.Foundations.Operation<
 TParams & TraitProperties<Traits & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId , TraitLocation.Parameters, TraitContext.Action>,
 TResponse & TraitProperties<Traits & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId, TraitLocation.Response, TraitContext.Action>,
-Traits  & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId           
+Traits  & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId,
+ErrorResponse         
 >;
 
-//alias DataMapResourceOperations = Azure.Core.ResourceOperations<NoClientRequestId & NoConditionalRequests & NoRepeatableRequests, ErrorResponse>;
 alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
   @doc("The content type for the operation. Always multipart/form-data for this operation.")
   @header("content-type")
@@ -104,7 +58,7 @@ For each contact type, the maximum number of contacts is 20.
 """)
   @route("/atlas/v2/entity")
   @post
-  createOrUpdate is AtlasBaseOperation<
+  createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Used to define the update behavior for business attributes when updating
@@ -124,7 +78,9 @@ need to move an entity to another collection.
       @body
       entity: AtlasEntityWithExtInfo;
     },
-    EntityMutationResponse
+    EntityMutationResponse,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -132,7 +88,7 @@ need to move an entity to another collection.
   @doc("List entities in bulk identified by its GUIDs.")
   @route("/atlas/v2/entity/bulk")
   @get
-  listByGuids is AtlasBaseOperation<
+  listByGuids is Azure.Core.Foundations.Operation<
     {
       @doc("An array of GUIDs of entities to list.")
       @query({format: "multi"})
@@ -146,7 +102,9 @@ need to move an entity to another collection.
       @query
       ignoreRelationships?: boolean;
     },
-    AtlasEntitiesWithExtInfo
+    AtlasEntitiesWithExtInfo,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -162,7 +120,7 @@ is 20.
 """)
   @route("/atlas/v2/entity/bulk")
   @post
-  bulkCreateOrUpdate is AtlasBaseOperation<
+  bulkCreateOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The collection where entities will be moved to. Only specify a value if you
@@ -182,7 +140,9 @@ entities.
       @body
       entities: AtlasEntitiesWithExtInfo;
     },
-    EntityMutationResponse
+    EntityMutationResponse,
+    {},
+    ErrorResponse
   >;
 
   
@@ -194,33 +154,35 @@ attributes.
 """)
   @route("/atlas/v2/entity/bulk")
   @delete
-  bulkDelete is AtlasBaseOperation<
+  bulkDelete is Azure.Core.Foundations.Operation<
     {
       @doc("An array of GUIDs of entities to delete.")
       @query({format: "multi"})
       guid: string[];
     },
-    EntityMutationResponse
+    EntityMutationResponse,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Associate a classification to multiple entities in bulk.")
   @route("/atlas/v2/entity/bulk/classification")
   @post
-  addClassification is AtlasBaseOperation<
+  addClassification is Azure.Core.Foundations.Operation<
     {
       @doc("The request to associate a classification to multiple entities.")
       @body
       request: ClassificationAssociateRequest;
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get complete definition of an entity given its GUID.")
   @route("/atlas/v2/entity/guid/{guid}")
   @get
-  get is AtlasBaseOperation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -234,7 +196,7 @@ attributes.
       @query
       ignoreRelationships?: boolean;
     },
-    AtlasEntityWithExtInfo
+    AtlasEntityWithExtInfo,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -249,7 +211,7 @@ possible.
 """)
   @route("/atlas/v2/entity/guid/{guid}")
   @put
-  partialUpdateAttributeByGuid is AtlasBaseOperation<
+  partialUpdateAttributeByGuid is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -264,27 +226,27 @@ possible.
       @body
       body: unknown;
     },
-    EntityMutationResponse
+    EntityMutationResponse,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete an entity identified by its GUID.")
   @route("/atlas/v2/entity/guid/{guid}")
   @delete
-  delete is AtlasBaseOperation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
       guid: string;
     },
-    EntityMutationResponse
+    EntityMutationResponse,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get classification for a given entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classification/{classificationName}")
   @get
-  getClassification is AtlasBaseOperation<
+  getClassification is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -294,14 +256,14 @@ possible.
       @path
       classificationName: string;
     },
-    AtlasClassification
+    AtlasClassification,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete a given classification from an existing entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classification/{classificationName}")
   @delete
-  removeClassification is AtlasBaseOperation<
+  removeClassification is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -311,20 +273,20 @@ possible.
       @path
       classificationName: string;
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("List classifications for a given entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @get
-  getClassifications is AtlasBaseOperation<
+  getClassifications is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
       guid: string;
     },
-    AtlasClassifications
+    AtlasClassifications,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -332,7 +294,7 @@ possible.
   @doc("Add classifications to an existing entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @post
-  addClassifications is AtlasBaseOperation<
+  addClassifications is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -342,7 +304,7 @@ possible.
       @body
       classifications: AtlasClassification[];
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -350,7 +312,7 @@ possible.
   @doc("Update classifications to an existing entity represented by a guid.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @put
-  updateClassifications is AtlasBaseOperation<
+  updateClassifications is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -360,7 +322,7 @@ possible.
       @body
       classifications: AtlasClassification[];
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -382,7 +344,7 @@ GET
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @get
-  getByUniqueAttributes is AtlasBaseOperation<
+  getByUniqueAttributes is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -403,7 +365,7 @@ be changed to other unique attributes)
       @query("attr:qualifiedName")
       attr?: string;
     },
-    AtlasEntityWithExtInfo
+    AtlasEntityWithExtInfo,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -427,7 +389,7 @@ PUT
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @put
-  partialUpdateByUniqueAttributes is AtlasBaseOperation<
+  partialUpdateByUniqueAttributes is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -444,7 +406,9 @@ be changed to other unique attributes)
       @body
       atlasEntityWithExtInfo: AtlasEntityWithExtInfo;
     },
-    EntityMutationResponse
+    EntityMutationResponse,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -464,7 +428,7 @@ DELETE
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @delete
-  deleteByUniqueAttribute is AtlasBaseOperation<
+  deleteByUniqueAttribute is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -477,7 +441,9 @@ be changed to other unique attributes)
       @query("attr:qualifiedName")
       attr?: string;
     },
-    EntityMutationResponse
+    EntityMutationResponse,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -487,7 +453,7 @@ attributes.
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classification/{classificationName}")
   @delete
-  removeClassificationByUniqueAttribute is AtlasBaseOperation<
+  removeClassificationByUniqueAttribute is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -504,7 +470,9 @@ be changed to other unique attributes)
       @query("attr:qualifiedName")
       attr?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -512,7 +480,7 @@ be changed to other unique attributes)
   @doc("Add classification to the entity identified by its type and unique attributes.")
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classifications")
   @post
-  addClassificationsByUniqueAttribute is AtlasBaseOperation<
+  addClassificationsByUniqueAttribute is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -529,7 +497,9 @@ be changed to other unique attributes)
       @body
       atlasClassificationArray: AtlasClassification[];
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -537,7 +507,7 @@ be changed to other unique attributes)
   @doc("Update classification on an entity identified by its type and unique attributes.")
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classifications")
   @put
-  updateClassificationsByUniqueAttribute is AtlasBaseOperation<
+  updateClassificationsByUniqueAttribute is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -554,20 +524,24 @@ be changed to other unique attributes)
       @body
       atlasClassificationArray: AtlasClassification[];
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Set classifications on entities in bulk.")
   @route("/atlas/v2/entity/bulk/setClassifications")
   @post
-  bulkSetClassifications is AtlasBaseOperation<
+  bulkSetClassifications is Azure.Core.Foundations.Operation<
     {
       @doc("Atlas entity headers.")
       @body
       entityHeaders: AtlasEntityHeaders;
     },
-    OkResponse<string[]>
+    OkResponse<string[]>,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -594,7 +568,7 @@ at least one unique attribute must be provided.
 """)
   @route("/atlas/v2/entity/bulk/uniqueAttribute/type/{typeName}")
   @get
-  listByUniqueAttributes is AtlasBaseOperation<
+  listByUniqueAttributes is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -616,27 +590,31 @@ example. qualifiedName can be changed to other unique attributes)
       @query
       `attr_N:qualifiedName`?: string;
     },
-    AtlasEntitiesWithExtInfo
+    AtlasEntitiesWithExtInfo,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get entity header given its GUID.")
   @route("/atlas/v2/entity/guid/{guid}/header")
   @get
-  getHeader is AtlasBaseOperation<
+  getHeader is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
       guid: string;
     },
-    AtlasEntityHeader
+    AtlasEntityHeader,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Remove business metadata from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata")
   @delete
-  removeBusinessMetadata is AtlasBaseOperation<
+  removeBusinessMetadata is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -646,14 +624,16 @@ example. qualifiedName can be changed to other unique attributes)
       @doc("Business metadata payload")
       @body businessMetadata: Record<Record<unknown>>;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Add business metadata to an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata")
   @post
-  addOrUpdateBusinessMetadata is AtlasBaseOperation<
+  addOrUpdateBusinessMetadata is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -669,7 +649,9 @@ default is false.
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @body businessMetadata: Record<Record<unknown>>;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
@@ -677,7 +659,7 @@ default is false.
   @doc("Delete business metadata attributes from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}")
   @delete
-  removeBusinessMetadataAttributes is AtlasBaseOperation<
+  removeBusinessMetadataAttributes is Azure.Core.Foundations.Operation<
     {
       @doc("BusinessMetadata name")
       @path
@@ -691,7 +673,9 @@ default is false.
       @doc("Business metadata attribute payload")
       @body businessMetadataAttributes: Record<unknown>;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an Atlas existing api"
@@ -699,7 +683,7 @@ default is false.
   @doc("Add or update business metadata attributes.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}")
   @post
-  addOrUpdateBusinessMetadataAttributes is AtlasBaseOperation<
+  addOrUpdateBusinessMetadataAttributes is Azure.Core.Foundations.Operation<
     {
       @doc("BusinessMetadata name")
       @path
@@ -712,7 +696,9 @@ default is false.
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @body businessMetadataAttributes: Record<unknown>;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -743,7 +729,7 @@ default is false.
   @doc("Delete given labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @delete
-  removeLabels is AtlasBaseOperation<
+  removeLabels is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -753,7 +739,9 @@ default is false.
       @body
       body: string[];
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -761,7 +749,7 @@ default is false.
   @doc("Set labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @post
-  setLabels is AtlasBaseOperation<
+  setLabels is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -771,7 +759,9 @@ default is false.
       @body
       body: string[];
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -779,7 +769,7 @@ default is false.
   @doc("Add given labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @put
-  addLabel is AtlasBaseOperation<
+  addLabel is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -789,7 +779,9 @@ default is false.
       @body
       body: string[];
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -811,7 +803,7 @@ this: DELETE
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @delete
-  removeLabelsByUniqueAttribute is AtlasBaseOperation<
+  removeLabelsByUniqueAttribute is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -828,7 +820,9 @@ be changed to other unique attributes)
       @body
       body: string[];
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -852,7 +846,7 @@ request would look something like this: POST
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @post
-  setLabelsByUniqueAttribute is AtlasBaseOperation<
+  setLabelsByUniqueAttribute is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -869,7 +863,7 @@ be changed to other unique attributes)
       @body
       body: string[];
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -893,7 +887,7 @@ request would look something like this: PUT
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @put
-  addLabelsByUniqueAttribute is AtlasBaseOperation<
+  addLabelsByUniqueAttribute is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -910,14 +904,14 @@ be changed to other unique attributes)
       @body
       body: string[];
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Move existing entities to the target collection.")
   @route("/entity/moveTo")
   @post
-  moveEntitiesToCollection is DataMapBaseOperation<
+  moveEntitiesToCollection is Azure.Core.Foundations.Operation<
     {
       @doc("The collection where entities will be moved to.")
       @query
@@ -927,7 +921,7 @@ be changed to other unique attributes)
       @body
       moveEntitiesRequest: MoveEntitiesRequest;
     },
-    EntityMutationResponse
+    EntityMutationResponse,{},ErrorResponse
   >;
 }
 
@@ -946,7 +940,7 @@ and
 """)
   @route("/atlas/v2/glossary")
   @get
-  list is AtlasBaseOperation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("The page size - by default there is no paging.")
       @query
@@ -964,7 +958,9 @@ and
       @query
       ignoreTermsAndCategories?: boolean;
     },
-    OkResponse<AtlasGlossary[]>
+    OkResponse<AtlasGlossary[]>,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -972,7 +968,7 @@ and
   @doc("Create a glossary.")
   @route("/atlas/v2/glossary")
   @post
-  create is AtlasBaseOperation<
+  create is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Glossary definition, terms & categories can be anchored to a glossary.
@@ -982,7 +978,9 @@ the anchor attribute when creating the Term/Category.
       @body
       atlasGlossary: AtlasGlossary;
     },
-    AtlasGlossary
+    AtlasGlossary,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -990,20 +988,22 @@ the anchor attribute when creating the Term/Category.
   @doc("Create glossary category in bulk.")
   @route("/atlas/v2/glossary/categories")
   @post
-  createCategories is AtlasBaseOperation<
+  createCategories is Azure.Core.Foundations.Operation<
     {
       @doc("An array of glossary category definitions to be created.")
       @body
       glossaryCategory: AtlasGlossaryCategory[];
     },
-    OkResponse<AtlasGlossaryCategory[]>
+    OkResponse<AtlasGlossaryCategory[]>,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Create a glossary category.")
   @route("/atlas/v2/glossary/category")
   @post
-  createCategory is AtlasBaseOperation<
+  createCategory is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The glossary category definition. A category must be anchored to a Glossary
@@ -1014,27 +1014,31 @@ can also be defined during creation.
       @body
       glossaryCategory: AtlasGlossaryCategory;
     },
-    AtlasGlossaryCategory
+    AtlasGlossaryCategory,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get specific glossary category by its GUID.")
   @route("/atlas/v2/glossary/category/{categoryGuid}")
   @get
-  getCategory is AtlasBaseOperation<
+  getCategory is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
       categoryGuid: string;
     },
-    AtlasGlossaryCategory
+    AtlasGlossaryCategory,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Update the given glossary category by its GUID.")
   @route("/atlas/v2/glossary/category/{categoryGuid}")
   @put
-  updateCategory is AtlasBaseOperation<
+  updateCategory is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1044,20 +1048,24 @@ can also be defined during creation.
       @body
       glossaryCategory: AtlasGlossaryCategory;
     },
-    AtlasGlossaryCategory
+    AtlasGlossaryCategory,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete a glossary category.")
   @route("/atlas/v2/glossary/category/{categoryGuid}")
   @delete
-  deleteCategory is AtlasBaseOperation<
+  deleteCategory is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
       categoryGuid: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   
@@ -1069,7 +1077,7 @@ updating shortDescription and longDescription for category.
 """)
   @route("/atlas/v2/glossary/category/{categoryGuid}/partial")
   @put
-  partialUpdateCategory is AtlasBaseOperation<
+  partialUpdateCategory is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1082,7 +1090,9 @@ values for partial update.
       @body
       partialUpdates: unknown;
     },
-    AtlasGlossaryCategory
+    AtlasGlossaryCategory,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1092,7 +1102,7 @@ parameters are currently not being enabled and won't work even they are passed.
 """)
   @route("/atlas/v2/glossary/category/{categoryGuid}/related")
   @get
-  listRelatedCategories is AtlasBaseOperation<
+  listRelatedCategories is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1110,14 +1120,16 @@ parameters are currently not being enabled and won't work even they are passed.
       @query
       sort?: string;
     },
-    OkResponse<Record<AtlasRelatedCategoryHeader[]>>
+    OkResponse<Record<AtlasRelatedCategoryHeader[]>>,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get all terms associated with the specific category.")
   @route("/atlas/v2/glossary/category/{categoryGuid}/terms")
   @get
-  listCategoryTerms is AtlasBaseOperation<
+  listCategoryTerms is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1135,14 +1147,16 @@ parameters are currently not being enabled and won't work even they are passed.
       @query
       sort?: string;
     },
-    OkResponse<AtlasRelatedTermHeader[]>
+    OkResponse<AtlasRelatedTermHeader[]>,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Create a glossary term.")
   @route("/atlas/v2/glossary/term")
   @post
-  createTerm is AtlasBaseOperation<
+  createTerm is Azure.Core.Foundations.Operation<
     {
       @doc("Whether include term hierarchy")
       @query
@@ -1156,27 +1170,27 @@ Optionally it can be categorized as well.
       @body
       glossaryTerm: AtlasGlossaryTerm;
     },
-    AtlasGlossaryTerm
+    AtlasGlossaryTerm,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get a specific glossary term by its GUID. ")
   @route("/atlas/v2/glossary/term/{termGuid}")
   @get
-  getTerm is AtlasBaseOperation<
+  getTerm is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
       termGuid: string;
     },
-    AtlasGlossaryTerm
+    AtlasGlossaryTerm,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Update the given glossary term by its GUID.")
   @route("/atlas/v2/glossary/term/{termGuid}")
   @put
-  updateTerm is AtlasBaseOperation<
+  updateTerm is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1190,20 +1204,20 @@ Optionally it can be categorized as well.
       @body
       glossaryTerm: AtlasGlossaryTerm;
     },
-    AtlasGlossaryTerm
+    AtlasGlossaryTerm,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete a glossary term.")
   @route("/atlas/v2/glossary/term/{termGuid}")
   @delete
-  deleteTerm is AtlasBaseOperation<
+  deleteTerm is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
       termGuid: string;
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1214,7 +1228,7 @@ shortDescription, longDescription, abbreviation, usage and status for term.
 """)
   @route("/atlas/v2/glossary/term/{termGuid}/partial")
   @put
-  partialUpdateTerm is AtlasBaseOperation<
+  partialUpdateTerm is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1231,7 +1245,7 @@ values to be updated.
       @body
       partialUpdates: unknown;
     },
-    AtlasGlossaryTerm
+    AtlasGlossaryTerm,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -1239,7 +1253,7 @@ values to be updated.
   @doc("Create glossary terms in bulk.")
   @route("/atlas/v2/glossary/terms")
   @post
-  createTerms is AtlasBaseOperation<
+  createTerms is Azure.Core.Foundations.Operation<
     {
       @doc("Whether include term hierarchy")
       @query
@@ -1249,7 +1263,7 @@ values to be updated.
       @body
       glossaryTerm: AtlasGlossaryTerm[];
     },
-    OkResponse<AtlasGlossaryTerm[]>
+    OkResponse<AtlasGlossaryTerm[]>,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1259,7 +1273,7 @@ limit/offset to get pagination result.
 """)
   @route("/atlas/v2/glossary/terms/{termGuid}/assignedEntities")
   @get
-  listEntitiesAssignedWithTerm is AtlasBaseOperation<
+  listEntitiesAssignedWithTerm is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1277,7 +1291,7 @@ limit/offset to get pagination result.
       @query
       sort?: string;
     },
-    OkResponse<AtlasRelatedObjectId[]>
+    OkResponse<AtlasRelatedObjectId[]>,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -1292,7 +1306,7 @@ is an alternative to assign a term to multiple entities.
 """)
   @route("/atlas/v2/glossary/terms/{termGuid}/assignedEntities")
   @post
-  assignTermToEntities is AtlasBaseOperation<
+  assignTermToEntities is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1302,7 +1316,7 @@ is an alternative to assign a term to multiple entities.
       @body
       relatedObjectIds: AtlasRelatedObjectId[];
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -1310,7 +1324,7 @@ is an alternative to assign a term to multiple entities.
   @doc("Delete the term assignment for the given list of related objects.")
   @route("/atlas/v2/glossary/terms/{termGuid}/assignedEntities")
   @delete
-  deleteTermAssignmentFromEntities is AtlasBaseOperation<
+  deleteTermAssignmentFromEntities is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1320,7 +1334,7 @@ is an alternative to assign a term to multiple entities.
       @body
       relatedObjectIds: AtlasRelatedObjectId[];
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1330,7 +1344,7 @@ parameters are currently not being enabled and won't work even they are passed.
 """)
   @route("/atlas/v2/glossary/terms/{termGuid}/related")
   @get
-  listRelatedTerms is AtlasBaseOperation<
+  listRelatedTerms is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1348,27 +1362,27 @@ parameters are currently not being enabled and won't work even they are passed.
       @query
       sort?: string;
     },
-    OkResponse<Record<AtlasRelatedTermHeader[]>>
+    OkResponse<Record<AtlasRelatedTermHeader[]>>,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get a specific Glossary by its GUID.")
   @route("/atlas/v2/glossary/{glossaryGuid}")
   @get
-  get is AtlasBaseOperation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
       glossaryGuid: string;
     },
-    AtlasGlossary
+    AtlasGlossary,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Update the given glossary.")
   @route("/atlas/v2/glossary/{glossaryGuid}")
   @put
-  update is AtlasBaseOperation<
+  update is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1382,7 +1396,7 @@ parameters are currently not being enabled and won't work even they are passed.
       @body
       updatedGlossary: AtlasGlossary;
     },
-    AtlasGlossary
+    AtlasGlossary,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1392,13 +1406,13 @@ separate delete terms and categories.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}")
   @delete
-  delete is AtlasBaseOperation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
       glossaryGuid: string;
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1408,7 +1422,7 @@ limit/offset to get pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/categories")
   @get
-  listCategories is AtlasBaseOperation<
+  listCategories is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1426,7 +1440,7 @@ limit/offset to get pagination result.
       @query
       sort?: string;
     },
-    OkResponse<AtlasGlossaryCategory[]>
+    OkResponse<AtlasGlossaryCategory[]>,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1436,7 +1450,7 @@ limit/offset to get pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/categories/headers")
   @get
-  listCategoriesHeaders is AtlasBaseOperation<
+  listCategoriesHeaders is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1454,7 +1468,7 @@ limit/offset to get pagination result.
       @query
       sort?: string;
     },
-    OkResponse<AtlasRelatedCategoryHeader[]>
+    OkResponse<AtlasRelatedCategoryHeader[]>,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1470,13 +1484,13 @@ GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/categories.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/detailed")
   @get
-  getDetailed is AtlasBaseOperation<
+  getDetailed is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
       glossaryGuid: string;
     },
-    AtlasGlossaryExtInfo
+    AtlasGlossaryExtInfo,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1493,7 +1507,7 @@ using 'ignoreTermsAndCategories=true' to reduce response body size.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/partial")
   @put
-  partialUpdate is AtlasBaseOperation<
+  partialUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1510,7 +1524,7 @@ values.
       @body
       partialUpdates: unknown;
     },
-    AtlasGlossary
+    AtlasGlossary,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1520,7 +1534,7 @@ pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/terms")
   @get
-  listTerms is AtlasBaseOperation<
+  listTerms is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1538,7 +1552,7 @@ pagination result.
       @query
       sort?: string;
     },
-    OkResponse<AtlasGlossaryTerm[]>
+    OkResponse<AtlasGlossaryTerm[]>,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1548,7 +1562,7 @@ to get pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/terms/headers")
   @get
-  listTermHeaders is AtlasBaseOperation<
+  listTermHeaders is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1566,7 +1580,9 @@ to get pagination result.
       @query
       sort?: string;
     },
-    OkResponse<AtlasRelatedTermHeader[]>
+    OkResponse<AtlasRelatedTermHeader[]>,
+    {},
+    ErrorResponse
   >;
 }
 
@@ -1576,39 +1592,43 @@ interface Discovery {
   @doc("Get data using search.")
   @route("/search/query")
   @post
-  query is DataMapBaseOperation<
+  query is Azure.Core.Foundations.Operation<
     {
       @doc("An object specifying the search criteria.")
       @body
       searchRequest: SearchRequest;
     },
-    SearchResult
+    SearchResult,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get search suggestions by query criteria.")
   @route("/search/suggest")
   @post
-  suggest is DataMapBaseOperation<
+  suggest is Azure.Core.Foundations.Operation<
     {
       @doc("An object specifying the suggest criteria.")
       @body
       suggestRequest: SuggestRequest;
     },
-    SuggestResult
+    SuggestResult,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get auto complete options.")
   @route("/search/autocomplete")
   @post
-  autoComplete is DataMapBaseOperation<
+  autoComplete is Azure.Core.Foundations.Operation<
     {
       @doc("An object specifying the autocomplete criteria.")
       @body
       autoCompleteRequest: AutoCompleteRequest;
     },
-    AutoCompleteResult
+    AutoCompleteResult,{},ErrorResponse
   >;
 }
 
@@ -1618,7 +1638,7 @@ interface Lineage {
   @doc("Get lineage info of the entity specified by GUID.")
   @route("/atlas/v2/lineage/{guid}")
   @get
-  get is AtlasBaseOperation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -1632,14 +1652,14 @@ interface Lineage {
       @query
       direction: Direction;
     },
-    AtlasLineageInfo
+    AtlasLineageInfo,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Return immediate next page lineage info about entity with pagination")
   @route("/lineage/{guid}/next/")
   @get
-  getNextPage is DataMapBaseOperation<
+  getNextPage is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -1657,7 +1677,9 @@ interface Lineage {
       @query
       limit?: int32;
     },
-    AtlasLineageInfo
+    AtlasLineageInfo,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1681,7 +1703,7 @@ GET
 """)
   @route("/atlas/v2/lineage/uniqueAttribute/type/{typeName}")
   @get
-  getByUniqueAttribute is AtlasBaseOperation<
+  getByUniqueAttribute is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
@@ -1702,7 +1724,7 @@ be changed to other unique attributes)
       @query("attr:qualifiedName")
       attr?: string;
     },
-    AtlasLineageInfo
+    AtlasLineageInfo,{},ErrorResponse
   >;
 }
 
@@ -1712,7 +1734,7 @@ interface Relationship {
   @doc("Create a new relationship between entities.")
   @route("/atlas/v2/relationship")
   @post
-  create is AtlasBaseOperation<
+  create is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The AtlasRelationship object containing the information for the relationship to
@@ -1721,14 +1743,14 @@ be created.
       @body
       relationship: AtlasRelationship;
     },
-    AtlasRelationship
+    AtlasRelationship,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Update an existing relationship between entities.")
   @route("/atlas/v2/relationship")
   @put
-  update is AtlasBaseOperation<
+  update is Azure.Core.Foundations.Operation<
     {
       @doc("""
 The AtlasRelationship object containing the information for the relationship to
@@ -1737,14 +1759,14 @@ be created.
       @body
       relationship: AtlasRelationship;
     },
-    AtlasRelationship
+    AtlasRelationship,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get relationship information between entities by its GUID.")
   @route("/atlas/v2/relationship/guid/{guid}")
   @get
-  get is AtlasBaseOperation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the relationship.")
       @path
@@ -1754,20 +1776,20 @@ be created.
       @query
       extendedInfo?: boolean;
     },
-    AtlasRelationshipWithExtInfo
+    AtlasRelationshipWithExtInfo,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete a relationship between entities by its GUID.")
   @route("/atlas/v2/relationship/guid/{guid}")
   @delete
-  delete is AtlasBaseOperation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the relationship.")
       @path
       guid: string;
     },
-    void
+    void,{},ErrorResponse
   >;
 }
 
@@ -1777,202 +1799,206 @@ interface `Type`{
   @doc("Get the businessMetadata definition for the given guid.")
   @route("/atlas/v2/types/businessmetadatadef/guid/{guid}")
   @get
-  getBusinessMetadataDefByGuid is AtlasBaseOperation<
+  getBusinessMetadataDefByGuid is Azure.Core.Foundations.Operation<
     {
       @doc("businessMetadata guid")
       @path
       guid: string;
     },
-    AtlasBusinessMetadataDef
+    AtlasBusinessMetadataDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the businessMetadata definition by it's name (unique).")
   @route("/atlas/v2/types/businessmetadatadef/name/{name}")
   @get
-  getBusinessMetadataDefByName is AtlasBaseOperation<
+  getBusinessMetadataDefByName is Azure.Core.Foundations.Operation<
     {
       @doc("businessMetadata name")
       @path
       name: string;
     },
-    AtlasBusinessMetadataDef
+    AtlasBusinessMetadataDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the classification definition for the given GUID.")
   @route("/atlas/v2/types/classificationdef/guid/{guid}")
   @get
-  getClassificationDefByGuid is AtlasBaseOperation<
+  getClassificationDefByGuid is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the classification.")
       @path
       guid: string;
     },
-    AtlasClassificationDef
+    AtlasClassificationDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the classification definition by its name (unique).")
   @route("/atlas/v2/types/classificationdef/name/{name}")
   @get
-  getClassificationDefByName is AtlasBaseOperation<
+  getClassificationDefByName is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the classification.")
       @path
       name: string;
     },
-    AtlasClassificationDef
+    AtlasClassificationDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the Entity definition for the given GUID.")
   @route("/atlas/v2/types/entitydef/guid/{guid}")
   @get
-  getEntityDefByGuid is AtlasBaseOperation<
+  getEntityDefByGuid is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
       guid: string;
     },
-    AtlasEntityDef
+    AtlasEntityDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the entity definition by its name (unique).")
   @route("/atlas/v2/types/entitydef/name/{name}")
   @get
-  getEntityDefByName is AtlasBaseOperation<
+  getEntityDefByName is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the entity.")
       @path
       name: string;
     },
-    AtlasEntityDef
+    AtlasEntityDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the enum definition for the given GUID.")
   @route("/atlas/v2/types/enumdef/guid/{guid}")
   @get
-  getEnumDefByGuid is AtlasBaseOperation<
+  getEnumDefByGuid is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the enum.")
       @path
       guid: string;
     },
-    AtlasEnumDef
+    AtlasEnumDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the enum definition by its name (unique).")
   @route("/atlas/v2/types/enumdef/name/{name}")
   @get
-  getEnumDefByName is AtlasBaseOperation<
+  getEnumDefByName is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the enum.")
       @path
       name: string;
     },
-    AtlasEnumDef
+    AtlasEnumDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the relationship definition for the given GUID.")
   @route("/atlas/v2/types/relationshipdef/guid/{guid}")
   @get
-  getRelationshipDefByGuid is AtlasBaseOperation<
+  getRelationshipDefByGuid is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the relationship.")
       @path
       guid: string;
     },
-    AtlasRelationshipDef
+    AtlasRelationshipDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the relationship definition by its name (unique).")
   @route("/atlas/v2/types/relationshipdef/name/{name}")
   @get
-  getRelationshipDefByName is AtlasBaseOperation<
+  getRelationshipDefByName is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the relationship.")
       @path
       name: string;
     },
-    AtlasRelationshipDef
+    AtlasRelationshipDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the struct definition for the given GUID.")
   @route("/atlas/v2/types/structdef/guid/{guid}")
   @get
-  getStructDefByGuid is AtlasBaseOperation<
+  getStructDefByGuid is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the struct.")
       @path
       guid: string;
     },
-    AtlasStructDef
+    AtlasStructDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the struct definition by its name (unique).")
   @route("/atlas/v2/types/structdef/name/{name}")
   @get
-  getStructDefByName is AtlasBaseOperation<
+  getStructDefByName is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the struct.")
       @path
       name: string;
     },
-    AtlasStructDef
+    AtlasStructDef,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the type definition for the given GUID.")
   @route("/atlas/v2/types/typedef/guid/{guid}")
   @get
-  getByGuid is AtlasBaseOperation<
+  getByGuid is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the type.")
       @path
       guid: string;
     },
-    AtlasTypeDef
+    AtlasTypeDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the type definition by its name (unique).")
   @route("/atlas/v2/types/typedef/name/{name}")
   @get
-  getByName is AtlasBaseOperation<
+  getByName is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
       name: string;
     },
-    AtlasTypeDef
+    AtlasTypeDef,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete API for type identified by its name.")
   @route("/atlas/v2/types/typedef/name/{name}")
   @delete
-  delete is AtlasBaseOperation<
+  delete is Azure.Core.Foundations.Operation<
     {
       @doc("The name of the type.")
       @path
       name: string;
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("List all type definitions in bulk.")
   @route("/atlas/v2/types/typedefs")
   @get
-  list is AtlasBaseOperation<
+  list is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Whether include termtemplatedef when return all typedefs.
@@ -1986,7 +2012,7 @@ when search filter type=term_template
       @query
       type?: Typedef;
     },
-    AtlasTypesDef
+    AtlasTypesDef,{},ErrorResponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1997,13 +2023,13 @@ Any changes to the existing definitions will be discarded.
 """)
   @route("/atlas/v2/types/typedefs")
   @post
-  bulkCreate is AtlasBaseOperation<
+  bulkCreate is Azure.Core.Foundations.Operation<
     {
       @doc("A composite wrapper object with corresponding lists of the type definition.")
       @body
       typesDef: AtlasTypesDef;
     },
-    AtlasTypesDef
+    AtlasTypesDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -2013,33 +2039,33 @@ persisted.
 """)
   @route("/atlas/v2/types/typedefs")
   @put
-  bulkUpdate is AtlasBaseOperation<
+  bulkUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("A composite object that captures all type definition changes.")
       @body
       typesDef: AtlasTypesDef;
     },
-    AtlasTypesDef
+    AtlasTypesDef,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete API for all types in bulk.")
   @route("/atlas/v2/types/typedefs")
   @delete
-  bulkDelete is AtlasBaseOperation<
+  bulkDelete is Azure.Core.Foundations.Operation<
     {
       @doc("A composite object that captures all types to be deleted")
       @body
       typesDef: AtlasTypesDef;
     },
-    void
+    void,{},ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("List all type definitions returned as a list of minimal information header.")
   @route("/atlas/v2/types/typedefs/headers")
   @get
-  listHeaders is AtlasBaseOperation<
+  listHeaders is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Whether include termtemplatedef when return all typedefs.
@@ -2053,32 +2079,38 @@ when search filter type=term_template
       @query
       type?: Typedef;
     },
-    OkResponse<AtlasTypeDefHeader[]>
+    OkResponse<AtlasTypeDefHeader[]>,
+    {},
+    ErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get the term template definition for the given GUID.")
   @route("/types/termtemplatedef/guid/{guid}")
   @get
-  getTermTemplateDefByGuid is DataMapBaseOperation<
+  getTermTemplateDefByGuid is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the term template.")
       @path
       guid: string;
     },
-    TermTemplateDef
+    TermTemplateDef,
+    {},
+    ErrorResponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get the term template definition by its name (unique).")
   @route("/types/termtemplatedef/name/{name}")
   @get
-  getTermTemplateDefByName is DataMapBaseOperation<
+  getTermTemplateDefByName is Azure.Core.Foundations.Operation<
   {
     @doc("The unique name of the term template.")
     @path
     name: string;
   },
-  TermTemplateDef
+  TermTemplateDef,
+  {},
+  ErrorResponse
 >;
 }
