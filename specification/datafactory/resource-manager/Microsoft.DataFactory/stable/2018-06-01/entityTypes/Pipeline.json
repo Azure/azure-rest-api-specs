@@ -2640,8 +2640,8 @@
         },
         "additionalHeaders": {
           "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "The additional HTTP headers in the request to the RESTful API. Type: key value pairs (value should be string type)."
         },
         "httpRequestTimeout": {
           "type": "object",
@@ -2654,7 +2654,8 @@
         },
         "httpCompressionType": {
           "type": "object",
-          "description": "Http Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. "
+          "x-ms-format": "dfe-string",
+          "description": "Http Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2698,7 +2699,8 @@
         },
         "additionalColumns": {
           "type": "object",
-          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "Specifies the additional columns to be added to source data. Type: key value pairs (value should be string type)."
         }
       }
     },
@@ -2731,8 +2733,9 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2773,8 +2776,9 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2857,8 +2861,9 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2899,8 +2904,9 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2937,8 +2943,9 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
-          "type": "object"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -4754,7 +4761,8 @@
         },
         "writeBehavior": {
           "type": "object",
-          "description": "Write behavior when copying data into sql. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+          "x-ms-format": "dfe-string",
+          "description": "Write behavior when copying data into sql. Type: string (or Expression with resultType string)."
         },
         "upsertSettings": {
           "description": "SQL upsert settings.",
@@ -4808,7 +4816,8 @@
         },
         "writeBehavior": {
           "type": "object",
-          "description": "Write behavior when copying data into sql server. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+          "x-ms-format": "dfe-string",
+          "description": "Write behavior when copying data into sql server. Type: string (or Expression with resultType string)."
         },
         "upsertSettings": {
           "description": "SQL upsert settings.",
@@ -4916,7 +4925,8 @@
         },
         "writeBehavior": {
           "type": "object",
-          "description": "White behavior when copying data into azure SQL MI. Type: SqlWriteBehaviorEnum (or Expression with resultType SqlWriteBehaviorEnum)"
+          "x-ms-format": "dfe-string",
+          "description": "White behavior when copying data into azure SQL MI. Type: string (or Expression with resultType string)"
         },
         "upsertSettings": {
           "description": "SQL upsert settings.",
@@ -5966,6 +5976,7 @@
         },
         "arguments": {
           "type": "object",
+          "x-ms-format": "dfe-list-string",
           "description": "User specified arguments to HDInsightActivity. Type: array (or Expression with resultType array)."
         },
         "getDebugInfo": {
@@ -6996,8 +7007,8 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
         },
         "body": {
           "type": "object",
@@ -7011,6 +7022,15 @@
         "disableCertValidation": {
           "type": "boolean",
           "description": "When set to true, Certificate validation will be disabled."
+        },
+        "httpRequestTimeout": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Timeout for the HTTP request to get a response. Format is in TimeSpan (hh:mm:ss). This value is the timeout to get a response, not the activity timeout. The default value is 00:01:00 (1 minute). The range is from 1 to 10 minutes"
+        },
+        "turnOffAsync": {
+          "type": "boolean",
+          "description": "Option to disable invoking HTTP GET on location given in response header of a HTTP 202 Response. If set true, it stops invoking HTTP GET on http location given in response header. If set false then continues to invoke HTTP GET call on location given in http response headers."
         },
         "datasets": {
           "type": "array",
@@ -7421,8 +7441,7 @@
           "type": "object"
         },
         "dataPathAssignments": {
-          "x-ms-format": "dfe-key-value-pairs",
-          "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
+          "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request. Type: object (or Expression with resultType object).",
           "type": "object"
         },
         "mlParentRunId": {
@@ -8026,8 +8045,8 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
         },
         "body": {
           "type": "object",
@@ -8092,8 +8111,8 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
         },
         "body": {
           "type": "object",
@@ -8862,6 +8881,7 @@
         },
         "referenceName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Reference spark job name. Expression with resultType string."
         }
       },
