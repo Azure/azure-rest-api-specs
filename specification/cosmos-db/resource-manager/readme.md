@@ -50,6 +50,24 @@ input-file:
   - Microsoft.DocumentDB/preview/2023-11-15-preview/services.json
   - Microsoft.DocumentDB/preview/2023-11-15-preview/throughputpool.json
 ```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.DocumentDB/stable/2023-11-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2023-11-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2023-11-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2023-11-15/notebook.json
+  - Microsoft.DocumentDB/stable/2023-11-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2023-11-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2023-11-15/rbac.json
+  - Microsoft.DocumentDB/stable/2023-11-15/restorable.json
+  - Microsoft.DocumentDB/stable/2023-11-15/services.json
+```
+
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
