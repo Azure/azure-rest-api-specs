@@ -78,6 +78,12 @@
         "x-ms-examples": {
           "ClusterPoolPut": {
             "$ref": "./examples/CreateClusterPool.json"
+          },
+          "ClusterPoolPutWithPrivateAks": {
+            "$ref": "./examples/CreateClusterPoolWithPrivateAks.json"
+          },
+          "ClusterPoolPutWithUDRAks": {
+            "$ref": "./examples/CreateClusterPoolWithUDRAks.json"
           }
         },
         "parameters": [
@@ -679,6 +685,9 @@
           },
           "HDInsightSparkClusterPut": {
             "$ref": "./examples/CreateSparkCluster.json"
+          },
+          "HDInsightSparkClusterPutWithInternalIngress": {
+            "$ref": "./examples/CreateSparkClusterWithInternalIngress.json"
           }
         },
         "parameters": [
@@ -1344,6 +1353,19 @@
           "default": "loadBalancer",
           "title": "The outbound (egress) routing method.",
           "description": "This can only be set at cluster pool creation time and cannot be changed later. "
+        },
+        "enablePrivateApiServer": {
+          "type": "boolean",
+          "description": "ClusterPool is based on AKS cluster. Aks cluster exposes the apiserver to public internet by default. If you set this property to true, a private aks cluster will be created, and it will use private apiserver, which is not exposed to public internet.",
+          "x-ms-mutability": [ "create", "read" ]
+        },
+        "apiServerAuthorizedIpRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The IP ranges authorized to access the AKS API server.",
+          "description": "IP ranges are specified in CIDR format, e.g. 137.117.106.88/29. This feature is not compatible with private AKS clusters. So you cannot set enablePrivateApiServer to true and apiServerAuthorizedIpRanges at the same time."
         }
       }
     },
@@ -1832,7 +1854,13 @@
       "properties": {
         "enableInternalIngress": {
           "type": "boolean",
-          "description": "Whether to create cluster using private IP instead of public IP."
+          "description": "Whether to create cluster using private IP instead of public IP.",
+          "x-ms-mutability": [ "create", "read" ]
+        },
+        "privateLinkServiceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Private link service resource id. Only when enableInternalIngress is true, this property will be returned."
         }
       }
     },
@@ -1847,6 +1875,11 @@
           "type": "string",
           "description": "Web connectivity endpoint.",
           "example": "clusterName11223344.clusterPoolName55667788.eastus.hdinsightaks.net"
+        },
+        "privateFQDN": {
+          "type": "string",
+          "description": "Private web connectivity endpoint. This property will only be returned when enableInternalIngress is true.",
+          "example": "clusterName11223344-int.clusterPoolName55667788.eastus.hdinsightaks.net"
         }
       },
       "readOnly": true
@@ -1862,6 +1895,11 @@
           "type": "string",
           "description": "SSH connectivity endpoint.",
           "example": "clusterName11223344.clusterPoolName55667788.eastus.hdinsightaks.net/ssh/host/podPrefix-0"
+        },
+        "privateEndpoint": {
+          "type": "string",
+          "description": "Private ssh connectivity endpoint. This property will only be returned when enableInternalIngress is true.",
+          "example": "clusterName11223344-int.clusterPoolName55667788.eastus.hdinsightaks.net/ssh/host/podPrefix-0"
         }
       }
     },
