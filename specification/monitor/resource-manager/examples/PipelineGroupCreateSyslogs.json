@@ -26,7 +26,12 @@
             }
           }
         ],
-        "processors": [],
+        "processors": [
+          {
+            "type": "Batch",
+            "name": "batch-processor1"
+          }
+        ],
         "exporters": [
           {
             "type": "AzureMonitorWorkspaceLogs",
@@ -68,7 +73,9 @@
               "receivers": [
                 "syslog-receiver1"
               ],
-              "processors": [],
+              "processors": [
+                "batch-processor1"
+              ],
               "exporters": [
                 "my-workspace-logs-exporter1"
               ]
@@ -104,7 +111,12 @@
               }
             }
           ],
-          "processors": [],
+          "processors": [
+            {
+              "type": "Batch",
+              "name": "batch-processor1"
+            }
+          ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
@@ -146,7 +158,9 @@
                 "receivers": [
                   "syslog-receiver1"
                 ],
-                "processors": [],
+                "processors": [
+                  "batch-processor1"
+                ],
                 "exporters": [
                   "my-workspace-logs-exporter1"
                 ]
@@ -189,7 +203,13 @@
               }
             }
           ],
-          "processors": [],
+          "processors": [
+            {
+              "type": "Batch",
+              "name": "batch-processor1"
+            }
+  
+          ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
@@ -231,7 +251,9 @@
                 "receivers": [
                   "syslog-receiver1"
                 ],
-                "processors": [],
+                "processors": [
+                  "batch-processor1"
+                ],
                 "exporters": [
                   "my-workspace-logs-exporter1"
                 ]

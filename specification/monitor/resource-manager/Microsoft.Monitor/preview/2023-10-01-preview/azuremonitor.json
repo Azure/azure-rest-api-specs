@@ -596,6 +596,9 @@
           },
           "Create a PipelineGroup instance using a syslog receiver": {
             "$ref": "./examples/PipelineGroupCreateSyslogs.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver and networking configurations.": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithNetworking.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -910,6 +913,28 @@
         }
       }
     },
+    "BatchProcessor": {
+      "type": "object",
+      "description": "Batch processor.",
+      "properties": {
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the batch.",
+          "default": 8192,
+          "minimum": 10,
+          "maximum": 100000
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout in milliseconds.",
+          "default": 200,
+          "minimum": 10,
+          "maximum": 60000
+        }
+      }
+    },
     "ConcurrencyConfiguration": {
       "type": "object",
       "description": "Concurrent publishing configuration.",
@@ -1058,6 +1083,60 @@
         }
       }
     },
+    "Networking": {
+      "type": "object",
+      "description": "Networking configuration for the pipeline group instance.",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.",
+          "pattern": "^[a-zA-Z0-9-\\.]+$"
+        },
+        "routes": {
+          "type": "array",
+          "description": "Networking routes configuration.",
+          "items": {
+            "$ref": "#/definitions/NetworkingRoute"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "host",
+        "routes"
+      ]
+    },
+    "NetworkingRoute": {
+      "type": "object",
+      "description": "Networking route configuration.",
+      "properties": {
+        "receiver": {
+          "type": "string",
+          "description": "The name of the previously defined receiver.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port that will be configured externally. If not specified, it will use the port from the receiver definition.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "path": {
+          "type": "string",
+          "description": "Route path.",
+          "pattern": "^[a-zA-Z0-9-/\\.]+$"
+        },
+        "subdomain": {
+          "type": "string",
+          "description": "Route subdomain.",
+          "pattern": "^[a-zA-Z0-9-\\.]+$"
+        }
+      },
+      "required": [
+        "receiver"
+      ]
+    },
     "OtlpReceiver": {
       "type": "object",
       "description": "OTLP Receiver.",
@@ -1199,6 +1278,14 @@
           "$ref": "#/definitions/Service",
           "description": "The service section for a given pipeline group instance."
         },
+        "networking": {
+          "type": "array",
+          "description": "Networking configurations for the pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Networking"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.",
@@ -1266,6 +1353,14 @@
         "service": {
           "$ref": "#/definitions/ServiceUpdate",
           "description": "The service section for a given pipeline group instance."
+        },
+        "networking": {
+          "type": "array",
+          "description": "Networking configurations for the pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Networking"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1281,6 +1376,10 @@
           "type": "string",
           "description": "The name of processor.",
           "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "batch": {
+          "$ref": "#/definitions/BatchProcessor",
+          "description": "Batch processor configurations."
         }
       },
       "required": [
@@ -1292,16 +1391,16 @@
       "type": "string",
       "description": "The processor type.",
       "enum": [
-        "Filter"
+        "Batch"
       ],
       "x-ms-enum": {
         "name": "ProcessorType",
         "modelAsString": true,
         "values": [
           {
-            "name": "Filter",
-            "value": "Filter",
-            "description": "filter"
+            "name": "Batch",
+            "value": "Batch",
+            "description": "Batch processor."
           }
         ]
       }
@@ -1563,6 +1662,54 @@
         }
       }
     },
+    "StreamEncodingType": {
+      "type": "string",
+      "description": "Encoding types for streams.",
+      "enum": [
+        "nop",
+        "utf-8",
+        "utf-16le",
+        "utf-16be",
+        "ascii",
+        "big5"
+      ],
+      "x-ms-enum": {
+        "name": "StreamEncodingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "nop",
+            "value": "nop",
+            "description": "No encoding validation. Treats the file as a stream of raw bytes."
+          },
+          {
+            "name": "utf_8",
+            "value": "utf-8",
+            "description": "UTF-8 encoding."
+          },
+          {
+            "name": "utf_16le",
+            "value": "utf-16le",
+            "description": "UTF-16 encoding with little-endian byte order."
+          },
+          {
+            "name": "utf_16be",
+            "value": "utf-16be",
+            "description": "UTF-16 encoding with little-endian byte order."
+          },
+          {
+            "name": "ascii",
+            "value": "ascii",
+            "description": "ASCII encoding."
+          },
+          {
+            "name": "big5",
+            "value": "big5",
+            "description": "The Big5 Chinese character encoding."
+          }
+        ]
+      }
+    },
     "SyslogProtocol": {
       "type": "string",
       "description": "The syslog protocol to parse messages.",
@@ -1577,12 +1724,12 @@
           {
             "name": "rfc3164",
             "value": "rfc3164",
-            "description": "rfc3164"
+            "description": "rfc3164."
           },
           {
             "name": "rfc5424",
             "value": "rfc5424",
-            "description": "rfc5424"
+            "description": "rfc5424."
           }
         ]
       }
@@ -1642,6 +1789,19 @@
           "type": "string",
           "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
           "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
+        },
+        "encoding": {
+          "$ref": "#/definitions/StreamEncodingType",
+          "description": "The encoding of the stream being received.",
+          "default": "nop"
+        },
+        "readQueueLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max read queue length.",
+          "default": 1000,
+          "minimum": 100,
+          "maximum": 100000
         }
       },
       "required": [
