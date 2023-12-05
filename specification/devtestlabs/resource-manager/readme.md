@@ -36,7 +36,6 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 ``` yaml $(tag) == 'package-2021-09'
 input-file:
   - Microsoft.DevTestLab/stable/2021-09-01/DTL.json
-  - Microsoft.DevTestLab/stable/2021-09-01/types.json
 ```
 
 ### Tag: package-2018-09
