@@ -59,7 +59,7 @@
         "description": "List Offer resources by parent",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -116,17 +116,17 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Offers_List": {
+            "$ref": "./examples/ListOffers.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Offers_List_MaximumSet_Gen": {
-            "$ref": "./examples/Offers_List_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -139,7 +139,7 @@
         "description": "Get a Offer",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -162,13 +162,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Offers_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Offers_Get_MaximumSet_Gen.json"
+          "Offers_Get": {
+            "$ref": "./examples/GetOffer.json"
           }
         }
       }
@@ -182,7 +182,7 @@
         "description": "A long-running resource action.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -228,22 +228,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Offers_GenerateAccessToken": {
+            "$ref": "./examples/GenerateAccessToken.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Offers_GenerateAccessToken_MaximumSet_Gen": {
-            "$ref": "./examples/Offers_GenerateAccessToken_MaximumSet_Gen.json"
-          },
-          "Offers_GenerateAccessToken_MinimumSet_Gen": {
-            "$ref": "./examples/Offers_GenerateAccessToken_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/{resourceUri}/providers/Microsoft.EdgeMarketplace/offers/{offerId}/getAccessToken": {
@@ -255,7 +252,7 @@
         "description": "get access token.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -287,16 +284,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Offers_GetAccessToken_MaximumSet_Gen": {
-            "$ref": "./examples/Offers_GetAccessToken_MaximumSet_Gen.json"
-          },
-          "Offers_GetAccessToken_MinimumSet_Gen": {
-            "$ref": "./examples/Offers_GetAccessToken_MinimumSet_Gen.json"
+          "Offers_GetAccessToken": {
+            "$ref": "./examples/GetAccessToken.json"
           }
         }
       }
@@ -310,7 +304,7 @@
         "description": "List Publisher resources by parent",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -367,17 +361,17 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Publishers_List": {
+            "$ref": "./examples/ListPublishers.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Publishers_List_MaximumSet_Gen": {
-            "$ref": "./examples/Publishers_List_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -390,7 +384,7 @@
         "description": "Get a Publisher",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -414,13 +408,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Publishers_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Publishers_Get_MaximumSet_Gen.json"
+          "Publishers_Get": {
+            "$ref": "./examples/GetPublisher.json"
           }
         }
       }
@@ -434,33 +428,30 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/ListOperations.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
         }
       }
     }
@@ -721,7 +712,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -970,7 +961,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
