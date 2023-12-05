@@ -35,7 +35,7 @@ op AtlasImportOperation<
 TParams & TraitProperties<Traits & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId , TraitLocation.Parameters, TraitContext.Action>,
 TResponse & TraitProperties<Traits & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId, TraitLocation.Response, TraitContext.Action>,
 Traits  & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId,
-ErrorResponse         
+AtlasErrorResponse         
 >;
 
 alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
@@ -80,7 +80,7 @@ need to move an entity to another collection.
     },
     EntityMutationResponse,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -104,7 +104,7 @@ need to move an entity to another collection.
     },
     AtlasEntitiesWithExtInfo,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -142,7 +142,7 @@ entities.
     },
     EntityMutationResponse,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   
@@ -162,7 +162,7 @@ attributes.
     },
     EntityMutationResponse,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -175,7 +175,7 @@ attributes.
       @body
       request: ClassificationAssociateRequest;
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -196,7 +196,7 @@ attributes.
       @query
       ignoreRelationships?: boolean;
     },
-    AtlasEntityWithExtInfo,{},ErrorResponse
+    AtlasEntityWithExtInfo,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -226,7 +226,7 @@ possible.
       @body
       body: unknown;
     },
-    EntityMutationResponse,{},ErrorResponse
+    EntityMutationResponse,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -239,7 +239,7 @@ possible.
       @path
       guid: string;
     },
-    EntityMutationResponse,{},ErrorResponse
+    EntityMutationResponse,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -256,7 +256,7 @@ possible.
       @path
       classificationName: string;
     },
-    AtlasClassification,{},ErrorResponse
+    AtlasClassification,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -273,7 +273,7 @@ possible.
       @path
       classificationName: string;
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -286,7 +286,7 @@ possible.
       @path
       guid: string;
     },
-    AtlasClassifications,{},ErrorResponse
+    AtlasClassifications,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -304,7 +304,7 @@ possible.
       @body
       classifications: AtlasClassification[];
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -322,7 +322,7 @@ possible.
       @body
       classifications: AtlasClassification[];
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -365,7 +365,7 @@ be changed to other unique attributes)
       @query("attr:qualifiedName")
       attr?: string;
     },
-    AtlasEntityWithExtInfo,{},ErrorResponse
+    AtlasEntityWithExtInfo,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -408,7 +408,7 @@ be changed to other unique attributes)
     },
     EntityMutationResponse,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -443,7 +443,7 @@ be changed to other unique attributes)
     },
     EntityMutationResponse,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -472,7 +472,7 @@ be changed to other unique attributes)
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -499,7 +499,7 @@ be changed to other unique attributes)
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -526,7 +526,7 @@ be changed to other unique attributes)
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -541,7 +541,7 @@ be changed to other unique attributes)
     },
     OkResponse<string[]>,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -592,7 +592,7 @@ example. qualifiedName can be changed to other unique attributes)
     },
     AtlasEntitiesWithExtInfo,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -607,7 +607,7 @@ example. qualifiedName can be changed to other unique attributes)
     },
     AtlasEntityHeader,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -626,7 +626,7 @@ example. qualifiedName can be changed to other unique attributes)
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -651,7 +651,7 @@ default is false.
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
@@ -675,7 +675,7 @@ default is false.
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an Atlas existing api"
@@ -698,7 +698,7 @@ default is false.
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -708,7 +708,8 @@ default is false.
   getSampleBusinessMetadataTemplate is Azure.Core.RpcOperation<{}, {
     @header contentType: "application/octet-stream";
     @body template: bytes;
-  }>;
+  },{},AtlasErrorResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -741,7 +742,7 @@ default is false.
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -761,7 +762,7 @@ default is false.
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -781,7 +782,7 @@ default is false.
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -822,7 +823,7 @@ be changed to other unique attributes)
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -863,7 +864,7 @@ be changed to other unique attributes)
       @body
       body: string[];
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -904,7 +905,7 @@ be changed to other unique attributes)
       @body
       body: string[];
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
@@ -921,7 +922,7 @@ be changed to other unique attributes)
       @body
       moveEntitiesRequest: MoveEntitiesRequest;
     },
-    EntityMutationResponse,{},ErrorResponse
+    EntityMutationResponse,{},AtlasErrorResponse
   >;
 }
 
@@ -960,7 +961,7 @@ and
     },
     OkResponse<AtlasGlossary[]>,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -980,7 +981,7 @@ the anchor attribute when creating the Term/Category.
     },
     AtlasGlossary,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -996,7 +997,7 @@ the anchor attribute when creating the Term/Category.
     },
     OkResponse<AtlasGlossaryCategory[]>,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1016,7 +1017,7 @@ can also be defined during creation.
     },
     AtlasGlossaryCategory,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1031,7 +1032,7 @@ can also be defined during creation.
     },
     AtlasGlossaryCategory,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1050,7 +1051,7 @@ can also be defined during creation.
     },
     AtlasGlossaryCategory,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1065,7 +1066,7 @@ can also be defined during creation.
     },
     void,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   
@@ -1092,7 +1093,7 @@ values for partial update.
     },
     AtlasGlossaryCategory,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1122,7 +1123,7 @@ parameters are currently not being enabled and won't work even they are passed.
     },
     OkResponse<Record<AtlasRelatedCategoryHeader[]>>,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1149,7 +1150,7 @@ parameters are currently not being enabled and won't work even they are passed.
     },
     OkResponse<AtlasRelatedTermHeader[]>,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1170,7 +1171,7 @@ Optionally it can be categorized as well.
       @body
       glossaryTerm: AtlasGlossaryTerm;
     },
-    AtlasGlossaryTerm,{},ErrorResponse
+    AtlasGlossaryTerm,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1183,7 +1184,7 @@ Optionally it can be categorized as well.
       @path
       termGuid: string;
     },
-    AtlasGlossaryTerm,{},ErrorResponse
+    AtlasGlossaryTerm,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1204,7 +1205,7 @@ Optionally it can be categorized as well.
       @body
       glossaryTerm: AtlasGlossaryTerm;
     },
-    AtlasGlossaryTerm,{},ErrorResponse
+    AtlasGlossaryTerm,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1217,7 +1218,7 @@ Optionally it can be categorized as well.
       @path
       termGuid: string;
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1245,7 +1246,7 @@ values to be updated.
       @body
       partialUpdates: unknown;
     },
-    AtlasGlossaryTerm,{},ErrorResponse
+    AtlasGlossaryTerm,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -1263,7 +1264,7 @@ values to be updated.
       @body
       glossaryTerm: AtlasGlossaryTerm[];
     },
-    OkResponse<AtlasGlossaryTerm[]>,{},ErrorResponse
+    OkResponse<AtlasGlossaryTerm[]>,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1291,7 +1292,7 @@ limit/offset to get pagination result.
       @query
       sort?: string;
     },
-    OkResponse<AtlasRelatedObjectId[]>,{},ErrorResponse
+    OkResponse<AtlasRelatedObjectId[]>,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -1316,7 +1317,7 @@ is an alternative to assign a term to multiple entities.
       @body
       relatedObjectIds: AtlasRelatedObjectId[];
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -1334,7 +1335,7 @@ is an alternative to assign a term to multiple entities.
       @body
       relatedObjectIds: AtlasRelatedObjectId[];
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1362,7 +1363,7 @@ parameters are currently not being enabled and won't work even they are passed.
       @query
       sort?: string;
     },
-    OkResponse<Record<AtlasRelatedTermHeader[]>>,{},ErrorResponse
+    OkResponse<Record<AtlasRelatedTermHeader[]>>,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1375,7 +1376,7 @@ parameters are currently not being enabled and won't work even they are passed.
       @path
       glossaryGuid: string;
     },
-    AtlasGlossary,{},ErrorResponse
+    AtlasGlossary,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1396,7 +1397,7 @@ parameters are currently not being enabled and won't work even they are passed.
       @body
       updatedGlossary: AtlasGlossary;
     },
-    AtlasGlossary,{},ErrorResponse
+    AtlasGlossary,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1412,7 +1413,7 @@ separate delete terms and categories.
       @path
       glossaryGuid: string;
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1440,7 +1441,7 @@ limit/offset to get pagination result.
       @query
       sort?: string;
     },
-    OkResponse<AtlasGlossaryCategory[]>,{},ErrorResponse
+    OkResponse<AtlasGlossaryCategory[]>,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1468,7 +1469,7 @@ limit/offset to get pagination result.
       @query
       sort?: string;
     },
-    OkResponse<AtlasRelatedCategoryHeader[]>,{},ErrorResponse
+    OkResponse<AtlasRelatedCategoryHeader[]>,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1490,7 +1491,7 @@ GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/categories.
       @path
       glossaryGuid: string;
     },
-    AtlasGlossaryExtInfo,{},ErrorResponse
+    AtlasGlossaryExtInfo,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1524,7 +1525,7 @@ values.
       @body
       partialUpdates: unknown;
     },
-    AtlasGlossary,{},ErrorResponse
+    AtlasGlossary,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1552,7 +1553,7 @@ pagination result.
       @query
       sort?: string;
     },
-    OkResponse<AtlasGlossaryTerm[]>,{},ErrorResponse
+    OkResponse<AtlasGlossaryTerm[]>,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1582,7 +1583,7 @@ to get pagination result.
     },
     OkResponse<AtlasRelatedTermHeader[]>,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 }
 
@@ -1600,7 +1601,7 @@ interface Discovery {
     },
     SearchResult,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
@@ -1615,7 +1616,7 @@ interface Discovery {
     },
     SuggestResult,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
@@ -1628,7 +1629,7 @@ interface Discovery {
       @body
       autoCompleteRequest: AutoCompleteRequest;
     },
-    AutoCompleteResult,{},ErrorResponse
+    AutoCompleteResult,{},AtlasErrorResponse
   >;
 }
 
@@ -1652,7 +1653,7 @@ interface Lineage {
       @query
       direction: Direction;
     },
-    AtlasLineageInfo,{},ErrorResponse
+    AtlasLineageInfo,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
@@ -1679,7 +1680,7 @@ interface Lineage {
     },
     AtlasLineageInfo,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1724,7 +1725,7 @@ be changed to other unique attributes)
       @query("attr:qualifiedName")
       attr?: string;
     },
-    AtlasLineageInfo,{},ErrorResponse
+    AtlasLineageInfo,{},AtlasErrorResponse
   >;
 }
 
@@ -1743,7 +1744,7 @@ be created.
       @body
       relationship: AtlasRelationship;
     },
-    AtlasRelationship,{},ErrorResponse
+    AtlasRelationship,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1759,7 +1760,7 @@ be created.
       @body
       relationship: AtlasRelationship;
     },
-    AtlasRelationship,{},ErrorResponse
+    AtlasRelationship,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1776,7 +1777,7 @@ be created.
       @query
       extendedInfo?: boolean;
     },
-    AtlasRelationshipWithExtInfo,{},ErrorResponse
+    AtlasRelationshipWithExtInfo,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1789,7 +1790,7 @@ be created.
       @path
       guid: string;
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 }
 
@@ -1805,7 +1806,7 @@ interface `Type`{
       @path
       guid: string;
     },
-    AtlasBusinessMetadataDef,{},ErrorResponse
+    AtlasBusinessMetadataDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1818,7 +1819,7 @@ interface `Type`{
       @path
       name: string;
     },
-    AtlasBusinessMetadataDef,{},ErrorResponse
+    AtlasBusinessMetadataDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1831,7 +1832,7 @@ interface `Type`{
       @path
       guid: string;
     },
-    AtlasClassificationDef,{},ErrorResponse
+    AtlasClassificationDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1844,7 +1845,7 @@ interface `Type`{
       @path
       name: string;
     },
-    AtlasClassificationDef,{},ErrorResponse
+    AtlasClassificationDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1857,7 +1858,7 @@ interface `Type`{
       @path
       guid: string;
     },
-    AtlasEntityDef,{},ErrorResponse
+    AtlasEntityDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1870,7 +1871,7 @@ interface `Type`{
       @path
       name: string;
     },
-    AtlasEntityDef,{},ErrorResponse
+    AtlasEntityDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1883,7 +1884,7 @@ interface `Type`{
       @path
       guid: string;
     },
-    AtlasEnumDef,{},ErrorResponse
+    AtlasEnumDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1896,7 +1897,7 @@ interface `Type`{
       @path
       name: string;
     },
-    AtlasEnumDef,{},ErrorResponse
+    AtlasEnumDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1909,7 +1910,7 @@ interface `Type`{
       @path
       guid: string;
     },
-    AtlasRelationshipDef,{},ErrorResponse
+    AtlasRelationshipDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1922,7 +1923,7 @@ interface `Type`{
       @path
       name: string;
     },
-    AtlasRelationshipDef,{},ErrorResponse
+    AtlasRelationshipDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1935,7 +1936,7 @@ interface `Type`{
       @path
       guid: string;
     },
-    AtlasStructDef,{},ErrorResponse
+    AtlasStructDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1950,7 +1951,7 @@ interface `Type`{
     },
     AtlasStructDef,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1963,7 +1964,7 @@ interface `Type`{
       @path
       guid: string;
     },
-    AtlasTypeDef,{},ErrorResponse
+    AtlasTypeDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1978,7 +1979,7 @@ interface `Type`{
     },
     AtlasTypeDef,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1991,7 +1992,7 @@ interface `Type`{
       @path
       name: string;
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -2012,7 +2013,7 @@ when search filter type=term_template
       @query
       type?: Typedef;
     },
-    AtlasTypesDef,{},ErrorResponse
+    AtlasTypesDef,{},AtlasErrorResponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -2029,7 +2030,7 @@ Any changes to the existing definitions will be discarded.
       @body
       typesDef: AtlasTypesDef;
     },
-    AtlasTypesDef,{},ErrorResponse
+    AtlasTypesDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -2045,7 +2046,7 @@ persisted.
       @body
       typesDef: AtlasTypesDef;
     },
-    AtlasTypesDef,{},ErrorResponse
+    AtlasTypesDef,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -2058,7 +2059,7 @@ persisted.
       @body
       typesDef: AtlasTypesDef;
     },
-    void,{},ErrorResponse
+    void,{},AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -2081,7 +2082,7 @@ when search filter type=term_template
     },
     OkResponse<AtlasTypeDefHeader[]>,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
@@ -2096,7 +2097,7 @@ when search filter type=term_template
     },
     TermTemplateDef,
     {},
-    ErrorResponse
+    AtlasErrorResponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
@@ -2111,6 +2112,6 @@ when search filter type=term_template
   },
   TermTemplateDef,
   {},
-  ErrorResponse
+  AtlasErrorResponse
 >;
 }

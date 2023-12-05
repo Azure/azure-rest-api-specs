@@ -447,9 +447,9 @@ removed.
 
 @doc("An error response from the service")
 @error
-model ErrorResponse {
+model AtlasErrorResponse {
   @doc("The request ID.")
-  requestId?: string;
+  requestId?: Azure.Core.uuid;
 
   @doc("The error code.")
   errorCode?: string;
