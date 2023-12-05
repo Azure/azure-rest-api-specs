@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+
+scope: ResourceGroup
+
+scenarios:
+  - description: Microsoft.YourService Test Operation Get
+    steps:
+      - step: Test Operation Get
+        exampleFile: ../examples/OperationGroupGet.json
+
+  - description: Microsoft.YourService Test Cat Create and Update
+    steps:
+      - step: Create cat Rococo
+        exampleFile: ../examples/CatsCreateOrUpdate.json
+
+      - step: Get cat Rococo
+        exampleFile: ../examples/CatsGet.json
+
+  - description: Microsoft.YourService Test Cat mate link
+    steps:
+      - step: Create cat Rococo
+        exampleFile: ../examples/CatsCreateOrUpdate.json
+
+      - step: Create cat Baroque
+        exampleFile: ../examples/CatsCreateOrUpdate.json
+        variables:
+          catName: Baroque
+        requestUpdate:
+          - replace: /parameters/properties/fullName
+            value: Baroque the Cat
+        outputVariables:
+          cat1Id:
+            fromResponse: /id
+      

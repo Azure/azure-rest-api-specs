@@ -1,0 +1,19 @@
+emit:
+  - "@azure-tools/typespec-autorest" # This generates the swagger / openapi v2 file
+  # - "@azure-tools/typespec-providerhub-controller" # This generates the controller code (.cs) files
+
+# Variables in use:
+# {project-root} - parent directory of tspconfig.yaml
+# {output-dir} - correspond to --output-path in tsp.js compile command
+options:
+  "@azure-tools/typespec-autorest":
+    # Path should match target outputs in csproj, to avoid rebuilding
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}/.."
+    # arm-types-dir: "{project-root}/../../common-types/resource-management"
+    examples-directory: "examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/AppSecurity.json"
+  # "@azure-tools/typespec-providerhub-controller":
+  #   emitter-output-dir: "{project-root}/../../../../AppSecurity/generated/"
+  #   # This generates the files used to register the RP
+  #   # registration-output-path: "{project-root}/../../../generated/rp_registration"

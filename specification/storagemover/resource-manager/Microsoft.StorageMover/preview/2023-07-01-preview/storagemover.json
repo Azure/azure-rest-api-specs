@@ -1839,40 +1839,6 @@
         "endpointType"
       ]
     },
-    "AzureStorageFileShareEndpointBaseProperties": {
-      "description": "The shared properties of Storage Mover endpoint of type Azure Storage file share.",
-      "type": "object",
-      "properties": {
-        "storageAccountResourceId": {
-          "description": "The Azure Resource ID of the storage account.",
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/storageAccounts"
-              }
-            ]
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "fileShareName": {
-          "description": "The name of the Azure Storage file share.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "storageAccountResourceId",
-        "fileShareName"
-      ]
-    },
     "Endpoint": {
       "description": "The Endpoint resource, which contains information about file sources and targets.",
       "type": "object",
@@ -2050,12 +2016,39 @@
       "type": "object",
       "description": "The properties of Azure Storage SMB file share endpoint.",
       "x-ms-discriminator-value": "AzureStorageSmbFileShare",
+      "properties": {
+        "storageAccountResourceId": {
+          "description": "The Azure Resource ID of the storage account.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "fileShareName": {
+          "description": "The name of the Azure Storage file share.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "storageAccountResourceId",
+        "fileShareName"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EndpointBaseProperties"
-        },
-        {
-          "$ref": "#/definitions/AzureStorageFileShareEndpointBaseProperties"
         }
       ]
     },
@@ -2171,13 +2164,11 @@
       "properties": {
         "usernameUri": {
           "description": "The Azure Key Vault secret URI which stores the username. Use empty string to clean-up existing value.",
-          "type": "string",
-          "format": "uri"
+          "type": "string"
         },
         "passwordUri": {
           "description": "The Azure Key Vault secret URI which stores the password. Use empty string to clean-up existing value.",
-          "type": "string",
-          "format": "uri"
+          "type": "string"
         }
       },
       "allOf": [

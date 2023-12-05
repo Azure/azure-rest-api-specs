@@ -1,5 +1,8 @@
 name: "Azure OpenAPI"
 
+pool:
+  vmImage: 'Ubuntu-20.04'
+
 trigger:
   branches:
     include:
@@ -7,9 +10,6 @@ trigger:
 
 pr:
   autoCancel: false
-  branches:
-    include:
-      - "*"
 
 variables:
   TRAVIS: 'true'
@@ -22,3 +22,4 @@ variables:
 
 jobs:
 - template: .azure-pipelines/BranchProtectionForPrivateRepo.yml
+- template: .azure-pipelines/ShouldSendPRToMain.yml

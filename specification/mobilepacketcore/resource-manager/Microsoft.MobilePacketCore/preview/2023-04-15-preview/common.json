@@ -590,6 +590,33 @@
         }
       }
     },
+    "SummaryOfResources": {
+      "readOnly": true,
+      "type": "array",
+      "description": "List of objects that are present or have changed (added/delete/modified)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resourceId": {
+            "$ref": "#/definitions/ReferencedResource",
+            "description": "The reference to the changed object"
+          },
+          "action": {
+            "description": "The action applied to the object.  Used when getting change lists.  Not used in the manifest response",
+            "type": "string",
+            "enum": [
+              "Create",
+              "Update",
+              "Delete"
+            ],
+            "x-ms-enum": {
+              "name": "SummaryChangeAction",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
     "BaseMetrics": {
       "type": "object",
       "description": "Base metrics of the Mobile Packet Core instance",
@@ -1128,6 +1155,18 @@
       },
       "description": "PDU Type"
     },
+    "IpVersion": {
+      "type": "string",
+      "enum": [
+        "V4",
+        "V6"
+      ],
+      "x-ms-enum": {
+        "name": "IpVersion",
+        "modelAsString": true
+      },
+      "description": "IP Version"
+    },
     "NetworkContextName": {
       "type": "string",
       "description": "Definition of a network context name",
@@ -1428,7 +1467,7 @@
         },
         "tag": {
           "type": "string",
-          "description": "Optional tag to be used to identify the cluster pool from which this pool is allocated.  If specified, only pools provisioned with the same tag value can be used to populate this IP Pool when a UPF is deployed.  If not specified any untagged pool can be used.  Applicable to pools of type UE"
+          "description": "Optional tag to be used to identify the cluster pool from which this pool is allocated.  If specified, only pools provisioned with the same tag value can be used to populate this IP Pool when the network function is deployed.  If not specified any untagged pool can be used"
         },
         "dataNetworkList": {
           "type": "array",
@@ -1532,6 +1571,18 @@
             "$ref": "#/definitions/LoopbackUsage"
           }
         }
+      }
+    },
+    "OperationalTaskType": {
+      "type": "string",
+      "description": "Task type",
+      "enum": [
+        "LifecycleManagement",
+        "ConfigurationManagement"
+      ],
+      "x-ms-enum": {
+        "name": "OperationalTaskType",
+        "modelAsString": true
       }
     }
   },

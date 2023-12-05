@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "api-version": "2023-06-15",
+    "l3IsolationDomainName": "example-l3domain",
+    "body": {
+      "properties": {
+        "annotation": "annotation1",
+        "redistributeConnectedSubnets": "True",
+        "redistributeStaticRoutes": "False",
+        "aggregateRouteConfiguration": {
+          "ipv4Routes": [
+            {
+              "prefix": "10.0.0.0/24"
+            }
+          ],
+          "ipv6Routes": [
+            {
+              "prefix": "3FFE:FFFF:0:CD30::a0/29"
+            }
+          ]
+        },
+        "connectedSubnetRoutePolicy": {
+          "exportRoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/routePolicyName",
+          "exportRoutePolicy": {
+            "exportIpv4RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy1",
+            "exportIpv6RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy1"
+          }
+        }
+      },
+      "tags": {
+        "key4953": "1234"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "networkFabricId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric",
+          "configurationState": "Succeeded",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled",
+          "annotation": "annotation",
+          "redistributeConnectedSubnets": "True",
+          "redistributeStaticRoutes": "False",
+          "aggregateRouteConfiguration": {
+            "ipv4Routes": [
+              {
+                "prefix": "10.0.0.0/24"
+              }
+            ],
+            "ipv6Routes": [
+              {
+                "prefix": "3FFE:FFFF:0:CD30::a0/29"
+              }
+            ]
+          },
+          "connectedSubnetRoutePolicy": {
+            "exportRoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/routePolicyName",
+            "exportRoutePolicy": {
+              "exportIpv4RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy1",
+              "exportIpv6RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy1"
+            }
+          }
+        },
+        "tags": {
+          "key4953": "1234"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/example-l3domain",
+        "name": "example-l3domain",
+        "type": "microsoft.managednetworkfabric/l3isolationdomains",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-05T18:37:10.310Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-05T18:37:10.310Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

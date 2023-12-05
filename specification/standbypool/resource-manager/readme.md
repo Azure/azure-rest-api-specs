@@ -30,6 +30,14 @@ openapi-subtype: rpaas
 tag: package-2023-06-01-preview
 ```
 
+### Suppression
+``` yaml
+suppressions:
+  - code: OperationIdNounVerb
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/standbyVirtualMachines"].get.operationId
+    reason: OperationId "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource" does seem to be a Noun_Verb
+```
+
 ### Tag: package-2023-06-01-preview
 
 These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.

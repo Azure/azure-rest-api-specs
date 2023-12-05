@@ -27,7 +27,7 @@ These are the global settings for the scom.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-09-13-preview
+tag: package-2023-07-07-preview
 ```
 
 ### Tag: package-2021-06-30-preview
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2021-06-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-06-30-preview'
 input-file:
-  - Microsoft.SCOM/preview/2021-06-30-preview/scom.json
+  - Microsoft.Scom/preview/2021-06-30-preview/scom.json
 ```
 
 ### Tag: package-2022-04-30-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2022-04-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-04-30-preview'
 input-file:
-  - Microsoft.SCOM/preview/2022-04-30-preview/scom.json
+  - Microsoft.Scom/preview/2022-04-30-preview/scom.json
 ```
 
 ### Tag: package-2022-09-13-preview
@@ -54,7 +54,40 @@ These settings apply only when `--tag=package-2022-09-13-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-09-13-preview'
 input-file:
-  - Microsoft.SCOM/preview/2022-09-13-preview/scom.json
+  - Microsoft.Scom/preview/2022-09-13-preview/scom.json
+```
+
+### Tag: package-2023-06-30
+
+These settings apply only when `--tag=package-2023-06-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06-30'
+input-file:
+  - Microsoft.Scom/stable/2023-06-30/scom.json
+```
+
+### Tag: package-2023-07-07-preview
+
+These settings apply only when `--tag=package-2023-07-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07-07-preview'
+input-file:
+  - Microsoft.Scom/preview/2023-07-07-preview/scom.json
+  - Microsoft.Scom/preview/2023-07-07-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2023-07-07-preview/managedGateways.json
+  - Microsoft.Scom/preview/2023-07-07-preview/commonTypes.json
+```
+
+### Tag: package-2023-10-30
+
+These settings apply only when `--tag=package-2023-10-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-30'
+input-file:
+  - Microsoft.Scom/stable/2023-10-30/scom.json
+  - Microsoft.Scom/stable/2023-10-30/monitoredResources.json
+  - Microsoft.Scom/stable/2023-10-30/managedGateways.json
+  - Microsoft.Scom/stable/2023-10-30/commonTypes.json
 ```
 ---
 
@@ -99,3 +132,5 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+

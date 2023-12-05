@@ -152,7 +152,7 @@
         "tags": [
           "NginxCertificate"
         ],
-        "summary": "Deletes a certificate from the nginx deployment",
+        "summary": "Deletes a certificate from the NGINX deployment",
         "operationId": "Certificates_Delete",
         "produces": [
           "application/json"
@@ -874,12 +874,6 @@
         "properties": {
           "$ref": "#/definitions/NginxCertificateProperties"
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string"
         },
@@ -975,12 +969,6 @@
         },
         "properties": {
           "$ref": "#/definitions/NginxConfigurationProperties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "location": {
           "type": "string"
@@ -1192,7 +1180,8 @@
       "properties": {
         "capacity": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "example": 20
         }
       }
     },
@@ -1201,8 +1190,14 @@
       "properties": {
         "preferredEmail": {
           "type": "string",
-          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
-          "description": "The preferred email address of the user used for sending alerts and notification."
+          "format": "email",
+          "pattern": "^$|^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+          "description": "The preferred support contact email address of the user used for sending alerts and notification. Can be an empty string or a valid email address.",
+          "example": [
+            "",
+            "john.doe@example.com",
+            "tom@example.com"
+          ]
         }
       }
     },

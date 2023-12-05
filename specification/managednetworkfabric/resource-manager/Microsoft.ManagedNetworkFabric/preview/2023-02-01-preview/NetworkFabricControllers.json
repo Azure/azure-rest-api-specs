@@ -515,64 +515,16 @@
       ],
       "properties": {
         "infrastructureServices": {
-          "type": "object",
           "description": "InfrastructureServices IP ranges.",
-          "properties": {
-            "ipv4AddressSpaces": {
-              "type": "array",
-              "description": "The IPv4 Address space is optional, if the value is not defined at the time of NFC creation, then the default value 10.0.0.0/19 is considered. The IPV4 address subnet is an optional attribute.",
-              "items": {
-                "type": "string",
-                "description": "This will provide the IPv4 Network Fabric Controller Address Space."
-              }
-            },
-            "ipv6AddressSpaces": {
-              "type": "array",
-              "description": "The IPv6 is not supported right now.",
-              "items": {
-                "type": "string",
-                "description": "The IPv6 is not supported right now."
-              }
-            }
-          },
-          "readOnly": true
+          "$ref": "#/definitions/InfrastructureServices"
         },
         "workloadServices": {
-          "type": "object",
           "description": "WorkloadServices IP ranges.",
-          "properties": {
-            "ipv4AddressSpaces": {
-              "type": "array",
-              "description": "The IPv4 Address space is optional, if the value is defined at the time of NFC creation, then the default value 10.0.0.0/19 is considered. The IPV4 address subnet is an optional attribute.",
-              "items": {
-                "type": "string",
-                "description": "This will provide the IPv4 Network Fabric Controller Address Space."
-              }
-            },
-            "ipv6AddressSpaces": {
-              "type": "array",
-              "description": "The IPv6 is not supported right now.",
-              "items": {
-                "type": "string",
-                "description": "The IPv6 is not supported right now."
-              }
-            }
-          },
-          "readOnly": true
+          "$ref": "#/definitions/WorkloadServices"
         },
         "managedResourceGroupConfiguration": {
-          "type": "object",
           "description": "Managed Resource Group configuration properties.",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "The NFC service will be hosted in a Managed resource group."
-            },
-            "location": {
-              "type": "string",
-              "description": "Managed resource group location."
-            }
-          }
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration"
         },
         "networkFabricIds": {
           "type": "array",
@@ -716,6 +668,66 @@
         "nextLink": {
           "type": "string",
           "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "InfrastructureServices": {
+      "type": "object",
+      "description": "InfrastructureServices IP ranges.",
+      "properties": {
+        "ipv4AddressSpaces": {
+          "type": "array",
+          "description": "The IPv4 Address space is optional, if the value is not defined at the time of NFC creation, then the default value 10.0.0.0/19 is considered. The IPV4 address subnet is an optional attribute.",
+          "items": {
+            "type": "string",
+            "description": "This will provide the IPv4 Network Fabric Controller Address Space."
+          }
+        },
+        "ipv6AddressSpaces": {
+          "type": "array",
+          "description": "The IPv6 is not supported right now.",
+          "items": {
+            "type": "string",
+            "description": "The IPv6 is not supported right now."
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "WorkloadServices": {
+      "type": "object",
+      "description": "WorkloadServices IP ranges.",
+      "properties": {
+        "ipv4AddressSpaces": {
+          "type": "array",
+          "description": "The IPv4 Address space is optional, if the value is defined at the time of NFC creation, then the default value 10.0.0.0/19 is considered. The IPV4 address subnet is an optional attribute.",
+          "items": {
+            "type": "string",
+            "description": "This will provide the IPv4 Network Fabric Controller Address Space."
+          }
+        },
+        "ipv6AddressSpaces": {
+          "type": "array",
+          "description": "The IPv6 is not supported right now.",
+          "items": {
+            "type": "string",
+            "description": "The IPv6 is not supported right now."
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "description": "Managed Resource Group configuration properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The NFC service will be hosted in a Managed resource group."
+        },
+        "location": {
+          "type": "string",
+          "description": "Managed resource group location."
         }
       }
     }

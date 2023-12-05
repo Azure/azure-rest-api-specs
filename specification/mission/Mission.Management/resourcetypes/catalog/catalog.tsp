@@ -16,24 +16,36 @@ using Azure.ResourceManager;
 enum CatalogStorageType {
   @doc("Blob Storage Catalog Type")
   BlobCatalog,
-
-  @doc("Git Storage Catalog Type")
-  GitCatalog,
 }
 
-@doc("Catalog Connection properties.")
-model CatalogConnectionParams {
+@doc("Base type for catalog.")
+model CatalogBase {
+  @doc("Catalog's storage type.")
+  catalogStorageType?: CatalogStorageType;
+}
+
+@doc("Blob Catalog type.")
+model BlobCatalog extends CatalogBase {
   @doc("Catalog Storage's URI.")
   uri?: string;
 }
 
-@doc("Catalog Core properties.")
-model CatalogCore {
-  @doc("Catalog's storage type.")
-  type?: CatalogStorageType;
+@doc("Catalog Types.")
+union Catalog {
+  @doc("Blob Catalog")
+  blob: BlobCatalog,
+}
 
-  @doc("Catalog Connection properties.")
-  catalogConnectionParams?: CatalogConnectionParams;
+@doc("Package Properties")
+model Package {
+  @doc("Package Id.")
+  id?: string;
+
+  @doc("Package Name.")
+  name?: string;
+
+  @doc("Package metadata.")
+  metadata?: Record<string>;
 }
 
 @doc("Catalog properties")
@@ -51,6 +63,9 @@ model CatalogProperties {
   @doc("Virtual Enclave Resource Id.")
   enclaveResourceId?: string;
 
-  @doc("Catalog Core.")
-  catalogCore?: CatalogCore;
+  @doc("Catalog Connection properties.")
+  catalog?: Catalog;
+
+  @doc("List of packages for catalog.")
+  packageCollection?: Package[];
 }

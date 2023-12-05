@@ -1,0 +1,88 @@
+{
+  "operationId": "Policies_Update",
+  "title": "Policies_Update1",
+  "parameters": {
+    "api-version": "2023-02-06-preview",
+    "subscriptionId": "sub1",
+    "resourceGroupName": "rg1",
+    "policyName": "Policy1",
+    "properties": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      },
+      "properties": {
+        "policySettings": {
+          "mode": "Detection",
+          "redirectUrl": "http://bing.com",
+          "customBlockResponse": {
+            "body": "SGVsbG8=",
+            "statusCode": 499
+          },
+          "requestBodySizeLimitations": [
+            {
+              "maxSizeInKb": 128
+            }
+          ],
+          "fileUploadSizeLimitations": [
+            {
+              "endpointType": "ApplicationGateway",
+              "maxSizeInMb": 100
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/sub1/resourceGroups/rg1/providers/Microsoft.AppSecurity/Policies/Policy1",
+        "name": "Policy1",
+        "type": "Microsoft.AppSecurity/Policies",
+        "location": "global",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "protectedEndpoints": [],
+          "policySettings": {
+            "mode": "Detection",
+            "redirectUrl": "http://bing.com",
+            "customBlockResponse": {
+              "body": "SGVsbG8=",
+              "statusCode": 499
+            },
+            "requestBodySizeLimitations": [
+              {
+                "maxSizeInKb": 128
+              }
+            ],
+            "fileUploadSizeLimitations": [
+              {
+                "endpointType": "ApplicationGateway",
+                "maxSizeInMb": 100
+              }
+            ],
+            "requestBodyInspections": [
+              {
+                "state": "Disabled"
+              }
+            ]
+          },
+          "webProtection": {
+            "managedRules": [
+              {
+                "ruleSetType": "DRS",
+                "ruleSetVersion": "3.2"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/sub1/providers/Microsoft.AppSecurity/locations/westus/operations/sub1?api-version=2023-02-06-preview"
+      }
+    }
+  }
+}

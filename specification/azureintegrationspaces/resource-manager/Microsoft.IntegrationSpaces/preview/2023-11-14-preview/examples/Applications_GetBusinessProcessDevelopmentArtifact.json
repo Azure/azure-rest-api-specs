@@ -1,0 +1,175 @@
+{
+  "operationId": "Applications_GetBusinessProcessDevelopmentArtifact",
+  "title": "GetBusinessProcessDevelopmentArtifact",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2023-11-14-preview",
+    "spaceName": "Space1",
+    "applicationName": "Application1",
+    "body": {
+      "name": "BusinessProcess1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "BusinessProcess1",
+        "systemData": {
+          "lastModifiedAt": "2023-09-06T22:53:01.8497279Z"
+        },
+        "properties": {
+          "description": "First Business Process",
+          "identifier": {
+            "propertyName": "businessIdentifier-1",
+            "propertyType": "String"
+          },
+          "businessProcessStages": {
+            "Received": {
+              "properties": {
+                "Product": "String",
+                "Quantity": "Integer",
+                "State": "String",
+                "City": "String"
+              },
+              "description": "received"
+            },
+            "Processing": {
+              "properties": {
+                "ApprovalState": "String",
+                "ApproverName": "String",
+                "POAmount": "Integer"
+              },
+              "description": "Processing",
+              "stagesBefore": [
+                "Received"
+              ]
+            },
+            "Denied": {
+              "description": "Denied",
+              "stagesBefore": [
+                "Processing"
+              ]
+            },
+            "Shipped": {
+              "properties": {
+                "TrackingID": "Integer",
+                "ShipPriority": "Integer"
+              },
+              "description": "Shipped",
+              "stagesBefore": [
+                "Denied"
+              ]
+            },
+            "Completed": {
+              "description": "Completed",
+              "stagesBefore": [
+                "Shipped"
+              ]
+            }
+          },
+          "businessProcessMapping": {
+            "Received": {
+              "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+              "workflowName": "PurchaseOrder",
+              "operationType": "Trigger",
+              "operationName": "manual"
+            },
+            "Processing": {
+              "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+              "workflowName": "PurchaseOrder",
+              "operationType": "Action",
+              "operationName": "ApprovedPO"
+            },
+            "Shipped": {
+              "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+              "workflowName": "Fulfillment",
+              "operationType": "Action",
+              "operationName": "ShippedPO"
+            },
+            "Denied": {
+              "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+              "workflowName": "Fulfillment",
+              "operationType": "Action",
+              "operationName": "DeniedPO"
+            },
+            "Completed": {
+              "logicAppResourceId": "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1",
+              "workflowName": "Fulfillment",
+              "operationType": "Action",
+              "operationName": "CompletedPO"
+            }
+          },
+          "trackingProfiles": {
+            "subscriptions/sub1/resourcegroups/group1/providers/Microsoft.Web/sites/logicApp1": {
+              "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2023-01-01/trackingdefinitionschema.json#",
+              "businessProcess": {
+                "name": "businessProcess1",
+                "version": "d52c9c91-6e10-4a90-9c1f-08ee5d01c656"
+              },
+              "trackingDefinitions": {
+                "PurchaseOrder": {
+                  "correlationContext": {
+                    "operationType": "Trigger",
+                    "operationName": "manual",
+                    "propertyName": "OrderNumber",
+                    "value": "@trigger().outputs.body.OrderNumber"
+                  },
+                  "events": {
+                    "Received": {
+                      "operationType": "Trigger",
+                      "operationName": "manual",
+                      "properties": {
+                        "Product": "@trigger().outputs.body.Product",
+                        "Quantity": "@trigger().outputs.body.Quantity",
+                        "State": "@trigger().outputs.body.Address.State",
+                        "City": "@trigger().outputs.body.Address.City"
+                      }
+                    },
+                    "Processing": {
+                      "operationType": "Action",
+                      "operationName": "ApprovedPO",
+                      "properties": {
+                        "ApprovalStatus": "@action().inputs.ApprovalStatus",
+                        "ApproverName": "@action().inputs.ApproverName",
+                        "POAmount": "@action().inputs.POamount"
+                      }
+                    }
+                  }
+                },
+                "Fulfillment": {
+                  "correlationContext": {
+                    "operationType": "Trigger",
+                    "operationName": "manual",
+                    "propertyName": "OrderNumber",
+                    "value": "@trigger().outputs.body.OrderNumber"
+                  },
+                  "events": {
+                    "Shipped": {
+                      "operationType": "Action",
+                      "operationName": "ShippedPO",
+                      "properties": {
+                        "TrackingID": "@action().inputs.trackingID",
+                        "ShipPriority": "@action().inputs.shipPriority"
+                      }
+                    },
+                    "Denied": {
+                      "operationType": "Action",
+                      "operationName": "DeniedPO",
+                      "properties": {}
+                    },
+                    "Completed": {
+                      "operationType": "Action",
+                      "operationName": "CompletedPO",
+                      "properties": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -117,7 +117,7 @@
             }
           },
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/VirtualHardDisks"
             }
@@ -137,6 +137,10 @@
           "DeleteVirtualHardDisk": {
             "$ref": "./examples/DeleteVirtualHardDisk.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -162,6 +166,14 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "No content"
           }
@@ -174,6 +186,10 @@
           "UpdateVirtualHardDisk": {
             "$ref": "./examples/UpdateVirtualHardDisk.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -210,16 +226,12 @@
               "$ref": "#/definitions/VirtualHardDisks"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
-            }
-          },
           "202": {
             "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           }
         }
@@ -269,7 +281,7 @@
         "operationId": "VirtualHardDisks_ListAll",
         "description": "Lists all of the virtual hard disks in the specified subscription. Use the nextLink property in the response to get the next page of virtual hard disks.",
         "x-ms-examples": {
-          "ListVirtualHardDiskByResourceGroup": {
+          "ListVirtualHardDiskBySubscription": {
             "$ref": "./examples/ListVirtualHardDiskBySubscription.json"
           }
         },
@@ -378,6 +390,7 @@
       "description": "Properties under the virtual hard disk resource"
     },
     "VirtualHardDiskStatus": {
+      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
@@ -390,6 +403,7 @@
           "description": "Descriptive error message"
         },
         "provisioningStatus": {
+          "type": "object",
           "properties": {
             "operationId": {
               "type": "string",

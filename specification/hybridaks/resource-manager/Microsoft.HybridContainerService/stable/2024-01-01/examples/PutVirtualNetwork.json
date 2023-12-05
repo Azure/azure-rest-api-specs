@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "subscriptionId": "a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b",
+    "resourceGroupName": "test-arcappliance-resgrp",
+    "virtualNetworkName": "test-vnet-static",
+    "api-version": "2024-01-01",
+    "virtualNetworks": {
+      "location": "westus",
+      "extendedLocation": {
+        "type": "CustomLocation",
+        "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation"
+      },
+      "properties": {
+        "infraVnetProfile": {
+          "hci": {
+            "mocGroup": "target-group",
+            "mocLocation": "MocLocation",
+            "mocVnetName": "vnet1"
+          }
+        },
+        "vipPool": [
+          {
+            "startIP": "192.168.0.10",
+            "endIP": "192.168.0.50"
+          }
+        ],
+        "vmipPool": [
+          {
+            "startIP": "192.168.0.110",
+            "endIP": "192.168.0.130"
+          }
+        ],
+        "dnsServers": [
+          "192.168.0.1"
+        ],
+        "gateway": "192.168.0.1",
+        "ipAddressPrefix": "192.168.0.0/16",
+        "vlanID": 10
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/virtualNetworks/test-vnet-static",
+        "name": "test-vnet-static",
+        "type": "microsoft.hybridcontainerservice/virtualnetworks",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "infraVnetProfile": {
+            "hci": {
+              "mocGroup": "target-group",
+              "mocLocation": "MocLocation",
+              "mocVnetName": "vnet1"
+            }
+          },
+          "vipPool": [
+            {
+              "startIP": "192.168.0.10",
+              "endIP": "192.168.0.50"
+            }
+          ],
+          "vmipPool": [
+            {
+              "startIP": "192.168.0.110",
+              "endIP": "192.168.0.130"
+            }
+          ],
+          "dnsServers": [
+            "192.168.0.1"
+          ],
+          "gateway": "192.168.0.1",
+          "ipAddressPrefix": "192.168.0.0/16",
+          "vlanID": 10
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "location": "westus",
+        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/virtualNetworks/test-vnet-static",
+        "name": "test-vnet-static",
+        "type": "microsoft.hybridcontainerservice/virtualnetworks",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "infraVnetProfile": {
+            "hci": {
+              "mocGroup": "target-group",
+              "mocLocation": "MocLocation",
+              "mocVnetName": "vnet1"
+            }
+          },
+          "vipPool": [
+            {
+              "startIP": "192.168.0.10",
+              "endIP": "192.168.0.50"
+            }
+          ],
+          "vmipPool": [
+            {
+              "startIP": "192.168.0.110",
+              "endIP": "192.168.0.130"
+            }
+          ],
+          "dnsServers": [
+            "192.168.0.1"
+          ],
+          "gateway": "192.168.0.1",
+          "ipAddressPrefix": "192.168.0.0/16",
+          "vlanID": 10
+        }
+      }
+    }
+  }
+}

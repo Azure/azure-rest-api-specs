@@ -5,6 +5,9 @@
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
     "parameters": {
+      "tags": {
+        "additionalProp1": "string"
+      },
       "properties": {
         "quantity": 20
       }
@@ -15,7 +18,11 @@
       "body": {
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/myResourceName",
         "name": "myResourceName",
+        "location": "westus",
         "type": "Microsoft.SaaSHub/CloudServices",
+        "tags": {
+          "additionalProp1": "string"
+        },
         "properties": {
           "autoRenew": "On",
           "productType": "Microsoft 365 E5",
@@ -38,7 +45,7 @@
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.SaaSHub/locations/global/operationStatuses/{operationId}?api-version=2023-01-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.SaaSHub/locations/westus/operationStatuses/{operationId}?api-version=2023-01-01-preview",
         "Retry-After": "60"
       }
     }

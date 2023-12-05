@@ -1,4 +1,5 @@
 import "@typespec/rest";
+import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
@@ -12,104 +13,26 @@ import "./resourcetypes/workload/workload.tsp";
 import "./resourcetypes/catalog/catalog.tsp";
 import "./resourcetypes/endpoint/endpoint.tsp";
 import "./resourcetypes/internalConnection/internalConnection.tsp";
+import "./resourcetypes/externalConnection/externalConnection.tsp";
+import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
+import "./resourcetypes/transitHub/transitHub.tsp";
+import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
+import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
+import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
+import "./version.tsp";
+import "./model.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Mission")
 @service({
   title: "Microsoft Mission",
-  version: "2023-02-01-preview"
 })
-@Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Microsoft.Mission.Versions)
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
 interface Operations extends Azure.ResourceManager.Operations {}
-
-@doc("Community Model Resource")
-model CommunityResource is TrackedResource<CommunityProperties>{
-  @key("communityName")
-  @segment("communities")
-  @path
-  @doc("The name of the communityResource Resource")
-  name: string;
-}
-
-@doc("Virtual Enclave Model Resource")
-model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
-  @key("virtualEnclaveName")
-  @segment("virtualEnclaves")
-  @doc("The name of the enclaveResource Resource")
-  @path
-  name: string;
-}
-
-@doc("Workload Model Resource")
-@parentResource(EnclaveResource)
-model WorkloadResource is TrackedResource<WorkloadProperties> {
-  @key("workloadName")
-  @segment("workloads")
-  @path
-  @doc("The name of the workloadResource Resource")
-  name: string;
-}
-
-@doc("Catalog Model Resource")
-model CatalogResource is TrackedResource<CatalogProperties> {
-  @key("catalogName")
-  @segment("catalogs")
-  @doc("The name of the catalogResource Resource")
-  @path
-  name: string;
-}
-
-@doc("Endpoint Model Resource")
-@parentResource(EnclaveResource)
-model EndpointResource is TrackedResource<EndpointProperties> {
-  @key("endpointName")
-  @segment("endpoints")
-  @path
-  @doc("The name of the endpointResource Resource")
-  name: string;
-}
-
-@doc("Describes an Internal Connection.")
-model InternalConnection is TrackedResource<InternalConnectionProperties> {
-  @key("internalConnectionName")
-  @segment("internalConnections")
-  @doc("The name of the internal connection.")
-  @path
-  name: string;
-}
-
-@doc("Workload Interface")
-@armResourceOperations
-interface Workload
-  extends TrackedResourceOperations<WorkloadResource, WorkloadProperties> {}
-
-@doc("Endpoint Interface")
-@armResourceOperations
-interface Endpoint
-  extends TrackedResourceOperations<EndpointResource, EndpointProperties> {}
-
-@doc("Virtual Enclave Interface")
-@armResourceOperations
-interface VirtualEnclave
-  extends TrackedResourceOperations<EnclaveResource, VirtualEnclaveProperties> {}
-
-@doc("Community Interface")
-@armResourceOperations
-interface Community 
-  extends TrackedResourceOperations<CommunityResource, CommunityProperties> {}
-
-@doc("Catalog Interface")
-@armResourceOperations
-interface Catalog
-  extends TrackedResourceOperations<CatalogResource, CatalogProperties> {}
-
-@doc("Internal Connections")
-@armResourceOperations
-interface InternalConnections
-  extends TrackedResourceOperations<InternalConnection, InternalConnectionProperties> {}

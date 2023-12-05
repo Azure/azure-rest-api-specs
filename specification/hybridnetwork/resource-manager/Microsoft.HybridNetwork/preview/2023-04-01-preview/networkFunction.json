@@ -643,9 +643,339 @@
           "readOnly": true,
           "type": "string",
           "description": "The JSON-serialized deployment profile of the component resource."
+        },
+        "deploymentStatus": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "#/definitions/DeploymentStatusProperties",
+          "description": "The deployment status of the component resource."
         }
       },
       "description": "The component properties of the network function."
+    },
+    "DeploymentStatusProperties": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the component resource."
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resource related to the component resource."
+        },
+        "nextExpectedUpdateAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The next expected update of deployment status."
+        }
+      },
+      "description": "The deployment status properties of the network function component."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The component resource deployment status.",
+      "enum": [
+        "Unknown",
+        "Deployed",
+        "Uninstalled",
+        "Superseded",
+        "Failed",
+        "Uninstalling",
+        "Pending-Install",
+        "Pending-Upgrade",
+        "Pending-Rollback",
+        "Downloading",
+        "Installing",
+        "Reinstalling",
+        "Rollingback",
+        "Upgrading"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
+    },
+    "Resources": {
+      "type": "object",
+      "properties": {
+        "deployments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          },
+          "description": "Deployments that are related to component resource."
+        },
+        "pods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pod"
+          },
+          "description": "Pods related to component resource."
+        },
+        "replicaSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicaSet"
+          },
+          "description": "Replica sets related to component resource."
+        },
+        "statefulSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatefulSet"
+          },
+          "description": "Stateful sets related to component resource."
+        },
+        "daemonSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaemonSet"
+          },
+          "description": "Daemonsets related to component resource."
+        }
+      },
+      "description": "The resources of the network function component."
+    },
+    "Deployment": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the deployment."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the deployment."
+        },
+        "desired": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired number of pods"
+        },
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ready pods."
+        },
+        "upToDate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of upto date pods."
+        },
+        "available": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of available pods."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Time of deployment."
+        }
+      },
+      "description": "Helm Deployment status properties."
+    },
+    "Pod": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Pod."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the Pod."
+        },
+        "desired": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired number of containers"
+        },
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ready containers."
+        },
+        "status": {
+          "$ref": "#/definitions/PodStatus",
+          "description": "The status of a pod."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Time of Pod."
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PodEvent"
+          },
+          "description": "Last 5 Pod events."
+        }
+      },
+      "description": "Helm Pod status properties."
+    },
+    "PodStatus": {
+      "type": "string",
+      "description": "The status of a Pod.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Running",
+        "Pending",
+        "Terminating",
+        "NotReady"
+      ],
+      "x-ms-enum": {
+        "name": "PodStatus",
+        "modelAsString": true
+      }
+    },
+    "PodEvent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PodEventType",
+          "description": "The type of pod event."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Event reason."
+        },
+        "message": {
+          "type": "string",
+          "description": "Event message."
+        },
+        "lastSeenTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Event Last seen."
+        }
+      },
+      "description": "Pod Event  properties."
+    },
+    "PodEventType": {
+      "type": "string",
+      "description": "The type of pod event.",
+      "enum": [
+        "Normal",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "PodEventType",
+        "modelAsString": true
+      }
+    },
+    "ReplicaSet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the replicaSet."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the replicaSet."
+        },
+        "desired": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired number of pods"
+        },
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ready pods."
+        },
+        "current": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of current pods."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Time of replicaSet."
+        }
+      },
+      "description": "Helm ReplicaSet status properties."
+    },
+    "StatefulSet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the statefulset."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the statefulset."
+        },
+        "desired": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired number of pods"
+        },
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ready pods."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Time of statefulset."
+        }
+      },
+      "description": "Helm StatefulSet status properties."
+    },
+    "DaemonSet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the daemonSet."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the daemonSet."
+        },
+        "desired": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired number of pods"
+        },
+        "current": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current number of pods"
+        },
+        "ready": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Ready pods"
+        },
+        "upToDate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of  upto date pods"
+        },
+        "available": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of available pods."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Time of daemonSet."
+        }
+      },
+      "description": "Helm DaemonSet status properties."
     },
     "ComponentListResult": {
       "type": "object",

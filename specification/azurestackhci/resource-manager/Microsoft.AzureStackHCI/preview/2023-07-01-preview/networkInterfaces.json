@@ -117,7 +117,7 @@
             }
           },
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/NetworkInterfaces"
             }
@@ -137,6 +137,10 @@
           "DeleteNetworkInterface": {
             "$ref": "./examples/DeleteNetworkInterface.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -162,6 +166,14 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "No content"
           }
@@ -174,6 +186,10 @@
           "UpdateNetworkInterface": {
             "$ref": "./examples/UpdateNetworkInterface.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -210,16 +226,12 @@
               "$ref": "#/definitions/NetworkInterfaces"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/NetworkInterfaces"
-            }
-          },
           "202": {
             "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/NetworkInterfaces"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           }
         }
@@ -358,6 +370,7 @@
       "description": "Properties under the network interface resource"
     },
     "NetworkInterfaceStatus": {
+      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
@@ -370,6 +383,7 @@
           "description": "Descriptive error message"
         },
         "provisioningStatus": {
+          "type": "object",
           "properties": {
             "operationId": {
               "type": "string",
@@ -421,18 +435,6 @@
             "privateIPAddress": {
               "type": "string",
               "description": "PrivateIPAddress - Private IP address of the IP configuration."
-            },
-            "privateIPAllocationMethod": {
-              "type": "string",
-              "description": "PrivateIPAllocationMethod - The private IP address allocation method. Possible values include: 'Static', 'Dynamic'",
-              "enum": [
-                "Dynamic",
-                "Static"
-              ],
-              "x-ms-enum": {
-                "name": "PrivateIPAllocationMethodEnum",
-                "modelAsString": true
-              }
             },
             "subnet": {
               "type": "object",
