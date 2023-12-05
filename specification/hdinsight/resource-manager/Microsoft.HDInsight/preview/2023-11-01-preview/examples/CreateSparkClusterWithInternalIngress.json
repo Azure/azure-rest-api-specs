@@ -79,10 +79,10 @@
           "sparkProfile": {},
           "sshProfile": {
             "count": 2
+          },
+          "clusterAccessProfile": {
+            "enableInternalIngress": true
           }
-        },
-        "clusterAccessProfile": {
-          "enableInternalIngress": true
         }
       }
     }
@@ -173,7 +173,7 @@
             "connectivityProfile": {
               "web": {
                 "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net",
-                "privateFQDN": "cluster1-int.clusterpool1.westus2.projecthilo.net"
+                "privateFqdn": "cluster1-int.clusterpool1.westus2.projecthilo.net"
               },
               "ssh": [
                 {
@@ -190,11 +190,11 @@
             "sshProfile": {
               "count": 2,
               "podPrefix": "sshnode"
+            },
+            "clusterAccessProfile": {
+              "enableInternalIngress": true,
+              "privateLinkServiceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.Network/privateLinkServices/testpls"
             }
-          },
-          "clusterAccessProfile": {
-            "enableInternalIngress": true,
-            "privateLinkServiceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.Network/privateLinkServices/testpls"
           }
         },
         "systemData": {
@@ -292,7 +292,7 @@
             "connectivityProfile": {
               "web": {
                 "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net",
-                "privateFQDN": "cluster1-int.clusterpool1.westus2.projecthilo.net"
+                "privateFqdn": "cluster1-int.clusterpool1.westus2.projecthilo.net"
               },
               "ssh": [
                 {
@@ -309,11 +309,11 @@
             "sshProfile": {
               "count": 2,
               "podPrefix": "sshnode"
+            },
+            "clusterAccessProfile": {
+              "enableInternalIngress": true,
+              "privateLinkServiceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.Network/privateLinkServices/testpls"
             }
-          },
-          "clusterAccessProfile": {
-            "enableInternalIngress": true,
-            "privateLinkServiceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.Network/privateLinkServices/testpls"
           }
         },
         "systemData": {
