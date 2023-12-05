@@ -16,42 +16,48 @@ namespace ClientForAcsJobRouter;
   service: AzureCommunicationRoutingService,
 })
 interface JobRouterAdministrationRestClient {
-  @internal("csharp")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "java")
   upsertDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertDistributionPolicy;
 
   getDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.getDistributionPolicy;
 
+  @access(Access.internal, "csharp")
   listDistributionPolicies is AzureCommunicationRoutingService.JobRouterAdministrationOperations.listDistributionPolicies;
 
   deleteDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteDistributionPolicy;
 
-  @internal("csharp")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "java")
   upsertClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertClassificationPolicy;
 
   getClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.getClassificationPolicy;
 
+  @access(Access.internal, "csharp")
   listClassificationPolicies is AzureCommunicationRoutingService.JobRouterAdministrationOperations.listClassificationPolicies;
 
   deleteClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteClassificationPolicy;
 
-  @internal("csharp")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "java")
   upsertExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertExceptionPolicy;
 
+  @access(Access.internal, "java")
   getExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.getExceptionPolicy;
 
+  @access(Access.internal, "java")
+  @access(Access.internal, "csharp")
   listExceptionPolicies is AzureCommunicationRoutingService.JobRouterAdministrationOperations.listExceptionPolicies;
 
   deleteExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteExceptionPolicy;
 
-  @internal("csharp")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "java")
   upsertQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertQueue;
 
   getQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.getQueue;
 
+  @access(Access.internal, "csharp")
   listQueues is AzureCommunicationRoutingService.JobRouterAdministrationOperations.listQueues;
 
   deleteQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteQueue;
@@ -62,61 +68,63 @@ interface JobRouterAdministrationRestClient {
   service: AzureCommunicationRoutingService,
 })
 interface JobRouterRestClient {
-  @internal("csharp")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "java")
   upsertJob is AzureCommunicationRoutingService.JobRouterOperations.upsertJob;
 
   getJob is AzureCommunicationRoutingService.JobRouterOperations.getJob;
 
   deleteJob is AzureCommunicationRoutingService.JobRouterOperations.deleteJob;
 
-  @internal("csharp")
-  @internal("python")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "python")
+  @access(Access.internal, "java")
   reclassify is AzureCommunicationRoutingService.JobRouterOperations.reclassify;
 
-  @internal("csharp")
-  @internal("python")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "python")
+  @access(Access.internal, "java")
   cancel is AzureCommunicationRoutingService.JobRouterOperations.cancel;
 
-  @internal("csharp")
-  @internal("python")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "python")
+  @access(Access.internal, "java")
   complete is AzureCommunicationRoutingService.JobRouterOperations.complete;
 
-  @internal("csharp")
-  @internal("python")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "python")
+  @access(Access.internal, "java")
   close is AzureCommunicationRoutingService.JobRouterOperations.close;
 
+  @access(Access.internal, "csharp")
   listJobs is AzureCommunicationRoutingService.JobRouterOperations.listJobs;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
   getQueuePosition is AzureCommunicationRoutingService.JobRouterOperations.getInQueuePosition;
 
-  @internal("csharp")
+  @access(Access.internal, "csharp")
   unassign is AzureCommunicationRoutingService.JobRouterOperations.unassign;
 
   accept is AzureCommunicationRoutingService.JobRouterOperations.accept;
 
-  @internal("csharp")
-  @internal("python")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "python")
+  @access(Access.internal, "java")
   decline is AzureCommunicationRoutingService.JobRouterOperations.decline;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
   getQueueStatistics is AzureCommunicationRoutingService.JobRouterOperations.getQueueStatistics;
 
-  @internal("csharp")
-  @internal("java")
+  @access(Access.internal, "csharp")
+  @access(Access.internal, "java")
   upsertWorker is AzureCommunicationRoutingService.JobRouterOperations.upsertWorker;
 
   getWorker is AzureCommunicationRoutingService.JobRouterOperations.getWorker;
 
   deleteWorker is AzureCommunicationRoutingService.JobRouterOperations.deleteWorker;
 
+  @access(Access.internal, "csharp")
   listWorkers is AzureCommunicationRoutingService.JobRouterOperations.listWorkers;
 }
