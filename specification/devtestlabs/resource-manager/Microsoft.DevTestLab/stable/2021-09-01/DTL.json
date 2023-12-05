@@ -9285,6 +9285,42 @@
     }
   },
   "definitions": {
+    "Resource": {
+      "title": "Resource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
     "ApplicableSchedule": {
       "description": "Schedules applicable to a virtual machine. The schedules may have been defined on a VM or on lab level.",
       "required": [
@@ -9293,7 +9329,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -9349,7 +9385,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -9471,7 +9507,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -9631,7 +9667,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -9791,7 +9827,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -10015,7 +10051,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ]
     },
@@ -10070,7 +10106,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -10352,7 +10388,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -10467,7 +10503,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -10687,7 +10723,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -10793,7 +10829,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -11053,7 +11089,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -11124,7 +11160,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -11517,7 +11553,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -11659,7 +11695,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -12262,7 +12298,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -12593,7 +12629,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -12731,7 +12767,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ]
     },
@@ -12880,7 +12916,7 @@
       "description": "A schedule.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -13089,7 +13125,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -13157,7 +13193,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -13235,7 +13271,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -13310,7 +13346,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ]
     },
@@ -13390,7 +13426,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ]
     },
@@ -13665,7 +13701,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
@@ -13785,7 +13821,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "#/definitions/resource"
         }
       ],
       "properties": {
