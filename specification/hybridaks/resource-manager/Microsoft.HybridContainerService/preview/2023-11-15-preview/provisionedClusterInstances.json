@@ -614,61 +614,12 @@
         }
       }
     },
-    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/upgradeNodeImageVersionForEntireCluster": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/listUserKubeconfig": {
       "post": {
         "tags": [
           "provisionedClusterInstances"
         ],
-        "operationId": "provisionedClusterInstances_UpgradeNodeImageVersionForEntireCluster",
-        "summary": "Upgrades the node image version of the cluster control plane and all agent pools to the latest.",
-        "description": "Upgrading the node image version of a cluster applies the newest OS and runtime updates to the nodes.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/connectedClusterResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/provisionedClusters"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "UpgradeClusterNodeImageVersion": {
-            "$ref": "./examples/ProvisionedClusterInstanceUpgradeNodeImageVersionForEntireCluster.json"
-          }
-        }
-      }
-    },
-    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/listClusterUserCredential": {
-      "post": {
-        "tags": [
-          "provisionedClusterInstances"
-        ],
-        "operationId": "provisionedClusterInstances_ListClusterUserCredentials",
+        "operationId": "provisionedClusterInstances_ListUserKubeconfig",
         "summary": "Listing the AAD user credentials of a provisioned cluster instance used only in direct mode.",
         "description": "Lists the AAD user credentials of a provisioned cluster instance used only in direct mode.",
         "parameters": [
@@ -683,7 +634,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CredentialResults"
+              "$ref": "#/definitions/ListCredentialResponse"
             }
           },
           "202": {
@@ -703,22 +654,22 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/CredentialResults"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ListCredentialResponse"
         },
         "x-ms-examples": {
           "ListClusterUserCredentials": {
-            "$ref": "./examples/ProvisionedClusterInstanceListClusterUserCredentials.json"
+            "$ref": "./examples/ProvisionedClusterInstanceListUserKubeconfig.json"
           }
         }
       }
     },
-    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/listClusterAdminCredential": {
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/listAdminKubeconfig": {
       "post": {
         "tags": [
           "provisionedClusterInstances"
         ],
-        "operationId": "provisionedClusterInstances_ListClusterAdminCredentials",
+        "operationId": "provisionedClusterInstances_ListAdminKubeconfig",
         "summary": "Listing the admin credentials of a provisioned cluster instance used only in direct mode.",
         "description": "Lists the admin credentials of a provisioned cluster instance used only in direct mode.",
         "parameters": [
@@ -733,7 +684,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CredentialResults"
+              "$ref": "#/definitions/ListCredentialResponse"
             }
           },
           "202": {
@@ -753,12 +704,12 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/CredentialResults"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ListCredentialResponse"
         },
         "x-ms-examples": {
           "ListClusterAdminCredentials": {
-            "$ref": "./examples/ProvisionedClusterInstanceListClusterAdminCredentials.json"
+            "$ref": "./examples/ProvisionedClusterInstanceListAdminKubeconfig.json"
           }
         }
       }
@@ -1123,20 +1074,62 @@
     }
   },
   "definitions": {
-    "CredentialResults": {
+    "ListCredentialResponse": {
       "type": "object",
       "properties": {
-        "kubeconfigs": {
-          "type": "array",
+        "id": {
+          "type": "string",
           "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/CredentialResult"
+          "description": "Operation Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Operation Name"
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridContainerService/provisionedClusterInstances"
+              }
+            ]
           },
-          "x-ms-identifiers": [],
-          "description": "Base64-encoded Kubernetes configuration file."
+          "readOnly": true,
+          "description": "ARM Resource Id of the provisioned cluster instance"
+        },
+        "status": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "kubeconfigs": {
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/CredentialResult"
+              },
+              "x-ms-identifiers": [],
+              "description": "Base64-encoded Kubernetes configuration file."
+            }
+          }
         }
       },
-      "description": "The list credential result response."
+      "description": "The list kubeconfig result response."
     },
     "CredentialResult": {
       "type": "object",
@@ -1158,10 +1151,6 @@
     "provisionedClusterProperties": {
       "type": "object",
       "properties": {
-        "enableRbac": {
-          "type": "boolean",
-          "description": "EnableRBAC - Whether to enable Kubernetes Role-Based Access Control."
-        },
         "linuxProfile": {
           "description": "LinuxProfile - The profile for Linux VMs in the Provisioned Cluster.",
           "$ref": "#/definitions/LinuxProfileProperties"
@@ -1197,28 +1186,19 @@
           "type": "object",
           "readOnly": true,
           "properties": {
-            "featuresStatus": {
-              "type": "object",
-              "description": "Additional features status like Arc Agent Onboarding.",
-              "properties": {
-                "arcAgentStatus": {
-                  "description": "Defines the observed Arc Agent status that is resourceSynced back to the ARM resource.",
-                  "$ref": "#/definitions/ArcAgentStatus"
-                }
-              }
-            },
-            "addonStatus": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/AddonStatus"
+            "controlPlaneStatus": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AddonStatusProfile"
               },
-              "description": "AddonStatus - Status of Addons"
+              "x-ms-identifiers": [],
+              "description": "Status of the control plane components"
             },
             "errorMessage": {
               "type": "string",
               "description": "ErrorMessage - Error messages during creation of cluster"
             },
-            "provisioningStatus": {
+            "operationStatus": {
               "type": "object",
               "properties": {
                 "error": {
@@ -1234,10 +1214,6 @@
                 },
                 "operationId": {
                   "type": "string"
-                },
-                "phase": {
-                  "type": "string",
-                  "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc."
                 },
                 "status": {
                   "type": "string"
@@ -1289,26 +1265,9 @@
       },
       "x-ms-identifiers": []
     },
-    "AddonStatus": {
-      "properties": {
-        "errorMessage": {
-          "description": "ErrorMessage will be set in the event that there is a terminal problem reconciling the AddOn and will contain a more verbose string suitable for logging and human consumption.",
-          "type": "string"
-        },
-        "phase": {
-          "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc.",
-          "type": "string"
-        },
-        "ready": {
-          "type": "boolean"
-        }
-      },
+    "AgentPoolUpdateProfile": {
       "type": "object",
-      "description": "Status of the addon"
-    },
-    "AgentPoolProfile": {
-      "type": "object",
-      "description": "AgentPool configuration",
+      "description": "AgentPool update configuration",
       "properties": {
         "count": {
           "type": "integer",
@@ -1316,6 +1275,16 @@
           "description": "Count - Number of agents to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1.",
           "default": 1
         },
+        "vmSize": {
+          "type": "string",
+          "description": "VmSize - The size of the agent pool VMs."
+        }
+      }
+    },
+    "AgentPoolProfile": {
+      "type": "object",
+      "description": "AgentPool configuration",
+      "properties": {
         "availabilityZones": {
           "type": "array",
           "items": {
@@ -1332,10 +1301,6 @@
         "nodeImageVersion": {
           "type": "string",
           "description": "The version of node image"
-        },
-        "vmSize": {
-          "type": "string",
-          "description": "VmSize - The size of the agent pool VMs."
         }
       }
     },
@@ -1358,6 +1323,10 @@
         },
         {
           "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AgentPoolUpdateProfile"
+        },
+        {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/AgentPoolName"
         }
       ]
@@ -1367,6 +1336,10 @@
         {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AgentPoolProfile"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AgentPoolUpdateProfile"
         },
         {
           "x-ms-client-flatten": true,
@@ -1385,9 +1358,9 @@
           "properties": {
             "errorMessage": {
               "type": "string",
-              "description": "ErrorMessage - Error messages during creation of cluster"
+              "description": "ErrorMessage - Error messages during creation of agent pool"
             },
-            "provisioningStatus": {
+            "operationStatus": {
               "type": "object",
               "properties": {
                 "error": {
@@ -1404,10 +1377,6 @@
                 "operationId": {
                   "type": "string"
                 },
-                "phase": {
-                  "type": "string",
-                  "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc."
-                },
                 "status": {
                   "type": "string"
                 }
@@ -1415,14 +1384,11 @@
               "description": "Contains Provisioning errors"
             },
             "readyReplicas": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Total number of ready machines targeted by this deployment."
-            },
-            "replicas": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Total number of non-terminated machines targeted by this deployment"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentPoolUpdateProfile"
+              },
+              "x-ms-identifiers": []
             }
           },
           "description": "Defines the observed state of the agent pool"
@@ -1665,13 +1631,18 @@
         }
       }
     },
-    "ArcAgentStatus": {
-      "description": "Defines the observed Arc Agent status that is resourceSynced back to the ARM resource.",
+    "AddonStatusProfile": {
+      "description": "Defines the addon status profile.",
       "type": "object",
+      "readOnly": true,
       "properties": {
-        "deploymentState": {
+        "name": {
           "type": "string",
-          "description": "Observed deployment state of the Arc Agents on the target cluster. Possible values include: 'pending', 'provisioning', 'provisioning {HelmChartInstalled}', 'provisioning {MSICertificateDownloaded}', 'provisioned', 'deleting', 'failed', 'upgrading'",
+          "description": "Name of the addon"
+        },
+        "phase": {
+          "type": "string",
+          "description": "Observed phase of the addon on the target cluster. Possible values include: 'pending', 'provisioning', 'provisioning {HelmChartInstalled}', 'provisioning {MSICertificateDownloaded}', 'provisioned', 'deleting', 'failed', 'upgrading'",
           "enum": [
             "pending",
             "provisioning",
@@ -1684,12 +1655,16 @@
           ],
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "deploymentState"
+            "name": "addonPhase"
           }
+        },
+        "ready": {
+          "type": "boolean",
+          "description": "Indicates whether the addon is ready"
         },
         "errorMessage": {
           "type": "string",
-          "description": "Error messages while onboarding/upgrading/uninstalling the Arc agents"
+          "description": "Error message while deploying the addon"
         }
       }
     },
@@ -1849,6 +1824,14 @@
       "type": "object",
       "description": "Kubernetes Patch Version profile",
       "properties": {
+        "readiness": {
+          "type": "array",
+          "description": "Whether the kubernetes version variant (Linux, Windows, Windows2022) is ready or not",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/KubernetesVersionReadiness"
+          }
+        },
         "upgrades": {
           "type": "array",
           "description": "Possible upgrade path for given patch version",
@@ -1856,6 +1839,51 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "KubernetesVersionReadiness": {
+      "type": "object",
+      "description": "Whether a particular kubernetes version's variant (CBLMariner, Windows, Windows2022) is ready or not ",
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "The particular KubernetesVersion's Image's OS Type (Linux, Windows)",
+          "readOnly": true,
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "default": "Linux",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "osType"
+          }
+        },
+        "osSku": {
+          "type": "string",
+          "description": "The particular KubernetesVersion's Image's OS SKU (CBLMariner, Windows, Windows2022)",
+          "readOnly": true,
+          "enum": [
+            "CBLMariner",
+            "Windows2019",
+            "Windows2022"
+          ],
+          "default": "CBLMariner",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "osSku"
+          }
+        },
+        "ready": {
+          "type": "boolean",
+          "description": "Whether or not the given image is ready",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "If image is not ready, the error message for version not being ready",
+          "readOnly": true
         }
       }
     },

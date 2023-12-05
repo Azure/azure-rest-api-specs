@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.MobilePacketCore
-  output-folder: $(csharp-sdks-folder)/mobilePacketCore/management/$(namespace)/GeneratedProtocol
+  namespace: mpcnetworkfunction
+  output-folder: $(csharp-sdks-folder)/mpcnetworkfunction/management/$(namespace)/GeneratedProtocol
 ```

@@ -49,10 +49,10 @@
   "paths": {
     "/providers/Microsoft.MobilePacketCore/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -73,22 +73,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "OperationsList": {
             "$ref": "./examples/OperationList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MobilePacketCore/networkFunctions": {
       "get": {
+        "operationId": "NetworkFunctions_ListBySubscription",
         "tags": [
           "NetworkFunctions"
         ],
-        "operationId": "NetworkFunctions_ListBySubscription",
         "description": "List NetworkFunctionResource resources by subscription ID",
         "parameters": [
           {
@@ -112,22 +112,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "NetworkFunctions_ListBySubscription": {
             "$ref": "./examples/NetworkFunctions_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/networkFunctions": {
       "get": {
+        "operationId": "NetworkFunctions_ListByResourceGroup",
         "tags": [
           "NetworkFunctions"
         ],
-        "operationId": "NetworkFunctions_ListByResourceGroup",
         "description": "List NetworkFunctionResource resources by resource group",
         "parameters": [
           {
@@ -154,22 +154,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "NetworkFunctions_ListByResourceGroup": {
             "$ref": "./examples/NetworkFunctions_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/networkFunctions/{networkFunctionName}": {
       "get": {
+        "operationId": "NetworkFunctions_Get",
         "tags": [
           "NetworkFunctions"
         ],
-        "operationId": "NetworkFunctions_Get",
         "description": "Get a NetworkFunctionResource",
         "parameters": [
           {
@@ -184,9 +184,12 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "required": true,
             "description": "The name of the network function",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -210,10 +213,10 @@
         }
       },
       "put": {
+        "operationId": "NetworkFunctions_CreateOrUpdate",
         "tags": [
           "NetworkFunctions"
         ],
-        "operationId": "NetworkFunctions_CreateOrUpdate",
         "description": "Create a NetworkFunctionResource",
         "parameters": [
           {
@@ -228,15 +231,18 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "required": true,
             "description": "The name of the network function",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkFunctionResource"
             }
@@ -244,9 +250,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM resource update successful",
             "schema": {
               "$ref": "#/definitions/NetworkFunctionResource"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -260,13 +279,17 @@
           "NetworkFunctions_CreateOrUpdate": {
             "$ref": "./examples/NetworkFunctions_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "NetworkFunctions_UpdateTags",
         "tags": [
           "NetworkFunctions"
         ],
-        "operationId": "NetworkFunctions_UpdateTags",
         "description": "Update a NetworkFunctionResource",
         "parameters": [
           {
@@ -281,15 +304,18 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "required": true,
             "description": "The name of the network function",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkFunctionResourceTagsUpdate"
             }
@@ -316,10 +342,10 @@
         }
       },
       "delete": {
+        "operationId": "NetworkFunctions_Delete",
         "tags": [
           "NetworkFunctions"
         ],
-        "operationId": "NetworkFunctions_Delete",
         "description": "Delete a NetworkFunctionResource",
         "parameters": [
           {
@@ -334,9 +360,12 @@
           {
             "name": "networkFunctionName",
             "in": "path",
-            "required": true,
             "description": "The name of the network function",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -424,6 +453,7 @@
     },
     "NetworkFunctionResource": {
       "type": "object",
+      "description": "AO5GC Network Function Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkFunctionResourceProperties",
@@ -435,7 +465,6 @@
           ]
         }
       },
-      "description": "AO5GC Network Function Resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -444,29 +473,28 @@
     },
     "NetworkFunctionResourceListResult": {
       "type": "object",
+      "description": "The response of a NetworkFunctionResource list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The NetworkFunctionResource items on this page",
           "items": {
             "$ref": "#/definitions/NetworkFunctionResource"
-          },
-          "x-typespec-name": "NetworkFunctionResource[]",
-          "description": "The NetworkFunctionResource items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a NetworkFunctionResource list operation.",
       "required": [
         "value"
       ]
     },
     "NetworkFunctionResourceProperties": {
       "type": "object",
+      "description": "Network Function Properties.",
       "properties": {
         "sku": {
           "$ref": "#/definitions/SkuDefinitions",
@@ -522,7 +550,6 @@
           "readOnly": true
         }
       },
-      "description": "Network Function Properties.",
       "required": [
         "sku",
         "networkFunctionType",
@@ -531,17 +558,16 @@
     },
     "NetworkFunctionResourceTagsUpdate": {
       "type": "object",
+      "description": "The type used for updating tags in NetworkFunctionResource resources.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
+          }
         }
-      },
-      "description": "The type used for updating tags in NetworkFunctionResource resources."
+      }
     },
     "NetworkFunctionType": {
       "type": "string",
@@ -553,11 +579,6 @@
         "NRF",
         "NSSF",
         "MME",
-        "SaegwControlPlane",
-        "SaegwUserPlane",
-        "Saegw",
-        "ePDG",
-        "N3IWF",
         "RemotePaaS",
         "EMS",
         "OperationsPolicyManager"
@@ -597,31 +618,6 @@
             "description": "Mobility Management Entity"
           },
           {
-            "name": "SaegwControlPlane",
-            "value": "SaegwControlPlane",
-            "description": "System Architecture Evolution Gateway Control Plane, control and user plane separation (CUPS) architecture"
-          },
-          {
-            "name": "SaegwUserPlane",
-            "value": "SaegwUserPlane",
-            "description": "System Architecture Evolution Gateway User Plane, control and user plane separation (CUPS) architecture"
-          },
-          {
-            "name": "Saegw",
-            "value": "Saegw",
-            "description": "System Architecture Evolution Gateway.  This combines the Serving Gateway (SGW) and the Packet Data Network Gateway (PGW) functionality"
-          },
-          {
-            "name": "ePDG",
-            "value": "ePDG",
-            "description": "Evolved Packet Data Gateway"
-          },
-          {
-            "name": "N3IWF",
-            "value": "N3IWF",
-            "description": "Non-3GPP Interworking Function"
-          },
-          {
             "name": "RemotePaaS",
             "value": "RemotePaaS",
             "description": "Remote Platform As A Service Components"
@@ -657,15 +653,18 @@
         "values": [
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
           },
           {
             "name": "Provisioning",
@@ -730,7 +729,8 @@
       "type": "string",
       "description": "API Versions",
       "enum": [
-        "2023-05-15-preview"
+        "2023-05-15-preview",
+        "2023-10-15"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -740,6 +740,11 @@
             "name": "v2023_05_15_preview",
             "value": "2023-05-15-preview",
             "description": "May 15, 2023 Preview API Version"
+          },
+          {
+            "name": "v2023_10_15",
+            "value": "2023-10-15",
+            "description": "Oct 15, 2023 Stable API Version"
           }
         ]
       }

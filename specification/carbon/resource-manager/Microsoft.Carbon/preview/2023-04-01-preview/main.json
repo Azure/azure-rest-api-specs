@@ -209,12 +209,10 @@
       "properties": {
         "startDate": {
           "type": "string",
-          "format": "date",
           "description": "Start date parameter, format is yyyy-MM-dd"
         },
         "endDate": {
           "type": "string",
-          "format": "date",
           "description": "End date parameter, format is yyyy-MM-dd"
         }
       },
@@ -235,9 +233,12 @@
           },
           "x-ms-identifiers": []
         },
+        "skipToken": {
+          "type": "string",
+          "description": "The number of result items to skip for next page"
+        },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
@@ -302,7 +303,6 @@
     "CarbonEmissionOverallSummaryData": {
       "type": "object",
       "description": "Response for Overall Carbon Emissions Summary",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/CarbonEmissionData"
@@ -479,6 +479,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of items to return"
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "The number of result items to skip"
         }
       },
       "required": [
@@ -498,7 +502,6 @@
     "MonthlySummaryReportQueryFilter": {
       "type": "object",
       "description": "Query Parameters for Monthly Carbon Emissions Summary",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/QueryFilter"
@@ -509,7 +512,6 @@
     "OverallSummaryReportQueryFilter": {
       "type": "object",
       "description": "Query Parameters for Overall Carbon Emissions Summary",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/QueryFilter"

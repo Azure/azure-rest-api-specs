@@ -204,7 +204,7 @@ model GenerateLandingZoneRequest {
   @pattern("^([a-zA-Z0-9]+)$")
   deploymentLocation: string;
 
-  @doc("The name of the country, region or agency the landing zone is being deployed for.")
+  @doc("The name of the country/region or agency the landing zone is being deployed for")
   organization?: string;
 }
 
@@ -280,4 +280,21 @@ enum ResourceCreationOptions {
 
   @doc("Value to use an existing resource.")
   UseExisting: "UseExisting",
+}
+
+@doc("The request for the create copy action of landing zone configuration.")
+model CreateCopyRequest {
+  @doc("The name of the new landing zone configuration resource.")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  name: string;
+}
+
+@doc("The response of the create copy action of landing zone configuration.")
+model CreateCopyResponse {
+  @doc("The id of the copied landing zone configuration resource.")
+  copiedLandingZoneConfigurationId: ResourceIdentifier<[
+    {
+      type: "Microsoft.Sovereign/landingZoneConfigurations";
+    }
+  ]>;
 }

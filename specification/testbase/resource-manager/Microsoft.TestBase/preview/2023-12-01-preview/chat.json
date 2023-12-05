@@ -1,0 +1,350 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Test Base",
+    "description": "Test Base",
+    "version": "2023-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/chatSessions": {
+      "get": {
+        "tags": [
+          "Chat"
+        ],
+        "operationId": "ChatSessions_List",
+        "description": "List all chat sessions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The chat session was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ChatSessionResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ChatSessionList": {
+            "$ref": "./examples/ChatSessionList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/chatSessions/{chatSessionName}": {
+      "get": {
+        "tags": [
+          "Chat"
+        ],
+        "operationId": "ChatSessions_Get",
+        "description": "Get a chat session",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ChatSessionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The chat session.",
+            "schema": {
+              "$ref": "#/definitions/ChatSessionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChatSessionGet": {
+            "$ref": "./examples/ChatSessionGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/chatSessions/{chatSessionName}/chat": {
+      "post": {
+        "tags": [
+          "Chat"
+        ],
+        "operationId": "ChatSession_Chat",
+        "description": "Start a new chat turn. Ask a question and see the answer in response.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ChatSessionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatRequest"
+            },
+            "description": "Payload to ask a question."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The question was answered.",
+            "schema": {
+              "$ref": "#/definitions/ChatResponse"
+            }
+          },
+          "202": {
+            "description": "The chat operation was successfully enqueued. Waiting for the answer.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChatSessionChat": {
+            "$ref": "./examples/ChatSessionChat.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ChatSessionResourceListResult": {
+      "description": "A list of chat session.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatSessionResource"
+          },
+          "description": "The list of chat session."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "ChatSessionResource": {
+      "type": "object",
+      "description": "The chat session resource.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ChatSessionProperties",
+          "description": "The properties of chat session."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ChatSessionProperties": {
+      "type": "object",
+      "description": "The chat session properties.",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "./testbase.json#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "ChatRequest": {
+      "type": "object",
+      "description": "The chat request payload.",
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "The question of the chat turn"
+        }
+      },
+      "required": [
+        "question"
+      ]
+    },
+    "ChatResponse": {
+      "type": "object",
+      "description": "The chat response payload.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ChatResponseProperties",
+          "description": "The properties of chat response."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ChatResponseProperties": {
+      "type": "object",
+      "description": "The chat response properties.",
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "The question from the request"
+        },
+        "answer": {
+          "type": "string",
+          "description": "The answer from the system"
+        },
+        "citations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnswerCitation"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The usage of questions within the chat session",
+          "readOnly": true
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The limit of questions within the chat session",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "question",
+        "answer",
+        "usage",
+        "limit"
+      ]
+    },
+    "AnswerCitation": {
+      "type": "object",
+      "description": "The answer citation.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the citation."
+        },
+        "url": {
+          "type": "string",
+          "description": "The url of the citation."
+        },
+        "chunkIndex": {
+          "type": "integer",
+          "description": "The chunk index of the content.",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ChatSessionNameParameter": {
+      "name": "chatSessionName",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The chat session name."
+    }
+  }
+}

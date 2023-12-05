@@ -66,6 +66,9 @@ model DestinationRule {
 
   @doc("Protocol. Options specified by Endpoint Protocol Enum.")
   protocol?: CommunityEndpointProtocol[];
+
+  @doc("Transit Hub Resource Id.")
+  transitHubResourceId?: TransitHubResourceId;
 }
 
 @doc("Community Endpoint Resource properties")
@@ -73,9 +76,6 @@ model CommunityEndpointProperties {
   @extension("x-ms-identifiers", ["name"])
   @doc("Destination Rule Collection.")
   destinationRuleCollection: DestinationRule[];
-
-  @doc("Transit Hub Resource Id.")
-  transitHubResourceId: TransitHubResourceId;
 
   @doc("Provisioning State.")
   @visibility("read")

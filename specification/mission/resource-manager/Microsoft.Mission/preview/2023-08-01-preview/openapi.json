@@ -4303,10 +4303,6 @@
             "name"
           ]
         },
-        "transitHubResourceId": {
-          "$ref": "#/definitions/TransitHubResourceId",
-          "description": "Transit Hub Resource Id."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
@@ -4314,8 +4310,7 @@
         }
       },
       "required": [
-        "destinationRuleCollection",
-        "transitHubResourceId"
+        "destinationRuleCollection"
       ]
     },
     "CommunityEndpointProtocol": {
@@ -4437,10 +4432,6 @@
           "x-ms-identifiers": [
             "name"
           ]
-        },
-        "transitHubResourceId": {
-          "$ref": "#/definitions/TransitHubResourceId",
-          "description": "Transit Hub Resource Id."
         }
       }
     },
@@ -4619,6 +4610,10 @@
           "items": {
             "$ref": "#/definitions/CommunityEndpointProtocol"
           }
+        },
+        "transitHubResourceId": {
+          "$ref": "#/definitions/TransitHubResourceId",
+          "description": "Transit Hub Resource Id."
         }
       },
       "required": [
@@ -4660,6 +4655,24 @@
           }
         ]
       }
+    },
+    "EnclaveAddressSpaces": {
+      "type": "object",
+      "description": "Enclave Address Spaces",
+      "properties": {
+        "enclaveAddressSpace": {
+          "type": "string",
+          "description": "Enclave Address Space"
+        },
+        "managedAddressSpace": {
+          "type": "string",
+          "description": "Managed Address Space"
+        }
+      },
+      "required": [
+        "enclaveAddressSpace",
+        "managedAddressSpace"
+      ]
     },
     "EnclaveConnectionProperties": {
       "type": "object",
@@ -4813,7 +4826,7 @@
             "type": "Microsoft.Mission/virtualEnclaves"
           },
           {
-            "type": "Microsoft.Mission/transitHubs"
+            "type": "Microsoft.Mission/communities/transitHubs"
           }
         ]
       }
@@ -5951,7 +5964,7 @@
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
-            "type": "Microsoft.Mission/transitHubs"
+            "type": "Microsoft.Mission/communities/transitHubs"
           }
         ]
       }
@@ -6121,7 +6134,8 @@
       "description": "Supported API versions for the Microsoft.Mission resource provider.",
       "enum": [
         "2023-02-01-preview",
-        "2023-08-01-preview"
+        "2023-08-01-preview",
+        "2023-11-01-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -6136,6 +6150,11 @@
             "name": "v2023_08_01_preview",
             "value": "2023-08-01-preview",
             "description": "The 2023-08-01-preview version."
+          },
+          {
+            "name": "v2023_11_01_preview",
+            "value": "2023-11-01-preview",
+            "description": "The 2023-11-01-preview version."
           }
         ]
       }
@@ -6152,6 +6171,11 @@
         "enclaveVirtualNetwork": {
           "$ref": "#/definitions/EnclaveVirtualNetwork",
           "description": "Virtual Network."
+        },
+        "enclaveAddressSpaces": {
+          "$ref": "#/definitions/EnclaveAddressSpaces",
+          "description": "Enclave Address Spaces",
+          "readOnly": true
         },
         "communityResourceId": {
           "$ref": "#/definitions/CommunityResourceId",
