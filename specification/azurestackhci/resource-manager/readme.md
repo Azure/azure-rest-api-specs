@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-09
+tag: package-preview-2023-11
 ```
 
 ## Suppression
@@ -59,11 +59,12 @@ directive:
       - updateSummaries.json
       - deploymentSettings.json
       - edgeDevices.json
+      - securitySettings.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
     reason: Microsoft.AzureStackHCI was chosen over Microsoft.AzureStackHci or Microsoft.AzureStackHyperConvergedInfrastructure
-    from: 
+    from:
       - arcSettings.json
       - clusters.json
       - extensions.json
@@ -84,34 +85,56 @@ suppressions:
       - updateRuns.json
       - updateSummaries.json
       - deploymentSettings.json
-      - edgeDevices.json    
+      - edgeDevices.json
+      - securitySettings.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
     from: clusters.json
-    where: 
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/addNodes"]
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
     from: deploymentSettings.json
-    where: 
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}/deploy"]
 
   - code: DefinitionsPropertiesNamesCamelCase
-    reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility 
+    reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
     from: deploymentSettings.json
-    where: 
-    - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
-    - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
-    - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
+    where:
+      - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
+      - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
+      - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
 
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
-  
 ```
+
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updates.json
+```
+
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
@@ -127,7 +150,6 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualHardDisks.json
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualMachineInstances.json
 ```
-
 
 ### Tag: package-2023-08
 
@@ -166,11 +188,12 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/deploymentSettings.json
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/edgeDevices.json
 ```
+
 ### Tag: package-preview-2023-07-01
 
 These settings apply only when `--tag=package-preview-2023-07-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-07-01'
+```yaml $(tag) == 'package-preview-2023-07-01'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/marketplaceGalleryImages.json
@@ -185,7 +208,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06'
+```yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-06-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2023-06-01/clusters.json
