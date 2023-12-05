@@ -911,11 +911,27 @@ model SearchFacetItem {
   count?: int32;
 
   @doc("The name of the facet item.")
-  facet?: string;
+  facet: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
-  @doc("Any object")
-  sort?: unknown;
+  @doc("Define the sorting criteria for items")
+  sort?: SearchFacetSort;
+}
+
+@doc("The sorting criteria")
+model SearchFacetSort {
+  @doc("Order by count")
+  count?: SearchSortOrder;
+
+  @doc("Order by value")
+  value?: SearchSortOrder;
+}
+
+@doc("Search sort order")
+enum SearchSortOrder {
+  @doc("Use ascending order for sorting")
+  asc,
+  @doc("Use descending order for sorting")
+  desc
 }
 
 @doc("Taxonomy setting for search request")
