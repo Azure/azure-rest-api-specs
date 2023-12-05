@@ -1615,24 +1615,25 @@ model AtlasClassificationDef {
 Specifying a list of entityType names in the classificationDef, ensures that
 classifications can
 only be applied to those entityTypes.
-<ul>
-<li>Any subtypes
-of the entity types inherit the restriction</li>
-<li>Any classificationDef
-subtypes inherit the parents entityTypes restrictions</li>
-<li>Any
-classificationDef subtypes can further restrict the parents entityTypes
-restrictions by specifying a subset of the entityTypes</li>
-<li>An empty
-entityTypes list when there are no parent restrictions means there are no
-restrictions</li>
-<li>An empty entityTypes list when there are parent
+
+Any subtypes of the entity types inherit the restriction.
+
+Any classificationDef subtypes inherit the parents entityTypes restrictions.
+
+Any classificationDef subtypes can further restrict the parents entityTypes
+restrictions by specifying a subset of the entityTypes.
+
+An empty entityTypes list when there are no parent restrictions means there are no
+restrictions.
+
+An empty entityTypes list when there are parent
 restrictions means that the subtype picks up the parents
-restrictions</li>
-<li>If a list of entityTypes are supplied, where one inherits
+restrictions.
+
+If a list of entityTypes are supplied, where one inherits
 from another, this will be rejected. This should encourage cleaner
-classificationsDefs</li>
-</ul>
+classificationsDefs.
+
 """)
   entityTypes?: string[];
 
@@ -1698,48 +1699,39 @@ model AtlasEnumElementDef {
 
 @doc("""
 AtlasRelationshipDef is a TypeDef that defines a relationship.
-<p>
-As with
-other typeDefs the AtlasRelationshipDef has a name. Once created the
+As with other typeDefs the AtlasRelationshipDef has a name. Once created the
 RelationshipDef has a guid.
 The name and the guid are the 2 ways that the
 RelationshipDef is identified.
-<p>
 RelationshipDefs have 2 ends, each of which
 specify cardinality, an EntityDef type name and name and optionally
 whether the
 end is a container.
-<p>
 RelationshipDefs can have AttributeDefs - though only
-primitive types are allowed. <br>
+primitive types are allowed. 
 RelationshipDefs have a relationshipCategory
-specifying the UML type of relationship required <br>
+specifying the UML type of relationship required 
 The way EntityDefs and
 RelationshipDefs are intended to be used is that EntityDefs will define
 AttributeDefs these AttributeDefs
 will not specify an EntityDef type name as
 their types.
-<p>
 RelationshipDefs introduce new attributes to the entity
 instances. For example
-<p>
 EntityDef A might have attributes attr1,attr2,attr3
-<br>
-EntityDef B might have attributes attr4,attr5,attr6 <br>
+
+EntityDef B might have attributes attr4,attr5,attr6 
 RelationshipDef
-AtoB might define 2 ends <br>
+AtoB might define 2 ends 
 
-<pre>
-   end1:  type A, name attr7
-   end2:
-type B, name attr8  </pre>
+end1:  type A, name attr7
+end2:  type B, name attr8 
 
-<p>
 When an instance of EntityDef A is created, it
-will have attributes attr1,attr2,attr3,attr7 <br>
+will have attributes attr1,attr2,attr3,attr7 
 When an instance of EntityDef
 B is created, it will have attributes attr4,attr5,attr6,attr8
-<p>
+
 In this way
 relationshipDefs can be authored separately from entityDefs and can inject
 relationship attributes into
@@ -1767,19 +1759,12 @@ it  is the container end of the relationship.
   @doc("""
 The Relationship category determines the style of relationship around
 containment and lifecycle.
-UML terminology is used for the
-values.
-<p>
-ASSOCIATION is a relationship with no containment. <br>
-COMPOSITION
-and AGGREGATION are containment relationships.
-<p>
-The difference being in the
-lifecycles of the container and its children. In the COMPOSITION case,
-the
-children cannot exist without the container. For AGGREGATION, the life
-cycles
-of the container and children are totally independent.
+UML terminology is used for the values.
+ASSOCIATION is a relationship with no containment. 
+COMPOSITION and AGGREGATION are containment relationships.
+The difference being in the lifecycles of the container and its children. 
+In the COMPOSITION case, the children cannot exist without the container.
+For AGGREGATION, the life cycles of the container and children are totally independent.
 """)
   relationshipCategory?: RelationshipCategory;
 
@@ -1825,24 +1810,25 @@ model AtlasExtraTypeDef {
 Specifying a list of entityType names in the classificationDef, ensures that
 classifications can
 only be applied to those entityTypes.
-<ul>
-<li>Any subtypes
-of the entity types inherit the restriction</li>
-<li>Any classificationDef
-subtypes inherit the parents entityTypes restrictions</li>
-<li>Any
-classificationDef subtypes can further restrict the parents entityTypes
-restrictions by specifying a subset of the entityTypes</li>
-<li>An empty
-entityTypes list when there are no parent restrictions means there are no
-restrictions</li>
-<li>An empty entityTypes list when there are parent
+
+Any subtypes of the entity types inherit the restriction.
+
+Any classificationDef subtypes inherit the parents entityTypes restrictions.
+
+Any classificationDef subtypes can further restrict the parents entityTypes
+restrictions by specifying a subset of the entityTypes.
+
+An empty entityTypes list when there are no parent restrictions means there are no
+restrictions.
+
+An empty entityTypes list when there are parent
 restrictions means that the subtype picks up the parents
-restrictions</li>
-<li>If a list of entityTypes are supplied, where one inherits
+restrictions.
+
+If a list of entityTypes are supplied, where one inherits
 from another, this will be rejected. This should encourage cleaner
-classificationsDefs</li>
-</ul>
+classificationsDefs.
+
 """)
   entityTypes?: string[];
 
@@ -1880,19 +1866,14 @@ it  is the container end of the relationship.
   @doc("""
 The Relationship category determines the style of relationship around
 containment and lifecycle.
-UML terminology is used for the
-values.
-<p>
-ASSOCIATION is a relationship with no containment. <br>
-COMPOSITION
-and AGGREGATION are containment relationships.
-<p>
-The difference being in the
-lifecycles of the container and its children. In the COMPOSITION case,
-the
-children cannot exist without the container. For AGGREGATION, the life
-cycles
-of the container and children are totally independent.
+UML terminology is used for the values.
+
+ASSOCIATION is a relationship with no containment. 
+COMPOSITION and AGGREGATION are containment relationships.
+
+The difference being in the lifecycles of the container and its children. 
+In the COMPOSITION case, the children cannot exist without the container. 
+For AGGREGATION, the life cycles of the container and children are totally independent.
 """)
   relationshipCategory?: RelationshipCategory;
 
