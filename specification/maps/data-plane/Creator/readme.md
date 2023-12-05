@@ -39,12 +39,12 @@ These settings apply only when `--tag=package-stable-V2` is specified on the com
 
 ```yaml $(tag) == 'package-stable-V2'
 input-file:
-  - Creator/preview/2.0/alias.json
-  - Creator/preview/2.0/dataset.json
-  - Creator/preview/2.0/dwgconversion.json
-  - Creator/preview/2.0/featurestate.json
-  - Creator/preview/2.0/tileset.json
-  - Creator/preview/2.0/wfs.json
+  - preview/2.0/alias.json
+  - preview/2.0/dataset.json
+  - preview/2.0/dwgconversion.json
+  - preview/2.0/featurestate.json
+  - preview/2.0/tileset.json
+  - preview/2.0/wfs.json
 
 ```
 
@@ -54,16 +54,16 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - Creator/preview/2023-03-01-preview/alias.json
-  - Creator/preview/2023-03-01-preview/dataset.json
-  - Creator/preview/2023-03-01-preview/dwgconversion.json
-  - Creator/preview/2023-03-01-preview/features.json
-  - Creator/preview/2023-03-01-preview/featurestate.json
-  - Creator/preview/2023-03-01-preview/mapconfiguration.json
-  - Creator/preview/2023-03-01-preview/routeset.json
-  - Creator/preview/2023-03-01-preview/style.json
-  - Creator/preview/2023-03-01-preview/tileset.json
-  - Creator/preview/2023-03-01-preview/wayfind.json
+  - preview/2023-03-01-preview/alias.json
+  - preview/2023-03-01-preview/dataset.json
+  - preview/2023-03-01-preview/dwgconversion.json
+  - preview/2023-03-01-preview/features.json
+  - preview/2023-03-01-preview/featurestate.json
+  - preview/2023-03-01-preview/mapconfiguration.json
+  - preview/2023-03-01-preview/routeset.json
+  - preview/2023-03-01-preview/style.json
+  - preview/2023-03-01-preview/tileset.json
+  - preview/2023-03-01-preview/wayfind.json
 ```
 
 ## Code Generation
