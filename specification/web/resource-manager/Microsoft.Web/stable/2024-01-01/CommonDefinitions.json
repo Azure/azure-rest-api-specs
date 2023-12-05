@@ -3591,27 +3591,27 @@
       "type": "object",
       "properties": {
         "storage": {
-          "description": "TBD",
+          "description": "Storage for deployed package used by the Azure Function app.",
           "type": "object",
           "properties": {
             "type": {
-              "description": "TBD",
+              "description": "Property to select Azure Storage Type. Available option: blobContainer.",
               "type": "string"
             },
             "value": {
-              "description": "TBD",
+              "description": "Property to set the URL for the selected Azure Storage Type. Example: For blobContainer, value will be like https://<storageAccountName>.blob.core.windows.net/<containerName>.",
               "type": "string"
             },
             "authentication": {
-              "description": "TBD",
+              "description": "Authentication method to access the storage for deployment.",
               "type": "object",
               "properties": {
                 "type": {
-                  "description": "TBD",
+                  "description": "Property to select Authentication Type to access the selected storage. Available options: SystemAssignedIdentity, UserAssignedIdentity, StorageAccountAccessKey.",
                   "type": "string"
                 },
                 "value": {
-                  "description": "TBD.",
+                  "description": "Property to set the value for the selected Authentication Type. Example: For SystemAssignedIdentity, do not set value. For UserAssignedIdentity, set resource ID of identity. For StorageAccountAccessKey, set name of the app setting that has the storage account access key.",
                   "type": "string"
                 }
               }
