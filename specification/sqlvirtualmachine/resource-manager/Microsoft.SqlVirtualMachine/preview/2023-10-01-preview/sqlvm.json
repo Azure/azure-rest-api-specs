@@ -1744,11 +1744,10 @@
           "readOnly": true
         },
         "type": {
-          "description": "The identity type.",
+          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
           "enum": [
             "None",
-            "SystemAssigned",
-            "UserAssigned"
+            "SystemAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1910,6 +1909,10 @@
             "read",
             "update"
           ]
+        },
+        "virtualMachineIdentitySettings": {
+          "$ref": "#/definitions/VirtualMachineIdentity",
+          "description": "Virtual Machine Identity details used for Sql IaaS extension configurations."
         }
       }
     },
@@ -2274,6 +2277,31 @@
         }
       }
     },
+    "VirtualMachineIdentity": {
+      "description": "Virtual Machine Identity details used for Sql IaaS extension configurations.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Identity type of the virtual machine. Specify None to opt-out of Managed Identities.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string"
+        },
+        "principalId": {
+          "format": "uuid",
+          "description": "Principal (Object) Id of the identity, this value is required for system assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "format": "uuid",
+          "description": "Client Id of the identity, this value is required for user assigned identity.",
+          "type": "string"
+        }
+      }
+    },
     "SqlConnectivityUpdateSettings": {
       "description": "Set the access level and network port settings for SQL Server.",
       "type": "object",
@@ -2573,10 +2601,10 @@
       "properties": {
         "identity": {
           "$ref": "#/definitions/ResourceIdentity",
-          "description": "Managed Identity used by the Sql IaaS extension. This is NOT the managed Identity of the SQL Server.",
+          "description": "DO NOT USE. This value will be deprecated. Azure Active Directory identity of the server.",
           "x-ms-mutability": [
             "read",
-            "update"
+            "create"
           ]
         },
         "properties": {
