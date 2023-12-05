@@ -647,7 +647,7 @@ model UserDetailsUpdate
 /** Company details of Informatica Organization resource */
 model CompanyDetailsUpdate
   is OptionalProperties<UpdateableProperties<CompanyDetails>>;
-  
+
 // additional models for Organizations_patch
 model InformaticaServerlessRuntimeResourceUpdate
   is OptionalProperties<UpdateableProperties<OmitProperties<
