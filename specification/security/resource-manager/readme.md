@@ -86,7 +86,14 @@ These settings apply only when `--tag=package-2023-11-15` is specified on the co
 input-file:
   - Microsoft.Security/stable/2023-11-15/apiCollections.json
 ```
+### Tag: package-preview-2023-10
 
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
+```
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
@@ -116,6 +123,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 input-file:
   - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 ```
+
 ### Tag: package-preview-2023-03-only
 
 These settings apply only when `--tag=package-preview-2023-03-only` is specified on the command line.
@@ -144,6 +152,15 @@ input-file:
   - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 ```
 
+### Tag: package-preview-2023-02-15-only
+
+These settings apply only when `--tag=package-preview-2023-02-15-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-02-15-only'
+input-file:
+  - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
+```
+
 ### Tag: package-preview-2023-02-only
 
 These settings apply only when `--tag=package-preview-2023-02-only` is specified on the command line.
@@ -168,6 +185,7 @@ input-file:
   - Microsoft.Security/preview/2023-02-01-preview/healthReports.json
   - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 ```
+
 ### Tag: package-preview-2022-12
 
 These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
@@ -176,7 +194,6 @@ These settings apply only when `--tag=package-preview-2022-12` is specified on t
 input-file:
   - Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
 ```
-
 
 ### Tag: package-preview-2022-11
 
@@ -419,12 +436,12 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-- Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
+- Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
 
 # Autorest suppressions
 suppressions:
@@ -619,6 +636,7 @@ These settings apply only when `--tag=package-2020-01-preview-python-only` is sp
 ``` yaml $(tag) == 'package-2020-01-preview-python-only'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 
 # Needed when there is more than one input file
 override-info:
@@ -926,7 +944,7 @@ override-info:
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05'
+``` yaml $(tag) == 'package-2023-05'
 input-file:
   - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 ```
