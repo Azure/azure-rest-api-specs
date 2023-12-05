@@ -298,5 +298,8 @@ directive:
     from: types.json
     where: $
     reason: This is a copy of the common types from ARM.
-
+  - suppress: PatchIdentityProperty
+    from: types.json
+    where: $
+    reason: Patch in DTL only supports updating tags.
 ```
