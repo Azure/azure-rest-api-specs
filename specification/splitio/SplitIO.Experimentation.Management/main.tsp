@@ -53,10 +53,10 @@ model PartnerExperimentationWorkspaceProperties {
   dataSource?: DataSource;
 }
 
-@doc("AccessPolicy for an experimentation workspace")
+@doc("Access policy for an experimentation workspace")
 model AccessPolicy {
-  @doc("AAD application id used for access to the experimentation workspace")
-  aadAppId?: string;
+  @doc("Application id used for access to the experimentation workspace")
+  authApplicationId?: string;
 }
 
 @doc("DataSource for an experimentation workspace")
@@ -75,7 +75,7 @@ model ExperimentationWorkspace
   @key("workspaceName")
   @pattern("^[^<>%&:\\?/#]*$")
   @segment("experimentationWorkspaces")
-  @maxLength(260)
+  @maxLength(50)
   @doc("The name of the ExperimentationWorkspace resource")
   @path
   name: string;
