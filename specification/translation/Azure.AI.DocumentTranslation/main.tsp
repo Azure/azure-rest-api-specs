@@ -199,7 +199,7 @@ op CustomGetOperation<TParams, TResponse, TError = ErrorResponse>(
  *  The list includes the common file extension used. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @get
-@route("single/glossary/formats")
+@route("single/glossaries/formats")
 @summary("Gets the set of file formats currently supported by glossaries.")
 op getSingleGlossaryFormats is CustomGetOperation<
   GlossaryFormatParameters,
@@ -211,7 +211,7 @@ op getSingleGlossaryFormats is CustomGetOperation<
  *  The list includes the common file extension used. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @get
-@route("single/formats")
+@route("single/documents/formats")
 @summary("Gets the set of file formats currently supported by documents.")
 op getSingleDocumentFormats is CustomGetOperation<
   DocumentFormatParameters,
