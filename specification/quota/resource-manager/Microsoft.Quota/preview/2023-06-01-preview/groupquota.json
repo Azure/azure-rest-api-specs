@@ -457,7 +457,7 @@
           "GroupQuotasSubscriptions"
         ],
         "summary": "Returns the subscriptionId along with its provisioning state for being associated with the GroupQuotas.",
-        "description": "Returns the subscriptionIds along with its provisioning state for being associated with the GroupQuota. If the subscription is not fmember of GroupQuota, it will return 404, else 200.",
+        "description": "Returns the subscriptionIds along with its provisioning state for being associated with the GroupQuota. If the subscription is not a member of GroupQuota, it will return 404, else 200.",
         "operationId": "GroupQuotaSubscriptions_Get",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Get_Subscriptions": {
@@ -771,7 +771,7 @@
           "GroupQuotaLimits"
         ],
         "summary": "Gets the resource groupQuotaLimits for the MGId for a resource.",
-        "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The $filter is a required paramater to filter out the specific resource based on the ResourceProvider/Location. It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the groupQuota.",
+        "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The $filter is a required parameter to filter out the specific resource based on the ResourceProvider/Location. It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the groupQuota.",
         "operationId": "GroupQuotaLimits_Get",
         "x-ms-examples": {
           "GroupQuotaLimits_Get_Request_ForCompute": {
@@ -866,7 +866,7 @@
           "GroupQuotaLimitsRequests"
         ],
         "summary": "List the status of all GroupQuota requests.",
-        "description": "List API to check the status of a GroupQuota requests by requestId. The groupQuotaRequest history is maintained for 1 year. Use the $filter paramater to filter out the specific resource based on the ResourceProvider/Location. ",
+        "description": "List API to check the status of a GroupQuota requests by requestId. The groupQuotaRequest history is maintained for 1 year. Use the $filter parameter to filter out the specific resource based on the ResourceProvider/Location. ",
         "operationId": "GroupQuotaLimitsRequests_List",
         "x-ms-examples": {
           "GroupQuotaLimitsRequests_List": {
@@ -958,7 +958,7 @@
           "SubscriptionQuotaAllocation"
         ],
         "summary": "Gets all the quota allocated to a subscription for the specific Resource Provider, Location.",
-        "description": "Gets all the quota allocated to a subscription for the specific Resource Provider, Location. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota. Use the $filter paramater to filter out the specific resource based on the ResourceProvider/Location. $filter is a required parameter. ",
+        "description": "Gets all the quota allocated to a subscription for the specific Resource Provider, Location. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota. Use the $filter parameter to filter out the specific resource based on the ResourceProvider/Location. $filter is a required parameter. ",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_List",
         "x-ms-examples": {
           "SubscriptionQuotaAllocation_List_Request_ForCompute": {
