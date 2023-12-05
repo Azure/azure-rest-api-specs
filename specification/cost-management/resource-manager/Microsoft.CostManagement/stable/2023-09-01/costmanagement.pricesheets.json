@@ -111,7 +111,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.\n \n You can use the new 2023-09-01 API version for billing periods December 2022 onwards. Azure Reserved Instance (RI) pricing is only available through the new version of the API. \n \n Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single csv/json file to a Zip file containing multiple csv/json files, each with max size of 75MB.",
+        "description": "Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.\n \n You can use the new 2023-09-01 API version for billing periods January 2023 onwards. Azure Reserved Instance (RI) pricing is only available through the new version of the API. \n \n Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single csv/json file to a Zip file containing multiple csv/json files, each with max size of 75MB.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -171,7 +171,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Generates the pricesheet for the provided billing period asynchronously based on the Enrollment ID. This is for Enterprise Agreement customers. \n You can use the new 2023-09-01 API version at '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.CostManagement/pricesheets/default/download' for billing periods December 2022 onwards. With a new schema detailed below, the new price sheet provides more information and includes prices for Azure Reserved Instances (RI) for the current billing period.\n \n We recommend downloading an Azure Price Sheet for when entering a new billing period if you would maintain a record of past Azure Reserved Instance (RI) pricing. Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single .csv file to a zip file containing multiple csv files, each with max size of 75MB.",
+        "description": "Generates the pricesheet for the provided billing period asynchronously based on the Enrollment ID. This is for Enterprise Agreement customers. \n You can use the new 2023-09-01 API version at '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.CostManagement/pricesheets/default/download' for billing periods January 2023 onwards. With a new schema detailed below, the new price sheet provides more information and includes prices for Azure Reserved Instances (RI) for the current billing period.\n \n We recommend downloading an Azure Price Sheet for when entering a new billing period if you would maintain a record of past Azure Reserved Instance (RI) pricing. Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single .csv file to a zip file containing multiple csv files, each with max size of 75MB.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -363,25 +363,27 @@
         "effectiveStartDate": {
           "description": "Effective start date of the Price Sheet billing period",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "effectiveEndDate": {
           "description": "Effective end date of the Price Sheet billing period",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "unitPrice": {
-          "description": "Price per unit at the time of billing (not the effective blended price) as specific to a meter and product order name.  \n \n Note: The unit price isn't the same as the effective price in usage details downloads when services have differential prices across tiers. If services have multi-tiered pricing, the effective price is a blended rate across the tiers and doesn't show a tier-specific unit price. The blended price or effective price is the net price for the consumed quantity spanning across the multiple tiers (where each tier has a specific unit price)",
+          "description": "The per-unit price at the time of billing for a given product or service, inclusive of any negotiated discounts on top of the market price.\n\n For PriceType ReservedInstance, unit price reflects the total cost of the 1 or 3-year commitment including discounts.\n\n Note: The unit price isn't the same as the effective price in usage details downloads when services have differential prices across tiers.\n\n If services have multi-tiered pricing, the effective price is a blended rate across the tiers and doesn't show a tier-specific unit price. The blended price or effective price is the net price for the consumed quantity spanning across the multiple tiers (where each tier has a specific unit price).",
           "type": "string",
           "readOnly": true
         },
         "basePrice": {
-          "description": "The market price at the time the customer signs on or the market price at the time the service meter launches if it is after sign-on.\n \n Not applicable for Microsoft Partner Agreement.",
+          "description": "The market price at the time the customer signs on or the market price at the time of service meter GA launch if it is after sign-on.",
           "type": "string",
           "readOnly": true
         },
         "marketPrice": {
-          "description": "The current, prevailing market price for a given service.",
+          "description": "The current list price for a given product or service. This price is without any negotiations and is based on your Microsoft Agreement type.\n\n For PriceType Consumption, market price is reflected as the pay-as-you-go price.\n\n For PriceType Savings Plan, market price reflects the Savings plan benefit on top of pay-as-you-go price for the corresponding commitment term.\n\n For PriceType ReservedInstance, market price reflects the total price of the 1 or 3-year commitment.",
           "type": "string",
           "readOnly": true
         },
@@ -401,7 +403,7 @@
           "readOnly": true
         },
         "priceType": {
-          "description": "Price type for a product. For example, an Azure resource with a pay-as-you-go rate with priceType as Consumption. Other price types include ReservedInstance, Entitlement and Savings Plan.",
+          "description": "Price type for a product. For example, an Azure resource with a pay-as-you-go rate with priceType as Consumption. Other price types include ReservedInstance and Savings Plan.",
           "type": "string",
           "readOnly": true
         }
@@ -474,25 +476,27 @@
         "effectiveStartDate": {
           "description": "Effective start date of the Price Sheet billing period",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "effectiveEndDate": {
           "description": "Effective end date of the Price Sheet billing period",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "unitPrice": {
-          "description": "Price per unit at the time of billing (not the effective blended price) as specific to a meter and product order name.  \n \n Note: The unit price isn't the same as the effective price in usage details downloads when services have differential prices across tiers. If services have multi-tiered pricing, the effective price is a blended rate across the tiers and doesn't show a tier-specific unit price. The blended price or effective price is the net price for the consumed quantity spanning across the multiple tiers (where each tier has a specific unit price)",
+          "description": "The per-unit price at the time of billing for a given product or service, inclusive of any negotiated discounts on top of the market price.\n\n For PriceType ReservedInstance, unit price reflects the total cost of the 1 or 3-year commitment including discounts.\n\n Note: The unit price isn't the same as the effective price in usage details downloads when services have differential prices across tiers.\n\n If services have multi-tiered pricing, the effective price is a blended rate across the tiers and doesn't show a tier-specific unit price. The blended price or effective price is the net price for the consumed quantity spanning across the multiple tiers (where each tier has a specific unit price).",
           "type": "string",
           "readOnly": true
         },
         "basePrice": {
-          "description": "The market price at the time the customer signs on or the market price at the time the service meter launches if it is after sign-on.",
+          "description": "The market price at the time the customer signs on or the market price at the time of service meter GA launch if it is after sign-on.",
           "type": "string",
           "readOnly": true
         },
         "marketPrice": {
-          "description": "EA list price of this service.",
+          "description": "The current list price for a given product or service. This price is without any negotiations and is based on your Microsoft Agreement type.\n\n For PriceType Consumption, market price is reflected as the pay-as-you-go price.\n\n For PriceType Savings Plan, market price reflects the Savings plan benefit on top of pay-as-you-go price for the corresponding commitment term.\n\n For PriceType ReservedInstance, market price reflects the total price of the 1 or 3-year commitment.\n\n Note: For EA customers with no negotiations, market price may appear rounded to a different decimal precision than unit price.",
           "type": "string",
           "readOnly": true
         },
@@ -512,7 +516,7 @@
           "readOnly": true
         },
         "priceType": {
-          "description": "Price type for a product. For example, an Azure resource with a pay-as-you-go rate with priceType as Consumption. Other price types include ReservedInstance, Entitlement and Savings Plan.",
+          "description": "Price type for a product. For example, an Azure resource with a pay-as-you-go rate with priceType as Consumption. Other price types include ReservedInstance and Savings Plan.",
           "type": "string",
           "readOnly": true
         },
