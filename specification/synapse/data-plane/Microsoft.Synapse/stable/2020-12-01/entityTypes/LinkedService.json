@@ -1310,9 +1310,44 @@
       "description": "MySQL linked service properties.",
       "type": "object",
       "properties": {
+        "driverVersion": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The version of the MySQL driver. Type: string. V1 or empty for legacy driver, V2 for new driver."
+        },
         "connectionString": {
           "description": "The connection string.",
           "type": "object"
+        },
+        "server": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port for the connection. Type: integer."
+        },
+        "username": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database name for connection. Type: string."
+        },
+        "sslMode": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "SSL mode for connection. Type: integer. 0: disable, 1: prefer, 2: require, 3: verify-ca, 4: verify-full."
+        },
+        "useSystemTrustStore": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Use system trust store for connection. Type: integer. 0: enable, 1: disable."
         },
         "password": {
           "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
@@ -1324,7 +1359,7 @@
         }
       },
       "required": [
-        "connectionString"
+        "driverVersion"
       ]
     },
     "PostgreSqlLinkedService": {
@@ -4846,11 +4881,36 @@
       "description": "MariaDB server linked service properties.",
       "type": "object",
       "properties": {
+        "driverVersion": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The version of the MariaDB driver. Type: string. V1 or empty for legacy driver, V2 for new driver."
+        },
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
-        "pwd": {
+        "server": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port for the connection. Type: integer."
+        },
+        "username": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database name for connection. Type: string."
+        },
+        "password": {
           "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
           "description": "The Azure key vault secret reference of password in connection string."
         },
