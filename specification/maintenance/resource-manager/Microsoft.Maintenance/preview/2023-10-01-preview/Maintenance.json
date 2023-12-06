@@ -61,7 +61,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Response of scheduled event acknowledge",
+            "schema": {
+              "$ref": "#/definitions/ScheduledEventApproveResponse"
+            }
           },
           "default": {
             "description": "Error",
@@ -2425,6 +2428,16 @@
     }
   },
   "definitions": {
+    "ScheduledEventApproveResponse": {
+      "description": "Response of scheduled event acknowledge",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Successfully Approved",
+          "type": "string"
+        }
+      }
+    },
     "ApplyUpdateProperties": {
       "description": "Properties for apply update",
       "type": "object",
