@@ -2199,22 +2199,22 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of the action.",
+          "description": "The type of the action. The value should be compared case-insensitively.",
           "enum": [
-            "rotate",
-            "notify"
+            "Rotate",
+            "Notify"
           ],
           "x-ms-enum": {
             "name": "KeyRotationPolicyAction",
             "modelAsString": false,
             "values": [
               {
-                "value": "rotate",
+                "value": "Rotate",
                 "description": "Rotate the key based on the key policy."
               },
               {
-                "value": "notify",
-                "description": "Trigger event grid events. For preview, the notification time is not configurable and it is default to 30 days before expiry."
+                "value": "Notify",
+                "description": "Trigger Event Grid events. Defaults to 30 days before expiry. Key Vault only."
               }
             ]
           }

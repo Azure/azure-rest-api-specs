@@ -20,8 +20,8 @@
       {
         "name": "endpoint",
         "in": "path",
-        "required": true,
         "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+        "required": true,
         "type": "string",
         "format": "uri",
         "x-ms-skip-url-encoding": true
@@ -119,8 +119,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -168,8 +168,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -245,8 +245,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -294,8 +294,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -488,6 +488,11 @@
           "description": "Inner error."
         }
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "ClinicalCodedElement": {
       "type": "object",
@@ -1526,8 +1531,7 @@
       "description": "The response for the Onco Phenotype request.",
       "properties": {
         "jobId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "A processing job identifier.",
           "readOnly": true
         },
@@ -1875,8 +1879,7 @@
       "description": "The response for the Trial Matcher request.",
       "properties": {
         "jobId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "A processing job identifier.",
           "readOnly": true
         },

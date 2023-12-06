@@ -1,0 +1,324 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API for managing SCOM managed instances and monitored resources.",
+    "version": "2023-07-07-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "parameters": {
+    "instanceName": {
+      "name": "instanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the SCOM managed instance.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+    },
+    "monitoredResourceName": {
+      "name": "monitoredResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The monitored resource name.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/monitoredResources/{monitoredResourceName}": {
+      "get": {
+        "operationId": "MonitoredResources_Get",
+        "description": "Retrieve the details of the monitored resource.",
+        "tags": [
+          "MonitoredResource"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "#/parameters/monitoredResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoredResource"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitoredResource_Get": {
+            "$ref": "./examples/MonitoredResource_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MonitoredResources_CreateOrUpdate",
+        "description": "Create or update a monitored resource.",
+        "tags": [
+          "MonitoredResource"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "#/parameters/monitoredResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monitored resource updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoredResource"
+            }
+          },
+          "201": {
+            "description": "Monitored resource created successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoredResource"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitoredResources_CreateOrUpdate": {
+            "$ref": "./examples/MonitoredResource_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MonitoredResources_Delete",
+        "description": "Delete a monitored resource.",
+        "tags": [
+          "MonitoredResource"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "#/parameters/monitoredResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deletion operation has been successful."
+          },
+          "204": {
+            "description": "The deletion operation has been successful."
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitoredResource_Delete": {
+            "$ref": "./examples/MonitoredResource_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/monitoredResources": {
+      "get": {
+        "operationId": "MonitoredResources_ListByManagedInstance",
+        "description": "A comprehensive list of all monitored resources within a SCOM managed instance.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "MonitoredResource"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoredResources"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitoredResources_ListByResourceGroup": {
+            "$ref": "./examples/MonitoredResources_ListByResourceGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MonitoredResource": {
+      "type": "object",
+      "description": "A monitored resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a monitored resource.",
+          "$ref": "#/definitions/MonitoredResourceProperties"
+        }
+      }
+    },
+    "MonitoredResourceProperties": {
+      "type": "object",
+      "description": "The properties of a monitored resource.",
+      "properties": {
+        "resourceId": {
+          "description": "ArmId of the monitored resource.",
+          "type": "string"
+        },
+        "resourceLocation": {
+          "description": "Location of the monitored resource.",
+          "type": "string"
+        },
+        "computerName": {
+          "description": "ComputerName of the monitored resource.",
+          "type": "string"
+        },
+        "domainName": {
+          "description": "The domain name associated with the monitored resource.",
+          "type": "string"
+        },
+        "managementServerEndpoint": {
+          "description": "The management server endpoint to which the monitored resource is directed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "healthStatus": {
+          "description": "The health status of the monitored resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "description": "The connection status of the monitored resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "agentVersion": {
+          "description": "The version of the monitored resource agent version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "installType": {
+          "description": "Install type of monitored resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MonitoredResources": {
+      "type": "object",
+      "description": "A paginated list of SCOM monitored resources.",
+      "properties": {
+        "value": {
+          "description": "The contents displayed on the page.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MonitoredResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

@@ -27,7 +27,7 @@ These are the global settings for the testbase.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-04-01-preview
+tag: package-2023-11-01-preview
 ```
 
 ### Tag: package-2020-12-16-preview
@@ -37,10 +37,6 @@ These settings apply only when `--tag=package-2020-12-16-preview` is specified o
 ```yaml $(tag) == 'package-2020-12-16-preview'
 input-file:
   - Microsoft.TestBase/preview/2020-12-16-preview/testbase.json
-directive:
-- suppress: R4031
-  from: testbase.json
-  reason: provisioningState is not required for Proxy Resources.
 ```
 
 ### Tag: package-2022-04-01-preview
@@ -50,10 +46,20 @@ These settings apply only when `--tag=package-2022-04-01-preview` is specified o
 ```yaml $(tag) == 'package-2022-04-01-preview'
 input-file:
   - Microsoft.TestBase/preview/2022-04-01-preview/testbase.json
-directive:
-- suppress: R4031
-  from: testbase.json
-  reason: provisioningState is not required for Proxy Resources.
+```
+
+### Tag: package-2023-11-01-preview
+
+These settings apply only when `--tag=package-2023-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11-01-preview'
+input-file:
+  - Microsoft.TestBase/preview/2023-11-01-preview/actionrequest.json
+  - Microsoft.TestBase/preview/2023-11-01-preview/chat.json
+  - Microsoft.TestBase/preview/2023-11-01-preview/customimage.json
+  - Microsoft.TestBase/preview/2023-11-01-preview/draftpackage.json
+  - Microsoft.TestBase/preview/2023-11-01-preview/testbase.json
+  - Microsoft.TestBase/preview/2023-11-01-preview/credential.json
 ```
 
 ---
@@ -72,17 +78,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js testbase/resource-manager
   - repo: azure-powershell
-```
-## Suppression
-```
-directive:
-  - suppress: SECRET_PROPERTY
-    from:
-      - Microsoft.TestBase/preview/2022-04-01-preview/testbase.json
-    where:
-      - $.definitions.DownloadURLResponse.properties.downloadUrl
-    reason: Secrets are OK to return in a POST response according to ARM.
 ```
 
 ## Go
@@ -101,4 +99,6 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

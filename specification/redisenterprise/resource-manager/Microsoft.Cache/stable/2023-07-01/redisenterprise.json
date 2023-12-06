@@ -1700,6 +1700,14 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cache/redisEnterprise/databases"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -1833,7 +1841,15 @@
         "ids": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Cache/redisEnterprise/databases"
+                }
+              ]
+            }
           },
           "description": "The resource IDs of the database resources to be unlinked."
         }
