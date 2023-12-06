@@ -677,7 +677,7 @@
           "ConnectorSpaceInfoList"
         ],
         "summary": "Get ConnectorSpace Info List.",
-        "operationId": "ConnectorSpaceInfoList",
+        "operationId": "ConnectorSpaceInfo_List",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -730,7 +730,7 @@
           "Get ConnectorSpaceInfo"
         ],
         "summary": "Get ConnectorSpace Info.",
-        "operationId": "Get ConnectorSpaceInfo",
+        "operationId": "ConnectorSpaceInfo_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -837,7 +837,7 @@
           }
         },
         "x-ms-examples": {
-          "Create/Update Connector Space Information": {
+          "Update Connector Space Information": {
             "$ref": "./examples/PutConnectorSpaceInfo.json"
           }
         }
@@ -897,7 +897,7 @@
           }
         },
         "x-ms-examples": {
-          "Create/Update Connector Space Information": {
+          "Patch Connector Space Information": {
             "$ref": "./examples/PatchConnectorSpaceInfo.json"
           }
         }
@@ -1721,7 +1721,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Region where the Azure Log Analytics Workspace is deployed."
+          "description": "Region where the Azure Log Analytics Workspace is deployed.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tenantId": {
           "type": "string",
