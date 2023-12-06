@@ -650,7 +650,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/countDevices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/deprecated": {
       "post": {
         "operationId": "Catalogs_CountDevices",
         "tags": [
@@ -789,7 +789,8 @@
             "in": "path",
             "description": "Image name. Use .default for image creation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^\\.default$"
           }
         ],
         "responses": {
@@ -841,7 +842,8 @@
             "in": "path",
             "description": "Image name. Use .default for image creation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^\\.default$"
           },
           {
             "name": "resource",
@@ -919,7 +921,8 @@
             "in": "path",
             "description": "Image name. Use .default for image creation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^\\.default$"
           }
         ],
         "responses": {
@@ -1553,7 +1556,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/countDevices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deprecated": {
       "post": {
         "operationId": "Products_CountDevices",
         "tags": [
@@ -2075,69 +2078,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/countDevices": {
-      "post": {
-        "operationId": "DeviceGroups_CountDevices",
-        "tags": [
-          "DeviceGroups"
-        ],
-        "description": "Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
-            "name": "productName",
-            "in": "path",
-            "description": "Name of product.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
-          },
-          {
-            "name": "deviceGroupName",
-            "in": "path",
-            "description": "Name of device group.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CountDeviceResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeviceGroups_CountDevices": {
-            "$ref": "./examples/PostCountDevicesDeviceGroup.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments": {
       "get": {
         "operationId": "Deployments_ListByDeviceGroup",
@@ -2464,6 +2404,69 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deprecated": {
+      "post": {
+        "operationId": "DeviceGroups_CountDevices",
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CountDeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceGroups_CountDevices": {
+            "$ref": "./examples/PostCountDevicesDeviceGroup.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices": {
@@ -3293,6 +3296,15 @@
     },
     "CountDeviceResponse": {
       "type": "object",
+      "description": "Response to the action call for count devices in a catalog (preview API).",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CountElementsResponse"
+        }
+      ]
+    },
+    "CountDevicesResponse": {
+      "type": "object",
       "description": "Response to the action call for count devices in a catalog.",
       "allOf": [
         {
@@ -3954,7 +3966,7 @@
       "properties": {
         "images": {
           "type": "string",
-          "description": "."
+          "description": "Image as a UTF-8 encoded base 64 string."
         }
       },
       "required": [
@@ -4120,7 +4132,7 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the resource.",
+      "description": "Provisioning state of resource.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -4227,6 +4239,30 @@
             "name": "No3rdPartyAppUpdates",
             "value": "No3rdPartyAppUpdates",
             "description": "No update for 3rd party app policy."
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Azure Sphere API versions.",
+      "enum": [
+        "2022-09-01-preview",
+        "2024-04-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_09_01",
+            "value": "2022-09-01-preview",
+            "description": "Public preview API version."
+          },
+          {
+            "name": "v2024_04_01",
+            "value": "2024-04-01",
+            "description": "Initial GA API version."
           }
         ]
       }
