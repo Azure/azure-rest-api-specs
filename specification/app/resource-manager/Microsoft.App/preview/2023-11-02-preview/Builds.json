@@ -310,12 +310,12 @@
         "environmentVariables": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EnvironmentVariable"
+            "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVariable"
           },
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "List of environment variables to be passed to the build and application runtime."
+          "description": "List of environment variables to be passed to the build, secrets should not be used in environment variable."
         },
         "preBuildSteps": {
           "type": "array",
@@ -457,24 +457,6 @@
           "readOnly": true
         }
       }
-    },
-    "EnvironmentVariable": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Environment variable name."
-        },
-        "value": {
-          "type": "string",
-          "description": "Environment variable value."
-        }
-      },
-      "description": "Model representing an environment variable.",
-      "required": [
-        "name",
-        "value"
-      ]
     },
     "HttpGet": {
       "type": "object",
