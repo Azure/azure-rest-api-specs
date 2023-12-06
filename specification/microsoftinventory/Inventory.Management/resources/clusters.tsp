@@ -31,6 +31,6 @@ model ClusterResource is ProxyResource<ClusterProperties> {
 
 @armResourceOperations
 interface Clusters {
-  get is ArmLocResourceRead<ClusterResource>;
+  getCluster is ArmLocResourceRead<ClusterResource>;
   list is ArmLocResourceListByParent<ClusterResource>;
 }

@@ -97,7 +97,7 @@
     },
     "/providers/Microsoft.Inventory/locations/{location}/physicalAzureHosts/{azureHostName}": {
       "get": {
-        "operationId": "AzureHosts_Get",
+        "operationId": "AzureHosts_GetAzureHost",
         "tags": [
           "AzureHosts"
         ],
@@ -130,6 +130,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AzureHosts_GetAzureHost": {
+            "$ref": "./examples/AzureHosts_Get.json"
           }
         }
       }
@@ -175,7 +180,7 @@
     },
     "/providers/Microsoft.Inventory/locations/{location}/physicalClusters/{clusterName}": {
       "get": {
-        "operationId": "Clusters_Get",
+        "operationId": "Clusters_GetCluster",
         "tags": [
           "Clusters"
         ],
@@ -208,6 +213,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_GetCluster": {
+            "$ref": "./examples/Clusters_Get.json"
           }
         }
       }
@@ -253,7 +263,7 @@
     },
     "/providers/Microsoft.Inventory/locations/{location}/physicalDatacenters/{datacenterName}": {
       "get": {
-        "operationId": "Datacenters_Get",
+        "operationId": "Datacenters_GetDatacenter",
         "tags": [
           "Datacenters"
         ],
@@ -286,6 +296,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Datacenters_GetDatacenter": {
+            "$ref": "./examples/Datacenters_GetDatacenter.json"
           }
         }
       }
@@ -392,6 +407,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionInternalPropertyResources_Get": {
+            "$ref": "./examples/SubscriptionInternalPropertyResources_Get.json"
           }
         }
       }

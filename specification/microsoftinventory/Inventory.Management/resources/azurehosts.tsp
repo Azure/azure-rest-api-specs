@@ -33,7 +33,7 @@ model AzureHostResource is ProxyResource<AzureHostProperties> {
 
 @armResourceOperations
 interface AzureHosts {
-  get is ArmLocResourceRead<
+  getAzureHost is ArmLocResourceRead<
     AzureHostResource,
     BaseParameters<AzureHostResource> & LocationParameter
   >;
