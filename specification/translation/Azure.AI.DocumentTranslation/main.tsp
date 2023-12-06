@@ -101,7 +101,7 @@ model FileFormat {
 
   /** Is this format supported for translate by Document API. */
   supportedByDocument: boolean;
-  
+
   /** Is this format supported for translate by batches API. */
   supportedByBatches: boolean;
 }
