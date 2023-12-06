@@ -1,5 +1,8 @@
 @doc("Entity representing a Skillset.")
 model SkillsetDescriptor {
+    @doc("Namespace for the skillset")
+    `namespace`: string;
+
     @doc("The name of the Skillset")
     name: string;
 
@@ -18,6 +21,9 @@ model SkillsetDescriptor {
     @doc("The category of the Skillset")
     category: SkillsetCategory;
 
+    @doc("CatalogScope of the Skillset")
+    catalogScope: SkillsetCatalogScope;
+
     @doc("Whether the skillset is enabled TODO how is this different than Hidden")
     enabled: boolean;
 
@@ -29,6 +35,9 @@ model SkillsetDescriptor {
 
     @doc("The settings of a skillset")
     settings: SkillsetSetting[];
+
+    @doc("The settings of a skillset")
+    authorization: SkillsetAuth;
 
     @doc("The types of authentication supported by the skillset")
     supportedAuthTypes: SkillsetAuthType[];
@@ -44,6 +53,12 @@ model SkillsetDescriptor {
 
     @doc("Controls the conditions under a prompt can use this skillset")
     plannerVisibility: SkillVisibility;
+
+    @doc("The user ID of the user who created this skillset.")
+    creatorUserId: string;
+
+    @doc("The ID of an Entra group that contains the owners for this Skillset")
+    ownersGroupId: string;
 }
 
 @doc("Defines the settings of a skillset")
@@ -198,6 +213,15 @@ model SkillGroup {
     settings: Dictionary<string, string>;
 }
 
+@doc("SkillSummaryDescriptor")
+model SkillSummaryDescriptor {
+    @doc("SummaryStartMessage")
+    summaryStartMessage: string;
+
+    @doc("SummaryEndMessage")
+    summaryEndMessage: string;
+}
+
 @doc("The desciptor of a skill")
 model SkillDescriptor {
     @doc("The skillset descriptor")
@@ -250,7 +274,12 @@ model SkillDescriptor {
 
     @doc("The settings of the skill")
     settings: Record<string>;
-    //settings: Dictionary<string, {}>;
+
+    @doc("skillSummaryMetadata")
+    skillSummaryMetadata: SkillSummaryDescriptor;
+
+    @doc("EnableVariableSubstitutionInCompose")
+    enableVariableSubstitutionInCompose: boolean;
 }
 
 @doc("The descriptor of a skill dependency")
@@ -272,6 +301,9 @@ model SkillInputDescriptor is SkillVariableDescriptor {
 
     @doc("The placeholder value of the skill input TODO how is this different than the default")
     placeholderValue: string;
+
+    @doc("Enum")
+    `enum`: string[] | null;
 }
 
 @doc("The descriptor of a skill variable")
@@ -448,4 +480,10 @@ model Dictionary<T, U> {
 
     @doc("The value of the key value pair")
     value: U;
+}
+
+@doc("The authorization settings for the skillset")
+model SkillsetAuth {
+    @doc("SkillsetAuth Type")
+    type: SkillsetAuthType;
 }

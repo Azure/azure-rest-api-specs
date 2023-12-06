@@ -75,6 +75,9 @@ model SkillSource {
 
   @doc("The source type (i.e. URI)")
   sourceType: SkillSourceType;
+
+  @doc("Source data serialized as string")
+  sourceSerializedData?: string | null;
 }
 
 @doc("The prompt history of the current session")
@@ -147,4 +150,10 @@ model SetInputRequest {
 
   @doc("Default value for the input")
   defaultValue?: SkillVariable | null;
+}
+
+@doc("AddSourcesRequest")
+model AddSourcesRequest {
+  @doc("List of SkillSource")
+  sources: Array<SkillSource>;
 }

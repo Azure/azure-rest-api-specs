@@ -96,4 +96,12 @@ namespace SkillContext {
     @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
     @body setInputRequest : SetInputRequest,
   ): NoContentResponse;
+
+  @post
+  @route("AddSources")
+  @doc("Adds a list of sources to the output")
+  op addSources(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body addSourcesRequest  : AddSourcesRequest ,
+  ): NoContentResponse;
 }
