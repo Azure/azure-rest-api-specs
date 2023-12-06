@@ -2288,16 +2288,14 @@
             "SystemAssigned",
             "UserAssigned"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "VmIdentityType",
+            "modelAsString": true
+          }
         },
-        "principalId": {
-          "format": "uuid",
-          "description": "Principal (Object) Id of the identity, this value is required for system assigned identity.",
-          "type": "string"
-        },
-        "clientId": {
-          "format": "uuid",
-          "description": "Client Id of the identity, this value is required for user assigned identity.",
+        "resourceId": {
+          "description": "Resource Id of the identity. Only required when userAssigned identity is selected.",
           "type": "string"
         }
       }
