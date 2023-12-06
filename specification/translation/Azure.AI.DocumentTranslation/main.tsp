@@ -7,8 +7,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-/** Use following line to generate Swagger specification for dev machine */
-/** @server("http://localhost:80", "Development endpoint") */
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @service({
   title: "Azure.AI.DocumentTranslation",
@@ -94,6 +92,18 @@ model FileFormat {
 
   /** Supported Version. */
   versions: string[];
+
+  /** Can this file format used for glossary file. */
+  isGlossaryFormat: boolean;
+
+  /** Can this file format used to translate file. */
+  isTranslationFormat: boolean;
+
+  /** Is this format supported for translate by Document API. */
+  supportedByDocument: boolean;
+  
+  /** Is this format supported for translate by batches API. */
+  supportedByBatches: boolean;
 }
 
 /** Request parameters for the Glossary Formats. */
@@ -195,24 +205,12 @@ op CustomGetOperation<TParams, TResponse, TError = ErrorResponse>(
   ...TParams,
 ): TResponse | TError;
 
-/** The Get supported glossary formats method returns a list of glossary formats supported by the Document Translation service.
- *  The list includes the common file extension used. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@get
-@route("single/glossaries/formats")
-@summary("Gets the set of file formats currently supported by glossaries.")
-op getSingleGlossaryFormats is CustomGetOperation<
-  GlossaryFormatParameters,
-  GlossaryFormatResult,
-  ErrorResponse
->;
-
 /** The Get supported document formats method returns a list of document formats supported by the Document Translation service.
  *  The list includes the common file extension used. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @get
-@route("single/documents/formats")
-@summary("Gets the set of file formats currently supported by documents.")
+@route("document/formats")
+@summary("Gets the set of file formats currently supported by translate.")
 op getSingleDocumentFormats is CustomGetOperation<
   DocumentFormatParameters,
   DocumentFormatResult,
@@ -220,13 +218,13 @@ op getSingleDocumentFormats is CustomGetOperation<
 >;
 
 /** Use this API to translate a single document.
- * All supported document formats can be obtained with `single/formats` API.
+ * All supported document formats can be obtained with formats API.
  * Single Glossary / Translation memory can be included in the request and applied by the service when the document is translated.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/byos"
 @post
-@route("single:translateDocument")
+@route("document:translate")
 op singleTranslateDocument is CustomOperation<
   TranslateDocumentRequest,
   TranslateDocumentParameters,
