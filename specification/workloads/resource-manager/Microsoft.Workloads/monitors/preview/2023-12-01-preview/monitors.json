@@ -1199,39 +1199,15 @@
     "Error": {
       "description": "Standard error object.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+        }
+      ],
       "properties": {
-        "code": {
-          "description": "Server-defined set of error codes.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Human-readable representation of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "Target of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Array of details about specific errors that led to this reported error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
         "innerError": {
           "description": "Object containing more specific information than  the current object about the error.",
-          "type": "object",
-          "properties": {
-            "innerError": {
-              "$ref": "#/definitions/Error"
-            }
-          },
+          "$ref": "#/definitions/Error",
           "readOnly": true
         }
       }
