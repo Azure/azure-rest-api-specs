@@ -967,7 +967,7 @@ model SearchFacetItem {
   count?: int32;
 
   @doc("The name of the facet item.")
-  facet: string;
+  facet?: string;
 
   @doc("Define the sorting criteria for items")
   sort?: SearchFacetSort;
