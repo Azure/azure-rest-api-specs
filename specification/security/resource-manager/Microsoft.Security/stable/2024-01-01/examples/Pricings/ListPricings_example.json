@@ -25,6 +25,10 @@
                   "additionalExtensionProperties": {
                     "ExclusionTags": "[{\"Key\":\"TestKey1\",\"Value\":\"TestValue1\"},{\"Key\":\"TestKey2\",\"Value\":\"TestValue2\"}]"
                   }
+                },
+                {
+                  "name": "MdeDesignatedSubscription",
+                  "isEnabled": "True"
                 }
               ]
             }
@@ -126,6 +130,7 @@
             "type": "Microsoft.Security/pricings",
             "properties": {
               "pricingTier": "Standard",
+              "subPlan": "PerKeyVault",
               "freeTrialRemainingTime": "PT0S",
               "enablementTime": "2023-03-01T12:42:42.1921106Z",
               "enforce": "False",
@@ -140,6 +145,10 @@
               "pricingTier": "Standard",
               "freeTrialRemainingTime": "PT0S",
               "enablementTime": "2023-03-01T12:42:42.1921106Z",
+              "deprecated": true,
+              "replacedBy": [
+                  "VirtualMachines"
+              ],
               "enforce": "False",
               "resourcesCoverageStatus": "FullyCovered"
             }
@@ -150,6 +159,7 @@
             "type": "Microsoft.Security/pricings",
             "properties": {
               "pricingTier": "Standard",
+              "subPlan": "PerSubscription",
               "freeTrialRemainingTime": "PT0S",
               "enablementTime": "2023-03-01T12:42:42.1921106Z",
               "enforce": "False",
@@ -161,10 +171,10 @@
             "name": "OpenSourceRelationalDatabases",
             "type": "Microsoft.Security/pricings",
             "properties": {
-              "pricingTier": "Free",
+              "pricingTier": "Standard",
               "freeTrialRemainingTime": "PT0S",
               "enforce": "False",
-              "resourcesCoverageStatus": "NotCovered"
+              "resourcesCoverageStatus": "FullyCovered"
             }
           },
           {
@@ -200,7 +210,7 @@
                   "name": "AgentlessVmScanning",
                   "isEnabled": "True",
                   "additionalExtensionProperties": {
-                    "ExclusionTags": "[{\"Key\":\"TestKey1\",\"Value\":\"TestValue1\"},{\"Key\":\"TestKey2\",\"Value\":\"TestValue2\"}]"
+                      "ExclusionTags": "[]"
                   }
                 },
                 {
@@ -214,9 +224,23 @@
                 {
                   "name": "ContainerRegistriesVulnerabilityAssessments",
                   "isEnabled": "True"
+                },
+                {
+                    "name": "EntraPermissionsManagement",
+                    "isEnabled": "True"
                 }
               ]
             }
+          },
+          {
+              "id": "subscriptions/d34fd44c-ebfa-4a9c-bceb-9eeafe72ac15/providers/Microsoft.Security/pricings/Api",
+              "name": "Api",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                  "pricingTier": "Standard",
+                  "subPlan": "P1",
+                  "freeTrialRemainingTime": "PT0S"
+              }
           }
         ]
       }
