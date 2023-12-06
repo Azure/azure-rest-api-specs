@@ -38,3 +38,17 @@ These settings apply only when `--tag=package-2024-01-01-preview` is specified o
 input-file:
   - Microsoft.Inventory/preview/2024-01-01-preview/microsoftinventory.json
 ```
+
+
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.HDInsight/preview/2023-11-01-preview/hdinsight.json
+  
+suppressions:
+  - code: OperationIdNounVerb
+    reason: The operation id cannot be fixed as fixing it is resulting in typespec validation errors valid.
+```
