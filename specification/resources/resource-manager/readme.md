@@ -91,7 +91,7 @@ These settings apply only when `--tag=package-bicep-2023-11` is specified on the
 
 ```yaml $(tag) == 'package-bicep-2023-11'
 input-file:
-  - Microsoft.Resources/stable/2023-11-01/bicepRp.json
+  - Microsoft.Resources/stable/2023-11-01/bicepClient.json
 ```
 ### Tag: package-policy-2023-04
 
