@@ -10,8 +10,10 @@ namespace PurviewDataMap;
 enum BusinessAttributeUpdateBehavior {
   @doc("Ignore the business attribute payload for update.")
   ignore,
+
   @doc("Replace all the business attributes using the payload.")
   replace,
+
   @doc("Merge the business attributes. Business attributes will not be updated if not provided.")
   merge,
 }
@@ -20,6 +22,7 @@ enum BusinessAttributeUpdateBehavior {
 enum Status {
   @doc("The status is active.")
   ACTIVE,
+
   @doc("The status is deleted.")
   DELETED,
 }
@@ -28,16 +31,22 @@ enum Status {
 enum AtlasTermAssignmentStatus {
   @doc("The status is discovered.")
   DISCOVERED,
+
   @doc("The status is proposed.")
   PROPOSED,
+
   @doc("The status is imported.")
   IMPORTED,
+
   @doc("The status is validated.")
   VALIDATED,
+
   @doc("The status is deprecated.")
   DEPRECATED,
+
   @doc("The status is obsolete.")
   OBSOLETE,
+
   @doc("Other status.")
   OTHER,
 }
@@ -46,8 +55,10 @@ enum AtlasTermAssignmentStatus {
 enum SortType {
   @doc("No sorting order")
   NONE,
+
   @doc("Use ascending order for sorting")
   ASC,
+
   @doc("Use descending order for sorting")
   DESC,
 }
@@ -56,6 +67,7 @@ enum SortType {
 enum ImportStatus {
   @doc("Success")
   SUCCESS,
+
   @doc("Failed")
   FAILED,
 }
@@ -64,12 +76,16 @@ enum ImportStatus {
 enum AtlasTermRelationshipStatus {
   @doc("draft")
   DRAFT,
+
   @doc("active")
   ACTIVE,
+
   @doc("deprecated")
   DEPRECATED,
+
   @doc("obsolete")
   OBSOLETE,
+
   @doc("other")
   OTHER,
 }
@@ -78,10 +94,13 @@ enum AtlasTermRelationshipStatus {
 enum TermStatus {
   @doc("draft")
   Draft,
+
   @doc("approved")
   Approved,
+
   @doc("alert")
   Alert,
+
   @doc("expired")
   Expired,
 }
@@ -90,6 +109,7 @@ enum TermStatus {
 enum StatusAtlasRelationship {
   @doc("active")
   ACTIVE,
+
   @doc("deleted")
   DELETED,
 }
@@ -98,8 +118,10 @@ enum StatusAtlasRelationship {
 enum Direction {
   @doc("both")
   BOTH,
+
   @doc("input")
   INPUT,
+
   @doc("output")
   OUTPUT,
 }
@@ -108,8 +130,10 @@ enum Direction {
 enum LineageDirection {
   @doc("input")
   INPUT,
+
   @doc("output")
   OUTPUT,
+
   @doc("both")
   BOTH,
 }
@@ -118,8 +142,10 @@ enum LineageDirection {
 enum Cardinality {
   @doc("single")
   SINGLE,
+
   @doc("list")
   LIST,
+
   @doc("set")
   SET,
 }
@@ -128,22 +154,31 @@ enum Cardinality {
 enum TypeCategory {
   @doc("primitive")
   PRIMITIVE,
+
   @doc("object id type")
   OBJECT_ID_TYPE,
+
   @doc("enum")
   ENUM,
+
   @doc("struct")
   STRUCT,
+
   @doc("classification")
   CLASSIFICATION,
+
   @doc("entity")
   ENTITY,
+
   @doc("array")
   ARRAY,
+
   @doc("map")
   MAP,
+
   @doc("relationship")
   RELATIONSHIP,
+
   @doc("term template")
   TERM_TEMPLATE,
 }
@@ -152,18 +187,25 @@ enum TypeCategory {
 enum RoundingMode {
   @doc("up")
   UP,
+
   @doc("down")
   DOWN,
+
   @doc("ceiling")
   CEILING,
+
   @doc("floor")
   FLOOR,
+
   @doc("half up")
   HALF_UP,
+
   @doc("half down")
   HALF_DOWN,
+
   @doc("half even")
   HALF_EVEN,
+
   @doc("unnecessary")
   UNNECESSARY,
 }
@@ -172,8 +214,10 @@ enum RoundingMode {
 enum RelationshipCategory {
   @doc("association")
   ASSOCIATION,
+
   @doc("aggregation")
   AGGREGATION,
+
   @doc("composition")
   COMPOSITION,
 }
@@ -182,14 +226,19 @@ enum RelationshipCategory {
 enum Typedef {
   @doc("enum")
   `enum`,
+
   @doc("entity")
   entity,
+
   @doc("classification")
   classification,
+
   @doc("relationship")
   relationship,
+
   @doc("struct")
   struct,
+
   @doc("term template")
   term_template,
 }
@@ -198,24 +247,34 @@ enum Typedef {
 enum SearchFilterOperator {
   @doc("equal")
   eq,
+
   @doc("not equal")
   ne,
+
   @doc("greater than")
   gt,
+
   @doc("less than")
   lt,
+
   @doc("greater than or equal to")
   ge,
+
   @doc("less than or equal to")
   le,
+
   @doc("contains")
   contains,
+
   @doc("start with")
   startswith,
+
   @doc("prefix")
   prefix,
+
   @doc("time range")
   timerange,
+
   @doc("exists")
   exists,
 }
@@ -345,6 +404,7 @@ model AtlasStruct {
 
   @doc("The name of the type.")
   typeName?: string;
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "It is an Atlas model"
   @doc("ETag for concurrency control.")
   lastModifiedTS?: string;
@@ -605,7 +665,6 @@ model AtlasRelatedTermHeader {
   termGuid?: string;
 }
 
-
 @doc("The glossary base object.")
 model AtlasGlossaryBaseObject {
   ...AtlasBaseModelObject;
@@ -676,7 +735,6 @@ model AtlasGlossaryHeader {
   @doc("The GUID of the relationship.")
   relationGuid?: string;
 }
-
 
 @doc("The glossary term.")
 model AtlasGlossaryTerm {
@@ -871,7 +929,6 @@ model AtlasGlossaryExtInfo {
   termInfo?: Record<AtlasGlossaryTerm>;
 }
 
-
 @doc("The search query of advanced search request.")
 model SearchRequest {
   @doc("The keywords applied to all searchable fields.")
@@ -906,7 +963,6 @@ batch, and will return new token in each response unless there's no more data.
 
 @doc("The content of a search facet result item.")
 model SearchFacetItem {
-
   @doc("The count of the facet item.")
   count?: int32;
 
@@ -930,8 +986,9 @@ model SearchFacetSort {
 enum SearchSortOrder {
   @doc("Use ascending order for sorting")
   asc,
+
   @doc("Use descending order for sorting")
-  desc
+  desc,
 }
 
 @doc("Taxonomy setting for search request")
@@ -1151,7 +1208,6 @@ Expert or Steward for a glossary term.
 """)
   contactType?: string;
 }
-
 
 @doc("The query of suggest request.")
 model SuggestRequest {
@@ -1927,18 +1983,16 @@ model AtlasTypeDefHeader {
 
 @discriminator("kind")
 @doc("Base model for search filter")
-model SearchFilter {
-
-}
-
+model SearchFilter {}
 
 @doc("And filter for search")
 model AndFilter extends SearchFilter {
   @doc("And filter for search")
   kind: "AndFilter";
+
   @doc("List of filters")
   @projectedName("json", "and")
-  andFilters : SearchFilter[];
+  andFilters: SearchFilter[];
 }
 
 @doc("Not filter for search")
@@ -1948,22 +2002,24 @@ model NotFilter extends SearchFilter {
 
   @doc("Not filter")
   @projectedName("json", "not")
-  notFilters : SearchFilter;
+  notFilters: SearchFilter;
 }
 
 @doc("Or filter for search")
 model OrFilter extends SearchFilter {
   @doc("Or filter for search")
   kind: "OrFilter";
+
   @doc("List of filters")
   @projectedName("json", "or")
-  orFilters : SearchFilter[];
+  orFilters: SearchFilter[];
 }
 
 @doc("Asset type filter for search")
 model AssetTypeFilter extends SearchFilter {
   @doc("Asset type filter for search")
   kind: "AssetTypeFilter";
+
   @doc("Asset type name")
   assetType: string;
 }
@@ -1975,6 +2031,7 @@ model AttributeFilter extends SearchFilter {
 
   @doc("Attribute name")
   attributeName: string;
+
   @doc("Operator")
   operator: SearchFilterOperator;
 
@@ -1986,8 +2043,10 @@ model AttributeFilter extends SearchFilter {
 model ClassificationFilter extends SearchFilter {
   @doc("Classification type filter for search")
   kind: "ClassificationFilter";
+
   @doc("Classification name")
   classificationName: string;
+
   @doc("Whether to include sub classifications")
   includeSubClassifications?: boolean;
 }
@@ -1996,6 +2055,7 @@ model ClassificationFilter extends SearchFilter {
 model ClassificationCategoryFilter extends SearchFilter {
   @doc("Classification category filter for search")
   kind: "ClassificationCategoryFilter";
+
   @doc("Classification category")
   classificationCategory: string;
 }
@@ -2004,6 +2064,7 @@ model ClassificationCategoryFilter extends SearchFilter {
 model CollectionIdFilter extends SearchFilter {
   @doc("Collection id filter for search")
   kind: "CollectionIdFilter";
+
   @doc("Collection id")
   collectionId: string;
 }
@@ -2012,8 +2073,10 @@ model CollectionIdFilter extends SearchFilter {
 model ContactFilter extends SearchFilter {
   @doc("Contact filter for search")
   kind: "ContactFilter";
+
   @doc("Contact type")
   contactType?: string;
+
   @doc("Contact Id")
   contactId?: string;
 }
@@ -2022,6 +2085,7 @@ model ContactFilter extends SearchFilter {
 model DomainIdFilter extends SearchFilter {
   @doc("Domain id filter for search")
   kind: "DomainIdFilter";
+
   @doc("Domain id")
   domainId: string;
 }
@@ -2030,6 +2094,7 @@ model DomainIdFilter extends SearchFilter {
 model ExistsFilter extends SearchFilter {
   @doc("Exists filter for search")
   kind: "ExistsFilter";
+
   @projectedName("json", "exists")
   @doc("Field")
   field: string;
@@ -2039,6 +2104,7 @@ model ExistsFilter extends SearchFilter {
 model FileExtensionFilter extends SearchFilter {
   @doc("File extension filter for search")
   kind: "FileExtensionFilter";
+
   @doc("File extension")
   fileExtension: string;
 }
@@ -2047,17 +2113,19 @@ model FileExtensionFilter extends SearchFilter {
 model LabelFilter extends SearchFilter {
   @doc("Label filter for search")
   kind: "LabelFilter";
+
   @doc("Label")
   label: string;
+
   @doc("Whether to include sub labels")
   includeSubLabels?: boolean;
 }
-
 
 @doc("Label filter for search")
 model ObjectTypeFilter extends SearchFilter {
   @doc("Label filter for search")
   kind: "ObjectTypeFilter";
+
   @doc("Object type")
   objectType: string;
 }
@@ -2066,8 +2134,10 @@ model ObjectTypeFilter extends SearchFilter {
 model PathFilter extends SearchFilter {
   @doc("Path filter for search")
   kind: "PathFilter";
+
   @doc("Path")
   path: string;
+
   @doc("Whether the path is parent path")
   isParent?: boolean;
 }
@@ -2076,8 +2146,10 @@ model PathFilter extends SearchFilter {
 model ScanInfoFilter extends SearchFilter {
   @doc("Scan info filter for search")
   kind: "ScanInfoFilter";
+
   @doc("Data source name")
   dataSourceName?: string;
+
   @doc("Scan name")
   scanName?: string;
 }
@@ -2086,6 +2158,7 @@ model ScanInfoFilter extends SearchFilter {
 model GlossaryFilter extends SearchFilter {
   @doc("Glossary filter for search")
   kind: "GlossaryFilter";
+
   @doc("Glossary type. Either AtlasGlossary or AtlasGlossaryType")
   glossaryType: string;
 }
@@ -2094,6 +2167,7 @@ model GlossaryFilter extends SearchFilter {
 model IdFilter extends SearchFilter {
   @doc("Id filter for search")
   kind: "IdFilter";
+
   @doc("Id value")
   id: string;
 }
@@ -2102,8 +2176,10 @@ model IdFilter extends SearchFilter {
 model TypeFilter extends SearchFilter {
   @doc("Type filter for search")
   kind: "TypeFilter";
+
   @doc("Type name")
   typeName: string;
+
   @doc("Whether to include sub types")
   includeSubTypes?: boolean;
 }
@@ -2113,6 +2189,7 @@ model TypeFilter extends SearchFilter {
 model CreateTimeFilter extends SearchFilter {
   @doc("Create time filter for search")
   kind: "CreateTimeFilter";
+
   @doc("""
 Either using a string 'LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D', or using a map for example
 {
@@ -2129,6 +2206,7 @@ to represent the time filter, operator must be one of gt/lt/gte/lte
 model UpdateTimeFilter extends SearchFilter {
   @doc("Update time filter for search")
   kind: "UpdateTimeFilter";
+
   @doc("""
 Either using a string 'LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D', or using a map for example
 {
