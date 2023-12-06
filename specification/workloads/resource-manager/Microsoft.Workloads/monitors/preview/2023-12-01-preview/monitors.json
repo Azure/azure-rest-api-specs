@@ -1079,22 +1079,6 @@
         "modelAsString": true
       }
     },
-    "Error": {
-      "description": "Standard error object.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
-        }
-      ],
-      "properties": {
-        "innerError": {
-          "description": "Object containing more specific information than  the current object about the error.",
-          "$ref": "#/definitions/Error",
-          "readOnly": true
-        }
-      }
-    },
     "ManagedRGConfiguration": {
       "description": "Managed resource group configuration",
       "type": "object",
@@ -1214,7 +1198,7 @@
         },
         "errors": {
           "description": "Defines the SAP monitor errors.",
-          "$ref": "#/definitions/Error",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "readOnly": true
         },
         "appLocation": {
@@ -1664,7 +1648,7 @@
         },
         "errors": {
           "description": "Defines the provider instance errors.",
-          "$ref": "#/definitions/Error",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "readOnly": true
         },
         "providerSettings": {
