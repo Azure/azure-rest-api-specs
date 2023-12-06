@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../models/azureHost.tsp";
@@ -34,6 +33,12 @@ model AzureHostResource is ProxyResource<AzureHostProperties> {
 
 @armResourceOperations
 interface AzureHosts {
-  get is ArmLocResourceRead<AzureHostResource, BaseParameters<AzureHostResource> & LocationParameter>;
-  list is ArmLocResourceListByParent<AzureHostResource, LocationCollectionParameters<AzureHostResource>>;
+  get is ArmLocResourceRead<
+    AzureHostResource,
+    BaseParameters<AzureHostResource> & LocationParameter
+  >;
+  list is ArmLocResourceListByParent<
+    AzureHostResource,
+    LocationCollectionParameters<AzureHostResource>
+  >;
 }

@@ -36,187 +36,207 @@ model SubscriptionInternalProperties {
   tenantId: string;
 
   @doc("Created Time")
-  @format("date-time")
-  changedTime?: string;
+  changedTime?: utcDateTime;
 
   @doc("Created Time")
-  @format("date-time")
-  createdTime?: string;
+  createdTime?: utcDateTime;
 
   @doc("Provisioning state")
   provisioningState?: ProvisioningState;
 }
 
 @doc("List of promotions")
-model PromotionsList  {
-   @doc("Promotion")
-   @OpenAPI.extension("x-ms-identifiers", [])
-   value: PromotionData[];
+model PromotionsList {
+  @doc("Promotion")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  value: PromotionData[];
 }
 
 @doc("Promotion")
 model PromotionData {
-
   @doc("promotion category free vs pay-as-you-go")
   category: string;
 
   @doc("promotion end date time")
-  @format("date-time")
-  endDateTime: string;
+  endDateTime: utcDateTime;
 }
 
-
 @doc("Subscription state")
-enum State { 
+enum State {
   @doc("Registered subscription state")
   Registered,
+
   @doc("Unregistered subscription state")
   Unregistered,
+
   @doc("Warned subscription state")
   Warned,
+
   @doc("Suspended subscription state")
   Suspended,
+
   @doc("Deleted subscription state")
-  Deleted
+  Deleted,
 }
 
 @doc("The Subscription billing properties")
 model BillingProperties {
-    @doc("Commerce object identifying additional state information associated with the subscription.")
-    additionalStateInformation: AdditionalStateInformation;
+  @doc("Commerce object identifying additional state information associated with the subscription.")
+  additionalStateInformation: AdditionalStateInformation;
 
-    @doc("Billing account of the customer that holds customer payment instrument, address etc. The subscription is always linked to a billing account.")
-    billingAccount: BillingAccount;
+  @doc("Billing account of the customer that holds customer payment instrument, address etc. The subscription is always linked to a billing account.")
+  billingAccount: BillingAccount;
 
-    @doc("Indicates the commerce stack that this account is on - modern or legacy")
-    billingType: BillingType;
-    
-    @doc("Indicates the sales motion that this subscription type belongs to. This can be changed if a subscription moves from one channel type to another (e.g., CustomerLed to PartnerLed)")
-    channelType: ChannelType;
-    
-    @doc("Differentiates how customer is paying for the subscription. This can change if customer changes from free to paid, etc.")
-    paymentType: PaymentType;
-    
-    @doc("Customer segment")
-    tier: Tier;
-    
-    @doc("Indicates the importance of this subscription. DevTest subscriptions get lower SLA compared to Production ones. This property can be changed later if needed as well.")
-    workloadType: WorkloadType
+  @doc("Indicates the commerce stack that this account is on - modern or legacy")
+  billingType: BillingType;
+
+  @doc("Indicates the sales motion that this subscription type belongs to. This can be changed if a subscription moves from one channel type to another (e.g., CustomerLed to PartnerLed)")
+  channelType: ChannelType;
+
+  @doc("Differentiates how customer is paying for the subscription. This can change if customer changes from free to paid, etc.")
+  paymentType: PaymentType;
+
+  @doc("Customer segment")
+  tier: Tier;
+
+  @doc("Indicates the importance of this subscription. DevTest subscriptions get lower SLA compared to Production ones. This property can be changed later if needed as well.")
+  workloadType: WorkloadType;
 }
 
 @doc("Commerce object identifying additional state information associated with the subscription.")
 model AdditionalStateInformation {
-    @doc("Indicates whether the Non data retention resources can be released. This is a high confidence signal that would be set to true when the subscription is already in disabled state. To learn about Azure Data Retention policy after subscription has been disabled see")
-    releaseNonDataRetentionResource?: boolean;
+  @doc("Indicates whether the Non data retention resources can be released. This is a high confidence signal that would be set to true when the subscription is already in disabled state. To learn about Azure Data Retention policy after subscription has been disabled see")
+  releaseNonDataRetentionResource?: boolean;
 
-    @doc("Indicates whether the new resource creation should be blocked. Existing resources functionality should not be impacted. This signal should be looked at when subscription state is Active. The service should be able to recover if the flag is reset to false.")
-    blockNewResourceCreation?: boolean
+  @doc("Indicates whether the new resource creation should be blocked. Existing resources functionality should not be impacted. This signal should be looked at when subscription state is Active. The service should be able to recover if the flag is reset to false.")
+  blockNewResourceCreation?: boolean;
 }
 
 @doc("Billing account of the customer that holds customer payment instrument, address etc. The subscription is always linked to a billing account.")
 model BillingAccount {
-    @doc("Unique Id identifying the commerce object for the billing account.")
-    id: string
+  @doc("Unique Id identifying the commerce object for the billing account.")
+  id: string;
 }
 
 @doc("Subscription state image type")
-enum BillingType { 
-  @doc("Legacy billing type")   
+enum BillingType {
+  @doc("Legacy billing type")
   Legacy,
+
   @doc("Modern billing type")
-  Modern
+  Modern,
 }
 
 @doc("Subscription state image type")
-enum ChannelType {  
-  @doc("None channel type")  
-  None, 
-  @doc("Internal channel type")  
+enum ChannelType {
+  @doc("None channel type")
+  None,
+
+  @doc("Internal channel type")
   Internal,
-  @doc("FieldLed channel type")  
+
+  @doc("FieldLed channel type")
   FieldLed,
-  @doc("CustomerLed channel type")  
+
+  @doc("CustomerLed channel type")
   CustomerLed,
-  @doc("Partnerled channel type")  
-  PartnerLed
+
+  @doc("Partnerled channel type")
+  PartnerLed,
 }
 
 @doc("Subscription state image type")
-enum PaymentType {  
-  @doc("None payment type")    
+enum PaymentType {
+  @doc("None payment type")
   None,
-  @doc("Paid payment type")      
+
+  @doc("Paid payment type")
   Paid,
-  @doc("Free payment type")    
+
+  @doc("Free payment type")
   Free,
-  @doc("Entitlement payment type")    
+
+  @doc("Entitlement payment type")
   Entitlement,
-  @doc("SponsoredPlus payment type")    
+
+  @doc("SponsoredPlus payment type")
   SponsoredPlus,
-  @doc("Sponsored payment type")    
+
+  @doc("Sponsored payment type")
   Sponsored,
-  @doc("Benefit payment type")    
-  Benefit
+
+  @doc("Benefit payment type")
+  Benefit,
 }
 
 @doc("Subscription state image type")
-enum Tier {   
-  @doc("Unknown tier")  
+enum Tier {
+  @doc("Unknown tier")
   Unknown,
-  @doc("Standard tier")   
+
+  @doc("Standard tier")
   Standard,
-  @doc("Premium tier")   
+
+  @doc("Premium tier")
   Premium,
-  @doc("Priority tier")  
-  Priority
+
+  @doc("Priority tier")
+  Priority,
 }
 
 @doc("Subscription state image type")
-enum WorkloadType {    
-  @doc("None workload type")  
+enum WorkloadType {
+  @doc("None workload type")
   None,
-  @doc("Development test workload type")  
+
+  @doc("Development test workload type")
   DevTest,
-  @doc("Production workload type")  
-  Production
+
+  @doc("Production workload type")
+  Production,
 }
 
 @doc("CostCategory for internal subscription")
-enum CostCategory {   
-  @doc("None cost category")  
+enum CostCategory {
+  @doc("None cost category")
   None,
-  @doc("FR cost category")  
+
+  @doc("FR cost category")
   FR,
-  @doc("FG cost category")  
+
+  @doc("FG cost category")
   FG,
-  @doc("FS cost category")  
+
+  @doc("FS cost category")
   FS,
-  @doc("FX cost category")  
+
+  @doc("FX cost category")
   FX,
-  @doc("FB cost category")  
-  FB
+
+  @doc("FB cost category")
+  FB,
 }
 
 @doc("The Subscription policies")
 model SubscriptionPolicies {
-    @doc("The placement requirement for the subscription based on its country of origin / offer type / offer category / etc. This is used in geo-fencing of certain regions or regulatory boundaries (e.g. Australia ring-fencing).")
-    locationPlacementId: string;
+  @doc("The placement requirement for the subscription based on its country of origin / offer type / offer category / etc. This is used in geo-fencing of certain regions or regulatory boundaries (e.g. Australia ring-fencing).")
+  locationPlacementId: string;
 
-    @doc("The quota requirement for the subscription based on the offer type / category (e.g. free vs. pay-as-you-go). This can be used to inform quota information for the subscription (e.g. max # of resource groups or max # of virtual machines.")
-    quotaId: string;
+  @doc("The quota requirement for the subscription based on the offer type / category (e.g. free vs. pay-as-you-go). This can be used to inform quota information for the subscription (e.g. max # of resource groups or max # of virtual machines.")
+  quotaId: string;
 
-    @doc("Indicates whether subscription has spending limit.")
-    spendingLimit: string
+  @doc("Indicates whether subscription has spending limit.")
+  spendingLimit: string;
 }
 
 @doc("The Internal Subscription policies")
 model InternalSubscriptionPolicies {
-    @doc("Cost categorizations used for internal subscriptions.")
-    costCategory: CostCategory;
+  @doc("Cost categorizations used for internal subscriptions.")
+  costCategory: CostCategory;
 
-    @doc("Environment for the internal subscription.")
-    environment: string;
+  @doc("Environment for the internal subscription.")
+  environment: string;
 
-    @doc("PCCode for the internal subscription.")
-    pcCode: string
+  @doc("PCCode for the internal subscription.")
+  pcCode: string;
 }

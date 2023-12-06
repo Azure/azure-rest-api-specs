@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -33,6 +32,8 @@ model LocationCollectionParameters<T extends ArmResource> {
  * @template TParentName Optional. The name of the parent resource
  * @template TParentFriendlyName Optional. The friendly name of the parent resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations are inside an interface"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid casing"
 @autoRoute
 @get
 @listsResource(TResource)
@@ -48,17 +49,21 @@ op ArmLocResourceListByParent<
   ...LocationCollectionParameters<TResource>,
 ): ArmResponse<ResourceListResult<TResource>> | ErrorResponse;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "Template"
 /// Templates
 /**
  * A resource GET operation
  * @template TResource the resource being patched
  * @template TBaseParameters Optional. Allows overriding the operation parameters
  */
+/// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "This is a valid template"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations are inside an interface"
 @autoRoute
 @doc("Get a {name}", TResource)
 @get
 @armResourceRead(TResource)
-op ArmLocResourceRead<TResource extends ArmResource, TBaseParameters = BaseParameters<TResource>>(
+op ArmLocResourceRead<
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>
+>(
   ...LocationInstanceParameters<TResource>,
 ): ArmResponse<TResource> | ErrorResponse;

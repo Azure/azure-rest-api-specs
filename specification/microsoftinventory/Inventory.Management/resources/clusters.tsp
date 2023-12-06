@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../models/cluster.tsp";
@@ -19,7 +18,6 @@ using Azure.ResourceManager;
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.Inventory;
-
 
 @tenantResource
 model ClusterResource is ProxyResource<ClusterProperties> {

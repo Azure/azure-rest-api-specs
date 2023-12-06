@@ -1,4 +1,3 @@
-
 @doc("Provisioning state enum")
 enum ProvisioningState {
   @doc("The resource is being provisioned.")
@@ -33,31 +32,86 @@ enum ProvisioningState {
 }
 
 scalar ClusterResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[{
-  type: "Microsoft.Inventory/physicalClusters"
-}]>;
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "string",
+    }
+  ]>;
 
 scalar ServerResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[{
-  type: "Microsoft.Inventory/physicalServers"
-}]>;
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "string",
+    }
+  ]>;
 
-scalar DatacenterResourceId 
-  extends Azure.ResourceManager.ResourceIdentifier<[{
-  type: "Microsoft.Inventory/physicalDatacenters"
-}]>;
+scalar DatacenterResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "string",
+    }
+  ]>;
 
 scalar AvailabilityZoneResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[{
-  type: "Microsoft.Inventory/physicalAvailabilityZones"
-}]>;
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "string",
+    }
+  ]>;
 
-scalar FacilityResourceId 
-  extends Azure.ResourceManager.ResourceIdentifier<[{
-  type: "Microsoft.Inventory/physicalFacilities"
-}]>;
+scalar FacilityResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "string",
+    }
+  ]>;
 
-scalar AzureRegionResourceId 
-  extends Azure.ResourceManager.ResourceIdentifier<[{
-  type: "Microsoft.Inventory/physicalAzureRegions"
-}]>;
+scalar AzureRegionResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "string",
+    }
+  ]>;
+
+/*
+scalar ClusterResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.Inventory/physicalClusters",
+    }
+  ]>;
+
+scalar ServerResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "string",
+    }
+  ]>;
+
+scalar DatacenterResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.Inventory/physicalDatacenters",
+    }
+  ]>;
+
+scalar AvailabilityZoneResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.Inventory/physicalAvailabilityZones",
+    }
+  ]>;
+
+scalar FacilityResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.Inventory/physicalFacilities",
+    }
+  ]>;
+
+scalar AzureRegionResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.Inventory/physicalAzureRegions",
+    }
+  ]>; */
