@@ -11239,6 +11239,19 @@
       "description": "App resource properties payload",
       "type": "object",
       "properties": {
+        "type": {
+          "description": "The type of App, whether it's long running app or short lived app",
+          "enum": [
+            "LongRunning",
+            "ShortLived"
+          ],
+          "type": "string",
+          "default": "LongRunning",
+          "x-ms-enum": {
+            "name": "AppResourceType",
+            "modelAsString": true
+          }
+        },
         "public": {
           "description": "Indicates whether the App exposes public endpoint",
           "type": "boolean"
@@ -12777,6 +12790,11 @@
         },
         "startTime": {
           "description": "Start time of the deployment instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End time of the deployment instance",
           "type": "string",
           "readOnly": true
         },
