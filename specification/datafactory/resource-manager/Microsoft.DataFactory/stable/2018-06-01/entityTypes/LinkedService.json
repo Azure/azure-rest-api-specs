@@ -1529,7 +1529,7 @@
         "driverVersion": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The version of the MySQL driver. Type: string. V1 or empty for legacy driver, V2 for new driver."
+          "description": "The version of the MySQL driver. Type: string. V1 or empty for legacy driver, V2 for new driver. V1 can support connection string and property bag, V2 can only support connection string."
         },
         "connectionString": {
           "type": "object",
@@ -1574,10 +1574,7 @@
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
-      },
-      "required": [
-        "driverVersion"
-      ]
+      }
     },
     "PostgreSqlLinkedService": {
       "x-ms-discriminator-value": "PostgreSql",
@@ -5342,7 +5339,7 @@
         "driverVersion": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The version of the MariaDB driver. Type: string. V1 or empty for legacy driver, V2 for new driver."
+          "description": "The version of the MariaDB driver. Type: string. V1 or empty for legacy driver, V2 for new driver. V1 can support connection string and property bag, V2 can only support connection string."
         },
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
