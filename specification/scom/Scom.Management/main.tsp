@@ -17,12 +17,13 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 /** Azure Monitor Operations Manager Managed Instance (SCOM MI) management APIs */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations is there but not standard."
 @armProviderNamespace
 @service({
   title: "Azure API for managing SCOM managed instances and monitored resources.",
 })
 @versioned(Versions)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations is there but not standard."
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Scom;
 
 /** The available API versions. */
