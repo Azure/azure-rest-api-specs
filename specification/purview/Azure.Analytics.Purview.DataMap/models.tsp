@@ -484,7 +484,7 @@ model AtlasEntityHeader {
   displayText?: string;
 
   @doc("The GUID of the record.")
-  guid: Azure.Core.uuid;
+  guid: string;
 
   @doc("Whether it is a shell entity")
   isIncomplete?: boolean;
