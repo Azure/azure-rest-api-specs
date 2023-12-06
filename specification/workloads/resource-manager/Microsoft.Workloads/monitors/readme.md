@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-preview-2023-12-01-preview` is spe
 input-file:
   - preview/2023-12-01-preview/monitors.json
   - ../common-types/v2/commonTypes.json
-  - ../operations/preview/2023-11-01-preview/operations.json
+  - ../operations/preview/2023-12-01-preview/operations.json
 ```
 ### Tag: package-preview-2023-10-01-preview
 
