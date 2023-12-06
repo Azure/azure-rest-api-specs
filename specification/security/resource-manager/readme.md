@@ -152,6 +152,15 @@ input-file:
   - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 ```
 
+### Tag: package-preview-2023-02-15-only
+
+These settings apply only when `--tag=package-preview-2023-02-15-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-02-15-only'
+input-file:
+  - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
+```
+
 ### Tag: package-preview-2023-02-only
 
 These settings apply only when `--tag=package-preview-2023-02-only` is specified on the command line.
@@ -627,6 +636,7 @@ These settings apply only when `--tag=package-2020-01-preview-python-only` is sp
 ``` yaml $(tag) == 'package-2020-01-preview-python-only'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 
 # Needed when there is more than one input file
 override-info:
