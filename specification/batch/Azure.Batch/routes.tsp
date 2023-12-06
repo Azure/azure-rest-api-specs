@@ -238,7 +238,7 @@ error code PoolBeingDeleted.
   @head
   poolExists is RpcOperationWithAdditionalResponse<
     BatchClientRequestHeaders & BatchPoolHeaders,
-    PoolDoesntExistResponseHeaders,
+    PoolDoesNotExistResponseHeaders,
     PoolDoesExistResponseHeaders,
     {},
     BatchError
@@ -2416,9 +2416,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 
 // headers ////////////////////
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("The request to the Batch service was successful.")
-model PoolRemoveNodesResponseHeaders {
+alias PoolRemoveNodesResponseHeaders = {
   ...BatchResponseHeaders;
 
   @doc("A process exit code.")
@@ -2428,11 +2426,10 @@ model PoolRemoveNodesResponseHeaders {
   @doc("The OData ID of the resource to which the request applied")
   @header("DataServiceId")
   DataServiceId: string;
-}
+};
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("The request to the Batch service was successful.")
-model PoolUpdatePropertiesResponseHeaders {
+
+alias PoolUpdatePropertiesResponseHeaders = {
   ...BatchResponseHeaders;
 
   @doc("A process exit code.")
@@ -2442,13 +2439,11 @@ model PoolUpdatePropertiesResponseHeaders {
   @doc("The OData ID of the resource to which the request applied")
   @header("DataServiceId")
   DataServiceId: string;
-}
+};
 
 alias PoolStopResizeResponseHeaders = PoolResizeResponseHeaders;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("The request to the Batch service was successful.")
-model PoolResizeResponseHeaders {
+alias PoolResizeResponseHeaders = {
   ...BatchResponseHeaders;
 
   @doc("A process exit code.")
@@ -2458,11 +2453,9 @@ model PoolResizeResponseHeaders {
   @doc("The OData ID of the resource to which the request applied")
   @header("DataServiceId")
   DataServiceId: string;
-}
+};
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("Common header values for pool requests")
-model FileResponse {
+alias FileResponse = {
   @doc("A process exit code.")
   @statusCode
   code: "200";
@@ -2487,127 +2480,122 @@ model FileResponse {
   @header
   @doc("The length of the file.")
   `Content-Length`: int64;
-}
+};
 
-/////////////////////////////////////  Headers models ///////////////////////////////////
 
-@doc("Common header values for pool requests")
-model BatchPoolHeaders is BatchMatchHeaders {
+alias BatchPoolHeaders = {
+  ...BatchMatchHeaders;
+
   @doc("The ID of the Pool to get.")
   @path
   poolId: string;
-}
+};
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("Common header values for pool requests")
-model BatchMatchHeaders is BatchModifiedSinceHeaders {
+
+alias BatchMatchHeaders = {
+  ...BatchModifiedSinceHeaders;
+
   @doc("""
 An ETag value associated with the version of the resource known to the client.
 The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
-  @header
+  @header("If-Match")
   @projectedName("python", "if__match")
-  `If-Match`?: string;
+  ifMatch?: string;
 
   @doc("""
 An ETag value associated with the version of the resource known to the client.
 The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
-  @header
+  @header("If-None-Match")
   @projectedName("python", "if_none_match")
-  `If-None-Match`?: string;
-}
+  ifNoneMatch?: string;
+};
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("Common header values for modified headers")
-model BatchModifiedSinceHeaders {
+alias BatchModifiedSinceHeaders = {
   @doc("""
 A timestamp indicating the last modified time of the resource known to the
 client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
-  @header
+  @header("If-Modified-Since")
   @encode(DateTimeKnownEncoding.rfc7231)
   @projectedName("python", "if_modified_since")
-  `If-Modified-Since`?: utcDateTime;
+  ifModifiedSince?: utcDateTime;
 
   @doc("""
 A timestamp indicating the last modified time of the resource known to the
 client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
-  @header
+  @header("If-Unmodified-Since")
   @encode(DateTimeKnownEncoding.rfc7231)
   @projectedName("python", "if_unmodified_since")
-  `If-Unmodified-Since`?: utcDateTime;
-}
+  ifUnmodifiedSince?: utcDateTime;
+};
 
 // This is the standard set of headers that most of batch apis return
 alias BatchResponseHeaders = BatchClientResponseHeaders &
   BatchEtagResponseHeaders;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("Etag related response header values")
-model BatchEtagResponseHeaders {
+
+
+alias BatchEtagResponseHeaders = {
   @doc("The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.")
-  @header
+  @header("ETag")
   @projectedName("python", "etag")
-  ETag?: string;
+  etag?: string;
 
   @doc("The time at which the resource was last modified.")
-  @header
+  @header("Last-Modified")
   @encode(DateTimeKnownEncoding.rfc7231)
-  `Last-Modified`?: utcDateTime;
-}
+  lastmodified?: utcDateTime;
+};
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("Client related response header values")
-model BatchClientResponseHeaders {
+
+alias BatchClientResponseHeaders = {
   @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
-  @header
-  `client-request-id`?: string;
+  @header("client-request-id")
+  clientrequestid?: string;
 
   @doc("A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.")
-  @header
-  `request-id`?: string;
-}
+  @header("request-id")
+  requestid?: string;
+};
 
-@doc("A response containing headers related to the Pool, if it exists.")
-model PoolDoesExistResponseHeaders {
+alias PoolDoesExistResponseHeaders = {
   ...BatchResponseHeaders;
 
   @doc("A process exit code.")
   @statusCode
   code: "200";
-}
+};
 
-@doc("The Pool does not exist.")
-model PoolDoesntExistResponseHeaders {
+alias PoolDoesNotExistResponseHeaders = {
   @doc("A process exit code.")
   @statusCode
   code: "404";
-}
+};
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("The parameters for a widget status request")
-model DeleteResponseHeaders {
+alias DeleteResponseHeaders = {
   @doc("A process exit code.")
   @statusCode
   code: "202";
 
   @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
-  @header
-  `client-request-id`?: string;
+  @header("client-request-id")
+  clientrequestid?: string;
 
   @doc("A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.")
-  @header
-  `request-id`?: string;
-}
+  @header("request-id")
+  requestid?: string;
+};
 
-@doc("The parameters for a widget status request")
-model BatchApplicationListHeaders is BatchClientRequestHeaders {
+alias BatchApplicationListHeaders = {
+  ...BatchClientRequestHeaders;
+
   @doc("""
 The maximum number of items to return in the response. A maximum of 1000
 applications can be returned.
@@ -2616,10 +2604,11 @@ applications can be returned.
   @minValue(1)
   @maxValue(1000)
   maxresults?: int32 = 1000;
-}
+};
 
-@doc("Common path parms for Node related File operartions")
-model BatchNodeFileClientPathParameters is BatchClientRequestHeaders {
+alias BatchNodeFileClientPathParameters = {
+  ...BatchClientRequestHeaders;
+
   @doc("The ID of the Pool that contains the Compute Node.")
   @path
   poolId: string;
@@ -2631,10 +2620,11 @@ model BatchNodeFileClientPathParameters is BatchClientRequestHeaders {
   @doc("The path to the file or directory that you want to delete.")
   @path
   filePath: string;
-}
+};
 
-@doc("Common path parms for Task related File operartions")
-model BatchTaskFileClientPathParameters is BatchClientRequestHeaders {
+alias BatchTaskFileClientPathParameters = {
+  ...BatchClientRequestHeaders;
+
   @doc("The ID of the Job that contains the Task.")
   @path
   jobId: string;
@@ -2646,11 +2636,9 @@ model BatchTaskFileClientPathParameters is BatchClientRequestHeaders {
   @doc("The path to the Task file that you want to get the content of.")
   @path
   filePath: string;
-}
+};
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("The parameters for a widget status request")
-model BatchClientRequestHeaders {
+alias BatchClientRequestHeaders = {
   @doc("""
 Sets the maximum time that the server can spend processing the request,
 in seconds. The default is 30 seconds.
@@ -2663,19 +2651,19 @@ in seconds. The default is 30 seconds.
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
-  @header
-  `client-request-id`?: string;
+  @header("client-request-id")
+  clientrequestid?: string;
 
   @doc("Whether the server should return the client-request-id in the response.")
-  @header
-  `return-client-request-id`?: boolean = false;
+  @header("return-client-request-id")
+  returnclientrequestid?: boolean = false;
 
   @doc("""
 The time the request was issued. Client libraries typically set this to the
 current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
-  @header
+  @header("ocp-date")
   @encode(DateTimeKnownEncoding.rfc7231)
-  `ocp-date`?: utcDateTime;
-}
+  ocpdate?: utcDateTime;
+};
