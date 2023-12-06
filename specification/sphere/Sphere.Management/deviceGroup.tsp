@@ -55,6 +55,7 @@ interface DeviceGroups
   @autoRoute
   @renamedFrom(Versions.v2024_04_01, "countDevices")
   @armResourceAction(DeviceGroup)
+  @action("countDevices")
   @post
   deprecated(
     ...ResourceInstanceParameters<DeviceGroup>,
@@ -64,6 +65,7 @@ interface DeviceGroups
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   @added(Versions.v2024_04_01)
   @autoRoute
+  @sharedRoute
   @armResourceAction(DeviceGroup)
   @post
   countDevices(

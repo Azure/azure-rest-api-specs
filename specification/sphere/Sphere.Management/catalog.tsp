@@ -77,6 +77,7 @@ interface Catalogs
   @autoRoute
   @doc("Counts devices in catalog.")
   @armResourceAction(Catalog)
+  @action("countDevices")
   @renamedFrom(Versions.v2024_04_01, "countDevices")
   @post
   deprecated(
@@ -85,6 +86,7 @@ interface Catalogs
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
   @added(Versions.v2024_04_01)
+  @sharedRoute
   @autoRoute
   @doc("Counts devices in catalog.")
   @armResourceAction(Catalog)

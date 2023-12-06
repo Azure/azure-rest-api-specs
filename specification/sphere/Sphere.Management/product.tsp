@@ -52,26 +52,28 @@ interface Products extends ProxyResourceOperationsProducts<Product> {
     ...ResourceInstanceParameters<Product>,
   ): ArmResponse<ResourceListResult<DeviceGroup>> | ErrorResponse;
 
+  @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+  @removed(Versions.v2024_04_01)
+  @autoRoute
+  @renamedFrom(Versions.v2024_04_01, "countDevices")
+  @armResourceAction(Product)
+  @action("countDevices")
+  @post
+  deprecated(
+    ...ResourceInstanceParameters<Product>,
+  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   @added(Versions.v2024_04_01)
   @autoRoute
-  @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+  @sharedRoute
   @armResourceAction(Product)
   @post
   countDevices(
     ...ResourceInstanceParameters<Product>,
   ): ArmResponse<CountDevicesResponse> | ErrorResponse;
-
-  @autoRoute
-  @removed(Versions.v2024_04_01)
-  @renamedFrom(Versions.v2024_04_01, "countDevices")
-  @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  @armResourceAction(Product)
-  @post
-  deprecated(
-    ...ResourceInstanceParameters<Product>,
-  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
-}
+  }
 
 @doc("The properties of product")
 model ProductProperties {

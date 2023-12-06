@@ -650,7 +650,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/deprecated": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/countDevices": {
       "post": {
         "operationId": "Catalogs_CountDevices",
         "tags": [
@@ -1556,7 +1556,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deprecated": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/countDevices": {
       "post": {
         "operationId": "Products_CountDevices",
         "tags": [
@@ -2078,6 +2078,69 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/countDevices": {
+      "post": {
+        "operationId": "DeviceGroups_CountDevices",
+        "tags": [
+          "DeviceGroups"
+        ],
+        "description": "Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "productName",
+            "in": "path",
+            "description": "Name of product.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
+          },
+          {
+            "name": "deviceGroupName",
+            "in": "path",
+            "description": "Name of device group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CountDeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceGroups_CountDevices": {
+            "$ref": "./examples/PostCountDevicesDeviceGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deployments": {
       "get": {
         "operationId": "Deployments_ListByDeviceGroup",
@@ -2404,69 +2467,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/deprecated": {
-      "post": {
-        "operationId": "DeviceGroups_CountDevices",
-        "tags": [
-          "DeviceGroups"
-        ],
-        "description": "Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
-            "name": "productName",
-            "in": "path",
-            "description": "Name of product.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
-          },
-          {
-            "name": "deviceGroupName",
-            "in": "path",
-            "description": "Name of device group.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CountDeviceResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeviceGroups_CountDevices": {
-            "$ref": "./examples/PostCountDevicesDeviceGroup.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices": {
