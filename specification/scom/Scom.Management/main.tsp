@@ -26,6 +26,7 @@ namespace Microsoft.Scom;
 
 /** The available API versions. */
 enum Versions {
+  /** Version 2023-07-07-preview */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_07_07_preview: "2023-07-07-preview",

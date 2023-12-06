@@ -51,14 +51,14 @@ interface Instances {
   scale is ScomArmResourceActionAsync<
     ManagedInstance,
     ScalingProperties,
-    SetServerCountResponseProperties
+    setServerCountResponseProperties
   >;
 
   /** Update SCOM servers with latest scom software. */
   patchServers is ScomArmResourceActionAsync<
     ManagedInstance,
     {},
-    PatchServersResponseProperties
+    patchServersResponseProperties
   >;
 
   /** Link Log Analytics workspace for SCOM monitoring instance */
@@ -71,7 +71,7 @@ interface Instances {
   unlinkLogAnalytics is ScomArmResourceActionAsync<
     ManagedInstance,
     {},
-    UnlinkLogAnalyticsResponseProperties
+    unlinkLogAnalyticsResponseProperties
   >;
   /** Update configuration for log analytics linking for SCOM monitoring instance */
   updateLogAnalytics is ScomArmResourceActionAsync<

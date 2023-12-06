@@ -8,41 +8,43 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Scom;
 
-enum Origin {
-  user,
-  system,
-  `user,system`,
-}
-
-enum ActionType {
-  Internal,
-}
-
 /** The license type associated with different SCOM infrastructure components. */
 enum HybridLicenseType {
+  /** None */
   None,
+
+  /** AzureHybridBenefit */
   AzureHybridBenefit,
 }
 
+/** The types of data to be ingested to Log Analytics workspace. */
 enum DataType {
+  /** State */
   State,
+
+  /** Performance */
   Performance,
+
+  /** Event */
   Event,
+
+  /** Audit */
   Audit,
 }
 
+/** The identity type */
 enum ManagedIdentityType {
+  /** No managed identity. */
   None,
-  UserAssigned,
-  SystemAssigned,
-  `SystemAssigned,UserAssigned`,
-}
 
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
+  /** User assigned managed identity. */
+  UserAssigned,
+
+  /** System assigned managed identity. */
+  SystemAssigned,
+
+  /** System and user assigned managed identity. */
+  `SystemAssigned,UserAssigned`,
 }
 
 /** The properties of a SCOM instance resource */
@@ -74,6 +76,7 @@ model MonitoringInstanceProperties {
   azureHybridBenefit?: AzureHybridBenefitProperties;
 
   /** Gets or sets the provisioning state. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Prexisting type"
   @visibility("read")
   provisioningState?: string;
 
@@ -166,6 +169,7 @@ model DomainUserCredentials {
 /** Gmsa Details */
 model GmsaDetails {
   /** Frontend IP configuration for Load Balancer, which should be an available IP in customer VNet */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Prexisting name"
   loadBalancerIP?: string;
 
   /** gMSA account under which context all Management Server services will run */
@@ -191,6 +195,7 @@ model AzureHybridBenefitProperties {
 }
 
 /** Configuration for Log Analytics linking to SCOM managed instance. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Prexisting type"
 model logAnalyticsConfiguration {
   /** The resource ID of the Log Analytics workspace to be used. */
   workspaceId?: string;
@@ -252,24 +257,28 @@ model ScalingProperties {
 }
 
 /** Properties for set server count operation */
-model SetServerCountResponseProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Prexisting name"
+model setServerCountResponseProperties {
   /** Management server count */
   serverCount?: int32;
 }
 
 /** Properties for patching servers */
-model PatchServersResponseProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Prexisting name"
+model patchServersResponseProperties {
   /** Status of the patch operation */
   status?: string;
 }
 
 /** Properties for unlinking log analytics */
-model UnlinkLogAnalyticsResponseProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Prexisting name"
+model unlinkLogAnalyticsResponseProperties {
   /** Status of the unlink operation */
   status?: string;
 }
 
 /** Updated configuration for Log Analytics linking */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Prexisting name"
 model logAnalyticsUpdateConfiguration {
   /** The types of data to be ingested to Log Analytics workspace. */
   dataTypes?: DataType[];
@@ -309,6 +318,8 @@ model MonitoredResourceProperties {
   @visibility("read")
   installType?: string;
 
+  /** Gets or sets the provisioning state. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Prexisting type"
   @visibility("read")
   provisioningState?: string;
 }
@@ -347,6 +358,8 @@ model ManagedGatewayProperties {
   @visibility("read")
   installType?: string;
 
+  /** Gets or sets the provisioning state. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Prexisting type"
   @visibility("read")
   provisioningState?: string;
 }

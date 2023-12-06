@@ -8,9 +8,11 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Scom;
 
+@armResourceOperations
 interface Operations {
     // TODO - is this correct?? Should be using `interface Operations extends Azure.ResourceManager.Operations {}`
-    /** Lists all available operations on SCOM managed instance (SCOM MI)r */
+    /** Lists all available operations on SCOM monitoring instance */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Operation list"
     @tag("Operations")
     @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/operations")
     @get
@@ -20,6 +22,8 @@ interface Operations {
         ...ResourceGroupParameter,
     ): ArmResponse<Foundations.OperationListResult> | ErrorResponse;
 
+    /** Lists all available operations on SCOM managed instance (SCOM MI) */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Operation list"
     @tag("Operations")
     @route("/providers/Microsoft.Scom/operations")
     @get
