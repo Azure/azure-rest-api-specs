@@ -373,6 +373,18 @@
         "elasticSanResourceId": {
           "type": "string",
           "description": "Required if createOption is CopyFromSanSnapshot. This is the ARM id of the source elastic san volume snapshot."
+        },
+        "provisionedBandwidthCopySpeed": {
+          "type": "string",
+          "description": "If this field is set on a snapshot and createOption is CopyStart, the snapshot will be copied at a quicker speed.",
+          "enum": [
+            "None",
+            "Enhanced"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisionedBandwidthCopyOption",
+            "modelAsString": true
+          }
         }
       },
       "required": [
