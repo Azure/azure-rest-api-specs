@@ -74,6 +74,9 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: ThreatProtection.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: PutResponseCodes
+    from: ThreatProtection.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: ProvisioningStateSpecifiedForLROPut
     from: VirtualEndpoints.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
