@@ -22,6 +22,9 @@ model ManagedInstance is TrackedResource<MonitoringInstanceProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }
 
+@friendlyName("MonitoringInstanceList")  // BUG https://github.com/microsoft/typespec/issues/2276
+model MonitoringInstanceList is Azure.Core.Page<ManagedInstance>;
+
 @armResourceOperations
 interface Instances {
   /** Get SCOM managed instance details */
@@ -42,9 +45,15 @@ interface Instances {
   /** Delete a SCOM managed instance */
   delete is ArmResourceDeleteAsync<ManagedInstance>;
   /** Lists all SCOM managed instances in a resource group */
-  listByResourceGroup is ArmResourceListByParent<ManagedInstance>;
+  listByResourceGroup is ScomArmResourceListByParent<
+    ManagedInstance,
+    MonitoringInstanceList
+  >;
   /** Lists all SCOM managed instances in a subscription */
-  listBySubscription is ArmListBySubscription<ManagedInstance>;
+  listBySubscription is ScomArmListBySubscription<
+    ManagedInstance,
+    MonitoringInstanceList
+  >;
 
   /** Scaling SCOM managed instance. */
   @action("setServerCount")

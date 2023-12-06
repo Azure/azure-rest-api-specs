@@ -102,7 +102,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedInstanceListResult"
+              "$ref": "#/definitions/MonitoringInstanceList"
             }
           },
           "default": {
@@ -139,7 +139,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedInstanceListResult"
+              "$ref": "#/definitions/MonitoringInstanceList"
             }
           },
           "default": {
@@ -1556,27 +1556,6 @@
         }
       ]
     },
-    "ManagedInstanceListResult": {
-      "type": "object",
-      "description": "The response of a ManagedInstance list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ManagedInstance items on this page",
-          "items": {
-            "$ref": "#/definitions/ManagedInstance"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ManagedInstanceOperationStatus": {
       "type": "object",
       "description": "Gets status of current and latest SCOM managed instance operation.",
@@ -1721,6 +1700,27 @@
           "readOnly": true
         }
       }
+    },
+    "MonitoringInstanceList": {
+      "type": "object",
+      "description": "Paged collection of ManagedInstance items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "MonitoringInstancePatch": {
       "type": "object",

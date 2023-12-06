@@ -22,6 +22,7 @@ using TypeSpec.Versioning;
   title: "Azure API for managing SCOM managed instances and monitored resources.",
 })
 @versioned(Versions)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations is there but not standard."
 namespace Microsoft.Scom;
 
 /** The available API versions. */
