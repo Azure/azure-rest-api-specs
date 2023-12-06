@@ -55,7 +55,7 @@ interface Products extends ProxyResourceOperationsProducts<Product> {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
   @added(Versions.v2024_04_01)
   @autoRoute
-  @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")  
+  @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   @armResourceAction(Product)
   @post
   countDevices(
@@ -71,7 +71,7 @@ interface Products extends ProxyResourceOperationsProducts<Product> {
   deprecated(
     ...ResourceInstanceParameters<Product>,
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
-  }
+}
 
 @doc("The properties of product")
 model ProductProperties {

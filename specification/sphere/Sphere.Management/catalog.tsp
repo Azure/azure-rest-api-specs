@@ -25,7 +25,6 @@ model Catalog is TrackedResource<CatalogProperties> {
 
 @doc("Catalog properties")
 model CatalogProperties {
-
   @visibility("read")
   @doc("The Azure Sphere tenant ID associated with the catalog.")
   @added(Microsoft.AzureSphere.Versions.v2024_04_01)
