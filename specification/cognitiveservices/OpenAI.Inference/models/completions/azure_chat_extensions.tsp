@@ -1,25 +1,15 @@
 import "@typespec/versioning";
-
 import "./chat_completions.tsp";
-import "./azure_cognitive_search_options.tsp";
+import "./chat_messages.tsp";
+import "./extensions/oyd/azure_cognitive_search_options.tsp";
+import "./extensions/oyd/azure_machinelearning_index_options.tsp";
+import "./extensions/oyd/azure_cosmosdb_options.tsp";
+import "./extensions/oyd/elasticsearch_options.tsp";
+import "./extensions/oyd/pinecone_options.tsp";
 
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
-
-// Explanatory notes for Azure OpenAI chat extensions (as of 2023-08-01-preview):
-//  - Although the REST API serves this capability via a distinct /extensions/chat/completions route, client libraries
-//    should abstract that detail and dynamically dispatch this on the normal chat completions path, using the
-//    specification of extensions in the options (request body payload) as the decision mechanism
-//  - A future service API version will merge /extensions/chat/completions into /chat/completions and, at that time,
-//    the above ensures there's no customer-facing change or disruption
-//  - The current schema for specifying extensions uses a supplementary `dataSources` array at the top level of the
-//    request payload. This can be problematic for dynamic selection in some languages (minimally, ambiguous or
-//    confusing) and so libraries should instead wrap this in a custom "sub-options" type: wire format will realize as
-//    ChatCompletionsOptions.DataSources, but libraries should present that instead as
-//    ChatCompletionsOptions.AzureExtensionsOptions.Extensions
-//  - Another future service API version (TBD, perhaps the same that merges into /chat/completions) should reflect the
-//    structural and naming changes in the wire format
 
 @added(ServiceApiVersions.v2023_08_01_Preview)
 @doc("""
@@ -30,8 +20,25 @@ using TypeSpec.Versioning;
 enum AzureChatExtensionType {
   @doc("Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension.")
   azureCognitiveSearch: "AzureCognitiveSearch",
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension.")
+  azureMachineLearningIndex: "AzureMLIndex",
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("Represents the use of Azure Cosmos DB as an Azure OpenAI chat extension.")
+  azureCosmosDB: "AzureCosmosDB",
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("Represents the use of Elasticsearch® index as an Azure OpenAI chat extension.")
+  elasticsearch: "Elasticsearch",
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("Represents the use of Pinecone index as an Azure OpenAI chat extension.")
+  pinecone: "Pinecone",
 }
 
+@discriminator("type")
 @added(ServiceApiVersions.v2023_08_01_Preview)
 @doc("""
   A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
@@ -44,14 +51,6 @@ model AzureChatExtensionConfiguration {
     Azure chat extensions are only compatible with Azure OpenAI.
   """)
   type: AzureChatExtensionType;
-
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "API explicitly uses arbitrary JSON structure"
-  @doc("""
-    The configuration payload used for the Azure chat extension. The structure payload details are specific to the
-    extension being configured.
-    Azure chat extensions are only compatible with Azure OpenAI.
-  """)
-  parameters: unknown;
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)
@@ -67,5 +66,86 @@ model AzureChatExtensionsMessageContext {
     course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat
     extensions.
   """)
-  messages?: ChatMessage[];
+  messages?: ChatResponseMessage[];
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A representation of the available options for the Azure OpenAI grounding enhancement.")
+model AzureChatGroundingEnhancementConfiguration {
+  @doc("Specifies whether the enhancement is enabled.")
+  enabled: boolean;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "established industry acronym"
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A representation of the available options for the Azure OpenAI optical character recognition (OCR) enhancement.")
+model AzureChatOCREnhancementConfiguration {
+  @doc("Specifies whether the enhancement is enabled.")
+  enabled: boolean;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A representation of the available Azure OpenAI enhancement configurations.")
+model AzureChatEnhancementConfiguration {
+  @doc("A representation of the available options for the Azure OpenAI grounding enhancement.")
+  grounding?: AzureChatGroundingEnhancementConfiguration;
+
+  @doc("A representation of the available options for the Azure OpenAI optical character recognition (OCR) enhancement.")
+  ocr?: AzureChatOCREnhancementConfiguration;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("""
+Represents the output results of Azure enhancements to chat completions, as configured via the matching input provided
+in the request.
+""")
+model AzureChatEnhancements {
+  @doc("The grounding enhancement that returns the bounding box of the objects detected in the image.")
+  grounding?: AzureGroundingEnhancement;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("The grounding enhancement that returns the bounding box of the objects detected in the image.")
+model AzureGroundingEnhancement {
+  @doc("The lines of text detected by the grounding enhancement.")
+  lines: AzureGroundingEnhancementLine[];
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.")
+model AzureGroundingEnhancementLine {
+  @doc("The text within the line.")
+  text: string;
+
+  @doc("An array of spans that represent detected objects and its bounding box information.")
+  spans: AzureGroundingEnhancementLineSpan[];
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A span object that represents a detected object and its bounding box information.")
+model AzureGroundingEnhancementLineSpan {
+  @doc("The text content of the span that represents the detected object.")
+  text: string;
+
+  @doc("""
+  The character offset within the text where the span begins. This offset is defined as the position of the first
+  character of the span, counting from the start of the text as Unicode codepoints.
+  """)
+  offset: int32;
+
+  @doc("The length of the span in characters, measured in Unicode codepoints.")
+  length: int32;
+
+  @doc("An array of objects representing points in the polygon that encloses the detected object.")
+  polygon: AzureGroundingEnhancementCoordinatePoint[];
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A representation of a single polygon point as used by the Azure grounding enhancement.")
+model AzureGroundingEnhancementCoordinatePoint {
+  @doc("The x-coordinate (horizontal axis) of the point.")
+  x: float32;
+
+  @doc("The y-coordinate (vertical axis) of the point.")
+  y: float32;
 }
