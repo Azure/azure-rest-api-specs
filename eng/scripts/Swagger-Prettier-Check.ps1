@@ -5,40 +5,49 @@ param (
 Set-StrictMode -Version 3
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
-
-$exitCode = 0
+. $PSScriptRoot/Logging-Functions.ps1
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
+$pathsWithErrors = @()
 
 if ($CheckAll) {
-  Write-Host "npx --no -- prettier --check $repoPath/specification/**/*.json --log-level warn"
+  LogInfo "npx --no -- prettier --check $repoPath/specification/**/*.json --log-level warn"
   npx --no -- prettier --check $repoPath/specification/**/*.json --log-level warn
   if ($LASTEXITCODE) {
-    Write-Host "##vso[task.logissue type=error;]Code style issues found please run prettier.%0D%0A> npm install%0D%0A> npx prettier --write $repoPath/specification/**/*.json"
-    $exitCode = 1
+    $pathsWithErrors += "$repoPath/specification/**/*.json"
   }
 }
 else 
 {
   $filesToCheck = @(Get-ChangedSwaggerFiles)
   if (!$filesToCheck) {
-    Write-Host "No specification files found to check."
+    LogInfo "No specification files found to check."
   }
   else {
     foreach ($file in $filesToCheck) {
-      Write-Host "npx --no -- prettier --check $repoPath/$file --log-level warn"
+      LogInfo "npx --no -- prettier --check $repoPath/$file --log-level warn"
       npx --no -- prettier --check $repoPath/$file --log-level warn
       if ($LASTEXITCODE) {
-        Write-Host "##vso[task.logissue type=error;sourcepath=$file;linenumber=1;columnnumber=1;]Code style issues found, please run prettier.%0D%0A> npm install%0D%0A> npx prettier --write $file"
-        $exitCode = 1
+        $pathsWithErrors += $file
       }
     }
   }
 }
 
-if ($exitCode) {
-  Write-Host "##vso[task.logissue type=error;]Code style issues found in the above file(s), please run prettier to update. For more detailed docs see https://aka.ms/azsdk/specs/prettier"
-  Write-Host "##vso[task.complete result=Failed;]"
+if ($pathsWithErrors.Count -gt 0)
+{
+  # DevOps only adds the first 4 errors to the github checks list so lets always add the generic one first and then as many of the individual ones as can be found afterwards
+  LogError "Code style issues found in the above file(s), please run prettier to update. For more detailed docs see https://aka.ms/azsdk/specs/prettier"
+  LogJobFailure
+
+  foreach ($path in $pathsWithErrors)
+  {
+    $errorString = "Code style issues found, please run prettier."
+    $errorString += "`n > npm install"
+    $errorString += "`n > npx prettier --write $path"
+    LogErrorForFile $path $errorString
+  }
+  exit 1
 }
 
-exit $exitCode
+exit 0

@@ -79,50 +79,73 @@ model ImageUploadRequestBody {
 enum ImageType {
   /** Invalid image. */
   InvalidImageType,
+
   /** One Bl image type */
   OneBl,
+
   /** Pluton image type */
   PlutonRuntime,
+
   /** Wifi firmware image type */
   WifiFirmware,
+
   /** Security monitor image type */
   SecurityMonitor,
+
   /** Normal world loader image type */
   NormalWorldLoader,
+
   /** Normal world dtb image type */
   NormalWorldDtb,
+
   /** Normal world kernel image type */
   NormalWorldKernel,
+
   /** Root FS image type */
   RootFs,
+
   /** Services image type */
   Services,
+
   /** Applications image type */
   Applications,
+
   /** FW config image type */
   FwConfig,
+
   /** Boot manifest image type */
   BootManifest,
+
   /** Nwfs image type */
   Nwfs,
+
   /** Trusted key store image type */
   TrustedKeystore,
+
   /** Policy image type */
   Policy,
+
   /** Customer board config image type */
   CustomerBoardConfig,
+
   /** Update certificate store image type */
   UpdateCertStore,
+
   /** Base system update manifest image type */
   BaseSystemUpdateManifest,
+
   /** Firmware update manifest image type */
   FirmwareUpdateManifest,
+
   /** Customer update manifest image type */
   CustomerUpdateManifest,
+
   /** Recovery manifest image type */
   RecoveryManifest,
+
   /** manifest set image type */
   ManifestSet,
+
   /** Other image type */
   Other,
 }

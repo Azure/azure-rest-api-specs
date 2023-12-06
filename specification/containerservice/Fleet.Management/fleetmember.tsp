@@ -7,7 +7,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 
