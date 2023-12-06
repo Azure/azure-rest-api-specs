@@ -1,16 +1,19 @@
 {
-  "title": "Instances_PatchServers",
-  "operationId": "Instances_PatchServers",
+  "title": "Instance_Scale",
+  "operationId": "Instance_Scale",
   "parameters": {
     "api-version": "2023-07-07-preview",
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResGroup",
-    "instanceName": "myInstace"
+    "instanceName": "myInstace",
+    "body": {
+      "serverCount": 3
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "status": "Started"
+        "serverCount": 3
       }
     },
     "202": {

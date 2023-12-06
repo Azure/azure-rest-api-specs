@@ -1,16 +1,29 @@
 {
-  "title": "Instances_PatchServers",
-  "operationId": "Instances_PatchServers",
+  "title": "Instance_UpdateLogAnalytics",
+  "operationId": "Instance_UpdateLogAnalytics",
   "parameters": {
     "api-version": "2023-07-07-preview",
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResGroup",
-    "instanceName": "myInstace"
+    "instanceName": "myInstance",
+    "body": {
+      "dataTypes": [
+        "State",
+        "Performance",
+        "Event",
+        "Audit"
+      ]
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "status": "Started"
+        "dataTypes": [
+          "State",
+          "Performance",
+          "Event",
+          "Audit"
+        ]
       }
     },
     "202": {

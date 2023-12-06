@@ -1,23 +1,20 @@
 {
-  "title": "Instances_PatchServers",
-  "operationId": "Instances_PatchServers",
+  "title": "Instance_Delete",
+  "operationId": "Instance_Delete",
   "parameters": {
     "api-version": "2023-07-07-preview",
     "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResGroup",
+    "resourceGroupName": "mySCOMMIGroup",
     "instanceName": "myInstace"
   },
   "responses": {
-    "200": {
-      "body": {
-        "status": "Started"
-      }
-    },
+    "200": {},
     "202": {
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Scom/locations/WESTUS/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2023-07-07-preview",
         "Location": "https://management.azure.com/providers/Microsoft.Scom/locations/WESTUS/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2023-07-07-preview"
       }
-    }
+    },
+    "204": {}
   }
 }
