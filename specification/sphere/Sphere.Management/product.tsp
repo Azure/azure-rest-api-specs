@@ -73,7 +73,7 @@ interface Products extends ProxyResourceOperationsProducts<Product> {
   countDevices(
     ...ResourceInstanceParameters<Product>,
   ): ArmResponse<CountDevicesResponse> | ErrorResponse;
-  }
+}
 
 @doc("The properties of product")
 model ProductProperties {
