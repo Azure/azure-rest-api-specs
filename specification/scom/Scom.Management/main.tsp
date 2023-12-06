@@ -7,6 +7,7 @@ import "./ManagedInstance.tsp";
 import "./MonitoredResource.tsp";
 import "./ManagedGateway.tsp";
 import "./routes.tsp";
+import "./builders.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

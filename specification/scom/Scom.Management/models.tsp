@@ -79,7 +79,7 @@ model MonitoringInstanceProperties {
 
   /** Details of Log Analytics workspace and data being ingested. */
   @visibility("read")
-  logAnalyticsProperties?: LogAnalyticsConfiguration;
+  logAnalyticsProperties?: logAnalyticsConfiguration;
 
   /** Gets status of current and latest SCOM managed instance operations. */
   @visibility("read")
@@ -191,7 +191,7 @@ model AzureHybridBenefitProperties {
 }
 
 /** Configuration for Log Analytics linking to SCOM managed instance. */
-model LogAnalyticsConfiguration {
+model logAnalyticsConfiguration {
   /** The resource ID of the Log Analytics workspace to be used. */
   workspaceId?: string;
 
@@ -270,7 +270,7 @@ model UnlinkLogAnalyticsResponseProperties {
 }
 
 /** Updated configuration for Log Analytics linking */
-model LogAnalyticsUpdateConfiguration {
+model logAnalyticsUpdateConfiguration {
   /** The types of data to be ingested to Log Analytics workspace. */
   dataTypes?: DataType[];
 }

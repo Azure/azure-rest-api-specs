@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using Microsoft.Scom.Builders;
 
 namespace Microsoft.Scom;
 /** A SCOM instance resource */
@@ -47,35 +48,35 @@ interface Instances {
 
   /** Scaling SCOM managed instance. */
   @action("setServerCount")
-  scale is ArmResourceActionAsync<
+  scale is ScomArmResourceActionAsync<
     ManagedInstance,
     ScalingProperties,
     SetServerCountResponseProperties
   >;
 
   /** Update SCOM servers with latest scom software. */
-  patchServers is ArmResourceActionAsync<
+  patchServers is ScomArmResourceActionAsync<
     ManagedInstance,
     {},
     PatchServersResponseProperties
   >;
 
   /** Link Log Analytics workspace for SCOM monitoring instance */
-  linkLogAnalytics is ArmResourceActionAsync<
+  linkLogAnalytics is ScomArmResourceActionAsync<
     ManagedInstance,
-    LogAnalyticsConfiguration,
-    LogAnalyticsConfiguration
+    logAnalyticsConfiguration,
+    logAnalyticsConfiguration
   >;
   /** Unlink Log Analytics workspace for SCOM monitoring instance */
-  unlinkLogAnalytics is ArmResourceActionAsync<
+  unlinkLogAnalytics is ScomArmResourceActionAsync<
     ManagedInstance,
     {},
     UnlinkLogAnalyticsResponseProperties
   >;
   /** Update configuration for log analytics linking for SCOM monitoring instance */
-  updateLogAnalytics is ArmResourceActionAsync<
+  updateLogAnalytics is ScomArmResourceActionAsync<
     ManagedInstance,
-    LogAnalyticsUpdateConfiguration,
-    LogAnalyticsUpdateConfiguration
+    logAnalyticsUpdateConfiguration,
+    logAnalyticsUpdateConfiguration
   >;
 }

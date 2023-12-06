@@ -424,7 +424,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LogAnalyticsConfiguration"
+              "$ref": "#/definitions/logAnalyticsConfiguration"
             }
           }
         ],
@@ -432,7 +432,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LogAnalyticsConfiguration"
+              "$ref": "#/definitions/logAnalyticsConfiguration"
             }
           },
           "202": {
@@ -446,6 +446,10 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
               }
             }
           },
@@ -927,6 +931,10 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
               }
             }
           },
@@ -996,6 +1004,10 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
               }
             }
           },
@@ -1065,6 +1077,10 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
               }
             }
           },
@@ -1112,7 +1128,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LogAnalyticsUpdateConfiguration"
+              "$ref": "#/definitions/logAnalyticsUpdateConfiguration"
             }
           }
         ],
@@ -1120,7 +1136,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LogAnalyticsUpdateConfiguration"
+              "$ref": "#/definitions/logAnalyticsUpdateConfiguration"
             }
           },
           "202": {
@@ -1134,6 +1150,10 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
               }
             }
           },
@@ -1341,40 +1361,6 @@
       "x-ms-enum": {
         "name": "HybridLicenseType",
         "modelAsString": true
-      }
-    },
-    "LogAnalyticsConfiguration": {
-      "type": "object",
-      "description": "Configuration for Log Analytics linking to SCOM managed instance.",
-      "properties": {
-        "workspaceId": {
-          "type": "string",
-          "description": "The resource ID of the Log Analytics workspace to be used."
-        },
-        "dataTypes": {
-          "type": "array",
-          "description": "The types of data to be ingested to Log Analytics workspace.",
-          "items": {
-            "$ref": "#/definitions/DataType"
-          }
-        },
-        "importData": {
-          "type": "boolean",
-          "description": "A one-time optional parameter to import data of last 7 days."
-        }
-      }
-    },
-    "LogAnalyticsUpdateConfiguration": {
-      "type": "object",
-      "description": "Updated configuration for Log Analytics linking",
-      "properties": {
-        "dataTypes": {
-          "type": "array",
-          "description": "The types of data to be ingested to Log Analytics workspace.",
-          "items": {
-            "$ref": "#/definitions/DataType"
-          }
-        }
       }
     },
     "ManagedGateway": {
@@ -1763,7 +1749,7 @@
           "readOnly": true
         },
         "logAnalyticsProperties": {
-          "$ref": "#/definitions/LogAnalyticsConfiguration",
+          "$ref": "#/definitions/logAnalyticsConfiguration",
           "description": "Details of Log Analytics workspace and data being ingested.",
           "readOnly": true
         },
@@ -1862,6 +1848,40 @@
             "value": "2023-07-07-preview"
           }
         ]
+      }
+    },
+    "logAnalyticsConfiguration": {
+      "type": "object",
+      "description": "Configuration for Log Analytics linking to SCOM managed instance.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The resource ID of the Log Analytics workspace to be used."
+        },
+        "dataTypes": {
+          "type": "array",
+          "description": "The types of data to be ingested to Log Analytics workspace.",
+          "items": {
+            "$ref": "#/definitions/DataType"
+          }
+        },
+        "importData": {
+          "type": "boolean",
+          "description": "A one-time optional parameter to import data of last 7 days."
+        }
+      }
+    },
+    "logAnalyticsUpdateConfiguration": {
+      "type": "object",
+      "description": "Updated configuration for Log Analytics linking",
+      "properties": {
+        "dataTypes": {
+          "type": "array",
+          "description": "The types of data to be ingested to Log Analytics workspace.",
+          "items": {
+            "$ref": "#/definitions/DataType"
+          }
+        }
       }
     }
   },
