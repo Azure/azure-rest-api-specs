@@ -11,6 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "This is defined in other swagger file - hybridconnectivity.json"
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
@@ -46,8 +47,6 @@ model GenerateAwsTemplateRequest {
 }
 
 //---------------------------------------------- Operations ----------------------------------------------
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/")
