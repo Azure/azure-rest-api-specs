@@ -1043,6 +1043,7 @@
       "type": "object",
       "properties": {
         "healthState": {
+          "description": "Health state of the resource",
           "$ref": "#/definitions/HealthState"
         },
         "impactingReasons": {
@@ -1076,124 +1077,6 @@
       "x-ms-enum": {
         "name": "jobConfigurationType",
         "modelAsString": true
-      }
-    },
-    "OperationsDisplayDefinition": {
-      "description": "Defines the workload operation.",
-      "required": [
-        "description",
-        "operation",
-        "provider",
-        "resource"
-      ],
-      "type": "object",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Defines the workload provider."
-        },
-        "resource": {
-          "type": "string",
-          "description": "Defines the workload resource."
-        },
-        "operation": {
-          "type": "string",
-          "description": "Defines the workload operation."
-        },
-        "description": {
-          "type": "string",
-          "description": "Describes the workload operation."
-        }
-      }
-    },
-    "OperationsDefinition": {
-      "required": [
-        "display",
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation."
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "description": "Indicates whether the operation applies to data-plane."
-        },
-        "origin": {
-          "enum": [
-            "NotSpecified",
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "description": "Defines the workload operation origin.",
-          "x-ms-enum": {
-            "name": "OperationProperties",
-            "modelAsString": true
-          }
-        },
-        "display": {
-          "description": "Display information of the operation.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/OperationsDisplayDefinition"
-            }
-          ]
-        },
-        "actionType": {
-          "enum": [
-            "NotSpecified",
-            "Internal"
-          ],
-          "x-ms-enum": {
-            "name": "WorkloadMonitorActionType",
-            "modelAsString": true
-          },
-          "description": "Defines the action type of workload operation.",
-          "type": "string"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Defines the workload operation properties."
-        }
-      },
-      "description": "Properties of an Operation."
-    },
-    "OperationsContent": {
-      "type": "object",
-      "description": "Defines the workload operation content.",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Operations content.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OperationsDefinition"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "OperationsDefinitionArrayResponseWithContinuation": {
-      "type": "object",
-      "description": "Defines the workload operation definition response.",
-      "properties": {
-        "value": {
-          "description": "Defines the workload operation definition response properties.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationsDefinition"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "The URL to get to the next set of results, if there are any.",
-          "type": "string"
-        }
       }
     },
     "Error": {
@@ -1331,11 +1214,7 @@
         },
         "errors": {
           "description": "Defines the SAP monitor errors.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Error"
-            }
-          ],
+          "$ref": "#/definitions/Error",
           "readOnly": true
         },
         "appLocation": {
@@ -1780,17 +1659,12 @@
         },
         "health": {
           "readOnly": true,
-          "type": "object",
           "description": "Resource health details",
           "$ref": "#/definitions/Health"
         },
         "errors": {
           "description": "Defines the provider instance errors.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Error"
-            }
-          ],
+          "$ref": "#/definitions/Error",
           "readOnly": true
         },
         "providerSettings": {
