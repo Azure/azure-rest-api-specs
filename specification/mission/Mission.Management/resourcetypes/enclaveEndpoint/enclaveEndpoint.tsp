@@ -55,8 +55,8 @@ model EnclaveEndpointRule {
 
 @doc("Enclave Endpoint Rule Properties")
 model EnclaveEndpointDestinationRule is EndpointRuleBase {
-  @doc("Protocol. Options specified by Endpoint Protocol Enum.")
-  protocol?: EnclaveEndpointProtocol[];
+  @doc("Protocols. Options specified by Endpoint Protocol Enum.")
+  protocols?: EnclaveEndpointProtocol[];
 }
 
 @doc("Enclave Endpoint Resource properties")

@@ -85,8 +85,8 @@ model CommunityEndpointDestinationRule is EndpointRuleBase {
   @doc("Destination Type.")
   destinationType?: DestinationType;
 
-  @doc("Protocol. Options specified by Endpoint Protocol Enum.")
-  protocol?: CommunityEndpointProtocol[];
+  @doc("Protocols. Options specified by Endpoint Protocol Enum.")
+  protocols?: CommunityEndpointProtocol[];
 
   @doc("Transit Hub Resource Id.")
   transitHubResourceId?: TransitHubResourceId;
