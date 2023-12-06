@@ -33,7 +33,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/javaComponents": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/javaComponents": {
       "get": {
         "tags": [
           "JavaComponents"
@@ -52,7 +52,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -82,7 +83,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/javaComponents/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/javaComponents/{name}": {
       "get": {
         "tags": [
           "JavaComponents"
@@ -101,14 +102,16 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "name",
             "in": "path",
             "description": "Name of the Java Component.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -120,10 +123,6 @@
             "schema": {
               "$ref": "#/definitions/JavaComponent"
             }
-          },
-          "404": {
-            "description": "Not found.",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "Common error response.",
@@ -157,14 +156,16 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "name",
             "in": "path",
             "description": "Name of the Java Component.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "javaComponentEnvelope",
@@ -228,14 +229,16 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "name",
             "in": "path",
             "description": "Name of the Java Component.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "javaComponentEnvelope",
@@ -298,23 +301,22 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "name",
             "in": "path",
             "description": "Name of the Java Component.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Java Component deleted successfully."
-          },
           "202": {
             "description": "Delete operation is in progress.",
             "headers": {
