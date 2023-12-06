@@ -5,15 +5,19 @@
       "keywords": "<asset name>",
       "limit": 3,
       "filter": {
+        "kind": "OrFilter",
         "or": [
           {
+            "kind": "TermFilter",
             "term": "ExampleTerm"
           },
           {
+            "kind": "TermFilter",
             "term": "ExampleTerm",
             "glossary": "GlossaryName"
           },
           {
+            "kind": "TermFilter",
             "termGuid": "<term guid>"
           }
         ]

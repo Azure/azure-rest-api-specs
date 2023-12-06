@@ -5,23 +5,29 @@
       "keywords": null,
       "limit": 10,
       "filter": {
+        "kind": "AndFilter",
         "and": [
           {
-            "entityType": "azure_blob_path"
+            "kind": "TypeFilter",
+            "typeName": "azure_blob_path"
           },
           {
+            "kind": "AttributeFilter",
             "attributeName": "qualifiedName",
             "operator": "contains",
             "attributeValue": ".csv"
           },
           {
+            "kind": "OrFilter",
             "or": [
               {
+                "kind": "AttributeFilter",
                 "attributeName": "name",
                 "operator": "eq",
                 "attributeValue": "exampledata.csv"
               },
               {
+                "kind": "AttributeFilter",
                 "attributeName": "qualifiedName",
                 "operator": "prefix",
                 "attributeValue": "https://"

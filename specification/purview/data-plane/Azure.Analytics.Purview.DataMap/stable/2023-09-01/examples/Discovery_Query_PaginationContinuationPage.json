@@ -4,12 +4,15 @@
     "searchRequest": {
       "keywords": "exampledata",
       "filter": {
+        "kind": "AndFilter",
         "and": [
           {
+            "kind": "ObjectTypeFilter",
             "objectType": "Files"
           },
           {
-            "entityType": "azure_blob_path"
+            "kind": "TypeFilter",
+            "typeName": "azure_blob_path"
           }
         ]
       },

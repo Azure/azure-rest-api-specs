@@ -4,19 +4,25 @@
     "searchRequest": {
       "keywords": "exampledata",
       "filter": {
+        "kind": "AndFilter",
         "and": [
           {
+            "kind": "ObjectTypeFilter",
             "objectType": "Files"
           },
           {
+            "kind": "NotFilter",
             "not": {
+              "kind": "OrFilter",
               "or": [
                 {
+                  "kind": "AttributeFilter",
                   "attributeName": "size",
                   "operator": "eq",
                   "attributeValue": 0
                 },
                 {
+                  "kind": "AttributeFilter",
                   "attributeName": "fileSize",
                   "operator": "eq",
                   "attributeValue": 0
@@ -25,8 +31,10 @@
             }
           },
           {
+            "kind": "NotFilter",
             "not": {
-              "classification": "MICROSOFT.SYSTEM.TEMP_FILE"
+              "kind": "ClassificationFilter",
+              "classificationName": "MICROSOFT.SYSTEM.TEMP_FILE"
             }
           }
         ]

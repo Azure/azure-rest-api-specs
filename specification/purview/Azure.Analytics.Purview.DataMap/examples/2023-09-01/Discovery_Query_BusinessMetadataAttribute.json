@@ -5,23 +5,28 @@
       "keywords": null,
       "limit": 10,
       "filter": {
+        "kind": "OrFilter",
         "or": [
           {
+            "kind": "AttributeFilter",
             "attributeName": "<BusinessMetadataName>.<StringAttributeName>",
             "operator": "eq|ne|contains|prefix",
             "attributeValue": "string value"
           },
           {
+            "kind": "AttributeFilter",
             "attributeName": "<BusinessMetadataName>.<NumberAttributeName>",
             "operator": "eq|ne|gt|ge|lt|le",
             "attributeValue": 123
           },
           {
+            "kind": "AttributeFilter",
             "attributeName": "<BusinessMetadataName>.<BooleanAttributeName>",
             "operator": "eq|ne",
             "attributeValue": true
           },
           {
+            "kind": "AttributeFilter",
             "attributeName": "<BusinessMetadataName>.<DateAttributeName>",
             "operator": "timerange",
             "attributeValue": "LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D"

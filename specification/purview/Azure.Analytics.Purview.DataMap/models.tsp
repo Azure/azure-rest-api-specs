@@ -2158,9 +2158,23 @@ model ScanInfoFilter extends SearchFilter {
 model GlossaryFilter extends SearchFilter {
   @doc("Glossary filter for search")
   kind: "GlossaryFilter";
-
   @doc("Glossary type. Either AtlasGlossary or AtlasGlossaryType")
   glossaryType: string;
+}
+
+@doc("Glossary term filter for search")
+model TermFilter extends SearchFilter {
+  @doc("Term filter for search")
+  kind: "TermFilter";
+
+  @doc("Glossary name")
+  glossary?: string;
+
+  @doc("Term name")
+  term?: string;
+
+  @doc("Term name")
+  termGuid?: string;
 }
 
 @doc("Id filter for search")

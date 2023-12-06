@@ -8972,6 +8972,30 @@
         }
       }
     },
+    "TermFilter": {
+      "type": "object",
+      "description": "Glossary term filter for search",
+      "properties": {
+        "glossary": {
+          "type": "string",
+          "description": "Glossary name"
+        },
+        "term": {
+          "type": "string",
+          "description": "Term name"
+        },
+        "termGuid": {
+          "type": "string",
+          "description": "Term name"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchFilter"
+        }
+      ],
+      "x-ms-discriminator-value": "TermFilter"
+    },
     "TermSearchResultValue": {
       "type": "object",
       "description": "The context.",

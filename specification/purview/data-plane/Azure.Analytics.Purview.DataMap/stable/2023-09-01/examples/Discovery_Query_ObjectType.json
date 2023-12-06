@@ -5,33 +5,40 @@
       "keywords": null,
       "limit": 10,
       "filter": {
+        "kind": "OrFilter",
         "or": [
-          [
-            {
-              "objectType": "Dashboards"
-            },
-            {
-              "objectType": "Data pipelines"
-            },
-            {
-              "objectType": "Files"
-            },
-            {
-              "objectType": "Folders"
-            },
-            {
-              "objectType": "Glossary terms"
-            },
-            {
-              "objectType": "Reports"
-            },
-            {
-              "objectType": "Stored procedures"
-            },
-            {
-              "objectType": "Tables"
-            }
-          ]
+          {
+            "kind": "ObjectTypeFilter",
+            "objectType": "Dashboards"
+          },
+          {
+            "kind": "ObjectTypeFilter",
+            "objectType": "Data pipelines"
+          },
+          {
+            "kind": "ObjectTypeFilter",
+            "objectType": "Files"
+          },
+          {
+            "kind": "ObjectTypeFilter",
+            "objectType": "Folders"
+          },
+          {
+            "kind": "ObjectTypeFilter",
+            "objectType": "Glossary terms"
+          },
+          {
+            "kind": "ObjectTypeFilter",
+            "objectType": "Reports"
+          },
+          {
+            "kind": "ObjectTypeFilter",
+            "objectType": "Stored procedures"
+          },
+          {
+            "kind": "ObjectTypeFilter",
+            "objectType": "Tables"
+          }
         ]
       }
     },

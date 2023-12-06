@@ -5,18 +5,22 @@
       "keywords": null,
       "limit": 10,
       "filter": {
+        "kind": "OrFilter",
         "or": [
           {
+            "kind": "AttributeFilter",
             "attributeName": "name",
             "operator": "eq",
             "attributeValue": "exampledata.csv"
           },
           {
+            "kind": "AttributeFilter",
             "attributeName": "createTime",
             "operator": "ge",
             "attributeValue": 1545580800000
           },
           {
+            "kind": "AttributeFilter",
             "attributeName": "modifiedTime",
             "operator": "timerange",
             "attributeValue": "LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D"
