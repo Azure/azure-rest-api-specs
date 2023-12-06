@@ -47,7 +47,7 @@ model PartnerExperimentationWorkspaceProperties {
   experimentationEnabled?: boolean;
 
   @doc("Access policy for an experimentation workspace")
-  accessPolicy?: AccessPolicy;
+  accessPolicy: AccessPolicy;
 
   @doc("DataSource for an experimentation workspace")
   dataSource?: DataSource;
@@ -56,7 +56,7 @@ model PartnerExperimentationWorkspaceProperties {
 @doc("Access policy for an experimentation workspace")
 model AccessPolicy {
   @doc("Application id used for access to the experimentation workspace")
-  authApplicationId?: string;
+  authApplicationId: string;
 }
 
 @doc("DataSource for an experimentation workspace")
