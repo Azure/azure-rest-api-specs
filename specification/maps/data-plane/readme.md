@@ -69,6 +69,33 @@ input-file:
   - Weather/stable/1.1/weather.json
 ```
 
+### Tag: package-stable-2023-07-01
+
+These settings apply only when `--tag=package-stable-2023-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-stable-2023-07-01'
+input-file:
+  - Common/stable/2023-06-01/common.json
+  - Creator/stable/2023-07-01/alias.json
+  - Creator/stable/2023-07-01/dataset.json
+  - Creator/stable/2023-07-01/dwgconversion.json
+  - Creator/stable/2023-07-01/features.json
+  - Creator/stable/2023-07-01/featurestate.json
+  - Creator/stable/2023-07-01/mapconfiguration.json
+  - Creator/stable/2023-07-01/style.json
+  - Creator/stable/2023-07-01/tileset.json
+  - Microsoft.Maps/Data/preview/2.0/data.json
+  - DataRegistry/stable/2023-06-01/dataregistry.json
+  - Geolocation/preview/1.0/geolocation.json
+  - Render/stable/2022-08-01/render.json
+  - Route/preview/1.0/route.json
+  - Search/stable/2023-06-01/search.json
+  - Spatial/stable/2022-08-01/spatial.json
+  - Timezone/preview/1.0/timezone.json
+  - Traffic/preview/1.0/traffic.json
+  - Weather/stable/1.1/weather.json
+```
+
 ### Tag: package-preview-2.0
 
 These settings apply only when `--tag=package-preview-2.0` is specified on the command line.
