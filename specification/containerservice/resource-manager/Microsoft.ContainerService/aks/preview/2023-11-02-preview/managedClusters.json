@@ -5557,10 +5557,12 @@
               "description": "If set to true, the resources used by daemonset will be taken into account when making scaling down decisions."
             },
             "expander": {
-              "type": "string",
-              "title": "Type of node group expander to be used in scale up. Set to be deprecated, please use 'expanders' flag in the future.",
-              "description": "Available values are: 'least-waste', 'most-pods', 'priority', 'random'.",
-              "$ref": "#/definitions/expander"
+              "type": "array",
+              "title": "Type of node group expander to be used in scale up.",
+              "description": "Available values are: 'least-waste', 'most-pods', 'priority', 'random'. If multiple expanders are configured, they will be considered in the order in which they are listed, with the first one being considered first.",
+              "items": {
+                "$ref": "#/definitions/expander"
+              }
             },
             "max-empty-bulk-delete": {
               "type": "string",
