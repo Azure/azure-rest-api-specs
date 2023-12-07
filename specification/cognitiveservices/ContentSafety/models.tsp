@@ -422,8 +422,8 @@ model AddImageIncidentSamplesResult {
 @doc("Annotate text options")
 @added(Versions.v2023_10_30_Preview)
 model AnnotateTextOptions {
-  @doc("The text needs to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
-  @maxLength(10000)
+  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(1000)
   text: string;
 
   @doc("The category will be analyzed, you can set your customized category or one of built-in categories in 'Hate','Selfharm', 'Sexual' and 'Violence'.")
