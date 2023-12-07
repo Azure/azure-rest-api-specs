@@ -39,6 +39,23 @@ model MonitoringInstanceList {
   nextLink?: ResourceLocation<ManagedInstance>;
 }
 
+// Workaround
+@@projectedName(Instances.createOrUpdate::parameters.resource,
+  "json",
+  "ManagedInstance"
+);
+@@OpenAPI.extension(Instances.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "ManagedInstance"
+);
+@@projectedName(Instances.update::parameters.properties,
+  "json",
+  "ManagedInstance"
+);
+@@OpenAPI.extension(Instances.update::parameters.properties,
+  "x-ms-client-name",
+  "ManagedInstance"
+);
 @armResourceOperations
 interface Instances {
   /** Get SCOM managed instance details */
