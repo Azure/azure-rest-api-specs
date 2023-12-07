@@ -1,29 +1,33 @@
 {
-  "title": "Instance_UpdateLogAnalytics",
-  "operationId": "Instance_UpdateLogAnalytics",
+  "title": "Instances_LinkLogAnalytics",
+  "operationId": "Instances_LinkLogAnalytics",
   "parameters": {
     "api-version": "2023-07-07-preview",
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResGroup",
     "instanceName": "myInstance",
     "body": {
+      "workspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/00000000/providers/microsoft.operationalinsights/workspaces/00000000",
       "dataTypes": [
         "State",
         "Performance",
         "Event",
         "Audit"
-      ]
+      ],
+      "importData": true
     }
   },
   "responses": {
     "200": {
       "body": {
+        "workspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/00000000/providers/microsoft.operationalinsights/workspaces/00000000",
         "dataTypes": [
           "State",
           "Performance",
           "Event",
           "Audit"
-        ]
+        ],
+        "importData": true
       }
     },
     "202": {

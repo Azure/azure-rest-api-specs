@@ -10,10 +10,10 @@ namespace Microsoft.Scom;
 
 /** The license type associated with different SCOM infrastructure components. */
 enum HybridLicenseType {
-  /** None */
+  /** No license */
   None,
 
-  /** AzureHybridBenefit */
+  /** Azure Hybrid Benefit license */
   AzureHybridBenefit,
 }
 
