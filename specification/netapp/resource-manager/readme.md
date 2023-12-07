@@ -35,7 +35,7 @@ tag: package-netapp-2023-07-01
 
 These settings apply only when `--tag=package-netapp-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07-01'
+```yaml $(tag) == 'package-netapp-2023-07-01'
 input-file:
   - Microsoft.NetApp/stable/2023-07-01/netapp.json
 ```
@@ -47,7 +47,6 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 ```yaml $(tag) == 'package-preview-2023-05'
 input-file:
   - Microsoft.NetApp/preview/2023-05-01-preview/netapp.json
-tag: package-2023-07
 ```
 
 

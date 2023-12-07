@@ -22,6 +22,7 @@ azure-arm: true
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-netapp-2023-07-01
+  - tag: package-preview-2023-05
   - tag: package-netapp-2023-05-01
   - tag: package-netapp-2022-11-01-preview
   - tag: package-netapp-2022-11-01
@@ -60,6 +61,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-netapp-2023-07-01' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2023-07-01/$(namespace)
+```
+
+### Tag: package-preview-2023-05 and go
+
+These settings apply only when `--tag=package-preview-2023-05 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-preview-2023-05' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2023-05-01-preview/$(namespace)
 ```
 
 ### Tag: package-netapp-2023-05-01 and go
