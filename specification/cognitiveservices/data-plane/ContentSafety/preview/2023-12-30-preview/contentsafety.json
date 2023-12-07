@@ -2047,13 +2047,6 @@
           },
           "x-ms-identifiers": []
         },
-        "citation": {
-          "type": "array",
-          "description": "Chunks in the original text detected as harmful content. Analysis result and scores are caused by these.",
-          "items": {
-            "type": "string"
-          }
-        },
         "incidentMatches": {
           "type": "array",
           "description": "The incident match details.",
@@ -2061,6 +2054,13 @@
             "$ref": "#/definitions/IncidentMatch"
           },
           "x-ms-identifiers": []
+        },
+        "citation": {
+          "type": "array",
+          "description": "Chunks in the original text detected as harmful content. Analysis result and scores are caused by these.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -2090,10 +2090,14 @@
       "type": "object",
       "description": "The text annotation response.",
       "properties": {
-        "label": {
+        "id": {
           "type": "integer",
           "format": "int32",
-          "description": "The label."
+          "description": "The id of annotated subcategory."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of annotated subcategory."
         },
         "reasoning": {
           "type": "string",
@@ -2101,7 +2105,8 @@
         }
       },
       "required": [
-        "label"
+        "id",
+        "name"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -2165,7 +2170,90 @@
         }
       }
     },
-    "DetectUngroundednessGptxResource": {
+    "DetectUngroundednessOptions": {
+      "type": "object",
+      "description": "The request of ungroudedness detection.",
+      "properties": {
+        "domain": {
+          "$ref": "#/definitions/Domain",
+          "description": "Domain of the text to be analyzed."
+        },
+        "task": {
+          "$ref": "#/definitions/Task",
+          "description": "Task type of the text to be analyzed."
+        },
+        "query": {
+          "type": "string",
+          "description": "This is optional and only required for QnA task."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed."
+        },
+        "groundingSources": {
+          "type": "array",
+          "description": "Source information that serves as grounding source.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gptResource": {
+          "$ref": "#/definitions/GptResource",
+          "description": "GPT resource connection information."
+        }
+      },
+      "required": [
+        "text",
+        "groundingSources"
+      ]
+    },
+    "DetectUngroundednessResult": {
+      "type": "object",
+      "description": "The response of ungroudedness detection.",
+      "properties": {
+        "ungrounded": {
+          "type": "boolean",
+          "description": "Detection result for ungrouded text."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Model confidence store in the analysis results."
+        },
+        "ungroundedPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of Ungrounded Text."
+        },
+        "ungroundedDetails": {
+          "type": "array",
+          "description": "The detailed information about a text identified as ungroundness.",
+          "items": {
+            "$ref": "#/definitions/UngroundedDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "ungrounded",
+        "confidenceScore",
+        "ungroundedPercentage",
+        "ungroundedDetails"
+      ]
+    },
+    "Domain": {
+      "type": "string",
+      "description": "domain category.",
+      "enum": [
+        "Generic",
+        "Medical"
+      ],
+      "x-ms-enum": {
+        "name": "Domain",
+        "modelAsString": true
+      }
+    },
+    "GptResource": {
       "type": "object",
       "description": "Connection information for GPT resource.",
       "properties": {
@@ -2181,61 +2269,6 @@
       "required": [
         "azureOpenAIEndpoint",
         "deploymentName"
-      ]
-    },
-    "DetectUngroundednessOptions": {
-      "type": "object",
-      "description": "The request of ungroudedness detection.",
-      "properties": {
-        "domainCategory": {
-          "$ref": "#/definitions/TextDomainCategory",
-          "description": "Domain of the text to be analyzed."
-        },
-        "task": {
-          "$ref": "#/definitions/TextTask",
-          "description": "Task type of the text to be analyzed."
-        },
-        "qaQuery": {
-          "type": "string",
-          "description": "This is optional and only used for QnA or chat task."
-        },
-        "text": {
-          "type": "string",
-          "description": "The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request."
-        },
-        "groundingSources": {
-          "type": "array",
-          "description": "Source information that serves as grounding source. We support a maximum of 10k Unicode characters (Unicode code points) in all grounding sources of one request.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "gptxResource": {
-          "$ref": "#/definitions/DetectUngroundednessGptxResource",
-          "description": "GPT resources connection information for BYO scenario."
-        }
-      },
-      "required": [
-        "domainCategory",
-        "text",
-        "groundingSources"
-      ]
-    },
-    "DetectUngroundednessResult": {
-      "type": "object",
-      "description": "The response of ungroudedness detection.",
-      "properties": {
-        "ungroundednessAnalysis": {
-          "type": "array",
-          "description": "Ungroudedness detection result.",
-          "items": {
-            "$ref": "#/definitions/UngroundednessAnalysis"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "ungroundednessAnalysis"
       ]
     },
     "ImageCategoriesAnalysis": {
@@ -2472,26 +2505,6 @@
       },
       "required": [
         "detected"
-      ]
-    },
-    "LabelDefinition": {
-      "type": "object",
-      "description": "Label definition.",
-      "properties": {
-        "label": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "enumerations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "label",
-        "enumerations"
       ]
     },
     "ListImageIncidentSampleResult": {
@@ -2740,6 +2753,42 @@
         "incidentSampleIds"
       ]
     },
+    "SubCategory": {
+      "type": "object",
+      "description": "Label definition.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "statements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "statements"
+      ]
+    },
+    "Task": {
+      "type": "string",
+      "description": "task type.",
+      "enum": [
+        "Summarization",
+        "QnA"
+      ],
+      "x-ms-enum": {
+        "name": "Task",
+        "modelAsString": true
+      }
+    },
     "TextBlocklist": {
       "type": "object",
       "description": "Text Blocklist.",
@@ -2890,12 +2939,11 @@
           },
           "x-ms-identifiers": []
         },
-        "labelDefinitions": {
+        "subCategories": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LabelDefinition"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/SubCategory"
+          }
         },
         "emphases": {
           "type": "array",
@@ -2910,21 +2958,8 @@
       },
       "required": [
         "categoryName",
-        "labelDefinitions"
+        "subCategories"
       ]
-    },
-    "TextDomainCategory": {
-      "type": "string",
-      "description": "Text analyze domain category.",
-      "enum": [
-        "Office",
-        "Medical",
-        "Generic"
-      ],
-      "x-ms-enum": {
-        "name": "TextDomainCategory",
-        "modelAsString": true
-      }
     },
     "TextIncident": {
       "type": "object",
@@ -3009,118 +3044,23 @@
         "incidentSampleId"
       ]
     },
-    "TextTask": {
-      "type": "string",
-      "description": "Text analyze task.",
-      "enum": [
-        "QNA",
-        "Chat",
-        "Summarization"
-      ],
-      "x-ms-enum": {
-        "name": "TextTask",
-        "modelAsString": true
-      }
-    },
-    "UngroundedTextDetails": {
+    "UngroundedDetails": {
       "type": "object",
       "description": "The detailed information about a text identified as ungroundness.",
       "properties": {
-        "ungroundedTextOffset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The index of the ungrounded text from the beginning of the original text."
-        },
-        "ungroundedTextLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the ungrounded text."
-        },
-        "ungroundedText": {
+        "text": {
           "type": "string",
           "description": "The ungrounded text."
         },
-        "ungroundedTextReason": {
+        "reason": {
           "type": "string",
           "description": "The reason or explanation for identifying the text as ungrounded."
         }
       },
       "required": [
-        "ungroundedTextOffset",
-        "ungroundedTextLength",
-        "ungroundedText",
-        "ungroundedTextReason"
+        "text",
+        "reason"
       ]
-    },
-    "UngroundednessAnalysis": {
-      "type": "object",
-      "description": "The detection result of ungroudedness.",
-      "properties": {
-        "isUngrounded": {
-          "type": "boolean",
-          "description": "Detection result for ungrouded text."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "float",
-          "description": "Model confidence store in the analysis results."
-        },
-        "ungroundednessPercentage": {
-          "type": "number",
-          "format": "float",
-          "description": "Percentage of Ungrounded Text."
-        },
-        "ungroundedTextDetails": {
-          "type": "array",
-          "description": "The detailed information about a text identified as ungroundness.",
-          "items": {
-            "$ref": "#/definitions/UngroundedTextDetails"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "isUngrounded",
-        "confidenceScore",
-        "ungroundednessPercentage",
-        "ungroundedTextDetails"
-      ]
-    },
-    "Versions": {
-      "type": "string",
-      "enum": [
-        "2023-10-01",
-        "2023-10-15-preview",
-        "2023-10-30-preview",
-        "2023-11-30-preview",
-        "2023-12-30-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_10_01",
-            "value": "2023-10-01"
-          },
-          {
-            "name": "v2023_10_15_Preview",
-            "value": "2023-10-15-preview"
-          },
-          {
-            "name": "v2023_10_30_Preview",
-            "value": "2023-10-30-preview"
-          },
-          {
-            "name": "v2023_11_30_Preview",
-            "value": "2023-11-30-preview"
-          },
-          {
-            "name": "v2023_12_30_Preview",
-            "value": "2023-12-30-preview"
-          }
-        ]
-      }
     }
   },
   "parameters": {
