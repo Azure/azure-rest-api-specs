@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Scom;
 
 /** The license type associated with different SCOM infrastructure components. */
-enum HybridLicenseType {
+enum hybridLicenseType {
   /** No license */
   None,
 
@@ -186,13 +186,13 @@ model GmsaDetails {
 /** The properties to maximize savings by using Azure Hybrid Benefit */
 model AzureHybridBenefitProperties {
   /** SCOM license type. Maximize savings by using license you already own */
-  scomLicenseType?: HybridLicenseType;
+  scomLicenseType?: hybridLicenseType;
 
   /** Specifies that the image or disk that is being used was licensed on-premises. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) */
-  windowsServerLicenseType?: HybridLicenseType;
+  windowsServerLicenseType?: hybridLicenseType;
 
   /** SQL Server license type. Maximize savings by using Azure Hybrid Benefit for SQL Server with license you already own */
-  sqlServerLicenseType?: HybridLicenseType;
+  sqlServerLicenseType?: hybridLicenseType;
 }
 
 /** Configuration for Log Analytics linking to SCOM managed instance. */

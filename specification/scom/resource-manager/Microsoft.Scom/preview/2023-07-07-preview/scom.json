@@ -1285,15 +1285,15 @@
       "description": "The properties to maximize savings by using Azure Hybrid Benefit",
       "properties": {
         "scomLicenseType": {
-          "$ref": "#/definitions/HybridLicenseType",
+          "$ref": "#/definitions/hybridLicenseType",
           "description": "SCOM license type. Maximize savings by using license you already own"
         },
         "windowsServerLicenseType": {
-          "$ref": "#/definitions/HybridLicenseType",
+          "$ref": "#/definitions/hybridLicenseType",
           "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)"
         },
         "sqlServerLicenseType": {
-          "$ref": "#/definitions/HybridLicenseType",
+          "$ref": "#/definitions/hybridLicenseType",
           "description": "SQL Server license type. Maximize savings by using Azure Hybrid Benefit for SQL Server with license you already own"
         }
       }
@@ -1421,30 +1421,6 @@
           "type": "string",
           "description": "Frontend DNS name for Load Balancer which will be used by Agents to initiate communication"
         }
-      }
-    },
-    "HybridLicenseType": {
-      "type": "string",
-      "description": "The license type associated with different SCOM infrastructure components.",
-      "enum": [
-        "None",
-        "AzureHybridBenefit"
-      ],
-      "x-ms-enum": {
-        "name": "HybridLicenseType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No license"
-          },
-          {
-            "name": "AzureHybridBenefit",
-            "value": "AzureHybridBenefit",
-            "description": "Azure Hybrid Benefit license"
-          }
-        ]
       }
     },
     "ManagedGateway": {
@@ -1903,6 +1879,30 @@
           "description": "The Azure Active Directory client id.",
           "readOnly": true
         }
+      }
+    },
+    "hybridLicenseType": {
+      "type": "string",
+      "description": "The license type associated with different SCOM infrastructure components.",
+      "enum": [
+        "None",
+        "AzureHybridBenefit"
+      ],
+      "x-ms-enum": {
+        "name": "hybridLicenseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No license"
+          },
+          {
+            "name": "AzureHybridBenefit",
+            "value": "AzureHybridBenefit",
+            "description": "Azure Hybrid Benefit license"
+          }
+        ]
       }
     },
     "logAnalyticsConfiguration": {
