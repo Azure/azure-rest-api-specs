@@ -568,6 +568,7 @@ model RouterJobAssignment {
   closedAt?: utcDateTime;
 }
 
+@projectedName("java", "JobMatchingModeInternal")
 @doc("""
 A matching mode of one of the following types:
 QueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.
@@ -580,6 +581,7 @@ model JobMatchingMode {
   kind: JobMatchingModeKind;
 }
 
+@projectedName("java", "ScheduleAndSuspendModeInternal")
 @doc("Describes a matching mode used for scheduling jobs to be queued at a future time. At the specified time, matching worker to a job will not start automatically.")
 model ScheduleAndSuspendMode extends JobMatchingMode {
   @doc("Requested schedule time.")
@@ -589,12 +591,14 @@ model ScheduleAndSuspendMode extends JobMatchingMode {
   kind: JobMatchingModeKind.scheduleAndSuspend;
 }
 
+@projectedName("java", "QueueAndMatchModeInternal")
 @doc("Describes a matching mode where matching worker to a job is automatically started after job is queued successfully.")
 model QueueAndMatchMode extends JobMatchingMode {
   @doc("The type discriminator describing QueueAndMatchMode")
   kind: JobMatchingModeKind.queueAndMatch;
 }
 
+@projectedName("java", "SuspendModeInternal")
 @doc("Describes a matching mode where matching worker to a job is suspended.")
 model SuspendMode extends JobMatchingMode {
   @doc("The type discriminator describing SuspendMode")

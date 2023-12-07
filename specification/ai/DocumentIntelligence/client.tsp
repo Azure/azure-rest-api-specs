@@ -15,10 +15,10 @@ using DocumentIntelligence;
 namespace ClientCustomizations;
 
 @client({
-  name: "DocumentAnalysisClient",
+  name: "DocumentIntelligenceClient",
   service: DocumentIntelligence,
 })
-interface DocumentAnalysisClient {
+interface DocumentIntelligenceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   analyzeDocument is DocumentModels.analyzeDocument;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -26,10 +26,10 @@ interface DocumentAnalysisClient {
 }
 
 @client({
-  name: "DocumentModelAdministrationClient",
+  name: "DocumentIntelligenceAdministrationClient",
   service: DocumentIntelligence,
 })
-interface DocumentModelAdministrationClient {
+interface DocumentIntelligenceAdministrationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   buildDocumentModel is DocumentModels.buildModel;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
