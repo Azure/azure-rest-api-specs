@@ -1326,6 +1326,11 @@
         "provisioningState": {
           "$ref": "#/definitions/RequestState",
           "readOnly": true
+        },
+        "faultCode": {
+          "type": "string",
+          "description": "Details of the failure.",
+          "readOnly": true
         }
       }
     },
@@ -1747,8 +1752,13 @@
           "description": "Request properties.",
           "$ref": "#/definitions/RequestProperties"
         },
-        "status": {
+        "provisioningState": {
           "$ref": "#/definitions/RequestState",
+          "readOnly": true
+        },
+        "faultCode": {
+          "type": "string",
+          "description": "Details of the failure.",
           "readOnly": true
         }
       }
