@@ -777,6 +777,298 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VideoIndexer/accounts/{accountName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List all private endpoint connections in a Video Indexer account.",
+        "operationId": "PrivateEndpointConnections_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionList": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnection_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VideoIndexer/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get the specified private endpoint connection associated with the Video Indexer account.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionGet": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnection_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Update the state of specified private endpoint connection associated with the Video Indexer account.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection.",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionCreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnection_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes the specified private endpoint connection associated with the Video Indexer account.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation completed synchronously."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            }
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionDelete": {
+            "$ref": "./examples/PrivateEndpointConnections/PrivateEndpointConnection_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VideoIndexer/accounts/{accountName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "List all private link resources in a Video Indexer account.",
+        "operationId": "PrivateLinkResources_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResourcesList": {
+            "$ref": "./examples/PrivateLinkResources/PrivateLinkResources_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VideoIndexer/accounts/{accountName}/privateLinkResources/{groupId}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get the specified private link resource associated with the Video Indexer account.",
+        "operationId": "PrivateLinkResources_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/GroupInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResourcesGet": {
+            "$ref": "./examples/PrivateLinkResources/PrivateLinkResources_Get.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -959,7 +1251,12 @@
           "description": "The account's name",
           "type": "string",
           "readOnly": true,
-          "example": "contoso-videoAnalyzer"
+          "example": "contoso-videoindexer"
+        },
+        "mediaServices": {
+          "description": "The media services details",
+          "type": "object",
+          "$ref": "#/definitions/MediaServicesForPutRequest"
         },
         "storageServices": {
           "description": "The storage services details",
@@ -971,6 +1268,26 @@
           "type": "integer",
           "format": "int32",
           "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the account.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections associated with the account.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
         },
         "provisioningState": {
           "readOnly": true,
@@ -1007,10 +1324,35 @@
           "type": "string",
           "example": "3575690b-a569-449c-ab7b-11020f948f76"
         },
+        "mediaServices": {
+          "description": "The media services details",
+          "type": "object",
+          "$ref": "#/definitions/MediaServicesForPatchRequest"
+        },
         "storageServices": {
           "description": "The storage services details",
           "type": "object",
           "$ref": "#/definitions/StorageServicesForPatchRequest"
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the account.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections associated with the account.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
         },
         "provisioningState": {
           "readOnly": true,
@@ -1214,6 +1556,33 @@
         }
       }
     },
+    "MediaServicesForPutRequest": {
+      "description": "The media services details",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The media services resource id",
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.Media/mediaservices/contoso-videoindexer-ms"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned identity to be used to grant permissions",
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoindexer-mi"
+        }
+      }
+    },
+    "MediaServicesForPatchRequest": {
+      "description": "The media services details",
+      "type": "object",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned identity to be used to grant permissions",
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoindexer-mi"
+        }
+      }
+    },
     "StorageServicesForPutRequest": {
       "description": "The storage services details",
       "type": "object",
@@ -1229,7 +1598,7 @@
             ]
           },
           "description": "The storage services resource id",
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoAnalyzer-ms"
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoindexer-ms"
         },
         "userAssignedIdentity": {
           "type": "string",
@@ -1242,7 +1611,7 @@
             ]
           },
           "description": "The user assigned identity to be used to grant permissions",
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoAnalyzer-mi"
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoindexer-mi"
         }
       }
     },
@@ -1261,7 +1630,7 @@
             ]
           },
           "description": "The user assigned identity to be used to grant permissions",
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoAnalyzer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoAnalyzer-mi"
+          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoindexer-mi"
         }
       }
     },
