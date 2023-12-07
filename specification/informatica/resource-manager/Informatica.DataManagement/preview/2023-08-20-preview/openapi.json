@@ -42,9 +42,6 @@
       "name": "Operations"
     },
     {
-      "name": "SingleSignOnOperations"
-    },
-    {
       "name": "Organizations"
     },
     {
@@ -80,10 +77,10 @@
         },
         "x-ms-examples": {
           "Operations_List": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          },
-          "Operations_List - maximum set": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_Min": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -122,10 +119,10 @@
         },
         "x-ms-examples": {
           "Organizations_ListBySubscription": {
-            "$ref": "./examples/Organizations_ListBySubscription_MinimumSet_Gen.json"
-          },
-          "Organizations_ListBySubscription - maximum set": {
             "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Organizations_ListBySubscription_Min": {
+            "$ref": "./examples/Organizations_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -167,10 +164,10 @@
         },
         "x-ms-examples": {
           "Organizations_ListByResourceGroup": {
-            "$ref": "./examples/Organizations_ListByResourceGroup_MinimumSet_Gen.json"
-          },
-          "Organizations_ListByResourceGroup - maximum set": {
             "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Organizations_ListByResourceGroup_Min": {
+            "$ref": "./examples/Organizations_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -200,7 +197,8 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
@@ -219,10 +217,10 @@
         },
         "x-ms-examples": {
           "Organizations_Get": {
-            "$ref": "./examples/Organizations_Get_MinimumSet_Gen.json"
-          },
-          "Organizations_Get - maximum set": {
             "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
+          },
+          "Organizations_Get_Min": {
+            "$ref": "./examples/Organizations_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -247,7 +245,8 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "resource",
@@ -288,10 +287,10 @@
         },
         "x-ms-examples": {
           "Organizations_CreateOrUpdate": {
-            "$ref": "./examples/Organizations_CreateOrUpdate_MinimumSet_Gen.json"
-          },
-          "Organizations_CreateOrUpdate - maximum set": {
             "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Organizations_CreateOrUpdate_Min": {
+            "$ref": "./examples/Organizations_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -320,7 +319,8 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "properties",
@@ -328,7 +328,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OrganizationPropertiesUpdate"
+              "$ref": "#/definitions/InformaticaOrganizationResourceUpdate"
             }
           }
         ],
@@ -348,10 +348,10 @@
         },
         "x-ms-examples": {
           "Organizations_Update": {
-            "$ref": "./examples/Organizations_Update_MinimumSet_Gen.json"
-          },
-          "Organizations_Update - maximum set": {
             "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
+          },
+          "Organizations_Update_Min": {
+            "$ref": "./examples/Organizations_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -376,7 +376,8 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
@@ -409,10 +410,10 @@
         },
         "x-ms-examples": {
           "Organizations_Delete": {
-            "$ref": "./examples/Organizations_Delete_MinimumSet_Gen.json"
-          },
-          "Organizations_Delete - maximum set": {
             "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
+          },
+          "Organizations_Delete_Min": {
+            "$ref": "./examples/Organizations_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -443,7 +444,8 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
@@ -462,10 +464,10 @@
         },
         "x-ms-examples": {
           "Organizations_GetAllServerlessRuntimes": {
-            "$ref": "./examples/Organizations_GetAllServerlessRuntimes_MinimumSet_Gen.json"
-          },
-          "Organizations_GetAllServerlessRuntimes - maximum set": {
             "$ref": "./examples/Organizations_GetAllServerlessRuntimes_MaximumSet_Gen.json"
+          },
+          "Organizations_GetAllServerlessRuntimes_Min": {
+            "$ref": "./examples/Organizations_GetAllServerlessRuntimes_MinimumSet_Gen.json"
           }
         }
       }
@@ -492,7 +494,8 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
@@ -511,10 +514,10 @@
         },
         "x-ms-examples": {
           "Organizations_GetServerlessMetadata": {
-            "$ref": "./examples/Organizations_GetServerlessMetadata_MinimumSet_Gen.json"
-          },
-          "Organizations_GetServerlessMetadata - maximum set": {
             "$ref": "./examples/Organizations_GetServerlessMetadata_MaximumSet_Gen.json"
+          },
+          "Organizations_GetServerlessMetadata_Min": {
+            "$ref": "./examples/Organizations_GetServerlessMetadata_MinimumSet_Gen.json"
           }
         }
       }
@@ -541,7 +544,8 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
@@ -560,9 +564,6 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_ListByInformaticaOrganizationResource": {
-            "$ref": "./examples/ServerlessRuntimes_ListByInformaticaOrganizationResource_MinimumSet_Gen.json"
-          },
-          "ServerlessRuntimes_ListByInformaticaOrganizationResource - maximum set": {
             "$ref": "./examples/ServerlessRuntimes_ListByInformaticaOrganizationResource_MaximumSet_Gen.json"
           }
         },
@@ -593,14 +594,16 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "serverlessRuntimeName",
             "in": "path",
             "description": "Name of the Serverless Runtime resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
@@ -619,10 +622,10 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_Get": {
-            "$ref": "./examples/ServerlessRuntimes_Get_MinimumSet_Gen.json"
-          },
-          "ServerlessRuntimes_Get - maximum set": {
             "$ref": "./examples/ServerlessRuntimes_Get_MaximumSet_Gen.json"
+          },
+          "ServerlessRuntimes_Get_Min": {
+            "$ref": "./examples/ServerlessRuntimes_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -647,14 +650,16 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "serverlessRuntimeName",
             "in": "path",
             "description": "Name of the Serverless Runtime resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "resource",
@@ -695,10 +700,10 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_CreateOrUpdate": {
-            "$ref": "./examples/ServerlessRuntimes_CreateOrUpdate_MinimumSet_Gen.json"
-          },
-          "ServerlessRuntimes_CreateOrUpdate - maximum set": {
             "$ref": "./examples/ServerlessRuntimes_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "ServerlessRuntimes_CreateOrUpdate_Min": {
+            "$ref": "./examples/ServerlessRuntimes_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -727,14 +732,16 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "serverlessRuntimeName",
             "in": "path",
             "description": "Name of the Serverless Runtime resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "properties",
@@ -742,7 +749,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InformaticaServerlessRuntimePropertiesUpdate"
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResourceUpdate"
             }
           }
         ],
@@ -762,10 +769,10 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_Update": {
-            "$ref": "./examples/ServerlessRuntimes_Update_MinimumSet_Gen.json"
-          },
-          "ServerlessRuntimes_Update - maximum set": {
             "$ref": "./examples/ServerlessRuntimes_Update_MaximumSet_Gen.json"
+          },
+          "ServerlessRuntimes_Update_Min": {
+            "$ref": "./examples/ServerlessRuntimes_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -790,14 +797,16 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "serverlessRuntimeName",
             "in": "path",
             "description": "Name of the Serverless Runtime resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
@@ -830,9 +839,6 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_Delete": {
-            "$ref": "./examples/ServerlessRuntimes_Delete_MinimumSet_Gen.json"
-          },
-          "ServerlessRuntimes_Delete - maximum set": {
             "$ref": "./examples/ServerlessRuntimes_Delete_MaximumSet_Gen.json"
           }
         },
@@ -864,14 +870,16 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "serverlessRuntimeName",
             "in": "path",
             "description": "Name of the Serverless Runtime resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
@@ -890,15 +898,15 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_CheckDependencies": {
-            "$ref": "./examples/ServerlessRuntimes_CheckDependencies_MinimumSet_Gen.json"
-          },
-          "ServerlessRuntimes_CheckDependencies - maximum set": {
             "$ref": "./examples/ServerlessRuntimes_CheckDependencies_MaximumSet_Gen.json"
+          },
+          "ServerlessRuntimes_CheckDependencies_Min": {
+            "$ref": "./examples/ServerlessRuntimes_CheckDependencies_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes/{serverlessRuntimeName}/serverlessResourceByID": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes/{serverlessRuntimeName}/serverlessResourceById": {
       "post": {
         "operationId": "ServerlessRuntimes_ServerlessResourceById",
         "tags": [
@@ -920,14 +928,16 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "serverlessRuntimeName",
             "in": "path",
             "description": "Name of the Serverless Runtime resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
@@ -946,9 +956,6 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_ServerlessResourceById": {
-            "$ref": "./examples/ServerlessRuntimes_ServerlessResourceById_MinimumSet_Gen.json"
-          },
-          "ServerlessRuntimes_ServerlessResourceById - maximum set": {
             "$ref": "./examples/ServerlessRuntimes_ServerlessResourceById_MaximumSet_Gen.json"
           }
         }
@@ -976,14 +983,16 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "serverlessRuntimeName",
             "in": "path",
             "description": "Name of the Serverless Runtime resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
@@ -999,272 +1008,12 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_StartFailedServerlessRuntime": {
-            "$ref": "./examples/ServerlessRuntimes_StartFailedServerlessRuntime_MinimumSet_Gen.json"
-          },
-          "ServerlessRuntimes_StartFailedServerlessRuntime - maximum set": {
             "$ref": "./examples/ServerlessRuntimes_StartFailedServerlessRuntime_MaximumSet_Gen.json"
+          },
+          "ServerlessRuntimes_StartFailedServerlessRuntime_Min": {
+            "$ref": "./examples/ServerlessRuntimes_StartFailedServerlessRuntime_MinimumSet_Gen.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/singleSignOnConfigurations": {
-      "get": {
-        "operationId": "SingleSignOnOperations_ListByInformaticaOrganizationResource",
-        "tags": [
-          "SingleSignOnOperations"
-        ],
-        "description": "List SingleSignOn resources by InformaticaOrganizationResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Name of the Organizations resource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SingleSignOnListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SingleSignOnOperations_ListByInformaticaOrganizationResource": {
-            "$ref": "./examples/SingleSignOnOperations_ListByInformaticaOrganizationResource_MinimumSet_Gen.json"
-          },
-          "SingleSignOnOperations_ListByInformaticaOrganizationResource - maximum set": {
-            "$ref": "./examples/SingleSignOnOperations_ListByInformaticaOrganizationResource_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/singleSignOnConfigurations/{configurationName}": {
-      "get": {
-        "operationId": "SingleSignOnOperations_Get",
-        "tags": [
-          "SingleSignOnOperations"
-        ],
-        "description": "Get a SingleSignOn",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Name of the Organizations resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "description": "Name of the SSO Configuration",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SingleSignOn"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SingleSignOnOperations_Get": {
-            "$ref": "./examples/SingleSignOnOperations_Get_MinimumSet_Gen.json"
-          },
-          "SingleSignOnOperations_Get - maximum set": {
-            "$ref": "./examples/SingleSignOnOperations_Get_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "SingleSignOnOperations_CreateOrUpdate",
-        "tags": [
-          "SingleSignOnOperations"
-        ],
-        "description": "Create a SingleSignOn",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Name of the Organizations resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "description": "Name of the SSO Configuration",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SingleSignOn"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'SingleSignOn' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SingleSignOn"
-            }
-          },
-          "201": {
-            "description": "Resource 'SingleSignOn' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SingleSignOn"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SingleSignOnOperations_CreateOrUpdate": {
-            "$ref": "./examples/SingleSignOnOperations_CreateOrUpdate_MinimumSet_Gen.json"
-          },
-          "SingleSignOnOperations_CreateOrUpdate - maximum set": {
-            "$ref": "./examples/SingleSignOnOperations_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "SingleSignOnOperations_Delete",
-        "tags": [
-          "SingleSignOnOperations"
-        ],
-        "description": "Delete a SingleSignOn",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Name of the Organizations resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "description": "Name of the SSO Configuration",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SingleSignOnOperations_Delete": {
-            "$ref": "./examples/SingleSignOnOperations_Delete_MinimumSet_Gen.json"
-          },
-          "SingleSignOnOperations_Delete - maximum set": {
-            "$ref": "./examples/SingleSignOnOperations_Delete_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1444,6 +1193,37 @@
         }
       }
     },
+    "CompanyDetailsUpdate": {
+      "type": "object",
+      "description": "Company details of Informatica Organization resource",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "company Name"
+        },
+        "officeAddress": {
+          "type": "string",
+          "description": "Office Address"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country name"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain name"
+        },
+        "business": {
+          "type": "string",
+          "description": "Business phone number"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number Of Employees"
+        }
+      }
+    },
     "ComputeUnitsMetadata": {
       "type": "object",
       "description": "Informatica Serverless Runtime Application type Metadata",
@@ -1544,10 +1324,6 @@
           "type": "string",
           "description": "Resource group name"
         },
-        "nsg": {
-          "type": "string",
-          "description": "network Security Group"
-        },
         "advancedCustomProperties": {
           "type": "string",
           "description": "Advanced custom properties"
@@ -1635,6 +1411,23 @@
         "value"
       ]
     },
+    "InformaticaOrganizationResourceUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OrganizationPropertiesCustomUpdate",
+          "description": "Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource"
+        }
+      }
+    },
     "InformaticaProperties": {
       "type": "object",
       "description": "Properties of the Informatica organization.",
@@ -1643,9 +1436,17 @@
           "type": "string",
           "description": "Organization id"
         },
-        "singleSignOnProperties": {
-          "$ref": "#/definitions/InformaticaSingleSignOnProperties",
-          "description": "The login URL specific to this Informatica Organization"
+        "organizationName": {
+          "type": "string",
+          "description": "Organization name"
+        },
+        "informaticaRegion": {
+          "type": "string",
+          "description": "Informatica organization region"
+        },
+        "singleSignOnUrl": {
+          "type": "string",
+          "description": "Single sing on URL for informatica organization"
         }
       }
     },
@@ -1701,61 +1502,23 @@
         "serverlessRuntimeConfig": {
           "$ref": "#/definitions/ServerlessRuntimeConfigProperties",
           "description": "Serverless config properties"
+        },
+        "serverlessRuntimeTags": {
+          "type": "array",
+          "description": "Serverless Runtime Tags",
+          "items": {
+            "$ref": "#/definitions/ServerlessRuntimeTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "serverlessRuntimeUserContextProperties": {
+          "$ref": "#/definitions/ServerlessRuntimeUserContextProperties",
+          "description": "Serverless runtime user context properties"
         }
       },
       "required": [
         "serverlessAccountLocation"
       ]
-    },
-    "InformaticaServerlessRuntimePropertiesUpdate": {
-      "type": "object",
-      "description": "Serverless Runtime properties.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "description of the serverless runtime."
-        },
-        "platform": {
-          "$ref": "#/definitions/PlatformType",
-          "description": "Platform type of the Serverless Runtime."
-        },
-        "applicationType": {
-          "$ref": "#/definitions/ApplicationType",
-          "description": "Application type of the Serverless Runtime environment."
-        },
-        "computeUnits": {
-          "type": "string",
-          "description": "Compute units of the serverless runtime."
-        },
-        "executionTimeout": {
-          "type": "string",
-          "description": "Serverless Execution timeout"
-        },
-        "serverlessAccountLocation": {
-          "type": "string",
-          "description": "Serverless account creation location"
-        },
-        "serverlessRuntimeNetworkProfile": {
-          "$ref": "#/definitions/ServerlessRuntimeNetworkProfileUpdate",
-          "description": "Informatica Serverless Network profile properties."
-        },
-        "advancedCustomProperties": {
-          "type": "array",
-          "description": "String KV pairs indicating Advanced custom properties.",
-          "items": {
-            "$ref": "#/definitions/AdvancedCustomProperties"
-          },
-          "x-ms-identifiers": []
-        },
-        "supplementaryFileLocation": {
-          "type": "string",
-          "description": "Supplementary file location."
-        },
-        "serverlessRuntimeConfig": {
-          "$ref": "#/definitions/ServerlessRuntimeConfigProperties",
-          "description": "Serverless config properties"
-        }
-      }
     },
     "InformaticaServerlessRuntimeResource": {
       "type": "object",
@@ -1814,25 +1577,13 @@
         "value"
       ]
     },
-    "InformaticaSingleSignOnProperties": {
+    "InformaticaServerlessRuntimeResourceUpdate": {
       "type": "object",
-      "description": "Single sign on Info of the Informatica organization.",
+      "description": "The template for adding optional properties.",
       "properties": {
-        "singleSignOnState": {
-          "$ref": "#/definitions/SingleSignOnStates",
-          "description": "Single sign-on state"
-        },
-        "enterpriseAppId": {
-          "type": "string",
-          "description": "The Id of the Enterprise App used for Single sign-on."
-        },
-        "singleSignOnUrl": {
-          "type": "string",
-          "description": "The login URL specific to this Informatica Organization"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state"
+        "properties": {
+          "$ref": "#/definitions/ServerlessRuntimePropertiesCustomUpdate",
+          "description": "Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource"
         }
       }
     },
@@ -1866,7 +1617,7 @@
     },
     "MarketplaceDetailsUpdate": {
       "type": "object",
-      "description": "Marketplace details.",
+      "description": "Marketplace details",
       "properties": {
         "marketplaceSubscriptionId": {
           "type": "string",
@@ -1889,21 +1640,16 @@
         "subnetId": {
           "type": "string",
           "description": "Virtual network subnet resource id"
-        },
-        "nsg": {
-          "type": "string",
-          "description": "Network security group name"
         }
       },
       "required": [
         "vnetId",
-        "subnetId",
-        "nsg"
+        "subnetId"
       ]
     },
     "NetworkInterfaceConfigurationUpdate": {
       "type": "object",
-      "description": "Informatica Serverless Runtime Network Interface configurations.",
+      "description": "The template for adding optional properties.",
       "properties": {
         "vnetId": {
           "type": "string",
@@ -1912,10 +1658,6 @@
         "subnetId": {
           "type": "string",
           "description": "Virtual network subnet resource id"
-        },
-        "nsg": {
-          "type": "string",
-          "description": "Network security group name"
         }
       }
     },
@@ -1964,7 +1706,7 @@
     },
     "OfferDetailsUpdate": {
       "type": "object",
-      "description": "Details of the product offering.",
+      "description": "Details of the product offering",
       "properties": {
         "publisherId": {
           "type": "string",
@@ -2029,29 +1771,29 @@
         }
       }
     },
-    "OrganizationPropertiesUpdate": {
+    "OrganizationPropertiesCustomUpdate": {
       "type": "object",
-      "description": "Properties specific to the Informatica DataManagement Organization resource.",
+      "description": "Patchable Properties of the Informatica Organization resource",
       "properties": {
-        "informaticaProperties": {
-          "$ref": "#/definitions/InformaticaProperties",
-          "description": "Informatica Organization properties."
+        "informaticaOrganizationProperties": {
+          "$ref": "#/definitions/InformaticaOrganizationResourceUpdate",
+          "description": "Informatica Organization properties"
         },
         "marketplaceDetails": {
           "$ref": "#/definitions/MarketplaceDetailsUpdate",
-          "description": "Marketplace details."
+          "description": "Marketplace details"
         },
         "userDetails": {
-          "$ref": "#/definitions/UserDetails",
+          "$ref": "#/definitions/UserDetailsUpdate",
           "description": "User details"
         },
         "companyDetails": {
-          "$ref": "#/definitions/CompanyDetails",
-          "description": "Company details."
+          "$ref": "#/definitions/CompanyDetailsUpdate",
+          "description": "Company Details"
         },
-        "linkOrganization": {
-          "$ref": "#/definitions/LinkOrganization",
-          "description": "Link Organization"
+        "existingResourceId": {
+          "type": "string",
+          "description": "Existing Resource Id"
         }
       }
     },
@@ -2249,6 +1991,28 @@
         }
       }
     },
+    "ServerlessRuntimeConfigPropertiesUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "cdiConfigProps": {
+          "type": "array",
+          "description": "The List of Informatica Serverless Runtime CDI Config Properties.",
+          "items": {
+            "$ref": "#/definitions/CdiConfigProps"
+          },
+          "x-ms-identifiers": []
+        },
+        "cdieConfigProps": {
+          "type": "array",
+          "description": "The List of Informatica Serverless Runtime CDIE Config Properties.",
+          "items": {
+            "$ref": "#/definitions/CdiConfigProps"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "ServerlessRuntimeDependency": {
       "type": "object",
       "description": "Dependency reference for a serverless runtime resource",
@@ -2302,94 +2066,145 @@
     },
     "ServerlessRuntimeNetworkProfileUpdate": {
       "type": "object",
-      "description": "Informatica Serverless Runtime Network Profile.",
+      "description": "Informatica Serverless Network profile properties update.",
       "properties": {
         "networkInterfaceConfiguration": {
           "$ref": "#/definitions/NetworkInterfaceConfigurationUpdate",
-          "description": "Network Interface Configuration Profile"
+          "description": "Network Interface Configuration Profile Update"
         }
       }
     },
-    "SingleSignOn": {
+    "ServerlessRuntimePropertiesCustomUpdate": {
       "type": "object",
-      "description": "Single sign-on configurations for a Informatica resource.",
+      "description": "Patchable Properties of the Informatica Serverless Runtime resource",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/InformaticaSingleSignOnProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SingleSignOnListResult": {
-      "type": "object",
-      "description": "The response of a SingleSignOn list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SingleSignOn items on this page",
-          "items": {
-            "$ref": "#/definitions/SingleSignOn"
-          }
-        },
-        "nextLink": {
+        "description": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "description of the serverless runtime."
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformType",
+          "description": "Platform type of the Serverless Runtime."
+        },
+        "applicationType": {
+          "$ref": "#/definitions/ApplicationType",
+          "description": "Application type of the Serverless Runtime environment."
+        },
+        "computeUnits": {
+          "type": "string",
+          "description": "Compute units of the serverless runtime."
+        },
+        "executionTimeout": {
+          "type": "string",
+          "description": "Serverless Execution timeout"
+        },
+        "serverlessAccountLocation": {
+          "type": "string",
+          "description": "Serverless account creation location"
+        },
+        "serverlessRuntimeNetworkProfile": {
+          "$ref": "#/definitions/ServerlessRuntimeNetworkProfileUpdate",
+          "description": "Informatica Serverless Network profile properties."
+        },
+        "advancedCustomProperties": {
+          "type": "array",
+          "description": "String KV pairs indicating Advanced custom properties.",
+          "items": {
+            "$ref": "#/definitions/AdvancedCustomProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "supplementaryFileLocation": {
+          "type": "string",
+          "description": "Supplementary file location."
+        },
+        "serverlessRuntimeConfig": {
+          "$ref": "#/definitions/ServerlessRuntimeConfigPropertiesUpdate",
+          "description": "Serverless config properties"
+        },
+        "serverlessRuntimeTags": {
+          "type": "array",
+          "description": "Serverless Runtime Tags",
+          "items": {
+            "$ref": "#/definitions/ServerlessRuntimeTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "serverlessRuntimeUserContextProperties": {
+          "$ref": "#/definitions/ServerlessRuntimeUserContextPropertiesUpdate",
+          "description": "Serverless runtime user context properties"
+        }
+      }
+    },
+    "ServerlessRuntimeTag": {
+      "type": "object",
+      "description": "Serverless Runtime Tags",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name (also known as the key) of the tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the tag."
+        }
+      }
+    },
+    "ServerlessRuntimeUserContextProperties": {
+      "type": "object",
+      "description": "Informatica Serverless Runtime User context properties",
+      "properties": {
+        "userContextToken": {
+          "type": "string",
+          "description": "User context token for OBO flow."
         }
       },
       "required": [
-        "value"
+        "userContextToken"
       ]
     },
-    "SingleSignOnStates": {
-      "type": "string",
-      "description": "Various states of the SSO resource.",
-      "enum": [
-        "Initial",
-        "Enable",
-        "Disable",
-        "Existing"
-      ],
-      "x-ms-enum": {
-        "name": "SingleSignOnStates",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Initial",
-            "value": "Initial",
-            "description": "SSO state Initial"
-          },
-          {
-            "name": "Enable",
-            "value": "Enable",
-            "description": "SSO state Enable"
-          },
-          {
-            "name": "Disable",
-            "value": "Disable",
-            "description": "SSO state Disable"
-          },
-          {
-            "name": "Existing",
-            "value": "Existing",
-            "description": "SSO state Existing"
-          }
-        ]
+    "ServerlessRuntimeUserContextPropertiesUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "userContextToken": {
+          "type": "string",
+          "description": "User context token for OBO flow."
+        }
       }
     },
     "UserDetails": {
       "type": "object",
       "description": "User Info of Informatica Organization resource.",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "User first name.",
+          "maxLength": 50
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User last name.",
+          "maxLength": 50
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/email",
+          "description": "User email address."
+        },
+        "upn": {
+          "type": "string",
+          "description": "UPN of user"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the user used by for contacting them if needed",
+          "maxLength": 40
+        }
+      }
+    },
+    "UserDetailsUpdate": {
+      "type": "object",
+      "description": "User Info of Informatica Organization resource",
       "properties": {
         "firstName": {
           "type": "string",
