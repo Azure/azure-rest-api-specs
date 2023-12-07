@@ -82,8 +82,8 @@ model AnalyzeTextResult {
   categoriesAnalysis: TextCategoriesAnalysis[];
 
   @added(ContentSafety.Versions.v2023_12_30_Preview)
-  @doc("The chunks detected as harmful content. Chunk means some phrase or sentence in text. Analysis result and scores are caused by these chunks. ")
-  harmfulChunks?: string[];
+  @doc("Chunks in the original text detected as harmful content. Analysis result and scores are caused by these.")
+  citation?: string[];
 
   @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("The incident match details.")
