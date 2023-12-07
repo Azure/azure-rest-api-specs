@@ -19,7 +19,7 @@ enum BusinessAttributeUpdateBehavior {
 }
 
 @doc("Status - can be active or deleted")
-enum Status {
+enum EntityStatus {
   @doc("The status is active.")
   ACTIVE,
 
@@ -127,7 +127,7 @@ enum LineageDirection {
 }
 
 @doc("Cardinality")
-enum Cardinality {
+enum CardinalityValue {
   @doc("single")
   SINGLE,
 
@@ -331,7 +331,7 @@ model AtlasEntity {
 Status of the entity - can be active or deleted. Deleted entities are not
 removed.
 """)
-  status?: Status;
+  status?: EntityStatus;
 
   @doc("The update time of the record.")
   updateTime?: int64;
@@ -360,7 +360,7 @@ model AtlasClassification {
 Status of the entity - can be active or deleted. Deleted entities are not
 removed.
 """)
-  entityStatus?: Status;
+  entityStatus?: EntityStatus;
 
   @doc("Determines if propagations will be removed on entity deletion.")
   removePropagationsOnEntityDelete?: boolean;
@@ -490,7 +490,7 @@ model AtlasEntityHeader {
 Status of the entity - can be active or deleted. Deleted entities are not
 removed.
 """)
-  status?: Status;
+  status?: EntityStatus;
 }
 
 @doc("An error response from the service")
@@ -870,7 +870,7 @@ model AtlasRelatedObjectId {
 Status of the entity - can be active or deleted. Deleted entities are not
 removed.
 """)
-  entityStatus?: Status;
+  entityStatus?: EntityStatus;
 
   @doc("Relationship type")
   relationshipType?: string;
@@ -1460,7 +1460,7 @@ model AtlasStructDef {
 @doc("class that captures details of a struct-attribute.")
 model AtlasAttributeDef {
   @doc("single-valued attribute or multi-valued attribute.")
-  cardinality?: Cardinality;
+  cardinality?: CardinalityValue;
 
   @doc("An array of constraints.")
   constraints?: AtlasConstraintDef[];
@@ -1824,7 +1824,7 @@ it  is the container end of the relationship.
 """)
 model AtlasRelationshipEndDef {
   @doc("single-valued attribute or multi-valued attribute.")
-  cardinality?: Cardinality;
+  cardinality?: CardinalityValue;
 
   @doc("The description of the relationship end definition.")
   description?: string;

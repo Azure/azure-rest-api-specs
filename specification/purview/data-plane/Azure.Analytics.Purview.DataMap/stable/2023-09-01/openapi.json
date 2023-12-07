@@ -459,8 +459,7 @@
             "in": "formData",
             "description": "InputStream of file",
             "required": true,
-            "type": "string",
-            "format": "byte"
+            "type": "file"
           }
         ],
         "responses": {
@@ -4775,7 +4774,7 @@
       "description": "class that captures details of a struct-attribute.",
       "properties": {
         "cardinality": {
-          "$ref": "#/definitions/Cardinality",
+          "$ref": "#/definitions/CardinalityValue",
           "description": "single-valued attribute or multi-valued attribute."
         },
         "constraints": {
@@ -5013,7 +5012,7 @@
           "description": "The GUID of the entity."
         },
         "entityStatus": {
-          "$ref": "#/definitions/Status",
+          "$ref": "#/definitions/EntityStatus",
           "description": "Status of the entity - can be active or deleted. Deleted entities are not\nremoved."
         },
         "removePropagationsOnEntityDelete": {
@@ -5290,7 +5289,7 @@
           "additionalProperties": {}
         },
         "status": {
-          "$ref": "#/definitions/Status",
+          "$ref": "#/definitions/EntityStatus",
           "description": "Status of the entity - can be active or deleted. Deleted entities are not\nremoved."
         },
         "updateTime": {
@@ -5497,7 +5496,7 @@
           "x-ms-identifiers": []
         },
         "status": {
-          "$ref": "#/definitions/Status",
+          "$ref": "#/definitions/EntityStatus",
           "description": "Status of the entity - can be active or deleted. Deleted entities are not\nremoved."
         }
       }
@@ -6417,7 +6416,7 @@
           "description": "The display text."
         },
         "entityStatus": {
-          "$ref": "#/definitions/Status",
+          "$ref": "#/definitions/EntityStatus",
           "description": "Status of the entity - can be active or deleted. Deleted entities are not\nremoved."
         },
         "relationshipType": {
@@ -6548,7 +6547,7 @@
       "description": "The relationshipEndDef represents an end of the relationship. The end of the\nrelationship is defined by a type, an\nattribute name, cardinality and whether\nit  is the container end of the relationship.",
       "properties": {
         "cardinality": {
-          "$ref": "#/definitions/Cardinality",
+          "$ref": "#/definitions/CardinalityValue",
           "description": "single-valued attribute or multi-valued attribute."
         },
         "constraints": {
@@ -6715,7 +6714,7 @@
       "description": "The relationshipEndDef represents an end of the relationship. The end of the\nrelationship is defined by a type, an\nattribute name, cardinality and whether\nit  is the container end of the relationship.",
       "properties": {
         "cardinality": {
-          "$ref": "#/definitions/Cardinality",
+          "$ref": "#/definitions/CardinalityValue",
           "description": "single-valued attribute or multi-valued attribute."
         },
         "description": {
@@ -7362,7 +7361,7 @@
         ]
       }
     },
-    "Cardinality": {
+    "CardinalityValue": {
       "type": "string",
       "description": "Cardinality",
       "enum": [
@@ -7371,7 +7370,7 @@
         "SET"
       ],
       "x-ms-enum": {
-        "name": "Cardinality",
+        "name": "CardinalityValue",
         "modelAsString": true,
         "values": [
           {
@@ -7635,6 +7634,30 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "EntityStatus": {
+      "type": "string",
+      "description": "Status - can be active or deleted",
+      "enum": [
+        "ACTIVE",
+        "DELETED"
+      ],
+      "x-ms-enum": {
+        "name": "EntityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACTIVE",
+            "value": "ACTIVE",
+            "description": "The status is active."
+          },
+          {
+            "name": "DELETED",
+            "value": "DELETED",
+            "description": "The status is deleted."
+          }
+        ]
       }
     },
     "EntityTypeFilter": {
@@ -8762,30 +8785,6 @@
             "name": "DESC",
             "value": "DESC",
             "description": "Use descending order for sorting"
-          }
-        ]
-      }
-    },
-    "Status": {
-      "type": "string",
-      "description": "Status - can be active or deleted",
-      "enum": [
-        "ACTIVE",
-        "DELETED"
-      ],
-      "x-ms-enum": {
-        "name": "Status",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ACTIVE",
-            "value": "ACTIVE",
-            "description": "The status is active."
-          },
-          {
-            "name": "DELETED",
-            "value": "DELETED",
-            "description": "The status is deleted."
           }
         ]
       }
