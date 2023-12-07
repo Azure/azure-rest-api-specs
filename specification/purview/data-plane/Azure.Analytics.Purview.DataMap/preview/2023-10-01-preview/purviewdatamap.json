@@ -4377,9 +4377,6 @@
         "x-ms-examples": {
           "Intelligence_StartANewConversation": {
             "$ref": "./examples/Intelligence_StartANewConversation.json"
-          },
-          "Intelligence_StartFetchResponse": {
-            "$ref": "./examples/Intelligence_FetchResponse.json"
           }
         },
         "parameters": [
@@ -4387,19 +4384,9 @@
             "$ref": "#/parameters/purviewAPIVersion"
           },
           {
-            "$ref": "#/parameters/intelligenceOperationName"
-          },
-          {
             "name": "chatId",
             "in": "query",
-            "description": "The unique identifier for a conversation. Required when op=fetchResponse/stopResponding/closeConversation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "startingMessageId",
-            "in": "query",
-            "description": "The message ID to start fetching the conversation history from.",
+            "description": "The unique identifier for a conversation.",
             "required": false,
             "type": "string"
           },
@@ -7541,10 +7528,10 @@
       "properties": {
         "userMessage": {
           "type": "string",
-          "description": "The user's input message. Either this or userChoice must be provided when op=newMessage."
+          "description": "The user's input message. Either this or userChoice must be provided."
         },
         "userChoice": {
-          "description": "The user's choice (suggestion ID from the previous round of Chat API response). Either this or userMessage must be provided when op=newMessage.",
+          "description": "The user's choice (suggestion ID from the previous round of Chat API response). Either this or userMessage must be provided.",
           "type": "string"
         }
       }
@@ -8207,26 +8194,8 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "intelligenceOperationName": {
-      "name": "op",
-      "in": "query",
-      "description": "The operation to perform.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "newMessage",
-        "fetchResponse",
-        "stopResponding",
-        "closeConversation"
-      ],
-      "x-ms-enum": {
-        "name": "intelligenceOperationName",
-        "modelAsString": true
-      },
-      "x-ms-parameter-location": "method"
-    },
     "intelligenceSkillType": {
-      "name": "skillType",
+      "name": "skill",
       "in": "query",
       "description": "The type of skill to execute.",
       "required": true,
