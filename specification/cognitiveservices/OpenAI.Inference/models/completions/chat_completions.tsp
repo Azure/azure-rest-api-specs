@@ -16,16 +16,33 @@ using TypeSpec.Versioning;
 namespace Azure.OpenAI;
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("The valid response formats Chat Completions can provide. Used to enable JSON mode.")
-enum ChatCompletionsResponseFormat {
-  @doc("Use the default, plain text response format.")
-  text: "text",
+@doc("""
+An abstract representation of a response format configuration usable by Chat Completions. Can be used to enable JSON
+mode.
+""")
+@discriminator("type")
+model ChatCompletionsResponseFormat {
+  @doc("The discriminated type for the response format.")
+  type: string;
+}
 
-  @doc("""
-  Use a response format that guarantees emission of a valid JSON object. Only structure is guaranteed and contents must
-  still be validated.
-  """)
-  jsonObject: "json_object",
+@doc("""
+The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response
+content that adheres to a specific schema.
+""")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model ChatCompletionsTextResponseFormat extends ChatCompletionsResponseFormat {
+  @doc("The discriminated object type, which is always 'text' for this format.")
+  type: "text";
+}
+
+@doc("""
+A response format for Chat Completions that restricts responses to emitting valid JSON objects.
+""")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model ChatCompletionsJsonResponseFormat extends ChatCompletionsResponseFormat {
+  @doc("The discriminated object type, which is always 'json_object' for this format.")
+  type: "json_object";
 }
 
 @doc("""
