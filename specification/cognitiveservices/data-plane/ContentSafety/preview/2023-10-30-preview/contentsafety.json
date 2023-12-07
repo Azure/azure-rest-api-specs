@@ -1992,10 +1992,14 @@
       "type": "object",
       "description": "The text annotation response.",
       "properties": {
-        "label": {
+        "id": {
           "type": "integer",
           "format": "int32",
-          "description": "The label."
+          "description": "The id of annotated subcategory."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of annotated subcategory."
         },
         "reasoning": {
           "type": "string",
@@ -2003,7 +2007,8 @@
         }
       },
       "required": [
-        "label"
+        "id",
+        "name"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -2303,26 +2308,6 @@
         "detected"
       ]
     },
-    "LabelDefinition": {
-      "type": "object",
-      "description": "Label definition.",
-      "properties": {
-        "label": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "enumerations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "label",
-        "enumerations"
-      ]
-    },
     "ListImageIncidentSampleResult": {
       "type": "object",
       "description": "Sample in a Image Incident.",
@@ -2569,6 +2554,30 @@
         "incidentSampleIds"
       ]
     },
+    "SubCategory": {
+      "type": "object",
+      "description": "Label definition.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "statements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "statements"
+      ]
+    },
     "TextBlocklist": {
       "type": "object",
       "description": "Text Blocklist.",
@@ -2719,12 +2728,11 @@
           },
           "x-ms-identifiers": []
         },
-        "labelDefinitions": {
+        "subCategories": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LabelDefinition"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/SubCategory"
+          }
         },
         "emphases": {
           "type": "array",
@@ -2739,7 +2747,7 @@
       },
       "required": [
         "categoryName",
-        "labelDefinitions"
+        "subCategories"
       ]
     },
     "TextIncident": {
@@ -2824,37 +2832,6 @@
       "required": [
         "incidentSampleId"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "enum": [
-        "2023-10-01",
-        "2023-10-15-preview",
-        "2023-10-30-preview",
-        "2023-11-30-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_10_01",
-            "value": "2023-10-01"
-          },
-          {
-            "name": "v2023_10_15_Preview",
-            "value": "2023-10-15-preview"
-          },
-          {
-            "name": "v2023_10_30_Preview",
-            "value": "2023-10-30-preview"
-          },
-          {
-            "name": "v2023_11_30_Preview",
-            "value": "2023-11-30-preview"
-          }
-        ]
-      }
     }
   },
   "parameters": {
