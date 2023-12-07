@@ -428,14 +428,11 @@
         "type": {
           "$ref": "#/definitions/AzureChatExtensionType",
           "description": "  The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.\n  Azure chat extensions are only compatible with Azure OpenAI."
-        },
-        "parameters": {
-          "description": "  The configuration payload used for the Azure chat extension. The structure payload details are specific to the\n  extension being configured.\n  Azure chat extensions are only compatible with Azure OpenAI."
         }
       },
+      "discriminator": "type",
       "required": [
-        "type",
-        "parameters"
+        "type"
       ]
     },
     "AzureChatExtensionType": {
@@ -464,10 +461,179 @@
           "type": "array",
           "description": "  The contextual message payload associated with the Azure chat extensions used for a chat completions request.\n  These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the\n  course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat\n  extensions.",
           "items": {
-            "$ref": "#/definitions/ChatMessage"
+            "$ref": "#/definitions/ChatResponseMessage"
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "AzureCognitiveSearchChatExtensionConfiguration": {
+      "type": "object",
+      "description": "A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat\nextension.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureCognitiveSearchChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure Cognitive Search."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureCognitiveSearch"
+    },
+    "AzureCognitiveSearchChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
+        },
+        "topNDocuments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured top number of documents to feature for the configured query."
+        },
+        "inScope": {
+          "type": "boolean",
+          "description": "Whether queries should be restricted to use of indexed data."
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "roleInformation": {
+          "type": "string",
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The absolute endpoint path for the Azure Cognitive Search resource to use."
+        },
+        "indexName": {
+          "type": "string",
+          "description": "The name of the index to use as available in the referenced Azure Cognitive Search resource."
+        },
+        "key": {
+          "type": "string",
+          "description": "The API key to use when interacting with the Azure Cognitive Search resource."
+        },
+        "fieldsMapping": {
+          "$ref": "#/definitions/AzureCognitiveSearchIndexFieldMappingOptions",
+          "description": "Customized field mapping behavior to use when interacting with the search index."
+        },
+        "queryType": {
+          "$ref": "#/definitions/AzureCognitiveSearchQueryType",
+          "description": "The query type to use with Azure Cognitive Search."
+        },
+        "semanticConfiguration": {
+          "type": "string",
+          "description": "The additional semantic configuration for the query."
+        },
+        "filter": {
+          "type": "string",
+          "description": "Search filter."
+        },
+        "embeddingEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "When using embeddings for search, specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of format https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings?api-version={api-version}."
+        },
+        "embeddingKey": {
+          "type": "string",
+          "description": "When using embeddings, specifies the API key to use with the provided embeddings endpoint."
+        }
+      },
+      "required": [
+        "endpoint",
+        "indexName"
+      ]
+    },
+    "AzureCognitiveSearchIndexFieldMappingOptions": {
+      "type": "object",
+      "description": "Optional settings to control how fields are processed when using a configured Azure Cognitive Search resource.",
+      "properties": {
+        "titleField": {
+          "type": "string",
+          "description": "The name of the index field to use as a title."
+        },
+        "urlField": {
+          "type": "string",
+          "description": "The name of the index field to use as a URL."
+        },
+        "filepathField": {
+          "type": "string",
+          "description": "The name of the index field to use as a filepath."
+        },
+        "contentFields": {
+          "type": "array",
+          "description": "The names of index fields that should be treated as content.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contentFieldsSeparator": {
+          "type": "string",
+          "description": "The separator pattern that content fields should use."
+        },
+        "vectorFields": {
+          "type": "array",
+          "description": "The names of fields that represent vector data.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureCognitiveSearchQueryType": {
+      "type": "string",
+      "description": "The type of Azure Cognitive Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.",
+      "enum": [
+        "simple",
+        "semantic",
+        "vector",
+        "vectorSimpleHybrid",
+        "vectorSemanticHybrid"
+      ],
+      "x-ms-enum": {
+        "name": "AzureCognitiveSearchQueryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simple",
+            "value": "simple",
+            "description": "Represents the default, simple query parser."
+          },
+          {
+            "name": "semantic",
+            "value": "semantic",
+            "description": "Represents the semantic query parser for advanced semantic modeling."
+          },
+          {
+            "name": "vector",
+            "value": "vector",
+            "description": "Represents vector search over computed data."
+          },
+          {
+            "name": "vectorSimpleHybrid",
+            "value": "vectorSimpleHybrid",
+            "description": "Represents a combination of the simple query strategy with vector data."
+          },
+          {
+            "name": "vectorSemanticHybrid",
+            "value": "vectorSemanticHybrid",
+            "description": "Represents a combination of semantic search and vector data querying."
+          }
+        ]
       }
     },
     "AzureOpenAIOperationState": {
@@ -554,7 +720,7 @@
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
         "message": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The chat message for a given chat completions prompt."
         },
         "index": {
@@ -569,11 +735,11 @@
           "x-ms-client-name": "finishReason"
         },
         "delta": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The delta message content for a streaming response."
         },
         "content_filter_results": {
-          "$ref": "#/definitions/ContentFilterResults",
+          "$ref": "#/definitions/ContentFilterResultsForChoice",
           "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
           "x-ms-client-name": "contentFilterResults"
         }
@@ -608,7 +774,7 @@
           "type": "array",
           "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
           "items": {
-            "$ref": "#/definitions/PromptFilterResult"
+            "$ref": "#/definitions/ContentFilterResultsForPrompt"
           },
           "x-ms-client-name": "promptFilterResults",
           "x-ms-identifiers": []
@@ -633,7 +799,7 @@
           "type": "array",
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
           "items": {
-            "$ref": "#/definitions/ChatMessage"
+            "$ref": "#/definitions/ChatRequestMessage"
           },
           "x-ms-identifiers": []
         },
@@ -724,31 +890,140 @@
         "messages"
       ]
     },
-    "ChatMessage": {
+    "ChatRequestAssistantMessage": {
       "type": "object",
-      "description": "A single, role-attributed message within a chat completion interaction.",
+      "description": "A request chat message representing response or action from the assistant.",
       "properties": {
-        "role": {
-          "$ref": "#/definitions/ChatRole",
-          "description": "The role associated with this message payload."
-        },
         "content": {
           "type": "string",
-          "description": "The text associated with this message payload.",
+          "description": "The content of the message.",
           "x-nullable": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the author of this message. `name` is required if role is `function`, and it should be the name of the\nfunction whose response is in the `content`. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of\n64 characters."
+          "description": "An optional name for the participant."
         },
         "function_call": {
           "$ref": "#/definitions/FunctionCall",
-          "description": "The name and arguments of a function that should be called, as generated by the model.",
+          "description": "The function call that must be resolved and have its output appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "x-ms-client-name": "functionCall"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
+    "ChatRequestFunctionMessage": {
+      "type": "object",
+      "description": "A request chat message representing requested output from a configured function.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function that was called to produce output."
+        },
+        "content": {
+          "type": "string",
+          "description": "The output of the function as requested by the function call.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "name",
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "ChatRequestMessage": {
+      "type": "object",
+      "description": "An abstract representation of a chat message as provided in a request.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with this message."
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role"
+      ]
+    },
+    "ChatRequestSystemMessage": {
+      "type": "object",
+      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the system message."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ChatRequestUserMessage": {
+      "type": "object",
+      "description": "A request chat message representing user input to the assistant.",
+      "properties": {
+        "content": {
+          "description": "The contents of the user message, with available input types varying by selected model."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "description": "A representation of a chat message as received in a response.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "function_call": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The function call that must be resolved and have its output appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
           "x-ms-client-name": "functionCall"
         },
         "context": {
           "$ref": "#/definitions/AzureChatExtensionsMessageContext",
-          "description": "  Additional context data associated with a chat message when requesting chat completions using compatible Azure\n  OpenAI chat extensions. This includes information like the intermediate data source retrievals used to service a\n  request.\n  This context information is only populated when using Azure OpenAI with chat extensions capabilities configured."
+          "description": "If Azure OpenAI chat extensions are configured, this array represents the incremental steps performed by those\nextensions while processing the chat completions request."
         }
       },
       "required": [
@@ -812,7 +1087,7 @@
           "description": "The ordered index associated with this completions choice."
         },
         "content_filter_results": {
-          "$ref": "#/definitions/ContentFilterResults",
+          "$ref": "#/definitions/ContentFilterResultsForChoice",
           "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
           "x-ms-client-name": "contentFilterResults"
         },
@@ -857,7 +1132,7 @@
           "type": "array",
           "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
           "items": {
-            "$ref": "#/definitions/PromptFilterResult"
+            "$ref": "#/definitions/ContentFilterResultsForPrompt"
           },
           "x-ms-client-name": "promptFilterResults",
           "x-ms-identifiers": []
@@ -1110,9 +1385,9 @@
         "filtered"
       ]
     },
-    "ContentFilterResults": {
+    "ContentFilterResultDetailsForPrompt": {
       "type": "object",
-      "description": "Information about the content filtering category, if it has been detected.",
+      "description": "Information about content filtering evaluated against input data to Azure OpenAI.",
       "properties": {
         "sexual": {
           "$ref": "#/definitions/ContentFilterResult",
@@ -1136,6 +1411,54 @@
           "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
         }
       }
+    },
+    "ContentFilterResultsForChoice": {
+      "type": "object",
+      "description": "Information about content filtering evaluated against generated model output.",
+      "properties": {
+        "sexual": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including \n those portrayed as an assault or a forced sexual violent act against one’s will, \n prostitution, pornography, and abuse."
+        },
+        "violence": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or \nkill someone or something; describes weapons, etc."
+        },
+        "hate": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language \nwith reference to a person or identity group on the basis of certain differentiating \nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+        },
+        "self_harm": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
+          "x-ms-client-name": "selfHarm"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
+        }
+      }
+    },
+    "ContentFilterResultsForPrompt": {
+      "type": "object",
+      "description": "Content filtering results for a single prompt in the request.",
+      "properties": {
+        "prompt_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of this prompt in the set of prompt results",
+          "x-ms-client-name": "promptIndex"
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResultDetailsForPrompt",
+          "description": "Content filtering results for this prompt",
+          "x-ms-client-name": "contentFilterResults"
+        }
+      },
+      "required": [
+        "prompt_index",
+        "content_filter_results"
+      ]
     },
     "ContentFilterSeverity": {
       "type": "string",
@@ -1295,17 +1618,37 @@
           "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
         },
         "parameters": {
-          "description": "The parameters the functions accepts, described as a JSON Schema object."
+          "description": "The parameters the function accepts, described as a JSON Schema object."
         }
       },
       "required": [
         "name"
       ]
     },
+    "ImageGenerationData": {
+      "type": "object",
+      "description": "A representation of a single generated image, provided as either base64-encoded data or as a URL from which the image\nmay be retrieved.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL that provides temporary access to download the generated image."
+        },
+        "b64_json": {
+          "type": "string",
+          "description": "The complete data for an image, represented as a base64-encoded string.",
+          "x-ms-client-name": "base64Data"
+        }
+      }
+    },
     "ImageGenerationOptions": {
       "type": "object",
       "description": "Represents the request data used to generate images.",
       "properties": {
+        "model": {
+          "type": "string",
+          "description": "The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be\ninferred as a default."
+        },
         "prompt": {
           "type": "string",
           "description": "A description of the desired images."
@@ -1313,17 +1656,18 @@
         "n": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of images to generate (defaults to 1).",
+          "description": "The number of images to generate.\nDall-e-2 models support values between 1 and 10.\nDall-e-3 models only support a value of 1.",
           "default": 1
         },
         "size": {
           "$ref": "#/definitions/ImageSize",
-          "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).",
+          "description": "The desired dimensions for generated images.\nDall-e-2 models support 256x256, 512x512, or 1024x1024.\nDall-e-3 models support 1024x1024, 1792x1024, or 1024x1792.",
           "default": "1024x1024"
         },
         "response_format": {
           "$ref": "#/definitions/ImageGenerationResponseFormat",
-          "description": "  The format in which image generation response items should be presented.\n  Azure OpenAI only supports URL response items.",
+          "description": "The format in which image generation response items should be presented.",
+          "default": "url",
           "x-ms-client-name": "responseFormat"
         },
         "user": {
@@ -1347,12 +1691,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Url",
+            "name": "url",
             "value": "url",
             "description": "Image generation response items should provide a URL from which the image may be retrieved."
           },
           {
-            "name": "Base64",
+            "name": "base64",
             "value": "b64_json",
             "description": "Image generation response items should provide image data as a base64-encoded string."
           }
@@ -1361,15 +1705,20 @@
     },
     "ImageGenerations": {
       "type": "object",
-      "description": "The result of the operation if the operation succeeded.",
+      "description": "The result of a successful image generation operation.",
       "properties": {
         "created": {
           "type": "integer",
           "format": "unixtime",
-          "description": "A timestamp when this job or item was created (in unix epochs)."
+          "description": "A timestamp representing when this operation was started.\nExpressed in seconds since the Unix epoch of 1970-01-01T00:00:00+0000."
         },
         "data": {
-          "description": "The images generated by the operator."
+          "type": "array",
+          "description": "The images generated by the operation.",
+          "items": {
+            "$ref": "#/definitions/ImageGenerationData"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1379,53 +1728,174 @@
     },
     "ImageSize": {
       "type": "string",
-      "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.",
+      "description": "The desired size of generated images.",
       "enum": [
         "256x256",
-        "512x512",
-        "1024x1024"
+        "512x512"
       ],
       "x-ms-enum": {
         "name": "ImageSize",
         "modelAsString": true,
         "values": [
           {
-            "name": "Size256x256",
+            "name": "size256x256",
             "value": "256x256",
-            "description": "Image size of 256x256."
+            "description": "Very small image size of 256x256 pixels.\nOnly supported with dall-e-2 models."
           },
           {
-            "name": "Size512x512",
+            "name": "size512x512",
             "value": "512x512",
-            "description": "Image size of 512x512."
-          },
-          {
-            "name": "Size1024x1024",
-            "value": "1024x1024",
-            "description": "Image size of 1024x1024."
+            "description": "A smaller image size of 512x512 pixels.\nOnly supported with dall-e-2 models."
           }
         ]
       }
     },
-    "PromptFilterResult": {
+    "OnYourDataApiKeyAuthenticationOptions": {
       "type": "object",
-      "description": "Content filtering results for a single prompt in the request.",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an API key.",
       "properties": {
-        "prompt_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The index of this prompt in the set of prompt results",
-          "x-ms-client-name": "promptIndex"
-        },
-        "content_filter_results": {
-          "$ref": "#/definitions/ContentFilterResults",
-          "description": "Content filtering results for this prompt",
-          "x-ms-client-name": "contentFilterResults"
+        "key": {
+          "type": "string",
+          "description": "The API key to use for authentication."
         }
       },
       "required": [
-        "prompt_index"
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "APIKey"
+    },
+    "OnYourDataAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OnYourDataAuthenticationType",
+          "description": "The authentication type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
+    },
+    "OnYourDataAuthenticationType": {
+      "type": "string",
+      "description": "The authentication types supported with Azure OpenAI On Your Data.",
+      "enum": [
+        "APIKey",
+        "ConnectionString",
+        "KeyAndKeyId",
+        "SystemAssignedManagedIdentity",
+        "UserAssignedManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "OnYourDataAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "apiKey",
+            "value": "APIKey",
+            "description": "Authentication via API key."
+          },
+          {
+            "name": "connectionString",
+            "value": "ConnectionString",
+            "description": "Authentication via connection string."
+          },
+          {
+            "name": "keyAndKeyId",
+            "value": "KeyAndKeyId",
+            "description": "Authentication via key and key ID pair."
+          },
+          {
+            "name": "systemAssignedManagedIdentity",
+            "value": "SystemAssignedManagedIdentity",
+            "description": "Authentication via system-assigned managed identity."
+          },
+          {
+            "name": "userAssignedManagedIdentity",
+            "value": "UserAssignedManagedIdentity",
+            "description": "Authentication via user-assigned managed identity."
+          }
+        ]
+      }
+    },
+    "OnYourDataConnectionStringAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a connection string.",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "The connection string to use for authentication."
+        }
+      },
+      "required": [
+        "connectionString"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "ConnectionString"
+    },
+    "OnYourDataKeyAndKeyIdAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an Elasticsearch key and key ID pair.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key to use for authentication."
+        },
+        "keyId": {
+          "type": "string",
+          "description": "The key ID to use for authentication."
+        }
+      },
+      "required": [
+        "key",
+        "keyId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "KeyAndKeyId"
+    },
+    "OnYourDataSystemAssignedManagedIdentityAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a system-assigned managed identity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
+    },
+    "OnYourDataUserAssignedManagedIdentityAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a user-assigned managed identity.",
+      "properties": {
+        "managedIdentityResourceId": {
+          "type": "string",
+          "description": "The resource ID of the user-assigned managed identity to use for authentication."
+        }
+      },
+      "required": [
+        "managedIdentityResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "UserAssignedManagedIdentity"
     }
   },
   "parameters": {
