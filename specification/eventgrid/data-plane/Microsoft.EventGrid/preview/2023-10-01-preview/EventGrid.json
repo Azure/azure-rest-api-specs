@@ -55,10 +55,10 @@
   "paths": {
     "/topics/{topicName}:publish": {
       "post": {
-        "operationId": "PublishCloudEvents",
-        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "operationId": "PublishCloudEvent",
+        "description": "Publish Single Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
         "consumes": [
-          "application/cloudevents-batch+json; charset=utf-8"
+          "application/cloudevents+json; charset=utf-8"
         ],
         "parameters": [
           {
@@ -72,15 +72,12 @@
             "type": "string"
           },
           {
-            "name": "events",
+            "name": "event",
             "in": "body",
-            "description": "Array of Cloud Events being published.",
+            "description": "Single Cloud Event being published.",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CloudEvent"
-              }
+              "$ref": "#/definitions/CloudEvent"
             }
           }
         ],
@@ -102,11 +99,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Publish Cloud Event": {
-            "$ref": "./examples/publish.json"
           }
         }
       }
@@ -457,6 +449,66 @@
         "x-ms-examples": {
           "Renew lock for batch of Cloud Events": {
             "$ref": "./examples/renewlock.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/topics/{topicName}:publish?_overload=publishCloudEvents": {
+      "post": {
+        "operationId": "PublishCloudEvents",
+        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "consumes": [
+          "application/cloudevents-batch+json; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "description": "Topic Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "events",
+            "in": "body",
+            "description": "Array of Cloud Events being published.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudEvent"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PublishResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Publish Cloud Event": {
+            "$ref": "./examples/publish.json"
           }
         }
       }
