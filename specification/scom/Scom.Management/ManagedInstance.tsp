@@ -4,6 +4,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
@@ -24,8 +25,19 @@ model ManagedInstance is TrackedResource<MonitoringInstanceProperties> {
   identity?: ManagedIdentity;
 }
 
-@friendlyName("MonitoringInstanceList") // BUG https://github.com/microsoft/typespec/issues/2276
-model MonitoringInstanceList is Azure.Core.Page<ManagedInstance>;
+/** A paged list of SCOM managed instances */
+@pagedResult
+model MonitoringInstanceList {
+  /** The items on the page */
+  @items
+  @visibility("read")
+  value: ManagedInstance[];
+
+  /** URL to get the next page if any */
+  @nextLink
+  @visibility("read")
+  nextLink?: ResourceLocation<ManagedInstance>;
+}
 
 @armResourceOperations
 interface Instances {

@@ -1204,7 +1204,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/operations/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
@@ -1282,22 +1282,22 @@
           {
             "name": "State",
             "value": "State",
-            "description": "State"
+            "description": "State data"
           },
           {
             "name": "Performance",
             "value": "Performance",
-            "description": "Performance"
+            "description": "Performance data"
           },
           {
             "name": "Event",
             "value": "Event",
-            "description": "Event"
+            "description": "Event data"
           },
           {
             "name": "Audit",
             "value": "Audit",
-            "description": "Audit"
+            "description": "Audit data"
           }
         ]
       }
@@ -1741,19 +1741,21 @@
     },
     "MonitoringInstanceList": {
       "type": "object",
-      "description": "Paged collection of ManagedInstance items",
+      "description": "A paged list of SCOM managed instances",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ManagedInstance items on this page",
+          "description": "The items on the page",
           "items": {
             "$ref": "#/definitions/ManagedInstance"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "URL to get the next page if any",
+          "readOnly": true
         }
       },
       "required": [
@@ -1773,7 +1775,12 @@
         },
         "identity": {
           "$ref": "#/definitions/ManagedIdentity",
-          "description": "The Azure Active Directory identity of the SCOM instance"
+          "description": "The Azure Active Directory identity of the SCOM instance",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },

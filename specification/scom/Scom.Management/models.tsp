@@ -19,16 +19,16 @@ enum HybridLicenseType {
 
 /** The types of data to be ingested to Log Analytics workspace. */
 enum DataType {
-  /** State */
+  /** State data */
   State,
 
-  /** Performance */
+  /** Performance data */
   Performance,
 
-  /** Event */
+  /** Event data */
   Event,
 
-  /** Audit */
+  /** Audit data */
   Audit,
 }
 
@@ -94,6 +94,7 @@ model MonitoringInstancePatch {
   ...Foundations.ArmTagsProperty;
 
   /** The Azure Active Directory identity of the SCOM instance */
+  @visibility("create", "read", "update")
   identity: ManagedIdentity;
 }
 

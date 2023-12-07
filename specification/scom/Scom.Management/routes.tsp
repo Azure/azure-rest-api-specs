@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Scom;
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom Operations interface"
 interface Operations {
     // TODO - is this correct?? Should be using `interface Operations extends Azure.ResourceManager.Operations {}`
     /** Lists all available operations on SCOM monitoring instance */
