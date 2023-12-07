@@ -5153,7 +5153,85 @@
     },
     "AssessedDisk": {
       "type": "object",
-      "description": "Assessed Disk.",
+      "properties": {
+        "suitability": {
+          "$ref": "#/definitions/CloudSuitability",
+          "description": "Gets the suitability."
+        },
+        "suitabilityExplanation": {
+          "$ref": "#/definitions/AzureDiskSuitabilityExplanation",
+          "description": "Gets the suitability explanation."
+        },
+        "suitabilityDetail": {
+          "$ref": "#/definitions/AzureDiskSuitabilityDetail",
+          "description": "Gets the suitability detail."
+        },
+        "recommendedDiskSize": {
+          "$ref": "#/definitions/AzureDiskSize",
+          "description": "Gets the recommended disk size."
+        },
+        "recommendedDiskType": {
+          "$ref": "#/definitions/AzureDiskType",
+          "description": "Gets the recommended disk type."
+        },
+        "gigabytesForRecommendedDiskSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the recommended disk size."
+        },
+        "recommendDiskThroughputInMbps": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the recommended disk throughput."
+        },
+        "recommendedDiskIops": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the recommended disk iops."
+        },
+        "monthlyStorageCost": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the monthly storage cost."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets the name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets the machine display name."
+        },
+        "gigabytesProvisioned": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the gigabytes provisioned."
+        },
+        "megabytesPerSecondOfRead": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the megabytes per second of read."
+        },
+        "megabytesPerSecondOfWrite": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the megabytes per second of write."
+        },
+        "numberOfReadOperationsPerSecond": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the number of read operations per second."
+        },
+        "numberOfWriteOperationsPerSecond": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the number of write operations per second."
+        }
+      }
+    },
+    "AssessedDiskData": {
+      "type": "object",
+      "description": "Assessed Disk data. Used in Assessed SQL machine DTO.",
       "properties": {
         "suitability": {
           "$ref": "#/definitions/CloudSuitability",
@@ -6188,7 +6266,7 @@
           "type": "object",
           "description": "Gets the list of data disks that were assessed as part of this assessment.",
           "additionalProperties": {
-            "$ref": "#/definitions/AssessedDisk"
+            "$ref": "#/definitions/AssessedDiskData"
           },
           "readOnly": true
         },
