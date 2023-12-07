@@ -3518,6 +3518,88 @@
                 }
             }
         },
+        "DeviceCapabilityDetails": {
+            "description": "Device capability details for a given sku for a given region.",
+            "type": "object",
+            "properties": {
+                "hardwareEncryption": {
+                    "description": "Hardware encryption support for a given sku for a given region.",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "type": "string",
+                    "readOnly": true,
+                    "x-ms-enum": {
+                        "name": "HardwareEncryption",
+                        "modelAsExtensible": true,
+                        "values": [
+                            {
+                                "value": "Enabled",
+                                "description": "Hardware-based encryption is enabled."
+                            },
+                            {
+                                "value": "Disabled",
+                                "description": "Hardware-based encryption is disabled."
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "DeviceCapabilityRequest": {
+            "description": "Request body to get the device capabilities for given sku.",
+            "type": "object",
+            "properties": {
+                "skuName": {
+                    "description": "Type of the device.",
+                    "enum": [
+                        "DataBox",
+                        "DataBoxDisk",
+                        "DataBoxHeavy",
+                        "DataBoxCustomerDisk"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "SkuName",
+                        "modelAsExtensible": true,
+                        "values": [
+                            {
+                                "value": "DataBox",
+                                "description": "Data Box."
+                            },
+                            {
+                                "value": "DataBoxDisk",
+                                "description": "Data Box Disk."
+                            },
+                            {
+                                "value": "DataBoxHeavy",
+                                "description": "Data Box Heavy."
+                            },
+                            {
+                                "value": "DataBoxCustomerDisk",
+                                "description": "Data Box Customer Disk."
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "DeviceCapabilityResponse": {
+            "description": "Device capabilities for given sku in a region",
+            "type": "object",
+            "properties": {
+                "deviceCapabilityDetails": {
+                    "description": "List of device capabilities available for a given region and a given sku",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DeviceCapabilityDetails"
+                    },
+                    "readOnly": true,
+                    "x-ms-identifiers": []
+                }
+            }
+        },
         "DiskScheduleAvailabilityRequest": {
             "description": "Request body to get the availability for scheduling disk orders.",
             "required": [
@@ -6670,87 +6752,6 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/TransportAvailabilityDetails"
-                    },
-                    "readOnly": true
-                }
-            }
-        },
-        "DeviceCapabilityDetails": {
-            "description": "Device capability details for a given sku for a given region.",
-            "type": "object",
-            "properties": {
-                "hardwareEncryption": {
-                    "description": "Hardware encryption support for a given sku for a given region.",
-                    "enum": [
-                        "Enabled",
-                        "Disabled"
-                    ],
-                    "type": "string",
-                    "readOnly": true,
-                    "x-ms-enum": {
-                        "name": "HardwareEncryption",
-                        "modelAsExtensible": true,
-                        "values": [
-                            {
-                                "value": "Enabled",
-                                "description": "Hardware-based encryption is enabled."
-                            },
-                            {
-                                "value": "Disabled",
-                                "description": "Hardware-based encryption is disabled."
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        "DeviceCapabilityRequest": {
-            "description": "Request body to get the device capabilities for given sku.",
-            "type": "object",
-            "properties": {
-                "skuName": {
-                    "description": "Type of the device.",
-                    "enum": [
-                        "DataBox",
-                        "DataBoxDisk",
-                        "DataBoxHeavy",
-                        "DataBoxCustomerDisk"
-                    ],
-                    "type": "string",
-                    "x-ms-enum": {
-                        "name": "SkuName",
-                        "modelAsExtensible": true,
-                        "values": [
-                            {
-                                "value": "DataBox",
-                                "description": "Data Box."
-                            },
-                            {
-                                "value": "DataBoxDisk",
-                                "description": "Data Box Disk."
-                            },
-                            {
-                                "value": "DataBoxHeavy",
-                                "description": "Data Box Heavy."
-                            },
-                            {
-                                "value": "DataBoxCustomerDisk",
-                                "description": "Data Box Customer Disk."
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        "DeviceCapabilityResponse": {
-            "description": "Device capabilities for given sku in a region",
-            "type": "object",
-            "properties": {
-                "deviceCapabilityDetails": {
-                    "description": "List of device capabilities available for a given region and a given sku",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/DeviceCapabilityDetails"
                     },
                     "readOnly": true
                 }
