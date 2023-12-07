@@ -114,18 +114,6 @@ enum StatusAtlasRelationship {
   DELETED,
 }
 
-@doc("Direction")
-enum Direction {
-  @doc("both")
-  BOTH,
-
-  @doc("input")
-  INPUT,
-
-  @doc("output")
-  OUTPUT,
-}
-
 @doc("Lineage direction")
 enum LineageDirection {
   @doc("input")
@@ -223,7 +211,7 @@ enum RelationshipCategory {
 }
 
 @doc("Type")
-enum Typedef {
+enum TypeDef {
   @doc("enum")
   `enum`,
 
@@ -458,8 +446,8 @@ model AtlasEntityExtInfo {
   referredEntities?: Record<AtlasEntity>;
 }
 
-@doc("The mutation response of entity.")
-model EntityMutationResponse {
+@doc("The mutation response result of entity.")
+model EntityMutationResult {
   @doc("A map of GUID assignments with entities.")
   guidAssignments?: Record<string>;
 
@@ -529,8 +517,8 @@ model AtlasEntitiesWithExtInfo {
   entities?: AtlasEntity[];
 }
 
-@doc("The request for classification association.")
-model ClassificationAssociateRequest {
+@doc("The request content for classification association.")
+model ClassificationAssociateContent {
   @doc("""
 An instance of a classification; it doesn't have an identity, this object
 exists only when associated with an entity.
@@ -576,8 +564,8 @@ model AtlasEntityHeaders {
   guidHeaderMap?: Record<AtlasEntityHeader>;
 }
 
-@doc("example")
-model BulkImportResponse {
+@doc("Bulk import result")
+model BulkImportResult {
   @doc("failed importInfoList")
   failedImportInfoList?: ImportInfo[];
 
@@ -600,8 +588,8 @@ model ImportInfo {
   remarks?: string;
 }
 
-@doc("MoveEntitiesRequest")
-model MoveEntitiesRequest {
+@doc("MoveEntitiesContent")
+model MoveEntitiesContent {
   @doc("An array of entity guids to be moved to target collection.")
   entityGuids?: string[];
 }
@@ -930,7 +918,7 @@ model AtlasGlossaryExtInfo {
 }
 
 @doc("The search query of advanced search request.")
-model SearchRequest {
+model SearchContent {
   @doc("The keywords applied to all searchable fields.")
   keywords?: string;
 
@@ -1210,7 +1198,7 @@ Expert or Steward for a glossary term.
 }
 
 @doc("The query of suggest request.")
-model SuggestRequest {
+model SuggestContent {
   @doc("""
 The keywords applied to all fields that support suggest operation. It must be
 at least 1 character, and no more than 100 characters. In the index schema we
@@ -1319,7 +1307,7 @@ AtlasGlossaryCategory.
 }
 
 @doc("The query of autocomplete request.")
-model AutoCompleteRequest {
+model AutoCompleteContent {
   @doc("""
 The keywords applied to all fields that support autocomplete operation. It must
 be at least 1 character, and no more than 100 characters.
@@ -2159,6 +2147,7 @@ model ScanInfoFilter extends SearchFilter {
 model GlossaryFilter extends SearchFilter {
   @doc("Glossary filter for search")
   kind: "GlossaryFilter";
+
   @doc("Glossary type. Either AtlasGlossary or AtlasGlossaryType")
   glossaryType: string;
 }

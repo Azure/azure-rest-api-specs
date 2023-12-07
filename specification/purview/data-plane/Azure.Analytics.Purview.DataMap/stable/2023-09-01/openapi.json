@@ -113,7 +113,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
+              "$ref": "#/definitions/EntityMutationResult"
             }
           },
           "default": {
@@ -251,7 +251,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
+              "$ref": "#/definitions/EntityMutationResult"
             }
           },
           "default": {
@@ -290,7 +290,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
+              "$ref": "#/definitions/EntityMutationResult"
             }
           },
           "default": {
@@ -321,7 +321,7 @@
             "description": "The request to associate a classification to multiple entities.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClassificationAssociateRequest"
+              "$ref": "#/definitions/ClassificationAssociateContent"
             }
           }
         ],
@@ -467,7 +467,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BulkImportResponse"
+              "$ref": "#/definitions/BulkImportResult"
             }
           },
           "default": {
@@ -601,7 +601,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
+              "$ref": "#/definitions/EntityMutationResult"
             }
           },
           "default": {
@@ -636,7 +636,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
+              "$ref": "#/definitions/EntityMutationResult"
             }
           },
           "default": {
@@ -1327,7 +1327,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
+              "$ref": "#/definitions/EntityMutationResult"
             }
           },
           "default": {
@@ -1370,7 +1370,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
+              "$ref": "#/definitions/EntityMutationResult"
             }
           },
           "default": {
@@ -3169,19 +3169,14 @@
             "required": true,
             "type": "string",
             "enum": [
-              "BOTH",
               "INPUT",
-              "OUTPUT"
+              "OUTPUT",
+              "BOTH"
             ],
             "x-ms-enum": {
-              "name": "Direction",
+              "name": "LineageDirection",
               "modelAsString": true,
               "values": [
-                {
-                  "name": "BOTH",
-                  "value": "BOTH",
-                  "description": "both"
-                },
                 {
                   "name": "INPUT",
                   "value": "INPUT",
@@ -3191,6 +3186,11 @@
                   "name": "OUTPUT",
                   "value": "OUTPUT",
                   "description": "output"
+                },
+                {
+                  "name": "BOTH",
+                  "value": "BOTH",
+                  "description": "both"
                 }
               ]
             }
@@ -3247,19 +3247,14 @@
             "required": true,
             "type": "string",
             "enum": [
-              "BOTH",
               "INPUT",
-              "OUTPUT"
+              "OUTPUT",
+              "BOTH"
             ],
             "x-ms-enum": {
-              "name": "Direction",
+              "name": "LineageDirection",
               "modelAsString": true,
               "values": [
-                {
-                  "name": "BOTH",
-                  "value": "BOTH",
-                  "description": "both"
-                },
                 {
                   "name": "INPUT",
                   "value": "INPUT",
@@ -3269,6 +3264,11 @@
                   "name": "OUTPUT",
                   "value": "OUTPUT",
                   "description": "output"
+                },
+                {
+                  "name": "BOTH",
+                  "value": "BOTH",
+                  "description": "both"
                 }
               ]
             }
@@ -4035,7 +4035,7 @@
               "term_template"
             ],
             "x-ms-enum": {
-              "name": "Typedef",
+              "name": "TypeDef",
               "modelAsString": true,
               "values": [
                 {
@@ -4240,7 +4240,7 @@
               "term_template"
             ],
             "x-ms-enum": {
-              "name": "Typedef",
+              "name": "TypeDef",
               "modelAsString": true,
               "values": [
                 {
@@ -4323,7 +4323,7 @@
             "description": "Entity guids to be moved to target collection.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MoveEntitiesRequest"
+              "$ref": "#/definitions/MoveEntitiesContent"
             }
           }
         ],
@@ -4331,7 +4331,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
+              "$ref": "#/definitions/EntityMutationResult"
             }
           },
           "default": {
@@ -4370,19 +4370,14 @@
             "required": true,
             "type": "string",
             "enum": [
-              "BOTH",
               "INPUT",
-              "OUTPUT"
+              "OUTPUT",
+              "BOTH"
             ],
             "x-ms-enum": {
-              "name": "Direction",
+              "name": "LineageDirection",
               "modelAsString": true,
               "values": [
-                {
-                  "name": "BOTH",
-                  "value": "BOTH",
-                  "description": "both"
-                },
                 {
                   "name": "INPUT",
                   "value": "INPUT",
@@ -4392,6 +4387,11 @@
                   "name": "OUTPUT",
                   "value": "OUTPUT",
                   "description": "output"
+                },
+                {
+                  "name": "BOTH",
+                  "value": "BOTH",
+                  "description": "both"
                 }
               ]
             }
@@ -4448,7 +4448,7 @@
             "description": "An object specifying the autocomplete criteria.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AutoCompleteRequest"
+              "$ref": "#/definitions/AutoCompleteContent"
             }
           }
         ],
@@ -4487,7 +4487,7 @@
             "description": "An object specifying the search criteria.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchRequest"
+              "$ref": "#/definitions/SearchContent"
             }
           }
         ],
@@ -4586,7 +4586,7 @@
             "description": "An object specifying the suggest criteria.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SuggestRequest"
+              "$ref": "#/definitions/SuggestContent"
             }
           }
         ],
@@ -7258,7 +7258,7 @@
       ],
       "x-ms-discriminator-value": "AttributeFilter"
     },
-    "AutoCompleteRequest": {
+    "AutoCompleteContent": {
       "type": "object",
       "description": "The query of autocomplete request.",
       "properties": {
@@ -7310,9 +7310,9 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
-    "BulkImportResponse": {
+    "BulkImportResult": {
       "type": "object",
-      "description": "example",
+      "description": "Bulk import result",
       "properties": {
         "failedImportInfoList": {
           "type": "array",
@@ -7392,9 +7392,9 @@
         ]
       }
     },
-    "ClassificationAssociateRequest": {
+    "ClassificationAssociateContent": {
       "type": "object",
-      "description": "The request for classification association.",
+      "description": "The request content for classification association.",
       "properties": {
         "classification": {
           "$ref": "#/definitions/AtlasClassification",
@@ -7586,36 +7586,6 @@
         }
       }
     },
-    "Direction": {
-      "type": "string",
-      "description": "Direction",
-      "enum": [
-        "BOTH",
-        "INPUT",
-        "OUTPUT"
-      ],
-      "x-ms-enum": {
-        "name": "Direction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BOTH",
-            "value": "BOTH",
-            "description": "both"
-          },
-          {
-            "name": "INPUT",
-            "value": "INPUT",
-            "description": "input"
-          },
-          {
-            "name": "OUTPUT",
-            "value": "OUTPUT",
-            "description": "output"
-          }
-        ]
-      }
-    },
     "DomainIdFilter": {
       "type": "object",
       "description": "Domain id filter for search",
@@ -7635,9 +7605,9 @@
       ],
       "x-ms-discriminator-value": "DomainIdFilter"
     },
-    "EntityMutationResponse": {
+    "EntityMutationResult": {
       "type": "object",
-      "description": "The mutation response of entity.",
+      "description": "The mutation response result of entity.",
       "properties": {
         "guidAssignments": {
           "type": "object",
@@ -7884,9 +7854,9 @@
         }
       }
     },
-    "MoveEntitiesRequest": {
+    "MoveEntitiesContent": {
       "type": "object",
-      "description": "MoveEntitiesRequest",
+      "description": "MoveEntitiesContent",
       "properties": {
         "entityGuids": {
           "type": "array",
@@ -8268,6 +8238,45 @@
       ],
       "x-ms-discriminator-value": "ScanInfoFilter"
     },
+    "SearchContent": {
+      "type": "object",
+      "description": "The search query of advanced search request.",
+      "properties": {
+        "keywords": {
+          "type": "string",
+          "description": "The keywords applied to all searchable fields."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The limit of the number of the search result. default value is 50; maximum\nvalue is 1000."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used to get next batch of data. Default 'Null' to get the first\nbatch, and will return new token in each response unless there's no more data."
+        },
+        "orderby": {
+          "type": "array",
+          "description": "The sort order of search results, can specify multiple fields.",
+          "items": {}
+        },
+        "filter": {
+          "description": "The filter for the search. See examples for the usage of supported filters."
+        },
+        "facets": {
+          "type": "array",
+          "description": "The facets for search. See examples for the usage of supported facets.",
+          "items": {
+            "$ref": "#/definitions/SearchFacetItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "taxonomySetting": {
+          "$ref": "#/definitions/SearchRequestTaxonomySetting",
+          "description": "The taxonomy setting for search."
+        }
+      }
+    },
     "SearchFacetItem": {
       "type": "object",
       "description": "The content of a search facet result item.",
@@ -8532,45 +8541,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "SearchRequest": {
-      "type": "object",
-      "description": "The search query of advanced search request.",
-      "properties": {
-        "keywords": {
-          "type": "string",
-          "description": "The keywords applied to all searchable fields."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The limit of the number of the search result. default value is 50; maximum\nvalue is 1000."
-        },
-        "continuationToken": {
-          "type": "string",
-          "description": "The token used to get next batch of data. Default 'Null' to get the first\nbatch, and will return new token in each response unless there's no more data."
-        },
-        "orderby": {
-          "type": "array",
-          "description": "The sort order of search results, can specify multiple fields.",
-          "items": {}
-        },
-        "filter": {
-          "description": "The filter for the search. See examples for the usage of supported filters."
-        },
-        "facets": {
-          "type": "array",
-          "description": "The facets for search. See examples for the usage of supported facets.",
-          "items": {
-            "$ref": "#/definitions/SearchFacetItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "taxonomySetting": {
-          "$ref": "#/definitions/SearchRequestTaxonomySetting",
-          "description": "The taxonomy setting for search."
         }
       }
     },
@@ -8844,7 +8814,7 @@
         ]
       }
     },
-    "SuggestRequest": {
+    "SuggestContent": {
       "type": "object",
       "description": "The query of suggest request.",
       "properties": {
@@ -9273,7 +9243,7 @@
         ]
       }
     },
-    "Typedef": {
+    "TypeDef": {
       "type": "string",
       "description": "Type",
       "enum": [
@@ -9285,7 +9255,7 @@
         "term_template"
       ],
       "x-ms-enum": {
-        "name": "Typedef",
+        "name": "TypeDef",
         "modelAsString": true,
         "values": [
           {

@@ -95,7 +95,7 @@ need to move an entity to another collection.
       @body
       entity: AtlasEntityWithExtInfo;
     },
-    EntityMutationResponse,
+    EntityMutationResult,
     {},
     AtlasErrorResponse
   >;
@@ -159,7 +159,7 @@ entities.
       @body
       entities: AtlasEntitiesWithExtInfo;
     },
-    EntityMutationResponse,
+    EntityMutationResult,
     {},
     AtlasErrorResponse
   >;
@@ -180,7 +180,7 @@ attributes.
       })
       guid: string[];
     },
-    EntityMutationResponse,
+    EntityMutationResult,
     {},
     AtlasErrorResponse
   >;
@@ -193,7 +193,7 @@ attributes.
     {
       @doc("The request to associate a classification to multiple entities.")
       @body
-      request: ClassificationAssociateRequest;
+      request: ClassificationAssociateContent;
     },
     void,
     {},
@@ -248,7 +248,7 @@ Null updates are not possible.
       @body
       body: unknown;
     },
-    EntityMutationResponse,
+    EntityMutationResult,
     {},
     AtlasErrorResponse
   >;
@@ -263,7 +263,7 @@ Null updates are not possible.
       @path
       guid: string;
     },
-    EntityMutationResponse,
+    EntityMutationResult,
     {},
     AtlasErrorResponse
   >;
@@ -444,7 +444,7 @@ be changed to other unique attributes)
       @body
       atlasEntityWithExtInfo: AtlasEntityWithExtInfo;
     },
-    EntityMutationResponse,
+    EntityMutationResult,
     {},
     AtlasErrorResponse
   >;
@@ -479,7 +479,7 @@ be changed to other unique attributes)
       @query("attr:qualifiedName")
       attr?: string;
     },
-    EntityMutationResponse,
+    EntityMutationResult,
     {},
     AtlasErrorResponse
   >;
@@ -769,7 +769,7 @@ default is false.
       @doc("InputStream of file")
       uploadedInputStream: bytes;
     },
-    BulkImportResponse,
+    BulkImportResult,
     MultipartFormDataRequestHeadersTraits
   >;
 
@@ -972,9 +972,9 @@ be changed to other unique attributes)
 
       @doc("Entity guids to be moved to target collection.")
       @body
-      moveEntitiesRequest: MoveEntitiesRequest;
+      moveEntitiesRequest: MoveEntitiesContent;
     },
-    EntityMutationResponse,
+    EntityMutationResult,
     {},
     AtlasErrorResponse
   >;
@@ -1686,7 +1686,7 @@ interface Discovery {
     {
       @doc("An object specifying the search criteria.")
       @body
-      searchRequest: SearchRequest;
+      searchRequest: SearchContent;
     },
     SearchResult,
     {},
@@ -1701,7 +1701,7 @@ interface Discovery {
     {
       @doc("An object specifying the suggest criteria.")
       @body
-      suggestRequest: SuggestRequest;
+      suggestRequest: SuggestContent;
     },
     SuggestResult,
     {},
@@ -1716,7 +1716,7 @@ interface Discovery {
     {
       @doc("An object specifying the autocomplete criteria.")
       @body
-      autoCompleteRequest: AutoCompleteRequest;
+      autoCompleteRequest: AutoCompleteContent;
     },
     AutoCompleteResult,
     {},
@@ -1742,7 +1742,7 @@ interface Lineage {
 
       @doc("The direction of the lineage, which could be INPUT, OUTPUT or BOTH.")
       @query
-      direction: Direction;
+      direction: LineageDirection;
     },
     AtlasLineageInfo,
     {},
@@ -1761,7 +1761,7 @@ interface Lineage {
 
       @doc("The direction of the lineage, which could be INPUT, OUTPUT or BOTH.")
       @query
-      direction: Direction;
+      direction: LineageDirection;
 
       @doc("The offset for pagination purpose.")
       @query
@@ -1809,7 +1809,7 @@ GET
 
       @doc("The direction of the lineage, which could be INPUT, OUTPUT or BOTH.")
       @query
-      direction: Direction;
+      direction: LineageDirection;
 
       @doc("""
 The qualified name of the entity. (This is only an example. qualifiedName can
@@ -2140,7 +2140,7 @@ when search filter type=term_template
 
       @doc("Typedef name as search filter when get typedefs.")
       @query
-      type?: Typedef;
+      type?: TypeDef;
     },
     AtlasTypesDef,
     {},
@@ -2215,7 +2215,7 @@ when search filter type=term_template
 
       @doc("Typedef name as search filter when get typedefs.")
       @query
-      type?: Typedef;
+      type?: TypeDef;
     },
     OkResponse<AtlasTypeDefHeader[]>,
     {},
