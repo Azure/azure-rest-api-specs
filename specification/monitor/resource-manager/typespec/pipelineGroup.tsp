@@ -59,7 +59,7 @@ model PipelineGroupProperties {
 
   @doc("Networking configurations for the pipeline group instance.")
   @extension("x-ms-identifiers", [])
-  networking?: Networking[];
+  networkingConfigurations?: Networking[];
 
   @doc("The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.")
   @visibility("read")
