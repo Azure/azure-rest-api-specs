@@ -57,6 +57,8 @@ directive:
 suppressions:
   - code: LroPostReturn
     reason: start,stop,flushDNSsetting api do not have return body in async operation
+  - code: PostResponseCodes
+    reason: start,stop,flushDNSSetting API do not have return body
 ```
 
 
