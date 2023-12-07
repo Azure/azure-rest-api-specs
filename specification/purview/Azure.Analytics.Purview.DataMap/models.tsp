@@ -2035,8 +2035,9 @@ model AttributeFilter extends SearchFilter {
   @doc("Operator")
   operator: SearchFilterOperator;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("Attribute value")
-  attributeValue: string;
+  attributeValue: unknown;
 }
 
 @doc("Classification type filter for search")
@@ -2045,7 +2046,7 @@ model ClassificationFilter extends SearchFilter {
   kind: "ClassificationFilter";
 
   @doc("Classification name")
-  classificationName: string;
+  classification: string;
 
   @doc("Whether to include sub classifications")
   includeSubClassifications?: boolean;
@@ -2186,13 +2187,13 @@ model IdFilter extends SearchFilter {
   id: string;
 }
 
-@doc("Type filter for search")
-model TypeFilter extends SearchFilter {
+@doc("Entity type filter for search")
+model EntityTypeFilter extends SearchFilter {
   @doc("Type filter for search")
-  kind: "TypeFilter";
+  kind: "EntityTypeFilter";
 
   @doc("Type name")
-  typeName: string;
+  entityType: string;
 
   @doc("Whether to include sub types")
   includeSubTypes?: boolean;

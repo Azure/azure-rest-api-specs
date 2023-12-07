@@ -7243,7 +7243,6 @@
           "description": "Operator"
         },
         "attributeValue": {
-          "type": "string",
           "description": "Attribute value"
         }
       },
@@ -7433,7 +7432,7 @@
       "type": "object",
       "description": "Classification type filter for search",
       "properties": {
-        "classificationName": {
+        "classification": {
           "type": "string",
           "description": "Classification name"
         },
@@ -7443,7 +7442,7 @@
         }
       },
       "required": [
-        "classificationName"
+        "classification"
       ],
       "allOf": [
         {
@@ -7667,6 +7666,29 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "EntityTypeFilter": {
+      "type": "object",
+      "description": "Entity type filter for search",
+      "properties": {
+        "entityType": {
+          "type": "string",
+          "description": "Type name"
+        },
+        "includeSubTypes": {
+          "type": "boolean",
+          "description": "Whether to include sub types"
+        }
+      },
+      "required": [
+        "entityType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchFilter"
+        }
+      ],
+      "x-ms-discriminator-value": "EntityTypeFilter"
     },
     "ExistsFilter": {
       "type": "object",
@@ -9250,29 +9272,6 @@
           }
         ]
       }
-    },
-    "TypeFilter": {
-      "type": "object",
-      "description": "Type filter for search",
-      "properties": {
-        "typeName": {
-          "type": "string",
-          "description": "Type name"
-        },
-        "includeSubTypes": {
-          "type": "boolean",
-          "description": "Whether to include sub types"
-        }
-      },
-      "required": [
-        "typeName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SearchFilter"
-        }
-      ],
-      "x-ms-discriminator-value": "TypeFilter"
     },
     "Typedef": {
       "type": "string",
