@@ -205,7 +205,7 @@ model logAnalyticsConfiguration {
   dataTypes?: DataType[];
 
   /** A one-time optional parameter to import data of last 7 days. */
-  importData?: boolean;
+  importData?: boolean = false;
 }
 
 /** Gets status of current and latest SCOM managed instance operation. */
@@ -254,6 +254,8 @@ model UserIdentity {
 /** Properties for Scaling */
 model ScalingProperties {
   /** Required management server count */
+  @minValue(1)
+  @maxValue(100)
   serverCount?: int32;
 }
 

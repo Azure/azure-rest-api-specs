@@ -1757,10 +1757,7 @@
           "description": "URL to get the next page if any",
           "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "MonitoringInstancePatch": {
       "type": "object",
@@ -1853,7 +1850,9 @@
         "serverCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Required management server count"
+          "description": "Required management server count",
+          "minimum": 1,
+          "maximum": 100
         }
       }
     },
@@ -1890,7 +1889,8 @@
         },
         "importData": {
           "type": "boolean",
-          "description": "A one-time optional parameter to import data of last 7 days."
+          "description": "A one-time optional parameter to import data of last 7 days.",
+          "default": false
         }
       }
     },

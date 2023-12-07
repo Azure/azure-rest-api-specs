@@ -31,7 +31,7 @@ model MonitoringInstanceList {
   /** The items on the page */
   @items
   @visibility("read")
-  value: ManagedInstance[];
+  value?: ManagedInstance[];
 
   /** URL to get the next page if any */
   @nextLink
