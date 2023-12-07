@@ -37,8 +37,6 @@ These settings apply only when `--tag=package-2023-07-07-preview` is specified o
 ```yaml $(tag) == 'package-2023-07-07-preview'
 input-file:
   - Microsoft.Scom/preview/2023-07-07-preview/scom.json
-  # - Microsoft.Scom/preview/2023-07-07-preview/monitoredResources.json
-  # - Microsoft.Scom/preview/2023-07-07-preview/managedGateways.json
 ```
 ---
 

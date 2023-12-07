@@ -152,7 +152,7 @@ model DomainControllerProperties {
   dnsServer?: string;
 
   /** Organizational Unit path in which the SCOM servers will be present */
-  ouPath?: string;
+  ouPath?: string = "";
 }
 
 /** Get Domain user name and password from key vault */
