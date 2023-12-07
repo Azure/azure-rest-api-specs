@@ -1506,11 +1506,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK - terminal state"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
