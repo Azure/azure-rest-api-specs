@@ -18,17 +18,16 @@ namespace Microsoft.Scom.Builders;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template op"
 op ScomArmResourceActionAsync<
-    TResource extends ArmResource,
-    TRequest extends TypeSpec.Reflection.Model | void,
-    TResponse extends TypeSpec.Reflection.Model | void,
-    TBaseParameters extends TypeSpec.Reflection.Model = BaseParameters<TResource>
+  TResource extends ArmResource,
+  TRequest extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
+  TBaseParameters extends TypeSpec.Reflection.Model = BaseParameters<TResource>
 > is ArmResourceActionAsyncBase<
-    TResource,
-    TRequest,
-    ScomArmAcceptedLroResponse | ArmResponse<TResponse>,
-    TBaseParameters
+  TResource,
+  TRequest,
+  ScomArmAcceptedLroResponse | ArmResponse<TResponse>,
+  TBaseParameters
 >;
-
 
 /**
  * The standard ARM response for asynchronous PATCH, POST, and DELETE operations
@@ -36,12 +35,12 @@ op ScomArmResourceActionAsync<
  */
 @doc(TMessage)
 model ScomArmAcceptedLroResponse<TMessage extends valueof string = "Resource operation accepted.">
-    is ArmAcceptedResponse<TMessage> {
-    /** The Location header contains the URL where the status of the long running operation can be checked. */
-    @header("Location") location?: string;
+  is ArmAcceptedResponse<TMessage> {
+  /** The Location header contains the URL where the status of the long running operation can be checked. */
+  @header("Location") location?: string;
 
-    /** The URL to retrieve the status of the asynchronous operation. */
-    @header("Azure-AsyncOperation") azureAsyncOperation?: string;
+  /** The URL to retrieve the status of the asynchronous operation. */
+  @header("Azure-AsyncOperation") azureAsyncOperation?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template op"
@@ -52,7 +51,7 @@ model ScomArmAcceptedLroResponse<TMessage extends valueof string = "Resource ope
 @armResourceList(TResource)
 @get
 op ScomArmListBySubscription<TResource extends ArmResource, List>(
-    ...SubscriptionScope<TResource>,
+  ...SubscriptionScope<TResource>,
 ): ArmResponse<List> | ErrorResponse;
 
 /**
@@ -69,5 +68,5 @@ op ScomArmListBySubscription<TResource extends ArmResource, List>(
 @segmentOf(TResource)
 @armResourceList(TResource)
 op ScomArmResourceListByParent<TResource extends ArmResource, List>(
-    ...ResourceParentParameters<TResource, BaseParameters<TResource>>,
+  ...ResourceParentParameters<TResource, BaseParameters<TResource>>,
 ): ArmResponse<List> | ErrorResponse;
