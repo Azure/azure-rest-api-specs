@@ -48,11 +48,11 @@ input-file:
 
 ```
 
-### Tag: package-preview-2023-03
+### Tag: package-2023-03-preview
 
-These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+These settings apply only when `--tag=package-2023-03-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-03'
+``` yaml $(tag) == 'package-2023-03-preview'
 input-file:
   - preview/2023-03-01-preview/alias.json
   - preview/2023-03-01-preview/dataset.json
@@ -66,11 +66,11 @@ input-file:
   - preview/2023-03-01-preview/wayfind.json
 ```
 
-### Tag: package-preview-2022-09
+### Tag: package-2022-09-preview
 
-These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+These settings apply only when `--tag=package-2022-09-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-2022-09-preview'
 input-file:
   - preview/2022-09-01-preview/tileset.json
   - preview/2022-09-01-preview/style.json
@@ -85,24 +85,21 @@ input-file:
   - preview/2.0/wfs.json
 ```
 
-### Tag: 2.0-preview
+### Tag: package-2023-07
 
-# at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
+These settings apply only when `--tag=package-2023-07` is specified on the command line.
 
-These settings apply only when `--tag=2.0-preview` is specified on the command line.
-
-``` yaml $(tag) == '2.0-preview'
+``` yaml $(tag) == 'package-2023-07'
 input-file:
-  - preview/2.0/alias.json
-  - preview/2.0/data.json
-  - preview/2.0/dataset.json
-  - preview/2.0/dwgconversion.json
-  - preview/2.0/featurestate.json
-  - preview/1.0/spatial.json
-  - preview/2.0/tileset.json
-  - preview/2.0/wfs.json
+  - stable/2023-07-01/alias.json
+  - stable/2023-07-01/dataset.json
+  - stable/2023-07-01/dwgconversion.json
+  - stable/2023-07-01/features.json
+  - stable/2023-07-01/featurestate.json
+  - stable/2023-07-01/mapconfiguration.json
+  - stable/2023-07-01/style.json
+  - stable/2023-07-01/tileset.json
 ```
-
 
 ## Code Generation
 
