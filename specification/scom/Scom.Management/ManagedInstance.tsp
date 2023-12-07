@@ -88,33 +88,33 @@ interface Instances {
 
   /** Scaling SCOM managed instance. */
   @action("setServerCount")
-  scale is ScomArmResourceActionAsync<
+  scale is ArmResourceActionAsync<
     ManagedInstance,
     ScalingProperties,
     setServerCountResponseProperties
   >;
 
   /** Update SCOM servers with latest scom software. */
-  patchServers is ScomArmResourceActionAsync<
+  patchServers is ArmResourceActionAsync<
     ManagedInstance,
     void,
     patchServersResponseProperties
   >;
 
   /** Link Log Analytics workspace for SCOM monitoring instance */
-  linkLogAnalytics is ScomArmResourceActionAsync<
+  linkLogAnalytics is ArmResourceActionAsync<
     ManagedInstance,
     logAnalyticsConfiguration,
     logAnalyticsConfiguration
   >;
   /** Unlink Log Analytics workspace for SCOM monitoring instance */
-  unlinkLogAnalytics is ScomArmResourceActionAsync<
+  unlinkLogAnalytics is ArmResourceActionAsync<
     ManagedInstance,
     void,
     unlinkLogAnalyticsResponseProperties
   >;
   /** Update configuration for log analytics linking for SCOM monitoring instance */
-  updateLogAnalytics is ScomArmResourceActionAsync<
+  updateLogAnalytics is ArmResourceActionAsync<
     ManagedInstance,
     logAnalyticsUpdateConfiguration,
     logAnalyticsUpdateConfiguration
