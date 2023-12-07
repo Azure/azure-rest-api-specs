@@ -3,16 +3,13 @@
   "operationId": "Instances_LinkLogAnalytics",
   "parameters": {
     "api-version": "2023-07-07-preview",
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResGroup",
-    "instanceName": "myInstance",
+    "subscriptionId": "7F3D56CF-5F59-41AC-9D08-C909DC1EBB68",
+    "resourceGroupName": "rgscom",
+    "instanceName": "f-2_V",
     "body": {
-      "workspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/00000000/providers/microsoft.operationalinsights/workspaces/00000000",
+      "workspaceId": "t",
       "dataTypes": [
-        "State",
-        "Performance",
-        "Event",
-        "Audit"
+        "State"
       ],
       "importData": true
     }
@@ -20,20 +17,16 @@
   "responses": {
     "200": {
       "body": {
-        "workspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/00000000/providers/microsoft.operationalinsights/workspaces/00000000",
+        "workspaceId": "t",
         "dataTypes": [
-          "State",
-          "Performance",
-          "Event",
-          "Audit"
+          "State"
         ],
         "importData": true
       }
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Scom/locations/WESTUS/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2023-07-07-preview",
-        "Location": "https://management.azure.com/providers/Microsoft.Scom/locations/WESTUS/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2023-07-07-preview"
+        "location": "https://contoso.com/operationstatus"
       }
     }
   }
