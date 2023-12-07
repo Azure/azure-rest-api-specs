@@ -20,7 +20,7 @@ using OpenAPI;
 
 namespace Microsoft.StandbyPool;
 
-@added(Microsoft.StandbyPool.Versions.v2023_12_01_preview)
+@added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("A StandbyContainerGroupPoolResource.")
 model StandbyContainerGroupPoolResource
   is TrackedResource<StandbyContainerGroupPoolResourceProperties> {
@@ -33,7 +33,7 @@ model StandbyContainerGroupPoolResource
   name: string;
 }
 
-@added(Microsoft.StandbyPool.Versions.v2023_12_01_preview)
+@added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Details of the StandbyContainerGroupPool.")
 model StandbyContainerGroupPoolResourceProperties {
   @doc("Specifies elasticity profile of standby container group pools.")
@@ -47,7 +47,7 @@ model StandbyContainerGroupPoolResourceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Microsoft.StandbyPool.Versions.v2023_12_01_preview)
+@added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Details of the ElasticityProfile.")
 model ElasticityProfile {
   @doc("Specifies maximum number of standby container groups.")
@@ -59,7 +59,7 @@ model ElasticityProfile {
   refillPolicy?: RefillPolicy;
 }
 
-@added(Microsoft.StandbyPool.Versions.v2023_12_01_preview)
+@added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Details of the ContainerGroupProperties.")
 model ContainerGroupProperties {
   @doc("Specifies container group profile of standby container groups.")
@@ -69,7 +69,7 @@ model ContainerGroupProperties {
   subnetIds?: Subnet[];
 }
 
-@added(Microsoft.StandbyPool.Versions.v2023_12_01_preview)
+@added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Details of the ContainerGroupProfile.")
 model ContainerGroupProfile {
   @doc("Specifies container group profile id of standby container groups.")
@@ -79,21 +79,21 @@ model ContainerGroupProfile {
   revision?: int64;
 }
 
-@added(Microsoft.StandbyPool.Versions.v2023_12_01_preview)
+@added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Refill policy of standby pool")
 enum RefillPolicy {
   @doc("A refill policy that standby pool is automatically refilled to maintain maxReadyCapacity.")
   always,
 }
 
-@added(Microsoft.StandbyPool.Versions.v2023_12_01_preview)
+@added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Subnet of container group")
 model Subnet {
   @doc("Specifies ARM resource id of the subnet.")
   id: string;
 }
 
-@added(Microsoft.StandbyPool.Versions.v2023_12_01_preview)
+@added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @armResourceOperations
 interface StandbyContainerGroupPools {
   get is ArmResourceRead<StandbyContainerGroupPoolResource>;

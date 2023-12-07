@@ -22,18 +22,19 @@ using OpenAPI;
   title: "Microsoft.StandbyPool",
 })
 @versioned(Microsoft.StandbyPool.Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.StandbyPool;
 
 @doc("Supported API Versions for Microsoft.StandbyPool")
 enum Versions {
   @doc("API Version 2023-06-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2023_06_01_preview: "2023-06-01-preview",
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  `2023-06-01-preview`,
 
   @doc("API Version 2023-12-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2023_12_01_preview: "2023-12-01-preview",
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2023-12-01-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
