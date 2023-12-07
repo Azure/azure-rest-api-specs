@@ -48,6 +48,7 @@ directive:
 
   - suppress: RESPONSE_SCHEMA_NOT_IN_SPEC
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
+
 ```
 
 ### Tag: package-stable-2023-07-01
@@ -57,6 +58,14 @@ These settings apply only when `--tag=package-stable-2023-07-01` is specified on
 ```yaml $(tag) == 'package-stable-2023-07-01'
 input-file:
   - Common/stable/2023-06-01/common.json
+  - Creator/stable/2023-07-01/alias.json
+  - Creator/stable/2023-07-01/dataset.json
+  - Creator/stable/2023-07-01/dwgconversion.json
+  - Creator/stable/2023-07-01/features.json
+  - Creator/stable/2023-07-01/featurestate.json
+  - Creator/stable/2023-07-01/mapconfiguration.json
+  - Creator/stable/2023-07-01/style.json
+  - Creator/stable/2023-07-01/tileset.json
   - Microsoft.Maps/Data/preview/2.0/data.json
   - DataRegistry/stable/2023-06-01/dataregistry.json
   - Geolocation/preview/1.0/geolocation.json
@@ -75,7 +84,13 @@ These settings apply only when `--tag=package-preview-2.0` is specified on the c
 
 ```yaml $(tag) == 'package-preview-2.0'
 input-file:
+  - Microsoft.Maps/Alias/preview/2.0/alias.json
   - Microsoft.Maps/Data/preview/2.0/data.json
+  - Microsoft.Maps/Dataset/preview/2.0/dataset.json
+  - Microsoft.Maps/DEM/preview/1.0/elevation.json
+  - Microsoft.Maps/DwgConversion/preview/2.0/dwgconversion.json
+  - Microsoft.Maps/FeatureState/preview/2.0/featurestate.json
+  - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
   - Microsoft.Maps/Render/preview/1.0/render.json
   - Microsoft.Maps/Render/preview/2.0/render.json
@@ -86,6 +101,7 @@ input-file:
   - Microsoft.Maps/Timezone/preview/1.0/timezone.json
   - Microsoft.Maps/Traffic/preview/1.0/traffic.json
   - Microsoft.Maps/Weather/preview/1.0/weather.json
+  - Microsoft.Maps/WFS/preview/2.0/wfs.json
 ```
 
 ### Tag: package-1.0-preview
@@ -95,6 +111,8 @@ These settings apply only when `--tag=package-1.0-preview` is specified on the c
 ``` yaml $(tag) == 'package-1.0-preview'
 input-file:
   - Microsoft.Maps/Data/preview/1.0/data.json
+  - Microsoft.Maps/DEM/preview/1.0/elevation.json
+  - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
   - Microsoft.Maps/Render/preview/1.0/render.json
   - Microsoft.Maps/Render/preview/2.0/render.json
