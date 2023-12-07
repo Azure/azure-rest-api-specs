@@ -1866,6 +1866,14 @@
         "privateLinkServiceId": {
           "type": "string",
           "readOnly": true,
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateLinkServices"
+              }
+            ]
+          },
           "description": "Private link service resource id. Only when enableInternalIngress is true, this property will be returned."
         }
       }
