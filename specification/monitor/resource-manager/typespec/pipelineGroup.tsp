@@ -59,7 +59,7 @@ model PipelineGroupProperties {
 
   @doc("Networking configurations for the pipeline group instance.")
   @extension("x-ms-identifiers", [])
-  networkingConfigurations?: Networking[];
+  networkingConfigurations?: NetworkingConfiguration[];
 
   @doc("The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.")
   @visibility("read")
@@ -174,7 +174,7 @@ model Pipeline {
 }
 
 @doc("Networking configuration for the pipeline group instance.")
-model Networking {
+model NetworkingConfiguration {
   @doc("The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.")
   @pattern("^[a-zA-Z0-9-\\.]+$")
   host: string;
