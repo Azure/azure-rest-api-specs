@@ -19,10 +19,12 @@ model ManagedInstance is TrackedResource<MonitoringInstanceProperties> {
   @segment("managedInstances")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  /** The managed service identities assigned to this resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Have to do custom identity to prevent breaking change"
+  identity?: ManagedIdentity;
 }
 
-@friendlyName("MonitoringInstanceList")  // BUG https://github.com/microsoft/typespec/issues/2276
+@friendlyName("MonitoringInstanceList") // BUG https://github.com/microsoft/typespec/issues/2276
 model MonitoringInstanceList is Azure.Core.Page<ManagedInstance>;
 
 @armResourceOperations
@@ -66,7 +68,7 @@ interface Instances {
   /** Update SCOM servers with latest scom software. */
   patchServers is ScomArmResourceActionAsync<
     ManagedInstance,
-    {},
+    void,
     patchServersResponseProperties
   >;
 
@@ -79,7 +81,7 @@ interface Instances {
   /** Unlink Log Analytics workspace for SCOM monitoring instance */
   unlinkLogAnalytics is ScomArmResourceActionAsync<
     ManagedInstance,
-    {},
+    void,
     unlinkLogAnalyticsResponseProperties
   >;
   /** Update configuration for log analytics linking for SCOM monitoring instance */

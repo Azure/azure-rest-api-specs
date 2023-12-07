@@ -19,8 +19,8 @@ namespace Microsoft.Scom.Builders;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template op"
 op ScomArmResourceActionAsync<
     TResource extends ArmResource,
-    TRequest extends TypeSpec.Reflection.Model,
-    TResponse extends TypeSpec.Reflection.Model,
+    TRequest extends TypeSpec.Reflection.Model | void,
+    TResponse extends TypeSpec.Reflection.Model | void,
     TBaseParameters extends TypeSpec.Reflection.Model = BaseParameters<TResource>
 > is ArmResourceActionAsyncBase<
     TResource,
@@ -28,6 +28,7 @@ op ScomArmResourceActionAsync<
     ScomArmAcceptedLroResponse | ArmResponse<TResponse>,
     TBaseParameters
 >;
+
 
 /**
  * The standard ARM response for asynchronous PATCH, POST, and DELETE operations
