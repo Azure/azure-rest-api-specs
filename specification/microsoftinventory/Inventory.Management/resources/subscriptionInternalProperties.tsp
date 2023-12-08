@@ -28,7 +28,7 @@ model SubscriptionInternalPropertyResource
   @doc("Subscription billing properties")
   @key("subscriptionInternalPropertyName")
   @path
-  name: string = "default";
+  name: "default";
 }
 
 @armResourceOperations

@@ -12,5 +12,6 @@ model AzureHostProperties {
   serverId: ServerResourceId;
 
   @doc("Provisioning state")
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }

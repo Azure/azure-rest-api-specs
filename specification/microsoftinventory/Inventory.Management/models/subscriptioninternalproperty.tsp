@@ -42,6 +42,7 @@ model SubscriptionInternalProperties {
   createdTime?: utcDateTime;
 
   @doc("Provisioning state")
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
