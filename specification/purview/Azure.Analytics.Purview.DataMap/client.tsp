@@ -59,10 +59,9 @@ alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTr
 }>;
 
 @client({
-  name: "PurviewDataMapClient",
+  name: "EntityClient",
   service: PurviewDataMap,
 })
-@operationGroup
 interface Entity {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
@@ -981,7 +980,10 @@ be changed to other unique attributes)
   >;
 }
 
-@operationGroup
+@client({
+  name: "GlossaryClient",
+  service: PurviewDataMap,
+})
 interface Glossary {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
@@ -1677,7 +1679,10 @@ to get pagination result.
   >;
 }
 
-@operationGroup
+@client({
+  name: "DiscoveryClient",
+  service: PurviewDataMap,
+})
 interface Discovery {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get data using search.")
@@ -1725,7 +1730,10 @@ interface Discovery {
   >;
 }
 
-@operationGroup
+@client({
+  name: "LineageClient",
+  service: PurviewDataMap,
+})
 interface Lineage {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get lineage info of the entity specified by GUID.")
@@ -1825,7 +1833,10 @@ be changed to other unique attributes)
   >;
 }
 
-@operationGroup
+@client({
+  name: "RelationshipClient",
+  service: PurviewDataMap,
+})
 interface Relationship {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Create a new relationship between entities.")
@@ -1898,7 +1909,10 @@ be created.
   >;
 }
 
-@operationGroup
+@client({
+  name: "TypeClient",
+  service: PurviewDataMap,
+})
 interface Type {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the businessMetadata definition for the given guid.")
