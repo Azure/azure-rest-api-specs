@@ -2,43 +2,126 @@
   "swagger": "2.0",
   "info": {
     "title": "CommunicationMessagesClient",
+    "version": "2024-02-01",
     "description": "Azure Communication Messages Service",
-    "version": "2024-02-01"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The communication resource, for example https://my-resource.communication.azure.com",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "Template"
+    },
+    {
+      "name": "Notifications"
+    },
+    {
+      "name": "Stream"
+    }
+  ],
   "paths": {
-    "/messages/notifications/:send": {
-      "post": {
+    "/messages/channels/{channelId}/templates": {
+      "get": {
+        "operationId": "TemplateOperations_List",
         "tags": [
-          "Notifications"
+          "Template"
         ],
-        "operationId": "NotificationMessages_SendMessage",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "summary": "List all templates for given ACS channel",
+        "description": "List all templates for given ACS channel",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "in": "header",
-            "name": "Repeatability-Request-Id",
-            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs. Internal identifiers shouldn't be used. The value should be an opaque meaningless string in UUID format.",
+            "name": "channelId",
+            "in": "path",
+            "description": "The registration ID of the channel.",
+            "required": true,
             "type": "string",
             "format": "uuid"
           },
           {
-            "in": "header",
-            "name": "Repeatability-First-Sent",
-            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date",
-            "type": "string",
-            "format": "date-time"
+            "name": "maxPageSize",
+            "in": "query",
+            "description": "The max page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListTemplatesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of templates": {
+            "$ref": "./examples/Template_GetTemplates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/messages/notifications/:send": {
+      "post": {
+        "operationId": "NotificationMessagesOperations_SendMessage",
+        "tags": [
+          "Notifications"
+        ],
+        "summary": "Sends a notification message from Business to User.",
+        "description": "Sends a notification message from Business to User.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
+            "description": "Details of the message to send.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SendNotificationRequest"
             }
@@ -46,282 +129,328 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/SendMessageResult"
             }
           },
           "default": {
-            "description": "Communication Error Response",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
-            "x-ms-error-response": true
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Send a notification message": {
-            "$ref": "./examples/SendMessage.json"
+          "Sends a notification message": {
+            "$ref": "./examples/NotificationMessages_SendMessage.json"
           }
         }
       }
     },
     "/messages/streams/{id}": {
       "get": {
+        "operationId": "StreamOperations_DownloadMedia",
         "tags": [
           "Stream"
         ],
         "summary": "Download the Media payload from a User to Business message.",
-        "operationId": "Stream_DownloadMedia",
+        "description": "Download the Media payload from a User to Business message.",
         "produces": [
+          "application/octect-stream",
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "id",
+            "in": "path",
             "description": "The Media Identifier contained in the User to Business message event.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
-              "format": "binary",
-              "type": "string"
+              "type": "file"
             }
           },
           "default": {
-            "description": "Communication Error Response",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
-            "x-ms-error-response": true
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
           "Download a media": {
-            "$ref": "./examples/DownloadMedia.json"
-          }
-        }
-      }
-    },
-    "/messages/channels/{channelId}/templates": {
-      "get": {
-        "tags": [
-          "Template"
-        ],
-        "summary": "List all templates for given ACS channel",
-        "operationId": "Template_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "channelId",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "query",
-            "name": "maxPageSize",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns the list of waTemplatesInternal.",
-            "schema": {
-              "$ref": "#/definitions/ListTemplatesResponse"
-            }
-          },
-          "default": {
-            "description": "Communication Error Response",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
-        },
-        "x-ms-examples": {
-          "Get a list of templates for a channel": {
-            "$ref": "./examples/GetTemplates.json"
+            "$ref": "./examples/Stream_DownloadMedia.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "CommunicationError": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
-    "CommunicationErrorResponse": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "CommunicationMessageType": {
+      "type": "string",
       "description": "The type of message. Supports text, image, template.",
       "enum": [
         "text",
         "image",
         "template"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "CommunicationMessageType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Text message type."
+          },
+          {
+            "name": "image",
+            "value": "image",
+            "description": "Image message type."
+          },
+          {
+            "name": "template",
+            "value": "template",
+            "description": "Template message type."
+          }
+        ]
       }
     },
     "CommunicationMessagesChannel": {
+      "type": "string",
+      "description": "The Communication Messages Channel.",
       "enum": [
         "whatsApp"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "CommunicationMessagesChannel",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "whatsApp",
+            "value": "whatsApp",
+            "description": "The Communication Messages Channel is WhatsApp."
+          }
+        ]
       }
     },
     "ListTemplatesResponse": {
-      "required": [
-        "value"
-      ],
       "type": "object",
+      "description": "Paged collection of MessageTemplateResponse items",
       "properties": {
         "value": {
-          "description": "The collection of elements",
           "type": "array",
+          "description": "The MessageTemplateResponse items on this page",
           "items": {
             "$ref": "#/definitions/MessageTemplateResponse"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
-          "type": "string"
+          "type": "string",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "MessageReceipt": {
+      "type": "object",
       "description": "Receipt of the sending one message.",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The message id."
+        },
+        "to": {
+          "type": "string",
+          "description": "The native external platform user identifier of the recipient."
+        }
+      },
       "required": [
         "messageId",
         "to"
-      ],
-      "type": "object",
-      "properties": {
-        "messageId": {
-          "description": "The message id.",
-          "type": "string"
-        },
-        "to": {
-          "description": "The native external platform user identifier of the recipient.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "MessageTemplate": {
-      "description": "The template object used to create templates.",
-      "required": [
-        "language",
-        "name"
-      ],
       "type": "object",
+      "description": "The template object used to create templates.",
       "properties": {
         "name": {
-          "description": "Name of the template.",
           "type": "string",
-          "example": "appointment_update"
+          "description": "Name of the template."
         },
         "language": {
-          "description": "The codes for the supported languages for templates.",
           "type": "string",
-          "example": "en_US"
+          "description": "The codes for the supported languages for templates."
         },
         "values": {
-          "description": "The template values.",
           "type": "object",
+          "description": "The template values.",
           "additionalProperties": {
             "$ref": "#/definitions/MessageTemplateValue"
           }
         },
         "bindings": {
-          "$ref": "#/definitions/MessageTemplateBindings"
+          "$ref": "#/definitions/MessageTemplateBindings",
+          "description": "The binding object to link values to the template specific locations"
         }
-      }
+      },
+      "required": [
+        "name",
+        "language"
+      ]
     },
     "MessageTemplateBindings": {
-      "description": "The binding object to link values to the template specific locations",
       "type": "object",
+      "description": "The binding object to link values to the template specific locations",
       "properties": {
         "whatsApp": {
-          "$ref": "#/definitions/WhatsAppMessageTemplateBindings"
+          "$ref": "#/definitions/WhatsAppMessageTemplateBindings",
+          "description": "The template bindings for WhatsApp"
         }
       }
     },
     "MessageTemplateParameterLocation": {
-      "description": "The message template's location value information.",
       "type": "object",
+      "description": "The message template's location value information.",
       "properties": {
         "name": {
-          "description": "The [Optional] name of the location.",
           "type": "string",
-          "example": "Microsoft"
+          "description": "The [Optional] name of the location."
         },
         "address": {
-          "description": "The [Optional] address of the location.",
           "type": "string",
-          "example": "1 Microsoft Way, Redmond, WA 98052, USA"
+          "description": "The [Optional] address of the location."
         },
         "latitude": {
-          "format": "double",
-          "description": "The latitude of the location.",
           "type": "number",
-          "example": 47.639423
+          "format": "double",
+          "description": "The latitude of the location."
         },
         "longitude": {
-          "format": "double",
-          "description": "The longitude of the location.",
           "type": "number",
-          "example": -122.12831
+          "format": "double",
+          "description": "The longitude of the location."
         }
       }
     },
     "MessageTemplateResponse": {
       "type": "object",
+      "description": "The Message Template Response.",
       "properties": {
         "name": {
-          "description": "Get the template's Name",
-          "type": "string"
+          "type": "string",
+          "description": "Get the template's Name"
         },
         "language": {
-          "description": "Get the template's language",
-          "type": "string"
+          "type": "string",
+          "description": "Get the template's language"
         },
         "channelType": {
-          "$ref": "#/definitions/CommunicationMessagesChannel"
+          "$ref": "#/definitions/CommunicationMessagesChannel",
+          "description": "The Communication Messages Channel."
         },
         "status": {
-          "$ref": "#/definitions/MessageTemplateStatus"
+          "$ref": "#/definitions/MessageTemplateStatus",
+          "description": "The aggregated template status."
         },
         "whatsApp": {
-          "$ref": "#/definitions/WhatsAppMessageTemplateResponse"
+          "$ref": "#/definitions/WhatsAppMessageTemplateResponse",
+          "description": "The WhatsApp-specific template response contract"
         }
       }
     },
     "MessageTemplateStatus": {
+      "type": "string",
       "description": "The aggregated template status.",
       "enum": [
         "approved",
@@ -329,43 +458,72 @@
         "pending",
         "paused"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "MessageTemplateStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "approved",
+            "value": "approved",
+            "description": "Message template is approved."
+          },
+          {
+            "name": "rejected",
+            "value": "rejected",
+            "description": "Message template is rejected."
+          },
+          {
+            "name": "pending",
+            "value": "pending",
+            "description": "Message template is pending."
+          },
+          {
+            "name": "paused",
+            "value": "paused",
+            "description": "Message template is paused."
+          }
+        ]
       }
     },
     "MessageTemplateValue": {
-      "description": "The class describes a parameter of a template.",
-      "required": [
-        "kind"
-      ],
       "type": "object",
+      "description": "The class describes a parameter of a template.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/MessageTemplateValueKind"
+          "$ref": "#/definitions/MessageTemplateValueKind",
+          "description": "The template value kind."
         },
         "text": {
-          "$ref": "#/definitions/MessageTemplateValueText"
+          "$ref": "#/definitions/MessageTemplateValueText",
+          "description": "The message template's text value information."
         },
         "image": {
-          "$ref": "#/definitions/MessageTemplateValueMedia"
+          "$ref": "#/definitions/MessageTemplateValueMedia",
+          "description": "The message template's media value information.\nCould be an image, document or\nvideo."
         },
         "document": {
-          "$ref": "#/definitions/MessageTemplateValueMedia"
+          "$ref": "#/definitions/MessageTemplateValueMedia",
+          "description": "The message template's media value information.\nCould be an image, document or\nvideo."
         },
         "video": {
-          "$ref": "#/definitions/MessageTemplateValueMedia"
+          "$ref": "#/definitions/MessageTemplateValueMedia",
+          "description": "The message template's media value information.\nCould be an image, document or\nvideo."
         },
         "location": {
-          "$ref": "#/definitions/MessageTemplateParameterLocation"
+          "$ref": "#/definitions/MessageTemplateParameterLocation",
+          "description": "The message template's location value information."
         },
         "quickAction": {
-          "$ref": "#/definitions/MessageTemplateValueQuickAction"
+          "$ref": "#/definitions/MessageTemplateValueQuickAction",
+          "description": "The message template's quick action value information."
         }
-      }
+      },
+      "required": [
+        "kind"
+      ]
     },
     "MessageTemplateValueKind": {
+      "type": "string",
       "description": "The template value kind.",
       "enum": [
         "text",
@@ -375,237 +533,256 @@
         "location",
         "quick_action"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "MessageTemplateValueKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Message parameter type is text."
+          },
+          {
+            "name": "image",
+            "value": "image",
+            "description": "Message parameter type is image."
+          },
+          {
+            "name": "document",
+            "value": "document",
+            "description": "Message parameter type is document."
+          },
+          {
+            "name": "video",
+            "value": "video",
+            "description": "Message parameter type is video."
+          },
+          {
+            "name": "location",
+            "value": "location",
+            "description": "Message parameter type is location."
+          },
+          {
+            "name": "quick_action",
+            "value": "quick_action",
+            "description": "Message parameter type is quick action."
+          }
+        ]
       }
     },
     "MessageTemplateValueMedia": {
-      "description": "The message template's media value information.\r\nCould be an image, document or video.",
       "type": "object",
+      "description": "The message template's media value information.\nCould be an image, document or\nvideo.",
       "properties": {
         "url": {
-          "format": "uri",
-          "description": "The (public) URL of the media.",
           "type": "string",
-          "example": "https://www.example.com/image.png"
+          "format": "uri",
+          "description": "The (public) URL of the media."
         },
         "caption": {
-          "description": "The [optional] caption of the media object.",
-          "type": "string"
+          "type": "string",
+          "description": "The [optional] caption of the media object."
         },
         "fileName": {
-          "description": "The [optional] filename of the media file.",
-          "type": "string"
+          "type": "string",
+          "description": "The [optional] filename of the media file."
         }
       }
     },
     "MessageTemplateValueQuickAction": {
-      "description": "The message template's quick action value information.",
       "type": "object",
+      "description": "The message template's quick action value information.",
       "properties": {
         "text": {
-          "description": "The [Optional] quick action text",
           "type": "string",
-          "example": "Yes"
+          "description": "The [Optional] quick action text"
         },
         "payload": {
-          "description": "The [Optional] quick action payload",
           "type": "string",
-          "example": "cGF5bG9hZA=="
+          "description": "The [Optional] quick action payload"
         }
       }
     },
     "MessageTemplateValueText": {
-      "description": "The message template's text value information.",
-      "required": [
-        "text"
-      ],
       "type": "object",
+      "description": "The message template's text value information.",
       "properties": {
         "text": {
-          "description": "The text value.",
           "type": "string",
-          "example": "John DOE"
+          "description": "The text value."
         }
-      }
+      },
+      "required": [
+        "text"
+      ]
     },
     "SendMessageResult": {
-      "description": "Result of the send message operation.",
-      "required": [
-        "receipts"
-      ],
       "type": "object",
+      "description": "Result of the send message operation.",
       "properties": {
         "receipts": {
-          "description": "Receipts of the send message operation.",
           "type": "array",
+          "description": "Receipts of the send message operation.",
           "items": {
             "$ref": "#/definitions/MessageReceipt"
-          }
+          },
+          "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "receipts"
+      ]
     },
     "SendNotificationRequest": {
+      "type": "object",
       "description": "Details of the message to send.",
+      "properties": {
+        "channelRegistrationId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Channel Registration ID for the Business Identifier."
+        },
+        "to": {
+          "type": "array",
+          "description": "The native external platform user identifiers of the recipient.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/CommunicationMessageType",
+          "description": "The type of message. Supports text, image, template."
+        },
+        "content": {
+          "type": "string",
+          "description": "Message content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "description": "A media url for the file. Required if the type is one of the supported media\ntypes, e.g. image"
+        },
+        "template": {
+          "$ref": "#/definitions/MessageTemplate",
+          "description": "The template object used to create templates."
+        }
+      },
       "required": [
         "channelRegistrationId",
         "to",
         "type"
-      ],
-      "type": "object",
-      "properties": {
-        "channelRegistrationId": {
-          "format": "uuid",
-          "description": "The Channel Registration ID for the Business Identifier.",
-          "type": "string"
-        },
-        "to": {
-          "description": "The native external platform user identifiers of the recipient.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "example": [
-            "16315551234"
-          ]
-        },
-        "type": {
-          "$ref": "#/definitions/CommunicationMessageType"
-        },
-        "content": {
-          "description": "Message content.",
-          "type": "string",
-          "example": "Come on everyone, lets go for lunch together."
-        },
-        "mediaUri": {
-          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image",
-          "type": "string",
-          "example": "https://IMAGE_URL"
-        },
-        "template": {
-          "$ref": "#/definitions/MessageTemplate"
-        }
-      }
+      ]
     },
     "WhatsAppMessageTemplateBindings": {
-      "description": "The template bindings for WhatsApp",
       "type": "object",
+      "description": "The template bindings for WhatsApp",
       "properties": {
         "header": {
           "type": "array",
+          "description": "The header template bindings",
           "items": {
             "$ref": "#/definitions/WhatsAppMessageTemplateBindingsComponent"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "body": {
           "type": "array",
+          "description": "The body template bindings",
           "items": {
             "$ref": "#/definitions/WhatsAppMessageTemplateBindingsComponent"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "footer": {
           "type": "array",
+          "description": "The footer template bindings",
           "items": {
             "$ref": "#/definitions/WhatsAppMessageTemplateBindingsComponent"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "button": {
           "type": "array",
+          "description": "The button template bindings",
           "items": {
             "$ref": "#/definitions/WhatsAppMessageTemplateBindingsButton"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "WhatsAppMessageTemplateBindingsButton": {
-      "description": "The template bindings component button for WhatsApp",
-      "required": [
-        "refValue"
-      ],
       "type": "object",
+      "description": "The template bindings component button for WhatsApp",
       "properties": {
         "subType": {
-          "$ref": "#/definitions/WhatsAppMessageTemplateValueSubType"
+          "$ref": "#/definitions/WhatsAppMessageTemplateValueSubType",
+          "description": "The WhatsApp button sub type"
         },
         "refValue": {
-          "description": "The reference to the value in the Microsoft.Azure.Communication.CrossPlatformMessages.Contract.Model.VNext.Notifications.Requests.MessageTemplate.Values dictionary.",
           "type": "string",
-          "example": "title"
+          "description": "The reference to the value in the\nMicrosoft.Azure.Communication.CrossPlatformMessages.Contract.Model.VNext.Notifications.Requests.MessageTemplate.Values\ndictionary."
         }
-      }
-    },
-    "WhatsAppMessageTemplateBindingsComponent": {
-      "description": "The template bindings component for WhatsApp",
+      },
       "required": [
         "refValue"
-      ],
+      ]
+    },
+    "WhatsAppMessageTemplateBindingsComponent": {
       "type": "object",
+      "description": "The template bindings component for WhatsApp",
       "properties": {
         "refValue": {
-          "description": "The reference to the value in the Microsoft.Azure.Communication.CrossPlatformMessages.Contract.Model.VNext.Notifications.Requests.MessageTemplate.Values dictionary.",
           "type": "string",
-          "example": "title"
+          "description": "The reference to the value in the\nMicrosoft.Azure.Communication.CrossPlatformMessages.Contract.Model.VNext.Notifications.Requests.MessageTemplate.Values\ndictionary."
         }
-      }
+      },
+      "required": [
+        "refValue"
+      ]
     },
     "WhatsAppMessageTemplateResponse": {
-      "description": "The WhatsApp-specific template response contract",
       "type": "object",
+      "description": "The WhatsApp-specific template response contract",
       "properties": {
         "content": {
-          "description": "WhatsApp platform's template content\r\nThis is the payload returned from WhatsApp API."
+          "description": "WhatsApp platform's template content\nThis is the payload returned from WhatsApp\nAPI."
         }
       }
     },
     "WhatsAppMessageTemplateValueSubType": {
-      "description": "The WhatsApp button sub type",
+      "type": "string",
+      "description": "The WhatsApp button sub type.",
       "enum": [
         "quickReply",
         "url"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "WhatsAppMessageTemplateValueSubType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "quickReply",
+            "value": "quickReply",
+            "description": "The WhatsApp button sub type is quick reply."
+          },
+          {
+            "name": "url",
+            "value": "url",
+            "description": "The WhatsApp button sub type is url."
+          }
+        ]
       }
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "in": "query",
+    "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
-      "description": "Version of API to invoke.",
+      "in": "query",
+      "description": "The API version to use for this operation.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "name": "endpoint",
-        "description": "The communication resource, for example https://my-resource.communication.azure.com",
-        "required": true,
-        "type": "string",
-        "format": "url",
-        "in": "path",
-        "x-ms-skip-url-encoding": true,
-        "x-ms-parameter-location": "client"
-      }
-    ]
   }
 }
