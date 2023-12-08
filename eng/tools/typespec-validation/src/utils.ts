@@ -27,5 +27,5 @@ export function normalizePath(folder: string) {
     .resolve(folder)
     .split(path.sep)
     .join("/")
-    .replace(/^[a-zA-Z]:/g, "");
+    .replace(/[a-zA-Z]:/g, "");
 }
