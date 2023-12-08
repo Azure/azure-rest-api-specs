@@ -2278,7 +2278,7 @@
       "properties": {
         "model": {
           "type": "string",
-          "description": "The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be\ninferred as a default."
+          "description": "The model name or Azure OpenAI model deployment name to use for image generation."
         },
         "prompt": {
           "type": "string",
@@ -2535,7 +2535,8 @@
       "in": "formData",
       "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranscriptionOptions.filename": {
@@ -2631,7 +2632,8 @@
       "in": "formData",
       "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranslationOptions.filename": {
