@@ -583,7 +583,7 @@
     },
     "BillingType": {
       "type": "string",
-      "description": "Subscription state image type",
+      "description": "Subscription billing types",
       "enum": [
         "Legacy",
         "Modern"
@@ -607,7 +607,7 @@
     },
     "ChannelType": {
       "type": "string",
-      "description": "Subscription state image type",
+      "description": "Subscription channel type",
       "enum": [
         "None",
         "Internal",
@@ -909,7 +909,7 @@
     },
     "PaymentType": {
       "type": "string",
-      "description": "Subscription state image type",
+      "description": "Subscription state payment type",
       "enum": [
         "None",
         "Paid",
@@ -963,7 +963,7 @@
     },
     "PromotionData": {
       "type": "object",
-      "description": "Promotion",
+      "description": "Promotion cateegory and end date time",
       "properties": {
         "category": {
           "type": "string",
@@ -986,7 +986,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "Promotion",
+          "description": "Promotions that are offered to the subscription",
           "items": {
             "$ref": "#/definitions/PromotionData"
           },
@@ -1083,7 +1083,7 @@
     },
     "State": {
       "type": "string",
-      "description": "Subscription state",
+      "description": "Subscription states",
       "enum": [
         "Registered",
         "Unregistered",
@@ -1129,7 +1129,7 @@
       "properties": {
         "billingProperties": {
           "$ref": "#/definitions/BillingProperties",
-          "description": "Billing properties."
+          "description": "Subscription Billing properties."
         },
         "subscriptionId": {
           "type": "string",
@@ -1141,15 +1141,15 @@
         },
         "entitlementStartDate": {
           "type": "string",
-          "description": "Entitlement start date"
+          "description": "Subscription Entitlement start date"
         },
         "offerCategory": {
           "type": "string",
-          "description": "Offer Category"
+          "description": "Subscription Offer Category"
         },
         "offerType": {
           "type": "string",
-          "description": "offer Type"
+          "description": "Subscription offer Type"
         },
         "promotions": {
           "$ref": "#/definitions/PromotionsList",
@@ -1165,25 +1165,25 @@
         },
         "internalSubscriptionPolicies": {
           "$ref": "#/definitions/InternalSubscriptionPolicies",
-          "description": "internal subscription policies"
+          "description": "Internal subscription policies"
         },
         "tenantId": {
           "type": "string",
-          "description": "Tenant Id"
+          "description": "Subscription Tenant Id"
         },
         "changedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Created Time"
+          "description": "Subscription Created Time"
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Created Time"
+          "description": "Subscription Created Time"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state",
+          "description": "Subscription Provisioning state",
           "readOnly": true
         }
       },
@@ -1258,7 +1258,7 @@
     },
     "Tier": {
       "type": "string",
-      "description": "Subscription state image type",
+      "description": "Subscription tier",
       "enum": [
         "Unknown",
         "Standard",
@@ -1294,7 +1294,7 @@
     },
     "WorkloadType": {
       "type": "string",
-      "description": "Subscription state image type",
+      "description": "Subscription workload type",
       "enum": [
         "None",
         "DevTest",
