@@ -10,14 +10,14 @@ using TypeSpec.Versioning;
 @useDependency(AzureCommunicationMessagesService.Versions.c2024_02_01)
 namespace ClientForAcsMessages;
 
-// Your customizations here
-
 @client({
   name: "NotificationMessagesClient",
   service: AzureCommunicationMessagesService,
 })
 interface NotificationMessagesClient {
+  @access(Access.internal, "csharp")
   sendMessage is AzureCommunicationMessagesService.NotificationMessagesOperations.sendMessage;
+  @access(Access.internal, "csharp")
   downloadMedia is AzureCommunicationMessagesService.StreamOperations.downloadMedia;
 }
 
@@ -26,6 +26,7 @@ interface NotificationMessagesClient {
   service: AzureCommunicationMessagesService,
 })
 interface MessageTemplateClient {
+  @access(Access.internal, "csharp")
   getTemplates is AzureCommunicationMessagesService.TemplateOperations.list;
 }
 
@@ -34,5 +35,6 @@ interface MessageTemplateClient {
   service: AzureCommunicationMessagesService,
 })
 interface StreamRestClient {
+  @access(Access.internal, "csharp")
   downloadMedia is AzureCommunicationMessagesService.StreamOperations.downloadMedia;
 }
