@@ -1,4 +1,3 @@
-import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
@@ -8,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -46,14 +46,42 @@ model IndexProperties {
   indexConfigurations: Record<string>
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+@doc("Provides the '$latest' query parameter for list operations.")
+model CustomlatestQueryParameter {
+  @query("$latest")
+  @doc("If set to true, $latest provides the latest of each index.")
+  latest?: boolean;
+}
+
+@doc("Provides the '$includeAllVersions' query parameter for list operations.")
+model CustomIncludeAllVersionsQueryParameter {
+  @query("$includeAllVersions")
+  @doc("Return all the versions.")
+  includeAllVersions?: boolean;
+}
+
+alias ListQueryParameters = {
+  ...CustomlatestQueryParameter;
+  ...CustomIncludeAllVersionsQueryParameter;
+  ...StandardListQueryParameters;
+};
+
+
+interface ProxyResourceOperationsIndexes<
+  TResource extends ArmResource,
+  TListParameters extends {} = {}
+>
+  extends ResourceListByParent<
+      TResource,
+      TListParameters & BaseParameters<TResource>
+    > {
+  @doc("Get a Index.")
+  get is ArmResourceRead<Index>;
+  @doc("Create a Index.")
+  createOrUpdate is ArmResourceCreateOrUpdateSync<Index>;
+  @doc("Delete a Index.")
+  delete is ArmResourceDeleteSync<Index>;
+}
 
 @armResourceOperations
-interface Indexes {
-  get is ArmResourceRead<Index>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Index>;
-  update is ArmResourcePatchSync<Index, IndexProperties>;
-  delete is ArmResourceDeleteSync<Index>;
-  listByResourceGroup is ArmResourceListByParent<Index>;
-  listBySubscription is ArmListBySubscription<Index>;
-}
+interface Indexes extends ProxyResourceOperationsIndexes<Index, ListQueryParameters>{}

@@ -40,83 +40,10 @@
   },
   "tags": [
     {
-      "name": "Operations"
-    },
-    {
       "name": "Indexes"
     }
   ],
   "paths": {
-    "/providers/Microsoft.MachineLearningServices/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List the operations for the provider",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/indexes": {
-      "get": {
-        "operationId": "Indexes_ListBySubscription",
-        "tags": [
-          "Indexes"
-        ],
-        "description": "List Index resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/IndexListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/indexes": {
       "get": {
         "operationId": "Indexes_ListByResourceGroup",
@@ -125,6 +52,21 @@
         ],
         "description": "List Index resources by resource group",
         "parameters": [
+          {
+            "$ref": "#/parameters/CustomlatestQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomIncludeAllVersionsQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
@@ -160,7 +102,7 @@
         "tags": [
           "Indexes"
         ],
-        "description": "Get a Index",
+        "description": "Get a Index.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -200,7 +142,7 @@
         "tags": [
           "Indexes"
         ],
-        "description": "Create a Index",
+        "description": "Create a Index.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -231,72 +173,6 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Index' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Index"
-            }
-          },
-          "201": {
-            "description": "Resource 'Index' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Index"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "Indexes_Update",
-        "tags": [
-          "Indexes"
-        ],
-        "description": "Update a Index",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "indexName",
-            "in": "path",
-            "description": "Name of the index",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/IndexUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Index"
@@ -315,7 +191,7 @@
         "tags": [
           "Indexes"
         ],
-        "description": "Delete a Index",
+        "description": "Delete a Index.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -425,38 +301,54 @@
         "version",
         "indexConfigurations"
       ]
-    },
-    "IndexUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Index.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/IndexUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "IndexUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Index.",
-      "properties": {
-        "previousVersionIndexId": {
-          "type": "string",
-          "description": "Reference to the Index this index was versioned off of. Null implies creation of a new versioned set."
-        },
-        "storageUri": {
-          "type": "string",
-          "description": "Default workspace blob storage Uri. Should work across storage types and auth scenarios."
-        },
-        "indexConfigurations": {
-          "type": "object",
-          "description": "Placeholder for extras.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomIncludeAllVersionsQueryParameter": {
+      "name": "$includeAllVersions",
+      "in": "query",
+      "description": "Return all the versions.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "includeAllVersions"
+    },
+    "CustomlatestQueryParameter": {
+      "name": "$latest",
+      "in": "query",
+      "description": "If set to true, $latest provides the latest of each index.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "latest"
+    }
+  }
 }
