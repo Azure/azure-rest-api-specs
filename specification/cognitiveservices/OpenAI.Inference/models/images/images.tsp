@@ -96,8 +96,7 @@ enum ImageGenerationResponseFormat {
 @added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageGenerationOptions {
   @doc("""
-  The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be
-  inferred as a default.
+  The model name or Azure OpenAI model deployment name to use for image generation.
   """)
   `model`?: string;
 
