@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Monitor Metric Batch",
-    "version": "2023-05-01-preview"
+    "version": "2023-10-01"
   },
   "securityDefinitions": {
     "AADToken": {
@@ -73,22 +73,31 @@
             "$ref": "#/parameters/MetricNamesParameter"
           },
           {
-            "$ref": "#/parameters/AggregationsParameter"
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/parameters/AggregationsParameter"
           },
           {
-            "$ref": "#/parameters/TopParameter"
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/parameters/TopParameter"
           },
           {
-            "$ref": "#/parameters/OrderByParameter"
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/parameters/OrderByParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
           },
           {
+            "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/parameters/RollUpByParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceIdList"
+            "name": "batchRequest",
+            "in": "body",
+            "required": true,
+            "description": "Metrics batch body including the list of resource ids",
+            "schema": {
+              "$ref": "#/definitions/ResourceIdList"
+            }
           }
         ],
         "responses": {
@@ -107,33 +116,28 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/AdditionalInfoErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Query Storage Metrics": {
             "$ref": "./examples/MetricBatchExample.json"
+          },
+          "Query Redis Metrics summary": {
+            "$ref": "./examples/MetricBatchExample2.json"
           }
         }
       }
     }
   },
   "parameters": {
-    "ResourceIdList": {
-      "name": "resourceIds",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ResourceIdList"
-      },
-      "description": "The comma separated list of resource IDs to query metrics for."
-    },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "required": true,
       "type": "string",
+      "format": "uuid",
       "description": "The subscription identifier for the resources in this batch.",
       "x-ms-parameter-location": "method"
     },
@@ -182,31 +186,6 @@
       "description": "The names of the metrics (comma separated) to retrieve.",
       "x-ms-parameter-location": "method"
     },
-    "AggregationsParameter": {
-      "name": "aggregation",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The list of aggregation types (comma separated) to retrieve.\n*Examples: average, minimum, maximum*",
-      "x-ms-parameter-location": "method"
-    },
-    "TopParameter": {
-      "name": "top",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "description": "The maximum number of records to retrieve per resource ID in the request.\nValid only if filter is specified.\nDefaults to 10.",
-      "x-ms-parameter-location": "method"
-    },
-    "OrderByParameter": {
-      "name": "orderby",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\n*Examples: sum asc*",
-      "x-ms-parameter-location": "method"
-    },
     "FilterParameter": {
       "name": "filter",
       "in": "query",
@@ -245,50 +224,6 @@
         ]
       }
     },
-    "AdditionalInfoErrorResponse": {
-      "description": "The response to a metrics query that results in a bad request, with optional additional information.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Top level error object that contains all relevant information.",
-          "type": "object",
-          "properties": {
-            "additionalInfo": {
-              "description": "Additional information about the error",
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "description": "The type of the info property (e.g. string).",
-                    "type": "string"
-                  },
-                  "info": {
-                    "description": "Additional information related to the error.",
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "code": {
-              "description": "Error code",
-              "type": "string"
-            },
-            "message": {
-              "description": "Error message indicating why the operation failed.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "code",
-            "message"
-          ]
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
     "MetricResultsResponse": {
       "description": "The metrics result for a resource.",
       "type": "object",
@@ -326,7 +261,7 @@
               "value": {
                 "type": "array",
                 "items": {
-                  "$ref": "../../../../common-types/v1/commonMonitoringTypes.json#/definitions/Metric"
+                  "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/Metric"
                 },
                 "description": "The value of the collection."
               }
