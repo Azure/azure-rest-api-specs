@@ -973,11 +973,12 @@
           "description": "Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4."
         },
         "privateIPAddressPrefix": {
-          "$ref": "./network.json#/definitions/IPPrefix",
+          "type": "string",
           "description": "The prefix address in CIDR format."
         },
         "privateIPAddressPrefixSize": {
-          "$ref": "./network.json#/definitions/IPPrefixSize",
+          "type": "integer",
+          "format": "int32",
           "description": "The /n prefix size of the address prefix."
         },
         "subnet": {
