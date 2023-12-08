@@ -49,6 +49,14 @@ interface NotificationMessagesOperations {
       @doc("Details of the message to send.")
       @body 
       body: SendNotificationRequest;
+
+      @header("Repeatability-Request-ID")
+      @doc("An opaque, globally-unique, client-generated string identifier for the request.")
+      repeatabilityRequestId?: string;
+    
+      @doc("Specifies the date and time at which the request was first created.")
+      @header("Repeatability-First-Sent")
+      repeatabilityFirstSent?: utcDateTime;
     },
     AcceptedResponse & SendMessageResult
   >;
