@@ -26,13 +26,13 @@ interface NotificationMessagesClient {
   service: AzureCommunicationMessagesService,
 })
 interface MessageTemplateClient {
-  list is AzureCommunicationMessagesService.TemplateOperations.list;
+  getTemplates is AzureCommunicationMessagesService.TemplateOperations.list;
 }
 
-// @client({
-//   name: "StreamRestClient",
-//   service: AzureCommunicationMessagesService,
-// })
-// interface StreamRestClient {
-//   downloadMedia is AzureCommunicationMessagesService.StreamOperations.downloadMedia;
-// }
+@client({
+  name: "StreamRestClient",
+  service: AzureCommunicationMessagesService,
+})
+interface StreamRestClient {
+  downloadMedia is AzureCommunicationMessagesService.StreamOperations.downloadMedia;
+}
