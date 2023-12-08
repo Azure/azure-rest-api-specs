@@ -4,6 +4,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@typespec/rest";
 import "./models.tsp";
+import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -13,10 +14,6 @@ using Azure.Core.Traits;
 using Azure.Core.Traits.Private;
 using Azure.ClientGenerator.Core;
 
-@client({
-  name: "PurviewDataMapClient",
-  service: PurviewDataMap,
-})
 namespace PurviewDataMap;
 
 model OkResponse<T> {
@@ -61,6 +58,10 @@ alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTr
   contentType: "multipart/form-data";
 }>;
 
+@client({
+  name: "PurviewDataMapClient",
+  service: PurviewDataMap,
+})
 @operationGroup
 interface Entity {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"

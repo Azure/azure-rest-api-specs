@@ -837,7 +837,7 @@ model PurviewObjectId {
 @doc("Reference to an object-instance of a type - like entity.")
 model AtlasObjectId {
   @doc("The GUID of the object.")
-  guid?: Azure.Core.uuid;
+  guid?: string;
 
   @doc("The name of the type.")
   typeName?: string;
