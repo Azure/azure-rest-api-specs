@@ -1,0 +1,32 @@
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.AppPlatform;
+
+interface RuntimeVersionsOperations {
+  @doc("Lists all of the available runtime versions supported by Microsoft.AppPlatform provider.")
+  @route("/providers/Microsoft.AppPlatform/runtimeVersions")
+  @get
+  ListRuntimeVersions is Azure.Core.Foundations.Operation<
+    {},
+    AvailableRuntimeVersions
+  >;
+}
+
+interface SkusOperations {
+  @doc("Lists all of the available skus of the Microsoft.AppPlatform provider.")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/skus")
+  @get
+  List is Azure.Core.Foundations.Operation<
+    {
+      @doc("Gets subscription ID which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      @path
+      subscriptionId: string;
+    },
+    ResourceSkuCollection
+  >;
+}

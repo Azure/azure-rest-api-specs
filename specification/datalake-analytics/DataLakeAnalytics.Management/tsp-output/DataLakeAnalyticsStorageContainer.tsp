@@ -1,0 +1,36 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./DataLakeAnalyticsStorageAccountInformation.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.DataLakeAnalytics;
+@doc("Azure Storage blob container information.")
+@parentResource(DataLakeAnalyticsStorageAccountInformation)
+model DataLakeAnalyticsStorageContainer
+  is ProxyResource<StorageContainerProperties> {
+  @doc("The name of the Azure storage container to retrieve")
+  @path
+  @key("containerName")
+  @segment("containers")
+  name: string;
+}
+
+@armResourceOperations
+interface DataLakeAnalyticsStorageContainers {
+  @doc("Gets the specified Azure Storage container associated with the given Data Lake Analytics and Azure Storage accounts.")
+  getStorageContainer is ArmResourceRead<DataLakeAnalyticsStorageContainer>;
+  @doc("Lists the Azure Storage containers, if any, associated with the specified Data Lake Analytics and Azure Storage account combination. The response includes a link to the next page of results, if any.")
+  listStorageContainers is ArmResourceListByParent<DataLakeAnalyticsStorageContainer>;
+  @doc("Gets the SAS token associated with the specified Data Lake Analytics and Azure Storage account and container combination.")
+  listSasTokens is ArmResourceActionSync<
+    DataLakeAnalyticsStorageContainer,
+    {},
+    SasTokenInformationListResult
+  >;
+}
