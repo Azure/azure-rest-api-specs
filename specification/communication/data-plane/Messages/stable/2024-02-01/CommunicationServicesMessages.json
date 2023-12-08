@@ -118,6 +118,23 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "repeatabilityRequestId"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "Specifies the date and time at which the request was first created.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "repeatabilityFirstSent"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "Details of the message to send.",
