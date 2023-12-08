@@ -47,7 +47,7 @@ model IndexProperties {
 }
 
 @doc("Provides the '$latest' query parameter for list operations.")
-model CustomlatestQueryParameter {
+model CustomLatestQueryParameter {
   @query("$latest")
   @doc("If set to true, $latest provides the latest of each index.")
   latest?: boolean;
@@ -61,7 +61,7 @@ model CustomIncludeAllVersionsQueryParameter {
 }
 
 alias ListQueryParameters = {
-  ...CustomlatestQueryParameter;
+  ...CustomLatestQueryParameter;
   ...CustomIncludeAllVersionsQueryParameter;
   ...StandardListQueryParameters;
 };

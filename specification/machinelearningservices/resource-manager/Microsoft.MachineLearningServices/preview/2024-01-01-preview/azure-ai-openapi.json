@@ -53,7 +53,7 @@
         "description": "List Index resources by resource group",
         "parameters": [
           {
-            "$ref": "#/parameters/CustomlatestQueryParameter"
+            "$ref": "#/parameters/CustomLatestQueryParameter"
           },
           {
             "$ref": "#/parameters/CustomIncludeAllVersionsQueryParameter"
@@ -93,6 +93,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Indexes_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Indexes_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Indexes_ListByResourceGroup_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -134,6 +142,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Indexes_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_Get_MaximumSet_Gen.json"
+          },
+          "Indexes_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Indexes_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -184,6 +200,14 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Indexes_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Indexes_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Indexes_CreateOrUpdate_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -223,6 +247,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Indexes_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_Delete_MaximumSet_Gen.json"
+          },
+          "Indexes_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Indexes_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -341,7 +373,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "includeAllVersions"
     },
-    "CustomlatestQueryParameter": {
+    "CustomLatestQueryParameter": {
       "name": "$latest",
       "in": "query",
       "description": "If set to true, $latest provides the latest of each index.",
