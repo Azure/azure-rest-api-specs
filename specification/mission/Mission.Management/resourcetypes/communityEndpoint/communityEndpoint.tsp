@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 import "../shared/provisioningstate.tsp";
 import "../shared/resourceid.tsp";
+import "../shared/endpointrulebase.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -33,6 +34,12 @@ enum CommunityEndpointProtocol {
 
   @doc("CommunityEndpointProtocol Type AH")
   AH,
+
+  @doc("CommunityEndpointProtocol Type HTTPS")
+  HTTPS,
+
+  @doc("CommunityEndpointProtocol Type HTTP")
+  HTTP,
 }
 
 @doc("Destination Type Enum")
@@ -50,6 +57,8 @@ enum DestinationType {
   PrivateNetwork,
 }
 
+#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+@removed(Microsoft.Mission.Versions.v2023_11_01_preview)
 @doc("Base type for destination rules.")
 model DestinationRule {
   @doc("Destination Rule Name.")
@@ -71,8 +80,28 @@ model DestinationRule {
   transitHubResourceId?: TransitHubResourceId;
 }
 
+@doc("Base type for destination rules.")
+model CommunityEndpointDestinationRule is EndpointRuleBase {
+  @doc("Destination Type.")
+  destinationType?: DestinationType;
+
+  @doc("Protocols. Options specified by Endpoint Protocol Enum.")
+  protocols?: CommunityEndpointProtocol[];
+
+  @doc("Transit Hub Resource Id.")
+  transitHubResourceId?: TransitHubResourceId;
+}
+
 @doc("Community Endpoint Resource properties")
 model CommunityEndpointProperties {
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
+  @added(Microsoft.Mission.Versions.v2023_11_01_preview)
+  @extension("x-ms-identifiers", [])
+  @doc("Community Endpoint Rule Collection.")
+  ruleCollection: CommunityEndpointDestinationRule[];
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @removed(Microsoft.Mission.Versions.v2023_11_01_preview)
   @extension("x-ms-identifiers", ["name"])
   @doc("Destination Rule Collection.")
   destinationRuleCollection: DestinationRule[];

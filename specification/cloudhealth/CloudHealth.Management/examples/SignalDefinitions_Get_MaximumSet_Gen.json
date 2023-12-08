@@ -12,13 +12,13 @@
     "200": {
       "body": {
         "properties": {
-          "metricNamespace": "kujaurtzrdlyexshjcraswhnjrmcjlegmtbzduetqznxieewurnnezcwznjpvufjoypioxtfgrfziqhkfthbdvwbzmcvxmdzxgbzxviwmugayrhdyurhdcmvwhuzmhavbvliskxavzov",
-          "metricName": "xlsswqywkvtiulmxongbafoqksbsltadbggpeubkyiy",
+          "metricNamespace": "microsoft.compute/virtualMachines",
+          "metricName": "cpuusage",
           "aggregationType": "None",
-          "dimension": "sxxlqypljsttlvuvsogtycoiydgzhjjtmbxu",
-          "dimensionFilter": "yhbqekkrnnippcgbeeimcdcuvuohaajzpqcviyqunqhsorduzecwmeawrpffpljlqeauvnhronbycqyurpqgdcrmeikppwezhvrwtqshomrcptiyvnanlticrlihpzjgttdxkawdujtlnwgg",
+          "dimension": "nodename",
+          "dimensionFilter": "node1",
           "provisioningState": "Succeeded",
-          "displayName": "mgrilplginubbvafosnnwwxkwflvsznaplxnlqnfhkcnuttrhskkforavbytgptctphwniskif",
+          "displayName": "cpu upsage",
           "signalKind": "AzureResourceMetric",
           "refreshInterval": "PT1M",
           "labels": {
@@ -29,7 +29,8 @@
           "evaluationRules": {
             "dynamicDetectionRule": {
               "dynamicThresholdModel": "AnomalyDetection",
-              "modelSensitivity": 12
+              "modelSensitivity": 4.5,
+              "dynamicThresholdDirection": "GreaterThan"
             },
             "degradedRule": {
               "operator": "LowerThan",
