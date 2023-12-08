@@ -36,16 +36,5 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-01'
 input-file:
-  - Microsoft.Inventory/preview/2024-01-01-preview/microsoftinventory.json
-  
-suppressions:
-  - code: OperationIdNounVerb
-    reason: The operation id cannot be fixed as fixing it is resulting in typespec validation errors valid.
-    where: $.paths["/providers/Microsoft.Inventory/locations/{location}/physicalAzureHosts/{azureHostName}"].get.operationId
-  - code: OperationIdNounVerb
-    reason: The operation id cannot be fixed as fixing it is resulting in typespec validation errors valid.
-    where: $.paths["/providers/Microsoft.Inventory/locations/{location}/physicalClusters/{clusterName}"].get.operationId
-  - code: OperationIdNounVerb
-    reason: The operation id cannot be fixed as fixing it is resulting in typespec validation errors valid.
-    where: $.paths["/providers/Microsoft.Inventory/locations/{location}/physicalDatacenters/{datacenterName}"].get.operationId    
+  - Microsoft.Inventory/preview/2024-01-01-preview/microsoftinventory.json    
 ```
