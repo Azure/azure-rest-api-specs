@@ -37,6 +37,9 @@ interface TextOperations {
     {
       @body
       @doc("The text jailbreak analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeTextJailbreakOptions;
     },
     AnalyzeTextJailbreakResult
@@ -50,7 +53,10 @@ interface TextOperations {
   detectTextProtectedMaterial is Azure.Core.RpcOperation<
     {
       @body
-      @doc("The text analysis request.")
+      @doc("The text protected material analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeTextProtectedMaterialOptions;
     },
     AnalyzeTextProtectedMaterialResult
