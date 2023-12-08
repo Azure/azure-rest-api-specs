@@ -10,29 +10,30 @@
       "properties": {
         "controlPlane": {
           "count": 1,
-          "vmSize": "Standard_A4_v2",
-          "osType": "Linux",
-          "linuxProfile": {
-            "ssh": {
-              "publicKeys": [
-                {
-                  "keyData": "ssh-rsa AAAAB1NzaC1yc2EAAAADAQABAAACAQCY......"
-                }
-              ]
-            }
-          }
+          "vmSize": "Standard_A4_v2"
         },
         "kubernetesVersion": "v1.20.5",
         "networkProfile": {
           "networkPolicy": "calico",
           "podCidr": "10.244.0.0/16"
         },
+        "clusterVMAccessProfile": {
+          "authorizedIPRanges": "127.0.0.1,127.0.0.2"
+        },
         "agentPoolProfiles": [
           {
             "name": "default-nodepool-1",
             "count": 1,
             "vmSize": "Standard_A4_v2",
-            "osType": "Linux"
+            "osType": "Linux",
+            "nodeLabels": {
+              "env": "dev",
+              "goal": "test"
+            },
+            "nodeTaints": [
+              "env=prod:NoSchedule",
+              "sku=gpu:NoSchedule"
+            ]
           }
         ],
         "linuxProfile": {
@@ -71,17 +72,7 @@
           "provisioningState": "Succeeded",
           "controlPlane": {
             "count": 1,
-            "vmSize": "Standard_A4_v2",
-            "osType": "Linux",
-            "linuxProfile": {
-              "ssh": {
-                "publicKeys": [
-                  {
-                    "keyData": "ssh-rsa AAAAB1NzaC1yc2EAAAADAQABAAACAQCY......"
-                  }
-                ]
-              }
-            }
+            "vmSize": "Standard_A4_v2"
           },
           "kubernetesVersion": "v1.20.5",
           "networkProfile": {
@@ -93,7 +84,15 @@
               "name": "default-nodepool-1",
               "count": 1,
               "vmSize": "Standard_A4_v2",
-              "osType": "Linux"
+              "osType": "Linux",
+              "nodeLabels": {
+                "env": "dev",
+                "goal": "test"
+              },
+              "nodeTaints": [
+                "env=prod:NoSchedule",
+                "sku=gpu:NoSchedule"
+              ]
             }
           ],
           "linuxProfile": {
@@ -131,17 +130,7 @@
           "provisioningState": "Succeeded",
           "controlPlane": {
             "count": 1,
-            "vmSize": "Standard_A4_v2",
-            "osType": "Linux",
-            "linuxProfile": {
-              "ssh": {
-                "publicKeys": [
-                  {
-                    "keyData": "ssh-rsa AAAAB1NzaC1yc2EAAAADAQABAAACAQCY......"
-                  }
-                ]
-              }
-            }
+            "vmSize": "Standard_A4_v2"
           },
           "kubernetesVersion": "v1.20.5",
           "networkProfile": {
@@ -153,7 +142,15 @@
               "name": "default-nodepool-1",
               "count": 1,
               "vmSize": "Standard_A4_v2",
-              "osType": "Linux"
+              "osType": "Linux",
+              "nodeLabels": {
+                "env": "dev",
+                "goal": "test"
+              },
+              "nodeTaints": [
+                "env=prod:NoSchedule",
+                "sku=gpu:NoSchedule"
+              ]
             }
           ],
           "linuxProfile": {
