@@ -1,0 +1,122 @@
+{
+  "title": "Orders_Preview",
+  "operationId": "Orders_Preview",
+  "parameters": {
+    "api-version": "2023-07-12-preview",
+    "subscriptionId": "subid",
+    "body": {
+      "location": "centralus",
+      "properties": {
+        "status": "Pending",
+        "currency": "USD",
+        "market": "US",
+        "language": "en",
+        "reservationId": "reId",
+        "provisioningState": "Pending",
+        "customerOrder": {
+          "id": "VsbTest17Aug23",
+          "createdDate": "2023-08-09"
+        },
+        "orderLines": [
+          {
+            "id": 1,
+            "status": "Pending",
+            "quantity": {
+              "ordered": 1
+            },
+            "product": {
+              "id": "8MZBMMCK15WW/7KM4/8W0KD9HC39VZ",
+              "type": "PSA"
+            },
+            "price": {
+              "unitAmount": 77777.77,
+              "shippingCost": 0,
+              "taxes": [
+                {
+                  "amount": 63.699,
+                  "type": "Unit"
+                }
+              ],
+              "fees": [
+                {
+                  "amount": 6.0,
+                  "type": "Recycling"
+                }
+              ]
+            },
+            "shipTo": {
+              "id": "DIS3-W55D-BG7-TGB",
+              "type": "BusinessLocation"
+            },
+            "shippingMethod": "Ground",
+            "requestedDeliveryDate": "2023-08-09"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": null,
+        "location": "centralus",
+        "name": null,
+        "properties": {
+          "currency": "USD",
+          "customerOrder": {
+            "createdDate": "2023-08-09",
+            "id": "VsbTest17Aug23"
+          },
+          "language": "en",
+          "market": "US",
+          "orderLines": [
+            {
+              "createdDateTime": "2023-08-09T18:45:52.4857651Z",
+              "estimatedShippedDate": "2023-08-09",
+              "id": 1,
+              "price": {
+                "fees": [
+                  {
+                    "amount": 6.0,
+                    "type": "Recycling"
+                  }
+                ],
+                "shippingCost": 0,
+                "taxes": [
+                  {
+                    "amount": 63.699,
+                    "type": "Unit"
+                  }
+                ],
+                "unitAmount": 77777.77
+              },
+              "product": {
+                "id": "8MZBMMCK15WW/7KM4/8W0KD9HC39VZ",
+                "type": "PSA"
+              },
+              "quantity": {
+                "confirmed": null,
+                "ordered": 1,
+                "returned": null,
+                "shipped": null
+              },
+              "requestedDeliveryDate": "2023-08-09",
+              "shipTo": {
+                "id": "DIS3-W55D-BG7-TGB",
+                "type": "BusinessLocation"
+              },
+              "shippingMethod": "Ground",
+              "status": "Pending"
+            }
+          ],
+          "provisioningState": "Pending",
+          "reservationId": "reId",
+          "status": "Pending"
+        },
+        "systemData": null,
+        "tags": null,
+        "type": null
+      }
+    }
+  }
+}
