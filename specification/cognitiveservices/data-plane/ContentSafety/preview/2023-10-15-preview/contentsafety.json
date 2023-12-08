@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContentSafety Service",
-    "version": "2023-10-01",
+    "version": "2023-10-15-preview",
     "description": "Analyze harmful content",
     "x-typespec-generated": [
       {
@@ -558,6 +558,98 @@
           }
         }
       }
+    },
+    "/text:detectJailbreak": {
+      "post": {
+        "operationId": "TextOperations_DetectTextJailbreak",
+        "summary": "Analyze Text Jailbreak",
+        "description": "A synchronous API for the analysis of text jailbreak.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text jailbreak analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextJailbreakOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextJailbreakResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect Jailbreak": {
+            "$ref": "./examples/DetectJailbreak.json"
+          }
+        }
+      }
+    },
+    "/text:detectProtectedMaterial": {
+      "post": {
+        "operationId": "TextOperations_DetectTextProtectedMaterial",
+        "summary": "Analyze Protected Material",
+        "description": "A synchronous API for the analysis of protected material.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text protected material analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextProtectedMaterialOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextProtectedMaterialResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect Protected Material": {
+            "$ref": "./examples/DetectProtectedMaterial.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -655,6 +747,33 @@
         "categoriesAnalysis"
       ]
     },
+    "AnalyzeTextJailbreakOptions": {
+      "type": "object",
+      "description": "The text jailbreak analysis request.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed if it attempt to jailbreak. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextJailbreakResult": {
+      "type": "object",
+      "description": "The text jailbreak analysis request.",
+      "properties": {
+        "jailbreakAnalysis": {
+          "$ref": "#/definitions/JailbreakAnalysisResult",
+          "description": "Analysis result for jailbreak."
+        }
+      },
+      "required": [
+        "jailbreakAnalysis"
+      ]
+    },
     "AnalyzeTextOptions": {
       "type": "object",
       "description": "The text analysis request.",
@@ -715,6 +834,33 @@
           }
         ]
       }
+    },
+    "AnalyzeTextProtectedMaterialOptions": {
+      "type": "object",
+      "description": "The protected material analysis request.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextProtectedMaterialResult": {
+      "type": "object",
+      "description": "The protected material analysis response.",
+      "properties": {
+        "protectedMaterialAnalysis": {
+          "$ref": "#/definitions/ProtectedMaterialAnalysisResult",
+          "description": "Analysis result for protected material."
+        }
+      },
+      "required": [
+        "protectedMaterialAnalysis"
+      ]
     },
     "AnalyzeTextResult": {
       "type": "object",
@@ -850,6 +996,19 @@
         }
       }
     },
+    "JailbreakAnalysisResult": {
+      "type": "object",
+      "description": "The text jailbreak analysis response.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Analysis result for jailbreak."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
     "PagedTextBlocklist": {
       "type": "object",
       "description": "Paged collection of TextBlocklist items",
@@ -892,6 +1051,19 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "ProtectedMaterialAnalysisResult": {
+      "type": "object",
+      "description": "The text protected material analysis response.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Analysis result for protected material.."
+        }
+      },
+      "required": [
+        "detected"
       ]
     },
     "RemoveTextBlocklistItemsOptions": {
