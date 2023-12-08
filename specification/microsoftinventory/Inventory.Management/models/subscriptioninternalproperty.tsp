@@ -11,11 +11,7 @@ model SubscriptionInternalProperties {
   @doc("Subscription display name")
   displayName?: string;
 
-<<<<<<< HEAD
-  @doc("Entitlement start date")
-=======
   @doc("Subscription Entitlement start date")
->>>>>>> RPSaaSMaster
   entitlementStartDate?: string;
 
   @doc("Subscription Offer Category")
@@ -39,15 +35,6 @@ model SubscriptionInternalProperties {
   @doc("Subscription Tenant Id")
   tenantId: string;
 
-<<<<<<< HEAD
-  @doc("Created Time")
-  changedTime?: utcDateTime;
-
-  @doc("Created Time")
-  createdTime?: utcDateTime;
-
-  @doc("Provisioning state")
-=======
   @doc("Subscription Created Time")
   changedTime?: utcDateTime;
 
@@ -55,27 +42,18 @@ model SubscriptionInternalProperties {
   createdTime?: utcDateTime;
 
   @doc("Subscription Provisioning state")
->>>>>>> RPSaaSMaster
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
 @doc("List of promotions")
 model PromotionsList {
-<<<<<<< HEAD
-  @doc("Promotion")
-=======
   @doc("Promotions that are offered to the subscription")
->>>>>>> RPSaaSMaster
   @OpenAPI.extension("x-ms-identifiers", [])
   value: PromotionData[];
 }
 
-<<<<<<< HEAD
-@doc("Promotion")
-=======
 @doc("Promotion cateegory and end date time")
->>>>>>> RPSaaSMaster
 model PromotionData {
   @doc("promotion category free vs pay-as-you-go")
   category: string;
@@ -84,11 +62,7 @@ model PromotionData {
   endDateTime: utcDateTime;
 }
 
-<<<<<<< HEAD
-@doc("Subscription state")
-=======
 @doc("Subscription states")
->>>>>>> RPSaaSMaster
 enum State {
   @doc("Registered subscription state")
   Registered,
@@ -145,11 +119,7 @@ model BillingAccount {
   id: string;
 }
 
-<<<<<<< HEAD
-@doc("Subscription state image type")
-=======
 @doc("Subscription billing types")
->>>>>>> RPSaaSMaster
 enum BillingType {
   @doc("Legacy billing type")
   Legacy,
@@ -158,11 +128,7 @@ enum BillingType {
   Modern,
 }
 
-<<<<<<< HEAD
-@doc("Subscription state image type")
-=======
 @doc("Subscription channel type")
->>>>>>> RPSaaSMaster
 enum ChannelType {
   @doc("None channel type")
   None,
