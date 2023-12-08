@@ -1,6 +1,8 @@
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
 import { normalizePath } from "../src/utils.js";
 
+export { IGitOperation } from "../src/tsv-host.js";
+
 export class TsvTestHost implements TsvHost {
   static get folder() {
     return "specification/foo/Foo";

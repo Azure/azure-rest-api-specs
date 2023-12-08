@@ -23,5 +23,9 @@ export async function checkFileExists(file: string) {
 }
 
 export function normalizePath(folder: string) {
-  return path.resolve(folder).split(path.sep).join("/");
+  return path
+    .resolve(folder)
+    .split(path.sep)
+    .join("/")
+    .replace(/^[a-zA-Z]:/g, "");
 }
