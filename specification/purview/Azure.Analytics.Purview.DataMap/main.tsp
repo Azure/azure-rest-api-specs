@@ -30,7 +30,7 @@ namespace PurviewDataMap;
 enum ApiVersions {
   @doc("2023-09-01 service API version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2023-09-01`,
+  v2023_09_01: "2023-09-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It follows the rule"
