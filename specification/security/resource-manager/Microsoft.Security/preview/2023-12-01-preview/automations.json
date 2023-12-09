@@ -388,10 +388,11 @@
           "description": "Security automation data",
           "$ref": "#/definitions/AutomationProperties"
         },
-        "tags": {
-          "description": "Security automation tags",
-          "$ref": "../../../common/v1/types.json#/definitions/Tags"
-        }
+        "allOf": [
+          {
+            "$ref": "../../../common/v1/types.json#/definitions/Tags"
+          }
+        ]
       }
     },
     "AutomationProperties": {
