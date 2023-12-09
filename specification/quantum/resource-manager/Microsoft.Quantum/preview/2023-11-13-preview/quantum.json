@@ -422,7 +422,7 @@
         "operationId": "Workspace_ListKeys",
         "x-ms-examples": {
           "ListKeys": {
-            "$ref": "./examples/ListKeys.json"
+            "$ref": "./examples/listKeys.json"
           }
         },
         "parameters": [
@@ -461,7 +461,7 @@
         "operationId": "Workspace_RegenerateKeys",
         "x-ms-examples": {
           "RegenerateKey": {
-            "$ref": "./examples/RegenerateKey.json"
+            "$ref": "./examples/regenerateKey.json"
           }
         },
         "parameters": [
@@ -483,12 +483,12 @@
             "required": true,
             "description": "Which key to regenerate:  primary or secondary.",
             "schema": {
-              "$ref": "#/definitions/ApiKeySpecification"
+              "$ref": "#/definitions/APIKeys"
             }
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "The request was successful."
           },
           "default": {
@@ -584,11 +584,12 @@
       ]
     },
     "ApiKey": {
-      "description": "Result of Api key.",
+      "description": "Azure quantum workspace Api key details.",
       "type": "object",
       "properties": {
-        "createTime": {
-          "type": "string"
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
         },
         "key": {
           "x-ms-secret": true,
@@ -607,33 +608,44 @@
           "description": "Indicator of enablement of the Quantum workspace Api keys."
         },
         "primaryKey": {
-          "$ref": "#/definitions/ApiKey"
+          "$ref": "#/definitions/ApiKey",
+          "description": "The quantum workspace primary api key."
         },
         "secondaryKey": {
-          "$ref": "#/definitions/ApiKey"
+          "$ref": "#/definitions/ApiKey",
+          "description": "The quantum workspace secondary api key."
         },
         "primaryConnectionString": {
           "x-ms-secret": true,
           "readOnly": true,
           "type": "string",
-          "description": "The connection string of the primary key."
+          "description": "The connection string of the primary api key."
         },
         "secondaryConnectionString": {
           "x-ms-secret": true,
           "readOnly": true,
           "type": "string",
-          "description": "The connection string of the secondary key."
+          "description": "The connection string of the secondary api key."
         }
       }
     },
-    "ApiKeySpecification": {
+    "APIKeys": {
       "type": "object",
       "properties": {
         "keys": {
           "description": "A list of api key names.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Primary",
+              "secondary"
+            ],
+            "default": "Primary",
+            "x-ms-enum": {
+              "name": "KeyType",
+              "modelAsString": true
+            }
           }
         }
       },
