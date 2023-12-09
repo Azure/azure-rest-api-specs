@@ -14,6 +14,7 @@ using Azure.ClientGenerator.Core;
 @versioned(AzureCommunicationMessagesService.Versions)
 namespace AzureCommunicationMessagesService;
 
+@access(Access.public)
 @doc("The type of message. Supports text, image, template.")
 enum CommunicationMessageType {
   @doc("Text message type.")
@@ -47,6 +48,7 @@ enum MessageTemplateValueKind {
   quick_action,
 }
 
+@access(Access.public)
 @doc("The WhatsApp button sub type.")
 enum WhatsAppMessageTemplateValueSubType {
   @doc("The WhatsApp button sub type is quick reply.")
@@ -263,7 +265,6 @@ model MessageReceipt {
 
 @pagedResult
 @doc("Paged collection of MessageTemplateResponse items")
-@access(Access.public)
 model ListTemplatesResponse {
   @doc("The MessageTemplateResponse items on this page")
   @items
