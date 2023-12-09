@@ -41,6 +41,7 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/registries.json
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceRP.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/azure-ai.json
 suppressions:
   - code: PathForResourceAction
     reason: Keep identical to stable GA version to avoid breaking changes. https://dev.azure.com/msdata/Vienna/_workitems/edit/2803196
