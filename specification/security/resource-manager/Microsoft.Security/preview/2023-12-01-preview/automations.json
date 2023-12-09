@@ -236,7 +236,7 @@
             "$ref": "#/parameters/AutomationName"
           },
           {
-            "$ref": "#/parameters/AutomationInBody"
+            "$ref": "#/parameters/AutomationUpdateInBody"
           }
         ],
         "responses": {
@@ -378,6 +378,20 @@
           "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "AutomationUpdateModel": {
+      "type": "object",
+      "description": "The update model of security automation resource.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security automation data",
+          "$ref": "#/definitions/AutomationProperties"
+        },
+        "tags": {
+          "description": "Security automation tags",
+          "$ref": "../../../common/v1/types.json#/definitions/Tags"
+        }
     },
     "AutomationProperties": {
       "type": "object",
@@ -753,6 +767,16 @@
       "description": "The security automation resource",
       "schema": {
         "$ref": "#/definitions/Automation"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AutomationUpdateInBody": {
+      "name": "AutomationUpdate",
+      "in": "body",
+      "required": true,
+      "description": "The update model of security automation resource",
+      "schema": {
+        "$ref": "#/definitions/AutomationUpdateModel"
       },
       "x-ms-parameter-location": "method"
     }
