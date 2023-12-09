@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 @versioned(AzureCommunicationMessagesService.Versions)
 namespace AzureCommunicationMessagesService;
@@ -240,6 +242,7 @@ dictionary.
   refValue: string;
 }
 
+@access(Access.public)
 @doc("Result of the send message operation.")
 model SendMessageResult {
   @doc("Receipts of the send message operation.")
@@ -257,6 +260,7 @@ model MessageReceipt {
 
 @pagedResult
 @doc("Paged collection of MessageTemplateResponse items")
+@access(Access.public)
 model ListTemplatesResponse {
   @doc("The MessageTemplateResponse items on this page")
   @items
