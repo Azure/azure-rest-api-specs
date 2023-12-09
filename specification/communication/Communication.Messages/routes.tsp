@@ -78,7 +78,7 @@ interface StreamOperations {
       @body 
       body: bytes;
       @header 
-      contentType: "application/octect-stream";
+      contentType: "application/octet-stream";
     }
   >;
 }
