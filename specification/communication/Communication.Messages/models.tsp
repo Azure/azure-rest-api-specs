@@ -56,12 +56,14 @@ enum WhatsAppMessageTemplateValueSubType {
   url,
 }
 
+@access(Access.public)
 @doc("The Communication Messages Channel.")
 enum CommunicationMessagesChannel {
   @doc("The Communication Messages Channel is WhatsApp.")
   whatsApp,
 }
 
+@access(Access.public)
 @doc("The aggregated template status.")
 enum MessageTemplateStatus {
   @doc("Message template is approved.")
@@ -249,6 +251,7 @@ model SendMessageResult {
   receipts: MessageReceipt[];
 }
 
+@access(Access.public)
 @doc("Receipt of the sending one message.")
 model MessageReceipt {
   @doc("The message id.")
@@ -271,6 +274,7 @@ model ListTemplatesResponse {
   nextLink?: string;
 }
 
+@access(Access.public)
 @doc("The Message Template Response.")
 model MessageTemplateResponse {
   @doc("Get the template's Name")
@@ -289,6 +293,7 @@ model MessageTemplateResponse {
   whatsApp?: WhatsAppMessageTemplateResponse;
 }
 
+@access(Access.public)
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateResponse {
   @doc("""
