@@ -60,15 +60,6 @@ input-file:
   - Microsoft.DataProtection/stable/2023-11-01/dataprotection.json
 ```
 
-### Tag: package-2023-08
-
-These settings apply only when `--tag=package-2023-08` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-08'
-input-file:
-  - Microsoft.DataProtection/stable/2023-08-01/dataprotection.json
-```
-
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.

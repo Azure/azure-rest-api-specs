@@ -28,6 +28,22 @@ describe("folder-structure", function () {
     assert(result.errorOutput.includes("must be lower case"));
   });
 
+  it("should succeed if package folder has trailing slash", async function () {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/bar/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/Foo/Foo/",
+    );
+    assert(result.success);
+  });
+
   it("should fail if package folder is more than 3 levels deep", async function () {
     let host = new TsvTestHost();
     host.globby = async () => {
