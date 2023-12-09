@@ -33,6 +33,16 @@ credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: NOT_LATEST_API_VERSION_IN_DEFAULT_TAG
+    from: /specification/maps/data-plane/Creator/preview/2023-07-01-preview
+    reason: The files in '/specification/maps/data-plane/Creator/preview/2023-07-01-preview' were never released. Please ignore them, they should not appear in the TOC. '/specification/maps/data-plane/Creator/preview/2023-03-01-preview/' contains the latest preview.
+
+```
+
 ### Tag: package-stable-V2
 
 These settings apply only when `--tag=package-stable-V2` is specified on the command line.
