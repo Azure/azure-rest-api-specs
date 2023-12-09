@@ -31,10 +31,10 @@ interface MessageTemplateClient {
 }
 
 @client({
-  name: "StreamRestClient",
+  name: "StreamClient",
   service: AzureCommunicationMessagesService,
 })
-interface StreamRestClient {
+interface StreamClient {
   @access(Access.internal)
   downloadMedia is AzureCommunicationMessagesService.StreamOperations.downloadMedia;
 }
