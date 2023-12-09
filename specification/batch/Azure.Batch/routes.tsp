@@ -77,7 +77,8 @@ interface Ops {
   #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
   @doc("New rpc operation allowing multiple repsonses")
   @Foundations.Private.needsRoute
-  @head ResourceInfoOperationWithAdditionalResponse<
+  @head
+  ResourceInfoOperationWithAdditionalResponse<
     TParams extends TypeSpec.Reflection.Model,
     TResponse extends TypeSpec.Reflection.Model,
     TAdditionalResponse extends {} = {}
@@ -89,11 +90,11 @@ interface Ops {
   >;
 
   @post PostOperation<TResource, TResponse> is RpcOperation<
-  TResource & BatchClientRequestHeaders,
-  BatchResponseHeaders & TResponse,
-  NoFilter,
-  BatchError
->;
+    TResource & BatchClientRequestHeaders,
+    BatchResponseHeaders & TResponse,
+    NoFilter,
+    BatchError
+  >;
 }
 
 alias NoFilter = {};
