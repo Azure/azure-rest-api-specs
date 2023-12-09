@@ -1,5 +1,5 @@
 {
-  "title": "Create a PipelineGroup instance using a syslog receiver",
+  "title": "Create a PipelineGroup instance using a syslog receiver and networking configurations.",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -26,12 +26,7 @@
             }
           }
         ],
-        "processors": [
-          {
-            "type": "Batch",
-            "name": "batch-processor1"
-          }
-        ],
+        "processors": [],
         "exporters": [
           {
             "type": "AzureMonitorWorkspaceLogs",
@@ -73,15 +68,23 @@
               "receivers": [
                 "syslog-receiver1"
               ],
-              "processors": [
-                "batch-processor1"
-              ],
+              "processors": [],
               "exporters": [
                 "my-workspace-logs-exporter1"
               ]
             }
           ]
-        }
+        },
+        "networkingConfigurations": [
+          {
+            "host": "azuremonitorpipeline.contoso.com",
+            "routes": [
+              {
+                "receiver": "syslog-receiver1"
+              }
+            ]
+          }
+        ]
       }
     }
   },
@@ -111,12 +114,7 @@
               }
             }
           ],
-          "processors": [
-            {
-              "type": "Batch",
-              "name": "batch-processor1"
-            }
-          ],
+          "processors": [],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
@@ -158,15 +156,23 @@
                 "receivers": [
                   "syslog-receiver1"
                 ],
-                "processors": [
-                  "batch-processor1"
-                ],
+                "processors": [],
                 "exporters": [
                   "my-workspace-logs-exporter1"
                 ]
               }
             ]
-          }
+          },
+          "networkingConfigurations": [
+            {
+              "host": "azuremonitorpipeline.contoso.com",
+              "routes": [
+                {
+                  "receiver": "syslog-receiver1"
+                }
+              ]
+            }
+          ]
         },
         "systemData": {
           "createdBy": "myuser@myorg.com",
@@ -203,12 +209,7 @@
               }
             }
           ],
-          "processors": [
-            {
-              "type": "Batch",
-              "name": "batch-processor1"
-            }
-          ],
+          "processors": [],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
@@ -250,15 +251,23 @@
                 "receivers": [
                   "syslog-receiver1"
                 ],
-                "processors": [
-                  "batch-processor1"
-                ],
+                "processors": [],
                 "exporters": [
                   "my-workspace-logs-exporter1"
                 ]
               }
             ]
-          }
+          },
+          "networkingConfigurations": [
+            {
+              "host": "azuremonitorpipeline.contoso.com",
+              "routes": [
+                {
+                  "receiver": "syslog-receiver1"
+                }
+              ]
+            }
+          ]
         },
         "systemData": {
           "createdBy": "myuser@myorg.com",
