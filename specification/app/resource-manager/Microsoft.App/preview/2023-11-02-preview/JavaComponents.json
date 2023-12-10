@@ -348,7 +348,7 @@
     }
   },
   "definitions": {
-    "JavaComponentProperty": {
+    "JavaComponentConfigurationProperty": {
       "description": "Configuration properties for a Java Component",
       "type": "object",
       "properties": {
@@ -391,7 +391,16 @@
           "properties": {
             "componentType": {
               "description": "Type of the Java Component.",
-              "type": "string"
+              "enum": [
+                "SpringBootAdmin",
+                "SpringCloudEureka",
+                "SpringCloudConfig"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "JavaComponentProvisioningState",
+                "modelAsString": true
+              }
             },
             "provisioningState": {
               "description": "Provisioning state of the Java Component.",
@@ -413,7 +422,7 @@
               "description": "List of Java Components configuration properties",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/JavaComponentProperty"
+                "$ref": "#/definitions/JavaComponentConfigurationProperty"
               },
               "x-ms-identifiers": [
                 "propertyName"
