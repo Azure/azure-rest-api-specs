@@ -53,7 +53,7 @@ model PromotionsList {
   value: PromotionData[];
 }
 
-@doc("Promotion cateegory and end date time")
+@doc("Promotion category and end date time")
 model PromotionData {
   @doc("promotion category free vs pay-as-you-go")
   category: string;
