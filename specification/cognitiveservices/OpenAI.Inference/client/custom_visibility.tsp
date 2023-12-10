@@ -14,6 +14,10 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.ImageSize, Access.public);
 @@usage(Azure.OpenAI.ImageGenerations, Usage.input | Usage.output);
 
+// The purpose of this enum is to identify the type of a given result. In C#, this is redundant because we have
+// strongly-typed classes for each possible result.
+@@access(Azure.OpenAI.AudioTaskLabel, Access.internal, "csharp");
+
 // Java will need to have those models expose in public surface.
 @@access(Azure.OpenAI.AudioTranscription, Access.public, "java");
 @@access(Azure.OpenAI.AudioTranscriptionOptions, Access.public, "java");

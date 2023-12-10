@@ -9,15 +9,18 @@ using TypeSpec.Versioning;
 @added(ServiceApiVersions.v2023_09_01_Preview)
 enum AudioTranscriptionFormat {
   @doc("Use a response body that is a JSON object containing a single 'text' field for the transcription.")
+  @projectedName("csharp", "Simple")
   json: "json",
 
   @doc("""
     Use a response body that is a JSON object containing transcription text along with timing, segments, and other
     metadata.
     """)
+  @projectedName("csharp", "Verbose")
   verbose_json: "verbose_json",
 
   @doc("Use a response body that is plain text containing the raw, unannotated transcription.")
+  @projectedName("csharp", "InternalPlainText")
   text: "text",
 
   @doc("Use a response body that is plain text in SubRip (SRT) format that also includes timing information.")
@@ -36,7 +39,7 @@ The configuration information for an audio transcription request.
 model AudioTranscriptionOptions {
   @doc("""
   The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:
-   flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
+  flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
   """)
   @projectedName("csharp", "AudioData")
   file: bytes;
@@ -80,7 +83,7 @@ model AudioTranscriptionOptions {
   // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
-  @projectedName("csharp", "InternalNonAzureModelName")
+  @projectedName("csharp", "DeploymentName")
   `model`?: string;
 }
 
