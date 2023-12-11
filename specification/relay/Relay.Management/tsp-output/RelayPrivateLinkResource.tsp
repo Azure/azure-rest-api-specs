@@ -1,0 +1,29 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./RelayNamespace.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.Relay;
+@doc("Information of the private link resource.")
+@parentResource(RelayNamespace)
+model RelayPrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+  @doc("The PrivateLinkResource name")
+  @path
+  @key("privateLinkResourceName")
+  @segment("privateLinkResources")
+  name: string;
+}
+
+@armResourceOperations
+interface RelayPrivateLinkResources {
+  @doc("Gets a description for the specified Private Endpoint Connection name.")
+  get is ArmResourceRead<RelayPrivateLinkResource>;
+  @doc("Gets lists of resources that supports Privatelinks.")
+  list is ArmResourceListByParent<RelayPrivateLinkResource>;
+}

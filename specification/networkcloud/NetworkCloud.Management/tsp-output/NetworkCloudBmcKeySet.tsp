@@ -1,0 +1,39 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./NetworkCloudCluster.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.NetworkCloud;
+@doc("BmcKeySet represents the baseboard management controller key set.")
+@parentResource(NetworkCloudCluster)
+model NetworkCloudBmcKeySet is TrackedResource<BmcKeySetProperties> {
+  @doc("The name of the baseboard management controller key set.")
+  @pattern("^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$")
+  @path
+  @key("bmcKeySetName")
+  @segment("bmcKeySets")
+  name: string;
+
+  @doc("The extended location of the cluster associated with the resource.")
+  extendedLocation: ExtendedLocation;
+}
+
+@armResourceOperations
+interface NetworkCloudBmcKeySets {
+  @doc("Get baseboard management controller key set of the provided cluster.")
+  get is ArmResourceRead<NetworkCloudBmcKeySet>;
+  @doc("Create a new baseboard management controller key set or update the existing one for the provided cluster.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<NetworkCloudBmcKeySet>;
+  @doc("Patch properties of baseboard management controller key set for the provided cluster, or update the tags associated with it. Properties and tag updates can be done independently.")
+  update is ArmResourcePatchAsync<NetworkCloudBmcKeySet, BmcKeySetProperties>;
+  @doc("Delete the baseboard management controller key set of the provided cluster.")
+  delete is ArmResourceDeleteAsync<NetworkCloudBmcKeySet>;
+  @doc("Get a list of baseboard management controller key sets for the provided cluster.")
+  listByCluster is ArmResourceListByParent<NetworkCloudBmcKeySet>;
+}
