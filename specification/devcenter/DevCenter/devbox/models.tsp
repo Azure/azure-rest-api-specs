@@ -34,6 +34,46 @@ enum LocalAdminStatus {
   Disabled,
 }
 
+enum DevBoxProvisioningState {
+Succeeded,
+Failed,
+Canceled,
+Creating,
+Deleting,
+Updating,
+Starting,
+Stopping,
+Provisioning,
+ProvisionedWithWarning,
+InGracePeriod,
+NotProvisioned	
+}
+
+enum SkuName {
+"general_i_8c32gb256ssd_v2",
+"general_i_8c32gb512ssd_v2",
+"general_i_8c32gb1024ssd_v2",
+"general_i_8c32gb2048ssd_v2",
+"general_i_16c64gb256ssd_v2",
+"general_i_16c64gb512ssd_v2",
+"general_i_16c64gb1024ssd_v2",
+"general_i_16c64gb2048ssd_v2",
+"general_i_32c128gb512ssd_v2",
+"general_i_32c128gb1024ssd_v2",
+"general_i_32c128gb2048ssd_v2",
+"general_a_8c32gb256ssd_v2",
+"general_a_8c32gb512ssd_v2",
+"general_a_8c32gb1024ssd_v2",
+"general_a_8c32gb2048ssd_v2",
+"general_a_16c64gb256ssd_v2",
+"general_a_16c64gb512ssd_v2",
+"general_a_16c64gb1024ssd_v2",
+"general_a_16c64gb2048ssd_v2",
+"general_a_32c128gb512ssd_v2",
+"general_a_32c128gb1024ssd_v2",
+"general_a_32c128gb2048ssd_v2"
+}
+
 @doc("Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.")
 @projectedName("csharp", "StopOnDisconnectStatus")
 @projectedName("java", "StopOnDisconnectStatus")
@@ -153,7 +193,7 @@ available to create Dev Boxes.
 model HardwareProfile {
   @doc("The name of the SKU")
   @visibility("read")
-  skuName?: string;
+  skuName?: SkuName;
 
   @doc("The number of vCPUs available for the Dev Box.")
   @visibility("read")
@@ -286,7 +326,7 @@ model DevBox {
 
   @doc("The current provisioning state of the Dev Box.")
   @visibility("read")
-  provisioningState?: string;
+  provisioningState?: DevBoxProvisioningState;
 
   @doc("""
 The current action state of the Dev Box. This is state is based on previous
