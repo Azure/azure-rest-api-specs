@@ -1,0 +1,712 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ResourceGraphClient",
+    "version": "2021-06-01-preview",
+    "description": "Azure Resource Graph API Reference",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Azure.ResourceManager.ResourceGraph/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceGraph/resources": {
+      "post": {
+        "operationId": "Resources",
+        "description": "Queries the resources managed by Azure Resource Manager for scopes specified in the request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceGraph/resourcesHistory": {
+      "post": {
+        "operationId": "ResourcesHistory",
+        "description": "List all snapshots of a resource for a given time interval.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourcesHistoryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AuthorizationScopeFilter": {
+      "type": "string",
+      "enum": [
+        "AtScopeAndBelow",
+        "AtScopeAndAbove",
+        "AtScopeExact",
+        "AtScopeAboveAndBelow"
+      ],
+      "x-ms-enum": {
+        "name": "AuthorizationScopeFilter",
+        "modelAsString": false
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Column": {
+      "type": "object",
+      "description": "Query result column descriptor.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Column name."
+        },
+        "type": {
+          "$ref": "#/definitions/ColumnDataType",
+          "description": "Column data type."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ColumnDataType": {
+      "type": "string",
+      "enum": [
+        "string",
+        "integer",
+        "number",
+        "boolean",
+        "object",
+        "datetime"
+      ],
+      "x-ms-enum": {
+        "name": "ColumnDataType",
+        "modelAsString": false
+      }
+    },
+    "DateTimeInterval": {
+      "type": "object",
+      "description": "An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error."
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code identifying the specific error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "Error details",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code identifying the specific error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Facet": {
+      "type": "object",
+      "description": "A facet containing additional statistics on the response of a query. Can be either FacetResult or FacetError.",
+      "properties": {
+        "resultType": {
+          "type": "string",
+          "description": "Discriminator property for Facet."
+        },
+        "expression": {
+          "type": "string",
+          "description": "Facet expression, same as in the corresponding facet request."
+        }
+      },
+      "discriminator": "resultType",
+      "required": [
+        "resultType",
+        "expression"
+      ]
+    },
+    "FacetError": {
+      "type": "object",
+      "description": "A facet whose execution resulted in an error.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "An array containing detected facet errors with details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "errors"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Facet"
+        }
+      ],
+      "x-ms-discriminator-value": "FacetError"
+    },
+    "FacetRequest": {
+      "type": "object",
+      "description": "A request to compute additional statistics (facets) over the query results.",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "The column or list of columns to summarize by"
+        },
+        "options": {
+          "$ref": "#/definitions/FacetRequestOptions",
+          "description": "The options for facet evaluation"
+        }
+      },
+      "required": [
+        "expression"
+      ]
+    },
+    "FacetRequestOptions": {
+      "type": "object",
+      "description": "The options for facet evaluation",
+      "properties": {
+        "sortBy": {
+          "type": "string",
+          "description": "The column name or query expression to sort on. Defaults to count if not present."
+        },
+        "sortOrder": {
+          "$ref": "#/definitions/FacetSortOrder",
+          "description": "The sorting order by the selected column (count by default)."
+        },
+        "filter": {
+          "type": "string",
+          "description": "Specifies the filter condition for the 'where' clause which will be run on main query's result, just before the actual faceting."
+        },
+        "$top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of facet rows that should be returned.",
+          "x-ms-client-name": "top"
+        }
+      }
+    },
+    "FacetResult": {
+      "type": "object",
+      "description": "Successfully executed facet containing additional statistics on the response of a query.",
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of total records in the facet results."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of records returned in the facet response."
+        },
+        "data": {
+          "type": "object",
+          "description": "A JObject array or Table containing the desired facets. Only present if the facet is valid.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "totalRecords",
+        "count",
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Facet"
+        }
+      ],
+      "x-ms-discriminator-value": "FacetResult"
+    },
+    "FacetSortOrder": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "x-ms-enum": {
+        "name": "FacetSortOrder",
+        "modelAsString": false
+      }
+    },
+    "QueryRequest": {
+      "type": "object",
+      "description": "Describes a query to be executed.",
+      "properties": {
+        "subscriptions": {
+          "type": "array",
+          "description": "Azure subscriptions against which to execute the query.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managementGroups": {
+          "type": "array",
+          "description": "Azure management groups against which to execute the query. Example: [ 'mg1', 'mg2' ]",
+          "items": {
+            "type": "string"
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The resources query."
+        },
+        "options": {
+          "$ref": "#/definitions/QueryRequestOptions",
+          "description": "The query evaluation options"
+        },
+        "facets": {
+          "type": "array",
+          "description": "An array of facet requests to be computed against the query result.",
+          "items": {
+            "$ref": "#/definitions/FacetRequest"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "QueryRequestOptions": {
+      "type": "object",
+      "description": "The options for query evaluation",
+      "properties": {
+        "$skipToken": {
+          "type": "string",
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
+          "x-ms-client-name": "skipToken"
+        },
+        "$top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
+          "x-ms-client-name": "top"
+        },
+        "$skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
+          "x-ms-client-name": "skip"
+        },
+        "resultFormat": {
+          "$ref": "#/definitions/ResultFormat",
+          "description": "Defines in which format query result returned."
+        },
+        "allowPartialScopes": {
+          "type": "boolean",
+          "description": "Only applicable for tenant and management group level queries to decide whether to allow partial scopes for result in case the number of subscriptions exceed allowed limits."
+        },
+        "authorizationScopeFilter": {
+          "$ref": "#/definitions/AuthorizationScopeFilter",
+          "description": "Defines what level of authorization resources should be returned based on the which subscriptions and management groups are passed as scopes."
+        }
+      }
+    },
+    "QueryResponse": {
+      "type": "object",
+      "description": "Query result.",
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of total records matching the query."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of records returned in the current response. In the case of paging, this is the number of records in the current page."
+        },
+        "resultTruncated": {
+          "$ref": "#/definitions/ResultTruncated",
+          "description": "Indicates whether the query results are truncated."
+        },
+        "$skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
+          "x-ms-client-name": "skipToken"
+        },
+        "data": {
+          "type": "object",
+          "description": "Query output in JObject array or Table format.",
+          "additionalProperties": {}
+        },
+        "facets": {
+          "type": "array",
+          "description": "Query facets.",
+          "items": {
+            "$ref": "#/definitions/Facet"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "totalRecords",
+        "count",
+        "resultTruncated",
+        "data"
+      ]
+    },
+    "ResourcesHistoryRequest": {
+      "type": "object",
+      "description": "Describes a history request to be executed.",
+      "properties": {
+        "subscriptions": {
+          "type": "array",
+          "description": "Azure subscriptions against which to execute the query.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The resources query."
+        },
+        "options": {
+          "$ref": "#/definitions/ResourcesHistoryRequestOptions",
+          "description": "The history request evaluation options"
+        },
+        "managementGroups": {
+          "type": "array",
+          "description": "Azure management groups against which to execute the query. Example: [ 'mg1', 'mg2' ]",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourcesHistoryRequestOptions": {
+      "type": "object",
+      "description": "The options for history request evaluation",
+      "properties": {
+        "interval": {
+          "$ref": "#/definitions/DateTimeInterval",
+          "description": "The time interval used to fetch history."
+        },
+        "$top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of rows that the query should return. Overrides the page size when ```$skipToken``` property is present.",
+          "x-ms-client-name": "top"
+        },
+        "$skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of rows to skip from the beginning of the results. Overrides the next page offset when ```$skipToken``` property is present.",
+          "x-ms-client-name": "skip"
+        },
+        "$skipToken": {
+          "type": "string",
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
+          "x-ms-client-name": "skipToken"
+        },
+        "resultFormat": {
+          "$ref": "#/definitions/ResultFormat",
+          "description": "Defines in which format query result returned."
+        }
+      }
+    },
+    "ResultFormat": {
+      "type": "string",
+      "enum": [
+        "table",
+        "objectArray"
+      ],
+      "x-ms-enum": {
+        "name": "ResultFormat",
+        "modelAsString": false
+      }
+    },
+    "ResultTruncated": {
+      "type": "string",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "ResultTruncated",
+        "modelAsString": false
+      }
+    },
+    "Table": {
+      "type": "object",
+      "description": "Query output in tabular format.",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "Query result column descriptors.",
+          "items": {
+            "$ref": "#/definitions/Column"
+          },
+          "x-ms-identifiers": []
+        },
+        "rows": {
+          "type": "array",
+          "description": "Query result rows.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "x-ms-identifiers": []
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "columns",
+        "rows"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2021-06-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2021_06_01_preview",
+            "value": "2021-06-01-preview"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

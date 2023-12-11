@@ -1,0 +1,1256 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Machine Learning Compute Management Client",
+    "version": "2017-08-01-preview",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Compute resources. They support the following operations:<ul><li>Create or update a cluster</li><li>Get a cluster</li><li>Patch a cluster</li><li>Delete a cluster</li><li>Get keys for a cluster</li><li>Check if updates are available for system services in a cluster</li><li>Update system services in a cluster</li><li>Get all clusters in a resource group</li><li>Get all clusters in a subscription</li></ul>",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "OperationalizationClusters"
+    }
+  ],
+  "paths": {
+    "/providers/Azure.ResourceManager.MachineLearningCompute/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.MachineLearningCompute/operationalizationClusters": {
+      "get": {
+        "operationId": "OperationalizationClusters_ListBySubscriptionId",
+        "tags": [
+          "OperationalizationClusters"
+        ],
+        "description": "Gets the operationalization clusters in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationalizationClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.MachineLearningCompute/operationalizationClusters": {
+      "get": {
+        "operationId": "OperationalizationClusters_ListByResourceGroup",
+        "tags": [
+          "OperationalizationClusters"
+        ],
+        "description": "Gets the clusters in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationalizationClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.MachineLearningCompute/operationalizationClusters/{clusterName}": {
+      "get": {
+        "operationId": "OperationalizationClusters_Get",
+        "tags": [
+          "OperationalizationClusters"
+        ],
+        "description": "Gets the operationalization cluster resource view. Note that the credentials are not returned by this call. Call ListKeys to get them.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][-\\w\\._\\(\\)]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationalizationCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "OperationalizationClusters_CreateOrUpdate",
+        "tags": [
+          "OperationalizationClusters"
+        ],
+        "description": "Create or update an operationalization cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][-\\w\\._\\(\\)]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationalizationCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OperationalizationCluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OperationalizationCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'OperationalizationCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OperationalizationCluster"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OperationalizationClusters_Update",
+        "tags": [
+          "OperationalizationClusters"
+        ],
+        "description": "The PATCH operation can be used to update only the tags for a cluster. Use PUT operation to update other properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][-\\w\\._\\(\\)]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationalizationClusterTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationalizationCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "OperationalizationClusters_Delete",
+        "tags": [
+          "OperationalizationClusters"
+        ],
+        "description": "Deletes the specified cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deleteAll",
+            "in": "query",
+            "description": "If true, deletes all resources associated with this cluster.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][-\\w\\._\\(\\)]+[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.MachineLearningCompute/operationalizationClusters/{clusterName}/checkSystemServicesUpdatesAvailable": {
+      "post": {
+        "operationId": "OperationalizationClusters_CheckSystemServicesUpdatesAvailable",
+        "tags": [
+          "OperationalizationClusters"
+        ],
+        "description": "Checks if updates are available for system services in the cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][-\\w\\._\\(\\)]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckSystemServicesUpdatesAvailableResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.MachineLearningCompute/operationalizationClusters/{clusterName}/listKeys": {
+      "post": {
+        "operationId": "OperationalizationClusters_ListKeys",
+        "tags": [
+          "OperationalizationClusters"
+        ],
+        "description": "Gets the credentials for the specified cluster such as Storage, ACR and ACS credentials. This is a long running operation because it fetches keys from dependencies.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][-\\w\\._\\(\\)]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationalizationClusterCredentials"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.MachineLearningCompute/operationalizationClusters/{clusterName}/updateSystemServices": {
+      "post": {
+        "operationId": "OperationalizationClusters_UpdateSystemServices",
+        "tags": [
+          "OperationalizationClusters"
+        ],
+        "description": "Updates system services in a cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][-\\w\\._\\(\\)]+[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateSystemServicesResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AcsClusterProperties": {
+      "type": "object",
+      "description": "Information about the container service backing the cluster",
+      "properties": {
+        "clusterFqdn": {
+          "type": "string",
+          "description": "The FQDN of the cluster. ",
+          "readOnly": true
+        },
+        "orchestratorType": {
+          "$ref": "#/definitions/OrchestratorType",
+          "description": "Type of orchestrator. It cannot be changed once the cluster is created."
+        },
+        "orchestratorProperties": {
+          "$ref": "#/definitions/KubernetesClusterProperties",
+          "description": "Orchestrator specific properties"
+        },
+        "systemServices": {
+          "type": "array",
+          "description": "The system services deployed to the cluster",
+          "items": {
+            "$ref": "#/definitions/SystemService"
+          },
+          "x-ms-identifiers": []
+        },
+        "masterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of master nodes in the container service."
+        },
+        "agentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of agent nodes in the Container Service. This can be changed to scale the cluster."
+        },
+        "agentVmSize": {
+          "$ref": "#/definitions/AgentVMSizeTypes",
+          "description": "The Azure VM size of the agent VM nodes. This cannot be changed once the cluster is created. This list is non exhaustive; refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes for the possible VM sizes."
+        }
+      },
+      "required": [
+        "orchestratorType"
+      ]
+    },
+    "AgentVMSizeTypes": {
+      "type": "string",
+      "enum": [
+        "Standard_A0",
+        "Standard_A1",
+        "Standard_A2",
+        "Standard_A3",
+        "Standard_A4",
+        "Standard_A5",
+        "Standard_A6",
+        "Standard_A7",
+        "Standard_A8",
+        "Standard_A9",
+        "Standard_A10",
+        "Standard_A11",
+        "Standard_D1",
+        "Standard_D2",
+        "Standard_D3",
+        "Standard_D4",
+        "Standard_D11",
+        "Standard_D12",
+        "Standard_D13",
+        "Standard_D14",
+        "Standard_D1_v2",
+        "Standard_D2_v2",
+        "Standard_D3_v2",
+        "Standard_D4_v2",
+        "Standard_D5_v2",
+        "Standard_D11_v2",
+        "Standard_D12_v2",
+        "Standard_D13_v2",
+        "Standard_D14_v2",
+        "Standard_G1",
+        "Standard_G2",
+        "Standard_G3",
+        "Standard_G4",
+        "Standard_G5",
+        "Standard_DS1",
+        "Standard_DS2",
+        "Standard_DS3",
+        "Standard_DS4",
+        "Standard_DS11",
+        "Standard_DS12",
+        "Standard_DS13",
+        "Standard_DS14",
+        "Standard_GS1",
+        "Standard_GS2",
+        "Standard_GS3",
+        "Standard_GS4",
+        "Standard_GS5"
+      ],
+      "x-ms-enum": {
+        "name": "AgentVMSizeTypes",
+        "modelAsString": true
+      }
+    },
+    "AppInsightsCredentials": {
+      "type": "object",
+      "description": "AppInsights credentials.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "The AppInsights application ID."
+        },
+        "instrumentationKey": {
+          "type": "string",
+          "description": "The AppInsights instrumentation key. This is not returned in response of GET/PUT on the resource. To see this please call listKeys API."
+        }
+      }
+    },
+    "AppInsightsProperties": {
+      "type": "object",
+      "description": "Properties of App Insights.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "ARM resource ID of the App Insights."
+        }
+      }
+    },
+    "AutoScaleConfiguration": {
+      "type": "object",
+      "description": "AutoScale configuration properties.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "If auto-scale is enabled for all services. Each service can turn it off individually."
+        },
+        "minReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of replicas for each service."
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of replicas for each service."
+        },
+        "targetUtilization": {
+          "type": "number",
+          "format": "float",
+          "description": "The target utilization."
+        },
+        "refreshPeriodInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Refresh period in seconds."
+        }
+      }
+    },
+    "AvailableOperations": {
+      "type": "object",
+      "description": "Available operation list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of available operations.",
+          "items": {
+            "$ref": "#/definitions/ResourceOperation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CheckSystemServicesUpdatesAvailableResponse": {
+      "type": "object",
+      "description": "Information about updates available for system services in a cluster.",
+      "properties": {
+        "updatesAvailable": {
+          "$ref": "#/definitions/UpdatesAvailable",
+          "description": "Yes if updates are available for the system services, No if not.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterType": {
+      "type": "string",
+      "enum": [
+        "ACS",
+        "Local"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterType",
+        "modelAsString": true
+      }
+    },
+    "ContainerRegistryCredentials": {
+      "type": "object",
+      "description": "Information about the Azure Container Registry which contains the images deployed to the cluster.",
+      "properties": {
+        "loginServer": {
+          "type": "string",
+          "description": "The ACR login server name. User name is the first part of the FQDN.",
+          "readOnly": true
+        },
+        "password": {
+          "type": "string",
+          "description": "The ACR primary password.",
+          "readOnly": true
+        },
+        "password2": {
+          "type": "string",
+          "description": "The ACR secondary password.",
+          "readOnly": true
+        },
+        "username": {
+          "type": "string",
+          "description": "The ACR login username.",
+          "readOnly": true
+        }
+      }
+    },
+    "ContainerRegistryProperties": {
+      "type": "object",
+      "description": "Properties of Azure Container Registry.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "ARM resource ID of the Azure Container Registry used to store Docker images for web services in the cluster. If not provided one will be created. This cannot be changed once the cluster is created."
+        }
+      }
+    },
+    "ContainerServiceCredentials": {
+      "type": "object",
+      "description": "Information about the Azure Container Registry which contains the images deployed to the cluster.",
+      "properties": {
+        "acsKubeConfig": {
+          "type": "string",
+          "description": "The ACS kube config file.",
+          "readOnly": true
+        },
+        "servicePrincipalConfiguration": {
+          "$ref": "#/definitions/ServicePrincipalProperties",
+          "description": "Service principal configuration used by Kubernetes.",
+          "readOnly": true
+        },
+        "imagePullSecretName": {
+          "type": "string",
+          "description": "The ACR image pull secret name which was created in Kubernetes.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponseWrapper": {
+      "type": "object",
+      "description": "Wrapper for error response to follow ARM guidelines.",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "description": "The error response."
+        }
+      }
+    },
+    "GlobalServiceConfiguration": {
+      "type": "object",
+      "description": "Global configuration for services in the cluster.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "The configuration ETag for updates."
+        },
+        "ssl": {
+          "$ref": "#/definitions/SslConfiguration",
+          "description": "The SSL configuration properties"
+        },
+        "serviceAuth": {
+          "$ref": "#/definitions/ServiceAuthConfiguration",
+          "description": "Optional global authorization keys for all user services deployed in cluster. These are used if the service does not have auth keys."
+        },
+        "autoScale": {
+          "$ref": "#/definitions/AutoScaleConfiguration",
+          "description": "The auto-scale configuration"
+        }
+      }
+    },
+    "KubernetesClusterProperties": {
+      "type": "object",
+      "description": "Kubernetes cluster specific properties",
+      "properties": {
+        "servicePrincipal": {
+          "$ref": "#/definitions/ServicePrincipalProperties",
+          "description": "The Azure Service Principal used by Kubernetes"
+        }
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Updating",
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true
+      }
+    },
+    "OperationalizationCluster": {
+      "type": "object",
+      "description": "Instance of an Azure ML Operationalization Cluster resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OperationalizationClusterProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OperationalizationClusterCredentials": {
+      "type": "object",
+      "description": "Credentials to resources in the cluster.",
+      "properties": {
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccountCredentials",
+          "description": "Credentials for the Storage Account."
+        },
+        "containerRegistry": {
+          "$ref": "#/definitions/ContainerRegistryCredentials",
+          "description": "Credentials for Azure Container Registry."
+        },
+        "containerService": {
+          "$ref": "#/definitions/ContainerServiceCredentials",
+          "description": "Credentials for Azure Container Service."
+        },
+        "appInsights": {
+          "$ref": "#/definitions/AppInsightsCredentials",
+          "description": "Credentials for Azure AppInsights."
+        },
+        "serviceAuthConfiguration": {
+          "$ref": "#/definitions/ServiceAuthConfiguration",
+          "description": "Global authorization keys for all user services deployed in cluster. These are used if the service does not have auth keys."
+        },
+        "sslConfiguration": {
+          "$ref": "#/definitions/SslConfiguration",
+          "description": "The SSL configuration for the services."
+        }
+      }
+    },
+    "OperationalizationClusterListResult": {
+      "type": "object",
+      "description": "The response of a OperationalizationCluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OperationalizationCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/OperationalizationCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationalizationClusterProperties": {
+      "type": "object",
+      "description": "Properties of an operationalization cluster",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the cluster."
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the cluster was created.",
+          "readOnly": true
+        },
+        "modifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the cluster was last modified.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "The provision state of the cluster. Valid values are Unknown, Updating, Provisioning, Succeeded, and Failed.",
+          "readOnly": true
+        },
+        "provisioningErrors": {
+          "type": "array",
+          "description": "List of provisioning errors reported by the resource provider.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseWrapper"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "clusterType": {
+          "$ref": "#/definitions/ClusterType",
+          "description": "The cluster type."
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "Storage Account properties."
+        },
+        "containerRegistry": {
+          "$ref": "#/definitions/ContainerRegistryProperties",
+          "description": "Container Registry properties."
+        },
+        "containerService": {
+          "$ref": "#/definitions/AcsClusterProperties",
+          "description": "Parameters for the Azure Container Service cluster."
+        },
+        "appInsights": {
+          "$ref": "#/definitions/AppInsightsProperties",
+          "description": "AppInsights configuration."
+        },
+        "globalServiceConfiguration": {
+          "$ref": "#/definitions/GlobalServiceConfiguration",
+          "description": "Contains global configuration for the web services in the cluster."
+        }
+      },
+      "required": [
+        "clusterType"
+      ]
+    },
+    "OperationalizationClusterTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in OperationalizationCluster resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OrchestratorType": {
+      "type": "string",
+      "enum": [
+        "Kubernetes",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "OrchestratorType",
+        "modelAsString": true
+      }
+    },
+    "ResourceOperation": {
+      "type": "object",
+      "description": "Resource operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of this operation."
+        },
+        "display": {
+          "$ref": "#/definitions/ResourceOperationDisplay",
+          "description": "Display of the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The operation origin."
+        }
+      }
+    },
+    "ResourceOperationDisplay": {
+      "type": "object",
+      "description": "Display of the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The resource provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource name."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the operation."
+        }
+      }
+    },
+    "ServiceAuthConfiguration": {
+      "type": "object",
+      "description": "Global service auth configuration properties. These are the data-plane authorization keys and are used if a service doesn't define it's own.",
+      "properties": {
+        "primaryAuthKeyHash": {
+          "type": "string",
+          "description": "The primary auth key hash. This is not returned in response of GET/PUT on the resource.. To see this please call listKeys API."
+        },
+        "secondaryAuthKeyHash": {
+          "type": "string",
+          "description": "The secondary auth key hash. This is not returned in response of GET/PUT on the resource.. To see this please call listKeys API."
+        }
+      },
+      "required": [
+        "primaryAuthKeyHash",
+        "secondaryAuthKeyHash"
+      ]
+    },
+    "ServicePrincipalProperties": {
+      "type": "object",
+      "description": "The Azure service principal used by Kubernetes for configuring load balancers",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The service principal client ID"
+        },
+        "secret": {
+          "type": "string",
+          "description": "The service principal secret. This is not returned in response of GET/PUT on the resource. To see this please call listKeys."
+        }
+      },
+      "required": [
+        "clientId",
+        "secret"
+      ]
+    },
+    "SslConfiguration": {
+      "type": "object",
+      "description": "SSL configuration. If configured data-plane calls to user services will be exposed over SSL only.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "SSL status. Allowed values are Enabled and Disabled."
+        },
+        "cert": {
+          "type": "string",
+          "description": "The SSL cert data in PEM format."
+        },
+        "key": {
+          "type": "string",
+          "description": "The SSL key data in PEM format. This is not returned in response of GET/PUT on the resource. To see this please call listKeys API."
+        },
+        "cname": {
+          "type": "string",
+          "description": "The CName of the certificate."
+        }
+      }
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
+    },
+    "StorageAccountCredentials": {
+      "type": "object",
+      "description": "Access information for the storage account.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The ARM resource ID of the storage account.",
+          "readOnly": true
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "The primary key of the storage account.",
+          "readOnly": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "The secondary key of the storage account.",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageAccountProperties": {
+      "type": "object",
+      "description": "Properties of Storage Account.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "ARM resource ID of the Azure Storage Account to store CLI specific files. If not provided one will be created. This cannot be changed once the cluster is created."
+        }
+      }
+    },
+    "SystemService": {
+      "type": "object",
+      "description": "Information about a system service deployed in the cluster",
+      "properties": {
+        "systemServiceType": {
+          "$ref": "#/definitions/SystemServiceType",
+          "description": "The system service type"
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "description": "The public IP address of the system service",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The state of the system service",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "systemServiceType"
+      ]
+    },
+    "SystemServiceType": {
+      "type": "string",
+      "enum": [
+        "None",
+        "ScoringFrontEnd",
+        "BatchFrontEnd"
+      ],
+      "x-ms-enum": {
+        "name": "SystemServiceType",
+        "modelAsString": true
+      }
+    },
+    "UpdateSystemServicesResponse": {
+      "type": "object",
+      "description": "Response of the update system services API",
+      "properties": {
+        "updateStatus": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Update status",
+          "readOnly": true
+        },
+        "updateStartedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the last system services update was started.",
+          "readOnly": true
+        },
+        "updateCompletedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the last system services update completed.",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdatesAvailable": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ],
+      "x-ms-enum": {
+        "name": "UpdatesAvailable",
+        "modelAsString": true
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2017-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2017_08_01_preview",
+            "value": "2017-08-01-preview"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
