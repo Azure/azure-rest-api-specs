@@ -1,0 +1,1327 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Inventory",
+    "version": "2024-01-01-preview",
+    "description": "Microsoft Inventory Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SubscriptionInternalPropertyResources"
+    },
+    {
+      "name": "AzureHosts"
+    },
+    {
+      "name": "Datacenters"
+    },
+    {
+      "name": "Clusters"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Inventory/locations/{location}/physicalAzureHosts": {
+      "get": {
+        "operationId": "AzureHosts_ListByTenant",
+        "tags": [
+          "AzureHosts"
+        ],
+        "description": "List AzureHostResource resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureHostResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureHosts_ListByTenant": {
+            "$ref": "./examples/AzureHosts_ListByTenant_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Inventory/locations/{location}/physicalAzureHosts/{azureHostName}": {
+      "get": {
+        "operationId": "AzureHosts_GetAzureHost",
+        "tags": [
+          "AzureHosts"
+        ],
+        "description": "Get a AzureHostResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "azureHostName",
+            "in": "path",
+            "description": "Azure Host",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9]+[-]*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureHostResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureHosts_GetAzureHost": {
+            "$ref": "./examples/AzureHosts_GetAzureHost.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Inventory/locations/{location}/physicalClusters": {
+      "get": {
+        "operationId": "Clusters_ListByTenant",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "List ClusterResource resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_ListByTenant": {
+            "$ref": "./examples/Clusters_ListByTenant_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Inventory/locations/{location}/physicalClusters/{clusterName}": {
+      "get": {
+        "operationId": "Clusters_GetCluster",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Get a ClusterResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "Cluster",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9]+[-_]*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clusters_GetCluster": {
+            "$ref": "./examples/Clusters_GetCluster.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Inventory/locations/{location}/physicalDatacenters": {
+      "get": {
+        "operationId": "Datacenters_ListByTenant",
+        "tags": [
+          "Datacenters"
+        ],
+        "description": "List DatacenterResource resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatacenterResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datacenters_ListByTenant": {
+            "$ref": "./examples/Datacenters_ListByTenant_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Inventory/locations/{location}/physicalDatacenters/{datacenterName}": {
+      "get": {
+        "operationId": "Datacenters_GetDatacenter",
+        "tags": [
+          "Datacenters"
+        ],
+        "description": "Get a DatacenterResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "datacenterName",
+            "in": "path",
+            "description": "Datacenter",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9]+[-_]*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatacenterResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datacenters_GetDatacenter": {
+            "$ref": "./examples/Datacenters_GetDatacenter.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Inventory/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Inventory/subscriptionInternalProperties": {
+      "get": {
+        "operationId": "SubscriptionInternalPropertyResources_ListBySubscription",
+        "tags": [
+          "SubscriptionInternalPropertyResources"
+        ],
+        "description": "List SubscriptionInternalPropertyResource resources by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionInternalPropertyResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionInternalPropertyResources_ListSubscriptionInternalPropertyResources": {
+            "$ref": "./examples/SubscriptionInternalPropertyResources_ListSubscriptionInternalPropertyResources_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Inventory/subscriptionInternalProperties/default": {
+      "get": {
+        "operationId": "SubscriptionInternalPropertyResources_Get",
+        "tags": [
+          "SubscriptionInternalPropertyResources"
+        ],
+        "description": "Gets Subscription's internal properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionInternalPropertyResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionInternalPropertyResources_Get": {
+            "$ref": "./examples/SubscriptionInternalPropertyResources_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdditionalStateInformation": {
+      "type": "object",
+      "description": "Commerce object identifying additional state information associated with the subscription.",
+      "properties": {
+        "releaseNonDataRetentionResource": {
+          "type": "boolean",
+          "description": "Indicates whether the Non data retention resources can be released. This is a high confidence signal that would be set to true when the subscription is already in disabled state. To learn about Azure Data Retention policy after subscription has been disabled see"
+        },
+        "blockNewResourceCreation": {
+          "type": "boolean",
+          "description": "Indicates whether the new resource creation should be blocked. Existing resources functionality should not be impacted. This signal should be looked at when subscription state is Active. The service should be able to recover if the flag is reset to false."
+        }
+      }
+    },
+    "AvailabilityZoneResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "AzureHostProperties": {
+      "type": "object",
+      "description": "Azure Host Properties",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "Node Id"
+        },
+        "clusterId": {
+          "$ref": "#/definitions/ClusterResourceId",
+          "description": "Cluster Id"
+        },
+        "serverId": {
+          "$ref": "#/definitions/ServerResourceId",
+          "description": "Physical server Id"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "nodeId",
+        "clusterId",
+        "serverId"
+      ]
+    },
+    "AzureHostResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureHostProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AzureHostResourceListResult": {
+      "type": "object",
+      "description": "The response of a AzureHostResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzureHostResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AzureHostResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AzureRegionResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "BillingAccount": {
+      "type": "object",
+      "description": "Billing account of the customer that holds customer payment instrument, address etc. The subscription is always linked to a billing account.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Id identifying the commerce object for the billing account."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "BillingProperties": {
+      "type": "object",
+      "description": "The Subscription billing properties",
+      "properties": {
+        "additionalStateInformation": {
+          "$ref": "#/definitions/AdditionalStateInformation",
+          "description": "Commerce object identifying additional state information associated with the subscription."
+        },
+        "billingAccount": {
+          "$ref": "#/definitions/BillingAccount",
+          "description": "Billing account of the customer that holds customer payment instrument, address etc. The subscription is always linked to a billing account."
+        },
+        "billingType": {
+          "$ref": "#/definitions/BillingType",
+          "description": "Indicates the commerce stack that this account is on - modern or legacy"
+        },
+        "channelType": {
+          "$ref": "#/definitions/ChannelType",
+          "description": "Indicates the sales motion that this subscription type belongs to. This can be changed if a subscription moves from one channel type to another (e.g., CustomerLed to PartnerLed)"
+        },
+        "paymentType": {
+          "$ref": "#/definitions/PaymentType",
+          "description": "Differentiates how customer is paying for the subscription. This can change if customer changes from free to paid, etc."
+        },
+        "tier": {
+          "$ref": "#/definitions/Tier",
+          "description": "Customer segment"
+        },
+        "workloadType": {
+          "$ref": "#/definitions/WorkloadType",
+          "description": "Indicates the importance of this subscription. DevTest subscriptions get lower SLA compared to Production ones. This property can be changed later if needed as well."
+        }
+      },
+      "required": [
+        "additionalStateInformation",
+        "billingAccount",
+        "billingType",
+        "channelType",
+        "paymentType",
+        "tier",
+        "workloadType"
+      ]
+    },
+    "BillingType": {
+      "type": "string",
+      "description": "Subscription billing types",
+      "enum": [
+        "Legacy",
+        "Modern"
+      ],
+      "x-ms-enum": {
+        "name": "BillingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Legacy",
+            "value": "Legacy",
+            "description": "Legacy billing type"
+          },
+          {
+            "name": "Modern",
+            "value": "Modern",
+            "description": "Modern billing type"
+          }
+        ]
+      }
+    },
+    "ChannelType": {
+      "type": "string",
+      "description": "Subscription channel type",
+      "enum": [
+        "None",
+        "Internal",
+        "FieldLed",
+        "CustomerLed",
+        "PartnerLed"
+      ],
+      "x-ms-enum": {
+        "name": "ChannelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None channel type"
+          },
+          {
+            "name": "Internal",
+            "value": "Internal",
+            "description": "Internal channel type"
+          },
+          {
+            "name": "FieldLed",
+            "value": "FieldLed",
+            "description": "FieldLed channel type"
+          },
+          {
+            "name": "CustomerLed",
+            "value": "CustomerLed",
+            "description": "CustomerLed channel type"
+          },
+          {
+            "name": "PartnerLed",
+            "value": "PartnerLed",
+            "description": "Partnerled channel type"
+          }
+        ]
+      }
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "Cluster Properties",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "friendly Name"
+        },
+        "isClusterInBuildout": {
+          "type": "boolean",
+          "description": "Is cluster in buildout"
+        },
+        "datacenterId": {
+          "$ref": "#/definitions/DatacenterResourceId",
+          "description": "Datacenter Resource Id"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "friendlyName",
+        "isClusterInBuildout",
+        "datacenterId"
+      ]
+    },
+    "ClusterResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "ClusterResourceListResult": {
+      "type": "object",
+      "description": "The response of a ClusterResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClusterResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ClusterResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CostCategory": {
+      "type": "string",
+      "description": "CostCategory for internal subscription",
+      "enum": [
+        "None",
+        "FR",
+        "FG",
+        "FS",
+        "FX",
+        "FB"
+      ],
+      "x-ms-enum": {
+        "name": "CostCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None cost category"
+          },
+          {
+            "name": "FR",
+            "value": "FR",
+            "description": "FR cost category"
+          },
+          {
+            "name": "FG",
+            "value": "FG",
+            "description": "FG cost category"
+          },
+          {
+            "name": "FS",
+            "value": "FS",
+            "description": "FS cost category"
+          },
+          {
+            "name": "FX",
+            "value": "FX",
+            "description": "FX cost category"
+          },
+          {
+            "name": "FB",
+            "value": "FB",
+            "description": "FB cost category"
+          }
+        ]
+      }
+    },
+    "DatacenterProperties": {
+      "type": "object",
+      "description": "Datacenter Properties",
+      "properties": {
+        "shortId": {
+          "type": "string",
+          "description": "Datacenter short Id"
+        },
+        "locationDcmtId": {
+          "type": "string",
+          "description": "Datacenter location Dcmt Id"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Datacenter friendly Name Id"
+        },
+        "availabilityZoneId": {
+          "$ref": "#/definitions/AvailabilityZoneResourceId",
+          "description": "Availability Zone Id"
+        },
+        "facilityId": {
+          "$ref": "#/definitions/FacilityResourceId",
+          "description": "Facility Id"
+        },
+        "azureRegionId": {
+          "$ref": "#/definitions/AzureRegionResourceId",
+          "description": "Azure Region Id"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "shortId",
+        "locationDcmtId",
+        "friendlyName",
+        "availabilityZoneId",
+        "facilityId",
+        "azureRegionId"
+      ]
+    },
+    "DatacenterResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatacenterProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatacenterResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "DatacenterResourceListResult": {
+      "type": "object",
+      "description": "The response of a DatacenterResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatacenterResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DatacenterResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FacilityResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "InternalSubscriptionPolicies": {
+      "type": "object",
+      "description": "The Internal Subscription policies",
+      "properties": {
+        "costCategory": {
+          "$ref": "#/definitions/CostCategory",
+          "description": "Cost categorizations used for internal subscriptions."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Environment for the internal subscription."
+        },
+        "pcCode": {
+          "type": "string",
+          "description": "PCCode for the internal subscription."
+        }
+      },
+      "required": [
+        "costCategory",
+        "environment",
+        "pcCode"
+      ]
+    },
+    "PaymentType": {
+      "type": "string",
+      "description": "Subscription state payment type",
+      "enum": [
+        "None",
+        "Paid",
+        "Free",
+        "Entitlement",
+        "SponsoredPlus",
+        "Sponsored",
+        "Benefit"
+      ],
+      "x-ms-enum": {
+        "name": "PaymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None payment type"
+          },
+          {
+            "name": "Paid",
+            "value": "Paid",
+            "description": "Paid payment type"
+          },
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "Free payment type"
+          },
+          {
+            "name": "Entitlement",
+            "value": "Entitlement",
+            "description": "Entitlement payment type"
+          },
+          {
+            "name": "SponsoredPlus",
+            "value": "SponsoredPlus",
+            "description": "SponsoredPlus payment type"
+          },
+          {
+            "name": "Sponsored",
+            "value": "Sponsored",
+            "description": "Sponsored payment type"
+          },
+          {
+            "name": "Benefit",
+            "value": "Benefit",
+            "description": "Benefit payment type"
+          }
+        ]
+      }
+    },
+    "PromotionData": {
+      "type": "object",
+      "description": "Promotion category and end date time",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "promotion category free vs pay-as-you-go"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "promotion end date time"
+        }
+      },
+      "required": [
+        "category",
+        "endDateTime"
+      ]
+    },
+    "PromotionsList": {
+      "type": "object",
+      "description": "List of promotions",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Promotions that are offered to the subscription",
+          "items": {
+            "$ref": "#/definitions/PromotionData"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state enum",
+      "enum": [
+        "Provisioning",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource action is successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource action has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource action has been cancelled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning has been accepted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The resource has been deleted."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource status is unspecified."
+          }
+        ]
+      }
+    },
+    "ServerResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "State": {
+      "type": "string",
+      "description": "Subscription states",
+      "enum": [
+        "Registered",
+        "Unregistered",
+        "Warned",
+        "Suspended",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Registered",
+            "value": "Registered",
+            "description": "Registered subscription state"
+          },
+          {
+            "name": "Unregistered",
+            "value": "Unregistered",
+            "description": "Unregistered subscription state"
+          },
+          {
+            "name": "Warned",
+            "value": "Warned",
+            "description": "Warned subscription state"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Suspended subscription state"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted subscription state"
+          }
+        ]
+      }
+    },
+    "SubscriptionInternalProperties": {
+      "type": "object",
+      "description": "The Subscription internal properties",
+      "properties": {
+        "billingProperties": {
+          "$ref": "#/definitions/BillingProperties",
+          "description": "Subscription Billing properties."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Subscription display name"
+        },
+        "entitlementStartDate": {
+          "type": "string",
+          "description": "Subscription Entitlement start date"
+        },
+        "offerCategory": {
+          "type": "string",
+          "description": "Subscription Offer Category"
+        },
+        "offerType": {
+          "type": "string",
+          "description": "Subscription offer Type"
+        },
+        "promotions": {
+          "$ref": "#/definitions/PromotionsList",
+          "description": "Promotions offered to the subscription"
+        },
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "Current state of subscription"
+        },
+        "subscriptionPolicies": {
+          "$ref": "#/definitions/SubscriptionPolicies",
+          "description": "Subscription policies"
+        },
+        "internalSubscriptionPolicies": {
+          "$ref": "#/definitions/InternalSubscriptionPolicies",
+          "description": "Internal subscription policies"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Subscription Tenant Id"
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription Created Time"
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription Created Time"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Subscription Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "tenantId"
+      ]
+    },
+    "SubscriptionInternalPropertyResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionInternalProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SubscriptionInternalPropertyResourceListResult": {
+      "type": "object",
+      "description": "The response of a SubscriptionInternalPropertyResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SubscriptionInternalPropertyResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SubscriptionInternalPropertyResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SubscriptionPolicies": {
+      "type": "object",
+      "description": "The Subscription policies",
+      "properties": {
+        "locationPlacementId": {
+          "type": "string",
+          "description": "The placement requirement for the subscription based on its country of origin / offer type / offer category / etc. This is used in geo-fencing of certain regions or regulatory boundaries (e.g. Australia ring-fencing)."
+        },
+        "quotaId": {
+          "type": "string",
+          "description": "The quota requirement for the subscription based on the offer type / category (e.g. free vs. pay-as-you-go). This can be used to inform quota information for the subscription (e.g. max # of resource groups or max # of virtual machines."
+        },
+        "spendingLimit": {
+          "type": "string",
+          "description": "Indicates whether subscription has spending limit."
+        }
+      },
+      "required": [
+        "locationPlacementId",
+        "quotaId",
+        "spendingLimit"
+      ]
+    },
+    "Tier": {
+      "type": "string",
+      "description": "Subscription tier",
+      "enum": [
+        "Unknown",
+        "Standard",
+        "Premium",
+        "Priority"
+      ],
+      "x-ms-enum": {
+        "name": "Tier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown tier"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard tier"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium tier"
+          },
+          {
+            "name": "Priority",
+            "value": "Priority",
+            "description": "Priority tier"
+          }
+        ]
+      }
+    },
+    "WorkloadType": {
+      "type": "string",
+      "description": "Subscription workload type",
+      "enum": [
+        "None",
+        "DevTest",
+        "Production"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None workload type"
+          },
+          {
+            "name": "DevTest",
+            "value": "DevTest",
+            "description": "Development test workload type"
+          },
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "Production workload type"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
