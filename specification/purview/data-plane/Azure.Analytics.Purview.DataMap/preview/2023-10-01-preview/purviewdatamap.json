@@ -1624,7 +1624,7 @@
         }
       }
     },
-    "/entity/operations/{operationGuid}": {
+    "/entity/operations/{operationId}": {
       "get": {
         "tags": [
           "Entity"
@@ -1638,7 +1638,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/operationGuid"
+            "$ref": "#/parameters/operationId"
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
@@ -7340,8 +7340,8 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "operationGuid": {
-      "name": "operationGuid",
+    "operationId": {
+      "name": "operationId",
       "in": "path",
       "description": "The globally unique identifier for async operation job.",
       "required": true,
