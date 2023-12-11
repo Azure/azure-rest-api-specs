@@ -62,12 +62,6 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
   @doc("An internet location, which must be accessible to the model,from which the image may be retrieved.")
   @projectedName("json", "image_url")
   imageUrl: ChatMessageImageUrl;
-
-  @doc("""
-  The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
-  accuracy.
-  """)
-  detail?: ChatMessageImageDetailLevel;
 }
 
 @doc("An internet location from which the model may retrieve an image.")
@@ -75,6 +69,12 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
 model ChatMessageImageUrl {
   @doc("The URL of the image.")
   url: url;
+
+  @doc("""
+  The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
+  accuracy.
+  """)
+  detail?: ChatMessageImageDetailLevel;
 }
 
 @discriminator("role")
