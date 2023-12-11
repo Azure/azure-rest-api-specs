@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure EventHub events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid;
+namespace Microsoft.EventGrid;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.EventHub.CaptureFileCreated event.")
 model EventHubCaptureFileCreatedEventData {

@@ -1,5 +1,5 @@
 @doc("Describes the schema of the Azure Media Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid {
+namespace Microsoft.EventGrid {
   @doc("State of a Media Job.")
   enum MediaJobState {
     @doc("The job was canceled. This is a final state for the job.")

@@ -1,7 +1,7 @@
 import "./AzureCommunicationServicesCore.tsp";
 
 @doc("Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
-namespace EventGrid;
+namespace Microsoft.EventGrid;
 
 @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event")
 model AcsIncomingCallEventData {
