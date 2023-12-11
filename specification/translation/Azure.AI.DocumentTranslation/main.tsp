@@ -24,7 +24,7 @@ enum Versions {
 alias CommonParameters = {
   /** Mandatory API version parameter */
   @query("api-version")
-  apiVersion: string = "2023-11-01-preview";
+  apiVersion: string;
 
   /** The value is the region of the translator resource. This value is optional if when custom endpoint is used.
    * The value can be found in Azure portal. Translator resource => Resource Management => Keys and Endpoint => Location/Region  */
@@ -61,81 +61,15 @@ model ErrorResponse {
 
 /** Error details as returned by Translator Service. */
 model ErrorDetails {
-  /** Enums containing high-level error codes. Possible values:.
-   * InternalServerError
-   * InvalidArgument
-   * InvalidRequest
-   * RequestRateTooHigh
-   * ResourceNotFound
-   * ServiceUnavailable
-   * Unauthorized
-   */
+  /** Enums containing high-level error codes. */
   code: string;
 
   /** Human readable error description. */
   message: string;
 }
 
-/** Item containing Document format result. */
-model FileFormat {
-  /** Name of the format. */
-  format: string;
-
-  /** Supported file extension for this format. */
-  fileExtensions: string[];
-
-  /** Supported Content-Types for this format. */
-  contentTypes: string[];
-
-  /** Default version if none is specified. */
-  defaultVersion: string;
-
-  /** Supported Version. */
-  versions: string[];
-
-  /** Can this file format used for glossary file. */
-  isGlossaryFormat: boolean;
-
-  /** Can this file format used to translate file. */
-  isTranslationFormat: boolean;
-
-  /** Is this format supported for translate by Document API. */
-  supportedByDocument: boolean;
-
-  /** Is this format supported for translate by batches API. */
-  supportedByBatches: boolean;
-}
-
-/** Request parameters for the Glossary Formats. */
-model GlossaryFormatParameters {
-  ...CommonParameters;
-}
-
-/** Response for the Glossary Formats. */
-model GlossaryFormatResult {
-  ...CommonResultHeaders;
-
-  /** Array of the FileFormat. */
-  @body
-  value: FileFormat[];
-}
-
-/** Request parameters for the Document file Formats. */
-model DocumentFormatParameters {
-  ...CommonParameters;
-}
-
-/** Response for the Document Formats. */
-model DocumentFormatResult {
-  ...CommonResultHeaders;
-
-  /** Array of the FileFormat. */
-  @body
-  value: FileFormat[];
-}
-
 /** Request parameters for the Document Translate. */
-model TranslateDocumentParameters {
+model DocumentTranslateParameters {
   ...CommonParameters;
 
   /** Specifies the language of the input document. If the from parameter isn't specified, 
@@ -144,7 +78,7 @@ model TranslateDocumentParameters {
   sourceLanguage?: string;
 
   /** Specifies the language of the output document. The target language must be one of the supported languages included 
-    in the translation scope. For example, use to=de to translate to German. */
+    in the translation scope. For example, use targetLanguage=de to translate to German. */
   @query("TargetLanguage")
   targetLanguage: string;
 
@@ -168,8 +102,8 @@ model TranslateDocumentParameters {
   @header contentType: "multipart/form-data";
 }
 
-/** Translate Document Request Body. */
-model TranslateDocumentRequest {
+/** Document Translate Request Body. */
+model DocumentTranslateRequest {
   /** Document to be translated in the form */
   document: bytes;
 
@@ -178,7 +112,7 @@ model TranslateDocumentRequest {
 }
 
 /** Successful request and the document is translated. The translated document is returned in the body. */
-model TranslateDocumentResult {
+model DocumentTranslateResult {
   ...CommonResultHeaders;
 
   /** response conent type */
@@ -200,23 +134,6 @@ op CustomOperation<TBody, TParams, TResponse, TError = ErrorResponse>(
   requestBody: TBody,
 ): TResponse | TError;
 
-/** Defines Document Translation custom Operations which doesn't have any content in the request */
-op CustomGetOperation<TParams, TResponse, TError = ErrorResponse>(
-  ...TParams,
-): TResponse | TError;
-
-/** The Get supported document formats method returns a list of document formats supported by the Document Translation service.
- *  The list includes the common file extension used. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@get
-@route("document/formats")
-@summary("Gets the set of file formats currently supported by translate.")
-op getSingleDocumentFormats is CustomGetOperation<
-  DocumentFormatParameters,
-  DocumentFormatResult,
-  ErrorResponse
->;
-
 /** Use this API to translate a single document.
  * All supported document formats can be obtained with formats API.
  * Single Glossary / Translation memory can be included in the request and applied by the service when the document is translated.
@@ -226,8 +143,8 @@ op getSingleDocumentFormats is CustomGetOperation<
 @post
 @route("document:translate")
 op singleTranslateDocument is CustomOperation<
-  TranslateDocumentRequest,
-  TranslateDocumentParameters,
-  TranslateDocumentResult,
+  DocumentTranslateRequest,
+  DocumentTranslateParameters,
+  DocumentTranslateResult,
   ErrorResponse
 >;
