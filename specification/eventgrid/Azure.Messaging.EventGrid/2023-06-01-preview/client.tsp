@@ -1,27 +1,27 @@
 import "@azure-tools/typespec-client-generator-core";
 
-import "./../SystemEvents/ApiManagement.tsp";
-import "./../SystemEvents/AppConfiguration.tsp";
-import "./../SystemEvents/AzureCommunicationServices.tsp";
-import "./../SystemEvents/ContainerRegistry.tsp";
-import "./../SystemEvents/ContainerService.tsp";
-import "./../SystemEvents/DataBox.tsp";
-import "./../SystemEvents/EventHub.tsp";
-import "./../SystemEvents/Maps.tsp";
-import "./../SystemEvents/IotHub.tsp";
-import "./../SystemEvents/HealthcareApis.tsp";
-import "./../SystemEvents/KeyVault.tsp";
-import "./../SystemEvents/MachineLearningServices.tsp";
-import "./../SystemEvents/MediaServices.tsp";
-import "./../SystemEvents/PolicyInsights.tsp";
-import "./../SystemEvents/RedisCache.tsp";
-import "./../SystemEvents/Resources.tsp";
-import "./../SystemEvents/ServiceBus.tsp";
-import "./../SystemEvents/SignalRService.tsp";
-import "./../SystemEvents/Storage.tsp";
-import "./../SystemEvents/Web.tsp";
-import "./../SystemEvents/EventGrid.tsp";
-import "./../SystemEvents/ResourceNotifications.tsp";
+import "./ApiManagement.tsp";
+import "./AppConfiguration.tsp";
+import "./AzureCommunicationServices.tsp";
+import "./ContainerRegistry.tsp";
+import "./ContainerService.tsp";
+import "./DataBox.tsp";
+import "./EventHub.tsp";
+import "./Maps.tsp";
+import "./IotHub.tsp";
+import "./HealthcareApis.tsp";
+import "./KeyVault.tsp";
+import "./MachineLearningServices.tsp";
+import "./MediaServices.tsp";
+import "./PolicyInsights.tsp";
+import "./RedisCache.tsp";
+import "./Resources.tsp";
+import "./ServiceBus.tsp";
+import "./SignalRService.tsp";
+import "./Storage.tsp";
+import "./Web.tsp";
+import "./EventGrid.tsp";
+import "./ResourceNotifications.tsp";
 
 // Which EventGrid Version 
 import "./main.tsp";
@@ -29,6 +29,9 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
+@@access(Microsoft.EventGrid.publishCloudEvent, Access.internal);
+@@access(Microsoft.EventGrid.publishCloudEvents, Access.internal);
+@@access(Microsoft.EventGrid.receiveCloudEvents, Access.internal);
 @@usage(EventGrid.ApiManagementUserCreatedEventData, Usage.input | Usage.output);
 @@access(EventGrid.ApiManagementUserCreatedEventData, Access.public);
 @@usage(EventGrid.ApiManagementUserUpdatedEventData, Usage.input | Usage.output);
