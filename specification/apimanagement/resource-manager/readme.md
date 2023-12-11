@@ -1059,7 +1059,13 @@ directive:
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
   - suppress: R4009
     from: apimpolicyfragments.json
-    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version. 
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: LroErrorContent
+    from: apimapis.json
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
+  - suppress: LroErrorContent
+    from: apimusers.json
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
     from: definitions.json
