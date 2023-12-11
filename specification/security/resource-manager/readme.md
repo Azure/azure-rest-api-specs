@@ -409,11 +409,11 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-- Microsoft.Security/preview/2019-01-01-preview/automations.json
+- Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
-- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
+- Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
