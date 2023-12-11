@@ -5902,12 +5902,46 @@
         "managementCluster",
         "networkBlock"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrivateCloudUpdateProperties"
-        }
-      ],
       "properties": {
+        "managementCluster": {
+          "description": "The default cluster used for management",
+          "$ref": "#/definitions/ManagementCluster"
+        },
+        "internet": {
+          "description": "Connectivity to internet is enabled or disabled",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "x-ms-enum": {
+            "name": "InternetEnum",
+            "modelAsString": true
+          }
+        },
+        "identitySources": {
+          "description": "vCenter Single Sign On Identity Sources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IdentitySource"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "availability": {
+          "description": "Properties describing how the cloud is distributed across availability zones",
+          "$ref": "#/definitions/AvailabilityProperties",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "encryption": {
+          "description": "Customer managed key encryption, can be enabled or disabled",
+          "$ref": "#/definitions/Encryption"
+        },
         "provisioningState": {
           "description": "The provisioning state",
           "type": "string",
@@ -6002,6 +6036,13 @@
           "x-ms-enum": {
             "name": "nsxPublicIpQuotaRaisedEnum",
             "modelAsString": true
+          }
+        },
+        "extendedNetworkBlocks": {
+          "description": "Array of additional networks noncontiguous with networkBlock. Networks must be unique and non-overlapping across VNet in your subscription, on-premise, and this privateCloud networkBlock attribute. Make sure the CIDR format conforms to (A.B.C.D/X).",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
