@@ -19,19 +19,34 @@ model Target is ProxyResource<Record<unknown>> {
   name: string;
 }
 
+alias ParentedResourceParameters = BaseParameters<Target> & {
+  @path
+  @segment("providers")
+  parentProviderNamespace: string;
+
+  @path
+  parentResourceType: string;
+};
+
 @armResourceOperations
 interface Targets {
   @doc("Get a Target resource that extends a tracked regional resource.")
-  get is ArmResourceRead<Target>;
+  get is ArmResourceRead<Target, ParentedResourceParameters>;
+
   @doc("Create or update a Target resource that extends a tracked regional resource.")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Target>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Target,
+    ParentedResourceParameters
+  >;
+
   @doc("Delete a Target resource that extends a tracked regional resource.")
-  delete is ArmResourceDeleteSync<Target>;
+  delete is ArmResourceDeleteSync<Target, ParentedResourceParameters>;
+
   @doc("Get a list of Target resources that extend a tracked regional resource.")
   list is ArmResourceListByParent<
     Target,
     {
-      ...BaseParameters<Target>;
+      ...ParentedResourceParameters;
 
       @doc("String that sets the continuation token.")
       @query("continuationToken")

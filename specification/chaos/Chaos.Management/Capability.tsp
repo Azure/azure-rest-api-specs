@@ -4,10 +4,10 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./Target.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Http;
 
 namespace Microsoft.Chaos;
 @doc("Model that represents a Capability resource.")
@@ -25,10 +25,13 @@ model Capability is ProxyResource<CapabilityProperties> {
 interface Capabilities {
   @doc("Get a Capability resource that extends a Target resource.")
   get is ArmResourceRead<Capability>;
+
   @doc("Create or update a Capability resource that extends a Target resource.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Capability>;
+
   @doc("Delete a Capability that extends a Target resource.")
   delete is ArmResourceDeleteSync<Capability>;
+
   @doc("Get a list of Capability resources that extend a Target resource..")
   list is ArmResourceListByParent<
     Capability,

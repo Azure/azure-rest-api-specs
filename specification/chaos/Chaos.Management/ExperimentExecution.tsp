@@ -4,12 +4,13 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./Experiment.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Http;
 
 namespace Microsoft.Chaos;
+
 @doc("Model that represents the execution of a Experiment.")
 @parentResource(Experiment)
 model ExperimentExecution is ProxyResource<ExperimentExecutionProperties> {
@@ -25,8 +26,10 @@ model ExperimentExecution is ProxyResource<ExperimentExecutionProperties> {
 interface ExperimentExecutions {
   @doc("Get an execution of an Experiment resource.")
   getExecution is ArmResourceRead<ExperimentExecution>;
+
   @doc("Get a list of executions of an Experiment resource.")
   listAllExecutions is ArmResourceListByParent<ExperimentExecution>;
+
   @doc("Execution details of an experiment resource.")
   executionDetails is ArmResourceActionSync<
     ExperimentExecution,
