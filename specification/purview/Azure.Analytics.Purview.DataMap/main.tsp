@@ -33,7 +33,6 @@ enum ApiVersions {
   v2023_09_01: "2023-09-01",
 }
 
-
 @doc("The Azure Active Directory OAuth2 Flow")
 model AuthToken
   is OAuth2Auth<[
