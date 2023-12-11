@@ -133,6 +133,8 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/jobs.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/volumes.json
 
 ### Tag: package-2024-01
 
@@ -158,26 +160,6 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/updateRuns.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/updates.json
-```
-
-### Tag: package-preview-2023-12
-
-These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-12'
-input-file:
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/deploymentSettings.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/edgeDevices.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/extensions.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/offers.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/operations.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/publishers.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/skus.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/updateRuns.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/updateSummaries.json
-  - Microsoft.AzureStackHCI/preview/2023-12-15-preview/updates.json
 ```
 
 ### Tag: package-preview-2023-11
