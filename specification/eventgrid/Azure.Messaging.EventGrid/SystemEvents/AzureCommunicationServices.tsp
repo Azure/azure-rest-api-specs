@@ -399,6 +399,45 @@ model AcsRouterJobReceivedEventData {
   unavailableForMatching: boolean;
 }
 
+enum AcsRouterJobStatus{
+
+  @doc("Router Job Status Pending Classification")
+  PendingClassification,
+
+  @doc("Router Job Status Queued")
+  Queued,
+
+  @doc("Router Job Status Assigned")
+  Assigned,
+
+  @doc("Router Job Status Completed")
+  Completed,
+
+  @doc("Router Job Status Closed")
+  Closed,
+
+  @doc("Router Job Status Cancelled")
+  Cancelled,
+
+  @doc("Router Job Status Classification Failed")
+  ClassificationFailed,
+
+  @doc("Router Job Status Created")
+  Created,
+
+  @doc("Router Job Status Pending Schedule")
+  PendingSchedule,
+
+  @doc("Router Job Status Scheduled")
+  Scheduled,
+
+  @doc("Router Job Status Schedule Failed")
+  ScheduleFailed,
+
+  @doc("Router Job Status Waiting For Activation")
+  WaitingForActivation,
+}
+
 @doc("""
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobSchedulingFailed event
@@ -806,6 +845,37 @@ enum recordingFormatType {
 
   @doc("MP4 format")
   Mp4,
+}
+
+@doc("Router Job Worker Selector Label Operator")
+enum AcsRouterLabelOperator {
+  @doc("Router Label Operator Equal")
+  Equal,
+
+  @doc("Router Label Operator Not Equal")
+  NotEqual,
+
+  @doc("Router Label Operator Greater")
+  Greater,
+
+  @doc("Router Label Operator Less")
+  Less,
+
+  @doc("Router Label Operator Greater than or equal")
+  GreaterThanorEqual,
+
+  @doc("Router Label Operator Less than or equal")
+  LessThanOrEqual,
+
+}
+
+@doc("Router Worker Selector State")
+enum AcsRouterWorkerSelectorState {
+  @doc("Router Worker Selector State Active")
+  Active,
+
+  @doc("Router Worker Selector State Expired")
+  Expired,
 }
 
 @doc("The status of the email. Any value other than Delivered is considered failed.")
