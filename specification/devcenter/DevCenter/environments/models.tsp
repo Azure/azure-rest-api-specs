@@ -30,22 +30,6 @@ enum EnvironmentTypeEnableStatus {
   @doc("The environment type is not enabled for use in the project.") Disabled,
 }
 
-enum EnvironmentProvisioningState {
-Succeeded,
-Failed,
-Canceled,
-Creating,
-Accepted,
-Deleting,
-Updating,
-Preparing,
-Running,
-Syncing,
-MovingResources,
-TransientFailure,
-StorageProvisioningFailed,
-}
-
 @doc("Results of the environment list operation.")
 model EnvironmentListResult is Azure.Core.Page<Environment>;
 
@@ -73,7 +57,7 @@ model Environment {
 
   @doc("The provisioning state of the environment.")
   @visibility("read")
-  provisioningState?: EnvironmentProvisioningState;
+  provisioningState?: string;
 
   @doc("The identifier of the resource group containing the environment's resources.")
   @visibility("read")
