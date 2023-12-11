@@ -1660,6 +1660,42 @@
         }
       }
     },
+    "/entity/operations/{operationId}/cancel": {
+      "post": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Cancel an entity asynchronous operation",
+        "operationId": "Entity_CancelOperationById",
+        "x-ms-examples": {
+          "Entity_CancelOperationById": {
+            "$ref": "./examples/Entity_CancelOperationById.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationId"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the status of import csv operation.",
+            "schema": {
+              "$ref": "#/definitions/EntityAsyncOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
