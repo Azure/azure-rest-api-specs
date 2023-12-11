@@ -3,7 +3,19 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey">)
+#suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme" "SharedAccessKey is not supported by typespec-autorest"
+@useAuth(
+  {
+    type: AuthType.http,
+    scheme: "SharedAccessKey",
+  } | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: ["https://eventgrid.azure.net/.default"],
+    }
+  ]>
+)
 @service({
   title: "Azure.Messaging.EventGridClient",
 })
@@ -26,7 +38,7 @@ import "@azure-tools/typespec-azure-core";
 )
 @doc("Azure Messaging EventGrid Client")
 @versioned(ServiceApiVersions)
-namespace EventGrid {
+namespace Microsoft.EventGrid {
   using TypeSpec.Http;
   using TypeSpec.Rest;
   using TypeSpec.Versioning;

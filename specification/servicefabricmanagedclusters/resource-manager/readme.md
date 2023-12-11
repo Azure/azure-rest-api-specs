@@ -27,7 +27,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2023-07-preview
+tag: package-2023-09-preview
 
 directive:
   - suppress: ListInOperationName
@@ -68,6 +68,18 @@ directive:
       - Currently systemData is not allowed.
 
 ```
+
+### Tag: package-2023-09-preview
+
+These settings apply only when `--tag=package-2023-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2023-09-01-preview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2023-09-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2023-09-01-preview/nodetype.json
+```
+
 
 ### Tag: package-2023-07-preview
 

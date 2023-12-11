@@ -312,7 +312,7 @@ These settings apply only when `--tag=package-2020-06-searchservice` is specifie
 
 ``` yaml $(tag) == 'package-2020-06-searchservice'
 input-file:
-- preview/2020-06-30/searchservice.json
+- stable/2020-06-30/searchservice.json
 ```
 
 ### Tag: package-2020-06-searchindex
@@ -321,7 +321,25 @@ These settings apply only when `--tag=package-2020-06-searchindex` is specified 
 
 ``` yaml $(tag) == 'package-2020-06-searchindex'
 input-file:
-- preview/2020-06-30/searchindex.json
+- stable/2020-06-30/searchindex.json
+```
+
+### Tag: package-2023-11-searchservice
+
+These settings apply only when `--tag=package-2023-11-searchservice` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-searchservice'
+input-file:
+- stable/2023-11-01/searchservice.json
+```
+
+### Tag: package-2023-11-searchindex
+
+These settings apply only when `--tag=package-2023-11-searchindex` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-searchindex'
+input-file:
+- stable/2023-11-01/searchindex.json
 ```
 
 ### Tag: package-2019-05-searchservice-preview

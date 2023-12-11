@@ -21,6 +21,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -35,6 +38,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -49,6 +55,26 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
+            "synonymMaps": []
+          },
+          {
+            "name": "descriptionEmbedding",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "normalizer": null,
+            "dimensions": 1536,
+            "vectorSearchProfile": "myHnswProfile",
             "synonymMaps": []
           },
           {
@@ -63,6 +89,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": "fr.lucene",
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -77,6 +106,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -91,6 +123,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -105,6 +140,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": "tagsAnalyzer",
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -119,6 +157,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -133,6 +174,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -147,6 +191,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -161,6 +208,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -175,32 +225,41 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "normalizer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           }
         ],
         "scoringProfiles": [
           {
             "name": "geo",
+            "functionAggregation": "sum",
             "text": {
               "weights": {
-                "hotelName": 5
+                "hotelName": 5.0
               }
             },
             "functions": [
               {
-                "type": "distance",
-                "boost": 5,
                 "fieldName": "location",
                 "interpolation": "logarithmic",
+                "type": "distance",
+                "boost": 5.0,
                 "distance": {
                   "referencePointParameter": "currentLocation",
-                  "boostingDistance": 10
+                  "boostingDistance": 10.0
                 }
               }
             ]
           }
         ],
         "defaultScoringProfile": "geo",
+        "similarity": {
+          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
+          "k1": null,
+          "b": null
+        },
         "suggesters": [
           {
             "name": "sg",
@@ -212,14 +271,16 @@
         ],
         "analyzers": [
           {
-            "name": "tagsAnalyzer",
             "@odata.type": "#Microsoft.Azure.Search.CustomAnalyzer",
+            "name": "tagsAnalyzer",
+            "tokenizer": "standard_v2",
+            "tokenFilters": [],
             "charFilters": [
               "html_strip"
-            ],
-            "tokenizer": "standard_v2"
+            ]
           }
         ],
+        "normalizers": [],
         "tokenizers": [],
         "tokenFilters": [],
         "charFilters": [],
@@ -237,6 +298,72 @@
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": null
           }
+        },
+        "semantic": {
+          "defaultConfiguration": null,
+          "configurations": [
+            {
+              "name": "semanticHotels",
+              "prioritizedFields": {
+                "titleField": {
+                  "fieldName": "hotelName"
+                },
+                "prioritizedContentFields": [
+                  {
+                    "fieldName": "description"
+                  },
+                  {
+                    "fieldName": "description_fr"
+                  }
+                ],
+                "prioritizedKeywordsFields": [
+                  {
+                    "fieldName": "tags"
+                  },
+                  {
+                    "fieldName": "category"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "vectorSearch": {
+          "algorithms": [
+            {
+              "name": "myHnsw",
+              "kind": "hnsw",
+              "hnswParameters": {
+                "metric": "cosine",
+                "m": 4,
+                "efConstruction": 400,
+                "efSearch": 500
+              }
+            }
+          ],
+          "profiles": [
+            {
+              "name": "myHnswProfile",
+              "algorithm": "myHnsw",
+              "vectorizer": "myOpenAi"
+            },
+            {
+              "name": "myAlgorithm",
+              "algorithm": "myHnsw"
+            }
+          ],
+          "vectorizers": [
+            {
+              "name": "myOpenAi",
+              "kind": "azureOpenAI",
+              "azureOpenAIParameters": {
+                "resourceUri": "https://url.openai.azure.com",
+                "deploymentId": "text-embedding-ada-002",
+                "apiKey": "topsecretkey",
+                "authIdentity": null
+              }
+            }
+          ]
         }
       }
     }

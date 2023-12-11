@@ -142,7 +142,7 @@ model AccessToken {
 
   @doc("The access-token createdAt utcDateTime.")
   @visibility("read")
-  createdAt: utcDateTime;
+  createdAt?: utcDateTime;
 
   @doc("The access-token expiryAt utcDateTime.")
   @visibility("read", "create")
@@ -150,7 +150,7 @@ model AccessToken {
 
   @doc("The access-token state - Active | Expired.")
   @visibility("read")
-  state: AccessTokenState;
+  state?: AccessTokenState;
 }
 
 @doc("The access-token state.")
