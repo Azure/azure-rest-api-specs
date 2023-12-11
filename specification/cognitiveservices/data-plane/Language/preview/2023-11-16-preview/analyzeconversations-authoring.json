@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations Authoring",
-    "version": "2023-11-15-preview",
+    "version": "2023-04-15-preview",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>."
   },
   "securityDefinitions": {
@@ -190,7 +190,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -290,7 +290,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -350,7 +350,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -405,7 +405,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -457,7 +457,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -597,7 +597,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -689,7 +689,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -730,7 +730,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -785,7 +785,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -1163,7 +1163,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -1206,7 +1206,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results in loading the working directory with the snapshot of the model provided.",
             "headers": {
               "operation-location": {
@@ -1485,7 +1485,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -1537,7 +1537,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -1746,7 +1746,7 @@
           }
         ],
         "responses": {
-          "210": {
+          "202": {
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
@@ -4033,8 +4033,18 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "RepeatabilityResult",
-        "modelAsString": false
+        "name": "TrainingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "advanced",
+            "description": "Trains using fine-tuned neural network transformer models. Can train multilingual projects."
+          },
+          {
+            "value": "standard",
+            "description": "Faster training times for quicker iterations."
+          }
+        ]
       },
       "x-ms-client-name": "TrainingMode"
     },
