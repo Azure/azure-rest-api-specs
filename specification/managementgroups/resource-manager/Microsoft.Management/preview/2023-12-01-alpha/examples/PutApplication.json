@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-alpha",
+    "applicationId": "Application1",
+    "CreateApplicationRequest": {
+      "properties": {
+        "displayName": "Application 1 Name",
+        "memberOf": {
+          "id": "/providers/Microsoft.Management/managementGroups/RootGroup"
+        }
+      }
+    },
+    "Cache-Control": "no-cache"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/applications/Application1",
+        "type": "Microsoft.Management/applications",
+        "name": "Application1",
+        "properties": {
+          "displayName": "Application 1 Name",
+          "memberOf": {
+            "id": "/providers/Microsoft.Management/managementGroups/RootGroup"
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/providers/Microsoft.Management/applications/Application1",
+        "type": "Microsoft.Management/applications",
+        "name": "Application1",
+        "properties": {
+          "status": "NotStarted",
+          "displayName": "Application 1 Name",
+          "memberOf": {
+            "id": "/providers/Microsoft.Management/managementGroups/RootGroup"
+          }
+        }
+      }
+    }
+  }
+}
