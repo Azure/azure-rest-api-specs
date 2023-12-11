@@ -150,6 +150,7 @@
     },
     "Application": {
       "description": "The application details.",
+      "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -169,18 +170,16 @@
         },
         "properties": {
           "title": "properties",
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/CreateApplicationRequestProperties"
         }
       }
     },
     "ApplicationProvisioningStatus": {
       "description": "The application details.",
+      "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "title": "properties",
-        "x-ms-client-flatten": true,
-        "$ref": "#/definitions/CreateApplicationRequestPropertiesWithProvisioningState"
+        "$ref": "#/definitions/CreateApplicationRequestProperties"
       }
     },
     "CreateApplicationRequest": {
@@ -188,28 +187,10 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-          "title": "properties",
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/CreateApplicationRequestProperties"
         }
       },
     "CreateApplicationRequestProperties": {
-      "description": "Application creation request body parameters.",
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The name of the application. For example, ApplicationTest1"
-        },
-        "memberOf": {
-          "title": "memberOf",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CreateApplicationMemberOfProperties"
-        }
-      }
-    },
-    "CreateApplicationRequestPropertiesWithProvisioningState": {
       "description": "Application creation request body parameters.",
       "type": "object",
       "x-ms-azure-resource": true,
@@ -224,7 +205,6 @@
         },
         "memberOf": {
           "title": "memberOf",
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/CreateApplicationMemberOfProperties"
         }
       }
@@ -261,6 +241,7 @@
       "name": "createApplicationRequest",
       "in": "body",
       "required": true,
+      "type": "object",
       "description": "Application creation parameters.",
       "schema": {
         "$ref": "#/definitions/CreateApplicationRequest"
