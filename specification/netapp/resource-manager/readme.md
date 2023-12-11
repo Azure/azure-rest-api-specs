@@ -44,21 +44,19 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-05'
+``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
-  - Microsoft.NetApp/preview/2023-05-01-preview/netapp.json
+- Microsoft.NetApp/preview/2023-05-01-preview/netapp.json
 ```
-
 
 ### Tag: package-netapp-2023-05-01
 
 These settings apply only when `--tag=package-netapp-2023-05-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-netapp-2023-05-01'
+```yaml $(tag) == 'package-netapp-2023-05-01'
 input-file:
   - Microsoft.NetApp/stable/2023-05-01/netapp.json
 ```
-
 ### Tag: package-netapp-2022-11-01
 
 These settings apply only when `--tag=package-netapp-2022-11-01` is specified on the command line.
@@ -76,6 +74,7 @@ These settings apply only when `--tag=package-netapp-2022-11-01-preview` is spec
 input-file:
 - Microsoft.NetApp/preview/2022-11-01-preview/netapp.json
 ```
+
 
 ### Tag: package-netapp-2022-09-01
 
