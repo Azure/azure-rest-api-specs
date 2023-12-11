@@ -1253,11 +1253,6 @@
           "readOnly": true,
           "example": "contoso-videoindexer"
         },
-        "mediaServices": {
-          "description": "The media services details",
-          "type": "object",
-          "$ref": "#/definitions/MediaServicesForPutRequest"
-        },
         "storageServices": {
           "description": "The storage services details",
           "type": "object",
@@ -1323,11 +1318,6 @@
           "readOnly": true,
           "type": "string",
           "example": "3575690b-a569-449c-ab7b-11020f948f76"
-        },
-        "mediaServices": {
-          "description": "The media services details",
-          "type": "object",
-          "$ref": "#/definitions/MediaServicesForPatchRequest"
         },
         "storageServices": {
           "description": "The storage services details",
@@ -1553,33 +1543,6 @@
           "type": "integer",
           "format": "int32",
           "example": 3600
-        }
-      }
-    },
-    "MediaServicesForPutRequest": {
-      "description": "The media services details",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The media services resource id",
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.Media/mediaservices/contoso-videoindexer-ms"
-        },
-        "userAssignedIdentity": {
-          "type": "string",
-          "description": "The user assigned identity to be used to grant permissions",
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoindexer-mi"
-        }
-      }
-    },
-    "MediaServicesForPatchRequest": {
-      "description": "The media services details",
-      "type": "object",
-      "properties": {
-        "userAssignedIdentity": {
-          "type": "string",
-          "description": "The user assigned identity to be used to grant permissions",
-          "example": "/subscriptions/xxx/resourceGroups/contoso-videoindexer-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-videoindexer-mi"
         }
       }
     },
