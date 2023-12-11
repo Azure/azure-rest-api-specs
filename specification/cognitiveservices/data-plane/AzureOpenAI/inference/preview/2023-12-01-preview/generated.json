@@ -1696,6 +1696,16 @@
       ],
       "x-ms-discriminator-value": "function"
     },
+    "ChatCompletionsJsonResponseFormat": {
+      "type": "object",
+      "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_object"
+    },
     "ChatCompletionsOptions": {
       "type": "object",
       "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
@@ -1810,28 +1820,28 @@
       ]
     },
     "ChatCompletionsResponseFormat": {
-      "type": "string",
-      "description": "The valid response formats Chat Completions can provide. Used to enable JSON mode.",
-      "enum": [
-        "text",
-        "json_object"
+      "type": "object",
+      "description": "An abstract representation of a response format configuration usable by Chat Completions. Can be used to enable JSON\nmode.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The discriminated type for the response format."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ChatCompletionsTextResponseFormat": {
+      "type": "object",
+      "description": "The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response\ncontent that adheres to a specific schema.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
       ],
-      "x-ms-enum": {
-        "name": "ChatCompletionsResponseFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Use the default, plain text response format."
-          },
-          {
-            "name": "jsonObject",
-            "value": "json_object",
-            "description": "Use a response format that guarantees emission of a valid JSON object. Only structure is guaranteed and contents must\nstill be validated."
-          }
-        ]
-      }
+      "x-ms-discriminator-value": "text"
     },
     "ChatCompletionsToolCall": {
       "type": "object",
