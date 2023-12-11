@@ -26,18 +26,27 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-04
+tag: package-preview-2023-12
 ```
 
 
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-12'
+input-file:
+  - Microsoft.Management/preview/2023-12-01-alpha/management.json
+```
 ### Tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-04'
+``` yaml $(tag) == 'package-2023-04'
 input-file:
   - Microsoft.Management/stable/2023-04-01/management.json
 ```
+
 ### Tag: package-2021-04
 
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
