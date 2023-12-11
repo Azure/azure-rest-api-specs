@@ -518,9 +518,6 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Success."
-          },
           "202": {
             "description": "Accepted. The response indicates the Flush VNET DNS setting operation is performed in the background.",
             "headers": {
@@ -13024,7 +13021,15 @@
       "properties": {
         "resourceId": {
           "description": "Resource Id of the APM",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppPlatform/Spring/apms"
+              }
+            ]
+          }
         }
       }
     },
@@ -13047,7 +13052,15 @@
       "properties": {
         "resourceId": {
           "description": "Resource Id of the certificate",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppPlatform/Spring/certificates"
+              }
+            ]
+          }
         }
       }
     },
@@ -14114,7 +14127,15 @@
       "properties": {
         "caCertResourceId": {
           "description": "Resource Id of CA certificate for https URL of Git repository.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppPlatform/Spring/certificates"
+              }
+            ]
+          }
         }
       },
       "x-ms-discriminator-value": "Public"
@@ -14134,7 +14155,15 @@
       "properties": {
         "caCertResourceId": {
           "description": "Resource Id of CA certificate for https URL of Git repository.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppPlatform/Spring/certificates"
+              }
+            ]
+          }
         },
         "username": {
           "description": "Username of git repository basic auth.",
