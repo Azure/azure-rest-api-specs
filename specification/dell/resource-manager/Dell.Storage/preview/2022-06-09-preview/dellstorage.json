@@ -457,9 +457,10 @@
           "type": "string",
           "description": "Delegated subnet id for Vnet injection"
         },
-        "cidr": {
+        "delegatedSubnetCidr": {
           "type": "string",
-          "description": "Domain range for the delegated subnet"
+          "description": "Domain range for the delegated subnet",
+          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}/(16|24)$"
         },
         "user": {
           "$ref": "#/definitions/User",
@@ -485,7 +486,7 @@
         "user",
         "initialCapacity",
         "delegatedSubnetId",
-        "cidr"
+        "delegatedSubnetCidr"
       ]
     },
     "FileSystemResourceUpdate": {
