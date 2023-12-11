@@ -33,13 +33,13 @@
   ],
   "security": [
     {
-      "AADToken": [
+      "AuthToken": [
         "https://purview.azure.net/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "AADToken": {
+    "AuthToken": {
       "type": "oauth2",
       "description": "The Azure Active Directory OAuth2 Flow",
       "flow": "implicit",
@@ -4686,28 +4686,6 @@
     }
   },
   "definitions": {
-    "AADToken": {
-      "type": "object",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows"
-      ]
-    },
     "AndFilter": {
       "type": "object",
       "description": "And filter for search",
@@ -7256,6 +7234,28 @@
         }
       ],
       "x-ms-discriminator-value": "AttributeFilter"
+    },
+    "AuthToken": {
+      "type": "object",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OAuth2 authentication",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "type": "array",
+          "description": "Supported OAuth2 flows",
+          "items": {}
+        }
+      },
+      "required": [
+        "type",
+        "flows"
+      ]
     },
     "AutoCompleteContent": {
       "type": "object",

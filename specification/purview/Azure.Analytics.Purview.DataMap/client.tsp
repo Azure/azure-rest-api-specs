@@ -4,7 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using PurviewDataMap;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(PurviewDataMap.ApiVersions.v2023_09_01)
 namespace Customizations;
 

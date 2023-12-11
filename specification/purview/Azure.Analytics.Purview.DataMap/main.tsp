@@ -22,7 +22,7 @@ discover the data sources they need and understand the data sources they find.
 At the same time, Data Map helps organizations get more value from their
 existing investments. This spec defines REST API of Purview Data Map Service.
 """)
-@useAuth(AADToken)
+@useAuth(AuthToken)
 @versioned(ApiVersions)
 namespace PurviewDataMap;
 
@@ -33,9 +33,9 @@ enum ApiVersions {
   v2023_09_01: "2023-09-01",
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "It follows the rule"
+
 @doc("The Azure Active Directory OAuth2 Flow")
-model AADToken
+model AuthToken
   is OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit;
