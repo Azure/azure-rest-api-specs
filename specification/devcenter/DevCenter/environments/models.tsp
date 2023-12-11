@@ -136,7 +136,7 @@ model EnvironmentDefinitionParameter {
   @doc("Default value of the parameter")
   @projectedName("csharp", "defaultValue")
   @projectedName("java", "defaultValue")
-  default?: {};
+  default?: unknown;
 
   @doc("""
 A string of one of the basic JSON types (number, integer, array, object,
