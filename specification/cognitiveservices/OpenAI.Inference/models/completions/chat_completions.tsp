@@ -310,7 +310,7 @@ model ChatCompletions {
   Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that
   might impact determinism.
   """)
-  systemFingerprint: string;
+  systemFingerprint?: string;
 
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
