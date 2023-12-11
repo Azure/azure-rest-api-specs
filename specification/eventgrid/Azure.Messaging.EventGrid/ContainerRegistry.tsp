@@ -2,19 +2,19 @@
 namespace Microsoft.EventGrid;
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.")
 model ContainerRegistryImagePushedEventData
-  extends ContainerRegistryEventData {}
+  { ... ContainerRegistryEventData }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event.")
 model ContainerRegistryImageDeletedEventData
-  extends ContainerRegistryEventData {}
+  { ... ContainerRegistryEventData }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event.")
 model ContainerRegistryChartPushedEventData
-  extends ContainerRegistryArtifactEventData {}
+  { ... ContainerRegistryArtifactEventData }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event.")
 model ContainerRegistryChartDeletedEventData
-  extends ContainerRegistryArtifactEventData {}
+  { ... ContainerRegistryArtifactEventData }
 
 alias ContainerRegistryBaseEventData = {
   @doc("The event ID.")

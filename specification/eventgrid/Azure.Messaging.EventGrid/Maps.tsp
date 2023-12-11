@@ -2,13 +2,13 @@
 namespace Microsoft.EventGrid;
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.")
-model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties {}
+model MapsGeofenceEnteredEventData { ... MapsGeofenceEventProperties }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.")
-model MapsGeofenceExitedEventData extends MapsGeofenceEventProperties {}
+model MapsGeofenceExitedEventData { ... MapsGeofenceEventProperties }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.")
-model MapsGeofenceResultEventData extends MapsGeofenceEventProperties {}
+model MapsGeofenceResultEventData { ... MapsGeofenceEventProperties }
 
 @doc("Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult).")
 model MapsGeofenceEventProperties {
