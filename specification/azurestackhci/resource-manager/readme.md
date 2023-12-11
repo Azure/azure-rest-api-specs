@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01
+tag: package-preview-2023-12
 ```
 
 ## Suppression
@@ -113,6 +113,26 @@ suppressions:
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
 ```
+
+### Tag: package-2023-12-01
+
+These settings apply only when `--tag=package-2023-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12-01'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
 
 ### Tag: package-2024-01
 

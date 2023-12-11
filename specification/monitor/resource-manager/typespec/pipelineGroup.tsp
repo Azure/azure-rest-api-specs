@@ -10,6 +10,7 @@ import "./exporters/TcpExporters.tsp";
 import "./receivers/TcpReceivers.tsp";
 import "./receivers/OtlpReceiver.tsp";
 import "./receivers/SyslogReceiver.tsp";
+import "./processors/BatchProcessor.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -55,6 +56,10 @@ model PipelineGroupProperties {
 
   @doc("The service section for a given pipeline group instance.")
   service: Service;
+
+  @doc("Networking configurations for the pipeline group instance.")
+  @extension("x-ms-identifiers", [])
+  networkingConfigurations?: NetworkingConfiguration[];
 
   @doc("The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.")
   @visibility("read")
@@ -106,12 +111,15 @@ model Processor {
   @doc("The name of processor.")
   @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
   name: string;
+
+  @doc("Batch processor configurations.")
+  batch?: BatchProcessor;
 }
 
 @doc("The processor type.")
 enum ProcessorType {
-  @doc("filter")
-  Filter,
+  @doc("Batch processor.")
+  Batch,
 }
 
 @doc("Exporter Info.")
@@ -163,6 +171,37 @@ model Pipeline {
   @doc("Reference to exporters configured for the pipeline.")
   @extension("x-ms-identifiers", [])
   exporters: string[];
+}
+
+@doc("Networking configuration for the pipeline group instance.")
+model NetworkingConfiguration {
+  @doc("The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.")
+  @pattern("^[a-zA-Z0-9-\\.]+$")
+  host: string;
+
+  @doc("Networking routes configuration.")
+  @extension("x-ms-identifiers", [])
+  routes: NetworkingRoute[];
+}
+
+@doc("Networking route configuration.")
+model NetworkingRoute {
+  @doc("The name of the previously defined receiver.")
+  @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
+  receiver: string;
+
+  @doc("The port that will be configured externally. If not specified, it will use the port from the receiver definition.")
+  @minValue(1)
+  @maxValue(65535)
+  port?: int32;
+
+  @doc("Route path.")
+  @pattern("^[a-zA-Z0-9-/\\.]+$")
+  path?: string;
+
+  @doc("Route subdomain.")
+  @pattern("^[a-zA-Z0-9-\\.]+$")
+  subdomain?: string;
 }
 
 @armResourceOperations

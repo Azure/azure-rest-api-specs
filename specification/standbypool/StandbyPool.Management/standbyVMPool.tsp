@@ -9,6 +9,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./service.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -17,15 +18,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 
-@armProviderNamespace("Microsoft.StandbyPool")
-@service({
-  title: "Microsoft.StandbyPool",
-  version: "2023-06-01-preview",
-})
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.StandbyPool;
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A StandbyVirtualMachinePoolResource.")
 model StandbyVirtualMachinePoolResource
@@ -64,15 +57,6 @@ enum VirtualMachineState {
 
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off.")
   Deallocated,
-}
-
-@doc("Provisioning state")
-@lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
-
-  @doc("Virtual machine is being deleted.")
-  Deleting,
 }
 
 @armResourceOperations
