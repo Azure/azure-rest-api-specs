@@ -780,6 +780,11 @@
         "interopSettings": {
           "type": "object",
           "description": "Settings to allow interoperability with third party components e.g. RANs and UEs."
+        },
+        "homeNetworkPrivateKeysProvisioning": {
+          "readOnly": true,
+          "$ref": "#/definitions/homeNetworkPrivateKeysProvisioning",
+          "description": "The provisioning state of the secret containing private keys and keyIds for SUPI concealment."
         }
       },
       "required": [
@@ -1212,6 +1217,42 @@
           "description": "Reason for certificate provisioning failure."
         }
       }
+    },
+    "homeNetworkPrivateKeysProvisioning": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the private keys for SUPI concealment.",
+          "enum": [
+            "NotProvisioned",
+            "Provisioned",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "homeNetworkPrivateKeysProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotProvisioned",
+                "description": "Provisioning of the private keys for SUPI concealment has not been attempted."
+              },
+              {
+                "value": "Provisioned",
+                "description": "The private keys for SUPI concealment are successfully provisioned."
+              },
+              {
+                "value": "Failed",
+                "description": "Provisioning of the private keys for SUPI concealment has failed."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "state"
+      ]
     },
     "PacketCoreControlPlaneCollectDiagnosticsPackage": {
       "description": "Packet core control plane collect diagnostics package options",

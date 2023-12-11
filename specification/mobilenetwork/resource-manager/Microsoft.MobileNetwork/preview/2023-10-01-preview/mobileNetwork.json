@@ -186,7 +186,7 @@
           "MobileNetwork"
         ],
         "operationId": "MobileNetworks_UpdateTags",
-        "description": "Updates mobile network tags.",
+        "description": "Updates mobile network tags and managed identity.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -205,9 +205,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/definitions/TagsObject"
+              "$ref": "./common.json#/definitions/IdentityAndTagsObject"
             },
-            "description": "Parameters supplied to update mobile network tags."
+            "description": "Parameters supplied to update mobile network tags and/or identity."
           }
         ],
         "responses": {
@@ -321,6 +321,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MobileNetworkPropertiesFormat",
           "description": "Mobile network properties."
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity used to retrieve any private keys used for SUPI concealment from Azure key vault."
         }
       },
       "allOf": [
@@ -344,7 +348,20 @@
         },
         "publicLandMobileNetworkIdentifier": {
           "$ref": "./ts29571.json#/definitions/PlmnId",
-          "description": "The unique public land mobile network identifier for the network. This is made up of the mobile country code and mobile network code, as defined in https://www.itu.int/rec/T-REC-E.212. The values 001-01 and 001-001 can be used for testing and the values 999-99 and 999-999 can be used on internal private networks."
+          "description": "The unique public land mobile network identifier for the network. If both 'publicLandMobileNetworks' and 'publicLandMobileNetworkIdentifier' are specified, then the 'publicLandMobileNetworks' will take precedence."
+        },
+        "publicLandMobileNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/publicLandMobileNetwork"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "A list of public land mobile networks including their identifiers. If both 'publicLandMobileNetworks' and 'publicLandMobileNetworkIdentifier' are specified, then the 'publicLandMobileNetworks' will take precedence.",
+          "x-ms-identifiers": [
+            "mcc",
+            "mnc"
+          ]
         },
         "serviceKey": {
           "type": "string",
@@ -366,6 +383,59 @@
       },
       "required": [
         "publicLandMobileNetworkIdentifier"
+      ]
+    },
+    "publicLandMobileNetwork": {
+      "type": "object",
+      "description": "Configuration relating to a particular PLMN",
+      "properties": {
+        "homeNetworkPublicKeys": {
+          "type": "object",
+          "description": "Configuration relating to SUPI concealment.",
+          "properties": {
+            "profileA": {
+              "$ref": "#/definitions/homeNetworkPublicKeys",
+              "description": "This provides a mapping to identify which public key has been used for SUPI concealment using the Profile A Protection Scheme."
+            },
+            "profileB": {
+              "$ref": "#/definitions/homeNetworkPublicKeys",
+              "description": "This provides a mapping to identify which public key has been used for SUPI concealment using the Profile B Protection Scheme."
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./ts29571.json#/definitions/PlmnId"
+        }
+      ]
+    },
+    "homeNetworkPublicKeys": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/homeNetworkPublicKey"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "homeNetworkPublicKey": {
+      "type": "object",
+      "description": "A key used for SUPI concealment.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 255,
+          "description": "The Home Network Public Key Identifier determines which public key was used to generate the SUCI sent to the AMF. See TS 23.003 Section 2.2B Section 5."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of Azure Key Vault secret containing the private key, versioned or unversioned. For example: https://contosovault.vault.azure.net/secrets/mySuciPrivateKey/562a4bb76b524a1493a6afe8e536ee78."
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "MobileNetworkListResult": {

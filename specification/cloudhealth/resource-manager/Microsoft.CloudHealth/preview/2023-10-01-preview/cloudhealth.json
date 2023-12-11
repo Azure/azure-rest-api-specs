@@ -1521,52 +1521,66 @@
         }
       }
     },
-    "DynamicAzureResourcesSignalGroup": {
-      "type": "object",
-      "description": "A grouping of signal assignments for dynamic Azure Resources",
-      "properties": {
-        "signalAssignments": {
-          "type": "array",
-          "description": "Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.",
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/SignalAssignment"
-          },
-          "x-ms-identifiers": []
-        },
-        "authenticationSetting": {
-          "$ref": "#/definitions/stringResourceName",
-          "description": "Reference to the name of the authentication setting which is used for querying the data source"
-        },
-        "azureResourceGraphQuery": {
-          "type": "string",
-          "description": "Azure Resource Graph query in KQL syntax to select a dynamic set of Azure resources",
-          "minLength": 1,
-          "maxLength": 5000
-        }
-      },
-      "required": [
-        "authenticationSetting",
-        "azureResourceGraphQuery"
-      ]
-    },
     "DynamicDetectionRule": {
       "type": "object",
       "description": "ML-based evaluation rule for a signal definition",
       "properties": {
         "dynamicThresholdModel": {
           "$ref": "#/definitions/DynamicThresholdModel",
-          "description": "Operator"
+          "description": "ML model to use for dynamic thresholds"
         },
         "modelSensitivity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "ML model sensitivity"
+          "type": "number",
+          "format": "float",
+          "description": "ML model sensitivity. Lowest value = high sensitivity. Supported step size = 0.5",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "dynamicThresholdDirection": {
+          "$ref": "#/definitions/DynamicThresholdDirection",
+          "description": "Threshold direction"
+        },
+        "trainingStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the training in UTC."
         }
       },
       "required": [
-        "dynamicThresholdModel"
+        "dynamicThresholdModel",
+        "modelSensitivity",
+        "dynamicThresholdDirection"
       ]
+    },
+    "DynamicThresholdDirection": {
+      "type": "string",
+      "description": "Threshold direction for dynamic thresholds",
+      "enum": [
+        "LowerThan",
+        "GreaterThan",
+        "GreaterOrLowerThan"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicThresholdDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LowerThan",
+            "value": "LowerThan",
+            "description": "Lower than"
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan",
+            "description": "Greater than"
+          },
+          {
+            "name": "GreaterOrLowerThan",
+            "value": "GreaterOrLowerThan",
+            "description": "Greater or Lower Than"
+          }
+        ]
+      }
     },
     "DynamicThresholdModel": {
       "type": "string",
@@ -1944,6 +1958,12 @@
           "minLength": 1,
           "maxLength": 5000
         },
+        "timeGrain": {
+          "type": "string",
+          "description": "Time range of signal. ISO duration format like PT10M. If not specified, the KQL query must define a time range.",
+          "minLength": 1,
+          "maxLength": 100
+        },
         "valueColumnName": {
           "type": "string",
           "description": "Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified.",
@@ -2058,6 +2078,12 @@
           "description": "Query text in PromQL syntax",
           "minLength": 1,
           "maxLength": 5000
+        },
+        "timeGrain": {
+          "type": "string",
+          "description": "Time range of signal. ISO duration format like PT10M.",
+          "minLength": 1,
+          "maxLength": 100
         }
       },
       "required": [
@@ -2224,6 +2250,12 @@
           "minLength": 1,
           "maxLength": 256
         },
+        "timeGrain": {
+          "type": "string",
+          "description": "Time range of signal. ISO duration format like PT10M.",
+          "minLength": 1,
+          "maxLength": 100
+        },
         "aggregationType": {
           "$ref": "#/definitions/MetricAggregationType",
           "description": "Type of aggregation to apply to the metric"
@@ -2244,6 +2276,7 @@
       "required": [
         "metricNamespace",
         "metricName",
+        "timeGrain",
         "aggregationType"
       ],
       "allOf": [
@@ -2272,7 +2305,8 @@
         "signalDefinitions": {
           "type": "array",
           "description": "Signal definitions referenced by their names. All definitions are combined with an AND operator.",
-          "maxItems": 50,
+          "minItems": 1,
+          "maxItems": 1,
           "items": {
             "$ref": "#/definitions/stringResourceName"
           }
@@ -2375,7 +2409,8 @@
         },
         "refreshInterval": {
           "$ref": "#/definitions/RefreshInterval",
-          "description": "Interval in which the signal is being evaluated."
+          "description": "Interval in which the signal is being evaluated. Defaults to PT1M.",
+          "default": "PT1M"
         },
         "labels": {
           "type": "object",
@@ -2383,12 +2418,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/string4096"
           }
-        },
-        "timeGrain": {
-          "type": "string",
-          "description": "Time range of signal. ISO duration format like PT10M.",
-          "minLength": 1,
-          "maxLength": 100
         },
         "dataUnit": {
           "type": "string",
@@ -2414,6 +2443,7 @@
       "discriminator": "signalKind",
       "required": [
         "signalKind",
+        "refreshInterval",
         "evaluationRules",
         "enabledState"
       ]
@@ -2436,11 +2466,7 @@
       "properties": {
         "azureResource": {
           "$ref": "#/definitions/AzureResourceSignalGroup",
-          "description": "Azure Resource Signal Group. Can only be defined if dynamicAzureResourceDefinition is not defined."
-        },
-        "dynamicAzureResources": {
-          "$ref": "#/definitions/DynamicAzureResourcesSignalGroup",
-          "description": "Dynamic Azure Resource Signal Group. Can only be defined if azureResource is not defined."
+          "description": "Azure Resource Signal Group"
         },
         "azureLogAnalytics": {
           "$ref": "#/definitions/LogAnalyticsSignalGroup",

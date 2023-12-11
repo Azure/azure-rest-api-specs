@@ -4089,16 +4089,15 @@
       "type": "object",
       "description": "Blob Catalog type.",
       "properties": {
+        "catalogStorageType": {
+          "$ref": "#/definitions/CatalogStorageType",
+          "description": "Catalog's storage type."
+        },
         "uri": {
           "type": "string",
           "description": "Catalog Storage's URI."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/CatalogBase"
-        }
-      ]
+      }
     },
     "Catalog": {
       "type": "object",
@@ -4108,16 +4107,6 @@
           "$ref": "#/definitions/BlobCatalog"
         }
       ]
-    },
-    "CatalogBase": {
-      "type": "object",
-      "description": "Base type for catalog.",
-      "properties": {
-        "catalogStorageType": {
-          "$ref": "#/definitions/CatalogStorageType",
-          "description": "Catalog's storage type."
-        }
-      }
     },
     "CatalogProperties": {
       "type": "object",
@@ -4322,7 +4311,9 @@
         "UDP",
         "ICMP",
         "ESP",
-        "AH"
+        "AH",
+        "HTTPS",
+        "HTTP"
       ],
       "x-ms-enum": {
         "name": "CommunityEndpointProtocol",
@@ -4357,6 +4348,16 @@
             "name": "AH",
             "value": "AH",
             "description": "CommunityEndpointProtocol Type AH"
+          },
+          {
+            "name": "HTTPS",
+            "value": "HTTPS",
+            "description": "CommunityEndpointProtocol Type HTTPS"
+          },
+          {
+            "name": "HTTP",
+            "value": "HTTP",
+            "description": "CommunityEndpointProtocol Type HTTP"
           }
         ]
       }
