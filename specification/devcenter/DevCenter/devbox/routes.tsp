@@ -155,7 +155,7 @@ interface DevBoxesOperations {
 
       @doc("Represents a environment.")
       @body
-      body: DevBox;
+      devBox: DevBox;
     },
     DevBox | {
       @statusCode statusCode: 201;

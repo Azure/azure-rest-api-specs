@@ -10,17 +10,11 @@ using TypeSpec.Http;
 namespace DevCenterService;
 
 
-@doc("Operation Error message")
-model OperationStatusError {
-  @doc("The error code.")
-  code?: string;
-
-  @doc("The error message.")
-  message?: string;
-}
-
 @doc("Indicates whether operation status is running, completed, canceled or failed.")
 @lroStatus
+@projectedName("csharp", "DevCenterOperationStatus")
+@projectedName("java", "DevCenterOperationStatus")
+@projectedName("python", "OperationStatus")
 enum OperationStatusValue {
   Running,
   @lroSucceeded
@@ -30,6 +24,9 @@ enum OperationStatusValue {
 }
 
 @doc("The current status of an async operation")
+@projectedName("csharp", "DevCenterOperationDetails")
+@projectedName("java", "DevCenterOperationDetails")
+@projectedName("python", "OperationDetails")
 model OperationStatus {
   @doc("Fully qualified ID for the operation status.")
   id?: string;
@@ -44,14 +41,11 @@ model OperationStatus {
   resourceId?: string;
 
   @doc("The start time of the operation")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   @doc("The end time of the operation")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
-  // FIXME: check if this is a float or int
   @doc("Percent of the operation that is complete")
   @minValue(0.0)
   @maxValue(100.0)
@@ -61,7 +55,7 @@ model OperationStatus {
   properties?: unknown;
 
   @doc("Operation Error message")
-  error?: OperationStatusError;
+  error?: Azure.Core.Foundations.Error;
 }
 
 @doc("Project details.")

@@ -10,6 +10,8 @@ using TypeSpec.Http;
 namespace DevCenterService;
 
 @doc("The type of data a parameter accepts.")
+@projectedName("csharp", "EnvironmentDefinitionParameterType")
+@projectedName("java", "EnvironmentDefinitionParameterType")
 enum ParameterType {
   @doc("The parameter accepts an array of values.") array,
   @doc("The parameter accepts a boolean value.") boolean,
@@ -20,9 +22,28 @@ enum ParameterType {
 }
 
 @doc("Indicates whether an environment type is enabled for use in a project.")
+@projectedName("csharp", "EnvironmentTypeStatus")
+@projectedName("java", "EnvironmentTypeStatus")
+@projectedName("python", "EnvironmentTypeStatus")
 enum EnvironmentTypeEnableStatus {
   @doc("The environment type is enabled for use in the project.") Enabled,
   @doc("The environment type is not enabled for use in the project.") Disabled,
+}
+
+enum EnvironmentProvisioningState {
+Succeeded,
+Failed,
+Canceled,
+Creating,
+Accepted,
+Deleting,
+Updating,
+Preparing,
+Running,
+Syncing,
+MovingResources,
+TransientFailure,
+StorageProvisioningFailed,
 }
 
 @doc("Results of the environment list operation.")
@@ -30,6 +51,7 @@ model EnvironmentListResult is Azure.Core.Page<Environment>;
 
 @doc("Properties of an environment.")
 @projectedName("csharp", "DevCenterEnvironment")
+@projectedName("java", "DevCenterEnvironment")
 model Environment {
   ...EnvironmentUpdateProperties;
 
@@ -39,15 +61,19 @@ model Environment {
 
   @doc("Environment type.")
   @visibility("read", "create")
+  @projectedName("csharp", "environmentTypeName")
+  @projectedName("java", "environmentTypeName")
   environmentType: string;
 
   @doc("The AAD object id of the owner of this Environment.")
   @visibility("read")
+  @projectedName("csharp", "userId")
+  @projectedName("java", "userId")
   user?: string;
 
   @doc("The provisioning state of the environment.")
   @visibility("read")
-  provisioningState?: string;
+  provisioningState?: EnvironmentProvisioningState;
 
   @doc("The identifier of the resource group containing the environment's resources.")
   @visibility("read")
@@ -89,7 +115,6 @@ model Catalog {
 model EnvironmentDefinitionListResult is Azure.Core.Page<EnvironmentDefinition>;
 
 @doc("An environment definition.")
-@projectedName("csharp", "EnvironmentDefinitionModel")
 model EnvironmentDefinition {
   @doc("The ID of the environment definition.")
   id: string;
@@ -114,7 +139,6 @@ model EnvironmentDefinition {
 }
 
 @doc("Properties of an Environment Definition parameter")
-@projectedName("csharp", "EnvironmentDefinitionParameterModel")
 model EnvironmentDefinitionParameter {
   @doc("Unique ID of the parameter")
   id: string;
@@ -126,12 +150,16 @@ model EnvironmentDefinitionParameter {
   description?: string;
 
   @doc("Default value of the parameter")
-  default?: string;
+  @projectedName("csharp", "defaultValue")
+  @projectedName("java", "defaultValue")
+  default?: {};
 
   @doc("""
 A string of one of the basic JSON types (number, integer, array, object,
 boolean, string)
 """)
+  @projectedName("csharp", "parameterType")
+  @projectedName("java", "parameterType")
   type: ParameterType;
 
   @doc("""
@@ -153,6 +181,8 @@ value.
 model EnvironmentTypeListResult is Azure.Core.Page<EnvironmentType>;
 
 @doc("Properties of an environment type.")
+@projectedName("csharp", "DevCenterEnvironmentType")
+@projectedName("java", "DevCenterEnvironmentType")
 model EnvironmentType {
   @doc("Name of the environment type")
   name: string;
