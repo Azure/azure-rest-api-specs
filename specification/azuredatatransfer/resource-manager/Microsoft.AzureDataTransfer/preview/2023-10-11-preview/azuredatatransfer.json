@@ -34,15 +34,15 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.AzureDataTransfer/action": {
+    "/providers/Microsoft.AzureDataTransfer/performRequest": {
       "post": {
         "description": "Performs an action request on Azure Data Transfer.",
         "x-ms-examples": {
           "Performs action request": {
-            "$ref": "examples/postAction.json"
+            "$ref": "examples/postPerformRequest.json"
           }
         },
-        "operationId": "AzureDataTransfer_action",
+        "operationId": "AzureDataTransfer_performRequest",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1419,7 +1419,7 @@
   "definitions": {
     "actionRequest": {
       "type": "object",
-      "description": "An action request",
+      "description": "Payload to perform custom data transfer actions",
       "properties": {
         "name": {
           "type": "string",
