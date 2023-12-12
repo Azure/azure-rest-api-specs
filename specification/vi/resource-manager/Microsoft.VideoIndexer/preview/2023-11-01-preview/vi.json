@@ -803,7 +803,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/parameters/PrivateEndpointConnectionListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -1050,7 +1050,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/GroupInformation"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -1799,22 +1799,6 @@
       "type": "string",
       "description": "The group ID of the private link resource.",
       "x-ms-parameter-location": "method"
-    },
-    "PrivateEndpointConnectionListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-          },
-          "description": "List of private endpoint connections on video indexer account"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of results."
-        }
-      },
-      "description": "Response for ListPrivateEndpointConnection API service call. Gets all private endpoint connections for a video indexer account."
     }
   }
 }
