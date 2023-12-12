@@ -1,5 +1,6 @@
 import { access } from "fs/promises";
 import { exec } from "child_process";
+import path from "path";
 
 export async function runCmd(cmd: string, cwd: string) {
   console.log(`run command:${cmd}`);
@@ -19,4 +20,8 @@ export async function checkFileExists(file: string) {
   return access(file)
     .then(() => true)
     .catch(() => false);
+}
+
+export function normalizePath(folder: string) {
+  return path.resolve(folder).split(path.sep).join("/");
 }
