@@ -1415,8 +1415,8 @@
         "tags": [
           "AppServicePlans"
         ],
-        "summary": " Get a Virtual Network associated with an App Service plan and its properties",
-        "description": " Get a Virtual Network associated with an App Service plan and its properties",
+        "summary": "Get a Virtual Network associated with an App Service plan",
+        "description": "Get a Virtual Network associated with an App Service plan and its properties, such as IP allocation and resource allocation",
         "operationId": "AppServicePlans_GetVirtualNetworkIntegration",
         "parameters": [
           {
@@ -1470,8 +1470,8 @@
         "tags": [
           "AppServicePlans"
         ],
-        "summary": " Get all Virtual Networks associated with an App Service plan and their properties",
-        "description": " Get all Virtual Networks associated with an App Service plan and their properties",
+        "summary": "Get all Virtual Networks associated with an App Service plan",
+        "description": "Get all Virtual Networks associated with an App Service plan and their properties, such as IP allocation and resource allocation",
         "operationId": "AppServicePlans_GetVirtualNetworkIntegrations",
         "parameters": [
           {
@@ -1495,10 +1495,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetwork"
-              }
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkCollection"
             }
           },
           "default": {
@@ -1512,7 +1509,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetVirtualNetworkIntegration": {
+          "GetVirtualNetworkIntegrations": {
             "$ref": "./examples/AppServicePlan_GetVirtualNetworkIntegrations.json"
           }
         }
