@@ -70,3 +70,31 @@ enum ChatRole {
   @added(ServiceApiVersions.v2023_08_01_Preview)
   tool: "tool",
 }
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@discriminator("type")
+@doc("An abstract representation of structured information about why a chat completions response terminated.")
+model ChatFinishDetails {
+  @doc("The object type.")
+  type: string;
+}
+
+@doc("A structured representation of a stop reason that signifies natural termination by the model.")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model StopFinishDetails extends ChatFinishDetails {
+  @doc("The object type, which is always 'stop' for this object.")
+  type: "stop";
+
+  @doc("The token sequence that the model terminated with.")
+  stop: string;
+}
+
+@doc("""
+A structured representation of a stop reason that signifies a token limit was reached before the model could naturally
+complete.
+""")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model MaxTokensFinishDetails extends ChatFinishDetails {
+  @doc("The object type, which is always 'max_tokens' for this object.")
+  type: "max_tokens";
+}
