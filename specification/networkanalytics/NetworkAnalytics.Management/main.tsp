@@ -940,6 +940,14 @@ model DataProductProperties {
   @doc("Key vault url.")
   @visibility("read")
   keyVaultUrl?: string;
+
+  @doc("Dependent data products.")
+  @visibility("read","create")
+  dependentDataProducts?: Record<ResourceIdentifier<[
+    {
+      type: "Microsoft.NetworkAnalytics/dataProducts";
+    }
+  ]>[]>;
 }
 
 @doc("Encryption key details.")
@@ -1022,6 +1030,7 @@ model AccountSas {
 @added(Versions.v2023_11_15)
 model AccountSasToken {
   @doc("Field to specify storage account sas token.")
+  @secret
   storageAccountSasToken: string;
 }
 
@@ -1029,6 +1038,7 @@ model AccountSasToken {
 @added(Versions.v2023_11_15)
 model ContainerSasToken {
   @doc("Field to specify storage container sas token.")
+  @secret
   storageContainerSasToken: string;
 }
 
@@ -1260,6 +1270,12 @@ interface MetricsIngestionEndpoints {
 interface DataProductsCatalogs {
   @doc("Retrieve data type resource.")
   get is ArmResourceRead<DataProductsCatalog>;
+  
+  @doc("List data catalog by resource group.")
+  listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
+
+  @doc("List data catalog by subscription.")
+  listBySubscription is ArmListBySubscription<DataProductsCatalog>;
 }
 
 @doc("Operations on data type resource.")
@@ -1276,11 +1292,13 @@ interface DataTypes {
   update is ArmResourcePatchAsync<DataType, DataTypeProperties>;
 
   @doc("Delete data type resource.")
-  @segment("deleteData")
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
 
+  @doc("Delete data for data type.")
+  deleteData is ArmResourceActionNoContentAsync<DataType, {}>;
+
   @doc("Generate sas token for storage container.")
-  generateStorageContainerSasToken is ArmResourceActionAsync<
+  generateStorageContainerSasToken is ArmResourceActionSync<
     DataType,
     ContainerSaS,
     ContainerSasToken
@@ -1307,30 +1325,30 @@ interface DataProducts {
   delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
 
   @doc("Generate sas token for storage account.")
-  generateStorageAccountSasToken is ArmResourceActionAsync<
+  generateStorageAccountSasToken is ArmResourceActionSync<
     DataProduct,
     AccountSas,
     AccountSasToken
   >;
 
   @doc("Initiate key rotation on Data Product.")
-  rotateKey is ArmResourceActionNoContentAsync<DataProduct, KeyVaultInfo>;
+  rotateKey is ArmResourceActionNoContentSync<DataProduct, KeyVaultInfo>;
 
   @doc("Assign role to the data product.")
-  addUserRole is ArmResourceActionAsync<
+  addUserRole is ArmResourceActionSync<
     DataProduct,
     RoleAssignmentCommonProperties,
     RoleAssignmentDetail
   >;
 
   @doc("Remove role from the data product.")
-  removeUserRole is ArmResourceActionNoContentAsync<
+  removeUserRole is ArmResourceActionNoContentSync<
     DataProduct,
     RoleAssignmentDetail
   >;
 
   @doc("List user roles associated with the data product.")
-  listRolesAssignments is ArmResourceActionAsync<
+  listRolesAssignments is ArmResourceActionSync<
     DataProduct,
     {},
     ListRoleAssignments
