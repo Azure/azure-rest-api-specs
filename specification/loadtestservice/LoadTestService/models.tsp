@@ -728,14 +728,13 @@ model TestRunOutputArtifacts {
 
   @doc("The container for test run artifacts.")
   @added(APIVersions.v2023_04_01_preview)
-  artifactsContainerInfo?: ContainerInfo;
+  artifactsContainerInfo?: ArtifactsContainerInfo;
 }
 
-@doc("Container info.")
-// update description and name
+@doc("Artifacts container info.")
 @added(APIVersions.v2023_04_01_preview)
-model ContainerInfo {
-  @doc("Container URL.")
+model ArtifactsContainerInfo {
+  @doc("This is a SAS URI to an Azure Storage Container that contains the test run artifacts.")
   url?: url;
 
   @doc("Expiry time of the container (RFC 3339 literal format)")

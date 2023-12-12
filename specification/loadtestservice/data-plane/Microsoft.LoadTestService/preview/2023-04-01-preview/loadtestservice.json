@@ -1730,6 +1730,22 @@
         }
       }
     },
+    "ArtifactsContainerInfo": {
+      "type": "object",
+      "description": "Artifacts container info.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "This is a SAS URI to an Azure Storage Container that contains the test run artifacts."
+        },
+        "expireDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time of the container (RFC 3339 literal format)"
+        }
+      }
+    },
     "AutoStopCriteria": {
       "type": "object",
       "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.",
@@ -1848,22 +1864,6 @@
             "description": "If the certificate is stored in an Azure Key Vault."
           }
         ]
-      }
-    },
-    "ContainerInfo": {
-      "type": "object",
-      "description": "Container info.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Container URL."
-        },
-        "expireDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiry time of the container (RFC 3339 literal format)"
-        }
       }
     },
     "DimensionFilter": {
@@ -3550,7 +3550,7 @@
           "description": "File info"
         },
         "artifactsContainerInfo": {
-          "$ref": "#/definitions/ContainerInfo",
+          "$ref": "#/definitions/ArtifactsContainerInfo",
           "description": "The container for test run artifacts."
         }
       }
