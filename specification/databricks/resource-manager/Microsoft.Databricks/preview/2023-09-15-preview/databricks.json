@@ -50,6 +50,9 @@
           },
           "Get a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
             "$ref": "./examples/WorkspaceManagedDiskEncryptionGet.json"
+          },
+          "Get a workspace with Enhanced Security & Compliance Add-On": {
+            "$ref": "./examples/WorkspaceEnhancedSecurityComplianceGet.json"
           }
         },
         "parameters": [
@@ -162,6 +165,9 @@
           },
           "Update a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
             "$ref": "./examples/WorkspaceManagedDiskEncryptionUpdate.json"
+          },
+          "Create or update a workspace with Enhanced Security & Compliance Add-On": {
+            "$ref": "./examples/WorkspaceEnhancedSecurityComplianceCreateOrUpdate.json"
           }
         },
         "parameters": [
@@ -822,6 +828,10 @@
             "entities"
           ]
         },
+        "enhancedSecurityCompliance": {
+          "description": "Contains settings related to the Enhanced Security and Compliance Add-On.",
+          "$ref": "#/definitions/EnhancedSecurityComplianceDefinition"
+        },
         "privateEndpointConnections": {
           "readOnly": true,
           "description": "Private endpoint connections created on the workspace",
@@ -997,6 +1007,98 @@
           "description": "The type of Identity created. It can be either SystemAssigned or UserAssigned.",
           "readOnly": true
         }
+      }
+    },
+    "EnhancedSecurityComplianceDefinition": {
+      "type": "object",
+      "description": "Status of settings related to the Enhanced Security and Compliance Add-On.",
+      "properties": {
+        "automaticClusterUpdate": {
+          "type": "string",
+          "description": "Status of automated cluster updates feature.",
+          "$ref": "#/definitions/AutomaticClusterUpdateDefinition"
+        },
+        "complianceSecurityProfile": {
+          "type": "object",
+          "description": "Status of Compliance Security Profile feature.",
+          "$ref": "#/definitions/ComplianceSecurityProfileDefinition"
+        },
+        "enhancedSecurityMonitoring": {
+          "type": "object",
+          "description": "Status of Enhanced Security Monitoring feature.",
+          "$ref": "#/definitions/EnhancedSecurityMonitoringDefinition"
+        }
+      }
+    },
+    "AutomaticClusterUpdateDefinition": {
+      "type": "object",
+      "description": "Status of automated cluster updates feature.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AutomaticClusterUpdateValue"
+          }
+        }
+      }
+    },
+    "EnhancedSecurityMonitoringDefinition": {
+      "type": "object",
+      "description": "Status of Enhanced Security Monitoring feature.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EnhancedSecurityMonitoringValue"
+          }
+        }
+      }
+    },
+    "ComplianceSecurityProfileDefinition": {
+      "type": "object",
+      "description": "Status of Compliance Security Profile feature.",
+      "properties": {
+        "complianceStandards": {
+          "description": "Compliance standards associated with the workspace.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplianceStandardDefinition"
+          }
+        },
+        "value": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ComplianceSecurityProfileValue"
+          }
+        }
+      }
+    },
+    "ComplianceStandardDefinition": {
+      "description": "Compliance standard that can be associated with a workspace.",
+      "type": "string",
+      "enum": [
+        "NONE",
+        "HIPAA",
+        "PCI_DSS"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ComplianceStandard"
       }
     },
     "WorkspaceCustomParameterType": {
