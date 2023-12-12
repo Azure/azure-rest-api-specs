@@ -15,7 +15,7 @@ using Azure.Core;
       {
         type: OAuth2FlowType.implicit,
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-        scopes: ["https://programmableconnectivity.azure.net/default"],
+        scopes: ["https://programmableconnectivity.azure.net/.default"],
       }
     ]>
   ]
@@ -25,12 +25,11 @@ using Azure.Core;
   version: "2023-11-14-preview",
 })
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-// TODO - what is this?
 @server(
   "{endpoint}",
   "Azure Programmable Connectivity Endpoint.",
   {
-    @doc("An Azure Programmable Connectivity Endpoint providing access to Network APIs.")
+    @doc("An Azure Programmable Connectivity Endpoint providing access to Network APIs, for example eastus.usprod.apcgatewayapi.azure.com")
     endpoint: string,
   }
 )

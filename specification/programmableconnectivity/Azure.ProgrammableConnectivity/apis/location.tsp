@@ -10,6 +10,7 @@ namespace Azure.ProgrammableConnectivity;
 /// Interfaces
 
 interface LocationInterface {
+  @doc("Verifies whether a device is within a specified location area, defined as an accuracy (radius) around a point, specified by longitude and latitude.")
   verify is Operations.ResourceAction<
     LocationEndpoint,
     LocationVerifyRequest,
@@ -25,15 +26,15 @@ model LocationEndpoint {
   @key("action")
   @doc("Static endpoint")
   @visibility("read")
-  action: CommonActionEnum;
+  action: "";
 }
 
 /// Request models
 
 @doc("Request to verify Location")
 model LocationVerifyRequest {
-  @doc("Network to query for this device")
-  network: Network;
+    @doc("Network to query for this device, or device information to enable network routing.")
+  networkIdentifier: NetworkIdentifier;
 
   @doc("Latitude of location to be verified")
   @minValue(-90)
@@ -50,7 +51,8 @@ model LocationVerifyRequest {
   @maxValue(100)
   accuracy: int32;
 
-  ...LocationDevice;
+  @doc("The device to find the location for.")
+  locationDevice: LocationDevice
 }
 
 /// Response models
@@ -62,23 +64,43 @@ model LocationVerifyResponse {
 }
 
 /// Common models
-
-// TODO - implement maxProperties = 1 and minProperties = 1
-@doc("Device information needed by CAMARA Location API")
+@doc("Device information needed by operator to provide location information. Include exactly one of these properties to identify your device.")
 model LocationDevice {
   @doc("External identifier or network access identifier of the device")
   networkAccessIdentifier?: string;
+  
+  ...PhoneNumberModel;
 
-  // TODO - is there a good way to commonise the phone number definition and still capture that it's sometimes required and sometimes optional?
-  @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
-  @pattern("^\\+?[0-9]{5,15}$")
-  phoneNumber?: string;
+  @doc ("IPv4 address and port of the device")
+  ipv4Address?: Ipv4Address;
 
-  @doc("IPv4 address and port of the device, in the form address:port")
-  @pattern("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])(?:\\.(?:[01]?\\d\\d?|2[0-4]\\d|25[0-5])){3}(:\\d{1,4})?$")
-  ipv4Address?: string;
+  @doc ("IPv6 address and port of the device")
+  ipv6Address?: Ipv6Address;
+}
 
-  @doc("IPv6 address of the device")
-  @pattern("^((([^:]+:){7}([^:]+))|((([^:]+:)*[^:]+)?::(([^:]+:)*[^:]+)?))(\\/.+)?$")
-  ipv6Address?: string;
+@doc ("IPv4 device indicator")
+model Ipv4Address {
+  /** IPv4 address may be specified in form <address/mask> as:
+          - address - an IPv4 number in dotted-quad form 1.2.3.4. Only this exact IP number will match the flow control rule.
+          - address/mask - an IP number as above with a mask width of the form 1.2.3.4/24.
+            In this case, all IP numbers from 1.2.3.0 to 1.2.3.255 will match. The bit width MUST be valid for the IP version. */
+  ipv4: string;
+
+  @doc ("User equipment port.")
+  port: int32;
+}
+
+@doc ("IPv6 device indicator")
+model Ipv6Address {
+  /** IPv6 address, following IETF 5952 format, may be specified in form <address/mask> as:
+          - address - The /128 subnet is optional for single addresses:
+            - 2001:db8:85a3:8d3:1319:8a2e:370:7344
+            - 2001:db8:85a3:8d3:1319:8a2e:370:7344/128
+          - address/mask - an IP v6 number with a mask:
+            - 2001:db8:85a3:8d3::0/64
+            - 2001:db8:85a3:8d3::/64 */
+  ipv6: string;
+
+  @doc ("User equipment port.")
+  port: int32;
 }

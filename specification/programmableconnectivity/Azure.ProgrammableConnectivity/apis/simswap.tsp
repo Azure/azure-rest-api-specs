@@ -9,14 +9,16 @@ using Azure.Core.Traits;
 namespace Azure.ProgrammableConnectivity;
 
 /// Interfaces
-
+@doc("SIM Swap API provides the customer the ability to obtain information on any recent SIM pairing change related to the User's mobile account.")
 interface SimSwapInterface {
+  @doc("Provides timestamp of latest SIM swap")
   retrieve is Operations.ResourceAction<
     SimSwapEndpoint,
     SimSwapRetrieveRequest,
     SimSwapRetrieveResponse
   >;
 
+  @doc("Verifies if a SIM swap has been performed during a past period (defined in the request with 'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.")
   verify is Operations.ResourceAction<
     SimSwapEndpoint,
     SimSwapVerifyRequest,
@@ -32,28 +34,28 @@ model SimSwapEndpoint {
   @key("action")
   @doc("Static endpoint")
   @visibility("read")
-  action: CommonActionEnum;
+  action: "";
 }
 
 /// Request models
 
 @doc("Request to retrieve SimSwap date")
 model SimSwapRetrieveRequest {
-  @doc("Network to query for this device")
-  network: Network;
-
   ...SimSwapDevice;
+
+  @doc("Network to query for this device")
+  networkIdentifier: NetworkIdentifier;
 }
 
 @doc("Request to verify SimSwap in period")
 model SimSwapVerifyRequest {
   @doc("Maximum lookback for SimSwap verification")
-  maxAge?: int32;
+  @minValue(1)
+  @maxValue(2400)
+  maxAgeHours?: int32 = 240;
 
-  @doc("Network to query for this device")
-  network: Network;
-
-  ...SimSwapDevice;
+  @doc("Identifier for the network to query for this device.")
+  networkIdentifier: NetworkIdentifier;
 }
 
 /// Response Models
@@ -72,10 +74,10 @@ model SimSwapVerifyResponse {
 
 /// Common models
 
-@doc("Device information needed by CAMARA SimSwap API")
+@doc("Device information needed by operator to find sim swap information.")
 model SimSwapDevice {
-  // TODO - is there a good way to commonise the phone number definition and still capture that it's sometimes required and sometimes optional?
   @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
   @pattern("^\\+?[0-9]{5,15}$")
   phoneNumber: string;
 }
+

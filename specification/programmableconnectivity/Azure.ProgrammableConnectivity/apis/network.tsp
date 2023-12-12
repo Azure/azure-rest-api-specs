@@ -11,12 +11,10 @@ namespace Azure.ProgrammableConnectivity;
 /// Interfaces
 
 interface Networks {
-  // TODO - do we need this?
-  list is Operations.ResourceList<Network>;
-
+  @doc("Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.")
   retrieve is Operations.ResourceAction<
     NetworkRetrieveEndpoint,
-    NetworkDevice,
+    DeviceNetworkIdentifier,
     Network
   >;
 }
@@ -29,15 +27,23 @@ model NetworkRetrieveEndpoint {
   @key("action")
   @doc("Static endpoint")
   @visibility("read")
-  action: CommonActionEnum;
+  action: "";
 }
 
 /// Common models
+@doc("The device for which to find the network.")
+model DeviceNetworkIdentifier {
+  @doc("The type of device identifier given: 'IPv4' or 'IPv6'.")
+  identifierType: string;
+  /** The device identifier in a format matching the type above:
+  - IPv4 in dotted-quad format.
+  - IPV6 in IETF 5952 format.*/
+  deviceIdentifier: string;
+}
 
-@doc("Represents a Device whose Network is searched for")
-model NetworkDevice {
-  // TODO - is there a good way to commonise the phone number definition and still capture that it's sometimes required and sometimes optional?
-  @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
-  @pattern("^\\+?[0-9]{5,15}$")
-  phoneNumber: string;
+@doc("The network that the device is on.")
+model Network {
+  @pattern("[a-z0-9-]+$")
+  @doc("The identifier for the network. This can be used as the networkIdentifier for the service APIs.")
+  networkCode: string;
 }
