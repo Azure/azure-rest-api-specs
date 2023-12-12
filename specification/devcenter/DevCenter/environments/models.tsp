@@ -132,7 +132,7 @@ model EnvironmentDefinition {
   parameters?: EnvironmentDefinitionParameter[];
 
   @doc("JSON schema defining the parameters object passed to an environment.")
-  parametersSchema?: string;
+  parametersSchema?: bytes;
 
   @doc("Path to the Environment Definition entrypoint file.")
   templatePath?: string;
