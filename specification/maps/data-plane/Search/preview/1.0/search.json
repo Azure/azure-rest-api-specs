@@ -307,7 +307,7 @@
       "name": "countrySet",
       "x-ms-client-name": "countryFilter",
       "in": "query",
-      "description": "Comma separated string of country codes, e.g. FR,ES. This will limit the search to the specified countries",
+      "description": "Comma separated string of country/region codes, e.g. FR,ES. This will limit the search to the specified countries/regions",
       "type": "array",
       "items": {
         "type": "string"
@@ -443,7 +443,7 @@
   "paths": {
     "/search/polygon/{format}": {
       "get": {
-        "description": "**Get Polygon**\n\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Polygon service allows you to request the geometry data such as a city or country  outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format. The geometry ID is returned in the sourceGeometry object under \"geometry\" and \"id\" in either a Search Address or Search Fuzzy call.\n\nPlease note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client  should not store geometry IDs in persistent storage for later referral, as the stability of these identifiers is  not guaranteed for a long period of time. It is expected that a request to the Polygon method is made within a  few minutes of the request to the Online Search method that provided the ID. The service allows for batch  requests up to 20 identifiers.",
+        "description": "**Get Polygon**\n\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Get Polygon service allows you to request the geometry data such as a city or country/region outline for a set of entities, previously retrieved from an Online Search request in GeoJSON format. The geometry ID is returned in the sourceGeometry object under \"geometry\" and \"id\" in either a Search Address or Search Fuzzy call.\n\nPlease note that any geometry ID retrieved from an Online Search endpoint has a limited lifetime. The client  should not store geometry IDs in persistent storage for later referral, as the stability of these identifiers is  not guaranteed for a long period of time. It is expected that a request to the Polygon method is made within a  few minutes of the request to the Online Search method that provided the ID. The service allows for batch  requests up to 20 identifiers.",
         "operationId": "Search_GetSearchPolygon",
         "x-ms-client-name": "ListPolygons",
         "x-ms-examples": {
@@ -488,7 +488,7 @@
     },
     "/search/fuzzy/{format}": {
       "get": {
-        "description": "\n**Free Form Search**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe basic default API is Free Form Search which handles the most fuzzy of inputs handling any combination of address or POI tokens. This search API is the canonical 'single line search'. The Free Form Search API is a seamless combination of POI search and geocoding. The API can also be weighted with a contextual position (lat./lon. pair), or fully constrained by a coordinate and radius, or it can be executed more generally without any geo biasing anchor point.<br><br>We strongly advise you to use the 'countrySet' parameter to specify only the countries for which your application needs coverage, as the default behavior will be to search the entire world, potentially returning unnecessary results.<br><br> E.g.: `countrySet`=US,FR <br><br>Please see [Search Coverage](https://learn.microsoft.com/azure/location-based-services/geocoding-coverage) for a complete list of all the supported countries.<br><br>Most Search queries default to `maxFuzzyLevel`=2 to gain performance and also reduce unusual results. This new default can be overridden as needed per request by passing in the query param `maxFuzzyLevel`=3 or 4.",
+        "description": "\n**Free Form Search**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe basic default API is Free Form Search which handles the most fuzzy of inputs handling any combination of address or POI tokens. This search API is the canonical 'single line search'. The Free Form Search API is a seamless combination of POI search and geocoding. The API can also be weighted with a contextual position (lat./lon. pair), or fully constrained by a coordinate and radius, or it can be executed more generally without any geo biasing anchor point.<br><br>We strongly advise you to use the 'countrySet' parameter to specify only the countries/regions for which your application needs coverage, as the default behavior will be to search the entire world, potentially returning unnecessary results.<br><br> E.g.: `countrySet`=US,FR <br><br>Please see [Search Coverage](https://learn.microsoft.com/azure/location-based-services/geocoding-coverage) for a complete list of all the supported countries/regions.<br><br>Most Search queries default to `maxFuzzyLevel`=2 to gain performance and also reduce unusual results. This new default can be overridden as needed per request by passing in the query param `maxFuzzyLevel`=3 or 4.",
         "operationId": "Search_GetSearchFuzzy",
         "x-ms-client-name": "FuzzySearch",
         "x-ms-examples": {
@@ -599,7 +599,7 @@
     },
     "/search/poi/{format}": {
       "get": {
-        "description": "**Get POI by Name**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nPoints of Interest (POI) Search allows you to request POI results by name.  Search supports additional query parameters such as language and filtering results by area of interest driven by country or bounding box.  Endpoint will return only POI results matching the query string. Response includes POI details such as address, coordinate location and category.",
+        "description": "**Get POI by Name**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nPoints of Interest (POI) Search allows you to request POI results by name.  Search supports additional query parameters such as language and filtering results by area of interest driven by country/region or bounding box.  Endpoint will return only POI results matching the query string. Response includes POI details such as address, coordinate location and category.",
         "operationId": "Search_GetSearchPOI",
         "x-ms-client-name": "SearchPointOfInterest",
         "x-ms-examples": {
@@ -1163,7 +1163,7 @@
           {
             "name": "countryCode",
             "in": "query",
-            "description": "The 2 or 3 letter [ISO3166-1](https://www.iso.org/iso-3166-country-codes.html) country code portion of an address. E.g. US.",
+            "description": "The 2 or 3 letter [ISO3166-1](https://www.iso.org/iso-3166-country-codes.html) country/region code portion of an address. E.g. US.",
             "required": true,
             "default": "US",
             "type": "string"
@@ -1213,13 +1213,13 @@
           {
             "name": "countrySecondarySubdivision",
             "in": "query",
-            "description": "The county for the structured address",
+            "description": "The country/region for the structured address",
             "type": "string"
           },
           {
             "name": "countrySubdivision",
             "in": "query",
-            "description": "The country subdivision portion of an address",
+            "description": "The country/region subdivision portion of an address",
             "type": "string"
           },
           {
@@ -2429,12 +2429,12 @@
           "readOnly": true
         },
         "countryCode": {
-          "description": "Country (Note: This is a two-letter code, not a country name.)",
+          "description": "Country (Note: This is a two-letter code, not a country/region name.)",
           "type": "string",
           "readOnly": true
         },
         "country": {
-          "description": "Country name",
+          "description": "country/region name",
           "type": "string",
           "readOnly": true
         },
@@ -2444,12 +2444,12 @@
           "readOnly": true
         },
         "freeformAddress": {
-          "description": "An address line formatted according to the formatting rules of a Result's country of origin, or in the case of a country, its full country name.",
+          "description": "An address line formatted according to the formatting rules of a Result's country/region of origin, or in the case of a country/region, its full country/region name.",
           "type": "string",
           "readOnly": true
         },
         "countrySubdivisionName": {
-          "description": "The full name of a first level of country administrative hierarchy. This field appears only in case countrySubdivision is presented in an abbreviated form. Only supported for USA, Canada, and United Kingdom.",
+          "description": "The full name of a first level of country/region administrative hierarchy. This field appears only in case countrySubdivision is presented in an abbreviated form. Only supported for USA, Canada, and United Kingdom.",
           "type": "string",
           "readOnly": true
         },
@@ -2603,7 +2603,7 @@
         "values": [
           {
             "value": "Country",
-            "description": "Country name"
+            "description": "country/region name"
           },
           {
             "value": "CountrySubdivision",

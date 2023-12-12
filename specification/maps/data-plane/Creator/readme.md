@@ -33,6 +33,15 @@ credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: RESPONSE_SCHEMA_NOT_IN_SPEC
+    reason: false positive from oav is breaking our example validation. See azure/oav#1021.
+  - suppress: INVALID_TYPE
+    reason: false positive from oav is breaking our example validation. See azure/oav#1020.
+```
 
 ### Tag: package-2023-07
 
