@@ -618,7 +618,9 @@
         "responses": {
           "200": {
             "description": "The Virtual Network is deleted.",
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/PurgedUnusedVirtualNetworkSuccessResponse"
+            }
           },
           "default": {
             "description": "App Service error response.",
@@ -1708,6 +1710,10 @@
           "type": "string"
         }
       }
+    },
+    "PurgedUnusedVirtualNetworkSuccessResponse": {
+      "description": "Response content upon successful deletion of an unused virtual network.",
+      "type": "string"
     }
   },
   "parameters": {
