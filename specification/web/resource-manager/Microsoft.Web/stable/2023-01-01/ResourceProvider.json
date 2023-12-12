@@ -576,6 +576,10 @@
               "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetwork"
             }
           },
+          "404": {
+            "description": "Cannot find the specified virtual network",
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -584,7 +588,58 @@
           }
         },
         "x-ms-examples": {
-          "Get usages in location for subscription": {
+          "GetVirtualNetworkIntegrations": {
+            "$ref": "./examples/GetVirtualNetworkIntegrations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/purgeUnusedVirtualNetworkIntegration": {
+      "post": {
+        "summary": "Delete orphaned (unused) VNET",
+        "description": "Delete orphaned (unused) VNET, otherwise fail the call if there are sites that are still using the VNET",
+        "operationId": "PurgeUnusedVirtualNetworkIntegrations",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Object contains the subnetResourceId",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkIntegrationRequest"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Virtual Network is deleted.",
+            "type": "string"
+          },
+          "409": {
+            "description": "Conflict. There are sites still using the Virtual Network.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetwork"
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkIntegrations": {
             "$ref": "./examples/GetVirtualNetworkIntegrations.json"
           }
         }

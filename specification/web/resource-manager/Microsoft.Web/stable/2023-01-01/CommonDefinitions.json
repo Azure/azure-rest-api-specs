@@ -954,12 +954,12 @@
     },
     "SwiftVirtualNetwork": {
       "description": "Swift Virtual Network Contract",
-      "required": [
-        "subnetResourceId",
-        "subnetIpAllocation",
-        "resourceAllocation"
-      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
         "subnetResourceId": {
           "description": "The Virtual Network subnet's ARM ID",
@@ -972,46 +972,38 @@
         "subnetIpAllocation": {
           "description": "IP allocation for a Swift Subnet",
           "type": "object",
-          "required": [
-            "subnetIpAddressesAvailable",
-            "subnetIpAddressesUsed"
-          ],
           "properties": {
             "subnetIpAddressesAvailable": {
               "description": "The number of IP addresses available in the Swift subnet address space",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "subnetIpAddressesUsed": {
               "description": "The number of IP addresses that have already been used in the Swift subnet address space",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             }
           }
         },
         "vnetConnectionAllocation": {
           "description": "Swift Connection allocation for an App Service Plan",
           "type": "object",
-          "required": [
-            "vnetConnectionsUsed",
-            "vnetConnectionsMax"
-          ],
           "properties": {
             "vnetConnectionsUsed": {
               "description": "The number of Swift Connections used for an App Service Plan",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "vnetConnectionsMax": {
               "description": "The maximum number of Swift Connections available for an App Service Plan",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             }
           }
         },
         "resourceAllocation": {
           "description": "Resources (sites and serverfarms) allocated to this subnet",
           "type": "object",
-          "required": [
-            "connectedServerFarmsId",
-            "connectedSitesId"
-          ],
           "properties": {
             "connectedServerFarmsId": {
               "description": "The list of all ServerFarms' ARM ID that are using the VNET",
