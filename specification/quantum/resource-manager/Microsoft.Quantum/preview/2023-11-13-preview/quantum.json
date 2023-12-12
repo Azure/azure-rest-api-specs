@@ -519,6 +519,7 @@
       "description": "The response of a list Workspaces operation."
     },
     "OfferingsListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -660,7 +661,36 @@
       "description": "List of api keys to be generated."
     },
     "TagsObject": {
+      "type": "object",
       "properties": {
+        "identity": {
+          "type": "object",
+          "description": "Managed Identity information.",
+          "properties": {
+            "principalId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The principal ID of resource identity."
+            },
+            "tenantId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The tenant ID of resource."
+            },
+            "type": {
+              "type": "string",
+              "description": "The identity type.",
+              "enum": [
+                "SystemAssigned",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "ResourceIdentityType",
+                "modelAsString": true
+              }
+            }
+          }
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -1122,7 +1152,8 @@
       "required": true,
       "type": "string",
       "description": "Location.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
     },
     "WorkspaceNameParameter": {
       "name": "workspaceName",
