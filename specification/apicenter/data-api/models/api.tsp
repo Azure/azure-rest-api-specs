@@ -22,7 +22,7 @@ model Api {
   kind: string;
 
   @doc("Current lifecycle stage of the API.")
-  lifeCycleStage?: ApiLifecycleStage;
+  lifecycleStage?: ApiLifecycleStage;
 
   @doc("Terms of service for the API.")
   termsOfService?: ApiTermsOfService;
