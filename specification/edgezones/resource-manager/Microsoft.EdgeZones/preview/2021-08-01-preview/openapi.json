@@ -51,10 +51,10 @@
   "paths": {
     "/providers/Microsoft.EdgeZones/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -75,22 +75,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "ListOperations": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/microsoftEdgeZones": {
       "get": {
+        "operationId": "MicrosoftEdgeZones_ListBySubscription",
         "tags": [
           "MicrosoftEdgeZones"
         ],
-        "operationId": "MicrosoftEdgeZones_ListBySubscription",
         "description": "Lists the Microsoft Edge Zones for a subscription",
         "parameters": [
           {
@@ -114,22 +114,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "ListMicrosoftEdgeZones": {
             "$ref": "./examples/MicrosoftEdgeZones_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/microsoftEdgeZones/{microsoftEdgeZoneName}": {
       "get": {
+        "operationId": "MicrosoftEdgeZones_Get",
         "tags": [
           "MicrosoftEdgeZones"
         ],
-        "operationId": "MicrosoftEdgeZones_Get",
         "description": "Get a Microsoft Edge Zone in the subscription",
         "parameters": [
           {
@@ -141,8 +141,8 @@
           {
             "name": "microsoftEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the MicrosoftEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -170,10 +170,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/microsoftEdgeZones/{microsoftEdgeZoneName}/register": {
       "post": {
+        "operationId": "MicrosoftEdgeZones_Register",
         "tags": [
           "MicrosoftEdgeZones"
         ],
-        "operationId": "MicrosoftEdgeZones_Register",
         "description": "Registers a subscription for a Microsoft Edge Zone",
         "parameters": [
           {
@@ -185,16 +185,16 @@
           {
             "name": "microsoftEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the MicrosoftEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "description": "The content of the action request",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RegisterMicrosoftEdgeZoneRequest"
             }
@@ -223,10 +223,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/microsoftEdgeZones/{microsoftEdgeZoneName}/unregister": {
       "post": {
+        "operationId": "MicrosoftEdgeZones_Unregister",
         "tags": [
           "MicrosoftEdgeZones"
         ],
-        "operationId": "MicrosoftEdgeZones_Unregister",
         "description": "Unregisters a subscription for a Microsoft Edge Zone",
         "parameters": [
           {
@@ -238,8 +238,8 @@
           {
             "name": "microsoftEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the MicrosoftEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -267,10 +267,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/publicMecEdgeZones": {
       "get": {
+        "operationId": "PublicMecEdgeZones_ListBySubscription",
         "tags": [
           "PublicMecEdgeZones"
         ],
-        "operationId": "PublicMecEdgeZones_ListBySubscription",
         "description": "Lists the Public MEC Edge Zones for a subscription",
         "parameters": [
           {
@@ -294,22 +294,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "ListPublicMecEdgeZones": {
             "$ref": "./examples/PublicMecEdgeZones_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/publicMecEdgeZones/{publicMecEdgeZoneName}": {
       "get": {
+        "operationId": "PublicMecEdgeZones_Get",
         "tags": [
           "PublicMecEdgeZones"
         ],
-        "operationId": "PublicMecEdgeZones_Get",
         "description": "Get a Public MEC Edge Zone in the subscription",
         "parameters": [
           {
@@ -321,8 +321,8 @@
           {
             "name": "publicMecEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the PublicMecEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -350,10 +350,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/publicMecEdgeZones/{publicMecEdgeZoneName}/register": {
       "post": {
+        "operationId": "PublicMecEdgeZones_Register",
         "tags": [
           "PublicMecEdgeZones"
         ],
-        "operationId": "PublicMecEdgeZones_Register",
         "description": "Registers a subscription for a Public MEC Edge Zone",
         "parameters": [
           {
@@ -365,16 +365,16 @@
           {
             "name": "publicMecEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the PublicMecEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "description": "The content of the action request",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RegisterPublicMecEdgeZoneRequest"
             }
@@ -403,10 +403,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/publicMecEdgeZones/{publicMecEdgeZoneName}/unregister": {
       "post": {
+        "operationId": "PublicMecEdgeZones_Unregister",
         "tags": [
           "PublicMecEdgeZones"
         ],
-        "operationId": "PublicMecEdgeZones_Unregister",
         "description": "Unregisters a subscription for a Public MEC Edge Zone",
         "parameters": [
           {
@@ -418,8 +418,8 @@
           {
             "name": "publicMecEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the PublicMecEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -449,6 +449,7 @@
   "definitions": {
     "MicrosoftEdgeZone": {
       "type": "object",
+      "description": "A MicrosoftEdgeZone resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/MicrosoftEdgeZoneProperties",
@@ -460,7 +461,6 @@
           ]
         }
       },
-      "description": "A MicrosoftEdgeZone resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -469,29 +469,28 @@
     },
     "MicrosoftEdgeZoneListResult": {
       "type": "object",
+      "description": "The response of a MicrosoftEdgeZone list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The MicrosoftEdgeZone items on this page",
           "items": {
             "$ref": "#/definitions/MicrosoftEdgeZone"
-          },
-          "description": "The MicrosoftEdgeZone items on this page",
-          "x-typespec-name": "MicrosoftEdgeZone[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a MicrosoftEdgeZone list operation.",
       "required": [
         "value"
       ]
     },
     "MicrosoftEdgeZoneProperties": {
       "type": "object",
+      "description": "The properties of a MicrosoftEdgeZone Resource",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -508,7 +507,6 @@
           "description": "MicrosoftEdgeZone display name"
         }
       },
-      "description": "The properties of a MicrosoftEdgeZone Resource",
       "required": [
         "displayName"
       ]
@@ -569,6 +567,7 @@
     },
     "PublicMecEdgeZone": {
       "type": "object",
+      "description": "A PublicMecEdgeZone resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PublicMecEdgeZoneProperties",
@@ -580,7 +579,6 @@
           ]
         }
       },
-      "description": "A PublicMecEdgeZone resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -589,29 +587,28 @@
     },
     "PublicMecEdgeZoneListResult": {
       "type": "object",
+      "description": "The response of a PublicMecEdgeZone list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The PublicMecEdgeZone items on this page",
           "items": {
             "$ref": "#/definitions/PublicMecEdgeZone"
-          },
-          "description": "The PublicMecEdgeZone items on this page",
-          "x-typespec-name": "PublicMecEdgeZone[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a PublicMecEdgeZone list operation.",
       "required": [
         "value"
       ]
     },
     "PublicMecEdgeZoneProperties": {
       "type": "object",
+      "description": "The properties of a PublicMecEdgeZone Resource",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -628,13 +625,13 @@
           "description": "PublicMecEdgeZone display name"
         }
       },
-      "description": "The properties of a PublicMecEdgeZone Resource",
       "required": [
         "displayName"
       ]
     },
     "RegisterMicrosoftEdgeZoneRequest": {
       "type": "object",
+      "description": "A MicrosoftEdgeZone register request body",
       "properties": {
         "organizationName": {
           "type": "string",
@@ -657,7 +654,6 @@
           "description": "Azure resource capacity needed by organization of the Microsoft Edge Zone registration"
         }
       },
-      "description": "A MicrosoftEdgeZone register request body",
       "required": [
         "organizationName",
         "organizationContactName",
@@ -668,6 +664,7 @@
     },
     "RegisterPublicMecEdgeZoneRequest": {
       "type": "object",
+      "description": "A PublicMecEdgeZone register request body",
       "properties": {
         "organizationName": {
           "type": "string",
@@ -702,7 +699,6 @@
           "description": "Azure resource capacity needed by organization of the Public MEC Edge Zone registration"
         }
       },
-      "description": "A PublicMecEdgeZone register request body",
       "required": [
         "organizationName",
         "organizationContactName",

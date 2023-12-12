@@ -25,12 +25,16 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @Azure.Core.lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
+
   @doc("Provisioning State")
   Provisioning,
+
   @doc("Updating State")
   Updating,
+
   @doc("Deleting State")
   Deleting,
+
   @doc("Accepted State")
   Accepted,
 }
@@ -39,10 +43,15 @@ enum ProvisioningState {
 enum RegistrationState {
   @doc("Not Registered State")
   NotRegistered,
-  @doc("Pending Approval State")
-  PendingApproval,
+
+  @doc("Pending Register State")
+  PendingRegister,
+
   @doc("Registered State")
   Registered,
+
+  @doc("Pending Unregister State")
+  PendingUnregister,
 }
 
 @doc("The properties of a MicrosoftEdgeZone Resource")
@@ -111,9 +120,6 @@ model RegisterMicrosoftEdgeZoneRequest {
 
   @doc("Azure resource capacity needed by organization of the Microsoft Edge Zone registration")
   organizationAzureResourceCapacityNeeded: string;
-
-  @doc("Onboarding start date planned by organization of the Microsoft Edge Zone registration")
-  organizationOnboardingStartDate: string;
 }
 
 @doc("A PublicMecEdgeZone register request body")
@@ -141,25 +147,24 @@ model RegisterPublicMecEdgeZoneRequest {
 
   @doc("Azure resource capacity needed by organization of the Public MEC Edge Zone registration")
   organizationAzureResourceCapacityNeeded: string;
-
-  @doc("Onboarding start date planned by organization of the Public MEC Edge Zone registration")
-  organizationOnboardingStartDate: string;
 }
 
+// We will use this in an interface
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations must be inside an interface declaration."
 @autoRoute
 @armResourceAction(TResource)
 @post
-@doc("Arm Resource Action Taking no request body object and returning no result object")
-op ArmResourceActionNoBodyNoContentSync<
+@doc("Arm Resource Action Taking no request body object and returning result object")
+op ArmResourceActionNoBodySync<
   TResource extends ArmResource,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmNoContentResponse<"Action completed successfully."> | ErrorResponse;
+): ArmResponse<TResource> | ErrorResponse;
 
- @doc("MicrosoftEdgeZone operations")
- @armResourceOperations
- interface MicrosoftEdgeZones {
+@doc("MicrosoftEdgeZone operations")
+@armResourceOperations
+interface MicrosoftEdgeZones {
   @doc("Get a Microsoft Edge Zone in the subscription")
   get is ArmResourceRead<MicrosoftEdgeZone>;
 
@@ -167,15 +172,19 @@ op ArmResourceActionNoBodyNoContentSync<
   listBySubscription is ArmListBySubscription<MicrosoftEdgeZone>;
 
   @doc("Registers a subscription for a Microsoft Edge Zone")
-  register is ArmResourceActionNoContentSync<MicrosoftEdgeZone, RegisterMicrosoftEdgeZoneRequest>;
+  register is ArmResourceActionSync<
+    MicrosoftEdgeZone,
+    RegisterMicrosoftEdgeZoneRequest,
+    MicrosoftEdgeZone
+  >;
 
   @doc("Unregisters a subscription for a Microsoft Edge Zone")
-  unregister is ArmResourceActionNoBodyNoContentSync<MicrosoftEdgeZone>;
+  unregister is ArmResourceActionNoBodySync<MicrosoftEdgeZone>;
 }
 
- @doc("PublicMecEdgeZone operations")
- @armResourceOperations
- interface PublicMecEdgeZones {
+@doc("PublicMecEdgeZone operations")
+@armResourceOperations
+interface PublicMecEdgeZones {
   @doc("Get a Public MEC Edge Zone in the subscription")
   get is ArmResourceRead<PublicMecEdgeZone>;
 
@@ -183,8 +192,12 @@ op ArmResourceActionNoBodyNoContentSync<
   listBySubscription is ArmListBySubscription<PublicMecEdgeZone>;
 
   @doc("Registers a subscription for a Public MEC Edge Zone")
-  register is ArmResourceActionNoContentSync<PublicMecEdgeZone, RegisterPublicMecEdgeZoneRequest>;
+  register is ArmResourceActionSync<
+    PublicMecEdgeZone,
+    RegisterPublicMecEdgeZoneRequest,
+    MicrosoftEdgeZone
+  >;
 
   @doc("Unregisters a subscription for a Public MEC Edge Zone")
-  unregister is ArmResourceActionNoBodyNoContentSync<PublicMecEdgeZone>;
+  unregister is ArmResourceActionNoBodySync<PublicMecEdgeZone>;
 }
