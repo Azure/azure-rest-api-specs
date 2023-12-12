@@ -23,16 +23,18 @@ namespace Azure.ProgrammableConnectivity;
   of the entire flow (the 200 response) is included in this document.
 """)
 interface NumberInterface {
+
+  @doc("Verifies the phone number (MSISDN) associated with a device.")
   verify is Operations.ResourceAction<
     NumberEndpoint,
     NumberVerifyRequest,
     NumberVerifyResponse
   >;
 
-  // TODO - GET or POST?
+  @doc("Retrieves the phone number (MSISDN) associated with a device.")
   retrieve is Operations.ResourceAction<
     NumberEndpoint,
-    {},
+    NetworkIdentifier,
     NumberRetrieveResponse
   >;
 }
@@ -45,15 +47,15 @@ model NumberEndpoint {
   @key("action")
   @doc("Static endpoint")
   @visibility("read")
-  action: CommonActionEnum;
+  action: "";
 }
 
 /// Request models
 
 @doc("Request to verify number of device")
 model NumberVerifyRequest {
-  @doc("Network to query for this device")
-  network: Network;
+  @doc("Identifier for the network to query for this device.")
+  networkIdentifier: NetworkIdentifier;
 
   ...NumberDevice;
 }
@@ -68,21 +70,15 @@ model NumberVerifyResponse {
 
 @doc("Response with number of device")
 model NumberRetrieveResponse {
-  // TODO - is there a good way to commonise the phone number definition and still capture that it's sometimes required and sometimes optional?
   @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
   @pattern("^\\+?[0-9]{5,15}$")
   phoneNumber: string;
 }
 
 /// Common models
-
-// TODO - implement maxProperties = 1 and minProperties = 1
-@doc("Device information needed by CAMARA Number API")
+@doc("Device information to verify phone number. Include exactly one form of phone number.")
 model NumberDevice {
-  // TODO - is there a good way to commonise the phone number definition and still capture that it's sometimes required and sometimes optional?
-  @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
-  @pattern("^\\+?[0-9]{5,15}$")
-  phoneNumber?: string;
+  ...PhoneNumberModel;
 
   @doc("Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'.")
   hashedPhoneNumber?: string;

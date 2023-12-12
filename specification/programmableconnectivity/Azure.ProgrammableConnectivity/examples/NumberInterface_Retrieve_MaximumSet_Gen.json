@@ -3,15 +3,32 @@
   "operationId": "NumberInterface_Retrieve",
   "parameters": {
     "api-version": "2023-11-14-preview",
-    "action": "action",
-    "x-ms-client-request-id": "123e4567-e89b-12d3-a456-426614174000",
-    "apc-gateway-id": "zlnvwgnnhcbhlwnh"
+    "x-ms-client-request-id": "peoejiqirqp",
+    "apc-gateway-id": "zdgrzzaxlodrvewbksn",
+    "body": {
+      "identifierType": "ipv6",
+      "deviceIdentifier": "3001:0da8:75a3:0000:0000:8a2e:0370:7334"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "phoneNumber": "27799869276"
+        "phoneNumber": "7570575566"
       }
-    }
+    },
+    "404":{
+      "body":{
+        "status": 404,
+        "message": "There is no Operator configured for this network.",
+        "code": "OPERATOR_NOT_FOUND"
+      }
+    },
+    "500":{
+      "body":{
+          "status": 500,
+          "message": "INTERNAL_ERROR",
+          "code": "Internal error occurred"
+      }
+    } 
   }
 }
