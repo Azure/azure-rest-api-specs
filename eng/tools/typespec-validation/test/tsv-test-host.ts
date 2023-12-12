@@ -1,4 +1,5 @@
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
+import { normalizePath } from "../src/utils.js";
 
 export class TsvTestHost implements TsvHost {
   static get folder() {
@@ -34,6 +35,10 @@ export class TsvTestHost implements TsvHost {
     return true;
   }
 
+  normalizePath(folder: string): string {
+    return normalizePath(folder);
+  }
+
   async readTspConfig(_folder: string): Promise<string> {
     // Sample config that should cause all rules to succeed
     return `
@@ -49,5 +54,9 @@ options:
     examples-directory: "examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
 `;
+  }
+
+  async globby(patterns: string[]): Promise<string[]> {
+    return Promise.resolve(patterns);
   }
 }
