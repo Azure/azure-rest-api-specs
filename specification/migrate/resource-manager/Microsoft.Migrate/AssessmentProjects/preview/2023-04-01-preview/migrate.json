@@ -24144,7 +24144,7 @@
         "numberOfWebApps": {
           "type": "number",
           "format": "float",
-          "description": "The cost details.",
+          "description": "The number of web apps.",
           "readOnly": true
         }
       }
@@ -24218,7 +24218,7 @@
     },
     "WebAppServicePlanV2Properties": {
       "type": "object",
-      "description": "Assessed Web app database properties web model.",
+      "description": "Web app service plan properties web model.",
       "properties": {
         "webAppType": {
           "$ref": "#/definitions/WebAppType",
@@ -24238,64 +24238,58 @@
         "numberOfWebApps": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the machine name.",
+          "description": "Gets the number of web apps.",
           "readOnly": true
         },
         "monthlyCost": {
           "type": "number",
           "format": "float",
-          "description": "Gets or sets the server ARM Id.",
+          "description": "Gets or sets the monthly cost.",
           "readOnly": true
         },
         "storage": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the web server name.",
-          "readOnly": true
-        },
-        "scaleOutInstances": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets web app name.",
+          "description": "Gets or sets the storage.",
           "readOnly": true
         },
         "cores": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the discovered web app ID.",
+          "description": "Gets the number of cores.",
           "readOnly": true
         },
         "ram": {
           "type": "number",
           "format": "double",
-          "description": "Machine arm id.",
+          "description": "Memory.",
           "readOnly": true
         },
         "webAppSkuName": {
           "type": "string",
-          "description": "Confidence Rating in Percentage.",
+          "description": "Web app sku name.",
           "readOnly": true
         },
         "webAppSkuSize": {
           "type": "string",
-          "description": "Confidence Rating in Percentage.",
+          "description": "Web app sku size.",
           "readOnly": true
         },
         "createdTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "When was assessed SQL database first created.",
+          "description": "When was web app service plan first created.",
           "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "When was assessed Web app database last updated.",
+          "description": "When was web app service plan last updated.",
           "readOnly": true
         },
         "costComponents": {
           "type": "array",
-          "description": "Confidence Rating in Percentage.",
+          "description": "Cost components.",
           "items": {
             "$ref": "#/definitions/CostComponent"
           },
@@ -24310,7 +24304,7 @@
     },
     "WebAppSkuDetails": {
       "type": "object",
-      "description": "Web app discovered entities summary data.",
+      "description": "Web app sku details data.",
       "properties": {
         "totalMonthlyCost": {
           "type": "number",
@@ -24390,7 +24384,7 @@
     },
     "WebAppType": {
       "type": "string",
-      "description": "Web App Type.",
+      "description": "Web App Type for assessment.",
       "enum": [
         "Unknown",
         "IIS",
