@@ -3,6 +3,8 @@ export interface TsvHost {
   gitOperation(folder: string): IGitOperation;
   readTspConfig(folder: string): Promise<string>;
   runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]>;
+  normalizePath(folder: string): string;
+  globby(patterns: string[]): Promise<string[]>;
 }
 
 export interface IGitOperation {

@@ -42,7 +42,7 @@ suppress:
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-09
+tag: package-preview-2023-10
 directive:
   - where:
       - $.definitions.NamespaceCreateOrUpdateParameters
@@ -52,14 +52,23 @@ directive:
 ```
 
 
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.NotificationHubs/preview/2023-10-01-preview/notificationhubs.json
+```
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-09'
+``` yaml $(tag) == 'package-2023-09'
 input-file:
   - Microsoft.NotificationHubs/stable/2023-09-01/notificationhubs.json
 ```
+
 ### Tag: package-preview-2023-01
 
 These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.

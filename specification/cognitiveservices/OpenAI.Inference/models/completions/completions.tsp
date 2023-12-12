@@ -4,6 +4,7 @@ import "@typespec/versioning";
 
 import "./streaming/completions.tsp";
 import "./common.tsp";
+import "./azure_content_filtering.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -170,7 +171,7 @@ model Completions {
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "prompt_filter_results")
-  promptFilterResults?: PromptFilterResult[];
+  promptFilterResults?: ContentFilterResultsForPrompt[];
 
   @doc("""
     The collection of completions choices associated with this completions response.
@@ -208,7 +209,7 @@ model Choice {
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "content_filter_results")
-  contentFilterResults?: ContentFilterResults;
+  contentFilterResults?: ContentFilterResultsForChoice;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   @doc("The log probabilities model for tokens associated with this completions choice.")
