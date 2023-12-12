@@ -1434,7 +1434,8 @@
             "in": "path",
             "description": "Name of the Virtual Network in the form of <vnetGuid>_<subnetName>",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}_.+$"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1449,10 +1450,6 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetwork"
             }
-          },
-          "404": {
-            "description": "Cannot find the specified virtual network",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
@@ -1475,7 +1472,7 @@
         ],
         "summary": " Get all Virtual Networks associated with an App Service plan and their properties",
         "description": " Get all Virtual Networks associated with an App Service plan and their properties",
-        "operationId": "AppServicePlans_GetVirtualNetworkIntegration",
+        "operationId": "AppServicePlans_GetVirtualNetworkIntegrations",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1511,6 +1508,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
         "x-ms-examples": {
           "GetVirtualNetworkIntegration": {
             "$ref": "./examples/AppServicePlan_GetVirtualNetworkIntegrations.json"
