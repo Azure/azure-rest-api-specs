@@ -391,7 +391,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands": {
-      "post": {
+      "get": {
         "operationId": "CassandraClusters_ListCommand",
         "description": "List all commands currently running on ring info",
         "x-ms-examples": {
@@ -399,7 +399,6 @@
             "$ref": "./examples/CosmosDBManagedCassandraListCommand.json"
           }
         },
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -431,9 +430,9 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands/{commandId}": {
-      "post": {
+      "get": {
         "operationId": "CassandraClusters_GetCommandAsync",
-        "description": "Get list of details about commands that were run asynchronously. Use \"all\" as commandId to list all commands in three days associated with the cluster.",
+        "description": "Get list of details about commands that were run asynchronously. Use \"all\" for commandId to list all commands in three days associated with the cluster.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraCommandResult": {
             "$ref": "./examples/CosmosDBManagedCassandraCommandResult.json"
@@ -442,7 +441,6 @@
             "$ref": "./examples/CosmosDBManagedCassandraCommandResultList.json"
           }
         },
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -461,7 +459,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Success. Return a list of command resource.",
             "schema": {
               "$ref": "#/definitions/ListCommands"
@@ -1248,7 +1246,7 @@
             },
             "azureConnectionMethod": {
               "type": "string",
-              "description": "How to connect to the azure servcies needed for running the cluster",
+              "description": "How to connect to the azure services needed for running the cluster",
               "enum": [
                 "None",
                 "VPN"
@@ -1581,7 +1579,19 @@
         },
         "status": {
           "type": "string",
-          "description": "status of the command."
+          "description": "Status of the command.",
+          "enum": [
+            "Done",
+            "Running",
+            "Enqueue",
+            "Processing",
+            "Finished",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "CommandStatus",
+            "modelAsString": true
+          }
         },
         "outputFile": {
           "type": "string",
