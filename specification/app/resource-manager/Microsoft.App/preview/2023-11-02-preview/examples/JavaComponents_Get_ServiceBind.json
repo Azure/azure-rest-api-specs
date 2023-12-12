@@ -4,22 +4,7 @@
     "resourceGroupName": "examplerg",
     "environmentName": "myenvironment",
     "name": "myjavacomponent",
-    "api-version": "2023-11-02-preview",
-    "javaComponentEnvelope": {
-      "properties": {
-        "componentType": "SpringBootAdmin",
-        "configurations": [
-          {
-            "propertyName": "spring.boot.admin.ui.enable-toasts",
-            "value": "true"
-          },
-          {
-            "propertyName": "spring.boot.admin.monitor.status-interval",
-            "value": "10000ms"
-          }
-        ]
-      }
-    }
+    "api-version": "2023-11-02-preview"
   },
   "responses": {
     "200": {
@@ -40,13 +25,14 @@
               "propertyName": "spring.boot.admin.monitor.status-interval",
               "value": "10000ms"
             }
+          ],
+          "serviceBinds": [
+            {
+              "name": "yellowcat",
+              "serviceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/yellowcat"
+            }
           ]
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationResults/amF2YUNvbXBvbmVudHM6OWFiZTM5OGUtY2ZjNi00NGZmLThmODQtNjRiOWJhMTUzZWYy?api-version=2023-11-02-preview"
       }
     }
   }
