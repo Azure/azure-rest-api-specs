@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "automationAccountName": "testaccount",
+    "api-version": "2023-05-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/Default/providers/Microsoft.Automation/automationAccounts/testaccount/privateLinkResources/sql",
+            "name": "sql",
+            "type": "Microsoft.Automation/automationAccounts/privateLinkResources",
+            "properties": {
+              "groupId": "sql",
+              "requiredMembers": [
+                "testaccount",
+                "ddb1-westus"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
