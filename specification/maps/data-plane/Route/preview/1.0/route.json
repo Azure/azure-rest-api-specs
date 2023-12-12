@@ -63,7 +63,7 @@
     "VehicleLoadType": {
       "name": "vehicleLoadType",
       "in": "query",
-      "description": "Types of cargo that may be classified as hazardous materials and restricted from some roads. Available vehicleLoadType values are US Hazmat classes 1 through 9, plus generic classifications for use in other countries. Values beginning with USHazmat are for US routing while otherHazmat should be used for all other countries. vehicleLoadType can be specified multiple times. This parameter is currently only considered for travelMode=truck.",
+      "description": "Types of cargo that may be classified as hazardous materials and restricted from some roads. Available vehicleLoadType values are US Hazmat classes 1 through 9, plus generic classifications for use in other countries/regions. Values beginning with USHazmat are for US routing while otherHazmat should be used for all other countries/regions. vehicleLoadType can be specified multiple times. This parameter is currently only considered for travelMode=truck.",
       "type": "string",
       "enum": [
         "USHazmatClass1",
@@ -593,7 +593,7 @@
           {
             "value": "country",
             "name": "Country",
-            "description": "Sections indicating which countries the route is in."
+            "description": "Sections indicating which countries/regions the route is in."
           },
           {
             "value": "ferry",
@@ -1750,14 +1750,14 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometryCollection"
         },
         "avoidVignette": {
-          "description": "This is a list of 3-character, ISO 3166-1, alpha-3 country codes of countries in which all toll roads with vignettes are to be avoided, e.g. \"AUS,CHE\". Toll roads with vignettes in countries not in the list are unaffected. Note: It is an error to specify both **avoidVignette** and **allowVignette**.",
+          "description": "This is a list of 3-character, ISO 3166-1, alpha-3 country codes of countries/regions in which all toll roads with vignettes are to be avoided, e.g. \"AUS,CHE\". Toll roads with vignettes in countries/regions not in the list are unaffected. Note: It is an error to specify both **avoidVignette** and **allowVignette**.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "allowVignette": {
-          "description": "This is a list of 3-character, ISO 3166-1, alpha-3 country codes of countries in which toll roads with vignettes are allowed, e.g. \"AUS,CHE\". Specifying **allowVignette** with some countries X is equivalent to specifying **avoidVignette** with all countries but X. Specifying **allowVignette** with an empty list is the same as avoiding all toll roads with vignettes. Note: It is an error to specify both **avoidVignette** and **allowVignette**.",
+          "description": "This is a list of 3-character, ISO 3166-1, alpha-3 country codes of countries/regions in which toll roads with vignettes are allowed, e.g. \"AUS,CHE\". Specifying **allowVignette** with some countries/regions X is equivalent to specifying **avoidVignette** with all countries/regions but X. Specifying **allowVignette** with an empty list is the same as avoiding all toll roads with vignettes. Note: It is an error to specify both **avoidVignette** and **allowVignette**.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2119,7 +2119,7 @@
           "readOnly": true
         },
         "stateCode": {
-          "description": "A subdivision (e.g., state) of the country, represented by the second part of an [ISO 3166-2](https://www.iso.org/standard/63546.html) code. This is only available for some countries like the US, Canada, and Mexico.",
+          "description": "A subdivision (e.g., state) of the country, represented by the second part of an [ISO 3166-2](https://www.iso.org/standard/63546.html) code. This is only available for some countries/regions like the US, Canada, and Mexico.",
           "type": "string",
           "readOnly": true
         },
@@ -2693,7 +2693,7 @@
           {
             "value": "COUNTRY",
             "name": "Country",
-            "description": "Sections indicating which countries the route is in."
+            "description": "Sections indicating which countries/regions the route is in."
           },
           {
             "value": "FERRY",

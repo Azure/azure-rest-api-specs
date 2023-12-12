@@ -307,7 +307,7 @@
       "name": "countrySet",
       "x-ms-client-name": "countryFilter",
       "in": "query",
-      "description": "Comma separated string of country codes, e.g. FR,ES. This will limit the search to the specified countries",
+      "description": "Comma separated string of country codes, e.g. FR,ES. This will limit the search to the specified countries/regions",
       "type": "array",
       "items": {
         "type": "string"
@@ -488,7 +488,7 @@
     },
     "/search/fuzzy/{format}": {
       "get": {
-        "description": "\n**Free Form Search**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe basic default API is Free Form Search which handles the most fuzzy of inputs handling any combination of address or POI tokens. This search API is the canonical 'single line search'. The Free Form Search API is a seamless combination of POI search and geocoding. The API can also be weighted with a contextual position (lat./lon. pair), or fully constrained by a coordinate and radius, or it can be executed more generally without any geo biasing anchor point.<br><br>We strongly advise you to use the 'countrySet' parameter to specify only the countries for which your application needs coverage, as the default behavior will be to search the entire world, potentially returning unnecessary results.<br><br> E.g.: `countrySet`=US,FR <br><br>Please see [Search Coverage](https://learn.microsoft.com/azure/location-based-services/geocoding-coverage) for a complete list of all the supported countries.<br><br>Most Search queries default to `maxFuzzyLevel`=2 to gain performance and also reduce unusual results. This new default can be overridden as needed per request by passing in the query param `maxFuzzyLevel`=3 or 4.",
+        "description": "\n**Free Form Search**\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe basic default API is Free Form Search which handles the most fuzzy of inputs handling any combination of address or POI tokens. This search API is the canonical 'single line search'. The Free Form Search API is a seamless combination of POI search and geocoding. The API can also be weighted with a contextual position (lat./lon. pair), or fully constrained by a coordinate and radius, or it can be executed more generally without any geo biasing anchor point.<br><br>We strongly advise you to use the 'countrySet' parameter to specify only the countries/regions for which your application needs coverage, as the default behavior will be to search the entire world, potentially returning unnecessary results.<br><br> E.g.: `countrySet`=US,FR <br><br>Please see [Search Coverage](https://learn.microsoft.com/azure/location-based-services/geocoding-coverage) for a complete list of all the supported countries/regions.<br><br>Most Search queries default to `maxFuzzyLevel`=2 to gain performance and also reduce unusual results. This new default can be overridden as needed per request by passing in the query param `maxFuzzyLevel`=3 or 4.",
         "operationId": "Search_GetSearchFuzzy",
         "x-ms-client-name": "FuzzySearch",
         "x-ms-examples": {
