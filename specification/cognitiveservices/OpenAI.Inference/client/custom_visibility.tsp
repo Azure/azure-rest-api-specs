@@ -48,8 +48,8 @@ using Azure.ClientGenerator.Core;
 
 // New additions: we don't seem to need routes for them to be exposed
 // These models will be added under implementation.models
-// @@access(Azure.OpenAI.ChatCompletionsStream, Access.internal);
-// @@usage(Azure.OpenAI.ChatCompletionsStream, Usage.output);
+@@access(Azure.OpenAI.ChatCompletionsStream, Access.internal);
+@@usage(Azure.OpenAI.ChatCompletionsStream, Usage.output);
 
-// @@access(Azure.OpenAI.CompletionsStreamDelta, Access.internal);
-// @@usage(Azure.OpenAI.CompletionsStreamDelta, Usage.output);
+@@access(Azure.OpenAI.CompletionsStreamDelta, Access.internal);
+@@usage(Azure.OpenAI.CompletionsStreamDelta, Usage.output);

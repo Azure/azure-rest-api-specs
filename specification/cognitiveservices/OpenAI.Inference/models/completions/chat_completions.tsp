@@ -246,11 +246,6 @@ model ChatChoice {
   @projectedName("json", "finish_details")
   finishDetails?: ChatFinishDetails;
 
-  @doc("The delta message content for a streaming response.")
-  @projectedName("json", "delta")
-  @projectedName("csharp", "InternalStreamingDeltaMessage")
-  delta?: ChatResponseMessage;
-
   @doc("""
     Information about the content filtering category (hate, sexual, violence, self_harm), if it
     has been detected, as well as the severity level (very_low, low, medium, high-scale that
