@@ -1,0 +1,508 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "policyName": "MicrosoftCdnWafPolicy",
+    "cdnWebApplicationFirewallPolicy": {
+      "location": "WestUs",
+      "sku": {
+        "name": "Standard_Microsoft"
+      },
+      "properties": {
+        "policySettings": {
+          "defaultRedirectUrl": "http://www.bing.com",
+          "defaultCustomBlockResponseStatusCode": 200,
+          "defaultCustomBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
+        },
+        "rateLimitRules": {
+          "rules": [
+            {
+              "name": "RateLimitRule1",
+              "priority": 1,
+              "enabledState": "Enabled",
+              "rateLimitDurationInMinutes": 0,
+              "rateLimitThreshold": 1000,
+              "matchConditions": [
+                {
+                  "matchVariable": "RemoteAddr",
+                  "selector": null,
+                  "operator": "IPMatch",
+                  "negateCondition": false,
+                  "transforms": [],
+                  "matchValue": [
+                    "192.168.1.0/24",
+                    "10.0.0.0/24"
+                  ]
+                }
+              ],
+              "action": "Block"
+            }
+          ]
+        },
+        "customRules": {
+          "rules": [
+            {
+              "name": "CustomRule1",
+              "priority": 2,
+              "enabledState": "Enabled",
+              "matchConditions": [
+                {
+                  "matchVariable": "RemoteAddr",
+                  "selector": null,
+                  "operator": "GeoMatch",
+                  "negateCondition": false,
+                  "transforms": [],
+                  "matchValue": [
+                    "CH"
+                  ]
+                },
+                {
+                  "matchVariable": "RequestHeader",
+                  "selector": "UserAgent",
+                  "operator": "Contains",
+                  "negateCondition": false,
+                  "transforms": [],
+                  "matchValue": [
+                    "windows"
+                  ]
+                },
+                {
+                  "matchVariable": "QueryString",
+                  "selector": "search",
+                  "operator": "Contains",
+                  "negateCondition": false,
+                  "transforms": [
+                    "UrlDecode",
+                    "Lowercase"
+                  ],
+                  "matchValue": [
+                    "<?php",
+                    "?>"
+                  ]
+                }
+              ],
+              "action": "Block"
+            }
+          ]
+        },
+        "managedRules": {
+          "managedRuleSets": [
+            {
+              "ruleSetType": "DefaultRuleSet",
+              "ruleSetVersion": "preview-1.0",
+              "ruleGroupOverrides": [
+                {
+                  "ruleGroupName": "Group1",
+                  "rules": [
+                    {
+                      "ruleId": "GROUP1-0001",
+                      "enabledState": "Enabled",
+                      "action": "Redirect"
+                    },
+                    {
+                      "ruleId": "GROUP1-0002",
+                      "enabledState": "Disabled"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MicrosoftCdnWafPolicy",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/MicrosoftCdnWafPolicy",
+        "type": "Microsoft.Cdn/cdnwebapplicationfirewallpolicies",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "sku": {
+          "name": "Standard_Microsoft"
+        },
+        "properties": {
+          "resourceState": "Enabled",
+          "provisioningState": "Succeeded",
+          "policySettings": {
+            "enabledState": "Enabled",
+            "mode": "Prevention",
+            "defaultRedirectUrl": "http://www.bing.com",
+            "defaultCustomBlockResponseStatusCode": 200,
+            "defaultCustomBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
+          },
+          "rateLimitRules": {
+            "rules": [
+              {
+                "name": "RateLimitRule1",
+                "priority": 1,
+                "enabledState": "Enabled",
+                "rateLimitDurationInMinutes": 0,
+                "rateLimitThreshold": 1000,
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "selector": null,
+                    "operator": "IPMatch",
+                    "negateCondition": false,
+                    "transforms": [],
+                    "matchValue": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ]
+                  }
+                ],
+                "action": "Block"
+              }
+            ]
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "CustomRule1",
+                "priority": 2,
+                "enabledState": "Enabled",
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "selector": null,
+                    "operator": "GeoMatch",
+                    "negateCondition": false,
+                    "transforms": [],
+                    "matchValue": [
+                      "CH"
+                    ]
+                  },
+                  {
+                    "matchVariable": "RequestHeader",
+                    "selector": "UserAgent",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "transforms": [],
+                    "matchValue": [
+                      "windows"
+                    ]
+                  },
+                  {
+                    "matchVariable": "QueryString",
+                    "selector": "search",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "transforms": [
+                      "UrlDecode",
+                      "Lowercase"
+                    ],
+                    "matchValue": [
+                      "<?php",
+                      "?>"
+                    ]
+                  }
+                ],
+                "action": "Block"
+              }
+            ]
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "DefaultRuleSet",
+                "ruleSetVersion": "preview-1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "Group1",
+                    "rules": [
+                      {
+                        "ruleId": "GROUP1-0001",
+                        "enabledState": "Enabled",
+                        "action": "Redirect"
+                      },
+                      {
+                        "ruleId": "GROUP1-0002",
+                        "enabledState": "Disabled"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "endpointLinks": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint1"
+            },
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint2"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "MicrosoftCdnWafPolicy",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/MicrosoftCdnWafPolicy",
+        "type": "Microsoft.Cdn/cdnwebapplicationfirewallpolicies",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "sku": {
+          "name": "Standard_Microsoft"
+        },
+        "properties": {
+          "resourceState": "Enabled",
+          "provisioningState": "Succeeded",
+          "policySettings": {
+            "enabledState": "Enabled",
+            "mode": "Prevention",
+            "defaultRedirectUrl": "http://www.bing.com",
+            "defaultCustomBlockResponseStatusCode": 200,
+            "defaultCustomBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
+          },
+          "rateLimitRules": {
+            "rules": [
+              {
+                "name": "RateLimitRule1",
+                "priority": 1,
+                "enabledState": "Enabled",
+                "rateLimitDurationInMinutes": 0,
+                "rateLimitThreshold": 1000,
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "selector": null,
+                    "operator": "IPMatch",
+                    "negateCondition": false,
+                    "transforms": [],
+                    "matchValue": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ]
+                  }
+                ],
+                "action": "Block"
+              }
+            ]
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "CustomRule1",
+                "priority": 2,
+                "enabledState": "Enabled",
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "selector": null,
+                    "operator": "GeoMatch",
+                    "negateCondition": false,
+                    "transforms": [],
+                    "matchValue": [
+                      "CH"
+                    ]
+                  },
+                  {
+                    "matchVariable": "RequestHeader",
+                    "selector": "UserAgent",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "transforms": [],
+                    "matchValue": [
+                      "windows"
+                    ]
+                  },
+                  {
+                    "matchVariable": "QueryString",
+                    "selector": "search",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "transforms": [
+                      "UrlDecode",
+                      "Lowercase"
+                    ],
+                    "matchValue": [
+                      "<?php",
+                      "?>"
+                    ]
+                  }
+                ],
+                "action": "Block"
+              }
+            ]
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "DefaultRuleSet",
+                "ruleSetVersion": "preview-1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "Group1",
+                    "rules": [
+                      {
+                        "ruleId": "GROUP1-0001",
+                        "enabledState": "Enabled",
+                        "action": "Redirect"
+                      },
+                      {
+                        "ruleId": "GROUP1-0002",
+                        "enabledState": "Disabled"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "endpointLinks": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint1"
+            },
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint2"
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2023-07-01-preview"
+      },
+      "body": {
+        "name": "MicrosoftCdnWafPolicy",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/MicrosoftCdnWafPolicy",
+        "type": "Microsoft.Cdn/cdnwebapplicationfirewallpolicies",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "sku": {
+          "name": "Standard_Microsoft"
+        },
+        "properties": {
+          "resourceState": "Creating",
+          "provisioningState": "Succeeded",
+          "policySettings": {
+            "enabledState": "Enabled",
+            "mode": "Prevention",
+            "defaultRedirectUrl": "http://www.bing.com",
+            "defaultCustomBlockResponseStatusCode": 200,
+            "defaultCustomBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
+          },
+          "rateLimitRules": {
+            "rules": [
+              {
+                "name": "RateLimitRule1",
+                "priority": 1,
+                "enabledState": "Enabled",
+                "rateLimitDurationInMinutes": 0,
+                "rateLimitThreshold": 1000,
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "selector": null,
+                    "operator": "IPMatch",
+                    "negateCondition": false,
+                    "transforms": [],
+                    "matchValue": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ]
+                  }
+                ],
+                "action": "Block"
+              }
+            ]
+          },
+          "customRules": {
+            "rules": [
+              {
+                "name": "CustomRule1",
+                "priority": 3,
+                "enabledState": "Enabled",
+                "matchConditions": [
+                  {
+                    "matchVariable": "RemoteAddr",
+                    "selector": null,
+                    "operator": "GeoMatch",
+                    "negateCondition": false,
+                    "transforms": [],
+                    "matchValue": [
+                      "CH"
+                    ]
+                  },
+                  {
+                    "matchVariable": "RequestHeader",
+                    "selector": "UserAgent",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "transforms": [],
+                    "matchValue": [
+                      "windows"
+                    ]
+                  },
+                  {
+                    "matchVariable": "QueryString",
+                    "selector": "search",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "transforms": [
+                      "UrlDecode",
+                      "Lowercase"
+                    ],
+                    "matchValue": [
+                      "<?php",
+                      "?>"
+                    ]
+                  }
+                ],
+                "action": "Block"
+              }
+            ]
+          },
+          "managedRules": {
+            "managedRuleSets": [
+              {
+                "ruleSetType": "DefaultRuleSet",
+                "ruleSetVersion": "preview-1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "Group1",
+                    "rules": [
+                      {
+                        "ruleId": "GROUP1-0001",
+                        "enabledState": "Enabled",
+                        "action": "Redirect"
+                      },
+                      {
+                        "ruleId": "GROUP1-0002",
+                        "enabledState": "Disabled"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "endpointLinks": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint1"
+            },
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint2"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

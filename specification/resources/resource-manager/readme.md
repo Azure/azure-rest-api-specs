@@ -62,7 +62,7 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2020-10
+tag: package-deploymentscripts-2023-08
 ```
 
 ``` yaml $(package-templatespecs)
@@ -81,6 +81,18 @@ tag: package-changes-2022-05
 tag: package-snapshots-2022-11
 ```
 
+``` yaml $(package-bicep)
+tag: package-bicep-2023-11
+```
+
+### Tag: package-bicep-2023-11
+
+These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-bicep-2023-11'
+input-file:
+  - Microsoft.Resources/stable/2023-11-01/bicepClient.json
+```
 ### Tag: package-policy-2023-04
 
 These settings apply only when `--tag=package-policy-2023-04` is specified on the command line.
@@ -150,6 +162,18 @@ suppressions:
 
 ```
 
+### Tag: package-deploymentscripts-2023-08
+
+These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-deploymentscripts-2023-08'
+input-file:
+  - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
+
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: OperationsAPI will come from Resources
+```
 ### Tag: package-resources-2023-07
 
 These settings apply only when `--tag=package-resources-2023-07` is specified on the command line.
@@ -1070,10 +1094,37 @@ directive:
     suppress: TrackedResourcePatchOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
-  - from: deploymentScripts.json
-    suppress: OperationsAPIImplementation
+  - suppress: OperationsAPIImplementation
+    from: deploymentScripts.json
     where: $.paths
     reason: OperationsAPI will come from Resources
+  - suppress: IntegerTypeMustHaveFormat
+    from: deploymentScripts.json
+    reason: Tooling issue, default is int32, explictly mentioning the format as per doc, it still flags breaking change.
+  - suppress: ResourceNameRestriction
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PropertiesTypeObjectNoDefinition
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SubscriptionsAndResourceGroupCasing
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ParametersInPointGet
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PatchIdentityProperty
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroErrorContent
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - from: deploymentScripts.json
     suppress: R3006
     where:
@@ -1335,6 +1386,7 @@ batch:
   - package-deploymentstacks: true
   - package-changes: true
   - package-snapshots: true
+  - package-bicep: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
