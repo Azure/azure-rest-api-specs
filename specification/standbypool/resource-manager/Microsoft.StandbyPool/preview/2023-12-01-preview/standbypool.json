@@ -1122,6 +1122,35 @@
         }
       }
     },
+    "StandbyVirtualMachinePoolElasticityProfile": {
+      "type": "object",
+      "description": "Details of the elasticity profile.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of virtual machines in the standby virtual machine pool.",
+          "minimum": 0,
+          "maximum": 2000
+        }
+      },
+      "required": [
+        "maxReadyCapacity"
+      ]
+    },
+    "StandbyVirtualMachinePoolElasticityProfileUpdate": {
+      "type": "object",
+      "description": "Details of the elasticity profile.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of virtual machines in the standby virtual machine pool.",
+          "minimum": 0,
+          "maximum": 2000
+        }
+      }
+    },
     "StandbyVirtualMachinePoolResource": {
       "type": "object",
       "description": "A StandbyVirtualMachinePoolResource.",
@@ -1168,7 +1197,7 @@
       "description": "Details of the StandbyVirtualMachinePool.",
       "properties": {
         "elasticityProfile": {
-          "$ref": "#/definitions/VirtualMachinePoolElasticityProfile",
+          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfile",
           "description": "Specifies the elasticity profile of the standby virtual machine pools."
         },
         "virtualMachineState": {
@@ -1222,7 +1251,7 @@
       "description": "The updatable properties of the StandbyVirtualMachinePoolResource.",
       "properties": {
         "elasticityProfile": {
-          "$ref": "#/definitions/VirtualMachinePoolElasticityProfileUpdate",
+          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfileUpdate",
           "description": "Specifies the elasticity profile of the standby virtual machine pools."
         },
         "virtualMachineState": {
@@ -1317,35 +1346,6 @@
       "required": [
         "id"
       ]
-    },
-    "VirtualMachinePoolElasticityProfile": {
-      "type": "object",
-      "description": "Details of the elasticity profile.",
-      "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of virtual machines in the standby virtual machine pool.",
-          "minimum": 0,
-          "maximum": 2000
-        }
-      },
-      "required": [
-        "maxReadyCapacity"
-      ]
-    },
-    "VirtualMachinePoolElasticityProfileUpdate": {
-      "type": "object",
-      "description": "Details of the elasticity profile.",
-      "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of virtual machines in the standby virtual machine pool.",
-          "minimum": 0,
-          "maximum": 2000
-        }
-      }
     },
     "VirtualMachineState": {
       "type": "string",

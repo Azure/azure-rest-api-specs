@@ -42,7 +42,7 @@ model StandbyVirtualMachinePoolResourceProperties {
 
   @doc("Specifies the elasticity profile of the standby virtual machine pools.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
-  elasticityProfile?: VirtualMachinePoolElasticityProfile;
+  elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
 
   @doc("Specifies the desired state of virtual machines in the pool.")
   @extension("x-ms-identifiers", ["vmState"])
@@ -77,7 +77,7 @@ enum VirtualMachineState {
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Details of the elasticity profile.")
-model VirtualMachinePoolElasticityProfile {
+model StandbyVirtualMachinePoolElasticityProfile {
   @doc("Specifies maximum number of virtual machines in the standby virtual machine pool.")
   @maxValue(2000)
   @minValue(0)
