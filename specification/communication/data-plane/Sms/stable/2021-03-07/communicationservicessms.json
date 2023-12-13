@@ -100,6 +100,11 @@
         "tag": {
           "description": "Use this field to provide metadata that will then be sent back in the corresponding Delivery Report.",
           "type": "string"
+        },
+        "validityPeriodSeconds": {
+          "format": "int32",
+          "description": "Expresses how long the message is considered valid for processing (retried to be sent or waited for delivery report). After this time the message will be considered as failed to deliver or carrier does not support delivery report.",
+          "type": "integer"
         }
       }
     },
