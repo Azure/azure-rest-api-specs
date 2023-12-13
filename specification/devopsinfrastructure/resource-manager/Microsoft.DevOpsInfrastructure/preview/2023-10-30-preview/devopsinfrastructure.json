@@ -186,7 +186,7 @@
             "description": "Name of the pool. It needs to be globally unique.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
           }
         ],
         "responses": {
@@ -231,7 +231,7 @@
             "description": "Name of the pool. It needs to be globally unique.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
           },
           {
             "name": "resource",
@@ -302,7 +302,7 @@
             "description": "Name of the pool. It needs to be globally unique.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
           },
           {
             "name": "properties",
@@ -374,7 +374,7 @@
             "description": "Name of the pool. It needs to be globally unique.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]*$"
           }
         ],
         "responses": {
@@ -487,6 +487,28 @@
       "required": [
         "kind"
       ]
+    },
+    "GitHubOrganizationProfile": {
+      "type": "object",
+      "description": "GitHub organization profile",
+      "properties": {
+        "organizations": {
+          "type": "array",
+          "description": "The list of GitHub organizations/repositories the pool should be present in.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "organizations"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OrganizationProfile"
+        }
+      ],
+      "x-ms-discriminator-value": "GitHub"
     },
     "NetworkProfile": {
       "type": "object",

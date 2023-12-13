@@ -61,7 +61,7 @@ model GitHubOrganizationProfile extends OrganizationProfile {
   kind: "GitHub";
 
   @doc("The list of GitHub organizations/repositories the pool should be present in.")
-  organizations: Uri[];
+  organizations: string[];
 }
 
 @doc("Azure DevOps organization profile")
