@@ -13,9 +13,6 @@ namespace Microsoft.AzureCIS;
 
 @doc("dsmsRootFolder properties")
 model DsmsRootFolderResourceProperties {
-  @doc("The ServiceTreeId that owns the new root folder")
-  serviceTreeId?: string;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Duplicate property found in the resource envelope and resource properties."
   @doc("The name of the root folder to add. This should be the full folder path starting with a \"$\", with \"$\" replacing all \"/\" characters")
   name: string;
