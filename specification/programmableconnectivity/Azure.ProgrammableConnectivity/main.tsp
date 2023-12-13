@@ -29,7 +29,7 @@ using Azure.Core;
   "{endpoint}",
   "Azure Programmable Connectivity Endpoint.",
   {
-    @doc("An Azure Programmable Connectivity Endpoint providing access to Network APIs, for example eastus.usprod.apcgatewayapi.azure.com")
+    @doc("An Azure Programmable Connectivity Endpoint providing access to Network APIs, for example https://{region}.apcgatewayapi.azure.com")
     endpoint: string,
   }
 )

@@ -3,7 +3,7 @@
   "operationId": "LocationInterface_Verify",
   "parameters": {
     "api-version": "2023-11-14-preview",
-    "x-ms-client-request-id": "peoejiqirqp",
+    "x-ms-client-request-id": "123e4567-e89b-12d3-a456-426614174000",
     "apc-gateway-id": "zdgrzzaxlodrvewbksn",
     "body": {
       "networkIdentifier": {
@@ -31,28 +31,6 @@
     "200": {
       "body": {
         "verified": true
-      }
-    },
-    "403": {
-      "body": {
-        "status": 403,
-        "message": "There user has not consented",
-        "code": "CONSENT_URL_ERROR",
-        "consentUrl": "https://operator.consent_url.com"
-      }
-    },
-    "404":{
-      "body":{
-        "status": 404,
-        "message": "There is no Operator configured for this network.",
-        "code": "OPERATOR_NOT_FOUND"
-      }
-    },
-    "500":{
-      "body":{
-          "status": 500,
-          "message": "INTERNAL_ERROR",
-          "code": "Internal error occurred"
       }
     }
   }

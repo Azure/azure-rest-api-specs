@@ -21,13 +21,13 @@ interface Networks {
 
 /// Endpoints
 
-@resource("Network")
+@resource("Apis")
 @doc("Static endpoint to access Network API")
 model NetworkRetrieveEndpoint {
-  @key("action")
+  @key
   @doc("Static endpoint")
   @visibility("read")
-  action: "";
+  network: "Network";
 }
 
 /// Common models
@@ -35,6 +35,7 @@ model NetworkRetrieveEndpoint {
 model DeviceNetworkIdentifier {
   @doc("The type of device identifier given: 'IPv4' or 'IPv6'.")
   identifierType: string;
+
   /** The device identifier in a format matching the type above:
   - IPv4 in dotted-quad format.
   - IPV6 in IETF 5952 format.*/

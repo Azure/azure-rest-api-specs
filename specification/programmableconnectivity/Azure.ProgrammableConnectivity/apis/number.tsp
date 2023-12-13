@@ -23,7 +23,6 @@ namespace Azure.ProgrammableConnectivity;
   of the entire flow (the 200 response) is included in this document.
 """)
 interface NumberInterface {
-
   @doc("Verifies the phone number (MSISDN) associated with a device.")
   verify is Operations.ResourceAction<
     NumberEndpoint,
@@ -41,13 +40,13 @@ interface NumberInterface {
 
 /// Endpoints
 
-@resource("Number")
+@resource("Apis")
 @doc("Static endpoint to access Number API")
 model NumberEndpoint {
-  @key("action")
+  @key
   @doc("Static endpoint")
   @visibility("read")
-  action: "";
+  number: "Number";
 }
 
 /// Request models
