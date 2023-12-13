@@ -787,6 +787,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets a private link resource by name which can be used for the Maps Account.",
+        "operationId": "PrivateLinkResources_Get",
+        "x-ms-examples": {
+          "Get a private link resource.": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private link resource.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
@@ -1037,6 +1082,15 @@
       "minLength": 3,
       "maxLength": 98,
       "pattern": "^[a-zA-Z][a-zA-Z0-9-]{3,98}[a-zA-Z0-9]$"
+    },
+    "PrivateLinkResourceNameParameter": {
+      "name": "privateLinkResourceName",
+      "in": "path",
+      "description": "The name of the private link resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "pattern": "^.*$"
     }
   },
   "definitions": {
