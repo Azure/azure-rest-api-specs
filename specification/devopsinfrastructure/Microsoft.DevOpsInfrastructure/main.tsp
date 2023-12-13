@@ -19,7 +19,7 @@ namespace Microsoft.DevOpsInfrastructure;
 
 model Pool is TrackedResource<PoolProperties> {
   @key("poolName")
-  @pattern("^[a-z][a-z0-9]*$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-.]*$")
   @path
   @segment("pools")
   @doc("Name of the pool. It needs to be globally unique.")
@@ -54,6 +54,15 @@ model PoolProperties {
 @doc("Defines the organization in which the pool will be used.")
 @discriminator("kind")
 model OrganizationProfile {}
+
+@doc("GitHub organization profile")
+model GitHubOrganizationProfile extends OrganizationProfile {
+  @doc("GitHub organization profile")
+  kind: "GitHub";
+
+  @doc("The list of GitHub organizations/repositories the pool should be present in.")
+  organizations: Uri[];
+}
 
 @doc("Azure DevOps organization profile")
 model AzureDevOpsOrganizationProfile extends OrganizationProfile {
