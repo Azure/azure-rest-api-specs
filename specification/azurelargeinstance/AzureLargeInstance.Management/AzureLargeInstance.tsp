@@ -106,7 +106,3 @@ op ArmResourceActionNoBody<
   "json",
   "tagsParameter"
 );
-@@OpenAPI.extension(AzureLargeInstances.update::parameters.properties,
-  "x-ms-client-name",
-  "tagsParameter"
-);
