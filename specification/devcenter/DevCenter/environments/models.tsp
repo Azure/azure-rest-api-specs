@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 import "../shared/models.tsp";
 
 using TypeSpec.Versioning;
@@ -30,20 +31,21 @@ enum EnvironmentTypeEnableStatus {
   @doc("The environment type is not enabled for use in the project.") Disabled,
 }
 
+@doc("The provisioning state of the environment.")
 enum EnvironmentProvisioningState {
-Succeeded,
-Failed,
-Canceled,
-Creating,
-Accepted,
-Deleting,
-Updating,
-Preparing,
-Running,
-Syncing,
-MovingResources,
-TransientFailure,
-StorageProvisioningFailed,
+  @doc("The environment was successfully provisioned.") Succeeded,
+  @doc("The environment failed to provision.") Failed,
+  @doc("The environment provisioning was canceled.") Canceled,
+  @doc("The environment is creating.") Creating,
+  @doc("The environment was accepted.") Accepted,
+  @doc("The environment is deleting.") Deleting,
+  @doc("The environment is updating.") Updating,
+  @doc("The environment is preparing.") Preparing,
+  @doc("The environment is running.") Running,
+  @doc("The environment is Syncing.") Syncing,
+  @doc("The environment is moving resources.") MovingResources,
+  @doc("The environment has a transient failure.") TransientFailure,
+  @doc("The environment storage provisioning failed.") StorageProvisioningFailed,
 }
 
 @doc("Results of the environment list operation.")
@@ -69,7 +71,7 @@ model Environment {
   @visibility("read")
   @projectedName("csharp", "userId")
   @projectedName("java", "userId")
-  user?: string;
+  user?: Azure.Core.uuid;
 
   @doc("The provisioning state of the environment.")
   @visibility("read")
@@ -77,7 +79,7 @@ model Environment {
 
   @doc("The identifier of the resource group containing the environment's resources.")
   @visibility("read")
-  resourceGroupId?: string;
+  resourceGroupId?: Azure.ResourceManager.ResourceIdentifier<[{type:"Microsoft.Resources/resourceGroups"}]> ;
 
   @doc("Name of the catalog.")
   @visibility("read", "create")
@@ -192,7 +194,7 @@ Id of a subscription or management group that the environment type will be
 mapped to. The environment's resources will be deployed into this subscription
 or management group.
 """)
-  deploymentTargetId: string;
+  deploymentTargetId: Azure.ResourceManager.ResourceIdentifier;
 
   @doc("Indicates whether this environment type is enabled for use in this project.")
   status: EnvironmentTypeEnableStatus;
