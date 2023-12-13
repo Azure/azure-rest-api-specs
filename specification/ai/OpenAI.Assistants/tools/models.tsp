@@ -77,7 +77,7 @@ model ToolCall {
 }
 
 @doc("""
-A tool call to a code interpreter tool, issued by the model in evaluation of a configured code interpeter tool, that
+A tool call to a code interpreter tool, issued by the model in evaluation of a configured code interpreter tool, that
 represents submitted output needed or already fulfilled by the tool for the model to continue.
 """)
 @added(ServiceApiVersions.v2023_11_06_beta)
@@ -87,7 +87,7 @@ model CodeInterpreterToolCall extends ToolCall {
 
   @projectedName("json", "code_interpreter")
   @doc("The details of the tool call to the code interpreter tool.")
-  codeInterpreter: CodeInterpeterCallDetails;
+  codeInterpreter: CodeInterpreterCallDetails;
 }
 
 @doc("""
@@ -120,11 +120,11 @@ model FunctionToolCall extends ToolCall {
 
 @doc("The detailed information about a code interpreter invocation by the model.")
 @added(ServiceApiVersions.v2023_11_06_beta)
-model CodeInterpeterCallDetails {
+model CodeInterpreterCallDetails {
   @doc("The input provided by the model to the code interpreter tool.")
   input: string;
 
-  @doc("The outputs produced by the code interpeter tool back to the model in response to the tool call.")
+  @doc("The outputs produced by the code interpreter tool back to the model in response to the tool call.")
   outputs: CodeInterpreterCallOutput[];
 }
 
