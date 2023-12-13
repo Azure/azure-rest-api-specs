@@ -3,6 +3,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./workspace.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -13,7 +14,7 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service({
-  title: "Microsoft.MachineLearningServices management service",
+  title: "Azure Machine Learning Services",
   version: "2024-01-01-preview",
 })
 @doc("Microsoft.MachineLearningServices Resource Provider management API.")
@@ -21,6 +22,7 @@ using Azure.ResourceManager;
 namespace Microsoft.MachineLearningServices;
 
 @doc("Index resource")
+@parentResource(Workspace)
 model Index is ProxyResource<IndexVersionProperties> {
   @doc("Name of the index")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
