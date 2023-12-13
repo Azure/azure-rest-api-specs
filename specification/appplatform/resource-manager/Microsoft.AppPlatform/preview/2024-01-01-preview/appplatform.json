@@ -8510,6 +8510,7 @@
           "AppPlatform"
         ],
         "description": "Check the customized accelerator are valid.",
+        "x-ms-long-running-operation": true,
         "operationId": "CustomizedAccelerators_Validate",
         "parameters": [
           {
@@ -15378,7 +15379,7 @@
       "description": "The name of the application accelerator.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])$",
       "x-ms-parameter-location": "method"
     },
     "CustomizedAcceleratorNameParameter": {
@@ -15387,7 +15388,7 @@
       "description": "The name of the customized accelerator.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])$",
       "x-ms-parameter-location": "method"
     },
     "PredefinedAcceleratorNameParameter": {
@@ -15396,7 +15397,7 @@
       "description": "The name of the predefined accelerator.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])$",
       "x-ms-parameter-location": "method"
     }
   },
