@@ -9,18 +9,15 @@ using TypeSpec.Versioning;
 @added(ServiceApiVersions.v2023_09_01_Preview)
 enum AudioTranslationFormat {
   @doc("Use a response body that is a JSON object containing a single 'text' field for the translation.")
-  @projectedName("csharp", "Simple")
   json: "json",
 
   @doc("""
     Use a response body that is a JSON object containing translation text along with timing, segments, and other
     metadata.
     """)
-  @projectedName("csharp", "Verbose")
   verbose_json: "verbose_json",
 
   @doc("Use a response body that is plain text containing the raw, unannotated translation.")
-  @projectedName("csharp", "InternalPlainText")
   text: "text",
 
   @doc("Use a response body that is plain text in SubRip (SRT) format that also includes timing information.")
@@ -39,7 +36,7 @@ The configuration information for an audio translation request.
 model AudioTranslationOptions {
   @doc("""
   The audio data to translate. This must be the binary content of a file in one of the supported media formats:
-  flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
+   flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
   """)
   @projectedName("csharp", "AudioData")
   file: bytes;

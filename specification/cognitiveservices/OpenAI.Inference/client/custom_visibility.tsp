@@ -49,3 +49,33 @@ using Azure.ClientGenerator.Core;
   "csharp",
   "AzureExtensionsContext"
 );
+
+@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.json,
+  "csharp",
+  "Simple"
+);
+
+@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.verbose_json,
+  "csharp",
+  "Verbose"
+);
+
+@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.text,
+  "csharp",
+  "InternalPlainText"
+);
+
+@@projectedName(Azure.OpenAI.AudioTranslationFormat.json,
+  "csharp",
+  "Simple"
+);
+
+@@projectedName(Azure.OpenAI.AudioTranslationFormat.verbose_json,
+  "csharp",
+  "Verbose"
+);
+
+@@projectedName(Azure.OpenAI.AudioTranslationFormat.text,
+  "csharp",
+  "InternalPlainText"
+);
