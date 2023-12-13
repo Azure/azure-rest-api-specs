@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
 import "../service.tsp";
 
 using Azure.Core;
@@ -39,7 +38,7 @@ model OperationStatus {
   status: OperationStatusValue;
 
   @doc("The id of the resource.")
-  resourceId?: Azure.ResourceManager.ResourceIdentifier;
+  resourceId?: string;
 
   @doc("The start time of the operation")
   startTime?: utcDateTime;

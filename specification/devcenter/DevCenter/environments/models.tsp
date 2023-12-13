@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
 import "../shared/models.tsp";
 
 using TypeSpec.Versioning;
@@ -79,7 +78,7 @@ model Environment {
 
   @doc("The identifier of the resource group containing the environment's resources.")
   @visibility("read")
-  resourceGroupId?: Azure.ResourceManager.ResourceIdentifier<[{type:"Microsoft.Resources/resourceGroups"}]> ;
+  resourceGroupId?: string ;
 
   @doc("Name of the catalog.")
   @visibility("read", "create")
@@ -194,7 +193,7 @@ Id of a subscription or management group that the environment type will be
 mapped to. The environment's resources will be deployed into this subscription
 or management group.
 """)
-  deploymentTargetId: Azure.ResourceManager.ResourceIdentifier;
+  deploymentTargetId: string;
 
   @doc("Indicates whether this environment type is enabled for use in this project.")
   status: EnvironmentTypeEnableStatus;
