@@ -1920,7 +1920,6 @@
     "ClusterProfile": {
       "type": "object",
       "required": [
-        "identityProfile",
         "authorizationProfile",
         "clusterVersion",
         "ossVersion"
@@ -1936,6 +1935,7 @@
           "$ref": "#/definitions/ClusterComponents"
         },
         "identityProfile": {
+          "description": "This property is required by Trino, Spark and Flink cluster but is optional for Kafka cluster.",
           "$ref": "#/definitions/IdentityProfile"
         },
         "authorizationProfile": {
@@ -1971,9 +1971,7 @@
           "$ref": "#/definitions/AutoscaleProfile"
         },
         "kafkaProfile": {
-          "type": "object",
-          "description": "Kafka cluster profile.",
-          "additionalProperties": true
+          "$ref": "#/definitions/KafkaProfile"
         },
         "trinoProfile": {
           "$ref": "#/definitions/TrinoProfile"
@@ -2694,7 +2692,7 @@
       "properties": {
         "storageUri": {
           "type": "string",
-          "pattern": "^(\\w{4,5})://(.*)@(.*).\\b(blob|dfs)\\b\\.core\\.windows\\.net$",
+          "pattern": "^(\\w{4,5})://(.*)@(.*).\\b(blob|dfs)\\b.*$",
           "description": "Storage account uri which is used for savepoint and checkpoint state."
         },
         "storagekey": {
@@ -2721,6 +2719,69 @@
           "type": "integer",
           "format": "int64",
           "description": "The required memory in MB, Container memory will be 110 percentile"
+        }
+      }
+    },
+    "KafkaProfile": {
+      "type": "object",
+      "description": "The Kafka cluster profile.",
+      "required": [
+        "diskStorage"
+      ],
+      "properties": {
+        "enableKRaft": {
+          "description": "Expose Kafka cluster in KRaft mode.",
+          "default": true,
+          "type": "boolean"
+        },
+        "enablePublicEndpoints": {
+          "description": "Expose worker nodes as public endpoints.",
+          "default": false,
+          "type": "boolean"
+        },
+        "remoteStorageUri": {
+          "description": "Fully qualified path of Azure Storage container used for Tiered Storage.",
+          "type": "string",
+          "pattern": "^(https?|abfss?):\\/\\/[^/]+(?:\\/|$)"
+        },
+        "diskStorage": {
+          "$ref": "#/definitions/DiskStorageProfile"
+        },
+        "clusterIdentity": {
+          "description": "Identity of the internal service components inside the Kafka cluster.",
+          "$ref": "#/definitions/IdentityProfile",
+          "readOnly": true
+        }
+      }
+    },
+    "DiskStorageProfile": {
+      "type": "object",
+      "description": "Kafka disk storage profile.",
+      "required": [
+        "dataDiskSize",
+        "dataDiskType"
+      ],
+      "properties": {
+        "dataDiskSize": {
+          "description": "Managed Disk size in GB. The maximum supported disk size for Standard and Premium HDD/SSD is 32TB, except for Premium SSD v2, which supports up to 64TB.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "dataDiskType": {
+          "description": "Managed Disk Type.",
+          "type": "string",
+          "enum": [
+            "Standard_HDD_LRS",
+            "Standard_SSD_LRS",
+            "Standard_SSD_ZRS",
+            "Premium_SSD_LRS",
+            "Premium_SSD_ZRS",
+            "Premium_SSD_v2_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "DataDiskType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2818,7 +2879,7 @@
           "description": "The number of virtual machines.",
           "type": "integer",
           "format": "int32",
-          "minimum": 1.0
+          "minimum": 1
         }
       }
     },
