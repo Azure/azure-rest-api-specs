@@ -454,7 +454,7 @@
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
         "message": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The chat message for a given chat completions prompt."
         },
         "index": {
@@ -469,11 +469,11 @@
           "x-ms-client-name": "finishReason"
         },
         "delta": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The delta message content for a streaming response."
         },
         "content_filter_results": {
-          "$ref": "#/definitions/ContentFilterResults",
+          "$ref": "#/definitions/ContentFilterResultsForChoice",
           "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
           "x-ms-client-name": "contentFilterResults"
         }
@@ -508,7 +508,7 @@
           "type": "array",
           "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
           "items": {
-            "$ref": "#/definitions/PromptFilterResult"
+            "$ref": "#/definitions/ContentFilterResultsForPrompt"
           },
           "x-ms-client-name": "promptFilterResults",
           "x-ms-identifiers": []
@@ -533,7 +533,7 @@
           "type": "array",
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
           "items": {
-            "$ref": "#/definitions/ChatMessage"
+            "$ref": "#/definitions/ChatRequestMessage"
           },
           "x-ms-identifiers": []
         },
@@ -604,17 +604,100 @@
         "messages"
       ]
     },
-    "ChatMessage": {
+    "ChatRequestAssistantMessage": {
       "type": "object",
-      "description": "A single, role-attributed message within a chat completion interaction.",
+      "description": "A request chat message representing response or action from the assistant.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
+    "ChatRequestMessage": {
+      "type": "object",
+      "description": "An abstract representation of a chat message as provided in a request.",
       "properties": {
         "role": {
           "$ref": "#/definitions/ChatRole",
-          "description": "The role associated with this message payload."
+          "description": "The chat role associated with this message."
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role"
+      ]
+    },
+    "ChatRequestSystemMessage": {
+      "type": "object",
+      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the system message."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ChatRequestUserMessage": {
+      "type": "object",
+      "description": "A request chat message representing user input to the assistant.",
+      "properties": {
+        "content": {
+          "description": "The contents of the user message, with available input types varying by selected model."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "description": "A representation of a chat message as received in a response.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message."
         },
         "content": {
           "type": "string",
-          "description": "The text associated with this message payload.",
+          "description": "The content of the message.",
           "x-nullable": true
         }
       },
@@ -667,7 +750,7 @@
           "description": "The ordered index associated with this completions choice."
         },
         "content_filter_results": {
-          "$ref": "#/definitions/ContentFilterResults",
+          "$ref": "#/definitions/ContentFilterResultsForChoice",
           "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
           "x-ms-client-name": "contentFilterResults"
         },
@@ -712,7 +795,7 @@
           "type": "array",
           "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
           "items": {
-            "$ref": "#/definitions/PromptFilterResult"
+            "$ref": "#/definitions/ContentFilterResultsForPrompt"
           },
           "x-ms-client-name": "promptFilterResults",
           "x-ms-identifiers": []
@@ -959,9 +1042,9 @@
         "filtered"
       ]
     },
-    "ContentFilterResults": {
+    "ContentFilterResultDetailsForPrompt": {
       "type": "object",
-      "description": "Information about the content filtering category, if it has been detected.",
+      "description": "Information about content filtering evaluated against input data to Azure OpenAI.",
       "properties": {
         "sexual": {
           "$ref": "#/definitions/ContentFilterResult",
@@ -985,6 +1068,54 @@
           "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
         }
       }
+    },
+    "ContentFilterResultsForChoice": {
+      "type": "object",
+      "description": "Information about content filtering evaluated against generated model output.",
+      "properties": {
+        "sexual": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including \n those portrayed as an assault or a forced sexual violent act against one’s will, \n prostitution, pornography, and abuse."
+        },
+        "violence": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or \nkill someone or something; describes weapons, etc."
+        },
+        "hate": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language \nwith reference to a person or identity group on the basis of certain differentiating \nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+        },
+        "self_harm": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
+          "x-ms-client-name": "selfHarm"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
+        }
+      }
+    },
+    "ContentFilterResultsForPrompt": {
+      "type": "object",
+      "description": "Content filtering results for a single prompt in the request.",
+      "properties": {
+        "prompt_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of this prompt in the set of prompt results",
+          "x-ms-client-name": "promptIndex"
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResultDetailsForPrompt",
+          "description": "Content filtering results for this prompt",
+          "x-ms-client-name": "contentFilterResults"
+        }
+      },
+      "required": [
+        "prompt_index",
+        "content_filter_results"
+      ]
     },
     "ContentFilterSeverity": {
       "type": "string",
@@ -1113,10 +1244,30 @@
         "total_tokens"
       ]
     },
+    "ImageGenerationData": {
+      "type": "object",
+      "description": "A representation of a single generated image, provided as either base64-encoded data or as a URL from which the image\nmay be retrieved.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL that provides temporary access to download the generated image."
+        },
+        "b64_json": {
+          "type": "string",
+          "description": "The complete data for an image, represented as a base64-encoded string.",
+          "x-ms-client-name": "base64Data"
+        }
+      }
+    },
     "ImageGenerationOptions": {
       "type": "object",
       "description": "Represents the request data used to generate images.",
       "properties": {
+        "model": {
+          "type": "string",
+          "description": "The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be\ninferred as a default."
+        },
         "prompt": {
           "type": "string",
           "description": "A description of the desired images."
@@ -1124,17 +1275,18 @@
         "n": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of images to generate (defaults to 1).",
+          "description": "The number of images to generate.\nDall-e-2 models support values between 1 and 10.\nDall-e-3 models only support a value of 1.",
           "default": 1
         },
         "size": {
           "$ref": "#/definitions/ImageSize",
-          "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).",
+          "description": "The desired dimensions for generated images.\nDall-e-2 models support 256x256, 512x512, or 1024x1024.\nDall-e-3 models support 1024x1024, 1792x1024, or 1024x1792.",
           "default": "1024x1024"
         },
         "response_format": {
           "$ref": "#/definitions/ImageGenerationResponseFormat",
-          "description": "  The format in which image generation response items should be presented.\n  Azure OpenAI only supports URL response items.",
+          "description": "The format in which image generation response items should be presented.",
+          "default": "url",
           "x-ms-client-name": "responseFormat"
         },
         "user": {
@@ -1158,12 +1310,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Url",
+            "name": "url",
             "value": "url",
             "description": "Image generation response items should provide a URL from which the image may be retrieved."
           },
           {
-            "name": "Base64",
+            "name": "base64",
             "value": "b64_json",
             "description": "Image generation response items should provide image data as a base64-encoded string."
           }
@@ -1172,15 +1324,20 @@
     },
     "ImageGenerations": {
       "type": "object",
-      "description": "The result of the operation if the operation succeeded.",
+      "description": "The result of a successful image generation operation.",
       "properties": {
         "created": {
           "type": "integer",
           "format": "unixtime",
-          "description": "A timestamp when this job or item was created (in unix epochs)."
+          "description": "A timestamp representing when this operation was started.\nExpressed in seconds since the Unix epoch of 1970-01-01T00:00:00+0000."
         },
         "data": {
-          "description": "The images generated by the operator."
+          "type": "array",
+          "description": "The images generated by the operation.",
+          "items": {
+            "$ref": "#/definitions/ImageGenerationData"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1190,53 +1347,27 @@
     },
     "ImageSize": {
       "type": "string",
-      "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.",
+      "description": "The desired size of generated images.",
       "enum": [
         "256x256",
-        "512x512",
-        "1024x1024"
+        "512x512"
       ],
       "x-ms-enum": {
         "name": "ImageSize",
         "modelAsString": true,
         "values": [
           {
-            "name": "Size256x256",
+            "name": "size256x256",
             "value": "256x256",
-            "description": "Image size of 256x256."
+            "description": "Very small image size of 256x256 pixels.\nOnly supported with dall-e-2 models."
           },
           {
-            "name": "Size512x512",
+            "name": "size512x512",
             "value": "512x512",
-            "description": "Image size of 512x512."
-          },
-          {
-            "name": "Size1024x1024",
-            "value": "1024x1024",
-            "description": "Image size of 1024x1024."
+            "description": "A smaller image size of 512x512 pixels.\nOnly supported with dall-e-2 models."
           }
         ]
       }
-    },
-    "PromptFilterResult": {
-      "type": "object",
-      "description": "Content filtering results for a single prompt in the request.",
-      "properties": {
-        "prompt_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The index of this prompt in the set of prompt results",
-          "x-ms-client-name": "promptIndex"
-        },
-        "content_filter_results": {
-          "$ref": "#/definitions/ContentFilterResults",
-          "description": "Content filtering results for this prompt",
-          "x-ms-client-name": "contentFilterResults"
-        }
-      },
-      "required": [
-        "prompt_index"
-      ]
     }
   },
   "parameters": {
