@@ -9,6 +9,8 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
+alias standardOps = StandardResourceOperations;
+
 interface DevBoxesOperations {
   @doc("Lists available pools")
   @route("/projects/{projectName}/pools")
@@ -137,39 +139,43 @@ interface DevBoxesOperations {
   @doc("Creates or replaces a Dev Box.")
   @finalOperation(DevBoxesOperations.GetDevBox)
   @pollingOperation(SharedOperations.GetProjectOperationStatus)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
-  @put
-  CreateDevBox is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
+  CreateDevBox is standardOps.LongRunningResourceCreateOrReplace<DevBox>;
+  // @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
+  // @put
+  // @createsOrUpdatesResource(DevBox)
+  // CreateDevBox is Azure.Core.Foundations.Operation<
+  //   {
+  //     @projectedName("client", "name")
+  //     @doc("Display name for the Dev Box")
+  //     @path("devBoxName")
+  //     devBoxName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
+  //     @path("projectName")
+  //     @doc("Name of the project the Dev Box belongs to")
+  //     projectName: string;
 
-      @doc("The name of a Dev Box.")
-      @path
-      devBoxName: string;
+  //     @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+  //     @path("userId")
+  //     userId: string;
 
-      @doc("Represents a environment.")
-      @body
-      devBox: DevBox;
-    },
-    DevBox | {
-      @statusCode statusCode: 201;
+  //     @doc("Represents a DevBox.")
+  //     @body
+  //     devBox: DevBox;
+  //   },
+  //   DevBox |
+  //   {
+  //     @statusCode statusCode: 201;
 
-      @header("Location")
-      location: ResourceLocation<DevBox>;
+  //     @header("Location")
+  //     location: ResourceLocation<DevBox>;
 
-      @pollingLocation
-      @header("Operation-Location")
-      operationLocation: string;
+  //     @pollingLocation
+  //     @header("Operation-Location")
+  //     operationLocation: string;
 
-      @body body?: DevBox;
-    }
-  >;
+  //     @body body?: DevBox;
+  //   }
+  // >;
 
   @doc("Deletes a Dev Box.")
   @pollingOperation(SharedOperations.GetProjectOperationStatus)
