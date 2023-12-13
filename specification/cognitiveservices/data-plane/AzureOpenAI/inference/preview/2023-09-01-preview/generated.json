@@ -1365,10 +1365,6 @@
           "x-nullable": true,
           "x-ms-client-name": "finishReason"
         },
-        "delta": {
-          "$ref": "#/definitions/ChatResponseMessage",
-          "description": "The delta message content for a streaming response."
-        },
         "content_filter_results": {
           "$ref": "#/definitions/ContentFilterResultsForChoice",
           "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
@@ -2535,7 +2531,8 @@
       "in": "formData",
       "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranscriptionOptions.filename": {
@@ -2631,7 +2628,8 @@
       "in": "formData",
       "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranslationOptions.filename": {
