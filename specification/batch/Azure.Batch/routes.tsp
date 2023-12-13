@@ -13,10 +13,6 @@ using Azure.Core.Traits;
 namespace Azure.Batch;
 
 // Templates
-
-/**
- * Group of Operations pre-populated with the standard batch request and response headers.
- */
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @get op ListOperation<TFilter, TResponse> is Azure.Core.RpcOperation<
   BatchCommonListHeaders & TFilter,
