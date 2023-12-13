@@ -61,6 +61,7 @@ model ChatCompletionsStreamDelta {
   functionCall?: FunctionCallStreamDelta;
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
+  @projectedName("json", "tool_calls")
   toolCalls: ToolCallStreaming[];
 
   @doc("""
@@ -89,6 +90,14 @@ model ChatChoiceStream {
   @doc("The reason that this chat completions choice completed its generated.")
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
+
+  @doc("""
+  The reason the model stopped generating tokens, together with any applicable details.
+  This structured representation replaces 'finish_reason' for some models.
+  """)
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @projectedName("json", "finish_details")
+  finishDetails?: ChatFinishDetails;
 
   @doc("The delta message content for a streaming response.")
   @projectedName("json", "delta")
@@ -160,9 +169,9 @@ model ChatCompletionsStream {
 
 
   // TODO: this doesn't seem to be present at all.
-  @doc("""
-    Usage information for tokens processed and generated as part of this completions operation.
-    """)
-  @projectedName("json", "usage")
-  usage?: CompletionsUsage;
+  // @doc("""
+  //   Usage information for tokens processed and generated as part of this completions operation.
+  //   """)
+  // @projectedName("json", "usage")
+  // usage?: CompletionsUsage;
 }
