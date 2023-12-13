@@ -20,20 +20,20 @@ interface LocationInterface {
 
 /// Endpoints
 
-@resource("Location")
+@resource("Apis")
 @doc("Static endpoint to access Location API")
 model LocationEndpoint {
-  @key("action")
+  @key
   @doc("Static endpoint")
   @visibility("read")
-  action: "";
+  location: "Location";
 }
 
 /// Request models
 
 @doc("Request to verify Location")
 model LocationVerifyRequest {
-    @doc("Network to query for this device, or device information to enable network routing.")
+  @doc("Network to query for this device, or device information to enable network routing.")
   networkIdentifier: NetworkIdentifier;
 
   @doc("Latitude of location to be verified")
@@ -52,7 +52,7 @@ model LocationVerifyRequest {
   accuracy: int32;
 
   @doc("The device to find the location for.")
-  locationDevice: LocationDevice
+  locationDevice: LocationDevice;
 }
 
 /// Response models
@@ -68,17 +68,17 @@ model LocationVerifyResponse {
 model LocationDevice {
   @doc("External identifier or network access identifier of the device")
   networkAccessIdentifier?: string;
-  
+
   ...PhoneNumberModel;
 
-  @doc ("IPv4 address and port of the device")
+  @doc("IPv4 address and port of the device")
   ipv4Address?: Ipv4Address;
 
-  @doc ("IPv6 address and port of the device")
+  @doc("IPv6 address and port of the device")
   ipv6Address?: Ipv6Address;
 }
 
-@doc ("IPv4 device indicator")
+@doc("IPv4 device indicator")
 model Ipv4Address {
   /** IPv4 address may be specified in form <address/mask> as:
           - address - an IPv4 number in dotted-quad form 1.2.3.4. Only this exact IP number will match the flow control rule.
@@ -86,11 +86,11 @@ model Ipv4Address {
             In this case, all IP numbers from 1.2.3.0 to 1.2.3.255 will match. The bit width MUST be valid for the IP version. */
   ipv4: string;
 
-  @doc ("User equipment port.")
+  @doc("User equipment port.")
   port: int32;
 }
 
-@doc ("IPv6 device indicator")
+@doc("IPv6 device indicator")
 model Ipv6Address {
   /** IPv6 address, following IETF 5952 format, may be specified in form <address/mask> as:
           - address - The /128 subnet is optional for single addresses:
@@ -101,6 +101,6 @@ model Ipv6Address {
             - 2001:db8:85a3:8d3::/64 */
   ipv6: string;
 
-  @doc ("User equipment port.")
+  @doc("User equipment port.")
   port: int32;
 }

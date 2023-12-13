@@ -28,13 +28,13 @@ interface SimSwapInterface {
 
 /// Endpoints
 
-@resource("SimSwap")
-@doc("Static endpoint to access SimSwap API")
+@resource("device")
+@doc("Static endpoint to access Location API")
 model SimSwapEndpoint {
-  @key("action")
+  @key
   @doc("Static endpoint")
   @visibility("read")
-  action: "";
+  simSwap: "SimSwap";
 }
 
 /// Request models
@@ -80,4 +80,3 @@ model SimSwapDevice {
   @pattern("^\\+?[0-9]{5,15}$")
   phoneNumber: string;
 }
-

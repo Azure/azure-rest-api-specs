@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "An Azure Programmable Connectivity Endpoint providing access to Network APIs, for example eastus.usprod.apcgatewayapi.azure.com",
+        "description": "An Azure Programmable Connectivity Endpoint providing access to Network APIs, for example https://{region}.apcgatewayapi.azure.com",
         "required": true,
         "type": "string"
       }
@@ -50,7 +50,7 @@
   },
   "tags": [],
   "paths": {
-    "/Location:verify": {
+    "/Apis/Location:verify": {
       "post": {
         "operationId": "LocationInterface_Verify",
         "description": "Verifies whether a device is within a specified location area, defined as an accuracy (radius) around a point, specified by longitude and latitude.",
@@ -101,7 +101,7 @@
         }
       }
     },
-    "/Network:retrieve": {
+    "/Apis/Network:retrieve": {
       "post": {
         "operationId": "Networks_Retrieve",
         "description": "Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.",
@@ -152,7 +152,7 @@
         }
       }
     },
-    "/Number:retrieve": {
+    "/Apis/Number:retrieve": {
       "post": {
         "operationId": "NumberInterface_Retrieve",
         "description": "Retrieves the phone number (MSISDN) associated with a device.",
@@ -203,7 +203,7 @@
         }
       }
     },
-    "/Number:verify": {
+    "/Apis/Number:verify": {
       "post": {
         "operationId": "NumberInterface_Verify",
         "description": "Verifies the phone number (MSISDN) associated with a device.",
@@ -254,7 +254,7 @@
         }
       }
     },
-    "/SimSwap:retrieve": {
+    "/device/SimSwap:retrieve": {
       "post": {
         "operationId": "SimSwapInterface_Retrieve",
         "description": "Provides timestamp of latest SIM swap",
@@ -305,7 +305,7 @@
         }
       }
     },
-    "/SimSwap:verify": {
+    "/device/SimSwap:verify": {
       "post": {
         "operationId": "SimSwapInterface_Verify",
         "description": "Verifies if a SIM swap has been performed during a past period (defined in the request with 'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.",
@@ -348,6 +348,11 @@
               "$ref": "#/definitions/ApcErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SimSwapInterface_Verify": {
+            "$ref": "./examples/SimSwapInterface_Verify_MaximumSet_Gen.json"
+          }
         }
       }
     }
@@ -360,13 +365,13 @@
         "status": {
           "type": "integer",
           "format": "int32",
-          "description": "The numeric error code."
+          "description": "The numerical error status eg 500, 404"
         },
         "code": {
           "type": "string",
           "description": "The error code"
         },
-        "errorMessage": {
+        "message": {
           "type": "string",
           "description": "The detailed error message."
         },
@@ -379,7 +384,7 @@
       "required": [
         "status",
         "code",
-        "errorMessage"
+        "message"
       ]
     },
     "DeviceNetworkIdentifier": {
@@ -465,11 +470,11 @@
       "type": "object",
       "description": "Static endpoint to access Location API",
       "properties": {
-        "action": {
+        "location": {
           "type": "string",
           "description": "Static endpoint",
           "enum": [
-            ""
+            "Location"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -478,7 +483,7 @@
         }
       },
       "required": [
-        "action"
+        "location"
       ]
     },
     "LocationVerifyRequest": {
@@ -572,11 +577,11 @@
       "type": "object",
       "description": "Static endpoint to access Network API",
       "properties": {
-        "action": {
+        "network": {
           "type": "string",
           "description": "Static endpoint",
           "enum": [
-            ""
+            "Network"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -585,7 +590,7 @@
         }
       },
       "required": [
-        "action"
+        "network"
       ]
     },
     "NumberDevice": {
@@ -607,11 +612,11 @@
       "type": "object",
       "description": "Static endpoint to access Number API",
       "properties": {
-        "action": {
+        "number": {
           "type": "string",
           "description": "Static endpoint",
           "enum": [
-            ""
+            "Number"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -620,7 +625,7 @@
         }
       },
       "required": [
-        "action"
+        "number"
       ]
     },
     "NumberRetrieveResponse": {
@@ -699,13 +704,13 @@
     },
     "SimSwapEndpoint": {
       "type": "object",
-      "description": "Static endpoint to access SimSwap API",
+      "description": "Static endpoint to access Location API",
       "properties": {
-        "action": {
+        "simSwap": {
           "type": "string",
           "description": "Static endpoint",
           "enum": [
-            ""
+            "SimSwap"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -714,7 +719,7 @@
         }
       },
       "required": [
-        "action"
+        "simSwap"
       ]
     },
     "SimSwapRetrieveRequest": {
