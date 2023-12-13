@@ -53,7 +53,3 @@ operations returns various properties of each Azure LargeStorage instance.
   "json",
   "tagsParameter"
 );
-@@OpenAPI.extension(AzureLargeStorageInstances.update::parameters.properties,
-  "x-ms-client-name",
-  "tagsParameter"
-);

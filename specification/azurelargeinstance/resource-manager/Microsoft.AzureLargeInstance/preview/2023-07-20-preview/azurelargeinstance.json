@@ -635,7 +635,7 @@
             "schema": {
               "$ref": "#/definitions/AzureLargeStorageInstanceTagsUpdate"
             },
-            "x-ms-client-name": "tagsParameter"
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -920,7 +920,7 @@
     },
     "AzureLargeInstanceSizeNamesEnum": {
       "type": "string",
-      "description": "Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://learn.microsoft.com/en-us/azure/sap/large-instances/hana-available-skus",
+      "description": "Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://docs.microsoft.com/azure/sap/large-instances/hana-available-skus",
       "enum": [
         "S72m",
         "S144m",
@@ -1516,7 +1516,8 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "State of provisioning of the AzureLargeStorageInstance"
+          "description": "State of provisioning of the AzureLargeStorageInstance",
+          "readOnly": true
         },
         "offeringType": {
           "type": "string",

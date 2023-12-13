@@ -22,7 +22,7 @@ enum AzureLargeInstanceHardwareTypeNamesEnum {
   SDFLEX,
 }
 
-@doc("Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://learn.microsoft.com/en-us/azure/sap/large-instances/hana-available-skus")
+@doc("Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://docs.microsoft.com/azure/sap/large-instances/hana-available-skus")
 enum AzureLargeInstanceSizeNamesEnum {
   @doc("Type I class SKU that can't be purchased anymore")
   S72m,
@@ -406,6 +406,7 @@ model AzureLargeStorageInstanceProperties {
 @doc("described the storage properties of the azure large storage instance")
 model StorageProperties {
   @doc("State of provisioning of the AzureLargeStorageInstance")
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   @doc("the offering type for which the resource is getting provisioned")
