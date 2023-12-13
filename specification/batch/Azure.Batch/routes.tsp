@@ -18,91 +18,90 @@ namespace Azure.Batch;
  * Group of Operations pre-populated with the standard batch request and response headers.
  */
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-  @get op ListOperation<TFilter, TResponse> is Azure.Core.RpcOperation<
-    BatchCommonListHeaders & TFilter,
-    BatchResponseHeaders & TResponse,
-    NoFilter,
-    BatchError
-  >;
+@get op ListOperation<TFilter, TResponse> is Azure.Core.RpcOperation<
+  BatchCommonListHeaders & TFilter,
+  BatchResponseHeaders & TResponse,
+  NoFilter,
+  BatchError
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-  @get op ReadOperation<
-    TPathParams extends TypeSpec.Reflection.Model,
-    TResource
-  > is Azure.Core.RpcOperation<
-    TPathParams & BatchClientRequestHeaders,
-    BatchResponseHeaders & TResource,
-    NoFilter,
-    BatchError
-  >;
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@get op ReadOperation<
+  TPathParams extends TypeSpec.Reflection.Model,
+  TResource
+> is Azure.Core.RpcOperation<
+  TPathParams & BatchClientRequestHeaders,
+  BatchResponseHeaders & TResource,
+  NoFilter,
+  BatchError
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-  @delete op DeleteOperation<
-    TFilter,
-    TResponse extends TypeSpec.Reflection.Model
-  > is Azure.Core.RpcOperation<
-    BatchClientRequestHeaders & TFilter,
-    TResponse,
-    NoFilter,
-    BatchError
-  >;
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@delete op DeleteOperation<
+  TFilter,
+  TResponse extends TypeSpec.Reflection.Model
+> is Azure.Core.RpcOperation<
+  BatchClientRequestHeaders & TFilter,
+  TResponse,
+  NoFilter,
+  BatchError
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-  @post op CreateOperation<TResource, TResponse> is RpcOperation<
-    TResource & MinimalMetadata & BatchClientRequestHeaders,
-    BatchResponseHeaders & Created<TResponse>,
-    NoFilter,
-    BatchError
-  >;
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@post op CreateOperation<TResource, TResponse> is RpcOperation<
+  TResource & MinimalMetadata & BatchClientRequestHeaders,
+  BatchResponseHeaders & Created<TResponse>,
+  NoFilter,
+  BatchError
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-  @patch op UpdateOperation<TResource, TResponse> is RpcOperation<
-    TResource & MinimalMetadata & BatchClientRequestHeaders,
-    BatchResponseHeaders & TResponse,
-    NoFilter,
-    BatchError
-  >;
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@patch op UpdateOperation<TResource, TResponse> is RpcOperation<
+  TResource & MinimalMetadata & BatchClientRequestHeaders,
+  BatchResponseHeaders & TResponse,
+  NoFilter,
+  BatchError
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-  @put op ReplaceOperation<TResource, TResponse> is RpcOperation<
-    TResource & MinimalMetadata & BatchClientRequestHeaders,
-    BatchResponseHeaders & TResponse,
-    NoFilter,
-    BatchError
-  >;
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@put op ReplaceOperation<TResource, TResponse> is RpcOperation<
+  TResource & MinimalMetadata & BatchClientRequestHeaders,
+  BatchResponseHeaders & TResponse,
+  NoFilter,
+  BatchError
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-  @head op ResourceInfoOperation<TResource, TResponse> is RpcOperation<
-    TResource & BatchClientRequestHeaders,
-    BatchResponseHeaders & TResponse,
-    NoFilter,
-    BatchError
-  >;
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@head op ResourceInfoOperation<TResource, TResponse> is RpcOperation<
+  TResource & BatchClientRequestHeaders,
+  BatchResponseHeaders & TResponse,
+  NoFilter,
+  BatchError
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-  @doc("New rpc operation allowing multiple repsonses")
-  @Foundations.Private.needsRoute
-  @head
-  op ResourceInfoOperationWithAdditionalResponse<
-    TParams extends TypeSpec.Reflection.Model,
-    TResponse extends TypeSpec.Reflection.Model,
-    TAdditionalResponse extends {} = {}
-  > is Foundations.Operation<
-    TParams,
-    TResponse | TAdditionalResponse,
-    NoFilter,
-    BatchError
-  >;
+#suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@doc("New rpc operation allowing multiple repsonses")
+@Foundations.Private.needsRoute
+@head
+op ResourceInfoOperationWithAdditionalResponse<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model,
+  TAdditionalResponse extends {} = {}
+> is Foundations.Operation<
+  TParams,
+  TResponse | TAdditionalResponse,
+  NoFilter,
+  BatchError
+>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-  @post op PostOperation<TResource, TResponse> is RpcOperation<
-    TResource & BatchClientRequestHeaders,
-    BatchResponseHeaders & TResponse,
-    NoFilter,
-    BatchError
-  >;
-
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@post op PostOperation<TResource, TResponse> is RpcOperation<
+  TResource & BatchClientRequestHeaders,
+  BatchResponseHeaders & TResponse,
+  NoFilter,
+  BatchError
+>;
 
 alias NoFilter = {};
 alias MinimalMetadata = {
