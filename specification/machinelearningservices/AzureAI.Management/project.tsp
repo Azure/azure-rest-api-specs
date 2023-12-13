@@ -12,11 +12,9 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service({
-  title: "Azure Machine Learning Services",
-  version: "2024-01-01-preview",
+  title: "Azure AI Project Services"
 })
-@doc("Microsoft.MachineLearningServices Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@doc("Azure AI Project Services: includes connections, AI Resource, etc.")
 namespace Microsoft.MachineLearningServices;
 
 //todo rest of workspaceRP.json
