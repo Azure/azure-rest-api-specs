@@ -28,12 +28,22 @@ model FunctionCallStreaming {
   arguments?: string;
 }
 
-// Only "id" and "function" are always present, AFAICT. The other two fields are updated on each message.
 @added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("""
+An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested
+chat completion.
+""")
 model ToolCallStreaming {
+  @doc("The ordered index associated with this tool call choice.")
   index: int32;
+  
+  @doc("The ID of the tool call.")
   id?: string;
-  type?: string; // only "function" for now
+
+  @doc("The type of tool call, in this case always 'function'.")
+  type?: string;
+
+  @doc("The details of the function invocation requested by the tool call.")
   function: FunctionCallStreaming;
 }
 
@@ -62,7 +72,12 @@ model ChatCompletionsStreamDelta {
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @projectedName("json", "tool_calls")
-  toolCalls: ToolCallStreaming[];
+  @doc("""
+  The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
+  completions request to resolve as configured. In a streaming context, the arguments will be 
+  provided in an incremental fashion.
+  """)
+  toolCalls?: ToolCallStreaming[];
 
   @doc("""
     Additional context data associated with a chat message when requesting chat completions using compatible Azure
@@ -139,9 +154,13 @@ model ChatCompletionsStream {
   object: string;
 
   @doc("""
-  model
-  """)
-  `model`: string;
+    The model name to provide as part of this completions request.
+    Not applicable to Azure OpenAI, where deployment information should be included in the Azure
+    resource URI that's connected to.
+    """)
+  @projectedName("json", "model")
+  @projectedName("csharp", "InternalNonAzureModelName")
+  `model`?: string;
 
 
   @doc("""
@@ -162,8 +181,10 @@ model ChatCompletionsStream {
 
 
   @doc("""
-  new field
+  Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that
+  might impact determinism.
   """)
+  @added(ServiceApiVersions.v2023_12_01_Preview)
   @projectedName("json", "system_fingerprint")
   systemFingerprint?: string;
 
