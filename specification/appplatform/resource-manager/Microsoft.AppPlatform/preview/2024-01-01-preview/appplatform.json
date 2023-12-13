@@ -11324,10 +11324,28 @@
           "description": "The workload profile used for this app. Supported for Consumption + Dedicated plan.",
           "type": "string"
         },
-        "disableTestEndpointAuth": {
-          "description": "Indicate if test endpoint auth is disabled.",
-          "type": "boolean",
-          "default": false
+        "testEndpointAuthState": {
+          "description": "State of test endpoint auth.",
+          "type": "string",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "TestEndpointAuthState",
+            "values": [
+              {
+                "description": "Enable test endpoint auth.",
+                "value": "Enabled"
+              },
+              {
+                "description": "Disable test endpoint auth",
+                "value": "Disabled"
+              }
+            ]
+          }
         }
       }
     },
