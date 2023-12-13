@@ -38,7 +38,7 @@ model CompletionsStreamDelta {
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "prompt_filter_results")
-  promptFilterResults?: PromptFilterResult[];
+  promptFilterResults?: ContentFilterResultsForPrompt[];
 
   @doc("""
     The collection of completions choices associated with this completions response.
@@ -77,7 +77,7 @@ model ChoiceStreamDelta {
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "content_filter_results")
-  contentFilterResults?: ContentFilterResults;
+  contentFilterResults?: ContentFilterResultsForChoice;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   @doc("The log probabilities model for tokens associated with this completions choice.")

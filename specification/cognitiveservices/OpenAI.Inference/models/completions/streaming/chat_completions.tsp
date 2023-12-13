@@ -29,6 +29,7 @@ model FunctionCallStreaming {
 }
 
 // Only "id" and "function" are always present, AFAICT. The other two fields are updated on each message.
+@added(ServiceApiVersions.v2023_12_01_Preview)
 model ToolCallStreaming {
   index: int32;
   id?: string;
@@ -59,6 +60,7 @@ model ChatCompletionsStreamDelta {
   @projectedName("json", "function_call")
   functionCall?: FunctionCallStreamDelta;
 
+  @added(ServiceApiVersions.v2023_12_01_Preview)
   toolCalls: ToolCallStreaming[];
 
   @doc("""
