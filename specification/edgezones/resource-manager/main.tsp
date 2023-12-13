@@ -17,6 +17,7 @@ using Azure.ResourceManager.Foundations;
   version: "2021-08-01-preview",
 })
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.EdgeZones;
 
 interface Operations extends Azure.ResourceManager.Operations {}
