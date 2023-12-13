@@ -406,7 +406,6 @@ model AzureLargeStorageInstanceProperties {
 @doc("described the storage properties of the azure large storage instance")
 model StorageProperties {
   @doc("State of provisioning of the AzureLargeStorageInstance")
-  @visibility("read")
   provisioningState?: ProvisioningState;
 
   @doc("the offering type for which the resource is getting provisioned")
