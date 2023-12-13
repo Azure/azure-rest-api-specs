@@ -14,6 +14,8 @@ namespace Customizations;
 interface ContentSafetyClient {
   analyzeText is ContentSafety.TextOperations.analyzeText;
   analyzeImage is ContentSafety.ImageOperations.analyzeImage;
+  detectTextJailbreak is ContentSafety.TextOperations.detectTextJailbreak;
+  detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
 }
 
 @client({

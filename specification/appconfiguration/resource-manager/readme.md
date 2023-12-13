@@ -26,16 +26,23 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-
-tag: package-2023-03-01
+tag: package-preview-2023-08
 ```
 
 
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.AppConfiguration/preview/2023-08-01-preview/appconfiguration.json
+```
 ### Tag: package-2023-03-01
 
 These settings apply only when `--tag=packge-2023-03-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03-01'
+``` yaml $(tag) == 'package-2023-03-01'
 input-file:
   - Microsoft.AppConfiguration/stable/2023-03-01/appconfiguration.json
 ```
@@ -204,4 +211,22 @@ directive:
     from: appconfiguration.json
     where: $.definitions.KeyValue
     reason: Listing is not supported in ARM templates.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: appconfiguration.json
+    where: $.definitions.Snapshot
+    reason: Following KeyValue, with both being proxies for data plane resources.
+  - suppress: AllProxyResourcesShouldHaveDelete
+    from: appconfiguration.json
+    where: $.definitions.Snapshot
+    reason: This is a proxy for a data plane snapshot which doesn't support delete.
+  - suppress: RequiredReadOnlySystemData
+    from: appconfiguration.json
+    where: 
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].put'
+    reason: This is a proxy for a data plane snapshot which doesn't have the info.
+  - suppress: TrackedResourcePatchOperation
+    from: appconfiguration.json
+    where: $.definitions.Replica
+    reason: Replica is a proxy resource
 ```
