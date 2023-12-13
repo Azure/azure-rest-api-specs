@@ -80,7 +80,7 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   @doc("The list of Azure DevOps organizations the pool should be present in.")
   organizations: Organization[];
 
-  @doc("The type of permission which determines which accounts are adming on the Azure DevOps pool.")
+  @doc("The type of permission which determines which accounts are admins on the Azure DevOps pool.")
   permissionProfile?: AzureDevOpsPermissionProfile;
 }
 @doc("Defines an Azure DevOps organization.")
@@ -112,10 +112,10 @@ model SpecificAccounts extends AzureDevOpsPermissionProfile {
   @doc("Only the specified accounts will be admins of the pool.")
   kind: "SpecificAccounts";
 
-  @doc("User email adresses")
+  @doc("User email addresses")
   users?: string[];
 
-  @doc("Group email adresses")
+  @doc("Group email addresses")
   groups?: string[];
 }
 
