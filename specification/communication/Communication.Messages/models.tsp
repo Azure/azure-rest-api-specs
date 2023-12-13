@@ -14,7 +14,7 @@ using Azure.ClientGenerator.Core;
 @versioned(AzureCommunicationMessagesService.Versions)
 namespace AzureCommunicationMessagesService;
 
-@access(Access.public)
+@access(Access.public, "csharp")
 @doc("The type of message. Supports text, image, template.")
 enum CommunicationMessageType {
   @doc("Text message type.")
@@ -48,7 +48,7 @@ enum MessageTemplateValueKind {
   quick_action,
 }
 
-@access(Access.public)
+@access(Access.public, "csharp")
 @doc("The WhatsApp button sub type.")
 enum WhatsAppMessageTemplateValueSubType {
   @doc("The WhatsApp button sub type is quick reply.")
@@ -58,14 +58,14 @@ enum WhatsAppMessageTemplateValueSubType {
   url,
 }
 
-@access(Access.public)
+@access(Access.public, "csharp")
 @doc("The Communication Messages Channel.")
 enum CommunicationMessagesChannel {
   @doc("The Communication Messages Channel is WhatsApp.")
   whatsApp,
 }
 
-@access(Access.public)
+@access(Access.public, "csharp")
 @doc("The aggregated template status.")
 enum MessageTemplateStatus {
   @doc("Message template is approved.")
@@ -246,14 +246,14 @@ dictionary.
   refValue: string;
 }
 
-@access(Access.public)
+@access(Access.public, "csharp")
 @doc("Result of the send message operation.")
 model SendMessageResult {
   @doc("Receipts of the send message operation.")
   receipts: MessageReceipt[];
 }
 
-@access(Access.public)
+@access(Access.public, "csharp")
 @doc("Receipt of the sending one message.")
 model MessageReceipt {
   @doc("The message id.")
@@ -275,7 +275,7 @@ model ListTemplatesResponse {
   nextLink?: string;
 }
 
-@access(Access.public)
+@access(Access.public, "csharp")
 @doc("The Message Template Response.")
 model MessageTemplateResponse {
   @doc("Get the template's Name")
@@ -294,7 +294,7 @@ model MessageTemplateResponse {
   whatsApp?: WhatsAppMessageTemplateResponse;
 }
 
-@access(Access.public)
+@access(Access.public, "csharp")
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateResponse {
   @doc("""

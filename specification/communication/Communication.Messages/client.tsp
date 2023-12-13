@@ -15,10 +15,10 @@ namespace ClientForAcsMessages;
   service: AzureCommunicationMessagesService,
 })
 interface NotificationMessagesRestClient {
-  @access(Access.internal)
+  @access(Access.internal, "csharp")
   postMessage is AzureCommunicationMessagesService.NotificationMessagesOperations.sendMessage;
 
-  @access(Access.internal)
+  @access(Access.internal, "csharp")
   getMedia is AzureCommunicationMessagesService.StreamOperations.downloadMedia;
 }
 
@@ -27,6 +27,6 @@ interface NotificationMessagesRestClient {
   service: AzureCommunicationMessagesService,
 })
 interface MessageTemplateRestClient {
-  @access(Access.internal)
+  @access(Access.internal, "csharp")
   getTemplates is AzureCommunicationMessagesService.TemplateOperations.list;
 }
