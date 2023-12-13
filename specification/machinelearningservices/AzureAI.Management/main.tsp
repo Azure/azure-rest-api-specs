@@ -21,7 +21,7 @@ using Azure.ResourceManager;
 namespace Microsoft.MachineLearningServices;
 
 @doc("Index resource")
-model Index is ProxyResource<IndexProperties> {
+model Index is ProxyResource<IndexVersionProperties> {
   @doc("Name of the index")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("indexName")
@@ -30,17 +30,21 @@ model Index is ProxyResource<IndexProperties> {
   name: string;
 }
 
-@doc("Index properties")
-model IndexProperties {
-  @doc("Reference to the Index this index was versioned off of. Null implies creation of a new versioned set.")
-  previousVersionIndexId: string;
+@doc("Index Version resource")
+@parentResource(Index)
+model IndexVersion is ProxyResource<IndexVersionProperties> {
+  @doc("version of the index")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @key("versionName")
+  @path
+  @segment("versions")
+  name: string;
+}
 
+@doc("Index properties")
+model IndexVersionProperties {
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
   storageUri: string;
-
-  @doc("Set by system: format {Major-Version}.{Minor-Version}. Example 3.5, major version 3 minor version 5.")
-  @visibility("read")
-  version: string;
 
   @doc("Placeholder for extras.")
   indexConfigurations: Record<string>
@@ -66,8 +70,7 @@ alias ListQueryParameters = {
   ...StandardListQueryParameters;
 };
 
-
-interface ProxyResourceOperationsIndexes<
+interface ProxyResourceOperationsIndexesVersions<
   TResource extends ArmResource,
   TListParameters extends {} = {}
 >
@@ -76,12 +79,20 @@ interface ProxyResourceOperationsIndexes<
       TListParameters & BaseParameters<TResource>
     > {
   @doc("Get a Index.")
-  get is ArmResourceRead<Index>;
+  get is ArmResourceRead<TResource>;
   @doc("Create a Index.")
-  createOrUpdate is ArmResourceCreateOrUpdateSync<Index>;
+  createOrUpdate is ArmResourceCreateOrUpdateSync<TResource>;
   @doc("Delete a Index.")
-  delete is ArmResourceDeleteSync<Index>;
+  delete is ArmResourceDeleteSync<TResource>;
+  @doc("List by parent.")
+  listByParent is ArmResourceListByParent<TResource>
 }
 
 @armResourceOperations
-interface Indexes extends ProxyResourceOperationsIndexes<Index, ListQueryParameters>{}
+interface IndexesVersions extends ProxyResourceOperationsIndexesVersions<IndexVersion, ListQueryParameters>{}
+
+@armResourceOperations(Index)
+interface Indexes {
+  @doc("List the latest indexes per name.")
+  listByParent is ArmResourceListByParent<Index>
+}
