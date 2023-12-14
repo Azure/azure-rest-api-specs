@@ -53,6 +53,11 @@
           }
         ],
         "responses": {
+          "default":{
+            "schema":{
+              "$ref":"#/definition/CloudError"
+            }
+          },
           "200": {
             "description": "OK - returns a JSON object",
             "schema": {
@@ -87,6 +92,11 @@
           }
         ],
         "responses": {
+          "default":{
+            "schema":{
+              "$ref":"#/definition/CloudError"
+            }
+          },
           "200": {
             "description": "OK - Returns a JSON object",
             "schema": {
@@ -97,7 +107,8 @@
             "description": "Subscription not found - returns a JSON object with error details",
             "schema": {
               "$ref": "#/definitions/GetSerialConsoleSubscriptionNotFound"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -127,6 +138,11 @@
           }
         ],
         "responses": {
+          "default":{
+            "schema":{
+              "$ref":"#/definition/CloudError"
+            }
+          },
           "200": {
             "description": "OK - Returns a JSON object",
             "schema": {
@@ -137,7 +153,8 @@
             "description": "Subscription not found - returns a JSON object with error details",
             "schema": {
               "$ref": "#/definitions/GetSerialConsoleSubscriptionNotFound"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -167,6 +184,11 @@
           }
         ],
         "responses": {
+          "default": {
+            "schema":{
+              "$ref": "#/definition/CloudError"
+            }
+          },
           "200": {
             "description": "OK - Serial Console disabled",
             "schema": {
@@ -177,7 +199,8 @@
             "description": "Subscription not found - returns a JSON object with error details",
             "schema": {
               "$ref": "#/definitions/GetSerialConsoleSubscriptionNotFound"
-            }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -259,7 +282,8 @@
             }
           }
         }
-      }
+      },
+      "x-ms-identifiers": ["name"]
     },
     "GetSerialConsoleSubscriptionNotFound": {
       "title": "Serial Console subscription not found",
