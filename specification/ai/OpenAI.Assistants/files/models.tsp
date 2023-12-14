@@ -7,9 +7,6 @@ using TypeSpec.Versioning;
 @doc("Represents an assistant that can call the model and use tools.")
 @added(ServiceApiVersions.v2023_11_06_beta)
 model File {
-  @doc("The object type, which is always 'file'.")
-  object: "file";
-
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
 
@@ -47,9 +44,6 @@ enum FilePurpose {
 @doc("The response data from a file list operation.")
 @added(ServiceApiVersions.v2023_11_06_beta)
 model FileListResponse {
-  @doc("The object type, which is always 'list'.")
-  object: "list";
-
   @doc("The files returned for the request.")
   data: File[];
 }
@@ -58,9 +52,6 @@ model FileListResponse {
 @doc("A status response from a file deletion operation.")
 @added(ServiceApiVersions.v2023_11_06_beta)
 model FileDeletionStatus extends DeletionStatus {
-  @doc("The object type, which is always 'file'.")
-  object: "file";
-
   @doc("The ID of the deleted file.")
   id: string;
 }

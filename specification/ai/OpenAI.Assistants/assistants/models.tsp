@@ -12,9 +12,6 @@ model Assistant {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
 
-  @doc("The object type, which is always assistant.")
-  object: "assistant";
-
   @projectedName("json", "created_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
@@ -98,19 +95,13 @@ model AssistantModificationOptions {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"
 @doc("The status of an assistant deletion operation.")
 @added(ServiceApiVersions.v2023_11_06_beta)
-model AssistantDeletionStatus extends DeletionStatus {
-  @doc("The object type, which is always 'assistant.deleted'.")
-  object: "assistant.deleted";
-}
+model AssistantDeletionStatus extends DeletionStatus { }
 
 @doc("Information about a file attached to an assistant, as used by tools that can read files.")
 @added(ServiceApiVersions.v2023_11_06_beta)
 model AssistantFile {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
-
-  @doc("The object type, which is always 'assistant.file'.")
-  object: "assistant.file";
 
   @projectedName("json", "created_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
@@ -125,7 +116,4 @@ model AssistantFile {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"
 @doc("The status of an assistant file deletion operation.")
 @added(ServiceApiVersions.v2023_11_06_beta)
-model AssistantFileDeletionStatus extends DeletionStatus {
-  @doc("The object type, which is always 'assistant.file.deleted'.")
-  object: "assistant.file.deleted";
-}
+model AssistantFileDeletionStatus extends DeletionStatus { }

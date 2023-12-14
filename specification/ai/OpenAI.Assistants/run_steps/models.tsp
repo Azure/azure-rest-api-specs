@@ -11,9 +11,6 @@ model RunStep {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
 
-  @doc("The object type, which is always 'thread.run.step'.")
-  object: "thread.run.step";
-
   @doc("The type of run step, which can be either message_creation or tool_calls.")
   type: RunStepType;
 

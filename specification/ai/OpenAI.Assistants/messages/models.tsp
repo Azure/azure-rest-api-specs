@@ -10,9 +10,6 @@ model ThreadMessage {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
 
-  @doc("The object type, which is always 'thread.message'.")
-  object: "thread.message";
-
   @projectedName("json", "created_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
@@ -183,9 +180,6 @@ model MessageImageFileIdDetails {
 model MessageFile {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
-
-  @doc("The object type, which is always 'thread.message.file'.")
-  object: "thread.message.file";
 
   @projectedName("json", "created_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)

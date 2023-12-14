@@ -46,9 +46,6 @@ alias OpenAIListRequestOptions = {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @doc("The response data for a requested list of items.")
 model OpenAIPageableListOf<T> {
-  @doc("The object type, which is always list.")
-  object: "list";
-
   @doc("The requested list of items.")
   data: T[];
 
@@ -68,9 +65,6 @@ model OpenAIPageableListOf<T> {
 @doc("An abstract representation of an OpenAI deletion operation result status.")
 // @discriminator("object")
 model DeletionStatus {
-  // @doc("The object type representing the deletion operation performed.")
-  // object: string;
-
   @doc("A value indicating whether deletion was successful.")
   deleted: boolean;
 }
