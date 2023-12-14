@@ -50,5 +50,5 @@ interface RunSteps {
     @path threadId: string,
     @path runId: string,
     ...OpenAIListRequestOptions,
-  ): ListResponseOf<RunStep>;
+  ): OpenAIPageableListOf<RunStep>;
 }

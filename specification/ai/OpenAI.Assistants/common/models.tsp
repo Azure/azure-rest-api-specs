@@ -45,7 +45,7 @@ alias OpenAIListRequestOptions = {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @doc("The response data for a requested list of items.")
-model ListResponseOf<T> {
+model OpenAIPageableListOf<T> {
   @doc("The object type, which is always list.")
   object: "list";
 

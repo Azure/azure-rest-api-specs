@@ -34,7 +34,7 @@ interface Assistants {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @get
   @added(ServiceApiVersions.v2023_11_06_beta)
-  listAssistants(...OpenAIListRequestOptions): ListResponseOf<Assistant>;
+  listAssistants(...OpenAIListRequestOptions): OpenAIPageableListOf<Assistant>;
 
   /**
    * Retrieves an existing assistant.
@@ -117,7 +117,7 @@ interface Assistants {
   listAssistantFiles(
     @path assistantId: string,
     ...OpenAIListRequestOptions,
-  ): ListResponseOf<AssistantFile>;
+  ): OpenAIPageableListOf<AssistantFile>;
 
   /**
    * Retrieves a file attached to an assistant.

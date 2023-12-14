@@ -55,7 +55,7 @@ interface ThreadMessages {
   listMessages(
     @path threadId: string,
     ...OpenAIListRequestOptions,
-  ): ListResponseOf<ThreadMessage>;
+  ): OpenAIPageableListOf<ThreadMessage>;
 
   /**
    * Gets an existing message from an existing thread.
@@ -113,7 +113,7 @@ interface ThreadMessages {
     @path threadId: string,
     @path messageId: string,
     ...OpenAIListRequestOptions,
-  ): ListResponseOf<MessageFile>;
+  ): OpenAIPageableListOf<MessageFile>;
 
   /**
    * Gets information about a file attachment to a message within a thread.

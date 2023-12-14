@@ -2026,7 +2026,7 @@
         }
       }
     },
-    "CodeInterpeterCallDetails": {
+    "CodeInterpreterCallDetails": {
       "type": "object",
       "description": "The detailed information about a code interpreter invocation by the model.",
       "properties": {
@@ -2036,7 +2036,7 @@
         },
         "outputs": {
           "type": "array",
-          "description": "The outputs produced by the code interpeter tool back to the model in response to the tool call.",
+          "description": "The outputs produced by the code interpreter tool back to the model in response to the tool call.",
           "items": {
             "$ref": "#/definitions/CodeInterpreterCallOutput"
           },
@@ -2116,10 +2116,10 @@
     },
     "CodeInterpreterToolCall": {
       "type": "object",
-      "description": "A tool call to a code interpreter tool, issued by the model in evaluation of a configured code interpeter tool, that\nrepresents submitted output needed or already fulfilled by the tool for the model to continue.",
+      "description": "A tool call to a code interpreter tool, issued by the model in evaluation of a configured code interpreter tool, that\nrepresents submitted output needed or already fulfilled by the tool for the model to continue.",
       "properties": {
         "code_interpreter": {
-          "$ref": "#/definitions/CodeInterpeterCallDetails",
+          "$ref": "#/definitions/CodeInterpreterCallDetails",
           "description": "The details of the tool call to the code interpreter tool.",
           "x-ms-client-name": "codeInterpreter"
         }

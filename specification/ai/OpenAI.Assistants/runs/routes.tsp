@@ -54,7 +54,7 @@ interface ThreadRuns {
   listRuns(
     @path threadId: string,
     ...OpenAIListRequestOptions,
-  ): ListResponseOf<ThreadRun>;
+  ): OpenAIPageableListOf<ThreadRun>;
 
   /**
    * Gets an existing run from an existing thread.
