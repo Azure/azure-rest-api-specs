@@ -179,7 +179,13 @@ model SecretsManagementSettings {
   keyExportable: boolean;
 }
 @doc("Determines how the service should be run.")
-enum LogonType { Service, Interactive}
+enum LogonType {
+  @doc("Run as a service.")
+  Service,
+
+  @doc("Run in interactive mode.")
+  Interactive,
+}
 
 @doc("The network profile of the machines in the pool.")
 model NetworkProfile {

@@ -569,29 +569,29 @@
       ],
       "x-ms-discriminator-value": "Inherit"
     },
-    "Interactive": {
-      "type": "object",
-      "description": "Interactive logon type",
-      "allOf": [
-        {
-          "$ref": "#/definitions/LogonType"
-        }
-      ],
-      "x-ms-discriminator-value": "Interactive"
-    },
     "LogonType": {
-      "type": "object",
+      "type": "string",
       "description": "Determines how the service should be run.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for LogonType."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "enum": [
+        "Service",
+        "Interactive"
+      ],
+      "x-ms-enum": {
+        "name": "LogonType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Service",
+            "value": "Service",
+            "description": "Run as a service."
+          },
+          {
+            "name": "Interactive",
+            "value": "Interactive",
+            "description": "Run in interactive mode."
+          }
+        ]
+      }
     },
     "NetworkProfile": {
       "type": "object",
@@ -909,16 +909,6 @@
         "observedCertificates",
         "keyExportable"
       ]
-    },
-    "Service": {
-      "type": "object",
-      "description": "Service logon type",
-      "allOf": [
-        {
-          "$ref": "#/definitions/LogonType"
-        }
-      ],
-      "x-ms-discriminator-value": "Service"
     },
     "SpecificAccounts": {
       "type": "object",
