@@ -155,13 +155,13 @@ model StorageProfile {
 
 @doc("The storage account type of the OS disk.")
 enum OsDiskStorageAccountType {
-  @doc("Standard.")
+  @doc("Standard OS disk type.")
   Standard,
 
-  @doc("Premium.")
+  @doc("Premium OS disk type.")
   Premium,
 
-  @doc("Standard SSD.")
+  @doc("Standard SSD OS disk type.")
   StandardSSD,
 }
 
