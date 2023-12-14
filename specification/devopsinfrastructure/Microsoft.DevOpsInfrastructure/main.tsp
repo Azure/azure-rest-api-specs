@@ -95,28 +95,26 @@ model Organization {
   parallelism?: int32;
 }
 @doc("Defines the type of Azure DevOps pool permission.")
-@discriminator("kind")
-model AzureDevOpsPermissionProfile {}
-@doc("Pool will inherit permissions from the project or organization.")
-model InheritPermissions extends AzureDevOpsPermissionProfile {
-  @doc("Pool will inherit permissions from the project or organization.")
-  kind: "Inherit";
-}
-@doc("Only the pool creator will be an admin of the pool.")
-model CreatorOnly extends AzureDevOpsPermissionProfile {
-  @doc("Only the pool creator will be an admin of the pool.")
-  kind: "CreatorOnly";
-}
-@doc("Only the specified accounts will be admins of the pool.")
-model SpecificAccounts extends AzureDevOpsPermissionProfile {
-  @doc("Only the specified accounts will be admins of the pool.")
-  kind: "SpecificAccounts";
+model AzureDevOpsPermissionProfile {
+  @doc("Determines who has admin permissions to the Azure DevOps pool.")
+  kind: AzureDevOpsPermissionType;
 
   @doc("User email addresses")
   users?: string[];
 
   @doc("Group email addresses")
   groups?: string[];
+}
+@doc("Determines who has admin permissions to the Azure DevOps pool.")
+enum AzureDevOpsPermissionType {
+  @doc("Pool will inherit permissions from the project or organization.")
+  Inherit,
+
+  @doc("Only the pool creator will be an admin of the pool.")
+  CreatorOnly,
+
+  @doc("Only the specified accounts will be admins of the pool.")
+  SpecificAccounts,
 }
 
 @doc("Defines the type of fabric the agent will run on.")
@@ -162,7 +160,7 @@ model PoolImage {
 @doc("The OS profile of the machines in the pool.")
 model OsProfile {
   @doc("The secret management settings of the machines in the pool.")
-  secretsManagementSettings: SecretsManagementSettings;
+  secretsManagementSettings?: SecretsManagementSettings;
 
   @doc("Determines how the service should be run. By default, this will be set to Service.")
   logonType?: LogonType;
