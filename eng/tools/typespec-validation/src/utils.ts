@@ -1,6 +1,6 @@
 import { access } from "fs/promises";
 import { exec } from "child_process";
-import path from "path";
+import defaultPath, { PlatformPath } from "path";
 
 export async function runCmd(cmd: string, cwd: string) {
   console.log(`run command:${cmd}`);
@@ -22,10 +22,10 @@ export async function checkFileExists(file: string) {
     .catch(() => false);
 }
 
-export function normalizePath(folder: string) {
+export function normalizePath(folder: string, path: PlatformPath = defaultPath) {
   return path
     .resolve(folder)
     .split(path.sep)
     .join("/")
-    .replace(/[a-zA-Z]:/g, "");
+    .replace(/^([a-z]):/, (_match, driveLetter) => driveLetter.toUpperCase() + ":");
 }

@@ -5,7 +5,7 @@ import path from "path";
 
 describe("npm-prefix", function () {
   it("should succeed if node returns inconsistent drive letter capitalization", async function () {
-    let host = new TsvTestHost();
+    let host = new TsvTestHost(path.win32);
     host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
       if (cmd.includes("npm prefix")) {
         return [null, `C:${path.sep}Git${path.sep}azure-rest-api-specs`, ""];
