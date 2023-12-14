@@ -465,7 +465,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ImportUpdateInput"
+              "$ref": "#/definitions/ImportUpdateRequest"
             },
             "description": "The update to be imported (see schema https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for details)."
           }
@@ -2831,6 +2831,18 @@
           }
         }
       }
+    },
+    "ImportUpdateRequest": {
+      "description": "Import Update API request body.",
+      "type": "object",
+      "properties": {
+        "importUpdateInput": {
+          "$ref": "#/definitions/ImportUpdateInput"
+        }
+      },
+      "required": [
+        "importUpdateInput"
+      ]
     },
     "ImportUpdateInput": {
       "type": "array",
