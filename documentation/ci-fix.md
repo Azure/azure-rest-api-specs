@@ -125,7 +125,7 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 ## Swagger LintDiff for TypeSpec
 
-### `Record<unkown>` causes `AvoidAdditionalProperties` and `PropertyTypeObjectNoDefinition`
+### `Record<unkown>` causes `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`
 
 The use of `Record<unkown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the swagger generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations (in `readme.md`).
 
