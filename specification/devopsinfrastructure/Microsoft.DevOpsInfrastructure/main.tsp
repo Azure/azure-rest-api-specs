@@ -179,18 +179,7 @@ model SecretsManagementSettings {
   keyExportable: boolean;
 }
 @doc("Determines how the service should be run.")
-@discriminator("kind")
-model LogonType {}
-@doc("Interactive logon type")
-model Interactive extends LogonType {
-  @doc("Interactive")
-  kind: "Interactive";
-}
-@doc("Service logon type")
-model Service extends LogonType {
-  @doc("Service")
-  kind: "Service";
-}
+enum LogonType { Service, Interactive}
 
 @doc("The network profile of the machines in the pool.")
 model NetworkProfile {
