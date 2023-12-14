@@ -220,7 +220,6 @@
         },
         "info": {
           "readOnly": true,
-          "type": "object",
           "description": "The additional info."
         }
       },
@@ -266,6 +265,7 @@
     },
     "OperationDisplayProperties": {
       "description": "The object that represents the operation.",
+      "type": "object",
       "properties": {
         "provider": {
           "description": "The name of the provider.",
@@ -332,10 +332,9 @@
           "type": "string",
           "description": "The provisioning state of the application. For example, Running",
           "enum": [
-            "NotStarted",
-            "Running",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Canceled"
           ],
           "readOnly": true,
           "x-ms-enum": {
