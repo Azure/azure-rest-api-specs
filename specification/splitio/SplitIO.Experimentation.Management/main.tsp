@@ -43,14 +43,11 @@ model PartnerExperimentationWorkspaceProperties {
   @visibility("read")
   experimentationWorkspaceId?: string;
 
-  @doc("Whether experimentation is enabled")
-  experimentationEnabled?: boolean;
-
   @doc("Access policy for an experimentation workspace")
   accessPolicy: AccessPolicy;
 
   @doc("DataSource for an experimentation workspace")
-  dataSource?: DataSource;
+  dataSource: DataSource;
 }
 
 @doc("Access policy for an experimentation workspace")
@@ -66,7 +63,10 @@ model DataSource {
   id?: string;
 
   @doc("Resource id of the data source")
-  resourceId?: string;
+  resourceId: string;
+
+  @doc("Whether experimentation is enabled")
+  enabled: boolean;
 }
 
 @doc("A ExperimentationWorkspace Resource by Split.IO")

@@ -487,6 +487,28 @@
         "resourceId": {
           "type": "string",
           "description": "Resource id of the data source"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether experimentation is enabled"
+        }
+      },
+      "required": [
+        "resourceId",
+        "enabled"
+      ]
+    },
+    "DataSourceUpdate": {
+      "type": "object",
+      "description": "DataSource for an experimentation workspace",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource id of the data source"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether experimentation is enabled"
         }
       }
     },
@@ -806,10 +828,6 @@
           "description": "ExperimentationWorkspace id in partner's system",
           "readOnly": true
         },
-        "experimentationEnabled": {
-          "type": "boolean",
-          "description": "Whether experimentation is enabled"
-        },
         "accessPolicy": {
           "$ref": "#/definitions/AccessPolicy",
           "description": "Access policy for an experimentation workspace"
@@ -820,23 +838,20 @@
         }
       },
       "required": [
-        "accessPolicy"
+        "accessPolicy",
+        "dataSource"
       ]
     },
     "PartnerExperimentationWorkspacePropertiesUpdate": {
       "type": "object",
       "description": "Properties specific to Partner's ExperimentationWorkspace",
       "properties": {
-        "experimentationEnabled": {
-          "type": "boolean",
-          "description": "Whether experimentation is enabled"
-        },
         "accessPolicy": {
           "$ref": "#/definitions/AccessPolicyUpdate",
           "description": "Access policy for an experimentation workspace"
         },
         "dataSource": {
-          "$ref": "#/definitions/DataSource",
+          "$ref": "#/definitions/DataSourceUpdate",
           "description": "DataSource for an experimentation workspace"
         }
       }
