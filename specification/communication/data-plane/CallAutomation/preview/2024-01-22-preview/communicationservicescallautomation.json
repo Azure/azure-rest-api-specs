@@ -1420,18 +1420,6 @@
         }
       }
     },
-    "AzureOpenAIDialog": {
-      "description": "Azure Open AI Dialog",
-      "required": [],
-      "type": "object",
-      "allOf": [
-          {
-              "$ref": "#/definitions/BaseDialog"
-          }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "AzureOpenAI"
-    },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
     },
@@ -2087,8 +2075,7 @@
     "DialogInputType": {
       "description": "Determines the type of the dialog.",
       "enum": [
-          "powerVirtualAgents",
-          "azureOpenAI"
+          "powerVirtualAgents"
       ],
       "type": "string",
       "x-ms-enum": {
