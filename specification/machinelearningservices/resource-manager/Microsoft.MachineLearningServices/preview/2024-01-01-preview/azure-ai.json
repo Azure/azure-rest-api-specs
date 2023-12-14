@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Machine Learning Services",
+    "title": "Azure AI Indexes",
     "version": "2024-01-01-preview",
-    "description": "Microsoft.MachineLearningServices Resource Provider management API.",
+    "description": "Azure AI Indexes Management API.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -40,21 +40,60 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
+      "name": "Workspaces"
+    },
+    {
       "name": "IndexesVersions"
     },
     {
       "name": "Indexes"
-    },
-    {
-      "name": "workspaces"
     }
   ],
   "paths": {
+    "/providers/Microsoft.MachineLearningServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "operationId": "Workspaces_ListBySubscription",
         "tags": [
-          "workspaces"
+          "Workspaces"
         ],
         "description": "List Workspace resources by subscription ID",
         "parameters": [
@@ -81,6 +120,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workspaces_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_ListBySubscription_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -88,7 +132,7 @@
       "get": {
         "operationId": "Workspaces_ListByResourceGroup",
         "tags": [
-          "workspaces"
+          "Workspaces"
         ],
         "description": "List Workspace resources by resource group",
         "parameters": [
@@ -118,14 +162,19 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workspaces_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_ListByResourceGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{WorkspaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}": {
       "get": {
         "operationId": "Workspaces_Get",
         "tags": [
-          "workspaces"
+          "Workspaces"
         ],
         "description": "Get a Workspace",
         "parameters": [
@@ -139,7 +188,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "WorkspaceName",
+            "name": "workspaceName",
             "in": "path",
             "description": "Name of the workspace",
             "required": true,
@@ -160,12 +209,17 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Workspaces_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_Get_MaximumSet_Gen.json"
+          }
         }
       },
       "put": {
         "operationId": "Workspaces_CreateOrUpdate",
         "tags": [
-          "workspaces"
+          "Workspaces"
         ],
         "description": "Create a Workspace",
         "parameters": [
@@ -179,7 +233,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "WorkspaceName",
+            "name": "workspaceName",
             "in": "path",
             "description": "Name of the workspace",
             "required": true,
@@ -226,12 +280,17 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Workspaces_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "operationId": "Workspaces_Update",
         "tags": [
-          "workspaces"
+          "Workspaces"
         ],
         "description": "Update a Workspace",
         "parameters": [
@@ -245,7 +304,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "WorkspaceName",
+            "name": "workspaceName",
             "in": "path",
             "description": "Name of the workspace",
             "required": true,
@@ -275,12 +334,17 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Workspaces_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_Update_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
         "operationId": "Workspaces_Delete",
         "tags": [
-          "workspaces"
+          "Workspaces"
         ],
         "description": "Delete a Workspace",
         "parameters": [
@@ -294,7 +358,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "WorkspaceName",
+            "name": "workspaceName",
             "in": "path",
             "description": "Name of the workspace",
             "required": true,
@@ -333,10 +397,15 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Workspaces_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Workspaces_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{WorkspaceName}/indexes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/indexes": {
       "get": {
         "operationId": "Indexes_ListByWorkspace",
         "tags": [
@@ -354,7 +423,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "WorkspaceName",
+            "name": "workspaceName",
             "in": "path",
             "description": "Name of the workspace",
             "required": true,
@@ -378,10 +447,15 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Indexes_ListByWorkspace_MaximumSet_Gen": {
+            "$ref": "./examples/Indexes_ListByWorkspace_MaximumSet_Gen.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{WorkspaceName}/indexes/{indexName}/versions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/indexes/{indexName}/versions": {
       "get": {
         "operationId": "IndexesVersions_ListByIndex",
         "tags": [
@@ -399,7 +473,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "WorkspaceName",
+            "name": "workspaceName",
             "in": "path",
             "description": "Name of the workspace",
             "required": true,
@@ -431,10 +505,15 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IndexesVersions_ListByIndex_MaximumSet_Gen": {
+            "$ref": "./examples/IndexesVersions_ListByIndex_MaximumSet_Gen.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{WorkspaceName}/indexes/{indexName}/versions/{versionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/indexes/{indexName}/versions/{versionName}": {
       "get": {
         "operationId": "IndexesVersions_Get",
         "tags": [
@@ -452,7 +531,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "WorkspaceName",
+            "name": "workspaceName",
             "in": "path",
             "description": "Name of the workspace",
             "required": true,
@@ -489,6 +568,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "IndexesVersions_Get_MaximumSet_Gen": {
+            "$ref": "./examples/IndexesVersions_Get_MaximumSet_Gen.json"
+          }
         }
       },
       "put": {
@@ -508,7 +592,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "WorkspaceName",
+            "name": "workspaceName",
             "in": "path",
             "description": "Name of the workspace",
             "required": true,
@@ -553,6 +637,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "IndexesVersions_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/IndexesVersions_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       }
@@ -733,6 +822,24 @@
         "tags",
         "properties"
       ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Azure Machine Learning Services api versions.",
+      "enum": [
+        "2024-01-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_01_01_preview",
+            "value": "2024-01-01-preview",
+            "description": "Azure Machine Learning Services api version 2024-01-01-preview."
+          }
+        ]
+      }
     },
     "Workspace": {
       "type": "object",

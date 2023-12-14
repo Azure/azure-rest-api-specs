@@ -23,7 +23,7 @@ namespace Microsoft.MachineLearningServices;
 model Workspace is TrackedResource<WorkspaceProperties> {
   @doc("Name of the workspace")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-  @key("WorkspaceName")
+  @key("workspaceName")
   @path
   @segment("workspaces")
   name: string;
@@ -42,4 +42,4 @@ model WorkspaceProperties {
 }
 
 @armResourceOperations
-interface workspaces extends TrackedResourceOperations<Workspace, WorkspaceProperties> {}
+interface Workspaces extends TrackedResourceOperations<Workspace, WorkspaceProperties> {}
