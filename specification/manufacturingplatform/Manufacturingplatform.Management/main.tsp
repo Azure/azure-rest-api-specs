@@ -121,6 +121,7 @@ model MdsResourceProperties {
   @doc("Profile of Adx Created.")
   adxProfile?: AdxProfile;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is a preview version"
   @visibility("read")
   @doc("Profile of Akv Created.")
   @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
@@ -130,11 +131,13 @@ model MdsResourceProperties {
   @doc("Profile of Azure Redis Created.")
   redisProfile?: RedisProfile;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is a preview version"
   @visibility("read")
   @doc("Profile of Adt Created.")
   @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   adtProfile?: AdtProfile;
   
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is a preview version"
   @visibility("read")
   @doc("Profile of Synapse Created.")
   @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
@@ -232,6 +235,7 @@ model AdxProfile {
 }
 
 
+#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is a preview version"
 @doc("The properties related to Azure Digital Twin (Adt) Resource")
 @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 model AdtProfile {
@@ -274,7 +278,7 @@ model UserManagedAdxProfile {
 
 }
 
-
+#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is a preview version"
 @doc("The properties related to Azure Key Vault (Akv) Resource")
 @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 model AkvProfile {
@@ -305,6 +309,7 @@ model MonitoringProfile {
     
 }
 
+#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is a preview version"
 @doc("The properties related to Synapse Resource")
 @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
 model SynapseProfile {
@@ -321,12 +326,14 @@ model SynapseProfile {
 
 @doc("The properties related to EventHub Resource")
 model EventHubProfile {
-  
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is a preview version"
   @doc("Resource Id of Ingestion Instance EventHub Resource")
   @visibility("read")
   @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   ingestionInstanceId?: string;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "This is a preview version"
   @doc("Resource Id of Data History Instance EventHub Resource")
   @visibility("read")
   @removed(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
