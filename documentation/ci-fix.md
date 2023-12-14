@@ -123,8 +123,10 @@ If that guidance is not enough, please also refer to the [LintDiff rules.md doc]
 
 To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
 
-### LintDiff for TypeSpec Specs
+## LintDiff for TypeSpec Specs
 
+### `Record<unkown>` causes `AvoidAdditionalProperties` and `PropertyTypeObjectNoDefinition`
+The use of `Record<unkown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the swagger generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations (in `readme.md`).
 
 ## Avocado
 
