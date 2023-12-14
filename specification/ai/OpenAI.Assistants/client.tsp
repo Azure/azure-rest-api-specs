@@ -58,6 +58,24 @@ namespace Azure.AI.OpenAI.Assistants;
   "csharp",
   "InternalDeleteThread"
 );
+@@access(Assistants.listAssistants, Access.internal);
+@@projectedName(Assistants.listAssistants, "csharp", "InternalGetAssistants");
+@@access(Assistants.listAssistantFiles, Access.internal);
+@@projectedName(Assistants.listAssistantFiles,
+  "csharp",
+  "InternalGetAssistantFiles"
+);
+@@access(ThreadMessages.listMessageFiles, Access.internal);
+@@projectedName(ThreadMessages.listMessageFiles,
+  "csharp",
+  "InternalGetMessageFiles"
+);
+@@access(RunSteps.listRunSteps, Access.internal);
+@@projectedName(RunSteps.listRunSteps, "csharp", "InternalGetRunSteps");
+@@access(ThreadMessages.listMessages, Access.internal);
+@@projectedName(ThreadMessages.listMessages, "csharp", "InternalGetMessages");
+@@access(ThreadRuns.listRuns, Access.internal);
+@@projectedName(ThreadRuns.listRuns, "csharp", "InternalGetRuns");
 @@access(FileListResponse, Access.internal);
 @@projectedName(FileListResponse, "csharp", "InternalFileListResponse");
 @@access(Files.listFiles, Access.internal);
@@ -81,3 +99,4 @@ namespace Azure.AI.OpenAI.Assistants;
 
 // Ensure some types remain public despite interaction with previously internalized details
 @@usage(FilePurpose, Usage.input | Usage.output);
+@@usage(ListSortOrder, Usage.input | Usage.output);
