@@ -27,7 +27,7 @@ These are the global settings for the manufacturingplatform.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-02-01-preview
+tag: package-2024-02-01-preview
 ```
 
 ### Tag: package-2023-02-01-preview
