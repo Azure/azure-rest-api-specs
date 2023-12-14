@@ -1,0 +1,126 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureStackHCI",
+    "description": "The Microsoft.AzureStackHCI Rest API spec",
+    "version": "2024-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "PrecheckResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the individual test/rule/alert that was executed. Unique, not exposed to the customer.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The health check DisplayName localized of the individual test executed.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Key-value pairs that allow grouping/filtering individual tests.",
+          "type": "object",
+          "properties": {
+            "key": {
+              "description": "Key that allow grouping/filtering individual tests.",
+              "type": "string"
+            },
+            "value": {
+              "description": "Value of the key that allow grouping/filtering individual tests.",
+              "type": "string"
+            }
+          }
+        },
+        "title": {
+          "description": "User-facing name; one or more sentences indicating the direct issue.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the check running (i.e. Failed, Succeeded, In Progress). This answers whether the check ran, and passed or failed.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "severity": {
+          "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity.",
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Warning",
+            "Informational",
+            "Hidden"
+          ],
+          "x-ms-enum": {
+            "name": "severity",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Detailed overview of the issue and what impact the issue has on the stamp.",
+          "type": "string"
+        },
+        "remediation": {
+          "description": "Set of steps that can be taken to resolve the issue found.",
+          "type": "string"
+        },
+        "targetResourceID": {
+          "description": "The unique identifier for the affected resource (such as a node or drive).",
+          "type": "string"
+        },
+        "targetResourceName": {
+          "description": "The name of the affected resource.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "The Time in which the HealthCheck was called.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "additionalData": {
+          "description": "Property bag of key value pairs for additional information.",
+          "type": "string"
+        },
+        "healthCheckSource": {
+          "description": "The name of the services called for the HealthCheck (I.E. Test-AzureStack, Test-Cluster).",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
