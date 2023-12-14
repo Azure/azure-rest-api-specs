@@ -8,6 +8,10 @@ using Azure.ClientGenerator.Core;
 // configuration options on the request payload options model.
 @@access(Azure.OpenAI.getChatCompletionsWithAzureExtensions, Access.internal);
 
+// In C#, the functionality provided by the `response_format` property used in image generations is handled by unique
+// method signatures for the different response types (i.e. blob URL versus base64 methods).
+@@access(Azure.OpenAI.ImageGenerationResponseFormat, Access.internal, "csharp");
+
 // Some models from routes with suppressed visibility are still desired for custom public surface.
 @@access(Azure.OpenAI.ImageGenerationOptions, Access.public);
 @@usage(Azure.OpenAI.ImageGenerationOptions, Usage.input | Usage.output);
