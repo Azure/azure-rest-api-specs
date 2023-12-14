@@ -79,13 +79,16 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
           "Operations_List_MaximumSet_Gen": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -118,13 +121,16 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
+          "Workspaces_ListBySubscription": {
+            "$ref": "./examples/Workspaces_ListBySubscription_MaximumSet_Gen.json"
+          },
           "Workspaces_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/Workspaces_ListBySubscription_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -160,13 +166,16 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
+          "Workspaces_ListByResourceGroup": {
+            "$ref": "./examples/Workspaces_ListByResourceGroup_MaximumSet_Gen.json"
+          },
           "Workspaces_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/Workspaces_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -211,6 +220,9 @@
           }
         },
         "x-ms-examples": {
+          "Workspaces_Get": {
+            "$ref": "./examples/Workspaces_Get_MaximumSet_Gen.json"
+          },
           "Workspaces_Get_MaximumSet_Gen": {
             "$ref": "./examples/Workspaces_Get_MaximumSet_Gen.json"
           }
@@ -277,15 +289,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "Workspaces_CreateOrUpdate": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "Workspaces_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Workspaces_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Workspaces_Update",
@@ -336,6 +351,9 @@
           }
         },
         "x-ms-examples": {
+          "Workspaces_Update": {
+            "$ref": "./examples/Workspaces_Update_MaximumSet_Gen.json"
+          },
           "Workspaces_Update_MaximumSet_Gen": {
             "$ref": "./examples/Workspaces_Update_MaximumSet_Gen.json"
           }
@@ -394,15 +412,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "Workspaces_Delete": {
+            "$ref": "./examples/Workspaces_Delete_MaximumSet_Gen.json"
+          },
           "Workspaces_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Workspaces_Delete_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/indexes": {
@@ -445,13 +466,16 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
+          "Indexes_ListByWorkspace": {
+            "$ref": "./examples/Indexes_ListByWorkspace_MaximumSet_Gen.json"
+          },
           "Indexes_ListByWorkspace_MaximumSet_Gen": {
             "$ref": "./examples/Indexes_ListByWorkspace_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -461,8 +485,20 @@
         "tags": [
           "IndexesVersions"
         ],
-        "description": "List by parent.",
+        "description": "List IndexVersion resources by Index",
         "parameters": [
+          {
+            "$ref": "#/parameters/CustomLatestQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
@@ -503,13 +539,16 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
+          "IndexesVersions_ListByIndex": {
+            "$ref": "./examples/IndexesVersions_ListByIndex_MaximumSet_Gen.json"
+          },
           "IndexesVersions_ListByIndex_MaximumSet_Gen": {
             "$ref": "./examples/IndexesVersions_ListByIndex_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -570,6 +609,9 @@
           }
         },
         "x-ms-examples": {
+          "IndexesVersions_Get": {
+            "$ref": "./examples/IndexesVersions_Get_MaximumSet_Gen.json"
+          },
           "IndexesVersions_Get_MaximumSet_Gen": {
             "$ref": "./examples/IndexesVersions_Get_MaximumSet_Gen.json"
           }
@@ -640,6 +682,9 @@
           }
         },
         "x-ms-examples": {
+          "IndexesVersions_CreateOrUpdate": {
+            "$ref": "./examples/IndexesVersions_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "IndexesVersions_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/IndexesVersions_CreateOrUpdate_MaximumSet_Gen.json"
           }
@@ -670,26 +715,6 @@
           "$ref": "#/definitions/ResourceBase"
         }
       ]
-    },
-    "CustomIncludeAllVersionsQueryParameter": {
-      "type": "object",
-      "description": "Provides the '$includeAllVersions' query parameter for list operations.",
-      "properties": {
-        "includeAllVersions": {
-          "type": "boolean",
-          "description": "Return all the versions."
-        }
-      }
-    },
-    "CustomLatestQueryParameter": {
-      "type": "object",
-      "description": "Provides the '$latest' query parameter for list operations.",
-      "properties": {
-        "latest": {
-          "type": "boolean",
-          "description": "If set to true, $latest provides the latest of each index."
-        }
-      }
     },
     "Index": {
       "type": "object",
@@ -948,5 +973,43 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomLatestQueryParameter": {
+      "name": "$latest",
+      "in": "query",
+      "description": "If set to true, $latest provides the latest of each index.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "latest"
+    }
+  }
 }

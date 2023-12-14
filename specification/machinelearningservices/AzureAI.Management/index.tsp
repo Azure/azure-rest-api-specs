@@ -41,7 +41,6 @@ model IndexVersion is ProxyResource<IndexVersionProperties> {
   name: string;
 }
 
-// todo move to common
 @doc("Resource Base class.")
 model ResourceBase {
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
@@ -51,7 +50,6 @@ model ResourceBase {
   properties: Record<string>;
 }
 
-// todo move to common
 @doc("Asset based class.")
 model AssetBased extends ResourceBase {
   @doc("Is the asset archived? For types where Stage is defined, when Stage is provided it will be used to populate IsArchived.")
@@ -77,16 +75,8 @@ model CustomLatestQueryParameter {
   latest?: boolean;
 }
 
-@doc("Provides the '$includeAllVersions' query parameter for list operations.")
-model CustomIncludeAllVersionsQueryParameter {
-  @query("$includeAllVersions")
-  @doc("Return all the versions.")
-  includeAllVersions?: boolean;
-}
-
 alias ListQueryParameters = {
   ...CustomLatestQueryParameter;
-  ...CustomIncludeAllVersionsQueryParameter;
   ...StandardListQueryParameters;
 };
 
@@ -102,8 +92,6 @@ interface ProxyResourceOperationsIndexesVersions<
   get is ArmResourceRead<TResource>;
   @doc("Create a Index.")
   createOrUpdate is ArmResourceCreateOrUpdateSync<TResource>;
-  @doc("List by parent.")
-  listByParent is ArmResourceListByParent<TResource>
 }
 
 @armResourceOperations
