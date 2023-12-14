@@ -13,9 +13,6 @@ model ThreadRun {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
 
-  @doc("The object type, which is always 'thread.run'.")
-  object: "thread.run";
-
   @projectedName("json", "thread_id")
   @doc("The ID of the thread associated with this run.")
   threadId: string;
