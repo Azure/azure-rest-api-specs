@@ -123,6 +123,9 @@ If that guidance is not enough, please also refer to the [LintDiff rules.md doc]
 
 To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
 
+### LintDiff for TypeSpec Specs
+
+
 ## Avocado
 
 ### Get help fixing Avocado validation failures
