@@ -38,47 +38,56 @@ model InsightUnderSubscription is ProxyResource<InsightProperties> {
 @doc("Impact category properties.")
 model InsightProperties is ResourceProperties {
   @doc("summary of the insight.")
-  summary?: string;
+  summary: string;
 
   @doc("category of the insight.")
-  category?: string;
+  category: string;
 
-  @doc("status of the impact. example resolved, repaired, other.")
-  status?: string;
+  @doc("status of the insight. example resolved, repaired, other.")
+  status: string;
 
-  @doc("time at which insight has been generated.")
-  createdTime: utcDateTime;
+  @doc("level of the insight. Informational, Warning, Error, Critical.")
+  level: InsightLevel;
 
-  @doc("time at which insight has been updated.")
-  updatedTime: utcDateTime;
+  @doc("priority of the insight relative to other insights.")
+  priority: int64;
 
-  @doc("list of actions performed to or for the azure resource.")
-  @extension("x-ms-identifiers", [])
-  actions: Action[];
+  @doc("attribution time of the insight.")
+  attributionTime: utcDateTime;
+
+  @doc("failure signature level 1.")
+  failureSignatureLevel1?: string;
+
+  @doc("failure signature level 2.")
+  failureSignatureLevel2?: string;
+
+  @doc("failure signature level 3.")
+  failureSignatureLevel3?: string;
+
+  @doc("unique id of the insight.")
+  insightUniqueId: string;
 
   @doc("details of of the impact for which insight has been generated.")
-  impactDetails: ImpactDetails;
-}
+  @extension("x-ms-identifiers", ["impactId"])
+  impacts: ImpactDetails[];
 
-@doc("details of the action performed to or for the azure resource.")
-model Action {
-  @doc("summary of the action performed to or for the resource.")
-  summary?: string;
-
-  @doc("time at which action was performed.")
-  time?: utcDateTime;
+  @extension("x-ms-identifiers", ["name"])
+  @doc("additional details of the insight.")
+  additionalDetails?: AdditionalField[];
 }
 
 @doc("details of of the impact for which insight has been generated.")
 model ImpactDetails {
   @doc("List of impacted Azure resources.")
-  @extension("x-ms-identifiers", [])
-  impactedResources: ImpactedResource[];
+  impactedResourceId: string;
 
   @doc("Time at which impact was started according to reported impact.")
-  impactStartTime: utcDateTime;
+  startTime: utcDateTime;
 
-  @doc("azure Id of the impact.")
+  @doc("Time at which impact was ended according to reported impact.")
+  endTime?: utcDateTime;
+
+  @doc("Azure Id of the impact.")
   impactId: string;
 
   @doc("unique (guid) id of the impact generated during impact creation.")
@@ -89,6 +98,15 @@ model ImpactDetails {
 model ImpactedResource {
   @doc("impacted azure resource id")
   impactedResourceId: string;
+}
+
+@doc("additional user defined field.")
+model AdditionalField {
+  @doc("name of the field.")
+  name: string;
+
+  @doc("value of the field.")
+  value: string;
 }
 
 @doc("context of post call for insight")
@@ -110,6 +128,21 @@ model InsightDetails {
   azureResourceId?: string;
 }
 
+@doc("Enum for insight level")
+enum InsightLevel {
+  @doc("Informational insight")
+  Informational: "Informational",
+
+  @doc("Warning insight")
+  Warning: "Warning",
+
+  @doc("Error insight")
+  Error: "Error",
+
+  @doc("Critical insight")
+  Critical: "Critical",
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
 interface Insights {
@@ -118,6 +151,12 @@ interface Insights {
 
   @doc("List Insight resources by workloadImpactName")
   listBySubscription is ArmListBySubscription<Insight>;
+
+  @doc("Create Insight resource")
+  create is ArmResourceCreateOrReplaceSync<Insight>;
+
+  @doc("Delete Insight resource")
+  delete is ArmResourceDeleteSync<Insight>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Using subscription level action"
   @get
