@@ -89,7 +89,15 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/CreateApplicationRequestParameter"
+            "name": "CreateApplicationRequestBody",
+            "in": "body",
+            "required": true,
+            "type": "object",
+            "description": "Application creation parameters.",
+            "schema": {
+              "$ref": "#/definitions/CreateApplicationRequest"
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -97,12 +105,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Application"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/ApplicationProvisioningStatus"
             }
           },
           "default": {
@@ -118,6 +120,42 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Application REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        }
       }
     }
   },
@@ -135,16 +173,117 @@
       "description": "The details of the error.",
       "properties": {
         "code": {
+          "readOnly": true,
           "description": "One of a server-defined set of error codes.",
           "type": "string"
         },
         "message": {
+          "readOnly": true,
           "description": "A human-readable representation of the error.",
           "type": "string"
         },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
+          "description": "The error details."
+        },
         "additionalInfo": {
-          "description": "A human-readable representation of additional information of error.",
-          "type": "string"
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "x-ms-identifiers": [],
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
+    "OperationListResult": {
+      "description": "Describes the result of the request to list Microsoft.Management Application operations.",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the Microsoft.Management resource provider for Applications.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation supported by the Microsoft.Management resource provider for Applications.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "title": "Display",
+          "$ref": "#/definitions/OperationDisplayProperties"
+        }
+      }
+    },
+    "OperationDisplayProperties": {
+      "description": "The object that represents the operation.",
+      "properties": {
+        "provider": {
+          "description": "The name of the provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The resource on which the operation is performed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The operation that can be performed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Operation description.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -174,14 +313,6 @@
         }
       }
     },
-    "ApplicationProvisioningStatus": {
-      "description": "The application details.",
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "$ref": "#/definitions/CreateApplicationRequestProperties"
-      }
-    },
     "CreateApplicationRequest": {
       "description": "Application creation parameters.",
       "type": "object",
@@ -197,7 +328,18 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state of the application. For example, Running"
+          "description": "The provisioning state of the application. For example, Running",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "displayName": {
           "type": "string",
@@ -235,18 +377,8 @@
       "in": "query",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "Version of the API to be used with the client request. The current version is 2023-12-01-alpha."
-    },
-    "CreateApplicationRequestParameter": {
-      "name": "createApplicationRequest",
-      "in": "body",
-      "required": true,
-      "type": "object",
-      "description": "Application creation parameters.",
-      "schema": {
-        "$ref": "#/definitions/CreateApplicationRequest"
-      },
-      "x-ms-parameter-location": "method"
     }
   }
 }
