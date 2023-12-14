@@ -111,7 +111,7 @@ model ChatCompletionsOptions {
     score varies by model.
     """)
   @projectedName("json", "logit_bias")
-  @projectedName("csharp", "InternalStringKeyedTokenSelectionBiases")
+  @projectedName("csharp", "TokenSelectionBiases")
   logitBias?: Record<int32>;
 
   @doc("""
@@ -169,7 +169,7 @@ model ChatCompletionsOptions {
     resource URI that's connected to.
     """)
   @projectedName("json", "model")
-  @projectedName("csharp", "InternalNonAzureModelName")
+  @projectedName("csharp", "DeploymentName")
   `model`?: string;
 
   @doc("""
