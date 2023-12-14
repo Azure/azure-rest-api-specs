@@ -17,9 +17,15 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
   title: "Azure Large Instance",
-  version: "2023-07-20-preview",
 })
 @doc("The AzureLargeInstance Management client")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.AzureLargeInstance;
+
+@doc("Azure Large Instance api versions.")
+enum Versions {
+  @doc("Azure Large Instance api version 2023-07-20-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_07_20_preview: "2023-07-20-preview",
+}
