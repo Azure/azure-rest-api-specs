@@ -1,6 +1,7 @@
 import "../HealthInsights.Common/model.common.request.tsp";
 import "../HealthInsights.Common/model.common.response.tsp";
 import "../HealthInsights.Common/model.common.shared.tsp";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 
@@ -21,6 +22,7 @@ model OncoPhenotypeResult {
 
   @doc("The inference results for the Onco Phenotype request.")
   @visibility("read")
+  @Azure.Core.lroResult
   results?: OncoPhenotypeResults;
 }
 
