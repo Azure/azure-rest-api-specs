@@ -15,7 +15,7 @@ using Azure.Core;
 
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
 @service({
-  title: "Data API"
+  title: "Data API",
 })
 @server(
   "https://{serviceName}.data.azure-apicenter.net",

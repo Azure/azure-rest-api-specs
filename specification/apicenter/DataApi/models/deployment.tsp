@@ -5,7 +5,7 @@ model ApiDeployment {
   @doc("The resource name.")
   @maxLength(50)
   name: string;
-  
+
   @doc("The name of the deployment.")
   @maxLength(50)
   title: string;
@@ -27,9 +27,8 @@ model ApiDeployment {
   recommended?: boolean;
 }
 
-@doc("Api Deployment Server") 
-  model ApiDeploymentServer {
-
-    @doc("Base runtime URIs for this deployment.")
-    runtimeUri: Array<string>;
+@doc("Api Deployment Server")
+model ApiDeploymentServer {
+  @doc("Base runtime URIs for this deployment.")
+  runtimeUri: Array<string>;
 }

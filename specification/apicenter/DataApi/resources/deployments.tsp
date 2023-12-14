@@ -25,7 +25,10 @@ model ApiDeploymentResource extends ApiDeployment {
 
 interface ApiDeployments {
   @doc("List a collection of API deployments.")
-  listDeployments is Operations.ResourceList<ApiDeploymentResource, ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>>;
+  listDeployments is Operations.ResourceList<
+    ApiDeploymentResource,
+    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+  >;
 
   @doc("Get an API deployment.")
   getDeployment is Operations.ResourceRead<ApiDeploymentResource>;

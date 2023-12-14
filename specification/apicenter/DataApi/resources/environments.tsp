@@ -25,14 +25,17 @@ model EnvironmentResource extends Environment {
 // Operations //////////////////////////////////////////////////////////////////
 
 alias ServiceTraits = SupportsRepeatableRequests &
-SupportsConditionalRequests &
-SupportsClientRequestId;
+  SupportsConditionalRequests &
+  SupportsClientRequestId;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface Environments {
   @doc("List a collection of environments.")
-  listEnvironments is Operations.ResourceList<EnvironmentResource, ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>>;
+  listEnvironments is Operations.ResourceList<
+    EnvironmentResource,
+    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+  >;
 
   @doc("Get an environment.")
   getEnvironment is Operations.ResourceRead<EnvironmentResource>;

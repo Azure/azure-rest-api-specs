@@ -25,7 +25,10 @@ model ApiVersionResource extends ApiVersion {
 
 interface ApiVersions {
   @doc("List a collection of API versions.")
-  listVersions is Operations.ResourceList<ApiVersionResource, ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>>;
+  listVersions is Operations.ResourceList<
+    ApiVersionResource,
+    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+  >;
 
   @doc("Get an API version.")
   getVersion is Operations.ResourceRead<ApiVersionResource>;

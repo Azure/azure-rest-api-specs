@@ -35,11 +35,18 @@ model ExportSpecificationResource extends ExportSpecification {
 
 interface ApiDefinitions {
   @doc("List a collection of API definitions.")
-  listDefinitions is Operations.ResourceList<ApiDefinitionResource, ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>>;
+  listDefinitions is Operations.ResourceList<
+    ApiDefinitionResource,
+    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+  >;
 
   @doc("Get an API definition.")
   getDefinition is Operations.ResourceRead<ApiDefinitionResource>;
 
   @doc("Export an API specification.")
-  exportSpecification is Operations.ResourceAction<ExportSpecificationResource, {}, ExportSpecificationResource>;
+  exportSpecification is Operations.ResourceAction<
+    ExportSpecificationResource,
+    {},
+    ExportSpecificationResource
+  >;
 }

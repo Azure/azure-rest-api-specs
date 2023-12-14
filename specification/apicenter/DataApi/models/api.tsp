@@ -43,21 +43,20 @@ model Api {
   lastUpdated: utcDateTime;
 }
 
-@doc("Api External Documentation Model") 
-  model ApiExternalDocumentation {
-    @doc("Title of the documentation.")
-    @maxLength(50)
-    title: string;
+@doc("Api External Documentation Model")
+model ApiExternalDocumentation {
+  @doc("Title of the documentation.")
+  @maxLength(50)
+  title: string;
 
-		@doc("Description of the documentation.")
-    @maxLength(1000)
-		description: string;
+  @doc("Description of the documentation.")
+  @maxLength(1000)
+  description: string;
 
-    @doc("URL pointing to the documentation.")
-    @maxLength(200)
-    url: string;
+  @doc("URL pointing to the documentation.")
+  @maxLength(200)
+  url: string;
 }
-
 
 @doc("API Lifecycle Stage")
 enum ApiLifecycleStage {
@@ -110,7 +109,7 @@ model ApiLicenseModel {
   @doc("Name of the license.")
   @maxLength(50)
   name: string;
-  
+
   @doc("URL pointing to the license details. The URL field is mutually exclusive of the identifier field.")
   @maxLength(200)
   url: string;

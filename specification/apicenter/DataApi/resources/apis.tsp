@@ -24,7 +24,10 @@ model ApiResource extends Api {
 
 interface Apis {
   @doc("List a collection of APIs.")
-  listApis is Operations.ResourceList<ApiResource, ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>>;
+  listApis is Operations.ResourceList<
+    ApiResource,
+    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+  >;
 
   @doc("Get an API.")
   getApi is Operations.ResourceRead<ApiResource>;
