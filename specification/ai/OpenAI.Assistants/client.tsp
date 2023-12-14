@@ -97,6 +97,60 @@ namespace Azure.AI.OpenAI.Assistants;
   "InternalSubmitToolOutputs"
 );
 
+@@access(MessageTextDetails, Access.internal);
+@@access(MessageTextFileCitationDetails, Access.internal);
+@@access(MessageFilePathDetails, Access.internal);
+@@access(MessageImageFileDetails, Access.internal);
+@@access(MessageImageFileIdDetails, Access.internal);
+
+@@projectedName(MessageTextDetails, "csharp", "InternalMessageTextDetails");
+@@projectedName(MessageTextContent.text, "csharp", "InternalTextDetails");
+
+@@projectedName(MessageTextFileCitationDetails,
+  "csharp",
+  "InternalMessageTextFileCitationDetails"
+);
+@@projectedName(MessageFileCitationTextAnnotation.fileCitation,
+  "csharp",
+  "InternalFileCitationDetails"
+);
+
+@@projectedName(MessageFilePathDetails,
+  "csharp",
+  "InternalMessageFilePathDetails"
+);
+@@projectedName(MessageFilePathTextAnnotation.filePath,
+  "csharp",
+  "InternalFilePathDetails"
+);
+
+@@projectedName(MessageImageFileDetails,
+  "csharp",
+  "InternalMessageImageFileDetails"
+);
+@@projectedName(MessageImageFileContent.imageFile,
+  "csharp",
+  "InternalImageFileDetails"
+);
+
+@@projectedName(MessageImageFileIdDetails,
+  "csharp",
+  "InternalMessageImageFileIdDetails"
+);
+@@projectedName(MessageImageFileDetails.fileId,
+  "csharp",
+  "InternalImageFileIdDetails"
+);
+
+// Many of the nested types used in messages are not meant to be user-instantiable
+@@usage(MessageTextContent, Usage.output);
+@@usage(MessageImageFileContent, Usage.output);
+@@usage(MessageTextContent, Usage.output);
+@@usage(MessageFileCitationTextAnnotation, Usage.output);
+@@usage(MessageFilePathTextAnnotation, Usage.output);
+
 // Ensure some types remain public despite interaction with previously internalized details
+@@access(MessageFilePathTextAnnotation, Access.public);
+@@access(MessageFileCitationTextAnnotation, Access.public);
 @@usage(FilePurpose, Usage.input | Usage.output);
 @@usage(ListSortOrder, Usage.input | Usage.output);
