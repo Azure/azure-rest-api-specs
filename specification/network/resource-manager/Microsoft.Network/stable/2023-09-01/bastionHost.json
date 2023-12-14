@@ -125,6 +125,9 @@
           },
           "Get Developer Bastion Host": {
             "$ref": "./examples/BastionHostDeveloperGet.json"
+          },
+          "Get Bastion Host With Zones": {
+            "$ref": "./examples/BastionHostGetWithZones.json"
           }
         }
       },
@@ -180,6 +183,9 @@
         "x-ms-examples": {
           "Create Bastion Host": {
             "$ref": "./examples/BastionHostPut.json"
+          },
+          "Create Bastion Host With Zones": {
+            "$ref": "./examples/BastionHostPutWithZones.json"
           },
           "Create Developer Bastion Host": {
             "$ref": "./examples/BastionHostDeveloperPut.json"
@@ -801,6 +807,13 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BastionHostPropertiesFormat",
           "description": "Represents the bastion host resource."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting where the resource needs to come from."
         },
         "etag": {
           "type": "string",
