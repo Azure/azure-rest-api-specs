@@ -11239,14 +11239,14 @@
       "description": "App resource properties payload",
       "type": "object",
       "properties": {
-        "type": {
+        "kind": {
           "description": "The type of App, whether it's long running app or short lived app",
           "enum": [
-            "LongRunning",
-            "ShortLived"
+            "Application",
+            "Task"
           ],
           "type": "string",
-          "default": "LongRunning",
+          "default": "Application",
           "x-ms-enum": {
             "name": "AppResourceType",
             "modelAsString": true
