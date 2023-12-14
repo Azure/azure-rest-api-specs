@@ -134,6 +134,9 @@ model VmssFabricProfile extends FabricProfile {
   @doc("The OS profile of the machines in the pool.")
   osProfile?: OsProfile;
 
+  @doc("The storage profile of the machines in the pool.")
+  storageProfile?: StorageProfile;
+
   @doc("The network profile of the machines in the pool.")
   networkProfile?: NetworkProfile;
 }
@@ -142,10 +145,26 @@ model VmssFabricProfile extends FabricProfile {
 model DevOpsAzureSku {
   @doc("The Azure SKU name of the machines in the pool.")
   name: string;
-
-  @doc("The Azure SKU tier of the machines in the pool.")
-  tier?: string = "Standard";
 }
+
+@doc("The storage profile of the VMSS.")
+model StorageProfile {
+  @doc("The Azure SKU name of the machines in the pool.")
+  osDiskStorageAccountType?: OsDiskStorageAccountType;
+}
+
+@doc("The storage account type of the OS disk.")
+enum OsDiskStorageAccountType {
+  @doc("Standard.")
+  Standard,
+
+  @doc("Premium.")
+  Premium,
+
+  @doc("Standard SSD.")
+  StandardSSD,
+}
+
 @doc("The VM image of the machines in the pool.")
 model PoolImage {
   @doc("The resource id of the image.")

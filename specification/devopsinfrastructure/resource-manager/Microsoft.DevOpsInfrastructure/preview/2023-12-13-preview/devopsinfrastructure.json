@@ -524,11 +524,6 @@
         "name": {
           "type": "string",
           "description": "The Azure SKU name of the machines in the pool."
-        },
-        "tier": {
-          "type": "string",
-          "description": "The Azure SKU tier of the machines in the pool.",
-          "default": "Standard"
         }
       },
       "required": [
@@ -667,6 +662,36 @@
       "required": [
         "kind"
       ]
+    },
+    "OsDiskStorageAccountType": {
+      "type": "string",
+      "description": "The storage account type of the OS disk.",
+      "enum": [
+        "Standard",
+        "Premium",
+        "StandardSSD"
+      ],
+      "x-ms-enum": {
+        "name": "OsDiskStorageAccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium."
+          },
+          {
+            "name": "StandardSSD",
+            "value": "StandardSSD",
+            "description": "Standard SSD."
+          }
+        ]
+      }
     },
     "OsProfile": {
       "type": "object",
@@ -959,6 +984,16 @@
       ],
       "x-ms-discriminator-value": "Stateless"
     },
+    "StorageProfile": {
+      "type": "object",
+      "description": "The storage profile of the VMSS.",
+      "properties": {
+        "osDiskStorageAccountType": {
+          "$ref": "#/definitions/OsDiskStorageAccountType",
+          "description": "The Azure SKU name of the machines in the pool."
+        }
+      }
+    },
     "VmssFabricProfile": {
       "type": "object",
       "description": "The agents will run on Virtual Machine Scale Sets.",
@@ -978,6 +1013,10 @@
         "osProfile": {
           "$ref": "#/definitions/OsProfile",
           "description": "The OS profile of the machines in the pool."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "The storage profile of the machines in the pool."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
