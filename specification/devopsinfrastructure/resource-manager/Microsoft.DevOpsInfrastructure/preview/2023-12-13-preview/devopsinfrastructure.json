@@ -465,24 +465,57 @@
       "description": "Defines the type of Azure DevOps pool permission.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "Discriminator property for AzureDevOpsPermissionProfile."
+          "$ref": "#/definitions/AzureDevOpsPermissionType",
+          "description": "Determines who has admin permissions to the Azure DevOps pool."
+        },
+        "users": {
+          "type": "array",
+          "description": "User email addresses",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groups": {
+          "type": "array",
+          "description": "Group email addresses",
+          "items": {
+            "type": "string"
+          }
         }
       },
-      "discriminator": "kind",
       "required": [
         "kind"
       ]
     },
-    "CreatorOnly": {
-      "type": "object",
-      "description": "Only the pool creator will be an admin of the pool.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureDevOpsPermissionProfile"
-        }
+    "AzureDevOpsPermissionType": {
+      "type": "string",
+      "description": "Determines who has admin permissions to the Azure DevOps pool.",
+      "enum": [
+        "Inherit",
+        "CreatorOnly",
+        "SpecificAccounts"
       ],
-      "x-ms-discriminator-value": "CreatorOnly"
+      "x-ms-enum": {
+        "name": "AzureDevOpsPermissionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inherit",
+            "value": "Inherit",
+            "description": "Pool will inherit permissions from the project or organization."
+          },
+          {
+            "name": "CreatorOnly",
+            "value": "CreatorOnly",
+            "description": "Only the pool creator will be an admin of the pool."
+          },
+          {
+            "name": "SpecificAccounts",
+            "value": "SpecificAccounts",
+            "description": "Only the specified accounts will be admins of the pool."
+          }
+        ]
+      }
     },
     "DevOpsAzureSku": {
       "type": "object",
@@ -558,16 +591,6 @@
         }
       ],
       "x-ms-discriminator-value": "GitHub"
-    },
-    "InheritPermissions": {
-      "type": "object",
-      "description": "Pool will inherit permissions from the project or organization.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureDevOpsPermissionProfile"
-        }
-      ],
-      "x-ms-discriminator-value": "Inherit"
     },
     "LogonType": {
       "type": "string",
@@ -657,10 +680,7 @@
           "$ref": "#/definitions/LogonType",
           "description": "Determines how the service should be run. By default, this will be set to Service."
         }
-      },
-      "required": [
-        "secretsManagementSettings"
-      ]
+      }
     },
     "Pool": {
       "type": "object",
@@ -909,32 +929,6 @@
         "observedCertificates",
         "keyExportable"
       ]
-    },
-    "SpecificAccounts": {
-      "type": "object",
-      "description": "Only the specified accounts will be admins of the pool.",
-      "properties": {
-        "users": {
-          "type": "array",
-          "description": "User email addresses",
-          "items": {
-            "type": "string"
-          }
-        },
-        "groups": {
-          "type": "array",
-          "description": "Group email addresses",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureDevOpsPermissionProfile"
-        }
-      ],
-      "x-ms-discriminator-value": "SpecificAccounts"
     },
     "Stateful": {
       "type": "object",
