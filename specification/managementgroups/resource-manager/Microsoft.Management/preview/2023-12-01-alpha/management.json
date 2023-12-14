@@ -89,15 +89,13 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "CreateApplicationRequestBody",
             "in": "body",
-            "required": true,
-            "type": "object",
+            "name": "CreateApplicationRequestBody",
             "description": "Application creation parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CreateApplicationRequest"
-            },
-            "x-ms-parameter-location": "method"
+            }
           }
         ],
         "responses": {
@@ -162,6 +160,7 @@
   "definitions": {
     "ErrorResponse": {
       "description": "The error object.",
+      "type": "object",
       "properties": {
         "error": {
           "title": "Error",
@@ -171,6 +170,7 @@
     },
     "ErrorDetails": {
       "description": "The details of the error.",
+      "type": "object",
       "properties": {
         "code": {
           "readOnly": true,
@@ -228,11 +228,11 @@
     },
     "OperationListResult": {
       "description": "Describes the result of the request to list Microsoft.Management Application operations.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "List of operations supported by the Microsoft.Management resource provider for Applications.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
           },
@@ -242,8 +242,7 @@
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -253,8 +252,11 @@
       "properties": {
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
         "display": {
           "title": "Display",
