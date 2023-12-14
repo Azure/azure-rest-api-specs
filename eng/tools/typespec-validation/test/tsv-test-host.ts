@@ -1,7 +1,16 @@
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
 import { normalizePath } from "../src/utils.js";
+import defaultPath, { PlatformPath } from "path";
+
+export { IGitOperation } from "../src/tsv-host.js";
 
 export class TsvTestHost implements TsvHost {
+  path: PlatformPath;
+
+  constructor(path: PlatformPath = defaultPath) {
+    this.path = path;
+  }
+
   static get folder() {
     return "specification/foo/Foo";
   }
@@ -36,7 +45,7 @@ export class TsvTestHost implements TsvHost {
   }
 
   normalizePath(folder: string): string {
-    return normalizePath(folder);
+    return normalizePath(folder, this.path);
   }
 
   async readTspConfig(_folder: string): Promise<string> {
