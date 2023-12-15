@@ -68,6 +68,7 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 input-file:
   - Microsoft.AppPlatform/preview/2024-01-01-preview/appplatform.json
 ```
+
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
