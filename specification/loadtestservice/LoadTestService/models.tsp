@@ -155,7 +155,6 @@ enum TimeGrain {
 
 @added(APIVersions.v2023_04_01_preview)
 @doc("Test kind")
-// testtype to test kind
 enum TestKind {
   @doc("URL Test")
   URL,
@@ -229,6 +228,11 @@ SECRET_VALUE.
   @added(APIVersions.v2023_04_01_preview)
   @doc("Kind of test.")
   kind?: TestKind;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Inject load test engines without deploying public IP for outbound access")
+  publicIPDisabled?: boolean;
 
   @doc("Type of the managed identity referencing the Key vault.")
   keyvaultReferenceIdentityType?: string;
@@ -307,15 +311,12 @@ model CertificateMetadata {
 @doc("Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.")
 model AutoStopCriteria {
   @doc("Whether auto-stop should be disabled. The default value is false.")
-  //update description with default values.
-  //change to use it false by default
   autoStopDisabled?: boolean = false;
 
   @doc("Threshold percentage of errors on which test run should be automatically stopped. Allowed values are in range of 0.0-100.0")
   errorRate?: float32 = 90;
 
   @doc("Time window during which the error percentage should be evaluated in seconds.")
-  // adding time unit in name
   errorRateTimeWindowInSeconds?: int32 = 60;
 }
 
@@ -351,7 +352,7 @@ model OptionalLoadTestConfig {
   @doc("Test URL. Provide the complete HTTP URL. For example, https://contoso-app.azurewebsites.net/login")
   endpointUrl?: string;
 
-  @doc("Target throughput (requests per second). This my not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it.")
+  @doc("Target throughput (requests per second). This may not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it.")
   @added(APIVersions.v2023_04_01_preview)
   requestsPerSecond?: int32;
 
@@ -385,7 +386,6 @@ model TestInputArtifacts {
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("The config json file for url based test")
-  //name urlTest
   urlTestConfigFileInfo?: TestFileInfo;
 
   @doc("Additional supported files for the test run")
@@ -614,6 +614,12 @@ SECRET_VALUE.
   @visibility("read")
   kind?: TestKind;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Inject load test engines without deploying public IP for outbound access")
+  @visibility("read")
+  publicIPDisabled?: boolean;
+
   ...SystemMetaData;
 }
 
@@ -674,12 +680,12 @@ model TestRunStatistics {
   @visibility("read")
   throughput?: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" //KBytes is expected
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "KBytes is expected"
   @doc("Received network bytes.")
   @visibility("read")
   receivedKBytesPerSec?: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" //KBytes is expected
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "KBytes is expected"
   @doc("Send network bytes.")
   @visibility("read")
   sentKBytesPerSec?: float64;

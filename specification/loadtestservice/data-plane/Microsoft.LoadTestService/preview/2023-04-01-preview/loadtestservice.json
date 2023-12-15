@@ -2284,7 +2284,7 @@
         "requestsPerSecond": {
           "type": "integer",
           "format": "int32",
-          "description": "Target throughput (requests per second). This my not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it."
+          "description": "Target throughput (requests per second). This may not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it."
         },
         "maxResponseTimeInMs": {
           "type": "integer",
@@ -2918,6 +2918,10 @@
           "$ref": "#/definitions/TestKind",
           "description": "Kind of test."
         },
+        "publicIPDisabled": {
+          "type": "boolean",
+          "description": "Inject load test engines without deploying public IP for outbound access"
+        },
         "keyvaultReferenceIdentityType": {
           "type": "string",
           "description": "Type of the managed identity referencing the Key vault."
@@ -3065,6 +3069,10 @@
         "kind": {
           "$ref": "#/definitions/TestKind",
           "description": "Kind of test."
+        },
+        "publicIPDisabled": {
+          "type": "boolean",
+          "description": "Inject load test engines without deploying public IP for outbound access"
         },
         "keyvaultReferenceIdentityType": {
           "type": "string",
@@ -3309,6 +3317,11 @@
         "kind": {
           "$ref": "#/definitions/TestKind",
           "description": "Type of test.",
+          "readOnly": true
+        },
+        "publicIPDisabled": {
+          "type": "boolean",
+          "description": "Inject load test engines without deploying public IP for outbound access",
           "readOnly": true
         },
         "createdDateTime": {
