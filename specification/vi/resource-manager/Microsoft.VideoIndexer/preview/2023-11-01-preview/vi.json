@@ -381,20 +381,6 @@
           "200": {
             "description": "The Azure Video Indexer account was successfully deleted."
           },
-          "202": {
-            "description": "Accepted. The Azure Video Indexer account will be deleted asynchronously.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "204": {
             "description": "The Azure Video Indexer account does not exist."
           },
@@ -903,8 +889,7 @@
           },
           {
             "in": "body",
-            "name": "requestBodyParameters",
-            "description": "The parameters for creating a private endpoint connection.",
+            "name": "body",
             "required": true,
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
