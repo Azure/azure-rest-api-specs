@@ -47,7 +47,7 @@ model PartnerExperimentationWorkspaceProperties {
   accessPolicy: AccessPolicy;
 
   @doc("DataSource for an experimentation workspace")
-  dataSource: DataSource;
+  dataSource?: DataSource;
 }
 
 @doc("Access policy for an experimentation workspace")
