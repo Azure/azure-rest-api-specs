@@ -7,8 +7,6 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-// TODO - how do we implement errors properly?
-// TODO - understand if this is the right way to set up auth
 @useAuth(
   [
     OAuth2Auth<[
