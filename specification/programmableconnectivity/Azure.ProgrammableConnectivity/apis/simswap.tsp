@@ -84,7 +84,5 @@ model SimSwapVerifyResponse {
 
 @doc("Device information needed by operator to find sim swap information.")
 model SimSwapDevice {
-  @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
-  @pattern("^\\+?[0-9]{5,15}$")
-  phoneNumber: string;
+  ...PhoneNumberModel;
 }
