@@ -673,6 +673,143 @@
         "value"
       ]
     },
+    "Image": {
+      "description": "Lab services virtual machine image",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the image.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Image resource properties",
+          "$ref": "#/definitions/ImageProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ImageUpdate": {
+      "description": "Lab services virtual machine image for updates.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Image resource properties",
+          "$ref": "#/definitions/ImageUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ImageUpdateProperties": {
+      "description": "Properties of an image resource update",
+      "type": "object",
+      "properties": {
+        "enabledState": {
+          "description": "Is the image enabled",
+          "default": "Disabled",
+          "$ref": "LabServices.json#/definitions/enableState"
+        }
+      }
+    },
+    "ImageProperties": {
+      "description": "Properties of an image resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Current provisioning state of the image.",
+          "$ref": "LabServices.json#/definitions/provisioningState",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The image display name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "A description of the image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "iconUrl": {
+          "description": "URL of the image icon.",
+          "type": "string",
+          "readOnly": true
+        },
+        "author": {
+          "description": "The image author.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osType": {
+          "description": "The OS Type of the image.",
+          "$ref": "LabServices.json#/definitions/osType",
+          "readOnly": true
+        },
+        "plan": {
+          "description": "The ID of marketplace plan associated with the image (optional).",
+          "type": "string",
+          "readOnly": true
+        },
+        "termsStatus": {
+          "description": "The status of image terms of use (enabled = accepted, disabled = not accepted).",
+          "$ref": "LabServices.json#/definitions/enableState",
+          "readOnly": true
+        },
+        "offer": {
+          "description": "The ID of an offer associated with the image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisher": {
+          "description": "The ID of the publisher of the image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "description": "The image SKU.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The image version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sharedGalleryId": {
+          "description": "The ID for the image in the shared gallery.",
+          "$ref": "LabServices.json#/definitions/url",
+          "readOnly": true
+        },
+        "availableRegions": {
+          "description": "The available regions of the image in the shared gallery.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "osState": {
+          "description": "The OS State of the image.",
+          "$ref": "LabServices.json#/definitions/osState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "enabledState"
+      ]
+    },
     "Validations": {
       "type": "object",
       "properties": {
@@ -723,6 +860,10 @@
         "imageId": {
           "type": "string",
           "description": "ImageId of Image in Validations"
+        },
+        "deleteResources": {
+          "$ref": "#/definitions/DeleteResources",
+          "description": "Status if resources needs to be deleted or not"
         },
         "testSuites": {
           "type": "array",
