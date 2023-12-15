@@ -724,7 +724,14 @@
           "type": "string",
           "description": "ImageId of Image in Validations"
         },
-    
+        "testSuites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestSuiteDefinitionReference"
+          },
+          "x-ms-identifiers": [],
+          "description": "An array of Test definition references."
+        },
         "deleteResources": {
           "$ref": "#/definitions/DeleteResources",
           "description": "Status if resources needs to be deleted or not"
