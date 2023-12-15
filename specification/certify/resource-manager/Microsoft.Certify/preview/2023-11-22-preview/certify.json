@@ -472,7 +472,7 @@
             "$ref": "#/parameters/ValidationNameParameter"
           },
           {
-            "name": "parameters",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Create or update resource parameters.",
@@ -633,18 +633,6 @@
     "TestSuitesResourceUpdate": {
       "type": "object",
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "properties": {
           "$ref": "#/definitions/TestSuitesProperties",
           "description": "The updatable resource-specific properties for a TestSuite."
