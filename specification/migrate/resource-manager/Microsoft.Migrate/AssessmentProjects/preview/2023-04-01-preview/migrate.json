@@ -1897,7 +1897,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/avssummaries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/avsSummaries": {
       "get": {
         "operationId": "BusinessCaseAvsSummaryOperations_ListByBusinessCase",
         "tags": [
@@ -1955,7 +1955,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/avssummaries/{avsSummaryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/avsSummaries/{avsSummaryName}": {
       "get": {
         "operationId": "BusinessCaseAvsSummaryOperations_Get",
         "tags": [
@@ -2788,7 +2788,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/iaassummaries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/iaasSummaries": {
       "get": {
         "operationId": "BusinessCaseIaasSummaryOperations_ListByBusinessCase",
         "tags": [
@@ -2846,7 +2846,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/iaassummaries/{iaasSummaryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/iaasSummaries/{iaasSummaryName}": {
       "get": {
         "operationId": "BusinessCaseIaasSummaryOperations_Get",
         "tags": [
@@ -2909,7 +2909,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/overviewsummaries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/overviewSummaries": {
       "get": {
         "operationId": "BusinessCaseOverviewSummaryOperations_ListByBusinessCase",
         "tags": [
@@ -2967,7 +2967,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/overviewsummaries/{overviewSummaryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/overviewSummaries/{overviewSummaryName}": {
       "get": {
         "operationId": "BusinessCaseOverviewSummaryOperations_Get",
         "tags": [
@@ -3030,7 +3030,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/paassummaries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/paasSummaries": {
       "get": {
         "operationId": "BusinessCasePaasSummaryOperations_ListByBusinessCase",
         "tags": [
@@ -3088,7 +3088,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/paassummaries/{paasSummaryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businessCases/{businessCaseName}/paasSummaries/{paasSummaryName}": {
       "get": {
         "operationId": "BusinessCasePaasSummaryOperations_Get",
         "tags": [
@@ -8769,26 +8769,22 @@
         "webAppCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the number of web apps.",
-          "readOnly": true
+          "description": "Gets or sets the number of web apps."
         },
         "webServerCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the number of web servers.",
-          "readOnly": true
+          "description": "Gets or sets the number of web servers."
         },
         "machineCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the number of machines.",
-          "readOnly": true
+          "description": "Gets or sets the number of machines."
         },
         "totalMonthlyCost": {
           "type": "number",
           "format": "float",
-          "description": "Gets the total monthly cost.",
-          "readOnly": true
+          "description": "Gets or sets the total monthly cost."
         }
       },
       "required": [
@@ -8889,8 +8885,7 @@
         },
         "details": {
           "$ref": "#/definitions/AKSAssessmentDetails",
-          "description": "Gets AKS Assessment Details.",
-          "readOnly": true
+          "description": "Gets or sets AKS Assessment Details."
         }
       },
       "required": [
@@ -8941,52 +8936,45 @@
       "properties": {
         "skuSummary": {
           "type": "object",
-          "description": "Gets SKU summary.",
+          "description": "Gets or sets SKU summary.",
           "additionalProperties": {
             "$ref": "#/definitions/SummaryDetails"
-          },
-          "readOnly": true
+          }
         },
         "webAppSummary": {
           "type": "object",
-          "description": "Gets web app summary.",
+          "description": "Gets or sets web app summary.",
           "additionalProperties": {
             "$ref": "#/definitions/SummaryDetails"
-          },
-          "readOnly": true
+          }
         },
         "webServerSummary": {
           "type": "object",
-          "description": "Gets web server summary.",
+          "description": "Gets or sets web server summary.",
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
-          },
-          "readOnly": true
+          }
         },
         "webAppCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the number of web apps.",
-          "readOnly": true
+          "description": "Gets or sets the number of web apps."
         },
         "webServerCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the number of web servers.",
-          "readOnly": true
+          "description": "Gets or sets the number of web servers."
         },
         "machineCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the number of machines.",
-          "readOnly": true
+          "description": "Gets or sets the number of machines."
         },
         "totalMonthlyCost": {
           "type": "number",
           "format": "float",
-          "description": "Gets the total monthly cost.",
-          "readOnly": true
+          "description": "Gets or sets the total monthly cost."
         }
       },
       "required": [
@@ -9113,14 +9101,10 @@
       "type": "object",
       "description": "ARM model of AKS Summary.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/AKSSummaryProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+        "name": {
+          "type": "string",
+          "description": "AKS Assessment Summary Name.",
+          "pattern": "^[^<>&:\\?/#]{1,260}$"
         },
         "eTag": {
           "type": "string",
@@ -9128,9 +9112,29 @@
           "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/AKSSummaryProperties",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          ]
         }
       ]
     },
@@ -9161,8 +9165,7 @@
       "properties": {
         "aksAssessmentSummary": {
           "$ref": "#/definitions/AKSAssessmentSummary",
-          "description": "Gets AKS assessment summary.",
-          "readOnly": true
+          "description": "Gets or sets AKS assessment summary."
         }
       },
       "required": [
@@ -10698,13 +10701,11 @@
       "properties": {
         "suitabilityResult": {
           "$ref": "#/definitions/SuitabilityResult",
-          "description": "Gets suitability result.",
-          "readOnly": true
+          "description": "Gets or sets suitability result."
         },
         "recommendationResult": {
           "$ref": "#/definitions/RecommendationResult",
-          "description": "Gets recommendation result.",
-          "readOnly": true
+          "description": "Gets or sets recommendation result."
         }
       },
       "allOf": [
@@ -10912,31 +10913,26 @@
         "pricesTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets last time when rates were queried.",
-          "readOnly": true
+          "description": "Gets or sets last time when rates were queried."
         },
         "confidenceRatingInPercentage": {
           "type": "number",
           "format": "float",
-          "description": "Gets Confidence score.",
-          "readOnly": true
+          "description": "Gets or sets Confidence score."
         },
         "createdTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets date and time when assessment was created.",
-          "readOnly": true
+          "description": "Gets or sets date and time when assessment was created."
         },
         "updatedTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets date and time when assessment was last updated.",
-          "readOnly": true
+          "description": "Gets or sets date and time when assessment was last updated."
         },
         "status": {
           "$ref": "#/definitions/AssessmentStatus",
-          "description": "Gets assessment status.",
-          "readOnly": true
+          "description": "Gets or sets assessment status."
         }
       },
       "required": [
@@ -11334,7 +11330,7 @@
       "description": "Base data model of Assessment Settings.",
       "properties": {
         "azureLocation": {
-          "$ref": "#/definitions/POSAzureLocation",
+          "$ref": "#/definitions/AzureLocation",
           "description": "Gets or sets azure location."
         },
         "environmentType": {
@@ -13483,6 +13479,17 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
+        }
+      }
+    },
+    "AzureResourceProperties2": {
+      "type": "object",
+      "description": "Common properties for all azure tracked and proxy resources.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       }
     },
@@ -16974,7 +16981,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResourceProperties"
+          "$ref": "#/definitions/AzureResourceProperties2"
         }
       ]
     },
@@ -17038,33 +17045,27 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets name.",
-          "readOnly": true
+          "description": "Gets or sets name."
         },
         "behavior": {
           "$ref": "#/definitions/CheckResult",
-          "description": "Gets behavior or check result.",
-          "readOnly": true
+          "description": "Gets or sets behavior or check result."
         },
         "description": {
           "type": "string",
-          "description": "Gets description.",
-          "readOnly": true
+          "description": "Gets or sets description."
         },
         "cause": {
           "type": "string",
-          "description": "Gets cause.",
-          "readOnly": true
+          "description": "Gets or sets cause."
         },
         "recommendation": {
           "type": "string",
-          "description": "Gets recommendation.",
-          "readOnly": true
+          "description": "Gets or sets recommendation."
         },
         "moreInfo": {
           "$ref": "#/definitions/MoreInfo",
-          "description": "Gets more information about check or rule.",
-          "readOnly": true
+          "description": "Gets or sets more information about check or rule."
         }
       },
       "required": [
@@ -17160,57 +17161,48 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets name.",
-          "readOnly": true
+          "description": "Gets or sets name."
         },
         "nodePools": {
           "type": "array",
-          "description": "Gets list of node pools.",
+          "description": "Gets or sets list of node pools.",
           "items": {
             "$ref": "#/definitions/NodePool"
-          },
-          "readOnly": true
+          }
         },
         "region": {
-          "$ref": "#/definitions/POSAzureLocation",
-          "description": "Gets region.",
-          "readOnly": true
+          "$ref": "#/definitions/AzureLocation",
+          "description": "Gets or sets region."
         },
         "userNodePoolCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets user node pool count.",
-          "readOnly": true
+          "description": "Gets or sets user node pool count."
         },
         "userNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets user node count.",
-          "readOnly": true
+          "description": "Gets or sets user node count."
         },
         "systemNodePoolCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets system node pool count.",
-          "readOnly": true
+          "description": "Gets or sets system node pool count."
         },
         "systemNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets system node count.",
-          "readOnly": true
+          "description": "Gets or sets system node count."
         },
         "podCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets pod count.",
-          "readOnly": true
+          "description": "Gets or sets pod count."
         },
         "monthlyCost": {
           "type": "number",
           "format": "float",
-          "description": "Gets monthly cost.",
-          "readOnly": true
+          "description": "Gets or sets monthly cost."
         }
       },
       "required": [
@@ -17408,14 +17400,12 @@
         "cores": {
           "type": "number",
           "format": "float",
-          "description": "Gets cores.",
-          "readOnly": true
+          "description": "Gets or sets cores."
         },
         "memory": {
           "type": "number",
           "format": "float",
-          "description": "Gets memory.",
-          "readOnly": true
+          "description": "Gets or sets memory."
         }
       },
       "required": [
@@ -17543,7 +17533,8 @@
         "Unknown",
         "MonthlyAzureHybridCostSavings",
         "MonthlySecurityCost",
-        "MonthlyPremiumV2StorageCost"
+        "MonthlyPremiumV2StorageCost",
+        "MonthlyLinuxAzureHybridCostSavings"
       ],
       "x-ms-enum": {
         "name": "CostComponentName",
@@ -19881,13 +19872,11 @@
       "properties": {
         "title": {
           "type": "string",
-          "description": "Gets or sets title.",
-          "readOnly": true
+          "description": "Gets or sets title."
         },
         "url": {
           "type": "string",
-          "description": "Gets or sets url.",
-          "readOnly": true
+          "description": "Gets or sets url."
         }
       },
       "required": [
@@ -19972,57 +19961,47 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets id.",
-          "readOnly": true
+          "description": "Gets or sets id."
         },
         "name": {
           "type": "string",
-          "description": "Gets name.",
-          "readOnly": true
+          "description": "Gets or sets name."
         },
         "clusterName": {
           "type": "string",
-          "description": "Gets cluster name.",
-          "readOnly": true
+          "description": "Gets or sets cluster name."
         },
         "mode": {
           "$ref": "#/definitions/NodePoolMode",
-          "description": "Gets mode.",
-          "readOnly": true
+          "description": "Gets or sets mode."
         },
         "osType": {
           "$ref": "#/definitions/OSType",
-          "description": "Gets os type.",
-          "readOnly": true
+          "description": "Gets or sets os type."
         },
         "armSkuName": {
           "type": "string",
-          "description": "Gets arm sku name.",
-          "readOnly": true
+          "description": "Gets or sets arm sku name."
         },
         "nodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets node count.",
-          "readOnly": true
+          "description": "Gets or sets node count."
         },
         "podCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets pod count.",
-          "readOnly": true
+          "description": "Gets or sets pod count."
         },
         "monthlyCost": {
           "type": "number",
           "format": "float",
-          "description": "Gets monthly cost.",
-          "readOnly": true
+          "description": "Gets or sets monthly cost."
         },
         "podApproxMonthlyCost": {
           "type": "number",
           "format": "float",
-          "description": "Gets pod approximate monthly cost.",
-          "readOnly": true
+          "description": "Gets or sets pod approximate monthly cost."
         }
       },
       "required": [
@@ -20438,11 +20417,10 @@
       "properties": {
         "edges": {
           "type": "object",
-          "description": "Gets the mapping of Assessment Options in graph representation.",
+          "description": "Gets or sets the mapping of Assessment Options in graph representation.",
           "additionalProperties": {
             "$ref": "#/definitions/RecordOfStringArray"
-          },
-          "readOnly": true
+          }
         }
       },
       "required": [
@@ -20629,78 +20607,6 @@
         }
       }
     },
-    "POSAzureLocation": {
-      "type": "string",
-      "description": "Location for Azure in POS.",
-      "enum": [
-        "Unknown",
-        "EastAsia",
-        "SoutheastAsia",
-        "AustraliaEast",
-        "AustraliaSoutheast",
-        "BrazilSouth",
-        "CanadaCentral",
-        "CanadaEast",
-        "WestEurope",
-        "NorthEurope",
-        "CentralIndia",
-        "SouthIndia",
-        "WestIndia",
-        "JapanEast",
-        "JapanWest",
-        "KoreaCentral",
-        "KoreaSouth",
-        "UkWest",
-        "UkSouth",
-        "NorthCentralUs",
-        "EastUs",
-        "WestUs2",
-        "SouthCentralUs",
-        "CentralUs",
-        "EastUs2",
-        "WestUs",
-        "WestCentralUs",
-        "GermanyCentral",
-        "GermanyNortheast",
-        "ChinaNorth",
-        "ChinaEast",
-        "USGovArizona",
-        "USGovTexas",
-        "USGovIowa",
-        "USGovVirginia",
-        "USDoDCentral",
-        "USDoDEast",
-        "FranceCentral",
-        "AustraliaCentral",
-        "SouthAfricaNorth",
-        "FranceSouth",
-        "AustraliaCentral2",
-        "SouthAfricaWest",
-        "GermanyNorth",
-        "GermanyWestCentral",
-        "NorwayEast",
-        "NorwayWest",
-        "ChinaEast2",
-        "ChinaNorth2",
-        "SwitzerlandNorth",
-        "SwitzerlandWest",
-        "UAENorth",
-        "UAECentral",
-        "UsNatEast",
-        "UsNatWest",
-        "UsSecEast",
-        "UsSecCentral",
-        "UsSecWest",
-        "SwedenCentral",
-        "QatarCentral",
-        "EastUS2EUAP",
-        "CentralUSEUAP"
-      ],
-      "x-ms-enum": {
-        "name": "POSAzureLocation",
-        "modelAsString": true
-      }
-    },
     "PaasDistribution": {
       "type": "object",
       "description": "Shows the distribution of platforms.",
@@ -20787,7 +20693,6 @@
     },
     "Percentile": {
       "type": "string",
-      "description": "Percentile for Performance Data.",
       "enum": [
         "Percentile50",
         "Percentile90",
@@ -20796,29 +20701,7 @@
       ],
       "x-ms-enum": {
         "name": "Percentile",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Percentile50",
-            "value": "Percentile50",
-            "description": "Percentile 50."
-          },
-          {
-            "name": "Percentile90",
-            "value": "Percentile90",
-            "description": "Percentile 90."
-          },
-          {
-            "name": "Percentile95",
-            "value": "Percentile95",
-            "description": "Percentile 95."
-          },
-          {
-            "name": "Percentile99",
-            "value": "Percentile99",
-            "description": "Percentile 99."
-          }
-        ]
+        "modelAsString": true
       }
     },
     "PerfDataSettings": {
@@ -20827,7 +20710,8 @@
       "properties": {
         "timeRange": {
           "$ref": "#/definitions/PerformanceDataTimeRange",
-          "description": "Gets perf data time range."
+          "description": "Gets perf data time range.",
+          "readOnly": true
         },
         "perfDataStartTime": {
           "type": "string",
@@ -20840,7 +20724,7 @@
           "description": "Gets or sets perf data end time."
         },
         "percentile": {
-          "$ref": "#/definitions/Percentile",
+          "type": "string",
           "description": "Gets percentile utilization for performance data."
         }
       },
@@ -21327,44 +21211,36 @@
       "properties": {
         "request": {
           "$ref": "#/definitions/ComputeResource",
-          "description": "Gets cores and memory request.",
-          "readOnly": true
+          "description": "Gets or sets cores and memory request."
         },
         "limit": {
           "$ref": "#/definitions/ComputeResource",
-          "description": "Gets cores and memory limit.",
-          "readOnly": true
+          "description": "Gets or sets cores and memory limit."
         },
         "osType": {
           "$ref": "#/definitions/OSType",
-          "description": "Gets os type.",
-          "readOnly": true
+          "description": "Gets or sets os type."
         },
         "clusterName": {
           "type": "string",
-          "description": "Gets cluster name.",
-          "readOnly": true
+          "description": "Gets or sets cluster name."
         },
         "nodePoolId": {
           "type": "string",
-          "description": "Gets node pool id.",
-          "readOnly": true
+          "description": "Gets or sets node pool id."
         },
         "nodePoolName": {
           "type": "string",
-          "description": "Gets node pool name.",
-          "readOnly": true
+          "description": "Gets or sets node pool name."
         },
         "nodePoolArmSkuName": {
           "type": "string",
-          "description": "Gets node pool arm sku name.",
-          "readOnly": true
+          "description": "Gets or sets node pool arm sku name."
         },
         "approxMonthlyCost": {
           "type": "number",
           "format": "float",
-          "description": "Gets approximate monthly cost.",
-          "readOnly": true
+          "description": "Gets or sets approximate monthly cost."
         }
       },
       "required": [
@@ -22651,6 +22527,12 @@
           "description": "Number of sql instances part of the assessment.",
           "readOnly": true
         },
+        "numberOfSuccessfullyDiscoveredSqlInstances": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of successfully discovered sql instances part of the assessment.",
+          "readOnly": true
+        },
         "numberOfSqlDatabases": {
           "type": "integer",
           "format": "int32",
@@ -23159,29 +23041,23 @@
       "properties": {
         "readiness": {
           "$ref": "#/definitions/Readiness",
-          "description": "Gets readiness.",
-          "readOnly": true
+          "description": "Gets or sets readiness."
         },
         "suitability": {
           "$ref": "#/definitions/Suitability",
-          "description": "Gets suitability.",
-          "readOnly": true
+          "description": "Gets or sets suitability."
         },
         "failedChecks": {
           "type": "array",
-          "description": "Gets list of failed Checks.",
+          "description": "Gets or sets list of failed Checks.",
           "items": {
             "$ref": "#/definitions/Check"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         },
         "suggestedMigrationTool": {
           "$ref": "#/definitions/SuggestedMigrationTool",
-          "description": "Gets suggested migration tool.",
-          "readOnly": true
+          "description": "Gets or sets suggested migration tool."
         }
       },
       "required": [
@@ -23198,14 +23074,12 @@
         "count": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets count.",
-          "readOnly": true
+          "description": "Gets or sets count."
         },
         "monthlyCost": {
           "type": "number",
           "format": "float",
-          "description": "Gets monthly cost.",
-          "readOnly": true
+          "description": "Gets or sets monthly cost."
         }
       },
       "required": [
@@ -23706,38 +23580,31 @@
       "properties": {
         "discoveryArmId": {
           "type": "string",
-          "description": "Gets discovery arm id.",
-          "readOnly": true
+          "description": "Gets or sets discovery arm id."
         },
         "displayName": {
           "type": "string",
-          "description": "Gets display name.",
-          "readOnly": true
+          "description": "Gets or sets display name."
         },
         "webServerArmId": {
           "type": "string",
-          "description": "Gets web server arm id.",
-          "readOnly": true
+          "description": "Gets or sets web server arm id."
         },
         "webServerDisplayName": {
           "type": "string",
-          "description": "Gets web server display name.",
-          "readOnly": true
+          "description": "Gets or sets web server display name."
         },
         "machineArmId": {
           "type": "string",
-          "description": "Gets machine arm id.",
-          "readOnly": true
+          "description": "Gets or sets machine arm id."
         },
         "machineDisplayName": {
           "type": "string",
-          "description": "Gets machine display name.",
-          "readOnly": true
+          "description": "Gets or sets machine display name."
         },
         "webAppType": {
           "$ref": "#/definitions/WebAppType",
-          "description": "Gets web app type.",
-          "readOnly": true
+          "description": "Gets or sets web app type."
         }
       },
       "required": [
@@ -24024,7 +23891,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResourceProperties"
+          "$ref": "#/definitions/AzureResourceProperties2"
         }
       ]
     },
@@ -24144,7 +24011,7 @@
         "numberOfWebApps": {
           "type": "number",
           "format": "float",
-          "description": "The number of web apps.",
+          "description": "The cost details.",
           "readOnly": true
         }
       }
@@ -24218,7 +24085,7 @@
     },
     "WebAppServicePlanV2Properties": {
       "type": "object",
-      "description": "Web app service plan properties web model.",
+      "description": "Assessed Web app database properties web model.",
       "properties": {
         "webAppType": {
           "$ref": "#/definitions/WebAppType",
@@ -24238,64 +24105,64 @@
         "numberOfWebApps": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the number of web apps.",
+          "description": "Gets the machine name.",
           "readOnly": true
         },
         "monthlyCost": {
           "type": "number",
           "format": "float",
-          "description": "Gets or sets the monthly cost.",
+          "description": "Gets or sets the server ARM Id.",
           "readOnly": true
         },
         "storage": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the storage.",
+          "description": "Gets or sets the web server name.",
           "readOnly": true
         },
         "scaleOutInstances": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the scale out instances.",
+          "description": "Gets or sets web app name.",
           "readOnly": true
         },
         "cores": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the number of cores.",
+          "description": "Gets the discovered web app ID.",
           "readOnly": true
         },
         "ram": {
           "type": "number",
           "format": "double",
-          "description": "Memory.",
+          "description": "Machine arm id.",
           "readOnly": true
         },
         "webAppSkuName": {
           "type": "string",
-          "description": "Web app sku name.",
+          "description": "Confidence Rating in Percentage.",
           "readOnly": true
         },
         "webAppSkuSize": {
           "type": "string",
-          "description": "Web app sku size.",
+          "description": "Confidence Rating in Percentage.",
           "readOnly": true
         },
         "createdTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "When was web app service plan first created.",
+          "description": "When was assessed SQL database first created.",
           "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "When was web app service plan last updated.",
+          "description": "When was assessed Web app database last updated.",
           "readOnly": true
         },
         "costComponents": {
           "type": "array",
-          "description": "Cost components.",
+          "description": "Confidence Rating in Percentage.",
           "items": {
             "$ref": "#/definitions/CostComponent"
           },
@@ -24310,7 +24177,7 @@
     },
     "WebAppSkuDetails": {
       "type": "object",
-      "description": "Web app sku details data.",
+      "description": "Web app discovered entities summary data.",
       "properties": {
         "totalMonthlyCost": {
           "type": "number",
@@ -24390,7 +24257,7 @@
     },
     "WebAppType": {
       "type": "string",
-      "description": "Web App Type for assessment.",
+      "description": "Web App Type.",
       "enum": [
         "Unknown",
         "IIS",
