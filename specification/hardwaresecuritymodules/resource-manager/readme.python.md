@@ -9,7 +9,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.hardwaresecuritymodules
 package-name: azure-mgmt-hardwaresecuritymodules
-package-version: 1.0.0b1
+package-version: 1.0.0b2
 clear-output-folder: true
 ```
 
