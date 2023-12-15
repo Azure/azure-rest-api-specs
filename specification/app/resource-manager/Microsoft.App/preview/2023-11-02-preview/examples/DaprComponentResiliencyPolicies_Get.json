@@ -24,6 +24,10 @@
             },
             "timeoutPolicy": {
               "responseTimeoutInSeconds": 30
+            },
+            "circuitBreakerPolicy": {
+              "consecutiveErrors": 5,
+              "timeoutInSeconds": 10
             }
           },
           "outboundPolicy": {
@@ -36,6 +40,11 @@
             },
             "timeoutPolicy": {
               "responseTimeoutInSeconds": 12
+            },
+            "circuitBreakerPolicy": {
+              "consecutiveErrors": 3,
+              "timeoutInSeconds": 20,
+              "intervalInSeconds": 60
             }
           }
         }
