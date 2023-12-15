@@ -311,7 +311,6 @@ model DevBox {
   name: string;
 
   @doc("Name of the project this Dev Box belongs to")
-  @path("projectName")
   @visibility("read")
   projectName?: string;
 
