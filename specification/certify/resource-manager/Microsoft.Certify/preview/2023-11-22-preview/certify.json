@@ -715,7 +715,7 @@
         "enabledState": {
           "description": "Is the image enabled",
           "default": "Disabled",
-          "$ref": "LabServices.json#/definitions/enableState"
+          "type": "string"
         }
       }
     },
@@ -728,11 +728,6 @@
         }
       ],
       "properties": {
-        "provisioningState": {
-          "description": "Current provisioning state of the image.",
-          "$ref": "LabServices.json#/definitions/provisioningState",
-          "readOnly": true
-        },
         "displayName": {
           "description": "The image display name.",
           "type": "string",
@@ -755,7 +750,7 @@
         },
         "osType": {
           "description": "The OS Type of the image.",
-          "$ref": "LabServices.json#/definitions/osType",
+          "type": "string",
           "readOnly": true
         },
         "plan": {
@@ -765,7 +760,7 @@
         },
         "termsStatus": {
           "description": "The status of image terms of use (enabled = accepted, disabled = not accepted).",
-          "$ref": "LabServices.json#/definitions/enableState",
+          "type": "string",
           "readOnly": true
         },
         "offer": {
@@ -790,7 +785,7 @@
         },
         "sharedGalleryId": {
           "description": "The ID for the image in the shared gallery.",
-          "$ref": "LabServices.json#/definitions/url",
+          "type": "string",
           "readOnly": true
         },
         "availableRegions": {
@@ -802,7 +797,7 @@
         },
         "osState": {
           "description": "The OS State of the image.",
-          "$ref": "LabServices.json#/definitions/osState",
+          "type": "string",
           "readOnly": true
         }
       },
