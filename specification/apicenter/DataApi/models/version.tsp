@@ -2,9 +2,15 @@ import "./api.tsp";
 
 namespace ApiCenter.DataApi.Models;
 
+using TypeSpec.Rest;
+
 @doc("API version")
+@resource("versions")
+@parentResource(Api)
 model ApiVersion {
-  @doc("The resource name.")
+  @doc("Version identifier.")
+  @key("versionName")
+  @visibility("read")
   @maxLength(50)
   name: string;
 

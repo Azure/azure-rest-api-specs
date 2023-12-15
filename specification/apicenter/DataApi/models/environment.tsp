@@ -1,8 +1,13 @@
 namespace ApiCenter.DataApi.Models;
 
-@doc("Environment")
+using TypeSpec.Rest;
+
+@doc("Environment resource model.")
+@resource("environments")
 model Environment {
-  @doc("The resource name.")
+  @doc("Environment identifier.")
+  @key("environmentName")
+  @visibility("read")
   @maxLength(50)
   name: string;
 
@@ -11,7 +16,7 @@ model Environment {
   title: string;
 
   @doc("Kind of deployment environment.")
-  kind: string;
+  kind: EnvironmentKind;
 
   @doc("Description of the environment.")
   @maxLength(1000)
@@ -33,7 +38,7 @@ model EnvironmentServer {
   type: string;
 
   @doc("URIs of the server's management portal.")
-  managementPortalUri: Array<string>;
+  managementPortalUris: url[];
 }
 
 @doc("Environment Onboarding Model")
@@ -43,5 +48,20 @@ model EnvironmentOnboardingModel {
   instructions: string;
 
   @doc("Developer portal URIs of the environment.")
-  developerPortalUri: Array<string>;
+  developerPortalUris: url[];
+}
+
+@doc("Environment kind")
+enum EnvironmentKind {
+  @doc("Environment is in the development stage")
+  Development: "development",
+
+  @doc("Environment is in the testing stage")
+  Testing: "testing",
+
+  @doc("Environment is in the staging stage")
+  Staging: "staging",
+
+  @doc("Environment is in the production stage")
+  Production: "production",
 }

@@ -31,7 +31,7 @@ namespace ApiCenter.DataApi;
 
 @doc("API versions")
 enum Versions {
-  @doc("GA release version 2024-03-01")
+  @doc("Preview release version 2024-02-01-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_03_01: "2024-03-01",
+  v2024_02_01_preview: "2024-02-01-preview",
 }

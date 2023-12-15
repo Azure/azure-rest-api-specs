@@ -25,17 +25,17 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the API Center Data API.
 
 ```yaml
-openapi-type: default
-tag: package-2023-03-01
+openapi-type: data-plane
+tag: package-2024-02-01-preview
 ```
 
-### Tag: package-2023-03-01
+### Tag: package-2024-02-01-preview
 
-These settings apply only when `--tag=package-2023-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-02-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03-01'
+```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
-  - DataApi/stable/2023-03-01/azure.apicenter.dataapi.json
+  - ApiCenter.DataApi/preview/2024-02-01-preview/azure.apicenter.dataapi.json
 ```
 
 ---

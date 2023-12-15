@@ -1,8 +1,14 @@
 namespace ApiCenter.DataApi.Models;
 
-@doc("API deployment")
+using TypeSpec.Rest;
+
+@doc("API Deployment resource model.")
+@resource("deployments")
+@parentResource(Api)
 model ApiDeployment {
-  @doc("The resource name.")
+  @doc("Deployment identifier.")
+  @key("deploymentName")
+  @visibility("read")
   @maxLength(50)
   name: string;
 
@@ -30,5 +36,5 @@ model ApiDeployment {
 @doc("Api Deployment Server")
 model ApiDeploymentServer {
   @doc("Base runtime URIs for this deployment.")
-  runtimeUri: Array<string>;
+  runtimeUris: url[];
 }

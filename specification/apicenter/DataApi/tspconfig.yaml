@@ -13,24 +13,24 @@ options:
     examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure.apicenter.dataapi.json"
   "@azure-tools/typespec-python":    
-    package-dir: "microsoft-apicenter"
+    package-dir: "azure-apicenter"
     package-name: "{package-dir}"  
     package-mode: dataplane
   "@azure-tools/typespec-csharp":
-    package-dir: "Microsoft.ApiCenter"
+    package-dir: "azure.ApiCenter"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "microsoft-apicenter-rest"
+    package-dir: "azure-apicenter-rest"
     generateMetadata: true
     generateTest: true
     packageDetails:
-      name: "@azure-rest/microsoft-apicenter-rest"
-      description: "Microsoft.ApiCenter Service"
+      name: "@azure-rest/azure-apicenter-rest"
+      description: "azure.ApiCenter Service"
   "@azure-tools/typespec-java":
-    package-dir: "microsoft-apicenter"
-    namespace: com.microsoft.apicenter
+    package-dir: "azure-apicenter"
+    namespace: com.azure.apicenter
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"

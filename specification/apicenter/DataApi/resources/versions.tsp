@@ -11,25 +11,13 @@ using ApiCenter.DataApi.Models;
 @versioned(ApiCenter.DataApi.Versions)
 namespace ApiCenter.DataApi;
 
-// Models /////////////////////////////////////////////////////////////////////
-
-@doc("API Version resource model.")
-@resource("versions")
-@parentResource(ApiResource)
-model ApiVersionResource extends ApiVersion {
-  @doc("Version identifier.")
-  @key("versionName")
-  @visibility("query")
-  versionName: string;
-}
-
 interface ApiVersions {
   @doc("List a collection of API versions.")
   listVersions is Operations.ResourceList<
-    ApiVersionResource,
-    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+    ApiVersion,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   @doc("Get an API version.")
-  getVersion is Operations.ResourceRead<ApiVersionResource>;
+  getVersion is Operations.ResourceRead<ApiVersion>;
 }

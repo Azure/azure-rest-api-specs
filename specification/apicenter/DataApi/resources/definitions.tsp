@@ -8,45 +8,24 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using ApiCenter.DataApi.Models;
+
 @versioned(ApiCenter.DataApi.Versions)
 namespace ApiCenter.DataApi;
-
-// Models /////////////////////////////////////////////////////////////////////
-
-@doc("API Definition resource model.")
-@resource("definitions")
-@parentResource(ApiVersionResource)
-model ApiDefinitionResource extends ApiDefinition {
-  @doc("Definition identifier.")
-  @key("apiDefinitionName")
-  @visibility("query")
-  apiDefinitionName: string;
-}
-
-@doc("Export specification resource model.")
-@resource("definitions")
-@parentResource(ApiVersionResource)
-model ExportSpecificationResource extends ExportSpecification {
-  @doc("Definition identifier.")
-  @key("apiDefinitionName")
-  @visibility("query")
-  apiDefinitionName: string;
-}
 
 interface ApiDefinitions {
   @doc("List a collection of API definitions.")
   listDefinitions is Operations.ResourceList<
-    ApiDefinitionResource,
-    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+    ApiDefinition,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   @doc("Get an API definition.")
-  getDefinition is Operations.ResourceRead<ApiDefinitionResource>;
+  getDefinition is Operations.ResourceRead<ApiDefinition>;
 
   @doc("Export an API specification.")
   exportSpecification is Operations.ResourceAction<
-    ExportSpecificationResource,
+    ExportSpecification,
     {},
-    ExportSpecificationResource
+    ExportSpecification
   >;
 }

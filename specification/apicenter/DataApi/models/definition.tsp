@@ -1,8 +1,14 @@
 namespace ApiCenter.DataApi.Models;
 
-@doc("API definition")
+using TypeSpec.Rest;
+
+@doc("API definition.")
+@resource("definitions")
+@parentResource(ApiVersion)
 model ApiDefinition {
-  @doc("The resource name.")
+  @doc("Definition identifier.")
+  @key("apiDefinitionName")
+  @visibility("read")
   @maxLength(50)
   name: string;
 

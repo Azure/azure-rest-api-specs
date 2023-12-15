@@ -1,16 +1,21 @@
+using TypeSpec.Rest;
+
 namespace ApiCenter.DataApi.Models;
 
-@doc("API contract")
+@doc("API resource model.")
+@resource("apis")
 model Api {
   @doc("The resource name.")
   @maxLength(50)
+  @key("apiName")
+  @visibility("read")
   name: string;
 
   @doc("The name of the API.")
   @maxLength(50)
   title: string;
 
-  @doc("Short descrption of the API.")
+  @doc("Short description of the API.")
   @maxLength(200)
   summary?: string;
 
@@ -19,7 +24,7 @@ model Api {
   description?: string;
 
   @doc("Kind of API. For example, REST or GraphQL.")
-  kind: string;
+  kind: ApiKind;
 
   @doc("Current lifecycle stage of the API.")
   lifecycleStage?: ApiLifecycleStage;
@@ -31,7 +36,7 @@ model Api {
   license?: ApiLicenseModel;
 
   @doc("External documentation")
-  externalDocumentation?: Array<ApiExternalDocumentation>;
+  externalDocumentation?: ApiExternalDocumentation[];
 
   @doc("Points of contact for the API.")
   contacts?: Array<ApiContact>;
@@ -54,8 +59,28 @@ model ApiExternalDocumentation {
   description: string;
 
   @doc("URL pointing to the documentation.")
-  @maxLength(200)
-  url: string;
+  url: url;
+}
+
+@doc("API kind")
+enum ApiKind {
+  @doc("REST API")
+  Rest: "rest",
+
+  @doc("GraphQL API")
+  Graphql: "graphql",
+
+  @doc("GRPC API")
+  Grpc: "grpc",
+
+  @doc("SOAP API")
+  Soap: "soap",
+
+  @doc("Webhook API")
+  Webhook: "webhook",
+
+  @doc("Websocket API")
+  Websocket: "websocket",
 }
 
 @doc("API Lifecycle Stage")
@@ -89,8 +114,7 @@ model ApiContact {
   name: string;
 
   @doc("URL for the contact.")
-  @maxLength(200)
-  url: string;
+  url: url;
 
   @doc("Email address for the contact.")
   @maxLength(100)
@@ -100,8 +124,7 @@ model ApiContact {
 @doc("API Terms of Service")
 model ApiTermsOfService {
   @doc("URL pointing to the terms of service.")
-  @maxLength(200)
-  url: string;
+  url: url;
 }
 
 @doc("API License Model")
@@ -111,10 +134,9 @@ model ApiLicenseModel {
   name: string;
 
   @doc("URL pointing to the license details. The URL field is mutually exclusive of the identifier field.")
-  @maxLength(200)
-  url: string;
+  url?: url;
 
   @doc("SPDX license information for the API. The identifier field is mutually exclusive of the URL field.")
   @maxLength(200)
-  identifier: string;
+  identifier?: string;
 }

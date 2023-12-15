@@ -11,25 +11,13 @@ using ApiCenter.DataApi.Models;
 @versioned(ApiCenter.DataApi.Versions)
 namespace ApiCenter.DataApi;
 
-// Models /////////////////////////////////////////////////////////////////////
-
-@doc("API Deployment resource model.")
-@resource("deployments")
-@parentResource(ApiResource)
-model ApiDeploymentResource extends ApiDeployment {
-  @doc("Deployment identifier.")
-  @key("deploymentName")
-  @visibility("query")
-  deploymentName: string;
-}
-
 interface ApiDeployments {
   @doc("List a collection of API deployments.")
   listDeployments is Operations.ResourceList<
-    ApiDeploymentResource,
-    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+    ApiDeployment,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   @doc("Get an API deployment.")
-  getDeployment is Operations.ResourceRead<ApiDeploymentResource>;
+  getDeployment is Operations.ResourceRead<ApiDeployment>;
 }
