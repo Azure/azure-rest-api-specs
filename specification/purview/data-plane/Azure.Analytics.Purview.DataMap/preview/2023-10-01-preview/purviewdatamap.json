@@ -1556,9 +1556,6 @@
         "tags": [
           "Entity"
         ],
-        "consumes": [
-          "multipart/form-data"
-        ],
         "description": "Delete entities with hierarchy",
         "operationId": "Entity_DeleteWithHierarchy",
         "x-ms-examples": {
@@ -1629,7 +1626,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "Get the status of entity asynchronous operation",
+        "description": "Get the status of entity long running operation",
         "operationId": "Entity_GetOperationStatus",
         "x-ms-examples": {
           "Entity_GetOperationForDeleteWithHierarchy": {
@@ -1646,9 +1643,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Return the status of import csv operation.",
+            "description": "OK. Return the status of the long running operation.",
             "schema": {
-              "$ref": "#/definitions/EntityAsyncOperation"
+              "$ref": "#/definitions/EntityLongRunningOperation"
             }
           },
           "default": {
@@ -1682,9 +1679,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Return the status of import csv operation.",
+            "description": "OK. Return the status of the long running operation.",
             "schema": {
-              "$ref": "#/definitions/EntityAsyncOperation"
+              "$ref": "#/definitions/EntityLongRunningOperation"
             }
           },
           "default": {
@@ -7200,7 +7197,7 @@
       "title": "AuditLog",
       "description": "Data map audit log."
     },
-    "EntityAsyncOperation": {
+    "EntityLongRunningOperation": {
       "type": "object",
       "title": "Status of entity operation",
       "description": "The status of entity operation",
@@ -7213,7 +7210,7 @@
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/EntityAsyncOperationStatus"
+          "$ref": "#/definitions/EntityLongRunningOperationStatus"
         },
         "createTime": {
           "type": "string",
@@ -7225,7 +7222,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EntityAsyncOperationProperties"
+          "$ref": "#/definitions/EntityLongRunningOperationProperties"
         },
         "error": {
           "x-ms-client-flatten": true,
@@ -7233,11 +7230,11 @@
         }
       }
     },
-    "EntityAsyncOperationProperties": {
+    "EntityLongRunningOperationProperties": {
       "type": "object",
       "additionalProperties": {}
     },
-    "EntityAsyncOperationStatus": {
+    "EntityLongRunningOperationStatus": {
       "type": "string",
       "enum": [
         "NotStarted",
@@ -7248,10 +7245,10 @@
         "PartialSucceeded"
       ],
       "x-ms-enum": {
-        "name": "EntityAsyncOperationStatus",
+        "name": "EntityLongRunningOperationStatus",
         "modelAsString": true
       },
-      "title": "EntityAsyncOperationStatus",
+      "title": "EntityLongRunningOperationStatus",
       "description": "Enum of the status of entity asynchronous operation."
     },
     "AsyncOperationError": {
