@@ -186,7 +186,7 @@
             "$ref": "#/parameters/OpenApiGatewayName"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "OpenAPI Gateway resource create or update request.",
             "required": true,
@@ -252,7 +252,7 @@
             "$ref": "#/parameters/OpenApiGatewayName"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "description": "OpenAPI Gateway properties to be updated.",
             "required": true,
@@ -404,6 +404,13 @@
       "type": "object",
       "description": "A Programmable Connectivity Open API Gateway resource",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "$ref": "#/definitions/OpenApiGatewayProperties",
           "description": "OpenAPI Gateway resource properties.",
