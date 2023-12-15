@@ -59,7 +59,6 @@ suppressions:
     reason: start,stop,flushDNSsetting api do not have return body in async operation
 ```
 
-
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
@@ -67,6 +66,24 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 ```yaml $(tag) == 'package-preview-2024-01'
 input-file:
   - Microsoft.AppPlatform/preview/2024-01-01-preview/appplatform.json
+```
+
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12'
+input-file:
+  - Microsoft.AppPlatform/stable/2023-12-01/appplatform.json
+```
+
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-12'
+input-file:
+  - Microsoft.AppPlatform/stable/2023-12-01/appplatform.json
 ```
 
 ### Tag: package-preview-2023-11

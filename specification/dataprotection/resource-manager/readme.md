@@ -28,7 +28,7 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2023-08
+tag: package-2023-11
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -51,13 +51,13 @@ message-format: json
 ```
 
 
-### Tag: package-2023-08
+### Tag: package-2023-11
 
-These settings apply only when `--tag=package-2023-08` is specified on the command line.
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08'
+```yaml $(tag) == 'package-2023-11'
 input-file:
-  - Microsoft.DataProtection/stable/2023-08-01/dataprotection.json
+  - Microsoft.DataProtection/stable/2023-11-01/dataprotection.json
 ```
 
 ### Tag: package-preview-2023-08
@@ -298,3 +298,12 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+``` yaml
+directive:
+  - suppress: ParametersInPost
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchSecondaryRecoveryPoints"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchCrossRegionRestoreJobs"].post
+```
