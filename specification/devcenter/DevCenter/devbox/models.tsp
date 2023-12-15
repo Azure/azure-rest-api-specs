@@ -302,17 +302,24 @@ model Schedule {
 model DevBoxListResult is Azure.Core.Page<DevBox>;
 
 @doc("A Dev Box")
-@resource("devboxes")
-@parentResource(User)
 model DevBox {
-  @key("devBoxName")
-  @doc("Display name for the Dev Box")
-  @visibility("create", "read")
-  name: string;
-
+  @key("projectName")
   @doc("Name of the project this Dev Box belongs to")
-  @visibility("read")
-  projectName?: string;
+  @segment("projects")
+  @path
+  projectName: string;
+
+  @doc("The AAD object id of the user this Dev Box is assigned to.")
+  @projectedName("csharp", "userId")
+  @projectedName("java", "userId")
+  @segment("user")
+  @path
+  userId: Azure.Core.uuid;
+
+  @doc("Display name for the Dev Box")
+  @segment("devboxes")
+  @path
+  devBoxName: string;
 
   @doc("The name of the Dev Box pool this machine belongs to.")
   @minLength(3)
@@ -363,11 +370,7 @@ Virtual Network it is attached to.
   @projectedName("csharp", "OSType")
   osType?: OsType;
 
-  @doc("The AAD object id of the user this Dev Box is assigned to.")
-  @visibility("read")
-  @projectedName("csharp", "userId")
-  @projectedName("java", "userId")
-  user?: Azure.Core.uuid;
+  
 
   @doc("Information about the Dev Box's hardware resources")
   @visibility("read")
