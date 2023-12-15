@@ -34,34 +34,73 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.AzureDataTransfer/performRequest": {
+    "/providers/Microsoft.AzureDataTransfer/validateSchema": {
       "post": {
-        "description": "Performs an action request on Azure Data Transfer.",
+        "description": "Validates a schema for Azure Data Transfer.",
         "x-ms-examples": {
           "Performs action request": {
-            "$ref": "examples/postPerformRequest.json"
+            "$ref": "examples/postValidateSchema.json"
           }
         },
-        "operationId": "AzureDataTransfer_performRequest",
+        "operationId": "AzureDataTransfer_validateSchema",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "parameters",
+            "name": "schema",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/actionRequest"
+              "$ref": "#/definitions/schema"
             },
-            "description": "The action request parameters."
+            "description": "The schema to validate"
           }
         ],
         "responses": {
           "200": {
-            "description": "Performed the action.",
+            "description": "Result of the schema validation.",
             "schema": {
-              "$ref": "#/definitions/actionResult"
+              "$ref": "#/definitions/validateSchemaResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureDataTransfer/listApprovedSchemas": {
+      "post": {
+        "description": "Lists approved schemas for Azure Data Transfer.",
+        "x-ms-examples": {
+          "Performs action request": {
+            "$ref": "examples/postListApprovedSchemas.json"
+          }
+        },
+        "operationId": "AzureDataTransfer_listApprovedSchemas",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "pipeline",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/listApprovedSchemasRequest"
+            },
+            "description": "The request to list approved schemas."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of approved schemas.",
+            "schema": {
+              "$ref": "#/definitions/schemasListResult"
             }
           },
           "default": {
@@ -1417,31 +1456,46 @@
     }
   },
   "definitions": {
-    "actionRequest": {
+    "validateSchemaResult": {
       "type": "object",
-      "description": "Payload to perform custom data transfer actions",
+      "description": "Result of the schema validation.",
       "properties": {
-        "name": {
+        "status": {
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
           "type": "string",
-          "description": "Name of the action"
+          "x-ms-enum": {
+            "name": "validateSchemaStatus",
+            "modelAsString": true
+          },
+          "description": "Validation status of the schema"
         },
-        "payload": {
+        "message": {
           "type": "string",
-          "description": "Request messaging describing the action"
+          "description": "Message describing the schema validation"
         }
       }
     },
-    "actionResult": {
+    "listApprovedSchemasRequest": {
       "type": "object",
-      "description": "An action result",
       "properties": {
-        "code": {
+        "pipeline": {
           "type": "string",
-          "description": "Response code describing the action result"
+          "description": "The name of the pipeline to filter approved schemas."
         },
-        "result": {
+        "direction": {
+          "description": "The direction pipeline to filter approved schemas.",
+          "enum": [
+            "Send",
+            "Receive"
+          ],
           "type": "string",
-          "description": "Response message describing the action result"
+          "x-ms-enum": {
+            "name": "listApprovedSchemasDirection",
+            "modelAsString": true
+          }
         }
       }
     },
