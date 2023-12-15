@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "browseRequest": {
+      "navigationMode": "assetType",
+      "itemPath": {
+        "path": "/azure_sql_server/exampleServer/databases",
+        "extendedProperties": {
+          "resourceGroup": "exampleResourceGroup",
+          "serverEndpoint": "exampleServer.database.windows.net",
+          "subscriptionId": "12345678-1234-5678-1234-86b7251e0353"
+        }
+      },
+      "top": 100
+    },
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "items": [
+          {
+            "name": "exampleDatabase",
+            "type": "azure_sql_db",
+            "leafNode": false,
+            "kind": "entity",
+            "itemPath": {
+              "path": "exampleDatabase",
+              "extendedProperties": {
+                "resourceGroup": "exampleResourceGroup",
+                "serverEndpoint": "exampleServer.database.windows.net",
+                "subscriptionId": "12345678-1234-5678-1234-86b7251e0353"
+              }
+            },
+            "properties": {
+              "resourceId": "/subscriptions/12345678-1234-5678-1234-86b7251e0353/resourceGroups/exampleResourceGroup/providers/Microsoft.Sql/servers/exampleServer/databases/exampleDatabase"
+            }
+          },
+          {
+            "name": "exampleDatabase2",
+            "type": "azure_sql_db",
+            "leafNode": false,
+            "kind": "entity",
+            "itemPath": {
+              "path": "exampleDatabase2",
+              "extendedProperties": {
+                "resourceGroup": "exampleResourceGroup",
+                "serverEndpoint": "exampleServer.database.windows.net",
+                "subscriptionId": "12345678-1234-5678-1234-86b7251e0353"
+              }
+            },
+            "properties": {
+              "resourceId": "/subscriptions/12345678-1234-5678-1234-86b7251e0353/resourceGroups/exampleResourceGroup/providers/Microsoft.Sql/servers/exampleServer/databases/exampleDatabase2"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
