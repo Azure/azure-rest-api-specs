@@ -40,13 +40,21 @@ interface NumberInterface {
 
 /// Endpoints
 
-@resource("Apis")
-@doc("Static endpoint to access Number API")
+@resource("NumberVerification")
+@doc("Static endpoint to access Number Verification API family")
 model NumberEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
-  number: "Number";
+  number: NumberEnum;
+}
+
+/* Needed to add this enum because typespec was creating an x-ms-enum without a name
+   which was causing a failure during linting. */
+@doc("Number static endpoint enum")
+enum NumberEnum {
+  @doc("Static endpoint")
+  number: "Number",
 }
 
 /// Request models
@@ -63,8 +71,8 @@ model NumberVerifyRequest {
 
 @doc("Response verifying number of device")
 model NumberVerifyResponse {
-  @doc("True if number is verified, False otherwise")
-  verified: boolean;
+  @doc("True if number if the phone number matches the device, False otherwise")
+  verificationResult: boolean;
 }
 
 @doc("Response with number of device")

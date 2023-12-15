@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
@@ -54,7 +53,7 @@ model PhoneNumberModel {
 model ApcErrorResponse {
   @doc("The numerical error status eg 500, 404")
   status: int32;
-  
+
   @doc("The error code")
   code: string;
 
@@ -63,4 +62,31 @@ model ApcErrorResponse {
 
   @doc("The consent URL in case of a consent failure")
   consentUrl?: url;
+}
+
+@doc("IPv4 device indicator")
+model Ipv4Address {
+  /** IPv4 address may be specified in form <address/mask> as:
+          - address - an IPv4 number in dotted-quad form 1.2.3.4. Only this exact IP number will match the flow control rule.
+          - address/mask - an IP number as above with a mask width of the form 1.2.3.4/24.
+            In this case, all IP numbers from 1.2.3.0 to 1.2.3.255 will match. The bit width MUST be valid for the IP version. */
+  ipv4: string;
+
+  @doc("User equipment port.")
+  port: int32;
+}
+
+@doc("IPv6 device indicator")
+model Ipv6Address {
+  /** IPv6 address, following IETF 5952 format, may be specified in form <address/mask> as:
+          - address - The /128 subnet is optional for single addresses:
+            - 2001:db8:85a3:8d3:1319:8a2e:370:7344
+            - 2001:db8:85a3:8d3:1319:8a2e:370:7344/128
+          - address/mask - an IP v6 number with a mask:
+            - 2001:db8:85a3:8d3::0/64
+            - 2001:db8:85a3:8d3::/64 */
+  ipv6: string;
+
+  @doc("User equipment port.")
+  port: int32;
 }

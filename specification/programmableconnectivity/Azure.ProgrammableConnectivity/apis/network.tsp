@@ -21,13 +21,21 @@ interface Networks {
 
 /// Endpoints
 
-@resource("Apis")
-@doc("Static endpoint to access Network API")
+@resource("DeviceNetwork")
+@doc("Static endpoint to access the Device Network API family.")
 model NetworkRetrieveEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
-  network: "Network";
+  network: NetworkEnum;
+}
+
+/* Needed to add this enum because typespec was creating an x-ms-enum without a name
+   which was causing a failure during linting. */
+@doc("Network static endpoint enum")
+enum NetworkEnum {
+  @doc("Static endpoint")
+  network: "Network",
 }
 
 /// Common models

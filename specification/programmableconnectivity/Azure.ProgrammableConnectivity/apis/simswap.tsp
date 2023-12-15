@@ -28,13 +28,21 @@ interface SimSwapInterface {
 
 /// Endpoints
 
-@resource("device")
-@doc("Static endpoint to access Location API")
+@resource("SimSwap")
+@doc("Static endpoint to access the Sim Swap API family")
 model SimSwapEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
-  simSwap: "SimSwap";
+  simSwap: SimSwapEnum;
+}
+
+/* Needed to add this enum because typespec was creating an x-ms-enum without a name
+   which was causing a failure during linting. */
+@doc("Number static endpoint enum")
+enum SimSwapEnum {
+  @doc("Static endpoint")
+  simSwap: "SimSwap",
 }
 
 /// Request models
@@ -69,7 +77,7 @@ model SimSwapRetrieveResponse {
 @doc("Response verifying SimSwap in period")
 model SimSwapVerifyResponse {
   @doc("True if the SIM has swapped in the specified period, False otherwise")
-  verified: boolean;
+  verificationResult: boolean;
 }
 
 /// Common models

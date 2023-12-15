@@ -50,13 +50,34 @@
   },
   "tags": [],
   "paths": {
-    "/Apis/Location:verify": {
+    "/DeviceLocation/{location}:verify": {
       "post": {
         "operationId": "LocationInterface_Verify",
         "description": "Verifies whether a device is within a specified location area, defined as an accuracy (radius) around a point, specified by longitude and latitude.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Static endpoint",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Location"
+            ],
+            "x-ms-enum": {
+              "name": "LocationEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "location",
+                  "value": "Location",
+                  "description": "Static endpoint"
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -101,13 +122,34 @@
         }
       }
     },
-    "/Apis/Network:retrieve": {
+    "/DeviceNetwork/{network}:retrieve": {
       "post": {
         "operationId": "Networks_Retrieve",
         "description": "Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "network",
+            "in": "path",
+            "description": "Static endpoint",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Network"
+            ],
+            "x-ms-enum": {
+              "name": "NetworkEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "network",
+                  "value": "Network",
+                  "description": "Static endpoint"
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -152,64 +194,34 @@
         }
       }
     },
-    "/Apis/Number:retrieve": {
-      "post": {
-        "operationId": "NumberInterface_Retrieve",
-        "description": "Retrieves the phone number (MSISDN) associated with a device.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "$ref": "#/parameters/ApcGatewayIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NetworkIdentifier"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/NumberRetrieveResponse"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NumberInterface_Retrieve": {
-            "$ref": "./examples/NumberInterface_Retrieve_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/Apis/Number:verify": {
+    "/NumberVerification/{number}:verify": {
       "post": {
         "operationId": "NumberInterface_Verify",
         "description": "Verifies the phone number (MSISDN) associated with a device.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "number",
+            "in": "path",
+            "description": "Static endpoint",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Number"
+            ],
+            "x-ms-enum": {
+              "name": "NumberEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "number",
+                  "value": "Number",
+                  "description": "Static endpoint"
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -254,13 +266,106 @@
         }
       }
     },
-    "/device/SimSwap:retrieve": {
+    "/NumberVerification/{number}:retrieve": {
+      "post": {
+        "operationId": "NumberInterface_Retrieve",
+        "description": "Retrieves the phone number (MSISDN) associated with a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "number",
+            "in": "path",
+            "description": "Static endpoint",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Number"
+            ],
+            "x-ms-enum": {
+              "name": "NumberEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "number",
+                  "value": "Number",
+                  "description": "Static endpoint"
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ApcGatewayIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkIdentifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NumberRetrieveResponse"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApcErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NumberInterface_Retrieve": {
+            "$ref": "./examples/NumberInterface_Retrieve_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/SimSwap/{simSwap}:retrieve": {
       "post": {
         "operationId": "SimSwapInterface_Retrieve",
         "description": "Provides timestamp of latest SIM swap",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "simSwap",
+            "in": "path",
+            "description": "Static endpoint",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "SimSwap"
+            ],
+            "x-ms-enum": {
+              "name": "SimSwapEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "simSwap",
+                  "value": "SimSwap",
+                  "description": "Static endpoint"
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -305,13 +410,34 @@
         }
       }
     },
-    "/device/SimSwap:verify": {
+    "/SimSwap/{simSwap}:verify": {
       "post": {
         "operationId": "SimSwapInterface_Verify",
         "description": "Verifies if a SIM swap has been performed during a past period (defined in the request with 'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "simSwap",
+            "in": "path",
+            "description": "Static endpoint",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "SimSwap"
+            ],
+            "x-ms-enum": {
+              "name": "SimSwapEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "simSwap",
+                  "value": "SimSwap",
+                  "description": "Static endpoint"
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -468,23 +594,35 @@
     },
     "LocationEndpoint": {
       "type": "object",
-      "description": "Static endpoint to access Location API",
+      "description": "Static endpoint to access the Device Location API family.",
       "properties": {
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/LocationEnum",
           "description": "Static endpoint",
-          "enum": [
-            "Location"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         }
       },
       "required": [
         "location"
       ]
+    },
+    "LocationEnum": {
+      "type": "string",
+      "description": "Location static endpoint enum",
+      "enum": [
+        "Location"
+      ],
+      "x-ms-enum": {
+        "name": "LocationEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "location",
+            "value": "Location",
+            "description": "Static endpoint"
+          }
+        ]
+      }
     },
     "LocationVerifyRequest": {
       "type": "object",
@@ -532,13 +670,13 @@
       "type": "object",
       "description": "Response verifying location",
       "properties": {
-        "verified": {
+        "verificationResult": {
           "type": "boolean",
-          "description": "True if the location is verified, False otherwise"
+          "description": "True if the location is in the specified area, False otherwise"
         }
       },
       "required": [
-        "verified"
+        "verificationResult"
       ]
     },
     "Network": {
@@ -554,6 +692,24 @@
       "required": [
         "networkCode"
       ]
+    },
+    "NetworkEnum": {
+      "type": "string",
+      "description": "Network static endpoint enum",
+      "enum": [
+        "Network"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "network",
+            "value": "Network",
+            "description": "Static endpoint"
+          }
+        ]
+      }
     },
     "NetworkIdentifier": {
       "type": "object",
@@ -575,17 +731,11 @@
     },
     "NetworkRetrieveEndpoint": {
       "type": "object",
-      "description": "Static endpoint to access Network API",
+      "description": "Static endpoint to access the Device Network API family.",
       "properties": {
         "network": {
-          "type": "string",
+          "$ref": "#/definitions/NetworkEnum",
           "description": "Static endpoint",
-          "enum": [
-            "Network"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         }
       },
@@ -610,23 +760,35 @@
     },
     "NumberEndpoint": {
       "type": "object",
-      "description": "Static endpoint to access Number API",
+      "description": "Static endpoint to access Number Verification API family",
       "properties": {
         "number": {
-          "type": "string",
+          "$ref": "#/definitions/NumberEnum",
           "description": "Static endpoint",
-          "enum": [
-            "Number"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         }
       },
       "required": [
         "number"
       ]
+    },
+    "NumberEnum": {
+      "type": "string",
+      "description": "Number static endpoint enum",
+      "enum": [
+        "Number"
+      ],
+      "x-ms-enum": {
+        "name": "NumberEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "number",
+            "value": "Number",
+            "description": "Static endpoint"
+          }
+        ]
+      }
     },
     "NumberRetrieveResponse": {
       "type": "object",
@@ -668,13 +830,13 @@
       "type": "object",
       "description": "Response verifying number of device",
       "properties": {
-        "verified": {
+        "verificationResult": {
           "type": "boolean",
-          "description": "True if number is verified, False otherwise"
+          "description": "True if number if the phone number matches the device, False otherwise"
         }
       },
       "required": [
-        "verified"
+        "verificationResult"
       ]
     },
     "PhoneNumberModel": {
@@ -704,23 +866,35 @@
     },
     "SimSwapEndpoint": {
       "type": "object",
-      "description": "Static endpoint to access Location API",
+      "description": "Static endpoint to access the Sim Swap API family",
       "properties": {
         "simSwap": {
-          "type": "string",
+          "$ref": "#/definitions/SimSwapEnum",
           "description": "Static endpoint",
-          "enum": [
-            "SimSwap"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         }
       },
       "required": [
         "simSwap"
       ]
+    },
+    "SimSwapEnum": {
+      "type": "string",
+      "description": "Number static endpoint enum",
+      "enum": [
+        "SimSwap"
+      ],
+      "x-ms-enum": {
+        "name": "SimSwapEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simSwap",
+            "value": "SimSwap",
+            "description": "Static endpoint"
+          }
+        ]
+      }
     },
     "SimSwapRetrieveRequest": {
       "type": "object",
@@ -780,13 +954,13 @@
       "type": "object",
       "description": "Response verifying SimSwap in period",
       "properties": {
-        "verified": {
+        "verificationResult": {
           "type": "boolean",
           "description": "True if the SIM has swapped in the specified period, False otherwise"
         }
       },
       "required": [
-        "verified"
+        "verificationResult"
       ]
     }
   },
