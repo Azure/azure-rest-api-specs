@@ -673,6 +673,30 @@
         "value"
       ]
     },
+    "User": {
+      "description": "User of a lab that can register for and use virtual machines within the lab.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the user resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "User resource properties",
+          "$ref": "#/definitions/ValidationsProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "Validations": {
       "type": "object",
       "properties": {
