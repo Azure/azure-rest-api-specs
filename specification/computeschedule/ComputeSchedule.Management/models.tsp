@@ -135,15 +135,6 @@ model ResourceOperationError {
   errorDetails: string;
 }
 
-@doc("These describe errors that occur at the request level")
-model RequestError {
-  @doc("Code for the error eg 404, 500")
-  code: string;
-
-  @doc("Detailed message about the error")
-  message: string;
-}
-
 @doc("The details of a response from an operation on a resource")
 model ResourceOperationDetails {
   @doc("Operation identifier for the unique operation")
@@ -172,7 +163,7 @@ model ResourceOperationDetails {
   state: OperationState = OperationState.Unknown;
 
   @doc("Timezone for the operation")
-  timeZone: string;
+  timeZone?: string;
 
   @doc("Operation level errors if they exist")
   resourceOperationError?: ResourceOperationError;
@@ -180,6 +171,9 @@ model ResourceOperationDetails {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("Time the operation was complete if errors are null")
   completedAt?: offsetDateTime;
+
+  @doc("Number of minutes to retry retriable errors")
+  retryWindowInMinutes?: float32;
 }
 
 @doc("High level response from an operation on a resource")
@@ -195,15 +189,6 @@ model ResourceOperation {
 
   @doc("Details of the operation performed on a resource")
   operation?: ResourceOperationDetails;
-}
-
-@doc("Error for the resource operation")
-model ErrorInfo {
-  @doc("Error code for the error, eg 404")
-  errorCode: string;
-
-  @doc("More details about the error")
-  errorDetails: string;
 }
 
 // ----------- SubmitDeallocate ---------
@@ -236,10 +221,7 @@ model DeallocateResourceOperationResponse {
 
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("The results from the deallocate request if no errors exist")
-  results?: ResourceOperation[];
-
-  @doc("Request level error if it exists")
-  error?: RequestError;
+  results?: Array<ResourceOperation>;
 }
 
 // ----------- SubmitStart ---------
@@ -273,9 +255,6 @@ model StartResourceOperationResponse {
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("The results from the start request if no errors exist")
   results?: Array<ResourceOperation>;
-
-  @doc("Request level error if it exists")
-  error?: RequestError;
 }
 
 // ----------- SubmitHibernate ---------
@@ -309,9 +288,6 @@ model HibernateResourceOperationResponse {
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("The results from the Hibernate request if no errors exist")
   results?: Array<ResourceOperation>;
-
-  @doc("Request level error if it exists")
-  error?: RequestError;
 }
 
 // ----------- Execute Operations Request ---------
@@ -365,7 +341,7 @@ model GetOperationStatusRequest {
 model GetOperationStatusResponse {
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("An array of resource operations based on their operation ids")
-  results: ResourceOperation[];
+  results: Array<ResourceOperation>;
 }
 
 // ----------- CancelOperations ---------
@@ -382,7 +358,16 @@ model CancelOperationsRequest {
 model CancelOperationsResponse {
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
-  results: ResourceOperation[];
+  results: Array<ResourceOperation>;
+}
+
+@doc("These describe errors that occur at the request level")
+model RequestError {
+  @doc("Code for the error eg 404, 500")
+  code: string;
+
+  @doc("Detailed message about the error")
+  message: string;
 }
 
 @doc("This is the default error for requests made with ScheduledActions")

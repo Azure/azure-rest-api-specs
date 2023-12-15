@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft.ComputeSchedule management service",
-  version: "2023-10-01-preview",
+  version: "2023-12-01-preview",
 })
 @doc("Microsoft.ComputeSchedule Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
