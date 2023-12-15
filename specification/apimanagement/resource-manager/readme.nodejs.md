@@ -11,4 +11,6 @@ nodejs:
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: true
+  modelerfour: 
+    lenient-model-deduplication: true
 ```
