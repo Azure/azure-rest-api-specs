@@ -1586,11 +1586,6 @@
           "x-nullable": true,
           "x-ms-client-name": "finishReason"
         },
-        "finish_details": {
-          "$ref": "#/definitions/ChatFinishDetails",
-          "description": "The reason the model stopped generating tokens, together with any applicable details.\nThis structured representation replaces 'finish_reason' for some models.",
-          "x-ms-client-name": "finishDetails"
-        },
         "delta": {
           "$ref": "#/definitions/ChatResponseMessage",
           "description": "The delta message content for a streaming response."
@@ -1864,20 +1859,6 @@
     "ChatCompletionsToolDefinition": {
       "type": "object",
       "description": "An abstract representation of a tool that can be used by the model to improve a chat completions response.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The object type."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "ChatFinishDetails": {
-      "type": "object",
-      "description": "An abstract representation of structured information about why a chat completions response terminated.",
       "properties": {
         "type": {
           "type": "string",
@@ -3085,16 +3066,6 @@
         ]
       }
     },
-    "MaxTokensFinishDetails": {
-      "type": "object",
-      "description": "A structured representation of a stop reason that signifies a token limit was reached before the model could naturally\ncomplete.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatFinishDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "max_tokens"
-    },
     "OnYourDataApiKeyAuthenticationOptions": {
       "type": "object",
       "description": "The authentication options for Azure OpenAI On Your Data when using an API key.",
@@ -3461,25 +3432,6 @@
           }
         }
       }
-    },
-    "StopFinishDetails": {
-      "type": "object",
-      "description": "A structured representation of a stop reason that signifies natural termination by the model.",
-      "properties": {
-        "stop": {
-          "type": "string",
-          "description": "The token sequence that the model terminated with."
-        }
-      },
-      "required": [
-        "stop"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatFinishDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "stop"
     }
   },
   "parameters": {

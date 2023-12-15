@@ -236,15 +236,6 @@ model ChatChoice {
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 
-  // Note: this property is currently speculative via observation and not yet documented anywhere.
-  @doc("""
-  The reason the model stopped generating tokens, together with any applicable details.
-  This structured representation replaces 'finish_reason' for some models.
-  """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
-  @projectedName("json", "finish_details")
-  finishDetails?: ChatFinishDetails;
-
   @doc("The delta message content for a streaming response.")
   @projectedName("json", "delta")
   @projectedName("csharp", "InternalStreamingDeltaMessage")
