@@ -4,6 +4,7 @@ import "../HealthInsights.Common/model.common.shared.tsp";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
+using Azure.Core;
 
 namespace AzureHealthInsights;
 
@@ -35,7 +36,7 @@ model TrialMatcherResult {
 
   @doc("The inference results for the Trial Matcher request.")
   @visibility("read")
-  @Azure.Core.lroResult
+  @lroResult
   results?: TrialMatcherResults;
 }
 
