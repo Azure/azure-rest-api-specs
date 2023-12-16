@@ -1264,6 +1264,54 @@
           }
         }
       }
+    },
+    "/operatorInformation/:search": {
+      "post": {
+        "tags": [
+          "Obtain operator information for requested numbers"
+        ],
+        "summary": "Searches for operator information for a given list of phone numbers.",
+        "operationId": "PhoneNumbers_OperatorInformationSearch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "The phone number(s) whose operator information should be searched",
+            "schema": {
+              "$ref": "#/definitions/OperatorInformationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperatorInformationResult"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Search for operator information on phone numbers": {
+            "$ref": "./examples/SearchOperatorInformation.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1769,7 +1817,10 @@
         "cost",
         "countryCode",
         "id",
+        "operatorId",
+        "operatorName",
         "phoneNumber",
+        "phoneNumberSource",
         "phoneNumberType",
         "purchaseDate"
       ],
@@ -1821,6 +1872,26 @@
         },
         "cost": {
           "$ref": "#/definitions/PhoneNumberCost"
+        },
+        "operatorId": {
+          "description": "Id of the operator that provided the number",
+          "type": "string"
+        },
+        "operatorName": {
+          "description": "Name of the operator that provided the number",
+          "type": "string"
+        },
+        "phoneNumberSource": {
+          "description": "Source of the number, e.g. Cloud or OperatorConnect",
+          "enum": [
+            "cloud",
+            "operatorConnect"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberSource",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2015,6 +2086,81 @@
         "consentToNotResellNumbers": {
           "description": "The consent to not resell numbers.",
           "type": "boolean"
+        }
+      }
+    },
+    "OperatorInformationRequest": {
+      "description": "Represents a search request for operator information for the given phone numbers",
+      "type": "object",
+      "properties": {
+        "phoneNumbers": {
+          "description": "Phone number(s) whose operator information is being requested",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperatorInformationResult": {
+      "description": "Represents a search result containing operator information associated with the requested phone numbers",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "Results of a search.\r\nThis array will have one entry per requested phone number which will contain the relevant operator information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperatorInformation"
+          }
+        }
+      }
+    },
+    "OperatorInformation": {
+      "description": "Represents metadata about a phone number that is controlled/provided by that phone number's operator.",
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "description": "E.164 formatted string representation of the phone number",
+          "type": "string"
+        },
+        "numberType": {
+          "description": "Type of service associated with the phone number",
+          "enum": [
+            "unknown",
+            "other",
+            "geographic",
+            "mobile"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperatorNumberType",
+            "modelAsString": true
+          }
+        },
+        "isoCountryCode": {
+          "description": "ISO 3166-1 two character ('alpha-2') code associated with the phone number.",
+          "type": "string"
+        },
+        "operatorDetails": {
+          "$ref": "#/definitions/OperatorDetails"
+        }
+      }
+    },
+    "OperatorDetails": {
+      "description": "Represents metadata describing the operator of a phone number",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the phone operator",
+          "type": "string"
+        },
+        "mobileNetworkCode": {
+          "description": "Mobile Network Code",
+          "type": "string"
+        },
+        "mobileCountryCode": {
+          "description": "Mobile Country Code",
+          "type": "string"
         }
       }
     }
