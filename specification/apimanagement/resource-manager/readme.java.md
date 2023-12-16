@@ -10,6 +10,8 @@ namespace: com.microsoft.azure.management.apimanagement
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-apimanagement
+modelerfour: 
+  lenient-model-deduplication: true
 ```
 
 ### Java multi-api
