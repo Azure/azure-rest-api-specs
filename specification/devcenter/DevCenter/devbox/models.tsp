@@ -307,11 +307,10 @@ model DevBoxListResult is Azure.Core.Page<DevBox>;
 model DevBox {
   @key("devBoxName")
   @doc("Display name for the Dev Box")
-  @visibility("create", "read")
+  @visibility("read")
   name: string;
 
   @doc("Name of the project this Dev Box belongs to")
-  @path("projectName")
   @visibility("read")
   projectName?: string;
 
