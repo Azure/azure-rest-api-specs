@@ -9,9 +9,8 @@ namespace Microsoft.AppSecurity;
 @doc("Protected endpoint definition")
 @discriminator("endpointType")
 model ProtectedEndpoint {
-  // TODO - enable this when providerhub emitter supports this https://msazure.visualstudio.com/One/_workitems/edit/24658912
-  // @doc("Defines the endpoint type")
-  // endpointType: EndpointType;
+  @doc("Defines the endpoint type")
+  endpointType: EndpointType;
 
   @doc("Fully qualified ARM ID of the endpoint to protect")
   endpointId: ProtectedEndpointId;
@@ -29,13 +28,13 @@ model ProtectedEndpoint {
 @doc("Defines a custom rule condition of type Ip")
 model ApplicationGatewayProtectedEndpoint extends ProtectedEndpoint {
   @doc("Defines the endpoint type")
-  endpointType: "ApplicationGateway";
+  endpointType: EndpointType.ApplicationGateway;
 }
 
 @doc("Defines a custom rule condition of type Ip")
 model FrontDoorProtectedEndpoint extends ProtectedEndpoint {
   @doc("Defines the endpoint type")
-  endpointType: "FrontDoor";
+  endpointType: EndpointType.FrontDoor;
 }
 
 scalar ProtectedEndpointId

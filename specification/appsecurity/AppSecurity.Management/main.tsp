@@ -28,6 +28,7 @@ using OpenAPI;
 @service({
   title: "Microsoft.AppSecurity",
 })
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @versioned(Versions)
 namespace Microsoft.AppSecurity;
 
