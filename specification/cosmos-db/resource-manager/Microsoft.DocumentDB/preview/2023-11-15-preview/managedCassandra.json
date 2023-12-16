@@ -375,10 +375,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The command operation was completed successfully."
+          },
           "202": {
             "description": "Success. The command operation will begin as soon as possible.",
-            "schema": {
-              "$ref": "#/definitions/CommandPublicResource"
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
             }
           },
           "default": {
@@ -394,6 +404,9 @@
       "get": {
         "operationId": "CassandraClusters_ListCommand",
         "description": "List all commands currently running on ring info",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "CosmosDBManagedCassandraListCommand": {
             "$ref": "./examples/CosmosDBManagedCassandraListCommand.json"
@@ -432,13 +445,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands/{commandId}": {
       "get": {
         "operationId": "CassandraClusters_GetCommandAsync",
-        "description": "Get list of details about commands that were run asynchronously. Use \"all\" for commandId to list all commands in three days associated with the cluster.",
+        "description": "Get details about a specified command that was run asynchronously.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraCommandResult": {
             "$ref": "./examples/CosmosDBManagedCassandraCommandResult.json"
-          },
-          "CosmosDBManagedCassandraCommandResultList": {
-            "$ref": "./examples/CosmosDBManagedCassandraCommandResultList.json"
           }
         },
         "parameters": [
@@ -453,6 +463,48 @@
           },
           {
             "$ref": "#/parameters/commandId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Return a command resource.",
+            "schema": {
+              "$ref": "#/definitions/CommandPublicResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands/all": {
+      "get": {
+        "operationId": "CassandraClusters_GetCommandAsync",
+        "description": "Lists all commands in three days associated with the cluster.",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraCommandResultList": {
+            "$ref": "./examples/CosmosDBManagedCassandraCommandResultList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -932,7 +984,8 @@
       "x-ms-parameter-location": "method",
       "description": "Managed Cassandra cluster command id.",
       "minLength": 1,
-      "maxLength": 100
+      "maxLength": 100,
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
     },
     "forceDeallocate": {
       "name": "x-ms-force-deallocate",
@@ -1570,8 +1623,16 @@
           "description": "If true, stops cassandra before executing the command and then start it again"
         },
         "readWrite": {
-          "type": "boolean",
-          "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
+          "type": "string",
+          "description": "Permissions of the command to access the cassandra directory.",
+          "enum": [
+            "ReadWrite",
+            "ReadOnly"
+          ],
+          "x-ms-enum": {
+            "name": "CommandPermissions",
+            "modelAsString": true
+          }
         },
         "result": {
           "type": "string",
