@@ -20,12 +20,18 @@ model Target is ProxyResource<Record<unknown>> {
 }
 
 alias ParentedResourceParameters = BaseParameters<Target> & {
+  @doc("The parent resource provider namespace.")
   @path
   @segment("providers")
   parentProviderNamespace: string;
 
+  @doc("The parent resource type.")
   @path
   parentResourceType: string;
+
+  @doc("The parent resource name.")
+  @path
+  parentResourceName: string;
 };
 
 @armResourceOperations

@@ -7,11 +7,13 @@ using TypeSpec.Http;
 
 namespace Microsoft.Chaos;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface does not contain resource operations."
 interface OperationStatusesOperations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is not a resource operation."
   @doc("Get the status of a long running azure asynchronous operation.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/operationsStatuses/{asyncOperationId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       @doc("The region name of operation.")
       @path

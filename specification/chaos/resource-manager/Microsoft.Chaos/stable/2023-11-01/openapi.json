@@ -368,7 +368,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/providers/Microsoft.Chaos/targets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets": {
       "get": {
         "operationId": "Targets_ListByResourceGroup",
         "tags": [
@@ -388,12 +388,21 @@
           {
             "name": "parentProviderNamespace",
             "in": "path",
+            "description": "The parent resource provider namespace.",
             "required": true,
             "type": "string"
           },
           {
             "name": "parentResourceType",
             "in": "path",
+            "description": "The parent resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "The parent resource name.",
             "required": true,
             "type": "string"
           },
@@ -424,7 +433,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/providers/Microsoft.Chaos/targets/{targetName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}": {
       "get": {
         "operationId": "Targets_Get",
         "tags": [
@@ -444,12 +453,21 @@
           {
             "name": "parentProviderNamespace",
             "in": "path",
+            "description": "The parent resource provider namespace.",
             "required": true,
             "type": "string"
           },
           {
             "name": "parentResourceType",
             "in": "path",
+            "description": "The parent resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "The parent resource name.",
             "required": true,
             "type": "string"
           },
@@ -496,12 +514,21 @@
           {
             "name": "parentProviderNamespace",
             "in": "path",
+            "description": "The parent resource provider namespace.",
             "required": true,
             "type": "string"
           },
           {
             "name": "parentResourceType",
             "in": "path",
+            "description": "The parent resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "The parent resource name.",
             "required": true,
             "type": "string"
           },
@@ -563,12 +590,21 @@
           {
             "name": "parentProviderNamespace",
             "in": "path",
+            "description": "The parent resource provider namespace.",
             "required": true,
             "type": "string"
           },
           {
             "name": "parentResourceType",
             "in": "path",
+            "description": "The parent resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentResourceName",
+            "in": "path",
+            "description": "The parent resource name.",
             "required": true,
             "type": "string"
           },
@@ -938,6 +974,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CancelExperiment": {
+            "$ref": "./examples/CancelExperiment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1426,12 +1467,20 @@
     },
     "ActionType": {
       "type": "string",
+      "description": "The type of the action.",
       "enum": [
         "Internal"
       ],
       "x-ms-enum": {
         "name": "ActionType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Internal",
+            "value": "Internal",
+            "description": "The action is internal."
+          }
+        ]
       }
     },
     "Azure.Core.Foundations.Error": {
@@ -1931,6 +1980,7 @@
     },
     "CreatedByType": {
       "type": "string",
+      "description": "The type of identity that created the resource.",
       "enum": [
         "User",
         "Application",
@@ -1939,7 +1989,29 @@
       ],
       "x-ms-enum": {
         "name": "CreatedByType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Created by User."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Created by Application."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "Created by ManagedIdentity."
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "Created by Key."
+          }
+        ]
       }
     },
     "DelayAction": {
@@ -2271,12 +2343,20 @@
     },
     "FilterType": {
       "type": "string",
+      "description": "The filter type.",
       "enum": [
         "Simple"
       ],
       "x-ms-enum": {
         "name": "FilterType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Simple",
+            "value": "Simple",
+            "description": "A simple filter."
+          }
+        ]
       }
     },
     "KeyValuePair": {
@@ -2331,6 +2411,7 @@
     },
     "Origin": {
       "type": "string",
+      "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
       "enum": [
         "user",
         "system",
@@ -2338,11 +2419,29 @@
       ],
       "x-ms-enum": {
         "name": "Origin",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "user",
+            "value": "user",
+            "description": "The operation is initiated by a user."
+          },
+          {
+            "name": "system",
+            "value": "system",
+            "description": "The operation is initiated by a system."
+          },
+          {
+            "name": "user,system",
+            "value": "user,system",
+            "description": "The operation is initiated by a user or a system."
+          }
+        ]
       }
     },
     "ProvisioningState": {
       "type": "string",
+      "description": "The state of the provisioning operation.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -2353,7 +2452,39 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Provisioning succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
       }
     },
     "ResourceIdentity": {
@@ -2375,6 +2506,7 @@
     },
     "ResourceIdentityType": {
       "type": "string",
+      "description": "The identity type.",
       "enum": [
         "None",
         "SystemAssigned",
@@ -2382,18 +2514,48 @@
       ],
       "x-ms-enum": {
         "name": "ResourceIdentityType",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "There is no identity type."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "The identity is system assigned."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "The identity is user assigned."
+          }
+        ]
       }
     },
     "SelectorType": {
       "type": "string",
+      "description": "The selector type.",
       "enum": [
         "List",
         "Query"
       ],
       "x-ms-enum": {
         "name": "SelectorType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "List",
+            "value": "List",
+            "description": "A list selector."
+          },
+          {
+            "name": "Query",
+            "value": "Query",
+            "description": "A query selector."
+          }
+        ]
       }
     },
     "StepStatus": {
@@ -2489,12 +2651,20 @@
     },
     "TargetReferenceType": {
       "type": "string",
+      "description": "The type of the target.",
       "enum": [
         "ChaosTarget"
       ],
       "x-ms-enum": {
         "name": "TargetReferenceType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ChaosTarget",
+            "value": "ChaosTarget",
+            "description": "The target is a resource group."
+          }
+        ]
       }
     },
     "TargetType": {
@@ -2596,7 +2766,8 @@
         "values": [
           {
             "name": "v2023_11_01",
-            "value": "2023-11-01"
+            "value": "2023-11-01",
+            "description": "The 2023-11-01 version of the Chaos service."
           }
         ]
       }

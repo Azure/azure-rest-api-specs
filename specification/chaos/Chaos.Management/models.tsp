@@ -11,51 +11,94 @@ namespace Microsoft.Chaos;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
+  @doc("Created by User.")
   User,
+
+  @doc("Created by Application.")
   Application,
+
+  @doc("Created by ManagedIdentity.")
   ManagedIdentity,
+
+  @doc("Created by Key.")
   Key,
 }
 
+@doc("The state of the provisioning operation.")
 enum ProvisioningState {
+  @doc("Provisioning succeeded.")
   Succeeded,
+
+  @doc("Provisioning failed.")
   Failed,
+
+  @doc("Provisioning was canceled.")
   Canceled,
+
+  @doc("Resource is being created.")
   Creating,
+
+  @doc("Resource is being updated.")
   Updating,
+
+  @doc("Resource is being deleted.")
   Deleting,
 }
 
+@doc("The selector type.")
 enum SelectorType {
+  @doc("A list selector.")
   List,
+
+  @doc("A query selector.")
   Query,
 }
 
+@doc("The filter type.")
 enum FilterType {
+  @doc("A simple filter.")
   Simple,
 }
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
+  @doc("The operation is initiated by a user.")
   user,
+
+  @doc("The operation is initiated by a system.")
   system,
+
+  @doc("The operation is initiated by a user or a system.")
   `user,system`,
 }
 
+@doc("The type of the action.")
 enum ActionType {
+  @doc("The action is internal.")
   Internal,
 }
 
+@doc("The type of the target.")
 enum TargetReferenceType {
+  @doc("The target is a resource group.")
   ChaosTarget,
 }
-@Azure.Core.fixed
+
+@doc("The identity type.")
 enum ResourceIdentityType {
+  @doc("There is no identity type.")
   None,
+
+  @doc("The identity is system assigned.")
   SystemAssigned,
+
+  @doc("The identity is user assigned.")
   UserAssigned,
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The original resource does not have a provisioningState property."
 @doc("Model that represents the Capability properties model.")
 model CapabilityProperties {
   @doc("String of the Publisher that this Capability extends.")
@@ -81,6 +124,7 @@ model CapabilityProperties {
   urn?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The original resource does not have a provisioningState property."
 @doc("Model that represents the Capability Type properties model.")
 model CapabilityTypeProperties {
   @doc("String of the Publisher that this Capability Type extends.")
@@ -218,12 +262,15 @@ model ChaosTargetSelector {
 @discriminator("type")
 model ChaosTargetFilter {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The original resource does not have a provisioningState property."
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "The original resource does not have a 'tags' property."
 @doc("Describes an experiment update.")
 model ExperimentUpdate {
   @doc("The identity of the experiment resource.")
   identity?: ResourceIdentity;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The original resource does not have a provisioningState property."
 @doc("Model that represents the execution properties of an Experiment.")
 model ExperimentExecutionProperties {
   @doc("The status of the execution.")
@@ -408,6 +455,7 @@ model OperationStatus {
   status?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The original resource does not have a provisioningState property."
 @doc("Model that represents the base Target Type properties model.")
 model TargetTypeProperties {
   @doc("Localized string of the display name.")
