@@ -79,9 +79,7 @@ model LocationDevice {
 
   ...PhoneNumberModel;
 
-  @doc("IPv4 address and port of the device")
-  ipv4Address?: Ipv4Address;
+  ...Ipv4AddressModel;
 
-  @doc("IPv6 address and port of the device")
-  ipv6Address?: Ipv6Address;
+  ...Ipv6AddressModel;
 }

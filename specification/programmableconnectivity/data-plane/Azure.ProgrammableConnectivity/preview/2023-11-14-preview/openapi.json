@@ -550,6 +550,19 @@
         "port"
       ]
     },
+    "Ipv4AddressModel": {
+      "type": "object",
+      "description": "IPv4 address and port of the device",
+      "properties": {
+        "ipv4Address": {
+          "$ref": "#/definitions/Ipv4Address",
+          "description": "The Ipv4 address"
+        }
+      },
+      "required": [
+        "ipv4Address"
+      ]
+    },
     "Ipv6Address": {
       "type": "object",
       "description": "IPv6 device indicator",
@@ -569,6 +582,19 @@
         "port"
       ]
     },
+    "Ipv6AddressModel": {
+      "type": "object",
+      "description": "IPv4 address and port of the device",
+      "properties": {
+        "ipv6Address": {
+          "$ref": "#/definitions/Ipv6Address",
+          "description": "The Ipv6 address"
+        }
+      },
+      "required": [
+        "ipv6Address"
+      ]
+    },
     "LocationDevice": {
       "type": "object",
       "description": "Device information needed by operator to provide location information. Include exactly one of these properties to identify your device.",
@@ -584,13 +610,17 @@
         },
         "ipv4Address": {
           "$ref": "#/definitions/Ipv4Address",
-          "description": "IPv4 address and port of the device"
+          "description": "The Ipv4 address"
         },
         "ipv6Address": {
           "$ref": "#/definitions/Ipv6Address",
-          "description": "IPv6 address and port of the device"
+          "description": "The Ipv6 address"
         }
-      }
+      },
+      "required": [
+        "ipv4Address",
+        "ipv6Address"
+      ]
     },
     "LocationEndpoint": {
       "type": "object",
@@ -841,7 +871,7 @@
     },
     "PhoneNumberModel": {
       "type": "object",
-      "description": "The phone number of the device to be identified.",
+      "description": "The phone number of the device.",
       "properties": {
         "phoneNumber": {
           "type": "string",

@@ -41,7 +41,7 @@ model NetworkIdentifier {
   identifier: string;
 }
 
-@doc("The phone number of the device to be identified.")
+@doc("The phone number of the device.")
 model PhoneNumberModel {
   @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
   @pattern("^\\+?[0-9]{5,15}$")
@@ -62,6 +62,18 @@ model ApcErrorResponse {
 
   @doc("The consent URL in case of a consent failure")
   consentUrl?: url;
+}
+
+@doc("IPv4 address and port of the device")
+model Ipv4AddressModel {
+  @doc("The Ipv4 address")
+  ipv4Address: Ipv4Address
+}
+
+@doc("IPv4 address and port of the device")
+model Ipv6AddressModel {
+  @doc("The Ipv6 address")
+  ipv6Address: Ipv6Address
 }
 
 @doc("IPv4 device indicator")
