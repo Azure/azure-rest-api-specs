@@ -84,6 +84,7 @@ types, e.g. image
   template?: MessageTemplate;
 }
 
+@access(Access.public, "csharp")
 @doc("The template object used to create templates.")
 model MessageTemplate {
   @doc("Name of the template.")
@@ -99,6 +100,7 @@ model MessageTemplate {
   bindings?: MessageTemplateBindings;
 }
 
+@access(Access.public, "csharp")
 @discriminator("kind")
 @doc("The class describes a parameter of a template.")
 model MessageTemplateValue {
