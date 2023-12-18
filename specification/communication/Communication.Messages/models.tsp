@@ -14,7 +14,6 @@ using Azure.ClientGenerator.Core;
 @versioned(AzureCommunicationMessagesService.Versions)
 namespace AzureCommunicationMessagesService;
 
-@access(Access.public, "csharp")
 @doc("The type of message. Supports text, image, template.")
 enum CommunicationMessageType {
   @doc("Text message type.")
@@ -27,45 +26,14 @@ enum CommunicationMessageType {
   template,
 }
 
-@doc("The template value kind.")
-enum MessageTemplateValueKind {
-  @doc("Message parameter type is text.")
-  text,
+alias WhatsAppMessageTemplateValueSubType = "quickReply" | "url";
 
-  @doc("Message parameter type is image.")
-  image,
-
-  @doc("Message parameter type is document.")
-  document,
-
-  @doc("Message parameter type is video.")
-  video,
-
-  @doc("Message parameter type is location.")
-  location,
-
-  @doc("Message parameter type is quick action.")
-  quick_action,
-}
-
-@access(Access.public, "csharp")
-@doc("The WhatsApp button sub type.")
-enum WhatsAppMessageTemplateValueSubType {
-  @doc("The WhatsApp button sub type is quick reply.")
-  quickReply,
-
-  @doc("The WhatsApp button sub type is url.")
-  url,
-}
-
-@access(Access.public, "csharp")
 @doc("The Communication Messages Channel.")
 enum CommunicationMessagesChannel {
   @doc("The Communication Messages Channel is WhatsApp.")
   whatsApp,
 }
 
-@access(Access.public, "csharp")
 @doc("The aggregated template status.")
 enum MessageTemplateStatus {
   @doc("Message template is approved.")
@@ -120,44 +88,16 @@ model MessageTemplate {
   bindings?: MessageTemplateBindings;
 }
 
+@discriminator("kind")
 @doc("The class describes a parameter of a template.")
 model MessageTemplateValue {
-  @doc("The template value kind.")
-  kind: MessageTemplateValueKind;
-
-  @doc("The message template's text value information.")
-  text?: MessageTemplateValueText;
-
-  @doc("""
-The message template's media value information.
-Could be an image, document or
-video.
-""")
-  image?: MessageTemplateValueMedia;
-
-  @doc("""
-The message template's media value information.
-Could be an image, document or
-video.
-""")
-  document?: MessageTemplateValueMedia;
-
-  @doc("""
-The message template's media value information.
-Could be an image, document or
-video.
-""")
-  video?: MessageTemplateValueMedia;
-
-  @doc("The message template's location value information.")
-  location?: MessageTemplateParameterLocation;
-
-  @doc("The message template's quick action value information.")
-  quickAction?: MessageTemplateValueQuickAction;
 }
 
 @doc("The message template's text value information.")
-model MessageTemplateValueText {
+model MessageTemplateValueText extends MessageTemplateValue {
+  @doc("Message parameter type is text.")
+  kind: "text";
+
   @doc("The text value.")
   text: string;
 }
@@ -169,7 +109,7 @@ video.
 """)
 model MessageTemplateValueMedia {
   @doc("The (public) URL of the media.")
-  url?: url;
+  url: url;
 
   @doc("The [optional] caption of the media object.")
   caption?: string;
@@ -178,8 +118,29 @@ model MessageTemplateValueMedia {
   fileName?: string;
 }
 
+model MessageTemplateValueImage extends MessageTemplateValue {
+  @doc("Message parameter type is image.")
+  kind: "image",
+  ...MessageTemplateValueMedia
+}
+
+model MessageTemplateValueDocument extends MessageTemplateValue {
+  @doc("Message parameter type is document.")
+  kind: "document",
+  ...MessageTemplateValueMedia
+}
+
+model MessageTemplateValueVideo extends MessageTemplateValue {
+  @doc("Message parameter type is video.")
+  kind: "video",
+  ...MessageTemplateValueMedia
+}
+
 @doc("The message template's location value information.")
-model MessageTemplateParameterLocation {
+model MessageTemplateValueLocation extends MessageTemplateValue {
+  @doc("Message parameter type is location.")
+  kind: "location";
+
   @doc("The [Optional] name of the location.")
   name?: string;
 
@@ -194,7 +155,10 @@ model MessageTemplateParameterLocation {
 }
 
 @doc("The message template's quick action value information.")
-model MessageTemplateValueQuickAction {
+model MessageTemplateValueQuickAction extends MessageTemplateValue {
+  @doc("Message parameter type is quick action.")
+  kind: "quickAction";
+
   @doc("The [Optional] quick action text")
   text?: string;
 
@@ -202,14 +166,16 @@ model MessageTemplateValueQuickAction {
   payload?: string;
 }
 
+@discriminator("kind")
 @doc("The binding object to link values to the template specific locations")
 model MessageTemplateBindings {
-  @doc("The template bindings for WhatsApp")
-  whatsApp?: WhatsAppMessageTemplateBindings;
 }
 
 @doc("The template bindings for WhatsApp")
-model WhatsAppMessageTemplateBindings {
+model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
+  @doc("MessageTemplateBindings is whatsApp")
+  kind: "whatsApp";
+
   @doc("The header template bindings")
   header?: WhatsAppMessageTemplateBindingsComponent[];
 
@@ -246,14 +212,12 @@ dictionary.
   refValue: string;
 }
 
-@access(Access.public, "csharp")
 @doc("Result of the send message operation.")
 model SendMessageResult {
   @doc("Receipts of the send message operation.")
   receipts: MessageReceipt[];
 }
 
-@access(Access.public, "csharp")
 @doc("Receipt of the sending one message.")
 model MessageReceipt {
   @doc("The message id.")
@@ -263,38 +227,6 @@ model MessageReceipt {
   to: string;
 }
 
-@pagedResult
-@doc("Paged collection of MessageTemplateResponse items")
-model ListTemplatesResponse {
-  @doc("The MessageTemplateResponse items on this page")
-  @items
-  value: MessageTemplateResponse[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: string;
-}
-
-@access(Access.public, "csharp")
-@doc("The Message Template Response.")
-model MessageTemplateResponse {
-  @doc("Get the template's Name")
-  name?: string;
-
-  @doc("Get the template's language")
-  language?: string;
-
-  @doc("The Communication Messages Channel.")
-  channelType?: CommunicationMessagesChannel;
-
-  @doc("The aggregated template status.")
-  status?: MessageTemplateStatus;
-
-  @doc("The WhatsApp-specific template response contract")
-  whatsApp?: WhatsAppMessageTemplateResponse;
-}
-
-@access(Access.public, "csharp")
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateResponse {
   @doc("""
@@ -304,6 +236,52 @@ API.
 """)
   content?: unknown;
 }
+
+@resource("messages/notifications")
+model Notifications {
+  @key
+  id: string;
+}
+
+@resource("messages/channels")
+@doc("A communication channel.")
+model CommunicationChannel {
+  @key
+  @doc("The registration ID of the channel.")
+  channelId: string;
+}
+
+@resource("messages/streams")
+model Stream {
+  @key
+  id: string;
+  @body
+  body: bytes;
+  @header 
+  contentType: "application/octect-stream";
+}
+
+@resource("templates")
+@parentResource(CommunicationChannel)
+@doc("The Message Template Response.")
+model MessageTemplateResponse {
+  @key
+  @doc("Get the template's Name")
+  name: string;
+
+  @doc("Get the template's language")
+  language: string;
+
+  @doc("The Communication Messages Channel.")
+  channelType: CommunicationMessagesChannel;
+
+  @doc("The aggregated template status.")
+  status: MessageTemplateStatus;
+
+  @doc("The WhatsApp-specific template response contract")
+  whatsApp?: WhatsAppMessageTemplateResponse;
+}
+
 
 @doc("Azure Communication Messages Versions")
 enum Versions {
