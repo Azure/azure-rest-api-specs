@@ -13667,6 +13667,9 @@
         ],
         "summary": "Trigger run.",
         "operationId": "Schedules_Trigger",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -13688,14 +13691,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "scheduleTime",
-            "description": "ScheduleTime specified from client side.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "in": "body",
+            "name": "body",
+            "description": "Request body for trigger once",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerOnceRequest"
+            }
           }
         ],
         "responses": {
@@ -29922,6 +29927,21 @@
         }
       },
       "discriminator": "triggerType"
+    },
+    "TriggerOnceRequest": {
+      "required": [
+        "scheduleTime"
+      ],
+      "type": "object",
+      "properties": {
+        "scheduleTime": {
+          "description": "[Required] Specify the schedule time for trigger once",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "TriggerRunSubmissionDto": {
       "type": "object",
