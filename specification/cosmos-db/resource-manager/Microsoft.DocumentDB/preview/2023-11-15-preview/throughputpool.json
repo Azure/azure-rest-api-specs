@@ -43,7 +43,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "description": "Lists all the Azure Cosmos DB Throughput Pools available under the subscription.",
         "parameters": [
@@ -59,14 +59,56 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputPoolsListResult"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "cosmos-db.json#/definitions/CloudError"
-              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools": {
+      "get": {
+        "tags": [
+          "ThroughputPools"
+        ],
+        "operationId": "ThroughputPools_ListByResourceGroup",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountList": {
+            "$ref": "./examples/throughputPool/CosmosDBThroughputPoolList.json"
+          }
+        },
+        "description": "List all the ThroughputPools in a given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputPoolsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -103,7 +145,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -160,7 +202,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -223,7 +265,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -271,7 +313,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -286,7 +328,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "description": "Lists all the Azure Cosmos DB accounts available under the subscription.",
         "parameters": [
@@ -313,7 +355,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -355,7 +397,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -415,7 +457,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -466,7 +508,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -475,18 +517,24 @@
   },
   "definitions": {
     "ThroughputPoolsListResult": {
+      "description": "The List operation response, that contains the throughput pools and their properties.",
+      "type": "object",
       "properties": {
         "value": {
+          "description": "List of throughput pools and their properties.",
           "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThroughputPoolResource"
-          },
-          "description": "List of throughput pools and their properties."
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
-      },
-      "description": "The List operation response, that contains the throughput pools and their properties."
-    },
+      }
+    }
     "ThroughputPoolResource": {
       "description": "An Azure Cosmos DB Throughputpool.",
       "type": "object",
@@ -507,7 +555,7 @@
       "type": "object",
       "properties": {
         "tags": {
-          "$ref": "#/definitions/Tags"
+          "$ref": "cosmos-db.json#/definitions/Tags"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -529,6 +577,8 @@
       }
     },
     "ThroughputPoolAccountsListResult": {
+      "description": "The List operation response, that contains the global database accounts and their properties.",
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -537,9 +587,13 @@
             "$ref": "#/definitions/ThroughputPoolAccountGetResult"
           },
           "description": "List of global database accounts in a throughput pool and their properties."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
-      },
-      "description": "The List operation response, that contains the global database accounts and their properties."
+      }
     },
     "ThroughputPoolAccountCreateParameters": {
       "description": "Parameters for creating a Azure Cosmos DB throughput pool account.",
@@ -593,12 +647,7 @@
           "description": "The instance id of global database account in the throughputPool.",
           "type": "string"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     }
   },
   "parameters": {
