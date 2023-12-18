@@ -16,10 +16,10 @@ namespace ClientForAcsMessages;
 })
 interface NotificationMessagesRestClient {
   @access(Access.internal, "csharp")
-  postMessage is AzureCommunicationMessagesService.NotificationMessagesOperations.sendMessage;
+  postMessage is AzureCommunicationMessagesService.NotificationMessagesOperations.send;
 
   @access(Access.internal, "csharp")
-  getMedia is AzureCommunicationMessagesService.StreamOperations.downloadMedia;
+  getMedia is AzureCommunicationMessagesService.StreamOperations.getStream;
 }
 
 @client({
