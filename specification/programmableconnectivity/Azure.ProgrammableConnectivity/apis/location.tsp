@@ -74,8 +74,7 @@ model LocationVerifyResponse {
 /// Common models
 @doc("Device information needed by operator to provide location information. Include exactly one of these properties to identify your device.")
 model LocationDevice {
-  @doc("External identifier or network access identifier of the device")
-  networkAccessIdentifier?: string;
+  ...NetworkAccessIdentifierModel;
 
   ...PhoneNumberModel;
 

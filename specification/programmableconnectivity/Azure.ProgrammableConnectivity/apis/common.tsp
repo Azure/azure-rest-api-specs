@@ -48,6 +48,13 @@ model PhoneNumberModel {
   phoneNumber?: string;
 }
 
+@doc("The network access ID/external ID of the device")
+model NetworkAccessIdentifierModel {
+  @doc("External identifier or network access identifier of the device")
+    networkAccessIdentifier?: string;
+}
+
+
 @error
 @doc("A custom error type for APC.")
 model ApcErrorResponse {
