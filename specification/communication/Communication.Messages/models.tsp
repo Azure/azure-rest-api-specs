@@ -94,7 +94,7 @@ model MessageTemplate {
   language: string;
 
   @doc("The template values.")
-  values?: Record<MessageTemplateValue>;
+  values?: MessageTemplateValue[];
 
   @doc("The binding object to link values to the template specific locations")
   bindings?: MessageTemplateBindings;
@@ -104,11 +104,13 @@ model MessageTemplate {
 @discriminator("kind")
 @doc("The class describes a parameter of a template.")
 model MessageTemplateValue {
+  @doc("Name of the Template value")
+  name: string;
 }
 
 @access(Access.public, "csharp")
 @doc("The message template's text value information.")
-model MessageTemplateValueText extends MessageTemplateValue {
+model MessageTemplateText extends MessageTemplateValue {
   @doc("Message parameter type is text.")
   kind: "text";
 
@@ -122,7 +124,7 @@ The message template's media value information.
 Could be an image, document or
 video.
 """)
-model MessageTemplateValueMedia {
+model MessageTemplateMedia {
   @doc("The (public) URL of the media.")
   url: url;
 
@@ -133,35 +135,38 @@ model MessageTemplateValueMedia {
   fileName?: string;
 }
 
+@doc("The message template's image value information.")
 @access(Access.public, "csharp")
-model MessageTemplateValueImage extends MessageTemplateValue {
+model MessageTemplateImage extends MessageTemplateValue {
   @doc("Message parameter type is image.")
   kind: "image",
-  ...MessageTemplateValueMedia
+  ...MessageTemplateMedia
 }
 
+@doc("The message template's document value information.")
 @access(Access.public, "csharp")
-model MessageTemplateValueDocument extends MessageTemplateValue {
+model MessageTemplateDocument extends MessageTemplateValue {
   @doc("Message parameter type is document.")
   kind: "document",
-  ...MessageTemplateValueMedia
+  ...MessageTemplateMedia
 }
 
+@doc("The message template's video value information.")
 @access(Access.public, "csharp")
-model MessageTemplateValueVideo extends MessageTemplateValue {
+model MessageTemplateVideo extends MessageTemplateValue {
   @doc("Message parameter type is video.")
   kind: "video",
-  ...MessageTemplateValueMedia
+  ...MessageTemplateMedia
 }
 
 @access(Access.public, "csharp")
 @doc("The message template's location value information.")
-model MessageTemplateValueLocation extends MessageTemplateValue {
+model MessageTemplateLocation extends MessageTemplateValue {
   @doc("Message parameter type is location.")
   kind: "location";
 
   @doc("The [Optional] name of the location.")
-  name?: string;
+  locationName?: string;
 
   @doc("The [Optional] address of the location.")
   address?: string;
@@ -175,7 +180,7 @@ model MessageTemplateValueLocation extends MessageTemplateValue {
 
 @access(Access.public, "csharp")
 @doc("The message template's quick action value information.")
-model MessageTemplateValueQuickAction extends MessageTemplateValue {
+model MessageTemplateQuickAction extends MessageTemplateValue {
   @doc("Message parameter type is quick action.")
   kind: "quickAction";
 
