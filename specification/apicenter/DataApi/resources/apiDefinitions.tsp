@@ -22,7 +22,7 @@ interface ApiDefinitions {
   @doc("Get an API definition.")
   getDefinition is Operations.ResourceRead<ApiDefinition>;
 
-  @doc("Gets status of a an API specifcation export operation.")
+  @doc("Gets status of a an API specification export operation.")
   getExportSpecificationOperationStatus is Operations.GetResourceOperationStatus<ExportSpecification>;
 
   @doc("Export an API specification asynchronously.")
