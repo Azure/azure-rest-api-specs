@@ -106,6 +106,7 @@ model MessageTemplate {
 model MessageTemplateValue {
 }
 
+@access(Access.public, "csharp")
 @doc("The message template's text value information.")
 model MessageTemplateValueText extends MessageTemplateValue {
   @doc("Message parameter type is text.")
@@ -115,6 +116,7 @@ model MessageTemplateValueText extends MessageTemplateValue {
   text: string;
 }
 
+@access(Access.public, "csharp")
 @doc("""
 The message template's media value information.
 Could be an image, document or
@@ -131,24 +133,28 @@ model MessageTemplateValueMedia {
   fileName?: string;
 }
 
+@access(Access.public, "csharp")
 model MessageTemplateValueImage extends MessageTemplateValue {
   @doc("Message parameter type is image.")
   kind: "image",
   ...MessageTemplateValueMedia
 }
 
+@access(Access.public, "csharp")
 model MessageTemplateValueDocument extends MessageTemplateValue {
   @doc("Message parameter type is document.")
   kind: "document",
   ...MessageTemplateValueMedia
 }
 
+@access(Access.public, "csharp")
 model MessageTemplateValueVideo extends MessageTemplateValue {
   @doc("Message parameter type is video.")
   kind: "video",
   ...MessageTemplateValueMedia
 }
 
+@access(Access.public, "csharp")
 @doc("The message template's location value information.")
 model MessageTemplateValueLocation extends MessageTemplateValue {
   @doc("Message parameter type is location.")
@@ -167,6 +173,7 @@ model MessageTemplateValueLocation extends MessageTemplateValue {
   longitude?: float64;
 }
 
+@access(Access.public, "csharp")
 @doc("The message template's quick action value information.")
 model MessageTemplateValueQuickAction extends MessageTemplateValue {
   @doc("Message parameter type is quick action.")
@@ -179,11 +186,13 @@ model MessageTemplateValueQuickAction extends MessageTemplateValue {
   payload?: string;
 }
 
+@access(Access.public, "csharp")
 @discriminator("kind")
 @doc("The binding object to link values to the template specific locations")
 model MessageTemplateBindings {
 }
 
+@access(Access.public, "csharp")
 @doc("The template bindings for WhatsApp")
 model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   @doc("MessageTemplateBindings is whatsApp")
@@ -202,6 +211,7 @@ model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   button?: WhatsAppMessageTemplateBindingsButton[];
 }
 
+@access(Access.public, "csharp")
 @doc("The template bindings component for WhatsApp")
 model WhatsAppMessageTemplateBindingsComponent {
   @doc("""
@@ -212,6 +222,7 @@ dictionary.
   refValue: string;
 }
 
+@access(Access.public, "csharp")
 @doc("The template bindings component button for WhatsApp")
 model WhatsAppMessageTemplateBindingsButton {
   @doc("The WhatsApp button sub type")
