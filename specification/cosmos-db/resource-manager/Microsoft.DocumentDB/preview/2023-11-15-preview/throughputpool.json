@@ -42,6 +42,9 @@
             "$ref": "./examples/throughputPool/CosmosDBThroughputPoolList.json"
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "description": "Lists all the Azure Cosmos DB Throughput Pools available under the subscription.",
         "parameters": [
           {
@@ -56,6 +59,12 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputPoolsListResult"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "cosmos-db.json#/definitions/CloudError"
+              }
             }
           }
         }
@@ -94,7 +103,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "cosmos-db.json#/definitions/CloudError"
             }
           }
         }
@@ -122,7 +131,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "createUpdateParameters",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
@@ -136,12 +145,22 @@
             "description": "The ThroughputPool create or update operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ThroughputPoolResource"
+            },
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "cosmos-db.json#/definitions/CloudError"
             }
           }
         }
@@ -169,7 +188,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "updateParameters",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
@@ -189,12 +208,22 @@
             "description": "The ThroughputPool update operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ThroughputPoolResource"
+            },
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "cosmos-db.json#/definitions/CloudError"
             }
           }
         }
@@ -242,7 +271,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "cosmos-db.json#/definitions/CloudError"
             }
           }
         }
@@ -255,6 +284,9 @@
           "CosmosDBDatabaseAccountList": {
             "$ref": "./examples/throughputPool/CosmosDBThroughputPoolAccountsList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
         "description": "Lists all the Azure Cosmos DB accounts available under the subscription.",
         "parameters": [
@@ -281,7 +313,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "cosmos-db.json#/definitions/CloudError"
             }
           }
         }
@@ -323,7 +355,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "cosmos-db.json#/definitions/CloudError"
             }
           }
         }
@@ -354,7 +386,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "createParameters",
+            "name": "body",
             "in": "body",
             "required": true,
             "schema": {
@@ -368,12 +400,22 @@
             "description": "The ThroughputPoolAccount create or update operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ThroughputPoolAccountGetResult"
+            },
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "cosmos-db.json#/definitions/CloudError"
             }
           }
         }
@@ -424,7 +466,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "cosmos-db.json#/definitions/CloudError"
             }
           }
         }
@@ -449,10 +491,9 @@
       "description": "An Azure Cosmos DB Throughputpool.",
       "type": "object",
       "properties": {
-        "maxThroughput": {
-          "type": "integer",
-          "description": "Value for throughput to be shared among CosmosDB resources in the pool.",
-          "readOnly": true
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ThroughputPoolUpdateProperties"
         }
       },
       "allOf": [
