@@ -2275,9 +2275,8 @@
       "description": "Hive Catalog Option",
       "required": [
         "catalogName",
+        "metastoreDbConnectionAuthenticationMode",
         "metastoreDbConnectionURL",
-        "metastoreDbConnectionUserName",
-        "metastoreDbConnectionPasswordSecret",
         "metastoreWarehouseDir"
       ],
       "properties": {
@@ -2285,6 +2284,11 @@
           "description": "Name of trino catalog which should use specified hive metastore.",
           "minLength": 1,
           "type": "string"
+        },
+        "metastoreDbConnectionAuthenticationMode": {
+          "description":"Hive metastore database's authentication mode (SQL for password-based authentication, or MICROSOFT_ENTRA for identity-based authentication) to connect to database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": ["SQL", "MICROSOFT_ENTRA"]
         },
         "metastoreDbConnectionPasswordSecret": {
           "description": "Secret reference name from secretsProfile.secrets containing password for database connection.",
@@ -2318,10 +2322,14 @@
       "description": "Hive Catalog Option for Flink cluster.",
       "required": [
         "metastoreDbConnectionURL",
-        "metastoreDbConnectionUserName",
-        "metastoreDbConnectionPasswordSecret"
+        "metastoreDbConnectionAuthenticationMode"
       ],
       "properties": {
+        "metastoreDbConnectionAuthenticationMode": {
+          "description":"Hive metastore database's authentication mode (SQL for password-based authentication, or MICROSOFT_ENTRA for identity-based authentication) to connect to database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": ["SQL", "MICROSOFT_ENTRA"]
+        },
         "metastoreDbConnectionPasswordSecret": {
           "description": "Secret reference name from secretsProfile.secrets containing password for database connection.",
           "type": "string"
@@ -2559,9 +2567,7 @@
       "required": [
         "dbServerHost",
         "dbName",
-        "dbUserName",
-        "dbPasswordSecretName",
-        "keyVaultId"
+        "dbConnectionAuthenticationMode"
       ],
       "properties": {
         "dbServerHost": {
@@ -2571,6 +2577,11 @@
         "dbName": {
           "type": "string",
           "description": "The database name."
+        },
+        "dbConnectionAuthenticationMode": {
+          "description":"Hive metastore database's authentication mode (SQL for password-based authentication, or MICROSOFT_ENTRA for identity-based authentication) to connect to database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": ["SQL", "MICROSOFT_ENTRA"]
         },
         "dbUserName": {
           "type": "string",
