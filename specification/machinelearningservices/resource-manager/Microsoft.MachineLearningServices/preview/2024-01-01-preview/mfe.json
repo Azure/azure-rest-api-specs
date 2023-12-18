@@ -13660,6 +13660,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}/trigger": {
+      "post": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Trigger run.",
+        "operationId": "Schedules_Trigger",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Schedule name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "scheduleTime",
+            "description": "ScheduleTime specified from client side.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TriggerRunSubmissionDto"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Schedule.": {
+            "$ref": "./examples/Schedule/trigger.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints": {
       "get": {
         "tags": [
@@ -27666,6 +27725,42 @@
       },
       "additionalProperties": false
     },
+    "ScheduleType": {
+      "enum": [
+        "ComputeStartStop",
+        "CreateJob",
+        "InvokeBatchEndpoint",
+        "ImportData",
+        "CreateMonitor",
+        "FeatureStoreMaterialization"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ComputeStartStop"
+          },
+          {
+            "value": "CreateJob"
+          },
+          {
+            "value": "InvokeBatchEndpoint"
+          },
+          {
+            "value": "ImportData"
+          },
+          {
+            "value": "CreateMonitor"
+          },
+          {
+            "value": "FeatureStoreMaterialization"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "Seasonality": {
       "description": "Forecasting seasonality.",
       "required": [
@@ -29827,6 +29922,18 @@
         }
       },
       "discriminator": "triggerType"
+    },
+    "TriggerRunSubmissionDto": {
+      "type": "object",
+      "properties": {
+        "scheduleActionType": {
+          "$ref": "#/definitions/ScheduleType"
+        },
+        "submissionId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "TriggerType": {
       "enum": [
