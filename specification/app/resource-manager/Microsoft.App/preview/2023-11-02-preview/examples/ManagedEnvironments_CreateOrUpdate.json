@@ -19,11 +19,19 @@
           "connectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/"
         },
         "openTelemetryConfiguration": {
+          "includeSystemTelemetry": true,
           "destinationsConfiguration": {
             "dataDogConfiguration": {
               "site": "string",
               "key": "000000000000000000000000"
-            }
+            },
+            "otlpConfigurations": [
+              {
+                "name": "dashboard",
+                "endpoint": "dashboard.k8s.region.azurecontainerapps.io:80",
+                "insecure": true
+              }
+            ]
           },
           "tracesConfiguration": {
             "destinations": [
@@ -101,11 +109,19 @@
             }
           },
           "openTelemetryConfiguration": {
+            "includeSystemTelemetry": true,
             "destinationsConfiguration": {
               "dataDogConfiguration": {
                 "site": "datadoghq.com",
                 "key": null
-              }
+              },
+              "otlpConfigurations": [
+                {
+                  "name": "dashboard",
+                  "endpoint": "dashboard.k8s.region.azurecontainerapps.io:80",
+                  "insecure": true
+                }
+              ]
             },
             "tracesConfiguration": {
               "destinations": [
@@ -186,11 +202,19 @@
             }
           },
           "openTelemetryConfiguration": {
+            "includeSystemTelemetry": true,
             "destinationsConfiguration": {
               "dataDogConfiguration": {
                 "site": "datadoghq.com",
                 "key": null
-              }
+              },
+              "otlpConfigurations": [
+                {
+                  "name": "dashboard",
+                  "endpoint": "dashboard.k8s.region.azurecontainerapps.io:80",
+                  "insecure": true
+                }
+              ]
             },
             "tracesConfiguration": {
               "destinations": [
