@@ -28,6 +28,22 @@ describe("folder-structure", function () {
     assert(result.errorOutput.includes("must be lower case"));
   });
 
+  it("should succeed if package folder has trailing slash", async function () {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/bar/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/Foo/Foo/",
+    );
+    assert(result.success);
+  });
+
   it("should fail if package folder is more than 3 levels deep", async function () {
     let host = new TsvTestHost();
     host.globby = async () => {
@@ -57,6 +73,40 @@ describe("folder-structure", function () {
     const result = await new FolderStructureRule().execute(
       host,
       "/gitroot/specification/foo/Foo.foo",
+    );
+    assert(result.errorOutput);
+    assert(result.errorOutput.includes("must be capitalized"));
+  });
+
+  it("should fail if second level folder is data-plane", async function () {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/bar/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/data-plane",
+    );
+    assert(result.errorOutput);
+    assert(result.errorOutput.includes("must be capitalized"));
+  });
+
+  it("should fail if second level folder is resource-manager", async function () {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/bar/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/resource-manager",
     );
     assert(result.errorOutput);
     assert(result.errorOutput.includes("must be capitalized"));
