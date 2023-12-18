@@ -492,7 +492,8 @@
         "TrustedLaunch",
         "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
         "ConfidentialVM_DiskEncryptedWithPlatformKey",
-        "ConfidentialVM_DiskEncryptedWithCustomerKey"
+        "ConfidentialVM_DiskEncryptedWithCustomerKey",
+        "ConfidentialVM_NonPersistedTPM"
       ],
       "x-ms-enum": {
         "name": "DiskSecurityTypes",
@@ -513,6 +514,10 @@
           {
             "value": "ConfidentialVM_DiskEncryptedWithCustomerKey",
             "description": "Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a customer managed key"
+          },
+          {
+            "value": "ConfidentialVM_NonPersistedTPM",
+            "description": "Indicates Confidential VM disk with a ephemeral vTPM. vTPM state is not persisted across VM reboots."
           }
         ]
       }
