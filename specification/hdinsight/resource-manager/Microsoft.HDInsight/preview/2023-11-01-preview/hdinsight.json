@@ -2289,20 +2289,20 @@
           "description": "Hive metastore database's authentication mode to connect to database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
           "type": "string",
           "enum": [
-            "Sql",
-            "MicrosoftEntra"
+            "SqlAuth",
+            "IdentityAuth"
           ],
           "x-ms-enum": {
             "name": "MetastoreDbConnectionAuthenticationMode",
             "modelAsString": true,
             "values": [
               {
-                "value": "Sql",
+                "value": "SqlAuth",
                 "description": "The password-based authentication to connect to your Hive metastore database. "
               },
               {
-                "value": "MicrosoftEntra",
-                "description": "The identity-based authentication to connect to your Hive metastore database. "
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
               }
             ]
           }
@@ -2343,23 +2343,23 @@
       ],
       "properties": {
         "metastoreDbConnectionAuthenticationMode": {
-          "description": "Hive metastore database's authentication mode to connect to database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "description": "The authentication mode to connect to Hive metastore database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
           "type": "string",
           "enum": [
-            "Sql",
-            "MicrosoftEntra"
+            "SqlAuth",
+            "IdentityAuth"
           ],
           "x-ms-enum": {
             "name": "MetastoreDbConnectionAuthenticationMode",
             "modelAsString": true,
             "values": [
               {
-                "value": "Sql",
+                "value": "SqlAuth",
                 "description": "The password-based authentication to connect to your Hive metastore database. "
               },
               {
-                "value": "MicrosoftEntra",
-                "description": "The identity-based authentication to connect to your Hive metastore database. "
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
               }
             ]
           }
@@ -2616,20 +2616,20 @@
           "description": "Hive metastore database's authentication mode to connect to database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
           "type": "string",
           "enum": [
-            "Sql",
-            "MicrosoftEntra"
+            "SqlAuth",
+            "IdentityAuth"
           ],
           "x-ms-enum": {
             "name": "DbConnectionAuthenticationMode",
             "modelAsString": true,
             "values": [
               {
-                "value": "Sql",
+                "value": "SqlAuth",
                 "description": "The password-based authentication to connect to your Hive metastore database. "
               },
               {
-                "value": "MicrosoftEntra",
-                "description": "The identity-based authentication to connect to your Hive metastore database. "
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
               }
             ]
           }
