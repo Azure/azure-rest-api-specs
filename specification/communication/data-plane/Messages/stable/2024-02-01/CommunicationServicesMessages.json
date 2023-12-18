@@ -742,12 +742,8 @@
       "description": "The template bindings component button for WhatsApp",
       "properties": {
         "subType": {
-          "type": "string",
-          "description": "The WhatsApp button sub type",
-          "enum": [
-            "quickReply",
-            "url"
-          ]
+          "$ref": "#/definitions/WhatsAppMessageTemplateValueSubType",
+          "description": "The WhatsApp button sub type"
         },
         "refValue": {
           "type": "string",
@@ -778,6 +774,30 @@
         "content": {
           "description": "WhatsApp platform's template content\nThis is the payload returned from WhatsApp\nAPI."
         }
+      }
+    },
+    "WhatsAppMessageTemplateValueSubType": {
+      "type": "string",
+      "description": "The WhatsApp button sub type.",
+      "enum": [
+        "quickReply",
+        "url"
+      ],
+      "x-ms-enum": {
+        "name": "WhatsAppMessageTemplateValueSubType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "quickReply",
+            "value": "quickReply",
+            "description": "The WhatsApp button sub type is quick reply."
+          },
+          {
+            "name": "url",
+            "value": "url",
+            "description": "The WhatsApp button sub type is url."
+          }
+        ]
       }
     }
   },
