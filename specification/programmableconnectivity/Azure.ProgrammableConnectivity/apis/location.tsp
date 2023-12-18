@@ -75,10 +75,7 @@ model LocationVerifyResponse {
 @doc("Device information needed by operator to provide location information. Include exactly one of these properties to identify your device.")
 model LocationDevice {
   ...NetworkAccessIdentifierModel;
-
   ...PhoneNumberModel;
-
   ...Ipv4AddressModel;
-
   ...Ipv6AddressModel;
 }

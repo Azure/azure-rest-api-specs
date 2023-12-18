@@ -51,9 +51,8 @@ model PhoneNumberModel {
 @doc("The network access ID/external ID of the device")
 model NetworkAccessIdentifierModel {
   @doc("External identifier or network access identifier of the device")
-    networkAccessIdentifier?: string;
+  networkAccessIdentifier?: string;
 }
-
 
 @error
 @doc("A custom error type for APC.")
@@ -74,13 +73,13 @@ model ApcErrorResponse {
 @doc("IPv4 address and port of the device")
 model Ipv4AddressModel {
   @doc("The Ipv4 address")
-  ipv4Address: Ipv4Address
+  ipv4Address: Ipv4Address;
 }
 
 @doc("IPv4 address and port of the device")
 model Ipv6AddressModel {
   @doc("The Ipv6 address")
-  ipv6Address: Ipv6Address
+  ipv6Address: Ipv6Address;
 }
 
 @doc("IPv4 device indicator")
