@@ -94,8 +94,7 @@ model MessageTemplate {
   language: string;
 
   @doc("The template values.")
-  @visibility("read", "query", "create", "update", "delete")
-  values?: MessageTemplateValue[];
+  values?: Array<MessageTemplateValue>;
 
   @doc("The binding object to link values to the template specific locations")
   bindings?: MessageTemplateBindings;
@@ -205,19 +204,15 @@ model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   kind: "whatsApp";
 
   @doc("The header template bindings")
-   @visibility("read", "query", "create", "update", "delete")
   header?: WhatsAppMessageTemplateBindingsComponent[];
 
   @doc("The body template bindings")
-   @visibility("read", "query", "create", "update", "delete")
   body?: WhatsAppMessageTemplateBindingsComponent[];
 
   @doc("The footer template bindings")
-   @visibility("read", "query", "create", "update", "delete")
   footer?: WhatsAppMessageTemplateBindingsComponent[];
 
   @doc("The button template bindings")
-   @visibility("read", "query", "create", "update", "delete")
   button?: WhatsAppMessageTemplateBindingsButton[];
 }
 
