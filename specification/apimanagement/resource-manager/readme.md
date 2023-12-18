@@ -937,8 +937,6 @@ csharp:
   namespace: Microsoft.Azure.Management.ApiManagement
   output-folder: $(csharp-sdks-folder)/apimanagement/Microsoft.Azure.Management.ApiManagement/src/Generated
   clear-output-folder: true
-  modelerfour: 
-    lenient-model-deduplication: true
 ```
 
 ## Python
