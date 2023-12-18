@@ -1066,6 +1066,9 @@ directive:
   - suppress: LroErrorContent
     from: apimusers.json
     reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
+  - suppress: LroErrorContent
+    from: apimpolicyrestrictionsvalidation.json
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
     from: definitions.json
