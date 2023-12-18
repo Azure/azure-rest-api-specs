@@ -772,7 +772,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceList"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -1033,7 +1033,7 @@
           "200": {
             "description": "Array of private endpoint resources in Maps Account",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionList"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -1094,47 +1094,6 @@
     }
   },
   "definitions": {
-    "PrivateLinkResourceList": {
-      "description": "A list of private link resources for a Maps Account resource type.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of the private link resources which can be used for Maps Account.",
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "Request URL that can be used to query next page of private link resources. Returned when the total number of requested private resources exceed maximum page size.",
-          "type": "string",
-          "format": "uri",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionList": {
-      "description": "A list of private endpoint connections",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of the private endpoint connections",
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
-          "type": "string",
-          "format": "uri",
-          "readOnly": true,
-          "x-nullable": true
-        }
-      }
-    },
     "Creator": {
       "description": "An Azure resource which represents Maps Creator product and provides ability to manage private location data.",
       "type": "object",
