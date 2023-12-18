@@ -14,6 +14,7 @@ using Azure.ClientGenerator.Core;
 @versioned(AzureCommunicationMessagesService.Versions)
 namespace AzureCommunicationMessagesService;
 
+@access(Access.public, "csharp")
 @doc("The type of message. Supports text, image, template.")
 enum CommunicationMessageType {
   @doc("Text message type.")
@@ -26,14 +27,24 @@ enum CommunicationMessageType {
   template,
 }
 
-alias WhatsAppMessageTemplateValueSubType = "quickReply" | "url";
+@access(Access.public, "csharp")
+@doc("The WhatsApp button sub type.")
+enum WhatsAppMessageTemplateValueSubType {
+  @doc("The WhatsApp button sub type is quick reply.")
+  quickReply,
 
+  @doc("The WhatsApp button sub type is url.")
+  url,
+}
+
+@access(Access.public, "csharp")
 @doc("The Communication Messages Channel.")
 enum CommunicationMessagesChannel {
   @doc("The Communication Messages Channel is WhatsApp.")
   whatsApp,
 }
 
+@access(Access.public, "csharp")
 @doc("The aggregated template status.")
 enum MessageTemplateStatus {
   @doc("Message template is approved.")
@@ -212,12 +223,14 @@ dictionary.
   refValue: string;
 }
 
+@access(Access.public, "csharp")
 @doc("Result of the send message operation.")
 model SendMessageResult {
   @doc("Receipts of the send message operation.")
   receipts: MessageReceipt[];
 }
 
+@access(Access.public, "csharp")
 @doc("Receipt of the sending one message.")
 model MessageReceipt {
   @doc("The message id.")
@@ -227,6 +240,7 @@ model MessageReceipt {
   to: string;
 }
 
+@access(Access.public, "csharp")
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateResponse {
   @doc("""
@@ -261,6 +275,7 @@ model Stream {
   contentType: "application/octect-stream";
 }
 
+@access(Access.public, "csharp")
 @resource("templates")
 @parentResource(CommunicationChannel)
 @doc("The Message Template Response.")
