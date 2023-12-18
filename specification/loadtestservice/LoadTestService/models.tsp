@@ -166,14 +166,12 @@ enum TestKind {
 @doc("Test file info.")
 @resource("files")
 @parentResource(Test)
-model TestFileInfo is FileInfo {
-}
+model TestFileInfo is FileInfo;
 
 @doc("Test run file info.")
 @resource("files")
 @parentResource(TestRun)
-model TestRunFileInfo is FileInfo {
-}
+model TestRunFileInfo is FileInfo;
 
 @doc("Load test model.")
 @resource("tests")
@@ -344,7 +342,6 @@ not required to upload.
 
   @doc("Configuration for quick load test")
   optionalLoadTestConfig?: OptionalLoadTestConfig;
-
 }
 
 @doc("Configuration for quick load test")
@@ -862,7 +859,6 @@ model MetricValue {
 @doc("Represents a metric dimension value.")
 model DimensionValue {
   @doc("The name of the dimension.")
-  @added(APIVersions.v2023_04_01_preview)
   name?: string;
 
   @doc("The value of the dimension.")
@@ -873,6 +869,7 @@ model DimensionValue {
 model DimensionValueList {
   @doc("The dimension name")
   @visibility("read")
+  @added(APIVersions.v2023_04_01_preview)
   name?: string;
 
   @doc("The dimension value")
@@ -937,7 +934,7 @@ for metric id).
 }
 
 @doc("Query parameters for list test run operation")
-model OldTestRunIdQueryParam{
+model OldTestRunIdQueryParam {
   @doc("""
 Existing test run identifier that should be rerun, if this is provided, the
 test will run with the JMX file, configuration and app components from the

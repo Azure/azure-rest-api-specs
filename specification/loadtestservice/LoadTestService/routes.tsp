@@ -206,10 +206,12 @@ interface LoadTestRun {
   getTestRun is StandardResourceOperations.ResourceRead<TestRun>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-
   @summary("Create and start a new test run with the given test run Id.")
   @doc("Create and start a new test run with the given test run Id.")
-  createOrUpdateTestRun is StandardResourceOperations.ResourceCreateOrUpdate<TestRun, QueryParametersTrait<OldTestRunIdQueryParam>>;
+  createOrUpdateTestRun is StandardResourceOperations.ResourceCreateOrUpdate<
+    TestRun,
+    QueryParametersTrait<OldTestRunIdQueryParam>
+  >;
 
   @summary("Delete an existing load test run.")
   @doc("Delete an existing load test run by providing the testRunId.")
@@ -406,7 +408,7 @@ numeric, underscore or hyphen characters.
       @minLength(2)
       @pattern("^[a-z0-9_-]*$")
       testRunId: string;
-      
+
       @doc("Server metric configuration model.")
       @body
       body: TestRunServerMetricConfig;
