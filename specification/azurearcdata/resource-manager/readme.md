@@ -30,6 +30,12 @@ openapi-subtype: rpaas
 tag: package-preview-2024-02
 ```
 
+``` yaml
+directive:
+  - suppress: RPC-Uri-V1-05
+    from: azurearcdata.json
+    reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
+```
 
 ### Tag: package-preview-2024-02
 
