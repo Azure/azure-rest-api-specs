@@ -212,6 +212,9 @@
           },
           "ConfigurationStores_Create_With_Data_Plane_Proxy": {
             "$ref": "./examples/ConfigurationStoresCreateWithDataPlaneProxy.json"
+          },
+          "ConfigurationStores_Create_With_Telemetry_And_Experimentation": {
+            "$ref": "./examples/ConfigurationStoresCreateWithTelemetryAndExperimentation.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1487,6 +1490,145 @@
           "final-state-via": "azure-async-operation"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_ListByConfigurationStore",
+        "description": "Lists all Network Security Perimeter configurations for a configuration store.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfiguration_List": {
+            "$ref": "./examples/ConfigurationStoresListNetworkSecurityPerimeterConfigurations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations/{nspConfigurationName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "description": "Gets the specified Network Security Perimeter configuration associated with the configuration store.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NSPConfigurationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfiguration_GetConfiguration": {
+            "$ref": "./examples/ConfigurationStoresGetNetworkSecurityPerimeterConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations/{nspConfigurationName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+        "description": "Forces a refresh of the specified Network Security Perimeter configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NSPConfigurationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfiguration_Reconcile": {
+            "$ref": "./examples/ConfigurationStoresReconcileNetworkSecurityPerimeterConfiguration.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -1587,7 +1729,8 @@
           "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1629,6 +1772,14 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "telemetry": {
+          "$ref": "#/definitions/TelemetryProperties",
+          "description": "Property specifying the configuration of telemetry for this configuration store"
+        },
+        "experimentation": {
+          "$ref": "#/definitions/ExperimentationProperties",
+          "description": "Property specifying the configuration of experimentation for this configuration store"
         }
       }
     },
@@ -1774,7 +1925,8 @@
           "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1789,6 +1941,14 @@
         "dataPlaneProxy": {
           "$ref": "#/definitions/DataPlaneProxyProperties",
           "description": "Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM)."
+        },
+        "telemetry": {
+          "$ref": "#/definitions/TelemetryProperties",
+          "description": "Property specifying the configuration of telemetry to update for this configuration store"
+        },
+        "experimentation": {
+          "$ref": "#/definitions/ExperimentationProperties",
+          "description": "Property specifying the configuration of experimentation to update for this configuration store"
         }
       }
     },
@@ -2815,6 +2975,319 @@
           "type": "string"
         }
       }
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "description": "A list of Network Security Perimeter configurations",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "A Network Security Perimeter configuration",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "The properties of a Network Security Perimeter configuration.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning status of the Network Security Perimeter configuration.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "NSPProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningIssues": {
+          "description": "List of warnings and errors related to Network Security Perimeter provisioning.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPProvisioningIssue"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NSPProperties"
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/NSPResourceAssociation"
+        },
+        "profile": {
+          "$ref": "#/definitions/NSPProfile"
+        }
+      }
+    },
+    "NSPProvisioningIssue": {
+      "description": "A Network Security Perimeter provisioning issue",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the provisioning issue",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPProvisioningIssueProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NSPProperties": {
+      "description": "Properties of the Network Security Perimeter",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID of the Network Security Perimeter",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "perimeterGuid": {
+          "description": "The Network Security Perimeter GUID",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The geo-location of the Network Security Perimeter",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NSPResourceAssociation": {
+      "description": "Properties of the related Resource Association",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Resource Association",
+          "type": "string",
+          "readOnly": true
+        },
+        "accessMode": {
+          "description": "The access mode of the Resource Association",
+          "enum": [
+            "Learning",
+            "Enforced"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "NSPResourceAssociationAccessMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "NSPProfile": {
+      "description": "Properties of the related network profile",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the network profile",
+          "type": "string",
+          "readOnly": true
+        },
+        "accessRulesVersion": {
+          "description": "The access rules version number",
+          "type": "string",
+          "readOnly": true
+        },
+        "accessRules": {
+          "description": "List of access rules on the associated network profile",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPProfileAccessRule"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "diagnosticSettingsVersion": {
+          "description": "The diagnostic settings version number",
+          "type": "string",
+          "readOnly": true
+        },
+        "enabledLogCategories": {
+          "description": "List of enabled log categories",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NSPProvisioningIssueProperties": {
+      "description": "Properties of a Network Security Perimeter provisioning issue",
+      "type": "object",
+      "properties": {
+        "issueType": {
+          "description": "The type of provisioning issue",
+          "type": "string",
+          "enum": [
+            "MissingPerimeterConfiguration",
+            "MissingIdentityConfiguration",
+            "ConfigurationPropagationFailure",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "NSPProvisioningIssueType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "severity": {
+          "description": "The severity of the provisioning issue",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the provisioning issue",
+          "type": "string",
+          "enum": [
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "NSPProvisioningIssueSeverity",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "suggestedResourceIds": {
+          "description": "List of IDs of Azure resources that can be associated to the same perimeter to remediate the issue",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "description": "Access rules that can be added to the perimeter to remediate the issue",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/NSPProfileAccessRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NSPProfileAccessRule": {
+      "description": "Details of an access rule on a network profile",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the access rule",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPAccessRuleProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NSPAccessRuleProperties": {
+      "description": "Properties of an access rule on a network profile",
+      "type": "object",
+      "properties": {
+        "direction": {
+          "description": "The direction of the access rule",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "AccessRuleDirection",
+            "modelAsString": true
+          },
+          "type": "string",
+          "readOnly": true
+        },
+        "addressPrefixes": {
+          "description": "List of address prefixes granted access",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TelemetryProperties": {
+      "description": "Telemetry settings",
+      "type": "object",
+      "properties": {
+        "resourceIdentifier": {
+          "description": "Resource ID of a resource enabling telemetry collection",
+          "type": "string",
+          "format": "arm-id"
+        }
+      }
+    },
+    "ExperimentationProperties": {
+      "description": "Experimentation settings",
+      "type": "object",
+      "properties": {
+        "resourceIdentifier": {
+          "description": "Resource ID of a resource enabling experimentation",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "dataPlaneEndpoint": {
+          "description": "The data plane endpoint of the Split experimentation workspace resource where experimentation data can be retrieved",
+          "type": "string",
+          "format": "uri"
+        }
+      }
     }
   },
   "parameters": {
@@ -2867,6 +3340,14 @@
       "type": "string",
       "pattern": "^[^\\x00-\\x1F\\x7F]+$",
       "x-ms-parameter-location": "method"
+    },
+    "NSPConfigurationNameParameter": {
+      "name": "nspConfigurationName",
+      "in": "path",
+      "description": "The name of the Network Security Perimeter configuration. Takes the format {perimeterGuid}.{associationName}.",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$"
     }
   },
   "securityDefinitions": {
