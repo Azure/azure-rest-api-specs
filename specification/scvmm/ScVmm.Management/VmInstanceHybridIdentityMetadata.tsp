@@ -15,7 +15,7 @@ namespace Microsoft.ScVmm;
 @singleton("default")
 model VmInstanceHybridIdentityMetadata
   is ProxyResource<VmInstanceHybridIdentityMetadataProperties> {
-  @key("default")
+  @key("vmInstanceHybridIdentityMetadataName")
   @segment("hybridIdentityMetadata")
   name: string;
 }

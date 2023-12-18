@@ -3,7 +3,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./VMMServer.tsp";
+import "./VmmServer.tsp";
 import "./Cloud.tsp";
 import "./VirtualNetwork.tsp";
 import "./VirtualMachineTemplate.tsp";
@@ -21,7 +21,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
-  title: "SCVMM",
+  title: "ScVmm",
 })
 @versioned(Versions)
 @doc("The Microsoft.ScVmm Rest API spec.")

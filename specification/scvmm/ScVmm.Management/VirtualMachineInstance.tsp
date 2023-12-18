@@ -13,7 +13,7 @@ namespace Microsoft.ScVmm;
 @singleton("default")
 model VirtualMachineInstance
   is ExtensionResource<VirtualMachineInstanceProperties> {
-  @key("default")
+  @key("virtualMachineInstanceName")
   @segment("virtualMachineInstances")
   name: string;
 
@@ -42,7 +42,7 @@ interface VirtualMachineInstances {
       @query("force")
       force?: Force;
 
-      @doc("Whether to disable the VM from azure and also delete it from VMM.")
+      @doc("Whether to disable the VM from azure and also delete it from Vmm.")
       @query("deleteFromHost")
       deleteFromHost?: DeleteFromHost;
     }

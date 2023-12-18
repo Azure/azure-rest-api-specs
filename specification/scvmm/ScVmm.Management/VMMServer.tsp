@@ -10,8 +10,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.ScVmm;
 @doc("The VmmServers resource definition.")
-model VMMServer is TrackedResource<VMMServerProperties> {
-  @doc("Name of the VMMServer.")
+model VmmServer is TrackedResource<VmmServerProperties> {
+  @doc("Name of the VmmServer.")
   @maxLength(54)
   @minLength(1)
   @pattern("[a-zA-Z0-9-_\\.]")
@@ -25,18 +25,18 @@ model VMMServer is TrackedResource<VMMServerProperties> {
 }
 
 @armResourceOperations
-interface VMMServers {
-  @doc("Implements VMMServer GET method.")
-  get is ArmResourceRead<VMMServer>;
-  @doc("Onboards the SCVMM fabric as an Azure VmmServer resource.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<VMMServer>;
+interface VmmServers {
+  @doc("Implements VmmServer GET method.")
+  get is ArmResourceRead<VmmServer>;
+  @doc("Onboards the SCVmm fabric as an Azure VmmServer resource.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<VmmServer>;
   @doc("Updates the VmmServers resource.")
-  update is ArmTagsPatchAsync<VMMServer>;
-  @doc("Removes the SCVMM fabric from Azure.")
+  update is ArmTagsPatchAsync<VmmServer>;
+  @doc("Removes the SCVmm fabric from Azure.")
   delete is ArmResourceDeleteWithoutOkAsync<
-    VMMServer,
+    VmmServer,
     {
-      ...BaseParameters<VMMServer>;
+      ...BaseParameters<VmmServer>;
 
       @doc("Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.")
       @query("force")
@@ -44,7 +44,7 @@ interface VMMServers {
     }
   >;
   @doc("List of VmmServers in a resource group.")
-  listByResourceGroup is ArmResourceListByParent<VMMServer>;
+  listByResourceGroup is ArmResourceListByParent<VmmServer>;
   @doc("List of VmmServers in a subscription.")
-  listBySubscription is ArmListBySubscription<VMMServer>;
+  listBySubscription is ArmListBySubscription<VmmServer>;
 }

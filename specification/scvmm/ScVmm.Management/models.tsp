@@ -108,9 +108,9 @@ enum IdentityType {
 }
 
 @doc("Defines the resource properties.")
-model VMMServerProperties {
-  @doc("Credentials to connect to VMMServer.")
-  credentials?: VMMCredential;
+model VmmServerProperties {
+  @doc("Credentials to connect to VmmServer.")
+  credentials?: VmmCredential;
 
   @doc("Fqdn is the hostname/ip of the vmmServer.")
   @minLength(1)
@@ -140,12 +140,12 @@ model VMMServerProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Credentials to connect to VMMServer.")
-model VMMCredential {
-  @doc("Username to use to connect to VMMServer.")
+@doc("Credentials to connect to VmmServer.")
+model VmmCredential {
+  @doc("Username to use to connect to VmmServer.")
   username?: string;
 
-  @doc("Password to use to connect to VMMServer.")
+  @doc("Password to use to connect to VmmServer.")
   @visibility("create", "update")
   password?: string;
 }
@@ -171,7 +171,7 @@ model CloudProperties {
   @doc("ARM Id of the vmmServer resource in which this resource resides.")
   vmmServerId?: string;
 
-  @doc("Name of the cloud in VMMServer.")
+  @doc("Name of the cloud in VmmServer.")
   @visibility("read")
   cloudName?: string;
 
@@ -434,11 +434,11 @@ model InventoryItemProperties {
   @visibility("read")
   managedResourceId?: string;
 
-  @doc("Gets the UUID (which is assigned by VMM) for the inventory item.")
+  @doc("Gets the UUID (which is assigned by Vmm) for the inventory item.")
   @visibility("read")
   uuid?: string;
 
-  @doc("Gets the Managed Object name in VMM for the inventory item.")
+  @doc("Gets the Managed Object name in Vmm for the inventory item.")
   @visibility("read")
   inventoryItemName?: string;
 
@@ -558,7 +558,7 @@ model InfrastructureProfile {
   @doc("ARM Id of the template resource to use for deploying the vm.")
   templateId?: string;
 
-  @doc("VMName is the name of VM on the SCVMM server.")
+  @doc("VMName is the name of VM on the SCVmm server.")
   @minLength(1)
   vmName?: string;
 
@@ -776,7 +776,7 @@ model InventoryItemDetails {
   @doc("Gets or sets the inventory Item ID for the resource.")
   inventoryItemId?: string;
 
-  @doc("Gets or sets the Managed Object name in VMM for the resource.")
+  @doc("Gets or sets the Managed Object name in Vmm for the resource.")
   inventoryItemName?: string;
 }
 

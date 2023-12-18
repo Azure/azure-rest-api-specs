@@ -14,7 +14,7 @@ namespace Microsoft.ScVmm;
 @parentResource(VirtualMachineInstance)
 @singleton("default")
 model GuestAgent is ProxyResource<GuestAgentProperties> {
-  @key("default")
+  @key("guestAgentName")
   @segment("guestAgents")
   name: string;
 }
