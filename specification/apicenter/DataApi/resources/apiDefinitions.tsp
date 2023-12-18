@@ -1,5 +1,5 @@
 import "@typespec/rest";
-import "../models/definition.tsp";
+import "../models/apiDefinition.tsp";
 import "../models/exportSpecification.tsp";
 
 using TypeSpec.Http;
@@ -22,8 +22,12 @@ interface ApiDefinitions {
   @doc("Get an API definition.")
   getDefinition is Operations.ResourceRead<ApiDefinition>;
 
-  @doc("Export an API specification.")
-  exportSpecification is Operations.ResourceAction<
+  @doc("Gets status of a an API specifcation export operation.")
+  getExportSpecificationOperationStatus is Operations.GetResourceOperationStatus<ExportSpecification>;
+
+  @doc("Export an API specification asynchronously.")
+  @pollingOperation(ApiDefinitions.getExportSpecificationOperationStatus)
+  exportSpecification is Operations.LongRunningResourceAction<
     ExportSpecification,
     {},
     ExportSpecification

@@ -1,5 +1,5 @@
 import "@typespec/rest";
-import "../models/version.tsp";
+import "../models/apiVersion.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

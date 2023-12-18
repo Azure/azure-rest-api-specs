@@ -11,9 +11,9 @@ using ApiCenter.DataApi.Models;
 @versioned(ApiCenter.DataApi.Versions)
 namespace ApiCenter.DataApi;
 
-alias ServiceTraits = SupportsRepeatableRequests &
-  SupportsConditionalRequests &
-  SupportsClientRequestId;
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 

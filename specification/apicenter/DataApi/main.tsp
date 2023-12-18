@@ -4,16 +4,16 @@ import "@azure-tools/typespec-azure-core";
 
 //Resources
 import "./resources/apis.tsp";
-import "./resources/definitions.tsp";
+import "./resources/apiDefinitions.tsp";
 import "./resources/deployments.tsp";
 import "./resources/environments.tsp";
-import "./resources/versions.tsp";
+import "./resources/apiVersions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
+@useAuth(AadOauth2Auth<["https://azure-apicenter.net/user_impersonation"]>)
 @service({
   title: "Data API",
 })
