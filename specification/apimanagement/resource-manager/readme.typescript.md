@@ -9,8 +9,6 @@ typescript:
   package-name: "@azure/arm-apimanagement"
   output-folder: "$(typescript-sdks-folder)/sdk/apimanagement/arm-apimanagement"
   generate-metadata: true
-  modelerfour: 
-    lenient-model-deduplication: true
 
 directive:
 - from: definitions.json

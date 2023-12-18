@@ -937,8 +937,6 @@ csharp:
   namespace: Microsoft.Azure.Management.ApiManagement
   output-folder: $(csharp-sdks-folder)/apimanagement/Microsoft.Azure.Management.ApiManagement/src/Generated
   clear-output-folder: true
-  modelerfour: 
-    lenient-model-deduplication: true
 ```
 
 ## Python
@@ -1067,6 +1065,9 @@ directive:
     reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
   - suppress: LroErrorContent
     from: apimusers.json
+    reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
+  - suppress: LroErrorContent
+    from: apimpolicyrestrictionsvalidation.json
     reason: Error Schema not referencing Common Schema V2. Will fix in the future. 
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
