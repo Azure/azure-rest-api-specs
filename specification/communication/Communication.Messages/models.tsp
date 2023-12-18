@@ -94,6 +94,7 @@ model MessageTemplate {
   language: string;
 
   @doc("The template values.")
+  @visibility("create")
   values?: MessageTemplateValue[];
 
   @doc("The binding object to link values to the template specific locations")
@@ -204,15 +205,19 @@ model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   kind: "whatsApp";
 
   @doc("The header template bindings")
+  @visibility("create")
   header?: WhatsAppMessageTemplateBindingsComponent[];
 
   @doc("The body template bindings")
+  @visibility("create")
   body?: WhatsAppMessageTemplateBindingsComponent[];
 
   @doc("The footer template bindings")
+  @visibility("create")
   footer?: WhatsAppMessageTemplateBindingsComponent[];
 
   @doc("The button template bindings")
+  @visibility("create")
   button?: WhatsAppMessageTemplateBindingsButton[];
 }
 
