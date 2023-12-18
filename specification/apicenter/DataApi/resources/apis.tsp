@@ -13,11 +13,11 @@ namespace ApiCenter.DataApi;
 
 interface Apis {
   @doc("List a collection of APIs.")
-  listApis is Operations.ResourceList<
+  list is Operations.ResourceList<
     Api,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   @doc("Get an API.")
-  getApi is Operations.ResourceRead<Api>;
+  get is Operations.ResourceRead<Api>;
 }

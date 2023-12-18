@@ -19,11 +19,11 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface Environments {
   @doc("List a collection of environments.")
-  listEnvironments is Operations.ResourceList<
+  list is Operations.ResourceList<
     Environment,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   @doc("Get an environment.")
-  getEnvironment is Operations.ResourceRead<Environment>;
+  get is Operations.ResourceRead<Environment>;
 }
