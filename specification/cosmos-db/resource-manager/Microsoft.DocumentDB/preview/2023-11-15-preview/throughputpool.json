@@ -554,9 +554,6 @@
       "description": "Parameters for patching Azure Cosmos DB throughput pool properties.",
       "type": "object",
       "properties": {
-        "tags": {
-          "$ref": "cosmos-db.json#/definitions/Tags"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ThroughputPoolUpdateProperties"
@@ -572,6 +569,7 @@
       "properties": {
         "maxThroughput": {
           "type": "integer",
+          "format": "int32",
           "description": "Value for throughput to be shared among CosmosDB resources in the pool."
         }
       }
@@ -603,7 +601,7 @@
       ],
       "properties": {
         "tags": {
-          "$ref": "#/definitions/Tags"
+          "$ref": "cosmos-db.json#/definitions/Tags"
         },
         "properties": {
           "x-ms-client-flatten": true,
