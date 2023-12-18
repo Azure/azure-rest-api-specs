@@ -1076,6 +1076,10 @@
       "description": "Configuration of Open Telemetry",
       "type": "object",
       "properties": {
+        "includeSystemTelemetry": {
+          "type": "boolean",
+          "description": "Boolean indicating if including system telemetry"
+        },
         "destinationsConfiguration": {
           "description": "Open telemetry destinations configuration",
           "$ref": "#/definitions/DestinationsConfiguration"
@@ -1101,6 +1105,13 @@
         "dataDogConfiguration": {
           "description": "Open telemetry datadog destination configuration",
           "$ref": "#/definitions/DataDogConfiguration"
+        },
+        "otlpConfigurations": {
+          "description": "Open telemetry otlp configurations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OtlpConfiguration"
+          }
         }
       }
     },
@@ -1116,6 +1127,24 @@
           "description": "The data dog api key",
           "type": "string",
           "x-ms-secret": true
+        }
+      }
+    },
+    "OtlpConfiguration": {
+      "description": "Configuration of otlp ",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of otlp configuration",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The endpoint of otlp configuration",
+          "type": "string"
+        },
+        "insecure": {
+          "description": "Boolean indicating if otlp configuration is insecure",
+          "type": "boolean"
         }
       }
     },
