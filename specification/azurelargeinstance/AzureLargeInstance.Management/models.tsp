@@ -418,7 +418,7 @@ model StorageProperties {
   generation?: string;
 
   @doc("the hardware type of the storage instance")
-  hardwareType?: string;
+  hardwareType?: AzureLargeInstanceHardwareTypeNamesEnum;
 
   @doc("the workload for which the resource is getting provisioned")
   workloadType?: string;
