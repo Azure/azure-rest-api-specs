@@ -475,7 +475,7 @@
           "200": {
             "description": "Success. Return a command resource.",
             "schema": {
-              "$ref": "#/definitions/CommandPublicResource"
+              "$ref": "#/definitions/ListCommands"
             }
           },
           "default": {
@@ -1575,10 +1575,7 @@
         },
         "arguments": {
           "type": "object",
-          "description": "The arguments for the command to be run",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "The arguments for the command to be run"
         },
         "host": {
           "type": "string",
@@ -1588,7 +1585,7 @@
           "type": "boolean",
           "description": "If true, stops cassandra before executing the command and then start it again"
         },
-        "readwrite": {
+        "readWrite": {
           "type": "boolean",
           "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
         }
@@ -1623,16 +1620,8 @@
           "description": "If true, stops cassandra before executing the command and then start it again"
         },
         "readWrite": {
-          "type": "string",
-          "description": "Permissions of the command to access the cassandra directory.",
-          "enum": [
-            "ReadWrite",
-            "ReadOnly"
-          ],
-          "x-ms-enum": {
-            "name": "CommandPermissions",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
         },
         "result": {
           "type": "string",
