@@ -94,7 +94,7 @@ model MessageTemplate {
   language: string;
 
   @doc("The template values.")
-  values?: Array<MessageTemplateValue>;
+  values?: MessageTemplateValue[];
 
   @doc("The binding object to link values to the template specific locations")
   bindings?: MessageTemplateBindings;
