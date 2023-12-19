@@ -2819,8 +2819,15 @@
         "mode": {
           "default": "automatic",
           "description": "User & groups can be synced automatically or via a static list that's refreshed.",
-          "pattern": "^(static|automatic)$",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "static",
+            "automatic"
+          ],
+          "x-ms-enum": {
+            "name": "RangerUsersyncMode",
+            "modelAsString": true
+          }
         },
         "userMappingLocation": {
           "description": "Azure storage location of a mapping file that lists user & group associations.",
