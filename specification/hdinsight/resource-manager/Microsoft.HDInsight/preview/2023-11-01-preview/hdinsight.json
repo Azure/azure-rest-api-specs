@@ -2275,7 +2275,6 @@
       "description": "Hive Catalog Option",
       "required": [
         "catalogName",
-        "metastoreDbConnectionAuthenticationMode",
         "metastoreDbConnectionURL",
         "metastoreWarehouseDir"
       ],
@@ -2305,7 +2304,8 @@
                 "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
               }
             ]
-          }
+          },
+          "default": "IdentityAuth"
         },
         "metastoreDbConnectionPasswordSecret": {
           "description": "Secret reference name from secretsProfile.secrets containing password for database connection.",
@@ -2338,8 +2338,7 @@
       "type": "object",
       "description": "Hive Catalog Option for Flink cluster.",
       "required": [
-        "metastoreDbConnectionURL",
-        "metastoreDbConnectionAuthenticationMode"
+        "metastoreDbConnectionURL"
       ],
       "properties": {
         "metastoreDbConnectionAuthenticationMode": {
@@ -2362,7 +2361,8 @@
                 "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
               }
             ]
-          }
+          },
+          "default": "IdentityAuth"
         },
         "metastoreDbConnectionPasswordSecret": {
           "description": "Secret reference name from secretsProfile.secrets containing password for database connection.",
@@ -2600,8 +2600,7 @@
       "description": "The metastore specification for Spark cluster.",
       "required": [
         "dbServerHost",
-        "dbName",
-        "dbConnectionAuthenticationMode"
+        "dbName"
       ],
       "properties": {
         "dbServerHost": {
@@ -2632,7 +2631,8 @@
                 "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
               }
             ]
-          }
+          },
+          "default": "IdentityAuth"
         },
         "dbUserName": {
           "type": "string",
