@@ -677,12 +677,14 @@
       "type": "object",
       "properties": {
         "properties": {
-          "os": {
-            "type": "string",
-            "description": "OS of Image in Validations"
-          }
+          "$ref": "#/definitions/ValidationsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
         },
-        
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System metadata for this resource.",
