@@ -91,6 +91,19 @@ input-file:
 ```
 ---
 
+### Tag: package-2024-01-01-preview
+
+These settings apply only when `--tag=2024-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-30'
+input-file:
+  - Microsoft.Scom/stable/2024-01-01-preview/scom.json
+  - Microsoft.Scom/stable/2024-01-01-preview/monitoredResources.json
+  - Microsoft.Scom/stable/2024-01-01-preview/managedGateways.json
+  - Microsoft.Scom/stable/2024-01-01-preview/commonTypes.json
+```
+---
+
 # Code Generation
 
 ## Swagger to SDK
