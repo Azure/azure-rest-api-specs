@@ -1,11 +1,11 @@
 {
   "parameters": {
     "api-version": "2023-11-15-preview",
-    "subscriptionId": "subid",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "rg1",
     "throughputPoolName": "tp1",
     "parameters": {
-      "location": "West US",
+      "location": "westus2",
       "tags": {},
       "properties": {
         "maxThroughput": 10000
@@ -13,6 +13,22 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/throughputPools/tp1",
+        "name": "tp1",
+        "type": "/Microsoft.DocumentDB/throughputPools",
+        "tags": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "location": "westus2",
+        "properties": {
+          "maxThroughput": 10000
+        }
+      }
+    },
     "202": {
       "headers": {
         "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2023-11-15-preview",

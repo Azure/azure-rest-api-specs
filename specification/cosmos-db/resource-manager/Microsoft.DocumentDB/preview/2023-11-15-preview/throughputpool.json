@@ -112,7 +112,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{poolName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{throughputPoolName}": {
       "get": {
         "operationId": "ThroughputPool_Get",
         "x-ms-examples": {
@@ -173,7 +173,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -183,11 +183,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The ThroughputPool create or update operation will complete asynchronously.",
+          "200": {
+            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual ThroughputPool.",
             "schema": {
               "$ref": "#/definitions/ThroughputPoolResource"
-            },
+            }
+          },
+          "202": {
+            "description": "The ThroughputPool create or update operation will complete asynchronously.",
             "headers": {
               "azure-AsyncOperation": {
                 "type": "string",
@@ -230,11 +233,11 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThroughputPoolUpdateParameters"
+              "$ref": "#/definitions/ThroughputPoolResource"
             },
             "description": "The parameters to provide for the current Throughput Pool."
           }
@@ -248,9 +251,6 @@
           },
           "202": {
             "description": "The ThroughputPool update operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ThroughputPoolResource"
-            },
             "headers": {
               "azure-AsyncOperation": {
                 "type": "string",
@@ -319,7 +319,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{poolName}/throughputPoolAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{throughputPoolName}/throughputPoolAccounts": {
       "get": {
         "operationId": "ThroughputPoolAccounts_List",
         "x-ms-examples": {
@@ -361,7 +361,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{poolName}/throughputPoolAccounts/{poolAccountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{throughputPoolName}/throughputPoolAccounts/{throughputPoolAccountName}": {
       "get": {
         "operationId": "ThroughputPoolAccount_Get",
         "x-ms-examples": {
@@ -428,7 +428,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -440,9 +440,6 @@
         "responses": {
           "202": {
             "description": "The ThroughputPoolAccount create or update operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ThroughputPoolAccountGetResult"
-            },
             "headers": {
               "azure-AsyncOperation": {
                 "type": "string",
@@ -550,20 +547,12 @@
         }
       ]
     },
-    "ThroughputPoolUpdateParameters": {
-      "description": "Parameters for patching Azure Cosmos DB throughput pool properties.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ThroughputPoolUpdateProperties"
-        }
-      }
-    },
     "ThroughputPoolUpdateProperties": {
       "description": "Properties to update Azure Cosmos DB throughput pool.",
       "type": "object",
       "x-ms-mutability": [
+        "read",
+        "create",
         "update"
       ],
       "properties": {
@@ -650,7 +639,7 @@
   },
   "parameters": {
     "ThroughputPoolNameParameter": {
-      "name": "ThroughputPoolNameParameter",
+      "name": "throughputPoolName",
       "in": "path",
       "required": true,
       "type": "string",
@@ -661,7 +650,7 @@
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
     },
     "ThroughputPoolAccountNameParameter": {
-      "name": "ThroughputPoolAccountNameParameter",
+      "name": "throughputPoolAccountName",
       "in": "path",
       "required": true,
       "type": "string",
