@@ -1,0 +1,542 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ProgrammableConnectivity",
+    "version": "2023-12-15-preview",
+    "description": "Azure Programmable Connectivity Provider management API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "OperatorConnections"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorConnections": {
+      "get": {
+        "operationId": "OperatorConnections_ListBySubscription",
+        "tags": [
+          "OperatorConnections"
+        ],
+        "description": "List OperatorConnection resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OperatorConnection' list operation on subscription ID completed.",
+            "schema": {
+              "$ref": "#/definitions/OperatorConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Operator Connection error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OperatorConnections_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorConnections_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorConnections": {
+      "get": {
+        "operationId": "OperatorConnections_ListByResourceGroup",
+        "tags": [
+          "OperatorConnections"
+        ],
+        "description": "List OperatorConnection resources by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OperatorConnection' list operation on resource group completed.",
+            "schema": {
+              "$ref": "#/definitions/OperatorConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Operator Connection error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OperatorConnections_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorConnections_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorConnections/{operatorConnectionName}": {
+      "get": {
+        "operationId": "OperatorConnections_Get",
+        "tags": [
+          "OperatorConnections"
+        ],
+        "description": "Get an Operator Connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperatorConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OperatorConnection' get by name operation completed.",
+            "schema": {
+              "$ref": "#/definitions/OperatorConnection"
+            }
+          },
+          "default": {
+            "description": "Operator Connection error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorConnections_Get_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorConnections_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OperatorConnections_CreateOrUpdate",
+        "tags": [
+          "OperatorConnections"
+        ],
+        "description": "Create an Operator Connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperatorConnectionName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Operator Connection resource create or update request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperatorConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OperatorConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OperatorConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'OperatorConnection' create operation succeeded. Although the resource may be created but there could be other operations in progress on the resource. The current status can be queried via an HTTP GET operation on the URL returned in the HTTP header 'azure-async-operation' of the response.",
+            "schema": {
+              "$ref": "#/definitions/OperatorConnection"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "Operator Connection error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OperatorConnections_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorConnections_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "OperatorConnections_Update",
+        "tags": [
+          "OperatorConnections"
+        ],
+        "description": "Update an Operator Connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperatorConnectionName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Operator Connection properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperatorConnectionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OperatorConnection' update operation completed.",
+            "schema": {
+              "$ref": "#/definitions/OperatorConnection"
+            }
+          },
+          "202": {
+            "description": "Resource 'OperatorConnection' update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "Operator Connection error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OperatorConnections_Update_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorConnections_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "OperatorConnections_Delete",
+        "tags": [
+          "OperatorConnections"
+        ],
+        "description": "Delete an Operator Connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperatorConnectionName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource doesn't exist."
+          },
+          "default": {
+            "description": "Operator Connection error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OperatorConnections_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorConnections_Delete_MaximumSet_Gen.json"
+          },
+          "OperatorConnections_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/OperatorConnections_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountType": {
+      "type": "string",
+      "description": "The Account Type of the Operator Connections",
+      "enum": [
+        "AzureManaged",
+        "UserManaged"
+      ],
+      "x-ms-enum": {
+        "name": "AccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureManaged",
+            "value": "AzureManaged",
+            "description": "Managed by Azure on-behalf-of the user"
+          },
+          {
+            "name": "UserManaged",
+            "value": "UserManaged",
+            "description": "Managed by the User themselves on the Operator end"
+          }
+        ]
+      }
+    },
+    "AppCredentials": {
+      "type": "object",
+      "description": "Application credentials needed to authenticate to the operator's Network APIs in a specific country/region.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "Application ID of the App Developer that is registered with the Operator in a specific country/region."
+        },
+        "appSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "Application secret linked to the 'appId'. This should be stored securely and is not returned back when the resource information is read.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "OperatorConnection": {
+      "type": "object",
+      "description": "A Programmable Connectivity Operator Connection resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OperatorConnectionProperties",
+          "description": "Operator Connection resource properties.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OperatorConnectionListResult": {
+      "type": "object",
+      "description": "The response of an Operator Connection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OperatorConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/OperatorConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperatorConnectionProperties": {
+      "type": "object",
+      "description": "Operator Connection resource properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AppCredentials"
+        }
+      ],
+      "properties": {
+        "gatewayId": {
+          "$ref": "./common.json#/definitions/GatewayResourceId",
+          "description": "Reference to the APC Gateway resource ID."
+        },
+        "operatorOfferingId": {
+          "$ref": "./common.json#/definitions/OperatorOfferingResourceId",
+          "description": "Reference to the Operator Offering Resource ID"
+        },
+        "selectedApis": {
+          "type": "array",
+          "description": "List of selected Network APIs the user has selected for the current operator in the country/region provided in the Offering.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accountType": {
+          "$ref": "#/definitions/AccountType",
+          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "gatewayId",
+        "operatorOfferingId",
+        "selectedApis",
+        "accountType"
+      ]
+    },
+    "OperatorConnectionUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the OperatorConnection.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OperatorConnectionUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperatorConnectionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the OperatorConnection.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AppCredentials"
+        }
+      ],
+      "properties": {
+        "selectedApis": {
+          "type": "array",
+          "description": "List of selected Network APIs the user has selected for the current operator in the country/region provided in the Offering.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accountType": {
+          "$ref": "#/definitions/AccountType",
+          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "OperatorConnectionName": {
+      "name": "operatorConnectionName",
+      "in": "path",
+      "description": "Azure Programmable Connectivity (APC) Operator Connection Name",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{3,64}$"
+    }
+  }
+}
