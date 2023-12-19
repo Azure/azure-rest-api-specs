@@ -110,18 +110,10 @@ model SignalDefinitionProperties {
   displayName?: string;
 
   @doc("Kind of the signal definition")
-  @knownValues(SignalKind)
-  @extension(
-    "x-ms-enum",
-    {
-      name: "SignalKindEnum", // Adding this manually to fix linter issue when using @knownValues
-      modelAsString: true,
-    }
-  )
-  signalKind: string; // Cannot use enum directly due to bug https://github.com/Azure/typespec-azure/issues/3574
+  signalKind: SignalKind;
 
   @doc("Interval in which the signal is being evaluated. Defaults to PT1M.")
-  refreshInterval: RefreshInterval = RefreshInterval.PT1M;
+  refreshInterval?: RefreshInterval = RefreshInterval.PT1M;
 
   @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
@@ -225,7 +217,7 @@ enum RefreshInterval {
 model ResourceMetricSignalDefinitionProperties
   extends SignalDefinitionProperties {
   @doc("Kind of the signal definition")
-  signalKind: "AzureResourceMetric";
+  signalKind: SignalKind.AzureResourceMetric;
 
   @doc("Metric namespace")
   @minLength(1)
@@ -260,7 +252,7 @@ model ResourceMetricSignalDefinitionProperties
 model LogAnalyticsQuerySignalDefinitionProperties
   extends SignalDefinitionProperties {
   @doc("Kind of the signal definition")
-  signalKind: "LogAnalyticsQuery";
+  signalKind: SignalKind.LogAnalyticsQuery;
 
   @doc("Query text in KQL syntax")
   @minLength(1)
@@ -285,7 +277,7 @@ model LogAnalyticsQuerySignalDefinitionProperties
 model PrometheusMetricsSignalDefinitionProperties
   extends SignalDefinitionProperties {
   @doc("Kind of the signal definition")
-  signalKind: "PrometheusMetricsQuery";
+  signalKind: SignalKind.PrometheusMetricsQuery;
 
   @doc("Query text in PromQL syntax")
   @minLength(1)
@@ -374,22 +366,14 @@ model AuthenticationSettingProperties {
   displayName?: string;
 
   @doc("Kind of the authentication setting")
-  @knownValues(AuthenticationKind)
-  @extension(
-    "x-ms-enum",
-    {
-      name: "AuthenticationKindEnum", // Adding this manually to fix linter issue when using @knownValues
-      modelAsString: true,
-    }
-  )
-  authenticationKind: string; // Cannot use enum directly due to bug https://github.com/Azure/typespec-azure/issues/3574
+  authenticationKind: AuthenticationKind;
 }
 
 @doc("Authentication setting properties for Azure Managed Identity")
 model ManagedIdentityAuthenticationSettingProperties
   extends AuthenticationSettingProperties {
   @doc("Kind of the authentication setting")
-  authenticationKind: "ManagedIdentity";
+  authenticationKind: AuthenticationKind.ManagedIdentity;
 
   @doc("Name of the managed identity to use. Either 'SystemAssigned' or the resourceId of a user-assigned identity.")
   @minLength(1)
