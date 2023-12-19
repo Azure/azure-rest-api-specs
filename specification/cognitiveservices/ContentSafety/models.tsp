@@ -523,19 +523,9 @@ model AnalyzeImageWithTextResult {
   categoriesAnalysis: ImageWithTextCategoriesAnalysis[];
 }
 
-@added(Versions.v2023_11_30_Preview)
-@doc("Connection information for GPT resource.")
-model GptResource {
-  @doc("Endpoint of Azure OpenAI resource.")
-  azureOpenAIEndpoint: string;
-
-  @doc("Deployment name of GPT model.")
-  deploymentName: string;
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2023_11_30_Preview)
-@doc("domain category.")
+@doc("Domain category.")
 enum Domain {
   Generic,
   Medical,
@@ -543,41 +533,54 @@ enum Domain {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2023_11_30_Preview)
-@doc("task type.")
+@doc("Task type.")
 enum Task {
   Summarization,
   QnA,
 }
 
 @added(Versions.v2023_11_30_Preview)
+@doc("Connection details for the GPT resource.")
+model GptResource {
+  @doc("Endpoint of Azure OpenAI resource.")
+  azureOpenAIEndpoint: string;
+
+  @doc("Deployment model name.")
+  deploymentName: string;
+}
+
+@added(Versions.v2023_11_30_Preview)
 @doc("The request of ungroudedness detection.")
 model DetectUngroundednessOptions {
-  @doc("Domain of the text to be analyzed.")
+  @doc("The domain of the text for analysis.")
   domain?: Domain;
 
-  @doc("Task type of the text to be analyzed.")
+  @doc("The task type for the text analysis.")
   task?: Task;
 
-  @doc("This is optional and only required for QnA task.")
+  @doc("The user's question input in a QnA scenario.")
   query?: string;
 
-  @doc("The text needs to be analyzed.")
+  @doc("The text requiring analysis.")
   text: string;
 
-  @doc("Source information that serves as grounding source.")
+  @doc("The source information used as a grounding reference.")
   groundingSources: string[];
 
-  @doc("GPT resource connection information.")
+  @doc("A value indicating if the output includes an explanation for the identified ungroundedness.")
+  reasoning?: boolean;
+
+  @doc("Connection details for the GPT resource.")
   gptResource?: GptResource;
 }
 
 @added(Versions.v2023_11_30_Preview)
-@doc("The detailed information about a text identified as ungroundness.")
+@doc("The detailed information about a text identified as unground.")
 model UngroundedDetails {
   @doc("The ungrounded text.")
   text: string;
 
-  @doc("The reason or explanation for identifying the text as ungrounded.")
+  @doc("The explanation for identifying the text as ungrounded.")
   reason: string;
 }
 
@@ -587,12 +590,12 @@ model DetectUngroundednessResult {
   @doc("Detection result for ungrouded text.")
   ungrounded: boolean;
 
-  @doc("Model confidence store in the analysis results.")
+  @doc("Confidence score of the model in the analysis results.")
   confidenceScore: float32;
 
-  @doc("Percentage of Ungrounded Text.")
+  @doc("Percentage of ungrounded Text.")
   ungroundedPercentage: float32;
 
-  @doc("The detailed information about a text identified as ungroundness.")
+  @doc("The detailed information about a text identified as unground.")
   ungroundedDetails: UngroundedDetails[];
 }

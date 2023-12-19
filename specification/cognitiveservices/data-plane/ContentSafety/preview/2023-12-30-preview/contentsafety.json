@@ -1648,7 +1648,7 @@
       "post": {
         "operationId": "TextUngroundednessDetectionOperations_DetectUngroundedness",
         "summary": "Detect Ungrounded Information",
-        "description": "A synchronous API for the analysis of language model outputs to determine if they align with the information provided by the user or contain fictional content.",
+        "description": "A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2176,30 +2176,34 @@
       "properties": {
         "domain": {
           "$ref": "#/definitions/Domain",
-          "description": "Domain of the text to be analyzed."
+          "description": "The domain of the text for analysis."
         },
         "task": {
           "$ref": "#/definitions/Task",
-          "description": "Task type of the text to be analyzed."
+          "description": "The task type for the text analysis."
         },
         "query": {
           "type": "string",
-          "description": "This is optional and only required for QnA task."
+          "description": "The user's question input in a QnA scenario."
         },
         "text": {
           "type": "string",
-          "description": "The text needs to be analyzed."
+          "description": "The text requiring analysis."
         },
         "groundingSources": {
           "type": "array",
-          "description": "Source information that serves as grounding source.",
+          "description": "The source information used as a grounding reference.",
           "items": {
             "type": "string"
           }
         },
+        "reasoning": {
+          "type": "boolean",
+          "description": "A value indicating if the output includes an explanation for the identified ungroundedness."
+        },
         "gptResource": {
           "$ref": "#/definitions/GptResource",
-          "description": "GPT resource connection information."
+          "description": "Connection details for the GPT resource."
         }
       },
       "required": [
@@ -2218,16 +2222,16 @@
         "confidenceScore": {
           "type": "number",
           "format": "float",
-          "description": "Model confidence store in the analysis results."
+          "description": "Confidence score of the model in the analysis results."
         },
         "ungroundedPercentage": {
           "type": "number",
           "format": "float",
-          "description": "Percentage of Ungrounded Text."
+          "description": "Percentage of ungrounded Text."
         },
         "ungroundedDetails": {
           "type": "array",
-          "description": "The detailed information about a text identified as ungroundness.",
+          "description": "The detailed information about a text identified as unground.",
           "items": {
             "$ref": "#/definitions/UngroundedDetails"
           },
@@ -2243,7 +2247,7 @@
     },
     "Domain": {
       "type": "string",
-      "description": "domain category.",
+      "description": "Domain category.",
       "enum": [
         "Generic",
         "Medical"
@@ -2255,7 +2259,7 @@
     },
     "GptResource": {
       "type": "object",
-      "description": "Connection information for GPT resource.",
+      "description": "Connection details for the GPT resource.",
       "properties": {
         "azureOpenAIEndpoint": {
           "type": "string",
@@ -2263,7 +2267,7 @@
         },
         "deploymentName": {
           "type": "string",
-          "description": "Deployment name of GPT model."
+          "description": "Deployment model name."
         }
       },
       "required": [
@@ -2779,7 +2783,7 @@
     },
     "Task": {
       "type": "string",
-      "description": "task type.",
+      "description": "Task type.",
       "enum": [
         "Summarization",
         "QnA"
@@ -3046,7 +3050,7 @@
     },
     "UngroundedDetails": {
       "type": "object",
-      "description": "The detailed information about a text identified as ungroundness.",
+      "description": "The detailed information about a text identified as unground.",
       "properties": {
         "text": {
           "type": "string",
@@ -3054,7 +3058,7 @@
         },
         "reason": {
           "type": "string",
-          "description": "The reason or explanation for identifying the text as ungrounded."
+          "description": "The explanation for identifying the text as ungrounded."
         }
       },
       "required": [
