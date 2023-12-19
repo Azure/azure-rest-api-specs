@@ -30,6 +30,17 @@ openapi-subtype: rpaas
 tag: package-2023-04
 ```
 
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.Workloads/SAPVirtualInstance/preview/2023-10-01-preview/SAPVirtualInstance.json
+  - Microsoft.Workloads/common-types/v1/commonTypes.json
+  - Microsoft.Workloads/operations/preview/2023-10-01-preview/operations.json
+  - Microsoft.Workloads/stable/2023-04-01/monitors.json
+```
 
 ### Tag: package-2023-04
 
