@@ -321,7 +321,7 @@
             "description": "The request to associate a classification to multiple entities.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClassificationAssociateContent"
+              "$ref": "#/definitions/ClassificationAssociateOptions"
             }
           }
         ],
@@ -4322,7 +4322,7 @@
             "description": "Entity guids to be moved to target collection.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MoveEntitiesContent"
+              "$ref": "#/definitions/MoveEntitiesOptions"
             }
           }
         ],
@@ -4447,7 +4447,7 @@
             "description": "An object specifying the autocomplete criteria.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AutoCompleteContent"
+              "$ref": "#/definitions/AutoCompleteOptions"
             }
           }
         ],
@@ -4486,7 +4486,7 @@
             "description": "An object specifying the search criteria.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchContent"
+              "$ref": "#/definitions/SearchOptions"
             }
           }
         ],
@@ -4585,7 +4585,7 @@
             "description": "An object specifying the suggest criteria.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SuggestContent"
+              "$ref": "#/definitions/SuggestOptions"
             }
           }
         ],
@@ -5289,7 +5289,7 @@
           "description": "The dictionary of contacts for entities. Key could be Expert or Owner.",
           "additionalProperties": {
             "items": {
-              "$ref": "#/definitions/ContactBasic"
+              "$ref": "#/definitions/ContactInfo"
             },
             "type": "array"
           }
@@ -6129,7 +6129,7 @@
           "description": "The dictionary of contacts for terms. Key could be Expert or Steward.",
           "additionalProperties": {
             "items": {
-              "$ref": "#/definitions/ContactBasic"
+              "$ref": "#/definitions/ContactInfo"
             },
             "type": "array"
           }
@@ -7257,7 +7257,7 @@
         "flows"
       ]
     },
-    "AutoCompleteContent": {
+    "AutoCompleteOptions": {
       "type": "object",
       "description": "The query of autocomplete request.",
       "properties": {
@@ -7391,7 +7391,7 @@
         ]
       }
     },
-    "ClassificationAssociateContent": {
+    "ClassificationAssociateOptions": {
       "type": "object",
       "description": "The request content for classification association.",
       "properties": {
@@ -7469,20 +7469,6 @@
       ],
       "x-ms-discriminator-value": "CollectionIdFilter"
     },
-    "ContactBasic": {
-      "type": "object",
-      "description": "ContactBasic",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Azure Active Directory object Id."
-        },
-        "info": {
-          "type": "string",
-          "description": "additional information to describe this contact."
-        }
-      }
-    },
     "ContactFilter": {
       "type": "object",
       "description": "Contact filter for search",
@@ -7502,6 +7488,20 @@
         }
       ],
       "x-ms-discriminator-value": "ContactFilter"
+    },
+    "ContactInfo": {
+      "type": "object",
+      "description": "ContactInfo",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure Active Directory object Id."
+        },
+        "info": {
+          "type": "string",
+          "description": "additional information to describe this contact."
+        }
+      }
     },
     "ContactSearchResultValue": {
       "type": "object",
@@ -7877,7 +7877,7 @@
         }
       }
     },
-    "MoveEntitiesContent": {
+    "MoveEntitiesOptions": {
       "type": "object",
       "description": "MoveEntitiesContent",
       "properties": {
@@ -8261,45 +8261,6 @@
       ],
       "x-ms-discriminator-value": "ScanInfoFilter"
     },
-    "SearchContent": {
-      "type": "object",
-      "description": "The search query of advanced search request.",
-      "properties": {
-        "keywords": {
-          "type": "string",
-          "description": "The keywords applied to all searchable fields."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The limit of the number of the search result. default value is 50; maximum\nvalue is 1000."
-        },
-        "continuationToken": {
-          "type": "string",
-          "description": "The token used to get next batch of data. Default 'Null' to get the first\nbatch, and will return new token in each response unless there's no more data."
-        },
-        "orderby": {
-          "type": "array",
-          "description": "The sort order of search results, can specify multiple fields.",
-          "items": {}
-        },
-        "filter": {
-          "description": "The filter for the search. See examples for the usage of supported filters."
-        },
-        "facets": {
-          "type": "array",
-          "description": "The facets for search. See examples for the usage of supported facets.",
-          "items": {
-            "$ref": "#/definitions/SearchFacetItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "taxonomySetting": {
-          "$ref": "#/definitions/SearchRequestTaxonomySetting",
-          "description": "The taxonomy setting for search."
-        }
-      }
-    },
     "SearchFacetItem": {
       "type": "object",
       "description": "The content of a search facet result item.",
@@ -8567,20 +8528,42 @@
         }
       }
     },
-    "SearchRequestTaxonomySetting": {
+    "SearchOptions": {
       "type": "object",
-      "description": "Taxonomy setting for search request",
+      "description": "The search query of advanced search request.",
       "properties": {
-        "assetTypes": {
-          "type": "array",
-          "description": "Asset types",
-          "items": {
-            "type": "string"
-          }
+        "keywords": {
+          "type": "string",
+          "description": "The keywords applied to all searchable fields."
         },
-        "facet": {
-          "$ref": "#/definitions/SearchFacetItem",
-          "description": "The content of a search facet result item."
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The limit of the number of the search result. default value is 50; maximum\nvalue is 1000."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used to get next batch of data. Default 'Null' to get the first\nbatch, and will return new token in each response unless there's no more data."
+        },
+        "orderby": {
+          "type": "array",
+          "description": "The sort order of search results, can specify multiple fields.",
+          "items": {}
+        },
+        "filter": {
+          "description": "The filter for the search. See examples for the usage of supported filters."
+        },
+        "facets": {
+          "type": "array",
+          "description": "The facets for search. See examples for the usage of supported facets.",
+          "items": {
+            "$ref": "#/definitions/SearchFacetItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "taxonomySetting": {
+          "$ref": "#/definitions/SearchTaxonomySetting",
+          "description": "The taxonomy setting for search."
         }
       }
     },
@@ -8759,6 +8742,23 @@
         ]
       }
     },
+    "SearchTaxonomySetting": {
+      "type": "object",
+      "description": "Taxonomy setting for search request",
+      "properties": {
+        "assetTypes": {
+          "type": "array",
+          "description": "Asset types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facet": {
+          "$ref": "#/definitions/SearchFacetItem",
+          "description": "The content of a search facet result item."
+        }
+      }
+    },
     "SortType": {
       "type": "string",
       "description": "Type for sorting",
@@ -8813,7 +8813,7 @@
         ]
       }
     },
-    "SuggestContent": {
+    "SuggestOptions": {
       "type": "object",
       "description": "The query of suggest request.",
       "properties": {
