@@ -285,9 +285,6 @@
           "final-state-via": "azure-async-operation"
         },
         "responses": {
-          "200": {
-            "description": "OK. Resource has been deleted"
-          },
           "202": {
             "description": "Accepted. Operation will complete asynchronously.",
             "headers": {
@@ -575,9 +572,6 @@
           "final-state-via": "azure-async-operation"
         },
         "responses": {
-          "200": {
-            "description": "OK. Resource has been deleted"
-          },
           "202": {
             "description": "Accepted. Operation will complete asynchronously.",
             "headers": {
@@ -842,9 +836,6 @@
           "final-state-via": "azure-async-operation"
         },
         "responses": {
-          "200": {
-            "description": "OK. Resource has been deleted"
-          },
           "202": {
             "description": "Accepted. Operation will complete asynchronously.",
             "headers": {
@@ -953,6 +944,9 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NetworkConnections_GetHealthDetails": {
