@@ -95,7 +95,7 @@ input-file:
 
 These settings apply only when `--tag=2024-01-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-10-30'
+```yaml $(tag) == 'package-2024-01-01-preview'
 input-file:
   - Microsoft.Scom/stable/2024-01-01-preview/scom.json
   - Microsoft.Scom/stable/2024-01-01-preview/monitoredResources.json
