@@ -59,7 +59,6 @@ suppressions:
     reason: start,stop,flushDNSsetting api do not have return body in async operation
 ```
 
-
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
