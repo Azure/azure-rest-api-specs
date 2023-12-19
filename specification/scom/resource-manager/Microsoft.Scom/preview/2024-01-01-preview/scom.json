@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure API for managing SCOM managed instances and monitored resources.",
     "description": "Azure Monitor Operations Manager Managed Instance (SCOM MI) management APIs",
-    "version": "2023-10-30",
+    "version": "2024-01-01-preview",
     "x-ms-code-generation-settings": {
       "name": "scomClient"
     }
@@ -538,6 +538,53 @@
         "x-ms-examples": {
           "Instances_Get": {
             "$ref": "./examples/Resource_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/getResourceHealthStatusSummary": {
+      "post": {
+        "operationId": "ResourceHealthStatusSummary",
+        "description": "Getting Health Status Summary of specified type of resource attached to a SCOM managed instance based on filter conditions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetResourceHealthStatusSummaryProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetResourceHealthStatusSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Get": {
+            "$ref": "./examples/ResourceHealthStatusSummary.json"
           }
         }
       }
@@ -1380,6 +1427,109 @@
           "format": "int64",
           "maximum": 100,
           "minimum": 1
+        }
+      }
+    },
+    "GetResourceHealthStatusSummaryProperties": {
+      "type": "object",
+      "description": "Properties for filtering resource list and fetch resource health status summary.",
+      "properties": {
+        "filterProperties": {
+          "description": "Filter properties for filtering resource list and fetch resource health status summary.",
+          "$ref": "#/definitions/FilterPropertiesForResourceHealthSummary"
+        }
+      }
+    },
+    "FilterPropertiesForResourceHealthSummary": {
+      "description": "List of filter properties to be applied while fetching the resource list.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Resource Type of various types to be used for filtering",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to be used for filtering",
+          "type": "string"
+        },
+        "subscription": {
+          "description": "Subscription List to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "subscription Id.",
+            "type": "string"
+          }
+        },
+        "resourcegroup": {
+          "description": "ResourceGroupName List to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "Resource Group Name.",
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "Location list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "Location.",
+            "type": "string"
+          }
+        },
+        "healthStatus": {
+          "description": "Health status list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "Health status.",
+            "type": "string"
+          }
+        },
+        "autoUpgrade": {
+          "description": "AutoUpgrade list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "AutoUpgrade values.",
+            "type": "string"
+          }
+        },
+        "machineType": {
+          "description": "machine types list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "machine type.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetResourceHealthStatusSummaryResponse": {
+      "type": "object",
+      "description": "Resource health status summary based on selected filters.",
+      "resourceCount": {
+        "total": {
+          "description": "Total number of resources based on the selected filters.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "error": {
+          "description": "Total number of resources with health state as 'error', based on the selected filters.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "warning": {
+          "description": "Total number of resources with health state as 'warning', based on the selected filters.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "unknown": {
+          "description": "Total number of resources with health state as 'unknown', based on the selected filters.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "success": {
+          "description": "Total number of resources with health state as 'success', based on the selected filters.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
