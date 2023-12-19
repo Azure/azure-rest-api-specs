@@ -189,7 +189,7 @@ attributes.
     {
       @doc("The request to associate a classification to multiple entities.")
       @body
-      request: ClassificationAssociateContent;
+      request: ClassificationAssociateOptions;
     },
     void,
     {},
@@ -968,7 +968,7 @@ be changed to other unique attributes)
 
       @doc("Entity guids to be moved to target collection.")
       @body
-      moveEntitiesRequest: MoveEntitiesContent;
+      moveEntitiesRequest: MoveEntitiesOptions;
     },
     EntityMutationResult,
     {},
@@ -1680,7 +1680,7 @@ interface Discovery {
     {
       @doc("An object specifying the search criteria.")
       @body
-      searchRequest: SearchContent;
+      searchRequest: SearchOptions;
     },
     SearchResult,
     {},
@@ -1695,7 +1695,7 @@ interface Discovery {
     {
       @doc("An object specifying the suggest criteria.")
       @body
-      suggestRequest: SuggestContent;
+      suggestRequest: SuggestOptions;
     },
     SuggestResult,
     {},
@@ -1710,7 +1710,7 @@ interface Discovery {
     {
       @doc("An object specifying the autocomplete criteria.")
       @body
-      autoCompleteRequest: AutoCompleteContent;
+      autoCompleteRequest: AutoCompleteOptions;
     },
     AutoCompleteResult,
     {},

@@ -343,7 +343,7 @@ removed.
   version?: int64;
 
   @doc("The dictionary of contacts for entities. Key could be Expert or Owner.")
-  contacts?: Record<ContactBasic[]>;
+  contacts?: Record<ContactInfo[]>;
 }
 
 @doc("""
@@ -428,8 +428,8 @@ model AtlasTermAssignmentHeader {
   termGuid?: Azure.Core.uuid;
 }
 
-@doc("ContactBasic")
-model ContactBasic {
+@doc("ContactInfo")
+model ContactInfo {
   @doc("Azure Active Directory object Id.")
   id?: string;
 
@@ -518,7 +518,7 @@ model AtlasEntitiesWithExtInfo {
 }
 
 @doc("The request content for classification association.")
-model ClassificationAssociateContent {
+model ClassificationAssociateOptions {
   @doc("""
 An instance of a classification; it doesn't have an identity, this object
 exists only when associated with an entity.
@@ -589,7 +589,7 @@ model ImportInfo {
 }
 
 @doc("MoveEntitiesContent")
-model MoveEntitiesContent {
+model MoveEntitiesOptions {
   @doc("An array of entity guids to be moved to target collection.")
   entityGuids?: string[];
 }
@@ -754,7 +754,7 @@ model AtlasGlossaryTerm {
   resources?: ResourceLink[];
 
   @doc("The dictionary of contacts for terms. Key could be Expert or Steward.")
-  contacts?: Record<ContactBasic[]>;
+  contacts?: Record<ContactInfo[]>;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Recode<unknown> to model Map<String,Object>"
   @doc("""
@@ -918,7 +918,7 @@ model AtlasGlossaryExtInfo {
 }
 
 @doc("The search query of advanced search request.")
-model SearchContent {
+model SearchOptions {
   @doc("The keywords applied to all searchable fields.")
   keywords?: string;
 
@@ -946,7 +946,7 @@ batch, and will return new token in each response unless there's no more data.
   facets?: SearchFacetItem[];
 
   @doc("The taxonomy setting for search.")
-  taxonomySetting?: SearchRequestTaxonomySetting;
+  taxonomySetting?: SearchTaxonomySetting;
 }
 
 @doc("The content of a search facet result item.")
@@ -980,7 +980,7 @@ enum SearchSortOrder {
 }
 
 @doc("Taxonomy setting for search request")
-model SearchRequestTaxonomySetting {
+model SearchTaxonomySetting {
   @doc("Asset types")
   assetTypes?: string[];
 
@@ -1198,7 +1198,7 @@ Expert or Steward for a glossary term.
 }
 
 @doc("The query of suggest request.")
-model SuggestContent {
+model SuggestOptions {
   @doc("""
 The keywords applied to all fields that support suggest operation. It must be
 at least 1 character, and no more than 100 characters. In the index schema we
@@ -1307,7 +1307,7 @@ AtlasGlossaryCategory.
 }
 
 @doc("The query of autocomplete request.")
-model AutoCompleteContent {
+model AutoCompleteOptions {
   @doc("""
 The keywords applied to all fields that support autocomplete operation. It must
 be at least 1 character, and no more than 100 characters.
