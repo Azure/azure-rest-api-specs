@@ -6975,6 +6975,104 @@
         "workspaceId",
         "tenantId"
       ]
+    },
+    "SalesforceV2LinkedService": {
+      "x-ms-discriminator-value": "SalesforceV2",
+      "description": "Linked service for Salesforce V2.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce V2 linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceV2LinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SalesforceV2LinkedServiceTypeProperties": {
+      "description": "Salesforce V2 linked service properties.",
+      "type": "object",
+      "properties": {
+        "environmentUrl": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The URL of Salesforce instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string)."
+        },
+        "clientId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The client Id for OAuth 2.0 Client Credentials Flow authentication of the Salesforce instance. Type: string (or Expression with resultType string)."
+        },
+        "clientSecret": {
+          "description": "The client secret for OAuth 2.0 Client Credentials Flow authentication of the Salesforce instance.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce API version used in ADF. The version must be larger than or equal to 47.0 which is required by Salesforce BULK API 2.0. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        }
+      }
+    },
+    "SalesforceServiceCloudV2LinkedService": {
+      "x-ms-discriminator-value": "SalesforceServiceCloudV2",
+      "description": "Linked service for Salesforce Service Cloud V2.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce Service Cloud V2 linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceServiceCloudV2LinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SalesforceServiceCloudV2LinkedServiceTypeProperties": {
+      "description": "Salesforce Service Cloud V2 linked service properties.",
+      "type": "object",
+      "properties": {
+        "environmentUrl": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The URL of Salesforce Service Cloud instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string)."
+        },
+        "clientId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The client Id for OAuth 2.0 Client Credentials Flow authentication of the Salesforce instance. Type: string (or Expression with resultType string)."
+        },
+        "clientSecret": {
+          "description": "The client secret for OAuth 2.0 Client Credentials Flow authentication of the Salesforce instance.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce API version used in ADF. The version must be larger than or equal to 47.0 which is required by Salesforce BULK API 2.0. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        }
+      }
     }
   }
 }
