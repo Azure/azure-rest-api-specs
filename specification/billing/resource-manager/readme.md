@@ -29,6 +29,18 @@ openapi-type: arm
 tag: package-2023-04
 ```
 
+### Suppression
+``` yaml
+directive:
+  - suppress: ProvisioningStateValidation
+    from: billingSavingsPlan.json
+    where: $.definitions.ProvisioningState
+    reason: \'Cancelled\' state is used in the service which should be equivalent to in ARM's \'Canceled\' definition ProvisioningState property.
+  - suppress: PatchSkuProperty
+    from: billingSavingsPlan.json
+    reason: \'Sku\' is not a supported property in savings plan patch operation
+```
+
 ### Tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
@@ -38,13 +50,16 @@ title: BillingManagementClient
 description: Billing Client
 input-file:
 - Microsoft.Billing/stable/2023-04-01/agreement.json
+- Microsoft.Billing/stable/2023-04-01/associatedTenant.json
 - Microsoft.Billing/stable/2023-04-01/availableBalance.json
 - Microsoft.Billing/stable/2023-04-01/billingAccount.json
 - Microsoft.Billing/stable/2023-04-01/billingPermission.json
 - Microsoft.Billing/stable/2023-04-01/billingProfile.json
 - Microsoft.Billing/stable/2023-04-01/billingProperty.json
+- Microsoft.Billing/stable/2023-04-01/billingRequest.json
 - Microsoft.Billing/stable/2023-04-01/billingRoleAssignment.json
 - Microsoft.Billing/stable/2023-04-01/billingRoleDefinition.json
+- Microsoft.Billing/stable/2023-04-01/billingSavingsPlan.json
 - Microsoft.Billing/stable/2023-04-01/billingSubscription.json
 - Microsoft.Billing/stable/2023-04-01/customer.json
 - Microsoft.Billing/stable/2023-04-01/instruction.json
