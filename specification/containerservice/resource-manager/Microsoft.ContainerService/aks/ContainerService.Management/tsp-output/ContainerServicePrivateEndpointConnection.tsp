@@ -1,0 +1,34 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./ContainerServiceManagedCluster.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.ContainerService;
+@doc("A private endpoint connection")
+@parentResource(ContainerServiceManagedCluster)
+model ContainerServicePrivateEndpointConnection
+  is ProxyResource<PrivateEndpointConnectionProperties> {
+  @doc("The name of the private endpoint connection.")
+  @path
+  @key("privateEndpointConnectionName")
+  @segment("privateEndpointConnections")
+  name: string;
+}
+
+@armResourceOperations
+interface ContainerServicePrivateEndpointConnections {
+  @doc("To learn more about private clusters, see: https://docs.microsoft.com/azure/aks/private-clusters")
+  get is ArmResourceRead<ContainerServicePrivateEndpointConnection>;
+  @doc("Updates a private endpoint connection.")
+  update is ArmResourceCreateOrReplaceSync<ContainerServicePrivateEndpointConnection>;
+  @doc("Deletes a private endpoint connection.")
+  delete is ArmResourceDeleteAsync<ContainerServicePrivateEndpointConnection>;
+  @doc("To learn more about private clusters, see: https://docs.microsoft.com/azure/aks/private-clusters")
+  list is ArmResourceListByParent<ContainerServicePrivateEndpointConnection>;
+}

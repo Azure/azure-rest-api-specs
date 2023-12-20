@@ -1,0 +1,33 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./AvsPrivateCloud.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.Avs;
+@doc("A global reach connection resource")
+@parentResource(AvsPrivateCloud)
+model GlobalReachConnection is ProxyResource<GlobalReachConnectionProperties> {
+  @doc("Name of the global reach connection in the private cloud")
+  @path
+  @key("globalReachConnectionName")
+  @segment("globalReachConnections")
+  name: string;
+}
+
+@armResourceOperations
+interface GlobalReachConnections {
+  @doc("Get a global reach connection by name in a private cloud")
+  get is ArmResourceRead<GlobalReachConnection>;
+  @doc("Create or update a global reach connection in a private cloud")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<GlobalReachConnection>;
+  @doc("Delete a global reach connection in a private cloud")
+  delete is ArmResourceDeleteAsync<GlobalReachConnection>;
+  @doc("List global reach connections in a private cloud")
+  list is ArmResourceListByParent<GlobalReachConnection>;
+}
