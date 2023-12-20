@@ -525,7 +525,7 @@ model AnalyzeImageWithTextResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2023_11_30_Preview)
-@doc("Domain category.")
+@doc("Domain.")
 enum Domain {
   Generic,
   Medical,
@@ -552,13 +552,22 @@ model GptResource {
 @added(Versions.v2023_11_30_Preview)
 @doc("The request of ungroudedness detection.")
 model DetectUngroundednessOptions {
-  @doc("The domain of the text for analysis.")
+  @doc("""
+  The domain of the text for analysis.
+  This field is optional, with a default value of Generic.
+  """)
   domain?: Domain;
 
-  @doc("The task type for the text analysis.")
+  @doc("""
+  The task type for the text analysis.
+  This field is optional, with a default value of Summarization.
+  """)
   task?: Task;
 
-  @doc("The user's question input in a QnA scenario.")
+  @doc("""
+  The user's question input in a QnA scenario.
+  This field is optional, but if the Task type is set to QnA, it becomes required.
+  """)
   query?: string;
 
   @doc("The text requiring analysis.")
@@ -567,21 +576,30 @@ model DetectUngroundednessOptions {
   @doc("The source information used as a grounding reference.")
   groundingSources: string[];
 
-  @doc("A value indicating if the output includes an explanation for the identified ungroundedness.")
+  @doc("""
+  A value indicating if the output includes an explanation for the identified ungroundedness.
+  This field is optional, with a default value of false.
+  """)
   reasoning?: boolean;
 
-  @doc("Connection details for the GPT resource.")
+  @doc("""
+  Connection details for the GPT resource. 
+  This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
+  """)
   gptResource?: GptResource;
 }
 
 @added(Versions.v2023_11_30_Preview)
-@doc("The detailed information about a text identified as unground.")
+@doc("The detailed information about a text identified as ungrounded.")
 model UngroundedDetails {
   @doc("The ungrounded text.")
   text: string;
 
-  @doc("The explanation for identifying the text as ungrounded.")
-  reason: string;
+  @doc("""
+  The explanation for identifying the text as ungrounded. 
+  Only when the 'reasoning' field in the input is set to true will the API return this 'reason' field.
+  """)
+  reason?: string;
 }
 
 @added(Versions.v2023_11_30_Preview)
@@ -596,6 +614,6 @@ model DetectUngroundednessResult {
   @doc("Percentage of ungrounded Text.")
   ungroundedPercentage: float32;
 
-  @doc("The detailed information about a text identified as unground.")
+  @doc("The detailed information about a text identified as ungrounded.")
   ungroundedDetails: UngroundedDetails[];
 }

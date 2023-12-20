@@ -2169,15 +2169,15 @@
       "properties": {
         "domain": {
           "$ref": "#/definitions/Domain",
-          "description": "The domain of the text for analysis."
+          "description": "The domain of the text for analysis.\nThis field is optional, with a default value of Generic."
         },
         "task": {
           "$ref": "#/definitions/Task",
-          "description": "The task type for the text analysis."
+          "description": "The task type for the text analysis.\nThis field is optional, with a default value of Summarization."
         },
         "query": {
           "type": "string",
-          "description": "The user's question input in a QnA scenario."
+          "description": "The user's question input in a QnA scenario.\nThis field is optional, but if the Task type is set to QnA, it becomes required."
         },
         "text": {
           "type": "string",
@@ -2192,11 +2192,11 @@
         },
         "reasoning": {
           "type": "boolean",
-          "description": "A value indicating if the output includes an explanation for the identified ungroundedness."
+          "description": "A value indicating if the output includes an explanation for the identified ungroundedness.\nThis field is optional, with a default value of false."
         },
         "gptResource": {
           "$ref": "#/definitions/GptResource",
-          "description": "Connection details for the GPT resource."
+          "description": "Connection details for the GPT resource. \nThis field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored."
         }
       },
       "required": [
@@ -2224,7 +2224,7 @@
         },
         "ungroundedDetails": {
           "type": "array",
-          "description": "The detailed information about a text identified as unground.",
+          "description": "The detailed information about a text identified as ungrounded.",
           "items": {
             "$ref": "#/definitions/UngroundedDetails"
           },
@@ -2240,7 +2240,7 @@
     },
     "Domain": {
       "type": "string",
-      "description": "Domain category.",
+      "description": "Domain.",
       "enum": [
         "Generic",
         "Medical"
@@ -3043,7 +3043,7 @@
     },
     "UngroundedDetails": {
       "type": "object",
-      "description": "The detailed information about a text identified as unground.",
+      "description": "The detailed information about a text identified as ungrounded.",
       "properties": {
         "text": {
           "type": "string",
@@ -3051,12 +3051,11 @@
         },
         "reason": {
           "type": "string",
-          "description": "The explanation for identifying the text as ungrounded."
+          "description": "The explanation for identifying the text as ungrounded. \nOnly when the 'reasoning' field in the input is set to true will the API return this 'reason' field."
         }
       },
       "required": [
-        "text",
-        "reason"
+        "text"
       ]
     }
   },
