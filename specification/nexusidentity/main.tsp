@@ -49,6 +49,8 @@ model IdentitySetResourceProperties {
   tenant: string;
   @doc("List of scopes to be watched")
   scopes: Array<ScopeProperties>;
+  @doc("The URL to which the Nexus Identity Service will send notifications.")
+  callBackUrl: string;
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
