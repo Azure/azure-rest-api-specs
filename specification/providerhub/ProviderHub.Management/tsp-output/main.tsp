@@ -1,0 +1,37 @@
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "./models.tsp";
+import "./CustomRollout.tsp";
+import "./DefaultRollout.tsp";
+import "./NotificationRegistration.tsp";
+import "./ProviderRegistration.tsp";
+import "./ResourceTypeRegistration.tsp";
+import "./ResourceTypeSku.tsp";
+import "./NestedResourceTypeFirstSku.tsp";
+import "./NestedResourceTypeSecondSku.tsp";
+import "./NestedResourceTypeThirdSku.tsp";
+import "./routes.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
+@armProviderNamespace
+@service({
+  title: "ProviderHub",
+})
+@versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+@doc("Microsoft ProviderHub")
+namespace Azure.ResourceManager.ProviderHub;
+
+@doc("The available API versions.")
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2020_11_20: "2020-11-20",
+}

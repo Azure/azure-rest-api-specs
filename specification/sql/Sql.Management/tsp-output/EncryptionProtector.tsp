@@ -1,0 +1,35 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./SqlServer.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.Sql;
+@doc("The server encryption protector.")
+@parentResource(SqlServer)
+model EncryptionProtector is ProxyResource<EncryptionProtectorProperties> {
+  @doc("The name of the encryption protector to be retrieved.")
+  @path
+  @key("encryptionProtectorName")
+  @segment("encryptionProtector")
+  name: EncryptionProtectorName;
+
+  ...Azure.ResourceManager.ResourceKind;
+}
+
+@armResourceOperations
+interface EncryptionProtectors {
+  @doc("Gets a server encryption protector.")
+  get is ArmResourceRead<EncryptionProtector>;
+  @doc("Updates an existing encryption protector.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<EncryptionProtector>;
+  @doc("Gets a list of server encryption protectors")
+  listByServer is ArmResourceListByParent<EncryptionProtector>;
+  @doc("Revalidates an existing encryption protector.")
+  revalidate is ArmResourceActionAsync<EncryptionProtector, void, void>;
+}
