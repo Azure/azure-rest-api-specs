@@ -10,13 +10,15 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
+using Autorest;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.LoadTestService.Draft;
 
 @doc("A ContosoProviderHub resource")
 model LoadTestResource is TrackedResource<LoadTestProperties> {
-  @doc("Name of employee")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @doc("Load Test name")
   @key("loadTestName")
   @path
   @segment("loadTests")
@@ -49,7 +51,10 @@ model EndpointDependency {
 
 }
 
-model OutboundEnvironmentEndpoint {
+@parentResource(LoadTestResource)
+@resource("outboundNetworkDependenciesEndpoints")
+model OutboundEnvironmentEndpoint extends ArmResource{
+  @key
   category: string;
   endpoints: EndpointDependency;
 }
@@ -90,21 +95,20 @@ enum CreatedByType {
   Key: "Key"
 }
 
-model SystemData {
-  createdBy: string;
-  createdByType: CreatedByType;
-  createdAt: string;
-  lastModifiedBy: string;
-  lastModifiedType: CreatedByType;
-  lastModifiedAt: utcDateTime;
-}
+// model SystemData {
+//   createdBy: string;
+//   createdByType: CreatedByType;
+//   createdAt: string;
+//   lastModifiedBy: string;
+//   lastModifiedType: CreatedByType;
+//   lastModifiedAt: utcDateTime;
+// }
 
-model Resource {
-  id: string;
-  name: string;
-  type: string;
-  systemData: SystemData;
-}
+// model Resource {
+//   id: string;
+//   type: string;
+//   systemData: SystemData;
+// }
 
 @doc("The location of quota resource")
 @subscriptionResource
@@ -144,4 +148,53 @@ model LoadTestProperties{
 
   @doc("CMK Encryption property.")
   encryption?: EncryptionProperties;
+}
+
+@doc("Check quota availability response properties.")
+model CheckQuotaAvailabilityResponse extends ArmResource {
+  @doc("Check quota availability response properties.")
+  properties?: CheckQuotaAvailabilityResponseProperties;
+}
+
+model CheckQuotaAvailabilityResponseProperties {
+  @doc("True/False indicating whether the quota request be granted based on availability.")
+  isAvailable?: boolean;
+
+  @doc("Message indicating additional details to add to quota support request.")
+  availabilityStatus?: string;
+}
+
+@doc("Request object of new quota for a quota bucket.")
+model QuotaBucketRequest extends ArmResource{
+  @doc("Request object of new quota for a quota bucket.")
+  properties?: QuotaBucketRequestProperties;
+}
+
+@doc("New quota request request properties.")
+model QuotaBucketRequestProperties {
+  @doc("Current quota usage of the quota bucket.")
+  @minValue(0)
+  currentUsage?: int32;
+
+  @doc("Current quota limit of the quota bucket.")
+  @minValue(0)
+  currentQuota?: int32;
+
+  @doc("New quota limit of the quota bucket.")
+  @minValue(0)
+  newQuota?: int32;
+
+  @doc("Dimensions for new quota request.")
+  dimensions?: Dimensions;
+}
+
+@doc("Dimensions for new quota request.")
+model Dimensions {
+  @doc("Subscription Id dimension for new quota request of the quota bucket.")
+  @minLength(1)
+  subscriptionId?: string;
+
+  @doc("Location dimension for new quota request of the quota bucket.")
+  @minLength(1)
+  location?: string;
 }

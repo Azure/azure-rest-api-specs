@@ -16,7 +16,7 @@ using Azure.ResourceManager;
 @service({
   title: "LoadTestingService",
 })
-@doc("Load Testing Resource Provider management API.")
+@doc("LoadTest client provides access to LoadTest Resource and it's status operations.")
 @versioned(APIVersions)
 //@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.LoadTestService.Draft;

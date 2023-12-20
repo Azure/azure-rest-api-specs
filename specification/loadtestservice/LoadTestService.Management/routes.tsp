@@ -8,7 +8,9 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-
+using OpenAPI;
+using Autorest;
+using Azure.ResourceManager.Foundations;
 namespace Microsoft.LoadTestService.Draft;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -22,6 +24,8 @@ interface LoadTests {
   update is ArmResourcePatchAsync<LoadTestResource, LoadTestProperties>;
   delete is ArmResourceDeleteAsync<LoadTestResource>;
   
+  @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
+  outboundNetworkDependenciesEndpoint2 is ArmResourceListByParent<OutboundEnvironmentEndpoint>;
 }
 
 @armResourceOperations
@@ -31,4 +35,54 @@ interface Quotas {
 
   @doc("List quotas for a given subscription Id.")
   listBySubscription is ArmListBySubscription<QuotaResource>;
+
+  checkAvailability is 
+
+  // @TypeSpec.Rest.autoRoute
+  // @armProviderNameValue
+  // @doc("Implements global CheckNameAvailability operations")
+  // @TypeSpec.Rest.action("checkAvailability")
+  // @post
+  // op checkAvailability(
+  //   ...SubscriptionIdParameter,
+  //   ...LocationParameter,
+  //   @body QuotaBucketRequest: QuotaBucketRequest
+  // ) : CheckQuotaAvailabilityResponse | ErrorResponse;
+
+  // @TypeSpec.Rest.autoRoute
+  // @armProviderNameValue
+  // @doc("Implements global CheckNameAvailability operations")
+  // @TypeSpec.Rest.action("checkAvailability3")
+  // @post
+  // op checkAvailability3<
+  //   TScopeParameters extends TypeSpec.Reflection.Model,
+  //   TRequest extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.CheckNameAvailabilityRequest,
+  //   TResponse extends TypeSpec.Reflection.Model = {},
+  //   TAdditionalParams extends TypeSpec.Reflection.Model = {}
+  // >(
+  //   @path subscriptionId: SubscriptionIdParameter,
+  //   @path location: LocationParameter,
+  //   @path quotaBucketName: string,
+  //   @query `api-version`: ApiVersionParameter
+  // ) : CheckQuotaAvailabilityResponse | ErrorResponse;
+
+  // @TypeSpec.Rest.autoRoute
+  // @armProviderNameValue
+  // @doc("Implements global CheckNameAvailability operations")
+  // @TypeSpec.Rest.action("checkNameAvailability")
+  // @post
+  // op checkNameAvailability<
+  //   TScopeParameters extends TypeSpec.Reflection.Model,
+  //   TRequest extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.CheckNameAvailabilityRequest,
+  //   TResponse extends TypeSpec.Reflection.Model = CheckNameAvailabilityResponse,
+  //   TAdditionalParams extends TypeSpec.Reflection.Model = {}
+  // >(
+  //   ...ApiVersionParameter,
+  //   ...TScopeParameters,
+  //   ...TAdditionalParams,
+
+  //   @doc("The CheckAvailability request")
+  //   @body
+  //   body: TRequest,
+  // ): TResponse | ErrorResponse;
 }

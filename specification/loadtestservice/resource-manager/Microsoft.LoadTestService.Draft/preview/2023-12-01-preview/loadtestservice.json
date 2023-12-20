@@ -3,7 +3,7 @@
   "info": {
     "title": "LoadTestingService",
     "version": "2023-12-01-preview",
-    "description": "Load Testing Resource Provider management API.",
+    "description": "LoadTest client provides access to LoadTest Resource and it's status operations.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -78,6 +78,45 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{location}/checkAvailability": {
+      "post": {
+        "operationId": "Quotas_CheckAvailability",
+        "tags": [
+          "Quotas"
+        ],
+        "description": "Implements global CheckNameAvailability operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "QuotaBucketRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaBucketRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckQuotaAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -201,6 +240,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{loadTestName}": {
+      "get": {
+        "operationId": "LoadTests_OutboundNetworkDependenciesEndpoint",
+        "tags": [
+          "LoadTests"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "loadTestName",
+            "in": "path",
+            "description": "Load Test name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService.Draft/loadTests": {
       "get": {
         "operationId": "LoadTests_ListByResourceGroup",
@@ -258,10 +340,9 @@
           {
             "name": "loadTestName",
             "in": "path",
-            "description": "Name of employee",
+            "description": "Load Test name",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -298,10 +379,9 @@
           {
             "name": "loadTestName",
             "in": "path",
-            "description": "Name of employee",
+            "description": "Load Test name",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "resource",
@@ -364,10 +444,9 @@
           {
             "name": "loadTestName",
             "in": "path",
-            "description": "Name of employee",
+            "description": "Load Test name",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "properties",
@@ -431,10 +510,9 @@
           {
             "name": "loadTestName",
             "in": "path",
-            "description": "Name of employee",
+            "description": "Load Test name",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -470,9 +548,122 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService.Draft/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "operationId": "LoadTests_ListOutboundNetworkDependenciesEndpoints",
+        "tags": [
+          "LoadTests"
+        ],
+        "description": "List OutboundEnvironmentEndpoint resources by LoadTestResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadTestName",
+            "in": "path",
+            "description": "Load Test name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
+    "Azure.ResourceManager.Foundations.ArmResource": {
+      "type": "object",
+      "description": "Common properties for all ARM resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "CheckQuotaAvailabilityResponse": {
+      "type": "object",
+      "description": "Check quota availability response properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
+          "description": "Check quota availability response properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResource"
+        }
+      ]
+    },
+    "CheckQuotaAvailabilityResponseProperties": {
+      "type": "object",
+      "properties": {
+        "isAvailable": {
+          "type": "boolean",
+          "description": "True/False indicating whether the quota request be granted based on availability."
+        },
+        "availabilityStatus": {
+          "type": "string",
+          "description": "Message indicating additional details to add to quota support request."
+        }
+      }
+    },
+    "Dimensions": {
+      "type": "object",
+      "description": "Dimensions for new quota request.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id dimension for new quota request of the quota bucket.",
+          "minLength": 1
+        },
+        "location": {
+          "type": "string",
+          "description": "Location dimension for new quota request of the quota bucket.",
+          "minLength": 1
+        }
+      }
+    },
     "EncryptionProperties": {
       "type": "object",
       "properties": {
@@ -485,6 +676,39 @@
           "description": "key encryption key Url, versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
         }
       }
+    },
+    "EndpointDependency": {
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "endpointDetails": {
+          "$ref": "#/definitions/EndpointDetail"
+        }
+      },
+      "required": [
+        "domainName",
+        "description",
+        "endpointDetails"
+      ]
+    },
+    "EndpointDetail": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "port"
+      ]
     },
     "Identity": {
       "type": "object",
@@ -593,6 +817,90 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionProperties",
           "description": "CMK Encryption property."
+        }
+      }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "endpoints": {
+          "$ref": "#/definitions/EndpointDependency"
+        }
+      },
+      "required": [
+        "category",
+        "endpoints"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResource"
+        }
+      ]
+    },
+    "OutboundEnvironmentEndpointListResult": {
+      "type": "object",
+      "description": "The response of a OutboundEnvironmentEndpoint list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OutboundEnvironmentEndpoint items on this page",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaBucketRequest": {
+      "type": "object",
+      "description": "Request object of new quota for a quota bucket.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaBucketRequestProperties",
+          "description": "Request object of new quota for a quota bucket."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResource"
+        }
+      ]
+    },
+    "QuotaBucketRequestProperties": {
+      "type": "object",
+      "description": "New quota request request properties.",
+      "properties": {
+        "currentUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current quota usage of the quota bucket.",
+          "minimum": 0
+        },
+        "currentQuota": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current quota limit of the quota bucket.",
+          "minimum": 0
+        },
+        "newQuota": {
+          "type": "integer",
+          "format": "int32",
+          "description": "New quota limit of the quota bucket.",
+          "minimum": 0
+        },
+        "dimensions": {
+          "$ref": "#/definitions/Dimensions",
+          "description": "Dimensions for new quota request."
         }
       }
     },
