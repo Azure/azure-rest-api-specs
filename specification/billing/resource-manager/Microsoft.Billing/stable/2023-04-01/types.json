@@ -10,7 +10,7 @@
     },
     "version": "2023-04-01"
   },
-  "paths": {},
+  "paths": { },
   "definitions": {
     "ArmError": {
       "description": "The error detail.",
@@ -38,7 +38,7 @@
             "$ref": "#/definitions/ArmError"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "additionalInfo": {
           "description": "The resource management error additional info.",
@@ -60,7 +60,7 @@
             }
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
       }
     },
@@ -82,11 +82,6 @@
       "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
       "type": "object",
       "properties": {
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
         "id": {
           "description": "Fully qualified resource ID for the resource.",
           "type": "string",
@@ -96,6 +91,18 @@
           "description": "The name of the resource.",
           "type": "string",
           "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"

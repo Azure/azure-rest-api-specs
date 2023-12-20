@@ -3,8 +3,17 @@
     "api-version": "2023-04-01",
     "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
     "billingProfileName": "xxxx-xxxx-xxx-xxx",
-    "invoiceSectionName": "yyyy-yyyy-yyy-yyy",
-    "includeDeleted": true
+    "invoiceSectionName": "invoice-section-1",
+    "parameters": {
+      "properties": {
+        "displayName": "Invoice Section 1",
+        "tags": {
+          "pcCode": "A123456",
+          "costCategory": "Support"
+        }
+      },
+      "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections"
+    }
   },
   "responses": {
     "200": {
@@ -20,6 +29,12 @@
           }
         },
         "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/operationResults/putAssociatedTenant_00000000-0000-0000-0000-000000000000?api-version=2023-04-01",
+        "retry-after": "10"
       }
     }
   }

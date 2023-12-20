@@ -1,7 +1,8 @@
 {
   "parameters": {
     "api-version": "2023-04-01",
-    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31"
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "expand": "enabledAzurePlans,resellers"
   },
   "responses": {
     "200": {
@@ -15,25 +16,29 @@
               "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx",
               "displayName": "customer1",
               "systemId": "yyyy-yyyy-yyy-yyy",
-              "status": "Active"
+              "status": "Active",
+              "enabledAzurePlans": [
+                {
+                  "skuId": "0002",
+                  "skuDescription": "Microsoft Azure Plan for DevTest"
+                }
+              ],
+              "resellers": [
+                {
+                  "resellerId": "89e87bdf-a2a2-4687-925f-4c18b27bccfd",
+                  "description": "Reseller1"
+                },
+                {
+                  "resellerId": "3b65b5a8-bd4f-4084-90e9-e1bd667a2b19",
+                  "description": "Reseller2"
+                }
+              ]
             },
             "type": "Microsoft.Billing/billingAccounts/customers",
             "tags": {
               "pcCode": "A123456",
               "costCategory": "Support"
             }
-          },
-          {
-            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx/customers/22222222-2222-2222-2222-222222222222",
-            "name": "22222222-2222-2222-2222-222222222222",
-            "properties": {
-              "billingProfileDisplayName": "Contoso Operations Billing",
-              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx",
-              "displayName": "customer2",
-              "systemId": "zzzz-zzzz-zzz-zzz",
-              "status": "Active"
-            },
-            "type": "Microsoft.Billing/billingAccounts/customers"
           }
         ]
       }

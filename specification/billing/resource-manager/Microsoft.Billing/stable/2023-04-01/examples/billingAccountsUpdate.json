@@ -2,7 +2,19 @@
   "parameters": {
     "api-version": "2023-04-01",
     "billingAccountName": "10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
-    "expand": "SoldTo"
+    "parameters": {
+      "properties": {
+        "displayName": "Test Account",
+        "soldTo": {
+          "addressLine1": "1 Microsoft Way",
+          "city": "Redmond",
+          "companyName": "Contoso",
+          "country": "US",
+          "postalCode": "98052-8300",
+          "region": "WA"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -32,6 +44,12 @@
           "createdAt": "2023-01-04T22:39:34.2606750Z",
           "lastModifiedAt": "2023-01-05T22:39:34.2606750Z"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://billingrp.trafficmanager.net/providers/Microsoft.Billing/billingAccounts/10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/operationResults/patchBillingAccount_11111111-1111-1111-1111-111111111111?api-version=2023-04-01",
+        "retry-after": "10"
       }
     }
   }
