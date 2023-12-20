@@ -51,53 +51,53 @@
   "paths": {
     "/providers/Microsoft.EdgeZones/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ListOperations": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/microsoftEdgeZones": {
       "get": {
+        "operationId": "MicrosoftEdgeZones_ListBySubscription",
         "tags": [
           "MicrosoftEdgeZones"
         ],
-        "operationId": "MicrosoftEdgeZones_ListBySubscription",
         "description": "Lists the Microsoft Edge Zones for a subscription",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -110,39 +110,39 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ListMicrosoftEdgeZones": {
             "$ref": "./examples/MicrosoftEdgeZones_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/microsoftEdgeZones/{microsoftEdgeZoneName}": {
       "get": {
+        "operationId": "MicrosoftEdgeZones_Get",
         "tags": [
           "MicrosoftEdgeZones"
         ],
-        "operationId": "MicrosoftEdgeZones_Get",
         "description": "Get a Microsoft Edge Zone in the subscription",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "microsoftEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the MicrosoftEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -157,7 +157,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -170,44 +170,47 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/microsoftEdgeZones/{microsoftEdgeZoneName}/register": {
       "post": {
+        "operationId": "MicrosoftEdgeZones_Register",
         "tags": [
           "MicrosoftEdgeZones"
         ],
-        "operationId": "MicrosoftEdgeZones_Register",
         "description": "Registers a subscription for a Microsoft Edge Zone",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "microsoftEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the MicrosoftEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "description": "The content of the action request",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RegisterMicrosoftEdgeZoneRequest"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MicrosoftEdgeZone"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -220,35 +223,38 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/microsoftEdgeZones/{microsoftEdgeZoneName}/unregister": {
       "post": {
+        "operationId": "MicrosoftEdgeZones_Unregister",
         "tags": [
           "MicrosoftEdgeZones"
         ],
-        "operationId": "MicrosoftEdgeZones_Unregister",
         "description": "Unregisters a subscription for a Microsoft Edge Zone",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "microsoftEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the MicrosoftEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MicrosoftEdgeZone"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -261,17 +267,17 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/publicMecEdgeZones": {
       "get": {
+        "operationId": "PublicMecEdgeZones_ListBySubscription",
         "tags": [
           "PublicMecEdgeZones"
         ],
-        "operationId": "PublicMecEdgeZones_ListBySubscription",
         "description": "Lists the Public MEC Edge Zones for a subscription",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -284,39 +290,39 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ListPublicMecEdgeZones": {
             "$ref": "./examples/PublicMecEdgeZones_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/publicMecEdgeZones/{publicMecEdgeZoneName}": {
       "get": {
+        "operationId": "PublicMecEdgeZones_Get",
         "tags": [
           "PublicMecEdgeZones"
         ],
-        "operationId": "PublicMecEdgeZones_Get",
         "description": "Get a Public MEC Edge Zone in the subscription",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "publicMecEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the PublicMecEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
@@ -331,7 +337,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -344,44 +350,47 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/publicMecEdgeZones/{publicMecEdgeZoneName}/register": {
       "post": {
+        "operationId": "PublicMecEdgeZones_Register",
         "tags": [
           "PublicMecEdgeZones"
         ],
-        "operationId": "PublicMecEdgeZones_Register",
         "description": "Registers a subscription for a Public MEC Edge Zone",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "publicMecEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the PublicMecEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "description": "The content of the action request",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RegisterPublicMecEdgeZoneRequest"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MicrosoftEdgeZone"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -394,35 +403,38 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/publicMecEdgeZones/{publicMecEdgeZoneName}/unregister": {
       "post": {
+        "operationId": "PublicMecEdgeZones_Unregister",
         "tags": [
           "PublicMecEdgeZones"
         ],
-        "operationId": "PublicMecEdgeZones_Unregister",
         "description": "Unregisters a subscription for a Public MEC Edge Zone",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "publicMecEdgeZoneName",
             "in": "path",
-            "required": true,
             "description": "The name of the PublicMecEdgeZone",
+            "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicMecEdgeZone"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -437,6 +449,7 @@
   "definitions": {
     "MicrosoftEdgeZone": {
       "type": "object",
+      "description": "A MicrosoftEdgeZone resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/MicrosoftEdgeZoneProperties",
@@ -448,38 +461,36 @@
           ]
         }
       },
-      "description": "A MicrosoftEdgeZone resource",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
     "MicrosoftEdgeZoneListResult": {
       "type": "object",
+      "description": "The response of a MicrosoftEdgeZone list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The MicrosoftEdgeZone items on this page",
           "items": {
             "$ref": "#/definitions/MicrosoftEdgeZone"
-          },
-          "description": "The MicrosoftEdgeZone items on this page",
-          "x-typespec-name": "MicrosoftEdgeZone[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a MicrosoftEdgeZone list operation.",
       "required": [
         "value"
       ]
     },
     "MicrosoftEdgeZoneProperties": {
       "type": "object",
+      "description": "The properties of a MicrosoftEdgeZone Resource",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -496,7 +507,6 @@
           "description": "MicrosoftEdgeZone display name"
         }
       },
-      "description": "The properties of a MicrosoftEdgeZone Resource",
       "required": [
         "displayName"
       ]
@@ -553,10 +563,12 @@
             "description": "Accepted State"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "PublicMecEdgeZone": {
       "type": "object",
+      "description": "A PublicMecEdgeZone resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PublicMecEdgeZoneProperties",
@@ -568,38 +580,36 @@
           ]
         }
       },
-      "description": "A PublicMecEdgeZone resource",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
     "PublicMecEdgeZoneListResult": {
       "type": "object",
+      "description": "The response of a PublicMecEdgeZone list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The PublicMecEdgeZone items on this page",
           "items": {
             "$ref": "#/definitions/PublicMecEdgeZone"
-          },
-          "description": "The PublicMecEdgeZone items on this page",
-          "x-typespec-name": "PublicMecEdgeZone[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a PublicMecEdgeZone list operation.",
       "required": [
         "value"
       ]
     },
     "PublicMecEdgeZoneProperties": {
       "type": "object",
+      "description": "The properties of a PublicMecEdgeZone Resource",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -616,13 +626,13 @@
           "description": "PublicMecEdgeZone display name"
         }
       },
-      "description": "The properties of a PublicMecEdgeZone Resource",
       "required": [
         "displayName"
       ]
     },
     "RegisterMicrosoftEdgeZoneRequest": {
       "type": "object",
+      "description": "A MicrosoftEdgeZone register request body",
       "properties": {
         "organizationName": {
           "type": "string",
@@ -643,24 +653,19 @@
         "organizationAzureResourceCapacityNeeded": {
           "type": "string",
           "description": "Azure resource capacity needed by organization of the Microsoft Edge Zone registration"
-        },
-        "organizationOnboardingStartDate": {
-          "type": "string",
-          "description": "Onboarding start date planned by organization of the Microsoft Edge Zone registration"
         }
       },
-      "description": "A MicrosoftEdgeZone register request body",
       "required": [
         "organizationName",
         "organizationContactName",
         "organizationContactEmailAddress",
         "organizationAzureServicesNeeded",
-        "organizationAzureResourceCapacityNeeded",
-        "organizationOnboardingStartDate"
+        "organizationAzureResourceCapacityNeeded"
       ]
     },
     "RegisterPublicMecEdgeZoneRequest": {
       "type": "object",
+      "description": "A PublicMecEdgeZone register request body",
       "properties": {
         "organizationName": {
           "type": "string",
@@ -693,13 +698,8 @@
         "organizationAzureResourceCapacityNeeded": {
           "type": "string",
           "description": "Azure resource capacity needed by organization of the Public MEC Edge Zone registration"
-        },
-        "organizationOnboardingStartDate": {
-          "type": "string",
-          "description": "Onboarding start date planned by organization of the Public MEC Edge Zone registration"
         }
       },
-      "description": "A PublicMecEdgeZone register request body",
       "required": [
         "organizationName",
         "organizationContactName",
@@ -708,8 +708,7 @@
         "organizationApplicationOnboarding",
         "organizationScenarioIndustry",
         "organizationAzureServicesNeeded",
-        "organizationAzureResourceCapacityNeeded",
-        "organizationOnboardingStartDate"
+        "organizationAzureResourceCapacityNeeded"
       ]
     },
     "RegistrationState": {
@@ -717,8 +716,9 @@
       "description": "The status of the subscription's' Microsoft EdgeZone registration.",
       "enum": [
         "NotRegistered",
-        "PendingApproval",
-        "Registered"
+        "PendingRegister",
+        "Registered",
+        "PendingUnregister"
       ],
       "x-ms-enum": {
         "name": "RegistrationState",
@@ -730,14 +730,19 @@
             "description": "Not Registered State"
           },
           {
-            "name": "PendingApproval",
-            "value": "PendingApproval",
-            "description": "Pending Approval State"
+            "name": "PendingRegister",
+            "value": "PendingRegister",
+            "description": "Pending Register State"
           },
           {
             "name": "Registered",
             "value": "Registered",
             "description": "Registered State"
+          },
+          {
+            "name": "PendingUnregister",
+            "value": "PendingUnregister",
+            "description": "Pending Unregister State"
           }
         ]
       }
