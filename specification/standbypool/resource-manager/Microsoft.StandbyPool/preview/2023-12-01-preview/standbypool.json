@@ -1122,6 +1122,35 @@
         }
       }
     },
+    "StandbyVirtualMachinePoolElasticityProfile": {
+      "type": "object",
+      "description": "Details of the elasticity profile.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of virtual machines in the standby virtual machine pool.",
+          "minimum": 0,
+          "maximum": 2000
+        }
+      },
+      "required": [
+        "maxReadyCapacity"
+      ]
+    },
+    "StandbyVirtualMachinePoolElasticityProfileUpdate": {
+      "type": "object",
+      "description": "Details of the elasticity profile.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of virtual machines in the standby virtual machine pool.",
+          "minimum": 0,
+          "maximum": 2000
+        }
+      }
+    },
     "StandbyVirtualMachinePoolResource": {
       "type": "object",
       "description": "A StandbyVirtualMachinePoolResource.",
@@ -1167,24 +1196,27 @@
       "type": "object",
       "description": "Details of the StandbyVirtualMachinePool.",
       "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of standby VMs. When the pool is attached to VMScaleSets, the limit applies to each VMScaleSet.",
-          "maximum": 2000
+        "elasticityProfile": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfile",
+          "description": "Specifies the elasticity profile of the standby virtual machine pools."
         },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of Virtual Machines in the pool.",
+          "description": "Specifies the desired state of virtual machines in the pool.",
           "x-ms-identifiers": [
             "vmState"
           ]
         },
-        "attachedVirtualMachineScaleSetIds": {
-          "type": "array",
-          "description": "Specifies list of VMScaleSets' fully qualified resource IDs the pool is attached to. When multiple VMScaleSets are specified, standby VMs are created for each VMScaleSet independently.",
-          "items": {
-            "type": "string"
+        "attachedVirtualMachineScaleSetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachineScaleSet"
+              }
+            ]
           }
         },
         "provisioningState": {
@@ -1194,7 +1226,6 @@
         }
       },
       "required": [
-        "maxReadyCapacity",
         "virtualMachineState"
       ]
     },
@@ -1219,24 +1250,27 @@
       "type": "object",
       "description": "The updatable properties of the StandbyVirtualMachinePoolResource.",
       "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of standby VMs. When the pool is attached to VMScaleSets, the limit applies to each VMScaleSet.",
-          "maximum": 2000
+        "elasticityProfile": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfileUpdate",
+          "description": "Specifies the elasticity profile of the standby virtual machine pools."
         },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of Virtual Machines in the pool.",
+          "description": "Specifies the desired state of virtual machines in the pool.",
           "x-ms-identifiers": [
             "vmState"
           ]
         },
-        "attachedVirtualMachineScaleSetIds": {
-          "type": "array",
-          "description": "Specifies list of VMScaleSets' fully qualified resource IDs the pool is attached to. When multiple VMScaleSets are specified, standby VMs are created for each VMScaleSet independently.",
-          "items": {
-            "type": "string"
+        "attachedVirtualMachineScaleSetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachineScaleSet"
+              }
+            ]
           }
         }
       }
@@ -1327,7 +1361,7 @@
           {
             "name": "Running",
             "value": "Running",
-            "description": "Virtual machine is up and running."
+            "description": "The virtual machine is up and running."
           },
           {
             "name": "Deallocated",
