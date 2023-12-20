@@ -202,20 +202,21 @@
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
           "description": "The version of the installed package, null or absent means not installed."
         },
-        "resourceId": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
-          "description": "The metadata resource id."
+        "metadataResourceId": {
+          "description": "The metadata resource id.",
+          "type": "string",
+          "format": "arm-id"
         },
         "packagedContent": {
           "$ref": "#/definitions/packagedContent",
-          "description": "The json to deploy. Expandable."
+          "description": "The json of the ARM template to deploy. Expandable."
         }
       },
       "type": "object"
     },
     "packagedContent": {
       "type": "object",
-      "description": "the json to deploy"
+      "description": "The json of the ARM template to deploy"
     }
   },
   "parameters": {
