@@ -524,7 +524,7 @@ model AnalyzeImageWithTextResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@added(ContentSafety.Versions.v2023_11_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("Domain.")
 enum Domain {
   Generic,
@@ -532,14 +532,14 @@ enum Domain {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@added(ContentSafety.Versions.v2023_11_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("Task type.")
 enum Task {
   Summarization,
   QnA,
 }
 
-@added(Versions.v2023_11_30_Preview)
+@added(Versions.v2023_10_30_Preview)
 @doc("Connection details for the GPT resource.")
 model GptResource {
   @doc("Endpoint of Azure OpenAI resource.")
@@ -549,7 +549,7 @@ model GptResource {
   deploymentName: string;
 }
 
-@added(Versions.v2023_11_30_Preview)
+@added(Versions.v2023_10_30_Preview)
 @doc("The request of ungroudedness detection.")
 model DetectUngroundednessOptions {
   @doc("""
@@ -589,7 +589,7 @@ model DetectUngroundednessOptions {
   gptResource?: GptResource;
 }
 
-@added(Versions.v2023_11_30_Preview)
+@added(Versions.v2023_10_30_Preview)
 @doc("The detailed information about a text identified as ungrounded.")
 model UngroundedDetails {
   @doc("The ungrounded text.")
@@ -602,7 +602,7 @@ model UngroundedDetails {
   reason?: string;
 }
 
-@added(Versions.v2023_11_30_Preview)
+@added(Versions.v2023_10_30_Preview)
 @doc("The response of ungroudedness detection.")
 model DetectUngroundednessResult {
   @doc("Detection result for ungrouded text.")

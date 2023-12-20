@@ -1593,6 +1593,47 @@
           }
         }
       }
+    },
+    "/text:detectUngroundedness": {
+      "post": {
+        "operationId": "TextUngroundednessDetectionOperations_DetectUngroundedness",
+        "summary": "Detect Ungrounded Information",
+        "description": "A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The ungroundedness detection request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectUngroundednessOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectUngroundednessResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2071,6 +2112,111 @@
           "description": "Inner error."
         }
       }
+    },
+    "DetectUngroundednessOptions": {
+      "type": "object",
+      "description": "The request of ungroudedness detection.",
+      "properties": {
+        "domain": {
+          "$ref": "#/definitions/Domain",
+          "description": "The domain of the text for analysis.\nThis field is optional, with a default value of Generic."
+        },
+        "task": {
+          "$ref": "#/definitions/Task",
+          "description": "The task type for the text analysis.\nThis field is optional, with a default value of Summarization."
+        },
+        "query": {
+          "type": "string",
+          "description": "The user's question input in a QnA scenario.\nThis field is optional, but if the Task type is set to QnA, it becomes required."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text requiring analysis."
+        },
+        "groundingSources": {
+          "type": "array",
+          "description": "The source information used as a grounding reference.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reasoning": {
+          "type": "boolean",
+          "description": "A value indicating if the output includes an explanation for the identified ungroundedness.\nThis field is optional, with a default value of false."
+        },
+        "gptResource": {
+          "$ref": "#/definitions/GptResource",
+          "description": "Connection details for the GPT resource. \nThis field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored."
+        }
+      },
+      "required": [
+        "text",
+        "groundingSources"
+      ]
+    },
+    "DetectUngroundednessResult": {
+      "type": "object",
+      "description": "The response of ungroudedness detection.",
+      "properties": {
+        "ungrounded": {
+          "type": "boolean",
+          "description": "Detection result for ungrouded text."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence score of the model in the analysis results."
+        },
+        "ungroundedPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of ungrounded Text."
+        },
+        "ungroundedDetails": {
+          "type": "array",
+          "description": "The detailed information about a text identified as ungrounded.",
+          "items": {
+            "$ref": "#/definitions/UngroundedDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "ungrounded",
+        "confidenceScore",
+        "ungroundedPercentage",
+        "ungroundedDetails"
+      ]
+    },
+    "Domain": {
+      "type": "string",
+      "description": "Domain.",
+      "enum": [
+        "Generic",
+        "Medical"
+      ],
+      "x-ms-enum": {
+        "name": "Domain",
+        "modelAsString": true
+      }
+    },
+    "GptResource": {
+      "type": "object",
+      "description": "Connection details for the GPT resource.",
+      "properties": {
+        "azureOpenAIEndpoint": {
+          "type": "string",
+          "description": "Endpoint of Azure OpenAI resource."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "Deployment model name."
+        }
+      },
+      "required": [
+        "azureOpenAIEndpoint",
+        "deploymentName"
+      ]
     },
     "ImageCategoriesAnalysis": {
       "type": "object",
@@ -2578,6 +2724,18 @@
         "statements"
       ]
     },
+    "Task": {
+      "type": "string",
+      "description": "Task type.",
+      "enum": [
+        "Summarization",
+        "QnA"
+      ],
+      "x-ms-enum": {
+        "name": "Task",
+        "modelAsString": true
+      }
+    },
     "TextBlocklist": {
       "type": "object",
       "description": "Text Blocklist.",
@@ -2831,6 +2989,23 @@
       },
       "required": [
         "incidentSampleId"
+      ]
+    },
+    "UngroundedDetails": {
+      "type": "object",
+      "description": "The detailed information about a text identified as ungrounded.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The ungrounded text."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The explanation for identifying the text as ungrounded. \nOnly when the 'reasoning' field in the input is set to true will the API return this 'reason' field."
+        }
+      },
+      "required": [
+        "text"
       ]
     }
   },
