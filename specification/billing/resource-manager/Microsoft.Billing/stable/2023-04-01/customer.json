@@ -46,7 +46,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -55,9 +55,6 @@
         "x-ms-examples": {
           "CustomersGet": {
             "$ref": "./examples/customersGet.json"
-          },
-          "CustomersGetWithExpand": {
-            "$ref": "./examples/customersGetWithExpand.json"
           }
         }
       }
@@ -88,7 +85,7 @@
           {
             "in": "query",
             "name": "expand",
-            "description": "May be used to expand enabledAzurePlans and resellers.",
+            "description": "May be used to expand enabledAzurePlans and resellers",
             "type": "string"
           },
           {
@@ -118,7 +115,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -157,7 +154,7 @@
           {
             "in": "query",
             "name": "expand",
-            "description": "May be used to expand enabledAzurePlans and resellers.",
+            "description": "May be used to expand enabledAzurePlans and resellers",
             "type": "string"
           },
           {
@@ -187,7 +184,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -196,6 +193,9 @@
         "x-ms-examples": {
           "CustomersListByBillingAccount": {
             "$ref": "./examples/customersListByBillingAccount.json"
+          },
+          "CustomersListByBillingAccountWithExpand": {
+            "$ref": "./examples/customersListByBillingAccountWithExpand.json"
           }
         },
         "x-ms-pageable": {
@@ -267,6 +267,29 @@
           "type": "string",
           "readOnly": true
         },
+        "systemId": {
+          "description": "The system generated unique identifier for a customer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Identifies the status of an customer. This is an upcoming property that will be populated in the future.",
+          "enum": [
+            "Other",
+            "Active",
+            "Pending",
+            "Disabled",
+            "Warned",
+            "Deleted",
+            "UnderReview"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CustomerStatus",
+            "modelAsString": true
+          }
+        },
         "enabledAzurePlans": {
           "description": "Azure plans enabled for the customer.",
           "type": "array",
@@ -282,13 +305,6 @@
             "$ref": "./types.json#/definitions/Reseller"
           },
           "x-ms-identifiers": []
-        },
-        "tags": {
-          "description": "Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     }
