@@ -258,7 +258,6 @@ model MessageReceipt {
   to: string;
 }
 
-@access(Access.public, "csharp")
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateResponse {
   @doc("""
@@ -293,7 +292,6 @@ model Stream {
   contentType: "application/octect-stream";
 }
 
-@access(Access.public, "csharp")
 @resource("templates")
 @parentResource(CommunicationChannel)
 @doc("The Message Template Response.")
