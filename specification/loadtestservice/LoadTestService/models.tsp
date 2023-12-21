@@ -33,8 +33,7 @@ enum PFAgFunc {
 
 @doc("Action to take on failure of pass/fail criteria.")
 enum PFAction {
-  @doc("Test will continue to run even if pass fail metric criteria metric gets failed.")
-  continue,
+  @doc("Test will continue to run even if pass fail metric criteria metric gets failed.") continue,
   @doc("Test run will stop if pass fail criteria metric is not passed.") stop,
 }
 
@@ -58,17 +57,12 @@ enum CertificateType {
 
 @doc("Types of file supported.")
 enum FileType {
-  @doc("If the file is a JMX script.")
-  JMX_FILE,
-
-  @doc("If the file is a user properties file.")
-  USER_PROPERTIES,
-
-  @doc("If the file is not among any of the other supported file types.")
-  ADDITIONAL_ARTIFACTS,
+  @doc("If the file is a JMX script.") JMX_FILE,
+  @doc("If the file is a user properties file.") USER_PROPERTIES,
+  @doc("If the file is not among any of the other supported file types.") ADDITIONAL_ARTIFACTS,
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("If the file is a compressed archive containing a collection of various artifacts or resources.")
+  @doc("If the file is a compressed archive containing a collection of various artifacts or resources.") 
   ZIPPED_ARTIFACTS,
 
   @added(APIVersions.v2023_04_01_preview)
@@ -137,30 +131,18 @@ enum MetricUnit {
 
 @doc("Time Grain")
 enum TimeGrain {
-  @doc("5 seconds, available only if test run duration is less than 10 minutes.")
-  PT5S,
-
-  @doc("10 seconds, available only if test run duration is less than 10 minutes.")
-  PT10S,
-
-  @doc("1 minute")
-  PT1M,
-
-  @doc("5 minutes, available only if test run duration is greater than 1 minute.")
-  PT5M,
-
-  @doc("1 hour, available only if test run duration is greater than 1 minute.")
-  PT1H,
+  @doc("5 seconds, available only if test run duration is less than 10 minutes.") PT5S,
+  @doc("10 seconds, available only if test run duration is less than 10 minutes.") PT10S,
+  @doc("1 minute") PT1M,
+  @doc("5 minutes, available only if test run duration is greater than 1 minute.") PT5M,
+  @doc("1 hour, available only if test run duration is greater than 1 minute.") PT1H,
 }
 
 @added(APIVersions.v2023_04_01_preview)
 @doc("Test kind")
 enum TestKind {
-  @doc("URL Test")
-  URL,
-
-  @doc("JMX Test")
-  JMX,
+  @doc("URL Test") URL,
+  @doc("JMX Test") JMX,
 }
 
 @doc("Test file info.")
