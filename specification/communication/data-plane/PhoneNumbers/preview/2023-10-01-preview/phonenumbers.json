@@ -698,6 +698,67 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Browse, reserve and purchase available phone numbers"
+        ],
+        "summary": "Updates a reservation by its ID. This only supports adding or removing phone numbers from the reservation. Note that this does not support bulk operations.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "PhoneNumbers_UpdateReservation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "reservationId",
+            "description": "The id of the reservation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "reservation",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbersReservation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbersReservation"
+            }
+          },
+          "409": {
+            "description": "Conflict while updating reservation. This can happen if multiple requests to update the reservation are processed at the same time.",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add to reservation": {
+            "$ref": "./examples/AddToReservation.json"
+          },
+          "Remove from reservation": {
+            "$ref": "./examples/RemoveFromReservation.json"
+          }
+        }
+      },
       "get": {
         "tags": [
           "Browse, reserve and purchase available phone numbers"
@@ -774,121 +835,6 @@
         "x-ms-examples": {
           "Delete reservation": {
             "$ref": "./examples/DeleteReservation.json"
-          }
-        }
-      }
-    },
-    "/availablePhoneNumbers/reservations/{reservationId}/:add": {
-      "post": {
-        "tags": [
-          "Browse, reserve and purchase available phone numbers"
-        ],
-        "summary": "Reserves an available phone number. This will lock the number and make it unavailable for others to purchase. If the reservation is deleted or expires, it will be released and made available for others to purchase.",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "PhoneNumbers_AddToReservation",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "reservationId",
-            "description": "The id of the reservation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "availablePhoneNumber",
-            "schema": {
-              "$ref": "#/definitions/AvailablePhoneNumber"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The updated reservation after the phone number was successfully locked and added to it.",
-            "schema": {
-              "$ref": "#/definitions/PhoneNumbersReservation"
-            }
-          },
-          "409": {
-            "description": "Conflict while adding phone number to reservation. This can happen if multiple requests to update the reservation are processed at the same time.",
-            "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Add phone number to reservation": {
-            "$ref": "./examples/AddToReservation.json"
-          }
-        }
-      }
-    },
-    "/availablePhoneNumbers/reservations/{reservationId}/:remove": {
-      "post": {
-        "tags": [
-          "Browse, reserve and purchase available phone numbers"
-        ],
-        "summary": "Removes a phone number from a reservation, making it available for others to purchase.",
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "PhoneNumbers_RemoveFromReservation",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "reservationId",
-            "description": "The id of the reservation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "phoneNumber",
-            "description": "The phone number to remove from the reservation.",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The updated reservation after the phone number was successfully unlocked and removed.",
-            "schema": {
-              "$ref": "#/definitions/PhoneNumbersReservation"
-            }
-          },
-          "409": {
-            "description": "Conflict while removing the phone number from the reservation. This can happen if multiple requests to update the reservation are processed at the same time.",
-            "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Remove phone number from reservation": {
-            "$ref": "./examples/RemoveFromReservation.json"
           }
         }
       }
@@ -1991,7 +1937,8 @@
       "properties": {
         "id": {
           "description": "The id of the phone number.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "countryCode": {
           "description": "The ISO 3166-2 country code, e.g. US.",
@@ -2077,8 +2024,8 @@
           "readOnly": true
         },
         "phoneNumbers": {
-          "type": "array",
-          "items": {
+          "type": "object",
+          "additionalProperties": {
             "$ref": "#/definitions/AvailablePhoneNumber"
           }
         },

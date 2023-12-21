@@ -3,15 +3,18 @@
     "api-version": "2023-10-01-preview",
     "endpoint": "https://resourcename.communication.azure.com/",
     "reservationId": "65c18c7f-8074-4efb-a572-e0df127a9964",
-    "availablePhoneNumber": {
-      "id": "11234567890",
-      "countryCode": "US",
-      "capabilities": {
-        "calling": "outbound",
-        "sms": "none"
-      },
-      "phoneNumberType": "geographic",
-      "assignmentType": "person"
+    "reservation": {
+      "phoneNumbers": {
+        "11234561230": {
+          "countryCode": "US",
+          "capabilities": {
+            "calling": "outbound",
+            "sms": "none"
+          },
+          "phoneNumberType": "geographic",
+          "assignmentType": "person"
+        }
+      }
     }
   },
   "responses": {
@@ -19,8 +22,8 @@
       "body": {
         "id": "65c18c7f-8074-4efb-a572-e0df127a9964",
         "expiresAt": "2023-08-23T22:29:17.092Z",
-        "phoneNumbers": [
-          {
+        "phoneNumbers": {
+          "11234567890": {
             "id": "11234567890",
             "countryCode": "US",
             "phoneNumber": "+11234567890",
@@ -35,8 +38,24 @@
               "currencyCode": "USD",
               "billingFrequency": "monthly"
             }
+          },
+          "11234561230": {
+            "id": "11234561230",
+            "countryCode": "US",
+            "phoneNumber": "+11234561230",
+            "capabilities": {
+              "calling": "outbound",
+              "sms": "none"
+            },
+            "phoneNumberType": "geographic",
+            "assignmentType": "person",
+            "cost": {
+              "amount": 1,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            }
           }
-        ],
+        },
         "status": "active"
       }
     },
