@@ -480,16 +480,8 @@
           "type": "string"
         },
         "source": {
-          "description": "The source of the watchlist",
-          "enum": [
-            "Local file",
-            "Remote storage"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "source"
-          }
+          "description": "The source of the watchlist. Only accepts \"Local file\" and \"Remote storage\". And it must included in the request.",
+          "type": "string"
         },
         "created": {
           "description": "The time the watchlist was created",
@@ -567,7 +559,6 @@
       },
       "required": [
         "displayName",
-        "source",
         "provider",
         "itemsSearchKey"
       ],

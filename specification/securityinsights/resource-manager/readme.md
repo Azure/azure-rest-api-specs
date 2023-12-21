@@ -41,11 +41,16 @@ input-file:
   - Microsoft.SecurityInsights/stable/2023-11-01/AlertRules.json
   - Microsoft.SecurityInsights/stable/2023-11-01/AutomationRules.json
   - Microsoft.SecurityInsights/stable/2023-11-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/ContentTemplates.json
   - Microsoft.SecurityInsights/stable/2023-11-01/DataConnectors.json
   - Microsoft.SecurityInsights/stable/2023-11-01/Incidents.json
   - Microsoft.SecurityInsights/stable/2023-11-01/Metadata.json
   - Microsoft.SecurityInsights/stable/2023-11-01/OnboardingStates.json
   - Microsoft.SecurityInsights/stable/2023-11-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2023-11-01/SourceControls.json
   - Microsoft.SecurityInsights/stable/2023-11-01/ThreatIntelligence.json
   - Microsoft.SecurityInsights/stable/2023-11-01/Watchlists.json
   - Microsoft.SecurityInsights/stable/2023-11-01/operations.json
