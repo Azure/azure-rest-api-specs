@@ -69,14 +69,8 @@ model PolicyList is Azure.Core.Page<Policy>;
 /** Purview RBAC policy */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Special ARM resource with no property bag"
 @extensionResource
+@segment("policies")
 model Policy extends Azure.ResourceManager.Foundations.ProxyResourceBase {
-  /** The policy name */
-  @segment("policies")
-  @key("policyname")
-  @visibility("read")
-  @path
-  name: string;
-
   /** The policy kind */
   kind?: string;
 
