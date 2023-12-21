@@ -400,6 +400,23 @@
         }
       }
     },
+    "ApplicationProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the application. Example: Fortnite."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the application."
+        },
+        "legalName": {
+          "type": "string",
+          "description": "Legal name of the organization owning the application."
+        }
+      }
+    },
     "OperatorConnection": {
       "type": "object",
       "description": "A Programmable Connectivity Operator Connection resource",
@@ -480,13 +497,18 @@
           "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "configuredApplication": {
+          "description": "Details about the Application that would use the Operator's Network APIs.",
+          "$ref": "#/definitions/ApplicationProperties"
         }
       },
       "required": [
         "gatewayId",
         "operatorOfferingId",
         "selectedApis",
-        "accountType"
+        "accountType",
+        "configuredApplication"
       ]
     },
     "OperatorConnectionUpdate": {
