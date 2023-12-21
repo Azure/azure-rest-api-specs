@@ -469,6 +469,9 @@
         "x-ms-examples": {
           "ClustersUpgradeAKSPatchVersion": {
             "$ref": "./examples/UpgradeAKSPatchVersionForCluster.json"
+          },
+          "ClustersUpgradeHotfix": {
+            "$ref": "./examples/UpgradeHotfixForCluster.json"
           }
         },
         "parameters": [
@@ -3853,7 +3856,8 @@
         "upgradeType": {
           "description": "Type of upgrade.",
           "enum": [
-            "AKSPatchUpgrade"
+            "AKSPatchUpgrade",
+            "Hotfix"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3877,6 +3881,34 @@
       ],
       "properties": {},
       "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterHotfixUpgradeProperties": {
+      "description": "Properties of upgrading cluster's hotfix.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "targetOssVersion": {
+          "description": "Target oss version of componet to be upgraded.",
+          "type": "string"
+        },
+        "targetClusterVersion": {
+          "description": "Target cluster version of componet to be upgraded.",
+          "type": "string"
+        },
+        "targetBuildNumber": {
+          "description": "Target build number of componet to be upgraded.",
+          "type": "string"
+        },
+        "componentName": {
+          "description": "Name of componet to be upgraded.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Hotfix"
     }
   },
   "parameters": {
