@@ -5,13 +5,13 @@ using Azure.ClientGenerator.Core;
 using PurviewDataMap;
 
 @TypeSpec.Versioning.useDependency(PurviewDataMap.ApiVersions.v2023_09_01)
-namespace Customizations;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @client({
   name: "DataMapClient",
   service: PurviewDataMap,
 })
+namespace Customizations;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
 interface Entity {
   createOrUpdate is PurviewDataMap.Entity.createOrUpdate;
@@ -103,6 +103,7 @@ interface Lineage {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@operationGroup
 interface Relationship {
   create is PurviewDataMap.Relationship.create;
   update is PurviewDataMap.Relationship.update;
