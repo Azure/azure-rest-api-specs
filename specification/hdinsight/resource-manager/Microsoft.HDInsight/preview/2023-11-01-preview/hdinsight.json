@@ -3720,7 +3720,8 @@
         "upgradeType": {
           "description": "Type of upgrade.",
           "enum": [
-            "AKSPatchUpgrade"
+            "AKSPatchUpgrade",
+            "HotfixUpgrade"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3765,6 +3766,73 @@
         }
       },
       "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterAvailableUpgradeHotfixUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster available hotfix version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Hotfix version upgrade description."
+        },
+        "sourceOssVersion": {
+          "description": "Source OSS version of current cluster component.",
+          "type": "string"
+        },
+        "sourceClusterVersion": {
+          "description": "Source cluster version of current cluster component.",
+          "type": "string"
+        },
+        "sourceBuildNumber": {
+          "description": "Source build number of current cluster component.",
+          "type": "string"
+        },
+        "targetOssVersion": {
+          "description": "Target OSS version of component to be upgraded.",
+          "type": "string"
+        },
+        "targetClusterVersion": {
+          "description": "Target cluster version of component to be upgraded.",
+          "type": "string"
+        },
+        "targetBuildNumber": {
+          "description": "Target build number of component to be upgraded.",
+          "type": "string"
+        },
+        "componentName": {
+          "description": "Name of component to be upgraded.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity of this upgrade.",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "extendedProperties": {
+          "description": "Extended properties of current available upgrade version",
+          "type": "string"
+        },
+        "createdTime": {
+          "description": "Created time of current available upgrade version",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "x-ms-discriminator-value": "HotfixUpgrade"
     },
     "ClusterPoolUpgrade": {
       "description": "Cluster Pool Upgrade.",
