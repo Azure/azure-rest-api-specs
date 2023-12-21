@@ -3,9 +3,9 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./EdgeOrderAddress.tsp";
-import "./EdgeOrder.tsp";
-import "./EdgeOrderItem.tsp";
+import "./AddressResource.tsp";
+import "./OrderResource.tsp";
+import "./OrderItemResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

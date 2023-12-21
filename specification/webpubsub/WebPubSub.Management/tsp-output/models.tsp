@@ -458,9 +458,7 @@ model PublicNetworkAcls {
 }
 
 @doc("ACL for a private endpoint")
-model PrivateEndpointACL {
-  ...PublicNetworkAcls;
-
+model PrivateEndpointACL extends PublicNetworkAcls {
   @doc("Name of the private endpoint connection")
   name: string;
 }
@@ -569,9 +567,7 @@ model WebPubSubKeys {
 model PrivateLinkResourceList is Azure.Core.Page<WebPubSubPrivateLink>;
 
 @doc("Private link resource")
-model WebPubSubPrivateLink {
-  ...ProxyResource;
-
+model WebPubSubPrivateLink extends ProxyResource {
   @doc("Private link resource properties")
   properties?: PrivateLinkResourceProperties;
 }

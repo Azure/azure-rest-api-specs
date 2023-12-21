@@ -20,7 +20,7 @@ model DatabaseMigrationSqlVm
 }
 
 @armResourceOperations
-interface DatabaseMigrationSqlVms {
+interface DatabaseMigrationsSqlVm {
   @doc("Retrieve the specified database migration for a given SQL VM.")
   get is ArmResourceRead<
     DatabaseMigrationSqlVm,

@@ -3,9 +3,9 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./MaintenancePublicConfiguration.tsp";
 import "./MaintenanceConfiguration.tsp";
-import "./MaintenanceApplyUpdate.tsp";
+import "./MaintenanceConfiguration.tsp";
+import "./ApplyUpdate.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

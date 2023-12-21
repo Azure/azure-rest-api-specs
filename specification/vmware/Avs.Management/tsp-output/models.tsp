@@ -478,9 +478,7 @@ model Quota {
 }
 
 @doc("The properties of a private cloud resource")
-model PrivateCloudProperties {
-  ...PrivateCloudUpdateProperties;
-
+model PrivateCloudProperties extends PrivateCloudUpdateProperties {
   @doc("The provisioning state")
   @visibility("read")
   provisioningState?: PrivateCloudProvisioningState;
@@ -569,9 +567,7 @@ model Endpoints {
 }
 
 @doc("The properties of a management cluster")
-model ManagementCluster {
-  ...CommonClusterProperties;
-}
+model ManagementCluster extends CommonClusterProperties {}
 
 @doc("The common properties of a cluster")
 model CommonClusterProperties {
@@ -683,9 +679,7 @@ model PrivateCloudIdentity {
 }
 
 @doc("The properties of a cluster")
-model ClusterProperties {
-  ...CommonClusterProperties;
-}
+model ClusterProperties extends CommonClusterProperties {}
 
 @doc("List of all zones and associated hosts for a cluster")
 @pagedResult

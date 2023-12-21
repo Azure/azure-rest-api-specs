@@ -21,7 +21,7 @@ model DscNodeConfiguration is ProxyResource<DscNodeConfigurationProperties> {
 }
 
 @armResourceOperations
-interface DscNodeConfigurations {
+interface DscNodeConfiguration {
   @doc("Retrieve the Dsc node configurations by node configuration.")
   get is ArmResourceRead<DscNodeConfiguration>;
   @doc("Create the node configuration identified by node configuration name.")

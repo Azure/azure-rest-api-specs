@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./ElasticMonitorResource.tsp";
-import "./MonitoringTagRule.tsp";
+import "./MonitoringTagRules.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

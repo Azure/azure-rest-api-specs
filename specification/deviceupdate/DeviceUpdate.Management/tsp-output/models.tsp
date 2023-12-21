@@ -244,9 +244,7 @@ model DiagnosticStorageProperties {
 }
 
 @doc("The properties for a group information object")
-model GroupInformationProperties {
-  ...PrivateLinkResourceProperties;
-
+model GroupInformationProperties extends PrivateLinkResourceProperties {
   @doc("The provisioning state of private link group ID.")
   @visibility("read")
   provisioningState?: GroupIdProvisioningState;
@@ -344,9 +342,8 @@ model PrivateLinkServiceProxy {
 }
 
 @doc("Remote private endpoint connection details.")
-model PrivateLinkServiceProxyRemotePrivateEndpointConnection {
-  ...RemotePrivateEndpointConnection;
-}
+model PrivateLinkServiceProxyRemotePrivateEndpointConnection
+  extends RemotePrivateEndpointConnection {}
 
 @doc("Remote private endpoint connection details.")
 model RemotePrivateEndpointConnection {

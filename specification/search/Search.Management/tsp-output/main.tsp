@@ -4,8 +4,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./SearchService.tsp";
-import "./SearchPrivateEndpointConnection.tsp";
-import "./SharedSearchServicePrivateLinkResource.tsp";
+import "./PrivateEndpointConnection.tsp";
+import "./SharedPrivateLinkResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

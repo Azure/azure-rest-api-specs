@@ -66,8 +66,16 @@ interface HostPools {
     void,
     RegistrationInfo
   >;
+}
+
+@armResourceOperations
+interface MsixImages {
   @doc("Expands and Lists MSIX packages in an Image, given the Image Path.")
   expand is ArmResourceActionSync<HostPool, MsixImageURI, ExpandMsixImageList>;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
   @doc("List the private link resources available for this hostpool.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateLinkResources")
   @get
@@ -104,7 +112,10 @@ interface HostPools {
     },
     PrivateLinkResourceListResult
   >;
+}
 
+@armResourceOperations
+interface ScalingPlans {
   @doc("List scaling plan associated with hostpool.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/scalingPlans")
   @get
@@ -141,7 +152,10 @@ interface HostPools {
     },
     ScalingPlanList
   >;
+}
 
+@armResourceOperations
+interface UserSessions {
   @doc("List userSessions.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/userSessions")
   @get

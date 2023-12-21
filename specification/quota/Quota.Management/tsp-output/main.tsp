@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./CurrentUsagesBase.tsp";
 import "./CurrentQuotaLimitBase.tsp";
-import "./QuotaRequestDetail.tsp";
+import "./QuotaRequestDetails.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

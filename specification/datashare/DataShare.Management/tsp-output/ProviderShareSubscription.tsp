@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./DataShare.tsp";
+import "./Share.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.DataShare;
 @doc("A provider side share subscription data transfer object.")
-@parentResource(DataShare)
+@parentResource(Share)
 model ProviderShareSubscription
   is ProxyResource<ProviderShareSubscriptionProperties> {
   @doc("To locate shareSubscription")

@@ -34,6 +34,10 @@ interface InstancePools {
   listByResourceGroup is ArmResourceListByParent<InstancePool>;
   @doc("Gets a list of all instance pools in the subscription.")
   list is ArmListBySubscription<InstancePool>;
+}
+
+@armResourceOperations
+interface Usages {
   @doc("Gets all instance pool usage metrics")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/usages")
   @get
@@ -57,7 +61,10 @@ interface InstancePools {
     },
     UsageListResult
   >;
+}
 
+@armResourceOperations
+interface ManagedInstances {
   @doc("Gets a list of all managed instances in an instance pool.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/managedInstances")
   @get

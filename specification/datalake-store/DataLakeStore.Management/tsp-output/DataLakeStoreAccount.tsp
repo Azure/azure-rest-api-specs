@@ -21,7 +21,7 @@ model DataLakeStoreAccount is ProxyResource<DataLakeStoreAccountProperties> {
 }
 
 @armResourceOperations
-interface DataLakeStoreAccounts {
+interface Accounts {
   @doc("Gets the specified Data Lake Store account.")
   get is ArmResourceRead<DataLakeStoreAccount>;
   @doc("Creates the specified Data Lake Store account.")

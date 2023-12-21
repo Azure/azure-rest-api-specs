@@ -22,7 +22,7 @@ model WebPubSub is TrackedResource<WebPubSubProperties> {
 }
 
 @armResourceOperations
-interface WebPubSubs {
+interface WebPubSub {
   @doc("Get the resource and its properties.")
   get is ArmResourceRead<WebPubSub>;
   @doc("Create or update a resource.")
@@ -63,7 +63,10 @@ interface WebPubSubs {
     },
     SkuList
   >;
+}
 
+@armResourceOperations
+interface WebPubSubPrivateLinkResources {
   @doc("Get the private link resources that need to be created for a resource.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/privateLinkResources")
   @get

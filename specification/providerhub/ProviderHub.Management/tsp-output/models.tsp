@@ -290,8 +290,8 @@ model TrafficRegions {
   regions?: string[];
 }
 
-model ProviderRegistrationProperties {
-  ...ResourceProviderManifestProperties;
+model ProviderRegistrationProperties
+  extends ResourceProviderManifestProperties {
   providerHubMetadata?: ProviderHubMetadata;
   provisioningState?: ProvisioningState;
   subscriptionLifecycleNotificationSpecifications?: SubscriptionLifecycleNotificationSpecifications;
@@ -535,9 +535,7 @@ model TypedErrorInfo {
 }
 
 @doc("Standard error object.")
-model ErrorResponseError {
-  ...Error;
-}
+model ErrorResponseError extends Error {}
 
 @doc("Standard error object.")
 model Error {
@@ -563,14 +561,10 @@ model Error {
 }
 
 @doc("Object containing more specific information than  the current object about the error.")
-model ErrorInnerError {
-  ...InnerError;
-}
+model ErrorInnerError extends InnerError {}
 
 @doc("Inner error containing list of errors.")
-model InnerError {
-  ...Record<Record<unknown>>;
-
+model InnerError extends Record<Record<unknown>> {
   @doc("Specific error code than was provided by the containing error.")
   @visibility("read")
   code?: string;
@@ -602,13 +596,11 @@ model CanaryTrafficRegionRolloutConfiguration {
   regions?: string[];
 }
 
-model TrafficRegionRolloutConfiguration {
-  ...TrafficRegions;
+model TrafficRegionRolloutConfiguration extends TrafficRegions {
   waitDuration?: duration;
 }
 
-model DefaultRolloutStatus {
-  ...RolloutStatusBase;
+model DefaultRolloutStatus extends RolloutStatusBase {
   nextTrafficRegion?: TrafficRegionCategory;
 
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -809,13 +801,9 @@ model OperationsDefinition {
 }
 
 @doc("Display information of the operation.")
-model OperationsDefinitionDisplay {
-  ...OperationsDisplayDefinition;
-}
+model OperationsDefinitionDisplay extends OperationsDisplayDefinition {}
 
-model OperationsContent {
-  ...Resource;
-
+model OperationsContent extends Resource {
   @doc("Operations content.")
   properties?: OperationsDefinition;
 }

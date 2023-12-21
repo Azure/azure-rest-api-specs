@@ -22,7 +22,7 @@ model ManagedPrivateEndpointModel
 }
 
 @armResourceOperations
-interface ManagedPrivateEndpointModels {
+interface ManagedPrivateEndpoints {
   @doc("Get a specific managed private endpoint of a grafana resource.")
   get is ArmResourceRead<ManagedPrivateEndpointModel>;
   @doc("Create or update a managed private endpoint for a grafana resource.")

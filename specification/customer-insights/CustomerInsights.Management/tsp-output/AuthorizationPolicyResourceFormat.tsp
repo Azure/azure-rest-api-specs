@@ -21,7 +21,7 @@ model AuthorizationPolicyResourceFormat is ProxyResource<AuthorizationPolicy> {
 }
 
 @armResourceOperations
-interface AuthorizationPolicyResourceFormats {
+interface AuthorizationPolicies {
   @doc("Gets an authorization policy in the hub.")
   get is ArmResourceRead<AuthorizationPolicyResourceFormat>;
   @doc("Creates an authorization policy or updates an existing authorization policy.")

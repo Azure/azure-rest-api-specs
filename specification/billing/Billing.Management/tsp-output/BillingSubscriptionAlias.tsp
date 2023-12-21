@@ -21,7 +21,7 @@ model BillingSubscriptionAlias
 }
 
 @armResourceOperations
-interface BillingSubscriptionAliases {
+interface BillingSubscriptionsAliases {
   @doc("Gets a subscription by its alias ID.  The operation is supported for seat based billing subscriptions.")
   get is ArmResourceRead<BillingSubscriptionAlias>;
   @doc("Creates or updates a billing subscription by its alias ID.  The operation is supported for seat based billing subscriptions.")

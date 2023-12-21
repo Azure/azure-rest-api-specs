@@ -23,7 +23,7 @@ model ServiceBusRule is ProxyResource<Ruleproperties> {
 }
 
 @armResourceOperations
-interface ServiceBusRules {
+interface Rules {
   @doc("Retrieves the description for the specified rule.")
   get is ArmResourceRead<ServiceBusRule>;
   @doc("Creates a new rule and updates an existing rule")

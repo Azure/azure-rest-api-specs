@@ -21,7 +21,7 @@ model ConnectorResourceFormat is ProxyResource<Connector> {
 }
 
 @armResourceOperations
-interface ConnectorResourceFormats {
+interface Connectors {
   @doc("Gets a connector in the hub.")
   get is ArmResourceRead<ConnectorResourceFormat>;
   @doc("Creates a connector or updates an existing connector in the hub.")

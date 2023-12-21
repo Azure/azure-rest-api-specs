@@ -1076,9 +1076,7 @@ model SavingsPlanPurchaseRequestProperties {
 }
 
 @doc("Commitment towards the benefit.")
-model Commitment {
-  ...Price;
-
+model Commitment extends Price {
   @doc("Commitment grain.")
   grain?: CommitmentGrain;
 }

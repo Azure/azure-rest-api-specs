@@ -434,8 +434,7 @@ model CreationData {
 }
 
 @doc("Profile for the container service agent pool.")
-model ManagedClusterAgentPoolProfile {
-...ManagedClusterAgentPoolProfileProperties;
+model ManagedClusterAgentPoolProfile extends ManagedClusterAgentPoolProfileProperties {
 @doc("Windows agent pool names must be 6 characters or less.")
 @pattern("^[a-z][a-z0-9]{0,11}$")
 "name": string;
@@ -752,8 +751,7 @@ model ManagedClusterAddonProfile {
 }
 
 @doc("Information of user assigned identity used by this add-on.")
-model ManagedClusterAddonProfileIdentity {
-...UserAssignedIdentity;
+model ManagedClusterAddonProfileIdentity extends UserAssignedIdentity {
 }
 
 @doc("Details about a user assigned identity.")
@@ -1313,8 +1311,7 @@ model ManagedClusterPoolUpgradeProfileUpgradesItem {
 }
 
 @doc("Managed cluster Access Profile.")
-model ManagedClusterAccessProfile {
-...TrackedResource;
+model ManagedClusterAccessProfile extends TrackedResource {
 @doc("AccessProfile of a managed cluster.")
 "properties"?: AccessProfile;
 }
@@ -1790,8 +1787,7 @@ model FleetMemberProperties {
 }
 
 @doc("The resource model definition for an Azure Resource Manager resource with an etag.")
-model AzureEntityResource {
-...Resource;
+model AzureEntityResource extends Resource {
 @doc("Resource Etag.")
 @visibility("read")
 "etag"?: string;

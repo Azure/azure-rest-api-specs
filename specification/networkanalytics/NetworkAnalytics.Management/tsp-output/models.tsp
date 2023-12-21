@@ -352,9 +352,7 @@ model RoleAssignmentDetail {
 model DataTypeListResult is Azure.Core.Page<DataType>;
 
 @doc("The data type resource.")
-model DataType {
-  ...ProxyResource;
-
+model DataType extends ProxyResource {
   @doc("The resource-specific properties for this resource.")
   @visibility("read", "create")
   properties?: DataTypeProperties;

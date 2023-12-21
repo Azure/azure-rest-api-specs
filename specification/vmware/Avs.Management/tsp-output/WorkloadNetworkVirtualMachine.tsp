@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AvsPrivateCloud.tsp";
+import "./PrivateCloud.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Avs;
 @doc("NSX Virtual Machine")
-@parentResource(AvsPrivateCloud)
+@parentResource(PrivateCloud)
 model WorkloadNetworkVirtualMachine
   is ProxyResource<WorkloadNetworkVirtualMachineProperties> {
   @doc("Virtual Machine identifier")
@@ -22,7 +22,7 @@ model WorkloadNetworkVirtualMachine
 }
 
 @armResourceOperations
-interface WorkloadNetworkVirtualMachines {
+interface WorkloadNetworks {
   @doc("Get a virtual machine by id in a private cloud workload network.")
   getVirtualMachine is ArmResourceRead<WorkloadNetworkVirtualMachine>;
   @doc("List of virtual machines in a private cloud workload network.")

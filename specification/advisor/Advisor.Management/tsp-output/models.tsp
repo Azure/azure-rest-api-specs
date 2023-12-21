@@ -95,9 +95,7 @@ model ArmErrorResponse {
 model ConfigurationListResult is Azure.Core.Page<ConfigData>;
 
 @doc("The Advisor configuration data structure.")
-model ConfigData {
-  ...Resource;
-
+model ConfigData extends Resource {
   @doc("The Advisor configuration data structure.")
   properties?: ConfigDataProperties;
 }

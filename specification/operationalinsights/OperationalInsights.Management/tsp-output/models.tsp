@@ -740,8 +740,7 @@ model PrivateLinkScopedResource {
 }
 
 @doc("Workspace features.")
-model WorkspaceFeatures {
-...Record<unknown>;
+model WorkspaceFeatures extends Record<unknown> {
 @doc("Flag that indicate if data should be exported.")
 "enableDataExport"?: boolean;
 @doc("Flag that describes if we want to remove the data after 30 days.")
@@ -755,8 +754,7 @@ model WorkspaceFeatures {
 }
 
 @doc("The resource model definition for an Azure Resource Manager resource with an etag.")
-model AzureEntityResource {
-...Resource;
+model AzureEntityResource extends Resource {
 @doc("Resource Etag.")
 @visibility("read")
 "etag"?: string;

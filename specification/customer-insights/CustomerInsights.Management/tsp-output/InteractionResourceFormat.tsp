@@ -21,7 +21,7 @@ model InteractionResourceFormat is ProxyResource<InteractionTypeDefinition> {
 }
 
 @armResourceOperations
-interface InteractionResourceFormats {
+interface Interactions {
   @doc("Gets information about the specified interaction.")
   get is ArmResourceRead<
     InteractionResourceFormat,

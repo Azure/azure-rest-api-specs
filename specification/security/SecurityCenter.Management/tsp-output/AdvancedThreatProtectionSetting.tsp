@@ -19,7 +19,7 @@ model AdvancedThreatProtectionSetting
 }
 
 @armResourceOperations
-interface AdvancedThreatProtectionSettings {
+interface AdvancedThreatProtection {
   @doc("Gets the Advanced Threat Protection settings for the specified resource.")
   get is ArmResourceRead<
     AdvancedThreatProtectionSetting,

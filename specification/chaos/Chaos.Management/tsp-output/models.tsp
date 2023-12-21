@@ -193,9 +193,7 @@ model Action {
 
 @doc("Model that represents a selector in the Experiment resource.")
 @discriminator("type")
-model Selector {
-  ...Record<unknown>;
-
+model Selector extends Record<unknown> {
   @doc("String of the selector ID.")
   @minLength(1)
   id: string;

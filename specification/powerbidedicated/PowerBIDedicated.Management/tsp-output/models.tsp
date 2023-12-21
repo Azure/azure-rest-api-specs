@@ -79,9 +79,7 @@ model CapacitySku {
 }
 
 @doc("Properties of Dedicated Capacity resource.")
-model DedicatedCapacityProperties {
-  ...DedicatedCapacityMutableProperties;
-
+model DedicatedCapacityProperties extends DedicatedCapacityMutableProperties {
   @doc("The current state of PowerBI Dedicated resource. The state is to indicate more states outside of resource provisioning.")
   @visibility("read")
   state?: State;
@@ -224,9 +222,7 @@ model AutoScaleVCoreSku {
 }
 
 @doc("Properties of an auto scale v-core resource.")
-model AutoScaleVCoreProperties {
-  ...AutoScaleVCoreMutableProperties;
-
+model AutoScaleVCoreProperties extends AutoScaleVCoreMutableProperties {
   @doc("The object ID of the capacity resource associated with the auto scale v-core resource.")
   capacityObjectId?: string;
 

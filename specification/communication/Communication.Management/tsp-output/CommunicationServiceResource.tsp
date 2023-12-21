@@ -25,7 +25,7 @@ model CommunicationServiceResource
 }
 
 @armResourceOperations
-interface CommunicationServiceResources {
+interface CommunicationServices {
   @doc("Get the CommunicationService and its properties.")
   get is ArmResourceRead<CommunicationServiceResource>;
   @doc("Create a new CommunicationService or update an existing CommunicationService.")

@@ -277,9 +277,7 @@ model ProductFamily {
 }
 
 @doc("Properties of product family")
-model ProductFamilyProperties {
-  ...CommonProperties;
-
+model ProductFamilyProperties extends CommonProperties {
   @doc("List of product lines supported in the product family")
   @visibility("read")
   productLines?: ProductLine[];
@@ -296,9 +294,7 @@ model ProductLine {
 }
 
 @doc("Properties of product line")
-model ProductLineProperties {
-  ...CommonProperties;
-
+model ProductLineProperties extends CommonProperties {
   @doc("List of products in the product line")
   @visibility("read")
   products?: EdgeOrderProduct[];
@@ -312,9 +308,7 @@ model EdgeOrderProduct {
 }
 
 @doc("Properties of products")
-model ProductProperties {
-  ...CommonProperties;
-
+model ProductProperties extends CommonProperties {
   @doc("List of configurations for the product")
   @visibility("read")
   configurations?: ProductConfiguration[];
@@ -328,9 +322,7 @@ model ProductConfiguration {
 }
 
 @doc("Properties of configuration")
-model ConfigurationProperties {
-  ...CommonProperties;
-
+model ConfigurationProperties extends CommonProperties {
   @doc("Specifications of the configuration")
   @visibility("read")
   specifications?: ProductSpecification[];
@@ -383,9 +375,7 @@ model ProductDimensions {
 }
 
 @doc("Represents common properties across product hierarchy")
-model CommonProperties {
-  ...BasicInformation;
-
+model CommonProperties extends BasicInformation {
   @doc("list of filters supported for a product")
   @visibility("read")
   filterableProperties?: FilterableProperty[];

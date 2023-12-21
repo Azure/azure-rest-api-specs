@@ -21,7 +21,7 @@ model ViewResourceFormat is ProxyResource<View> {
 }
 
 @armResourceOperations
-interface ViewResourceFormats {
+interface Views {
   @doc("Gets a view in the hub.")
   get is ArmResourceRead<
     ViewResourceFormat,

@@ -21,7 +21,7 @@ model KpiResourceFormat is ProxyResource<KpiDefinition> {
 }
 
 @armResourceOperations
-interface KpiResourceFormats {
+interface Kpi {
   @doc("Gets a KPI in the hub.")
   get is ArmResourceRead<KpiResourceFormat>;
   @doc("Creates a KPI or updates an existing KPI in the hub.")

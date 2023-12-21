@@ -348,9 +348,7 @@ model WorkspaceProperties {
 }
 
 @doc("The Private Endpoint Connection resource.")
-model PrivateEndpointConnection {
-  ...Resource;
-
+model PrivateEndpointConnection extends Resource {
   @doc("Resource properties.")
   properties?: PrivateEndpointConnectionProperties;
 }
@@ -430,9 +428,7 @@ model ResourceModelWithAllowedPropertySet {
   plan?: ResourceModelWithAllowedPropertySetPlan;
 }
 
-model ResourceModelWithAllowedPropertySetIdentity {
-  ...Identity;
-}
+model ResourceModelWithAllowedPropertySetIdentity extends Identity {}
 
 @doc("Identity for the resource.")
 model Identity {
@@ -466,9 +462,7 @@ model Sku {
   capacity?: int32;
 }
 
-model ResourceModelWithAllowedPropertySetPlan {
-  ...Plan;
-}
+model ResourceModelWithAllowedPropertySetPlan extends Plan {}
 
 @doc("Plan for the resource.")
 model Plan {
@@ -492,9 +486,7 @@ model Plan {
 model PrivateLinkResourceListResult is Azure.Core.Page<PrivateLinkResource>;
 
 @doc("A private link resource")
-model PrivateLinkResource {
-  ...Resource;
-
+model PrivateLinkResource extends Resource {
   @doc("Resource properties.")
   properties?: PrivateLinkResourceProperties;
 }
@@ -799,9 +791,7 @@ model ApplicationGroupProperties {
 model StartMenuItemList is Azure.Core.Page<StartMenuItem>;
 
 @doc("Represents a StartMenuItem definition.")
-model StartMenuItem {
-  ...Resource;
-
+model StartMenuItem extends Resource {
   @doc("Detailed properties for StartMenuItem")
   properties?: StartMenuItemProperties;
 }
@@ -1243,9 +1233,7 @@ model MsixImageURI {
 model ExpandMsixImageList is Azure.Core.Page<ExpandMsixImage>;
 
 @doc("Represents the definition of contents retrieved after expanding the MSIX Image. ")
-model ExpandMsixImage {
-  ...Resource;
-
+model ExpandMsixImage extends Resource {
   @doc("Detailed properties for ExpandMsixImage")
   properties?: ExpandMsixImageProperties;
 }

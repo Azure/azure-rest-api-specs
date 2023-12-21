@@ -22,7 +22,7 @@ model ManagedGrafana is TrackedResource<ManagedGrafanaProperties> {
 }
 
 @armResourceOperations
-interface ManagedGrafanas {
+interface Grafana {
   @doc("Get the properties of a specific workspace for Grafana resource.")
   get is ArmResourceRead<ManagedGrafana>;
   @doc("Create or update a workspace for Grafana resource. This API is idempotent, so user can either create a new grafana or update an existing grafana.")
@@ -47,6 +47,10 @@ interface ManagedGrafanas {
     void,
     GrafanaAvailablePluginListResponse
   >;
+}
+
+@armResourceOperations
+interface ManagedPrivateEndpoints {
   @doc("Refresh and sync managed private endpoints of a grafana resource to latest state.")
   refresh is ArmResourceActionAsync<ManagedGrafana, void, void>;
 }

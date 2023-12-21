@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./NewRelicMonitorResource.tsp";
-import "./NewRelicObservabilityTagRule.tsp";
+import "./TagRule.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

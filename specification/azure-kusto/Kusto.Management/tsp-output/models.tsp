@@ -1022,9 +1022,7 @@ model OutboundNetworkDependenciesEndpointListResult
   is Azure.Core.Page<OutboundNetworkDependenciesEndpoint>;
 
 @doc("Endpoints accessed for a common purpose that the Kusto Service Environment requires outbound network access to.")
-model OutboundNetworkDependenciesEndpoint {
-  ...ProxyResource;
-
+model OutboundNetworkDependenciesEndpoint extends ProxyResource {
   @doc("The outbound environment endpoint properties.")
   properties?: OutboundNetworkDependenciesEndpointProperties;
 

@@ -21,7 +21,7 @@ model PredictionResourceFormat is ProxyResource<Prediction> {
 }
 
 @armResourceOperations
-interface PredictionResourceFormats {
+interface Predictions {
   @doc("Gets a Prediction in the hub.")
   get is ArmResourceRead<PredictionResourceFormat>;
   @doc("Creates a Prediction or updates an existing Prediction in the hub.")

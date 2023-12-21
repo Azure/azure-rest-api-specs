@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SqlServer.tsp";
+import "./Server.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Sql;
 @doc("A server Advanced Threat Protection.")
-@parentResource(SqlServer)
+@parentResource(Server)
 model ServerAdvancedThreatProtection
   is ProxyResource<AdvancedThreatProtectionProperties> {
   @doc("The name of the Advanced Threat Protection state.")
@@ -22,7 +22,7 @@ model ServerAdvancedThreatProtection
 }
 
 @armResourceOperations
-interface ServerAdvancedThreatProtections {
+interface ServerAdvancedThreatProtectionSettings {
   @doc("Get a server's Advanced Threat Protection state.")
   get is ArmResourceRead<ServerAdvancedThreatProtection>;
   @doc("Creates or updates an Advanced Threat Protection state.")

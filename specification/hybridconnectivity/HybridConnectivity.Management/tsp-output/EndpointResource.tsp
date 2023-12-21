@@ -19,7 +19,7 @@ model EndpointResource is ExtensionResource<EndpointProperties> {
 }
 
 @armResourceOperations
-interface EndpointResources {
+interface Endpoints {
   @doc("Gets the endpoint to the resource.")
   get is ArmResourceRead<
     EndpointResource,

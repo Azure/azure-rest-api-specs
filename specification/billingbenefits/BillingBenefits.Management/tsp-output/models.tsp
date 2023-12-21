@@ -164,9 +164,7 @@ model AppliedScopeProperties {
 }
 
 @doc("Commitment towards the benefit.")
-model Commitment {
-  ...Price;
-
+model Commitment extends Price {
   @doc("Commitment grain.")
   grain?: CommitmentGrain;
 }
@@ -532,9 +530,7 @@ model SavingsPlanPurchaseValidateRequest {
 }
 
 @doc("Reservation order alias")
-model ReservationOrderAliasRequest {
-  ...Resource;
-
+model ReservationOrderAliasRequest extends Resource {
   @doc("Reservation order SKU")
   sku: Sku;
 
@@ -640,9 +636,7 @@ model ReservationOrderAliasResponsePropertiesReservedResourceProperties {
   instanceFlexibility?: InstanceFlexibility;
 }
 
-model PricingCurrencyTotal {
-  ...Price;
-
+model PricingCurrencyTotal extends Price {
   @doc("Represents either billing plan or savings plan term in ISO 8601 format.")
   duration?: PricingCurrencyDuration;
 }

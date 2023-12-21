@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./ContainerServiceManagedCluster.tsp";
+import "./ManagedCluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.ContainerService;
 @doc("The list of available upgrades for compute pools.")
-@parentResource(ContainerServiceManagedCluster)
 @singleton("default")
+@parentResource(ManagedCluster)
 model ManagedClusterUpgradeProfile
   is ProxyResource<ManagedClusterUpgradeProfileProperties> {
   @key("default")
@@ -21,7 +21,7 @@ model ManagedClusterUpgradeProfile
 }
 
 @armResourceOperations
-interface ManagedClusterUpgradeProfiles {
+interface ManagedClusters {
   @doc("Gets the upgrade profile of a managed cluster.")
   getUpgradeProfile is ArmResourceRead<ManagedClusterUpgradeProfile>;
 }

@@ -3,12 +3,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./ScVmmServer.tsp";
-import "./ScVmmCloud.tsp";
-import "./ScVmmVirtualNetwork.tsp";
-import "./ScVmmVirtualMachine.tsp";
-import "./ScVmmVirtualMachineTemplate.tsp";
-import "./ScVmmAvailabilitySet.tsp";
+import "./VMMServer.tsp";
+import "./Cloud.tsp";
+import "./VirtualNetwork.tsp";
+import "./VirtualMachine.tsp";
+import "./VirtualMachineTemplate.tsp";
+import "./AvailabilitySet.tsp";
 import "./InventoryItem.tsp";
 
 using TypeSpec.Rest;

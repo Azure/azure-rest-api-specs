@@ -5,9 +5,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./IotHubDescription.tsp";
 import "./EventHubConsumerGroupInfo.tsp";
-import "./IotHubCertificateDescription.tsp";
-import "./IotHubPrivateEndpointGroupInformation.tsp";
-import "./IotHubPrivateEndpointConnection.tsp";
+import "./CertificateDescription.tsp";
+import "./GroupIdInformation.tsp";
+import "./PrivateEndpointConnection.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

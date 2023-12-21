@@ -21,7 +21,7 @@ model GitHubRepo is ProxyResource<GitHubRepoProperties> {
 }
 
 @armResourceOperations
-interface GitHubRepos {
+interface GitHubRepo {
   @doc("Returns a monitored GitHub repository.")
   get is ArmResourceRead<GitHubRepo>;
   @doc("Create or update a monitored GitHub repository.")

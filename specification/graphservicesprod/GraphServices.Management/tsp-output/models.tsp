@@ -68,9 +68,7 @@ model AccountResourceProperties {
 }
 
 @doc("Account patch properties")
-model AccountPatchResource {
-  ...TagUpdate;
-}
+model AccountPatchResource extends TagUpdate {}
 
 @doc("Request payload used to update an existing resource's tags.")
 model TagUpdate {

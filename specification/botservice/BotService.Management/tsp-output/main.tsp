@@ -5,8 +5,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Bot.tsp";
 import "./BotChannel.tsp";
-import "./BotConnectionSetting.tsp";
-import "./BotServicePrivateEndpointConnection.tsp";
+import "./ConnectionSetting.tsp";
+import "./PrivateEndpointConnection.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

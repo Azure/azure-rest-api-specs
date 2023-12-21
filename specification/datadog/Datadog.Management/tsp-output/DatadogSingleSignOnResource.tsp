@@ -22,7 +22,7 @@ model DatadogSingleSignOnResource
 }
 
 @armResourceOperations
-interface DatadogSingleSignOnResources {
+interface SingleSignOnConfigurations {
   @doc("Gets the datadog single sign-on resource for the given Monitor.")
   get is ArmResourceRead<DatadogSingleSignOnResource>;
   @doc("Configures single-sign-on for this resource.")

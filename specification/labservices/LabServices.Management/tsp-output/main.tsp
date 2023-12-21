@@ -3,12 +3,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./LabVirtualMachineImage.tsp";
+import "./Image.tsp";
 import "./LabPlan.tsp";
 import "./Lab.tsp";
-import "./LabServicesSchedule.tsp";
-import "./LabUser.tsp";
-import "./LabVirtualMachine.tsp";
+import "./Schedule.tsp";
+import "./User.tsp";
+import "./VirtualMachine.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

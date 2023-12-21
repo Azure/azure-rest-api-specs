@@ -349,9 +349,7 @@ model SubscriptionQuotaItemList {
 }
 
 @doc("Information regarding Subscription Quota Item.")
-model SubscriptionQuotaItem {
-  ...ProxyResource;
-
+model SubscriptionQuotaItem extends ProxyResource {
   @doc("SubscriptionQuotaItem properties")
   properties?: SubscriptionQuotaItemProperties;
 }

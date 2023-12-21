@@ -5,9 +5,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./BillingSubscription.tsp";
 import "./BillingSubscriptionAlias.tsp";
-import "./BillingPaymentMethod.tsp";
-import "./BillingAccountPaymentMethod.tsp";
-import "./BillingPaymentMethodLink.tsp";
+import "./PaymentMethod.tsp";
+import "./PaymentMethod.tsp";
+import "./PaymentMethodLink.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

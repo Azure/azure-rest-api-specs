@@ -21,7 +21,7 @@ model RoleAssignmentResourceFormat is ProxyResource<RoleAssignment> {
 }
 
 @armResourceOperations
-interface RoleAssignmentResourceFormats {
+interface RoleAssignments {
   @doc("Gets the role assignment in the hub.")
   get is ArmResourceRead<RoleAssignmentResourceFormat>;
   @doc("Creates or updates a role assignment in the hub.")

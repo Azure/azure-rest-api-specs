@@ -20,22 +20,9 @@ model DeletedSite is ProxyResource<DeletedSiteProperties> {
 }
 
 @armResourceOperations
-interface DeletedSites {
+interface Global {
   @doc("Description for Get deleted app for a subscription.")
   getDeletedWebApp is ArmResourceRead<DeletedSite>;
-  @doc("Description for Get all deleted apps for a subscription.")
-  list is ArmResourceListByParent<DeletedSite>;
-  @doc("Description for Get all deleted apps for a subscription at location")
-  listByLocation is ArmResourceListAtScope<
-    DeletedSite,
-    LocationScope<DeletedSite>,
-    {
-      ...BaseParameters<DeletedSite>;
-
-      @path
-      location: string;
-    }
-  >;
   @summary("Get all deleted apps for a subscription.")
   @doc("Description for Get all deleted apps for a subscription.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Web/deletedSites/{deletedSiteId}/snapshots")
@@ -51,5 +38,22 @@ interface DeletedSites {
       subscriptionId: string;
     },
     void
+  >;
+}
+
+@armResourceOperations
+interface DeletedWebApps {
+  @doc("Description for Get all deleted apps for a subscription.")
+  list is ArmResourceListByParent<DeletedSite>;
+  @doc("Description for Get all deleted apps for a subscription at location")
+  listByLocation is ArmResourceListAtScope<
+    DeletedSite,
+    LocationScope<DeletedSite>,
+    {
+      ...BaseParameters<DeletedSite>;
+
+      @path
+      location: string;
+    }
   >;
 }

@@ -745,18 +745,14 @@ model ProxyArtifactOverviewListResult
   is Azure.Core.Page<ProxyArtifactListOverview>;
 
 @doc("The proxy artifact overview.")
-model ProxyArtifactListOverview {
-  ...ProxyResource;
-}
+model ProxyArtifactListOverview extends ProxyResource {}
 
 @doc("The proxy artifact list result.")
 model ProxyArtifactVersionsOverviewListResult
   is Azure.Core.Page<ProxyArtifactVersionsListOverview>;
 
 @doc("The proxy artifact overview.")
-model ProxyArtifactVersionsListOverview {
-  ...ProxyResource;
-
+model ProxyArtifactVersionsListOverview extends ProxyResource {
   @doc("Proxy Artifact overview properties.")
   @visibility("read")
   properties?: ProxyArtifactOverviewPropertiesValue;
@@ -1048,9 +1044,8 @@ model AzureArcKubernetesNetworkFunctionTemplate
 
 @doc("Azure arc kubernetes network function application definition.")
 @discriminator("artifactType")
-model AzureArcKubernetesNetworkFunctionApplication {
-  ...NetworkFunctionApplication;
-}
+model AzureArcKubernetesNetworkFunctionApplication
+  extends NetworkFunctionApplication {}
 
 @doc("Azure arc kubernetes helm application configurations.")
 model AzureArcKubernetesHelmApplication
@@ -1066,9 +1061,7 @@ model AzureArcKubernetesHelmApplication
 }
 
 @doc("Azure arc kubernetes artifact profile properties.")
-model AzureArcKubernetesArtifactProfile {
-  ...ArtifactProfile;
-
+model AzureArcKubernetesArtifactProfile extends ArtifactProfile {
   @doc("Helm artifact profile.")
   helmArtifactProfile?: HelmArtifactProfile;
 }
@@ -1089,9 +1082,7 @@ model HelmArtifactProfile {
 }
 
 @doc("Azure arc kubernetes deploy mapping rule profile.")
-model AzureArcKubernetesDeployMappingRuleProfile {
-  ...MappingRuleProfile;
-
+model AzureArcKubernetesDeployMappingRuleProfile extends MappingRuleProfile {
   @doc("The helm mapping rule profile.")
   helmMappingRuleProfile?: HelmMappingRuleProfile;
 }
@@ -1159,9 +1150,7 @@ model AzureCoreNetworkFunctionTemplate extends VirtualNetworkFunctionTemplate {
 
 @doc("Azure virtual network function application definition.")
 @discriminator("artifactType")
-model AzureCoreNetworkFunctionApplication {
-  ...NetworkFunctionApplication;
-}
+model AzureCoreNetworkFunctionApplication extends NetworkFunctionApplication {}
 
 @doc("Azure Operator Distributed Services network function template.")
 model AzureOperatorNexusNetworkFunctionTemplate
@@ -1175,9 +1164,8 @@ model AzureOperatorNexusNetworkFunctionTemplate
 
 @doc("Azure Operator Distributed Services network function application definition.")
 @discriminator("artifactType")
-model AzureOperatorNexusNetworkFunctionApplication {
-  ...NetworkFunctionApplication;
-}
+model AzureOperatorNexusNetworkFunctionApplication
+  extends NetworkFunctionApplication {}
 
 @doc("Azure core network function vhd application definition.")
 model AzureCoreNetworkFunctionVhdApplication
@@ -1193,9 +1181,7 @@ model AzureCoreNetworkFunctionVhdApplication
 }
 
 @doc("Azure vhd artifact profile properties.")
-model AzureCoreVhdImageArtifactProfile {
-  ...ArtifactProfile;
-
+model AzureCoreVhdImageArtifactProfile extends ArtifactProfile {
   @doc("Vhd artifact profile.")
   vhdArtifactProfile?: VhdImageArtifactProfile;
 }
@@ -1210,9 +1196,7 @@ model VhdImageArtifactProfile {
 }
 
 @doc("Azure vhd deploy mapping rule profile.")
-model AzureCoreVhdImageDeployMappingRuleProfile {
-  ...MappingRuleProfile;
-
+model AzureCoreVhdImageDeployMappingRuleProfile extends MappingRuleProfile {
   @doc("The vhd mapping rule profile.")
   vhdImageMappingRuleProfile?: VhdImageMappingRuleProfile;
 }
@@ -1237,9 +1221,7 @@ model AzureCoreNetworkFunctionArmTemplateApplication
 }
 
 @doc("Azure template artifact profile properties.")
-model AzureCoreArmTemplateArtifactProfile {
-  ...ArtifactProfile;
-
+model AzureCoreArmTemplateArtifactProfile extends ArtifactProfile {
   @doc("Template artifact profile.")
   templateArtifactProfile?: ArmTemplateArtifactProfile;
 }
@@ -1254,9 +1236,7 @@ model ArmTemplateArtifactProfile {
 }
 
 @doc("Azure template deploy mapping rule profile.")
-model AzureCoreArmTemplateDeployMappingRuleProfile {
-  ...MappingRuleProfile;
-
+model AzureCoreArmTemplateDeployMappingRuleProfile extends MappingRuleProfile {
   @doc("The template mapping rule profile.")
   templateMappingRuleProfile?: ArmTemplateMappingRuleProfile;
 }
@@ -1281,9 +1261,7 @@ model AzureOperatorNexusNetworkFunctionImageApplication
 }
 
 @doc("Azure Operator Distributed Services image artifact profile properties.")
-model AzureOperatorNexusImageArtifactProfile {
-  ...ArtifactProfile;
-
+model AzureOperatorNexusImageArtifactProfile extends ArtifactProfile {
   @doc("Image artifact profile.")
   imageArtifactProfile?: ImageArtifactProfile;
 }
@@ -1298,9 +1276,8 @@ model ImageArtifactProfile {
 }
 
 @doc("Azure Operator Distributed Services image deploy mapping rule profile.")
-model AzureOperatorNexusImageDeployMappingRuleProfile {
-  ...MappingRuleProfile;
-
+model AzureOperatorNexusImageDeployMappingRuleProfile
+  extends MappingRuleProfile {
   @doc("The vhd mapping rule profile.")
   imageMappingRuleProfile?: ImageMappingRuleProfile;
 }
@@ -1325,17 +1302,14 @@ model AzureOperatorNexusNetworkFunctionArmTemplateApplication
 }
 
 @doc("Azure Operator Distributed Services vhd artifact profile properties.")
-model AzureOperatorNexusArmTemplateArtifactProfile {
-  ...ArtifactProfile;
-
+model AzureOperatorNexusArmTemplateArtifactProfile extends ArtifactProfile {
   @doc("Template artifact profile.")
   templateArtifactProfile?: ArmTemplateArtifactProfile;
 }
 
 @doc("Azure Operator Distributed Services template deploy mapping rule profile.")
-model AzureOperatorNexusArmTemplateDeployMappingRuleProfile {
-  ...MappingRuleProfile;
-
+model AzureOperatorNexusArmTemplateDeployMappingRuleProfile
+  extends MappingRuleProfile {
   @doc("The template mapping rule profile.")
   templateMappingRuleProfile?: ArmTemplateMappingRuleProfile;
 }
@@ -1385,9 +1359,7 @@ model NetworkFunctionDefinitionResourceElementTemplateDetails
 }
 
 @doc("The proxy artifact overview.")
-model ProxyArtifactOverview {
-  ...ProxyResource;
-
+model ProxyArtifactOverview extends ProxyResource {
   @doc("Proxy Artifact properties overview.")
   @visibility("read")
   properties?: ProxyArtifactOverviewPropertiesFormat;

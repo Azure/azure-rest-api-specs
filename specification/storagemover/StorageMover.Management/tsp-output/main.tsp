@@ -4,9 +4,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./StorageMover.tsp";
-import "./StorageMoverAgent.tsp";
-import "./StorageMoverEndpoint.tsp";
-import "./StorageMoverProject.tsp";
+import "./Agent.tsp";
+import "./Endpoint.tsp";
+import "./Project.tsp";
 import "./JobDefinition.tsp";
 import "./JobRun.tsp";
 

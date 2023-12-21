@@ -782,9 +782,7 @@ model PccRuleConfiguration {
 }
 
 @doc("Data flow policy rule QoS policy")
-model PccRuleQosPolicy {
-  ...QosPolicy;
-
+model PccRuleQosPolicy extends QosPolicy {
   @doc("The guaranteed bit rate (GBR) for all service data flows that use this data flow policy rule. This is an optional setting. If you do not provide a value, there will be no GBR set for the data flow policy rule that uses this QoS definition.")
   guaranteedBitRate?: Ambr;
 }
@@ -810,9 +808,7 @@ model ServiceDataFlowTemplate {
 }
 
 @doc("SIM properties.")
-model SimPropertiesFormat {
-  ...CommonSimPropertiesFormat;
-
+model SimPropertiesFormat extends CommonSimPropertiesFormat {
   @doc("The Ki value for the SIM.")
   @visibility("create", "update")
   @pattern("^[0-9a-fA-F]{32}$")
@@ -962,9 +958,7 @@ model SimNameAndEncryptedProperties {
 }
 
 @doc("Encrypted SIM properties.")
-model EncryptedSimPropertiesFormat {
-  ...CommonSimPropertiesFormat;
-
+model EncryptedSimPropertiesFormat extends CommonSimPropertiesFormat {
   @doc("The encrypted SIM credentials.")
   @pattern("^[0-9a-fA-F]+$")
   encryptedCredentials?: string;

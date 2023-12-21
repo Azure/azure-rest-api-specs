@@ -1274,9 +1274,8 @@ model NameAvailabilityCheckResult {
 }
 
 @doc("The cluster create request specification.")
-model ClusterCreateRequestValidationParameters {
-  ...ClusterCreateParametersExtended;
-
+model ClusterCreateRequestValidationParameters
+  extends ClusterCreateParametersExtended {
   @doc("The cluster name.")
   name?: string;
 
@@ -1452,9 +1451,7 @@ model ExecuteScriptActionParameters {
 model ScriptActionsList is Azure.Core.Page<RuntimeScriptActionDetail>;
 
 @doc("The execution details of a script action.")
-model RuntimeScriptActionDetail {
-  ...RuntimeScriptAction;
-
+model RuntimeScriptActionDetail extends RuntimeScriptAction {
   @doc("The execution id of the script action.")
   @visibility("read")
   scriptExecutionId?: int32;

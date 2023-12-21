@@ -2367,9 +2367,7 @@ model Layer {
 }
 
 @doc("Describes the settings to be used when encoding the input video into a desired output bitrate layer.")
-model H265VideoLayer {
-  ...Layer;
-
+model H265VideoLayer extends Layer {
   @doc("The average bitrate in bits per second at which to encode the input video when generating this layer. For example: a target bitrate of 3000Kbps or 3Mbps means this value should be 3000000 This is a required field.")
   bitrate: int32;
 
@@ -2390,9 +2388,7 @@ model H265VideoLayer {
 }
 
 @doc("Describes the settings to be used when encoding the input video into a desired output bitrate layer with the H.265 video codec.")
-model H265Layer {
-  ...H265VideoLayer;
-
+model H265Layer extends H265VideoLayer {
   @doc("We currently support Main. Default is Auto.")
   profile?: H265VideoProfile;
 
@@ -2635,9 +2631,7 @@ model Filters {
 }
 
 @doc("Describes the settings to be used when encoding the input video into a desired output bitrate layer.")
-model VideoLayer {
-  ...Layer;
-
+model VideoLayer extends Layer {
   @doc("The average bitrate in bits per second at which to encode the input video when generating this layer. This is a required field.")
   bitrate: int32;
 
@@ -2658,9 +2652,7 @@ model VideoLayer {
 }
 
 @doc("Describes the settings to be used when encoding the input video into a desired output bitrate layer with the H.264 video codec.")
-model H264Layer {
-  ...VideoLayer;
-
+model H264Layer extends VideoLayer {
   @doc("We currently support Baseline, Main, High, High422, High444. Default is Auto.")
   profile?: H264VideoProfile;
 
@@ -2711,9 +2703,7 @@ model JpgImage extends Image {
 }
 
 @doc("Describes the settings to produce a JPEG image from the input video.")
-model JpgLayer {
-  ...Layer;
-
+model JpgLayer extends Layer {
   @doc("The compression quality of the JPEG output. Range is from 0-100 and the default is 70.")
   quality?: int32;
 }
@@ -2747,9 +2737,7 @@ model PngImage extends Image {
 }
 
 @doc("Describes the settings to produce a PNG image from the input video.")
-model PngLayer {
-  ...Layer;
-}
+model PngLayer extends Layer {}
 
 @doc("Describes a built-in preset for encoding the input video with the Standard Encoder.")
 model BuiltInStandardEncoderPreset extends Preset {

@@ -21,9 +21,19 @@ model SnapshotResource is ProxyResource<SnapshotProperties> {
 }
 
 @armResourceOperations
-interface SnapshotResources {
+interface Snapshot {
   @doc("Get the AppComplianceAutomation snapshot and its properties.")
   get is ArmResourceRead<SnapshotResource>;
+  @doc("Download compliance needs from snapshot, like: Compliance Report, Resource List.")
+  download is ArmResourceActionAsync<
+    SnapshotResource,
+    SnapshotDownloadRequest,
+    DownloadResponse
+  >;
+}
+
+@armResourceOperations
+interface Snapshots {
   @doc("Get the AppComplianceAutomation snapshot list.")
   list is ArmResourceListByParent<
     SnapshotResource,
@@ -55,11 +65,5 @@ interface SnapshotResources {
       @query("offerGuid")
       offerGuid?: string;
     }
-  >;
-  @doc("Download compliance needs from snapshot, like: Compliance Report, Resource List.")
-  download is ArmResourceActionAsync<
-    SnapshotResource,
-    SnapshotDownloadRequest,
-    DownloadResponse
   >;
 }

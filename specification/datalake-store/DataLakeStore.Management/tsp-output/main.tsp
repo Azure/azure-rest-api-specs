@@ -4,9 +4,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./DataLakeStoreAccount.tsp";
-import "./DataLakeStoreFirewallRule.tsp";
-import "./DataLakeStoreVirtualNetworkRule.tsp";
-import "./DataLakeStoreTrustedIdProvider.tsp";
+import "./FirewallRule.tsp";
+import "./VirtualNetworkRule.tsp";
+import "./TrustedIdProvider.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

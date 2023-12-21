@@ -21,7 +21,7 @@ model NginxCertificate is TrackedResource<NginxCertificateProperties> {
 }
 
 @armResourceOperations
-interface NginxCertificates {
+interface Certificates {
   @doc("Get a certificate of given Nginx deployment")
   get is ArmResourceRead<NginxCertificate>;
   @doc("Create or update the Nginx certificates for given Nginx deployment")

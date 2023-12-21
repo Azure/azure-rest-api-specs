@@ -4,8 +4,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./ManagedGrafana.tsp";
-import "./GrafanaPrivateEndpointConnection.tsp";
-import "./GrafanaPrivateLinkResource.tsp";
+import "./PrivateEndpointConnection.tsp";
+import "./PrivateLinkResource.tsp";
 import "./ManagedPrivateEndpointModel.tsp";
 
 using TypeSpec.Rest;

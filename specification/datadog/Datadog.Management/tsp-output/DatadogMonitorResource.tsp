@@ -22,7 +22,7 @@ model DatadogMonitorResource is TrackedResource<MonitorProperties> {
 }
 
 @armResourceOperations
-interface DatadogMonitorResources {
+interface Monitors {
   @doc("Get the properties of a specific monitor resource.")
   get is ArmResourceRead<DatadogMonitorResource>;
   @doc("Create a monitor resource.")

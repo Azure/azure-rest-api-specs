@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./CommunicationDomainResource.tsp";
+import "./DomainResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Communication;
 @doc("A class representing a SenderUsername resource.")
-@parentResource(CommunicationDomainResource)
+@parentResource(DomainResource)
 model SenderUsernameResource is ProxyResource<SenderUsernameProperties> {
   @doc("The valid sender Username.")
   @maxLength(253)
@@ -23,7 +23,7 @@ model SenderUsernameResource is ProxyResource<SenderUsernameProperties> {
 }
 
 @armResourceOperations
-interface SenderUsernameResources {
+interface SenderUsernames {
   @doc("Get a valid sender username for a domains resource.")
   get is ArmResourceRead<SenderUsernameResource>;
   @doc("Add a new SenderUsername resource under the parent Domains resource or update an existing SenderUsername resource.")

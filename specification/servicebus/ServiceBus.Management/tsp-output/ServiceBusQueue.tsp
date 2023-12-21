@@ -22,7 +22,7 @@ model ServiceBusQueue is ProxyResource<SBQueueProperties> {
 }
 
 @armResourceOperations
-interface ServiceBusQueues {
+interface Queues {
   @doc("Returns a description for the specified queue.")
   get is ArmResourceRead<ServiceBusQueue>;
   @doc("Creates or updates a Service Bus queue. This operation is idempotent.")

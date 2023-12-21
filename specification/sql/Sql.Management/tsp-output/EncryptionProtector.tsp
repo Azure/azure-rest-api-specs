@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SqlServer.tsp";
+import "./Server.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Sql;
 @doc("The server encryption protector.")
-@parentResource(SqlServer)
+@parentResource(Server)
 model EncryptionProtector is ProxyResource<EncryptionProtectorProperties> {
   @doc("The name of the encryption protector to be retrieved.")
   @path

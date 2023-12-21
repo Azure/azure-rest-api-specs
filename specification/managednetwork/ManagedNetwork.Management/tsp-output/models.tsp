@@ -27,9 +27,7 @@ enum ConnectivityType {
 }
 
 @doc("Properties of Managed Network")
-model ManagedNetworkProperties {
-  ...ResourceProperties;
-
+model ManagedNetworkProperties extends ResourceProperties {
   @doc("The collection of management groups, subscriptions, virtual networks, and subnets by the Managed Network. This is a read-only property that is reflective of all ScopeAssignments for this Managed Network")
   scope?: Scope;
 
@@ -71,9 +69,7 @@ model ConnectivityCollection {
 }
 
 @doc("Properties of a Managed Network Group")
-model ManagedNetworkGroupProperties {
-  ...ResourceProperties;
-
+model ManagedNetworkGroupProperties extends ResourceProperties {
   @doc("The collection of management groups covered by the Managed Network")
   managementGroups?: ResourceId[];
 
@@ -99,9 +95,7 @@ model ResourceProperties {
 }
 
 @doc("Properties of a Managed Network Peering Policy")
-model ManagedNetworkPeeringPolicyProperties {
-  ...ResourceProperties;
-
+model ManagedNetworkPeeringPolicyProperties extends ResourceProperties {
   @doc("Gets or sets the connectivity type of a network structure policy")
   @projectedName("json", "type")
   connectivityType: ConnectivityType;
@@ -117,19 +111,15 @@ model ManagedNetworkPeeringPolicyProperties {
 }
 
 @doc("Properties of Managed Network")
-model ScopeAssignmentProperties {
-  ...ResourceProperties;
-
+model ScopeAssignmentProperties extends ResourceProperties {
   @doc("The managed network ID with scope will be assigned to.")
   assignedManagedNetwork?: string;
 }
 
 @doc("Properties of a Hub and Spoke Peering Policy")
-model HubAndSpokePeeringPolicyProperties {
-  ...ManagedNetworkPeeringPolicyProperties;
-}
+model HubAndSpokePeeringPolicyProperties
+  extends ManagedNetworkPeeringPolicyProperties {}
 
 @doc("Properties of a Mesh Peering Policy")
-model MeshPeeringPolicyProperties {
-  ...ManagedNetworkPeeringPolicyProperties;
-}
+model MeshPeeringPolicyProperties
+  extends ManagedNetworkPeeringPolicyProperties {}

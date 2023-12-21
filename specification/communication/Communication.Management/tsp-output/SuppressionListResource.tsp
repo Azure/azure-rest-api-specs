@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./CommunicationDomainResource.tsp";
+import "./DomainResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Communication;
 @doc("A class representing a SuppressionList resource.")
-@parentResource(CommunicationDomainResource)
+@parentResource(DomainResource)
 model SuppressionListResource is ProxyResource<SuppressionListProperties> {
   @doc("The name of the suppression list.")
   @maxLength(253)
@@ -24,7 +24,7 @@ model SuppressionListResource is ProxyResource<SuppressionListProperties> {
 }
 
 @armResourceOperations
-interface SuppressionListResources {
+interface SuppressionLists {
   @doc("Get a SuppressionList resource.")
   get is ArmResourceRead<SuppressionListResource>;
   @doc("Add a new SuppressionList resource under the parent Domains resource or update an existing SuppressionList resource.")

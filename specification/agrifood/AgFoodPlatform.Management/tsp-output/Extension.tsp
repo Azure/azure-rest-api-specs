@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./FarmBeat.tsp";
+import "./FarmBeats.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,17 +11,13 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.AgFoodPlatform;
 @doc("Extension resource.")
-@parentResource(FarmBeat)
+@parentResource(FarmBeats)
 model Extension is ProxyResource<ExtensionProperties> {
   @doc("Id of extension resource.")
   @path
   @key("extensionId")
   @segment("extensions")
   name: string;
-
-  @doc("The ETag value to implement optimistic concurrency.")
-  @visibility("read")
-  eTag?: string;
 
   ...Azure.ResourceManager.EntityTag;
 }
@@ -34,7 +30,7 @@ interface Extensions {
   create is ArmResourceCreateOrReplaceSync<Extension>;
   // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
   @doc("Upgrade to latest extension.")
-  update is ArmCustomPatchSync<Extension, void>;
+  update is ArmCustomPatchSync<Extension, {}>;
   @doc("Uninstall extension.")
   delete is ArmResourceDeleteSync<Extension>;
   @doc("Get installed extensions details.")

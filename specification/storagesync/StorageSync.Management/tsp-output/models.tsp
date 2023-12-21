@@ -411,9 +411,7 @@ model PrivateLinkResourceListResult {
 }
 
 @doc("A private link resource")
-model PrivateLinkResource {
-  ...Resource;
-
+model PrivateLinkResource extends Resource {
   @doc("Resource properties.")
   properties?: PrivateLinkResourceProperties;
 }
@@ -444,17 +442,13 @@ model SyncGroupProperties {
 }
 
 @doc("The parameters used when creating a sync group.")
-model SyncGroupCreateParameters {
-  ...ProxyResource;
-
+model SyncGroupCreateParameters extends ProxyResource {
   @doc("The parameters used to create the sync group")
   properties?: Record<unknown>;
 }
 
 @doc("The parameters used when creating a cloud endpoint.")
-model CloudEndpointCreateParameters {
-  ...ProxyResource;
-
+model CloudEndpointCreateParameters extends ProxyResource {
   @doc("The parameters used to create the cloud endpoint.")
   properties?: CloudEndpointCreateParametersProperties;
 }
@@ -725,9 +719,7 @@ model CloudEndpointAfsShareMetadataCertificatePublicKeys {
 }
 
 @doc("The parameters used when creating a server endpoint.")
-model ServerEndpointCreateParameters {
-  ...ProxyResource;
-
+model ServerEndpointCreateParameters extends ProxyResource {
   @doc("The parameters used to create the server endpoint.")
   properties?: ServerEndpointCreateParametersProperties;
 }
@@ -1298,9 +1290,7 @@ model RegisteredServerProperties {
 }
 
 @doc("The parameters used when creating a registered server.")
-model RegisteredServerCreateParameters {
-  ...ProxyResource;
-
+model RegisteredServerCreateParameters extends ProxyResource {
   @doc("The parameters used to create the registered server.")
   properties?: RegisteredServerCreateParametersProperties;
 }

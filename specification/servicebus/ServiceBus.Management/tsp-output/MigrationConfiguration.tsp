@@ -22,7 +22,7 @@ model MigrationConfiguration
 }
 
 @armResourceOperations
-interface MigrationConfigurations {
+interface MigrationConfigs {
   @doc("Retrieves Migration Config")
   get is ArmResourceRead<MigrationConfiguration>;
   @doc("Creates Migration configuration and starts migration of entities from Standard to Premium namespace")

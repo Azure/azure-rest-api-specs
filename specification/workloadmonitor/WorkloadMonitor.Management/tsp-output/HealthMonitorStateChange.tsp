@@ -22,7 +22,7 @@ model HealthMonitorStateChange
 }
 
 @armResourceOperations
-interface HealthMonitorStateChanges {
+interface HealthMonitors {
   @doc("Get the health state change of a monitor of a virtual machine at the provided timestamp. Optional parameter: $expand (retrieve the monitor's evidence and configuration).")
   getStateChange is ArmResourceRead<
     HealthMonitorStateChange,

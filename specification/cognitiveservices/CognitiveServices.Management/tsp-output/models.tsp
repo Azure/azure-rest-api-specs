@@ -430,18 +430,14 @@ model PrivateLinkServiceConnectionState {
 }
 
 @doc("The resource model definition for an Azure Resource Manager resource with an etag.")
-model AzureEntityResource {
-  ...Resource;
-
+model AzureEntityResource extends Resource {
   @doc("Resource Etag.")
   @visibility("read")
   etag?: string;
 }
 
 @doc("The api properties for special APIs.")
-model ApiProperties {
-  ...Record<Record<unknown>>;
-
+model ApiProperties extends Record<Record<unknown>> {
   @doc("(QnAMaker Only) The runtime endpoint of QnAMaker.")
   qnaRuntimeEndpoint?: string;
 
@@ -650,9 +646,7 @@ model MetricName {
 model AccountModelListResult is Azure.Core.Page<AccountModel>;
 
 @doc("Cognitive Services account Model.")
-model AccountModel {
-  ...DeploymentModel;
-
+model AccountModel extends DeploymentModel {
   @doc("Base Model Identifier.")
   baseModel?: DeploymentModel;
 
@@ -888,9 +882,7 @@ model PrivateLinkResourceListResult {
 }
 
 @doc("A private link resource")
-model PrivateLinkResource {
-  ...Resource;
-
+model PrivateLinkResource extends Resource {
   @doc("Resource properties.")
   properties?: PrivateLinkResourceProperties;
 }
@@ -1015,9 +1007,7 @@ model CommitmentPeriod {
 }
 
 @doc("The object being used to update tags and sku of a resource, in general used for PATCH operations.")
-model PatchResourceTagsAndSku {
-  ...PatchResourceTags;
-
+model PatchResourceTagsAndSku extends PatchResourceTags {
   @doc("The resource model definition representing SKU")
   sku?: Sku;
 }

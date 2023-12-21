@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AppServiceEnvironment.tsp";
+import "./AppServiceEnvironmentResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.AppService;
 @doc("Full view of networking configuration for an ASE.")
-@parentResource(AppServiceEnvironment)
 @singleton("networking")
+@parentResource(AppServiceEnvironmentResource)
 model AseV3NetworkingConfiguration
   is ProxyResource<AseV3NetworkingConfigurationProperties> {
   @key("networking")
@@ -21,7 +21,7 @@ model AseV3NetworkingConfiguration
 }
 
 @armResourceOperations
-interface AseV3NetworkingConfigurations {
+interface AppServiceEnvironments {
   @doc("Description for Get networking configuration of an App Service Environment")
   getAseV3NetworkingConfiguration is ArmResourceRead<AseV3NetworkingConfiguration>;
   @doc("Description for Update networking configuration of an App Service Environment")

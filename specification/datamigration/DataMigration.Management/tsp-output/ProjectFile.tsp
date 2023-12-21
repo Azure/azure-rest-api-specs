@@ -18,10 +18,13 @@ model ProjectFile is ProxyResource<ProjectFileProperties> {
   @key("fileName")
   @segment("files")
   name: string;
+
+  @doc("HTTP strong entity tag value. This is ignored if submitted.")
+  etag?: string;
 }
 
 @armResourceOperations
-interface ProjectFiles {
+interface Files {
   @doc("The files resource is a nested, proxy-only resource representing a file stored under the project resource. This method retrieves information about a file.")
   get is ArmResourceRead<ProjectFile>;
   @doc("The PUT method creates a new file or updates an existing one.")

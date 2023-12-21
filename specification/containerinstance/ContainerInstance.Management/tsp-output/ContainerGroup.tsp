@@ -39,6 +39,30 @@ interface ContainerGroups {
   stop is ArmResourceActionNoContentSync<ContainerGroup, void>;
   @doc("Starts all containers in a container group. Compute resources will be allocated and billing will start.")
   start is ArmResourceActionNoResponseContentAsync<ContainerGroup, void>;
+  @summary("Get all network dependencies for container group.")
+  @doc("Gets all the network dependencies for this container group to allow complete control of network setting and configuration. For container groups, this will always be an empty list.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/outboundNetworkDependenciesEndpoints")
+  @get
+  GetOutboundNetworkDependenciesEndpoints is Azure.Core.Foundations.Operation<
+    {
+      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the resource group.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the container group.")
+      @path
+      containerGroupName: string;
+    },
+    void
+  >;
+}
+
+@armResourceOperations
+interface Containers {
   @doc("Executes a command for a specific container instance in a specified resource group and container group.")
   executeCommand is ArmResourceActionSync<
     ContainerGroup,
@@ -65,27 +89,6 @@ interface ContainerGroups {
       containerName: string;
     }
   >;
-  @summary("Get all network dependencies for container group.")
-  @doc("Gets all the network dependencies for this container group to allow complete control of network setting and configuration. For container groups, this will always be an empty list.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/outboundNetworkDependenciesEndpoints")
-  @get
-  GetOutboundNetworkDependenciesEndpoints is Azure.Core.Foundations.Operation<
-    {
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the resource group.")
-      @path
-      resourceGroupName: string;
-
-      @doc("The name of the container group.")
-      @path
-      containerGroupName: string;
-    },
-    void
-  >;
-
   @summary("Get the logs for a specified container instance.")
   @doc("Get the logs for a specified container instance in a specified resource group and container group.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs")

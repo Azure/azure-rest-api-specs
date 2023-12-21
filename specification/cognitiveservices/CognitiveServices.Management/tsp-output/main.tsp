@@ -3,12 +3,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./CognitiveServicesAccount.tsp";
-import "./CognitiveServicesDeletedAccount.tsp";
-import "./CognitiveServicesPrivateEndpointConnection.tsp";
-import "./CognitiveServicesAccountDeployment.tsp";
+import "./Account.tsp";
+import "./Account.tsp";
+import "./PrivateEndpointConnection.tsp";
+import "./Deployment.tsp";
 import "./CommitmentPlan.tsp";
-import "./CognitiveServicesCommitmentPlan.tsp";
+import "./CommitmentPlan.tsp";
 import "./CommitmentPlanAccountAssociation.tsp";
 import "./routes.tsp";
 

@@ -8,10 +8,10 @@ import "./DefaultRollout.tsp";
 import "./NotificationRegistration.tsp";
 import "./ProviderRegistration.tsp";
 import "./ResourceTypeRegistration.tsp";
-import "./ResourceTypeSku.tsp";
-import "./NestedResourceTypeFirstSku.tsp";
-import "./NestedResourceTypeSecondSku.tsp";
-import "./NestedResourceTypeThirdSku.tsp";
+import "./SkuResource.tsp";
+import "./SkuResource.tsp";
+import "./SkuResource.tsp";
+import "./SkuResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

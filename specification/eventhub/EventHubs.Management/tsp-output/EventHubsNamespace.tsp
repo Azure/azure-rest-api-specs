@@ -24,7 +24,7 @@ model EventHubsNamespace is TrackedResource<EHNamespaceProperties> {
 }
 
 @armResourceOperations
-interface EventHubsNamespaces {
+interface Namespaces {
   @doc("Gets the description of the specified namespace.")
   get is ArmResourceRead<EventHubsNamespace>;
   @doc("Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.")
@@ -37,6 +37,10 @@ interface EventHubsNamespaces {
   listByResourceGroup is ArmResourceListByParent<EventHubsNamespace>;
   @doc("Lists all the available Namespaces within a subscription, irrespective of the resource groups.")
   list is ArmListBySubscription<EventHubsNamespace>;
+}
+
+@armResourceOperations
+interface NetworkSecurityPerimeterConfigurations {
   @doc("Refreshes any information about the association.")
   createOrUpdate is ArmResourceActionAsync<
     EventHubsNamespace,
@@ -50,12 +54,20 @@ interface EventHubsNamespaces {
       resourceAssociationName: string;
     }
   >;
+}
+
+@armResourceOperations
+interface DisasterRecoveryConfigs {
   @doc("Check the give Namespace name availability.")
   checkNameAvailability is ArmResourceActionSync<
     EventHubsNamespace,
     EventHubsNameAvailabilityContent,
     EventHubsNameAvailabilityResult
   >;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
   @doc("Gets lists of resources that supports Privatelinks.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateLinkResources")
   @get
@@ -79,7 +91,10 @@ interface EventHubsNamespaces {
     },
     PrivateLinkResourcesListResult
   >;
+}
 
+@armResourceOperations
+interface NetworkSecurityPerimeterConfiguration {
   @doc("Gets list of current NetworkSecurityPerimeterConfiguration for Namespace")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations")
   @get

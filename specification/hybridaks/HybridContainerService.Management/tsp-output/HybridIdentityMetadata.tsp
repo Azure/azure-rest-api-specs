@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./ProvisionedCluster.tsp";
+import "./ProvisionedClustersResponse.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.HybridContainerService;
 @doc("Defines the hybridIdentityMetadata.")
-@parentResource(ProvisionedCluster)
+@parentResource(ProvisionedClustersResponse)
 model HybridIdentityMetadata
   is ProxyResource<HybridIdentityMetadataProperties> {
   @doc("Parameter for the name of the hybrid identity metadata resource.")

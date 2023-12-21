@@ -41,8 +41,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 
 @doc("Properties of Analysis Services resource.")
-model AnalysisServicesServerProperties {
-...AnalysisServicesServerMutableProperties;
+model AnalysisServicesServerProperties extends AnalysisServicesServerMutableProperties {
 @doc("The current state of Analysis Services resource. The state is to indicate more states outside of resource provisioning.")
 @visibility("read")
 "state"?: State;

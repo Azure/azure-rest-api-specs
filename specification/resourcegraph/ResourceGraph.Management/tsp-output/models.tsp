@@ -156,9 +156,7 @@ model Error {
 }
 
 @doc("Error details.")
-model ErrorDetails {
-  ...Record<Record<unknown>>;
-
+model ErrorDetails extends Record<Record<unknown>> {
   @doc("Error code identifying the specific error.")
   code: string;
 

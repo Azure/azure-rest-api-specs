@@ -21,7 +21,7 @@ model GitHubOwner is ProxyResource<GitHubOwnerProperties> {
 }
 
 @armResourceOperations
-interface GitHubOwners {
+interface GitHubOwner {
   @doc("Returns a monitored GitHub repository.")
   get is ArmResourceRead<GitHubOwner>;
   @doc("Create or update a monitored GitHub owner.")

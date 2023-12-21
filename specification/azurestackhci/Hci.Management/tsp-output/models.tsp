@@ -421,9 +421,7 @@ model GalleryImageVersionStorageProfile {
 }
 
 @doc("This is the OS disk image.")
-model GalleryOSDiskImage {
-  ...GalleryDiskImage;
-}
+model GalleryOSDiskImage extends GalleryDiskImage {}
 
 @doc("This is the disk image base class.")
 model GalleryDiskImage {

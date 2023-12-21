@@ -4,10 +4,10 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./PrivateStore.tsp";
-import "./MarketplaceApprovalRequest.tsp";
-import "./MarketplaceAdminApprovalRequest.tsp";
-import "./PrivateStoreCollectionInfo.tsp";
-import "./PrivateStoreOffer.tsp";
+import "./RequestApprovalResource.tsp";
+import "./AdminRequestApprovalsResource.tsp";
+import "./Collection.tsp";
+import "./Offer.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

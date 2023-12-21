@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./UserAssignedIdentity.tsp";
+import "./Identity.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.ManagedServiceIdentities;
 @doc("Describes a federated identity credential.")
-@parentResource(UserAssignedIdentity)
+@parentResource(Identity)
 model FederatedIdentityCredential
   is ProxyResource<FederatedIdentityCredentialProperties> {
   @doc("The name of the federated identity credential resource.")

@@ -39,6 +39,10 @@ interface Peerings {
   listByResourceGroup is ArmResourceListByParent<Peering>;
   @doc("Lists all of the peerings under the given subscription.")
   listBySubscription is ArmListBySubscription<Peering>;
+}
+
+@armResourceOperations
+interface ReceivedRoutes {
   @doc("Lists the prefixes received over the specified peering under the given subscription and resource group.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/receivedRoutes")
   @get
@@ -78,7 +82,10 @@ interface Peerings {
     },
     PeeringReceivedRouteListResult
   >;
+}
 
+@armResourceOperations
+interface RpUnbilledPrefixes {
   @doc("Lists all of the RP unbilled prefixes for the specified peering")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/rpUnbilledPrefixes")
   @get

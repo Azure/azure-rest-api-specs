@@ -32,6 +32,10 @@ interface Hubs {
   listByResourceGroup is ArmResourceListByParent<Hub>;
   @doc("Gets all hubs in the specified subscription.")
   list is ArmListBySubscription<Hub>;
+}
+
+@armResourceOperations
+interface Images {
   @doc("Gets entity type (profile or interaction) image upload URL.")
   getUploadUrlForEntityType is ArmResourceActionSync<
     Hub,
@@ -44,6 +48,10 @@ interface Hubs {
     GetImageUploadUrlInput,
     ImageDefinition
   >;
+}
+
+@armResourceOperations
+interface Roles {
   @doc("Gets all the roles for the hub.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/roles")
   @get

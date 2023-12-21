@@ -792,9 +792,7 @@ model ScriptActionProfile {
 }
 
 @doc("The parameters for resizing a cluster.")
-model ClusterResizeData {
-  ...TrackedResource;
-
+model ClusterResizeData extends TrackedResource {
   @doc("Sets the properties. Define cluster resize specific properties.")
   properties?: ClusterResizeProperties;
 }
@@ -830,9 +828,7 @@ model UpdatableClusterProfile {
 }
 
 @doc("Cluster job.")
-model ClusterJob {
-  ...ProxyResource;
-
+model ClusterJob extends ProxyResource {
   @doc("Properties of cluster job.")
   properties: ClusterJobProperties;
 }
@@ -854,9 +850,7 @@ model ServiceConfigResult {
 }
 
 @doc("Cluster instance service config properties.")
-model ServiceConfigResultProperties {
-  ...ServiceConfigListResultProperties;
-}
+model ServiceConfigResultProperties extends ServiceConfigListResultProperties {}
 
 @doc("Service config response.")
 model ServiceConfigListResultProperties {
@@ -928,9 +922,8 @@ model ClusterInstanceViewResult {
 }
 
 @doc("Properties of the instance view.")
-model ClusterInstanceViewResultProperties {
-  ...ClusterInstanceViewProperties;
-}
+model ClusterInstanceViewResultProperties
+  extends ClusterInstanceViewProperties {}
 
 @doc("Cluster Instance View Properties.")
 model ClusterInstanceViewProperties {
@@ -969,9 +962,7 @@ model ServiceStatus {
 model ClusterPoolVersionsListResult is Azure.Core.Page<ClusterPoolVersion>;
 
 @doc("Available cluster pool version.")
-model ClusterPoolVersion {
-  ...ProxyResource;
-
+model ClusterPoolVersion extends ProxyResource {
   @doc("Cluster pool version properties.")
   properties?: ClusterPoolVersionProperties;
 }
@@ -993,9 +984,7 @@ model ClusterPoolVersionProperties {
 model ClusterVersionsListResult is Azure.Core.Page<ClusterVersion>;
 
 @doc("Available cluster version.")
-model ClusterVersion {
-  ...ProxyResource;
-
+model ClusterVersion extends ProxyResource {
   @doc("Cluster version properties.")
   properties?: ClusterVersionProperties;
 }

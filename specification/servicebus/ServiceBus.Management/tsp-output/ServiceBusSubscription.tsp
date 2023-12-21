@@ -21,7 +21,7 @@ model ServiceBusSubscription is ProxyResource<SBSubscriptionProperties> {
 }
 
 @armResourceOperations
-interface ServiceBusSubscriptions {
+interface Subscriptions {
   @doc("Returns a subscription description for the specified topic.")
   get is ArmResourceRead<ServiceBusSubscription>;
   @doc("Creates a topic subscription.")

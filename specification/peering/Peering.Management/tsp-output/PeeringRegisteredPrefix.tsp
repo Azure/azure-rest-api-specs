@@ -22,7 +22,7 @@ model PeeringRegisteredPrefix
 }
 
 @armResourceOperations
-interface PeeringRegisteredPrefixes {
+interface RegisteredPrefixes {
   @doc("Gets an existing registered prefix with the specified name under the given subscription, resource group and peering.")
   get is ArmResourceRead<PeeringRegisteredPrefix>;
   @doc("Creates a new registered prefix with the specified name under the given subscription, resource group and peering.")

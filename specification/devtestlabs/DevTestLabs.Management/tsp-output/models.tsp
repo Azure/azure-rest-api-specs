@@ -583,9 +583,7 @@ model ArmTemplateInfo {
 }
 
 @doc("Properties of an artifact source.")
-model ArtifactSourceFragment {
-  ...UpdateResource;
-}
+model ArtifactSourceFragment extends UpdateResource {}
 
 @doc("Represents an update resource")
 model UpdateResource {
@@ -831,9 +829,7 @@ model CustomImagePropertiesFromPlan {
 }
 
 @doc("A custom image.")
-model CustomImageFragment {
-  ...UpdateResource;
-}
+model CustomImageFragment extends UpdateResource {}
 
 @doc("Properties of a formula.")
 model FormulaProperties {
@@ -1139,17 +1135,13 @@ model FormulaPropertiesFromVm {
 }
 
 @doc("A formula for creating a VM, specifying an image base and other parameters")
-model FormulaFragment {
-  ...UpdateResource;
-}
+model FormulaFragment extends UpdateResource {}
 
 @doc("The response of a list operation.")
 model GalleryImageList is Azure.Core.Page<GalleryImage>;
 
 @doc("A gallery image.")
-model GalleryImage {
-  ...Resource;
-
+model GalleryImage extends Resource {
   @doc("The properties of the resource.")
   properties: GalleryImageProperties;
 }
@@ -1221,9 +1213,7 @@ model Event {
 }
 
 @doc("A notification.")
-model NotificationChannelFragment {
-  ...UpdateResource;
-}
+model NotificationChannelFragment extends UpdateResource {}
 
 @doc("Properties for generating a Notification.")
 model NotifyParameters {
@@ -1314,14 +1304,10 @@ model PolicyProperties {
 }
 
 @doc("A Policy.")
-model PolicyFragment {
-  ...UpdateResource;
-}
+model PolicyFragment extends UpdateResource {}
 
 @doc("A schedule.")
-model ScheduleFragment {
-  ...UpdateResource;
-}
+model ScheduleFragment extends UpdateResource {}
 
 @doc("Properties of a managed identity")
 model IdentityProperties {
@@ -1388,9 +1374,7 @@ model UserSecretStore {
 }
 
 @doc("Profile of a lab user.")
-model UserFragment {
-  ...UpdateResource;
-}
+model UserFragment extends UpdateResource {}
 
 @doc("Properties of a disk.")
 model DiskProperties {
@@ -1433,9 +1417,7 @@ model DiskProperties {
 }
 
 @doc("A Disk.")
-model DiskFragment {
-  ...UpdateResource;
-}
+model DiskFragment extends UpdateResource {}
 
 @doc("Properties of the disk to attach.")
 model AttachDiskProperties {
@@ -1493,9 +1475,7 @@ model ArmTemplateParameterProperties {
 }
 
 @doc("An environment, which is essentially an ARM template deployment.")
-model DtlEnvironmentFragment {
-  ...UpdateResource;
-}
+model DtlEnvironmentFragment extends UpdateResource {}
 
 @doc("Properties of a secret.")
 model SecretProperties {
@@ -1512,9 +1492,7 @@ model SecretProperties {
 }
 
 @doc("A secret.")
-model SecretFragment {
-  ...UpdateResource;
-}
+model SecretFragment extends UpdateResource {}
 
 @doc("Properties of a service fabric.")
 model ServiceFabricProperties {
@@ -1538,9 +1516,7 @@ model ServiceFabricProperties {
 }
 
 @doc("Schedules applicable to a virtual machine. The schedules may have been defined on a VM or on lab level.")
-model ApplicableSchedule {
-  ...Resource;
-
+model ApplicableSchedule extends Resource {
   @doc("The properties of the resource.")
   properties: ApplicableScheduleProperties;
 }
@@ -1555,9 +1531,7 @@ model ApplicableScheduleProperties {
 }
 
 @doc("A Service Fabric.")
-model ServiceFabricFragment {
-  ...UpdateResource;
-}
+model ServiceFabricFragment extends UpdateResource {}
 
 @doc("Properties of a virtual machine.")
 model LabVirtualMachineProperties {
@@ -1745,9 +1719,7 @@ model ComputeDataDisk {
 }
 
 @doc("A virtual machine.")
-model LabVirtualMachineFragment {
-  ...UpdateResource;
-}
+model LabVirtualMachineFragment extends UpdateResource {}
 
 @doc("Request body for applying artifacts to a virtual machine.")
 model ApplyArtifactsRequest {
@@ -1863,14 +1835,10 @@ model Port {
 }
 
 @doc("A virtual network.")
-model VirtualNetworkFragment {
-  ...UpdateResource;
-}
+model VirtualNetworkFragment extends UpdateResource {}
 
 @doc("A lab.")
-model LabFragment {
-  ...UpdateResource;
-}
+model LabFragment extends UpdateResource {}
 
 @doc("The parameters of the export operation.")
 model ExportResourceUsageParameters {
@@ -1922,9 +1890,7 @@ model RetargetScheduleProperties {
 }
 
 @doc("Schedules applicable to a virtual machine. The schedules may have been defined on a VM or on lab level.")
-model ApplicableScheduleFragment {
-  ...UpdateResource;
-}
+model ApplicableScheduleFragment extends UpdateResource {}
 
 @doc("The REST API operation supported by DevTestLab ResourceProvider.")
 model OperationMetadata {

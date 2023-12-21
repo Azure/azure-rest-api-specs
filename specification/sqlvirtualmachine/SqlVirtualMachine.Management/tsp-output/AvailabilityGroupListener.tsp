@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SqlVmGroup.tsp";
+import "./SqlVirtualMachineGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.SqlVirtualMachine;
 @doc("A SQL Server availability group listener.")
-@parentResource(SqlVmGroup)
+@parentResource(SqlVirtualMachineGroup)
 model AvailabilityGroupListener
   is ProxyResource<AvailabilityGroupListenerProperties> {
   @doc("Name of the availability group listener.")

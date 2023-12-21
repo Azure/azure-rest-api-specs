@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./StorageSyncGroup.tsp";
+import "./SyncGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.StorageSync;
 @doc("Cloud Endpoint object.")
-@parentResource(StorageSyncGroup)
+@parentResource(SyncGroup)
 model CloudEndpoint is ProxyResource<CloudEndpointProperties> {
   @doc("Name of Cloud Endpoint object.")
   @path

@@ -836,9 +836,7 @@ model MonitorProperties {
 }
 
 @doc("Defines the SAP monitor errors.")
-model MonitorPropertiesErrors {
-  ...Error;
-}
+model MonitorPropertiesErrors extends Error {}
 
 @doc("Standard error object.")
 model Error {
@@ -884,9 +882,7 @@ model ProviderInstanceProperties {
 }
 
 @doc("Defines the provider instance errors.")
-model ProviderInstancePropertiesErrors {
-  ...Error;
-}
+model ProviderInstancePropertiesErrors extends Error {}
 
 @doc("Gets or sets the provider specific properties.")
 @discriminator("providerType")
@@ -1501,9 +1497,7 @@ model OperationsDefinition {
 }
 
 @doc("Defines the workload operation content.")
-model OperationsContent {
-  ...Resource;
-
+model OperationsContent extends Resource {
   @doc("Operations content.")
   properties?: OperationsDefinition;
 }

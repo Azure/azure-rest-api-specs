@@ -21,10 +21,14 @@ model CapacityPool is TrackedResource<PoolProperties> {
   @key("poolName")
   @segment("capacityPools")
   name: string;
+
+  @doc("A unique read-only string that changes whenever the resource is updated.")
+  @visibility("read")
+  etag?: string;
 }
 
 @armResourceOperations
-interface CapacityPools {
+interface Pools {
   @doc("Get details of the specified capacity pool")
   get is ArmResourceRead<CapacityPool>;
   @doc("Create or Update a capacity pool")

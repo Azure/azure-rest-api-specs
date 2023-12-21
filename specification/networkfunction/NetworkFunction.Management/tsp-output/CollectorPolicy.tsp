@@ -18,6 +18,10 @@ model CollectorPolicy is TrackedResource<CollectorPolicyPropertiesFormat> {
   @key("collectorPolicyName")
   @segment("collectorPolicies")
   name: string;
+
+  @doc("A unique read-only string that changes whenever the resource is updated.")
+  @visibility("read")
+  etag?: string;
 }
 
 @armResourceOperations

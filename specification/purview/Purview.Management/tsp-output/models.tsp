@@ -229,9 +229,7 @@ model UserAssignedIdentity {
 }
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
-model TrackedResourceSystemData {
-  ...SystemData;
-}
+model TrackedResourceSystemData extends SystemData {}
 
 @doc("Default error response model")
 @error
@@ -242,9 +240,7 @@ model ErrorResponseModel {
 }
 
 @doc("Gets or sets the error.")
-model ErrorResponseModelError {
-  ...ErrorModel;
-}
+model ErrorResponseModelError extends ErrorModel {}
 
 @doc("Default error model")
 model ErrorModel {

@@ -4,12 +4,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./StorageSyncService.tsp";
-import "./StorageSyncPrivateEndpointConnection.tsp";
-import "./StorageSyncGroup.tsp";
+import "./PrivateEndpointConnection.tsp";
+import "./SyncGroup.tsp";
 import "./CloudEndpoint.tsp";
-import "./StorageSyncServerEndpoint.tsp";
-import "./StorageSyncRegisteredServer.tsp";
-import "./StorageSyncWorkflow.tsp";
+import "./ServerEndpoint.tsp";
+import "./RegisteredServer.tsp";
+import "./Workflow.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Hci;
 @doc("Defines the GuestAgent.")
-@parentResource(VirtualMachineInstance)
 @singleton("default")
+@parentResource(VirtualMachineInstance)
 model GuestAgent is ProxyResource<GuestAgentProperties> {
   @key("default")
   @segment("guestAgents")
@@ -20,13 +20,17 @@ model GuestAgent is ProxyResource<GuestAgentProperties> {
 }
 
 @armResourceOperations
-interface GuestAgents {
+interface GuestAgent {
   @doc("Implements GuestAgent GET method.")
   get is ArmResourceRead<GuestAgent>;
   @doc("Create Or Update GuestAgent.")
   create is ArmResourceCreateOrUpdateAsync<GuestAgent>;
   @doc("Implements GuestAgent DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<GuestAgent>;
+}
+
+@armResourceOperations
+interface GuestAgents {
   @doc("Returns the list of GuestAgent of the given vm.")
-  listByVirtualMachineInstance is ArmResourceListByParent<GuestAgent>;
+  list is ArmResourceListByParent<GuestAgent>;
 }

@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SapMonitor.tsp";
+import "./Monitor.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Workloads;
 @doc("configuration associated with SAP Landscape Monitor Dashboard.")
-@parentResource(SapMonitor)
 @singleton("default")
+@parentResource(Monitor)
 model SapLandscapeMonitor is ProxyResource<SapLandscapeMonitorProperties> {
   @key("default")
   @segment("sapLandscapeMonitor")
@@ -20,7 +20,7 @@ model SapLandscapeMonitor is ProxyResource<SapLandscapeMonitorProperties> {
 }
 
 @armResourceOperations
-interface SapLandscapeMonitors {
+interface SapLandscapeMonitor {
   @doc("Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.")
   get is ArmResourceRead<SapLandscapeMonitor>;
   @doc("Creates a SAP Landscape Monitor Dashboard for the specified subscription, resource group, and resource name.")
@@ -33,5 +33,5 @@ interface SapLandscapeMonitors {
   @doc("Deletes a SAP Landscape Monitor Dashboard with the specified subscription, resource group, and SAP monitor name.")
   delete is ArmResourceDeleteSync<SapLandscapeMonitor>;
   @doc("Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.")
-  listBySapMonitor is ArmResourceListByParent<SapLandscapeMonitor>;
+  list is ArmResourceListByParent<SapLandscapeMonitor>;
 }

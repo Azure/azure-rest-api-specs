@@ -73,17 +73,13 @@ model Sku {
 }
 
 @doc("Description of a CheckAvailability resource.")
-model CheckAvailabilityResult {
-  ...Resource;
-
+model CheckAvailabilityResult extends Resource {
   @doc("True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false.")
   isAvailiable?: boolean;
 }
 
 @doc("Parameters supplied to the CreateOrUpdate Namespace operation.")
-model NamespaceCreateOrUpdateParameters {
-  ...Resource;
-
+model NamespaceCreateOrUpdateParameters extends Resource {
   @doc("Properties of the Namespace.")
   properties?: NamespaceProperties;
 }
@@ -206,9 +202,7 @@ model PolicykeyResource {
 }
 
 @doc("Parameters supplied to the CreateOrUpdate NotificationHub operation.")
-model NotificationHubCreateOrUpdateParameters {
-  ...Resource;
-
+model NotificationHubCreateOrUpdateParameters extends Resource {
   @doc("Properties of the NotificationHub.")
   properties: NotificationHubProperties;
 }
@@ -365,9 +359,7 @@ model BaiduCredentialProperties {
 }
 
 @doc("Description of a NotificationHub Resource.")
-model DebugSendResponse {
-  ...Resource;
-
+model DebugSendResponse extends Resource {
   @doc("Properties of the NotificationHub.")
   properties?: DebugSendResult;
 }
@@ -384,9 +376,7 @@ model DebugSendResult {
 }
 
 @doc("Description of a NotificationHub PNS Credentials.")
-model PnsCredentialsResource {
-  ...Resource;
-
+model PnsCredentialsResource extends Resource {
   @doc("NotificationHub PNS Credentials.")
   properties?: PnsCredentialsProperties;
 }

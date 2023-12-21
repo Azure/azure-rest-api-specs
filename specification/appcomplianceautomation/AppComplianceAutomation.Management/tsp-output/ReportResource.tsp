@@ -21,7 +21,7 @@ model ReportResource is ProxyResource<ReportProperties> {
 }
 
 @armResourceOperations
-interface ReportResources {
+interface Report {
   @doc("Get the AppComplianceAutomation report and its properties.")
   get is ArmResourceRead<ReportResource>;
   @doc("Create a new AppComplianceAutomation report or update an exiting AppComplianceAutomation report.")
@@ -30,6 +30,10 @@ interface ReportResources {
   update is ArmResourcePatchAsync<ReportResource, ReportProperties>;
   @doc("Delete an AppComplianceAutomation report.")
   delete is ArmResourceDeleteAsync<ReportResource>;
+}
+
+@armResourceOperations
+interface Reports {
   @doc("Get the AppComplianceAutomation report list for the tenant.")
   list is ArmResourceListByParent<
     ReportResource,

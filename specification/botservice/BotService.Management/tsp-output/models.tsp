@@ -309,9 +309,7 @@ model Channel {
 }
 
 @doc("The ARM channel of list channel with keys operation response.")
-model ListChannelWithKeysResponse {
-  ...BotChannel;
-
+model ListChannelWithKeysResponse extends BotChannel {
   @doc("The set of properties specific to bot channel resource")
   resource?: Channel;
 
@@ -687,9 +685,7 @@ model PrivateLinkResourceListResult {
 }
 
 @doc("A private link resource")
-model PrivateLinkResource {
-  ...PrivateLinkResourceBase;
-
+model PrivateLinkResource extends PrivateLinkResourceBase {
   @doc("Resource properties.")
   properties?: PrivateLinkResourceProperties;
 }
@@ -924,9 +920,7 @@ model WebChatChannelProperties {
 }
 
 @doc("A site for the Webchat channel")
-model WebChatSite {
-  ...Site;
-}
+model WebChatSite extends Site {}
 
 @doc("Direct Line channel definition")
 model DirectLineChannel extends Channel {
@@ -954,9 +948,7 @@ model DirectLineChannelProperties {
 }
 
 @doc("A site for the Direct Line channel")
-model DirectLineSite {
-  ...Site;
-}
+model DirectLineSite extends Site {}
 
 @doc("Telegram channel definition")
 model TelegramChannel extends Channel {

@@ -20,7 +20,7 @@ model PrivateStore is ProxyResource<PrivateStoreProperties> {
 }
 
 @armResourceOperations
-interface PrivateStores {
+interface PrivateStore {
   @doc("Get information about the private store")
   get is ArmResourceRead<PrivateStore>;
   @doc("Changes private store properties")
@@ -126,6 +126,10 @@ interface PrivateStores {
     void,
     SubscriptionsContextList
   >;
+}
+
+@armResourceOperations
+interface PrivateStores {
   @doc("All rules approved in the private store that are relevant for user subscriptions")
   queryUserRules is ArmResourceActionSync<
     PrivateStore,

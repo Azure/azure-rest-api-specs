@@ -21,7 +21,7 @@ model PeeringServicePrefix is ProxyResource<PeeringServicePrefixProperties> {
 }
 
 @armResourceOperations
-interface PeeringServicePrefixes {
+interface Prefixes {
   @doc("Gets an existing prefix with the specified name under the given subscription, resource group and peering service.")
   get is ArmResourceRead<
     PeeringServicePrefix,

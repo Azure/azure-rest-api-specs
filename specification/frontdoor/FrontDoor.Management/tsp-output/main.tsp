@@ -3,12 +3,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./FrontDoorWebApplicationFirewallPolicy.tsp";
+import "./WebApplicationFirewallPolicy.tsp";
 import "./FrontDoor.tsp";
 import "./FrontendEndpoint.tsp";
-import "./FrontDoorRulesEngine.tsp";
-import "./FrontDoorNetworkExperimentProfile.tsp";
-import "./FrontDoorExperiment.tsp";
+import "./RulesEngine.tsp";
+import "./Profile.tsp";
+import "./Experiment.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

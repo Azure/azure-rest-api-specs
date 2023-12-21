@@ -242,9 +242,7 @@ model Recurrence {
 model Action {}
 
 @doc("An azure managed resource object.")
-model ManagedResource {
-  ...Resource;
-
+model ManagedResource extends Resource {
   @doc("Resource location")
   @visibility("read", "create")
   location: string;
@@ -407,9 +405,7 @@ model ActionStatus {
 }
 
 @doc("Alert Modification details")
-model AlertModification {
-  ...Resource;
-
+model AlertModification extends Resource {
   @doc("Properties of the alert modification item.")
   properties?: AlertModificationProperties;
 }
@@ -449,9 +445,7 @@ model AlertModificationItem {
 }
 
 @doc("Summary of alerts based on the input filters and 'groupby' parameters.")
-model AlertsSummary {
-  ...Resource;
-
+model AlertsSummary extends Resource {
   @doc("Group the result set.")
   properties?: AlertsSummaryGroup;
 }
@@ -570,9 +564,7 @@ model SmartGroupErrorResponseBody {
 }
 
 @doc("Alert Modification details")
-model SmartGroupModification {
-  ...Resource;
-
+model SmartGroupModification extends Resource {
   @doc("Properties of the smartGroup modification item.")
   properties?: SmartGroupModificationProperties;
 }

@@ -95,9 +95,7 @@ enum DebugDataAccessLevel {
 }
 
 @doc("A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account.")
-model DataLakeAnalyticsAccountBasic {
-  ...Resource;
-
+model DataLakeAnalyticsAccountBasic extends Resource {
   @doc("The properties defined by Data Lake Analytics all properties are specific to each resource provider.")
   @visibility("read")
   properties?: DataLakeAnalyticsAccountPropertiesBasic;
@@ -269,9 +267,8 @@ model CreateOrUpdateFirewallRuleProperties {
 }
 
 @doc("The account specific properties that are associated with an underlying Data Lake Analytics account. Returned only when retrieving a specific account.")
-model DataLakeAnalyticsAccountProperties {
-  ...DataLakeAnalyticsAccountPropertiesBasic;
-
+model DataLakeAnalyticsAccountProperties
+  extends DataLakeAnalyticsAccountPropertiesBasic {
   @doc("The default Data Lake Store account associated with this account.")
   @visibility("read")
   defaultDataLakeStoreAccount?: string;
@@ -413,9 +410,7 @@ model ComputePolicyProperties {
   minPriorityPerJob?: int32;
 }
 
-model HiveMetastore {
-  ...SubResource;
-
+model HiveMetastore extends SubResource {
   @doc("The  HiveMetastoreProperties rule properties.")
   @visibility("read")
   properties?: HiveMetastoreProperties;
@@ -449,9 +444,7 @@ model HiveMetastoreProperties {
 }
 
 @doc("Data Lake Analytics  VirtualNetwork Rule information.")
-model VirtualNetworkRule {
-  ...SubResource;
-
+model VirtualNetworkRule extends SubResource {
   @doc("The  VirtualNetwork rule properties.")
   @visibility("read")
   properties?: VirtualNetworkRuleProperties;

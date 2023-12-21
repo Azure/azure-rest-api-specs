@@ -5,8 +5,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./DigitalTwinsDescription.tsp";
 import "./DigitalTwinsEndpointResource.tsp";
-import "./DigitalTwinsPrivateLinkResource.tsp";
-import "./DigitalTwinsPrivateEndpointConnection.tsp";
+import "./GroupIdInformation.tsp";
+import "./PrivateEndpointConnection.tsp";
 import "./TimeSeriesDatabaseConnection.tsp";
 
 using TypeSpec.Rest;

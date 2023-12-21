@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./SystemAssignedIdentity.tsp";
-import "./UserAssignedIdentity.tsp";
+import "./Identity.tsp";
 import "./FederatedIdentityCredential.tsp";
 
 using TypeSpec.Rest;

@@ -22,7 +22,7 @@ model ManagedTransparentDataEncryption
 }
 
 @armResourceOperations
-interface ManagedTransparentDataEncryptions {
+interface ManagedDatabaseTransparentDataEncryption {
   @doc("Gets a managed database's transparent data encryption.")
   get is ArmResourceRead<ManagedTransparentDataEncryption>;
   @doc("Updates a database's transparent data encryption configuration.")

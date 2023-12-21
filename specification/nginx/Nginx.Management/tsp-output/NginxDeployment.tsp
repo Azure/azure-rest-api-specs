@@ -22,7 +22,7 @@ model NginxDeployment is TrackedResource<NginxDeploymentProperties> {
 }
 
 @armResourceOperations
-interface NginxDeployments {
+interface Deployments {
   @doc("Get the Nginx deployment")
   get is ArmResourceRead<NginxDeployment>;
   @doc("Create or update the Nginx deployment")

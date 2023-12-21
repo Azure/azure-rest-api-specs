@@ -18,10 +18,13 @@ model DscConfiguration is TrackedResource<DscConfigurationProperties> {
   @key("configurationName")
   @segment("configurations")
   name: string;
+
+  @doc("Gets or sets the etag of the resource.")
+  etag?: string;
 }
 
 @armResourceOperations
-interface DscConfigurations {
+interface DscConfiguration {
   @doc("Retrieve the configuration identified by configuration name.")
   get is ArmResourceRead<DscConfiguration>;
   @doc("Create the configuration identified by configuration name.")

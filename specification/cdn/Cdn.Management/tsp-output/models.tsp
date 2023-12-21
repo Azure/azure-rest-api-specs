@@ -837,8 +837,7 @@ model RouteCacheCompressionSettings {
 }
 
 @doc("The JSON object that contains the properties of the Rule Set to create.")
-model RuleSetProperties {
-...AFDStateProperties;
+model RuleSetProperties extends AFDStateProperties {
 @doc("The name of the profile which holds the rule set.")
 @visibility("read")
 "profileName"?: string;
@@ -861,8 +860,7 @@ model DeliveryRuleAction {
 }
 
 @doc("The json object that contains properties required to create a security policy")
-model SecurityPolicyDetails {
-...AFDStateProperties;
+model SecurityPolicyDetails extends AFDStateProperties {
 @doc("The name of the profile which holds the security policy.")
 @visibility("read")
 "profileName"?: string;
@@ -877,8 +875,7 @@ model SecurityPolicyProperties {
 }
 
 @doc("The JSON object that contains the properties of the Secret to create.")
-model SecretDetails {
-...AFDStateProperties;
+model SecretDetails extends AFDStateProperties {
 @doc("The name of the profile which holds the secret.")
 @visibility("read")
 "profileName"?: string;
@@ -1125,8 +1122,7 @@ model CdnUsage {
 }
 
 @doc("The JSON object that contains the properties required to create an endpoint.")
-model EndpointProperties {
-...EndpointPropertiesUpdateParameters;
+model EndpointProperties extends EndpointPropertiesUpdateParameters {
 @doc("The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. contoso.azureedge.net")
 @visibility("read")
 "hostName"?: string;
@@ -1347,8 +1343,7 @@ model LoadParameters {
 }
 
 @doc("The JSON object that contains the properties of the origin.")
-model OriginProperties {
-...OriginUpdatePropertiesParameters;
+model OriginProperties extends OriginUpdatePropertiesParameters {
 @doc("Resource status of the origin.")
 @visibility("read")
 "resourceState"?: OriginResourceState;
@@ -1361,8 +1356,7 @@ model OriginProperties {
 }
 
 @doc("The JSON object that contains the properties of the origin group.")
-model OriginGroupProperties {
-...OriginGroupUpdatePropertiesParameters;
+model OriginGroupProperties extends OriginGroupUpdatePropertiesParameters {
 @doc("Resource status of the origin group.")
 @visibility("read")
 "resourceState"?: OriginGroupResourceState;
@@ -1487,8 +1481,7 @@ model EdgenodeResult is Azure.Core.Page<EdgeNode> {
 }
 
 @doc("Edgenode is a global Point of Presence (POP) location used to deliver CDN content to end users.")
-model EdgeNode {
-...ProxyResource;
+model EdgeNode extends ProxyResource {
 @doc("The JSON object that contains the properties required to create an edgenode.")
 "properties"?: EdgeNodeProperties;
 }
@@ -1562,8 +1555,7 @@ model RateLimitRuleList {
 }
 
 @doc("Defines a rate limiting rule that can be included in a waf policy")
-model RateLimitRule {
-...CustomRule;
+model RateLimitRule extends CustomRule {
 @doc("Defines rate limit threshold.")
 "rateLimitThreshold": int32;
 @doc("Defines rate limit duration. Default is 1 minute.")
@@ -1657,8 +1649,7 @@ model ManagedRuleSetDefinitionList is Azure.Core.Page<ManagedRuleSetDefinition> 
 }
 
 @doc("Describes a managed rule set definition.")
-model ManagedRuleSetDefinition {
-...Resource;
+model ManagedRuleSetDefinition extends Resource {
 @doc("Describes managed rule set definition properties.")
 "properties"?: ManagedRuleSetDefinitionProperties;
 @doc("The pricing tier (defines a CDN provider, feature list and rate) of the CdnWebApplicationFirewallPolicy.")
@@ -1717,13 +1708,11 @@ model Certificate {
 }
 
 @doc("Managed Certificate used for https")
-model ManagedCertificate {
-...Certificate;
+model ManagedCertificate extends Certificate {
 }
 
 @doc("Customer Certificate used for https")
-model CustomerCertificate {
-...Certificate;
+model CustomerCertificate extends Certificate {
 @doc("Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​")
 "secretSource"?: ResourceReference;
 @doc("Certificate version.")
@@ -1741,8 +1730,7 @@ model CustomerCertificate {
 }
 
 @doc("Azure FirstParty Managed Certificate provided by other first party resource providers to enable HTTPS.")
-model AzureFirstPartyManagedCertificate {
-...Certificate;
+model AzureFirstPartyManagedCertificate extends Certificate {
 }
 
 @doc("Input of the secret to be validated.")

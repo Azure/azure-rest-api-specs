@@ -17,6 +17,9 @@ model NetworkFunction is TrackedResource<NetworkFunctionPropertiesFormat> {
   @segment("networkFunctions")
   name: string;
 
+  @doc("A unique read-only string that changes whenever the resource is updated.")
+  etag?: string;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }
 

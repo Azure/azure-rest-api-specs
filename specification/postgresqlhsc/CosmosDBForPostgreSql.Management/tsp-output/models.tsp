@@ -174,9 +174,7 @@ model ServerNameItem {
 }
 
 @doc("A private endpoint connection.")
-model SimplePrivateEndpointConnection {
-  ...ProxyResource;
-
+model SimplePrivateEndpointConnection extends ProxyResource {
   @doc("Properties of the private endpoint connection.")
   properties?: PrivateEndpointConnectionSimpleProperties;
 }
@@ -212,9 +210,7 @@ model PrivateLinkServiceConnectionState {
 }
 
 @doc("The properties of a server in cluster.")
-model ClusterServerProperties {
-  ...ServerProperties;
-
+model ClusterServerProperties extends ServerProperties {
   @doc("The fully qualified domain name of a server.")
   @visibility("read")
   fullyQualifiedDomainName?: string;

@@ -349,9 +349,7 @@ model CheckNameAvailabilityResult {
 }
 
 @doc("Input to get capabilities information for Microsoft.RecoveryServices")
-model ResourceCapabilities {
-  ...ResourceCapabilitiesBase;
-
+model ResourceCapabilities extends ResourceCapabilitiesBase {
   @doc("Capabilities information")
   properties?: CapabilitiesProperties;
 }
@@ -374,9 +372,7 @@ model ResourceCapabilitiesBase {
 }
 
 @doc("Capabilities response for Microsoft.RecoveryServices")
-model CapabilitiesResponse {
-  ...ResourceCapabilitiesBase;
-
+model CapabilitiesResponse extends ResourceCapabilitiesBase {
   @doc("Capabilities properties in response")
   properties?: CapabilitiesResponseProperties;
 }
@@ -387,9 +383,7 @@ model CapabilitiesResponseProperties {
 }
 
 @doc("DNSZone information for Microsoft.RecoveryServices")
-model DNSZoneResponse {
-  ...DNSZone;
-
+model DNSZoneResponse extends DNSZone {
   @doc("The private link resource Private link DNS zone names.")
   requiredZoneNames?: string[];
 }
@@ -778,9 +772,7 @@ model ClientDiscoveryForLogSpecification {
 }
 
 @doc("Tracked resource with location.")
-model PatchTrackedResource {
-  ...Resource;
-
+model PatchTrackedResource extends Resource {
   @doc("Resource location.")
   location?: string;
 

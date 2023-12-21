@@ -21,7 +21,7 @@ model PeeringRegisteredAsn is ProxyResource<PeeringRegisteredAsnProperties> {
 }
 
 @armResourceOperations
-interface PeeringRegisteredAsns {
+interface RegisteredAsns {
   @doc("Gets an existing registered ASN with the specified name under the given subscription, resource group and peering.")
   get is ArmResourceRead<PeeringRegisteredAsn>;
   @doc("Creates a new registered ASN with the specified name under the given subscription, resource group and peering.")

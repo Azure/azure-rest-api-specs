@@ -3,8 +3,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./EasmWorkspace.tsp";
-import "./EasmLabel.tsp";
+import "./WorkspaceResource.tsp";
+import "./LabelResource.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

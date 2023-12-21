@@ -950,9 +950,7 @@ model VmPlacementRequestResult {
 }
 
 @doc("Object for Capturing DeviceCapacityInfo")
-model DeviceCapacityInfo {
-  ...ARMBaseModel;
-
+model DeviceCapacityInfo extends ARMBaseModel {
   @doc("The device capacity properties.")
   properties?: DeviceCapacityInfoProperties;
 
@@ -1152,9 +1150,7 @@ needed to form the activation key
 }
 
 @doc("The extended Info of the Data Box Edge/Gateway device.")
-model DataBoxEdgeDeviceExtendedInfo {
-  ...ARMBaseModel;
-
+model DataBoxEdgeDeviceExtendedInfo extends ARMBaseModel {
   @doc("The extended info properties.")
   properties?: DataBoxEdgeDeviceExtendedInfoProperties;
 
@@ -1347,9 +1343,7 @@ model UpdateInstallProgress {
 }
 
 @doc("The network settings of a device.")
-model NetworkSettings {
-  ...ARMBaseModel;
-
+model NetworkSettings extends ARMBaseModel {
   @doc("The properties of network settings of a device.")
   @visibility("read")
   properties?: NetworkSettingsProperties;
@@ -1476,9 +1470,7 @@ Represents a single node in a Data box Edge/Gateway device
 Gateway devices, standalone Edge devices and a single node cluster Edge device will all have 1 node
 Multi-node Edge devices will have more than 1 nodes
 """)
-model Node {
-  ...ARMBaseModel;
-
+model Node extends ARMBaseModel {
   @doc("The properties of the node")
   @visibility("read")
   properties?: NodeProperties;
@@ -1694,9 +1686,7 @@ model MetricDimension {
 }
 
 @doc("The security settings of a device.")
-model SecuritySettings {
-  ...ARMBaseModel;
-
+model SecuritySettings extends ARMBaseModel {
   @doc("Properties of the security settings.")
   properties: SecuritySettingsProperties;
 }
@@ -1879,9 +1869,7 @@ model ContainerProperties {
 }
 
 @doc("The request object for trigger support package.")
-model TriggerSupportPackageRequest {
-  ...ARMBaseModel;
-
+model TriggerSupportPackageRequest extends ARMBaseModel {
   @doc("The TriggerSupportPackageRequest properties.")
   properties: SupportPackageRequestProperties;
 }
@@ -1923,9 +1911,7 @@ model DataBoxEdgeDeviceExtendedInfoPatch {
 }
 
 @doc("Details about ongoing updates and availability of updates on the device.")
-model UpdateSummary {
-  ...ARMBaseModel;
-
+model UpdateSummary extends ARMBaseModel {
   @doc("The device update information summary.")
   properties?: UpdateSummaryProperties;
 

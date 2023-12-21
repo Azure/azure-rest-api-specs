@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./AttestationProvider.tsp";
-import "./AttestationPrivateEndpointConnection.tsp";
+import "./PrivateEndpointConnection.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

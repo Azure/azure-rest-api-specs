@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SecurityAssessment.tsp";
+import "./SecurityAssessmentResponse.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.SecurityCenter;
 @doc("Governance assignment over a given scope")
-@parentResource(SecurityAssessment)
+@parentResource(SecurityAssessmentResponse)
 model GovernanceAssignment is ProxyResource<GovernanceAssignmentProperties> {
   @doc("The governance assignment key - the assessment key of the required governance assignment")
   @path

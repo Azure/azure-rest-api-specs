@@ -427,9 +427,7 @@ model IscsiLun {
 }
 
 @doc("Payload for iSCSI Target create or update requests.")
-model IscsiTargetCreate {
-  ...ProxyResource;
-
+model IscsiTargetCreate extends ProxyResource {
   @doc("Properties for iSCSI Target create request.")
   properties: IscsiTargetCreateProperties;
 

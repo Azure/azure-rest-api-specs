@@ -22,7 +22,7 @@ model EmailServiceResource is TrackedResource<EmailServiceProperties> {
 }
 
 @armResourceOperations
-interface EmailServiceResources {
+interface EmailServices {
   @doc("Get the EmailService and its properties.")
   get is ArmResourceRead<EmailServiceResource>;
   @doc("Create a new EmailService or update an existing EmailService.")

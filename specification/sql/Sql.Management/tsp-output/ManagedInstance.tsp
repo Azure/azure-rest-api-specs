@@ -53,8 +53,6 @@ interface ManagedInstances {
   >;
   @doc("Gets a list of all managed instances in the subscription.")
   list is ArmListBySubscription<ManagedInstance>;
-  @doc("Creates a TDE certificate for a given server.")
-  create is ArmResourceActionAsync<ManagedInstance, TdeCertificate, void>;
   @doc("Failovers a managed instance.")
   failover is ArmResourceActionAsync<
     ManagedInstance,
@@ -72,46 +70,6 @@ interface ManagedInstances {
   start is ArmResourceActionNoResponseContentAsync<ManagedInstance, void>;
   @doc("Stops the managed instance.")
   stop is ArmResourceActionNoResponseContentAsync<ManagedInstance, void>;
-  @doc("Gets a server trust groups by instance name.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustGroups")
-  @get
-  ListByInstance is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
-      @path
-      resourceGroupName: string;
-
-      @doc("The name of the managed instance.")
-      @path
-      managedInstanceName: string;
-
-      @doc("The subscription ID that identifies an Azure subscription.")
-      @path
-      subscriptionId: string;
-    },
-    ServerTrustGroupListResult
-  >;
-
-  @doc("Gets a list of inaccessible managed databases in a managed instance")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/inaccessibleManagedDatabases")
-  @get
-  ListInaccessibleByInstance is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
-      @path
-      resourceGroupName: string;
-
-      @doc("The name of the managed instance.")
-      @path
-      managedInstanceName: string;
-
-      @doc("The subscription ID that identifies an Azure subscription.")
-      @path
-      subscriptionId: string;
-    },
-    ManagedDatabaseListResult
-  >;
-
   @doc("Gets the collection of outbound network dependencies for the given managed instance.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/outboundNetworkDependenciesEndpoints")
   @get
@@ -178,5 +136,57 @@ interface ManagedInstances {
       subscriptionId: string;
     },
     TopQueriesListResult
+  >;
+}
+
+@armResourceOperations
+interface ManagedInstanceTdeCertificates {
+  @doc("Creates a TDE certificate for a given server.")
+  create is ArmResourceActionAsync<ManagedInstance, TdeCertificate, void>;
+}
+
+@armResourceOperations
+interface ServerTrustGroups {
+  @doc("Gets a server trust groups by instance name.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustGroups")
+  @get
+  ListByInstance is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the managed instance.")
+      @path
+      managedInstanceName: string;
+
+      @doc("The subscription ID that identifies an Azure subscription.")
+      @path
+      subscriptionId: string;
+    },
+    ServerTrustGroupListResult
+  >;
+}
+
+@armResourceOperations
+interface ManagedDatabases {
+  @doc("Gets a list of inaccessible managed databases in a managed instance")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/inaccessibleManagedDatabases")
+  @get
+  ListInaccessibleByInstance is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the managed instance.")
+      @path
+      managedInstanceName: string;
+
+      @doc("The subscription ID that identifies an Azure subscription.")
+      @path
+      subscriptionId: string;
+    },
+    ManagedDatabaseListResult
   >;
 }

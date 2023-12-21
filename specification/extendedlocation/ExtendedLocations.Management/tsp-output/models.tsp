@@ -79,9 +79,7 @@ model CustomLocationPropertiesAuthentication {
 model EnabledResourceTypesListResult is Azure.Core.Page<EnabledResourceType>;
 
 @doc("EnabledResourceType definition.")
-model EnabledResourceType {
-  ...ProxyResource;
-
+model EnabledResourceType extends ProxyResource {
   @doc("The set of properties for EnabledResourceType specific to a Custom Location")
   properties?: EnabledResourceTypeProperties;
 

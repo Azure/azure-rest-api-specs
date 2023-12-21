@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AvsPrivateCloud.tsp";
+import "./PrivateCloud.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -12,7 +12,7 @@ using TypeSpec.Http;
 namespace Azure.ResourceManager.Avs;
 // FIXME: WorkloadNetwork has no properties property
 @doc("Workload Network")
-@parentResource(AvsPrivateCloud)
+@parentResource(PrivateCloud)
 model WorkloadNetwork is ProxyResource<{}> {
   @doc("Name for the workload network in the private cloud")
   @path

@@ -489,9 +489,7 @@ model TransformationProperties {
 }
 
 @doc("The properties that are associated with an Azure Storage account with MSI")
-model JobStorageAccount {
-  ...StorageAccount;
-}
+model JobStorageAccount extends StorageAccount {}
 
 @doc("The properties that are associated with an Azure Storage account")
 model StorageAccount {
@@ -582,9 +580,7 @@ model SubscriptionQuotasListResult {
 }
 
 @doc("Describes the current quota for the subscription.")
-model SubscriptionQuota {
-  ...SubResource;
-
+model SubscriptionQuota extends SubResource {
   @doc("Describes the properties of the quota.")
   @visibility("read")
   properties?: SubscriptionQuotaProperties;
@@ -620,9 +616,7 @@ model TestQueryDiagnostics {
 }
 
 @doc("The result of the query testing request.")
-model QueryTestingResult {
-  ...StreamAnalyticsError;
-
+model QueryTestingResult extends StreamAnalyticsError {
   @doc("The status of the query testing request.")
   @visibility("read")
   status?: QueryTestingResultStatus;
@@ -743,9 +737,7 @@ model SampleInput {
 }
 
 @doc("The result of the sample input request.")
-model SampleInputResult {
-  ...StreamAnalyticsError;
-
+model SampleInputResult extends StreamAnalyticsError {
   @doc("The status of the sample input request.")
   @visibility("read")
   status?: SampleInputResultStatus;
@@ -770,9 +762,7 @@ model TestInput {
 }
 
 @doc("The result of the test input or output request.")
-model TestDatasourceResult {
-  ...StreamAnalyticsError;
-
+model TestDatasourceResult extends StreamAnalyticsError {
   @doc("The status of the sample output request.")
   @visibility("read")
   status?: TestDatasourceResultStatus;
@@ -1173,9 +1163,7 @@ model BlobStreamInputDataSource extends StreamInputDataSource {
 }
 
 @doc("The properties that are associated with a blob input containing stream data.")
-model BlobStreamInputDataSourceProperties {
-  ...BlobDataSourceProperties;
-
+model BlobStreamInputDataSourceProperties extends BlobDataSourceProperties {
   @doc("The partition count of the blob input data source. Range 1 - 1024.")
   sourcePartitionCount?: int32;
 }
@@ -1211,9 +1199,8 @@ model EventHubStreamInputDataSource extends StreamInputDataSource {
 }
 
 @doc("The properties that are associated with a Event Hub input containing stream data.")
-model EventHubStreamInputDataSourceProperties {
-  ...EventHubDataSourceProperties;
-
+model EventHubStreamInputDataSourceProperties
+  extends EventHubDataSourceProperties {
   @doc("The name of an Event Hub Consumer Group that should be used to read events from the Event Hub. Specifying distinct consumer group names for multiple inputs allows each of those inputs to receive the same events from the Event Hub. If not specified, the input uses the Event Hub’s default consumer group.")
   consumerGroupName?: string;
 
@@ -1222,9 +1209,7 @@ model EventHubStreamInputDataSourceProperties {
 }
 
 @doc("The common properties that are associated with Event Hub data sources.")
-model EventHubDataSourceProperties {
-  ...ServiceBusDataSourceProperties;
-
+model EventHubDataSourceProperties extends ServiceBusDataSourceProperties {
   @doc("The name of the Event Hub. Required on PUT (CreateOrReplace) requests.")
   eventHubName?: string;
 
@@ -1311,9 +1296,7 @@ model BlobReferenceInputDataSource extends ReferenceInputDataSource {
 }
 
 @doc("The properties that are associated with a blob input containing reference data.")
-model BlobReferenceInputDataSourceProperties {
-  ...BlobDataSourceProperties;
-
+model BlobReferenceInputDataSourceProperties extends BlobDataSourceProperties {
   @doc("The name of the blob input.")
   blobName?: string;
 
@@ -1463,9 +1446,8 @@ model GatewayMessageBusStreamInputDataSource extends StreamInputDataSource {
 }
 
 @doc("The properties that are associated with a gateway message bus input containing stream data.")
-model GatewayMessageBusStreamInputDataSourceProperties {
-  ...GatewayMessageBusSourceProperties;
-}
+model GatewayMessageBusStreamInputDataSourceProperties
+  extends GatewayMessageBusSourceProperties {}
 
 @doc("The properties that are associated with a gateway message bus datasource.")
 model GatewayMessageBusSourceProperties {
@@ -1522,9 +1504,7 @@ model BlobOutputDataSource extends OutputDataSource {
 }
 
 @doc("The properties that are associated with a blob output.")
-model BlobOutputDataSourceProperties {
-  ...BlobDataSourceProperties;
-
+model BlobOutputDataSourceProperties extends BlobDataSourceProperties {
   @doc("Blob path prefix.")
   blobPathPrefix?: string;
 
@@ -1575,9 +1555,7 @@ model EventHubOutputDataSource extends OutputDataSource {
 }
 
 @doc("The properties that are associated with an Event Hub output.")
-model EventHubOutputDataSourceProperties {
-  ...EventHubDataSourceProperties;
-
+model EventHubOutputDataSourceProperties extends EventHubDataSourceProperties {
   @doc("The key/column that is used to determine to which partition to send event data.")
   partitionKey?: string;
 
@@ -1604,9 +1582,8 @@ model AzureSqlDatabaseOutputDataSource extends OutputDataSource {
 }
 
 @doc("The properties that are associated with an Azure SQL database output.")
-model AzureSqlDatabaseOutputDataSourceProperties {
-  ...AzureSqlDatabaseDataSourceProperties;
-}
+model AzureSqlDatabaseOutputDataSourceProperties
+  extends AzureSqlDatabaseDataSourceProperties {}
 
 @doc("The properties that are associated with an Azure SQL database data source.")
 model AzureSqlDatabaseDataSourceProperties {
@@ -1645,9 +1622,8 @@ model AzureSynapseOutputDataSource extends OutputDataSource {
 }
 
 @doc("The properties that are associated with an Azure Synapse output.")
-model AzureSynapseOutputDataSourceProperties {
-  ...AzureSynapseDataSourceProperties;
-}
+model AzureSynapseOutputDataSourceProperties
+  extends AzureSynapseDataSourceProperties {}
 
 @doc("The properties that are associated with an Azure SQL database data source.")
 model AzureSynapseDataSourceProperties {
@@ -1680,9 +1656,8 @@ model PostgreSQLOutputDataSource extends OutputDataSource {
 }
 
 @doc("The properties that are associated with a PostgreSQL output.")
-model PostgreSQLOutputDataSourceProperties {
-  ...PostgreSQLDataSourceProperties;
-}
+model PostgreSQLOutputDataSourceProperties
+  extends PostgreSQLDataSourceProperties {}
 
 @doc("The properties that are associated with an Azure SQL database data source.")
 model PostgreSQLDataSourceProperties {
@@ -1778,9 +1753,8 @@ model ServiceBusQueueOutputDataSource extends OutputDataSource {
 }
 
 @doc("The properties that are associated with a Service Bus Queue output.")
-model ServiceBusQueueOutputDataSourceProperties {
-  ...ServiceBusDataSourceProperties;
-
+model ServiceBusQueueOutputDataSourceProperties
+  extends ServiceBusDataSourceProperties {
   @doc("The name of the Service Bus Queue. Required on PUT (CreateOrReplace) requests.")
   queueName?: string;
 
@@ -1801,9 +1775,8 @@ model ServiceBusTopicOutputDataSource extends OutputDataSource {
 }
 
 @doc("The properties that are associated with a Service Bus Topic output.")
-model ServiceBusTopicOutputDataSourceProperties {
-  ...ServiceBusDataSourceProperties;
-
+model ServiceBusTopicOutputDataSourceProperties
+  extends ServiceBusDataSourceProperties {
   @doc("The name of the Service Bus Topic. Required on PUT (CreateOrReplace) requests.")
   topicName?: string;
 
@@ -1824,9 +1797,7 @@ model PowerBIOutputDataSource extends OutputDataSource {
 }
 
 @doc("The properties that are associated with a Power BI output.")
-model PowerBIOutputDataSourceProperties {
-  ...OAuthBasedDataSourceProperties;
-
+model PowerBIOutputDataSourceProperties extends OAuthBasedDataSourceProperties {
   @doc("The name of the Power BI dataset. Required on PUT (CreateOrReplace) requests.")
   dataset?: string;
 
@@ -1865,9 +1836,8 @@ model AzureDataLakeStoreOutputDataSource extends OutputDataSource {
 }
 
 @doc("The properties that are associated with an Azure Data Lake Store.")
-model AzureDataLakeStoreOutputDataSourceProperties {
-  ...OAuthBasedDataSourceProperties;
-
+model AzureDataLakeStoreOutputDataSourceProperties
+  extends OAuthBasedDataSourceProperties {
   @doc("The name of the Azure Data Lake Store account. Required on PUT (CreateOrReplace) requests.")
   accountName?: string;
 
@@ -1897,6 +1867,5 @@ model GatewayMessageBusOutputDataSource extends OutputDataSource {
 }
 
 @doc("The properties that are associated with a Gateway Message Bus.")
-model GatewayMessageBusOutputDataSourceProperties {
-  ...GatewayMessageBusSourceProperties;
-}
+model GatewayMessageBusOutputDataSourceProperties
+  extends GatewayMessageBusSourceProperties {}

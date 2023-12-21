@@ -122,9 +122,7 @@ enum KeyType {
 }
 
 @doc("Data POST-ed to the nameAvailability action")
-model NameAvailabilityParameters {
-  ...CheckNameAvailabilityRequest;
-}
+model NameAvailabilityParameters extends CheckNameAvailabilityRequest {}
 
 @doc("The check availability request body.")
 model CheckNameAvailabilityRequest {
@@ -356,9 +354,7 @@ model EmailServiceProperties {
 }
 
 @doc("A class representing update parameters for EmailService resource.")
-model EmailServiceResourceUpdate {
-  ...TaggedResource;
-}
+model EmailServiceResourceUpdate extends TaggedResource {}
 
 @doc("A class that describes the properties of a SenderUsername resource.")
 model SenderUsernameProperties {

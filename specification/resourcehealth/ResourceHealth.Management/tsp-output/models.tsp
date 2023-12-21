@@ -638,9 +638,7 @@ model ImpactedRegion {
 }
 
 @doc("impactedResource with health status")
-model ImpactedResourceStatus {
-  ...ProxyResource;
-
+model ImpactedResourceStatus extends ProxyResource {
   @doc("Properties of impacted resource status.")
   properties?: ImpactedResourceStatusProperties;
 }

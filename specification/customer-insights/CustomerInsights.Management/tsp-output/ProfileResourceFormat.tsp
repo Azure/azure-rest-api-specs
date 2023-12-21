@@ -21,7 +21,7 @@ model ProfileResourceFormat is ProxyResource<ProfileTypeDefinition> {
 }
 
 @armResourceOperations
-interface ProfileResourceFormats {
+interface Profiles {
   @doc("Gets information about the specified profile.")
   get is ArmResourceRead<
     ProfileResourceFormat,

@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./HealthcareApisWorkspace.tsp";
+import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.HealthcareApis;
 @doc("The description of Fhir Service")
-@parentResource(HealthcareApisWorkspace)
+@parentResource(Workspace)
 model FhirService is TrackedResource<FhirServiceProperties> {
   @doc("The name of FHIR Service resource.")
   @maxLength(24)

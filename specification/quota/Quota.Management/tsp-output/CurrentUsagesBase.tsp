@@ -24,7 +24,7 @@ Resource name for a given resource provider. For example:
 }
 
 @armResourceOperations
-interface CurrentUsagesBases {
+interface Usages {
   @doc("Get the current usage of a resource.")
   get is ArmResourceRead<CurrentUsagesBase>;
   @doc("Get a list of current usage for all resources for the scope specified.")

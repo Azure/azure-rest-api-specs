@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./FirmwareWorkspace.tsp";
+import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.IotFirmwareDefense;
 @doc("Firmware definition")
-@parentResource(FirmwareWorkspace)
+@parentResource(Workspace)
 model Firmware is ProxyResource<FirmwareProperties> {
   @doc("The id of the firmware.")
   @path

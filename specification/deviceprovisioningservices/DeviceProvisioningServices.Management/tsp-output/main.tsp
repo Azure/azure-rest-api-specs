@@ -3,10 +3,10 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./DeviceProvisioningServicesCertificate.tsp";
-import "./DeviceProvisioningService.tsp";
-import "./DeviceProvisioningServicesPrivateLinkResource.tsp";
-import "./DeviceProvisioningServicesPrivateEndpointConnection.tsp";
+import "./CertificateResponse.tsp";
+import "./ProvisioningServiceDescription.tsp";
+import "./GroupIdInformation.tsp";
+import "./PrivateEndpointConnection.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.EventHubs;
 @doc("Description of topic resource.")
-@parentResource(EventHubsNamespace)
 @singleton("default")
+@parentResource(EventHubsNamespace)
 model EventHubsNetworkRuleSet is ProxyResource<NetworkRuleSetProperties> {
   @key("default")
   @segment("networkRuleSets")
@@ -20,11 +20,11 @@ model EventHubsNetworkRuleSet is ProxyResource<NetworkRuleSetProperties> {
 }
 
 @armResourceOperations
-interface EventHubsNetworkRuleSets {
+interface Namespaces {
   @doc("Gets NetworkRuleSet for a Namespace.")
   getNetworkRuleSet is ArmResourceRead<EventHubsNetworkRuleSet>;
   @doc("Create or update NetworkRuleSet for a Namespace.")
   createOrUpdateNetworkRuleSet is ArmResourceCreateOrReplaceSync<EventHubsNetworkRuleSet>;
   @doc("Gets NetworkRuleSet for a Namespace.")
-  listByEventHubsNamespace is ArmResourceListByParent<EventHubsNetworkRuleSet>;
+  listNetworkRuleSet is ArmResourceListByParent<EventHubsNetworkRuleSet>;
 }

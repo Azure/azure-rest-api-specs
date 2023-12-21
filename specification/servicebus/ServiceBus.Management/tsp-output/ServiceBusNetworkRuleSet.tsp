@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.ServiceBus;
 @doc("Description of NetworkRuleSet resource.")
-@parentResource(ServiceBusNamespace)
 @singleton("default")
+@parentResource(ServiceBusNamespace)
 model ServiceBusNetworkRuleSet is ProxyResource<NetworkRuleSetProperties> {
   @key("default")
   @segment("networkRuleSets")
@@ -20,11 +20,11 @@ model ServiceBusNetworkRuleSet is ProxyResource<NetworkRuleSetProperties> {
 }
 
 @armResourceOperations
-interface ServiceBusNetworkRuleSets {
+interface Namespaces {
   @doc("Gets NetworkRuleSet for a Namespace.")
   getNetworkRuleSet is ArmResourceRead<ServiceBusNetworkRuleSet>;
   @doc("Create or update NetworkRuleSet for a Namespace.")
   createOrUpdateNetworkRuleSet is ArmResourceCreateOrReplaceSync<ServiceBusNetworkRuleSet>;
   @doc("Gets list of NetworkRuleSet for a Namespace.")
-  listByServiceBusNamespace is ArmResourceListByParent<ServiceBusNetworkRuleSet>;
+  listNetworkRuleSets is ArmResourceListByParent<ServiceBusNetworkRuleSet>;
 }

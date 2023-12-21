@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./KustoCluster.tsp";
+import "./Cluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Kusto;
 @doc("Class representing a Kusto sandbox custom image.")
-@parentResource(KustoCluster)
+@parentResource(Cluster)
 model SandboxCustomImage is ProxyResource<SandboxCustomImageProperties> {
   @doc("The name of the sandbox custom image.")
   @pattern("^.*$")

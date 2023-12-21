@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./DataBoxEdgeRole.tsp";
+import "./Role.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.DataBoxEdge;
 @doc("The metric setting details for the role")
-@parentResource(DataBoxEdgeRole)
 @singleton("default")
+@parentResource(Role)
 model MonitoringMetricConfiguration
   is ProxyResource<MonitoringMetricConfigurationProperties> {
   @key("default")
@@ -21,7 +21,7 @@ model MonitoringMetricConfiguration
 }
 
 @armResourceOperations
-interface MonitoringMetricConfigurations {
+interface MonitoringConfig {
   @doc("Gets a  metric configuration of a role.")
   get is ArmResourceRead<MonitoringMetricConfiguration>;
   @doc("Creates a new metric configuration or updates an existing one for a role.")
@@ -29,5 +29,5 @@ interface MonitoringMetricConfigurations {
   @doc("deletes a new metric configuration for a role.")
   delete is ArmResourceDeleteAsync<MonitoringMetricConfiguration>;
   @doc("Lists metric configurations in a role.")
-  listByDataBoxEdgeRole is ArmResourceListByParent<MonitoringMetricConfiguration>;
+  list is ArmResourceListByParent<MonitoringMetricConfiguration>;
 }

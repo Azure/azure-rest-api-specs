@@ -11,7 +11,7 @@ using TypeSpec.Http;
 namespace Azure.ResourceManager.Monitor;
 @doc("VM Insights onboarding status for a resource.")
 @singleton("default")
-model VmInsightsOnboardingStatus
+model VMInsightsOnboardingStatus
   is ExtensionResource<VMInsightsOnboardingStatusProperties> {
   @key("default")
   @segment("vmInsightsOnboardingStatuses")
@@ -19,7 +19,7 @@ model VmInsightsOnboardingStatus
 }
 
 @armResourceOperations
-interface VmInsightsOnboardingStatuses {
+interface VMInsights {
   @doc("Retrieves the VM Insights onboarding status for the specified resource or resource scope.")
-  getOnboardingStatus is ArmResourceRead<VmInsightsOnboardingStatus>;
+  getOnboardingStatus is ArmResourceRead<VMInsightsOnboardingStatus>;
 }

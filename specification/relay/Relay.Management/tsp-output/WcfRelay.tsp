@@ -22,7 +22,7 @@ model WcfRelay is ProxyResource<WcfRelayProperties> {
 }
 
 @armResourceOperations
-interface WcfRelays {
+interface WCFRelays {
   @doc("Returns the description for the specified WCF relay.")
   get is ArmResourceRead<WcfRelay>;
   @doc("Creates or updates a WCF relay. This operation is idempotent.")

@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./ContainerRegistry.tsp";
+import "./Registry.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.ContainerRegistry;
 @doc("An object that represents a scope map for a container registry.")
-@parentResource(ContainerRegistry)
+@parentResource(Registry)
 model ScopeMap is ProxyResource<ScopeMapProperties> {
   @doc("The name of the scope map.")
   @maxLength(50)

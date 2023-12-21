@@ -3,9 +3,9 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./RedisEnterpriseCluster.tsp";
-import "./RedisEnterpriseDatabase.tsp";
-import "./RedisEnterprisePrivateEndpointConnection.tsp";
+import "./Cluster.tsp";
+import "./Database.tsp";
+import "./PrivateEndpointConnection.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

@@ -503,9 +503,7 @@ enum AsyncOperationStatus {
 }
 
 @doc("API Entity Properties")
-model ApiContractProperties {
-  ...ApiEntityBaseContract;
-
+model ApiContractProperties extends ApiEntityBaseContract {
   @doc("API identifier of the source API.")
   sourceApiId?: string;
 
@@ -694,9 +692,7 @@ model ApiCreateOrUpdateParameter {
 }
 
 @doc("API Create or Update Properties.")
-model ApiCreateOrUpdateProperties {
-  ...ApiContractProperties;
-
+model ApiCreateOrUpdateProperties extends ApiContractProperties {
   @doc("Content value when Importing an API.")
   value?: string;
 
@@ -792,9 +788,7 @@ model ApiReleaseContractProperties {
 }
 
 @doc("Operation Contract Properties")
-model OperationContractProperties {
-  ...OperationEntityBaseContract;
-
+model OperationContractProperties extends OperationEntityBaseContract {
   @doc("Operation Name.")
   @maxLength(300)
   @minLength(1)
@@ -939,9 +933,7 @@ model TagContractProperties {
 }
 
 @doc("Product profile.")
-model ProductContractProperties {
-  ...ProductEntityBaseParameters;
-
+model ProductContractProperties extends ProductEntityBaseParameters {
   @doc("Product name.")
   @maxLength(300)
   @minLength(1)
@@ -1081,9 +1073,7 @@ model DataMaskingEntity {
 }
 
 @doc("Issue contract Properties.")
-model IssueContractProperties {
-  ...IssueContractBaseProperties;
-
+model IssueContractProperties extends IssueContractBaseProperties {
   @doc("The issue title.")
   title: string;
 
@@ -1133,9 +1123,7 @@ model IssueAttachmentContractProperties {
 }
 
 @doc("TagDescription contract Properties.")
-model TagDescriptionContractProperties {
-  ...TagDescriptionBaseProperties;
-
+model TagDescriptionContractProperties extends TagDescriptionBaseProperties {
   @doc("Identifier of the tag in the form of /tags/{tagId}")
   tagId?: string;
 
@@ -1197,9 +1185,7 @@ model TagTagResourceContractProperties {
 }
 
 @doc("API contract properties for the Tag Resources.")
-model ApiTagResourceContractProperties {
-  ...ApiEntityBaseContract;
-
+model ApiTagResourceContractProperties extends ApiEntityBaseContract {
   @doc("API identifier in the form /apis/{apiId}.")
   id?: string;
 
@@ -1256,9 +1242,7 @@ model OperationTagResourceContractProperties {
 }
 
 @doc("Product profile.")
-model ProductTagResourceContractProperties {
-  ...ProductEntityBaseParameters;
-
+model ProductTagResourceContractProperties extends ProductEntityBaseParameters {
   @doc("Identifier of the product in the form of /products/{productId}")
   id?: string;
 
@@ -1288,9 +1272,7 @@ model ApiExportResultValue {
 }
 
 @doc("Properties of an API Version Set.")
-model ApiVersionSetContractProperties {
-  ...ApiVersionSetEntityBase;
-
+model ApiVersionSetContractProperties extends ApiVersionSetEntityBase {
   @doc("Name of API Version Set")
   @maxLength(100)
   @minLength(1)
@@ -1317,9 +1299,8 @@ model ApiVersionSetEntityBase {
 }
 
 @doc("External OAuth authorization server settings Properties.")
-model AuthorizationServerContractProperties {
-  ...AuthorizationServerContractBaseProperties;
-
+model AuthorizationServerContractProperties
+  extends AuthorizationServerContractBaseProperties {
   @doc("User-friendly authorization server name.")
   @maxLength(50)
   @minLength(1)
@@ -1398,9 +1379,7 @@ model AuthorizationServerSecretsContract {
 }
 
 @doc("Parameters supplied to the Create Backend operation.")
-model BackendContractProperties {
-  ...BackendBaseParameters;
-
+model BackendContractProperties extends BackendBaseParameters {
   @doc("Runtime Url of the Backend.")
   @maxLength(2000)
   @minLength(1)
@@ -1531,9 +1510,7 @@ model BackendTlsProperties {
 }
 
 @doc("Reconnect request parameters.")
-model BackendReconnectContract {
-  ...Resource;
-
+model BackendReconnectContract extends Resource {
   @doc("Reconnect request properties.")
   properties?: BackendReconnectProperties;
 }
@@ -1584,9 +1561,7 @@ Expiration date of the certificate. The date conforms to the following format: `
 }
 
 @doc("KeyVault contract details.")
-model KeyVaultContractProperties {
-  ...KeyVaultContractCreateProperties;
-
+model KeyVaultContractProperties extends KeyVaultContractCreateProperties {
   @doc("Last time sync and refresh status of secret from key vault.")
   lastStatus?: KeyVaultLastAccessStatusContractProperties;
 }
@@ -1779,9 +1754,7 @@ model ConnectivityIssue {
 model ContentTypeListResult is Azure.Core.Page<ContentTypeContract>;
 
 @doc("Content type contract details.")
-model ContentTypeContract {
-  ...Resource;
-
+model ContentTypeContract extends Resource {
   @doc("Properties of the content type.")
   properties?: ContentTypeContractProperties;
 }
@@ -1807,9 +1780,7 @@ model ContentTypeContractProperties {
 model ContentItemListResult is Azure.Core.Page<ContentItemContract>;
 
 @doc("Content type contract details.")
-model ContentItemContract {
-  ...Resource;
-
+model ContentItemContract extends Resource {
   @doc("Properties of the content item.")
   properties?: Record<unknown>;
 }
@@ -1886,9 +1857,8 @@ model ApiManagementServiceBackupRestoreParameters {
 }
 
 @doc("Properties of an API Management service resource description.")
-model ApiManagementServiceProperties {
-  ...ApiManagementServiceBaseProperties;
-
+model ApiManagementServiceProperties
+  extends ApiManagementServiceBaseProperties {
   @doc("Publisher email.")
   @maxLength(100)
   publisherEmail: string;
@@ -2396,14 +2366,10 @@ model ApiManagementGatewayApiListResult is Azure.Core.Page<GatewayApiData> {
   count?: int32;
 }
 
-model GatewayApiData {
-  ...ApiContract;
-}
+model GatewayApiData extends ApiContract {}
 
 @doc("Association entity details.")
-model AssociationContract {
-  ...Resource;
-
+model AssociationContract extends Resource {
   @doc("Association entity contract properties.")
   properties?: AssociationContractProperties;
 }
@@ -2472,14 +2438,10 @@ model ApiManagementGroupUserListResult
   count?: int32;
 }
 
-model ApiManagementGroupUserData {
-  ...UserContract;
-}
+model ApiManagementGroupUserData extends UserContract {}
 
 @doc("User profile.")
-model UserContractProperties {
-  ...UserEntityBaseParameters;
-
+model UserContractProperties extends UserEntityBaseParameters {
   @doc("First name.")
   firstName?: string;
 
@@ -2523,9 +2485,8 @@ model UserIdentityContract {
 }
 
 @doc("The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.")
-model IdentityProviderContractProperties {
-  ...IdentityProviderBaseParameters;
-
+model IdentityProviderContractProperties
+  extends IdentityProviderBaseParameters {
   @doc("Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.")
   @minLength(1)
   clientId: string;
@@ -2571,17 +2532,14 @@ model IdentityProviderBaseParameters {
 }
 
 @doc("Identity Provider details.")
-model IdentityProviderCreateContract {
-  ...Resource;
-
+model IdentityProviderCreateContract extends Resource {
   @doc("Identity Provider contract properties.")
   properties?: IdentityProviderCreateContractProperties;
 }
 
 @doc("The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.")
-model IdentityProviderCreateContractProperties {
-  ...IdentityProviderBaseParameters;
-
+model IdentityProviderCreateContractProperties
+  extends IdentityProviderBaseParameters {
   @doc("Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.")
   @minLength(1)
   clientId: string;
@@ -2620,9 +2578,7 @@ Instrumentation key for applicationInsights logger.
 }
 
 @doc("NamedValue Contract properties.")
-model NamedValueContractProperties {
-  ...NamedValueEntityBaseParameters;
-
+model NamedValueContractProperties extends NamedValueEntityBaseParameters {
   @doc("Unique name of NamedValue. It may contain only letters, digits, period, dash, and underscore characters.")
   @maxLength(256)
   @minLength(1)
@@ -2648,17 +2604,14 @@ model NamedValueEntityBaseParameters {
 }
 
 @doc("NamedValue details.")
-model NamedValueCreateContract {
-  ...Resource;
-
+model NamedValueCreateContract extends Resource {
   @doc("NamedValue entity contract properties for PUT operation.")
   properties?: NamedValueCreateContractProperties;
 }
 
 @doc("NamedValue Contract properties.")
-model NamedValueCreateContractProperties {
-  ...NamedValueEntityBaseParameters;
-
+model NamedValueCreateContractProperties
+  extends NamedValueEntityBaseParameters {
   @doc("Unique name of NamedValue. It may contain only letters, digits, period, dash, and underscore characters.")
   @maxLength(256)
   @minLength(1)
@@ -2767,9 +2720,7 @@ model RecipientUserListResult {
 }
 
 @doc("Recipient User details.")
-model RecipientUserContract {
-  ...Resource;
-
+model RecipientUserContract extends Resource {
   @doc("Recipient User entity contract properties.")
   properties?: RecipientUsersContractProperties;
 }
@@ -2793,9 +2744,7 @@ model RecipientEmailListResult {
 }
 
 @doc("Recipient Email details.")
-model RecipientEmailContract {
-  ...Resource;
-
+model RecipientEmailContract extends Resource {
   @doc("Recipient Email contract properties.")
   properties?: RecipientEmailContractProperties;
 }
@@ -2872,9 +2821,7 @@ model PolicyDescriptionListResult {
 }
 
 @doc("Policy description details.")
-model PolicyDescriptionContract {
-  ...Resource;
-
+model PolicyDescriptionContract extends Resource {
   @doc("Policy description contract properties.")
   properties?: PolicyDescriptionContractProperties;
 }
@@ -2919,9 +2866,7 @@ model PortalRevisionContractProperties {
 }
 
 @doc("Portal Settings for the Developer Portal.")
-model PortalSettingsContract {
-  ...Resource;
-
+model PortalSettingsContract extends Resource {
   @doc("Portal Settings contract properties.")
   properties?: PortalSettingsContractProperties;
 }
@@ -3064,9 +3009,7 @@ model ApiManagementProductApiListResult is Azure.Core.Page<ProductApiData> {
   count?: int32;
 }
 
-model ProductApiData {
-  ...ApiContract;
-}
+model ProductApiData extends ApiContract {}
 
 @doc("Paged Group list representation.")
 model ApiManagementProductGroupListResult is Azure.Core.Page<ProductGroupData> {
@@ -3074,9 +3017,7 @@ model ApiManagementProductGroupListResult is Azure.Core.Page<ProductGroupData> {
   count?: int32;
 }
 
-model ProductGroupData {
-  ...GroupContract;
-}
+model ProductGroupData extends GroupContract {}
 
 @doc("Subscription details.")
 model SubscriptionContractProperties {
@@ -3684,9 +3625,7 @@ model DeployConfigurationParameterProperties {
 }
 
 @doc("Long Running Git Operation Results.")
-model OperationResultContract {
-  ...Resource;
-
+model OperationResultContract extends Resource {
   @doc("Properties of the Operation Contract.")
   properties?: OperationResultContractProperties;
 }
@@ -3752,9 +3691,7 @@ model SaveConfigurationParameterProperties {
 }
 
 @doc("Result of Tenant Configuration Sync State.")
-model TenantConfigurationSyncStateContract {
-  ...Resource;
-
+model TenantConfigurationSyncStateContract extends Resource {
   @doc("Properties returned Tenant Configuration Sync State check.")
   properties?: TenantConfigurationSyncStateContractProperties;
 }
@@ -3801,9 +3738,7 @@ model UserCreateParameters {
 }
 
 @doc("Parameters supplied to the Create User operation.")
-model UserCreateParameterProperties {
-  ...UserEntityBaseParameters;
-
+model UserCreateParameterProperties extends UserEntityBaseParameters {
   @doc("Email address. Must not be empty and must be unique within the service instance.")
   @maxLength(254)
   @minLength(1)

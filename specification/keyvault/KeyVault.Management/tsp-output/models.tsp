@@ -530,9 +530,7 @@ model PrivateLinkResourceListResult {
 }
 
 @doc("A private link resource")
-model PrivateLinkResource {
-  ...Resource;
-
+model PrivateLinkResource extends Resource {
   @doc("Resource properties.")
   properties?: PrivateLinkResourceProperties;
 }
@@ -803,9 +801,7 @@ model MhsmPrivateLinkResourceListResult {
 }
 
 @doc("A private link resource")
-model MhsmPrivateLinkResource {
-  ...ManagedHsmResource;
-
+model MhsmPrivateLinkResource extends ManagedHsmResource {
   @doc("Resource properties.")
   properties?: MhsmPrivateLinkResourceProperties;
 }
@@ -953,9 +949,7 @@ model SecretProperties {
 }
 
 @doc("The secret management attributes.")
-model SecretAttributes {
-  ...Attributes;
-}
+model SecretAttributes extends Attributes {}
 
 @doc("The object attributes managed by the KeyVault service.")
 model Attributes {

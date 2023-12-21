@@ -35,14 +35,6 @@ interface Profiles {
   listByResourceGroup is ArmResourceListByParent<Profile>;
   @doc("Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within an Azure subscription.")
   list is ArmListBySubscription<Profile>;
-  @doc("Checks the quota and actual usage of AzureFrontDoor endpoints under the given CDN profile.")
-  listResourceUsage is ArmResourceActionSync<Profile, void, UsagesListResult>;
-  @doc("Check the name availability of a host name.")
-  checkHostNameAvailability is ArmResourceActionSync<
-    Profile,
-    HostNameAvailabilityContent,
-    CdnNameAvailabilityResult
-  >;
   @doc("Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemental portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.")
   generateSsoUri is ArmResourceActionSync<Profile, void, SsoUri>;
   @doc("Gets the supported optimization types for the current profile. A user can create an endpoint with an optimization type from the listed values.")
@@ -57,6 +49,22 @@ interface Profiles {
     void,
     ResourceUsageListResult
   >;
+}
+
+@armResourceOperations
+interface FrontDoorProfiles {
+  @doc("Checks the quota and actual usage of AzureFrontDoor endpoints under the given CDN profile.")
+  listResourceUsage is ArmResourceActionSync<Profile, void, UsagesListResult>;
+  @doc("Check the name availability of a host name.")
+  checkHostNameAvailability is ArmResourceActionSync<
+    Profile,
+    HostNameAvailabilityContent,
+    CdnNameAvailabilityResult
+  >;
+}
+
+@armResourceOperations
+interface LogAnalytics {
   @doc("Get log report for AFD profile")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsMetrics")
   @get

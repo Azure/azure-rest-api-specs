@@ -1078,9 +1078,7 @@ model AccessPolicyResponse {
 
 @doc("Azure Data Factory nested object which serves as a compute resource for activities.")
 @discriminator("type")
-model IntegrationRuntime {
-  ...Record<Record<unknown>>;
-
+model IntegrationRuntime extends Record<Record<unknown>> {
   @doc("Integration runtime description.")
   description?: string;
 }
@@ -1125,9 +1123,7 @@ model IntegrationRuntimeStatusResponse {
 
 @doc("Integration runtime status.")
 @discriminator("type")
-model IntegrationRuntimeStatus {
-  ...Record<Record<unknown>>;
-
+model IntegrationRuntimeStatus extends Record<Record<unknown>> {
   @doc("The data factory name which the integration runtime belong to.")
   @visibility("read")
   dataFactoryName?: string;
@@ -1168,9 +1164,7 @@ model IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails {
 }
 
 @doc("Connection information for encrypting the on-premises data source credentials.")
-model IntegrationRuntimeConnectionInfo {
-  ...Record<Record<unknown>>;
-
+model IntegrationRuntimeConnectionInfo extends Record<Record<unknown>> {
   @doc("The token generated in service. Callers use this token to authenticate to integration runtime.")
   @visibility("read")
   serviceToken?: string;
@@ -1221,9 +1215,7 @@ model IntegrationRuntimeMonitoringData {
 }
 
 @doc("Monitoring data for integration runtime node.")
-model IntegrationRuntimeNodeMonitoringData {
-  ...Record<Record<unknown>>;
-
+model IntegrationRuntimeNodeMonitoringData extends Record<Record<unknown>> {
   @doc("Name of the integration runtime node.")
   @visibility("read")
   nodeName?: string;
@@ -1323,9 +1315,7 @@ model SsisObjectMetadata {
 }
 
 @doc("Properties of Self-hosted integration runtime node.")
-model SelfHostedIntegrationRuntimeNode {
-  ...Record<Record<unknown>>;
-
+model SelfHostedIntegrationRuntimeNode extends Record<Record<unknown>> {
   @doc("Name of the integration runtime node.")
   @visibility("read")
   nodeName?: string;
@@ -1422,9 +1412,7 @@ model IntegrationRuntimeNodeIpAddress {
 
 @doc("The nested object which contains the information and credential which can be used to connect with related store or compute resource.")
 @discriminator("type")
-model LinkedService {
-  ...Record<Record<unknown>>;
-
+model LinkedService extends Record<Record<unknown>> {
   @doc("The integration runtime reference.")
   connectVia?: IntegrationRuntimeReference;
 
@@ -1461,9 +1449,7 @@ model ParameterSpecification {
 
 @doc("The Azure Data Factory nested object which identifies data within different data stores, such as tables, files, folders, and documents.")
 @discriminator("type")
-model Dataset {
-  ...Record<Record<unknown>>;
-
+model Dataset extends Record<Record<unknown>> {
   @doc("Dataset description.")
   description?: string;
 
@@ -1537,9 +1523,7 @@ model Pipeline {
 
 @doc("A pipeline activity.")
 @discriminator("type")
-model Activity {
-  ...Record<Record<unknown>>;
-
+model Activity extends Record<Record<unknown>> {
   @doc("Activity name.")
   name: string;
 
@@ -1560,9 +1544,7 @@ model Activity {
 }
 
 @doc("Activity dependency information.")
-model ActivityDependency {
-  ...Record<Record<unknown>>;
-
+model ActivityDependency extends Record<Record<unknown>> {
   @doc("Activity name.")
   activity: string;
 
@@ -1663,9 +1645,7 @@ model PipelineRunsQueryResponse {
 }
 
 @doc("Information about a pipeline run.")
-model PipelineRun {
-  ...Record<Record<unknown>>;
-
+model PipelineRun extends Record<Record<unknown>> {
   @doc("Identifier of a run.")
   @visibility("read")
   runId?: string;
@@ -1755,9 +1735,7 @@ model ActivityRunsQueryResponse {
 }
 
 @doc("Information about an activity run in a pipeline.")
-model ActivityRun {
-  ...Record<Record<unknown>>;
-
+model ActivityRun extends Record<Record<unknown>> {
   @doc("The name of the pipeline.")
   @visibility("read")
   pipelineName?: string;
@@ -1815,9 +1793,7 @@ model ActivityRun {
 
 @doc("Azure data factory nested object which contains information about creating pipeline run")
 @discriminator("type")
-model Trigger {
-  ...Record<Record<unknown>>;
-
+model Trigger extends Record<Record<unknown>> {
   @doc("Trigger description.")
   description?: string;
 
@@ -1868,9 +1844,7 @@ model TriggerRunsQueryResponse {
 }
 
 @doc("Trigger runs.")
-model TriggerRun {
-  ...Record<Record<unknown>>;
-
+model TriggerRun extends Record<Record<unknown>> {
   @doc("Trigger run id.")
   @visibility("read")
   triggerRunId?: string;
@@ -1948,9 +1922,7 @@ model CreateDataFlowDebugSessionRequest {
 }
 
 @doc("Integration runtime debug resource.")
-model IntegrationRuntimeDebugResource {
-  ...SubResourceDebugResource;
-
+model IntegrationRuntimeDebugResource extends SubResourceDebugResource {
   @doc("Integration runtime properties.")
   properties: IntegrationRuntime;
 }
@@ -1975,9 +1947,7 @@ model QueryDataFlowDebugSessionsResponse
   is Azure.Core.Page<DataFlowDebugSessionInfo>;
 
 @doc("Data flow debug session info.")
-model DataFlowDebugSessionInfo {
-  ...Record<Record<unknown>>;
-
+model DataFlowDebugSessionInfo extends Record<Record<unknown>> {
   @doc("The name of the data flow.")
   dataFlowName?: string;
 
@@ -2007,9 +1977,7 @@ model DataFlowDebugSessionInfo {
 }
 
 @doc("Request body structure for starting data flow debug session.")
-model DataFlowDebugPackage {
-  ...Record<Record<unknown>>;
-
+model DataFlowDebugPackage extends Record<Record<unknown>> {
   @doc("The ID of data flow debug session.")
   sessionId?: string;
 
@@ -2033,25 +2001,19 @@ model DataFlowDebugPackage {
 }
 
 @doc("Data flow debug resource.")
-model DataFlowDebugResource {
-  ...SubResourceDebugResource;
-
+model DataFlowDebugResource extends SubResourceDebugResource {
   @doc("Data flow properties.")
   properties: DataFlow;
 }
 
 @doc("Dataset debug resource.")
-model DatasetDebugResource {
-  ...SubResourceDebugResource;
-
+model DatasetDebugResource extends SubResourceDebugResource {
   @doc("Dataset properties.")
   properties: Dataset;
 }
 
 @doc("Linked service debug resource.")
-model LinkedServiceDebugResource {
-  ...SubResourceDebugResource;
-
+model LinkedServiceDebugResource extends SubResourceDebugResource {
   @doc("Properties of linked service.")
   properties: LinkedService;
 }
@@ -2078,9 +2040,7 @@ model DataFlowDebugPackageDebugSettings {
 }
 
 @doc("Definition of data flow source setting for debug.")
-model DataFlowSourceSetting {
-  ...Record<Record<unknown>>;
-
+model DataFlowSourceSetting extends Record<Record<unknown>> {
   @doc("The data flow source name.")
   sourceName?: string;
 
@@ -2137,9 +2097,7 @@ model DataFlowDebugCommandResponse {
 }
 
 @doc("A managed Virtual Network associated with the Azure Data Factory")
-model ManagedVirtualNetwork {
-  ...Record<Record<unknown>>;
-
+model ManagedVirtualNetwork extends Record<Record<unknown>> {
   @doc("Managed Virtual Network ID.")
   @visibility("read")
   vNetId?: string;
@@ -2150,9 +2108,7 @@ model ManagedVirtualNetwork {
 }
 
 @doc("Properties of a managed private endpoint")
-model ManagedPrivateEndpoint {
-  ...Record<Record<unknown>>;
-
+model ManagedPrivateEndpoint extends Record<Record<unknown>> {
   @doc("The managed private endpoint connection state")
   connectionState?: ConnectionStateProperties;
 
@@ -2206,9 +2162,7 @@ model ManagedIdentityTypeProperties {
 
 @doc("The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource.")
 @discriminator("type")
-model Credential {
-  ...Record<Record<unknown>>;
-
+model Credential extends Record<Record<unknown>> {
   @doc("Credential description.")
   description?: string;
 
@@ -2247,9 +2201,7 @@ model PrivateLinkConnectionState {
 }
 
 @doc("Private Endpoint Connection Approval ARM resource.")
-model PrivateLinkConnectionApprovalRequestResource {
-  ...SubResource;
-
+model PrivateLinkConnectionApprovalRequestResource extends SubResource {
   @doc("Core resource properties")
   properties?: PrivateLinkConnectionApprovalRequest;
 }
@@ -2275,9 +2227,7 @@ model PrivateLinkResourcesWrapper {
 }
 
 @doc("A private link resource")
-model PrivateLinkResource {
-  ...SubResource;
-
+model PrivateLinkResource extends SubResource {
   @doc("Core resource properties")
   properties?: PrivateLinkResourceProperties;
 }
@@ -2596,17 +2546,13 @@ model DatasetReference {
 }
 
 @doc("Response body structure for get data factory operation status.")
-model GetDataFactoryOperationStatusResponse {
-  ...Record<Record<unknown>>;
-
+model GetDataFactoryOperationStatusResponse extends Record<Record<unknown>> {
   @doc("Status of the operation.")
   status?: string;
 }
 
 @doc("Data flow reference type.")
-model DataFlowReference {
-  ...Record<Record<unknown>>;
-
+model DataFlowReference extends Record<Record<unknown>> {
   @doc("Data flow reference type.")
   type: DataFlowReferenceType;
 
@@ -2630,9 +2576,7 @@ model ManagedVirtualNetworkReference {
 }
 
 @doc("Credential reference type.")
-model CredentialReference {
-  ...Record<Record<unknown>>;
-
+model CredentialReference extends Record<Record<unknown>> {
   @doc("Credential reference type.")
   type: CredentialReferenceType;
 
@@ -2641,9 +2585,7 @@ model CredentialReference {
 }
 
 @doc("Credential resource type.")
-model CredentialResource {
-  ...SubResource;
-
+model CredentialResource extends SubResource {
   @doc("Properties of credentials.")
   properties: Credential;
 }
@@ -2676,9 +2618,7 @@ model MappingDataFlowTypeProperties {
 }
 
 @doc("Transformation for data flow source.")
-model DataFlowSource {
-  ...Transformation;
-
+model DataFlowSource extends Transformation {
   @doc("Schema linked service reference.")
   schemaLinkedService?: LinkedServiceReference;
 }
@@ -2702,9 +2642,7 @@ model Transformation {
 }
 
 @doc("Transformation for data flow sink.")
-model DataFlowSink {
-  ...Transformation;
-
+model DataFlowSink extends Transformation {
   @doc("Schema linked service reference.")
   schemaLinkedService?: LinkedServiceReference;
 
@@ -2761,26 +2699,20 @@ model PowerQueryTypeProperties {
 }
 
 @doc("Power query source.")
-model PowerQuerySource {
-  ...DataFlowSource;
-
+model PowerQuerySource extends DataFlowSource {
   @doc("source script.")
   script?: string;
 }
 
 @doc("Power query sink.")
-model PowerQuerySink {
-  ...DataFlowSink;
-
+model PowerQuerySink extends DataFlowSink {
   @doc("sink script.")
   script?: string;
 }
 
 @doc("Dataset location.")
 @discriminator("type")
-model DatasetLocation {
-  ...Record<Record<unknown>>;
-
+model DatasetLocation extends Record<Record<unknown>> {
   @doc("Specify the folder path of dataset. Type: string (or Expression with resultType string)")
   folderPath?: Record<unknown>;
 
@@ -2915,9 +2847,7 @@ model DatasetDataElement {
 }
 
 @doc("Columns that define the physical type schema of the dataset.")
-model DatasetSchemaDataElement {
-  ...Record<Record<unknown>>;
-
+model DatasetSchemaDataElement extends Record<Record<unknown>> {
   @doc("Name of the schema column. Type: string (or Expression with resultType string).")
   name?: Record<unknown>;
 
@@ -2927,9 +2857,7 @@ model DatasetSchemaDataElement {
 
 @doc("The format definition of a storage.")
 @discriminator("type")
-model DatasetStorageFormat {
-  ...Record<Record<unknown>>;
-
+model DatasetStorageFormat extends Record<Record<unknown>> {
   @doc("Serializer. Type: string (or Expression with resultType string).")
   serializer?: Record<unknown>;
 
@@ -3010,9 +2938,7 @@ model ParquetFormat extends DatasetStorageFormat {
 }
 
 @doc("The compression method used on a dataset.")
-model DatasetCompression {
-  ...Record<Record<unknown>>;
-
+model DatasetCompression extends Record<Record<unknown>> {
   @doc("Type of dataset compression. Type: string (or Expression with resultType string).")
   type: Record<unknown>;
 
@@ -4698,9 +4624,7 @@ model ManagedIntegrationRuntimeTypeProperties {
 }
 
 @doc("The compute resource properties for managed integration runtime.")
-model IntegrationRuntimeComputeProperties {
-  ...Record<Record<unknown>>;
-
+model IntegrationRuntimeComputeProperties extends Record<Record<unknown>> {
   @doc("The location for managed integration runtime. The supported regions could be found on https://docs.microsoft.com/en-us/azure/data-factory/data-factory-data-movement-activities")
   location?: string;
 
@@ -4729,9 +4653,7 @@ model IntegrationRuntimeComputeProperties {
 }
 
 @doc("Data flow properties for managed integration runtime.")
-model IntegrationRuntimeDataFlowProperties {
-  ...Record<Record<unknown>>;
-
+model IntegrationRuntimeDataFlowProperties extends Record<Record<unknown>> {
   @doc("Compute type of the cluster which will execute data flow job.")
   computeType?: DataFlowComputeType;
 
@@ -4757,9 +4679,7 @@ model IntegrationRuntimeDataFlowPropertiesCustomPropertiesItem {
 }
 
 @doc("VNet properties for managed integration runtime.")
-model IntegrationRuntimeVNetProperties {
-  ...Record<Record<unknown>>;
-
+model IntegrationRuntimeVNetProperties extends Record<Record<unknown>> {
   @doc("The ID of the VNet that this integration runtime will join.")
   vNetId?: string;
 
@@ -4774,9 +4694,7 @@ model IntegrationRuntimeVNetProperties {
 }
 
 @doc("CopyComputeScale properties for managed integration runtime.")
-model CopyComputeScaleProperties {
-  ...Record<Record<unknown>>;
-
+model CopyComputeScaleProperties extends Record<Record<unknown>> {
   @doc("DIU number setting reserved for copy activity execution. Supported values are multiples of 4 in range 4-256.")
   @minValue(4)
   dataIntegrationUnit?: int32;
@@ -4787,9 +4705,7 @@ model CopyComputeScaleProperties {
 }
 
 @doc("PipelineExternalComputeScale properties for managed integration runtime.")
-model PipelineExternalComputeScaleProperties {
-  ...Record<Record<unknown>>;
-
+model PipelineExternalComputeScaleProperties extends Record<Record<unknown>> {
   @doc("Time to live (in minutes) setting of integration runtime which will execute pipeline and external activity.")
   @minValue(5)
   timeToLive?: int32;
@@ -4806,9 +4722,7 @@ model PipelineExternalComputeScaleProperties {
 }
 
 @doc("SSIS properties for managed integration runtime.")
-model IntegrationRuntimeSsisProperties {
-  ...Record<Record<unknown>>;
-
+model IntegrationRuntimeSsisProperties extends Record<Record<unknown>> {
   @doc("Catalog information for managed dedicated integration runtime.")
   catalogInfo?: IntegrationRuntimeSsisCatalogInfo;
 
@@ -4835,9 +4749,7 @@ model IntegrationRuntimeSsisProperties {
 }
 
 @doc("Catalog information for managed dedicated integration runtime.")
-model IntegrationRuntimeSsisCatalogInfo {
-  ...Record<Record<unknown>>;
-
+model IntegrationRuntimeSsisCatalogInfo extends Record<Record<unknown>> {
   @doc("The catalog database server URL.")
   catalogServerEndpoint?: string;
 
@@ -5052,9 +4964,7 @@ model ManagedIntegrationRuntimeStatusTypeProperties {
 }
 
 @doc("Properties of integration runtime node.")
-model ManagedIntegrationRuntimeNode {
-  ...Record<Record<unknown>>;
-
+model ManagedIntegrationRuntimeNode extends Record<Record<unknown>> {
   @doc("The managed integration runtime node id.")
   @visibility("read")
   nodeId?: string;
@@ -5068,9 +4978,7 @@ model ManagedIntegrationRuntimeNode {
 }
 
 @doc("Error definition for managed integration runtime.")
-model ManagedIntegrationRuntimeError {
-  ...Record<Record<unknown>>;
-
+model ManagedIntegrationRuntimeError extends Record<Record<unknown>> {
   @doc("The time when the error occurred.")
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -5090,9 +4998,7 @@ model ManagedIntegrationRuntimeError {
 }
 
 @doc("Properties of managed integration runtime operation result.")
-model ManagedIntegrationRuntimeOperationResult {
-  ...Record<Record<unknown>>;
-
+model ManagedIntegrationRuntimeOperationResult extends Record<Record<unknown>> {
   @doc("The operation type. Could be start or stop.")
   @visibility("read")
   type?: string;
@@ -9267,9 +9173,7 @@ model ExecutionActivity extends Activity {
 }
 
 @doc("Execution policy for an activity.")
-model ActivityPolicy {
-  ...Record<Record<unknown>>;
-
+model ActivityPolicy extends Record<Record<unknown>> {
   @doc("Specifies the timeout for the activity to run. The default timeout is 7 days. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).")
   timeout?: Record<unknown>;
 
@@ -9290,9 +9194,7 @@ model ActivityPolicy {
 
 @doc("Connector read setting.")
 @discriminator("type")
-model StoreReadSettings {
-  ...Record<Record<unknown>>;
-
+model StoreReadSettings extends Record<Record<unknown>> {
   @doc("The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).")
   maxConcurrentConnections?: Record<unknown>;
 
@@ -9530,9 +9432,7 @@ model SftpWriteSettings extends StoreWriteSettings {
 
 @doc("Connector write settings.")
 @discriminator("type")
-model StoreWriteSettings {
-  ...Record<Record<unknown>>;
-
+model StoreWriteSettings extends Record<Record<unknown>> {
   @doc("The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).")
   maxConcurrentConnections?: Record<unknown>;
 
@@ -9869,15 +9769,11 @@ model LakeHouseWriteSettings extends StoreWriteSettings {
 
 @doc("Format read settings.")
 @discriminator("type")
-model FormatReadSettings {
-  ...Record<Record<unknown>>;
-}
+model FormatReadSettings extends Record<Record<unknown>> {}
 
 @doc("Compression read settings.")
 @discriminator("type")
-model CompressionReadSettings {
-  ...Record<Record<unknown>>;
-}
+model CompressionReadSettings extends Record<Record<unknown>> {}
 
 @doc("The ZipDeflate compression read settings.")
 model ZipDeflateReadSettings extends CompressionReadSettings {
@@ -9968,9 +9864,7 @@ model BinaryReadSettings extends FormatReadSettings {
 
 @doc("Format write settings.")
 @discriminator("type")
-model FormatWriteSettings {
-  ...Record<Record<unknown>>;
-}
+model FormatWriteSettings extends Record<Record<unknown>> {}
 
 @doc("Avro write settings.")
 model AvroWriteSettings extends FormatWriteSettings {
@@ -10055,9 +9949,7 @@ model AvroSource extends CopySource {
 
 @doc("A copy activity source.")
 @discriminator("type")
-model CopySource {
-  ...Record<Record<unknown>>;
-
+model CopySource extends Record<Record<unknown>> {
   @doc("Source retry count. Type: integer (or Expression with resultType integer).")
   sourceRetryCount?: Record<unknown>;
 
@@ -10169,9 +10061,7 @@ model DelimitedTextSink extends CopySink {
 
 @doc("A copy activity sink.")
 @discriminator("type")
-model CopySink {
-  ...Record<Record<unknown>>;
-
+model CopySink extends Record<Record<unknown>> {
   @doc("Write batch size. Type: integer (or Expression with resultType integer), minimum: 0.")
   writeBatchSize?: Record<unknown>;
 
@@ -10279,9 +10169,7 @@ model CopyActivityTypeProperties {
 }
 
 @doc("Staging settings.")
-model StagingSettings {
-  ...Record<Record<unknown>>;
-
+model StagingSettings extends Record<Record<unknown>> {
   @doc("Staging linked service reference.")
   linkedServiceName: LinkedServiceReference;
 
@@ -10293,9 +10181,7 @@ model StagingSettings {
 }
 
 @doc("Redirect incompatible row settings")
-model RedirectIncompatibleRowSettings {
-  ...Record<Record<unknown>>;
-
+model RedirectIncompatibleRowSettings extends Record<Record<unknown>> {
   @doc("Name of the Azure Storage, Storage SAS, or Azure Data Lake Store linked service used for redirecting incompatible row. Must be specified if redirectIncompatibleRowSettings is specified. Type: string (or Expression with resultType string).")
   linkedServiceName: Record<unknown>;
 
@@ -10304,9 +10190,7 @@ model RedirectIncompatibleRowSettings {
 }
 
 @doc("(Deprecated. Please use LogSettings) Log storage settings.")
-model LogStorageSettings {
-  ...Record<Record<unknown>>;
-
+model LogStorageSettings extends Record<Record<unknown>> {
   @doc("Log storage linked service reference.")
   linkedServiceName: LinkedServiceReference;
 
@@ -11165,9 +11049,7 @@ model MongoDbAtlasSource extends CopySource {
 }
 
 @doc("Cursor methods for Mongodb query")
-model MongoDbCursorMethodsProperties {
-  ...Record<Record<unknown>>;
-
+model MongoDbCursorMethodsProperties extends Record<Record<unknown>> {
   @doc("Specifies the fields to return in the documents that match the query filter. To return all fields in the matching documents, omit this parameter. Type: string (or Expression with resultType string).")
   project?: Record<unknown>;
 
@@ -11693,9 +11575,7 @@ model SnowflakeExportCopyCommand extends ExportSettings {
 
 @doc("Export command settings.")
 @discriminator("type")
-model ExportSettings {
-  ...Record<Record<unknown>>;
-}
+model ExportSettings extends Record<Record<unknown>> {}
 
 @doc("A copy activity Azure Databricks Delta Lake source.")
 model AzureDatabricksDeltaLakeSource extends CopySource {
@@ -11747,9 +11627,7 @@ model AzureDatabricksDeltaLakeImportCommand extends ImportSettings {
 
 @doc("Import command settings.")
 @discriminator("type")
-model ImportSettings {
-  ...Record<Record<unknown>>;
-}
+model ImportSettings extends Record<Record<unknown>> {}
 
 @doc("SQL stored procedure parameter.")
 model StoredProcedureParameter {
@@ -12067,9 +11945,7 @@ model SqlDWSink extends CopySink {
 }
 
 @doc("PolyBase settings.")
-model PolybaseSettings {
-  ...Record<Record<unknown>>;
-
+model PolybaseSettings extends Record<Record<unknown>> {
   @doc("Reject type.")
   rejectType?: PolybaseSettingsRejectType;
 
@@ -12346,9 +12222,7 @@ model LakeHouseTableSink extends CopySink {
 
 @doc("A copy activity translator.")
 @discriminator("type")
-model CopyTranslator {
-  ...Record<Record<unknown>>;
-}
+model CopyTranslator extends Record<Record<unknown>> {}
 
 @doc("A copy activity tabular translator.")
 model TabularTranslator extends CopyTranslator {
@@ -12819,9 +12693,7 @@ model ExecutePipelineActivity extends ControlActivity {
 }
 
 @doc("Execution policy for an execute pipeline activity.")
-model ExecutePipelineActivityPolicy {
-  ...Record<Record<unknown>>;
-
+model ExecutePipelineActivityPolicy extends Record<Record<unknown>> {
   @doc("When set to true, Input from activity is considered as secure and will not be logged to monitoring.")
   secureInput?: boolean;
 }
@@ -13522,9 +13394,8 @@ model ExecuteWranglingDataflowActivity extends Activity {
 }
 
 @doc("Execute power query data flow activity properties.")
-model ExecutePowerQueryActivityTypeProperties {
-  ...ExecuteDataFlowActivityTypeProperties;
-
+model ExecutePowerQueryActivityTypeProperties
+  extends ExecuteDataFlowActivityTypeProperties {
   @doc("(Deprecated. Please use Queries). List of Power Query activity sinks mapped to a queryName.")
   sinks?: Record<PowerQuerySink>;
 
@@ -13784,9 +13655,7 @@ model ScheduleTriggerTypeProperties {
 }
 
 @doc("The workflow trigger recurrence.")
-model ScheduleTriggerRecurrence {
-  ...Record<Record<unknown>>;
-
+model ScheduleTriggerRecurrence extends Record<Record<unknown>> {
   @doc("The frequency.")
   frequency?: RecurrenceFrequency;
 
@@ -13809,9 +13678,7 @@ model ScheduleTriggerRecurrence {
 }
 
 @doc("The recurrence schedule.")
-model RecurrenceSchedule {
-  ...Record<Record<unknown>>;
-
+model RecurrenceSchedule extends Record<Record<unknown>> {
   @doc("The minutes.")
   minutes?: int32[];
 
@@ -13829,9 +13696,7 @@ model RecurrenceSchedule {
 }
 
 @doc("The recurrence schedule occurrence.")
-model RecurrenceScheduleOccurrence {
-  ...Record<Record<unknown>>;
-
+model RecurrenceScheduleOccurrence extends Record<Record<unknown>> {
   @doc("The day of the week.")
   day?: DayOfWeek;
 

@@ -22,7 +22,7 @@ model SearchService is TrackedResource<SearchServiceProperties> {
 }
 
 @armResourceOperations
-interface SearchServices {
+interface Services {
   @doc("Gets the search service with the given name in the given resource group.")
   get is ArmResourceRead<
     SearchService,
@@ -81,6 +81,10 @@ interface SearchServices {
   >;
   @doc("Gets a list of all Search services in the given subscription.")
   listBySubscription is ArmListBySubscription<SearchService>;
+}
+
+@armResourceOperations
+interface AdminKeys {
   @doc("Gets the primary and secondary admin API keys for the specified Azure Cognitive Search service.")
   get is ArmResourceActionSync<
     SearchService,
@@ -111,6 +115,10 @@ interface SearchServices {
       clientRequestId?: string;
     }
   >;
+}
+
+@armResourceOperations
+interface QueryKeys {
   @doc("Generates a new query key for the specified search service. You can create up to 50 query keys per service.")
   create is ArmResourceActionSync<
     SearchService,
@@ -141,6 +149,10 @@ interface SearchServices {
       clientRequestId?: string;
     }
   >;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
   @doc("Gets a list of all supported private link resource types for the given service.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/privateLinkResources")
   @get

@@ -374,9 +374,7 @@ model BillingSubscriptionSplitRequest {
 }
 
 @doc("Billing subscription alias properties.")
-model BillingSubscriptionAliasProperties {
-  ...BillingSubscriptionProperties;
-
+model BillingSubscriptionAliasProperties extends BillingSubscriptionProperties {
   @doc("The ID of the billing subscription with the subscription alias.")
   @visibility("read")
   billingSubscriptionId?: string;

@@ -7,7 +7,7 @@ import "./Capability.tsp";
 import "./CapabilityType.tsp";
 import "./Experiment.tsp";
 import "./ExperimentStatus.tsp";
-import "./ExperimentExecutionDetail.tsp";
+import "./ExperimentExecutionDetails.tsp";
 import "./TargetType.tsp";
 import "./Target.tsp";
 

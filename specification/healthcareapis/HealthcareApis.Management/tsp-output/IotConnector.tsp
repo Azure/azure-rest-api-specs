@@ -1,0 +1,38 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Workspace.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.HealthcareApis;
+@doc("IoT Connector definition.")
+@parentResource(Workspace)
+model IotConnector is TrackedResource<IotConnectorProperties> {
+  @doc("The name of IoT Connector resource.")
+  @maxLength(24)
+  @minLength(3)
+  @path
+  @key("iotConnectorName")
+  @segment("iotconnectors")
+  name: string;
+}
+
+@armResourceOperations
+interface IotConnectors {
+  @doc("Gets the properties of the specified IoT Connector.")
+  get is ArmResourceRead<IotConnector>;
+  @doc("Creates or updates an IoT Connector resource with the specified parameters.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<IotConnector>;
+  // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
+  @doc("Patch an IoT Connector.")
+  update is ArmCustomPatchAsync<IotConnector, IotConnectorPatchResource>;
+  @doc("Deletes an IoT Connector.")
+  delete is ArmResourceDeleteAsync<IotConnector>;
+  @doc("Lists all IoT Connectors for the given workspace")
+  listByWorkspace is ArmResourceListByParent<IotConnector>;
+}

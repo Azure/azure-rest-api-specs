@@ -308,9 +308,7 @@ model ErrorResponseError {
 }
 
 @doc("The Resource definition.")
-model ResourceNamespacePatch {
-  ...Resource;
-
+model ResourceNamespacePatch extends Resource {
   @doc("Resource location")
   location?: string;
 
@@ -833,6 +831,4 @@ model ServiceBusNameAvailabilityResult {
 }
 
 @doc("Represents set of actions written in SQL language-based syntax that is performed against a ServiceBus.Messaging.BrokeredMessage ")
-model SqlRuleAction {
-  ...FilterAction;
-}
+model SqlRuleAction extends FilterAction {}

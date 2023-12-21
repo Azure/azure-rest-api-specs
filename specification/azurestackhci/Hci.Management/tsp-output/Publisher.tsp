@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./HciCluster.tsp";
+import "./Cluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Hci;
 @doc("Publisher details.")
-@parentResource(HciCluster)
+@parentResource(Cluster)
 model Publisher is ProxyResource<PublisherProperties> {
   @doc("The name of the publisher available within HCI cluster.")
   @path

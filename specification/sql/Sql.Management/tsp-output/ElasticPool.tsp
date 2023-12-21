@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SqlServer.tsp";
+import "./Server.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Sql;
 @doc("An elastic pool.")
-@parentResource(SqlServer)
+@parentResource(Server)
 model ElasticPool is TrackedResource<ElasticPoolProperties> {
   @doc("The name of the elastic pool.")
   @path
@@ -44,6 +44,12 @@ interface ElasticPools {
       $skip?: int32;
     }
   >;
+  @doc("Failovers an elastic pool.")
+  failover is ArmResourceActionAsync<ElasticPool, void, void>;
+}
+
+@armResourceOperations
+interface ElasticPoolOperations {
   @doc("Cancels the asynchronous operation on the elastic pool.")
   cancel is ArmResourceActionSync<
     ElasticPool,
@@ -57,8 +63,32 @@ interface ElasticPools {
       operationId: string;
     }
   >;
-  @doc("Failovers an elastic pool.")
-  failover is ArmResourceActionAsync<ElasticPool, void, void>;
+  @doc("Gets a list of operations performed on the elastic pool.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/operations")
+  @get
+  ListByElasticPool is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the server.")
+      @path
+      serverName: string;
+
+      @path
+      elasticPoolName: string;
+
+      @doc("The subscription ID that identifies an Azure subscription.")
+      @path
+      subscriptionId: string;
+    },
+    ElasticPoolOperationListResult
+  >;
+}
+
+@armResourceOperations
+interface Metrics {
   @doc("Returns elastic pool  metrics.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/metrics")
   @get
@@ -86,7 +116,10 @@ interface ElasticPools {
     },
     MetricListResult
   >;
+}
 
+@armResourceOperations
+interface MetricDefinitions {
   @doc("Returns elastic pool metric definitions.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/metricDefinitions")
   @get
@@ -110,7 +143,10 @@ interface ElasticPools {
     },
     MetricDefinitionListResult
   >;
+}
 
+@armResourceOperations
+interface ElasticPoolActivities {
   @doc("Returns elastic pool activities.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolActivity")
   @get
@@ -134,7 +170,10 @@ interface ElasticPools {
     },
     ElasticPoolActivityListResult
   >;
+}
 
+@armResourceOperations
+interface ElasticPoolDatabaseActivities {
   @doc("Returns activity on databases inside of an elastic pool.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/elasticPoolDatabaseActivity")
   @get
@@ -158,30 +197,10 @@ interface ElasticPools {
     },
     ElasticPoolDatabaseActivityListResult
   >;
+}
 
-  @doc("Gets a list of operations performed on the elastic pool.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/operations")
-  @get
-  ListByElasticPool is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
-      @path
-      resourceGroupName: string;
-
-      @doc("The name of the server.")
-      @path
-      serverName: string;
-
-      @path
-      elasticPoolName: string;
-
-      @doc("The subscription ID that identifies an Azure subscription.")
-      @path
-      subscriptionId: string;
-    },
-    ElasticPoolOperationListResult
-  >;
-
+@armResourceOperations
+interface Databases {
   @doc("Gets a list of databases in an elastic pool.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases")
   @get

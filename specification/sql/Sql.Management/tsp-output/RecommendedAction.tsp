@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SqlDatabaseAdvisor.tsp";
+import "./Advisor.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Sql;
 @doc("Database, Server or Elastic Pool Recommended Action.")
-@parentResource(SqlDatabaseAdvisor)
+@parentResource(Advisor)
 model RecommendedAction is ProxyResource<RecommendedActionProperties> {
   @doc("The name of Database Recommended Action.")
   @path
@@ -23,7 +23,7 @@ model RecommendedAction is ProxyResource<RecommendedActionProperties> {
 }
 
 @armResourceOperations
-interface RecommendedActions {
+interface DatabaseRecommendedActions {
   @doc("Gets a database recommended action.")
   get is ArmResourceRead<RecommendedAction>;
   @doc("Updates a database recommended action.")

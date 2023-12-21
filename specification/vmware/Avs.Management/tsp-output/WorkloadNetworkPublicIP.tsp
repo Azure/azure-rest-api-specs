@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AvsPrivateCloud.tsp";
+import "./PrivateCloud.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Avs;
 @doc("NSX Public IP Block")
-@parentResource(AvsPrivateCloud)
+@parentResource(PrivateCloud)
 model WorkloadNetworkPublicIP
   is ProxyResource<WorkloadNetworkPublicIPProperties> {
   @doc("NSX Public IP Block identifier. Generally the same as the Public IP Block's display name")
@@ -22,7 +22,7 @@ model WorkloadNetworkPublicIP
 }
 
 @armResourceOperations
-interface WorkloadNetworkPublicIPS {
+interface WorkloadNetworks {
   @doc("Get a Public IP Block by id in a private cloud workload network.")
   getPublicIP is ArmResourceRead<WorkloadNetworkPublicIP>;
   @doc("Create a Public IP Block by id in a private cloud workload network.")

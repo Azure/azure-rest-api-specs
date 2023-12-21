@@ -3,11 +3,11 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./CostManagementExport.tsp";
-import "./TenantsCostManagementViews.tsp";
-import "./CostManagementViews.tsp";
-import "./CostManagementAlert.tsp";
-import "./TenantScheduledAction.tsp";
+import "./Export.tsp";
+import "./View.tsp";
+import "./View.tsp";
+import "./Alert.tsp";
+import "./ScheduledAction.tsp";
 import "./ScheduledAction.tsp";
 import "./routes.tsp";
 
@@ -22,7 +22,7 @@ using TypeSpec.Versioning;
   title: "CostManagementClient",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @doc("CostManagement management client provides access to CostManagement resources for Azure Enterprise Subscriptions.")
 namespace Azure.ResourceManager.CostManagement;
 

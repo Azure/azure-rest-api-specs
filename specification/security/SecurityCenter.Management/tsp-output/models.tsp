@@ -832,9 +832,7 @@ model MdeOnboardingDataList {
 }
 
 @doc("The resource of the configuration or data needed to onboard the machine to MDE")
-model MdeOnboardingData {
-  ...Resource;
-
+model MdeOnboardingData extends Resource {
   @doc("Properties of the MDE configuration or data parameter needed to onboard the machine to MDE")
   properties?: MdeOnboardingDataProperties;
 }
@@ -903,9 +901,7 @@ model CustomAssessmentAutomationProperties {
 }
 
 @doc("Custom Assessment Automation request")
-model CustomAssessmentAutomationRequest {
-  ...Resource;
-
+model CustomAssessmentAutomationRequest extends Resource {
   @doc("describes Custom Assessment Automation request properties.")
   properties?: CustomAssessmentAutomationRequestProperties;
 }
@@ -1397,9 +1393,7 @@ model SecurityTaskProperties {
 }
 
 @doc("Changing set of properties, depending on the task type that is derived from the name field")
-model SecurityTaskParameters {
-  ...Record<unknown>;
-
+model SecurityTaskParameters extends Record<unknown> {
   @doc("Name of the task type")
   @visibility("read")
   name?: string;
@@ -1439,9 +1433,7 @@ model ComplianceSegment {
 }
 
 @doc("Information protection policy.")
-model InformationProtectionPolicy {
-  ...Resource;
-
+model InformationProtectionPolicy extends Resource {
   @doc("Information protection policy data")
   properties?: InformationProtectionPolicyProperties;
 }
@@ -1833,9 +1825,7 @@ model SuppressionAlertsScope {
 }
 
 @doc("A more specific scope used to identify the alerts to suppress.")
-model ScopeElement {
-  ...Record<unknown>;
-
+model ScopeElement extends Record<unknown> {
   @doc("The alert entity type to suppress by.")
   field?: string;
 }
@@ -1848,8 +1838,8 @@ model ServerVulnerabilityAssessmentProperties {
 }
 
 @doc("Describes properties of an assessment metadata response.")
-model SecurityAssessmentMetadataPropertiesResponse {
-  ...SecurityAssessmentMetadataProperties;
+model SecurityAssessmentMetadataPropertiesResponse
+  extends SecurityAssessmentMetadataProperties {
   publishDates?: SecurityAssessmentMetadataPropertiesResponsePublishDates;
 
   @pattern("^[0-9]{2}/[0-9]{4}$")
@@ -1921,17 +1911,14 @@ model SecurityAssessmentMetadataPartnerData {
 model SecurityAssessmentList is Azure.Core.Page<SecurityAssessmentResponse>;
 
 @doc("Describes properties of an assessment.")
-model SecurityAssessmentPropertiesResponse {
-  ...SecurityAssessmentPropertiesBase;
-
+model SecurityAssessmentPropertiesResponse
+  extends SecurityAssessmentPropertiesBase {
   @doc("The result of the assessment")
   status: AssessmentStatusResponse;
 }
 
 @doc("The result of the assessment")
-model AssessmentStatusResponse {
-  ...AssessmentStatus;
-
+model AssessmentStatusResponse extends AssessmentStatus {
   @doc("The time that the assessment was created and first evaluated. Returned as UTC time in ISO 8601 format")
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -1995,17 +1982,13 @@ model SecurityAssessmentPartnerData {
 }
 
 @doc("Security assessment on a resource")
-model SecurityAssessment {
-  ...Resource;
-
+model SecurityAssessment extends Resource {
   @doc("Describes properties of an assessment.")
   properties?: SecurityAssessmentProperties;
 }
 
 @doc("Describes properties of an assessment.")
-model SecurityAssessmentProperties {
-  ...SecurityAssessmentPropertiesBase;
-
+model SecurityAssessmentProperties extends SecurityAssessmentPropertiesBase {
   @doc("The result of the assessment")
   status: AssessmentStatus;
 }
@@ -2517,9 +2500,7 @@ model ScoreDetails {
 model SecureScoreControlList is Azure.Core.Page<SecureScoreControlDetails>;
 
 @doc("Details of the security control, its score, and the health status of the relevant resources.")
-model SecureScoreControlDetails {
-  ...Resource;
-
+model SecureScoreControlDetails extends Resource {
   @doc("Calculation result data in control level")
   properties?: SecureScoreControlScoreDetails;
 }
@@ -2555,9 +2536,7 @@ model SecureScoreControlScoreDetails {
 }
 
 @doc("Information about the security control.")
-model SecureScoreControlDefinitionItem {
-  ...Resource;
-
+model SecureScoreControlDefinitionItem extends Resource {
   @doc("Security Control Definition Properties.")
   properties?: SecureScoreControlDefinitionItemProperties;
 }
@@ -2806,18 +2785,14 @@ model AlertProperties {
 model AlertResourceIdentifier {}
 
 @doc("Changing set of properties depending on the entity type.")
-model AlertEntity {
-  ...Record<Record<unknown>>;
-
+model AlertEntity extends Record<Record<unknown>> {
   @doc("Type of entity")
   @visibility("read")
   type?: string;
 }
 
 @doc("Changing set of properties depending on the supportingEvidence type.")
-model AlertPropertiesSupportingEvidence {
-  ...Record<Record<unknown>>;
-
+model AlertPropertiesSupportingEvidence extends Record<Record<unknown>> {
   @doc("Type of the supportingEvidence")
   @visibility("read")
   type?: string;
@@ -2831,9 +2806,7 @@ model AlertSimulatorRequestBody {
 
 @doc("Describes properties of an alert simulation request")
 @discriminator("kind")
-model AlertSimulatorRequestProperties {
-  ...Record<unknown>;
-}
+model AlertSimulatorRequestProperties extends Record<unknown> {}
 
 @doc("Configures how to correlate scan data and logs with resources associated with the subscription.")
 model IngestionSettingToken {
@@ -3137,9 +3110,7 @@ model ScanProperties {
 }
 
 @doc("A vulnerability assessment scan result for a single rule.")
-model ScanResult {
-  ...Resource;
-
+model ScanResult extends Resource {
   @doc("A vulnerability assessment scan result properties for a single rule.")
   properties?: ScanResultProperties;
 }
@@ -3572,9 +3543,7 @@ model AutomationActionWorkspace extends AutomationAction {
 }
 
 @doc("Security assessment metadata")
-model SecurityAssessmentMetadata {
-  ...Resource;
-
+model SecurityAssessmentMetadata extends Resource {
   @doc("Describes properties of an assessment metadata.")
   properties?: SecurityAssessmentMetadataProperties;
 }
@@ -3589,16 +3558,14 @@ model CefExternalSecuritySolution extends ExternalSecuritySolution {
 }
 
 @doc("The external security solution properties for CEF solutions")
-model CefSolutionProperties {
-  ...ExternalSecuritySolutionProperties;
+model CefSolutionProperties extends ExternalSecuritySolutionProperties {
   hostname?: string;
   agent?: string;
   lastEventReceived?: string;
 }
 
 @doc("The solution properties (correspond to the solution kind)")
-model ExternalSecuritySolutionProperties {
-  ...Record<unknown>;
+model ExternalSecuritySolutionProperties extends Record<unknown> {
   deviceVendor?: string;
   deviceType?: string;
 
@@ -3622,8 +3589,7 @@ model AtaExternalSecuritySolution extends ExternalSecuritySolution {
 }
 
 @doc("The external security solution properties for ATA solutions")
-model AtaSolutionProperties {
-  ...ExternalSecuritySolutionProperties;
+model AtaSolutionProperties extends ExternalSecuritySolutionProperties {
   lastEventReceived?: string;
 }
 

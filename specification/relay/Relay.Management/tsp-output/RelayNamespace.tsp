@@ -23,7 +23,7 @@ model RelayNamespace is TrackedResource<RelayNamespaceProperties> {
 }
 
 @armResourceOperations
-interface RelayNamespaces {
+interface Namespaces {
   @doc("Returns the description for the specified namespace.")
   get is ArmResourceRead<RelayNamespace>;
   @doc("Create Azure Relay namespace.")

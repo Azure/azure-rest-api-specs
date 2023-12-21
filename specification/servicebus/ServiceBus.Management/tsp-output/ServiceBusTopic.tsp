@@ -22,7 +22,7 @@ model ServiceBusTopic is ProxyResource<SBTopicProperties> {
 }
 
 @armResourceOperations
-interface ServiceBusTopics {
+interface Topics {
   @doc("Returns a description for the specified topic.")
   get is ArmResourceRead<ServiceBusTopic>;
   @doc("Creates a topic in the specified namespace.")

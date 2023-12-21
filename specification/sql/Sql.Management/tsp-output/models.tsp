@@ -648,8 +648,7 @@ model DataMaskingPolicyProperties {
 }
 
 @doc("Represents a database data masking rule.")
-model DataMaskingRule {
-...ProxyResource;
+model DataMaskingRule extends ProxyResource {
 @doc("The properties of the resource.")
 "properties"?: DataMaskingRuleProperties;
 @doc("The location of the data masking rule.")
@@ -844,8 +843,7 @@ model ElasticPoolActivityListResult {
 }
 
 @doc("Represents the activity on an elastic pool.")
-model ElasticPoolActivity {
-...ProxyResource;
+model ElasticPoolActivity extends ProxyResource {
 @doc("The geo-location where the resource lives")
 @visibility("read", "create")
 "location"?: string;
@@ -928,8 +926,7 @@ model ElasticPoolDatabaseActivityListResult {
 }
 
 @doc("Represents the activity on an elastic pool.")
-model ElasticPoolDatabaseActivity {
-...ProxyResource;
+model ElasticPoolDatabaseActivity extends ProxyResource {
 @doc("The geo-location where the resource lives")
 @visibility("read", "create")
 "location"?: string;
@@ -1344,8 +1341,7 @@ model VulnerabilityAssessmentScanError {
 }
 
 @doc("A database Vulnerability Assessment scan export resource.")
-model DatabaseVulnerabilityAssessmentScansExport {
-...ProxyResource;
+model DatabaseVulnerabilityAssessmentScansExport extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: DatabaseVulnerabilityAssessmentScanExportProperties;
 }
@@ -1386,8 +1382,7 @@ model ElasticPoolOperationListResult is Azure.Core.Page<ElasticPoolOperation> {
 }
 
 @doc("A elastic pool operation.")
-model ElasticPoolOperation {
-...ProxyResource;
+model ElasticPoolOperation extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: ElasticPoolOperationProperties;
 }
@@ -1470,8 +1465,7 @@ model ServerFirewallRuleProperties {
 }
 
 @doc("ARM proxy resource.")
-model ProxyResourceWithWritableName {
-...ResourceWithWritableName;
+model ProxyResourceWithWritableName extends ResourceWithWritableName {
 }
 
 @doc("ARM resource.")
@@ -2247,8 +2241,7 @@ model ManagedBackupShortTermRetentionPolicyProperties {
 }
 
 @doc("Database query.")
-model ManagedInstanceQuery {
-...ProxyResource;
+model ManagedInstanceQuery extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: QueryProperties;
 }
@@ -2264,8 +2257,7 @@ model ManagedInstanceQueryStatistics is Azure.Core.Page<QueryStatistics> {
 }
 
 
-model QueryStatistics {
-...ProxyResource;
+model QueryStatistics extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: QueryStatisticsProperties;
 }
@@ -2362,8 +2354,7 @@ model SecurityEventCollection is Azure.Core.Page<SecurityEvent> {
 }
 
 @doc("A security event.")
-model SecurityEvent {
-...ProxyResource;
+model SecurityEvent extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: SecurityEventProperties;
 }
@@ -2616,8 +2607,7 @@ model ManagedInstancePrivateLinkProperties {
 }
 
 @doc("A TDE certificate that can be uploaded into a server.")
-model TdeCertificate {
-...ProxyResource;
+model TdeCertificate extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: TdeCertificateProperties;
 }
@@ -2847,8 +2837,7 @@ model ServerOperationListResult is Azure.Core.Page<ServerOperation> {
 }
 
 @doc("A server operation.")
-model ServerOperation {
-...ProxyResource;
+model ServerOperation extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: ServerOperationProperties;
 }
@@ -2986,8 +2975,7 @@ model SyncAgentLinkedDatabaseListResult is Azure.Core.Page<SyncAgentLinkedDataba
 }
 
 @doc("An Azure SQL Database sync agent linked database.")
-model SyncAgentLinkedDatabase {
-...ProxyResource;
+model SyncAgentLinkedDatabase extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: SyncAgentLinkedDatabaseProperties;
 }
@@ -3259,8 +3247,7 @@ model BackupShortTermRetentionPolicyProperties {
 }
 
 @doc("An export managed database operation result resource.")
-model DatabaseExtensions {
-...ProxyResource;
+model DatabaseExtensions extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: DatabaseExtensionsProperties;
 }
@@ -3282,8 +3269,7 @@ model DatabaseExtensionsProperties {
 }
 
 @doc("An Extension operation result resource.")
-model ImportExportExtensionsOperationResult {
-...ProxyResource;
+model ImportExportExtensionsOperationResult extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: ImportExportExtensionsOperationResultProperties;
 }
@@ -3322,8 +3308,7 @@ model DatabaseOperationListResult is Azure.Core.Page<DatabaseOperation> {
 }
 
 @doc("A database operation.")
-model DatabaseOperation {
-...ProxyResource;
+model DatabaseOperation extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: DatabaseOperationProperties;
 }
@@ -3382,8 +3367,7 @@ model DatabaseUsageListResult is Azure.Core.Page<DatabaseUsage> {
 }
 
 @doc("Usage metric of a database.")
-model DatabaseUsage {
-...ProxyResource;
+model DatabaseUsage extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: DatabaseUsageProperties;
 }
@@ -3486,8 +3470,7 @@ model CopyLongTermRetentionBackupParametersProperties {
 }
 
 @doc("A LongTermRetentionBackup operation result resource.")
-model LongTermRetentionBackupOperationResult {
-...ProxyResource;
+model LongTermRetentionBackupOperationResult extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: LongTermRetentionOperationResultProperties;
 }
@@ -3702,8 +3685,7 @@ model SensitivityLabelUpdateList {
 }
 
 @doc("A sensitivity label update operation.")
-model SensitivityLabelUpdate {
-...ProxyResource;
+model SensitivityLabelUpdate extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: SensitivityLabelUpdateProperties;
 }
@@ -3727,8 +3709,7 @@ model RecommendedSensitivityLabelUpdateList {
 }
 
 @doc("A recommended sensitivity label update operation.")
-model RecommendedSensitivityLabelUpdate {
-...ProxyResource;
+model RecommendedSensitivityLabelUpdate extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: RecommendedSensitivityLabelUpdateProperties;
 }
@@ -4332,8 +4313,7 @@ model SynapseLinkWorkspaceListResult is Azure.Core.Page<SynapseLinkWorkspace> {
 }
 
 @doc("Synapse link workspace resource")
-model SynapseLinkWorkspace {
-...ProxyResource;
+model SynapseLinkWorkspace extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: SynapseLinkWorkspaceProperties;
 }
@@ -4365,8 +4345,7 @@ model VirtualClusterProperties {
 }
 
 @doc("A refresh DNS servers operation.")
-model UpdateVirtualClusterDnsServersOperation {
-...ProxyResource;
+model UpdateVirtualClusterDnsServersOperation extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: VirtualClusterDnsServersProperties;
 }
@@ -4799,8 +4778,7 @@ model NetworkIsolationSettings {
 }
 
 @doc("An ImportExport operation result resource.")
-model ImportExportOperationResult {
-...ProxyResource;
+model ImportExportOperationResult extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: ImportExportOperationResultProperties;
 }
@@ -5346,8 +5324,7 @@ model DatabaseSqlVulnerabilityAssessmentBaselineSetProperties {
 }
 
 @doc("A database sql vulnerability assessment rule baseline list input.")
-model DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput {
-...ProxyResource;
+model DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput extends ProxyResource {
 @doc("SystemData of DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputResource.")
 @visibility("read")
 "systemData"?: SystemData;
@@ -5370,8 +5347,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineProperties {
 }
 
 @doc("A database sql vulnerability assessment rule baseline input.")
-model DatabaseSqlVulnerabilityAssessmentRuleBaselineInput {
-...ProxyResource;
+model DatabaseSqlVulnerabilityAssessmentRuleBaselineInput extends ProxyResource {
 @doc("SystemData of DatabaseSqlVulnerabilityAssessmentRuleBaselineInputResource.")
 @visibility("read")
 "systemData"?: SystemData;
@@ -5717,8 +5693,7 @@ model ImportNewDatabaseDefinition {
 }
 
 @doc("An RefreshExternalGovernanceStatus operation result resource.")
-model RefreshExternalGovernanceStatusOperationResult {
-...ProxyResource;
+model RefreshExternalGovernanceStatusOperationResult extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: RefreshExternalGovernanceStatusOperationResultProperties;
 }
@@ -5845,8 +5820,7 @@ model ManagedDatabaseMoveOperationListResult {
 }
 
 @doc("A managed database move operation.")
-model ManagedDatabaseMoveOperationResult {
-...ProxyResource;
+model ManagedDatabaseMoveOperationResult extends ProxyResource {
 @doc("Resource properties.")
 "properties"?: ManagedDatabaseMoveOperationResultProperties;
 }

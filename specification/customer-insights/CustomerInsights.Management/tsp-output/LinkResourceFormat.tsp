@@ -21,7 +21,7 @@ model LinkResourceFormat is ProxyResource<LinkDefinition> {
 }
 
 @armResourceOperations
-interface LinkResourceFormats {
+interface Links {
   @doc("Gets a link in the hub.")
   get is ArmResourceRead<LinkResourceFormat>;
   @doc("Creates a link or updates an existing link in the hub.")

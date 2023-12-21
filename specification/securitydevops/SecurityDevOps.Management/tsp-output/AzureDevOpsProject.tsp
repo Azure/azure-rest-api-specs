@@ -21,7 +21,7 @@ model AzureDevOpsProject is ProxyResource<AzureDevOpsProjectProperties> {
 }
 
 @armResourceOperations
-interface AzureDevOpsProjects {
+interface AzureDevOpsProject {
   @doc("Returns a monitored AzureDevOps Project resource for a given ID.")
   get is ArmResourceRead<AzureDevOpsProject>;
   @doc("Creates or updates an Azure DevOps Project.")

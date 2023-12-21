@@ -22,7 +22,7 @@ model ManagedInstancePrivateLink
 }
 
 @armResourceOperations
-interface ManagedInstancePrivateLinks {
+interface ManagedInstancePrivateLinkResources {
   @doc("Gets a private link resource for SQL server.")
   get is ArmResourceRead<ManagedInstancePrivateLink>;
   @doc("Gets the private link resources for SQL server.")

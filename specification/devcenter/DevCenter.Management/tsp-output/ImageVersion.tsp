@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./DevCenterImage.tsp";
+import "./Image.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.DevCenter;
 @doc("Represents an image version.")
-@parentResource(DevCenterImage)
+@parentResource(Image)
 model ImageVersion is ProxyResource<ImageVersionProperties> {
   @doc("The version of the image.")
   @path

@@ -25,7 +25,7 @@ model DigitalTwinsEndpointResource
 }
 
 @armResourceOperations
-interface DigitalTwinsEndpointResources {
+interface DigitalTwinsEndpoint {
   @doc("Get DigitalTwinsInstances Endpoint.")
   get is ArmResourceRead<DigitalTwinsEndpointResource>;
   @doc("Create or update DigitalTwinsInstance endpoint.")

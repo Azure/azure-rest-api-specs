@@ -23,7 +23,7 @@ model EventHubsConsumerGroup is ProxyResource<ConsumerGroupProperties> {
 }
 
 @armResourceOperations
-interface EventHubsConsumerGroups {
+interface ConsumerGroups {
   @doc("Gets a description for the specified consumer group.")
   get is ArmResourceRead<EventHubsConsumerGroup>;
   @doc("Creates or updates an Event Hubs consumer group as a nested resource within a Namespace.")

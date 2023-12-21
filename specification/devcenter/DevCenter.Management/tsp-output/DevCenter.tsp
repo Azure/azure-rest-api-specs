@@ -44,6 +44,10 @@ interface DevCenters {
   >;
   @doc("Lists all devcenters in a subscription.")
   listBySubscription is ArmListBySubscription<DevCenter>;
+}
+
+@armResourceOperations
+interface Images {
   @doc("Lists images for a devcenter.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/images")
   @get

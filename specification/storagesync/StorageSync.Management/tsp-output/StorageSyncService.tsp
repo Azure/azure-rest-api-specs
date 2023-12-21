@@ -35,6 +35,10 @@ interface StorageSyncServices {
   listByResourceGroup is ArmResourceListByParent<StorageSyncService>;
   @doc("Get a StorageSyncService list by subscription.")
   listBySubscription is ArmListBySubscription<StorageSyncService>;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
   @doc("Gets the private link resources that need to be created for a storage sync service.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateLinkResources")
   @get

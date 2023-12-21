@@ -20,7 +20,7 @@ model DeletedManagedHsm is ProxyResource<DeletedManagedHsmProperties> {
 }
 
 @armResourceOperations
-interface DeletedManagedHsms {
+interface ManagedHsms {
   @doc("Gets the specified deleted managed HSM.")
   getDeleted is ArmResourceRead<DeletedManagedHsm>;
   @doc("Permanently deletes the specified managed HSM.")

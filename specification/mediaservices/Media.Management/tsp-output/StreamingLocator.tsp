@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./MediaServicesAccount.tsp";
+import "./MediaService.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Media;
 @doc("A Streaming Locator resource")
-@parentResource(MediaServicesAccount)
+@parentResource(MediaService)
 model StreamingLocator is ProxyResource<StreamingLocatorProperties> {
   @doc("The Streaming Locator name.")
   @path

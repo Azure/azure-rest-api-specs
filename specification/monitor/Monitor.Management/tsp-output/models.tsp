@@ -1351,8 +1351,7 @@ model MetricAlertProperties {
 
 @doc("The rule criteria that defines the conditions of the alert rule.")
 @discriminator("odata.type")
-model MetricAlertCriteria {
-...Record<Record<unknown>>;
+model MetricAlertCriteria extends Record<Record<unknown>> {
 }
 
 @doc("An alert action.")
@@ -1663,8 +1662,7 @@ model AccessModeSettingsExclusion {
 }
 
 @doc("The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'")
-model CommonTrackedResource {
-...CommonResource;
+model CommonTrackedResource extends CommonResource {
 @doc("Resource tags.")
 @visibility("read", "create", "update")
 "tags"?: Record<string>;
@@ -1739,8 +1737,7 @@ model ScopedResourceProperties {
 }
 
 @doc("The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location")
-model CommonProxyResource {
-...CommonResource;
+model CommonProxyResource extends CommonResource {
 }
 
 @doc("An Azure Activity Log Alert rule.")
@@ -1773,8 +1770,7 @@ __Important__: Each type has its unique subset of properties. Properties from di
   _Please note, 'field', 'equals' and 'containsAny' should __not__ be set in an AnyOf Condition._
 
 """)
-model AlertRuleAnyOfOrLeafCondition {
-...AlertRuleLeafCondition;
+model AlertRuleAnyOfOrLeafCondition extends AlertRuleLeafCondition {
 @doc("An Activity Log Alert rule condition that is met when at least one of its member leaf conditions are met.")
 "anyOf"?: AlertRuleLeafCondition[];
 }
@@ -1839,8 +1835,7 @@ model ActivityLogAlertErrorResponse {
 }
 
 @doc("Resource properties.")
-model DataCollectionEndpointResourceProperties {
-...DataCollectionEndpoint;
+model DataCollectionEndpointResourceProperties extends DataCollectionEndpoint {
 }
 
 @doc("Definition of data collection endpoint.")
@@ -1872,8 +1867,7 @@ model DataCollectionEndpoint {
 }
 
 @doc("The endpoint used by clients to access their configuration.")
-model DataCollectionEndpointConfigurationAccess {
-...ConfigurationAccessEndpointSpec;
+model DataCollectionEndpointConfigurationAccess extends ConfigurationAccessEndpointSpec {
 }
 
 @doc("Definition of the endpoint used for accessing configuration.")
@@ -1884,8 +1878,7 @@ model ConfigurationAccessEndpointSpec {
 }
 
 @doc("The endpoint used by clients to ingest logs.")
-model DataCollectionEndpointLogsIngestion {
-...LogsIngestionEndpointSpec;
+model DataCollectionEndpointLogsIngestion extends LogsIngestionEndpointSpec {
 }
 
 @doc("Definition of the endpoint used for ingesting logs.")
@@ -1896,8 +1889,7 @@ model LogsIngestionEndpointSpec {
 }
 
 @doc("The endpoint used by clients to ingest metrics.")
-model DataCollectionEndpointMetricsIngestion {
-...MetricsIngestionEndpointSpec;
+model DataCollectionEndpointMetricsIngestion extends MetricsIngestionEndpointSpec {
 }
 
 @doc("Definition of the endpoint used for ingesting metrics.")
@@ -1908,8 +1900,7 @@ model MetricsIngestionEndpointSpec {
 }
 
 @doc("Network access control rules for the endpoints.")
-model DataCollectionEndpointNetworkAcls {
-...NetworkRuleSet;
+model DataCollectionEndpointNetworkAcls extends NetworkRuleSet {
 }
 
 @doc("Definition of the network rules.")
@@ -1927,8 +1918,7 @@ model PrivateLinkScopedResource {
 }
 
 @doc("Failover configuration on this endpoint. This property is READ-ONLY.")
-model DataCollectionEndpointFailoverConfiguration {
-...FailoverConfigurationSpec;
+model DataCollectionEndpointFailoverConfiguration extends FailoverConfigurationSpec {
 }
 
 
@@ -1948,8 +1938,7 @@ model LocationSpec {
 }
 
 @doc("Metadata for the resource. This property is READ-ONLY.")
-model DataCollectionEndpointMetadata {
-...Metadata;
+model DataCollectionEndpointMetadata extends Metadata {
 }
 
 @doc("Metadata about the resource")
@@ -1963,8 +1952,7 @@ model Metadata {
 }
 
 @doc("Managed service identity of the resource.")
-model DataCollectionEndpointResourceIdentity {
-...ManagedServiceIdentity;
+model DataCollectionEndpointResourceIdentity extends ManagedServiceIdentity {
 }
 
 @doc("User assigned identity properties")
@@ -1978,8 +1966,7 @@ model UserAssignedIdentity {
 }
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
-model DataCollectionEndpointResourceSystemData {
-...SystemData;
+model DataCollectionEndpointResourceSystemData extends SystemData {
 }
 
 @doc("Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).")
@@ -1990,13 +1977,11 @@ model ErrorResponseCommonV2 {
 }
 
 @doc("Managed Service Identity.")
-model ResourceForUpdateIdentity {
-...ManagedServiceIdentity;
+model ResourceForUpdateIdentity extends ManagedServiceIdentity {
 }
 
 @doc("Resource properties.")
-model DataCollectionRuleAssociationProxyOnlyResourceProperties {
-...DataCollectionRuleAssociation;
+model DataCollectionRuleAssociationProxyOnlyResourceProperties extends DataCollectionRuleAssociation {
 }
 
 @doc("Definition of association of a data collection rule with a monitored Azure resource.")
@@ -2016,18 +2001,15 @@ model DataCollectionRuleAssociation {
 }
 
 @doc("Metadata about the resource")
-model DataCollectionRuleAssociationMetadata {
-...Metadata;
+model DataCollectionRuleAssociationMetadata extends Metadata {
 }
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
-model DataCollectionRuleAssociationProxyOnlyResourceSystemData {
-...SystemData;
+model DataCollectionRuleAssociationProxyOnlyResourceSystemData extends SystemData {
 }
 
 @doc("Resource properties.")
-model DataCollectionRuleResourceProperties {
-...DataCollectionRule;
+model DataCollectionRuleResourceProperties extends DataCollectionRule {
 }
 
 @doc("Definition of what monitoring data to collect and where that data should be sent.")
@@ -2059,8 +2041,7 @@ This property is optional and can be omitted if the rule is meant to be used via
 }
 
 @doc("Metadata about the resource")
-model DataCollectionRuleMetadata {
-...Metadata;
+model DataCollectionRuleMetadata extends Metadata {
 }
 
 @doc("Declaration of a custom stream.")
@@ -2081,8 +2062,7 @@ model ColumnDefinition {
 The specification of data sources. 
 This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
 """)
-model DataCollectionRuleDataSources {
-...DataSourcesSpec;
+model DataCollectionRuleDataSources extends DataSourcesSpec {
 }
 
 @doc("Specification of data sources that will be collected.")
@@ -2218,8 +2198,7 @@ This name should be unique across all data sources (regardless of type) within t
 }
 
 @doc("The log files specific settings.")
-model LogFilesDataSourceSettings {
-...LogFileSettings;
+model LogFilesDataSourceSettings extends LogFileSettings {
 }
 
 @doc("Settings for different log file formats")
@@ -2229,8 +2208,7 @@ model LogFileSettings {
 }
 
 @doc("Text settings")
-model LogFileSettingsText {
-...LogFileTextSettings;
+model LogFileSettingsText extends LogFileTextSettings {
 }
 
 @doc("Settings for text log files")
@@ -2292,8 +2270,7 @@ This name should be unique across all data sources (regardless of type) within t
 }
 
 @doc("Specifications of pull based data sources")
-model DataSourcesSpecDataImports {
-...DataImportSources;
+model DataSourcesSpecDataImports extends DataImportSources {
 }
 
 
@@ -2303,8 +2280,7 @@ model DataImportSources {
 }
 
 @doc("Definition of Event Hub configuration.")
-model DataImportSourcesEventHub {
-...EventHubDataSource;
+model DataImportSourcesEventHub extends EventHubDataSource {
 }
 
 
@@ -2321,8 +2297,7 @@ This name should be unique across all data sources (regardless of type) within t
 }
 
 @doc("The specification of destinations.")
-model DataCollectionRuleDestinations {
-...DestinationsSpec;
+model DataCollectionRuleDestinations extends DestinationsSpec {
 }
 
 @doc("Specification of destinations that can be used in data flows.")
@@ -2374,8 +2349,7 @@ This name should be unique across all destinations (regardless of type) within t
 }
 
 @doc("Azure Monitor Metrics destination.")
-model DestinationsSpecAzureMonitorMetrics {
-...AzureMonitorMetricsDestination;
+model DestinationsSpecAzureMonitorMetrics extends AzureMonitorMetricsDestination {
 }
 
 @doc("Azure Monitor Metrics destination.")
@@ -2450,18 +2424,15 @@ model DataFlow {
 }
 
 @doc("Managed service identity of the resource.")
-model DataCollectionRuleResourceIdentity {
-...ManagedServiceIdentity;
+model DataCollectionRuleResourceIdentity extends ManagedServiceIdentity {
 }
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
-model DataCollectionRuleResourceSystemData {
-...SystemData;
+model DataCollectionRuleResourceSystemData extends SystemData {
 }
 
 @doc("Resource properties")
-model AzureMonitorWorkspaceResourceProperties {
-...AzureMonitorWorkspace;
+model AzureMonitorWorkspaceResourceProperties extends AzureMonitorWorkspace {
 }
 
 @doc("Properties of an Azure Monitor workspace")
@@ -2487,8 +2458,7 @@ model AzureMonitorWorkspace {
 }
 
 @doc("Information about metrics for the Azure Monitor workspace")
-model AzureMonitorWorkspaceMetrics {
-...Metrics;
+model AzureMonitorWorkspaceMetrics extends Metrics {
 }
 
 @doc("Information about metrics for the workspace")
@@ -2502,8 +2472,7 @@ model Metrics {
 }
 
 @doc("The Data Collection Rule and Endpoint used for ingestion by default.")
-model AzureMonitorWorkspaceDefaultIngestionSettings {
-...IngestionSettings;
+model AzureMonitorWorkspaceDefaultIngestionSettings extends IngestionSettings {
 }
 
 @doc("Settings for data ingestion")
@@ -2517,8 +2486,7 @@ model IngestionSettings {
 }
 
 @doc("The private endpoint connection resource.")
-model MonitorWorkspacePrivateEndpointConnection {
-...CommonResourceV4;
+model MonitorWorkspacePrivateEndpointConnection extends CommonResourceV4 {
 @doc("Resource properties.")
 "properties"?: MonitorWorkspacePrivateEndpointConnectionProperties;
 }
@@ -2561,8 +2529,7 @@ model CommonResourceV4 {
 }
 
 @doc("The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'")
-model CommonTrackedResourceV3 {
-...CommonResourceV3;
+model CommonTrackedResourceV3 extends CommonResourceV3 {
 @doc("Resource tags.")
 @visibility("read", "create", "update")
 "tags"?: Record<string>;
@@ -2733,8 +2700,7 @@ model MetricCriteria extends MultiMetricCriteria {
 
 @doc("The types of conditions for a multi resource alert.")
 @discriminator("criterionType")
-model MultiMetricCriteria {
-...Record<Record<unknown>>;
+model MultiMetricCriteria extends Record<Record<unknown>> {
 @doc("Name of the criteria.")
 "name": string;
 @doc("Name of the metric.")

@@ -19,7 +19,7 @@ model LinkerResource is ExtensionResource<LinkerProperties> {
 }
 
 @armResourceOperations
-interface LinkerResources {
+interface Linker {
   @doc("Returns Linker resource for a given name.")
   get is ArmResourceRead<LinkerResource>;
   @doc("Create or update linker resource.")

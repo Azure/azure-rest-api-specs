@@ -35,6 +35,10 @@ interface ElasticSans {
   listByResourceGroup is ArmResourceListByParent<ElasticSan>;
   @doc("Gets a list of ElasticSans in a subscription")
   listBySubscription is ArmListBySubscription<ElasticSan>;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
   @doc("Gets the private link resources that need to be created for a elastic San.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateLinkResources")
   @get

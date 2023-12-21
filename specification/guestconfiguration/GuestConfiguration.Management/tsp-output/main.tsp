@@ -3,9 +3,9 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./GuestConfigurationVmAssignment.tsp";
-import "./GuestConfigurationHcrpAssignment.tsp";
-import "./GuestConfigurationVmssAssignment.tsp";
+import "./GuestConfigurationAssignment.tsp";
+import "./GuestConfigurationAssignment.tsp";
+import "./GuestConfigurationAssignment.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

@@ -3,13 +3,13 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./KeyVault.tsp";
-import "./DeletedKeyVault.tsp";
-import "./KeyVaultPrivateEndpointConnection.tsp";
+import "./Vault.tsp";
+import "./DeletedVault.tsp";
+import "./PrivateEndpointConnection.tsp";
 import "./ManagedHsm.tsp";
 import "./DeletedManagedHsm.tsp";
-import "./ManagedHsmPrivateEndpointConnection.tsp";
-import "./KeyVaultSecret.tsp";
+import "./MhsmPrivateEndpointConnection.tsp";
+import "./Secret.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

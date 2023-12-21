@@ -44,9 +44,7 @@ enum ActionType {
 }
 
 @doc("Workspace properties.")
-model WorkspaceResourceProperties {
-  ...ResourceBaseProperties;
-
+model WorkspaceResourceProperties extends ResourceBaseProperties {
   @doc("Data plane endpoint.")
   @visibility("read")
   dataPlaneEndpoint?: string;
@@ -60,9 +58,7 @@ model ResourceBaseProperties {
 }
 
 @doc("Label properties.")
-model LabelResourceProperties {
-  ...ResourceBaseProperties;
-
+model LabelResourceProperties extends ResourceBaseProperties {
   @doc("Label display name.")
   displayName?: string;
 
@@ -71,22 +67,16 @@ model LabelResourceProperties {
 }
 
 @doc("Label patch properties")
-model LabelPatchResource {
-  ...LabelResource;
-}
+model LabelPatchResource extends LabelResource {}
 
 @doc("Task details")
-model TaskResource {
-  ...ProxyResource;
-
+model TaskResource extends ProxyResource {
   @doc("Task properties")
   properties?: TaskResourceProperties;
 }
 
 @doc("Task properties.")
-model TaskResourceProperties {
-  ...ResourceBaseProperties;
-
+model TaskResourceProperties extends ResourceBaseProperties {
   @doc("The time the task started")
   startedAt?: string;
 

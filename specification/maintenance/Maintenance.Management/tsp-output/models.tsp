@@ -181,9 +181,7 @@ model ApplyUpdateProperties {
 }
 
 @doc("Configuration Assignment")
-model ConfigurationAssignment {
-  ...Resource;
-
+model ConfigurationAssignment extends Resource {
   @doc("Location of the resource")
   location?: string;
 

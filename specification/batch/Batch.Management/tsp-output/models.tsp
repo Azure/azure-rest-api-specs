@@ -530,9 +530,7 @@ model PrivateLinkServiceConnectionState {
 }
 
 @doc("Contains information about the auto-storage account associated with a Batch account.")
-model AutoStorageProperties {
-  ...AutoStorageBaseProperties;
-
+model AutoStorageProperties extends AutoStorageBaseProperties {
   @doc("The UTC time at which storage keys were last synchronized with the Batch account.")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastKeySync: utcDateTime;
@@ -696,9 +694,7 @@ model CheckNameAvailabilityResult {
 }
 
 @doc("Certificate properties.")
-model CertificateProperties {
-  ...CertificateBaseProperties;
-
+model CertificateProperties extends CertificateBaseProperties {
   @visibility("read")
   provisioningState?: CertificateProvisioningState;
 

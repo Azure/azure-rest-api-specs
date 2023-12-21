@@ -134,9 +134,7 @@ enum SendActivityLogsStatus {
 model AccountsListResponse is Azure.Core.Page<AccountResource>;
 
 @doc("The details of a account resource.")
-model AccountResource {
-  ...ProxyResource;
-
+model AccountResource extends ProxyResource {
   @doc("The resource-specific properties for this resource.")
   @visibility("read", "create")
   properties?: AccountProperties;
@@ -301,9 +299,7 @@ model UserAssignedIdentity {
 model OrganizationsListResponse is Azure.Core.Page<OrganizationResource>;
 
 @doc("The details of a Organization resource.")
-model OrganizationResource {
-  ...ProxyResource;
-
+model OrganizationResource extends ProxyResource {
   @doc("The resource-specific properties for this resource.")
   @visibility("read", "create")
   properties?: OrganizationProperties;
@@ -325,9 +321,7 @@ model OrganizationProperties {
 model PlanDataListResponse is Azure.Core.Page<PlanDataResource>;
 
 @doc("The details of a PlanData resource.")
-model PlanDataResource {
-  ...ProxyResource;
-
+model PlanDataResource extends ProxyResource {
   @doc("The resource-specific properties for this resource.")
   @visibility("read", "create")
   properties?: PlanDataProperties;

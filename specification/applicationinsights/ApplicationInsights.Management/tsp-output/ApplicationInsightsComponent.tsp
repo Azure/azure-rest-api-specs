@@ -18,11 +18,14 @@ model ApplicationInsightsComponent
   @segment("components")
   name: string;
 
+  @doc("Resource etag")
+  etag?: string;
+
   ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
-interface ApplicationInsightsComponents {
+interface Components {
   @doc("Returns an Application Insights component.")
   get is ArmResourceRead<ApplicationInsightsComponent>;
   @doc("Creates (or updates) an Application Insights component. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.")
@@ -44,24 +47,6 @@ Note: this operation is intended for Classic resources, for  workspace-based App
   purge is ArmResourceActionNoContentSync<
     ApplicationInsightsComponent,
     ComponentPurgeBody
-  >;
-  @doc("Create an API Key of an Application Insights component.")
-  create is ArmResourceActionSync<
-    ApplicationInsightsComponent,
-    APIKeyRequest,
-    ApplicationInsightsComponentAPIKey
-  >;
-  @doc("Create a Continuous Export configuration of an Application Insights component.")
-  create is ArmResourceActionSync<
-    ApplicationInsightsComponent,
-    ApplicationInsightsComponentExportRequest,
-    ApplicationInsightsComponentExportConfigurationListResult
-  >;
-  @doc("Create a work item configuration for an Application Insights component.")
-  create is ArmResourceActionSync<
-    ApplicationInsightsComponent,
-    WorkItemCreateConfiguration,
-    WorkItemConfiguration
   >;
   @doc("Get status for an ongoing purge operation.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/operations/{purgeId}")
@@ -89,65 +74,16 @@ Note: this operation is intended for Classic resources, for  workspace-based App
     },
     ComponentPurgeStatusResponse
   >;
+}
 
-  @doc("Gets the list of annotations for a component for given time range")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations")
-  @get
-  List is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the Application Insights component resource.")
-      @path
-      resourceName: string;
-
-      @doc("The start time to query from for annotations, cannot be older than 90 days from current date.")
-      @query("start")
-      start: string;
-
-      @doc("The end time to query for annotations.")
-      @query("end")
-      end: string;
-    },
-    AnnotationsListResult
+@armResourceOperations
+interface APIKeys {
+  @doc("Create an API Key of an Application Insights component.")
+  create is ArmResourceActionSync<
+    ApplicationInsightsComponent,
+    APIKeyRequest,
+    ApplicationInsightsComponentAPIKey
   >;
-
-  @doc("Get the annotation for given id.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations/{annotationId}")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the Application Insights component resource.")
-      @path
-      resourceName: string;
-
-      @doc("The unique annotation ID. This is unique within a Application Insights component.")
-      @path
-      annotationId: string;
-    },
-    void
-  >;
-
   @doc("Gets a list of API keys of an Application Insights component.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ApiKeys")
   @get
@@ -197,7 +133,16 @@ Note: this operation is intended for Classic resources, for  workspace-based App
     },
     ApplicationInsightsComponentAPIKey
   >;
+}
 
+@armResourceOperations
+interface ExportConfigurations {
+  @doc("Create a Continuous Export configuration of an Application Insights component.")
+  create is ArmResourceActionSync<
+    ApplicationInsightsComponent,
+    ApplicationInsightsComponentExportRequest,
+    ApplicationInsightsComponentExportConfigurationListResult
+  >;
   @doc("Gets a list of Continuous Export configuration of an Application Insights component.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration")
   @get
@@ -247,149 +192,16 @@ Note: this operation is intended for Classic resources, for  workspace-based App
     },
     ApplicationInsightsComponentExportConfiguration
   >;
+}
 
-  @doc("Returns current billing features for an Application Insights component.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the Application Insights component resource.")
-      @path
-      resourceName: string;
-    },
-    ApplicationInsightsComponentBillingFeatures
+@armResourceOperations
+interface WorkItemConfigurations {
+  @doc("Create a work item configuration for an Application Insights component.")
+  create is ArmResourceActionSync<
+    ApplicationInsightsComponent,
+    WorkItemCreateConfiguration,
+    WorkItemConfiguration
   >;
-
-  @doc("Returns daily data volume cap (quota) status for an Application Insights component.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/quotastatus")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the Application Insights component resource.")
-      @path
-      resourceName: string;
-    },
-    ApplicationInsightsComponentQuotaStatus
-  >;
-
-  @doc("Returns feature capabilities of the application insights component.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/featurecapabilities")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the Application Insights component resource.")
-      @path
-      resourceName: string;
-    },
-    ApplicationInsightsComponentFeatureCapabilities
-  >;
-
-  @doc("Returns all available features of the application insights component.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/getavailablebillingfeatures")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the Application Insights component resource.")
-      @path
-      resourceName: string;
-    },
-    ApplicationInsightsComponentAvailableFeatures
-  >;
-
-  @doc("Gets a list of ProactiveDetection configurations of an Application Insights component.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs")
-  @get
-  List is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the Application Insights component resource.")
-      @path
-      resourceName: string;
-    },
-    void
-  >;
-
-  @doc("Get the ProactiveDetection configuration for this configuration id.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs/{ConfigurationId}")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the Application Insights component resource.")
-      @path
-      resourceName: string;
-
-      @doc("The ProactiveDetection configuration ID. This is unique within a Application Insights component.")
-      @path
-      ConfigurationId: string;
-    },
-    ApplicationInsightsComponentProactiveDetectionConfiguration
-  >;
-
   @doc("Gets the list work item configurations that exist for the application")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs")
   @get
@@ -462,7 +274,228 @@ Note: this operation is intended for Classic resources, for  workspace-based App
     },
     WorkItemConfiguration
   >;
+}
 
+@armResourceOperations
+interface Annotations {
+  @doc("Gets the list of annotations for a component for given time range")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations")
+  @get
+  List is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the Application Insights component resource.")
+      @path
+      resourceName: string;
+
+      @doc("The start time to query from for annotations, cannot be older than 90 days from current date.")
+      @query("start")
+      start: string;
+
+      @doc("The end time to query for annotations.")
+      @query("end")
+      end: string;
+    },
+    AnnotationsListResult
+  >;
+
+  @doc("Get the annotation for given id.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations/{annotationId}")
+  @get
+  Get is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the Application Insights component resource.")
+      @path
+      resourceName: string;
+
+      @doc("The unique annotation ID. This is unique within a Application Insights component.")
+      @path
+      annotationId: string;
+    },
+    void
+  >;
+}
+
+@armResourceOperations
+interface ComponentCurrentBillingFeatures {
+  @doc("Returns current billing features for an Application Insights component.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures")
+  @get
+  Get is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the Application Insights component resource.")
+      @path
+      resourceName: string;
+    },
+    ApplicationInsightsComponentBillingFeatures
+  >;
+}
+
+@armResourceOperations
+interface ComponentQuotaStatus {
+  @doc("Returns daily data volume cap (quota) status for an Application Insights component.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/quotastatus")
+  @get
+  Get is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the Application Insights component resource.")
+      @path
+      resourceName: string;
+    },
+    ApplicationInsightsComponentQuotaStatus
+  >;
+}
+
+@armResourceOperations
+interface ComponentFeatureCapabilities {
+  @doc("Returns feature capabilities of the application insights component.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/featurecapabilities")
+  @get
+  Get is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the Application Insights component resource.")
+      @path
+      resourceName: string;
+    },
+    ApplicationInsightsComponentFeatureCapabilities
+  >;
+}
+
+@armResourceOperations
+interface ComponentAvailableFeatures {
+  @doc("Returns all available features of the application insights component.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/getavailablebillingfeatures")
+  @get
+  Get is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the Application Insights component resource.")
+      @path
+      resourceName: string;
+    },
+    ApplicationInsightsComponentAvailableFeatures
+  >;
+}
+
+@armResourceOperations
+interface ProactiveDetectionConfigurations {
+  @doc("Gets a list of ProactiveDetection configurations of an Application Insights component.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs")
+  @get
+  List is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the Application Insights component resource.")
+      @path
+      resourceName: string;
+    },
+    void
+  >;
+
+  @doc("Get the ProactiveDetection configuration for this configuration id.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs/{ConfigurationId}")
+  @get
+  Get is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the Application Insights component resource.")
+      @path
+      resourceName: string;
+
+      @doc("The ProactiveDetection configuration ID. This is unique within a Application Insights component.")
+      @path
+      ConfigurationId: string;
+    },
+    ApplicationInsightsComponentProactiveDetectionConfiguration
+  >;
+}
+
+@armResourceOperations
+interface Favorites {
   @doc("Gets a list of favorites defined within an Application Insights component.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/favorites")
   @get
@@ -531,7 +564,10 @@ Note: this operation is intended for Classic resources, for  workspace-based App
     },
     ApplicationInsightsComponentFavorite
   >;
+}
 
+@armResourceOperations
+interface webTestLocations {
   @doc("Gets a list of web test locations available to this Application Insights component.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/syntheticmonitorlocations")
   @get
@@ -554,7 +590,10 @@ Note: this operation is intended for Classic resources, for  workspace-based App
     },
     void
   >;
+}
 
+@armResourceOperations
+interface WebTests {
   @doc("Get all Application Insights web tests defined for the specified component.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{componentName}/webtests")
   @get
@@ -577,7 +616,10 @@ Note: this operation is intended for Classic resources, for  workspace-based App
     },
     WebTestListResult
   >;
+}
 
+@armResourceOperations
+interface AnalyticsItems {
   @doc("Gets a list of Analytics Items defined within an Application Insights component.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/{scopePath}")
   @get

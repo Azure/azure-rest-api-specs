@@ -17,13 +17,16 @@ model DataBoxEdgeDevice is TrackedResource<DataBoxEdgeDeviceProperties> {
   @segment("dataBoxEdgeDevices")
   name: string;
 
+  @doc("The etag for the devices.")
+  etag?: string;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
   ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
-interface DataBoxEdgeDevices {
+interface Devices {
   @doc("Gets the properties of the Data Box Edge/Data Box Gateway device.")
   get is ArmResourceRead<DataBoxEdgeDevice>;
   @doc("Creates or updates a Data Box Edge/Data Box Gateway resource.")
@@ -83,25 +86,6 @@ interface DataBoxEdgeDevices {
     UploadCertificateRequest,
     UploadCertificateResponse
   >;
-  @doc("Posts the device capacity request info to check feasibility.")
-  checkResourceCreationFeasibility is ArmResourceActionAsync<
-    DataBoxEdgeDevice,
-    DeviceCapacityRequestInfo,
-    void,
-    {
-      ...BaseParameters<DataBoxEdgeDevice>;
-
-      @doc("The capacity name.")
-      @query("capacityName")
-      capacityName?: string;
-    }
-  >;
-  @doc("Triggers support package on the device")
-  triggerSupportPackage is ArmResourceActionAsync<
-    DataBoxEdgeDevice,
-    TriggerSupportPackageRequest,
-    void
-  >;
   @doc("Gets the network settings of the specified Data Box Edge/Data Box Gateway device.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/networkSettings/default")
   @get
@@ -142,7 +126,37 @@ interface DataBoxEdgeDevices {
     },
     UpdateSummary
   >;
+}
 
+@armResourceOperations
+interface DeviceCapacityCheck {
+  @doc("Posts the device capacity request info to check feasibility.")
+  checkResourceCreationFeasibility is ArmResourceActionAsync<
+    DataBoxEdgeDevice,
+    DeviceCapacityRequestInfo,
+    void,
+    {
+      ...BaseParameters<DataBoxEdgeDevice>;
+
+      @doc("The capacity name.")
+      @query("capacityName")
+      capacityName?: string;
+    }
+  >;
+}
+
+@armResourceOperations
+interface SupportPackages {
+  @doc("Triggers support package on the device")
+  triggerSupportPackage is ArmResourceActionAsync<
+    DataBoxEdgeDevice,
+    TriggerSupportPackageRequest,
+    void
+  >;
+}
+
+@armResourceOperations
+interface DeviceCapacityInfo {
   @doc("Gets the properties of the specified device capacity info.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/deviceCapacityInfo/default")
   @get
@@ -162,7 +176,10 @@ interface DataBoxEdgeDevices {
     },
     DeviceCapacityInfo
   >;
+}
 
+@armResourceOperations
+interface Nodes {
   @doc("Gets all the nodes currently configured under this Data Box Edge device")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/nodes")
   @get

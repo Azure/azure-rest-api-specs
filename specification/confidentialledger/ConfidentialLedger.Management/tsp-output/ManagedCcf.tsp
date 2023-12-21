@@ -10,7 +10,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.ConfidentialLedger;
 @doc("Managed CCF. Contains the properties of Managed CCF Resource.")
-model ManagedCcf is TrackedResource<ManagedCCFProperties> {
+model ManagedCCF is TrackedResource<ManagedCCFProperties> {
   @doc("Name of the Managed CCF")
   @pattern("^[a-zA-Z0-9]")
   @path
@@ -20,20 +20,20 @@ model ManagedCcf is TrackedResource<ManagedCCFProperties> {
 }
 
 @armResourceOperations
-interface ManagedCcfs {
+interface ManagedCCF {
   @doc("Retrieves the properties of a Managed CCF app.")
-  get is ArmResourceRead<ManagedCcf>;
+  get is ArmResourceRead<ManagedCCF>;
   @doc("Creates a Managed CCF with the specified Managed CCF parameters.")
-  create is ArmResourceCreateOrUpdateAsync<ManagedCcf>;
+  create is ArmResourceCreateOrUpdateAsync<ManagedCCF>;
   @doc("Updates properties of Managed CCF")
-  update is ArmResourcePatchAsync<ManagedCcf, ManagedCCFProperties>;
+  update is ArmResourcePatchAsync<ManagedCCF, ManagedCCFProperties>;
   @doc("Deletes an existing Managed CCF.")
-  delete is ArmResourceDeleteAsync<ManagedCcf>;
+  delete is ArmResourceDeleteAsync<ManagedCCF>;
   @doc("Retrieves the properties of all Managed CCF apps.")
   listByResourceGroup is ArmResourceListByParent<
-    ManagedCcf,
+    ManagedCCF,
     {
-      ...BaseParameters<ManagedCcf>;
+      ...BaseParameters<ManagedCCF>;
 
       @doc("The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'")
       @query("$filter")
@@ -41,5 +41,5 @@ interface ManagedCcfs {
     }
   >;
   @doc("Retrieves the properties of all Managed CCF.")
-  listBySubscription is ArmListBySubscription<ManagedCcf>;
+  listBySubscription is ArmListBySubscription<ManagedCCF>;
 }

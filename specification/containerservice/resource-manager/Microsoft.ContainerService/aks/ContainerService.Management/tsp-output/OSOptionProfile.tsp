@@ -19,7 +19,7 @@ model OSOptionProfile is ProxyResource<OSOptionPropertyList> {
 }
 
 @armResourceOperations
-interface OSOptionProfiles {
+interface ManagedClusters {
   @doc("Gets supported OS options in the specified subscription.")
   getOSOptions is ArmResourceRead<
     OSOptionProfile,

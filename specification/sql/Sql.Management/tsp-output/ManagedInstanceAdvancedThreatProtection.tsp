@@ -22,7 +22,7 @@ model ManagedInstanceAdvancedThreatProtection
 }
 
 @armResourceOperations
-interface ManagedInstanceAdvancedThreatProtections {
+interface ManagedInstanceAdvancedThreatProtectionSettings {
   @doc("Get a managed instance's Advanced Threat Protection state.")
   get is ArmResourceRead<ManagedInstanceAdvancedThreatProtection>;
   @doc("Creates or updates Advanced Threat Protection settings.")

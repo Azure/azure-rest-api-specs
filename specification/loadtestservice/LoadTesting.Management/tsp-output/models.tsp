@@ -61,9 +61,7 @@ model QuotaResourceProperties {
 }
 
 @doc("Request object of new quota for a quota bucket.")
-model QuotaBucketRequest {
-  ...Resource;
-
+model QuotaBucketRequest extends Resource {
   @doc("New quota request request properties.")
   properties?: QuotaBucketRequestProperties;
 }
@@ -95,9 +93,7 @@ model QuotaBucketRequestPropertiesDimensions {
 }
 
 @doc("Check quota availability response object.")
-model CheckQuotaAvailabilityResponse {
-  ...Resource;
-
+model CheckQuotaAvailabilityResponse extends Resource {
   @doc("Check quota availability response properties.")
   properties?: CheckQuotaAvailabilityResponseProperties;
 }

@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./DevCenterProject.tsp";
+import "./Project.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.DevCenter;
 @doc("Represents an allowed environment type.")
-@parentResource(DevCenterProject)
+@parentResource(Project)
 model AllowedEnvironmentType
   is ProxyResource<AllowedEnvironmentTypeProperties> {
   @doc("The name of the environment type.")
@@ -22,7 +22,7 @@ model AllowedEnvironmentType
 }
 
 @armResourceOperations
-interface AllowedEnvironmentTypes {
+interface ProjectAllowedEnvironmentTypes {
   @doc("Gets an allowed environment type.")
   get is ArmResourceRead<AllowedEnvironmentType>;
   @doc("Lists allowed environment types for a project.")

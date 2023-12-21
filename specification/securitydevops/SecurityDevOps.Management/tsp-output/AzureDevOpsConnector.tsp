@@ -19,7 +19,7 @@ model AzureDevOpsConnector is TrackedResource<AzureDevOpsConnectorProperties> {
 }
 
 @armResourceOperations
-interface AzureDevOpsConnectors {
+interface AzureDevOpsConnector {
   @doc("Returns a monitored AzureDevOps Connector resource for a given ID.")
   get is ArmResourceRead<AzureDevOpsConnector>;
   @doc("Creates or updates an Azure DevOps Connector.")
@@ -35,7 +35,10 @@ interface AzureDevOpsConnectors {
   listByResourceGroup is ArmResourceListByParent<AzureDevOpsConnector>;
   @doc("Returns a list of monitored AzureDevOps Connectors.")
   listBySubscription is ArmListBySubscription<AzureDevOpsConnector>;
+}
 
+@armResourceOperations
+interface AzureDevOpsRepo {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityDevOps/azureDevOpsConnectors/{azureDevOpsConnectorName}/repos")
   @get
   ListByConnector is Azure.Core.Foundations.Operation<
@@ -57,7 +60,10 @@ interface AzureDevOpsConnectors {
     },
     AzureDevOpsRepoListResponse
   >;
+}
 
+@armResourceOperations
+interface AzureDevOpsConnectorStats {
   @summary("Returns the summary of the AzureDevOps Connector Stats.")
   @doc("Returns the summary of the AzureDevOps Connector Stats.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityDevOps/azureDevOpsConnectors/{azureDevOpsConnectorName}/stats")

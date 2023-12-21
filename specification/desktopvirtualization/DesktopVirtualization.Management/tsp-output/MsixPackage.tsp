@@ -23,7 +23,7 @@ model MsixPackage is ProxyResource<MsixPackageProperties> {
 }
 
 @armResourceOperations
-interface MsixPackages {
+interface MSIXPackages {
   @doc("Get a msixpackage.")
   get is ArmResourceRead<MsixPackage>;
   @doc("Create or update a MSIX package.")

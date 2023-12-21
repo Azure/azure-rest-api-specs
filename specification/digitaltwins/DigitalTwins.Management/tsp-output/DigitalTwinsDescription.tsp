@@ -22,7 +22,7 @@ model DigitalTwinsDescription is TrackedResource<DigitalTwinsProperties> {
 }
 
 @armResourceOperations
-interface DigitalTwinsDescriptions {
+interface DigitalTwins {
   @doc("Get DigitalTwinsInstances resource.")
   get is ArmResourceRead<DigitalTwinsDescription>;
   @doc("Create or update the metadata of a DigitalTwinsInstance. The usual pattern to modify a property is to retrieve the DigitalTwinsInstance and security metadata, and then combine them with the modified values in a new body to update the DigitalTwinsInstance.")

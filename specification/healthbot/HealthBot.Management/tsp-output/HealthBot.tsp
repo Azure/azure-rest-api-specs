@@ -25,7 +25,7 @@ model HealthBot is TrackedResource<HealthBotProperties> {
 }
 
 @armResourceOperations
-interface HealthBots {
+interface Bots {
   @doc("Get a HealthBot.")
   get is ArmResourceRead<HealthBot>;
   @doc("Create a new Azure Health Bot.")

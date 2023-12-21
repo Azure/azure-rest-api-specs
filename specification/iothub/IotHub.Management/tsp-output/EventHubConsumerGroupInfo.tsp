@@ -18,10 +18,14 @@ model EventHubConsumerGroupInfo is ProxyResource<Record<unknown>> {
   @key("name")
   @segment("ConsumerGroups")
   name: string;
+
+  @doc("The etag.")
+  @visibility("read")
+  etag?: string;
 }
 
 @armResourceOperations
-interface EventHubConsumerGroupInfos {
+interface IotHubResource {
   @doc("Get a consumer group from the Event Hub-compatible device-to-cloud endpoint for an IoT hub.")
   getEventHubConsumerGroup is ArmResourceRead<EventHubConsumerGroupInfo>;
   @doc("Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.")

@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./AlertProcessingRule.tsp";
-import "./ServiceAlert.tsp";
+import "./Alert.tsp";
 import "./SmartGroup.tsp";
 
 using TypeSpec.Rest;

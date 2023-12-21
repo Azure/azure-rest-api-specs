@@ -24,7 +24,7 @@ model ServiceBusDisasterRecovery
 }
 
 @armResourceOperations
-interface ServiceBusDisasterRecoveries {
+interface DisasterRecoveryConfigs {
   @doc("Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace")
   get is ArmResourceRead<ServiceBusDisasterRecovery>;
   @doc("Creates or updates a new Alias(Disaster Recovery configuration)")

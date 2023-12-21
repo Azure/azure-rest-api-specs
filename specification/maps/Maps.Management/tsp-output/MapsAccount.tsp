@@ -23,7 +23,7 @@ model MapsAccount is TrackedResource<MapsAccountProperties> {
 }
 
 @armResourceOperations
-interface MapsAccounts {
+interface Accounts {
   @doc("Get a Maps Account.")
   get is ArmResourceRead<MapsAccount>;
   @doc("Create or update a Maps Account. A Maps Account holds the keys which allow access to the Maps REST APIs.")

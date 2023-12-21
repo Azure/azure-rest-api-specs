@@ -23,7 +23,7 @@ model EventHubsCluster is TrackedResource<ClusterProperties> {
 }
 
 @armResourceOperations
-interface EventHubsClusters {
+interface Clusters {
   @doc("Gets the resource description of the specified Event Hubs Cluster.")
   get is ArmResourceRead<EventHubsCluster>;
   @doc("Creates or updates an instance of an Event Hubs Cluster.")
@@ -61,7 +61,10 @@ interface EventHubsClusters {
     },
     EHNamespaceIdListResult
   >;
+}
 
+@armResourceOperations
+interface Configuration {
   @doc("Get all Event Hubs Cluster settings - a collection of key/value pairs which represent the quotas and settings imposed on the cluster.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default")
   @get

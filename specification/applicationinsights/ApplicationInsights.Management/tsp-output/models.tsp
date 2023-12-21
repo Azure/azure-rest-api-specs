@@ -1447,9 +1447,7 @@ model WorkbookProperties {
 }
 
 @doc("An azure resource object")
-model WorkbookResource {
-  ...TrackedResource;
-
+model WorkbookResource extends TrackedResource {
   @doc("Identity used for BYOS")
   identity?: WorkbookResourceIdentity;
 
@@ -1461,9 +1459,7 @@ model WorkbookResource {
 }
 
 @doc("Identity used for BYOS")
-model WorkbookResourceIdentity {
-  ...ManagedServiceIdentity;
-}
+model WorkbookResourceIdentity extends ManagedServiceIdentity {}
 
 @doc("User assigned identity properties")
 model UserAssignedIdentity {

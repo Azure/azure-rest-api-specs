@@ -20,7 +20,7 @@ model ResourceRecommendationBase
 }
 
 @armResourceOperations
-interface ResourceRecommendationBases {
+interface Recommendations {
   @doc("Obtains details of a cached recommendation.")
   get is ArmResourceRead<ResourceRecommendationBase>;
   @doc("Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.")

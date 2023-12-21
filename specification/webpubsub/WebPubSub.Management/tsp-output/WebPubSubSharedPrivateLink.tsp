@@ -22,7 +22,7 @@ model WebPubSubSharedPrivateLink
 }
 
 @armResourceOperations
-interface WebPubSubSharedPrivateLinks {
+interface WebPubSubSharedPrivateLinkResources {
   @doc("Get the specified shared private link resource")
   get is ArmResourceRead<WebPubSubSharedPrivateLink>;
   @doc("Create or update a shared private link resource")

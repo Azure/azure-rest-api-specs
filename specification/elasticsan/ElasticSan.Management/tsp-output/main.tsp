@@ -4,10 +4,10 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./ElasticSan.tsp";
-import "./ElasticSanVolumeGroup.tsp";
-import "./ElasticSanVolume.tsp";
-import "./ElasticSanPrivateEndpointConnection.tsp";
-import "./ElasticSanSnapshot.tsp";
+import "./VolumeGroup.tsp";
+import "./Volume.tsp";
+import "./PrivateEndpointConnection.tsp";
+import "./Snapshot.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

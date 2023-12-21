@@ -21,7 +21,7 @@ model ConnectedCluster is TrackedResource<ConnectedClusterProperties> {
 }
 
 @armResourceOperations
-interface ConnectedClusters {
+interface ConnectedCluster {
   @doc("Returns the properties of the specified connected cluster, including name, identity, properties, and additional cluster details.")
   get is ArmResourceRead<ConnectedCluster>;
   @doc("API to register a new Kubernetes cluster and create a tracked resource in Azure Resource Manager (ARM).")

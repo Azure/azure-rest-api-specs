@@ -222,9 +222,7 @@ model AppInsightsProperties {
 }
 
 @doc("Global configuration for services in the cluster.")
-model GlobalServiceConfiguration {
-  ...Record<Record<unknown>>;
-
+model GlobalServiceConfiguration extends Record<Record<unknown>> {
   @doc("The configuration ETag for updates.")
   etag?: string;
 

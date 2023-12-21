@@ -21,7 +21,7 @@ model DscCompilationJob is ProxyResource<DscCompilationJobProperties> {
 }
 
 @armResourceOperations
-interface DscCompilationJobs {
+interface DscCompilationJob {
   @doc("Retrieve the Dsc configuration compilation job identified by job id.")
   get is ArmResourceRead<DscCompilationJob>;
   @doc("Creates the Dsc compilation job of the configuration.")

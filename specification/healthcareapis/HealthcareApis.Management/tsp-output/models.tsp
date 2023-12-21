@@ -202,9 +202,7 @@ model ServiceExportConfigurationInfo {
 }
 
 @doc("The Private Endpoint Connection resource.")
-model DummyPrivateEndpointConnection {
-  ...Resource;
-
+model DummyPrivateEndpointConnection extends Resource {
   @doc("Resource properties.")
   properties?: PrivateEndpointConnectionProperties;
 }
@@ -366,9 +364,7 @@ model ServicesNameAvailabilityInfo {
 }
 
 @doc("A private link resource")
-model DummyPrivateLinkResource {
-  ...Resource;
-
+model DummyPrivateLinkResource extends Resource {
   @doc("Resource properties.")
   properties?: PrivateLinkResourceProperties;
 }
@@ -415,9 +411,7 @@ model ResourceTags {
 }
 
 @doc("The common properties for any location based resource, tracked or proxy.")
-model LocationBasedResource {
-  ...ResourceCore;
-
+model LocationBasedResource extends ResourceCore {
   @doc("The resource location.")
   @visibility("read", "create")
   location?: string;
@@ -443,9 +437,7 @@ model ResourceCore {
 }
 
 @doc("Workspace patch properties")
-model WorkspacePatchResource {
-  ...ResourceTags;
-}
+model WorkspacePatchResource extends ResourceTags {}
 
 @doc("Error details.")
 @error
@@ -605,9 +597,7 @@ model IotConnectorPatchResource {
 }
 
 @doc("IoT Connector destination properties for an Azure FHIR service.")
-model IotFhirDestinationProperties {
-  ...IotDestinationProperties;
-
+model IotFhirDestinationProperties extends IotDestinationProperties {
   @doc("Determines how resource identity is resolved on the destination.")
   resourceIdentityResolutionType: IotIdentityResolutionType;
 

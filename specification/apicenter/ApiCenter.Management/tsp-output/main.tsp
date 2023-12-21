@@ -3,7 +3,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./ApiCenterService.tsp";
+import "./Service.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

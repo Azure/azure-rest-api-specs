@@ -660,9 +660,7 @@ model WorkflowTriggerListCallbackUrlQueries {
 }
 
 @doc("The workflow reference.")
-model WorkflowReference {
-  ...ResourceReference;
-}
+model WorkflowReference extends ResourceReference {}
 
 @doc("The access key regenerate action content.")
 model RegenerateActionParameter {
@@ -833,9 +831,7 @@ model SetTriggerStateActionDefinition {
 }
 
 @doc("The workflow trigger reference.")
-model WorkflowTriggerReference {
-  ...ResourceReference;
-
+model WorkflowTriggerReference extends ResourceReference {
   @doc("The workflow name.")
   flowName?: string;
 
@@ -1048,9 +1044,7 @@ model WorkflowRunTrigger {
 }
 
 @doc("The workflow output parameter.")
-model WorkflowOutputParameter {
-  ...WorkflowParameter;
-
+model WorkflowOutputParameter extends WorkflowParameter {
   @doc("Gets the error.")
   @visibility("read")
   error?: Record<unknown>;
@@ -1104,9 +1098,7 @@ model WorkflowRunActionProperties {
 }
 
 @doc("The workflow run action correlation properties.")
-model RunActionCorrelation {
-  ...RunCorrelation;
-
+model RunActionCorrelation extends RunCorrelation {
   @doc("The action tracking identifier.")
   actionTrackingId?: string;
 }
@@ -1151,9 +1143,7 @@ model ExpressionTraces {
 }
 
 @doc("The expression root.")
-model ExpressionRoot {
-  ...Expression;
-
+model ExpressionRoot extends Expression {
   @doc("The path.")
   path?: string;
 }
@@ -1174,9 +1164,7 @@ model Expression {
 }
 
 @doc("The azure resource error info.")
-model AzureResourceErrorInfo {
-  ...ErrorInfo;
-
+model AzureResourceErrorInfo extends ErrorInfo {
   @doc("The error message.")
   message: string;
 
@@ -1191,9 +1179,7 @@ model ErrorInfo {
 }
 
 @doc("The workflow run action repetition properties definition.")
-model WorkflowRunActionRepetitionProperties {
-  ...OperationResult;
-
+model WorkflowRunActionRepetitionProperties extends OperationResult {
   @doc("The repetition indexes.")
   repetitionIndexes?: RepetitionIndex[];
 }
@@ -1208,9 +1194,7 @@ model RepetitionIndex {
 }
 
 @doc("The operation result definition.")
-model OperationResult {
-  ...OperationResultProperties;
-
+model OperationResult extends OperationResultProperties {
   @doc("Gets the tracking id.")
   @visibility("read")
   trackingId?: string;
@@ -1321,9 +1305,7 @@ model IntegrationAccountSku {
 }
 
 @doc("The assembly properties definition.")
-model AssemblyProperties {
-  ...ArtifactContentPropertiesDefinition;
-
+model AssemblyProperties extends ArtifactContentPropertiesDefinition {
   @doc("The assembly name.")
   assemblyName: string;
 
@@ -1338,9 +1320,7 @@ model AssemblyProperties {
 }
 
 @doc("The artifact content properties definition.")
-model ArtifactContentPropertiesDefinition {
-  ...ArtifactProperties;
-
+model ArtifactContentPropertiesDefinition extends ArtifactProperties {
   @doc("Anything")
   content?: unknown;
 
@@ -1366,9 +1346,7 @@ model ArtifactProperties {
 }
 
 @doc("The batch configuration properties definition.")
-model BatchConfigurationProperties {
-  ...ArtifactProperties;
-
+model BatchConfigurationProperties extends ArtifactProperties {
   @doc("The name of the batch group.")
   batchGroupName: string;
 
@@ -1405,9 +1383,7 @@ model ListKeyVaultKeysDefinition {
 }
 
 @doc("The key vault reference.")
-model KeyVaultReference {
-  ...ResourceReference;
-}
+model KeyVaultReference extends ResourceReference {}
 
 @doc("Collection of key vault keys.")
 @pagedResult
@@ -2919,9 +2895,8 @@ model ExtendedErrorInfo {
 }
 
 @doc("The integration service environment managed api properties.")
-model IntegrationServiceEnvironmentManagedApiProperties {
-  ...ApiResourceProperties;
-
+model IntegrationServiceEnvironmentManagedApiProperties
+  extends ApiResourceProperties {
   @doc("The integration service environment managed api deployment parameters.")
   deploymentParameters?: IntegrationServiceEnvironmentManagedApiDeploymentParameters;
 }
@@ -3106,9 +3081,7 @@ model ApiResourceDefinitions {
 model ApiOperationListResult is Azure.Core.Page<ApiOperation>;
 
 @doc("The api operation.")
-model ApiOperation {
-  ...Resource;
-
+model ApiOperation extends Resource {
   @doc("The api operations properties")
   properties?: ApiOperationPropertiesDefinition;
 }
@@ -3165,9 +3138,7 @@ model ApiOperationAnnotation {
 }
 
 @doc("The Api reference.")
-model ApiReference {
-  ...ResourceReference;
-
+model ApiReference extends ResourceReference {
   @doc("The display name of the api.")
   displayName?: string;
 
@@ -3436,9 +3407,7 @@ model ManagedApiListResult {
 }
 
 @doc("The managed api definition.")
-model ManagedApi {
-  ...Resource;
-
+model ManagedApi extends Resource {
   @doc("The api resource properties.")
   properties?: ApiResourceProperties;
 }

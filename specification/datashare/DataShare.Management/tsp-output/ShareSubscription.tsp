@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./DataShareAccount.tsp";
+import "./Account.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.DataShare;
 @doc("A share subscription data transfer object.")
-@parentResource(DataShareAccount)
+@parentResource(Account)
 model ShareSubscription is ProxyResource<ShareSubscriptionProperties> {
   @doc("The name of the shareSubscription.")
   @path
@@ -114,6 +114,10 @@ interface ShareSubscriptions {
     Synchronize,
     ShareSubscriptionSynchronization
   >;
+}
+
+@armResourceOperations
+interface ConsumerSourceDataSets {
   @summary("Get source dataSets of a shareSubscription.")
   @doc("Get source dataSets of a shareSubscription")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/consumerSourceDataSets")

@@ -17,6 +17,10 @@ model AzureTrafficCollector
   @key("azureTrafficCollectorName")
   @segment("azureTrafficCollectors")
   name: string;
+
+  @doc("A unique read-only string that changes whenever the resource is updated.")
+  @visibility("read")
+  etag?: string;
 }
 
 @armResourceOperations
@@ -29,6 +33,10 @@ interface AzureTrafficCollectors {
   updateTags is ArmTagsPatchSync<AzureTrafficCollector>;
   @doc("Deletes a specified Azure Traffic Collector resource.")
   delete is ArmResourceDeleteAsync<AzureTrafficCollector>;
+}
+
+@armResourceOperations
+interface AzureTrafficCollectorsByResourceGroup {
   @doc("Return list of Azure Traffic Collectors in a Resource Group")
   list is ArmResourceListByParent<AzureTrafficCollector>;
 }

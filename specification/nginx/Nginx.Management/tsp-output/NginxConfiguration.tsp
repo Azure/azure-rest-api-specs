@@ -21,7 +21,7 @@ model NginxConfiguration is TrackedResource<NginxConfigurationProperties> {
 }
 
 @armResourceOperations
-interface NginxConfigurations {
+interface Configurations {
   @doc("Get the Nginx configuration of given Nginx deployment")
   get is ArmResourceRead<NginxConfiguration>;
   @doc("Create or update the Nginx configuration for given Nginx deployment")

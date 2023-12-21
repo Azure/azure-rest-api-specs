@@ -3,10 +3,10 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./HDInsightApplication.tsp";
-import "./HDInsightCluster.tsp";
-import "./HDInsightPrivateEndpointConnection.tsp";
-import "./HDInsightPrivateLinkResource.tsp";
+import "./Application.tsp";
+import "./Cluster.tsp";
+import "./PrivateEndpointConnection.tsp";
+import "./PrivateLinkResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

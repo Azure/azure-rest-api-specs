@@ -20,7 +20,7 @@ model LogAnalyticsQueryPack
 }
 
 @armResourceOperations
-interface LogAnalyticsQueryPacks {
+interface QueryPacks {
   @doc("Returns a Log Analytics QueryPack.")
   get is ArmResourceRead<LogAnalyticsQueryPack>;
   @doc("Creates (or updates) a Log Analytics QueryPack. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.")
@@ -33,11 +33,15 @@ interface LogAnalyticsQueryPacks {
   listByResourceGroup is ArmResourceListByParent<LogAnalyticsQueryPack>;
   @doc("Gets a list of all Log Analytics QueryPacks within a subscription.")
   list is ArmListBySubscription<LogAnalyticsQueryPack>;
+}
+
+@armResourceOperations
+interface Queries {
   @doc("Search a list of Queries defined within a Log Analytics QueryPack according to given search properties.")
   search is ArmResourceActionSync<
     LogAnalyticsQueryPack,
     LogAnalyticsQueryPackQuerySearchProperties,
-    ResourceListResult<LogAnalyticsQuery>,
+    ResourceListResult<LogAnalyticsQueryPackQuery>,
     {
       ...BaseParameters<LogAnalyticsQueryPack>;
 

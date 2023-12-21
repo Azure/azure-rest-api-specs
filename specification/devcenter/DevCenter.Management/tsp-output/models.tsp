@@ -189,9 +189,7 @@ model CloudErrorBody {
 }
 
 @doc("The devcenter resource for partial updates. Properties not provided in the update request will not be changed.")
-model DevCenterUpdate {
-  ...TrackedResourceUpdate;
-
+model DevCenterUpdate extends TrackedResourceUpdate {
   @doc("Managed identity properties")
   identity?: ManagedServiceIdentity;
 }
@@ -207,9 +205,7 @@ model TrackedResourceUpdate {
 }
 
 @doc("Properties of a project.")
-model ProjectProperties {
-  ...ProjectUpdateProperties;
-
+model ProjectProperties extends ProjectUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -331,9 +327,7 @@ model ImageVersionProperties {
 }
 
 @doc("Properties of a catalog.")
-model CatalogProperties {
-  ...CatalogUpdateProperties;
-
+model CatalogProperties extends CatalogUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -378,9 +372,8 @@ model AllowedEnvironmentTypeProperties {
 }
 
 @doc("Properties of a project environment type.")
-model ProjectEnvironmentTypeProperties {
-  ...ProjectEnvironmentTypeUpdateProperties;
-
+model ProjectEnvironmentTypeProperties
+  extends ProjectEnvironmentTypeUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -410,9 +403,7 @@ model UserRoleAssignmentValue {
 }
 
 @doc("Properties of a Dev Box definition.")
-model DevBoxDefinitionProperties {
-  ...DevBoxDefinitionUpdateProperties;
-
+model DevBoxDefinitionProperties extends DevBoxDefinitionUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -468,9 +459,7 @@ model Sku {
 }
 
 @doc("The current status of an async operation")
-model OperationStatus {
-  ...OperationStatusResult;
-
+model OperationStatus extends OperationStatusResult {
   @doc("The id of the resource.")
   @visibility("read")
   resourceId?: string;
@@ -562,9 +551,7 @@ model CheckNameAvailabilityResponse {
 model SkuListResult is Azure.Core.Page<DevCenterSku>;
 
 @doc("The resource model definition representing SKU for DevCenter resources")
-model DevCenterSku {
-  ...Sku;
-
+model DevCenterSku extends Sku {
   @doc("The name of the resource type")
   @visibility("read")
   resourceType?: string;
@@ -590,9 +577,7 @@ model Capability {
 }
 
 @doc("Properties of a Pool")
-model PoolProperties {
-  ...PoolUpdateProperties;
-
+model PoolProperties extends PoolUpdateProperties {
   @doc("Overall health status of the Pool. Indicates whether or not the Pool is available to create Dev Boxes.")
   @visibility("read")
   healthStatus?: HealthStatus;
@@ -627,18 +612,14 @@ model StopOnDisconnectConfiguration {
 }
 
 @doc("The Schedule properties defining when and what to execute.")
-model ScheduleProperties {
-  ...ScheduleUpdateProperties;
-
+model ScheduleProperties extends ScheduleUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
 @doc("Network properties")
-model NetworkProperties {
-  ...NetworkConnectionUpdateProperties;
-
+model NetworkProperties extends NetworkConnectionUpdateProperties {
   @doc("The provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;

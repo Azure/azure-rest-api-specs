@@ -21,7 +21,7 @@ model RelationshipResourceFormat is ProxyResource<RelationshipDefinition> {
 }
 
 @armResourceOperations
-interface RelationshipResourceFormats {
+interface Relationships {
   @doc("Gets information about the specified relationship.")
   get is ArmResourceRead<RelationshipResourceFormat>;
   @doc("Creates a relationship or updates an existing relationship within a hub.")

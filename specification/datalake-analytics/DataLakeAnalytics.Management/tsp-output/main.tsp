@@ -5,10 +5,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./DataLakeAnalyticsAccount.tsp";
 import "./DataLakeStoreAccountInformation.tsp";
-import "./DataLakeAnalyticsStorageAccountInformation.tsp";
-import "./DataLakeAnalyticsStorageContainer.tsp";
-import "./DataLakeAnalyticsComputePolicy.tsp";
-import "./DataLakeAnalyticsFirewallRule.tsp";
+import "./StorageAccountInformation.tsp";
+import "./StorageContainer.tsp";
+import "./ComputePolicy.tsp";
+import "./FirewallRule.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

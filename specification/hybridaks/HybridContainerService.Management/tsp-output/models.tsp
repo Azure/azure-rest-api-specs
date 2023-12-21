@@ -466,9 +466,7 @@ model ProvisionedClustersResponseExtendedLocation {
 }
 
 @doc("The provisionedClusters resource definition.")
-model ProvisionedClusters {
-  ...TrackedResource;
-
+model ProvisionedClusters extends TrackedResource {
   @doc("Identity for the Provisioned cluster.")
   identity?: ProvisionedClusterIdentity;
 

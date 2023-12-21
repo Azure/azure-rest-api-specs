@@ -10,7 +10,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.DataMigration;
 @doc("Database Migration Resource for SQL Database.")
-model DatabaseMigrationSqlDB
+model DatabaseMigrationSqlDb
   is ProxyResource<DatabaseMigrationSqlDBProperties> {
   @doc("The name of the target database.")
   @path
@@ -20,12 +20,12 @@ model DatabaseMigrationSqlDB
 }
 
 @armResourceOperations
-interface DatabaseMigrationSqlDBS {
+interface DatabaseMigrationsSqlDb {
   @doc("Retrieve the Database Migration resource.")
   get is ArmResourceRead<
-    DatabaseMigrationSqlDB,
+    DatabaseMigrationSqlDb,
     {
-      ...BaseParameters<DatabaseMigrationSqlDB>;
+      ...BaseParameters<DatabaseMigrationSqlDb>;
 
       @path
       sqlDbInstanceName: string;
@@ -45,9 +45,9 @@ interface DatabaseMigrationSqlDBS {
   >;
   @doc("Create or Update Database Migration resource.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    DatabaseMigrationSqlDB,
+    DatabaseMigrationSqlDb,
     {
-      ...BaseParameters<DatabaseMigrationSqlDB>;
+      ...BaseParameters<DatabaseMigrationSqlDb>;
 
       @path
       sqlDbInstanceName: string;
@@ -59,9 +59,9 @@ interface DatabaseMigrationSqlDBS {
   >;
   @doc("Delete Database Migration resource.")
   delete is ArmResourceDeleteAsync<
-    DatabaseMigrationSqlDB,
+    DatabaseMigrationSqlDb,
     {
-      ...BaseParameters<DatabaseMigrationSqlDB>;
+      ...BaseParameters<DatabaseMigrationSqlDb>;
 
       @path
       sqlDbInstanceName: string;
@@ -77,11 +77,11 @@ interface DatabaseMigrationSqlDBS {
   >;
   @doc("Stop on going migration for the database.")
   cancel is ArmResourceActionAsync<
-    DatabaseMigrationSqlDB,
+    DatabaseMigrationSqlDb,
     MigrationOperationInput,
     void,
     {
-      ...BaseParameters<DatabaseMigrationSqlDB>;
+      ...BaseParameters<DatabaseMigrationSqlDb>;
 
       @path
       sqlDbInstanceName: string;

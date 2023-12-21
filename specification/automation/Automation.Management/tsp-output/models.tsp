@@ -323,9 +323,7 @@ model PrivateLinkResourceListResult {
 }
 
 @doc("A private link resource")
-model PrivateLinkResource {
-  ...ProxyResource;
-
+model PrivateLinkResource extends ProxyResource {
   @doc("Resource properties.")
   properties?: PrivateLinkResourceProperties;
 }
@@ -2074,9 +2072,7 @@ model JobCreateProperties {
 }
 
 @doc("Job collection item properties.")
-model JobCollectionItem {
-  ...ProxyResource;
-
+model JobCollectionItem extends ProxyResource {
   @doc("Job properties.")
   properties: JobCollectionItemProperties;
 }

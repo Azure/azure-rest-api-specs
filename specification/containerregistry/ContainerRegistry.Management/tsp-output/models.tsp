@@ -902,9 +902,7 @@ model EventInfo {
 model EventListResult is Azure.Core.Page<Event>;
 
 @doc("The event for a webhook.")
-model Event {
-  ...EventInfo;
-
+model Event extends EventInfo {
   @doc("The event request message sent to the service URI.")
   eventRequestMessage?: EventRequestMessage;
 

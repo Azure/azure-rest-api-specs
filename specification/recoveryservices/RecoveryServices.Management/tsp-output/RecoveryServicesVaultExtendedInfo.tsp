@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./RecoveryServicesVault.tsp";
+import "./Vault.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.RecoveryServices;
 @doc("Vault extended information.")
-@parentResource(RecoveryServicesVault)
 @singleton("vaultExtendedInfo")
+@parentResource(Vault)
 model RecoveryServicesVaultExtendedInfo
   is ProxyResource<VaultExtendedInfoProperties> {
   @key("vaultExtendedInfo")
@@ -21,7 +21,7 @@ model RecoveryServicesVaultExtendedInfo
 }
 
 @armResourceOperations
-interface RecoveryServicesVaultExtendedInfos {
+interface VaultExtendedInfo {
   @doc("Get the vault extended info.")
   get is ArmResourceRead<RecoveryServicesVaultExtendedInfo>;
   @doc("Create vault extended info.")

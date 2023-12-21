@@ -379,9 +379,7 @@ model PrivateLinkResourcesResult {
 }
 
 @doc("Describes a supported private link resource for the Azure Cognitive Search service.")
-model PrivateLinkResource {
-  ...Resource;
-
+model PrivateLinkResource extends Resource {
   @doc("Describes the properties of a supported private link resource for the Azure Cognitive Search service.")
   @visibility("read")
   properties?: PrivateLinkResourceProperties;

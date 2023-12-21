@@ -3,11 +3,11 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./SignalR.tsp";
-import "./SignalRCustomCertificate.tsp";
-import "./SignalRCustomDomain.tsp";
-import "./SignalRPrivateEndpointConnection.tsp";
-import "./SignalRSharedPrivateLinkResource.tsp";
+import "./SignalRResource.tsp";
+import "./CustomCertificate.tsp";
+import "./CustomDomain.tsp";
+import "./PrivateEndpointConnection.tsp";
+import "./SharedPrivateLinkResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

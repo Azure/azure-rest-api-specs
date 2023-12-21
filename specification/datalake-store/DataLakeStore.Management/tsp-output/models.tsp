@@ -99,9 +99,7 @@ enum UsageUnit {
 }
 
 @doc("Basic Data Lake Store account information, returned on list calls.")
-model DataLakeStoreAccountBasic {
-  ...Resource;
-
+model DataLakeStoreAccountBasic extends Resource {
   @doc("The basic Data Lake Store account properties.")
   @visibility("read")
   properties?: DataLakeStoreAccountPropertiesBasic;
@@ -266,9 +264,8 @@ model CreateOrUpdateTrustedIdProviderProperties {
 }
 
 @doc("Data Lake Store account properties information.")
-model DataLakeStoreAccountProperties {
-  ...DataLakeStoreAccountPropertiesBasic;
-
+model DataLakeStoreAccountProperties
+  extends DataLakeStoreAccountPropertiesBasic {
   @doc("The default owner group for all new folders and files created in the Data Lake Store account.")
   @visibility("read")
   defaultGroup?: string;

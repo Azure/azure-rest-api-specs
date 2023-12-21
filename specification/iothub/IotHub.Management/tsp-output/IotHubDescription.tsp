@@ -17,12 +17,15 @@ model IotHubDescription is TrackedResource<IotHubProperties> {
   @segment("IotHubs")
   name: string;
 
+  @doc("The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.")
+  etag?: string;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations
-interface IotHubDescriptions {
+interface IotHubResource {
   @doc("Get the non-security related metadata of an IoT hub.")
   get is ArmResourceRead<IotHubDescription>;
   @doc("Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub. If certain properties are missing in the JSON, updating IoT Hub may cause these values to fallback to default, which may lead to unexpected behavior.")
@@ -100,19 +103,6 @@ interface IotHubDescriptions {
     IotHubDescription,
     ImportDevicesRequest,
     JobResponse
-  >;
-  @doc("Manually initiate a failover for the IoT Hub to its secondary region. To learn more, see https://aka.ms/manualfailover")
-  manualFailover is ArmResourceActionAsync<
-    IotHubDescription,
-    FailoverInput,
-    void,
-    {
-      ...BaseParameters<IotHubDescription>;
-
-      @doc("Name of the IoT hub to failover")
-      @path
-      iotHubName: string;
-    }
   >;
   @summary("Get the statistics from an IoT hub")
   @doc("Get the statistics from an IoT hub.")
@@ -240,5 +230,22 @@ interface IotHubDescriptions {
       iotHubName: string;
     },
     EndpointHealthDataListResult
+  >;
+}
+
+@armResourceOperations
+interface IotHub {
+  @doc("Manually initiate a failover for the IoT Hub to its secondary region. To learn more, see https://aka.ms/manualfailover")
+  manualFailover is ArmResourceActionAsync<
+    IotHubDescription,
+    FailoverInput,
+    void,
+    {
+      ...BaseParameters<IotHubDescription>;
+
+      @doc("Name of the IoT hub to failover")
+      @path
+      iotHubName: string;
+    }
   >;
 }

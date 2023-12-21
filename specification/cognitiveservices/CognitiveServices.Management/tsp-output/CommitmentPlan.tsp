@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./CognitiveServicesAccount.tsp";
+import "./Account.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,13 +11,17 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.CognitiveServices;
 @doc("Cognitive Services account commitment plan.")
-@parentResource(CognitiveServicesAccount)
+@parentResource(Account)
 model CommitmentPlan is TrackedResource<CommitmentPlanProperties> {
   @doc("The name of the commitmentPlan associated with the Cognitive Services Account")
   @path
   @key("commitmentPlanName")
   @segment("commitmentPlans")
   name: string;
+
+  @doc("Resource Etag.")
+  @visibility("read")
+  etag?: string;
 
   ...Azure.ResourceManager.ResourceSku;
   ...Azure.ResourceManager.ResourceKind;

@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SqlDatabase.tsp";
+import "./Database.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Sql;
 @doc("Maintenance windows.")
-@parentResource(SqlDatabase)
 @singleton("current")
+@parentResource(Database)
 model MaintenanceWindows is ProxyResource<MaintenanceWindowsProperties> {
   @key("current")
   @segment("maintenanceWindows")

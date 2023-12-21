@@ -20,7 +20,7 @@ model DataLakeAnalyticsAccount
 }
 
 @armResourceOperations
-interface DataLakeAnalyticsAccounts {
+interface Accounts {
   @doc("Gets details of the specified Data Lake Analytics account.")
   get is ArmResourceRead<DataLakeAnalyticsAccount>;
   @doc("Creates the specified Data Lake Analytics account. This supplies the user with computation services for Data Lake Analytics workloads.")

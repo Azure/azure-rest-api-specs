@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SqlDatabase.tsp";
+import "./Database.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Sql;
 @doc("An Azure SQL Database sync group.")
-@parentResource(SqlDatabase)
+@parentResource(Database)
 model SyncGroup is ProxyResource<SyncGroupProperties> {
   @doc("The name of the sync group.")
   @path

@@ -8,8 +8,8 @@ import "./WebTest.tsp";
 import "./WorkbookTemplate.tsp";
 import "./MyWorkbook.tsp";
 import "./Workbook.tsp";
-import "./WorkbookRevision.tsp";
-import "./ComponentLinkedStorageAccount.tsp";
+import "./Workbook.tsp";
+import "./ComponentLinkedStorageAccounts.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

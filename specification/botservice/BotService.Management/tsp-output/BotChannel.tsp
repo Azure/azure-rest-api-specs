@@ -21,7 +21,7 @@ model BotChannel is TrackedResource<Channel> {
 }
 
 @armResourceOperations
-interface BotChannels {
+interface Channels {
   @doc("Returns a BotService Channel registration specified by the parameters.")
   get is ArmResourceRead<BotChannel>;
   @doc("Creates a Channel registration for a Bot Service")

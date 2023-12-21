@@ -23,7 +23,7 @@ model EventHubsSchemaGroup is ProxyResource<SchemaGroupProperties> {
 }
 
 @armResourceOperations
-interface EventHubsSchemaGroups {
+interface SchemaRegistry {
   get is ArmResourceRead<EventHubsSchemaGroup>;
 
   createOrUpdate is ArmResourceCreateOrReplaceSync<EventHubsSchemaGroup>;

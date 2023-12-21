@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./IotSecuritySolutionAnalyticsModel.tsp";
+import "./IoTSecuritySolutionAnalyticsModel.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.SecurityCenter;
 @doc("Security Solution Aggregated Alert information")
-@parentResource(IotSecuritySolutionAnalyticsModel)
-model IotSecurityAggregatedAlert
+@parentResource(IoTSecuritySolutionAnalyticsModel)
+model IoTSecurityAggregatedAlert
   is ProxyResource<IoTSecurityAggregatedAlertProperties> {
   @doc("Identifier of the aggregated alert.")
   @path
@@ -22,14 +22,14 @@ model IotSecurityAggregatedAlert
 }
 
 @armResourceOperations
-interface IotSecurityAggregatedAlerts {
+interface IotSecuritySolutionsAnalyticsAggregatedAlert {
   @doc("Use this method to get a single the aggregated alert of yours IoT Security solution. This aggregation is performed by alert name.")
-  get is ArmResourceRead<IotSecurityAggregatedAlert>;
+  get is ArmResourceRead<IoTSecurityAggregatedAlert>;
   @doc("Use this method to get the aggregated alert list of yours IoT Security solution.")
   list is ArmResourceListByParent<
-    IotSecurityAggregatedAlert,
+    IoTSecurityAggregatedAlert,
     {
-      ...BaseParameters<IotSecurityAggregatedAlert>;
+      ...BaseParameters<IoTSecurityAggregatedAlert>;
 
       @doc("Number of results to retrieve.")
       @query("$top")
@@ -37,5 +37,5 @@ interface IotSecurityAggregatedAlerts {
     }
   >;
   @doc("Use this method to dismiss an aggregated IoT Security Solution Alert.")
-  dismiss is ArmResourceActionSync<IotSecurityAggregatedAlert, void, void>;
+  dismiss is ArmResourceActionSync<IoTSecurityAggregatedAlert, void, void>;
 }

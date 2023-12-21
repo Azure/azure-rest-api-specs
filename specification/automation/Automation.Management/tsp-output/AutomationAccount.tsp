@@ -17,11 +17,14 @@ model AutomationAccount is TrackedResource<AutomationAccountProperties> {
   @segment("automationAccounts")
   name: string;
 
+  @doc("Gets or sets the etag of the resource.")
+  etag?: string;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }
 
 @armResourceOperations
-interface AutomationAccounts {
+interface AutomationAccount {
   @doc("Get information about an Automation Account.")
   get is ArmResourceRead<AutomationAccount>;
   @doc("Create or update automation account.")
@@ -37,49 +40,16 @@ interface AutomationAccounts {
   listByResourceGroup is ArmResourceListByParent<AutomationAccount>;
   @doc("Retrieve a list of accounts within a given subscription.")
   list is ArmListBySubscription<AutomationAccount>;
+}
+
+@armResourceOperations
+interface AgentRegistrationInformation {
   @doc("Regenerate a primary or secondary agent registration key")
   regenerateKey is ArmResourceActionSync<
     AutomationAccount,
     AgentRegistrationRegenerateKeyParameter,
     AgentRegistration
   >;
-  @doc("Retrieve the automation keys for an account.")
-  listByAutomationAccount is ArmResourceActionSync<
-    AutomationAccount,
-    void,
-    KeyListResult
-  >;
-  @doc("Post operation to serialize or deserialize GraphRunbookContent")
-  convertGraphRunbookContent is ArmResourceActionSync<
-    AutomationAccount,
-    GraphicalRunbookContent,
-    GraphicalRunbookContent
-  >;
-  @doc("Generates a Uri for use in creating a webhook.")
-  generateUri is ArmResourceActionSync<AutomationAccount, void, string>;
-  @doc("Gets the private link resources that need to be created for Automation account.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/privateLinkResources")
-  @get
-  Automation is Azure.Core.Foundations.Operation<
-    {
-      @doc("Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
-      @path
-      subscriptionId: string;
-
-      @doc("Name of an Azure Resource group.")
-      @maxLength(90)
-      @minLength(1)
-      @pattern("^[-\\w\\._]+$")
-      @path
-      resourceGroupName: string;
-
-      @doc("The name of the automation account.")
-      @path
-      automationAccountName: string;
-    },
-    PrivateLinkResourceListResult
-  >;
-
   @doc("Retrieve the automation agent registration information.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/agentRegistrationInformation")
   @get
@@ -102,7 +72,62 @@ interface AutomationAccounts {
     },
     AgentRegistration
   >;
+}
 
+@armResourceOperations
+interface Keys {
+  @doc("Retrieve the automation keys for an account.")
+  listByAutomationAccount is ArmResourceActionSync<
+    AutomationAccount,
+    void,
+    KeyListResult
+  >;
+}
+
+@armResourceOperations
+interface AutomationAccounts {
+  @doc("Post operation to serialize or deserialize GraphRunbookContent")
+  convertGraphRunbookContent is ArmResourceActionSync<
+    AutomationAccount,
+    GraphicalRunbookContent,
+    GraphicalRunbookContent
+  >;
+}
+
+@armResourceOperations
+interface Webhook {
+  @doc("Generates a Uri for use in creating a webhook.")
+  generateUri is ArmResourceActionSync<AutomationAccount, void, string>;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
+  @doc("Gets the private link resources that need to be created for Automation account.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/privateLinkResources")
+  @get
+  Automation is Azure.Core.Foundations.Operation<
+    {
+      @doc("Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      @path
+      subscriptionId: string;
+
+      @doc("Name of an Azure Resource group.")
+      @maxLength(90)
+      @minLength(1)
+      @pattern("^[-\\w\\._]+$")
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the automation account.")
+      @path
+      automationAccountName: string;
+    },
+    PrivateLinkResourceListResult
+  >;
+}
+
+@armResourceOperations
+interface DscCompilationJob {
   @doc("Retrieve the job stream identified by job stream id.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams/{jobStreamId}")
   @get
@@ -133,7 +158,10 @@ interface AutomationAccounts {
     },
     JobStream
   >;
+}
 
+@armResourceOperations
+interface DscCompilationJobStream {
   @doc("Retrieve all the job streams for the compilation Job.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/compilationjobs/{jobId}/streams")
   @get
@@ -160,7 +188,10 @@ interface AutomationAccounts {
     },
     JobStreamListResult
   >;
+}
 
+@armResourceOperations
+interface NodeCountInformation {
   @doc("Retrieve counts for Dsc Nodes.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodecounts/{countType}")
   @get
@@ -187,7 +218,10 @@ interface AutomationAccounts {
     },
     NodeCounts
   >;
+}
 
+@armResourceOperations
+interface Statistics {
   @doc("Retrieve the statistics for the account.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/statistics")
   @get
@@ -214,7 +248,10 @@ interface AutomationAccounts {
     },
     StatisticsListResult
   >;
+}
 
+@armResourceOperations
+interface Usages {
   @doc("Retrieve the usage for the account id.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/usages")
   @get
@@ -237,7 +274,10 @@ interface AutomationAccounts {
     },
     UsageListResult
   >;
+}
 
+@armResourceOperations
+interface LinkedWorkspace {
   @doc("Retrieve the linked workspace for the account id.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/linkedWorkspace")
   @get
@@ -260,7 +300,10 @@ interface AutomationAccounts {
     },
     LinkedWorkspace
   >;
+}
 
+@armResourceOperations
+interface ObjectDataTypes {
   @doc("Retrieve a list of fields of a given type across all accessible modules.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/objectDataTypes/{typeName}/fields")
   @get
@@ -287,7 +330,10 @@ interface AutomationAccounts {
     },
     TypeFieldListResult
   >;
+}
 
+@armResourceOperations
+interface SoftwareUpdateConfigurationRuns {
   @doc("Get a single software update configuration Run by Id.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationRuns/{softwareUpdateConfigurationRunId}")
   @get
@@ -357,7 +403,10 @@ interface AutomationAccounts {
     },
     SoftwareUpdateConfigurationRunListResult
   >;
+}
 
+@armResourceOperations
+interface SoftwareUpdateConfigurationMachineRuns {
   @doc("Get a single software update configuration machine run by Id.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationMachineRuns/{softwareUpdateConfigurationMachineRunId}")
   @get

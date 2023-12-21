@@ -128,9 +128,7 @@ model ServicePrincipalListResult {
 }
 
 @doc("The Service Principal Id for the subscription.")
-model ServicePrincipal {
-  ...ProxyResource;
-
+model ServicePrincipal extends ProxyResource {
   @doc("The Service Principal properties for the subscription")
   properties?: ServicePrincipalProperties;
 

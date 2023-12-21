@@ -28,6 +28,10 @@ interface Blueprints {
   delete is ArmResourceDeleteSync<Blueprint>;
   @doc("List blueprint definitions.")
   list is ArmResourceListByParent<Blueprint>;
+}
+
+@armResourceOperations
+interface PublishedBlueprints {
   @doc("List published versions of given blueprint definition.")
   @route("/{resourceScope}/providers/Microsoft.Blueprint/blueprints/{blueprintName}/versions")
   @get

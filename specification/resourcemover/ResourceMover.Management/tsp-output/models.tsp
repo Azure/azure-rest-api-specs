@@ -131,9 +131,7 @@ model MoveCollectionProperties {
 }
 
 @doc("Defines the move collection errors.")
-model MoveCollectionPropertiesErrors {
-  ...MoveResourceError;
-}
+model MoveCollectionPropertiesErrors extends MoveResourceError {}
 
 @doc("An error response from the azure resource mover service.")
 model MoveResourceError {
@@ -369,9 +367,7 @@ model ResourceSettings {
 }
 
 @doc("Defines the move resource status.")
-model MoveResourcePropertiesMoveStatus {
-  ...MoveResourceStatus;
-}
+model MoveResourcePropertiesMoveStatus extends MoveResourceStatus {}
 
 @doc("Defines the move resource status.")
 model MoveResourceStatus {
@@ -449,9 +445,7 @@ the dependent resource.
 }
 
 @doc("Defines the move resource errors.")
-model MoveResourcePropertiesErrors {
-  ...MoveResourceError;
-}
+model MoveResourcePropertiesErrors extends MoveResourceError {}
 
 @doc("Summary Collection.")
 model SummaryCollection {
@@ -697,9 +691,7 @@ model SubnetResourceSettings {
 }
 
 @doc("Defines reference to NSG.")
-model NsgReference {
-  ...AzureResourceReference;
-}
+model NsgReference extends AzureResourceReference {}
 
 @doc("Defines reference to an Azure resource.")
 model AzureResourceReference {
@@ -735,9 +727,7 @@ deployed in the virtual network.
 }
 
 @doc("Defines reference to a proxy resource.")
-model ProxyResourceReference {
-  ...AzureResourceReference;
-
+model ProxyResourceReference extends AzureResourceReference {
   @doc("Gets the name of the proxy resource on the target side.")
   name?: string;
 }
@@ -785,24 +775,16 @@ model NicIpConfigurationResourceSettings {
 }
 
 @doc("Defines reference to subnet.")
-model SubnetReference {
-  ...ProxyResourceReference;
-}
+model SubnetReference extends ProxyResourceReference {}
 
 @doc("Defines reference to load balancer backend address pools.")
-model LoadBalancerBackendAddressPoolReference {
-  ...ProxyResourceReference;
-}
+model LoadBalancerBackendAddressPoolReference extends ProxyResourceReference {}
 
 @doc("Defines reference to load balancer NAT rules.")
-model LoadBalancerNatRuleReference {
-  ...ProxyResourceReference;
-}
+model LoadBalancerNatRuleReference extends ProxyResourceReference {}
 
 @doc("Defines reference to a public IP.")
-model PublicIpReference {
-  ...AzureResourceReference;
-}
+model PublicIpReference extends AzureResourceReference {}
 
 @doc("Security Rule data model for Network Security Groups.")
 model NsgSecurityRule {

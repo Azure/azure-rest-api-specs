@@ -3,10 +3,10 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./BillingBenefitsSavingsPlanOrderAlias.tsp";
-import "./BillingBenefitsSavingsPlanOrder.tsp";
-import "./BillingBenefitsSavingsPlan.tsp";
-import "./BillingBenefitsReservationOrderAlias.tsp";
+import "./SavingsPlanOrderAliasModel.tsp";
+import "./SavingsPlanOrderModel.tsp";
+import "./SavingsPlanModel.tsp";
+import "./ReservationOrderAliasResponse.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

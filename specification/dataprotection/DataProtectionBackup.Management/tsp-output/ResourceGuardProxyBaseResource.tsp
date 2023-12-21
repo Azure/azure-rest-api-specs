@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./DataProtectionBackupVault.tsp";
+import "./BackupVaultResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.DataProtectionBackup;
 @doc("ResourceGuardProxyBaseResource object, used for response and request bodies for ResourceGuardProxy APIs")
-@parentResource(DataProtectionBackupVault)
+@parentResource(BackupVaultResource)
 model ResourceGuardProxyBaseResource is ProxyResource<ResourceGuardProxyBase> {
   @doc("name of the resource guard proxy")
   @pattern("^[A-Za-z0-9]*$")
@@ -22,7 +22,7 @@ model ResourceGuardProxyBaseResource is ProxyResource<ResourceGuardProxyBase> {
 }
 
 @armResourceOperations
-interface ResourceGuardProxyBaseResources {
+interface DppResourceGuardProxy {
   @doc("Returns the ResourceGuardProxy object associated with the vault, and that matches the name in the request")
   get is ArmResourceRead<ResourceGuardProxyBaseResource>;
   @doc("Creates or Updates a ResourceGuardProxy")

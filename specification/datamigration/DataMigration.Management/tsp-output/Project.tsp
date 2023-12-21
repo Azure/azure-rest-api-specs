@@ -18,6 +18,9 @@ model Project is TrackedResource<ProjectProperties> {
   @key("projectName")
   @segment("projects")
   name: string;
+
+  @doc("HTTP strong entity tag value. This is ignored if submitted.")
+  etag?: string;
 }
 
 @armResourceOperations

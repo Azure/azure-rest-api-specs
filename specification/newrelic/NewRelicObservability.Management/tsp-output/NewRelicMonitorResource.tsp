@@ -21,7 +21,7 @@ model NewRelicMonitorResource is TrackedResource<MonitorProperties> {
 }
 
 @armResourceOperations
-interface NewRelicMonitorResources {
+interface Monitors {
   @doc("Get a NewRelicMonitorResource")
   get is ArmResourceRead<NewRelicMonitorResource>;
   @doc("Create a NewRelicMonitorResource")

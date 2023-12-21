@@ -68,9 +68,7 @@ model ResourceReference {
 }
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
-model TrackedResourceSystemData {
-  ...SystemData;
-}
+model TrackedResourceSystemData extends SystemData {}
 
 @doc("An error response from the service.")
 @error

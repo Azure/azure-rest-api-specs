@@ -443,9 +443,7 @@ model NetworkSecurityPerimeterConfigurationList {
 }
 
 @doc("Network Security Perimeter related configurations of a given namespace")
-model NetworkSecurityPerimeterConfiguration {
-  ...TrackedResource;
-
+model NetworkSecurityPerimeterConfiguration extends TrackedResource {
   @doc("Properties of the Network Security Perimeter Configuration")
   @visibility("read")
   properties?: NetworkSecurityPerimeterConfigurationProperties;

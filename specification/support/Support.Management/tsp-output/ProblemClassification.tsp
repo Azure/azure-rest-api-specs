@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SupportAzureService.tsp";
+import "./Service.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Support;
 @doc("ProblemClassification resource object.")
-@parentResource(SupportAzureService)
+@parentResource(Service)
 model ProblemClassification is ProxyResource<ProblemClassificationProperties> {
   @doc("Name of problem classification.")
   @path

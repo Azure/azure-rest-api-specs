@@ -10,7 +10,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.DataMigration;
 @doc("Database Migration Resource for SQL Managed Instance.")
-model DatabaseMigrationSqlMI
+model DatabaseMigrationSqlMi
   is ProxyResource<DatabaseMigrationSqlMIProperties> {
   @doc("The name of the target database.")
   @path
@@ -20,12 +20,12 @@ model DatabaseMigrationSqlMI
 }
 
 @armResourceOperations
-interface DatabaseMigrationSqlMIS {
+interface DatabaseMigrationsSqlMi {
   @doc("Retrieve the specified database migration for a given SQL Managed Instance.")
   get is ArmResourceRead<
-    DatabaseMigrationSqlMI,
+    DatabaseMigrationSqlMi,
     {
-      ...BaseParameters<DatabaseMigrationSqlMI>;
+      ...BaseParameters<DatabaseMigrationSqlMi>;
 
       @doc("The name of the target database.")
       @path
@@ -42,9 +42,9 @@ interface DatabaseMigrationSqlMIS {
   >;
   @doc("Create a new database migration to a given SQL Managed Instance.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    DatabaseMigrationSqlMI,
+    DatabaseMigrationSqlMi,
     {
-      ...BaseParameters<DatabaseMigrationSqlMI>;
+      ...BaseParameters<DatabaseMigrationSqlMi>;
 
       @doc("The name of the target database.")
       @path
@@ -53,11 +53,11 @@ interface DatabaseMigrationSqlMIS {
   >;
   @doc("Stop in-progress database migration to SQL Managed Instance.")
   cancel is ArmResourceActionAsync<
-    DatabaseMigrationSqlMI,
+    DatabaseMigrationSqlMi,
     MigrationOperationInput,
     void,
     {
-      ...BaseParameters<DatabaseMigrationSqlMI>;
+      ...BaseParameters<DatabaseMigrationSqlMi>;
 
       @doc("The name of the target database.")
       @path
@@ -66,11 +66,11 @@ interface DatabaseMigrationSqlMIS {
   >;
   @doc("Initiate cutover for in-progress online database migration to SQL Managed Instance.")
   cutover is ArmResourceActionAsync<
-    DatabaseMigrationSqlMI,
+    DatabaseMigrationSqlMi,
     MigrationOperationInput,
     void,
     {
-      ...BaseParameters<DatabaseMigrationSqlMI>;
+      ...BaseParameters<DatabaseMigrationSqlMi>;
 
       @doc("The name of the target database.")
       @path

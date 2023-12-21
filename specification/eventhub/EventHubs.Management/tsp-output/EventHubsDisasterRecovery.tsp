@@ -24,7 +24,7 @@ model EventHubsDisasterRecovery
 }
 
 @armResourceOperations
-interface EventHubsDisasterRecoveries {
+interface DisasterRecoveryConfigs {
   @doc("Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace")
   get is ArmResourceRead<EventHubsDisasterRecovery>;
   @doc("Creates or updates a new Alias(Disaster Recovery configuration)")

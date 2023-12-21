@@ -22,7 +22,7 @@ model ManagedDatabaseAdvancedThreatProtection
 }
 
 @armResourceOperations
-interface ManagedDatabaseAdvancedThreatProtections {
+interface ManagedDatabaseAdvancedThreatProtectionSettings {
   @doc("Gets a managed database's Advanced Threat Protection state.")
   get is ArmResourceRead<ManagedDatabaseAdvancedThreatProtection>;
   @doc("Creates or updates a managed database's Advanced Threat Protection state.")

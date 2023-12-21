@@ -23,7 +23,7 @@ model EventHubsApplicationGroup is ProxyResource<ApplicationGroupProperties> {
 }
 
 @armResourceOperations
-interface EventHubsApplicationGroups {
+interface ApplicationGroup {
   @doc("Gets an ApplicationGroup for a Namespace.")
   get is ArmResourceRead<EventHubsApplicationGroup>;
   @doc("Creates or updates an ApplicationGroup for a Namespace.")

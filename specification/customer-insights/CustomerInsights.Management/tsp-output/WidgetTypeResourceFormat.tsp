@@ -21,7 +21,7 @@ model WidgetTypeResourceFormat is ProxyResource<WidgetType> {
 }
 
 @armResourceOperations
-interface WidgetTypeResourceFormats {
+interface WidgetTypes {
   @doc("Gets a widget type in the specified hub.")
   get is ArmResourceRead<WidgetTypeResourceFormat>;
   @doc("Gets all available widget types in the specified hub.")

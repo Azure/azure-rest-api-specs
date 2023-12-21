@@ -167,9 +167,7 @@ enum OperationStatus {
 }
 
 @doc("Properties of an image resource.")
-model ImageProperties {
-  ...ImageUpdateProperties;
-
+model ImageProperties extends ImageUpdateProperties {
   @doc("Current provisioning state of the image.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -231,9 +229,7 @@ model ImageProperties {
 }
 
 @doc("Lab plan resource properties")
-model LabPlanProperties {
-  ...LabPlanUpdateProperties;
-
+model LabPlanProperties extends LabPlanUpdateProperties {
   @doc("Current provisioning state of the lab plan.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -330,9 +326,7 @@ model SaveImageBody {
 }
 
 @doc("Properties of a lab resource.")
-model LabProperties {
-  ...LabUpdateProperties;
-
+model LabProperties extends LabUpdateProperties {
   @doc("Current provisioning state of the lab.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -480,9 +474,7 @@ model RosterProfile {
 }
 
 @doc("Schedule resource properties")
-model ScheduleProperties {
-  ...ScheduleUpdateProperties;
-
+model ScheduleProperties extends ScheduleUpdateProperties {
   @doc("Current provisioning state of the schedule.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -645,9 +637,7 @@ model UsageName {
 }
 
 @doc("User resource properties")
-model UserProperties {
-  ...UserUpdateProperties;
-
+model UserProperties extends UserUpdateProperties {
   @doc("Current provisioning state of the user resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;

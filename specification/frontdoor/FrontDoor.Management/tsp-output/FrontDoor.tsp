@@ -39,6 +39,10 @@ interface FrontDoors {
     ValidateCustomDomainInput,
     ValidateCustomDomainOutput
   >;
+}
+
+@armResourceOperations
+interface Endpoints {
   @doc("Removes a content from Front Door.")
   purgeContent is ArmResourceActionAsync<FrontDoor, PurgeParameters, void>;
 }

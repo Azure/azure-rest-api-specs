@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./OperationalInsightsWorkspace.tsp";
+import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.OperationalInsights;
 @doc("The top level storage insight resource container.")
-@parentResource(OperationalInsightsWorkspace)
+@parentResource(Workspace)
 model StorageInsight is ProxyResource<StorageInsightProperties> {
   @doc("Name of the storageInsightsConfigs resource")
   @path
@@ -19,14 +19,11 @@ model StorageInsight is ProxyResource<StorageInsightProperties> {
   @segment("storageInsightConfigs")
   name: string;
 
-  @doc("The ETag of the storage insight.")
-  eTag?: string;
-
   ...Azure.ResourceManager.EntityTag;
 }
 
 @armResourceOperations
-interface StorageInsights {
+interface StorageInsightConfigs {
   @doc("Gets a storage insight instance.")
   get is ArmResourceRead<StorageInsight>;
   @doc("Create or update a storage insight.")

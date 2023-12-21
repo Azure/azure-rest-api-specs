@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AvsPrivateCloudCluster.tsp";
+import "./Cluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Avs;
 @doc("A vSphere Distributed Resource Scheduler (DRS) placement policy")
-@parentResource(AvsPrivateCloudCluster)
+@parentResource(Cluster)
 model PlacementPolicy is ProxyResource<PlacementPolicyProperties> {
   @doc("Name of the VMware vSphere Distributed Resource Scheduler (DRS) placement policy")
   @path

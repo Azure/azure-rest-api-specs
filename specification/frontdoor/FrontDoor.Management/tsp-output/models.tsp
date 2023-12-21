@@ -581,9 +581,7 @@ model FrontDoorResourceModel {
 model ManagedRuleSetDefinitionList is Azure.Core.Page<ManagedRuleSetDefinition>;
 
 @doc("Describes the a managed rule set definition.")
-model ManagedRuleSetDefinition {
-  ...FrontDoorResourceModel;
-
+model ManagedRuleSetDefinition extends FrontDoorResourceModel {
   @doc("Properties for a managed rule set definition.")
   properties?: ManagedRuleSetDefinitionProperties;
 }
@@ -670,9 +668,7 @@ model CheckNameAvailabilityOutput {
 }
 
 @doc("The JSON object that contains the properties required to create an endpoint.")
-model FrontDoorProperties {
-  ...FrontDoorUpdateParameters;
-
+model FrontDoorProperties extends FrontDoorUpdateParameters {
   @doc("Resource status of the Front Door.")
   @visibility("read")
   resourceState?: FrontDoorResourceState;
@@ -699,9 +695,7 @@ model FrontDoorProperties {
 }
 
 @doc("The JSON object that contains the properties required to create a Rules Engine Configuration.")
-model RulesEngineProperties {
-  ...RulesEngineUpdateParameters;
-
+model RulesEngineProperties extends RulesEngineUpdateParameters {
   @doc("Resource status.")
   @visibility("read")
   resourceState?: FrontDoorResourceState;
@@ -808,17 +802,13 @@ model FrontDoorUpdateParameters {
 }
 
 @doc("A routing rule represents a specification for traffic to treat and where to send it, along with health probe information.")
-model RoutingRule {
-  ...FrontDoorResourceData;
-
+model RoutingRule extends FrontDoorResourceData {
   @doc("Properties of the Front Door Routing Rule")
   properties?: RoutingRuleProperties;
 }
 
 @doc("The JSON object that contains the properties required to create a routing rule.")
-model RoutingRuleProperties {
-  ...RoutingRuleUpdateParameters;
-
+model RoutingRuleProperties extends RoutingRuleUpdateParameters {
   @doc("Resource status.")
   @visibility("read")
   resourceState?: FrontDoorResourceState;
@@ -874,17 +864,14 @@ model FrontDoorResourceData {
 }
 
 @doc("Load balancing settings for a backend pool")
-model LoadBalancingSettingsModel {
-  ...FrontDoorResourceData;
-
+model LoadBalancingSettingsModel extends FrontDoorResourceData {
   @doc("Properties of the load balancing settings")
   properties?: LoadBalancingSettingsProperties;
 }
 
 @doc("The JSON object that contains the properties required to create load balancing settings")
-model LoadBalancingSettingsProperties {
-  ...LoadBalancingSettingsUpdateParameters;
-
+model LoadBalancingSettingsProperties
+  extends LoadBalancingSettingsUpdateParameters {
   @doc("Resource status.")
   @visibility("read")
   resourceState?: FrontDoorResourceState;
@@ -903,17 +890,14 @@ model LoadBalancingSettingsUpdateParameters {
 }
 
 @doc("Load balancing settings for a backend pool")
-model HealthProbeSettingsModel {
-  ...FrontDoorResourceData;
-
+model HealthProbeSettingsModel extends FrontDoorResourceData {
   @doc("Properties of the health probe settings")
   properties?: HealthProbeSettingsProperties;
 }
 
 @doc("The JSON object that contains the properties required to create a health probe settings.")
-model HealthProbeSettingsProperties {
-  ...HealthProbeSettingsUpdateParameters;
-
+model HealthProbeSettingsProperties
+  extends HealthProbeSettingsUpdateParameters {
   @doc("Resource status.")
   @visibility("read")
   resourceState?: FrontDoorResourceState;
@@ -938,17 +922,13 @@ model HealthProbeSettingsUpdateParameters {
 }
 
 @doc("A backend pool is a collection of backends that can be routed to.")
-model BackendPool {
-  ...FrontDoorResourceData;
-
+model BackendPool extends FrontDoorResourceData {
   @doc("Properties of the Front Door Backend Pool")
   properties?: BackendPoolProperties;
 }
 
 @doc("The JSON object that contains the properties required to create a Backend Pool.")
-model BackendPoolProperties {
-  ...BackendPoolUpdateParameters;
-
+model BackendPoolProperties extends BackendPoolUpdateParameters {
   @doc("Resource status.")
   @visibility("read")
   resourceState?: FrontDoorResourceState;
@@ -1015,9 +995,7 @@ model Backend {
 }
 
 @doc("The JSON object that contains the properties required to create a frontend endpoint.")
-model FrontendEndpointProperties {
-  ...FrontendEndpointUpdateParameters;
-
+model FrontendEndpointProperties extends FrontendEndpointUpdateParameters {
   @doc("Resource status.")
   @visibility("read")
   resourceState?: FrontDoorResourceState;
@@ -1150,9 +1128,7 @@ model ProfileProperties {
 model PreconfiguredEndpointList is Azure.Core.Page<PreconfiguredEndpoint>;
 
 @doc("Defines the properties of a preconfigured endpoint")
-model PreconfiguredEndpoint {
-  ...FrontDoorResourceModel;
-
+model PreconfiguredEndpoint extends FrontDoorResourceModel {
   @doc("The properties of a preconfiguredEndpoint")
   properties?: PreconfiguredEndpointProperties;
 }
@@ -1209,9 +1185,7 @@ model Endpoint {
 }
 
 @doc("Defines the LatencyScorecard")
-model LatencyScorecard {
-  ...FrontDoorResourceModel;
-
+model LatencyScorecard extends FrontDoorResourceModel {
   @doc("The properties of a latency scorecard")
   properties?: LatencyScorecardProperties;
 }
@@ -1301,9 +1275,7 @@ model LatencyMetric {
 }
 
 @doc("Defines the Timeseries")
-model Timeseries {
-  ...FrontDoorResourceModel;
-
+model Timeseries extends FrontDoorResourceModel {
   @doc("The properties of a Timeseries")
   properties?: TimeseriesProperties;
 }

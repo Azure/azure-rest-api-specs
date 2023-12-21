@@ -835,9 +835,8 @@ model UserAssignedIdentity {
 }
 
 @doc("The application resource properties.")
-model ApplicationResourceProperties {
-  ...ApplicationResourceUpdateProperties;
-
+model ApplicationResourceProperties
+  extends ApplicationResourceUpdateProperties {
   @doc("The current deployment or provisioning state, which only appears in the response")
   @visibility("read")
   provisioningState?: string;
@@ -989,9 +988,7 @@ model ApplicationUserAssignedIdentity {
 
 @doc("The service resource properties.")
 @discriminator("serviceKind")
-model ServiceResourceProperties {
-  ...ServiceResourcePropertiesBase;
-
+model ServiceResourceProperties extends ServiceResourcePropertiesBase {
   @doc("The current deployment or provisioning state, which only appears in the response")
   @visibility("read")
   provisioningState?: string;

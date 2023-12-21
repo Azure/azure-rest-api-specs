@@ -60,9 +60,7 @@ model ResourceProviderOperationDisplay {
 model ChangeList is Azure.Core.Page<Change>;
 
 @doc("The detected change.")
-model Change {
-  ...ProxyResource;
-
+model Change extends ProxyResource {
   @doc("The properties of a change.")
   properties?: ChangeProperties;
 }

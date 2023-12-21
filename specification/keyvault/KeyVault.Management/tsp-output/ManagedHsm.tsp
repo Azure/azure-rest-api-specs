@@ -41,6 +41,10 @@ interface ManagedHsms {
   >;
   @doc("The List operation gets information about the managed HSM Pools associated with the subscription.")
   listBySubscription is ArmListBySubscription<ManagedHsm>;
+}
+
+@armResourceOperations
+interface MHSMPrivateLinkResources {
   @doc("Gets the private link resources supported for the managed hsm pool.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateLinkResources")
   @get
@@ -60,7 +64,10 @@ interface ManagedHsms {
     },
     MhsmPrivateLinkResourceListResult
   >;
+}
 
+@armResourceOperations
+interface MHSMRegions {
   @doc("The List operation gets information about the regions associated with the managed HSM Pool.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/regions")
   @get

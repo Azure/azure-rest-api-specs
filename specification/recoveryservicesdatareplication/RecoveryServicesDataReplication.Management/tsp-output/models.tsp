@@ -354,9 +354,7 @@ model InnerHealthErrorModel {
 @discriminator("instanceType")
 model DraModelCustomProperties {}
 
-model DraModelSystemData {
-  ...SystemDataModel;
-}
+model DraModelSystemData extends SystemDataModel {}
 
 @doc("System data required to be defined for Azure resources.")
 model SystemDataModel {
@@ -399,9 +397,7 @@ model EmailConfigurationModelProperties {
   locale?: string;
 }
 
-model EmailConfigurationModelSystemData {
-  ...SystemDataModel;
-}
+model EmailConfigurationModelSystemData extends SystemDataModel {}
 
 @doc("Event model properties.")
 model EventModelProperties {
@@ -450,9 +446,7 @@ model EventModelProperties {
 @discriminator("instanceType")
 model EventModelCustomProperties {}
 
-model EventModelSystemData {
-  ...SystemDataModel;
-}
+model EventModelSystemData extends SystemDataModel {}
 
 @doc("Fabric model properties.")
 model FabricModelProperties {
@@ -484,13 +478,9 @@ model FabricModelProperties {
 @discriminator("instanceType")
 model FabricModelCustomProperties {}
 
-model FabricModelSystemData {
-  ...SystemDataModel;
-}
+model FabricModelSystemData extends SystemDataModel {}
 
-model FabricModelUpdateSystemData {
-  ...SystemDataModel;
-}
+model FabricModelUpdateSystemData extends SystemDataModel {}
 
 @doc("Policy model properties.")
 model PolicyModelProperties {
@@ -506,9 +496,7 @@ model PolicyModelProperties {
 @discriminator("instanceType")
 model PolicyModelCustomProperties {}
 
-model PolicyModelSystemData {
-  ...SystemDataModel;
-}
+model PolicyModelSystemData extends SystemDataModel {}
 
 @doc("Protected item model properties.")
 model ProtectedItemModelProperties {
@@ -668,9 +656,7 @@ model ProtectedItemJobProperties {
 @discriminator("instanceType")
 model ProtectedItemModelCustomProperties {}
 
-model ProtectedItemModelSystemData {
-  ...SystemDataModel;
-}
+model ProtectedItemModelSystemData extends SystemDataModel {}
 
 @doc("Planned failover model.")
 model PlannedFailoverModel {
@@ -705,9 +691,7 @@ model RecoveryPointModelProperties {
 @discriminator("instanceType")
 model RecoveryPointModelCustomProperties {}
 
-model RecoveryPointModelSystemData {
-  ...SystemDataModel;
-}
+model RecoveryPointModelSystemData extends SystemDataModel {}
 
 @doc("Replication extension model properties.")
 model ReplicationExtensionModelProperties {
@@ -723,9 +707,7 @@ model ReplicationExtensionModelProperties {
 @discriminator("instanceType")
 model ReplicationExtensionModelCustomProperties {}
 
-model ReplicationExtensionModelSystemData {
-  ...SystemDataModel;
-}
+model ReplicationExtensionModelSystemData extends SystemDataModel {}
 
 @doc("Check name availability model.")
 model CheckNameAvailabilityModel {
@@ -784,13 +766,9 @@ model VaultModelProperties {
   vaultType?: ReplicationVaultType;
 }
 
-model VaultModelSystemData {
-  ...SystemDataModel;
-}
+model VaultModelSystemData extends SystemDataModel {}
 
-model VaultModelUpdateSystemData {
-  ...SystemDataModel;
-}
+model VaultModelUpdateSystemData extends SystemDataModel {}
 
 @doc("Workflow model properties.")
 model WorkflowModelProperties {
@@ -938,9 +916,7 @@ model WorkflowModelCustomProperties {
   affectedObjectDetails?: Record<string>;
 }
 
-model WorkflowModelSystemData {
-  ...SystemDataModel;
-}
+model WorkflowModelSystemData extends SystemDataModel {}
 
 @doc("AzStackHCI cluster properties.")
 model AzStackHCIClusterProperties {

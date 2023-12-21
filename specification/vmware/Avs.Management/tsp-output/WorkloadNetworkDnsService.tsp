@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AvsPrivateCloud.tsp";
+import "./PrivateCloud.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Avs;
 @doc("NSX DNS Service")
-@parentResource(AvsPrivateCloud)
+@parentResource(PrivateCloud)
 model WorkloadNetworkDnsService
   is ProxyResource<WorkloadNetworkDnsServiceProperties> {
   @doc("NSX DNS Service identifier. Generally the same as the DNS Service's display name")
@@ -22,7 +22,7 @@ model WorkloadNetworkDnsService
 }
 
 @armResourceOperations
-interface WorkloadNetworkDnsServices {
+interface WorkloadNetworks {
   @doc("Get a DNS service by id in a private cloud workload network.")
   getDnsService is ArmResourceRead<WorkloadNetworkDnsService>;
   @doc("Create a DNS service by id in a private cloud workload network.")

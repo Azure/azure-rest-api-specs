@@ -10,7 +10,6 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.CognitiveServices;
 @doc("The commitment plan association.")
-@parentResource(CognitiveServicesCommitmentPlan)
 model CommitmentPlanAccountAssociation
   is ProxyResource<CommitmentPlanAccountAssociationProperties> {
   @doc("The name of the commitment plan association with the Cognitive Services Account")
@@ -19,10 +18,14 @@ model CommitmentPlanAccountAssociation
   @key("commitmentPlanAssociationName")
   @segment("accountAssociations")
   name: string;
+
+  @doc("Resource Etag.")
+  @visibility("read")
+  etag?: string;
 }
 
 @armResourceOperations
-interface CommitmentPlanAccountAssociations {
+interface CommitmentPlans {
   @doc("Gets the association of the Cognitive Services commitment plan.")
   getAssociation is ArmResourceRead<CommitmentPlanAccountAssociation>;
   @doc("Create or update the association of the Cognitive Services commitment plan.")

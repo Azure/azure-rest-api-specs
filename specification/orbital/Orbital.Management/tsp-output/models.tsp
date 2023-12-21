@@ -288,9 +288,7 @@ model ContactsPropertiesAntennaConfiguration {
 }
 
 @doc("The reference to the contact profile resource.")
-model ContactsPropertiesContactProfile {
-  ...ResourceReference;
-}
+model ContactsPropertiesContactProfile extends ResourceReference {}
 
 @doc("Resource Reference.")
 model ResourceReference {
@@ -316,9 +314,7 @@ model ContactParameters {
 }
 
 @doc("The reference to the contact profile resource.")
-model ContactParametersContactProfile {
-  ...ResourceReference;
-}
+model ContactParametersContactProfile extends ResourceReference {}
 
 @doc("Response for the ListAvailableContacts API service call.")
 model AvailableContactsListResult {
@@ -341,14 +337,10 @@ model AvailableContacts {
 }
 
 @doc("The reference to the spacecraft resource.")
-model AvailableContactsSpacecraft {
-  ...ResourceReference;
-}
+model AvailableContactsSpacecraft extends ResourceReference {}
 
 @doc("Properties of Contact resource.")
-model AvailableContactsProperties {
-  ...ContactInstanceProperties;
-}
+model AvailableContactsProperties extends ContactInstanceProperties {}
 
 @doc("Contact Instance Properties.")
 model ContactInstanceProperties {
@@ -394,9 +386,7 @@ model ContactInstanceProperties {
 }
 
 @doc("Properties of the contact profile resource.")
-model ContactProfileProperties {
-  ...ContactProfilesProperties;
-}
+model ContactProfileProperties extends ContactProfilesProperties {}
 
 @doc("List of Contact Profile Resource Properties.")
 model ContactProfilesProperties {
@@ -492,9 +482,7 @@ model EndPoint {
 }
 
 @doc("The properties bag for this resource.")
-model AvailableGroundStationProperties {
-  ...GroundStationProperties;
-}
+model AvailableGroundStationProperties extends GroundStationProperties {}
 
 @doc("Properties object for Available groundstation.")
 model GroundStationProperties {

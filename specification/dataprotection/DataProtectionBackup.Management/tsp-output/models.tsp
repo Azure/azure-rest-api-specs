@@ -363,9 +363,7 @@ model CrossRegionRestoreSettings {
   state?: CrossRegionRestoreState;
 }
 
-model DppTrackedResource {
-  ...DppBaseTrackedResource;
-
+model DppTrackedResource extends DppBaseTrackedResource {
   @doc("Input Managed Identity Details")
   identity?: DppIdentityDetails;
 }
@@ -1056,9 +1054,7 @@ model AzureBackupFindRestorableTimeRangesRequest {
 }
 
 @doc("List Restore Ranges Response")
-model AzureBackupFindRestorableTimeRangesResponseResource {
-  ...DppResource;
-
+model AzureBackupFindRestorableTimeRangesResponseResource extends DppResource {
   @doc("AzureBackupFindRestorableTimeRangesResponseResource properties")
   properties?: AzureBackupFindRestorableTimeRangesResponse;
 }
@@ -1082,9 +1078,7 @@ model RestorableTimeRange {
 }
 
 @doc("Deleted Backup Instance")
-model DeletedBackupInstance {
-  ...BackupInstance;
-
+model DeletedBackupInstance extends BackupInstance {
   @doc("Deletion info of Backup Instance")
   @visibility("read")
   deletionInfo?: DeletionInfo;
@@ -1151,9 +1145,7 @@ model ResourceGuardOperation {
 model DppBaseResourceList is Azure.Core.Page<ResourceGuardProtectedObjectData>;
 
 @doc("Base resource under Microsoft.DataProtection provider namespace")
-model ResourceGuardProtectedObjectData {
-  ...ResourceData;
-}
+model ResourceGuardProtectedObjectData extends ResourceData {}
 
 model ResourceData {
   @doc("Resource Id represents the complete path to the resource.")
@@ -1298,9 +1290,8 @@ model RecoveryPointDataStoreDetails {
 }
 
 @doc("List Restore Ranges Request")
-model AzureBackupFindRestorableTimeRangesRequestResource {
-  ...DppWorkerRequest;
-
+model AzureBackupFindRestorableTimeRangesRequestResource
+  extends DppWorkerRequest {
   @doc("AzureBackupFindRestorableTimeRangesRequestResource content")
   content?: AzureBackupFindRestorableTimeRangesRequest;
 }

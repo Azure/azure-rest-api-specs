@@ -21,7 +21,7 @@ model AzureDevOpsRepo is ProxyResource<AzureDevOpsRepoProperties> {
 }
 
 @armResourceOperations
-interface AzureDevOpsRepos {
+interface AzureDevOpsRepo {
   @doc("Returns a monitored AzureDevOps Project resource for a given ID.")
   get is ArmResourceRead<AzureDevOpsRepo>;
   @doc("Updates an Azure DevOps Repo.")

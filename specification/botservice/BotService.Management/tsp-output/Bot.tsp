@@ -35,6 +35,10 @@ interface Bots {
   listByResourceGroup is ArmResourceListByParent<Bot>;
   @doc("Returns all the resources of a particular type belonging to a subscription.")
   list is ArmListBySubscription<Bot>;
+}
+
+@armResourceOperations
+interface DirectLine {
   @doc("Regenerates secret keys and returns them for the DirectLine Channel of a particular BotService resource")
   regenerateKeys is ArmResourceActionSync<
     Bot,
@@ -48,12 +52,20 @@ interface Bots {
       channelName: RegenerateKeysChannelName;
     }
   >;
+}
+
+@armResourceOperations
+interface Email {
   @doc("Creates an email channel sign in url for a Bot Service")
   createSignInUrl is ArmResourceActionSync<
     Bot,
     void,
     CreateEmailSignInUrlResponse
   >;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
   @doc("Gets the private link resources that need to be created for a Bot.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/privateLinkResources")
   @get

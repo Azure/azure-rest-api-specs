@@ -5,9 +5,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Extension.tsp";
 import "./FarmBeatsExtension.tsp";
-import "./FarmBeat.tsp";
-import "./AgFoodPlatformPrivateEndpointConnection.tsp";
-import "./AgFoodPlatformPrivateLinkResource.tsp";
+import "./FarmBeats.tsp";
+import "./PrivateEndpointConnection.tsp";
+import "./PrivateLinkResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

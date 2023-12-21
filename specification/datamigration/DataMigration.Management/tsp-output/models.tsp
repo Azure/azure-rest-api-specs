@@ -992,9 +992,7 @@ model DeleteNode {
 model DatabaseMigrationListResult is Azure.Core.Page<DatabaseMigration>;
 
 @doc("Database Migration Resource.")
-model DatabaseMigration {
-  ...ProxyResource;
-
+model DatabaseMigration extends ProxyResource {
   @doc("Metadata pertaining to creation and last modification of the resource.")
   @visibility("read")
   systemData?: SystemData;
@@ -2293,9 +2291,7 @@ model MigrateSchemaSqlServerSqlDbTaskProperties extends ProjectTaskProperties {
 }
 
 @doc("Input for task that migrates Schema for SQL Server databases to Azure SQL databases")
-model MigrateSchemaSqlServerSqlDbTaskInput {
-  ...SqlMigrationTaskInput;
-
+model MigrateSchemaSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
   @doc("Databases to migrate")
   selectedDatabases: MigrateSchemaSqlServerSqlDbDatabaseInput[];
 
@@ -2960,9 +2956,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseError
 }
 
 @doc("Input for the task that migrates on-prem SQL Server databases to Azure SQL Database for online migrations")
-model MigrateSqlServerSqlDbSyncTaskInput {
-  ...SqlMigrationTaskInput;
-
+model MigrateSqlServerSqlDbSyncTaskInput extends SqlMigrationTaskInput {
   @doc("Databases to migrate")
   selectedDatabases: MigrateSqlServerSqlDbSyncDatabaseInput[];
 
@@ -3206,9 +3200,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputDatabaseError
 }
 
 @doc("Input for the task that migrates on-prem SQL Server databases to Azure SQL Database")
-model MigrateSqlServerSqlDbTaskInput {
-  ...SqlMigrationTaskInput;
-
+model MigrateSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
   @doc("Databases to migrate")
   selectedDatabases: MigrateSqlServerSqlDbDatabaseInput[];
 
@@ -3500,9 +3492,7 @@ model MigrateSqlServerSqlDbTaskOutputError
 }
 
 @doc("Summary of database results in the migration")
-model DatabaseSummaryResult {
-  ...DataItemMigrationSummaryResult;
-
+model DatabaseSummaryResult extends DataItemMigrationSummaryResult {
   @doc("Size of the database in megabytes")
   @visibility("read")
   sizeMB?: float32;
@@ -3713,9 +3703,7 @@ model WaitStatistics {
 }
 
 @doc("Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.")
-model MigrateSqlServerSqlMISyncTaskInput {
-  ...SqlServerSqlMISyncTaskInput;
-
+model MigrateSqlServerSqlMISyncTaskInput extends SqlServerSqlMISyncTaskInput {
   @doc("Number of database migrations to start in parallel")
   numberOfParallelDatabaseMigrations?: float32;
 }
@@ -3882,9 +3870,7 @@ model MigrateSqlServerSqlMISyncTaskOutputError
 }
 
 @doc("Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance.")
-model MigrateSqlServerSqlMITaskInput {
-  ...SqlMigrationTaskInput;
-
+model MigrateSqlServerSqlMITaskInput extends SqlMigrationTaskInput {
   @doc("Databases to migrate")
   selectedDatabases: MigrateSqlServerSqlMIDatabaseInput[];
 
@@ -4118,9 +4104,7 @@ model MigrateSqlServerSqlMITaskOutputError
 }
 
 @doc("Input for task that migrates SSIS packages from SQL Server to Azure SQL Database Managed Instance.")
-model MigrateSsisTaskInput {
-  ...SqlMigrationTaskInput;
-
+model MigrateSsisTaskInput extends SqlMigrationTaskInput {
   @doc("SSIS package migration information.")
   ssisMigrationInfo: SsisMigrationInfo;
 }
@@ -4262,9 +4246,7 @@ model MongoDbClusterInfo {
 }
 
 @doc("Describes a database within a MongoDB data source")
-model MongoDbDatabaseInfo {
-  ...MongoDbObjectInfo;
-
+model MongoDbDatabaseInfo extends MongoDbObjectInfo {
   @doc("A list of supported collections in a MongoDB database")
   collections: MongoDbCollectionInfo[];
 
@@ -4273,9 +4255,7 @@ model MongoDbDatabaseInfo {
 }
 
 @doc("Describes a supported collection within a MongoDB database")
-model MongoDbCollectionInfo {
-  ...MongoDbObjectInfo;
-
+model MongoDbCollectionInfo extends MongoDbObjectInfo {
   @doc("The name of the database containing the collection")
   databaseName: string;
 
@@ -4448,9 +4428,7 @@ model MongoDbFinishCommand extends CommandProperties {
 }
 
 @doc("Describes the input to the 'finish' MongoDB migration command")
-model MongoDbFinishCommandInput {
-  ...MongoDbCommandInput;
-
+model MongoDbFinishCommandInput extends MongoDbCommandInput {
   @doc("If true, replication for the affected objects will be stopped immediately. If false, the migrator will finish replaying queued events before finishing the replication.")
   immediate: boolean;
 }
@@ -5660,9 +5638,8 @@ model ValidateMigrationInputSqlServerSqlMISyncTaskProperties
 }
 
 @doc("Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.")
-model ValidateMigrationInputSqlServerSqlMISyncTaskInput {
-  ...SqlServerSqlMISyncTaskInput;
-}
+model ValidateMigrationInputSqlServerSqlMISyncTaskInput
+  extends SqlServerSqlMISyncTaskInput {}
 
 @doc("Output for task that validates migration input for Azure SQL Database Managed Instance online migration")
 model ValidateMigrationInputSqlServerSqlMISyncTaskOutput {

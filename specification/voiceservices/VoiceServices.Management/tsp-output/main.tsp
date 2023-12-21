@@ -3,8 +3,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./VoiceServicesCommunicationsGateway.tsp";
-import "./VoiceServicesTestLine.tsp";
+import "./CommunicationsGateway.tsp";
+import "./TestLine.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

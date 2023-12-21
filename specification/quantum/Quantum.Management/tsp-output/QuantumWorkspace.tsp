@@ -21,7 +21,7 @@ model QuantumWorkspace is TrackedResource<WorkspaceResourceProperties> {
 }
 
 @armResourceOperations
-interface QuantumWorkspaces {
+interface Workspaces {
   @doc("Returns the Workspace resource associated with the given name.")
   get is ArmResourceRead<QuantumWorkspace>;
   @doc("Creates or updates a workspace resource.")

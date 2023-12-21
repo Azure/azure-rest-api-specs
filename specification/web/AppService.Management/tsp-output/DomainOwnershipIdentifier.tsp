@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AppServiceDomain.tsp";
+import "./Domain.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.AppService;
 @doc("Domain ownership Identifier.")
-@parentResource(AppServiceDomain)
+@parentResource(Domain)
 model DomainOwnershipIdentifier
   is ProxyResource<DomainOwnershipIdentifierProperties> {
   @doc("Name of identifier.")
@@ -22,7 +22,7 @@ model DomainOwnershipIdentifier
 }
 
 @armResourceOperations
-interface DomainOwnershipIdentifiers {
+interface Domains {
   @doc("Description for Get ownership identifier for domain")
   getOwnershipIdentifier is ArmResourceRead<DomainOwnershipIdentifier>;
   @doc("Description for Creates an ownership identifier for a domain or updates identifier details for an existing identifier")

@@ -1349,9 +1349,7 @@ model ArmBaseObject {
 model GranularCopyLogDetails {}
 
 @doc("DataBox CustomerDisk Copy Progress")
-model DataBoxCustomerDiskCopyProgress {
-  ...CopyProgress;
-
+model DataBoxCustomerDiskCopyProgress extends CopyProgress {
   @doc("Disk Serial Number.")
   @visibility("read")
   serialNumber?: string;
@@ -1791,9 +1789,7 @@ model DataBoxDiskCopyProgress {
 }
 
 @doc("DataBox Disk Granular Copy Progress")
-model DataBoxDiskGranularCopyProgress {
-  ...GranularCopyProgress;
-
+model DataBoxDiskGranularCopyProgress extends GranularCopyProgress {
   @doc("Disk Serial Number.")
   @visibility("read")
   serialNumber?: string;

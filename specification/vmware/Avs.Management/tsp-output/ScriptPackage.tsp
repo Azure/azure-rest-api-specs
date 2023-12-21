@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AvsPrivateCloud.tsp";
+import "./PrivateCloud.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Avs;
 @doc("Script Package resources available for execution")
-@parentResource(AvsPrivateCloud)
+@parentResource(PrivateCloud)
 model ScriptPackage is ProxyResource<ScriptPackageProperties> {
   @doc("Name of the script package in the private cloud")
   @path

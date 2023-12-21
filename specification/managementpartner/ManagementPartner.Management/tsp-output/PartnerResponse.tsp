@@ -17,17 +17,20 @@ model PartnerResponse is ProxyResource<PartnerProperties> {
   @key("partnerId")
   @segment("partners")
   name: string;
+
+  @doc("Type of the partner")
+  etag?: int32;
 }
 
 @armResourceOperations
-interface PartnerResponses {
+interface Partner {
   @doc("Get the management partner using the partnerId, objectId and tenantId.")
   get is ArmResourceRead<PartnerResponse>;
   @doc("Create a management partner for the objectId and tenantId.")
   create is ArmResourceCreateOrReplaceSync<PartnerResponse>;
   // FIXME: (ArmResourcePatch): ArmResourcePatchSync/ArmResourcePatchAsync should have a body parameter with either properties property or tag property
   @doc("Update the management partner for the objectId and tenantId.")
-  update is ArmCustomPatchSync<PartnerResponse, void>;
+  update is ArmCustomPatchSync<PartnerResponse, {}>;
   @doc("Delete the management partner for the objectId and tenantId.")
   delete is ArmResourceDeleteSync<PartnerResponse>;
 }

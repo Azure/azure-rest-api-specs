@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AvsPrivateCloud.tsp";
+import "./PrivateCloud.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Avs;
 @doc("ExpressRoute Circuit Authorization")
-@parentResource(AvsPrivateCloud)
+@parentResource(PrivateCloud)
 model ExpressRouteAuthorization
   is ProxyResource<ExpressRouteAuthorizationProperties> {
   @doc("Name of the ExpressRoute Circuit Authorization in the private cloud")
@@ -22,7 +22,7 @@ model ExpressRouteAuthorization
 }
 
 @armResourceOperations
-interface ExpressRouteAuthorizations {
+interface Authorizations {
   @doc("Get an ExpressRoute Circuit Authorization by name in a private cloud")
   get is ArmResourceRead<ExpressRouteAuthorization>;
   @doc("Create or update an ExpressRoute Circuit Authorization in a private cloud")

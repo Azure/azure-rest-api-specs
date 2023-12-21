@@ -759,9 +759,7 @@ model AvailableWorkloadProfilesCollection
   is Azure.Core.Page<AvailableWorkloadProfile>;
 
 @doc("A workload profile with specific hardware configure to run container apps.")
-model AvailableWorkloadProfile {
-  ...ProxyResource;
-
+model AvailableWorkloadProfile extends ProxyResource {
   @doc("Region of the workload profile.")
   location?: string;
 
@@ -794,9 +792,7 @@ model BillingMeterCollection {
 }
 
 @doc("Billing meter.")
-model BillingMeter {
-  ...ProxyResource;
-
+model BillingMeter extends ProxyResource {
   @doc("Region for the billing meter.")
   location?: string;
 
@@ -1315,9 +1311,7 @@ model Template {
 }
 
 @doc("Container App init container definition")
-model InitContainer {
-  ...BaseContainer;
-}
+model InitContainer extends BaseContainer {}
 
 @doc("Container App base container definition.")
 model BaseContainer {
@@ -1381,9 +1375,7 @@ model VolumeMount {
 }
 
 @doc("Container App container definition")
-model Container {
-  ...BaseContainer;
-
+model Container extends BaseContainer {
   @doc("List of probes for the container.")
   probes?: ContainerAppProbe[];
 }
@@ -1679,9 +1671,7 @@ model ContainerAppSecret {
 }
 
 @doc("Container App Auth Token.")
-model ContainerAppAuthToken {
-  ...TrackedResource;
-
+model ContainerAppAuthToken extends TrackedResource {
   @doc("Container App auth token resource specific properties")
   properties?: ContainerAppAuthTokenProperties;
 }
@@ -2315,9 +2305,7 @@ model ManagedCertificateProperties {
 }
 
 @doc("Environment Auth Token.")
-model EnvironmentAuthToken {
-  ...TrackedResource;
-
+model EnvironmentAuthToken extends TrackedResource {
   @doc("Environment auth token resource specific properties")
   properties?: EnvironmentAuthTokenProperties;
 }
@@ -2338,9 +2326,7 @@ model EnvironmentAuthTokenProperties {
 model WorkloadProfileStatesCollection is Azure.Core.Page<WorkloadProfileStates>;
 
 @doc("Collection of all the workload Profile States for a Managed Environment..")
-model WorkloadProfileStates {
-  ...ProxyResource;
-
+model WorkloadProfileStates extends ProxyResource {
   @doc("Workload Profile resource specific properties.")
   properties?: WorkloadProfileStatesProperties;
 }

@@ -874,9 +874,7 @@ model ProxyOnlyResource {
 }
 
 @doc("Class representing certificate reissue request.")
-model ReissueCertificateOrderRequest {
-  ...ProxyOnlyResource;
-
+model ReissueCertificateOrderRequest extends ProxyOnlyResource {
   @doc("ReissueCertificateOrderRequest resource specific properties")
   properties?: ReissueCertificateOrderRequestProperties;
 }
@@ -897,9 +895,7 @@ model ReissueCertificateOrderRequestProperties {
 }
 
 @doc("Class representing certificate renew request.")
-model RenewCertificateOrderRequest {
-  ...ProxyOnlyResource;
-
+model RenewCertificateOrderRequest extends ProxyOnlyResource {
   @doc("RenewCertificateOrderRequest resource specific properties")
   properties?: RenewCertificateOrderRequestProperties;
 }
@@ -938,9 +934,7 @@ model SiteSeal {
 }
 
 @doc("Certificate order action.")
-model CertificateOrderAction {
-  ...ProxyOnlyResource;
-
+model CertificateOrderAction extends ProxyOnlyResource {
   @doc("CertificateOrderAction resource specific properties")
   properties?: CertificateOrderActionProperties;
 }
@@ -958,9 +952,7 @@ model CertificateOrderActionProperties {
 }
 
 @doc("SSL certificate email.")
-model CertificateEmail {
-  ...ProxyOnlyResource;
-
+model CertificateEmail extends ProxyOnlyResource {
   @doc("CertificateEmail resource specific properties")
   properties?: CertificateEmailProperties;
 }
@@ -1611,9 +1603,7 @@ Basic apps are not used for capacity allocation.
 }
 
 @doc("Describes main public IP address and any extra virtual IPs.")
-model AddressResponse {
-  ...ProxyOnlyResource;
-
+model AddressResponse extends ProxyOnlyResource {
   @doc("AddressResponse resource specific properties")
   properties?: AddressResponseProperties;
 }
@@ -1775,9 +1765,7 @@ model ResourceMetricDefinitionCollection
   is Azure.Core.Page<ResourceMetricDefinition>;
 
 @doc("Metadata for the metrics.")
-model ResourceMetricDefinition {
-  ...ProxyOnlyResource;
-
+model ResourceMetricDefinition extends ProxyOnlyResource {
   @doc("ResourceMetricDefinition resource specific properties")
   properties?: ResourceMetricDefinitionProperties;
 }
@@ -1835,9 +1823,7 @@ model SkuInfo {
 model UsageCollection is Azure.Core.Page<Usage>;
 
 @doc("Usage of the quota resource.")
-model Usage {
-  ...ProxyOnlyResource;
-
+model Usage extends ProxyOnlyResource {
   @doc("Usage resource specific properties")
   properties?: UsageProperties;
 }
@@ -1976,9 +1962,7 @@ model PrivateLinkConnectionState {
 }
 
 @doc("Private Endpoint Connection Approval ARM resource.")
-model PrivateLinkConnectionApprovalRequestResource {
-  ...ProxyOnlyResource;
-
+model PrivateLinkConnectionApprovalRequestResource extends ProxyOnlyResource {
   @doc("Core resource properties")
   properties?: PrivateLinkConnectionApprovalRequest;
 }
@@ -2813,9 +2797,7 @@ for more details.
 }
 
 @doc("Push settings for the App.")
-model PushSettings {
-  ...ProxyOnlyResource;
-
+model PushSettings extends ProxyOnlyResource {
   @doc("PushSettings resource specific properties")
   properties?: PushSettingsProperties;
 }
@@ -3072,9 +3054,7 @@ normally, use the POST /listKeys API instead.
 }
 
 @doc("Hybrid Connection key contract. This has the send key name and value for a Hybrid Connection.")
-model HybridConnectionKey {
-  ...ProxyOnlyResource;
-
+model HybridConnectionKey extends ProxyOnlyResource {
   @doc("HybridConnectionKey resource specific properties")
   properties?: HybridConnectionKeyProperties;
 }
@@ -3138,9 +3118,7 @@ Point-To-Site VPN connection.
 }
 
 @doc("Virtual Network route contract used to pass routing information for a Virtual Network.")
-model VnetRoute {
-  ...ProxyOnlyResource;
-
+model VnetRoute extends ProxyOnlyResource {
   @doc("VnetRoute resource specific properties")
   properties?: VnetRouteProperties;
 }
@@ -3307,9 +3285,7 @@ model AnalysisDefinitionProperties {
 }
 
 @doc("Class representing a diagnostic analysis done on an application")
-model DiagnosticAnalysis {
-  ...ProxyOnlyResource;
-
+model DiagnosticAnalysis extends ProxyOnlyResource {
   @doc("DiagnosticAnalysis resource specific properties")
   properties?: DiagnosticAnalysisProperties;
 }
@@ -3506,9 +3482,7 @@ model DataSource {
 }
 
 @doc("Class representing Response from Diagnostic Detectors")
-model DiagnosticDetectorResponse {
-  ...ProxyOnlyResource;
-
+model DiagnosticDetectorResponse extends ProxyOnlyResource {
   @doc("DiagnosticDetectorResponse resource specific properties")
   properties?: DiagnosticDetectorResponseProperties;
 }
@@ -3543,9 +3517,7 @@ model DiagnosticDetectorResponseProperties {
 }
 
 @doc("A snapshot of an app.")
-model Snapshot {
-  ...ProxyOnlyResource;
-
+model Snapshot extends ProxyOnlyResource {
   @doc("Snapshot resource specific properties")
   properties?: SnapshotProperties;
 }
@@ -3639,9 +3611,7 @@ model LogAnalyticsConfiguration {
 model ApplicationStackCollection is Azure.Core.Page<ApplicationStackResource>;
 
 @doc("ARM resource for a ApplicationStack.")
-model ApplicationStackResource {
-  ...ProxyOnlyResource;
-
+model ApplicationStackResource extends ProxyOnlyResource {
   @doc("Core resource properties")
   properties?: ApplicationStack;
 }
@@ -3729,9 +3699,7 @@ model StackMinorVersion {
 model FunctionAppStackCollection is Azure.Core.Page<FunctionAppStack>;
 
 @doc("Function App Stack.")
-model FunctionAppStack {
-  ...ProxyOnlyResource;
-
+model FunctionAppStack extends ProxyOnlyResource {
   @doc("Function App stack location.")
   @visibility("read")
   location?: string;
@@ -3905,9 +3873,7 @@ model SiteConfigPropertiesDictionary {
 model WebAppStackCollection is Azure.Core.Page<WebAppStack>;
 
 @doc("Web App stack.")
-model WebAppStack {
-  ...ProxyOnlyResource;
-
+model WebAppStack extends ProxyOnlyResource {
   @doc("Web App stack location.")
   @visibility("read")
   location?: string;
@@ -4104,9 +4070,7 @@ model WindowsJavaContainerSettings {
 model RecommendationCollection is Azure.Core.Page<Recommendation>;
 
 @doc("Represents a recommendation result generated by the recommendation engine.")
-model Recommendation {
-  ...ProxyOnlyResource;
-
+model Recommendation extends ProxyOnlyResource {
   @doc("Recommendation resource specific properties")
   properties?: RecommendationProperties;
 }
@@ -4286,9 +4250,7 @@ model SourceControlProperties {
 model BillingMeterCollection is Azure.Core.Page<BillingMeter>;
 
 @doc("App Service billing entity that contains information about meter which the Azure billing system utilizes to charge users for services.")
-model BillingMeter {
-  ...ProxyOnlyResource;
-
+model BillingMeter extends ProxyOnlyResource {
   @doc("BillingMeter resource specific properties")
   properties?: BillingMeterProperties;
 }
@@ -4357,9 +4319,7 @@ model DeploymentLocations {
 }
 
 @doc("Geographical region.")
-model GeoRegion {
-  ...ProxyOnlyResource;
-
+model GeoRegion extends ProxyOnlyResource {
   @doc("GeoRegion resource specific properties")
   properties?: GeoRegionProperties;
 }
@@ -4402,9 +4362,7 @@ model IdentifierProperties {
 model PremierAddOnOfferCollection is Azure.Core.Page<PremierAddOnOffer>;
 
 @doc("Premier add-on offer.")
-model PremierAddOnOffer {
-  ...ProxyOnlyResource;
-
+model PremierAddOnOffer extends ProxyOnlyResource {
   @doc("PremierAddOnOffer resource specific properties")
   properties?: PremierAddOnOfferProperties;
 }
@@ -4476,9 +4434,7 @@ model GlobalCsmSkuDescription {
 }
 
 @doc("The required set of inputs to validate a VNET")
-model VnetParameters {
-  ...ProxyOnlyResource;
-
+model VnetParameters extends ProxyOnlyResource {
   @doc("VnetParameters resource specific properties")
   properties?: VnetParametersProperties;
 }
@@ -4499,9 +4455,7 @@ model VnetParametersProperties {
 }
 
 @doc("A class that describes the reason for a validation failure.")
-model VnetValidationFailureDetails {
-  ...ProxyOnlyResource;
-
+model VnetValidationFailureDetails extends ProxyOnlyResource {
   @doc("VnetValidationFailureDetails resource specific properties")
   properties?: VnetValidationFailureDetailsProperties;
 }
@@ -4522,9 +4476,7 @@ model VnetValidationFailureDetailsProperties {
 }
 
 @doc("A class that describes a test that failed during NSG and UDR validation.")
-model VnetValidationTestFailure {
-  ...ProxyOnlyResource;
-
+model VnetValidationTestFailure extends ProxyOnlyResource {
   @doc("VnetValidationTestFailure resource specific properties")
   properties?: VnetValidationTestFailureProperties;
 }
@@ -4618,9 +4570,7 @@ model ValidateResponseError {
 }
 
 @doc("Request entity for previewing the Static Site workflow")
-model StaticSitesWorkflowPreviewRequest {
-  ...ProxyOnlyResource;
-
+model StaticSitesWorkflowPreviewRequest extends ProxyOnlyResource {
   @doc("StaticSitesWorkflowPreviewRequest resource specific properties")
   properties?: StaticSitesWorkflowPreviewRequestProperties;
 }
@@ -4665,9 +4615,7 @@ model StaticSiteBuildProperties {
 }
 
 @doc("Preview for the Static Site Workflow to be generated")
-model StaticSitesWorkflowPreview {
-  ...ProxyOnlyResource;
-
+model StaticSitesWorkflowPreview extends ProxyOnlyResource {
   @doc("StaticSitesWorkflowPreview resource specific properties")
   properties?: StaticSitesWorkflowPreviewProperties;
 }
@@ -4797,9 +4745,7 @@ model ArmPlan {
 }
 
 @doc("A remote private endpoint connection")
-model RemotePrivateEndpointConnection {
-  ...ProxyOnlyResource;
-
+model RemotePrivateEndpointConnection extends ProxyOnlyResource {
   @doc("RemotePrivateEndpointConnection resource specific properties")
   properties?: RemotePrivateEndpointConnectionProperties;
 }
@@ -4855,9 +4801,7 @@ model StaticSiteUserProvidedFunctionAppARMResourceProperties {
 model StaticSiteUserCollection is Azure.Core.Page<StaticSiteUserARMResource>;
 
 @doc("Static Site User ARM resource.")
-model StaticSiteUserARMResource {
-  ...ProxyOnlyResource;
-
+model StaticSiteUserARMResource extends ProxyOnlyResource {
   @doc("StaticSiteUserARMResource resource specific properties")
   properties?: StaticSiteUserARMResourceProperties;
 }
@@ -4918,9 +4862,7 @@ model StaticSiteBuildARMResourceProperties {
 }
 
 @doc("String dictionary resource.")
-model StringDictionary {
-  ...ProxyOnlyResource;
-
+model StringDictionary extends ProxyOnlyResource {
   @doc("Settings.")
   properties?: Record<string>;
 }
@@ -4930,9 +4872,7 @@ model StaticSiteFunctionOverviewCollection
   is Azure.Core.Page<StaticSiteFunctionOverviewARMResource>;
 
 @doc("Static Site Function Overview ARM resource.")
-model StaticSiteFunctionOverviewARMResource {
-  ...ProxyOnlyResource;
-
+model StaticSiteFunctionOverviewARMResource extends ProxyOnlyResource {
   @doc("StaticSiteFunctionOverviewARMResource resource specific properties")
   properties?: StaticSiteFunctionOverviewARMResourceProperties;
 }
@@ -4949,9 +4889,7 @@ model StaticSiteFunctionOverviewARMResourceProperties {
 }
 
 @doc("Static site zip deployment ARM resource.")
-model StaticSiteZipDeploymentARMResource {
-  ...ProxyOnlyResource;
-
+model StaticSiteZipDeploymentARMResource extends ProxyOnlyResource {
   @doc("Core resource properties")
   properties?: StaticSiteZipDeployment;
 }
@@ -4975,9 +4913,7 @@ model StaticSiteZipDeployment {
 }
 
 @doc("Static sites user roles invitation resource.")
-model StaticSiteUserInvitationRequestResource {
-  ...ProxyOnlyResource;
-
+model StaticSiteUserInvitationRequestResource extends ProxyOnlyResource {
   @doc("StaticSiteUserInvitationRequestResource resource specific properties")
   properties?: StaticSiteUserInvitationRequestResourceProperties;
 }
@@ -5001,9 +4937,7 @@ model StaticSiteUserInvitationRequestResourceProperties {
 }
 
 @doc("Static sites user roles invitation link resource.")
-model StaticSiteUserInvitationResponseResource {
-  ...ProxyOnlyResource;
-
+model StaticSiteUserInvitationResponseResource extends ProxyOnlyResource {
   @doc("StaticSiteUserInvitationResponseResource resource specific properties")
   properties?: StaticSiteUserInvitationResponseResourceProperties;
 }
@@ -5044,9 +4978,8 @@ model StaticSiteCustomDomainOverviewARMResourceProperties {
 }
 
 @doc("Static Site Custom Domain Request Properties ARM resource.")
-model StaticSiteCustomDomainRequestPropertiesARMResource {
-  ...ProxyOnlyResource;
-
+model StaticSiteCustomDomainRequestPropertiesARMResource
+  extends ProxyOnlyResource {
   @doc("StaticSiteCustomDomainRequestPropertiesARMResource resource specific properties")
   properties?: StaticSiteCustomDomainRequestPropertiesARMResourceProperties;
 }
@@ -5058,17 +4991,13 @@ model StaticSiteCustomDomainRequestPropertiesARMResourceProperties {
 }
 
 @doc("String list resource.")
-model StringList {
-  ...ProxyOnlyResource;
-
+model StringList extends ProxyOnlyResource {
   @doc("List of string resources.")
   properties?: string[];
 }
 
 @doc("Static Site Reset Properties ARM resource.")
-model StaticSiteResetPropertiesARMResource {
-  ...ProxyOnlyResource;
-
+model StaticSiteResetPropertiesARMResource extends ProxyOnlyResource {
   @doc("StaticSiteResetPropertiesARMResource resource specific properties")
   properties?: StaticSiteResetPropertiesARMResourceProperties;
 }
@@ -5083,9 +5012,7 @@ model StaticSiteResetPropertiesARMResourceProperties {
 }
 
 @doc("Custom domain analysis.")
-model CustomHostnameAnalysisResult {
-  ...ProxyOnlyResource;
-
+model CustomHostnameAnalysisResult extends ProxyOnlyResource {
   @doc("CustomHostnameAnalysisResult resource specific properties")
   properties?: CustomHostnameAnalysisResultProperties;
 }
@@ -5142,9 +5069,7 @@ model CsmSlotEntity {
 }
 
 @doc("Description of a backup which will be performed.")
-model BackupRequest {
-  ...ProxyOnlyResource;
-
+model BackupRequest extends ProxyOnlyResource {
   @doc("BackupRequest resource specific properties")
   properties?: BackupRequestProperties;
 }
@@ -5272,9 +5197,7 @@ model BackupItemProperties {
 }
 
 @doc("Description of a restore request.")
-model RestoreRequest {
-  ...ProxyOnlyResource;
-
+model RestoreRequest extends ProxyOnlyResource {
   @doc("RestoreRequest resource specific properties")
   properties?: RestoreRequestProperties;
 }
@@ -5325,9 +5248,7 @@ model CsmPublishingCredentialsPoliciesEntityProperties {
 }
 
 @doc("Configuration settings for the Azure App Service Authentication / Authorization feature.")
-model SiteAuthSettings {
-  ...ProxyOnlyResource;
-
+model SiteAuthSettings extends ProxyOnlyResource {
   @doc("SiteAuthSettings resource specific properties")
   properties?: SiteAuthSettingsProperties;
 }
@@ -5566,9 +5487,7 @@ The setting in this value can control the behavior of the control plane for Auth
 }
 
 @doc("Configuration settings for the Azure App Service Authentication / Authorization V2 feature.")
-model SiteAuthSettingsV2 {
-  ...ProxyOnlyResource;
-
+model SiteAuthSettingsV2 extends ProxyOnlyResource {
   @doc("SiteAuthSettingsV2 resource specific properties")
   properties?: SiteAuthSettingsV2Properties;
 }
@@ -6095,9 +6014,7 @@ model ForwardProxy {
 }
 
 @doc("AzureStorageInfo dictionary resource.")
-model AzureStoragePropertyDictionaryResource {
-  ...ProxyOnlyResource;
-
+model AzureStoragePropertyDictionaryResource extends ProxyOnlyResource {
   @doc("Azure storage accounts.")
   properties?: Record<AzureStorageInfoValue>;
 }
@@ -6119,9 +6036,7 @@ model ApiKVReferenceProperties {
 }
 
 @doc("String dictionary resource.")
-model ConnectionStringDictionary {
-  ...ProxyOnlyResource;
-
+model ConnectionStringDictionary extends ProxyOnlyResource {
   @doc("Connection strings.")
   properties?: Record<ConnStringValueTypePair>;
 }
@@ -6267,9 +6182,7 @@ model SiteConfigurationSnapshotInfoCollection
   is Azure.Core.Page<SiteConfigurationSnapshotInfo>;
 
 @doc("A snapshot of a web app configuration.")
-model SiteConfigurationSnapshotInfo {
-  ...ProxyOnlyResource;
-
+model SiteConfigurationSnapshotInfo extends ProxyOnlyResource {
   @doc("SiteConfigurationSnapshotInfo resource specific properties")
   properties?: SiteConfigurationSnapshotInfoProperties;
 }
@@ -6386,9 +6299,7 @@ model MSDeployStatusProperties {
 }
 
 @doc("MSDeploy ARM PUT information")
-model MSDeploy {
-  ...ProxyOnlyResource;
-
+model MSDeploy extends ProxyOnlyResource {
   @doc("Core resource properties")
   properties?: MSDeployCore;
 }
@@ -6426,9 +6337,7 @@ Setting is <code>false</code> by default.
 }
 
 @doc("MSDeploy log")
-model MSDeployLog {
-  ...ProxyOnlyResource;
-
+model MSDeployLog extends ProxyOnlyResource {
   @doc("MSDeployLog resource specific properties")
   properties?: MSDeployLogProperties;
 }
@@ -6808,9 +6717,7 @@ model ProcessInfoProperties {
 }
 
 @doc("Process Thread Information.")
-model ProcessThreadInfo {
-  ...ProxyOnlyResource;
-
+model ProcessThreadInfo extends ProxyOnlyResource {
   @doc("ProcessThreadInfo resource specific properties")
   properties?: ProcessThreadInfoProperties;
 }
@@ -6939,9 +6846,7 @@ model SiteCloneabilityCriterion {
 }
 
 @doc("Options for app content migration.")
-model StorageMigrationOptions {
-  ...ProxyOnlyResource;
-
+model StorageMigrationOptions extends ProxyOnlyResource {
   @doc("StorageMigrationOptions resource specific properties")
   properties?: StorageMigrationOptionsProperties;
 }
@@ -6966,9 +6871,7 @@ model StorageMigrationOptionsProperties {
 }
 
 @doc("Response for a migration of app content request.")
-model StorageMigrationResponse {
-  ...ProxyOnlyResource;
-
+model StorageMigrationResponse extends ProxyOnlyResource {
   @doc("StorageMigrationResponse resource specific properties")
   properties?: StorageMigrationResponseProperties;
 }
@@ -6981,9 +6884,7 @@ model StorageMigrationResponseProperties {
 }
 
 @doc("MySQL migration request.")
-model MigrateMySqlRequest {
-  ...ProxyOnlyResource;
-
+model MigrateMySqlRequest extends ProxyOnlyResource {
   @doc("MigrateMySqlRequest resource specific properties")
   properties?: MigrateMySqlRequestProperties;
 }
@@ -7101,9 +7002,7 @@ model PerfMonSample {
 }
 
 @doc("Used for getting PHP error logging flag.")
-model SitePhpErrorLogFlag {
-  ...ProxyOnlyResource;
-
+model SitePhpErrorLogFlag extends ProxyOnlyResource {
   @doc("SitePhpErrorLogFlag resource specific properties")
   properties?: SitePhpErrorLogFlagProperties;
 }
@@ -7202,9 +7101,7 @@ Ftp
 }
 
 @doc("Details about restoring a deleted app.")
-model DeletedAppRestoreRequest {
-  ...ProxyOnlyResource;
-
+model DeletedAppRestoreRequest extends ProxyOnlyResource {
   @doc("DeletedAppRestoreRequest resource specific properties")
   properties?: DeletedAppRestoreRequestProperties;
 }
@@ -7231,9 +7128,7 @@ If unspecified, default value is the time that the app was deleted.
 }
 
 @doc("Details about app recovery operation.")
-model SnapshotRestoreRequest {
-  ...ProxyOnlyResource;
-
+model SnapshotRestoreRequest extends ProxyOnlyResource {
   @doc("SnapshotRestoreRequest resource specific properties")
   properties?: SnapshotRestoreRequestProperties;
 }
@@ -7359,9 +7254,7 @@ model SiteExtensionInfoProperties {
 model SlotDifferenceCollection is Azure.Core.Page<SlotDifference>;
 
 @doc("A setting difference between two deployment slots of an app.")
-model SlotDifference {
-  ...ProxyOnlyResource;
-
+model SlotDifference extends ProxyOnlyResource {
   @doc("SlotDifference resource specific properties")
   properties?: SlotDifferenceProperties;
 }
@@ -7626,9 +7519,7 @@ model CsmMoveResourceEnvelope {
 }
 
 @doc("A static site user provided function.")
-model StaticSiteUserProvidedFunctionApp {
-  ...ProxyOnlyResource;
-
+model StaticSiteUserProvidedFunctionApp extends ProxyOnlyResource {
   @doc("StaticSiteUserProvidedFunctionApp resource specific properties")
   properties?: StaticSiteUserProvidedFunctionAppProperties;
 }

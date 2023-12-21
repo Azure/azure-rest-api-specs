@@ -388,9 +388,7 @@ model BenefitRecommendationsListResult
   is Azure.Core.Page<BenefitRecommendationModel>;
 
 @doc("benefit plan recommendation details.")
-model BenefitRecommendationModel {
-  ...BenefitResource;
-
+model BenefitRecommendationModel extends BenefitResource {
   @doc("The properties of the benefit recommendations.")
   properties?: BenefitRecommendationProperties;
 }
@@ -505,9 +503,7 @@ model AllSavingsList {
 }
 
 @doc("The benefit resource model definition.")
-model BenefitResource {
-  ...Resource;
-
+model BenefitResource extends Resource {
   @doc("Reservation or SavingsPlan.")
   kind?: BenefitKind;
 }
@@ -544,9 +540,7 @@ model BenefitUtilizationSummariesListResult
 
 @doc("Benefit utilization summary resource.")
 @discriminator("kind")
-model BenefitUtilizationSummary {
-  ...Resource;
-}
+model BenefitUtilizationSummary extends Resource {}
 
 @doc("Properties of an async benefit utilization summaries request.")
 model BenefitUtilizationSummariesRequest {
@@ -603,9 +597,7 @@ model AsyncOperationStatusProperties {
 }
 
 @doc("The properties of the export.")
-model ExportProperties {
-  ...CommonExportProperties;
-
+model ExportProperties extends CommonExportProperties {
   @doc("Has schedule information for the export.")
   schedule?: ExportSchedule;
 }
@@ -729,9 +721,7 @@ model ExportExecutionListResult {
 }
 
 @doc("An export run.")
-model ExportRun {
-  ...CostManagementProxyResource;
-
+model ExportRun extends CostManagementProxyResource {
   @doc("The properties of the export run.")
   properties?: ExportRunProperties;
 }
@@ -1173,9 +1163,7 @@ model ForecastComparisonExpression {
 }
 
 @doc("Result of forecast. It contains all columns listed under groupings and aggregation.")
-model ForecastResult {
-  ...CostManagementResource;
-
+model ForecastResult extends CostManagementResource {
   @doc("Forecast properties")
   properties?: ForecastProperties;
 }
@@ -1242,9 +1230,7 @@ model DimensionsListResult {
 }
 
 @doc("List of Dimension.")
-model Dimension {
-  ...CostManagementResource;
-
+model Dimension extends CostManagementResource {
   @doc("Dimension properties.")
   properties?: DimensionProperties;
 }
@@ -1385,9 +1371,7 @@ model QueryComparisonExpression {
 }
 
 @doc("Result of query. It contains all columns listed under groupings and aggregation.")
-model QueryResult {
-  ...CostManagementResource;
-
+model QueryResult extends CostManagementResource {
   @doc("Query properties")
   properties?: QueryProperties;
 }
@@ -1528,9 +1512,7 @@ model ScheduleProperties {
 }
 
 @doc("The Resource model definition.")
-model ScheduledActionProxyResource {
-  ...ProxyResource;
-
+model ScheduledActionProxyResource extends ProxyResource {
   @doc("Resource Etag. For update calls, eTag is optional and can be specified to achieve optimistic concurrency. Fetch the resource's eTag by doing a 'GET' call first and then including the latest eTag as part of the request body or 'If-Match' header while performing the update. For create calls, eTag is not required.")
   @visibility("read")
   eTag?: string;
@@ -1559,9 +1541,7 @@ model ErrorResponseWithNestedDetails {
 }
 
 @doc("The details of the error.")
-model ErrorDetailsWithNestedDetails {
-  ...ErrorDetails;
-
+model ErrorDetailsWithNestedDetails extends ErrorDetails {
   @doc("The additional details of the error.")
   @visibility("read")
   details?: ErrorDetailsWithNestedDetails[];
@@ -1589,9 +1569,7 @@ model CheckNameAvailabilityResponse {
 }
 
 @doc("A Cost management REST API operation.")
-model CostManagementOperation {
-  ...Operation;
-
+model CostManagementOperation extends Operation {
   @doc("Operation id: {provider}/{resource}/{operation}.")
   @visibility("read")
   id?: string;
@@ -1652,9 +1630,8 @@ model IncludedQuantityUtilizationSummary extends BenefitUtilizationSummary {
 }
 
 @doc("Included Quantity utilization summary properties.")
-model IncludedQuantityUtilizationSummaryProperties {
-  ...BenefitUtilizationSummaryProperties;
-
+model IncludedQuantityUtilizationSummaryProperties
+  extends BenefitUtilizationSummaryProperties {
   @doc("This is the utilized percentage for the benefit ID.")
   @visibility("read")
   utilizationPercentage?: float32;
@@ -1670,9 +1647,8 @@ model SavingsPlanUtilizationSummary extends BenefitUtilizationSummary {
 }
 
 @doc("Savings plan utilization summary properties.")
-model SavingsPlanUtilizationSummaryProperties {
-  ...BenefitUtilizationSummaryProperties;
-
+model SavingsPlanUtilizationSummaryProperties
+  extends BenefitUtilizationSummaryProperties {
   @doc("This is the average hourly utilization for each date range that corresponds to given grain (Daily, Monthly). Suppose the API call is for usageDate > 2023-03-01 and usageDate < 2022-10-31 at a daily granularity. There will be one record per benefit id for each day. For a single day, the avgUtilizationPercentage value will be equal to the average of the set of values where the set contains 24 utilization percentage entries one for each hour in a specific day.")
   @visibility("read")
   avgUtilizationPercentage?: float32;

@@ -21,7 +21,7 @@ model SuppressionContract is ProxyResource<SuppressionProperties> {
 }
 
 @armResourceOperations
-interface SuppressionContracts {
+interface Suppressions {
   @doc("Obtains the details of a suppression.")
   get is ArmResourceRead<SuppressionContract>;
   @doc("Enables the snoozed or dismissed attribute of a recommendation. The snoozed or dismissed attribute is referred to as a suppression. Use this API to create or update the snoozed or dismissed status of a recommendation.")

@@ -31,6 +31,10 @@ interface IntegrationServiceEnvironmentManagedApis {
   delete is ArmResourceDeleteWithoutOkAsync<IntegrationServiceEnvironmentManagedApi>;
   @doc("Gets the integration service environment managed Apis.")
   list is ArmResourceListByParent<IntegrationServiceEnvironmentManagedApi>;
+}
+
+@armResourceOperations
+interface IntegrationServiceEnvironmentManagedApiOperations {
   @doc("Gets the managed Api operations.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/managedApis/{apiName}/apiOperations")
   @get

@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./WebPubSub.tsp";
 import "./WebPubSubHub.tsp";
-import "./WebPubSubPrivateEndpointConnection.tsp";
+import "./PrivateEndpointConnection.tsp";
 import "./WebPubSubSharedPrivateLink.tsp";
 import "./routes.tsp";
 

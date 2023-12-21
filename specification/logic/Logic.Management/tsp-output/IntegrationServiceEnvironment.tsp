@@ -50,6 +50,10 @@ interface IntegrationServiceEnvironments {
   listBySubscription is ArmListBySubscription<IntegrationServiceEnvironment>;
   @doc("Restarts an integration service environment.")
   restart is ArmResourceActionSync<IntegrationServiceEnvironment, void, void>;
+}
+
+@armResourceOperations
+interface IntegrationServiceEnvironmentSkus {
   @doc("Gets a list of integration service environment Skus.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/skus")
   @get
@@ -69,7 +73,10 @@ interface IntegrationServiceEnvironments {
     },
     IntegrationServiceEnvironmentSkuList
   >;
+}
 
+@armResourceOperations
+interface IntegrationServiceEnvironmentNetworkHealth {
   @doc("Gets the integration service environment network health.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/health/network")
   @get

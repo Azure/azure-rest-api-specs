@@ -34,6 +34,10 @@ interface AttestationProviders {
   list is ArmListBySubscription<AttestationProvider>;
   @doc("Get the default provider")
   listDefault is ArmListBySubscription<AttestationProvider>;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
   @doc("Gets the private link resources supported for the attestation provider.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}/privateLinkResources")
   @get

@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SqlDatabase.tsp";
+import "./Database.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Sql;
 @doc("An extended database blob auditing policy.")
-@parentResource(SqlDatabase)
+@parentResource(Database)
 model ExtendedDatabaseBlobAuditingPolicy
   is ProxyResource<ExtendedDatabaseBlobAuditingPolicyProperties> {
   @doc("The name of the blob auditing policy.")

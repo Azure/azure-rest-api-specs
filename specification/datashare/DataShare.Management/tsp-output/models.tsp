@@ -193,9 +193,7 @@ model AccountProperties {
 }
 
 @doc("Base data transfer object implementation for default resources.")
-model DefaultDto {
-  ...ProxyDto;
-
+model DefaultDto extends ProxyDto {
   @doc("Location of the azure resource.")
   location?: string;
 
@@ -720,9 +718,7 @@ model ShareSubscriptionSynchronization {
 model ConsumerSourceDataSetList is Azure.Core.Page<ConsumerSourceDataSet>;
 
 @doc("A consumer side dataSet data transfer object.")
-model ConsumerSourceDataSet {
-  ...ProxyDto;
-
+model ConsumerSourceDataSet extends ProxyDto {
   @doc("source dataSet properties")
   properties?: ConsumerSourceDataSetProperties;
 }

@@ -210,9 +210,7 @@ model HubBillingInfoFormat {
 }
 
 @doc("The profile type definition.")
-model ProfileTypeDefinition {
-  ...EntityTypeDefinition;
-
+model ProfileTypeDefinition extends EntityTypeDefinition {
   @doc("The strong IDs.")
   strongIds?: StrongId[];
 }
@@ -233,9 +231,7 @@ model StrongId {
 }
 
 @doc("Describes an entity.")
-model EntityTypeDefinition {
-  ...MetadataDefinitionBase;
-
+model EntityTypeDefinition extends MetadataDefinitionBase {
   @doc("The api entity set name. This becomes the odata entity set name for the entity Type being referred in this object.")
   apiEntitySetName?: string;
 
@@ -502,9 +498,7 @@ model KpiExtract {
 }
 
 @doc("The Interaction Type Definition")
-model InteractionTypeDefinition {
-  ...EntityTypeDefinition;
-
+model InteractionTypeDefinition extends EntityTypeDefinition {
   @doc("The id property names. Properties which uniquely identify an interaction instance.")
   idPropertyNames?: string[];
 
@@ -1045,9 +1039,7 @@ model TypePropertiesMapping {
 model RoleListResult is Azure.Core.Page<RoleResourceFormat>;
 
 @doc("The role resource format.")
-model RoleResourceFormat {
-  ...ProxyResource;
-
+model RoleResourceFormat extends ProxyResource {
   @doc("The Role definition.")
   properties?: Role;
 }
@@ -1461,6 +1453,4 @@ model CrmConnectorEntities {
 }
 
 @doc("The enriching KPI definition.")
-model EnrichingKpi {
-  ...KpiDefinition;
-}
+model EnrichingKpi extends KpiDefinition {}

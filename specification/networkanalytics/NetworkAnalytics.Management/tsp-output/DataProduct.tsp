@@ -62,6 +62,10 @@ interface DataProducts {
   >;
   @doc("Initiate key rotation on Data Product.")
   rotateKey is ArmResourceActionNoContentSync<DataProduct, KeyVaultInfo>;
+}
+
+@armResourceOperations
+interface DataTypes {
   @doc("List data type by parent resource.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes")
   @get

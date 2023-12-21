@@ -230,9 +230,7 @@ model ConnectionState {
 }
 
 @doc("Definition of resource.")
-model ResourceNamespacePatch {
-  ...Resource;
-
+model ResourceNamespacePatch extends Resource {
   @doc("Resource tags.")
   tags?: Record<string>;
 }

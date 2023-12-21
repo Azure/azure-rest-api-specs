@@ -22,7 +22,7 @@ model DataLakeStoreAccountInformation
 }
 
 @armResourceOperations
-interface DataLakeStoreAccountInformations {
+interface DataLakeStoreAccounts {
   @doc("Gets the specified Data Lake Store account details in the specified Data Lake Analytics account.")
   get is ArmResourceRead<DataLakeStoreAccountInformation>;
   @doc("Updates the specified Data Lake Analytics account to include the additional Data Lake Store account.")

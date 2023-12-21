@@ -3,10 +3,10 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./ReservationDetail.tsp";
-import "./ReservationOrder.tsp";
-import "./ReservationQuota.tsp";
-import "./QuotaRequestDetail.tsp";
+import "./ReservationResponse.tsp";
+import "./ReservationOrderResponse.tsp";
+import "./CurrentQuotaLimitBase.tsp";
+import "./QuotaRequestDetails.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

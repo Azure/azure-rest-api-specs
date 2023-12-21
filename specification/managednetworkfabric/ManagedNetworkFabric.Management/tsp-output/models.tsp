@@ -264,8 +264,7 @@ model AccessControlListMatchConfiguration {
 }
 
 @doc("Defines the match condition that is supported to filter the traffic.")
-model AccessControlListMatchCondition {
-...CommonMatchConditions;
+model AccessControlListMatchCondition extends CommonMatchConditions {
 @doc("List of ether type values that need to be matched.")
 "etherTypes"?: string[];
 @doc("List of IP fragment packets that need to be matched.")
@@ -281,8 +280,7 @@ model AccessControlListMatchCondition {
 }
 
 @doc("Defines the port condition that needs to be matched.")
-model AccessControlListPortCondition {
-...PortCondition;
+model AccessControlListPortCondition extends PortCondition {
 @doc("List of protocol flags that need to be matched.")
 "flags"?: string[];
 }
@@ -380,8 +378,7 @@ model PortGroupProperties {
 }
 
 @doc("Update administrative state on list of resources.")
-model UpdateAdministrativeState {
-...EnableDisableOnResources;
+model UpdateAdministrativeState extends EnableDisableOnResources {
 @doc("Administrative state.")
 "state"?: EnableDisableState;
 }
@@ -393,16 +390,14 @@ model EnableDisableOnResources {
 }
 
 @doc("Common response for the state updates.")
-model CommonPostActionResponseForStateUpdate {
-...ErrorResponse;
+model CommonPostActionResponseForStateUpdate extends ErrorResponse {
 @doc("Gets the configuration state.")
 @visibility("read")
 "configurationState"?: ConfigurationState;
 }
 
 @doc("The response of the action validate configuration.")
-model ValidateConfigurationResponse {
-...ErrorResponse;
+model ValidateConfigurationResponse extends ErrorResponse {
 @doc("Gets the configuration state.")
 @visibility("read")
 "configurationState"?: ConfigurationState;
@@ -430,8 +425,7 @@ model InternetGatewayProperties {
 }
 
 @doc("Internet Gateway Rule Properties defines the resource properties.")
-model InternetGatewayRuleProperties {
-...AnnotationResource;
+model InternetGatewayRuleProperties extends AnnotationResource {
 @doc("Rules for the InternetGateways")
 "ruleProperties": RuleProperties;
 @doc("Provisioning state of the resource.")
@@ -451,8 +445,7 @@ model RuleProperties {
 }
 
 @doc("The Internet Gateway Rules patch resource definition.")
-model InternetGatewayRulePatch {
-...TagsUpdate;
+model InternetGatewayRulePatch extends TagsUpdate {
 }
 
 @doc("IP Community Properties defines the resource properties.")
@@ -555,8 +548,7 @@ model IpPrefixRule {
 }
 
 @doc("L2Isolation Domain Properties defines the properties of the resource.")
-model L2IsolationDomainProperties {
-...AnnotationResource;
+model L2IsolationDomainProperties extends AnnotationResource {
 @doc("ARM Resource ID of the Network Fabric.")
 "networkFabricId": ResourceIdentifier<[{type: "Microsoft.ManagedNetworkFabric/networkFabrics";}]>;
 @doc("Vlan Identifier of the Network Fabric. Example: 501.")
@@ -579,8 +571,7 @@ model L2IsolationDomainProperties {
 }
 
 @doc("Common response for device updates.")
-model CommonPostActionResponseForDeviceUpdate {
-...ErrorResponse;
+model CommonPostActionResponseForDeviceUpdate extends ErrorResponse {
 @doc("Gets the configuration state.")
 @visibility("read")
 "configurationState"?: ConfigurationState;
@@ -676,13 +667,11 @@ model InternalNetworkProperties {
 }
 
 @doc("BGP configuration properties.")
-model InternalNetworkPropertiesBgpConfiguration {
-...BgpConfiguration;
+model InternalNetworkPropertiesBgpConfiguration extends BgpConfiguration {
 }
 
 @doc("BGP configuration properties")
-model BgpConfiguration {
-...AnnotationResource;
+model BgpConfiguration extends AnnotationResource {
 @doc("BFD configuration properties")
 "bfdConfiguration"?: BfdConfiguration;
 @doc("Originate a defaultRoute. Ex: \"True\" | \"False\".")
@@ -788,8 +777,7 @@ model InternalNetworkPatchableProperties {
 }
 
 @doc("Connected Subnet properties.")
-model ConnectedSubnet {
-...AnnotationResource;
+model ConnectedSubnet extends AnnotationResource {
 @doc("Prefix of the Connected Subnet.")
 @minLength(1)
 "prefix": string;
@@ -1040,8 +1028,7 @@ model NetworkDevicePatchableProperties {
 }
 
 @doc("Network Interface Properties defines the properties of the resource.")
-model NetworkInterfaceProperties {
-...AnnotationResource;
+model NetworkInterfaceProperties extends AnnotationResource {
 @doc("Physical Identifier of the network interface.")
 @visibility("read")
 "physicalIdentifier"?: string;
@@ -1072,8 +1059,7 @@ model RebootProperties {
 }
 
 @doc("Update the administrative state on list of resources.")
-model UpdateDeviceAdministrativeState {
-...EnableDisableOnResources;
+model UpdateDeviceAdministrativeState extends EnableDisableOnResources {
 @doc("Administrative state.")
 "state"?: DeviceAdministrativeState;
 }
@@ -1165,8 +1151,7 @@ model NetworkFabricSkuProperties {
 }
 
 @doc("Network Fabric Properties defines the properties of the resource.")
-model NetworkFabricProperties {
-...AnnotationResource;
+model NetworkFabricProperties extends AnnotationResource {
 @doc("Supported Network Fabric SKU.Example: Compute / Aggregate racks. Once the user chooses a particular SKU, only supported racks can be added to the Network Fabric. The SKU determines whether it is a single / multi rack Network Fabric.")
 @visibility("read", "create")
 @minLength(1)
@@ -1409,13 +1394,11 @@ model Layer2Configuration {
 }
 
 @doc("Common properties for Layer3Configuration.")
-model NetworkToNetworkInterconnectPropertiesOptionBLayer3Configuration {
-...OptionBLayer3Configuration;
+model NetworkToNetworkInterconnectPropertiesOptionBLayer3Configuration extends OptionBLayer3Configuration {
 }
 
 @doc("OptionB Layer3 Configuration properties.")
-model OptionBLayer3Configuration {
-...Layer3IpPrefixProperties;
+model OptionBLayer3Configuration extends Layer3IpPrefixProperties {
 @doc("ASN of PE devices for CE/PE connectivity.Example : 28")
 @maxValue(4294967295)
 @minValue(1)
@@ -1478,13 +1461,11 @@ model NetworkPacketBrokerProperties {
 }
 
 @doc("The NetworkPacketBroker patch resource definition.")
-model NetworkPacketBrokerPatch {
-...TagsUpdate;
+model NetworkPacketBrokerPatch extends TagsUpdate {
 }
 
 @doc("Network Rack Properties defines the properties of the resource.")
-model NetworkRackProperties {
-...AnnotationResource;
+model NetworkRackProperties extends AnnotationResource {
 @doc("Network Rack SKU name.")
 "networkRackType"?: NetworkRackType;
 @doc("ARM resource ID of the Network Fabric.")
@@ -1551,8 +1532,7 @@ model NetworkTapRuleMatchConfiguration {
 }
 
 @doc("Defines the match condition that is supported to filter the traffic.")
-model NetworkTapRuleMatchCondition {
-...CommonMatchConditions;
+model NetworkTapRuleMatchCondition extends CommonMatchConditions {
 @doc("Encapsulation Type that needs to be matched.")
 "encapsulationType"?: EncapsulationType;
 @doc("Defines the port condition that needs to be matched.")
@@ -1576,8 +1556,7 @@ model NetworkTapRuleAction {
 }
 
 @doc("Network Tap Properties defines the properties of the resource.")
-model NetworkTapProperties {
-...AnnotationResource;
+model NetworkTapProperties extends AnnotationResource {
 @doc("ARM resource ID of the Network Packet Broker.")
 @visibility("read", "create")
 "networkPacketBrokerId": ResourceIdentifier<[{type: "Microsoft.ManagedNetworkFabric/networkFabrics";}]>;
@@ -1600,8 +1579,7 @@ model NetworkTapProperties {
 }
 
 @doc("Destination.")
-model NetworkTapPropertiesDestinationsItem {
-...DestinationProperties;
+model NetworkTapPropertiesDestinationsItem extends DestinationProperties {
 }
 
 @doc("The network tap destination properties.")
@@ -1628,8 +1606,7 @@ model IsolationDomainProperties {
 }
 
 @doc("Destination.")
-model NetworkTapPatchableParametersDestinationsItem {
-...DestinationProperties;
+model NetworkTapPatchableParametersDestinationsItem extends DestinationProperties {
 }
 
 @doc("RoutePolicyProperties defines the resource properties.")
@@ -1652,8 +1629,7 @@ model RoutePolicyProperties {
 }
 
 @doc("Route Policy Statement properties.")
-model RoutePolicyStatementProperties {
-...AnnotationResource;
+model RoutePolicyStatementProperties extends AnnotationResource {
 @doc("Sequence to insert to/delete from existing route.")
 @maxValue(4294967295)
 @minValue(1)

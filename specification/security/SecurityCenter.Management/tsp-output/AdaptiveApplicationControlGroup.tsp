@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SecurityCenterLocation.tsp";
+import "./AscLocation.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.SecurityCenter;
 
-@parentResource(SecurityCenterLocation)
+@parentResource(AscLocation)
 model AdaptiveApplicationControlGroup
   is ProxyResource<AdaptiveApplicationControlGroupData> {
   @doc("Name of an application control machine group")
@@ -22,7 +22,7 @@ model AdaptiveApplicationControlGroup
 }
 
 @armResourceOperations
-interface AdaptiveApplicationControlGroups {
+interface AdaptiveApplicationControls {
   @doc("Gets an application control VM/server group.")
   get is ArmResourceRead<AdaptiveApplicationControlGroup>;
   @doc("Update an application control machine group")

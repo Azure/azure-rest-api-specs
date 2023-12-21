@@ -17,12 +17,15 @@ model DataMigrationService is TrackedResource<DataMigrationServiceProperties> {
   @segment("services")
   name: string;
 
+  @doc("HTTP strong entity tag value. Ignored if submitted")
+  etag?: string;
+
   ...Azure.ResourceManager.ResourceSku;
   ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
-interface DataMigrationServices {
+interface Services {
   @doc("The services resource is the top-level resource that represents the Database Migration Service. The GET method retrieves information about a service instance.")
   get is ArmResourceRead<DataMigrationService>;
   @doc("The services resource is the top-level resource that represents the Database Migration Service. The PUT method creates a new service or updates an existing one. When a service is updated, existing child resources (i.e. tasks) are unaffected. Services currently support a single kind, \"vm\", which refers to a VM-based service, although other kinds may be added in the future. This method can change the kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request (\"ServiceIsBusy\"). The provider will reply when successful with 200 OK or 201 Created. Long-running operations use the provisioningState property.")

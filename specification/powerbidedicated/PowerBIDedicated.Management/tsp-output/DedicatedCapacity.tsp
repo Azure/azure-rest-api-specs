@@ -24,7 +24,7 @@ model DedicatedCapacity is ProxyResource<DedicatedCapacityProperties> {
 }
 
 @armResourceOperations
-interface DedicatedCapacities {
+interface Capacities {
   @doc("Gets details about the specified dedicated capacity.")
   getDetails is ArmResourceRead<DedicatedCapacity>;
   @doc("Provisions the specified Dedicated capacity based on the configuration specified in the request.")

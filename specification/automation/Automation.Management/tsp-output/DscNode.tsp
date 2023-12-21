@@ -21,7 +21,7 @@ model DscNode is ProxyResource<DscNodeProperties> {
 }
 
 @armResourceOperations
-interface DscNodes {
+interface DscNode {
   @doc("Retrieve the dsc node identified by node id.")
   get is ArmResourceRead<DscNode>;
   @doc("Update the dsc node.")
@@ -51,6 +51,10 @@ interface DscNodes {
       $inlinecount?: string;
     }
   >;
+}
+
+@armResourceOperations
+interface NodeReports {
   @doc("Retrieve the Dsc node report list by node id.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/nodes/{nodeId}/reports")
   @get

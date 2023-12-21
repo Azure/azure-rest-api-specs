@@ -3,8 +3,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./MoverResourceSet.tsp";
-import "./MoverResource.tsp";
+import "./MoveCollection.tsp";
+import "./MoveResource.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

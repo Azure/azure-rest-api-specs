@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AvsPrivateCloud.tsp";
+import "./PrivateCloud.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Avs;
 @doc("NSX Gateway.")
-@parentResource(AvsPrivateCloud)
+@parentResource(PrivateCloud)
 model WorkloadNetworkGateway
   is ProxyResource<WorkloadNetworkGatewayProperties> {
   @doc("NSX Gateway identifier. Generally the same as the Gateway's display name")
@@ -22,7 +22,7 @@ model WorkloadNetworkGateway
 }
 
 @armResourceOperations
-interface WorkloadNetworkGateways {
+interface WorkloadNetworks {
   @doc("Get a gateway by id in a private cloud workload network.")
   getGateway is ArmResourceRead<WorkloadNetworkGateway>;
   @doc("List of gateways in a private cloud workload network.")

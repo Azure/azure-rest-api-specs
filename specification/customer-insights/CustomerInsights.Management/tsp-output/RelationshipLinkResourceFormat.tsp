@@ -22,7 +22,7 @@ model RelationshipLinkResourceFormat
 }
 
 @armResourceOperations
-interface RelationshipLinkResourceFormats {
+interface RelationshipLinks {
   @doc("Gets information about the specified relationship Link.")
   get is ArmResourceRead<RelationshipLinkResourceFormat>;
   @doc("Creates a relationship link or updates an existing relationship link within a hub.")

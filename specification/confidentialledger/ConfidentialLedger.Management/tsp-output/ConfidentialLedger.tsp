@@ -20,7 +20,7 @@ model ConfidentialLedger is TrackedResource<LedgerProperties> {
 }
 
 @armResourceOperations
-interface ConfidentialLedgers {
+interface Ledger {
   @doc("Retrieves the properties of a Confidential Ledger.")
   get is ArmResourceRead<ConfidentialLedger>;
   @doc("Creates a  Confidential Ledger with the specified ledger parameters.")

@@ -20,7 +20,7 @@ model MetadataEntity is ProxyResource<MetadataEntityProperties> {
 }
 
 @armResourceOperations
-interface MetadataEntities {
+interface RecommendationMetadata {
   @doc("Gets the metadata entity.")
   get is ArmResourceRead<MetadataEntity>;
   @doc("Gets the list of metadata entities.")

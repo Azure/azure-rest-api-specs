@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SqlServer.tsp";
+import "./Server.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Sql;
 @doc("An Azure SQL Database sync agent.")
-@parentResource(SqlServer)
+@parentResource(Server)
 model SyncAgent is ProxyResource<SyncAgentProperties> {
   @doc("The name of the sync agent.")
   @path

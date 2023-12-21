@@ -65,9 +65,7 @@ enum AssignmentDeleteBehavior {
 }
 
 @doc("Schema for blueprint definition properties.")
-model BlueprintProperties {
-  ...SharedBlueprintProperties;
-
+model BlueprintProperties extends SharedBlueprintProperties {
   @doc("Published versions of this blueprint definition.")
   versions?: Record<unknown>;
 
@@ -77,9 +75,7 @@ model BlueprintProperties {
 }
 
 @doc("Shared Schema for both blueprintProperties and publishedBlueprintProperties.")
-model SharedBlueprintProperties {
-  ...BlueprintResourcePropertiesBase;
-
+model SharedBlueprintProperties extends BlueprintResourcePropertiesBase {
   @doc("Status of the blueprint. This field is readonly.")
   @visibility("read")
   status?: BlueprintStatus;
@@ -95,9 +91,7 @@ model SharedBlueprintProperties {
 }
 
 @doc("The status of the blueprint. This field is readonly.")
-model BlueprintStatus {
-  ...BlueprintResourceStatusBase;
-}
+model BlueprintStatus extends BlueprintResourceStatusBase {}
 
 @doc("Shared status properties between all blueprint resources.")
 model BlueprintResourceStatusBase {
@@ -193,9 +187,7 @@ model CloudError {
 }
 
 @doc("Schema for published blueprint definition properties.")
-model PublishedBlueprintProperties {
-  ...SharedBlueprintProperties;
-
+model PublishedBlueprintProperties extends SharedBlueprintProperties {
   @doc("Name of the published blueprint definition.")
   blueprintName?: string;
 
@@ -217,9 +209,7 @@ model UserAssignedIdentity {
 }
 
 @doc("Detailed properties for a blueprint assignment.")
-model AssignmentProperties {
-  ...BlueprintResourcePropertiesBase;
-
+model AssignmentProperties extends BlueprintResourcePropertiesBase {
   @doc("ID of the published version of a blueprint definition.")
   blueprintId?: string;
 
@@ -283,9 +273,7 @@ model ResourceGroupValue {
 }
 
 @doc("The status of a blueprint assignment. This field is readonly.")
-model AssignmentStatus {
-  ...BlueprintResourceStatusBase;
-
+model AssignmentStatus extends BlueprintResourceStatusBase {
   @doc("List of resources that were created by the blueprint assignment.")
   @visibility("read")
   managedResources?: string[];
@@ -373,9 +361,7 @@ model AzureResourceManagerError {
 }
 
 @doc("Azure resource created from deployment job.")
-model AssignmentJobCreatedResource {
-  ...AzureResourceBase;
-
+model AssignmentJobCreatedResource extends AzureResourceBase {
   @doc("Additional properties in a dictionary.")
   properties?: Record<string>;
 }

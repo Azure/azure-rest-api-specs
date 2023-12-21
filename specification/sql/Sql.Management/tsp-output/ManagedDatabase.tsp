@@ -56,6 +56,10 @@ interface ManagedDatabases {
     ManagedDatabaseStartMoveDefinition,
     void
   >;
+}
+
+@armResourceOperations
+interface ManagedDatabaseColumns {
   @doc("List managed database columns")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/columns")
   @get
@@ -107,7 +111,10 @@ interface ManagedDatabases {
     },
     DatabaseColumnListResult
   >;
+}
 
+@armResourceOperations
+interface ManagedDatabaseQueries {
   @doc("Get query by query id.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/queries/{queryId}")
   @get
@@ -173,7 +180,10 @@ interface ManagedDatabases {
     },
     ManagedInstanceQueryStatistics
   >;
+}
 
+@armResourceOperations
+interface ManagedDatabaseSecurityEvents {
   @doc("Gets a list of security events.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityEvents")
   @get
@@ -213,7 +223,10 @@ interface ManagedDatabases {
     },
     SecurityEventCollection
   >;
+}
 
+@armResourceOperations
+interface ManagedDatabaseSensitivityLabels {
   @doc("Gets the sensitivity labels of a given database")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/currentSensitivityLabels")
   @get

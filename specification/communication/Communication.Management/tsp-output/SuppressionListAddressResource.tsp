@@ -25,7 +25,7 @@ model SuppressionListAddressResource
 }
 
 @armResourceOperations
-interface SuppressionListAddressResources {
+interface SuppressionListAddresses {
   @doc("Get a SuppressionListAddress.")
   get is ArmResourceRead<SuppressionListAddressResource>;
   @doc("Create or update a SuppressionListAddress.")

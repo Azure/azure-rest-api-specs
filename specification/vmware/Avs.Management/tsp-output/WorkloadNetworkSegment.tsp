@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AvsPrivateCloud.tsp";
+import "./PrivateCloud.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Avs;
 @doc("NSX Segment")
-@parentResource(AvsPrivateCloud)
+@parentResource(PrivateCloud)
 model WorkloadNetworkSegment
   is ProxyResource<WorkloadNetworkSegmentProperties> {
   @doc("NSX Segment identifier. Generally the same as the Segment's display name")
@@ -22,7 +22,7 @@ model WorkloadNetworkSegment
 }
 
 @armResourceOperations
-interface WorkloadNetworkSegments {
+interface WorkloadNetworks {
   @doc("Get a segment by id in a private cloud workload network.")
   getSegment is ArmResourceRead<WorkloadNetworkSegment>;
   @doc("Create a segment by id in a private cloud workload network.")

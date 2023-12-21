@@ -22,7 +22,7 @@ model HybridRunbookWorkerGroup
 }
 
 @armResourceOperations
-interface HybridRunbookWorkerGroups {
+interface HybridRunbookWorkerGroup {
   @doc("Retrieve a hybrid runbook worker group.")
   get is ArmResourceRead<HybridRunbookWorkerGroup>;
   @doc("Create a hybrid runbook worker group.")

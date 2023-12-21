@@ -37,7 +37,7 @@ interface VirtualMachineInstances {
   @doc("The operation to delete a virtual machine instance.")
   delete is ArmResourceDeleteWithoutOkAsync<VirtualMachineInstance>;
   @doc("Lists all of the virtual machine instances within the specified parent resource.")
-  listByArm is ArmResourceListByParent<VirtualMachineInstance>;
+  list is ArmResourceListByParent<VirtualMachineInstance>;
   @doc("The operation to start a virtual machine instance.")
   start is ArmResourceActionAsync<
     VirtualMachineInstance,

@@ -19,11 +19,14 @@ model CdnWebApplicationFirewallPolicy
   @segment("cdnWebApplicationFirewallPolicies")
   name: string;
 
+  @doc("Gets a unique read-only string that changes whenever the resource is updated.")
+  etag?: string;
+
   ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations
-interface CdnWebApplicationFirewallPolicies {
+interface Policies {
   @doc("Retrieve protection policy with specified name within a resource group.")
   get is ArmResourceRead<CdnWebApplicationFirewallPolicy>;
   @doc("Create or update policy with specified rule set name within a resource group.")

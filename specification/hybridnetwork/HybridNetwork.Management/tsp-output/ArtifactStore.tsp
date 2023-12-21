@@ -34,6 +34,10 @@ interface ArtifactStores {
   delete is ArmResourceDeleteWithoutOkAsync<ArtifactStore>;
   @doc("Gets information of the ArtifactStores under publisher.")
   listByPublisher is ArmResourceListByParent<ArtifactStore>;
+}
+
+@armResourceOperations
+interface ProxyArtifact {
   @doc("Lists all the available artifacts in the parent Artifact Store.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifacts")
   @get

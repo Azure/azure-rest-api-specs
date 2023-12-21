@@ -3,12 +3,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./SapVirtualInstance.tsp";
-import "./SapCentralServerInstance.tsp";
-import "./SapDatabaseInstance.tsp";
-import "./SapApplicationServerInstance.tsp";
-import "./SapMonitor.tsp";
-import "./SapProviderInstance.tsp";
+import "./SAPVirtualInstance.tsp";
+import "./SAPCentralServerInstance.tsp";
+import "./SAPDatabaseInstance.tsp";
+import "./SAPApplicationServerInstance.tsp";
+import "./Monitor.tsp";
+import "./ProviderInstance.tsp";
 import "./SapLandscapeMonitor.tsp";
 import "./routes.tsp";
 

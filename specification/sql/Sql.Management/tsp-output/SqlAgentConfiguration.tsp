@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Sql;
 @doc("A recoverable managed database resource.")
-@parentResource(ManagedInstance)
 @singleton("current")
+@parentResource(ManagedInstance)
 model SqlAgentConfiguration is ProxyResource<SqlAgentConfigurationProperties> {
   @key("current")
   @segment("sqlAgent")
@@ -20,7 +20,7 @@ model SqlAgentConfiguration is ProxyResource<SqlAgentConfigurationProperties> {
 }
 
 @armResourceOperations
-interface SqlAgentConfigurations {
+interface SqlAgent {
   @doc("Gets current instance sql agent configuration.")
   get is ArmResourceRead<SqlAgentConfiguration>;
   @doc("Puts new sql agent configuration to instance.")

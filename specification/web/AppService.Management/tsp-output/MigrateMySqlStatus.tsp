@@ -10,7 +10,6 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.AppService;
 @doc("MySQL migration status.")
-@parentResource(WebSiteSlot)
 @singleton("status")
 model MigrateMySqlStatus is ProxyResource<MigrateMySqlStatusProperties> {
   @key("status")
@@ -19,7 +18,7 @@ model MigrateMySqlStatus is ProxyResource<MigrateMySqlStatusProperties> {
 }
 
 @armResourceOperations
-interface MigrateMySqlStatuses {
+interface WebApps {
   @doc("Description for Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled")
   getMigrateMySqlStatusSlot is ArmResourceRead<MigrateMySqlStatus>;
 }

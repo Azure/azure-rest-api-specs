@@ -3,11 +3,11 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./ServiceFabricCluster.tsp";
-import "./ServiceFabricApplicationType.tsp";
-import "./ServiceFabricApplicationTypeVersion.tsp";
-import "./ServiceFabricApplication.tsp";
-import "./ServiceFabricService.tsp";
+import "./Cluster.tsp";
+import "./ApplicationTypeResource.tsp";
+import "./ApplicationTypeVersionResource.tsp";
+import "./ApplicationResource.tsp";
+import "./ServiceResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

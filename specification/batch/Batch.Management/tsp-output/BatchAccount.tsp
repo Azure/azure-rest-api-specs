@@ -24,7 +24,7 @@ model BatchAccount is ProxyResource<BatchAccountProperties> {
 }
 
 @armResourceOperations
-interface BatchAccounts {
+interface BatchAccount {
   @doc("Gets information about the specified Batch account.")
   get is ArmResourceRead<BatchAccount>;
   @doc("Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.")

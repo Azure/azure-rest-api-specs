@@ -321,9 +321,7 @@ model PolicyEventsQueryResults {
 }
 
 @doc("Policy event record.")
-model PolicyEvent {
-  ...Record<unknown>;
-
+model PolicyEvent extends Record<unknown> {
   @doc("OData entity ID; always set to null since policy event records do not have an entity ID.")
   @projectedName("json", "@odata.id")
   OdataId?: string;
@@ -422,9 +420,7 @@ model PolicyEvent {
 }
 
 @doc("Component event details.")
-model ComponentEventDetails {
-  ...Record<unknown>;
-
+model ComponentEventDetails extends Record<unknown> {
   @doc("Component Id.")
   id?: string;
 
@@ -470,9 +466,7 @@ model PolicyStatesQueryResults {
 }
 
 @doc("Policy state record.")
-model PolicyState {
-  ...Record<unknown>;
-
+model PolicyState extends Record<unknown> {
   @doc("OData entity ID; always set to null since policy state records do not have an entity ID.")
   @projectedName("json", "@odata.id")
   OdataId?: string;
@@ -626,9 +620,7 @@ model IfNotExistsEvaluationDetails {
 }
 
 @doc("Component state details.")
-model ComponentStateDetails {
-  ...Record<unknown>;
-
+model ComponentStateDetails extends Record<unknown> {
   @doc("Component Id.")
   id?: string;
 
@@ -766,9 +758,7 @@ model OperationsListResults {
 }
 
 @doc("The properties of the policy metadata.")
-model PolicyMetadataProperties {
-  ...PolicyMetadataSlimProperties;
-
+model PolicyMetadataProperties extends PolicyMetadataSlimProperties {
   @doc("The description of the policy metadata.")
   @visibility("read")
   description?: string;

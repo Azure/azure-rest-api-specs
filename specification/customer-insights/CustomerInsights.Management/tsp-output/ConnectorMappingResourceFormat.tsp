@@ -21,7 +21,7 @@ model ConnectorMappingResourceFormat is ProxyResource<ConnectorMapping> {
 }
 
 @armResourceOperations
-interface ConnectorMappingResourceFormats {
+interface ConnectorMappings {
   @doc("Gets a connector mapping in the connector.")
   get is ArmResourceRead<ConnectorMappingResourceFormat>;
   @doc("Creates a connector mapping or updates an existing connector mapping in the connector.")

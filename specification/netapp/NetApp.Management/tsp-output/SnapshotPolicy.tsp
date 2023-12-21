@@ -18,6 +18,10 @@ model SnapshotPolicy is TrackedResource<SnapshotPolicyProperties> {
   @key("snapshotPolicyName")
   @segment("snapshotPolicies")
   name: string;
+
+  @doc("A unique read-only string that changes whenever the resource is updated.")
+  @visibility("read")
+  etag?: string;
 }
 
 @armResourceOperations

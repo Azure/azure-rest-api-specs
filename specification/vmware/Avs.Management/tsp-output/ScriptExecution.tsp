@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AvsPrivateCloud.tsp";
+import "./PrivateCloud.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Avs;
 @doc("An instance of a script executed by a user - custom or AVS")
-@parentResource(AvsPrivateCloud)
+@parentResource(PrivateCloud)
 model ScriptExecution is ProxyResource<ScriptExecutionProperties> {
   @doc("Name of the user-invoked script execution resource")
   @path

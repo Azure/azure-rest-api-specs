@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./FrontDoorEndpoint.tsp";
+import "./AFDEndpoint.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.Cdn;
 @doc("Friendly Routes name mapping to the any Routes or secret related information.")
-@parentResource(FrontDoorEndpoint)
+@parentResource(AFDEndpoint)
 model FrontDoorRoute is ProxyResource<RouteProperties> {
   @doc("Name of the routing rule.")
   @path

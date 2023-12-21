@@ -22,7 +22,7 @@ model ExperimentStatus is ProxyResource<ExperimentStatusProperties> {
 }
 
 @armResourceOperations
-interface ExperimentStatuses {
+interface Experiments {
   @doc("Get a status of a Experiment resource.")
   getStatus is ArmResourceRead<ExperimentStatus>;
   @doc("Get a list of statuses of a Experiment resource.")

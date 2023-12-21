@@ -135,8 +135,7 @@ model AzureDevOpsConnectorStatsListResponse {
   nextLink?: string;
 }
 
-model AzureDevOpsConnectorStats {
-  ...ProxyResource;
+model AzureDevOpsConnectorStats extends ProxyResource {
   properties?: AzureDevOpsConnectorStatsProperties;
 }
 
@@ -202,8 +201,7 @@ model GitHubConnectorStatsListResponse {
   nextLink?: string;
 }
 
-model GitHubConnectorStats {
-  ...ProxyResource;
+model GitHubConnectorStats extends ProxyResource {
   properties?: GitHubConnectorStatsProperties;
 }
 

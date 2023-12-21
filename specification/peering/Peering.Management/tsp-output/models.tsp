@@ -175,9 +175,7 @@ enum LearnedType {
 model CdnPeeringPrefixListResult is Azure.Core.Page<CdnPeeringPrefix>;
 
 @doc("The CDN peering prefix")
-model CdnPeeringPrefix {
-  ...Resource;
-
+model CdnPeeringPrefix extends Resource {
   @doc("The properties that define a cdn peering prefix.")
   properties?: CdnPeeringPrefixProperties;
 }
@@ -494,9 +492,7 @@ model ContactDetail {
 model PeeringLocationListResult is Azure.Core.Page<PeeringLocation>;
 
 @doc("Peering location is where connectivity could be established to the Microsoft Cloud Edge.")
-model PeeringLocation {
-  ...Resource;
-
+model PeeringLocation extends Resource {
   @doc("The kind of peering that the peering location supports.")
   kind?: Kind;
 
@@ -624,9 +620,8 @@ model PeeringRegisteredPrefixProperties {
   provisioningState?: ProvisioningState;
 }
 
-model Paths1Sywd6ZSubscriptionsSubscriptionidResourcegroupsResourcegroupnameProvidersMicrosoftPeeringPeeringsPeeringnamePatchRequestbodyContentApplicationJsonSchema {
-  ...ResourceTags;
-}
+model Paths1Sywd6ZSubscriptionsSubscriptionidResourcegroupsResourcegroupnameProvidersMicrosoftPeeringPeeringsPeeringnamePatchRequestbodyContentApplicationJsonSchema
+  extends ResourceTags {}
 
 @doc("The resource tags.")
 model ResourceTags {
@@ -699,18 +694,14 @@ model ConnectionMonitorTestProperties {
 model PeeringServiceCountryListResult is Azure.Core.Page<PeeringServiceCountry>;
 
 @doc("The peering service country.")
-model PeeringServiceCountry {
-  ...Resource;
-}
+model PeeringServiceCountry extends Resource {}
 
 @doc("The paginated list of peering service locations.")
 model PeeringServiceLocationListResult
   is Azure.Core.Page<PeeringServiceLocation>;
 
 @doc("The peering service location.")
-model PeeringServiceLocation {
-  ...Resource;
-
+model PeeringServiceLocation extends Resource {
   @doc("The properties that define a peering service location.")
   properties?: PeeringServiceLocationProperties;
 }
@@ -785,9 +776,7 @@ model PeeringServiceProviderListResult
   is Azure.Core.Page<PeeringServiceProvider>;
 
 @doc("PeeringService provider")
-model PeeringServiceProvider {
-  ...Resource;
-
+model PeeringServiceProvider extends Resource {
   @doc("The properties that define a peering service provider.")
   properties?: PeeringServiceProviderProperties;
 }
@@ -844,9 +833,8 @@ model LogAnalyticsWorkspaceProperties {
   connectedAgents?: string[];
 }
 
-model Paths3702DwSubscriptionsSubscriptionidResourcegroupsResourcegroupnameProvidersMicrosoftPeeringPeeringservicesPeeringservicenamePatchRequestbodyContentApplicationJsonSchema {
-  ...ResourceTags;
-}
+model Paths3702DwSubscriptionsSubscriptionidResourcegroupsResourcegroupnameProvidersMicrosoftPeeringPeeringservicesPeeringservicenamePatchRequestbodyContentApplicationJsonSchema
+  extends ResourceTags {}
 
 @doc("The paginated list of RP unbilled prefixes.")
 model RpUnbilledPrefixListResult is Azure.Core.Page<RpUnbilledPrefix>;

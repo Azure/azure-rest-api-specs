@@ -18,11 +18,15 @@ model NetAppAccount is TrackedResource<AccountProperties> {
   @segment("netAppAccounts")
   name: string;
 
+  @doc("A unique read-only string that changes whenever the resource is updated.")
+  @visibility("read")
+  etag?: string;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }
 
 @armResourceOperations
-interface NetAppAccounts {
+interface Accounts {
   @doc("Get the NetApp account")
   get is ArmResourceRead<NetAppAccount>;
   @doc("Create or update the specified NetApp account within the resource group")
@@ -37,6 +41,10 @@ interface NetAppAccounts {
   listBySubscription is ArmListBySubscription<NetAppAccount>;
   @doc("Renew identity credentials that are used to authenticate to key vault, for customer-managed key encryption. If encryption.identity.principalId does not match identity.principalId, running this operation will fix it.")
   renewCredentials is ArmResourceActionAsync<NetAppAccount, void, void>;
+}
+
+@armResourceOperations
+interface VolumeGroups {
   @summary("Describe all volume groups")
   @doc("List all volume groups for given account")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/volumeGroups")

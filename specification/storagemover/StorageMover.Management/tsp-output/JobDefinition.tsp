@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./StorageMoverProject.tsp";
+import "./Project.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 
 namespace Azure.ResourceManager.StorageMover;
 @doc("The Job Definition resource.")
-@parentResource(StorageMoverProject)
+@parentResource(Project)
 model JobDefinition is ProxyResource<JobDefinitionProperties> {
   @doc("The name of the Job Definition resource.")
   @path

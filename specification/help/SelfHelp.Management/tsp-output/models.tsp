@@ -233,9 +233,7 @@ model Error {
 model DiscoveryResponse is Azure.Core.Page<SolutionMetadataResource>;
 
 @doc("Metadata resource")
-model SolutionMetadataResource {
-  ...ProxyResource;
-
+model SolutionMetadataResource extends ProxyResource {
   @doc("Solution metadata Resource properties.")
   properties?: Solutions;
 }
@@ -430,9 +428,7 @@ model Filter {
 }
 
 @doc("Video detail")
-model Video {
-  ...VideoGroupVideo;
-
+model Video extends VideoGroupVideo {
   @doc("Place holder used in HTML Content replace control with the insight content")
   replacementKey?: string;
 }

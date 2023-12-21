@@ -19,7 +19,7 @@ model GitHubConnector is TrackedResource<GitHubConnectorProperties> {
 }
 
 @armResourceOperations
-interface GitHubConnectors {
+interface GitHubConnector {
   @doc("Returns a monitored GitHub Connector resource for a given ID.")
   get is ArmResourceRead<GitHubConnector>;
   @doc("Create or update a monitored GitHub Connector resource.")
@@ -32,6 +32,10 @@ interface GitHubConnectors {
   listByResourceGroup is ArmResourceListByParent<GitHubConnector>;
   @doc("Returns a list of monitored GitHub Connectors.")
   listBySubscription is ArmListBySubscription<GitHubConnector>;
+}
+
+@armResourceOperations
+interface GitHubRepo {
   @summary("Returns a list of monitored GitHub repositories.")
   @doc("Returns a list of monitored GitHub repositories.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityDevOps/gitHubConnectors/{gitHubConnectorName}/repos")
@@ -55,7 +59,10 @@ interface GitHubConnectors {
     },
     GitHubRepoListResponse
   >;
+}
 
+@armResourceOperations
+interface GitHubConnectorStats {
   @summary("Returns the summary of the GitHub Connector Stats.")
   @doc("Returns the summary of the GitHub Connector Stats.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityDevOps/gitHubConnectors/{gitHubConnectorName}/stats")

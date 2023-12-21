@@ -541,9 +541,7 @@ model NetworkACL {
 }
 
 @doc("ACL for a private endpoint")
-model PrivateEndpointACL {
-  ...NetworkACL;
-
+model PrivateEndpointACL extends NetworkACL {
   @doc("Name of the private endpoint connection")
   name: string;
 }
@@ -639,9 +637,7 @@ model SignalRKeys {
 model PrivateLinkResourceList is Azure.Core.Page<PrivateLinkResource>;
 
 @doc("Private link resource")
-model PrivateLinkResource {
-  ...ProxyResource;
-
+model PrivateLinkResource extends ProxyResource {
   @doc("Private link resource properties")
   properties?: PrivateLinkResourceProperties;
 }

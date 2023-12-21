@@ -24,7 +24,7 @@ model ServiceBusNamespace is TrackedResource<SBNamespaceProperties> {
 }
 
 @armResourceOperations
-interface ServiceBusNamespaces {
+interface Namespaces {
   @doc("Gets a description for the specified namespace.")
   get is ArmResourceRead<ServiceBusNamespace>;
   @doc("Creates or updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.")
@@ -37,12 +37,20 @@ interface ServiceBusNamespaces {
   listByResourceGroup is ArmResourceListByParent<ServiceBusNamespace>;
   @doc("Gets all the available namespaces within the subscription, irrespective of the resource groups.")
   list is ArmListBySubscription<ServiceBusNamespace>;
+}
+
+@armResourceOperations
+interface DisasterRecoveryConfigs {
   @doc("Check the give namespace name availability.")
   checkNameAvailability is ArmResourceActionSync<
     ServiceBusNamespace,
     ServiceBusNameAvailabilityContent,
     ServiceBusNameAvailabilityResult
   >;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
   @doc("Gets lists of resources that supports Privatelinks.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/privateLinkResources")
   @get

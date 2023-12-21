@@ -24,7 +24,7 @@ Resource name for a given resource provider. For example:
 }
 
 @armResourceOperations
-interface CurrentQuotaLimitBases {
+interface Quota {
   @doc("Get the quota limit of a resource. The response can be used to determine the remaining quota to calculate a new quota limit that can be submitted with a PUT request.")
   get is ArmResourceRead<CurrentQuotaLimitBase>;
   @doc("""

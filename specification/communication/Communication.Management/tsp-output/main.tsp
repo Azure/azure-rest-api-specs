@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./CommunicationServiceResource.tsp";
-import "./CommunicationDomainResource.tsp";
+import "./DomainResource.tsp";
 import "./EmailServiceResource.tsp";
 import "./SenderUsernameResource.tsp";
 import "./SuppressionListResource.tsp";
