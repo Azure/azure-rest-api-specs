@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "searchRequest": {
+      "keywords": "<term name>",
+      "limit": 10,
+      "filter": {
+        "and": [
+          {
+            "objectType": "Glossary terms"
+          },
+          {
+            "or": [
+              {
+                "glossaryType": "AtlasGlossary"
+              },
+              {
+                "glossaryType": "AtlasGlossaryTerm"
+              }
+            ]
+          }
+        ]
+      },
+      "facets": [
+        {
+          "facet": "termStatus",
+          "count": 10,
+          "sort": {
+            "count": "desc"
+          }
+        },
+        {
+          "facet": "termTemplate",
+          "count": 10,
+          "sort": {
+            "count": "desc"
+          }
+        }
+      ]
+    },
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 2,
+        "@search.count.approximate": false,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "objectType": "Glossary terms",
+            "glossaryType": "AtlasGlossaryTerm",
+            "id": "b1e51cc4-9249-4c81-bbc7-e2f3117706f3",
+            "name": "termSample1",
+            "glossary": "DefaultGlossary",
+            "longDescription": "it is the definition of the term",
+            "termStatus": "Approved",
+            "termTemplate": [
+              "termTemplateSample"
+            ],
+            "createTime": 1625819659805,
+            "updateTime": 1625819659805,
+            "qualifiedName": "termSample1@DefaultGlossary"
+          },
+          {
+            "@search.score": 1.0,
+            "objectType": "Glossary terms",
+            "glossaryType": "AtlasGlossary",
+            "id": "b28f35e4-fcd4-43ca-91a3-daf432c87156",
+            "name": "DefaultGlossary",
+            "longDescription": "it is the definition of the glossary",
+            "createTime": 1625819658745,
+            "updateTime": 1640656877302,
+            "qualifiedName": "DefaultGlossary"
+          }
+        ],
+        "@search.facets": {
+          "termTemplate": [
+            {
+              "count": 1,
+              "value": "termTemplateSample"
+            }
+          ],
+          "termStatus": [
+            {
+              "count": 1,
+              "value": "Approved"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
