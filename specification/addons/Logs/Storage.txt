@@ -2,15 +2,33 @@ TypeSpec compiler v0.51.0
 
 Diagnostics were reported during compilation:
 
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/models.tsp[39m:[33m1768[39m:[33m6[39m - [31merror[39m[90m spread-model[39m: Cannot spread properties of non-model type.
-> 1768 |   ...Resource;
-       |      ^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/models.tsp[39m:[33m2246[39m:[33m6[39m - [31merror[39m[90m spread-model[39m: Cannot spread properties of non-model type.
-> 2246 |   ...Resource;
-       |      ^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/models.tsp[39m:[33m2536[39m:[33m6[39m - [31merror[39m[90m spread-model[39m: Cannot spread properties of non-model type.
-> 2536 |   ...Resource;
-       |      ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/BlobContainer.tsp[39m:[33m26[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "BlobContainers"
+> 26 | interface BlobContainers {
+     |           ^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/ImmutabilityPolicy.tsp[39m:[33m23[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "BlobContainers"
+> 23 | interface BlobContainers {
+     |           ^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/Table.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Table"
+> 15 | model Table is ProxyResource<TableProperties> {
+     |       ^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/Table.tsp[39m:[33m27[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Table"
+> 27 | interface Table {
+     |           ^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/main.tsp[39m:[33m36[39m:[33m67[39m - [31merror[39m[90m invalid-ref[39m: Enum doesn't have member v1
+> 36 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v1)
+     |                                                                   ^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/main.tsp[39m:[33m36[39m:[33m24[39m - [31merror[39m[90m invalid-argument[39m: Argument 'ErrorType' is not assignable to parameter of type 'valueof string | EnumMember'
+> 36 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v1)
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/models.tsp[39m:[33m1769[39m:[33m35[39m - [31merror[39m[90m extend-model[39m: Models must extend other models.
+> 1769 | model PrivateLinkResource extends Resource {
+       |                                   ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/models.tsp[39m:[33m2251[39m:[33m35[39m - [31merror[39m[90m extend-model[39m: Models must extend other models.
+> 2251 | model AzureEntityResource extends Resource {
+       |                                   ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/storage/Storage.Management/tsp-output/models.tsp[39m:[33m2537[39m:[33m25[39m - [31merror[39m[90m extend-model[39m: Models must extend other models.
+> 2537 | model ListQueue extends Resource {
+       |                         ^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/node_modules/@azure-tools/typespec-azure-resource-manager/lib/parameters.tsp[39m:[33m108[39m:[33m3[39m - [31merror[39m[90m duplicate-property[39m: Model already has a property named BlobServicesName
 > 108 |   ...KeysOf<TResource>;
       |   ^^^^^^^^^^^^^^^^^^^^
@@ -45,5 +63,5 @@ Diagnostics were reported during compilation:
 > 108 |   ...KeysOf<TResource>;
       |   ^^^^^^^^^^^^^^^^^^^^
 
-Found 14 errors.
+Found 20 errors.
 

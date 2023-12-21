@@ -2,6 +2,18 @@ TypeSpec compiler v0.51.0
 
 Diagnostics were reported during compilation:
 
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/sqlvirtualmachine/SqlVirtualMachine.Management/tsp-output/SqlVirtualMachineGroup.tsp[39m:[33m75[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "SqlVirtualMachines"
+> 75 | interface SqlVirtualMachines {
+     |           ^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/sqlvirtualmachine/SqlVirtualMachine.Management/tsp-output/SqlVirtualMachine.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "SqlVirtualMachines"
+> 24 | interface SqlVirtualMachines {
+     |           ^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/sqlvirtualmachine/SqlVirtualMachine.Management/tsp-output/main.tsp[39m:[33m21[39m:[33m67[39m - [31merror[39m[90m invalid-ref[39m: Enum doesn't have member v2
+> 21 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+     |                                                                   ^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/sqlvirtualmachine/SqlVirtualMachine.Management/tsp-output/main.tsp[39m:[33m21[39m:[33m24[39m - [31merror[39m[90m invalid-argument[39m: Argument 'ErrorType' is not assignable to parameter of type 'valueof string | EnumMember'
+> 21 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/node_modules/@azure-tools/typespec-azure-resource-manager/lib/parameters.tsp[39m:[33m108[39m:[33m3[39m - [31merror[39m[90m duplicate-property[39m: Model already has a property named sqlVirtualMachineGroupName
 > 108 |   ...KeysOf<TResource>;
       |   ^^^^^^^^^^^^^^^^^^^^
@@ -23,8 +35,8 @@ Diagnostics were reported during compilation:
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/node_modules/@azure-tools/typespec-azure-resource-manager/lib/parameters.tsp[39m:[33m108[39m:[33m3[39m - [31merror[39m[90m duplicate-property[39m: Model already has a property named sqlVirtualMachineGroupName
 > 108 |   ...KeysOf<TResource>;
       |   ^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/sqlvirtualmachine/SqlVirtualMachine.Management/tsp-output/SqlVmGroup.tsp[39m:[33m88[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier SqlVirtualMachineListResult
-> 88 |     SqlVirtualMachineListResult
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/sqlvirtualmachine/SqlVirtualMachine.Management/tsp-output/SqlVirtualMachineGroup.tsp[39m:[33m93[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier SqlVirtualMachineListResult
+> 93 |     SqlVirtualMachineListResult
      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/node_modules/@azure-tools/typespec-azure-resource-manager/lib/parameters.tsp[39m:[33m108[39m:[33m3[39m - [31merror[39m[90m duplicate-property[39m: Model already has a property named sqlVirtualMachineName
 > 108 |   ...KeysOf<TResource>;
@@ -42,5 +54,5 @@ Diagnostics were reported during compilation:
 > 108 |   ...KeysOf<TResource>;
       |   ^^^^^^^^^^^^^^^^^^^^
 
-Found 13 errors.
+Found 17 errors.
 

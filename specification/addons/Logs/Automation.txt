@@ -2,66 +2,207 @@ TypeSpec compiler v0.51.0
 
 Diagnostics were reported during compilation:
 
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/main.tsp[39m:[33m8[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./AutomationAccountModule.tsp"
-> 8 | import "./AutomationAccountModule.tsp";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m327[39m:[33m6[39m - [31merror[39m[90m invalid-template-args[39m: Too few template arguments provided.
-> 327 |   ...ProxyResource;
-      |      ^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m330[39m:[33m3[39m - [31merror[39m[90m duplicate-property[39m: Model already has a property named properties
-> 330 |   properties?: PrivateLinkResourceProperties;
-      |   ^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m1997[39m:[33m15[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier DscConfigurationCreateOrUpdateProperties
-> 1997 |   properties: DscConfigurationCreateOrUpdateProperties;
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m13[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "AutomationAccount"
+> 13 | model AutomationAccount is TrackedResource<AutomationAccountProperties> {
+     |       ^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m27[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "AutomationAccount"
+> 27 | interface AutomationAccount {
+     |           ^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m1262[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Statistics"
+> 1262 | model Statistics {
+       |       ^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m224[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Statistics"
+> 224 | interface Statistics {
+      |           ^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m1597[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "LinkedWorkspace"
+> 1597 | model LinkedWorkspace {
+       |       ^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m280[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "LinkedWorkspace"
+> 280 | interface LinkedWorkspace {
+      |           ^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscNode.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DscNode"
+> 15 | model DscNode is ProxyResource<DscNodeProperties> {
+     |       ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscNode.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DscNode"
+> 24 | interface DscNode {
+     |           ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscNodeConfiguration.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DscNodeConfiguration"
+> 15 | model DscNodeConfiguration is ProxyResource<DscNodeConfigurationProperties> {
+     |       ^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscNodeConfiguration.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DscNodeConfiguration"
+> 24 | interface DscNodeConfiguration {
+     |           ^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscCompilationJob.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DscCompilationJob"
+> 15 | model DscCompilationJob is ProxyResource<DscCompilationJobProperties> {
+     |       ^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscCompilationJob.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DscCompilationJob"
+> 24 | interface DscCompilationJob {
+     |           ^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m130[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DscCompilationJob"
+> 130 | interface DscCompilationJob {
+      |           ^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/SourceControl.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "SourceControl"
+> 15 | model SourceControl is ProxyResource<SourceControlProperties> {
+     |       ^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/SourceControl.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "SourceControl"
+> 24 | interface SourceControl {
+     |           ^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m960[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "SourceControlSyncJob"
+> 960 | model SourceControlSyncJob {
+      |       ^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/SourceControl.tsp[39m:[33m47[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "SourceControlSyncJob"
+> 47 | interface SourceControlSyncJob {
+     |           ^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Certificate.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Certificate"
+> 15 | model Certificate is ProxyResource<CertificateProperties> {
+     |       ^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Certificate.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Certificate"
+> 24 | interface Certificate {
+     |           ^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Connection.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Connection"
+> 15 | model Connection is ProxyResource<ConnectionProperties> {
+     |       ^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Connection.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Connection"
+> 24 | interface Connection {
+     |           ^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/ConnectionType.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "ConnectionType"
+> 15 | model ConnectionType is ProxyResource<ConnectionTypeProperties> {
+     |       ^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/ConnectionType.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "ConnectionType"
+> 24 | interface ConnectionType {
+     |           ^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Credential.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Credential"
+> 15 | model Credential is ProxyResource<CredentialProperties> {
+     |       ^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Credential.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Credential"
+> 24 | interface Credential {
+     |           ^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/JobSchedule.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "JobSchedule"
+> 15 | model JobSchedule is ProxyResource<JobScheduleProperties> {
+     |       ^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/JobSchedule.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "JobSchedule"
+> 24 | interface JobSchedule {
+     |           ^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Schedule.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Schedule"
+> 15 | model Schedule is ProxyResource<ScheduleProperties> {
+     |       ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Schedule.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Schedule"
+> 24 | interface Schedule {
+     |           ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Variable.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Variable"
+> 15 | model Variable is ProxyResource<VariableProperties> {
+     |       ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Variable.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Variable"
+> 24 | interface Variable {
+     |           ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Watcher.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Watcher"
+> 15 | model Watcher is TrackedResource<WatcherProperties> {
+     |       ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Watcher.tsp[39m:[33m27[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Watcher"
+> 27 | interface Watcher {
+     |           ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscConfiguration.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DscConfiguration"
+> 15 | model DscConfiguration is TrackedResource<DscConfigurationProperties> {
+     |       ^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscConfiguration.tsp[39m:[33m27[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DscConfiguration"
+> 27 | interface DscConfiguration {
+     |           ^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Job.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Job"
+> 15 | model Job is ProxyResource<JobProperties> {
+     |       ^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Job.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Job"
+> 24 | interface Job {
+     |           ^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m813[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "JobStream"
+> 813 | model JobStream {
+      |       ^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Job.tsp[39m:[33m173[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "JobStream"
+> 173 | interface JobStream {
+      |           ^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Runbook.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Runbook"
+> 15 | model Runbook is TrackedResource<RunbookProperties> {
+     |       ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Runbook.tsp[39m:[33m27[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Runbook"
+> 27 | interface Runbook {
+     |           ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m2596[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "RunbookDraft"
+> 2596 | model RunbookDraft {
+       |       ^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Runbook.tsp[39m:[33m73[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "RunbookDraft"
+> 73 | interface RunbookDraft {
+     |           ^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m2738[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "TestJob"
+> 2738 | model TestJob {
+       |       ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Runbook.tsp[39m:[33m136[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "TestJob"
+> 136 | interface TestJob {
+      |           ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Webhook.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Webhook"
+> 15 | model Webhook is ProxyResource<WebhookProperties> {
+     |       ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Webhook.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Webhook"
+> 24 | interface Webhook {
+     |           ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m98[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Webhook"
+> 98 | interface Webhook {
+     |           ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/HybridRunbookWorkerGroup.tsp[39m:[33m15[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "HybridRunbookWorkerGroup"
+> 15 | model HybridRunbookWorkerGroup
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/HybridRunbookWorkerGroup.tsp[39m:[33m25[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "HybridRunbookWorkerGroup"
+> 25 | interface HybridRunbookWorkerGroup {
+     |           ^^^^^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/main.tsp[39m:[33m41[39m:[33m67[39m - [31merror[39m[90m invalid-ref[39m: Enum doesn't have member v2
+> 41 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+     |                                                                   ^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/main.tsp[39m:[33m41[39m:[33m24[39m - [31merror[39m[90m invalid-argument[39m: Argument 'ErrorType' is not assignable to parameter of type 'valueof string | EnumMember'
+> 41 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m326[39m:[33m35[39m - [31merror[39m[90m invalid-template-args[39m: Too few template arguments provided.
+> 326 | model PrivateLinkResource extends ProxyResource {
+      |                                   ^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m1995[39m:[33m15[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier DscConfigurationCreateOrUpdateProperties
+> 1995 |   properties: DscConfigurationCreateOrUpdateProperties;
        |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m2078[39m:[33m6[39m - [31merror[39m[90m invalid-template-args[39m: Too few template arguments provided.
-> 2078 |   ...ProxyResource;
-       |      ^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m2081[39m:[33m3[39m - [31merror[39m[90m duplicate-property[39m: Model already has a property named properties
-> 2081 |   properties: JobCollectionItemProperties;
-       |   ^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m59[39m:[33m63[39m - [31merror[39m[90m unassignable[39m: Type 'string' is not assignable to type 'Model | void'
-> 59 |   generateUri is ArmResourceActionSync<AutomationAccount, {}, string>;
-     |                                                               ^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m167[39m:[33m3[39m - [31merror[39m[90m interface-duplicate[39m: Interface already has a member named Get
-> 167 |   Get is Azure.Core.Foundations.Operation<
-      |   ^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m221[39m:[33m3[39m - [31merror[39m[90m interface-duplicate[39m: Interface already has a member named ListByAutomationAccount
-> 221 |   ListByAutomationAccount is Azure.Core.Foundations.Operation<
-      |   ^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m244[39m:[33m3[39m - [31merror[39m[90m interface-duplicate[39m: Interface already has a member named Get
-> 244 |   Get is Azure.Core.Foundations.Operation<
-      |   ^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m364[39m:[33m3[39m - [31merror[39m[90m interface-duplicate[39m: Interface already has a member named GetById
-> 364 |   GetById is Azure.Core.Foundations.Operation<
-      |   ^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m395[39m:[33m3[39m - [31merror[39m[90m interface-duplicate[39m: Interface already has a member named List
-> 395 |   List is Azure.Core.Foundations.Operation<
-      |   ^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationSourceControl.tsp[39m:[33m147[39m:[33m3[39m - [31merror[39m[90m interface-duplicate[39m: Interface already has a member named Get
-> 147 |   Get is Azure.Core.Foundations.Operation<
-      |   ^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationRunbook.tsp[39m:[33m110[39m:[33m3[39m - [31merror[39m[90m interface-duplicate[39m: Interface already has a member named GetContent
-> 110 |   GetContent is Azure.Core.Foundations.Operation<
-      |   ^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationRunbook.tsp[39m:[33m141[39m:[33m3[39m - [31merror[39m[90m interface-duplicate[39m: Interface already has a member named Get
-> 141 |   Get is Azure.Core.Foundations.Operation<
-      |   ^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationRunbook.tsp[39m:[33m203[39m:[33m3[39m - [31merror[39m[90m interface-duplicate[39m: Interface already has a member named Get
-> 203 |   Get is Azure.Core.Foundations.Operation<
-      |   ^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/routes.tsp[39m:[33m122[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Module
-> 122 |     Module
-      |     ^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/routes.tsp[39m:[33m153[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Module
-> 153 |     Module
-      |     ^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/routes.tsp[39m:[33m184[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Module
-> 184 |     Module
-      |     ^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/models.tsp[39m:[33m2075[39m:[33m33[39m - [31merror[39m[90m invalid-template-args[39m: Too few template arguments provided.
+> 2075 | model JobCollectionItem extends ProxyResource {
+       |                                 ^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/AutomationAccount.tsp[39m:[33m100[39m:[33m65[39m - [31merror[39m[90m unassignable[39m: Type 'string' is not assignable to type 'Model | void'
+> 100 |   generateUri is ArmResourceActionSync<AutomationAccount, void, string>;
+      |                                                                 ^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscCompilationJob.tsp[39m:[33m26[39m:[33m26[39m - [31merror[39m[90m unassignable[39m: Type 'Azure.ResourceManager.Automation.DscCompilationJob' is not assignable to type 'Azure.ResourceManager.Foundations.ArmResource'
+> 26 |   get is ArmResourceRead<DscCompilationJob>;
+     |                          ^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscCompilationJob.tsp[39m:[33m28[39m:[33m44[39m - [31merror[39m[90m unassignable[39m: Type 'Azure.ResourceManager.Automation.DscCompilationJob' is not assignable to type 'Azure.ResourceManager.Foundations.ArmResource'
+> 28 |   create is ArmResourceCreateOrUpdateAsync<DscCompilationJob>;
+     |                                            ^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscCompilationJob.tsp[39m:[33m33[39m:[33m25[39m - [31merror[39m[90m unassignable[39m: Type 'Azure.ResourceManager.Automation.DscCompilationJob' is not assignable to type 'Azure.ResourceManager.Foundations.ArmResource'
+> 33 |       ...BaseParameters<DscCompilationJob>;
+     |                         ^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/DscCompilationJob.tsp[39m:[33m31[39m:[33m5[39m - [31merror[39m[90m unassignable[39m: Type 'Azure.ResourceManager.Automation.DscCompilationJob' is not assignable to type 'Azure.ResourceManager.Foundations.ArmResource'
+> 31 |     DscCompilationJob,
+     |     ^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Webhook.tsp[39m:[33m26[39m:[33m26[39m - [31merror[39m[90m unassignable[39m: Type 'Azure.ResourceManager.Automation.Webhook' is not assignable to type 'Azure.ResourceManager.Foundations.ArmResource'
+> 26 |   get is ArmResourceRead<Webhook>;
+     |                          ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Webhook.tsp[39m:[33m28[39m:[33m52[39m - [31merror[39m[90m unassignable[39m: Type 'Azure.ResourceManager.Automation.Webhook' is not assignable to type 'Azure.ResourceManager.Foundations.ArmResource'
+> 28 |   createOrUpdate is ArmResourceCreateOrReplaceSync<Webhook>;
+     |                                                    ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Webhook.tsp[39m:[33m30[39m:[33m34[39m - [31merror[39m[90m unassignable[39m: Type 'Azure.ResourceManager.Automation.Webhook' is not assignable to type 'Azure.ResourceManager.Foundations.ArmResource'
+> 30 |   update is ArmResourcePatchSync<Webhook, WebhookProperties>;
+     |                                  ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Webhook.tsp[39m:[33m32[39m:[33m35[39m - [31merror[39m[90m unassignable[39m: Type 'Azure.ResourceManager.Automation.Webhook' is not assignable to type 'Azure.ResourceManager.Foundations.ArmResource'
+> 32 |   delete is ArmResourceDeleteSync<Webhook>;
+     |                                   ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Webhook.tsp[39m:[33m37[39m:[33m25[39m - [31merror[39m[90m unassignable[39m: Type 'Azure.ResourceManager.Automation.Webhook' is not assignable to type 'Azure.ResourceManager.Foundations.ArmResource'
+> 37 |       ...BaseParameters<Webhook>;
+     |                         ^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/Webhook.tsp[39m:[33m35[39m:[33m5[39m - [31merror[39m[90m unassignable[39m: Type 'Azure.ResourceManager.Automation.Webhook' is not assignable to type 'Azure.ResourceManager.Foundations.ArmResource'
+> 35 |     Webhook,
+     |     ^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automation/Automation.Management/tsp-output/routes.tsp[39m:[33m207[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ModuleListResult
 > 207 |     ModuleListResult
       |     ^^^^^^^^^^^^^^^^
 
-Found 20 errors.
+Found 67 errors.
 

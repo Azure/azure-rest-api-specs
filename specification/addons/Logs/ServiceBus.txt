@@ -2,21 +2,24 @@ TypeSpec compiler v0.51.0
 
 Diagnostics were reported during compilation:
 
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/main.tsp[39m:[33m12[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./ServiceBusQueueAuthorizationRule.tsp"
-> 12 | import "./ServiceBusQueueAuthorizationRule.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/main.tsp[39m:[33m13[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./ServiceBusTopicAuthorizationRule.tsp"
-> 13 | import "./ServiceBusTopicAuthorizationRule.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/main.tsp[39m:[33m14[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./ServiceBusDisasterRecoveryAuthorizationRule.tsp"
-> 14 | import "./ServiceBusDisasterRecoveryAuthorizationRule.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/ServiceBusNamespace.tsp[39m:[33m27[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Namespaces"
+> 27 | interface Namespaces {
+     |           ^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/ServiceBusNetworkRuleSet.tsp[39m:[33m23[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Namespaces"
+> 23 | interface Namespaces {
+     |           ^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/ServiceBusNamespace.tsp[39m:[33m43[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DisasterRecoveryConfigs"
+> 43 | interface DisasterRecoveryConfigs {
+     |           ^^^^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/ServiceBusDisasterRecovery.tsp[39m:[33m27[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "DisasterRecoveryConfigs"
+> 27 | interface DisasterRecoveryConfigs {
+     |           ^^^^^^^^^^^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/models.tsp[39m:[33m307[39m:[33m20[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ErrorAdditionalInfo
 > 307 |   additionalInfo?: ErrorAdditionalInfo[];
       |                    ^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/models.tsp[39m:[33m312[39m:[33m6[39m - [31merror[39m[90m spread-model[39m: Cannot spread properties of non-model type.
-> 312 |   ...Resource;
-      |      ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/models.tsp[39m:[33m311[39m:[33m38[39m - [31merror[39m[90m extend-model[39m: Models must extend other models.
+> 311 | model ResourceNamespacePatch extends Resource {
+      |                                      ^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/node_modules/@azure-tools/typespec-azure-resource-manager/lib/parameters.tsp[39m:[33m108[39m:[33m3[39m - [31merror[39m[90m duplicate-property[39m: Model already has a property named subscriptionId
 > 108 |   ...KeysOf<TResource>;
       |   ^^^^^^^^^^^^^^^^^^^^
@@ -29,33 +32,12 @@ Diagnostics were reported during compilation:
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/routes.tsp[39m:[33m37[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier SBAuthorizationRuleListResult
 > 37 |     SBAuthorizationRuleListResult
      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/routes.tsp[39m:[33m74[39m:[33m19[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ServiceBusAuthorizationRule
-> 74 |       parameters: ServiceBusAuthorizationRule;
-     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/routes.tsp[39m:[33m76[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ServiceBusAuthorizationRule
-> 76 |     ServiceBusAuthorizationRule
-     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/routes.tsp[39m:[33m146[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ServiceBusAuthorizationRule
-> 146 |     ServiceBusAuthorizationRule
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/routes.tsp[39m:[33m251[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier SBAuthorizationRuleListResult
 > 251 |     SBAuthorizationRuleListResult
       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/routes.tsp[39m:[33m288[39m:[33m19[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ServiceBusAuthorizationRule
-> 288 |       parameters: ServiceBusAuthorizationRule;
-      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/routes.tsp[39m:[33m290[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ServiceBusAuthorizationRule
-> 290 |     ServiceBusAuthorizationRule
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/routes.tsp[39m:[33m325[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ServiceBusAuthorizationRule
-> 325 |     ServiceBusAuthorizationRule
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/routes.tsp[39m:[33m466[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier SBAuthorizationRuleListResult
 > 466 |     SBAuthorizationRuleListResult
       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/servicebus/ServiceBus.Management/tsp-output/routes.tsp[39m:[33m502[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ServiceBusAuthorizationRule
-> 502 |     ServiceBusAuthorizationRule
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Found 18 errors.
+Found 12 errors.
 

@@ -2,27 +2,30 @@ TypeSpec compiler v0.51.0
 
 Diagnostics were reported during compilation:
 
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m99[39m:[33m6[39m - [31merror[39m[90m spread-model[39m: Cannot spread properties of non-model type.
-> 99 |   ...Resource;
-     |      ^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m280[39m:[33m21[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier StorageAccountInformation
-> 280 |   storageAccounts?: StorageAccountInformation[];
-      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m284[39m:[33m21[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ComputePolicy
-> 284 |   computePolicies?: ComputePolicy[];
-      |                     ^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m296[39m:[33m19[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier FirewallRule
-> 296 |   firewallRules?: FirewallRule[];
-      |                   ^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m487[39m:[33m16[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier UpdateStorageAccountProperties
-> 487 |   properties?: UpdateStorageAccountProperties;
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/StorageAccountInformation.tsp[39m:[33m25[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "StorageAccounts"
+> 25 | interface StorageAccounts {
+     |           ^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/StorageContainer.tsp[39m:[33m24[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "StorageAccounts"
+> 24 | interface StorageAccounts {
+     |           ^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/main.tsp[39m:[33m25[39m:[33m67[39m - [31merror[39m[90m invalid-ref[39m: Enum doesn't have member v2
+> 25 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+     |                                                                   ^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/main.tsp[39m:[33m25[39m:[33m24[39m - [31merror[39m[90m invalid-argument[39m: Argument 'ErrorType' is not assignable to parameter of type 'valueof string | EnumMember'
+> 25 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m98[39m:[33m45[39m - [31merror[39m[90m extend-model[39m: Models must extend other models.
+> 98 | model DataLakeAnalyticsAccountBasic extends Resource {
+     |                                             ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m496[39m:[33m16[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier UpdateStorageAccountProperties
+> 496 |   properties?: UpdateStorageAccountProperties;
       |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m496[39m:[33m16[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier UpdateComputePolicyProperties
-> 496 |   properties?: UpdateComputePolicyProperties;
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m505[39m:[33m16[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier UpdateComputePolicyProperties
+> 505 |   properties?: UpdateComputePolicyProperties;
       |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m505[39m:[33m16[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier UpdateFirewallRuleProperties
-> 505 |   properties?: UpdateFirewallRuleProperties;
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/datalake-analytics/DataLakeAnalytics.Management/tsp-output/models.tsp[39m:[33m514[39m:[33m16[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier UpdateFirewallRuleProperties
+> 514 |   properties?: UpdateFirewallRuleProperties;
       |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Found 7 errors.
+Found 8 errors.
 

@@ -2,48 +2,27 @@ TypeSpec compiler v0.51.0
 
 Diagnostics were reported during compilation:
 
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/main.tsp[39m:[33m8[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./AutomanageConfigurationProfileVersion.tsp"
-> 8 | import "./AutomanageConfigurationProfileVersion.tsp";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/main.tsp[39m:[33m10[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./AutomanageHcrpConfigurationProfileAssignment.tsp"
-> 10 | import "./AutomanageHcrpConfigurationProfileAssignment.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/main.tsp[39m:[33m11[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./AutomanageHciClusterConfigurationProfileAssignment.tsp"
-> 11 | import "./AutomanageHciClusterConfigurationProfileAssignment.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/main.tsp[39m:[33m13[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./AutomanageHcrpConfigurationProfileAssignmentReport.tsp"
-> 13 | import "./AutomanageHcrpConfigurationProfileAssignmentReport.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/main.tsp[39m:[33m14[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./AutomanageHciClusterConfigurationProfileAssignmentReport.tsp"
-> 14 | import "./AutomanageHciClusterConfigurationProfileAssignmentReport.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/main.tsp[39m:[33m28[39m:[33m67[39m - [31merror[39m[90m invalid-ref[39m: Enum doesn't have member v2
+> 28 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+     |                                                                   ^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/main.tsp[39m:[33m28[39m:[33m24[39m - [31merror[39m[90m invalid-argument[39m: Argument 'ErrorType' is not assignable to parameter of type 'valueof string | EnumMember'
+> 28 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/models.tsp[39m:[33m119[39m:[33m11[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ErrorDetail
 > 119 |   error?: ErrorDetail;
       |           ^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/models.tsp[39m:[33m92[39m:[33m11[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ErrorDetail
 > 92 |   error?: ErrorDetail;
      |           ^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/models.tsp[39m:[33m132[39m:[33m6[39m - [31merror[39m[90m invalid-template-args[39m: Too few template arguments provided.
-> 132 |   ...ProxyResource;
-      |      ^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/models.tsp[39m:[33m135[39m:[33m3[39m - [31merror[39m[90m duplicate-property[39m: Model already has a property named properties
-> 135 |   properties?: ServicePrincipalProperties;
-      |   ^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/models.tsp[39m:[33m139[39m:[33m16[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier SystemData
-> 139 |   systemData?: SystemData;
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/models.tsp[39m:[33m131[39m:[33m32[39m - [31merror[39m[90m invalid-template-args[39m: Too few template arguments provided.
+> 131 | model ServicePrincipal extends ProxyResource {
+      |                                ^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/models.tsp[39m:[33m137[39m:[33m16[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier SystemData
+> 137 |   systemData?: SystemData;
       |                ^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/models.tsp[39m:[33m139[39m:[33m3[39m - [31merror[39m[90m duplicate-property[39m: Model already has a property named systemData
-> 139 |   systemData?: SystemData;
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/models.tsp[39m:[33m137[39m:[33m3[39m - [31merror[39m[90m override-property-mismatch[39m: Model has an inherited property named systemData of type ErrorType which cannot override type Azure.ResourceManager.Foundations.SystemData
+> 137 |   systemData?: SystemData;
       |   ^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m37[39m:[33m19[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfile
-> 37 |       parameters: ConfigurationProfile;
-     |                   ^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m39[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfile
-> 39 |     ConfigurationProfile
-     |     ^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m66[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfile
-> 66 |     ConfigurationProfile
-     |     ^^^^^^^^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m116[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfileList
 > 116 |     ConfigurationProfileList
       |     ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -53,36 +32,12 @@ Diagnostics were reported during compilation:
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m164[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfileAssignmentList
 > 164 |     ConfigurationProfileAssignmentList
       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m223[39m:[33m19[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfileAssignment
-> 223 |       parameters: ConfigurationProfileAssignment;
-      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m225[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfileAssignment
-> 225 |     ConfigurationProfileAssignment
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m252[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfileAssignment
-> 252 |     ConfigurationProfileAssignment
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m312[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Report
-> 312 |     Report
-      |     ^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m339[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ReportList
 > 339 |     ReportList
       |     ^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m370[39m:[33m19[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfileAssignment
-> 370 |       parameters: ConfigurationProfileAssignment;
-      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m372[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfileAssignment
-> 372 |     ConfigurationProfileAssignment
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m399[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ConfigurationProfileAssignment
-> 399 |     ConfigurationProfileAssignment
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m459[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Report
-> 459 |     Report
-      |     ^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/automanage/Automanage.Management/tsp-output/routes.tsp[39m:[33m486[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ReportList
 > 486 |     ReportList
       |     ^^^^^^^^^^
 
-Found 27 errors.
+Found 12 errors.
 

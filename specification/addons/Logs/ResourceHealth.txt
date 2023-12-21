@@ -2,39 +2,21 @@ TypeSpec compiler v0.51.0
 
 Diagnostics were reported during compilation:
 
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/main.tsp[39m:[33m8[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./TenantResourceHealthEventImpactedResource.tsp"
-> 8 | import "./TenantResourceHealthEventImpactedResource.tsp";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/main.tsp[39m:[33m10[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./TenantResourceHealthEvent.tsp"
-> 10 | import "./TenantResourceHealthEvent.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/models.tsp[39m:[33m642[39m:[33m6[39m - [31merror[39m[90m invalid-template-args[39m: Too few template arguments provided.
-> 642 |   ...ProxyResource;
-      |      ^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/models.tsp[39m:[33m645[39m:[33m3[39m - [31merror[39m[90m duplicate-property[39m: Model already has a property named properties
-> 645 |   properties?: ImpactedResourceStatusProperties;
-      |   ^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/Event.tsp[39m:[33m14[39m:[33m7[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Event"
+> 14 | model Event is ProxyResource<EventProperties> {
+     |       ^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/Event.tsp[39m:[33m23[39m:[33m11[39m - [31merror[39m[90m duplicate-symbol[39m: Duplicate name: "Event"
+> 23 | interface Event {
+     |           ^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/models.tsp[39m:[33m641[39m:[33m38[39m - [31merror[39m[90m invalid-template-args[39m: Too few template arguments provided.
+> 641 | model ImpactedResourceStatus extends ProxyResource {
+      |                                      ^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/routes.tsp[39m:[33m114[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier EventImpactedResourceListResult
 > 114 |     EventImpactedResourceListResult
       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/routes.tsp[39m:[33m131[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier EventImpactedResource
-> 131 |     EventImpactedResource
-      |     ^^^^^^^^^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/routes.tsp[39m:[33m149[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier EventImpactedResourceListResult
 > 149 |     EventImpactedResourceListResult
       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/routes.tsp[39m:[33m167[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Events
-> 167 |     Events
-      |     ^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/routes.tsp[39m:[33m183[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Events
-> 183 |     Events
-      |     ^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/routes.tsp[39m:[33m205[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Event
-> 205 |     Event
-      |     ^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/resourcehealth/ResourceHealth.Management/tsp-output/routes.tsp[39m:[33m217[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Event
-> 217 |     Event
-      |     ^^^^^
 
-Found 11 errors.
+Found 5 errors.
 

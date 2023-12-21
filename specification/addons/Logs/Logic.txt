@@ -2,48 +2,30 @@ TypeSpec compiler v0.51.0
 
 Diagnostics were reported during compilation:
 
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/main.tsp[39m:[33m11[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./LogicWorkflowRunOperation.tsp"
-> 11 | import "./LogicWorkflowRunOperation.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/main.tsp[39m:[33m14[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./LogicWorkflowRunActionScopeRepetition.tsp"
-> 14 | import "./LogicWorkflowRunActionScopeRepetition.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/main.tsp[39m:[33m16[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./LogicWorkflowRunActionRequestHistory.tsp"
-> 16 | import "./LogicWorkflowRunActionRequestHistory.tsp";
-     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/models.tsp[39m:[33m3110[39m:[33m6[39m - [31merror[39m[90m spread-model[39m: Cannot spread properties of non-model type.
-> 3110 |   ...Resource;
-       |      ^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/models.tsp[39m:[33m3440[39m:[33m6[39m - [31merror[39m[90m spread-model[39m: Cannot spread properties of non-model type.
-> 3440 |   ...Resource;
-       |      ^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/LogicWorkflow.tsp[39m:[33m56[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier AnyObject
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/models.tsp[39m:[33m3084[39m:[33m28[39m - [31merror[39m[90m extend-model[39m: Models must extend other models.
+> 3084 | model ApiOperation extends Resource {
+       |                            ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/models.tsp[39m:[33m3410[39m:[33m26[39m - [31merror[39m[90m extend-model[39m: Models must extend other models.
+> 3410 | model ManagedApi extends Resource {
+       |                          ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/Workflow.tsp[39m:[33m56[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier AnyObject
 > 56 |     AnyObject
      |     ^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/LogicWorkflow.tsp[39m:[33m56[39m:[33m5[39m - [31merror[39m[90m unassignable[39m: Type 'ErrorType' is not assignable to type 'Model | void'
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/Workflow.tsp[39m:[33m56[39m:[33m5[39m - [31merror[39m[90m unassignable[39m: Type 'ErrorType' is not assignable to type 'Model | void'
 > 56 |     AnyObject
      |     ^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/LogicWorkflow.tsp[39m:[33m65[39m:[33m59[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier AnyObject
-> 65 |   listSwagger is ArmResourceActionSync<LogicWorkflow, {}, AnyObject>;
-     |                                                           ^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/LogicWorkflow.tsp[39m:[33m65[39m:[33m59[39m - [31merror[39m[90m unassignable[39m: Type 'ErrorType' is not assignable to type 'Model | void'
-> 65 |   listSwagger is ArmResourceActionSync<LogicWorkflow, {}, AnyObject>;
-     |                                                           ^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/Workflow.tsp[39m:[33m65[39m:[33m56[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier AnyObject
+> 65 |   listSwagger is ArmResourceActionSync<Workflow, void, AnyObject>;
+     |                                                        ^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/Workflow.tsp[39m:[33m65[39m:[33m56[39m - [31merror[39m[90m unassignable[39m: Type 'ErrorType' is not assignable to type 'Model | void'
+> 65 |   listSwagger is ArmResourceActionSync<Workflow, void, AnyObject>;
+     |                                                        ^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/routes.tsp[39m:[33m36[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier RequestHistoryListResult
 > 36 |     RequestHistoryListResult
      |     ^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/routes.tsp[39m:[33m68[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier RequestHistory
-> 68 |     RequestHistory
-     |     ^^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/routes.tsp[39m:[33m98[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier WorkflowRunActionRepetitionDefinitionCollection
 > 98 |     WorkflowRunActionRepetitionDefinitionCollection
      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/routes.tsp[39m:[33m130[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier WorkflowRunActionRepetitionDefinition
-> 130 |     WorkflowRunActionRepetitionDefinition
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/logic/Logic.Management/tsp-output/routes.tsp[39m:[33m160[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier WorkflowRun
-> 160 |     WorkflowRun
-      |     ^^^^^^^^^^^
 
-Found 14 errors.
+Found 8 errors.
 

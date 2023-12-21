@@ -2,30 +2,18 @@ TypeSpec compiler v0.51.0
 
 Diagnostics were reported during compilation:
 
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/main.tsp[39m:[33m7[39m:[33m1[39m - [31merror[39m[90m import-not-found[39m: Couldn't resolve import "./MaintenanceConfiguration.tsp"
-> 7 | import "./MaintenanceConfiguration.tsp";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/models.tsp[39m:[33m185[39m:[33m6[39m - [31merror[39m[90m spread-model[39m: Cannot spread properties of non-model type.
-> 185 |   ...Resource;
-      |      ^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/models.tsp[39m:[33m246[39m:[33m11[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Operation
-> 246 |   value?: Operation[];
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/main.tsp[39m:[33m22[39m:[33m67[39m - [31merror[39m[90m invalid-ref[39m: Enum doesn't have member v2
+> 22 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+     |                                                                   ^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/main.tsp[39m:[33m22[39m:[33m24[39m - [31merror[39m[90m invalid-argument[39m: Argument 'ErrorType' is not assignable to parameter of type 'valueof string | EnumMember'
+> 22 | @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/models.tsp[39m:[33m184[39m:[33m39[39m - [31merror[39m[90m extend-model[39m: Models must extend other models.
+> 184 | model ConfigurationAssignment extends Resource {
+      |                                       ^^^^^^^^
+[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/models.tsp[39m:[33m244[39m:[33m11[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier Operation
+> 244 |   value?: Operation[];
       |           ^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/routes.tsp[39m:[33m327[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier MaintenanceConfiguration
-> 327 |     MaintenanceConfiguration
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/routes.tsp[39m:[33m350[39m:[33m22[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier MaintenanceConfiguration
-> 350 |       configuration: MaintenanceConfiguration;
-      |                      ^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/routes.tsp[39m:[33m352[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier MaintenanceConfiguration
-> 352 |     MaintenanceConfiguration
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/routes.tsp[39m:[33m396[39m:[33m22[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier MaintenanceConfiguration
-> 396 |       configuration: MaintenanceConfiguration;
-      |                      ^^^^^^^^^^^^^^^^^^^^^^^^
-[36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/routes.tsp[39m:[33m398[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier MaintenanceConfiguration
-> 398 |     MaintenanceConfiguration
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^
 [36mC:/Users/v-cruan/Documents/GitHub/azure-rest-api-specs/specification/maintenance/Maintenance.Management/tsp-output/routes.tsp[39m:[33m411[39m:[33m5[39m - [31merror[39m[90m unknown-identifier[39m: Unknown identifier ListMaintenanceConfigurationsResult
 > 411 |     ListMaintenanceConfigurationsResult
       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -36,5 +24,5 @@ Diagnostics were reported during compilation:
 > 449 |     ListApplyUpdate
       |     ^^^^^^^^^^^^^^^
 
-Found 11 errors.
+Found 7 errors.
 
