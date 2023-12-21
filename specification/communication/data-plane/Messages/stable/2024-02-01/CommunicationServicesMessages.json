@@ -354,11 +354,12 @@
           "description": "The codes for the supported languages for templates."
         },
         "values": {
-          "type": "object",
+          "type": "array",
           "description": "The template values.",
-          "additionalProperties": {
+          "items": {
             "$ref": "#/definitions/MessageTemplateValue"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "bindings": {
           "$ref": "#/definitions/MessageTemplateBindings",
@@ -383,6 +384,112 @@
       "required": [
         "kind"
       ]
+    },
+    "MessageTemplateDocument": {
+      "type": "object",
+      "description": "The message template's document value information.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The (public) URL of the media."
+        },
+        "caption": {
+          "type": "string",
+          "description": "The [optional] caption of the media object."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The [optional] filename of the media file."
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "document"
+    },
+    "MessageTemplateImage": {
+      "type": "object",
+      "description": "The message template's image value information.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The (public) URL of the media."
+        },
+        "caption": {
+          "type": "string",
+          "description": "The [optional] caption of the media object."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The [optional] filename of the media file."
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "image"
+    },
+    "MessageTemplateLocation": {
+      "type": "object",
+      "description": "The message template's location value information.",
+      "properties": {
+        "locationName": {
+          "type": "string",
+          "description": "The [Optional] name of the location."
+        },
+        "address": {
+          "type": "string",
+          "description": "The [Optional] address of the location."
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "description": "The latitude of the location."
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "description": "The longitude of the location."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "location"
+    },
+    "MessageTemplateQuickAction": {
+      "type": "object",
+      "description": "The message template's quick action value information.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The [Optional] quick action text"
+        },
+        "payload": {
+          "type": "string",
+          "description": "The [Optional] quick action payload"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "quickAction"
     },
     "MessageTemplateResponse": {
       "type": "object",
@@ -452,125 +559,7 @@
         ]
       }
     },
-    "MessageTemplateValue": {
-      "type": "object",
-      "description": "The class describes a parameter of a template.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for MessageTemplateValue."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
-    "MessageTemplateValueDocument": {
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The (public) URL of the media."
-        },
-        "caption": {
-          "type": "string",
-          "description": "The [optional] caption of the media object."
-        },
-        "fileName": {
-          "type": "string",
-          "description": "The [optional] filename of the media file."
-        }
-      },
-      "required": [
-        "url"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/MessageTemplateValue"
-        }
-      ],
-      "x-ms-discriminator-value": "document"
-    },
-    "MessageTemplateValueImage": {
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The (public) URL of the media."
-        },
-        "caption": {
-          "type": "string",
-          "description": "The [optional] caption of the media object."
-        },
-        "fileName": {
-          "type": "string",
-          "description": "The [optional] filename of the media file."
-        }
-      },
-      "required": [
-        "url"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/MessageTemplateValue"
-        }
-      ],
-      "x-ms-discriminator-value": "image"
-    },
-    "MessageTemplateValueLocation": {
-      "type": "object",
-      "description": "The message template's location value information.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The [Optional] name of the location."
-        },
-        "address": {
-          "type": "string",
-          "description": "The [Optional] address of the location."
-        },
-        "latitude": {
-          "type": "number",
-          "format": "double",
-          "description": "The latitude of the location."
-        },
-        "longitude": {
-          "type": "number",
-          "format": "double",
-          "description": "The longitude of the location."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MessageTemplateValue"
-        }
-      ],
-      "x-ms-discriminator-value": "location"
-    },
-    "MessageTemplateValueQuickAction": {
-      "type": "object",
-      "description": "The message template's quick action value information.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The [Optional] quick action text"
-        },
-        "payload": {
-          "type": "string",
-          "description": "The [Optional] quick action payload"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MessageTemplateValue"
-        }
-      ],
-      "x-ms-discriminator-value": "quickAction"
-    },
-    "MessageTemplateValueText": {
+    "MessageTemplateText": {
       "type": "object",
       "description": "The message template's text value information.",
       "properties": {
@@ -589,8 +578,28 @@
       ],
       "x-ms-discriminator-value": "text"
     },
-    "MessageTemplateValueVideo": {
+    "MessageTemplateValue": {
       "type": "object",
+      "description": "The class describes a parameter of a template.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for MessageTemplateValue."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Template value"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "name"
+      ]
+    },
+    "MessageTemplateVideo": {
+      "type": "object",
+      "description": "The message template's video value information.",
       "properties": {
         "url": {
           "type": "string",
