@@ -46,6 +46,27 @@ model GenerateAwsTemplateRequest {
   solutionTypes?: Array<SolutionTypeProperties>;
 }
 
+@doc("Public connector permissions.")
+model TestPermissionResponse {
+  @doc("The name of public cloud connector")
+  overallStatus: string;
+
+  @doc("Solution type permissions.")
+  solutionTypes: Array<SolutionTypePermissions>;
+}
+
+@doc("Solution type permissions.")
+model SolutionTypePermissions {
+  @doc("The name of solution Type")
+  solutionType: string;
+
+  @doc("The status")
+  status: string;
+
+  @doc("The details of the status")
+  statusDetails: string;
+}
+
 //---------------------------------------------- Operations ----------------------------------------------
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
@@ -65,4 +86,22 @@ interface GenerateAwsTemplate {
     @body
     generateAwsTemplateRequest: GenerateAwsTemplateRequest,
   ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
+@route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnectorId}")
+interface TestPermissions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
+  @route("testPermissions")
+  @post
+  @action
+  @tag("TestPermissions")
+  @doc("Retrieve AWS Cloud Formation template")
+  post(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    @doc("ConnectorId to check permissions of.")
+    publicCloudConnectorId: string,
+  ): Azure.ResourceManager.ArmAcceptedLroResponse<"Asynchronous operation in progress."> | TestPermissionResponse | Azure.ResourceManager.ErrorResponse;
 }
