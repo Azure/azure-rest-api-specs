@@ -751,7 +751,7 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}": {
+    "/atlas/v2/entity/guid/{guid}/businessmetadata/{businessMetadataName}": {
       "post": {
         "operationId": "Entity_AddOrUpdateBusinessMetadataAttributes",
         "description": "Add or update business metadata attributes.",
@@ -760,7 +760,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "bmName",
+            "name": "businessMetadataName",
             "in": "path",
             "description": "BusinessMetadata name",
             "required": true,
@@ -809,7 +809,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "bmName",
+            "name": "businessMetadataName",
             "in": "path",
             "description": "BusinessMetadata name",
             "required": true,
@@ -1512,7 +1512,7 @@
             "x-ms-client-name": "attr"
           },
           {
-            "name": "atlasClassificationArray",
+            "name": "classifications",
             "in": "body",
             "description": "An array of classification to be added.",
             "required": true,
@@ -1567,7 +1567,7 @@
             "x-ms-client-name": "attr"
           },
           {
-            "name": "body",
+            "name": "labels",
             "in": "body",
             "description": "set of labels to be added",
             "required": true,
@@ -1704,7 +1704,7 @@
     "/atlas/v2/glossary": {
       "get": {
         "operationId": "Glossary_List",
-        "description": "Get all glossaries. Recommend using limit/offset to get pagination result.\nRecommend using 'ignoreTermsAndCategories=true' and fetch terms/categories\nseparately using \n\n 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms'\nand \n\n 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
+        "description": "Get all glossaries. Recommend using limit/offset to get pagination result.\nRecommend using 'ignoreTermsAndCategories=true' and fetch terms/categories\nseparately using \n\n 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'\nand \n\n 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1802,7 +1802,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}": {
+    "/atlas/v2/glossary/{glossaryId}": {
       "get": {
         "operationId": "Glossary_Get",
         "description": "Get a specific Glossary by its GUID.",
@@ -1811,7 +1811,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "glossaryGuid",
+            "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
             "required": true,
@@ -1846,7 +1846,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "glossaryGuid",
+            "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
             "required": true,
@@ -1897,7 +1897,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "glossaryGuid",
+            "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
             "required": true,
@@ -1922,7 +1922,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/categories": {
+    "/atlas/v2/glossary/{glossaryId}/categories": {
       "get": {
         "operationId": "Glossary_ListCategories",
         "description": "Get the categories belonging to a specific glossary. Recommend using\nlimit/offset to get pagination result.",
@@ -1931,7 +1931,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "glossaryGuid",
+            "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
             "required": true,
@@ -1986,7 +1986,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/categories/headers": {
+    "/atlas/v2/glossary/{glossaryId}/categories/headers": {
       "get": {
         "operationId": "Glossary_ListCategoriesHeaders",
         "description": "Get the category headers belonging to a specific glossary. Recommend using\nlimit/offset to get pagination result.",
@@ -1995,7 +1995,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "glossaryGuid",
+            "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
             "required": true,
@@ -2050,16 +2050,16 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/detailed": {
+    "/atlas/v2/glossary/{glossaryId}/detailed": {
       "get": {
         "operationId": "Glossary_GetDetailed",
-        "description": "Get a specific glossary with detailed information. This API is not\nrecommend.\n\nRecommend to fetch terms/categories details separately using \n\nGET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms and \n\nGET /datamap/api/atlas/v2/glossary/{glossaryGuid}/categories.",
+        "description": "Get a specific glossary with detailed information. This API is not\nrecommend.\n\nRecommend to fetch terms/categories details separately using \n\nGET /datamap/api/atlas/v2/glossary/{glossaryId}/terms and \n\nGET /datamap/api/atlas/v2/glossary/{glossaryId}/categories.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "glossaryGuid",
+            "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
             "required": true,
@@ -2087,7 +2087,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/partial": {
+    "/atlas/v2/glossary/{glossaryId}/partial": {
       "put": {
         "operationId": "Glossary_PartialUpdate",
         "description": "Update the glossary partially. Some properties such as qualifiedName are not\nallowed to be updated.\n\nSo far we only supports partial updating\nshortDescription, longDescription, language and usage for glossary. \n\nRecommend\nusing 'ignoreTermsAndCategories=true' to reduce response body size.",
@@ -2096,7 +2096,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "glossaryGuid",
+            "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
             "required": true,
@@ -2138,7 +2138,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/terms": {
+    "/atlas/v2/glossary/{glossaryId}/terms": {
       "get": {
         "operationId": "Glossary_ListTerms",
         "description": "Get terms belonging to a specific glossary. Recommend using limit/offset to get\npagination result.",
@@ -2147,7 +2147,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "glossaryGuid",
+            "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
             "required": true,
@@ -2202,7 +2202,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/terms/headers": {
+    "/atlas/v2/glossary/{glossaryId}/terms/headers": {
       "get": {
         "operationId": "Glossary_ListTermHeaders",
         "description": "Get term headers belonging to a specific glossary. Recommend using limit/offset\nto get pagination result.",
@@ -2211,7 +2211,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "glossaryGuid",
+            "name": "glossaryId",
             "in": "path",
             "description": "The globally unique identifier for glossary.",
             "required": true,
@@ -2352,7 +2352,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}": {
+    "/atlas/v2/glossary/category/{categoryId}": {
       "get": {
         "operationId": "Glossary_GetCategory",
         "description": "Get specific glossary category by its GUID.",
@@ -2361,7 +2361,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "categoryGuid",
+            "name": "categoryId",
             "in": "path",
             "description": "The globally unique identifier of the category.",
             "required": true,
@@ -2396,7 +2396,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "categoryGuid",
+            "name": "categoryId",
             "in": "path",
             "description": "The globally unique identifier of the category.",
             "required": true,
@@ -2440,7 +2440,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "categoryGuid",
+            "name": "categoryId",
             "in": "path",
             "description": "The globally unique identifier of the category.",
             "required": true,
@@ -2465,7 +2465,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}/partial": {
+    "/atlas/v2/glossary/category/{categoryId}/partial": {
       "put": {
         "operationId": "Glossary_PartialUpdateCategory",
         "description": "Update the glossary category partially. So far we only supports partial\nupdating shortDescription and longDescription for category.",
@@ -2474,7 +2474,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "categoryGuid",
+            "name": "categoryId",
             "in": "path",
             "description": "The globally unique identifier of the category.",
             "required": true,
@@ -2509,7 +2509,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}/related": {
+    "/atlas/v2/glossary/category/{categoryId}/related": {
       "get": {
         "operationId": "Glossary_ListRelatedCategories",
         "description": "Get all related categories (parent and children). Limit, offset, and sort\nparameters are currently not being enabled and won't work even they are passed.",
@@ -2518,7 +2518,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "categoryGuid",
+            "name": "categoryId",
             "in": "path",
             "description": "The globally unique identifier of the category.",
             "required": true,
@@ -2576,7 +2576,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}/terms": {
+    "/atlas/v2/glossary/category/{categoryId}/terms": {
       "get": {
         "operationId": "Glossary_ListCategoryTerms",
         "description": "Get all terms associated with the specific category.",
@@ -2585,7 +2585,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "categoryGuid",
+            "name": "categoryId",
             "in": "path",
             "description": "The globally unique identifier of the category.",
             "required": true,
@@ -2689,7 +2689,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/term/{termGuid}": {
+    "/atlas/v2/glossary/term/{termId}": {
       "get": {
         "operationId": "Glossary_GetTerm",
         "description": "Get a specific glossary term by its GUID. ",
@@ -2698,7 +2698,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "termGuid",
+            "name": "termId",
             "in": "path",
             "description": "The globally unique identifier for glossary term.",
             "required": true,
@@ -2736,7 +2736,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "termGuid",
+            "name": "termId",
             "in": "path",
             "description": "The globally unique identifier for glossary term.",
             "required": true,
@@ -2787,7 +2787,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "termGuid",
+            "name": "termId",
             "in": "path",
             "description": "The globally unique identifier for glossary term.",
             "required": true,
@@ -2812,7 +2812,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/term/{termGuid}/partial": {
+    "/atlas/v2/glossary/term/{termId}/partial": {
       "put": {
         "operationId": "Glossary_PartialUpdateTerm",
         "description": "Update the glossary term partially. So far we only supports partial updating\nshortDescription, longDescription, abbreviation, usage and status for term.",
@@ -2821,7 +2821,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "termGuid",
+            "name": "termId",
             "in": "path",
             "description": "The globally unique identifier for glossary term.",
             "required": true,
@@ -2917,7 +2917,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/terms/{termGuid}/assignedEntities": {
+    "/atlas/v2/glossary/terms/{termId}/assignedEntities": {
       "get": {
         "operationId": "Glossary_ListEntitiesAssignedWithTerm",
         "description": "List all related objects assigned with the specified term. Recommend using\nlimit/offset to get pagination result.",
@@ -2926,7 +2926,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "termGuid",
+            "name": "termId",
             "in": "path",
             "description": "The globally unique identifier for glossary term.",
             "required": true,
@@ -2988,7 +2988,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "termGuid",
+            "name": "termId",
             "in": "path",
             "description": "The globally unique identifier for glossary term.",
             "required": true,
@@ -3033,7 +3033,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "termGuid",
+            "name": "termId",
             "in": "path",
             "description": "The globally unique identifier for glossary term.",
             "required": true,
@@ -3071,7 +3071,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/terms/{termGuid}/related": {
+    "/atlas/v2/glossary/terms/{termId}/related": {
       "get": {
         "operationId": "Glossary_ListRelatedTerms",
         "description": "Get all related terms for a specific term by its GUID. Limit, offset, and sort\nparameters are currently not being enabled and won't work even they are passed.",
@@ -3080,7 +3080,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "termGuid",
+            "name": "termId",
             "in": "path",
             "description": "The globally unique identifier for glossary term.",
             "required": true,
@@ -7216,7 +7216,7 @@
           "description": "Attribute name"
         },
         "operator": {
-          "$ref": "#/definitions/SearchFilterOperator",
+          "$ref": "#/definitions/FilterOperator",
           "description": "Operator"
         },
         "attributeValue": {
@@ -7721,6 +7721,84 @@
         }
       ],
       "x-ms-discriminator-value": "FileExtensionFilter"
+    },
+    "FilterOperator": {
+      "type": "string",
+      "description": "Search Filter Operator",
+      "enum": [
+        "eq",
+        "ne",
+        "gt",
+        "lt",
+        "ge",
+        "le",
+        "contains",
+        "startswith",
+        "prefix",
+        "timerange",
+        "exists"
+      ],
+      "x-ms-enum": {
+        "name": "FilterOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "eq",
+            "value": "eq",
+            "description": "equal"
+          },
+          {
+            "name": "ne",
+            "value": "ne",
+            "description": "not equal"
+          },
+          {
+            "name": "gt",
+            "value": "gt",
+            "description": "greater than"
+          },
+          {
+            "name": "lt",
+            "value": "lt",
+            "description": "less than"
+          },
+          {
+            "name": "ge",
+            "value": "ge",
+            "description": "greater than or equal to"
+          },
+          {
+            "name": "le",
+            "value": "le",
+            "description": "less than or equal to"
+          },
+          {
+            "name": "contains",
+            "value": "contains",
+            "description": "contains"
+          },
+          {
+            "name": "startswith",
+            "value": "startswith",
+            "description": "start with"
+          },
+          {
+            "name": "prefix",
+            "value": "prefix",
+            "description": "prefix"
+          },
+          {
+            "name": "timerange",
+            "value": "timerange",
+            "description": "time range"
+          },
+          {
+            "name": "exists",
+            "value": "exists",
+            "description": "exists"
+          }
+        ]
+      }
     },
     "GlossaryFilter": {
       "type": "object",
@@ -8408,84 +8486,6 @@
       "required": [
         "kind"
       ]
-    },
-    "SearchFilterOperator": {
-      "type": "string",
-      "description": "Search Filter Operator",
-      "enum": [
-        "eq",
-        "ne",
-        "gt",
-        "lt",
-        "ge",
-        "le",
-        "contains",
-        "startswith",
-        "prefix",
-        "timerange",
-        "exists"
-      ],
-      "x-ms-enum": {
-        "name": "SearchFilterOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "eq",
-            "value": "eq",
-            "description": "equal"
-          },
-          {
-            "name": "ne",
-            "value": "ne",
-            "description": "not equal"
-          },
-          {
-            "name": "gt",
-            "value": "gt",
-            "description": "greater than"
-          },
-          {
-            "name": "lt",
-            "value": "lt",
-            "description": "less than"
-          },
-          {
-            "name": "ge",
-            "value": "ge",
-            "description": "greater than or equal to"
-          },
-          {
-            "name": "le",
-            "value": "le",
-            "description": "less than or equal to"
-          },
-          {
-            "name": "contains",
-            "value": "contains",
-            "description": "contains"
-          },
-          {
-            "name": "startswith",
-            "value": "startswith",
-            "description": "start with"
-          },
-          {
-            "name": "prefix",
-            "value": "prefix",
-            "description": "prefix"
-          },
-          {
-            "name": "timerange",
-            "value": "timerange",
-            "description": "time range"
-          },
-          {
-            "name": "exists",
-            "value": "exists",
-            "description": "exists"
-          }
-        ]
-      }
     },
     "SearchHighlights": {
       "type": "object",

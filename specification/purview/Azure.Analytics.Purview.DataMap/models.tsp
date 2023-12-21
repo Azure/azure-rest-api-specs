@@ -232,7 +232,7 @@ enum TypeDef {
 }
 
 @doc("Search Filter Operator")
-enum SearchFilterOperator {
+enum FilterOperator {
   @doc("equal")
   eq,
 
@@ -2021,7 +2021,7 @@ model AttributeFilter extends SearchFilter {
   attributeName: string;
 
   @doc("Operator")
-  operator: SearchFilterOperator;
+  operator: FilterOperator;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("Attribute value")

@@ -529,7 +529,7 @@ be changed to other unique attributes)
 
       @doc("An array of classification to be added.")
       @body
-      atlasClassificationArray: AtlasClassification[];
+      classifications: AtlasClassification[];
     },
     void,
     {},
@@ -694,13 +694,13 @@ default is false.
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an Atlas existing api"
   @doc("Delete business metadata attributes from an entity.")
-  @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}")
+  @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{businessMetadataName}")
   @delete
   removeBusinessMetadataAttributes is Azure.Core.Foundations.Operation<
     {
       @doc("BusinessMetadata name")
       @path
-      bmName: string;
+      businessMetadataName: string;
 
       @doc("The globally unique identifier of the entity.")
       @path
@@ -719,13 +719,13 @@ default is false.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an Atlas existing api"
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
   @doc("Add or update business metadata attributes.")
-  @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}")
+  @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{businessMetadataName}")
   @post
   addOrUpdateBusinessMetadataAttributes is Azure.Core.Foundations.Operation<
     {
       @doc("BusinessMetadata name")
       @path
-      bmName: string;
+      businessMetadataName: string;
 
       @doc("The globally unique identifier of the entity.")
       @path
@@ -949,7 +949,7 @@ be changed to other unique attributes)
 
       @doc("set of labels to be added")
       @body
-      body: string[];
+      labels: string[];
     },
     void,
     {},
@@ -983,10 +983,10 @@ Get all glossaries. Recommend using limit/offset to get pagination result.
 Recommend using 'ignoreTermsAndCategories=true' and fetch terms/categories
 separately using 
 
- 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms'
+ 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'
 and 
 
- 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.
+ 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.
 """)
   @route("/atlas/v2/glossary")
   @get
@@ -1071,13 +1071,13 @@ can also be defined during creation.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get specific glossary category by its GUID.")
-  @route("/atlas/v2/glossary/category/{categoryGuid}")
+  @route("/atlas/v2/glossary/category/{categoryId}")
   @get
   getCategory is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
-      categoryGuid: string;
+      categoryId: string;
     },
     AtlasGlossaryCategory,
     {},
@@ -1086,13 +1086,13 @@ can also be defined during creation.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Update the given glossary category by its GUID.")
-  @route("/atlas/v2/glossary/category/{categoryGuid}")
+  @route("/atlas/v2/glossary/category/{categoryId}")
   @put
   updateCategory is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
-      categoryGuid: string;
+      categoryId: string;
 
       @doc("The glossary category to be updated.")
       @body
@@ -1105,13 +1105,13 @@ can also be defined during creation.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete a glossary category.")
-  @route("/atlas/v2/glossary/category/{categoryGuid}")
+  @route("/atlas/v2/glossary/category/{categoryId}")
   @delete
   deleteCategory is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
-      categoryGuid: string;
+      categoryId: string;
     },
     void,
     {},
@@ -1124,13 +1124,13 @@ can also be defined during creation.
 Update the glossary category partially. So far we only supports partial
 updating shortDescription and longDescription for category.
 """)
-  @route("/atlas/v2/glossary/category/{categoryGuid}/partial")
+  @route("/atlas/v2/glossary/category/{categoryId}/partial")
   @put
   partialUpdateCategory is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
-      categoryGuid: string;
+      categoryId: string;
 
       @doc("""
 A map containing keys as attribute names and values as corresponding attribute
@@ -1149,13 +1149,13 @@ values for partial update.
 Get all related categories (parent and children). Limit, offset, and sort
 parameters are currently not being enabled and won't work even they are passed.
 """)
-  @route("/atlas/v2/glossary/category/{categoryGuid}/related")
+  @route("/atlas/v2/glossary/category/{categoryId}/related")
   @get
   listRelatedCategories is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
-      categoryGuid: string;
+      categoryId: string;
 
       @doc("The page size - by default there is no paging.")
       @query
@@ -1176,13 +1176,13 @@ parameters are currently not being enabled and won't work even they are passed.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get all terms associated with the specific category.")
-  @route("/atlas/v2/glossary/category/{categoryGuid}/terms")
+  @route("/atlas/v2/glossary/category/{categoryId}/terms")
   @get
   listCategoryTerms is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier of the category.")
       @path
-      categoryGuid: string;
+      categoryId: string;
 
       @doc("The page size - by default there is no paging.")
       @query
@@ -1226,13 +1226,13 @@ Optionally it can be categorized as well.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get a specific glossary term by its GUID. ")
-  @route("/atlas/v2/glossary/term/{termGuid}")
+  @route("/atlas/v2/glossary/term/{termId}")
   @get
   getTerm is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
-      termGuid: string;
+      termId: string;
     },
     AtlasGlossaryTerm,
     {},
@@ -1241,13 +1241,13 @@ Optionally it can be categorized as well.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Update the given glossary term by its GUID.")
-  @route("/atlas/v2/glossary/term/{termGuid}")
+  @route("/atlas/v2/glossary/term/{termId}")
   @put
   updateTerm is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
-      termGuid: string;
+      termId: string;
 
       @doc("Whether include term hierarchy")
       @query
@@ -1264,13 +1264,13 @@ Optionally it can be categorized as well.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete a glossary term.")
-  @route("/atlas/v2/glossary/term/{termGuid}")
+  @route("/atlas/v2/glossary/term/{termId}")
   @delete
   deleteTerm is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
-      termGuid: string;
+      termId: string;
     },
     void,
     {},
@@ -1283,13 +1283,13 @@ Optionally it can be categorized as well.
 Update the glossary term partially. So far we only supports partial updating
 shortDescription, longDescription, abbreviation, usage and status for term.
 """)
-  @route("/atlas/v2/glossary/term/{termGuid}/partial")
+  @route("/atlas/v2/glossary/term/{termId}/partial")
   @put
   partialUpdateTerm is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
-      termGuid: string;
+      termId: string;
 
       @doc("Whether include term hierarchy")
       @query
@@ -1332,13 +1332,13 @@ values to be updated.
 List all related objects assigned with the specified term. Recommend using
 limit/offset to get pagination result.
 """)
-  @route("/atlas/v2/glossary/terms/{termGuid}/assignedEntities")
+  @route("/atlas/v2/glossary/terms/{termId}/assignedEntities")
   @get
   listEntitiesAssignedWithTerm is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
-      termGuid: string;
+      termId: string;
 
       @doc("The page size - by default there is no paging.")
       @query
@@ -1367,13 +1367,13 @@ small batches with multiple API calls.
 operation](https://learn.microsoft.com/en-us/rest/api/purview/datamapdataplane/entity/bulk-create-or-update?tabs=HTTP)
 is an alternative to assign a term to multiple entities.
 """)
-  @route("/atlas/v2/glossary/terms/{termGuid}/assignedEntities")
+  @route("/atlas/v2/glossary/terms/{termId}/assignedEntities")
   @post
   assignTermToEntities is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
-      termGuid: string;
+      termId: string;
 
       @doc("An array of related object IDs to which the term has to be associated.")
       @body
@@ -1387,13 +1387,13 @@ is an alternative to assign a term to multiple entities.
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Delete the term assignment for the given list of related objects.")
-  @route("/atlas/v2/glossary/terms/{termGuid}/assignedEntities")
+  @route("/atlas/v2/glossary/terms/{termId}/assignedEntities")
   @delete
   deleteTermAssignmentFromEntities is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
-      termGuid: string;
+      termId: string;
 
       @doc("An array of related object IDs from which the term has to be dissociated.")
       @body
@@ -1409,13 +1409,13 @@ is an alternative to assign a term to multiple entities.
 Get all related terms for a specific term by its GUID. Limit, offset, and sort
 parameters are currently not being enabled and won't work even they are passed.
 """)
-  @route("/atlas/v2/glossary/terms/{termGuid}/related")
+  @route("/atlas/v2/glossary/terms/{termId}/related")
   @get
   listRelatedTerms is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
-      termGuid: string;
+      termId: string;
 
       @doc("The page size - by default there is no paging.")
       @query
@@ -1436,13 +1436,13 @@ parameters are currently not being enabled and won't work even they are passed.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get a specific Glossary by its GUID.")
-  @route("/atlas/v2/glossary/{glossaryGuid}")
+  @route("/atlas/v2/glossary/{glossaryId}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
-      glossaryGuid: string;
+      glossaryId: string;
     },
     AtlasGlossary,
     {},
@@ -1451,13 +1451,13 @@ parameters are currently not being enabled and won't work even they are passed.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Update the given glossary.")
-  @route("/atlas/v2/glossary/{glossaryGuid}")
+  @route("/atlas/v2/glossary/{glossaryId}")
   @put
   update is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
-      glossaryGuid: string;
+      glossaryId: string;
 
       @doc("Whether ignore terms and categories")
       @query
@@ -1477,13 +1477,13 @@ parameters are currently not being enabled and won't work even they are passed.
 Delete a glossary. Will delete underlying terms/categories together. Recommend
 separate delete terms and categories.
 """)
-  @route("/atlas/v2/glossary/{glossaryGuid}")
+  @route("/atlas/v2/glossary/{glossaryId}")
   @delete
   delete is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
-      glossaryGuid: string;
+      glossaryId: string;
     },
     void,
     {},
@@ -1495,13 +1495,13 @@ separate delete terms and categories.
 Get the categories belonging to a specific glossary. Recommend using
 limit/offset to get pagination result.
 """)
-  @route("/atlas/v2/glossary/{glossaryGuid}/categories")
+  @route("/atlas/v2/glossary/{glossaryId}/categories")
   @get
   listCategories is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
-      glossaryGuid: string;
+      glossaryId: string;
 
       @doc("The page size - by default there is no paging.")
       @query
@@ -1525,13 +1525,13 @@ limit/offset to get pagination result.
 Get the category headers belonging to a specific glossary. Recommend using
 limit/offset to get pagination result.
 """)
-  @route("/atlas/v2/glossary/{glossaryGuid}/categories/headers")
+  @route("/atlas/v2/glossary/{glossaryId}/categories/headers")
   @get
   listCategoriesHeaders is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
-      glossaryGuid: string;
+      glossaryId: string;
 
       @doc("The page size - by default there is no paging.")
       @query
@@ -1557,17 +1557,17 @@ recommend.
 
 Recommend to fetch terms/categories details separately using 
 
-GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms and 
+GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms and 
 
-GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/categories.
+GET /datamap/api/atlas/v2/glossary/{glossaryId}/categories.
 """)
-  @route("/atlas/v2/glossary/{glossaryGuid}/detailed")
+  @route("/atlas/v2/glossary/{glossaryId}/detailed")
   @get
   getDetailed is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
-      glossaryGuid: string;
+      glossaryId: string;
     },
     AtlasGlossaryExtInfo,
     {},
@@ -1586,13 +1586,13 @@ shortDescription, longDescription, language and usage for glossary.
 Recommend
 using 'ignoreTermsAndCategories=true' to reduce response body size.
 """)
-  @route("/atlas/v2/glossary/{glossaryGuid}/partial")
+  @route("/atlas/v2/glossary/{glossaryId}/partial")
   @put
   partialUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
-      glossaryGuid: string;
+      glossaryId: string;
 
       @doc("Whether ignore terms and categories")
       @query
@@ -1615,13 +1615,13 @@ values.
 Get terms belonging to a specific glossary. Recommend using limit/offset to get
 pagination result.
 """)
-  @route("/atlas/v2/glossary/{glossaryGuid}/terms")
+  @route("/atlas/v2/glossary/{glossaryId}/terms")
   @get
   listTerms is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
-      glossaryGuid: string;
+      glossaryId: string;
 
       @doc("The page size - by default there is no paging.")
       @query
@@ -1645,13 +1645,13 @@ pagination result.
 Get term headers belonging to a specific glossary. Recommend using limit/offset
 to get pagination result.
 """)
-  @route("/atlas/v2/glossary/{glossaryGuid}/terms/headers")
+  @route("/atlas/v2/glossary/{glossaryId}/terms/headers")
   @get
   listTermHeaders is Azure.Core.Foundations.Operation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
-      glossaryGuid: string;
+      glossaryId: string;
 
       @doc("The page size - by default there is no paging.")
       @query
