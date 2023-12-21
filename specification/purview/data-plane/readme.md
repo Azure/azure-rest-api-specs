@@ -26,10 +26,18 @@ These are the global settings for the Azure Purview Catalog API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2023-09
+tag: package-preview-2023-10
 ```
 
 
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Azure.Analytics.Purview.DataMap/preview/2023-10-01-preview/purviewdatamap.json
+```
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
@@ -100,6 +108,16 @@ tag: package-2018-12-01-preview
 title: PurviewScanningClient
 ```
 
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09-01'
+input-file:
+  - Azure.Analytics.Purview.Scanning/stable/2023-09-01/scanningService.json
+```
+
+
 ### Tag: package-2022-07-01-preview
 
 These settings apply only when `--tag=package-2022-07-01-preview` is specified on the command line.
@@ -144,7 +162,7 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-These are the global settings for the Azure Purview Workflow API.
+These are the global settings for the Purview Workflow API.
 
 ``` yaml
 openapi-type: data-plane
@@ -160,7 +178,16 @@ input-file:
 - Azure.Analytics.Purview.Workflow/preview/2022-05-01-preview/purviewWorkflow.json
 ```
 
-These are the global settings for the Purview API.
+### Tag: package-2023-10-01-preview
+
+These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-10-01-preview'
+input-file:
+- Azure.Analytics.Purview.Workflow/preview/2023-10-01-preview/purviewWorkflow.json
+```
+
+These are the global settings for the Purview Metadata Policy API.
 
 ``` yaml
 openapi-type: data-plane
