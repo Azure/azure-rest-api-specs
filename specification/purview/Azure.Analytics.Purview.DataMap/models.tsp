@@ -9,85 +9,85 @@ namespace PurviewDataMap;
 @doc("Enum for business attribute update behavior")
 enum BusinessAttributeUpdateBehavior {
   @doc("Ignore the business attribute payload for update.")
-  ignore,
+  Ignore: "ignore",
 
   @doc("Replace all the business attributes using the payload.")
-  replace,
+  Replace: "replace",
 
   @doc("Merge the business attributes. Business attributes will not be updated if not provided.")
-  merge,
+  Merge: "merge",
 }
 
 @doc("Status - can be active or deleted")
 enum EntityStatus {
   @doc("The status is active.")
-  ACTIVE,
+  Active: "ACTIVE",
 
   @doc("The status is deleted.")
-  DELETED,
+  Deleted: "DELETED",
 }
 
 @doc("Status for term assignment")
 enum AtlasTermAssignmentStatus {
   @doc("The status is discovered.")
-  DISCOVERED,
+  Discovered: "DISCOVERED",
 
   @doc("The status is proposed.")
-  PROPOSED,
+  Proposed: "PROPOSED",
 
   @doc("The status is imported.")
-  IMPORTED,
+  Imported: "IMPORTED",
 
   @doc("The status is validated.")
-  VALIDATED,
+  Validated: "VALIDATED",
 
   @doc("The status is deprecated.")
-  DEPRECATED,
+  Deprecated: "DEPRECATED",
 
   @doc("The status is obsolete.")
-  OBSOLETE,
+  Obsolete: "OBSOLETE",
 
   @doc("Other status.")
-  OTHER,
+  Other: "OTHER",
 }
 
 @doc("Type for sorting")
 enum SortType {
   @doc("No sorting order")
-  NONE,
+  None: "NONE",
 
   @doc("Use ascending order for sorting")
-  ASC,
+  Ascend: "ASC",
 
   @doc("Use descending order for sorting")
-  DESC,
+  Descend: "DESC",
 }
 
 @doc("Status for import")
 enum ImportStatus {
   @doc("Success")
-  SUCCESS,
+  Success: "SUCCESS",
 
   @doc("Failed")
-  FAILED,
+  Failed: "FAILED",
 }
 
 @doc("Status for atlas term relationship")
 enum AtlasTermRelationshipStatus {
   @doc("draft")
-  DRAFT,
+  Draft: "DRAFT",
 
   @doc("active")
-  ACTIVE,
+  Active: "ACTIVE",
 
   @doc("deprecated")
-  DEPRECATED,
+  Deprecated: "DEPRECATED",
 
   @doc("obsolete")
-  OBSOLETE,
+  Obsolete: "OBSOLETE",
 
   @doc("other")
-  OTHER,
+  Other: "OTHER",
 }
 
 @doc("Status for term")
@@ -108,127 +108,127 @@ enum TermStatus {
 @doc("Status for atlas relationship")
 enum StatusAtlasRelationship {
   @doc("active")
-  ACTIVE,
+  Active: "ACTIVE",
 
   @doc("deleted")
-  DELETED,
+  Deleted: "DELETED",
 }
 
 @doc("Lineage direction")
 enum LineageDirection {
   @doc("input")
-  INPUT,
+  Input: "INPUT",
 
   @doc("output")
-  OUTPUT,
+  Output: "OUTPUT",
 
   @doc("both")
-  BOTH,
+  Both: "BOTH",
 }
 
 @doc("Cardinality")
 enum CardinalityValue {
   @doc("single")
-  SINGLE,
+  Single: "SINGLE",
 
   @doc("list")
-  LIST,
+  List: "LIST",
 
   @doc("set")
-  SET,
+  Set: "SET",
 }
 
 @doc("Type Category")
 enum TypeCategory {
   @doc("primitive")
-  PRIMITIVE,
+  Primitive: "PRIMITIVE",
 
   @doc("object id type")
-  OBJECT_ID_TYPE,
+  ObjectIdType: "OBJECT_ID_TYPE",
 
   @doc("enum")
-  ENUM,
+  Enum: "ENUM",
 
   @doc("struct")
-  STRUCT,
+  Struct: "STRUCT",
 
   @doc("classification")
-  CLASSIFICATION,
+  Classification: "CLASSIFICATION",
 
   @doc("entity")
-  ENTITY,
+  Entity: "ENTITY",
 
   @doc("array")
-  ARRAY,
+  Array: "ARRAY",
 
   @doc("map")
-  MAP,
+  Map: "MAP",
 
   @doc("relationship")
-  RELATIONSHIP,
+  Relationship: "RELATIONSHIP",
 
   @doc("term template")
-  TERM_TEMPLATE,
+  TermTemplate: "TERM_TEMPLATE",
 }
 
 @doc("Rounding Mode")
 enum RoundingMode {
   @doc("up")
-  UP,
+  Up: "UP",
 
   @doc("down")
-  DOWN,
+  Down: "DOWN",
 
   @doc("ceiling")
-  CEILING,
+  Ceiling: "CEILING",
 
   @doc("floor")
-  FLOOR,
+  Floor: "FLOOR",
 
   @doc("half up")
-  HALF_UP,
+  HalfUp: "HALF_UP",
 
   @doc("half down")
-  HALF_DOWN,
+  HalfDown: "HALF_DOWN",
 
   @doc("half even")
-  HALF_EVEN,
+  HalfEven: "HALF_EVEN",
 
   @doc("unnecessary")
-  UNNECESSARY,
+  Unnecessary: "UNNECESSARY",
 }
 
 @doc("Relationship Category")
 enum RelationshipCategory {
   @doc("association")
-  ASSOCIATION,
+  Association: "ASSOCIATION",
 
   @doc("aggregation")
-  AGGREGATION,
+  Aggregation: "AGGREGATION",
 
   @doc("composition")
-  COMPOSITION,
+  Composition: "COMPOSITION",
 }
 
 @doc("Type")
 enum TypeDef {
   @doc("enum")
-  `enum`,
+  Enum: "enum",
 
   @doc("entity")
-  entity,
+  Entity: "entity",
 
   @doc("classification")
-  classification,
+  Classification: "classification",
 
   @doc("relationship")
-  relationship,
+  Relationship: "relationship",
 
   @doc("struct")
-  struct,
+  Struct: "struct",
 
   @doc("term template")
-  term_template,
+  TermTemplate: "term_template",
 }
 
 @doc("Search Filter Operator")
@@ -973,10 +973,10 @@ model SearchFacetSort {
 @doc("Search sort order")
 enum SearchSortOrder {
   @doc("Use ascending order for sorting")
-  asc,
+  Ascend: "asc",
 
   @doc("Use descending order for sorting")
-  desc,
+  Descend: "desc",
 }
 
 @doc("Taxonomy setting for search request")
