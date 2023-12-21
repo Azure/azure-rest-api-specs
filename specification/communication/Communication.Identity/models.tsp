@@ -147,60 +147,135 @@ model ChatPermissions {
 @doc("Calling permissions")
 model CallingPermissions {
 
-  @doc("CanPublishAttendeeModalitiesUnrestricted")
-  canPublishAttendeeModalitiesUnrestricted: boolean;
+  @doc("Add participants")
+  addParticipants: boolean;
 
-  @doc("CanPublishSharingLayoutType")
-  canPublishSharingLayoutType: boolean;
+  @doc("Add pstn participants")
+  addPstnParticipants: boolean;
 
-  @doc("canPublishOrRemoveStateForOthers")
-  canPublishOrRemoveStateForOthers: boolean;
+  @doc("Leave a call")
+  removeSelf: boolean;
 
-  @doc("CanBeAVRestricted")
-  canBeAVRestricted: boolean;
+  @doc("Leave a call")
+  leaveCall: boolean;
 
-  @doc("CanMeetingRoleBeUpdated")
-  canMeetingRoleBeUpdated: boolean;
+  @doc("Remove any participant")
+  removeParticipants: boolean;
 
-  @doc("ShouldRemoveContentSharingAndMediaStreamsWhenStagingRoom")
-  shouldRemoveContentSharingAndMediaStreamsWhenStagingRoom: boolean;
+  @doc("Remove any pstn participant")
+  removePstnParticipant: boolean;
 
-  @doc("CanJoinGreenGroupByDefault")
-  canJoinGreenGroupByDefault: boolean;
+  @doc("List participants")
+  listParticipants: boolean;
 
-  @doc("CanUpdateMeetingGroup")
-  canUpdateMeetingGroup: boolean;
+  @doc("Get own data")
+  getOwnData: boolean;
 
-  @doc("CanRemoveOtherParticipantEndpoint")
-  canRemoveOtherParticipantEndpoint: boolean;
+  @doc("Get others data")
+  getOthersData: boolean;
 
-  @doc("CanAddRecordingBot")
-  canAddRecordingBot: boolean;
+  @doc("Update own data")
+  updateOwnData: boolean;
 
-  @doc("CanUpdateMeetingLiveState")
-  canUpdateMeetingLiveState: boolean;
+  @doc("Update others data")
+  updateOthersData: boolean;
 
-  @doc("CanUpdateParticipantInterpretationState")
-  canUpdateParticipantInterpretationState: boolean;
+  @doc("Get call poperties")
+  getCallProperties: boolean;
 
-  @doc("CanMuteSelfOrOthers")
-  canMuteSelfOrOthers: boolean;
+  @doc("Update call poperties")
+  updateCallProperties: boolean;
 
-  @doc("CanMuteAll")
-  canMuteAll: boolean;
+  @doc("Admit participants from the lobby")
+  admitLobbyParticipants: boolean;
 
-  @doc("CanUnmute")
-  canUnmute: boolean;
+  @doc("Deny participants from the lobby")
+  denyLobbyParticipants: boolean;
 
-  @doc("CanAddParticipant")
-  canAddParticipant: boolean;
+  @doc("Get the call directly without waiting in the lobby")
+  bypassLobby: boolean;
 
-  @doc("AuthorizeMeetingJoin")
-  authorizeMeetingJoin: boolean;
+  @doc("Delete a scheduled call")
+  deleteCall: boolean;
 
-  @doc("AuthorizeMeetingJoinForBroadcastMeetings")
-  authorizeMeetingJoinForBroadcastMeetings: boolean;
+  @doc("Join a meeting")
+  joinMeeting: boolean;
 
-  @doc("CanJoinAsAnonymousParticipant")
-  canJoinAsAnonymousParticipant: boolean;
+  @doc("Turn on own video")
+  turnOnVideo: boolean;
+
+  @doc("Turn on own video")
+  shareVideo: boolean;
+
+  @doc("Turn on own video")
+  sendVideo: boolean;
+
+  @doc("Disable video sharing functionality for other participants")
+  restrictOthersVideo: boolean;
+
+  @doc("Enable video sharing functionality for other participants")
+  unrestrictOthersVideo: boolean;
+
+  @doc("Turn on own audio in a call")
+  turnOnAudio: boolean;
+
+  @doc("Turn on own audio in a call")
+  shareAudio: boolean;
+
+  @doc("Turn on own audio in a call")
+  sendAudio: boolean;
+
+  @doc("Disable audio sharing functionality for others")
+  restrictOthersAudio: boolean;
+
+  @doc("Enable audio sharing functionality for others")
+  unrestrictOthersAudio: boolean;
+
+  @doc("Share own screen")
+  shareScreen: boolean;
+
+  @doc("Share own screen")
+  shareContent: boolean;
+
+  @doc("Mute self in a call")
+  muteSelf: boolean;
+
+  @doc("Unmute self in a call")
+  unmuteSelf: boolean;
+
+  @doc("Mute others in a call")
+  muteOthers: boolean;
+  
+  @doc("Highlight video feeds for everyone in the call")
+  spotlightParticipants: boolean;
+
+  @doc("Remove highlighted video feeds for everyone in the call")
+  removeSpotlights: boolean;
+
+  @doc("Remove highlighted video feeds for everyone in the call")
+  removeParticipantsSpotlight: boolean;
+
+  @doc("Start recording in the call")
+  startRecording: boolean;
+
+  @doc("Stop recording in the call")
+  stopRecording: boolean;
+
+  @doc("Start live captions")
+  startLiveCaptions: boolean;
+
+  @doc("Stop live captions")
+  stopLiveCaptions: boolean;
+
+  @doc("Raise a hand during the call")
+  raiseHand: boolean;
+
+  @doc("Send reactions during the call")
+  sendReaction: boolean;
+
+  @doc("End the call for everyone")
+  hangUpForEveryOne: boolean;
+
+  @doc("End the call for everyone")
+  endCallForAll: boolean;
 }
