@@ -3,14 +3,12 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "./models.tsp";
-import "@azure-tools/typespec-autorest";
 
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Autorest;
 using OpenAPI;
 
 namespace Microsoft.LoadTestService;
@@ -231,7 +229,6 @@ interface LoadTestRun {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   @summary("Stop test run by test run Id.")
   @doc("Stop test run by test run Id.")
-  @example("./examples/StopTestRun.json", "Stop test run by name.")
   @operationId("LoadTestRun_StopTestRun")
   stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
 
