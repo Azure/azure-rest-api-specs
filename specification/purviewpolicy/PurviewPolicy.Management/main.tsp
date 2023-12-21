@@ -11,17 +11,19 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
+/** Creates a Microsoft.Purview management client. */
 @armProviderNamespace
 @service({
   title: "PurviewPolicyClient",
   versions: Versions,
 })
 @versioned(Versions)
-@doc("Creates a Microsoft.Purview management client.")
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Purview;
 
-@doc("The available API versions.")
+/** The available API versions. */
 enum Versions {
+  /** 2023-06-01-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_06_01_preview: "2023-06-01-preview",

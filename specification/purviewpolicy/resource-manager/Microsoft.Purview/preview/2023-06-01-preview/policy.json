@@ -43,6 +43,9 @@
       "name": "Operations"
     },
     {
+      "name": "PurviewPolicies"
+    },
+    {
       "name": "PolicyListing"
     }
   ],
@@ -51,6 +54,7 @@
       "get": {
         "operationId": "PurviewPolicies_List",
         "tags": [
+          "PurviewPolicies",
           "PolicyListing"
         ],
         "summary": "API to list the purview RBAC policies based on a scope",
@@ -71,6 +75,7 @@
             "description": "Supported filters : $filter=policyType eq SelfService, $filter=policyType eq SqlDevops. Returns only the policies of the specified type. If not specified, all policies are returned.",
             "required": false,
             "type": "string",
+            "x-ms-client-name": "filter",
             "x-ms-skip-url-encoding": true
           }
         ],
@@ -427,7 +432,8 @@
         "values": [
           {
             "name": "v2023_06_01_preview",
-            "value": "2023-06-01-preview"
+            "value": "2023-06-01-preview",
+            "description": "2023-06-01-preview version"
           }
         ]
       }

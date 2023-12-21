@@ -15,9 +15,10 @@ namespace Microsoft.Purview;
   "The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'"
 );
 
+@armResourceOperations
 interface PurviewPolicies {
+  /** The API lists the Azure purview RBAC policies affecting the scope. The scope can be any valid ARM resource id */
   @summary("API to list the purview RBAC policies based on a scope")
-  @doc("The API lists the Azure purview RBAC policies affecting the scope. The scope can be any valid ARM resource id")
   @tag("PolicyListing")
   list is ArmResourceListByParent<
     Policy,
@@ -25,133 +26,127 @@ interface PurviewPolicies {
       ...Foundations.BaseParameters<Policy>;
       ...SkipTokenParameter;
 
+      /** Supported filters : $filter=policyType eq SelfService, $filter=policyType eq SqlDevops. Returns only the policies of the specified type. If not specified, all policies are returned. */
       @extension("x-ms-skip-url-encoding", true)
-      @doc("Supported filters : $filter=policyType eq SelfService, $filter=policyType eq SqlDevops. Returns only the policies of the specified type. If not specified, all policies are returned.")
-      @query
-      $filter?: string;
+      @query("$filter")
+      filter?: string;
     }
   >;
 }
 
-@doc("The skipToken parameter definition.")
+/** The skipToken parameter definition. */
 model SkipTokenParameter {
+  /** Paging key to paginate to next page. */
   @extension("x-ms-parameter-location", "method")
-  @doc("Paging key to paginate to next page.")
   @query
   skipToken?: string;
 }
 
+/** The objectType of the member. */
 enum ObjectType {
+  /** AAD User object type. */
   User,
+
+  /** AAD Group object type. */
   Group,
+
+  /** Service Principal object type. */
   ServicePrincipal,
 }
 
+/** The effect for rule */
 enum Decision {
+  /** Access permitted */
   Permit,
+
+  /** Access denied */
   Deny,
 }
 
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
-}
-
-enum Origin {
-  user,
-  system,
-  `user,system`,
-}
-
-enum ActionType {
-  Internal,
-}
-
-@doc("A paginated list of purview RBAC policies")
+/** A paginated list of purview RBAC policies */
 model PolicyList is Azure.Core.Page<Policy>;
 
-@doc("Purview RBAC policy")
+/** Purview RBAC policy */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Special ARM resource with no property bag"
 @extensionResource
-model Policy extends ProxyResource<{}> {
-  @doc("The policy name")
+model Policy extends Azure.ResourceManager.Foundations.ProxyResourceBase {
+  /** The policy name */
   @segment("policies")
   @key("policyname")
   @visibility("read")
   @path
   name: string;
 
-  @doc("The policy kind")
+  /** The policy kind */
   kind?: string;
 
-  @doc("The policy source")
+  /** The policy source */
   source: string;
 
-  @doc("The etag version of a policy")
+  /** The etag version of a policy */
   etag: string;
 
-  @doc("Array of scopes where the policy is published")
+  /** Array of scopes where the policy is published */
   scopes: string[];
 
-  @doc("Members of the policy")
+  /** Members of the policy */
   members: PolicyMembers;
 
-  @doc("Array of decision rules for the policy")
+  /** Array of decision rules for the policy */
   decisionRules: PolicyDecisionRule[];
 
-  @doc("The timestamp of the expiry time of the policy (UTC).")
+  /** The timestamp of the expiry time of the policy (UTC). */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryTime?: utcDateTime;
 
-  @doc("The AAD member who requested the policy")
+  /** The AAD member who requested the policy */
   requestor?: string;
 }
 
-@doc("Policy member")
+/** Policy member */
 model PolicyMembers {
-  @doc("Array of azure active directory members")
+  /** Array of azure active directory members */
   fabricItemMembers?: FabricItemMember[];
 
-  @doc("Array of azure active directory members")
-  aadMembers?: AADMember[];
+  /** Array of azure active directory members */
+  aadMembers?: AadMember[];
 }
 
-@doc("Microsoft fabric item member")
+/** Microsoft fabric item member */
 model FabricItemMember {
-  @doc("Source path of the member")
+  /** Source path of the member */
   sourcePath?: string;
 
-  @doc("Array of access items for the member")
+  /** Array of access items for the member */
   itemAccess?: string[];
 }
 
-@doc("Azure active directory member")
-model AADMember {
-  @doc("The tenantId of the member")
+/** Azure active directory member */
+model AadMember {
+  /** The tenantId of the member */
   tenantId?: string;
 
-  @doc("The objectId of the member")
+  /** The objectId of the member */
   objectId?: string;
 
-  @doc("The objectType of the member.")
+  /** The objectType of the member. */
   objectType?: ObjectType;
 }
 
-@doc("Purview RBAC policy decision rule")
+/** Purview RBAC policy decision rule */
 model PolicyDecisionRule {
-  @doc("The effect for rule")
+  /** The effect for rule */
   effect: Decision;
 
-  @doc("Array of attribute predicates")
+  /** Array of attribute predicates */
   permission?: AttributePredicate[];
 }
 
-@doc("Attribute predicate for a policy permission")
+/** Attribute predicate for a policy permission */
 model AttributePredicate {
-  @doc("AttributeName of a policy permission")
+  /** AttributeName of a policy permission */
   attributeName?: string;
 
-  @doc("values for a policy permission")
+  /** values for a policy permission */
   attributeValueIncludedIn?: string[];
 }
