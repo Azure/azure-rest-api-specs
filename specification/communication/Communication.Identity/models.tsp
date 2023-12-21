@@ -42,7 +42,6 @@ model Permissions {
   calling: CallingPermissions;
 }
 
-// https://skype.visualstudio.com/SCC/_git/async_messaging_chatentityservice?path=/Dev/ThreadService.Scenarios/Templates/ChatThreadTemplate.cs&_a=contents&version=GBmaster
 @doc("Chat permissions")
 model ChatPermissions {
   @doc("Add participants")
@@ -142,8 +141,6 @@ model ChatPermissions {
   sendTypingNotification: boolean;
 }
 
-
-// https://skype.visualstudio.com/SCC/_git/sync_calling_concore-conversation?path=/ConversationService/ConversationLogic/MeetingAuthorizer/MeetingAuthorizer.cs
 @doc("Calling permissions")
 model CallingPermissions {
 
