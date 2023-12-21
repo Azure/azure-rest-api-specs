@@ -421,10 +421,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ThroughputPoolAccountNameParameter"
+            "$ref": "#/parameters/ThroughputPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/ThroughputPoolNameParameter"
+            "$ref": "#/parameters/ThroughputPoolAccountNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -655,7 +655,11 @@
           "$ref": "#/definitions/ThroughputPoolAccountProperties"
         }
       },
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ThroughputPoolAccountProperties": {
       "description": "An Azure Cosmos DB Global Database Account which is part of a Throughputpool.",
