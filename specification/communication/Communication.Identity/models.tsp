@@ -45,59 +45,74 @@ model Permissions {
 // https://skype.visualstudio.com/SCC/_git/async_messaging_chatentityservice?path=/Dev/ThreadService.Scenarios/Templates/ChatThreadTemplate.cs&_a=contents&version=GBmaster
 @doc("Chat permissions")
 model ChatPermissions {
-  @doc("Add members")
-  addMembers: boolean;
-
-  @doc("Add self")
-  addSelf: boolean;
+  @doc("Add participants")
+  addParticipants: boolean;
 
   @doc("Remove self")
   removeSelf: boolean;
 
-  @doc("Remove member")
-  removeMember: boolean;
+  @doc("Leave chat thread")
+  leaveChatThread: boolean;
 
-  @doc("Get self details")
-  getSelfDetails: boolean;
+  @doc("Remove participants")
+  removeParticipants: boolean;
 
-  @doc("Get others details")
-  getOthersDetails: boolean;
+  @doc("Get list of participants")
+  listParticipants: boolean;
 
-  @doc("Update self details")
-  updateSelfDetails: boolean;
+  @doc("Get own data")
+  getOwnData: boolean;
 
-  @doc("Get members")
-  getMembers: boolean;
+  @doc("Get others data")
+  getOthersData: boolean;
 
-  @doc("Share history")
+  @doc("Update own data")
+  updateOwnData: boolean;
+
+  @doc("Update others data")
+  updateOthersData: boolean;
+
+  @doc("Share history of chat thread with others participants")
   shareHistory: boolean;
 
-  @doc("Get thread")
-  getThread: boolean;
+  @doc("Get properties of chat thread")
+  getChatThreadProperties: boolean;
 
-  @doc("Delete thread")
-  deleteThread: boolean;
+  @doc("Update chat thread properties")
+  updateChatThreadProperties: boolean;
 
-  @doc("Update thread properties")
-  updateThreadProperties: boolean;
+  @doc("Delete chat thread")
+  deleteChatThread: boolean;
 
   @doc("Send message")
   sendMessage: boolean;
 
   @doc("Get messages")
   getMessages: boolean;
+  
+  @doc("Get messages")
+  readMessages: boolean;
 
   @doc("Edit own message")
   editOwnMessage: boolean;
 
-  @doc("Edit shared message")
-  editSharedMessage: boolean;
+  @doc("Edit any message")
+  editOthersMessage: boolean;
 
-  @doc("Annotate own message")
+  @doc("Edit any message")
+  editAnyMessage: boolean;
+
+  @doc("Reply to own message")
   annotateOwnMessage: boolean;
 
-  @doc("Edit shared annotation")
-  editSharedAnnotation: boolean;
+  @doc("Reply to own message")
+  replyOwnMessage: boolean;
+
+  @doc("Reply to others message")
+  annotateOthersMessage: boolean;
+
+  @doc("Reply to others message")
+  replyOthersMessage: boolean;
 
   @doc("Delete own message")
   deleteOwnMessage: boolean;
@@ -105,29 +120,26 @@ model ChatPermissions {
   @doc("Delete others message")
   deleteOthersMessage: boolean;
 
+  @doc("Delete others message")
+  deleteAnyMessage: boolean;
+
   @doc("Recover own message")
-  recoverMessageSentBySelf: boolean;
+  recoverOwnMessage: boolean;
 
   @doc("Recover others message")
-  recoverMessageSentByOthers: boolean;
+  recoverOthersMessage: boolean;
 
-  @doc("Hard delete message initiated by ret hook")
-  hardDeleteMessageInitiatedByRetHook: boolean;
+  @doc("Recover others message")
+  recoverAnyMessage: boolean;
 
-  @doc("Pin message")
-  pinMessage: boolean;
+  @doc("Get read recepits")
+  getReadReceipts: boolean;
 
-  @doc("New post")
-  newPost: boolean;
+  @doc("Send read recepits")
+  sendReadReceipt: boolean;
 
-  @doc("Reply to others' post")
-  replyToPostSentByOthers: boolean;
-
-  @doc("Reply to own post")
-  replyToPostSentBySelf: boolean;
-
-  @doc("Update template type")
-  updateTemplateType: boolean;
+  @doc("Send typing notification")
+  sendTypingNotification: boolean;
 }
 
 
