@@ -25,47 +25,76 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   name: string;
 }
 
+@doc("Resources provisioning states.")
 enum ResourceState{
+  @doc("Succeeded state.")
   Succeeded: "Succeeded",
+
+  @doc("Failed state.")
   Failed: "Failed",
+  
+  @doc("Canceled state.")
   Canceled: "Canceled",
+  
+  @doc("Deleted state.")
   Deleted: "Deleted"
 }
 
 //need to update this
+@doc("Managed identity type to use for accessing encryption key Url.")
 enum Type{
+  @doc("System assigned identity.")
   SystemAssigned: "SystemAssigned",
+
+  @doc("User assigned identity.")
   UserAssigned: "UserAssigned"
 }
 
+@doc("Details about the connection between the Batch service and the endpoint.")
 model EndpointDetail {
   @visibility("read")
   @doc("The port an endpoint is connected to.")
   port: int32;
 }
 
+@doc("A domain name and connection details used to access a dependency.")
 model EndpointDependency {
+  @doc("The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard.")
   domainName: string;
+
+  @doc("Human-readable supplemental information about the dependency and when it is applicable.")
   description: string;
+
+  @doc("The list of connection details for this endpoint.")
   endpointDetails: EndpointDetail;
 
 }
 
 @parentResource(LoadTestResource)
 @resource("outboundNetworkDependenciesEndpoints")
+@doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
 model OutboundEnvironmentEndpoint extends ArmResource{
   @key
+  @doc("The type of service that Azure Load Testing connects to.")
+  @visibility("read")
   category: string;
-  endpoints: EndpointDependency;
+
+  @doc("The endpoints for this service to which the Batch service makes outbound calls.")
+  @visibility("read")
+  endpoints?: EndpointDependency;
 }
 
 
+@doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
 model Identity{
+  @doc("Managed identity type to use for accessing encryption key Url.")
   type?: Type;
 
+  @doc("User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.")
   resourceId?: string;
 }
 
+@doc("Key and identity details for Customer Managed Key encryption of load test resource.")
 model EncryptionProperties{
   @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
   identity?: Identity;
@@ -74,6 +103,7 @@ model EncryptionProperties{
   keyUrl?: string;
 }
 
+@doc("Quota bucket resource properties.")
 model QuotaResourceProperties {
   @minValue(0)
   @doc("Current quota limit of the quota bucket.")
@@ -88,12 +118,12 @@ model QuotaResourceProperties {
   provisioningState: ResourceState;
 }
 
-enum CreatedByType {
-  User: "User",
-  Application: "Application",
-  ManagedIdentity: "ManagedIdentity ",
-  Key: "Key"
-}
+// enum CreatedByType {
+//   User: "User",
+//   Application: "Application",
+//   ManagedIdentity: "ManagedIdentity ",
+//   Key: "Key"
+// }
 
 // model SystemData {
 //   createdBy: string;
@@ -141,6 +171,7 @@ model LoadTestProperties{
   @doc("Resource provisioning state.")
   provisioningState?: ResourceState;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "URI is an abbervation and should be upper case"
   @visibility("read")
   @maxLength(2083)
   @doc("Resource data plane URI.")
@@ -150,12 +181,13 @@ model LoadTestProperties{
   encryption?: EncryptionProperties;
 }
 
-@doc("Check quota availability response properties.")
+@doc("Check quota availability response object.")
 model CheckQuotaAvailabilityResponse extends ArmResource {
   @doc("Check quota availability response properties.")
   properties?: CheckQuotaAvailabilityResponseProperties;
 }
 
+@doc("Check quota availability response properties.")
 model CheckQuotaAvailabilityResponseProperties {
   @doc("True/False indicating whether the quota request be granted based on availability.")
   isAvailable?: boolean;

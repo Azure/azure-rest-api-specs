@@ -24,8 +24,9 @@ interface LoadTests {
   update is ArmResourcePatchAsync<LoadTestResource, LoadTestProperties>;
   delete is ArmResourceDeleteAsync<LoadTestResource>;
   
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationId in already published GA spec is different from the auto generated one"
   @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
-  outboundNetworkDependenciesEndpoint2 is ArmResourceListByParent<OutboundEnvironmentEndpoint>;
+  outboundNetworkDependenciesEndpoint is ArmResourceListByParent<OutboundEnvironmentEndpoint>;
 }
 
 @armResourceOperations
@@ -36,7 +37,9 @@ interface Quotas {
   @doc("List quotas for a given subscription Id.")
   listBySubscription is ArmListBySubscription<QuotaResource>;
 
-  checkAvailability is 
+  @doc("Check Quota Availability on quota bucket per region per subscription.")
+  @segment("checkAvailability")
+  checkAvailability is ArmResourceActionSync<QuotaResource, QuotaBucketRequest, CheckQuotaAvailabilityResponse>;
 
   // @TypeSpec.Rest.autoRoute
   // @armProviderNameValue
