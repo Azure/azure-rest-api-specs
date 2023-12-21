@@ -1212,13 +1212,23 @@
         }
       }
     },
+    "AspireDevEndpointConfiguration": {
+      "description": "Configuration of the Aspire Dev Endpoint scenario",
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Boolean indicating whether the Aspire scenario is enabled"
+        }
+      }
+    },
     "DevEndpointConfiguration": {
       "description": "Configuration of the Dev Endpoint",
       "type": "object",
       "properties": {
-        "isAspireEnabled": {
-          "type": "boolean",
-          "description": "Boolean indicating whether the Dev Endpoint is enabled for the Aspire scenario"
+        "aspireConfiguration": {
+          "description": ".NET Aspire configuration",
+          "$ref": "#/definitions/AspireDevEndpointConfiguration"
         }
       }
     },
