@@ -13477,6 +13477,60 @@
         }
       }
     },
+    "CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResultValues": {
+      "type": "string",
+      "description": "JobResultValues",
+      "enum": [
+        "Unknown",
+        "Completed",
+        "CompletedWithWarnings",
+        "CompletedWithErrors",
+        "Failed",
+        "WaitingForBlobUpload",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResultValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown value."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed value."
+          },
+          {
+            "name": "CompletedWithWarnings",
+            "value": "CompletedWithWarnings",
+            "description": "CompletedWithWarnings value."
+          },
+          {
+            "name": "CompletedWithErrors",
+            "value": "CompletedWithErrors",
+            "description": "CompletedWithErrors value."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed value."
+          },
+          {
+            "name": "WaitingForBlobUpload",
+            "value": "WaitingForBlobUpload",
+            "description": "WaitingForBlobUpload value."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress value."
+          }
+        ]
+      }
+    },
     "Default": {
       "type": "string",
       "description": "HealthError Details Source",
@@ -16473,6 +16527,10 @@
         "errorSummary": {
           "$ref": "#/definitions/JobErrorSummary",
           "description": "error summary"
+        },
+        "importType": {
+          "$ref": "#/definitions/ImportTypeValues",
+          "description": "import type"
         }
       }
     },
@@ -16570,6 +16628,30 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
         }
+      }
+    },
+    "ImportTypeValues": {
+      "type": "string",
+      "description": "ImportTypeValues enum.",
+      "enum": [
+        "AzureMigrateCSV",
+        "RVToolsXlsx"
+      ],
+      "x-ms-enum": {
+        "name": "ImportTypeValues",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureMigrateCSV",
+            "value": "AzureMigrateCSV",
+            "description": "AzureMigrateCSV value."
+          },
+          {
+            "name": "RVToolsXlsx",
+            "value": "RVToolsXlsx",
+            "description": "RVToolsXlsx value."
+          }
+        ]
       }
     },
     "JobErrorSummary": {
@@ -17689,6 +17771,11 @@
         "uri": {
           "type": "string",
           "description": "Gets or sets the SAS URI."
+        },
+        "importType": {
+          "$ref": "#/definitions/ImportTypeValues",
+          "description": "Gets or sets the import type.",
+          "default": "AzureMigrateCSV"
         }
       }
     },
@@ -21061,6 +21148,7 @@
         "2020-08-01-preview",
         "2020-11-11-preview",
         "2022-10-27",
+        "2023-06-06",
         "2023-10-01-preview"
       ],
       "x-ms-enum": {
@@ -21119,6 +21207,11 @@
           },
           {
             "name": "v2023_06_06",
+            "value": "2023-06-06",
+            "description": "Api version 2023-06-06."
+          },
+          {
+            "name": "v2023_10_01_preview",
             "value": "2023-10-01-preview",
             "description": "Api version 2023-10-01-preview."
           }
