@@ -1212,26 +1212,6 @@
         }
       }
     },
-    "AspireDevEndpointConfiguration": {
-      "description": "Configuration of the Aspire Dev Endpoint scenario",
-      "type": "object",
-      "properties": {
-        "isEnabled": {
-          "type": "boolean",
-          "description": "Boolean indicating whether the Aspire scenario is enabled"
-        }
-      }
-    },
-    "DevEndpointConfiguration": {
-      "description": "Configuration of the Dev Endpoint",
-      "type": "object",
-      "properties": {
-        "aspireConfiguration": {
-          "description": ".NET Aspire configuration",
-          "$ref": "#/definitions/AspireDevEndpointConfiguration"
-        }
-      }
-    },
     "VnetConfiguration": {
       "type": "object",
       "description": "Configuration properties for apps environment to join a Virtual Network",
@@ -1401,10 +1381,6 @@
             "daprConfiguration": {
               "$ref": "#/definitions/DaprConfiguration",
               "description": "The configuration of Dapr component."
-            },
-            "devEndpointConfiguration": {
-              "$ref": "#/definitions/DevEndpointConfiguration",
-              "description": "The configuration of the Dev Endpoint."
             },
             "infrastructureResourceGroup": {
               "description": "Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. If a subnet ID is provided, this resource group will be created in the same subscription as the subnet.",
