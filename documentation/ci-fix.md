@@ -114,7 +114,7 @@ Please see [readme](https://github.com/Azure/openapi-diff/blob/main/README.md) f
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
 Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/main/docs) for detailed description of all oad rules.
 
-## LintDiff Validation
+## Swagger LintDiff
 
 The [LintDiff validation tool](https://github.com/Azure/azure-openapi-validator) runs linting rules against specification difference. Two specifications are compared: the specification as it would be when proposed PR is merged, vs the specification as seen before the PR is merged.
 
@@ -122,6 +122,12 @@ Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure
 If that guidance is not enough, please also refer to the [LintDiff rules.md doc](https://github.com/Azure/azure-openapi-validator/blob/main/docs/rules.md). It links to `.md` files related to given error, containing instructions how to fix them.
 
 To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
+
+## Swagger LintDiff for TypeSpec
+
+### `Record<unkown>` causes `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`
+
+The use of `Record<unkown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the swagger generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations (in `readme.md`).
 
 ## Avocado
 

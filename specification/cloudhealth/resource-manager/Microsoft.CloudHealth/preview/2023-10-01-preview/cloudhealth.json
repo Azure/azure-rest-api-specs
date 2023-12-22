@@ -1423,15 +1423,8 @@
           "maxLength": 100
         },
         "authenticationKind": {
-          "type": "string",
-          "description": "Kind of the authentication setting",
-          "enum": [
-            "ManagedIdentity"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationKindEnum",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/AuthenticationKind",
+          "description": "Kind of the authentication setting"
         }
       },
       "discriminator": "authenticationKind",
@@ -2395,17 +2388,8 @@
           "maxLength": 100
         },
         "signalKind": {
-          "type": "string",
-          "description": "Kind of the signal definition",
-          "enum": [
-            "AzureResourceMetric",
-            "LogAnalyticsQuery",
-            "PrometheusMetricsQuery"
-          ],
-          "x-ms-enum": {
-            "name": "SignalKindEnum",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SignalKind",
+          "description": "Kind of the signal definition"
         },
         "refreshInterval": {
           "$ref": "#/definitions/RefreshInterval",
@@ -2443,7 +2427,6 @@
       "discriminator": "signalKind",
       "required": [
         "signalKind",
-        "refreshInterval",
         "evaluationRules",
         "enabledState"
       ]
