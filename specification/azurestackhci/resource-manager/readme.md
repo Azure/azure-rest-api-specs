@@ -60,6 +60,8 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - jobs.json
+      - volumes.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
@@ -87,6 +89,8 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - jobs.json
+      - volumes.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
