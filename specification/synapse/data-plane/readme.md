@@ -90,11 +90,13 @@ input-file:
 
 These settings apply only when `--tag=package-artifacts-2021-04-01` is specified on the command line.
 
-**ATTENTION**: Please DO NOT generate SDK based on this tag. Syms API set is not ready to be included in SDK.
+**ATTENTION**: Please DO NOT generate SDK based on this tag. Syms and credential API set is not ready to be included in SDK.
 
 ``` yaml $(tag) == 'package-artifacts-2021-04-01'
 input-file:
   - Microsoft.Synapse/stable/2021-04-01/symsAPI.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v6
@@ -123,6 +125,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -160,6 +163,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -197,6 +201,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -233,6 +238,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -268,6 +274,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -303,6 +310,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -390,6 +398,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json

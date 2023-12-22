@@ -10,9 +10,31 @@ Most guides here require for you to have `npm` installed, which you can get by i
 
 ## Spell check
 
-Please add your words to `./custom-words.txt` if you think you have the correct spell.
+If you receive a spelling failure either fix the spelling to match or if there are words that need to be suppressed for your service then add the word to the override list in [cspell.json](https://github.com/Azure/azure-rest-api-specs/blob/main/cSpell.json). Either
+add to your existing section or create a new section for your specific spec or service family if the work is more generally used in losts of files under your service.
+```
+ "overrides": [
+    ... example of specific file override
+    {
+        "filename": "**/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json",
+        "words": [
+            "saskey"
+        ]
+    }
+    ... example of specific service family override
+    {
+        "filename": "**/specification/cognitiveservices/**/*.json",
+        "words": [
+            "flac",
+            "mpga"
+        ]
+    }
+```
+Words are case-insensitive so use lower case for the word list.
 
-If your problem is some existing error name that is not a word and need to suppress the error in that file (and don't want to add to custom-words.txt), you can add it to `./cSpell.txt`.
+If you need more information on see [cspell configuration](https://cspell.org/configuration/). 
+
+*Note*: We are trying to move away from one shared dictionary file so try and avoid editing custom-words.txt in the root as it will likely go away in the future.
 
 ## Prettier check
 
@@ -39,7 +61,11 @@ npx prettier --write **/*.json
 
 Then please commit and push changes made by prettier.
 
-Reference: [prettier](https://www.npmjs.com/package/prettier).
+### Prettier reference
+
+- [`prettier` npm package](https://www.npmjs.com/package/prettier).
+- [Source: Swagger-Prettier-Check.ps1](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/scripts/Swagger-Prettier-Check.ps1)
+- [Pipeline: Swagger PrettierCheck](https://dev.azure.com/azure-sdk/public/_build?definitionId=6405)
 
 ## Model Validation
 
@@ -51,7 +77,7 @@ oav validate-example <swagger-spec-path>
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default).
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
-Refer to [Swagger-Example-Generation](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/393/Swagger-Example-Generation) for example automatic generation.
+Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md) for example automatic generation.
 
 ## Semantic Validation
 
@@ -88,7 +114,7 @@ Please see [readme](https://github.com/Azure/openapi-diff/blob/main/README.md) f
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
 Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/main/docs) for detailed description of all oad rules.
 
-## LintDiff Validation
+## Swagger LintDiff
 
 The [LintDiff validation tool](https://github.com/Azure/azure-openapi-validator) runs linting rules against specification difference. Two specifications are compared: the specification as it would be when proposed PR is merged, vs the specification as seen before the PR is merged.
 
@@ -96,6 +122,20 @@ Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure
 If that guidance is not enough, please also refer to the [LintDiff rules.md doc](https://github.com/Azure/azure-openapi-validator/blob/main/docs/rules.md). It links to `.md` files related to given error, containing instructions how to fix them.
 
 To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
+
+## Swagger LintDiff for TypeSpec
+
+### `Record<unkown>` causes `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`
+
+The use of `Record<unkown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the swagger generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations (in `readme.md`).
+
+### `RequestBodyMustExistForPutPatch`
+
+We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/641.  Until fixed, spec authors should **not** suppress the violations in `readme.md`, but rather have label `Approved-LintDiff` applied to their PR to ignore the errors.
+
+### `PatchPropertiesCorrespondToPutProperties`
+
+We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/642.  Until fixed, spec authors should **not** suppress the violations in `readme.md`, but rather have label `Approved-LintDiff` applied to their PR to ignore the errors.
 
 ## Avocado
 
@@ -126,7 +166,7 @@ If you see `Swagger ApiDocPreview ` check fail with a failure [like this one](ht
 |-|-|
 | ❌ RestBuild error | "logUrl":"https://apidrop.visualstudio.com/Content%20CI/_build/results?buildId=373646&view=logs&j=fd490c07-0b22-5182-fac9-6d67fe1e939b",<br/>"detail":"Run.ps1 failed with exit code 1 " |
 
-Then refer to [this TSG](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/79/Generation-of-docs-on-learn.microsoft.com?anchor=%22swagger-apidocpreview%22-build-is-failing).
+Refer to [troubleshoothing REST API documentation](https://eng.ms/docs/products/azure-developer-experience/design/api-docs-troubleshooting).
 
 ## TypeSpec Validation
 

@@ -3,14 +3,12 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "./models.tsp";
-import "@azure-tools/typespec-autorest";
 
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Autorest;
 using OpenAPI;
 
 namespace Microsoft.LoadTestService;
@@ -45,8 +43,8 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
     ListQueryParametersTrait<ListTestQueryParams>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" //Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743
-  #suppress "@azure-tools/typespec-azure-core/byos" //It is limiting for users to have storage first before creating a load test also it will be breaking change for us.
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743"
+  #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
   @summary("""
 Upload input file for a given test Id. File size can't be more than 50 MB.
 Existing file with same name for the given test will be overwritten. File
@@ -206,10 +204,12 @@ interface LoadTestRun {
   getTestRun is StandardResourceOperations.ResourceRead<TestRun>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-
   @summary("Create and start a new test run with the given test run Id.")
   @doc("Create and start a new test run with the given test run Id.")
-  createOrUpdateTestRun is StandardResourceOperations.ResourceCreateOrUpdate<TestRun, QueryParametersTrait<OldTestRunIdQueryParam>>;
+  createOrUpdateTestRun is StandardResourceOperations.ResourceCreateOrUpdate<
+    TestRun,
+    QueryParametersTrait<OldTestRunIdQueryParam>
+  >;
 
   @summary("Delete an existing load test run.")
   @doc("Delete an existing load test run by providing the testRunId.")
@@ -229,7 +229,6 @@ interface LoadTestRun {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   @summary("Stop test run by test run Id.")
   @doc("Stop test run by test run Id.")
-  @example("./examples/StopTestRun.json", "Stop test run by name.")
   @operationId("LoadTestRun_StopTestRun")
   stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
 
@@ -406,7 +405,7 @@ numeric, underscore or hyphen characters.
       @minLength(2)
       @pattern("^[a-z0-9_-]*$")
       testRunId: string;
-      
+
       @doc("Server metric configuration model.")
       @body
       body: TestRunServerMetricConfig;

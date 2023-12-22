@@ -1370,7 +1370,7 @@
               "USER_PROPERTIES",
               "ADDITIONAL_ARTIFACTS",
               "ZIPPED_ARTIFACTS",
-              "URL_TEST_CONFIG"
+              "URL_TEST_CONFIG_JSON"
             ],
             "x-ms-enum": {
               "name": "FileType",
@@ -1397,8 +1397,8 @@
                   "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
                 },
                 {
-                  "name": "URL_TEST_CONFIG",
-                  "value": "URL_TEST_CONFIG",
+                  "name": "URL_TEST_CONFIG_JSON",
+                  "value": "URL_TEST_CONFIG_JSON",
                   "description": "If the file is a JSON config file to define the requests for a URL test."
                 }
               ]
@@ -1730,6 +1730,22 @@
         }
       }
     },
+    "ArtifactsContainerInfo": {
+      "type": "object",
+      "description": "Artifacts container info.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "This is a SAS URI to an Azure Storage Container that contains the test run artifacts."
+        },
+        "expireDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time of the container (RFC 3339 literal format)"
+        }
+      }
+    },
     "AutoStopCriteria": {
       "type": "object",
       "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.",
@@ -1742,12 +1758,14 @@
         "errorRate": {
           "type": "number",
           "format": "float",
-          "description": "Threshold percentage of errors on which test run should be automatically stopped. Allowed values are in range of 0.0-100.0"
+          "description": "Threshold percentage of errors on which test run should be automatically stopped. Allowed values are in range of 0.0-100.0",
+          "default": 90
         },
         "errorRateTimeWindowInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Time window during which the error percentage should be evaluated in seconds."
+          "description": "Time window during which the error percentage should be evaluated in seconds.",
+          "default": 60
         }
       }
     },
@@ -1846,22 +1864,6 @@
             "description": "If the certificate is stored in an Azure Key Vault."
           }
         ]
-      }
-    },
-    "ContainerInfo": {
-      "type": "object",
-      "description": "Container info.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Container URL."
-        },
-        "expireDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiry time of the container (RFC3339 literal format)"
-        }
       }
     },
     "DimensionFilter": {
@@ -1979,7 +1981,7 @@
         "USER_PROPERTIES",
         "ADDITIONAL_ARTIFACTS",
         "ZIPPED_ARTIFACTS",
-        "URL_TEST_CONFIG"
+        "URL_TEST_CONFIG_JSON"
       ],
       "x-ms-enum": {
         "name": "FileType",
@@ -2006,8 +2008,8 @@
             "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
           },
           {
-            "name": "URL_TEST_CONFIG",
-            "value": "URL_TEST_CONFIG",
+            "name": "URL_TEST_CONFIG_JSON",
+            "value": "URL_TEST_CONFIG_JSON",
             "description": "If the file is a JSON config file to define the requests for a URL test."
           }
         ]
@@ -2226,7 +2228,7 @@
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp for the metric value in RFC3339 format."
+          "description": "The timestamp for the metric value in RFC 3339 format."
         },
         "value": {
           "type": "number",
@@ -2282,7 +2284,7 @@
         "requestsPerSecond": {
           "type": "integer",
           "format": "int32",
-          "description": "Target throughput (requests per second). This my not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it."
+          "description": "Target throughput (requests per second). This may not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it."
         },
         "maxResponseTimeInMs": {
           "type": "integer",
@@ -2916,6 +2918,10 @@
           "$ref": "#/definitions/TestKind",
           "description": "Kind of test."
         },
+        "publicIPDisabled": {
+          "type": "boolean",
+          "description": "Inject load test engines without deploying public IP for outbound access"
+        },
         "keyvaultReferenceIdentityType": {
           "type": "string",
           "description": "Type of the managed identity referencing the Key vault."
@@ -2927,7 +2933,7 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(RFC3339 literal format).",
+          "description": "The creation datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -2938,7 +2944,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(RFC3339 literal format).",
+          "description": "The last Modified datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -2970,7 +2976,7 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(RFC3339 literal format).",
+          "description": "The creation datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -2981,7 +2987,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(RFC3339 literal format).",
+          "description": "The last Modified datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -3064,6 +3070,10 @@
           "$ref": "#/definitions/TestKind",
           "description": "Kind of test."
         },
+        "publicIPDisabled": {
+          "type": "boolean",
+          "description": "Inject load test engines without deploying public IP for outbound access"
+        },
         "keyvaultReferenceIdentityType": {
           "type": "string",
           "description": "Type of the managed identity referencing the Key vault."
@@ -3096,7 +3106,7 @@
         "expireDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Expiry time of the file (RFC3339 literal format)",
+          "description": "Expiry time of the file (RFC 3339 literal format)",
           "readOnly": true
         },
         "validationStatus": {
@@ -3273,13 +3283,13 @@
         "startDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The test run start DateTime(RFC3339 literal format).",
+          "description": "The test run start DateTime(RFC 3339 literal format).",
           "readOnly": true
         },
         "endDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The test run end DateTime(RFC3339 literal format).",
+          "description": "The test run end DateTime(RFC 3339 literal format).",
           "readOnly": true
         },
         "executedDateTime": {
@@ -3309,10 +3319,15 @@
           "description": "Type of test.",
           "readOnly": true
         },
+        "publicIPDisabled": {
+          "type": "boolean",
+          "description": "Inject load test engines without deploying public IP for outbound access",
+          "readOnly": true
+        },
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(RFC3339 literal format).",
+          "description": "The creation datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -3323,7 +3338,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(RFC3339 literal format).",
+          "description": "The last Modified datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -3355,7 +3370,7 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(RFC3339 literal format).",
+          "description": "The creation datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -3366,7 +3381,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(RFC3339 literal format).",
+          "description": "The last Modified datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -3482,7 +3497,7 @@
         "expireDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Expiry time of the file (RFC3339 literal format)",
+          "description": "Expiry time of the file (RFC 3339 literal format)",
           "readOnly": true
         },
         "validationStatus": {
@@ -3520,7 +3535,7 @@
           "$ref": "#/definitions/TestRunFileInfo",
           "description": "File info"
         },
-        "urlTestsConfigFileInfo": {
+        "urlTestConfigFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
           "description": "The config json file for url based test"
         },
@@ -3548,7 +3563,7 @@
           "description": "File info"
         },
         "artifactsContainerInfo": {
-          "$ref": "#/definitions/ContainerInfo",
+          "$ref": "#/definitions/ArtifactsContainerInfo",
           "description": "The container for test run artifacts."
         }
       }
@@ -3572,7 +3587,7 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(RFC3339 literal format).",
+          "description": "The creation datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -3583,7 +3598,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(RFC3339 literal format).",
+          "description": "The last Modified datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -3701,7 +3716,7 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(RFC3339 literal format).",
+          "description": "The creation datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -3712,7 +3727,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(RFC3339 literal format).",
+          "description": "The last Modified datetime(RFC 3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -3817,7 +3832,7 @@
     "ListTestQueryParams.lastModifiedEndTime": {
       "name": "lastModifiedEndTime",
       "in": "query",
-      "description": "End DateTime(RFC3339 literal format) of the last updated time range to filter tests.",
+      "description": "End DateTime(RFC 3339 literal format) of the last updated time range to filter tests.",
       "required": false,
       "type": "string",
       "format": "date-time",
@@ -3826,7 +3841,7 @@
     "ListTestQueryParams.lastModifiedStartTime": {
       "name": "lastModifiedStartTime",
       "in": "query",
-      "description": "Start DateTime(RFC3339 literal format) of the last updated time range to filter tests.",
+      "description": "Start DateTime(RFC 3339 literal format) of the last updated time range to filter tests.",
       "required": false,
       "type": "string",
       "format": "date-time",
@@ -3861,7 +3876,7 @@
     "ListTestRunQueryParams.executionFrom": {
       "name": "executionFrom",
       "in": "query",
-      "description": "Start DateTime(RFC3339 literal format) of test-run execution time filter range.",
+      "description": "Start DateTime(RFC 3339 literal format) of test-run execution time filter range.",
       "required": false,
       "type": "string",
       "format": "date-time",
@@ -3870,7 +3885,7 @@
     "ListTestRunQueryParams.executionTo": {
       "name": "executionTo",
       "in": "query",
-      "description": "End DateTime(RFC3339 literal format) of test-run execution time filter range.",
+      "description": "End DateTime(RFC 3339 literal format) of test-run execution time filter range.",
       "required": false,
       "type": "string",
       "format": "date-time",

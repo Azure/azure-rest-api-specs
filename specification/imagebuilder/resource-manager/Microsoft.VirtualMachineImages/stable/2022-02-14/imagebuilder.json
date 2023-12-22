@@ -844,6 +844,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0,
+          "default": 0,
           "description": "Maximum number of updates to apply at a time. Omit or specify 0 to use the default (1000)"
         }
       }
@@ -982,7 +983,11 @@
       "properties": {
         "galleryImageId": {
           "type": "string",
-          "description": "Resource Id of the Shared Image Gallery image"
+          "description": "Resource Id of the Shared Image Gallery image",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "replicationRegions": {
           "description": "A list of regions that the image will be replicated to",

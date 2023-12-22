@@ -12,6 +12,7 @@ namespace Microsoft.LoadTestService;
 enum PFMetrics {
   @doc("Pass fail criteria for response time metric in milliseconds.")
   response_time_ms,
+
   @doc("Pass fail criteria for latency metric in milliseconds.") latency,
   @doc("Pass fail criteria for error metric.") error,
   @doc("Pass fail criteria for total requests.") requests,
@@ -35,6 +36,7 @@ enum PFAgFunc {
 enum PFAction {
   @doc("Test will continue to run even if pass fail metric criteria metric gets failed.")
   continue,
+
   @doc("Test run will stop if pass fail criteria metric is not passed.") stop,
 }
 
@@ -58,11 +60,8 @@ enum CertificateType {
 
 @doc("Types of file supported.")
 enum FileType {
-  @doc("If the file is a JMX script.")
-  JMX_FILE,
-
-  @doc("If the file is a user properties file.")
-  USER_PROPERTIES,
+  @doc("If the file is a JMX script.") JMX_FILE,
+  @doc("If the file is a user properties file.") USER_PROPERTIES,
 
   @doc("If the file is not among any of the other supported file types.")
   ADDITIONAL_ARTIFACTS,
@@ -73,7 +72,7 @@ enum FileType {
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a JSON config file to define the requests for a URL test.")
-  URL_TEST_CONFIG,
+  URL_TEST_CONFIG_JSON,
 }
 
 @doc("File status.")
@@ -143,8 +142,7 @@ enum TimeGrain {
   @doc("10 seconds, available only if test run duration is less than 10 minutes.")
   PT10S,
 
-  @doc("1 minute")
-  PT1M,
+  @doc("1 minute") PT1M,
 
   @doc("5 minutes, available only if test run duration is greater than 1 minute.")
   PT5M,
@@ -155,26 +153,20 @@ enum TimeGrain {
 
 @added(APIVersions.v2023_04_01_preview)
 @doc("Test kind")
-// testtype to test kind
 enum TestKind {
-  @doc("URL Test")
-  URL,
-
-  @doc("JMX Test")
-  JMX,
+  @doc("URL Test") URL,
+  @doc("JMX Test") JMX,
 }
 
 @doc("Test file info.")
 @resource("files")
 @parentResource(Test)
-model TestFileInfo is FileInfo {
-}
+model TestFileInfo is FileInfo;
 
 @doc("Test run file info.")
 @resource("files")
 @parentResource(TestRun)
-model TestRunFileInfo is FileInfo {
-}
+model TestRunFileInfo is FileInfo;
 
 @doc("Load test model.")
 @resource("tests")
@@ -229,6 +221,11 @@ SECRET_VALUE.
   @added(APIVersions.v2023_04_01_preview)
   @doc("Kind of test.")
   kind?: TestKind;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Inject load test engines without deploying public IP for outbound access")
+  publicIPDisabled?: boolean;
 
   @doc("Type of the managed identity referencing the Key vault.")
   keyvaultReferenceIdentityType?: string;
@@ -307,16 +304,13 @@ model CertificateMetadata {
 @doc("Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.")
 model AutoStopCriteria {
   @doc("Whether auto-stop should be disabled. The default value is false.")
-  //update description with default values.
-  //change to use it false by default
   autoStopDisabled?: boolean = false;
 
   @doc("Threshold percentage of errors on which test run should be automatically stopped. Allowed values are in range of 0.0-100.0")
-  errorRate?: float32;
+  errorRate?: float32 = 90;
 
   @doc("Time window during which the error percentage should be evaluated in seconds.")
-  // adding time unit in name
-  errorRateTimeWindowInSeconds?: int32;
+  errorRateTimeWindowInSeconds?: int32 = 60;
 }
 
 @doc("Configurations for the load test.")
@@ -326,7 +320,7 @@ The number of engine instances to execute load test. Supported values are in ran
 """)
   engineInstances?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" //CSV is an abbervation and should be all caps
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "CSV is an abbervation and should be all caps"
   @doc("""
 If false, Azure Load Testing copies and processes your input files unmodified
 across all test engine instances. If true, Azure Load Testing splits the CSV
@@ -343,7 +337,6 @@ not required to upload.
 
   @doc("Configuration for quick load test")
   optionalLoadTestConfig?: OptionalLoadTestConfig;
-
 }
 
 @doc("Configuration for quick load test")
@@ -351,7 +344,7 @@ model OptionalLoadTestConfig {
   @doc("Test URL. Provide the complete HTTP URL. For example, https://contoso-app.azurewebsites.net/login")
   endpointUrl?: string;
 
-  @doc("Target throughput (requests per second). This my not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it.")
+  @doc("Target throughput (requests per second). This may not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it.")
   @added(APIVersions.v2023_04_01_preview)
   requestsPerSecond?: int32;
 
@@ -385,7 +378,6 @@ model TestInputArtifacts {
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("The config json file for url based test")
-  //name urlTest
   urlTestConfigFileInfo?: TestFileInfo;
 
   @doc("Additional supported files for the test run")
@@ -409,7 +401,7 @@ model FileInfo {
   @visibility("read")
   fileType?: FileType;
 
-  @doc("Expiry time of the file (RFC3339 literal format)")
+  @doc("Expiry time of the file (RFC 3339 literal format)")
   @visibility("read")
   expireDateTime?: utcDateTime;
 
@@ -585,11 +577,11 @@ SECRET_VALUE.
   @visibility("read")
   status?: Status;
 
-  @doc("The test run start DateTime(RFC3339 literal format).")
+  @doc("The test run start DateTime(RFC 3339 literal format).")
   @visibility("read")
   startDateTime?: utcDateTime;
 
-  @doc("The test run end DateTime(RFC3339 literal format).")
+  @doc("The test run end DateTime(RFC 3339 literal format).")
   @visibility("read")
   endDateTime?: utcDateTime;
 
@@ -613,6 +605,12 @@ SECRET_VALUE.
   @doc("Type of test.")
   @visibility("read")
   kind?: TestKind;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Inject load test engines without deploying public IP for outbound access")
+  @visibility("read")
+  publicIPDisabled?: boolean;
 
   ...SystemMetaData;
 }
@@ -674,12 +672,12 @@ model TestRunStatistics {
   @visibility("read")
   throughput?: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" //KBytes is expected
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "KBytes is expected"
   @doc("Received network bytes.")
   @visibility("read")
   receivedKBytesPerSec?: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" //KBytes is expected
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "KBytes is expected"
   @doc("Send network bytes.")
   @visibility("read")
   sentKBytesPerSec?: float64;
@@ -711,7 +709,7 @@ model TestRunInputArtifacts {
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("The config json file for url based test")
-  urlTestsConfigFileInfo?: TestRunFileInfo;
+  urlTestConfigFileInfo?: TestRunFileInfo;
 
   @doc("Additional supported files for the test run")
   @visibility("read")
@@ -728,17 +726,16 @@ model TestRunOutputArtifacts {
 
   @doc("The container for test run artifacts.")
   @added(APIVersions.v2023_04_01_preview)
-  artifactsContainerInfo?: ContainerInfo;
+  artifactsContainerInfo?: ArtifactsContainerInfo;
 }
 
-@doc("Container info.")
-// update description and name
+@doc("Artifacts container info.")
 @added(APIVersions.v2023_04_01_preview)
-model ContainerInfo {
-  @doc("Container URL.")
+model ArtifactsContainerInfo {
+  @doc("This is a SAS URI to an Azure Storage Container that contains the test run artifacts.")
   url?: url;
 
-  @doc("Expiry time of the container (RFC3339 literal format)")
+  @doc("Expiry time of the container (RFC 3339 literal format)")
   expireDateTime?: utcDateTime;
 }
 
@@ -847,7 +844,7 @@ model TimeSeriesElement {
 
 @doc("Represents a metric value.")
 model MetricValue {
-  @doc("The timestamp for the metric value in RFC3339 format.")
+  @doc("The timestamp for the metric value in RFC 3339 format.")
   timestamp?: utcDateTime;
 
   @doc("The metric value.")
@@ -857,7 +854,6 @@ model MetricValue {
 @doc("Represents a metric dimension value.")
 model DimensionValue {
   @doc("The name of the dimension.")
-  @added(APIVersions.v2023_04_01_preview)
   name?: string;
 
   @doc("The value of the dimension.")
@@ -868,6 +864,7 @@ model DimensionValue {
 model DimensionValueList {
   @doc("The dimension name")
   @visibility("read")
+  @added(APIVersions.v2023_04_01_preview)
   name?: string;
 
   @doc("The dimension value")
@@ -932,7 +929,7 @@ for metric id).
 }
 
 @doc("Query parameters for list test run operation")
-model OldTestRunIdQueryParam{
+model OldTestRunIdQueryParam {
   @doc("""
 Existing test run identifier that should be rerun, if this is provided, the
 test will run with the JMX file, configuration and app components from the
@@ -964,11 +961,11 @@ the search parameter can be 500.
   @query
   testId?: string;
 
-  @doc("Start DateTime(RFC3339 literal format) of test-run execution time filter range.")
+  @doc("Start DateTime(RFC 3339 literal format) of test-run execution time filter range.")
   @query
   executionFrom?: utcDateTime;
 
-  @doc("End DateTime(RFC3339 literal format) of test-run execution time filter range.")
+  @doc("End DateTime(RFC 3339 literal format) of test-run execution time filter range.")
   @query
   executionTo?: utcDateTime;
 
@@ -999,13 +996,13 @@ the search parameter can be Login.
   search?: string;
 
   @doc("""
-Start DateTime(RFC3339 literal format) of the last updated time range to filter tests.
+Start DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
 """)
   @query
   lastModifiedStartTime?: utcDateTime;
 
   @doc("""
-End DateTime(RFC3339 literal format) of the last updated time range to filter tests.
+End DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
 """)
   @query
   lastModifiedEndTime?: utcDateTime;
@@ -1017,7 +1014,7 @@ End DateTime(RFC3339 literal format) of the last updated time range to filter te
 
 @doc("System metadata.")
 model SystemMetaData {
-  @doc("The creation datetime(RFC3339 literal format).")
+  @doc("The creation datetime(RFC 3339 literal format).")
   @visibility("read")
   createdDateTime?: utcDateTime;
 
@@ -1025,7 +1022,7 @@ model SystemMetaData {
   @visibility("read")
   createdBy?: string;
 
-  @doc("The last Modified datetime(RFC3339 literal format).")
+  @doc("The last Modified datetime(RFC 3339 literal format).")
   @visibility("read")
   lastModifiedDateTime?: utcDateTime;
 
