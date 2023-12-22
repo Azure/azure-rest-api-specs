@@ -3167,7 +3167,7 @@
           "type": "string",
           "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
           "default": "10.244.0.0/16",
-          "description": "A CIDR notation IP range from which to assign pod IPs when kubenet is used."
+          "description": "A CIDR notation IP range from which to assign pod IPs. When using the kubenet network plugin, the pod IPs can be assigned from a specified IP range using CIDR notation. The same can be applied for the azure network plugin, but only when the network plugin mode is set to overlay."
         },
         "serviceCidr": {
           "type": "string",
