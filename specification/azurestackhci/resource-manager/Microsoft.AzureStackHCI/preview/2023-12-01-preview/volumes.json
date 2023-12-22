@@ -288,120 +288,6 @@
     }
   },
   "definitions": {
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "NotSpecified",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The resource provision state is not specified"
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource create request has been accepted"
-          }
-        ]
-      }
-    },
-    "Step": {
-      "type": "object",
-      "description": "The Step of AzureStackHCI Cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of step.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of step.",
-          "readOnly": true
-        },
-        "fullStepIndex": {
-          "type": "string",
-          "description": "FullStepIndex of step.",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "description": "Start time of step.",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "description": "End time of step.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of nested steps of AzureStackHCI Cluster Deployment.",
-          "items": {
-            "$ref": "#/definitions/Step"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "exception": {
-          "type": "array",
-          "description": "List of exceptions in AzureStackHCI Cluster Deployment.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "Volume": {
       "type": "object",
       "description": "Azure stack HCI volume resource",
@@ -462,7 +348,7 @@
       "description": "Volume properties",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "Volume provisioning state",
           "readOnly": true
         },
@@ -485,29 +371,9 @@
           "type": "string"
         },
         "volumeStatus": {
-          "$ref": "#/definitions/VolumeStatus",
+          "$ref": "./common.json#/definitions/EceActionStatus",
           "description": "Volume status of AzureStackHCI Cluster Deployment.",
           "readOnly": true
-        }
-      }
-    },
-    "VolumeStatus": {
-      "type": "object",
-      "description": "The VolumeStatus of AzureStackHCI Cluster.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Status of AzureStackHCI Cluster volume.",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of steps of AzureStackHCI Cluster Deployment.",
-          "items": {
-            "$ref": "#/definitions/Step"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
         }
       }
     }

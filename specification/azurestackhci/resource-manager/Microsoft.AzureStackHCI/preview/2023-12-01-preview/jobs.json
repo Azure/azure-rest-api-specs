@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Jobs",
+    "title": "AzureStackHCI",
     "version": "2023-12-01-preview",
-    "description": "Azure Stack HCI Jobs.",
+    "description": "Azure Stack HCI management service",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -53,13 +53,13 @@
         "description": "List Job resources by Clusters",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "clusterName",
@@ -79,7 +79,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -97,13 +97,13 @@
         "description": "Get a Job",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "clusterName",
@@ -132,7 +132,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -145,13 +145,13 @@
         "description": "Create a Job",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "clusterName",
@@ -202,7 +202,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -219,13 +219,13 @@
         "description": "Delete a Job",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "clusterName",
@@ -265,75 +265,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/runjob": {
-      "post": {
-        "operationId": "Jobs_Runjob",
-        "tags": [
-          "Jobs"
-        ],
-        "description": "A long-running resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "Name of Cluster",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -370,7 +302,7 @@
           "description": "Name of server to be added to Azure stack HCI Cluster."
         },
         "mode": {
-          "$ref": "#/definitions/AddServerMode",
+          "$ref": "./common.json#/definitions/DeploymentMode",
           "description": "Add Server action plan mode."
         },
         "hostIpv4Address": {
@@ -381,14 +313,17 @@
           "type": "array",
           "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
           "items": {
-            "$ref": "#/definitions/JobProtectedParameters"
+            "$ref": "./common.json#/definitions/ProtectedParameters"
           },
           "x-ms-identifiers": []
         },
-        "statusDetails": {
-          "$ref": "#/definitions/EceJobStatus",
+        "validationStatus": {
+          "$ref": "./common.json#/definitions/EceActionStatus",
           "description": "use ECE status property to show job status run using ECE toolchain in HCI cluster.",
           "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "./common.json#/definitions/EceActionStatus"
         }
       },
       "allOf": [
@@ -397,16 +332,37 @@
         }
       ]
     },
-    "AddServerMode": {
-      "type": "string",
-      "enum": [
-        "Validate",
-        "Deploy"
+    "ClusterProperties": {
+      "type": "object",
+      "description": "A ClusterProperties"
+    },
+    "Clusters": {
+      "type": "object",
+      "description": "A Cluster",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of Cluster",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
       ],
-      "x-ms-enum": {
-        "name": "AddServerMode",
-        "modelAsString": true
-      }
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "CollectLogJob": {
       "type": "object",
@@ -477,7 +433,7 @@
           "type": "array",
           "description": "List of parameters to pass to trigger job for Azure Stack HCI cluster.",
           "items": {
-            "$ref": "#/definitions/JobParameters"
+            "$ref": "./common.json#/definitions/Parameters"
           },
           "x-ms-identifiers": []
         },
@@ -485,7 +441,7 @@
           "type": "array",
           "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
           "items": {
-            "$ref": "#/definitions/JobProtectedParameters"
+            "$ref": "./common.json#/definitions/ProtectedParameters"
           },
           "x-ms-identifiers": []
         },
@@ -499,20 +455,20 @@
         }
       ]
     },
-    "EceJobStatus": {
+    "EceActionStatus": {
       "type": "object",
-      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
+      "description": "The ECE action plan deployment status for AzureStackHCI Cluster.",
       "properties": {
         "status": {
           "type": "string",
-          "description": "Status of AzureStackHCI Cluster job.",
+          "description": "Status of ECE action AzureStackHCI Cluster Deployment.",
           "readOnly": true
         },
         "steps": {
           "type": "array",
           "description": "List of steps of AzureStackHCI Cluster Deployment.",
           "items": {
-            "$ref": "#/definitions/JobStep"
+            "$ref": "./common.json#/definitions/Step"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -534,7 +490,11 @@
         },
         "kind": {
           "$ref": "#/definitions/JobType",
-          "description": "Job Type to support polymorphic resource."
+          "description": "Job Type to support polymorphic resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "discriminator": "kind",
@@ -543,7 +503,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -568,45 +528,12 @@
         "value"
       ]
     },
-    "JobParameters": {
-      "type": "object",
-      "description": "Job parameters.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Job property name."
-        },
-        "value": {
-          "type": "string",
-          "description": "Job property value."
-        }
-      }
-    },
-    "JobProtectedParameters": {
-      "type": "object",
-      "description": "Job protected parameters list stored in keyvault.",
-      "properties": {
-        "secretsLocation": {
-          "type": "string",
-          "format": "uri",
-          "description": "keyvault URI to store protected secrets."
-        },
-        "secretNames": {
-          "type": "array",
-          "description": "List of secret names stored in keyvault.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "JobStatusDetails": {
       "type": "object",
       "description": "The DeploymentStatus of AzureStackHCI Cluster.",
       "properties": {
         "eceStatus": {
-          "$ref": "#/definitions/EceJobStatus",
+          "$ref": "./common.json#/definitions/EceActionStatus",
           "description": "use ECE status property to show job status run using ECE toolchain in HCI cluster.",
           "readOnly": true
         },
@@ -665,60 +592,6 @@
         }
       }
     },
-    "JobStep": {
-      "type": "object",
-      "description": "The Step of AzureStackHCI Cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of step.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of step.",
-          "readOnly": true
-        },
-        "fullStepIndex": {
-          "type": "string",
-          "description": "FullStepIndex of step.",
-          "readOnly": true
-        },
-        "startTimeUtc": {
-          "type": "string",
-          "description": "Start time of step.",
-          "readOnly": true
-        },
-        "endTimeUtc": {
-          "type": "string",
-          "description": "End time of step.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
-          "readOnly": true
-        },
-        "steps": {
-          "type": "array",
-          "description": "List of nested steps of AzureStackHCI Cluster Deployment.",
-          "items": {
-            "$ref": "#/definitions/JobStep"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "exception": {
-          "type": "array",
-          "description": "List of exceptions in AzureStackHCI Cluster Deployment.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "JobType": {
       "type": "string",
       "description": "Job Type supported.",
@@ -727,10 +600,10 @@
         "RemoveServer",
         "RepairServer",
         "ResumeServer",
+        "PauseServer",
         "SetInformation",
         "DefaultJob",
-        "CollectLog",
-        "RunCmd"
+        "CollectLog"
       ],
       "x-ms-enum": {
         "name": "JobType",
@@ -759,7 +632,7 @@
           {
             "name": "PauseServer",
             "value": "PauseServer",
-            "description": "PauseServer"
+            "description": "ResumeServer"
           },
           {
             "name": "SetInformation",
@@ -775,11 +648,6 @@
             "name": "CollectLog",
             "value": "CollectLog",
             "description": "CollectLog"
-          },
-          {
-            "name": "RunCmd",
-            "value": "RunCmd",
-            "description": "RunCmd"
           }
         ]
       }
@@ -789,13 +657,13 @@
       "description": "Job properties",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "Job provisioning state",
           "readOnly": true
         },
         "jobId": {
           "type": "string",
-          "description": "Unique, immutable job resource id.",
+          "description": "Unique, immutable job id.",
           "readOnly": true
         },
         "startTimeUtc": {
@@ -822,73 +690,84 @@
           "items": {
             "type": "string"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "Status details of AzureStackHCI Cluster job.",
+          "readOnly": true
         },
         "status": {
           "type": "string",
-          "description": "Status of AzureStackHCI Cluster job.",
+          "description": "Status of AzureStackHCI Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
           "readOnly": true
         }
       }
     },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "NotSpecified",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
+    "Parameters": {
+      "type": "object",
+      "description": "Parameters Object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "property name."
+        },
+        "value": {
+          "type": "string",
+          "description": "property value."
+        }
+      }
+    },
+    "PauseServerJob": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PauseServerJobProperties"
+        }
+      },
+      "required": [
+        "properties"
       ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The resource provision state is not specified"
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource create request has been accepted"
-          }
-        ]
+      "allOf": [
+        {
+          "$ref": "#/definitions/Job"
+        }
+      ],
+      "x-ms-discriminator-value": "PauseServer"
+    },
+    "PauseServerJobProperties": {
+      "type": "object",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "Trigger pause action plan for given server name in Azure stack HCI Cluster."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobsProperties"
+        }
+      ]
+    },
+    "ProtectedParameters": {
+      "type": "object",
+      "description": "Protected parameters list stored in keyvault.",
+      "properties": {
+        "secretsLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "keyvault URI to store protected secrets."
+        },
+        "secrets": {
+          "type": "array",
+          "description": "List of secret names stored in keyvault.",
+          "items": {},
+          "x-ms-identifiers": []
+        }
       }
     },
     "RepairServerJob": {
@@ -919,12 +798,12 @@
           "type": "array",
           "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
           "items": {
-            "$ref": "#/definitions/JobProtectedParameters"
+            "$ref": "./common.json#/definitions/ProtectedParameters"
           },
           "x-ms-identifiers": []
         },
         "statusDetails": {
-          "$ref": "#/definitions/EceJobStatus",
+          "$ref": "./common.json#/definitions/EceActionStatus",
           "description": "use ECE status property to show job status run using ECE toolchain in HCI cluster.",
           "readOnly": true
         }
@@ -958,37 +837,6 @@
         "serverName": {
           "type": "string",
           "description": "Trigger resume action plan for given server name in Azure stack HCI Cluster."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobsProperties"
-        }
-      ]
-    },
-    "PauseServerJob": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PauseServerJobProperties"
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Job"
-        }
-      ],
-      "x-ms-discriminator-value": "PauseServer"
-    },
-    "PauseServerJobProperties": {
-      "type": "object",
-      "properties": {
-        "serverName": {
-          "type": "string",
-          "description": "Trigger pause action plan for given server name in Azure stack HCI Cluster."
         }
       },
       "allOf": [
@@ -1058,7 +906,7 @@
           "description": "A string to specify the bandwidth percentage to be used for SMB."
         },
         "statusDetails": {
-          "$ref": "#/definitions/EceJobStatus",
+          "$ref": "./common.json#/definitions/EceActionStatus",
           "description": "use ECE status property to show job status run using ECE toolchain in HCI cluster.",
           "readOnly": true
         }
