@@ -3096,16 +3096,13 @@
             "name": "getAggregateUsageRequest",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/BillingHubGetAggregateUsageRequest"
+              "$ref": "#/definitions/BillingHubGetUsageRequest"
             }
           }
         ],
         "tags": [
           "BillingHubService"
         ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "BillingHubGetAggregateUsage": {
             "$ref": "./examples/BillingHubGetAggregateUsage.json"
@@ -6205,36 +6202,11 @@
           "$ref": "#/definitions/BillingHubGetAggregateUsage",
           "description": "The result set of usage."
         },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        "nextRequest": {
+          "type": "object",
+          "$ref": "#/definitions/BillingHubGetUsageRequest"
         }
       }
-    },
-    "BillingHubGetAggregateUsageRequest": {
-      "type": "object",
-      "properties": {
-        "startTimeStamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "endTimeStamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "top": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "skip": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "required": [
-        "startTimeStamp"
-      ]
     },
     "BillingHubGetAggregateUsage": {
       "type": "object",
