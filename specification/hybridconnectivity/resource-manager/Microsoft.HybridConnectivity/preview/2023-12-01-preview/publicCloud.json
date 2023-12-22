@@ -98,7 +98,7 @@
         "tags": [
           "TestPermissions"
         ],
-        "description": "Retrieve AWS Cloud Formation template",
+        "description": "Test permissions of solution configurations of a connector.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -188,7 +188,7 @@
           "description": "The name of solution Type"
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/Status",
           "description": "The status"
         },
         "statusDetails": {
@@ -219,12 +219,36 @@
         "solutionType"
       ]
     },
+    "Status": {
+      "type": "string",
+      "description": "Connection status.",
+      "enum": [
+        "Connected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Connected"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Disconnected"
+          }
+        ]
+      }
+    },
     "TestPermissionResponse": {
       "type": "object",
       "description": "Public connector permissions.",
       "properties": {
         "overallStatus": {
-          "type": "string",
+          "$ref": "#/definitions/Status",
           "description": "The name of public cloud connector"
         },
         "solutionTypes": {

@@ -49,7 +49,7 @@ model GenerateAwsTemplateRequest {
 @doc("Public connector permissions.")
 model TestPermissionResponse {
   @doc("The name of public cloud connector")
-  overallStatus: string;
+  overallStatus: Status;
 
   @doc("Solution type permissions.")
   solutionTypes: Array<SolutionTypePermissions>;
@@ -61,10 +61,19 @@ model SolutionTypePermissions {
   solutionType: string;
 
   @doc("The status")
-  status: string;
+  status: Status;
 
   @doc("The details of the status")
   statusDetails: string;
+}
+
+@doc("Connection status.")
+enum Status {
+  @doc("Connected")
+  Connected,
+
+  @doc("Disconnected")
+  Disconnected,
 }
 
 //---------------------------------------------- Operations ----------------------------------------------
@@ -96,7 +105,7 @@ interface TestPermissions {
   @post
   @action
   @tag("TestPermissions")
-  @doc("Retrieve AWS Cloud Formation template")
+  @doc("Test permissions of solution configurations of a connector.")
   post(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
