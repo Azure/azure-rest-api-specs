@@ -99,23 +99,6 @@
         }
       }
     },
-    "ProtectedParameters": {
-      "type": "object",
-      "description": "Protected parameters list stored in keyvault.",
-      "properties": {
-        "secretsLocation": {
-          "type": "string",
-          "format": "uri",
-          "description": "keyvault URI to store protected secrets."
-        },
-        "secrets": {
-          "type": "array",
-          "description": "List of secret names stored in keyvault.",
-          "items": {},
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource.",
@@ -174,6 +157,22 @@
             "description": "The resource create request has been accepted"
           }
         ]
+      }
+    },
+    "Secrets": {
+      "type": "object",
+      "description": "Protected parameters list stored in keyvault.",
+      "properties": {
+        "secretLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "Secret URI to store protected secrets."
+        },
+        "secretName": {
+          "type": "string",
+          "description": "Secret name stored in keyvault.",
+          "x-ms-identifiers": []
+        }
       }
     },
     "Step": {
