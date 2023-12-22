@@ -963,6 +963,32 @@
         "timeoutPolicy": {
           "description": "The optional timeout policy configuration",
           "$ref": "#/definitions/DaprComponentResiliencyPolicyTimeoutPolicyConfiguration"
+        },
+        "circuitBreakerPolicy": {
+          "description": "The optional circuit breaker policy configuration",
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyCircuitBreakerPolicyConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DaprComponentResiliencyPolicyCircuitBreakerPolicyConfiguration": {
+      "description": "Dapr Component Resiliency Policy Circuit Breaker Policy Configuration.",
+      "type": "object",
+      "properties": {
+        "consecutiveErrors": {
+          "description": "The number of consecutive errors before the circuit is opened.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeoutInSeconds": {
+          "description": "The interval in seconds until a retry attempt is made after the circuit is opened.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "intervalInSeconds": {
+          "description": "The optional interval in seconds after which the error count resets to 0. An interval of 0 will never reset. If not specified, the timeoutInSeconds value will be used.",
+          "type": "integer",
+          "format": "int32"
         }
       },
       "additionalProperties": false
