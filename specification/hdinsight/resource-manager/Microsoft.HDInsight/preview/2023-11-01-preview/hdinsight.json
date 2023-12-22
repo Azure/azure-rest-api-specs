@@ -1888,12 +1888,12 @@
         "fqdn": {
           "type": "string",
           "description": "Web connectivity endpoint.",
-          "example": "clusterName11223344.clusterPoolName55667788.eastus.hdinsightaks.net"
+          "example": "clusterName11223344.clusterPoolName55667788.subid.eastus.hdinsightaks.net"
         },
         "privateFqdn": {
           "type": "string",
           "description": "Private web connectivity endpoint. This property will only be returned when enableInternalIngress is true.",
-          "example": "clusterName11223344-int.clusterPoolName55667788.eastus.hdinsightaks.net"
+          "example": "clusterName11223344-int.clusterPoolName55667788.subid.eastus.hdinsightaks.net"
         }
       },
       "readOnly": true
@@ -2751,6 +2751,11 @@
           "description": "Identity of the internal service components inside the Kafka cluster.",
           "$ref": "#/definitions/IdentityProfile",
           "readOnly": true
+        },
+        "kafkaConnectivityProfile": {
+          "description": "Kafka bootstrap server and brokers related connectivity profile.",
+          "$ref": "#/definitions/KafkaConnectivityProfile",
+          "readOnly": true
         }
       }
     },
@@ -2782,6 +2787,24 @@
             "name": "DataDiskType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "KafkaConnectivityProfile": {
+      "type": "object",
+      "description": "Kafka bootstrap server and broker related connectivity profile.",
+      "properties": {
+        "bootstrapServerEndpoint": {
+          "type": "string",
+          "description": "bootstrap server connectivity endpoint."
+        },
+        "brokerEndpoints": {
+          "description": "Kafka broker endpoint list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
