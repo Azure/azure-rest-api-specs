@@ -1,0 +1,133 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "EffectiveNetworkSecurityRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the security rule specified by the user (if created by the user)."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The network protocol this rule applies to.",
+          "enum": [
+            "Tcp",
+            "Udp",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "EffectiveSecurityRuleProtocol",
+            "modelAsString": true
+          }
+        },
+        "sourcePortRange": {
+          "type": "string",
+          "description": "The source port or range."
+        },
+        "destinationPortRange": {
+          "type": "string",
+          "description": "The destination port or range."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The source port ranges. Expected values include a single integer between 0 and 65535, a range using '-' as separator (e.g. 100-400), or an asterisk (*)."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination port ranges. Expected values include a single integer between 0 and 65535, a range using '-' as separator (e.g. 100-400), or an asterisk (*)."
+        },
+        "sourceAddressPrefix": {
+          "type": "string",
+          "description": "The source address prefix."
+        },
+        "destinationAddressPrefix": {
+          "type": "string",
+          "description": "The destination address prefix."
+        },
+        "sourceAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*)."
+        },
+        "destinationAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*)."
+        },
+        "expandedSourceAddressPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The expanded source address prefix."
+        },
+        "expandedDestinationAddressPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Expanded destination address prefix."
+        },
+        "access": {
+          "$ref": "./networkSecurityGroup.json#/definitions/SecurityRuleAccess",
+          "description": "Whether network traffic is allowed or denied."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule."
+        },
+        "direction": {
+          "$ref": "./networkSecurityGroup.json#/definitions/SecurityRuleDirection",
+          "description": "The direction of the rule."
+        }
+      },
+      "description": "Effective network security rules."
+    }
+  }
+}

@@ -28,9 +28,22 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2023-06
+tag: package-preview-2023-09
 ```
 
+
+### Tag: package-2023-09-preview
+
+These settings apply only when `--tag=package-2023-09-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09-preview'
+input-file:
+  - Microsoft.Network/preview/2023-09-01-preview/applicationSecurityGroup.json
+  - Microsoft.Network/preview/2023-09-01-preview/network.json
+  - Microsoft.Network/preview/2023-09-01-preview/networkInterface.json
+  - Microsoft.Network/preview/2023-09-01-preview/networkSecurityGroup.json
+  - Microsoft.Network/preview/2023-09-01-preview/networkWatcher.json
+```
 ### Tag: package-2023-08-preview
 
 These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
@@ -55,7 +68,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.Network/stable/2023-06-01/applicationGateway.json
   - Microsoft.Network/stable/2023-06-01/applicationGatewayWafDynamicManifests.json
@@ -119,6 +132,7 @@ input-file:
   - Microsoft.Network/stable/2023-06-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2023-06-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
