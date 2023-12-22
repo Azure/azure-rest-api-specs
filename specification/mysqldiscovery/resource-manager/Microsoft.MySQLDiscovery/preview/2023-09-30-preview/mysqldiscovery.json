@@ -1228,14 +1228,32 @@
           "type": "string",
           "description": "mysql version support status.",
           "enum": [
-            "NotSupported",
-            "ExtendedSupport",
-            "MainstreamSupport"
+            "OutOfSupport",
+            "Extended",
+            "Mainstream"
           ],
           "x-ms-enum": {
             "name": "supportStatus",
             "modelAsString": true
           }
+        },
+        "suitability": {
+          "type": "string",
+          "description": "mysql server edition.",
+          "enum": [
+            "NotReady",
+            "ReadyWithConditions",
+            "Ready"
+          ],
+          "x-ms-enum": {
+            "name": "suitability",
+            "modelAsString": true
+          }
+        },
+        "supportEndIn": {
+          "description": "Time when mysql version support end.",
+          "type": "string",
+          "format": "date-time"
         },
         "errors": {
           "description": "The list of errors.",
