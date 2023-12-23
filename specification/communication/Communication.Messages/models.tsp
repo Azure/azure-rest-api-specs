@@ -38,13 +38,6 @@ enum WhatsAppMessageTemplateValueSubType {
 }
 
 @access(Access.public, "csharp")
-@doc("The Communication Messages Channel.")
-enum CommunicationMessagesChannel {
-  @doc("The Communication Messages Channel is WhatsApp.")
-  whatsApp,
-}
-
-@access(Access.public, "csharp")
 @doc("The aggregated template status.")
 enum MessageTemplateStatus {
   @doc("Message template is approved.")
@@ -60,6 +53,8 @@ enum MessageTemplateStatus {
   paused,
 }
 
+@access(Access.public, "csharp")
+@discriminator("kind")
 @doc("Details of the message to send.")
 model SendNotificationRequest {
   @doc("The Channel Registration ID for the Business Identifier.")
@@ -67,9 +62,19 @@ model SendNotificationRequest {
 
   @doc("The native external platform user identifiers of the recipient.")
   to: string[];
+}
 
-  @doc("The type of message. Supports text, image, template.")
-  type: CommunicationMessageType;
+@access(Access.public, "csharp")
+model SendTextNotificationRequest extends SendNotificationRequest {
+  kind: "text";
+
+  @doc("Message content.")
+  content?: string;
+}
+
+@access(Access.public, "csharp")
+model SendMediaNotificationRequest extends SendNotificationRequest {
+  kind: "image";
 
   @doc("Message content.")
   content?: string;
@@ -79,6 +84,11 @@ A media url for the file. Required if the type is one of the supported media
 types, e.g. image
 """)
   mediaUri?: string;
+}
+
+@access(Access.public, "csharp")
+model SendTemplateNotificationRequest extends SendNotificationRequest {
+  kind: "template";
 
   @doc("The template object used to create templates.")
   template?: MessageTemplate;
@@ -259,13 +269,16 @@ model MessageReceipt {
 }
 
 @doc("The WhatsApp-specific template response contract")
-model WhatsAppMessageTemplateResponse {
+model WhatsAppMessageTemplateResponse extends MessageTemplateResponse{
   @doc("""
 WhatsApp platform's template content
 This is the payload returned from WhatsApp
 API.
 """)
   content?: unknown;
+
+  @doc("Message template response type is whatsApp.")
+  kind: "whatsApp";
 }
 
 @resource("messages/notifications")
@@ -294,6 +307,7 @@ model Stream {
 
 @resource("templates")
 @parentResource(CommunicationChannel)
+@discriminator("kind")
 @doc("The Message Template Response.")
 model MessageTemplateResponse {
   @key
@@ -303,14 +317,8 @@ model MessageTemplateResponse {
   @doc("Get the template's language")
   language: string;
 
-  @doc("The Communication Messages Channel.")
-  channelType: CommunicationMessagesChannel;
-
   @doc("The aggregated template status.")
   status: MessageTemplateStatus;
-
-  @doc("The WhatsApp-specific template response contract")
-  whatsApp?: WhatsAppMessageTemplateResponse;
 }
 
 
