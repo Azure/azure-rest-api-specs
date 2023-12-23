@@ -1551,6 +1551,42 @@
         }
       }
     },
+    "/entity/guid/{guid}/batchUpdate": {
+      "put": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "This API enables batch editing of a main asset, its sub-assets, or both. Presently, the functionality is limited to assigning or removing sensitivity labels. Future enhancements may include additional operations like updating contact information.",
+        "operationId": "Entity_BulkEditAssetSubAssets",
+        "x-ms-examples": {
+          "Entity_BulkEditAssetSubAssets": {
+            "$ref": "./examples/Entity_BulkEditAssetSubAssets.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/guid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "$ref": "#/definitions/batchUpdateAssetRequest"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
@@ -6774,6 +6810,18 @@
         "type": "object"
       },
       "description": "BusinessMetadataAttributes"
+    },
+    "batchUpdateAssetRequest": {
+      "type": "object",
+      "properties": {
+        "AssignSensitivityLabel": {
+          "type": "object"
+        },
+        "DeleteSensitivityLabel": {
+          "type": "object"
+        }
+      },
+      "description": "batchUpdateAssetRequest"
     }
   },
   "parameters": {
