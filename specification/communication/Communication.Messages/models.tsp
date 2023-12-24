@@ -80,7 +80,7 @@ model SendMediaNotificationRequest extends SendNotificationRequest {
 A media url for the file. Required if the type is one of the supported media
 types, e.g. image
 """)
-  mediaUri: string;
+  mediaUri: url;
 }
 
 model SendTemplateNotificationRequest extends SendNotificationRequest {
