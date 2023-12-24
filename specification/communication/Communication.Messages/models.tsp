@@ -53,7 +53,6 @@ enum MessageTemplateStatus {
   paused,
 }
 
-@access(Access.public, "csharp")
 @discriminator("kind")
 @doc("Details of the message to send.")
 model SendNotificationRequest {
@@ -64,7 +63,6 @@ model SendNotificationRequest {
   to: string[];
 }
 
-@access(Access.public, "csharp")
 model SendTextNotificationRequest extends SendNotificationRequest {
   kind: "text";
 
@@ -72,7 +70,6 @@ model SendTextNotificationRequest extends SendNotificationRequest {
   content?: string;
 }
 
-@access(Access.public, "csharp")
 model SendMediaNotificationRequest extends SendNotificationRequest {
   kind: "image";
 
@@ -86,7 +83,6 @@ types, e.g. image
   mediaUri?: string;
 }
 
-@access(Access.public, "csharp")
 model SendTemplateNotificationRequest extends SendNotificationRequest {
   kind: "template";
 
@@ -268,6 +264,7 @@ model MessageReceipt {
   to: string;
 }
 
+@access(Access.public, "csharp")
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateResponse extends MessageTemplateResponse{
   @doc("""
@@ -305,6 +302,7 @@ model Stream {
   contentType: "application/octect-stream";
 }
 
+@access(Access.public, "csharp")
 @resource("templates")
 @parentResource(CommunicationChannel)
 @discriminator("kind")
