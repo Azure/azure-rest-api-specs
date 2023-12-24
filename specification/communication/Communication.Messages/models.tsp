@@ -67,7 +67,7 @@ model SendTextNotificationRequest extends SendNotificationRequest {
   kind: "text";
 
   @doc("Message content.")
-  content?: string;
+  content: string;
 }
 
 model SendMediaNotificationRequest extends SendNotificationRequest {
@@ -80,14 +80,14 @@ model SendMediaNotificationRequest extends SendNotificationRequest {
 A media url for the file. Required if the type is one of the supported media
 types, e.g. image
 """)
-  mediaUri?: string;
+  mediaUri: string;
 }
 
 model SendTemplateNotificationRequest extends SendNotificationRequest {
   kind: "template";
 
   @doc("The template object used to create templates.")
-  template?: MessageTemplate;
+  template: MessageTemplate;
 }
 
 @access(Access.public, "csharp")
