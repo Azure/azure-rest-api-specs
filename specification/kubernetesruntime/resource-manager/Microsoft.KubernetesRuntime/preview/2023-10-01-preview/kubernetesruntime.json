@@ -49,6 +49,9 @@
     },
     {
       "name": "BgpPeers"
+    },
+    {
+      "name": "Services"
     }
   ],
   "paths": {
@@ -460,6 +463,214 @@
         "x-ms-examples": {
           "LoadBalancers_Delete": {
             "$ref": "./examples/LoadBalancers_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.KubernetesRuntime/services": {
+      "get": {
+        "operationId": "Services_List",
+        "tags": [
+          "Services"
+        ],
+        "description": "List ServiceResource resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Services_List": {
+            "$ref": "./examples/Services_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.KubernetesRuntime/services/{serviceName}": {
+      "get": {
+        "operationId": "Services_Get",
+        "tags": [
+          "Services"
+        ],
+        "description": "Get a ServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the the service",
+            "required": true,
+            "type": "string",
+            "pattern": "^(storageclass|networking)$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Services_Get": {
+            "$ref": "./examples/Services_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Services_CreateOrUpdate",
+        "tags": [
+          "Services"
+        ],
+        "description": "Create a ServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the the service",
+            "required": true,
+            "type": "string",
+            "pattern": "^(storageclass|networking)$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ServiceResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ServiceResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Services_CreateOrUpdate": {
+            "$ref": "./examples/Services_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Services_Delete",
+        "tags": [
+          "Services"
+        ],
+        "description": "Delete a ServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the the service",
+            "required": true,
+            "type": "string",
+            "pattern": "^(storageclass|networking)$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Services_Delete": {
+            "$ref": "./examples/Services_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1232,7 +1443,8 @@
             "description": "Change accepted for processing"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "RwxStorageClassTypeProperties": {
       "type": "object",
@@ -1294,6 +1506,63 @@
           }
         ]
       }
+    },
+    "ServiceProperties": {
+      "type": "object",
+      "description": "Properties for the service resource",
+      "properties": {
+        "rpObjectId": {
+          "type": "string",
+          "description": "The object id of the service principal of the RP provisioned in the tenant",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provision state",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceResource": {
+      "type": "object",
+      "description": "A Service resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServiceResourceListResult": {
+      "type": "object",
+      "description": "The response of a ServiceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServiceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ServiceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SmbStorageClassTypeProperties": {
       "type": "object",
