@@ -3465,6 +3465,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/safeguardsVersions/{version}": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_GetSafeguardsVersions",
+        "summary": "Gets supported Safeguards version in the specified subscription and location.",
+        "description": "Contains Safeguards version along with its support info and whether it is a default version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SafeguardsAvailableVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Safeguards available versions": {
+            "$ref": "./examples/GetSafeguardsVersions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/safeguardsVersions": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ListSafeguardsVersions",
+        "summary": "Gets a list of supported Safeguards versions in the specified subscription and location.",
+        "description": "Contains list of Safeguards version along with its support info and whether it is a default version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SafeguardsAvailableVersionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Safeguards Versions": {
+            "$ref": "./examples/ListSafeguardsVersions.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/meshRevisionProfiles": {
       "get": {
         "tags": [
@@ -5726,9 +5812,9 @@
         "azureMonitorProfile": {
           "$ref": "#/definitions/ManagedClusterAzureMonitorProfile"
         },
-        "guardrailsProfile": {
-          "$ref": "#/definitions/GuardrailsProfile",
-          "description": "The guardrails profile holds all the guardrails information for a given cluster"
+        "safeguardsProfile": {
+          "$ref": "#/definitions/SafeguardsProfile",
+          "description": "The Safeguards profile holds all the safeguards information for a given cluster"
         },
         "serviceMeshProfile": {
           "$ref": "#/definitions/ServiceMeshProfile"
@@ -7554,6 +7640,74 @@
         }
       }
     },
+    "SafeguardsAvailableVersionsProperties": {
+      "type": "object",
+      "description": "Whether the version is default or not and support info.",
+      "properties": {
+        "isDefaultVersion": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "support": {
+          "type": "string",
+          "enum": [
+            "Preview",
+            "Stable"
+          ],
+          "x-ms-enum": {
+            "name": "SafeguardsSupport",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Preview",
+                "description": "The version is preview. It is not recommended to use preview versions on critical production clusters. The preview version may not support all use-cases."
+              },
+              {
+                "value": "Stable",
+                "description": "The version is stable and can be used on critical production clusters."
+              }
+            ]
+          },
+          "description": "Whether the version is preview or stable.",
+          "readOnly": true
+        }
+      }
+    },
+    "SafeguardsAvailableVersion": {
+      "type": "object",
+      "description": "Available Safeguards Version",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SafeguardsAvailableVersionsProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SafeguardsAvailableVersionsList": {
+      "type": "object",
+      "description": "Hold values properties, which is array of SafeguardsVersions",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SafeguardsAvailableVersion"
+          },
+          "description": "Array of AKS supported Safeguards versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next Safeguards available version.",
+          "readOnly": true
+        }
+      }
+    },
     "EndpointDependency": {
       "description": "A domain name that AKS agent nodes are reaching at.",
       "type": "object",
@@ -8562,13 +8716,13 @@
         "enabled"
       ]
     },
-    "GuardrailsProfile": {
+    "SafeguardsProfile": {
       "type": "object",
       "properties": {
         "systemExcludedNamespaces": {
           "readOnly": true,
           "type": "array",
-          "description": "List of namespaces specified by AKS to be excluded from Guardrails",
+          "description": "List of namespaces specified by AKS to be excluded from Safeguards",
           "items": {
             "type": "string"
           }
@@ -8588,10 +8742,10 @@
             "name": "level",
             "modelAsString": true
           },
-          "description": "The guardrails level to be used. By default, Guardrails is enabled for all namespaces except those that AKS excludes via systemExcludedNamespaces"
+          "description": "The Safeguards level to be used. By default, Safeguards is enabled for all namespaces except those that AKS excludes via systemExcludedNamespaces"
         },
         "excludedNamespaces": {
-          "description": "List of namespaces excluded from guardrails checks",
+          "description": "List of namespaces excluded from Safeguards checks",
           "type": "array",
           "items": {
             "type": "string"
@@ -8601,7 +8755,7 @@
       "required": [
         "level"
       ],
-      "description": "The Guardrails profile."
+      "description": "The Safeguards profile."
     },
     "ServiceMeshProfile": {
       "type": "object",
@@ -9277,7 +9431,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 24,
-      "description": "Guardrails version",
+      "description": "Safeguards version",
       "x-ms-parameter-location": "method"
     }
   }
