@@ -800,6 +800,118 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "springbootapps"
+        ],
+        "operationId": "springbootapps_CreateOrUpdate",
+        "description": "Create a springbootapps resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/springbootappsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "springbootapps",
+            "description": "Create a springbootapps payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/springbootappsModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the springbootapps resource.",
+            "schema": {
+              "$ref": "#/definitions/springbootappsModel"
+            }
+          },
+          "201": {
+            "description": "Creates the springbootapps resource.",
+            "schema": {
+              "$ref": "#/definitions/springbootappsModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootapps_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/springbootapps_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "springbootapps_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/springbootapps_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "springbootapps"
+        ],
+        "operationId": "springbootapps_Delete",
+        "description": "Delete a springbootapps resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/springbootappsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Deletes the springbootapps resource.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Deletes the springbootapps resource."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "springbootapps_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/springbootapps_Delete_MaximumSet_Gen.json"
+          },
+          "springbootapps_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/springbootapps_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
       "patch": {
         "tags": [
           "springbootapps"
@@ -1319,6 +1431,13 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
       "description": "The springbootservers resource definition."
@@ -1606,6 +1725,13 @@
             "description": "The error",
             "$ref": "#/definitions/Error"
           }
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
       "description": "The springbootapps resource definition."
