@@ -3,12 +3,7 @@
   "info": {
     "title": "AzureStackHCI",
     "version": "2023-12-01-preview",
-    "description": "Azure Stack HCI management service",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "description": "Azure Stack HCI management service"
   },
   "schemes": [
     "https"
@@ -62,11 +57,7 @@
             "$ref": "../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "description": "Name of Cluster",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -106,20 +97,10 @@
             "$ref": "../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "description": "Name of Cluster",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "name": "jobsName",
-            "in": "path",
-            "description": "Name of Job",
-            "required": true,
-            "type": "string",
-            "default": "default",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/JobNameParameter"
           }
         ],
         "responses": {
@@ -154,20 +135,10 @@
             "$ref": "../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "description": "Name of Cluster",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "name": "jobsName",
-            "in": "path",
-            "description": "Name of Job",
-            "required": true,
-            "type": "string",
-            "default": "default",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
             "name": "resource",
@@ -228,20 +199,10 @@
             "$ref": "../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "description": "Name of Cluster",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "name": "jobsName",
-            "in": "path",
-            "description": "Name of Job",
-            "required": true,
-            "type": "string",
-            "default": "default",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/JobNameParameter"
           }
         ],
         "responses": {
@@ -793,5 +754,23 @@
       ]
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "JobNameParameter": {
+      "name": "jobsName",
+      "in": "path",
+      "description": "Name of Job",
+      "required": true,
+      "type": "string",
+      "default": "default",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
+    }
+  }
 }
