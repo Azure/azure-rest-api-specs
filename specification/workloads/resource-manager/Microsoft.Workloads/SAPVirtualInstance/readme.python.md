@@ -14,5 +14,5 @@ clear-output-folder: true
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/workloads/azure-mgmt-workloads/azure/mgmt/sapvirtualinstance
+output-folder: $(python-sdks-folder)/workloads/azure-mgmt-workloads-sapvirtualinstance/azure/mgmt/workloads/sapvirtualinstance
 ```
