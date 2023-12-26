@@ -61,7 +61,6 @@ directive:
       - edgeDevices.json
       - securitySettings.json
       - jobs.json
-      - volumes.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
@@ -90,7 +89,6 @@ suppressions:
       - edgeDevices.json
       - securitySettings.json
       - jobs.json
-      - volumes.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -138,7 +136,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/jobs.json
-  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/volumes.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/hciCommon.json
 
 ### Tag: package-2024-01
 
@@ -146,7 +144,7 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-01'
 input-file:
-  - Microsoft.AzureStackHCI/stable/2024-01-01/common.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/hciCommon.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/galleryImages.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/logicalNetworks.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/marketplaceGalleryImages.json
@@ -174,7 +172,7 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 input-file:
   - Microsoft.AzureStackHCI/preview/2024-01-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2024-01-01-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2024-01-01-preview/hciCommon.json
   - Microsoft.AzureStackHCI/preview/2024-01-01-preview/deploymentSettings.json
   - Microsoft.AzureStackHCI/preview/2024-01-01-preview/edgeDevices.json
   - Microsoft.AzureStackHCI/preview/2024-01-01-preview/extensions.json
@@ -215,7 +213,7 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/hciCommon.json
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/logicalNetworks.json
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/marketplaceGalleryImages.json
@@ -340,7 +338,7 @@ These settings apply only when `--tag=package-preview-2022-12-15` is specified o
 input-file:
   - Microsoft.AzureStackHCI/preview/2022-12-15-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2022-12-15-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2022-12-15-preview/hciCommon.json
   - Microsoft.AzureStackHCI/preview/2022-12-15-preview/extensions.json
   - Microsoft.AzureStackHCI/preview/2022-12-15-preview/galleryImages.json
   - Microsoft.AzureStackHCI/preview/2022-12-15-preview/marketplaceGalleryImages.json
