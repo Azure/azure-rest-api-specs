@@ -2897,7 +2897,7 @@
       "properties": {
         "productDetails": {
           "$ref": "#/definitions/ProductDetails",
-          "description": "Unique identifier for configuration."
+          "description": "Represents product details."
         },
         "orderItemType": {
           "description": "Order item type.",
@@ -3095,6 +3095,20 @@
         }
       }
     },
+    "OrderItemDetailsUpdateParameter": {
+      "description": "Order item details Patchable Properties.",
+      "type": "object",
+      "properties": {
+        "productDetails": {
+          "$ref": "#/definitions/ProductDetailsUpdateParameter",
+          "description": "Represents product details."
+        },
+        "siteDetails": {
+          "$ref": "#/definitions/SiteDetails",
+          "description": "Site Related Details."
+        }
+      }
+    },
     "OrderItemProperties": {
       "description": "Represents order item properties.",
       "required": [
@@ -3212,13 +3226,9 @@
             "type": "string"
           }
         },
-        "provisioningDetails": {
-          "$ref": "#/definitions/ProvisioningDetails",
-          "description": "Details Related To Provisioning Resource."
-        },
-        "siteDetails": {
-          "$ref": "#/definitions/SiteDetails",
-          "description": "Represents Site Related Details."
+        "orderItemDetails": {
+          "$ref": "#/definitions/OrderItemDetailsUpdateParameter",
+          "description": "Represents order item details."
         }
       }
     },
@@ -3469,6 +3479,16 @@
           "description": "Term Commitment Information of the Device.",
           "$ref": "#/definitions/TermCommitmentInformation",
           "readOnly": true
+        }
+      }
+    },
+    "ProductDetailsUpdateParameter": {
+      "description": "Represents product details patchable properties.",
+      "type": "object",
+      "properties": {
+        "parentProvisioningDetails": {
+          "$ref": "#/definitions/ProvisioningDetails",
+          "description": "Device Provisioning Details for Parent."
         }
       }
     },
