@@ -408,6 +408,14 @@
         "outputDataStores": {
           "description": "DataStore to push insights for the workload instance.",
           "$ref": "#/definitions/OutputDataStores"
+        },
+        "environment": {
+          "description": "Type of the workload environment",
+          "type": "string"
+        },
+        "businessPurpose": {
+          "description": "Business purpose of the workload instance.",
+          "type": "string"
         }
       }
     },
@@ -440,7 +448,8 @@
           "type": "string",
           "enum": [
             "AzureLogAnalyticsDataFeed",
-            "AzureDataExplorerDataFeed"
+            "AzureDataExplorerDataFeed",
+            "AzureResourceGraphDataFeed"
           ],
           "x-ms-enum": {
             "name": "dataFeedType",
@@ -522,6 +531,34 @@
         },
         "dataStore": {
           "$ref": "#/definitions/AzureLogAnalyticsDataStore"
+        }
+      }
+    },
+    "AzureResourceGraphDataFeed": {
+      "description": "Azure Resource Graph datafeed.",
+      "type": "object",
+      "required": [
+        "details",
+        "trigger"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeed"
+        }
+      ],
+      "properties": {
+        "details": {
+          "description": "Details of Azure Resource Graph datafeed.",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Kusto query to pull data from Azure Resource Graph",
+              "type": "string"
+            }
+          }
+        },
+        "dataStore": {
+          "$ref": "#/definitions/AzureResourceGraphDataStore"
         }
       }
     },
@@ -721,7 +758,8 @@
             "AzureLogAnalyticsDataStore",
             "ImpactResourceProviderDataStore",
             "AzureDataExplorerDataStore",
-            "EventHubDataStore"
+            "EventHubDataStore",
+            "AzureResourceGraphDataStore"
           ],
           "x-ms-enum": {
             "name": "dataStoreType",
@@ -775,6 +813,24 @@
         },
         "database": {
           "description": "The database name for Azure data explorer cluster.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureResourceGraphDataStore": {
+      "description": "Azure Resource Graph in data store.",
+      "type": "object",
+      "required": [
+        "subscriptions"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataStore"
+        }
+      ],
+      "properties": {
+        "subscriptions": {
+          "description": "The subscriptions of the Azure Resource Graph.",
           "type": "string"
         }
       }
