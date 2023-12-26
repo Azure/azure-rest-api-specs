@@ -57,10 +57,10 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+          "$ref": "#/definitions/ErrorDetail"
         },
         "warning": {
-          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+          "$ref": "#/definitions/ErrorDetail"
         }
       }
     },
@@ -101,11 +101,13 @@
             "successfulRequests": {
               "description": "Number of successful requests in the batch",
               "type": "integer",
+              "format": "int32",
               "readOnly": true
             },
             "totalRequests": {
               "description": "Total number of requests in the batch",
               "type": "integer",
+              "format": "int32",
               "readOnly": true
             }
           }
@@ -119,6 +121,7 @@
         "statusCode": {
           "description": "HTTP request status code.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true,
           "example": 200
         }
@@ -534,6 +537,79 @@
       "type": "string",
       "description": "The ontology version of this dataset.",
       "readOnly": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": [],
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "x-ms-identifiers": [],
+          "description": "The error additional info."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      },
+      "required": [
+        "error"
+      ]
     }
   },
   "parameters": {
@@ -856,28 +932,28 @@
     "408": {
       "description": "Timeout: The request took longer to finish than the maximum amount of time defined in the api.",
       "schema": {
-        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "409": {
       "description": "The request could not be completed due to a conflict with the current state of the resource. Likely caused by a parallel update to the same resource.",
       "schema": {
-        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "409StorageLimit": {
       "description": "The [data storage limit](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-maps-limits) is reached on the Azure Maps account. You can always use the [Data Delete API](https://docs.microsoft.com/rest/api/maps/data/deletepreview) to delete old/unused content and create space for new uploads.",
       "schema": {
-        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "default": {
       "description": "An unexpected error occurred.",
       "schema": {
-        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     }
