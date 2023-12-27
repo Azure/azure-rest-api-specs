@@ -55,7 +55,7 @@ model DocumentTranslateParameters {
   document: bytes;
 
   /** Glossary / translation memory will be used during translation in the form. */
-  glossary?: bytes;
+  glossary?: bytes[];
 }
 
 /** Successful request and the document is translated. The translated document is returned in the body. */

@@ -176,9 +176,12 @@
           "description": "Document to be translated in the form"
         },
         "glossary": {
-          "type": "string",
-          "format": "byte",
-          "description": "Glossary / translation memory will be used during translation in the form."
+          "type": "array",
+          "description": "Glossary / translation memory will be used during translation in the form.",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
         }
       },
       "required": [
@@ -269,7 +272,11 @@
       "in": "formData",
       "description": "Glossary / translation memory will be used during translation in the form.",
       "required": false,
-      "type": "file",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "byte"
+      },
       "x-ms-parameter-location": "method"
     },
     "DocumentTranslateParameters.sourceLanguage": {
