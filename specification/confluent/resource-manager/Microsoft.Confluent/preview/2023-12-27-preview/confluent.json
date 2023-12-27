@@ -1187,6 +1187,9 @@
           "Organization_GetEnvironments": {
             "$ref": "./examples/Organization_EnvironmentList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1238,6 +1241,9 @@
           "Organization_Clusters": {
             "$ref": "./examples/Organization_ClusterList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1289,6 +1295,9 @@
           "Organization_GetSchemaRegistry": {
             "$ref": "./examples/Organization_GetSchemaRegistry.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1346,6 +1355,9 @@
           "Organization_SchemaRegistryRegions": {
             "$ref": "./examples/Organization_SchemaRegistryRegionList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2604,28 +2616,21 @@
       }
     },
     "SC_GetEnvironmentsResponse": {
-      "description": "Details of the environments returned on successful response",
+      "description": "Result of GET request to list Confluent operations.",
       "type": "object",
       "properties": {
-        "kind": {
-          "description": "Type of response",
+        "value": {
+          "description": "List of environments in a confluent organization",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/SCEnvironmentRecord"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of environment records if there are any.",
           "type": "string"
-        },
-        "metadata": {
-          "description": "Metadata of the environment list",
-          "$ref": "#/definitions/SCConfluentListMetadata"
-        },
-        "data": {
-          "description": "Environment list data",
-          "$ref": "#/definitions/SCEnvironmentsList"
         }
-      }
-    },
-    "SCEnvironmentsList": {
-      "description": "List of environment records",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/SCEnvironmentRecord"
       }
     },
     "SCEnvironmentRecord": {
@@ -2695,53 +2700,39 @@
         }
       }
     },
-    "SCClustersList": {
-      "description": "List of cluster records",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/SCClusterRecord"
-      }
-    },
     "SC_GetClustersResponse": {
-      "description": "Details of the clusters returned on successful response",
+      "description": "Result of GET request to list clusters in the environment of a confluent organization",
       "type": "object",
       "properties": {
-        "kind": {
-          "description": "Type of response",
+        "value": {
+          "description": "List of clusters in an environment of a confluent organization",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/SCClusterRecord"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of cluster records if there are any.",
           "type": "string"
-        },
-        "metadata": {
-          "description": "Metadata of the cluster list",
-          "$ref": "#/definitions/SCConfluentListMetadata"
-        },
-        "data": {
-          "description": "Cluster list data",
-          "$ref": "#/definitions/SCClustersList"
         }
       }
     },
-    "SchemaRegistryList": {
-      "description": "List of Schema registry Records",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/SCSchemaRegistryRecord"
-      }
-    },
     "SC_GetSchemaRegistryResponse": {
-      "description": "Details of the schema registry returned on successful response",
+      "description": "Result of GET request to list schema registry clusters in the environment of a confluent organization",
       "type": "object",
       "properties": {
-        "kind": {
-          "description": "Type of response",
+        "value": {
+          "description": "List of schema registry clusters in an environment of a confluent organization",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/SCSchemaRegistryRecord"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of schema registry cluster records if there are any.",
           "type": "string"
-        },
-        "metadata": {
-          "description": "Metadata of the Schema registry list",
-          "$ref": "#/definitions/SCConfluentListMetadata"
-        },
-        "data": {
-          "description": "Schema registry list data",
-          "$ref": "#/definitions/SchemaRegistryList"
         }
       }
     },
@@ -2891,28 +2882,21 @@
         }
       }
     },
-    "SCRegionsList": {
-      "description": "List of region records",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/SCRegionRecord"
-      }
-    },
     "SCListRegions_SuccessResponse": {
-      "description": "Details of the regions returned on successful response",
+      "description": "Result of GET request to list schema registry clusters in the environment of a confluent organization",
       "type": "object",
       "properties": {
-        "kind": {
-          "description": "Type of response",
+        "value": {
+          "description": "List of schema registry clusters in an environment of a confluent organization",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/SCRegionRecord"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of schema registry cluster records if there are any.",
           "type": "string"
-        },
-        "metadata": {
-          "description": "Metadata of the  environment list",
-          "$ref": "#/definitions/SCConfluentListMetadata"
-        },
-        "data": {
-          "description": "Region list data",
-          "$ref": "#/definitions/SCRegionsList"
         }
       }
     },
