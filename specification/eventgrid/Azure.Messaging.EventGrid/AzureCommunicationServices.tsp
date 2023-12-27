@@ -48,7 +48,6 @@ model AcsChatMessageReceivedInThreadEventData {
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.")
 model AcsChatMessageEditedEventData {
   ...AcsChatMessageEventBaseProperties;
-
   ...AcsChatMessageBaseEventData;
 
   @doc("The time at which the message was edited")
@@ -118,13 +117,13 @@ model AcsChatThreadPropertiesUpdatedEventData {
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.")
 model AcsChatParticipantAddedToThreadWithUserEventData {
-  ...AcsChatThreadEventBaseProperties,
-  ...AcsChatParticipantBaseEventData,
+  ...AcsChatThreadEventBaseProperties;
+  ...AcsChatParticipantBaseEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.")
 model AcsChatParticipantRemovedFromThreadWithUserEventData {
-  ...AcsChatThreadEventBaseProperties,
+  ...AcsChatThreadEventBaseProperties;
 
   @doc("The time at which the user was removed to the thread")
   time?: utcDateTime;
@@ -138,7 +137,7 @@ model AcsChatParticipantRemovedFromThreadWithUserEventData {
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.")
 model AcsChatParticipantAddedToThreadEventData {
-  ...AcsChatEventInThreadBaseProperties,
+  ...AcsChatEventInThreadBaseProperties;
   ...AcsChatParticipantBaseEventData;
 
   @doc("The version of the thread")
@@ -147,7 +146,7 @@ model AcsChatParticipantAddedToThreadEventData {
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.")
 model AcsChatParticipantRemovedFromThreadEventData {
-  ...AcsChatEventInThreadBaseProperties,
+  ...AcsChatEventInThreadBaseProperties;
 
   @doc("The time at which the user was removed to the thread")
   time?: utcDateTime;
@@ -164,7 +163,7 @@ model AcsChatParticipantRemovedFromThreadEventData {
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.")
 model AcsSmsDeliveryReportReceivedEventData {
-  ...AcsSmsEventBaseProperties,
+  ...AcsSmsEventBaseProperties;
 
   @doc("Status of Delivery")
   deliveryStatus?: string;
@@ -183,8 +182,8 @@ model AcsSmsDeliveryReportReceivedEventData {
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.")
-model AcsSmsReceivedEventData { 
-  ...AcsSmsEventBaseProperties,
+model AcsSmsReceivedEventData {
+  ...AcsSmsEventBaseProperties;
 
   @doc("The SMS content")
   message?: string;
@@ -411,8 +410,7 @@ model AcsRouterJobReceivedEventData {
 }
 
 @doc("Acs Router Job Status")
-enum AcsRouterJobStatus{
-
+enum AcsRouterJobStatus {
   @doc("Router Job Status Pending Classification")
   PendingClassification,
 
@@ -764,8 +762,8 @@ model AcsRouterWorkerSelector {
   @doc("Router Job Worker Selector Label Operator")
   labelOperator?: AcsRouterLabelOperator;
 
-  @doc("Router Job Worker Selector Value")
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of labelValue is object"
+  @doc("Router Job Worker Selector Value")
   labelValue?: unknown;
 
   @doc("Router Job Worker Selector Time to Live in Seconds")
@@ -879,7 +877,6 @@ enum AcsRouterLabelOperator {
 
   @doc("Router Label Operator Less than or equal")
   LessThanOrEqual,
-
 }
 
 @doc("Router Worker Selector State")

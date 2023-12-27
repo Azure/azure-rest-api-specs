@@ -4,7 +4,6 @@ Grid. This corresponds to the Data property of an EventGridEvent.
 """)
 namespace Microsoft.EventGrid;
 
-
 @doc("""
 Schema of the Data property of an EventGridEvent for a
 Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged
@@ -67,4 +66,3 @@ Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event.
 model ResourceNotificationsHealthResourcesAnnotatedEventData {
   ...ResourceNotificationsResourceUpdatedEventData;
 }
-

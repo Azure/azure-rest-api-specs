@@ -281,7 +281,6 @@ namespace Microsoft.EventGrid {
     eventSubscriptionName: string;
   }
 
-
   @doc("Publish CloudEvents")
   @route("/send")
   @sharedRoute
@@ -339,8 +338,7 @@ namespace Microsoft.EventGrid {
     },
     {}
   >;
-  
-  
+
   // Publish Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
 

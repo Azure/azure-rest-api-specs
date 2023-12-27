@@ -105,21 +105,29 @@ model DeviceConnectionStateEventInfo {
 }
 
 @doc("Event data for Microsoft.Devices.DeviceCreated event.")
-model IotHubDeviceCreatedEventData { ... DeviceLifeCycleEventProperties }
+model IotHubDeviceCreatedEventData {
+  ...DeviceLifeCycleEventProperties;
+}
 
 @doc("Event data for Microsoft.Devices.DeviceDeleted event.")
-model IotHubDeviceDeletedEventData { ... DeviceLifeCycleEventProperties }
+model IotHubDeviceDeletedEventData {
+  ...DeviceLifeCycleEventProperties;
+}
 
 @doc("Event data for Microsoft.Devices.DeviceConnected event.")
-model IotHubDeviceConnectedEventData
-  { ... DeviceConnectionStateEventProperties }
+model IotHubDeviceConnectedEventData {
+  ...DeviceConnectionStateEventProperties;
+}
 
 @doc("Event data for Microsoft.Devices.DeviceDisconnected event.")
-model IotHubDeviceDisconnectedEventData
-  { ... DeviceConnectionStateEventProperties }
+model IotHubDeviceDisconnectedEventData {
+  ...DeviceConnectionStateEventProperties;
+}
 
 @doc("Event data for Microsoft.Devices.DeviceTelemetry event.")
-model IotHubDeviceTelemetryEventData { ... DeviceTelemetryEventProperties }
+model IotHubDeviceTelemetryEventData {
+  ...DeviceTelemetryEventProperties;
+}
 
 @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
 model ThumbPrintValue {

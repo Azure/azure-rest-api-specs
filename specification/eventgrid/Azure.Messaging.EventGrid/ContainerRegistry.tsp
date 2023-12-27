@@ -1,20 +1,24 @@
 @doc("Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace Microsoft.EventGrid;
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.")
-model ContainerRegistryImagePushedEventData
-  { ... ContainerRegistryEventData }
+model ContainerRegistryImagePushedEventData {
+  ...ContainerRegistryEventData;
+}
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event.")
-model ContainerRegistryImageDeletedEventData
-  { ... ContainerRegistryEventData }
+model ContainerRegistryImageDeletedEventData {
+  ...ContainerRegistryEventData;
+}
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event.")
-model ContainerRegistryChartPushedEventData
-  { ... ContainerRegistryArtifactEventData }
+model ContainerRegistryChartPushedEventData {
+  ...ContainerRegistryArtifactEventData;
+}
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event.")
-model ContainerRegistryChartDeletedEventData
-  { ... ContainerRegistryArtifactEventData }
+model ContainerRegistryChartDeletedEventData {
+  ...ContainerRegistryArtifactEventData;
+}
 
 alias ContainerRegistryBaseEventData = {
   @doc("The event ID.")
