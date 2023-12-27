@@ -12,12 +12,25 @@ modelerfour:
 ```
 
 ``` yaml $(typescript)
-input-file:
-  - Microsoft.ContainerRegistry/preview/2022-02-01-preview/containerregistry.json
-  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 typescript:
   azure-arm: true
   package-name: "@azure/arm-containerregistry"
   output-folder: "$(typescript-sdks-folder)/sdk/containerregistry/arm-containerregistry"
   generate-metadata: true
+
+directive:
+  - from: containerregistry_build.json
+    where: $.definitions.IdentityProperties.properties
+    transform: >
+      $.principalId['readOnly'] = true;
+      $.tenantId['readOnly'] = true;
+  - from: containerregistry_build.json
+    where: $.definitions.UserIdentityProperties.properties
+    transform: >
+      $.principalId['readOnly'] = true;
+      $.clientId['readOnly'] = true;
+  - from: containerregistry_build.json
+    where: $.definitions.ErrorResponse
+    transform: >
+      $['x-ms-client-name'] = 'ErrorResponseForContainerRegistry';
 ```

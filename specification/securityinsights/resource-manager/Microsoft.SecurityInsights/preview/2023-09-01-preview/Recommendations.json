@@ -1,0 +1,564 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/recommendations": {
+      "get": {
+        "x-ms-examples": {
+          "Get Recommendations list.": {
+            "$ref": "./examples/recommendations/GetRecommendations.json"
+          }
+        },
+        "tags": [
+          "recommendations"
+        ],
+        "description": "Gets a list of all recommendations.",
+        "operationId": "GetRecommendations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/recommendations/{recommendationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a recommendation.": {
+            "$ref": "./examples/recommendations/GetRecommendation.json"
+          }
+        },
+        "tags": [
+          "recommendations"
+        ],
+        "description": "Gets a recommendation by its id.",
+        "operationId": "Get_SingleRecommendation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RecommendationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Recommendation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Creates a recommendation.": {
+            "$ref": "./examples/recommendations/PatchRecommendation.json"
+          }
+        },
+        "tags": [
+          "recommendations"
+        ],
+        "description": "Patch a recommendation.",
+        "operationId": "Update_Recommendation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RecommendationId"
+          },
+          {
+            "$ref": "#/parameters/RecommendationPatch"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "202": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Recommendation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Recommendation": {
+      "description": "Recommendation object.",
+      "properties": {
+        "id": {
+          "description": "id of recommendation.",
+          "type": "string",
+          "format": "uuid"
+        },
+        "instructions": {
+          "description": "Instructions of the recommendation.",
+          "$ref": "#/definitions/Instructions"
+        },
+        "content": {
+          "description": "Content of the recommendation.",
+          "$ref": "#/definitions/Content",
+          "x-nullable": true
+        },
+        "resourceId": {
+          "description": "Id of the resource this recommendation refers to.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "additionalProperties": {
+          "description": "Collection of additional properties for the recommendation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "title": {
+          "description": "Title of the recommendation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the recommendation.",
+          "type": "string"
+        },
+        "recommendationTypeTitle": {
+          "description": "Title of the recommendation type.",
+          "type": "string"
+        },
+        "recommendationTypeId": {
+          "description": "Id of the recommendation type.",
+          "type": "string"
+        },
+        "category": {
+          "description": "Category of the recommendation.",
+          "$ref": "#/definitions/RecommendationCategory"
+        },
+        "context": {
+          "description": "Context of the recommendation.",
+          "$ref": "#/definitions/RecommendationContext"
+        },
+        "workspaceId": {
+          "description": "Id of the workspace this recommendation refers to.",
+          "type": "string",
+          "format": "uuid"
+        },
+        "actions": {
+          "description": "List of actions to take for this recommendation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedAction"
+          },
+          "x-ms-identifiers": []
+        },
+        "state": {
+          "description": "State of the recommendation.",
+          "$ref": "#/definitions/RecommendationState"
+        },
+        "priority": {
+          "description": "Priority of the recommendation.",
+          "$ref": "#/definitions/RecommendationPriority"
+        },
+        "lastEvaluatedTimeUtc": {
+          "description": "The time stamp (UTC) when the recommendation was last evaluated.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "hideUntilTimeUtc": {
+          "description": "The time stamp (UTC) when the recommendation should be displayed again.",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "displayUntilTimeUtc": {
+          "description": "The timestamp (UTC) after which the recommendation should not be displayed anymore.",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "visible": {
+          "description": "Value indicating if the recommendation should be displayed or not.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "instructions",
+        "title",
+        "description",
+        "recommendationTypeTitle",
+        "recommendationTypeId",
+        "category",
+        "context",
+        "workspaceId",
+        "actions",
+        "state",
+        "priority",
+        "lastEvaluatedTimeUtc"
+      ],
+      "type": "object"
+    },
+    "RecommendationList": {
+      "description": "A list of recommendations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recommendation"
+          },
+          "description": "An list of recommendations"
+        }
+      },
+      "type": "object"
+    },
+    "Content": {
+      "description": "Content section of the recommendation.",
+      "properties": {
+        "title": {
+          "description": "Title of the content.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the content.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description"
+      ],
+      "type": "object"
+    },
+    "Instructions": {
+      "description": "Instructions section of a recommendation.",
+      "properties": {
+        "actionsToBePerformed": {
+          "description": "What actions should be taken to complete the recommendation.",
+          "type": "string"
+        },
+        "recommendationImportance": {
+          "description": "Explains why the recommendation is important.",
+          "type": "string"
+        },
+        "howToPerformActionDetails": {
+          "description": "How should the user complete the recommendation.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "actionsToBePerformed",
+        "recommendationImportance"
+      ],
+      "type": "object"
+    },
+    "RecommendedAction": {
+      "description": "What actions should be taken to complete the recommendation.",
+      "properties": {
+        "linkText": {
+          "description": "Text of the link to complete the action.",
+          "type": "string"
+        },
+        "linkUrl": {
+          "description": "The Link to complete the action.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state of the action.",
+          "$ref": "#/definitions/ActionState"
+        }
+      },
+      "required": [
+        "linkText",
+        "linkUrl"
+      ],
+      "type": "object"
+    },
+    "RecommendationPatch": {
+      "description": "Recommendation Fields to update.",
+      "properties": {
+        "state": {
+          "description": "State of the recommendation.",
+          "$ref": "#/definitions/RecommendationState"
+        },
+        "hideUntilTimeUtc": {
+          "description": "The time stamp (UTC) when the recommendation should be displayed again.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "type": "object"
+    },
+    "RecommendationCategory": {
+      "description": "Categories of recommendations.",
+      "type": "string",
+      "enum": [
+        "Onboarding",
+        "NewFeature",
+        "SocEfficiency",
+        "CostOptimization",
+        "Demo"
+      ],
+      "x-ms-enum": {
+        "name": "Category",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Onboarding",
+            "description": "Onboarding recommendation."
+          },
+          {
+            "value": "NewFeature",
+            "description": "New feature recommendation."
+          },
+          {
+            "value": "SocEfficiency",
+            "description": "Soc Efficiency recommendation."
+          },
+          {
+            "value": "CostOptimization",
+            "description": "Cost optimization recommendation."
+          },
+          {
+            "value": "Demo",
+            "description": "Demo recommendation."
+          }
+        ]
+      }
+    },
+    "RecommendationContext": {
+      "description": "Context of recommendation.",
+      "type": "string",
+      "enum": [
+        "Analytics",
+        "Incidents",
+        "Overview",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "Context",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Analytics",
+            "description": "Analytics context."
+          },
+          {
+            "value": "Incidents",
+            "description": "Incidents context."
+          },
+          {
+            "value": "Overview",
+            "description": "Overview context."
+          },
+          {
+            "value": "None",
+            "description": "No context."
+          }
+        ]
+      }
+    },
+    "RecommendationState": {
+      "description": "State of recommendation.",
+      "type": "string",
+      "enum": [
+        "Active",
+        "Disabled",
+        "CompletedByUser",
+        "CompletedByAction",
+        "Hidden"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Active",
+            "description": "Recommendation is active."
+          },
+          {
+            "value": "Disabled",
+            "description": "Recommendation is disabled."
+          },
+          {
+            "value": "CompletedByUser",
+            "description": "Recommendation has been completed by user."
+          },
+          {
+            "value": "CompletedByAction",
+            "description": "Recommendation has been completed by action."
+          },
+          {
+            "value": "Hidden",
+            "description": "Recommendation is hidden."
+          }
+        ]
+      }
+    },
+    "RecommendationPriority": {
+      "description": "Priority of recommendation.",
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "Priority",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Low",
+            "description": "Low priority for recommendation."
+          },
+          {
+            "value": "Medium",
+            "description": "Medium priority for recommendation."
+          },
+          {
+            "value": "High",
+            "description": "High priority for recommendation."
+          }
+        ]
+      }
+    },
+    "ActionState": {
+      "description": "Represents the state the recommendation action is currently in.",
+      "type": "string",
+      "enum": [
+        "Active",
+        "InProgress",
+        "Done"
+      ],
+      "x-ms-enum": {
+        "name": "Priority",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Active",
+            "description": "Default state of actions."
+          },
+          {
+            "value": "InProgress",
+            "description": "State for when actions have been clicked on."
+          },
+          {
+            "value": "Done",
+            "description": "State of completed actions."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "RecommendationId": {
+      "description": "Recommendation Id.",
+      "in": "path",
+      "name": "recommendationId",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "RecommendationPatch": {
+      "description": "Recommendation Fields to Update.",
+      "in": "body",
+      "name": "recommendationPatch",
+      "required": true,
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/RecommendationPatch"
+        },
+        "x-ms-identifiers": []
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

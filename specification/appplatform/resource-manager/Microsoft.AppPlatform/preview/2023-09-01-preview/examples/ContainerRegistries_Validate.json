@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "ContainerRegistryProperties": {
+      "credentials": {
+        "type": "BasicAuth",
+        "server": "myServer",
+        "username": "myUsername",
+        "password": "myPassword"
+      }
+    },
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "my-service",
+    "containerRegistryName": "my-container-registry"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "isValid": false,
+        "message": "Validate container registry failed. please check the properties first."
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2023-09-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2023-09-01-preview"
+      }
+    }
+  }
+}

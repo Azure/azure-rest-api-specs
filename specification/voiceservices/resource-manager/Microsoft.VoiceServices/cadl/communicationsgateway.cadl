@@ -1,0 +1,285 @@
+// Definitions for the CommunicationsGateway resource and child resources
+
+import "@cadl-lang/openapi";
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+namespace Microsoft.VoiceServices;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.ResourceManager;
+
+@doc("A TestLine resource")
+@parentResource(CommunicationsGateway)
+model TestLine is TrackedResource<TestLineProperties> {
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @key("testLineName")
+  @segment("testLines")
+  @doc("Unique identifier for this test line")
+  @visibility("Read")
+  @path
+  name: string;
+}
+
+@doc("The purpose of the TestLine resource.")
+enum TestLinePurpose {
+  Manual,
+  Automated,
+}
+
+@doc("Details of the TestLine resource.")
+model TestLineProperties is ResourceProperties {
+  @doc("The phone number")
+  @visibility("read", "update", "create")
+  phoneNumber: string;
+
+  @doc("Purpose of this test line, e.g. automated or manual testing")
+  @visibility("read", "update", "create")
+  purpose: TestLinePurpose;
+}
+
+@armResourceOperations
+interface TestLines
+  extends ResourceRead<TestLine>,
+    ResourceCreate<TestLine>,
+    ResourceDelete<TestLine>,
+    ResourceListByParent<TestLine>,
+    ResourceUpdateNoProperties<TestLine> {}
+
+@doc("A Contact resource")
+@parentResource(CommunicationsGateway)
+model Contact is TrackedResource<ContactProperties> {
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @key("contactName")
+  @segment("contacts")
+  @doc("Unique identifier for this contact")
+  @visibility("Read")
+  @path
+  name: string;
+}
+
+@doc("Details of the Contact resource.")
+model ContactProperties is ResourceProperties {
+  @doc("Full name of contact")
+  @visibility("read", "update", "create")
+  contactName: string;
+
+  @doc("Telephone number of contact")
+  @visibility("read", "update", "create")
+  phoneNumber: string;
+
+  @doc("Email address of contact")
+  @visibility("read", "update", "create")
+  email: string;
+
+  @doc("Job title of contact")
+  @visibility("read", "update", "create")
+  role: string;
+}
+
+@removed(Versions.v2023_01_31)
+@armResourceOperations
+interface Contacts
+  extends ResourceRead<Contact>,
+    ResourceCreate<Contact>,
+    ResourceDelete<Contact>,
+    ResourceListByParent<Contact>,
+    ResourceUpdateNoProperties<Contact> {}
+
+@doc("A CommunicationsGateway resource")
+model CommunicationsGateway
+  is TrackedResource<CommunicationsGatewayProperties> {
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @key("communicationsGatewayName")
+  @segment("communicationsGateways")
+  @doc("Unique identifier for this deployment")
+  @visibility("Read")
+  @path
+  name: string;
+
+  ...ManagedServiceIdentity;
+}
+
+@doc("The status of the current CommunicationsGateway resource.")
+enum Status {
+  @doc("The resource has been created or updated, but the CommunicationsGateway service has not yet been updated to reflect the changes.")
+  ChangePending,
+
+  @doc("The CommunicationsGateway service is up and running with the parameters specified in the resource.")
+  Complete,
+}
+
+@doc("The method for terminating emergency calls to the PSTN.")
+enum E911Type {
+  @doc("Emergency calls are not handled different from other calls")
+  Standard,
+
+  @doc("Emergency calls are routed directly to the ESRP")
+  DirectToEsrp,
+}
+
+@doc("The voice codecs expected for communication with Teams.")
+enum TeamsCodecs {
+  PCMA,
+  PCMU,
+  G722,
+  G722_2,
+  SILK_8,
+  SILK_16,
+}
+
+@doc("How this deployment connects back to the operator network")
+enum Connectivity {
+  @doc("This deployment connects to the operator network using a Public IP address, e.g. when using MAPS")
+  PublicAddress,
+}
+
+@doc("The service region configuration needed for Teams Callings.")
+model ServiceRegionProperties {
+  @doc("The name of the region in which the resources needed for Teams Calling will be deployed.")
+  @visibility("read", "create")
+  name: string;
+
+  @doc("The configuration used in this region as primary, and other regions as backup.")
+  @visibility("read", "update", "create")
+  primaryRegionProperties: PrimaryRegionProperties;
+}
+
+@doc("The configuration used in this region as primary, and other regions as backup.")
+model PrimaryRegionProperties {
+  @doc("IP address to use to contact the operator network from this region")
+  @visibility("read", "update", "create")
+  operatorAddresses: string[];
+
+  @doc("IP address to use to contact the ESRP from this region")
+  @visibility("read", "update", "create")
+  esrpAddresses?: string[];
+
+  @added(Versions.v2023_01_31)
+  @doc("The allowed source IP address or CIDR ranges for signaling")
+  @visibility("read", "update", "create")
+  allowedSignalingSourceAddressPrefixes?: string[] = [];
+
+  @added(Versions.v2023_01_31)
+  @doc("The allowed source IP address or CIDR ranges for media")
+  @visibility("read", "update", "create")
+  allowedMediaSourceAddressPrefixes?: string[] = [];
+}
+
+@doc("Available platform types.")
+enum CommunicationsPlatform {
+  OperatorConnect,
+  TeamsPhoneMobile,
+}
+
+// Currently empty, with presence indicating that this feature should be enabled.
+// This is expected to include more properties in future, hence being an object.
+@doc("Details of API bridge functionality.")
+model ApiBridgeProperties {}
+
+@doc("Available auto-generated domain name scopes.")
+enum AutoGeneratedDomainNameLabelScope {
+    TenantReuse,
+    SubscriptionReuse,
+    ResourceGroupReuse,
+    NoReuse
+}
+
+@doc("Details of the CommunicationsGateway resource.")
+model CommunicationsGatewayProperties is ResourceProperties {
+  @doc("The current status of the deployment.")
+  @visibility("read")
+  status?: Status;
+
+  @doc("The regions in which to deploy the resources needed for Teams Calling")
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", ["name"])
+  @visibility("read", "update", "create")
+  serviceLocations: ServiceRegionProperties[];
+
+  @doc("How to connect back to the operator network, e.g. MAPS")
+  @visibility("read", "create")
+  connectivity: Connectivity;
+
+  @doc("Voice codecs to support")
+  @visibility("read", "update", "create")
+  codecs: TeamsCodecs[];
+
+  @doc("How to handle 911 calls")
+  @visibility("read", "update", "create")
+  e911Type: E911Type;
+
+  @doc("What platforms to support")
+  @visibility("read", "update", "create")
+  @minItems(1)
+  platforms: CommunicationsPlatform[];
+
+  @doc("Details of API bridge functionality, if required")
+  @visibility("read", "update", "create")
+  apiBridge?: ApiBridgeProperties;
+
+  @added(Versions.v2023_01_31)
+  @doc("The scope at which the auto-generated domain name can be re-used")
+  @visibility("read", "create")
+  autoGeneratedDomainNameLabelScope?: AutoGeneratedDomainNameLabelScope = AutoGeneratedDomainNameLabelScope.TenantReuse;
+
+  @added(Versions.v2023_01_31)
+  @doc("The autogenerated label used as part of the FQDNs for accessing the Communications Gateway")
+  @visibility("read")
+  autoGeneratedDomainNameLabel?: string;
+
+  @added(Versions.v2023_01_31)
+  @doc("This number is used in Teams Phone Mobile scenarios for access to the voicemail IVR from the native dialer.")
+  @visibility("read", "update", "create")
+  teamsVoicemailPilotNumber?: string;
+
+  @added(Versions.v2023_01_31)
+  @doc("Whether an on-premises Mobile Control Point is in use.")
+  @visibility("read", "update", "create")
+  onPremMcpEnabled?: boolean = false;
+
+  @added(Versions.v2023_04_03)
+  @doc("Whether an integrated Mobile Control Point is in use.")
+  @visibility("read", "update", "create")
+  integratedMcpEnabled?: boolean = false;
+
+  @added(Versions.v2023_01_31)
+  @doc("A list of dial strings used for emergency calling.")
+  @visibility("read", "update", "create")
+  emergencyDialStrings?: string[] = ["911", "933"];
+}
+
+@armResourceOperations
+interface CommunicationsGateways
+  extends ResourceRead<CommunicationsGateway>,
+    ResourceCreate<CommunicationsGateway>,
+    ResourceDelete<CommunicationsGateway>,
+    ResourceListBySubscription<CommunicationsGateway>,
+    ResourceListByParent<CommunicationsGateway>,
+    ResourceUpdateNoProperties<CommunicationsGateway> {}
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-requires-decorator" "CheckNameAvailability is not supported by cadl-azure-resource-manager."
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "CheckNameAvailability is not supported by cadl-azure-resource-manager."
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-missing-decorator" "CheckNameAvailability is not supported by cadl-azure-resource-manager."
+@added(Versions.v2023_01_31)
+interface NameAvailability {
+  @doc("Check whether the resource name is available in the given region.")
+  @post
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.VoiceServices/locations/{location}/checkNameAvailability")
+  checkLocal(
+    @doc("The check availability request body.")
+    @body
+    body: CheckNameAvailabilityRequest,
+
+    @doc("The location in which uniqueness will be verified.")
+    @path
+    location: string,
+
+    ...SubscriptionIdParameter,
+    ...ApiVersionParameter
+  ): CheckNameAvailabilityResponse | ErrorResponse;
+}

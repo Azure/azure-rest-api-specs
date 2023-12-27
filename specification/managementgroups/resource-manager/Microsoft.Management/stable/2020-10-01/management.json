@@ -81,7 +81,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
           "ListManagementGroups": {
@@ -1070,7 +1070,7 @@
             "$ref": "#/definitions/ManagementGroupInfo"
           }
         },
-        "nextLink": {
+        "@nextLink": {
           "description": "The URL to use for getting the next set of results.",
           "type": "string",
           "readOnly": true
@@ -1173,7 +1173,7 @@
         },
         "parent": {
           "title": "Parent",
-          "$ref": "#/definitions/ParentGroupBagInfo",
+          "$ref": "#/definitions/DescendantParentGroupInfo",
           "x-nullable": true
         },
         "state": {
@@ -1450,7 +1450,7 @@
             "$ref": "#/definitions/HierarchySettingsInfo"
           }
         },
-        "nextLink": {
+        "@nextLink": {
           "description": "The URL to use for getting the next set of results.",
           "type": "string",
           "readOnly": true
@@ -1576,24 +1576,6 @@
         "id": {
           "type": "string",
           "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
-        }
-      }
-    },
-    "ParentGroupBagInfo": {
-      "description": "The ID, name and displayName of the parent management group.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the parent management group. For example, 00000000-0000-0000-0000-000000000000"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The friendly name of the parent management group."
         }
       }
     },

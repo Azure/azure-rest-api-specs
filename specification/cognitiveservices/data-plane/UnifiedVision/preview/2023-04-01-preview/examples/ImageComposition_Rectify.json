@@ -1,0 +1,33 @@
+{
+  "title": "Run the image rectification operation against an image with 4 control points provided in the parameter.",
+  "operationId": "ImageComposition_Rectify",
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "body": {
+      "url": "https://example.com/image.jpg",
+      "controlPoints": {
+        "topLeft": {
+          "x": 0.1,
+          "y": 0.1
+        },
+        "topRight": {
+          "x": 0.9,
+          "y": 0.1
+        },
+        "bottomLeft": {
+          "x": 0.1,
+          "y": 0.9
+        },
+        "bottomRight": {
+          "x": 0.9,
+          "y": 0.9
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": "Ynl0ZXM="
+    }
+  }
+}

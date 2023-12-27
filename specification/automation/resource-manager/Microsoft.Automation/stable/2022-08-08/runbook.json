@@ -69,7 +69,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -122,7 +123,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "name": "runbookContent",
@@ -140,7 +142,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
           },
           "202": {
             "description": "Accepted and  the operation will complete asynchronously.",
@@ -160,7 +165,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -194,7 +199,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -246,7 +252,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The parameters supplied to the publish runbook operation."
+            "description": "The parameters supplied to the publish runbook operation.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -302,7 +309,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -310,7 +318,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RunbookDraftUndoEditResult"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -354,7 +365,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -406,7 +418,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -459,7 +472,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "name": "parameters",
@@ -524,7 +538,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "name": "parameters",
@@ -583,7 +598,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -683,7 +699,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "name": "jobStreamId",
@@ -742,7 +759,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "name": "$filter",
@@ -804,7 +822,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The parameters supplied to the create test job operation."
+            "description": "The parameters supplied to the create test job operation.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "name": "parameters",
@@ -863,7 +882,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -915,7 +935,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -964,7 +985,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -1013,7 +1035,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The runbook name."
+            "description": "The runbook name.",
+            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$"
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
@@ -1035,6 +1058,7 @@
   },
   "definitions": {
     "JobStream": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1049,6 +1073,7 @@
       "description": "Definition of the job stream."
     },
     "JobStreamProperties": {
+      "type": "object",
       "properties": {
         "jobStreamId": {
           "type": "string",
@@ -1097,6 +1122,7 @@
       "description": "Definition of the job stream."
     },
     "JobStreamListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1149,6 +1175,7 @@
       "description": "Definition of the content link."
     },
     "RunbookProperties": {
+      "type": "object",
       "properties": {
         "runbookType": {
           "type": "string",
@@ -1256,6 +1283,7 @@
       "description": "Definition of the runbook property type."
     },
     "Runbook": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RunbookProperties",
@@ -1275,6 +1303,7 @@
       "description": "Definition of the runbook type."
     },
     "RunbookListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1291,6 +1320,7 @@
       "description": "The response model for the list runbook operation."
     },
     "RunbookCreateOrUpdateProperties": {
+      "type": "object",
       "properties": {
         "logVerbose": {
           "type": "boolean",
@@ -1342,6 +1372,7 @@
       "description": "The parameters supplied to the create or update runbook properties."
     },
     "RunbookCreateOrUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RunbookCreateOrUpdateProperties",
@@ -1370,6 +1401,7 @@
       "description": "The parameters supplied to the create or update runbook operation."
     },
     "RunbookUpdateProperties": {
+      "type": "object",
       "properties": {
         "description": {
           "type": "string",
@@ -1392,6 +1424,7 @@
       "description": "The parameters supplied to the update runbook properties."
     },
     "RunbookUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RunbookUpdateProperties",
@@ -1417,6 +1450,7 @@
       "description": "The parameters supplied to the update runbook operation."
     },
     "RunbookDraftUndoEditResult": {
+      "type": "object",
       "properties": {
         "statusCode": {
           "type": "string",
@@ -1481,6 +1515,7 @@
       "description": "The response model for the undo edit runbook operation."
     },
     "RunbookDraft": {
+      "type": "object",
       "properties": {
         "inEdit": {
           "type": "boolean",
@@ -1519,6 +1554,7 @@
       }
     },
     "RunbookParameter": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -1541,6 +1577,7 @@
       "description": "Definition of the runbook parameter type."
     },
     "TestJobCreateParameters": {
+      "type": "object",
       "properties": {
         "parameters": {
           "type": "object",
@@ -1557,6 +1594,7 @@
       "description": "The parameters supplied to the create test job operation."
     },
     "TestJob": {
+      "type": "object",
       "x-ms-mutability": [
         "read",
         "create"
@@ -1624,6 +1662,7 @@
       "description": "Definition of the test job."
     },
     "RunbookCreateOrUpdateDraftProperties": {
+      "type": "object",
       "properties": {
         "logVerbose": {
           "type": "boolean",
@@ -1672,6 +1711,7 @@
       "description": "The parameters supplied to the create or update draft runbook properties."
     },
     "RunbookCreateOrUpdateDraftParameters": {
+      "type": "object",
       "properties": {
         "runbookContent": {
           "type": "string",

@@ -253,13 +253,13 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": ""
           },
@@ -441,12 +441,21 @@
         },
         "sparkEventsFolder": {
           "type": "string",
-          "description": "The Spark events folder"
+          "description": "The Spark events folder",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "nodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of nodes in the Big Data pool."
+          "description": "The number of nodes in the Big Data pool.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "libraryRequirements": {
           "$ref": "#/definitions/LibraryRequirements",
@@ -457,7 +466,8 @@
           "type": "array",
           "items": {
             "$ref": "../../../../common/v1/types.json#/definitions/LibraryInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "sparkConfigProperties": {
           "$ref": "#/definitions/SparkConfigProperties",

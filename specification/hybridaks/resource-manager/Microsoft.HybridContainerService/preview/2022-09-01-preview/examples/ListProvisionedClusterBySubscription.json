@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "subscriptionId": "a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b",
+    "api-version": "2022-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/provisionedClusters/test-hybridakscluster",
+            "name": "test-hybridakscluster",
+            "type": "microsoft.hybridcontainerservice/provisionedclusters",
+            "location": "westus",
+            "extendedLocation": {
+              "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation",
+              "type": "CustomLocation"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "controlPlane": {
+                "count": 1,
+                "vmSize": "Standard_A4_v2",
+                "osType": "Linux",
+                "linuxProfile": {
+                  "ssh": {
+                    "publicKeys": [
+                      {
+                        "keyData": "ssh-rsa AAAAB1NzaC1yc2EAAAADAQABAAACAQCY......"
+                      }
+                    ]
+                  }
+                }
+              },
+              "kubernetesVersion": "v1.20.5",
+              "networkProfile": {
+                "loadBalancerSku": "unstacked-haproxy",
+                "loadBalancerProfile": {
+                  "count": 1,
+                  "vmSize": "Standard_K8S3_v1",
+                  "osType": "Linux",
+                  "linuxProfile": {
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "keyData": "ssh-rsa AAAAB2NzaC1yc2EAAAADAQABAAACAQCY......"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "networkPolicy": "calico",
+                "podCidr": "10.244.0.0/16"
+              },
+              "agentPoolProfiles": [
+                {
+                  "name": "default-nodepool-1",
+                  "count": 1,
+                  "vmSize": "Standard_A4_v2",
+                  "osType": "Linux"
+                }
+              ],
+              "linuxProfile": {
+                "ssh": {
+                  "publicKeys": [
+                    {
+                      "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCY......."
+                    }
+                  ]
+                }
+              },
+              "cloudProviderProfile": {
+                "infraNetworkProfile": {
+                  "vnetSubnetIds": [
+                    "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/virtualNetworks/test-vnet-static"
+                  ]
+                },
+                "infraStorageProfile": {
+                  "storageSpaceIds": [
+                    "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/storageSpaces/test-storage"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

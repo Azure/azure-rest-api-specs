@@ -1,0 +1,226 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/billingStatistics": {
+      "get": {
+        "x-ms-examples": {
+          "Get all Microsoft Sentinel billing statistics.": {
+            "$ref": "./examples/billingStatistics/GetAllBillingStatistics.json"
+          }
+        },
+        "tags": [
+          "billingStatistics"
+        ],
+        "description": "Gets all Microsoft Sentinel billing statistics.",
+        "operationId": "BillingStatistics_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BillingStatisticList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/billingStatistics/{billingStatisticName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a billing statistic.": {
+            "$ref": "./examples/billingStatistics/GetBillingStatistic.json"
+          }
+        },
+        "tags": [
+          "billingStatistics"
+        ],
+        "description": "Gets a billing statistic",
+        "operationId": "BillingStatistics_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BillingStatisticName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BillingStatistic"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingStatisticList": {
+      "description": "List of all Microsoft Sentinel billing statistics.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of billing statistics.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of billing statistics.",
+          "items": {
+            "$ref": "#/definitions/BillingStatistic"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BillingStatistic": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/AzureEntityResource"
+        }
+      ],
+      "description": "Billing statistic",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/BillingStatisticKindEnum",
+          "description": "The kind of the billing statistic"
+        }
+      },
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "BillingStatisticKindEnum": {
+      "description": "The kind of the billing statistic",
+      "enum": [
+        "SapSolutionUsage"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "BillingStatisticKind",
+        "values": [
+          {
+            "value": "SapSolutionUsage"
+          }
+        ]
+      }
+    },
+    "SapSolutionUsageStatistic": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BillingStatistic"
+        }
+      ],
+      "description": "Billing statistic about the Microsoft Sentinel solution for SAP Usage",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SapSolutionUsageStatisticProperties",
+          "description": "The SAP solution usage object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "SapSolutionUsage"
+    },
+    "SapSolutionUsageStatisticProperties": {
+      "description": "Properties of the billing statistic about the Microsoft Sentinel solution for SAP usage",
+      "properties": {
+        "activeSystemIdCount": {
+          "description": "The latest count of active SAP system IDs under the Microsoft Sentinel solution for SAP Usage",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "BillingStatisticName": {
+      "description": "The name of the billing statistic",
+      "in": "path",
+      "name": "billingStatisticName",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

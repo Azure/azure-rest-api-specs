@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sjName",
+    "outputName": "output1221"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "219b3b09-f823-4d78-ace0-90e24c12c501"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sjName/outputs/output1221",
+        "name": "output1221",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.Storage/Blob",
+            "properties": {
+              "storageAccounts": [
+                {
+                  "accountName": "someAccountName"
+                }
+              ],
+              "container": "deltaoutput"
+            }
+          },
+          "serialization": {
+            "type": "Delta",
+            "properties": {
+              "deltaTablePath": "/folder1/table1",
+              "partitionColumns": [
+                "column1"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

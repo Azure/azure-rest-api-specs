@@ -1,0 +1,318 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerGroups": {
+      "get": {
+        "x-ms-examples": {
+          "Get all workspace manager groups in the Sentinel workspace manager.": {
+            "$ref": "./examples/workspaceManagerGroups/GetAllWorkspaceManagerGroups.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerGroups"
+        ],
+        "description": "Gets all workspace manager groups in the Sentinel workspace manager",
+        "operationId": "WorkspaceManagerGroups_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerGroupList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerGroups/{workspaceManagerGroupName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a workspace manager group": {
+            "$ref": "./examples/workspaceManagerGroups/GetWorkspaceManagerGroup.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerGroups"
+        ],
+        "description": "Gets a workspace manager group",
+        "operationId": "WorkspaceManagerGroups_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a workspace manager group.": {
+            "$ref": "./examples/workspaceManagerGroups/CreateOrUpdateWorkspaceManagerGroup.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerGroups"
+        ],
+        "description": "Creates or updates a workspace manager group.",
+        "operationId": "WorkspaceManagerGroups_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerGroup"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, created or updated an instance",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerGroup"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a workspace manager group.": {
+            "$ref": "./examples/workspaceManagerGroups/DeleteWorkspaceManagerGroup.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerGroups"
+        ],
+        "description": "Deletes a workspace manager group",
+        "operationId": "WorkspaceManagerGroups_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkspaceManagerGroup": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/AzureEntityResource"
+        }
+      ],
+      "description": "The workspace manager group",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceManagerGroupProperties",
+          "description": "The workspace manager group object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WorkspaceManagerGroupProperties": {
+      "description": "The workspace manager group properties",
+      "properties": {
+        "description": {
+          "description": "The description of the workspace manager group",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the workspace manager group",
+          "type": "string"
+        },
+        "memberResourceNames": {
+          "description": "The names of the workspace manager members participating in this group.",
+          "items": {
+            "description": "memberResourceName",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "displayName",
+        "memberResourceNames"
+      ],
+      "type": "object"
+    },
+    "WorkspaceManagerGroupList": {
+      "description": "List of all the workspace manager groups.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of workspace manager groups.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of workspace manager groups.",
+          "items": {
+            "$ref": "#/definitions/WorkspaceManagerGroup"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "WorkspaceManagerGroupName": {
+      "description": "The name of the workspace manager group",
+      "in": "path",
+      "name": "workspaceManagerGroupName",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceManagerGroup": {
+      "description": "The workspace manager group object",
+      "in": "body",
+      "name": "workspaceManagerGroup",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WorkspaceManagerGroup"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

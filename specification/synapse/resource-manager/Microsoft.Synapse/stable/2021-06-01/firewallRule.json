@@ -172,7 +172,7 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/IpFirewallRuleInfo"
             },
             "description": "OK"
           },
@@ -244,7 +244,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Create an IP firewall rule": {
+          "Get IP firewall rule": {
             "$ref": "./examples/GetIpFirewallRule.json"
           }
         }
@@ -354,7 +354,12 @@
       "properties": {
         "endIpAddress": {
           "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "provisioningState": {
           "description": "Resource provisioning state",
@@ -374,7 +379,12 @@
         },
         "startIpAddress": {
           "description": "The start IP address of the firewall rule. Must be IPv4 format",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         }
       }
     },

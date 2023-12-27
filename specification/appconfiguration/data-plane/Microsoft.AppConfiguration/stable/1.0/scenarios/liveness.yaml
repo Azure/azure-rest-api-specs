@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+
+scope: ResourceGroup
+variables:
+  configStoreName:
+    type: string
+    prefix: configstor
+
+prepareSteps:
+  - step: Operations_CheckNameAvailability
+    operationId: Operations_CheckNameAvailability
+    readmeTag: ../../../../../resource-manager/readme.md
+    parameters:
+      checkNameAvailabilityParameters:
+        name: $(configStoreName)
+        type: Microsoft.AppConfiguration/configurationStores
+  - step: ConfigurationStores_Create
+    operationId: ConfigurationStores_Create
+    readmeTag: ../../../../../resource-manager/readme.md
+    parameters:
+      configStoreCreationParameters:
+        location: $(location)
+        sku:
+          name: Standard
+        tags:
+          myTag: myTagValue
+  - step: ConfigurationStores_Get
+    operationId: ConfigurationStores_Get
+    readmeTag: ../../../../../resource-manager/readme.md
+    outputVariables:
+      endpoint:
+        type: string
+        fromResponse: /properties/endpoint
+      configStoreId:
+        type: string
+        fromResponse: /id
+  - step: assignRole
+    roleAssignment:
+      scope: $(configStoreId)
+      principalId: $(object_id)
+      principalType: ServicePrincipal
+      roleName: App Configuration Data Owner
+
+scenarios:
+  - scenario: liveness
+    authentication:
+      type: AADToken
+      scope: https://azconfig.io/.default
+    steps:
+      - operationId: CheckKeys

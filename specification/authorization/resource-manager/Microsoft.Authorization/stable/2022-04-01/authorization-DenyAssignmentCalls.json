@@ -395,6 +395,36 @@
         "isSystemProtected": {
           "type": "boolean",
           "description": "Specifies whether this deny assignment was created by Azure and cannot be edited or deleted."
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the deny assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'"
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition."
+        },
+        "createdOn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Time it was created",
+          "format": "date-time"
+        },
+        "updatedOn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Time it was updated",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id of the user who created the assignment"
+        },
+        "updatedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id of the user who updated the assignment"
         }
       },
       "type": "object",

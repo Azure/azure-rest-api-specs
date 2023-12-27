@@ -34,6 +34,9 @@ directive:
       return $.
         replace(/.*public const string DummyOrchestrationServiceName.*/g,'').
         replace(/, 'DummyOrchestrationServiceName'/g,'');
+  - from: gallery.json
+    where: $.definitions.GalleryTargetExtendedLocation.properties.storageAccountType["x-ms-enum"].name
+    transform: return "EdgeZoneStorageAccountType"
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)

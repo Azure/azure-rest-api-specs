@@ -18,12 +18,19 @@ batch:
   - package-templatespecs: true
   - package-subscriptions: true
   - package-changes: true
+  - package-deploymentstacks: true
 ```
 
 ```yaml $(typescript) && $(package-features) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-features"
   output-folder: "$(typescript-sdks-folder)/sdk/features/arm-features"
+```
+
+```yaml $(typescript) && $(package-deploymentstacks) && !$(profile-content)
+typescript:
+  package-name: "@azure/arm-resourcesdeploymentstacks"
+  output-folder: "$(typescript-sdks-folder)/sdk/resourcesdeploymentstacks/arm-resourcesdeploymentstacks"
 ```
 
 ```yaml $(typescript) && $(package-locks) && !$(profile-content)

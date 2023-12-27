@@ -1,0 +1,110 @@
+{
+  "title": "Create a new dashboard with line chart tile",
+  "description": "Create a new dashboard with line chart tile",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "dashboardId": "urn:homepageView:uqxri3i7x",
+    "api-version": "2022-10-31-preview",
+    "body": {
+      "displayName": "My Dashboard",
+      "tiles": [
+        {
+          "displayName": "Line - root",
+          "configuration": {
+            "type": "lineChart",
+            "capabilities": [
+              {
+                "capability": "acceleration.z",
+                "aggregateFunction": "avg"
+              },
+              {
+                "capability": "complexDouble.value2",
+                "aggregateFunction": "avg"
+              },
+              {
+                "capability": "enumTelemetryString",
+                "aggregateFunction": "count"
+              }
+            ],
+            "devices": [
+              "2lpfdbwc8x4",
+              "h0fqspqcgq",
+              "1i2hbs1vb3l",
+              "1mk19thkcyy"
+            ],
+            "group": "953ef094-1198-4645-82d1-87a21266abc6",
+            "format": {
+              "xAxisEnabled": true,
+              "yAxisEnabled": true,
+              "legendEnabled": true
+            },
+            "queryRange": {
+              "type": "time",
+              "duration": "PT30M",
+              "resolution": "PT1M"
+            }
+          },
+          "x": 0,
+          "y": 0,
+          "width": 2,
+          "height": 2
+        }
+      ],
+      "favorite": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "urn:homepageView:uqxri3i7x",
+        "displayName": "My Dashboard",
+        "personal": false,
+        "tiles": [
+          {
+            "displayName": "Line - root",
+            "configuration": {
+              "type": "lineChart",
+              "capabilities": [
+                {
+                  "capability": "acceleration.z",
+                  "aggregateFunction": "avg"
+                },
+                {
+                  "capability": "complexDouble.value2",
+                  "aggregateFunction": "avg"
+                },
+                {
+                  "capability": "enumTelemetryString",
+                  "aggregateFunction": "count"
+                }
+              ],
+              "devices": [
+                "2lpfdbwc8x4",
+                "h0fqspqcgq",
+                "1i2hbs1vb3l",
+                "1mk19thkcyy"
+              ],
+              "group": "953ef094-1198-4645-82d1-87a21266abc6",
+              "format": {
+                "xAxisEnabled": true,
+                "yAxisEnabled": true,
+                "legendEnabled": true
+              },
+              "queryRange": {
+                "type": "time",
+                "duration": "PT30M",
+                "resolution": "PT1M"
+              }
+            },
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        ],
+        "favorite": false
+      }
+    }
+  }
+}
