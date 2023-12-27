@@ -34,7 +34,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
- ```
+```
 
 ## Multi-API/Profile support for AutoRest '2023-11-01-preview' generators 
 
