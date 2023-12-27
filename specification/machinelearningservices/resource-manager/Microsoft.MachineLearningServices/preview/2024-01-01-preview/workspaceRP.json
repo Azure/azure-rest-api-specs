@@ -799,7 +799,7 @@
           "Endpoint"
         ],
         "summary": "Get all the deployments under the workspace scope",
-        "operationId": "Endpoint_GetDeploymentsInWorkspace",
+        "operationId": "EndpointDeployment_GetInWorkspace",
         "produces": [
           "application/json"
         ],
@@ -927,6 +927,7 @@
           "Endpoint"
         ],
         "summary": "List All the endpoints under this workspace",
+        "operationId": "Endpoint_List",
         "produces": [
           "application/json"
         ],
@@ -952,10 +953,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/EndpointResourcePropertiesBasicResourceArmPaginatedResult"
             }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Endpoint": {
+            "$ref": "./examples/Endpoint/list.json"
           }
         },
         "x-ms-pageable": {
@@ -1087,192 +1099,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/{genericResourceType}": {
-      "get": {
-        "tags": [
-          "Endpoint"
-        ],
-        "summary": "Generic List Proxy",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/EndpointNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "genericResourceType",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/{genericResourceType}/{genericResourceName}": {
-      "delete": {
-        "tags": [
-          "Endpoint"
-        ],
-        "summary": "Generic Delete Proxy",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/EndpointNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "genericResourceType",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "genericResourceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Endpoint"
-        ],
-        "summary": "Generic Get Proxy",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/EndpointNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "genericResourceType",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "genericResourceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Endpoint"
-        ],
-        "summary": "Generic PUT Proxy",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/EndpointNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "genericResourceType",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "genericResourceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments": {
       "get": {
         "tags": [
           "Endpoint"
         ],
         "summary": "Get all the deployments under the endpoint resource scope",
-        "operationId": "Endpoint_GetDeployments",
+        "operationId": "EndpointDeployment_List",
         "produces": [
           "application/json"
         ],
@@ -1323,7 +1156,7 @@
           "Endpoint"
         ],
         "summary": "Delete  endpoint deployment resource by name",
-        "operationId": "Endpoint_Delete",
+        "operationId": "EndpointDeployment_Delete",
         "produces": [
           "application/json"
         ],
@@ -1375,7 +1208,7 @@
           "Endpoint"
         ],
         "summary": "Get deployments under endpoint resource by name",
-        "operationId": "Endpoint_GetDeployment",
+        "operationId": "EndpointDeployment_Get",
         "produces": [
           "application/json"
         ],
@@ -1424,7 +1257,7 @@
           "Endpoint"
         ],
         "summary": "Create or update endpoint deployment resource with the specified parameters",
-        "operationId": "Endpoint_CreateOrUpdate",
+        "operationId": "EndpointDeployment_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -5036,7 +4869,7 @@
           "type": "boolean"
         },
         "enableSoftwareBillOfMaterials": {
-          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace",
+          "description": "Flag to tell if SoftwareBillOfMaterial should be enabled for this workspace",
           "type": "boolean"
         },
         "encryption": {
@@ -5241,7 +5074,7 @@
           "type": "boolean"
         },
         "enableSoftwareBillOfMaterials": {
-          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace",
+          "description": "Flag to tell if SoftwareBillOfMaterial should be enabled for this workspace",
           "type": "boolean"
         },
         "encryption": {
