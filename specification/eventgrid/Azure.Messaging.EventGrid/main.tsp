@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
+//TODO: If we want to keep 2018-01-01 version, we need to have different auth scheme for it.
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme" "SharedAccessKey is not supported by typespec-autorest"
 @useAuth(
   {
@@ -49,10 +50,13 @@ namespace Microsoft.EventGrid {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
   enum ServiceApiVersions {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2023_11_01: "2023-11-01",
+    v2018_01_01: "2018-01-01",
 
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_06_01_preview: "2023-06-01-preview",
+
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    v2023_11_01: "2023-11-01",
 
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_10_01_preview: "2023-10-01-preview",
@@ -95,7 +99,42 @@ namespace Microsoft.EventGrid {
     subject?: string;
   }
 
+  @doc("Properties of an event published to an Event Grid topic using the EventGrid Schema.")
+  @removed(ServiceApiVersions.v2023_06_01_preview)
+  model EventGridEvent {
+    @doc("An unique identifier for the event.")
+    id: string;
+
+    @doc("The resource path of the event source.")
+    topic?: string;
+
+    @doc("A resource path relative to the topic path.")
+    subject: string;
+
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Using 'unknown' for data is intentional. Following EventGrid Event spec."
+    @doc("Event data specific to the event type.")
+    data: unknown;
+
+    @doc("The type of the event that occurred.")
+    eventType: string;
+
+    @doc("The time (in UTC) the event was generated.")
+    eventTime: utcDateTime;
+
+    @doc("The schema version of the event metadata.")
+    @visibility("read")
+    metadataVersion?: string;
+
+    @doc("The schema version of the data object.")
+    dataVersion: string;
+  }
+
+  @doc("Properties of an event published to an Event Grid topic using a custom schema")
+  @removed(ServiceApiVersions.v2023_06_01_preview)
+  model CustomEventEvent {}
+
   @doc("Properties of the Event Broker operation.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model BrokerProperties {
     @doc("The token of the lock on the event.")
     lockToken: string;
@@ -105,6 +144,7 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("Receive operation details per Cloud Event.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model ReceiveDetails {
     @doc("The Event Broker details.")
     brokerProperties: BrokerProperties;
@@ -114,12 +154,14 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("Details of the Receive operation response.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model ReceiveResult {
     @doc("Array of receive responses, one per cloud event.")
     value: ReceiveDetails[];
   }
 
   @doc("Failed LockToken information.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model FailedLockToken {
     @doc("The lock token of an entry in the request.")
     lockToken: string;
@@ -129,6 +171,7 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("Supported delays for release operation.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   enum ReleaseDelay {
     @doc("Release the event after 0 seconds.")
     By0Seconds: 0,
@@ -147,9 +190,11 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("The result of the Publish operation.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model PublishResult {}
 
   @doc("The result of the Acknowledge operation.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model AcknowledgeResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
@@ -159,6 +204,7 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("The result of the Release operation.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model ReleaseResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
@@ -168,6 +214,7 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("The result of the Reject operation.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model RejectResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
@@ -177,6 +224,7 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("The result of the RenewLock operation.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model RenewCloudEventLocksResult {
     @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
@@ -186,24 +234,28 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("Array of lock tokens for the corresponding received Cloud Events to be released.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model ReleaseOptions {
     @doc("Array of lock tokens.")
     lockTokens: string[];
   }
 
   @doc("Array of lock tokens for the corresponding received Cloud Events to be acknowledged.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model AcknowledgeOptions {
     @doc("Array of lock tokens.")
     lockTokens: string[];
   }
 
   @doc("Array of lock tokens for the corresponding received Cloud Events to be rejected.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model RejectOptions {
     @doc("Array of lock tokens.")
     lockTokens: string[];
   }
 
   @doc("Array of lock tokens for the corresponding received Cloud Events to be renewed.")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model RenewLockOptions {
     @doc("Array of lock tokens.")
     lockTokens: string[];
@@ -211,6 +263,7 @@ namespace Microsoft.EventGrid {
 
   @doc("Topic Resource.")
   @resource("topics")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   model Topic {
     @key
     @doc("Topic Name.")
@@ -220,6 +273,7 @@ namespace Microsoft.EventGrid {
 
   @doc("Event Subscription Resource.")
   @resource("eventsubscriptions")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   @parentResource(Topic)
   model EventSubscription {
     @key
@@ -228,11 +282,72 @@ namespace Microsoft.EventGrid {
     eventSubscriptionName: string;
   }
 
+
+  @doc("Publish CloudEvents")
+  @route("/send")
+  @sharedRoute
+  @removed(ServiceApiVersions.v2023_06_01_preview)
+  op publish is Azure.Core.RpcOperation<
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/cloudevents-batch+json; charset=utf-8";
+
+      @doc("Required only when publishing to partner namespaces with partner topic routing mode ChannelNameHeader.")
+      @header("aeg-channel-name")
+      channelName?: string;
+
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Events is a valid request body."
+      @doc("Events being published.")
+      @body
+      events: CloudEvent[];
+    },
+    {}
+  >;
+
+  @doc("Publish EventGridEvents")
+  @route("/send")
+  @sharedRoute
+  @removed(ServiceApiVersions.v2023_06_01_preview)
+  op publishEventGridEvent is Azure.Core.RpcOperation<
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/json";
+
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Events is a valid request body."
+      @doc("Events being published.")
+      @body
+      events: EventGridEvent[];
+    },
+    {}
+  >;
+
+  @doc("Publish custom events")
+  @route("/send")
+  @sharedRoute
+  @removed(ServiceApiVersions.v2023_06_01_preview)
+  op publishCustomEvent is Azure.Core.RpcOperation<
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/json";
+
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Events is a valid request body."
+      @doc("Events being published.")
+      @body
+      events: CustomEventEvent[];
+    },
+    {}
+  >;
+  
+  
   // Publish Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
 
   @doc("Publish Single Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ")
   @sharedRoute
+  @added(ServiceApiVersions.v2023_06_01_preview)
   @action("publish")
   op publishCloudEvent is StandardOperations.ResourceAction<
     Topic,
@@ -252,6 +367,7 @@ namespace Microsoft.EventGrid {
 
   @doc("Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ")
   @sharedRoute
+  @added(ServiceApiVersions.v2023_06_01_preview)
   @action("publish")
   op publishCloudEvents is StandardOperations.ResourceAction<
     Topic,
@@ -275,6 +391,7 @@ namespace Microsoft.EventGrid {
 
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @action("receive")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   op receiveCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
@@ -297,6 +414,7 @@ namespace Microsoft.EventGrid {
 
   @doc("Acknowledge batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.")
   @action("acknowledge")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   op acknowledgeCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
@@ -312,6 +430,7 @@ namespace Microsoft.EventGrid {
 
   @doc("Release batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("release")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   op releaseCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
@@ -332,6 +451,7 @@ namespace Microsoft.EventGrid {
 
   @doc("Reject batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully rejected lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("reject")
+  @added(ServiceApiVersions.v2023_06_01_preview)
   op rejectCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
@@ -347,6 +467,7 @@ namespace Microsoft.EventGrid {
   @added(ServiceApiVersions.v2023_10_01_preview)
   @doc("Renew lock for batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("renewLock")
+  @added(ServiceApiVersions.v2023_10_01_preview)
   op renewCloudEventLocks is StandardOperations.ResourceAction<
     EventSubscription,
     {
