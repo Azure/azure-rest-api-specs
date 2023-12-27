@@ -350,7 +350,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3671,24 +3671,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Update succeeded.",
+            "description": "OK. Update succeeded for an existing key group.",
             "schema": {
               "$ref": "#/definitions/KeyGroup"
             }
           },
           "201": {
             "description": "Created. The request has been fulfilled and a new key group has been created.",
-            "schema": {
-              "$ref": "#/definitions/KeyGroup"
-            }
-          },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
-            "headers": {
-              "location": {
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/KeyGroup"
             }
@@ -3700,7 +3689,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
