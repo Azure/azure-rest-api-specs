@@ -3,7 +3,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-//TODO: If we want to keep 2018-01-01 version, we need to have different auth scheme for it.
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme" "SharedAccessKey is not supported by typespec-autorest"
 @useAuth(
   {
