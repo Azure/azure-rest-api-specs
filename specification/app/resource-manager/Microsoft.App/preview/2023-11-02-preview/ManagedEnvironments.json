@@ -1148,6 +1148,30 @@
         "insecure": {
           "description": "Boolean indicating if otlp configuration is insecure",
           "type": "boolean"
+        },
+        "headers": {
+          "description": "Headers of otlp configurations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Header"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        }
+      }
+    },
+    "Header": {
+      "description": "Header of otlp configuration",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The key of otlp configuration header",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of otlp configuration header",
+          "type": "string"
         }
       }
     },
