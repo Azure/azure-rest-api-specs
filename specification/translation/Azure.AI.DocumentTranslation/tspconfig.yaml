@@ -1,16 +1,9 @@
-parameters:
+parameters:  
   "service-dir":
     default: "sdk/azure.ai.documenttranslation"
-  "python-sdk-folder":
-    default: "{project-root}/azure-sdk-for-python/"
-  "java-sdk-folder":
-    default: "{project-root}/azure-sdk-for-java/"
-  "js-sdk-folder":
-    default: "{project-root}/azure-sdk-for-js/"
-  "csharp-sdk-folder":
-    default: "{project-root}/azure-sdk-for-csharp/"
-  "service-directory-name":
-    default: "translation"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -23,18 +16,19 @@ options:
     examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/Azure.AI.DocumentTranslation/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
-    clear-output-folder: true
-    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
-    model-namespace: false
+    package-dir: "Azure.AI.Translation.Document"
     namespace: Azure.AI.Translation.Document
+    clear-output-folder: true
+    model-namespace: false
   "@azure-tools/typespec-python":    
-    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-dir: "azure-ai-translation-document"
     package-name: "azure-ai-translation-document"
+    package-mode: dataplane
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-translation-document"
+    package-dir: "azure-ai-translation-document"
     namespace: com.azure.ai.translation.document
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/ai-translation-document-rest"
+    package-dir: "azure-ai-translation-document"
     packageDetails:
-      name: "@azure-rest/ai-translation-document"
-      description: "Microsoft Translation document"
+      name: "@azure-rest/azure-ai-translation-document"
+      description: "Azure.AI.Translation.Document"
