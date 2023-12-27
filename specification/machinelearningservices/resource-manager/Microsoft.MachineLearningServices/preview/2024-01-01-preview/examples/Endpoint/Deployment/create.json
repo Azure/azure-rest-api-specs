@@ -7,9 +7,6 @@
     "deploymentName": "text-davinci-003",
     "api-version": "2024-01-01-preview",
     "body": {
-      "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/endpoints/Azure.OpenAI/deployments/text-davinci-003",
-      "name": "text-davinci-003",
-      "type": "Microsoft.MachineLearningServices/workspaces/endpoints/deployments",
       "properties": {
         "type": "Azure.OpenAI",
         "model": {
@@ -24,20 +21,12 @@
   "responses": {
     "200": {
       "body": {
-        "sku": {
-          "capacity": 60,
-          "name": "Standard"
-        },
         "systemData": {
           "createdBy": "00000000-1111-2222-3333-444444444444",
           "createdByType": "Application",
-          "createdOn": "2023-12-27T17:33:49.2691867+00:00",
           "lastModifiedBy": "00000000-1111-2222-3333-444444444444",
-          "lastModifiedByType": "Application",
-          "lastModifiedOn": "2023-12-27T17:33:49.2691867+00:00"
+          "lastModifiedByType": "Application"
         },
-        "tags": null,
-        "location": null,
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/endpoints/Azure.OpenAI/deployments/text-davinci-003",
         "name": "text-davinci-003",
         "type": "Microsoft.MachineLearningServices/workspaces/endpoints/deployments",
@@ -89,6 +78,11 @@
           },
           "provisioningState": "Succeeded"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
       }
     }
   }
