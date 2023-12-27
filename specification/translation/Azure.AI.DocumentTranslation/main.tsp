@@ -77,7 +77,7 @@ alias ServiceTraits = SupportsRepeatableRequests &
 #suppress "@azure-tools/typespec-azure-core/byos"
 @post
 @route("document:translate")
-op documentTanslate is RpcOperation<
+op documentTranslate is RpcOperation<
   DocumentTranslateParameters,
   DocumentTranslateResult,
   ServiceTraits
