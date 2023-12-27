@@ -7,7 +7,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-compute
 no-namespace-folders: true
-package-version: 1.0.0b1
+package-version: 1.0.0b
 combine-operation-files: true
 only-path-and-body-params-positional: true
 modelerfour:
