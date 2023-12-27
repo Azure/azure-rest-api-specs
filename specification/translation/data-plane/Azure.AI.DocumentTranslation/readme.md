@@ -4,21 +4,27 @@
 
 Configuration for generating Translation Document SDK.
 
-The current release is `v1_0_Preview_1`.
+## Configuration
+
+### Basic Information
+
+The current release is `2023-11-01-preview`.
 
 ``` yaml
-tag: v1_0_Preview_1
+tag: 2023-11-01-preview
 add-credentials: true
 openapi-type: data-plane
 ```
 
-# Releases
+## Tags
 
-### Release 3.0
-These settings apply only when `--tag=v1_0_Preview_1` is specified on the command line.
+### Release 2023-11-01-preview
+These settings apply only when `--tag=2023-11-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'v1_0_Preview_1'
-input-file: preview/2023-11-01-preview/openapi.json
+``` yaml $(tag) == '2023-11-01-preview'
+version: 2023-11-01-preview
+input-file:
+  - $(this-folder)/preview/2023-11-01-preview/openapi.json
 ```
 
 ## Swagger to SDK
