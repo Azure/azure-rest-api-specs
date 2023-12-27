@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-preview-2023-12` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-12'
 input-file:
-  - Microsoft.Confluent/preview/2023-12-27/confluent.json
+  - Microsoft.Confluent/preview/2023-12-27-preview/confluent.json
 ```
 ### Tag: package-preview-2023-10
 
