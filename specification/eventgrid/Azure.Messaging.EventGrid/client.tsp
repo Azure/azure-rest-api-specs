@@ -23,11 +23,42 @@ import "./Web.tsp";
 import "./EventGrid.tsp";
 import "./ResourceNotifications.tsp";
 
-// Which Microsoft.EventGrid Version 
 import "./main.tsp";
 
+import "@typespec/versioning";
+using Versioning;
 
 using Azure.ClientGenerator.Core;
+
+@useDependency(Microsoft.EventGrid.ServiceApiVersions.v2018_01_01,
+    Microsoft.EventGrid.ServiceApiVersions.v2023_06_01_preview,
+    Microsoft.EventGrid.ServiceApiVersions.v2023_11_01,
+    Microsoft.EventGrid.ServiceApiVersions.v2023_10_01_preview)
+namespace CustomClients;
+// Create the two clients
+@client({
+  name: "EventGridPublisherClient",
+  service: Microsoft.EventGrid
+})
+interface Client1 {
+  publish is Microsoft.EventGrid.publish;
+  publishEventGridEvent is Microsoft.EventGrid.publishEventGridEvent;
+  publishCustomEvent is Microsoft.EventGrid.publishCustomEvent;
+}
+
+@client({
+  name: "EventGridClient",
+  service: Microsoft.EventGrid
+})
+interface Client2 {
+  publishCloudEvent is Microsoft.EventGrid.publishCloudEvent;
+  publishCloudEvents is Microsoft.EventGrid.publishCloudEvents;
+  receiveCloudEvents is Microsoft.EventGrid.receiveCloudEvents;
+  acknowledgeCloudEvents is Microsoft.EventGrid.acknowledgeCloudEvents;
+  releaseCloudEvents is Microsoft.EventGrid.releaseCloudEvents;
+  rejectCloudEvents is Microsoft.EventGrid.rejectCloudEvents;
+  renewCloudEventLocks is Microsoft.EventGrid.renewCloudEventLocks;
+}
 
 @@access(Microsoft.EventGrid.publishCloudEvent, Access.internal);
 @@access(Microsoft.EventGrid.publishCloudEvents, Access.internal);
