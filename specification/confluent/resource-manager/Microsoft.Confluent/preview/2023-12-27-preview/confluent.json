@@ -1241,7 +1241,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environment/{environmentId}/schemaregistry": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environment/{environmentId}/schemaRegistry": {
       "get": {
         "tags": [
           "service connectors"
@@ -1292,8 +1292,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/schemaregistryregions": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/schemaRegistryRegions": {
+      "get": {
         "tags": [
           "service connectors"
         ],
@@ -1395,7 +1395,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SCAPIKeyRecord"
+              "$ref": "#/definitions/APIKeyRecord"
             }
           },
           "default": {
@@ -1448,6 +1448,12 @@
           },
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2910,7 +2916,7 @@
         }
       }
     },
-    "SCAPIKeyRecord": {
+    "APIKeyRecord": {
       "description": "Details API key",
       "type": "object",
       "properties": {
@@ -2928,11 +2934,11 @@
         },
         "spec": {
           "description": "Specification of the API Key",
-          "$ref": "#/definitions/SCAPIKeySpecEntity"
+          "$ref": "#/definitions/APIKeySpecEntity"
         }
       }
     },
-    "SCAPIKeySpecEntity": {
+    "APIKeySpecEntity": {
       "description": "Spec of the API Key record",
       "type": "object",
       "properties": {
@@ -2950,15 +2956,15 @@
         },
         "resource": {
           "description": "Specification of the cluster",
-          "$ref": "#/definitions/SCAPIKeyResourceEntity"
+          "$ref": "#/definitions/APIKeyResourceEntity"
         },
         "owner": {
           "description": "Specification of the cluster",
-          "$ref": "#/definitions/SCAPIKeyOwnerEntity"
+          "$ref": "#/definitions/APIKeyOwnerEntity"
         }
       }
     },
-    "SCAPIKeyResourceEntity": {
+    "APIKeyResourceEntity": {
       "description": "API Key Resource details",
       "type": "object",
       "properties": {
@@ -2979,12 +2985,12 @@
           "type": "string"
         },
         "kind": {
-          "description": "Type of the owner serivce or user account",
+          "description": "Type of the owner service or user account",
           "type": "string"
         }
       }
     },
-    "SCAPIKeyOwnerEntity": {
+    "APIKeyOwnerEntity": {
       "description": "API Key Resource details",
       "type": "object",
       "properties": {
@@ -3001,7 +3007,7 @@
           "type": "string"
         },
         "kind": {
-          "description": "Type of the owner serivce or user account",
+          "description": "Type of the owner service or user account",
           "type": "string"
         }
       }
