@@ -16,7 +16,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.LoadTestService.Draft;
 
-@doc("A ContosoProviderHub resource")
+@doc("LoadTest details.")
 model LoadTestResource is TrackedResource<LoadTestProperties> {
   @doc("Load Test name")
   @key("loadTestName")
@@ -73,7 +73,7 @@ model EndpointDependency {
 @parentResource(LoadTestResource)
 @resource("outboundNetworkDependenciesEndpoints")
 @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
-model OutboundEnvironmentEndpoint extends ArmResource{
+model OutboundEnvironmentEndpoint is ArmResource{
   @key
   @doc("The type of service that Azure Load Testing connects to.")
   @visibility("read")
@@ -151,7 +151,7 @@ model Location {
   name: string;
 }
 
-@doc("A quota resource")
+@doc("Quota bucket details object.")
 @parentResource(Location)
 model QuotaResource is ProxyResource<QuotaResourceProperties> {
   @doc("The quota name.")
@@ -182,7 +182,7 @@ model LoadTestProperties{
 }
 
 @doc("Check quota availability response object.")
-model CheckQuotaAvailabilityResponse extends ArmResource {
+model CheckQuotaAvailabilityResponse is ArmResource {
   @doc("Check quota availability response properties.")
   properties?: CheckQuotaAvailabilityResponseProperties;
 }
@@ -197,8 +197,9 @@ model CheckQuotaAvailabilityResponseProperties {
 }
 
 @doc("Request object of new quota for a quota bucket.")
-model QuotaBucketRequest extends ArmResource{
-  @doc("Request object of new quota for a quota bucket.")
+model QuotaBucketRequest{
+  @extension("x-ms-client-flatten", true)
+  @doc("New quota request request properties.")
   properties?: QuotaBucketRequestProperties;
 }
 

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "LoadTestingService",
+    "title": "LoadTest Client",
     "version": "2022-12-01",
     "description": "LoadTest client provides access to LoadTest Resource and it's status operations.",
     "x-typespec-generated": [
@@ -162,7 +162,7 @@
         "tags": [
           "Quotas"
         ],
-        "description": "Get quota by name.",
+        "description": "Get the available quota for a quota bucket per region per subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -201,7 +201,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService.Draft/locations/{location}/quotas/{quotaBucketName}/checkAvailability/checkAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService.Draft/locations/{location}/quotas/{quotaBucketName}/checkAvailability": {
       "post": {
         "operationId": "Quotas_CheckAvailability",
         "tags": [
@@ -230,7 +230,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "QuotaBucketRequest",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
@@ -356,7 +356,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -567,9 +567,9 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Foundations.ArmResource": {
+    "CheckQuotaAvailabilityResponse": {
       "type": "object",
-      "description": "Common properties for all ARM resources.",
+      "description": "Check quota availability response object.",
       "properties": {
         "id": {
           "type": "string",
@@ -585,26 +585,15 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
-    },
-    "CheckQuotaAvailabilityResponse": {
-      "type": "object",
-      "description": "Check quota availability response object.",
-      "properties": {
+        },
         "properties": {
           "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
           "description": "Check quota availability response properties."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResource"
-        }
+      "required": [
+        "id",
+        "type"
       ]
     },
     "CheckQuotaAvailabilityResponseProperties": {
@@ -731,7 +720,7 @@
     },
     "LoadTestResource": {
       "type": "object",
-      "description": "A ContosoProviderHub resource",
+      "description": "LoadTest details.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/LoadTestProperties",
@@ -806,6 +795,21 @@
       "type": "object",
       "description": "A collection of related endpoints from the same service for which the Batch service requires outbound access.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
         "category": {
           "type": "string",
           "description": "The type of service that Azure Load Testing connects to.",
@@ -818,12 +822,9 @@
         }
       },
       "required": [
+        "id",
+        "type",
         "category"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResource"
-        }
       ]
     },
     "OutboundEnvironmentEndpointListResult": {
@@ -853,14 +854,10 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/QuotaBucketRequestProperties",
-          "description": "Request object of new quota for a quota bucket."
+          "description": "New quota request request properties.",
+          "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResource"
-        }
-      ]
+      }
     },
     "QuotaBucketRequestProperties": {
       "type": "object",
@@ -892,7 +889,7 @@
     },
     "QuotaResource": {
       "type": "object",
-      "description": "A quota resource",
+      "description": "Quota bucket details object.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/QuotaResourceProperties",
