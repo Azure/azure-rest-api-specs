@@ -23,8 +23,8 @@ enum Versions {
   `2023-11-01-preview`,
 }
 
-/** Request parameters for the Document Translate. */
-model DocumentTranslateParameters {
+/** Document Translate Request. */
+model DocumentTranslateRequest {
   /** Specifies source language of the input document.
    * If this parameter isn't specified, automatic language detection is applied to determine the source language.
    * For example if the source document is written in English, then use sourceLanguage=en */
@@ -58,8 +58,8 @@ model DocumentTranslateParameters {
   glossary?: bytes[];
 }
 
-/** Successful request and the document is translated. The translated document is returned in the body. */
-model DocumentTranslateResult {
+/** Document Translate Response. */
+model DocumentTranslateResponse {
   /** response content type */
   @header
   contentType: "application/octet-stream";
@@ -78,7 +78,7 @@ alias ServiceTraits = SupportsRepeatableRequests &
 @post
 @route("document:translate")
 op documentTranslate is RpcOperation<
-  DocumentTranslateParameters,
-  DocumentTranslateResult,
+  DocumentTranslateRequest,
+  DocumentTranslateResponse,
   ServiceTraits
 >;

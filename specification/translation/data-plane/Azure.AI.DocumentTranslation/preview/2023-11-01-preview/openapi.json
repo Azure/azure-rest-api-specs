@@ -48,25 +48,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DocumentTranslateParameters.sourceLanguage"
+            "$ref": "#/parameters/DocumentTranslateRequest.sourceLanguage"
           },
           {
-            "$ref": "#/parameters/DocumentTranslateParameters.targetLanguage"
+            "$ref": "#/parameters/DocumentTranslateRequest.targetLanguage"
           },
           {
-            "$ref": "#/parameters/DocumentTranslateParameters.category"
+            "$ref": "#/parameters/DocumentTranslateRequest.category"
           },
           {
-            "$ref": "#/parameters/DocumentTranslateParameters.allowFallback"
+            "$ref": "#/parameters/DocumentTranslateRequest.allowFallback"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "$ref": "#/parameters/DocumentTranslateParameters.document"
+            "$ref": "#/parameters/DocumentTranslateRequest.document"
           },
           {
-            "$ref": "#/parameters/DocumentTranslateParameters.glossary"
+            "$ref": "#/parameters/DocumentTranslateRequest.glossary"
           }
         ],
         "responses": {
@@ -166,9 +166,9 @@
         }
       }
     },
-    "DocumentTranslateParameters": {
+    "DocumentTranslateRequest": {
       "type": "object",
-      "description": "Request parameters for the Document Translate.",
+      "description": "Document Translate Request.",
       "properties": {
         "document": {
           "type": "string",
@@ -188,9 +188,9 @@
         "document"
       ]
     },
-    "DocumentTranslateResult": {
+    "DocumentTranslateResponse": {
       "type": "object",
-      "description": "Successful request and the document is translated. The translated document is returned in the body.",
+      "description": "Document Translate Response.",
       "properties": {
         "document": {
           "type": "string",
@@ -242,7 +242,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "DocumentTranslateParameters.allowFallback": {
+    "DocumentTranslateRequest.allowFallback": {
       "name": "allowFallback",
       "in": "query",
       "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \n    Possible values are: true (default) or false.",
@@ -250,7 +250,7 @@
       "type": "boolean",
       "x-ms-parameter-location": "method"
     },
-    "DocumentTranslateParameters.category": {
+    "DocumentTranslateRequest.category": {
       "name": "category",
       "in": "query",
       "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \n    from a customized system built with Custom Translator. Add the Category ID from your Custom Translator \n    project details to this parameter to use your deployed customized system. Default value is: general.",
@@ -259,7 +259,7 @@
       "default": "general",
       "x-ms-parameter-location": "method"
     },
-    "DocumentTranslateParameters.document": {
+    "DocumentTranslateRequest.document": {
       "name": "document",
       "in": "formData",
       "description": "Document to be translated in the form",
@@ -267,7 +267,7 @@
       "type": "file",
       "x-ms-parameter-location": "method"
     },
-    "DocumentTranslateParameters.glossary": {
+    "DocumentTranslateRequest.glossary": {
       "name": "glossary",
       "in": "formData",
       "description": "Glossary / translation memory will be used during translation in the form.",
@@ -279,7 +279,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "DocumentTranslateParameters.sourceLanguage": {
+    "DocumentTranslateRequest.sourceLanguage": {
       "name": "sourceLanguage",
       "in": "query",
       "description": "Specifies source language of the input document.\nIf this parameter isn't specified, automatic language detection is applied to determine the source language.\nFor example if the source document is written in English, then use sourceLanguage=en",
@@ -287,7 +287,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "DocumentTranslateParameters.targetLanguage": {
+    "DocumentTranslateRequest.targetLanguage": {
       "name": "targetLanguage",
       "in": "query",
       "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de",
