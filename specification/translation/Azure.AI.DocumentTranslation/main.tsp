@@ -23,8 +23,8 @@ enum Versions {
   `2023-11-01-preview`,
 }
 
-/** Document Translate Request. */
-model DocumentTranslateRequest {
+/** Document Translate Request / Content. */
+model DocumentTranslateContent {
   /** Specifies source language of the input document.
    * If this parameter isn't specified, automatic language detection is applied to determine the source language.
    * For example if the source document is written in English, then use sourceLanguage=en */
@@ -58,8 +58,8 @@ model DocumentTranslateRequest {
   glossary?: bytes[];
 }
 
-/** Document Translate Response. */
-model DocumentTranslateResponse {
+/** Document Translate Result / Response. */
+model DocumentTranslateResult {
   /** response content type */
   @header
   contentType: "application/octet-stream";
@@ -78,7 +78,7 @@ alias ServiceTraits = SupportsRepeatableRequests &
 @post
 @route("document:translate")
 op documentTranslate is RpcOperation<
-  DocumentTranslateRequest,
-  DocumentTranslateResponse,
+  DocumentTranslateContent,
+  DocumentTranslateResult,
   ServiceTraits
 >;
