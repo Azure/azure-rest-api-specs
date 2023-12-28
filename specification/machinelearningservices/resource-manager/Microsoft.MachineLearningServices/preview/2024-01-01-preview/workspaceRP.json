@@ -1185,7 +1185,18 @@
             "description": "Success"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1201,6 +1212,10 @@
           "Delete Endpoint Deployment": {
             "$ref": "./examples/Endpoint/Deployment/delete.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "get": {
@@ -3398,8 +3413,11 @@
         },
         "provisioningState": {
           "description": "Read-only provision state status property.",
+          "$ref": "#/definitions/DefaultResourceProvisioningState",
           "readOnly": true,
-          "$ref": "#/definitions/DefaultResourceProvisioningState"
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "discriminator": "endpointType"
