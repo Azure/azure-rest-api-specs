@@ -1,9 +1,10 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./project.tsp";
+import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -12,11 +13,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 
-@armProviderNamespace
-@service({
-  title: "Azure AI Indexes",
-})
-@doc("Azure AI Indexes Management API.")
+
 namespace Microsoft.MachineLearningServices;
 
 @doc("Index resource")
@@ -42,6 +39,7 @@ model IndexVersion is ProxyResource<IndexVersionProperties> {
 }
 
 @doc("Resource Base class.")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "property bag is a required attribute for all our resources"
 model ResourceBase {
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
   tags: Record<string>;
@@ -60,6 +58,7 @@ model AssetBased extends ResourceBase {
 }
 
 @doc("Index properties")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "not a long running resource"
 model IndexVersionProperties extends AssetBased {
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
   storageUri: string;
@@ -95,6 +94,7 @@ interface ProxyResourceOperationsIndexesVersions<
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Proxy resource, not required, we use archive instead."
 interface IndexesVersions extends ProxyResourceOperationsIndexesVersions<IndexVersion, ListQueryParameters>{}
 
 @armResourceOperations(Index)
