@@ -1,3 +1,4 @@
+# The current main.tsp file is the same as Azure-Rest-Api-Specs, currently if you want to generate the 2018-01-01 version copy the main.tsp from [here](https://github.com/l0lawrence/azure-rest-api-specs/blob/system_events_typespec/specification/eventgrid/Azure.Messaging.EventGrid/2018-01-01/main.tsp)
 # EventGrid Typespec Guide
 
 ## Guidelines for defining a new event in Typespec
