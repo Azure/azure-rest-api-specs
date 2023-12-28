@@ -4,19 +4,15 @@
 
 Configuration for generating Translation Document SDK.
 
-## Configuration
+## Releases
 
-### Basic Information
-
-The current release is `2023-11-01-preview`.
-
+The current release of Document is **2023-11-01-preview**.
 ``` yaml
 tag: 2023-11-01-preview
 add-credentials: true
+clear-output-folder: true
 openapi-type: data-plane
 ```
-
-## Tags
 
 ### Release 2023-11-01-preview
 These settings apply only when `--tag=2023-11-01-preview` is specified on the command line.
