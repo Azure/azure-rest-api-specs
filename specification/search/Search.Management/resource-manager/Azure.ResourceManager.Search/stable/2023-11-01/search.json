@@ -1,0 +1,2661 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SearchManagementClient",
+    "version": "2023-11-01",
+    "description": "Client that can be used to manage Azure Cognitive Search services and API keys.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Services"
+    },
+    {
+      "name": "AdminKeys"
+    },
+    {
+      "name": "QueryKeys"
+    },
+    {
+      "name": "PrivateLinkResources"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "SharedPrivateLinkResources"
+    }
+  ],
+  "paths": {
+    "/providers/Azure.ResourceManager.Search/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Search/searchServices": {
+      "get": {
+        "operationId": "Services_ListBySubscription",
+        "tags": [
+          "Services"
+        ],
+        "description": "Gets a list of all Search services in the given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SearchServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages": {
+      "get": {
+        "operationId": "UsagesOperations_ListBySubscription",
+        "description": "Gets a list of all Search quota usages in the given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The unique location name for a Microsoft Azure geographic region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription. You can obtain this value from the Azure Resource Manager API or the portal.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedQuotaUsageResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}": {
+      "get": {
+        "operationId": "UsageBySubscriptionSku",
+        "description": "Gets the quota usage for a search sku in the given subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The unique location name for a Microsoft Azure geographic region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription. You can obtain this value from the Azure Resource Manager API or the portal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "description": "The unique search service sku name supported by Azure Cognitive Search.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QuotaUsageResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{name}/providers/Azure.ResourceManager.Search/searchServices/{searchServiceName}/create": {
+      "post": {
+        "operationId": "QueryKeys_Create",
+        "tags": [
+          "QueryKeys"
+        ],
+        "description": "Generates a new query key for the specified search service. You can create up to 50 query keys per service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the new query API key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/{keyKind}/providers/Azure.ResourceManager.Search/searchServices/{searchServiceName}/regenerate": {
+      "post": {
+        "operationId": "AdminKeys_Regenerate",
+        "tags": [
+          "AdminKeys"
+        ],
+        "description": "Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "keyKind",
+            "in": "path",
+            "description": "Specifies which key to regenerate. Valid values include 'primary' and 'secondary'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "primary",
+              "secondary"
+            ],
+            "x-ms-enum": {
+              "name": "AdminKeyKind",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "Primary",
+                  "value": "primary",
+                  "description": "The primary API key for the search service."
+                },
+                {
+                  "name": "Secondary",
+                  "value": "secondary",
+                  "description": "The secondary API key for the search service."
+                }
+              ]
+            }
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AdminKeyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Search/searchServices": {
+      "get": {
+        "operationId": "Services_ListByResourceGroup",
+        "tags": [
+          "Services"
+        ],
+        "description": "Gets a list of all Search services in the given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SearchServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Search/searchServices/{searchServiceName}": {
+      "get": {
+        "operationId": "Services_Get",
+        "tags": [
+          "Services"
+        ],
+        "description": "Gets the search service with the given name in the given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Services_CreateOrUpdate",
+        "tags": [
+          "Services"
+        ],
+        "description": "Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SearchService' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            }
+          },
+          "201": {
+            "description": "Resource 'SearchService' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Services_Update",
+        "tags": [
+          "Services"
+        ],
+        "description": "Updates an existing search service in the given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchServiceUpdateUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SearchService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Services_Delete",
+        "tags": [
+          "Services"
+        ],
+        "description": "Deletes a search service in the given resource group, along with its associated resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Search/searchServices/{searchServiceName}/get": {
+      "post": {
+        "operationId": "AdminKeys_Get",
+        "tags": [
+          "AdminKeys"
+        ],
+        "description": "Gets the primary and secondary admin API keys for the specified Azure Cognitive Search service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AdminKeyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Search/searchServices/{searchServiceName}/listBySearchService": {
+      "post": {
+        "operationId": "QueryKeys_ListBySearchService",
+        "tags": [
+          "QueryKeys"
+        ],
+        "description": "Returns the list of query API keys for the given Azure Cognitive Search service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedQueryKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Search/searchServices/{searchServiceName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_ListBySearchService",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets a list of all private endpoint connections in the given service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Search/searchServices/{searchServiceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets the details of the private endpoint connection to the search service in the given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_Update",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Updates a Private Endpoint connection to the search service in the given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Disconnects the private endpoint connection and deletes it from the search service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Search/searchServices/{searchServiceName}/sharedPrivateLinkResources": {
+      "get": {
+        "operationId": "SharedPrivateLinkResources_ListBySearchService",
+        "tags": [
+          "SharedPrivateLinkResources"
+        ],
+        "description": "Gets a list of all shared private link resources managed by the given service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Search/searchServices/{searchServiceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
+      "get": {
+        "operationId": "SharedPrivateLinkResources_Get",
+        "tags": [
+          "SharedPrivateLinkResources"
+        ],
+        "description": "Gets the details of the shared private link resource managed by the search service in the given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "description": "The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SharedPrivateLinkResources_CreateOrUpdate",
+        "tags": [
+          "SharedPrivateLinkResources"
+        ],
+        "description": "Initiates the creation or update of a shared private link resource managed by the search service in the given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "description": "The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SharedPrivateLinkResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'SharedPrivateLinkResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SharedPrivateLinkResources_Delete",
+        "tags": [
+          "SharedPrivateLinkResources"
+        ],
+        "description": "Initiates the deletion of the shared private link resource from the search service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "description": "The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/privateLinkResources/{subscriptionId}/{resourceGroupName}/{searchServiceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListSupported",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets a list of all supported private link resource types for the given service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription. You can obtain this value from the Azure Resource Manager API or the portal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the current subscription. You can obtain this value from the Azure Resource Manager API or the portal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AadAuthFailureMode": {
+      "type": "string",
+      "enum": [
+        "http403",
+        "http401WithBearerChallenge"
+      ],
+      "x-ms-enum": {
+        "name": "AadAuthFailureMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Http403",
+            "value": "http403",
+            "description": "Indicates that requests that failed authentication should be presented with an HTTP status code of 403 (Forbidden)."
+          },
+          {
+            "name": "Http401WithBearerChallenge",
+            "value": "http401WithBearerChallenge",
+            "description": "Indicates that requests that failed authentication should be presented with an HTTP status code of 401 (Unauthorized) and present a Bearer Challenge."
+          }
+        ]
+      }
+    },
+    "AdminKeyKind": {
+      "type": "string",
+      "enum": [
+        "primary",
+        "secondary"
+      ],
+      "x-ms-enum": {
+        "name": "AdminKeyKind",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "primary",
+            "description": "The primary API key for the search service."
+          },
+          {
+            "name": "Secondary",
+            "value": "secondary",
+            "description": "The secondary API key for the search service."
+          }
+        ]
+      }
+    },
+    "AdminKeyResult": {
+      "type": "object",
+      "description": "Response containing the primary and secondary admin API keys for a given Azure Cognitive Search service.",
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "description": "The primary admin API key of the search service.",
+          "readOnly": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "The secondary admin API key of the search service.",
+          "readOnly": true
+        }
+      }
+    },
+    "AsyncOperationResult": {
+      "type": "object",
+      "description": "The details of a long running asynchronous shared private link resource operation",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceAsyncOperationResult",
+          "description": "The current status of the long running asynchronous shared private link resource operation."
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CheckNameAvailabilityInput": {
+      "type": "object",
+      "description": "Input of check name availability API.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The search service name to validate. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource whose name is to be validated. This value must always be 'searchServices'.",
+          "enum": [
+            "searchServices"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "CheckNameAvailabilityOutput": {
+      "type": "object",
+      "description": "Output of check name availability API.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "A value indicating whether the name is available.",
+          "readOnly": true,
+          "x-ms-client-name": "IsNameAvailable"
+        },
+        "reason": {
+          "$ref": "#/definitions/UnavailableNameReason",
+          "description": "The reason why the name is not available. 'Invalid' indicates the name provided does not match the naming requirements (incorrect length, unsupported characters, etc.). 'AlreadyExists' indicates that the name is already in use and is therefore unavailable.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A message that explains why the name is invalid and provides resource naming requirements. Available only if 'Invalid' is returned in the 'reason' property.",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Contains information about an API error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Describes a particular API error with an error code and a message."
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "Describes a particular API error with an error code and a message.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message that describes the error in detail and provides debugging information."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error (for example, the name of the property in error)."
+        },
+        "details": {
+          "type": "array",
+          "description": "Contains nested errors that are related to this error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DataPlaneAadOrApiKeyAuthOption": {
+      "type": "object",
+      "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication.",
+      "properties": {
+        "aadAuthFailureMode": {
+          "$ref": "#/definitions/AadAuthFailureMode",
+          "description": "Describes what response the data plane API of a Search service would send for requests that failed authentication."
+        }
+      }
+    },
+    "DataPlaneAuthOptions": {
+      "type": "object",
+      "description": "Defines the options for how the data plane API of a Search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true.",
+      "properties": {
+        "apiKeyOnly": {
+          "type": "object",
+          "description": "Indicates that only the API key needs to be used for authentication.",
+          "additionalProperties": {}
+        },
+        "aadOrApiKey": {
+          "$ref": "#/definitions/DataPlaneAadOrApiKeyAuthOption",
+          "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication."
+        }
+      }
+    },
+    "EncryptionWithCmk": {
+      "type": "object",
+      "description": "Describes a policy that determines how resources within the search service are to be encrypted with Customer Managed Keys.",
+      "properties": {
+        "enforcement": {
+          "$ref": "#/definitions/SearchEncryptionWithCmk",
+          "description": "Describes how a search service should enforce having one or more non customer encrypted resources."
+        },
+        "encryptionComplianceStatus": {
+          "$ref": "#/definitions/SearchEncryptionComplianceStatus",
+          "description": "Describes whether the search service is compliant or not with respect to having non customer encrypted resources. If a service has more than one non customer encrypted resource and 'Enforcement' is 'enabled' then the service will be marked as 'nonCompliant'.",
+          "readOnly": true
+        }
+      }
+    },
+    "HostingMode": {
+      "type": "string",
+      "enum": [
+        "default",
+        "highDensity"
+      ],
+      "x-ms-enum": {
+        "name": "HostingMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Default",
+            "value": "default",
+            "description": "The limit on number of indexes is determined by the default limits for the SKU."
+          },
+          {
+            "name": "HighDensity",
+            "value": "highDensity",
+            "description": "Only application for standard3 SKU, where the search service can have up to 1000 indexes."
+          }
+        ]
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of the system-assigned identity of the search service.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the system-assigned identity of the search service.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The identity type."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "IdentityType": {
+      "type": "string",
+      "enum": [
+        "None",
+        "SystemAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": false
+      }
+    },
+    "IdentityUpdate": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The identity type."
+        }
+      }
+    },
+    "IpRule": {
+      "type": "object",
+      "description": "The IP restriction rule of the Azure Cognitive Search service.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value corresponding to a single IPv4 address (eg., 123.1.2.3) or an IP range in CIDR format (eg., 123.1.2.3/24) to be allowed."
+        }
+      }
+    },
+    "NetworkRuleSet": {
+      "type": "object",
+      "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached.",
+      "properties": {
+        "ipRules": {
+          "type": "array",
+          "description": "A list of IP restriction rules that defines the inbound network(s) with allowing access to the search service endpoint. At the meantime, all other public IP networks are blocked by the firewall. These restriction rules are applied only when the 'publicNetworkAccess' of the search service is 'enabled'; otherwise, traffic over public interface is not allowed even with any public IP rules, and private endpoint connections would be the exclusive access method.",
+          "items": {
+            "$ref": "#/definitions/IpRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PagedQueryKey": {
+      "type": "object",
+      "description": "Response containing the query API keys for a given Azure Cognitive Search service.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QueryKey items on this page",
+          "items": {
+            "$ref": "#/definitions/QueryKey"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedQuotaUsageResult": {
+      "type": "object",
+      "description": "Response containing the quota usage information for all the supported skus of Azure Cognitive Search service.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuotaUsageResult items on this page",
+          "items": {
+            "$ref": "#/definitions/QuotaUsageResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "Describes an existing Private Endpoint connection to the Azure Cognitive Search service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointConnectionPropertiesPrivateEndpoint",
+          "description": "The private endpoint resource from Microsoft.Network provider."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionPropertiesPrivateLinkServiceConnectionState",
+          "description": "Describes the current state of an existing Private Link Service connection to the Azure Private Endpoint."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The group id from the provider of resource the private link service connection is for."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionProvisioningState",
+          "description": "The provisioning state of the private link service connection. Can be Updating, Deleting, Failed, Succeeded, or Incomplete"
+        }
+      }
+    },
+    "PrivateEndpointConnectionPropertiesPrivateEndpoint": {
+      "type": "object",
+      "description": "The private endpoint resource from Microsoft.Network provider.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id of the private endpoint resource from Microsoft.Network provider."
+        }
+      }
+    },
+    "PrivateEndpointConnectionPropertiesPrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "Describes the current state of an existing Private Link Service connection to the Azure Private Endpoint.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus",
+          "description": "Status of the the private link service connection. Can be Pending, Approved, Rejected, or Disconnected."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description for the private link service connection state."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A description of any extra actions that may be required."
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "Describes a supported private link resource for the Azure Cognitive Search service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service. For a given API version, this represents the 'supported' groupIds when creating a shared private link resource.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The group ID of the private link resource.",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "The list of required members of the private link resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The list of required DNS zone names of the private link resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "shareablePrivateLinkResourceTypes": {
+          "type": "array",
+          "description": "The list of resources that are onboarded to private link service, that are supported by Azure Cognitive Search.",
+          "items": {
+            "$ref": "#/definitions/ShareablePrivateLinkResourceType"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PrivateLinkResourcesResult": {
+      "type": "object",
+      "description": "Response containing a list of supported Private Link Resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of supported Private Link Resources.",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Updating",
+        "Deleting",
+        "Failed",
+        "Succeeded",
+        "Incomplete",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateLinkServiceConnectionProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The private link service connection is in the process of being created along with other resources for it to be fully functional."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The private link service connection is in the process of being deleted."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The private link service connection has failed to be provisioned or deleted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The private link service connection has finished provisioning and is ready for approval."
+          },
+          {
+            "name": "Incomplete",
+            "value": "Incomplete",
+            "description": "Provisioning request for the private link service connection resource has been accepted but the process of creation has not commenced yet."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning request for the private link service connection resource has been canceled"
+          }
+        ]
+      }
+    },
+    "PrivateLinkServiceConnectionStatus": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateLinkServiceConnectionStatus",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The private endpoint connection has been created and is pending approval."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The private endpoint connection is approved and is ready for use."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The private endpoint connection has been rejected and cannot be used."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The private endpoint connection has been removed from the service."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "provisioning",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "succeeded",
+            "description": "The last provisioning operation has completed successfully."
+          },
+          {
+            "name": "Provisioning",
+            "value": "provisioning",
+            "description": "The search service is being provisioned or scaled up or down."
+          },
+          {
+            "name": "Failed",
+            "value": "failed",
+            "description": "The last provisioning operation has failed."
+          }
+        ]
+      }
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": false
+      }
+    },
+    "QueryKey": {
+      "type": "object",
+      "description": "Describes an API key for a given Azure Cognitive Search service that has permissions for query operations only.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the query API key; may be empty.",
+          "readOnly": true
+        },
+        "key": {
+          "type": "string",
+          "description": "The value of the query API key.",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaUsageResult": {
+      "type": "object",
+      "description": "Describes the quota usage for a particular sku supported by Azure Cognitive Search.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id of the quota usage sku endpoint for Microsoft.Search provider."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of measurement for the search sku."
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The currently used up value for the particular search sku."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The quota limit for the particular search sku."
+        },
+        "name": {
+          "$ref": "#/definitions/QuotaUsageResultName",
+          "description": "The name of the sku supported by Azure Cognitive Search.",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaUsageResultName": {
+      "type": "object",
+      "description": "The name of the sku supported by Azure Cognitive Search.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The sku name supported by Azure Cognitive Search."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The localized string value for the sku supported by Azure Cognitive Search."
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        }
+      }
+    },
+    "SearchEncryptionComplianceStatus": {
+      "type": "string",
+      "enum": [
+        "Compliant",
+        "NonCompliant"
+      ],
+      "x-ms-enum": {
+        "name": "SearchEncryptionComplianceStatus",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Compliant",
+            "value": "Compliant",
+            "description": "Indicates that the search service is compliant, either because number of non customer encrypted resources is zero or enforcement is disabled."
+          },
+          {
+            "name": "NonCompliant",
+            "value": "NonCompliant",
+            "description": "Indicates that the search service has more than 1 non customer encrypted resources."
+          }
+        ]
+      }
+    },
+    "SearchEncryptionWithCmk": {
+      "type": "string",
+      "enum": [
+        "Disabled",
+        "Enabled",
+        "Unspecified"
+      ],
+      "x-ms-enum": {
+        "name": "SearchEncryptionWithCmk",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "No enforcement will be made and the search service can have non customer encrypted resources."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Search service will be marked as non-compliant if there are one or more non customer encrypted resources."
+          },
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "Enforcement policy is not explicitly specified, with the behavior being the same as if it were set to 'Disabled'."
+          }
+        ]
+      }
+    },
+    "SearchSemanticSearch": {
+      "type": "string",
+      "enum": [
+        "disabled",
+        "free",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "SearchSemanticSearch",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "disabled",
+            "value": "disabled",
+            "description": "Indicates that semantic search is disabled for the search service."
+          },
+          {
+            "name": "free",
+            "value": "free",
+            "description": "Enables semantic search on a search service and indicates that it is to be used within the limits of the free tier. This would cap the volume of semantic search requests and is offered at no extra charge. This is the default for newly provisioned search services."
+          },
+          {
+            "name": "standard",
+            "value": "standard",
+            "description": "Enables semantic search on a search service as a billable feature, with higher throughput and volume of semantic search queries."
+          }
+        ]
+      }
+    },
+    "SearchService": {
+      "type": "object",
+      "description": "Describes an Azure Cognitive Search service and its current state.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SearchServiceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SearchServiceListResult": {
+      "type": "object",
+      "description": "The response of a SearchService list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SearchService items on this page",
+          "items": {
+            "$ref": "#/definitions/SearchService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SearchServiceProperties": {
+      "type": "object",
+      "description": "Properties of the search service.",
+      "properties": {
+        "replicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas in the search service. If specified, it must be a value between 1 and 12 inclusive for standard SKUs or between 1 and 3 inclusive for basic SKU.",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "partitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of partitions in the search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3.",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "hostingMode": {
+          "$ref": "#/definitions/HostingMode",
+          "description": "Applicable only for the standard3 SKU. You can set this property to enable up to 3 high density partitions that allow up to 1000 indexes, which is much higher than the maximum indexes allowed for any other SKU. For the standard3 SKU, the value is either 'default' or 'highDensity'. For all other SKUs, this value must be 'default'."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method."
+        },
+        "status": {
+          "$ref": "#/definitions/SearchServiceStatus",
+          "description": "The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. If your service is in the degraded, disabled, or error states, it means the Azure Cognitive Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
+          "readOnly": true
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The details of the search service status.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'succeeded' or 'failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.",
+          "readOnly": true
+        },
+        "networkRuleSet": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
+        },
+        "encryptionWithCmk": {
+          "$ref": "#/definitions/EncryptionWithCmk",
+          "description": "Specifies any policy regarding encryption of resources (such as indexes) using customer manager keys within a search service."
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "When set to true, calls to the search service will not be permitted to utilize API keys for authentication. This cannot be set to true if 'dataPlaneAuthOptions' are defined."
+        },
+        "authOptions": {
+          "$ref": "#/definitions/DataPlaneAuthOptions",
+          "description": "Defines the options for how the data plane API of a search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "The list of private endpoint connections to the Azure Cognitive Search service.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "semanticSearch": {
+          "$ref": "#/definitions/SearchSemanticSearch",
+          "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure Cognitive Search SKUs in certain locations."
+        },
+        "sharedPrivateLinkResources": {
+          "type": "array",
+          "description": "The list of shared private link resources managed by the Azure Cognitive Search service.",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResource"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SearchServiceStatus": {
+      "type": "string",
+      "enum": [
+        "running",
+        "provisioning",
+        "deleting",
+        "degraded",
+        "disabled",
+        "error"
+      ],
+      "x-ms-enum": {
+        "name": "SearchServiceStatus",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Running",
+            "value": "running",
+            "description": "The search service is running and no provisioning operations are underway."
+          },
+          {
+            "name": "Provisioning",
+            "value": "provisioning",
+            "description": "The search service is being provisioned or scaled up or down."
+          },
+          {
+            "name": "Deleting",
+            "value": "deleting",
+            "description": "The search service is being deleted."
+          },
+          {
+            "name": "Degraded",
+            "value": "degraded",
+            "description": "The search service is degraded because underlying search units are not healthy."
+          },
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "The search service is disabled and all API requests will be rejected."
+          },
+          {
+            "name": "Error",
+            "value": "error",
+            "description": "The search service is in error state, indicating either a failure to provision or to be deleted."
+          }
+        ]
+      }
+    },
+    "SearchServiceUpdate": {
+      "type": "object",
+      "description": "The parameters used to update an Azure Cognitive Search service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SearchServiceProperties",
+          "description": "Properties of the search service."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Search Service, which determines price tier and capacity limits. This property is required when creating a new Search Service."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags to help categorize the resource in the Azure portal.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "SearchServiceUpdateUpdate": {
+      "type": "object",
+      "description": "The parameters used to update an Azure Cognitive Search service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SearchServiceProperties",
+          "description": "Properties of the search service."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Search Service, which determines price tier and capacity limits. This property is required when creating a new Search Service."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags to help categorize the resource in the Azure portal.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityUpdate",
+          "description": "The identity of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ShareablePrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure Cognitive Search.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The resource provider type for the resource that has been onboarded to private link service, supported by Azure Cognitive Search.",
+          "readOnly": true
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The resource provider group id for the resource that has been onboarded to private link service, supported by Azure Cognitive Search.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the resource type that has been onboarded to private link service, supported by Azure Cognitive Search.",
+          "readOnly": true
+        }
+      }
+    },
+    "ShareablePrivateLinkResourceType": {
+      "type": "object",
+      "description": "Describes an resource type that has been onboarded to private link service, supported by Azure Cognitive Search.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource type that has been onboarded to private link service, supported by Azure Cognitive Search.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ShareablePrivateLinkResourceProperties",
+          "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure Cognitive Search.",
+          "readOnly": true
+        }
+      }
+    },
+    "SharedPrivateLinkResource": {
+      "type": "object",
+      "description": "Describes a Shared Private Link Resource managed by the Azure Cognitive Search service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SharedPrivateLinkResourceAsyncOperationResult": {
+      "type": "string",
+      "enum": [
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "SharedPrivateLinkResourceAsyncOperationResult",
+        "modelAsString": true
+      }
+    },
+    "SharedPrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a SharedPrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SharedPrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SharedPrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Describes the properties of an existing Shared Private Link Resource managed by the Azure Cognitive Search service.",
+      "properties": {
+        "privateLinkResourceId": {
+          "type": "string",
+          "description": "The resource id of the resource the shared private link resource is for."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The group id from the provider of resource the shared private link resource is for."
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "The request message for requesting approval of the shared private link resource."
+        },
+        "resourceRegion": {
+          "type": "string",
+          "description": "Optional. Can be used to specify the Azure Resource Manager location of the resource to which a shared private link is to be created. This is only required for those resources whose DNS configuration are regional (such as Azure Kubernetes Service)."
+        },
+        "status": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceStatus",
+          "description": "Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceProvisioningState",
+          "description": "The provisioning state of the shared private link resource. Can be Updating, Deleting, Failed, Succeeded or Incomplete."
+        }
+      }
+    },
+    "SharedPrivateLinkResourceProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Updating",
+        "Deleting",
+        "Failed",
+        "Succeeded",
+        "Incomplete"
+      ],
+      "x-ms-enum": {
+        "name": "SharedPrivateLinkResourceProvisioningState",
+        "modelAsString": false
+      }
+    },
+    "SharedPrivateLinkResourceStatus": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "SharedPrivateLinkResourceStatus",
+        "modelAsString": false
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "Defines the SKU of an Azure Cognitive Search Service, which determines price tier and capacity limits.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName",
+          "description": "The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'"
+        }
+      }
+    },
+    "SkuName": {
+      "type": "string",
+      "enum": [
+        "free",
+        "basic",
+        "standard",
+        "standard2",
+        "standard3",
+        "storage_optimized_l1",
+        "storage_optimized_l2"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Free",
+            "value": "free",
+            "description": "Free tier, with no SLA guarantees and a subset of features offered to paid tiers."
+          },
+          {
+            "name": "Basic",
+            "value": "basic",
+            "description": "Paid tier dedicated service with up to 3 replicas."
+          },
+          {
+            "name": "Standard",
+            "value": "standard",
+            "description": "Paid tier dedicated service with up to 12 partitions and 12 replicas."
+          },
+          {
+            "name": "Standard2",
+            "value": "standard2",
+            "description": "Similar to 'standard', but with more capacity per search unit."
+          },
+          {
+            "name": "Standard3",
+            "value": "standard3",
+            "description": " The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity')."
+          },
+          {
+            "name": "StorageOptimizedL1",
+            "value": "storage_optimized_l1",
+            "description": "Paid tier dedicated service that supports 1TB per partition, up to 12 partitions."
+          },
+          {
+            "name": "StorageOptimizedL2",
+            "value": "storage_optimized_l2",
+            "description": "Paid tier dedicated service that supports 2TB per partition, up to 12 partitions."
+          }
+        ]
+      }
+    },
+    "UnavailableNameReason": {
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "UnavailableNameReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "The search service name does not match naming requirements."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "The search service name is already assigned to a different search service."
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2023-11-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_11_01",
+            "value": "2023-11-01"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
