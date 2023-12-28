@@ -1173,7 +1173,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SC_GetEnvironmentsResponse"
+              "$ref": "#/definitions/GetEnvironmentsResponse"
             }
           },
           "default": {
@@ -1227,7 +1227,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SC_GetClustersResponse"
+              "$ref": "#/definitions/GetClustersResponse"
             }
           },
           "default": {
@@ -1281,7 +1281,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SC_GetSchemaRegistryResponse"
+              "$ref": "#/definitions/GetSchemaRegistryResponse"
             }
           },
           "default": {
@@ -1301,7 +1301,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/schemaRegistryRegions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/ListSchemaRegistryRegions": {
       "post": {
         "tags": [
           "service connectors"
@@ -1341,7 +1341,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SCListRegions_SuccessResponse"
+              "$ref": "#/definitions/ListRegionsSuccessResponse"
             }
           },
           "default": {
@@ -2615,7 +2615,7 @@
         }
       }
     },
-    "SC_GetEnvironmentsResponse": {
+    "GetEnvironmentsResponse": {
       "description": "Result of GET request to list Confluent operations.",
       "type": "object",
       "properties": {
@@ -2655,6 +2655,122 @@
         }
       }
     },
+    "SCClusterByokEntity": {
+      "description": "The network associated with this object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the referred resource",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the referred object",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        }
+      }
+    },
+    "SCClusterNetworkEntity": {
+      "description": "The network associated with this object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the referred resource",
+          "type": "string"
+        },
+        "environment": {
+          "description": "Environment of the referred resource",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the referred object",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        }
+      }
+    },
+    "SCClusterEnvironmentEntity": {
+      "description": "The environment to which cluster belongs",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the referred resource",
+          "type": "string"
+        },
+        "environment": {
+          "description": "Environment of the referred resource",
+          "type": "string"
+        },
+        "related": {
+          "description": "API URL for accessing or modifying the referred object",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "CRN reference to the referred resource",
+          "type": "string"
+        }
+      }
+    },
+    "SCClusterSpecEntity": {
+      "description": "Spec of the cluster record",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the cluster",
+          "type": "string"
+        },
+        "availability": {
+          "description": "The availability zone configuration of the cluster",
+          "type": "string"
+        },
+        "cloud": {
+          "description": "The cloud service provider ",
+          "type": "string"
+        },
+        "zone": {
+          "description": "type of zone availability",
+          "type": "string"
+        },
+        "region": {
+          "description": "The cloud service provider region",
+          "type": "string"
+        },
+        "kafkaBootstrapEndpoint": {
+          "description": "The bootstrap endpoint used by Kafka clients to connect to the cluster",
+          "type": "string"
+        },
+        "httpEndpoint": {
+          "description": "The cluster HTTP request URL.",
+          "type": "string"
+        },
+        "apiEndpoint": {
+          "description": "The Kafka API cluster endpoint",
+          "type": "string"
+        },
+        "config": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/ClusterConfigEntity"
+        },
+        "environment": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/SCClusterEnvironmentEntity"
+        },
+        "network": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/SCClusterNetworkEntity"
+        },
+        "byok": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/SCClusterByokEntity"
+        }
+      }
+    },
     "SCClusterRecord": {
       "description": "Details of cluster record",
       "type": "object",
@@ -2685,7 +2801,7 @@
         }
       }
     },
-    "SC_GetClustersResponse": {
+    "GetClustersResponse": {
       "description": "Result of GET request to list clusters in the environment of a confluent organization",
       "type": "object",
       "properties": {
@@ -2703,7 +2819,7 @@
         }
       }
     },
-    "SC_GetSchemaRegistryResponse": {
+    "GetSchemaRegistryResponse": {
       "description": "Result of GET request to list schema registry clusters in the environment of a confluent organization",
       "type": "object",
       "properties": {
@@ -2712,7 +2828,7 @@
           "type": "array",
           "x-ms-identifiers": [],
           "items": {
-            "$ref": "#/definitions/SCSchemaRegistryRecord"
+            "$ref": "#/definitions/SchemaRegistryRecord"
           }
         },
         "nextLink": {
@@ -2721,7 +2837,7 @@
         }
       }
     },
-    "SCSchemaRegistryEnvironmentEntity": {
+    "SchemaRegistryEnvironmentRegionEntity": {
       "description": "The environment associated with this object",
       "type": "object",
       "properties": {
@@ -2739,25 +2855,7 @@
         }
       }
     },
-    "SCSchemaRegistryRegionEntity": {
-      "description": "The region associated with this object",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "ID of the referred resource",
-          "type": "string"
-        },
-        "related": {
-          "description": "API URL for accessing or modifying the referred object",
-          "type": "string"
-        },
-        "resourceName": {
-          "description": "CRN reference to the referred resource",
-          "type": "string"
-        }
-      }
-    },
-    "SCSchemaRegistrySpecEntity": {
+    "SchemaRegistrySpecEntity": {
       "description": "Details of schema registry record",
       "type": "object",
       "properties": {
@@ -2776,17 +2874,17 @@
         "region": {
           "description": "Region details of the schema registry cluster",
           "type": "object",
-          "$ref": "#/definitions/SCSchemaRegistryRegionEntity"
+          "$ref": "#/definitions/SchemaRegistryEnvironmentRegionEntity"
         },
         "environment": {
           "description": "Environment details of the schema registry cluster",
           "type": "object",
-          "$ref": "#/definitions/SCSchemaRegistryEnvironmentEntity"
+          "$ref": "#/definitions/SchemaRegistryEnvironmentRegionEntity"
         }
       }
     },
-    "SCSchemaRegistryStatusEntity": {
-      "description": "Status of the cluster record",
+    "SchemaRegistryStatusEntity": {
+      "description": "Status of the schema registry cluster record",
       "type": "object",
       "properties": {
         "phase": {
@@ -2795,7 +2893,7 @@
         }
       }
     },
-    "SCSchemaRegistryRecord": {
+    "SchemaRegistryRecord": {
       "description": "Details of schema registry record",
       "type": "object",
       "properties": {
@@ -2812,16 +2910,16 @@
           "$ref": "#/definitions/SCMetadataEntity"
         },
         "spec": {
-          "description": "Specification of the cluster",
-          "$ref": "#/definitions/SCSchemaRegistrySpecEntity"
+          "description": "Specification of the schema registry cluster",
+          "$ref": "#/definitions/SchemaRegistrySpecEntity"
         },
         "status": {
           "description": "Specification of the cluster status",
-          "$ref": "#/definitions/SCSchemaRegistryStatusEntity"
+          "$ref": "#/definitions/SchemaRegistryStatusEntity"
         }
       }
     },
-    "SCRegionSpecEntity": {
+    "RegionSpecEntity": {
       "description": "Region spec details",
       "type": "object",
       "properties": {
@@ -2845,7 +2943,7 @@
         }
       }
     },
-    "SCRegionRecord": {
+    "RegionRecord": {
       "description": "Details of region record",
       "type": "object",
       "properties": {
@@ -2863,11 +2961,11 @@
         },
         "spec": {
           "description": "Specification of the cluster",
-          "$ref": "#/definitions/SCRegionSpecEntity"
+          "$ref": "#/definitions/RegionSpecEntity"
         }
       }
     },
-    "SCListRegions_SuccessResponse": {
+    "ListRegionsSuccessResponse": {
       "description": "Result of GET request to list schema registry clusters in the environment of a confluent organization",
       "type": "object",
       "properties": {
@@ -2876,7 +2974,7 @@
           "type": "array",
           "x-ms-identifiers": [],
           "items": {
-            "$ref": "#/definitions/SCRegionRecord"
+            "$ref": "#/definitions/RegionRecord"
           }
         },
         "nextLink": {
@@ -2977,122 +3075,6 @@
         },
         "kind": {
           "description": "Type of the owner service or user account",
-          "type": "string"
-        }
-      }
-    },
-    "SCClusterSpecEntity": {
-      "description": "Spec of the cluster record",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the cluster",
-          "type": "string"
-        },
-        "availability": {
-          "description": "The availability zone configuration of the cluster",
-          "type": "string"
-        },
-        "cloud": {
-          "description": "The cloud service provider ",
-          "type": "string"
-        },
-        "zone": {
-          "description": "type of zone availability",
-          "type": "string"
-        },
-        "region": {
-          "description": "The cloud service provider region",
-          "type": "string"
-        },
-        "kafkaBootstrapEndpoint": {
-          "description": "The bootstrap endpoint used by Kafka clients to connect to the cluster",
-          "type": "string"
-        },
-        "httpEndpoint": {
-          "description": "The cluster HTTP request URL.",
-          "type": "string"
-        },
-        "apiEndpoint": {
-          "description": "The Kafka API cluster endpoint",
-          "type": "string"
-        },
-        "config": {
-          "description": "Specification of the cluster",
-          "$ref": "#/definitions/ClusterConfigEntity"
-        },
-        "environment": {
-          "description": "Specification of the cluster",
-          "$ref": "#/definitions/SCClusterEnvironmentEntity"
-        },
-        "network": {
-          "description": "Specification of the cluster",
-          "$ref": "#/definitions/SCClusterNetworkEntity"
-        },
-        "byok": {
-          "description": "Specification of the cluster",
-          "$ref": "#/definitions/SCClusterByokEntity"
-        }
-      }
-    },
-    "SCClusterByokEntity": {
-      "description": "The network associated with this object",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "ID of the referred resource",
-          "type": "string"
-        },
-        "related": {
-          "description": "API URL for accessing or modifying the referred object",
-          "type": "string"
-        },
-        "resourceName": {
-          "description": "CRN reference to the referred resource",
-          "type": "string"
-        }
-      }
-    },
-    "SCClusterNetworkEntity": {
-      "description": "The network associated with this object",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "ID of the referred resource",
-          "type": "string"
-        },
-        "environment": {
-          "description": "Environment of the referred resource",
-          "type": "string"
-        },
-        "related": {
-          "description": "API URL for accessing or modifying the referred object",
-          "type": "string"
-        },
-        "resourceName": {
-          "description": "CRN reference to the referred resource",
-          "type": "string"
-        }
-      }
-    },
-    "SCClusterEnvironmentEntity": {
-      "description": "The environment to which cluster belongs",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "ID of the referred resource",
-          "type": "string"
-        },
-        "environment": {
-          "description": "Environment of the referred resource",
-          "type": "string"
-        },
-        "related": {
-          "description": "API URL for accessing or modifying the referred object",
-          "type": "string"
-        },
-        "resourceName": {
-          "description": "CRN reference to the referred resource",
           "type": "string"
         }
       }
