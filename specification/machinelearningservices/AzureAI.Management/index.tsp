@@ -90,7 +90,7 @@ interface ProxyResourceOperationsIndexesVersions<
   @doc("Get a Index.")
   get is ArmResourceRead<TResource>;
   @doc("Create a Index.")
-  createOrUpdate is ArmResourceCreateOrUpdateSync<TResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<TResource>;
 }
 
 @armResourceOperations

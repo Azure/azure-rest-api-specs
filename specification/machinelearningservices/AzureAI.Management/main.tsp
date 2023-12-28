@@ -20,11 +20,8 @@ using Azure.ResourceManager;
 
 @doc("Azure AI api client.")
 @versioned(Versions)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "ref:workspaceRP.json#Microsoft.MachineLearningServices/operations"
 namespace Microsoft.MachineLearningServices;
-
-@Autorest.useRef("workspaceRP.json#/definitions/WorkspaceProperties")
-// interface Operations extends Azure.ResourceManager.Operations {}
-
 
 @doc("Azure Machine Learning Services api versions.")
 enum Versions {
