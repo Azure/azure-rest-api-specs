@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "host": "management.azure.com",
   "info": {
-    "version": "2023-12-01-alpha",
+    "version": "2024-01-01-privatepreview",
     "title": "Management Groups APIs for Applications",
     "description": "The Azure Management Groups API enables consolidation of multiple \nsubscriptions/resources into an organizational hierarchy and centrally \nmanage access control, policies, alerting and reporting for those resources.\n This API version includes the preview state of Applications which are a new version of Management Groups.\n"
   },
@@ -165,11 +165,11 @@
       "properties": {
         "error": {
           "description": "Error object",
-          "$ref": "#/definitions/ErrorDetails"
+          "$ref": "#/definitions/ErrorDetail"
         }
       }
     },
-    "ErrorDetails": {
+    "ErrorDetail": {
       "description": "The details of the error.",
       "type": "object",
       "properties": {
@@ -192,7 +192,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDetails"
+            "$ref": "#/definitions/ErrorDetail"
           },
           "x-ms-identifiers": [
             "message",
@@ -221,6 +221,7 @@
         },
         "info": {
           "readOnly": true,
+          "type": "object",
           "description": "The additional info."
         }
       },
@@ -265,8 +266,30 @@
           "readOnly": true
         },
         "display": {
-          "title": "Display",
-          "$ref": "#/definitions/OperationDisplayProperties"
+          "description": "The object that represents the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "The name of the provider.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "The resource on which the operation is performed.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "The operation that can be performed.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Operation description.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         },
         "origin": {
           "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
@@ -293,32 +316,6 @@
             "name": "ActionType",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "OperationDisplayProperties": {
-      "description": "The object that represents the operation.",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "description": "The name of the provider.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resource": {
-          "description": "The resource on which the operation is performed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "operation": {
-          "description": "The operation that can be performed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "Operation description.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -412,7 +409,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Version of the API to be used with the client request. The current version is 2023-12-01-alpha."
+      "description": "Version of the API to be used with the client request. The current version is 2024-01-01-privatepreview."
     }
   }
 }
