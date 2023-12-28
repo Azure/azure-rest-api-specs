@@ -2673,30 +2673,8 @@
         }
       }
     },
-    "SCClusterNetworkEntity": {
-      "description": "The network associated with this object",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "ID of the referred resource",
-          "type": "string"
-        },
-        "environment": {
-          "description": "Environment of the referred resource",
-          "type": "string"
-        },
-        "related": {
-          "description": "API URL for accessing or modifying the referred object",
-          "type": "string"
-        },
-        "resourceName": {
-          "description": "CRN reference to the referred resource",
-          "type": "string"
-        }
-      }
-    },
-    "SCClusterEnvironmentEntity": {
-      "description": "The environment to which cluster belongs",
+    "SCClusterNetworkEnvironmentEntity": {
+      "description": "The environment or the network to which cluster belongs",
       "type": "object",
       "properties": {
         "id": {
@@ -2754,19 +2732,19 @@
           "type": "string"
         },
         "config": {
-          "description": "Specification of the cluster",
+          "description": "Specification of the cluster configuration",
           "$ref": "#/definitions/ClusterConfigEntity"
         },
         "environment": {
-          "description": "Specification of the cluster",
-          "$ref": "#/definitions/SCClusterEnvironmentEntity"
+          "description": "Specification of the cluster environment",
+          "$ref": "#/definitions/SCClusterNetworkEnvironmentEntity"
         },
         "network": {
-          "description": "Specification of the cluster",
-          "$ref": "#/definitions/SCClusterNetworkEntity"
+          "description": "Specification of the cluster network",
+          "$ref": "#/definitions/SCClusterNetworkEnvironmentEntity"
         },
         "byok": {
-          "description": "Specification of the cluster",
+          "description": "Specification of the cluster byok",
           "$ref": "#/definitions/SCClusterByokEntity"
         }
       }
