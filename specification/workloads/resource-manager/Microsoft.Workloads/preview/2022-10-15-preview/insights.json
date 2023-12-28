@@ -409,13 +409,19 @@
           "description": "DataStore to push insights for the workload instance.",
           "$ref": "#/definitions/OutputDataStores"
         },
-        "environment": {
-          "description": "Type of the workload environment",
-          "type": "string"
-        },
-        "businessPurpose": {
-          "description": "Business purpose of the workload instance.",
-          "type": "string"
+        "details": {
+          "description": "Details for the workload insight instance",
+          "type": "object",
+          "properties": {
+            "environment": {
+              "description": "Environment of the workload instance",
+              "type": "string"
+            },
+            "businessPurpose": {
+              "description": "Business purpose of the workload instance.",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -554,6 +560,14 @@
             "query": {
               "description": "Kusto query to pull data from Azure Resource Graph",
               "type": "string"
+            },
+            "subscriptions": {
+              "description": "Azure subscriptions against which to execute the query.",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Subscription Id."
+              }
             }
           }
         },
@@ -820,20 +834,11 @@
     "AzureResourceGraphDataStore": {
       "description": "Azure Resource Graph in data store.",
       "type": "object",
-      "required": [
-        "subscriptions"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DataStore"
         }
-      ],
-      "properties": {
-        "subscriptions": {
-          "description": "The subscriptions of the Azure Resource Graph.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "ImpactResourceProviderDataStore": {
       "description": "Impact Resource Provider in data store.",

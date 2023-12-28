@@ -12,6 +12,10 @@
       "properties": {
         "workloadType": "WorkloadType1",
         "workloadProvider": "WorkloadProvider1",
+        "details": {
+          "environment": "Production",
+          "businessPurpose": "Workload testing"
+        },
         "resourcesDiscoveryDataFeeds": [
           {
             "name": "resourcesDiscoveryDataFeed1",
@@ -62,6 +66,26 @@
                   }
                 }
               ]
+            }
+          },
+          {
+            "name": "resourcesDiscoveryDataFeed2",
+            "dataFeedType": "AzureResourceGraphDataFeed",
+            "dataFeedClass": "Raw",
+            "details": {
+              "query": "Resources | where (subscriptionId == '00000000-0000-0000-0000-000000000000')",
+              "subscriptions": [
+                  "00000000-0000-0000-0000-000000000000/"
+                ]
+            },
+            "dataStore": {
+              "dataStoreType": "AzureResourceGraphDataStore"
+            },
+            "trigger": {
+              "triggerType": "ScheduleTrigger",
+              "granularity": "seconds",
+              "value": 60,
+              "startFrom": "2023-12-19T15:10:46.196Z"
             }
           }
         ],
@@ -237,6 +261,10 @@
           ],
           "workloadType": "WorkloadType1",
           "workloadProvider": "WorkloadProvider1",
+          "details": {
+            "environment": "Production",
+            "businessPurpose": "Workload testing"
+          },
           "resourcesDiscoveryDataFeeds": [
             {
               "details": {
@@ -287,6 +315,26 @@
                     }
                   }
                 ]
+              }
+            },
+            {
+              "name": "resourcesDiscoveryDataFeed2",
+              "dataFeedType": "AzureResourceGraphDataFeed",
+              "dataFeedClass": "Raw",
+              "details": {
+                "query": "Resources | where (subscriptionId == '00000000-0000-0000-0000-000000000000')",
+                "subscriptions": [
+                    "00000000-0000-0000-0000-000000000000/"
+                  ]
+              },
+              "dataStore": {
+                "dataStoreType": "AzureResourceGraphDataStore"
+              },
+              "trigger": {
+                "triggerType": "ScheduleTrigger",
+                "granularity": "seconds",
+                "value": 60,
+                "startFrom": "2023-12-19T15:10:46.196Z"
               }
             }
           ],
@@ -453,6 +501,10 @@
           ],
           "workloadType": "WorkloadType1",
           "workloadProvider": "WorkloadProvider1",
+          "details": {
+            "environment": "Production",
+            "businessPurpose": "Workload testing"
+          },
           "resourcesDiscoveryDataFeeds": [
             {
               "details": {
@@ -503,6 +555,26 @@
                     }
                   }
                 ]
+              }
+            },
+            {
+              "name": "resourcesDiscoveryDataFeed2",
+              "dataFeedType": "AzureResourceGraphDataFeed",
+              "dataFeedClass": "Raw",
+              "details": {
+                "query": "Resources | where (subscriptionId == '00000000-0000-0000-0000-000000000000')",
+                "subscriptions": [
+                    "00000000-0000-0000-0000-000000000000/"
+                  ]
+              },
+              "dataStore": {
+                "dataStoreType": "AzureResourceGraphDataStore"
+              },
+              "trigger": {
+                "triggerType": "ScheduleTrigger",
+                "granularity": "seconds",
+                "value": 60,
+                "startFrom": "2023-12-19T15:10:46.196Z"
               }
             }
           ],
