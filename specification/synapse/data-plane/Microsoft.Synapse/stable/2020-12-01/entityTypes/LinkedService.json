@@ -3052,6 +3052,98 @@
         "authenticationType"
       ]
     },
+    "WebConnectionLinkedService": {
+      "x-ms-discriminator-value": "WebConnection",
+      "description": "Web Connection linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Web Connection linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WebConnectionLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "WebConnectionLinkedServiceTypeProperties": {
+      "description": "Web Connection linked service properties.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "The base URL of the WEB CONNECTION service. Type: string (or Expression with resultType string).",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "enableServerCertificateValidation": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Whether to validate server side SSL certificate when connecting to the endpoint.The default value is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "authenticationType": {
+          "description": "Type of authentication used to connect to the WEB CONNECTION service.",
+          "type": "string",
+          "enum": [
+            "Anonymous",
+            "Basic",
+            "ManagedServiceIdentity",
+            "ClientCertificate",
+            "AadServicePrincipal",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "WebConnectionAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "userName": {
+          "description": "The user name used in Basic authentication type. Type: string (or Expression with resultType string).",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "password": {
+          "description": "The password used in Basic & ClientCertificate authentication type.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "pfx": {
+          "description": "The certificate used in ClientCertificate authentication type.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalId": {
+          "description": "The application's client ID used in AadServicePrincipal authentication type. Type: string (or Expression with resultType string).",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "servicePrincipalKey": {
+          "description": "The application's key used in AadServicePrincipal authentication type.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "tenant": {
+          "description": "The tenant information (domain name or tenant ID) used in AadServicePrincipal authentication type under which your application resides. Type: string (or Expression with resultType string).",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "aadResourceId": {
+          "description": "The resource you are requesting authorization to use. Type: string (or Expression with resultType string).",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
+        }
+      },
+      "required": [
+        "url",
+        "authenticationType"
+      ]
+    },
     "TeamDeskLinkedService": {
       "x-ms-discriminator-value": "TeamDesk",
       "description": "Linked service for TeamDesk.",
