@@ -29,43 +29,44 @@ import "./main.tsp";
 using Versioning;
 using Azure.ClientGenerator.Core;
 
-// Create Two Clients for EventGrid
-@useDependency(
-  Microsoft.EventGrid.ServiceApiVersions.v2018_01_01,
-  Microsoft.EventGrid.ServiceApiVersions.v2023_06_01_preview,
-  Microsoft.EventGrid.ServiceApiVersions.v2023_11_01,
-  Microsoft.EventGrid.ServiceApiVersions.v2023_10_01_preview
-)
-namespace CustomClients;
-@client({
-  name: "EventGridPublisherClient",
-  service: Microsoft.EventGrid,
-})
-interface EventGridPublisherClient {
-  publish is Microsoft.EventGrid.publish;
-  publishEventGridEvent is Microsoft.EventGrid.publishEventGridEvent;
-  publishCustomEvent is Microsoft.EventGrid.publishCustomEvent;
-}
+// // Create Two Clients for EventGrid
+// @useDependency(
+//   Microsoft.EventGrid.ServiceApiVersions.v2018_01_01,
+//   Microsoft.EventGrid.ServiceApiVersions.v2023_06_01_preview,
+//   Microsoft.EventGrid.ServiceApiVersions.v2023_11_01,
+//   Microsoft.EventGrid.ServiceApiVersions.v2023_10_01_preview
+// )
+// namespace CustomClients;
+// @client({
+//   name: "EventGridPublisherClient",
+//   service: Microsoft.EventGrid,
+// })
+// interface EventGridPublisherClient {
+//   publish is Microsoft.EventGrid.publish;
+//   publishEventGridEvent is Microsoft.EventGrid.publishEventGridEvent;
+//   publishCustomEvent is Microsoft.EventGrid.publishCustomEvent;
+// }
 
-@client({
-  name: "EventGridClient",
-  service: Microsoft.EventGrid,
-})
-interface EventGridClient {
-  publishCloudEvent is Microsoft.EventGrid.publishCloudEvent;
-  publishCloudEvents is Microsoft.EventGrid.publishCloudEvents;
-  receiveCloudEvents is Microsoft.EventGrid.receiveCloudEvents;
-  acknowledgeCloudEvents is Microsoft.EventGrid.acknowledgeCloudEvents;
-  releaseCloudEvents is Microsoft.EventGrid.releaseCloudEvents;
-  rejectCloudEvents is Microsoft.EventGrid.rejectCloudEvents;
-  renewCloudEventLocks is Microsoft.EventGrid.renewCloudEventLocks;
-}
+// @client({
+//   name: "EventGridClient",
+//   service: Microsoft.EventGrid,
+// })
+// interface EventGridClient {
+//   publishCloudEvent is Microsoft.EventGrid.publishCloudEvent;
+//   publishCloudEvents is Microsoft.EventGrid.publishCloudEvents;
+//   receiveCloudEvents is Microsoft.EventGrid.receiveCloudEvents;
+//   acknowledgeCloudEvents is Microsoft.EventGrid.acknowledgeCloudEvents;
+//   releaseCloudEvents is Microsoft.EventGrid.releaseCloudEvents;
+//   rejectCloudEvents is Microsoft.EventGrid.rejectCloudEvents;
+//   renewCloudEventLocks is Microsoft.EventGrid.renewCloudEventLocks;
+// }
 
 // Models
 
 @@access(Microsoft.EventGrid.publishCloudEvent, Access.internal);
 @@access(Microsoft.EventGrid.publishCloudEvents, Access.internal);
 @@access(Microsoft.EventGrid.receiveCloudEvents, Access.internal);
+
 @@usage(Microsoft.EventGrid.ApiManagementUserCreatedEventData,
   Usage.input | Usage.output
 );
@@ -483,6 +484,7 @@ interface EventGridClient {
 @@usage(Microsoft.EventGrid.AcsRouterCommunicationError,
   Usage.input | Usage.output
 );
+// TODO: Internal for now -- issue in emitter
 @@access(Microsoft.EventGrid.AcsRouterCommunicationError, Access.internal);
 @@usage(Microsoft.EventGrid.AcsRouterWorkerSelector,
   Usage.input | Usage.output
@@ -546,6 +548,22 @@ interface EventGridClient {
   Usage.input | Usage.output
 );
 @@access(Microsoft.EventGrid.AcsIncomingCallCustomContext, Access.public);
+@@usage(Microsoft.EventGrid.CommunicationIdentifierModel,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.CommunicationIdentifierModel, Access.public);
+@@usage(Microsoft.EventGrid.MicrosoftTeamsUserIdentifierModel,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.MicrosoftTeamsUserIdentifierModel, Access.public);
+@@usage(Microsoft.EventGrid.PhoneNumberIdentifierModel,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.PhoneNumberIdentifierModel, Access.public);
+@@usage(Microsoft.EventGrid.CommunicationUserIdentifierModel,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.CommunicationUserIdentifierModel, Access.public);
 @@usage(Microsoft.EventGrid.ContainerRegistryImagePushedEventData,
   Usage.input | Usage.output
 );

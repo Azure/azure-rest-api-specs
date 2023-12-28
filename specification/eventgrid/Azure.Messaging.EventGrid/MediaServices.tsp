@@ -136,10 +136,11 @@ namespace Microsoft.EventGrid {
   @doc("The event data for a Job output.")
   @discriminator("@odata.type")
   model MediaJobOutput {
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    @doc("The discriminator for derived types.")
-    @projectedName("json", "@odata.type")
-    OdataType?: string;
+    // TODO: OData Key Issue
+    // #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
+    // @doc("The discriminator for derived types.")
+    // @projectedName("json", "@odata.type")
+    // OdataType?: string;
 
     @doc("Gets the Job output error.")
     error?: MediaJobError;
