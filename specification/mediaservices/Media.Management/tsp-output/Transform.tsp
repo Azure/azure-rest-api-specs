@@ -1,0 +1,47 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./MediaService.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.Media;
+@doc("A Transform encapsulates the rules or instructions for generating desired outputs from input media, such as by transcoding or by extracting insights. After the Transform is created, it can be applied to input media by creating Jobs.")
+@parentResource(MediaService)
+model Transform is ProxyResource<TransformProperties> {
+  @doc("The Transform name.")
+  @key("transformName")
+  @segment("transforms")
+  name: string;
+}
+
+@armResourceOperations
+interface Transforms {
+  @doc("Gets a Transform.")
+  get is ArmResourceRead<Transform>;
+  @doc("Creates or updates a new Transform.")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Transform>;
+  @doc("Updates a Transform.")
+  update is ArmCustomPatchSync<Transform, Transform>;
+  @doc("Deletes a Transform.")
+  delete is ArmResourceDeleteSync<Transform>;
+  @doc("Lists the Transforms in the account.")
+  list is ArmResourceListByParent<
+    Transform,
+    {
+      ...BaseParameters<Transform>;
+
+      @doc("Restricts the set of items returned.")
+      @query("$filter")
+      $filter?: string;
+
+      @doc("Specifies the key by which the result collection should be ordered.")
+      @query("$orderby")
+      $orderby?: string;
+    }
+  >;
+}

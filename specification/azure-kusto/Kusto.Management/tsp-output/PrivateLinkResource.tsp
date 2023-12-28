@@ -1,0 +1,29 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Cluster.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Azure.ResourceManager.Kusto;
+@doc("A private link resource")
+@parentResource(Cluster)
+model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+  @doc("The name of the private link resource.")
+  @pattern("^.*$")
+  @key("privateLinkResourceName")
+  @segment("privateLinkResources")
+  name: string;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
+  @doc("Gets a private link resource.")
+  get is ArmResourceRead<PrivateLinkResource>;
+  @doc("Returns the list of private link resources.")
+  list is ArmResourceListByParent<PrivateLinkResource>;
+}
