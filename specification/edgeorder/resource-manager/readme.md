@@ -73,24 +73,6 @@ input-file:
 
 ---
 
-## Suppression
-
-``` yaml
-directive:
-  - suppress: AvoidAdditionalProperties
-    from: edgeorder.json
-    where:
-      - $.definitions.UserAssignedIdentity
-      - $.definitions.ResourceIdentity.properties.userAssignedIdentities
-      - $.definitions.OrderItemUpdateParameter.properties.identity.properties.userAssignedIdentities
-      - $.definitions.OrderItemResource.properties.identity.properties.userAssignedIdentities
-      - $.definitions.OrderItemResourceList.properties.value.items.properties.identity.properties.userAssignedIdentities
-    reason: User-Assigned Identity is supposed to be a dictionary as per ARM recommendation (https://eng.ms/docs/products/arm/rbac/managed_identities/msionboardingsteps) more details here (https://microsoft.sharepoint.com/:w:/t/AzureMSI/EX3pnn_1rqRJueYLSx5H59UBRyPZXTh5E404q6D5mP0Prg?e=BiSODk)
-```
-
----
-
-
 # Code Generation
 
 ## Swagger to SDK
