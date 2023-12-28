@@ -457,59 +457,6 @@
         }
       }
     },
-    "metadataDependencies": {
-      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex dependencies.",
-      "type": "object",
-      "properties": {
-        "contentId": {
-          "description": "Id of the content item we depend on",
-          "$ref": "#/definitions/metadataContentId"
-        },
-        "kind": {
-          "description": "Type of the content item we depend on",
-          "$ref": "#/definitions/metadataKind"
-        },
-        "version": {
-          "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
-          "$ref": "#/definitions/metadataVersion"
-        },
-        "name": {
-          "description": "Name of the content item",
-          "type": "string"
-        },
-        "operator": {
-          "description": "Operator used for list of dependencies in criteria array.",
-          "type": "string",
-          "enum": [
-            "AND",
-            "OR"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "operator",
-            "values": [
-              {
-                "value": "AND"
-              },
-              {
-                "value": "OR"
-              }
-            ]
-          }
-        },
-        "criteria": {
-          "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/metadataDependencies",
-            "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
-          },
-          "x-ms-identifiers": [
-            "contentId"
-          ]
-        }
-      }
-    },
     "metadataCategories": {
       "type": "object",
       "description": "ies for the solution content item",
@@ -656,7 +603,7 @@
           "description": "Support information for the metadata - type, name, contact information"
         },
         "dependencies": {
-          "$ref": "#/definitions/metadataDependencies",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDependencies",
           "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
         },
         "categories": {
@@ -738,7 +685,7 @@
           "description": "Support information for the metadata - type, name, contact information"
         },
         "dependencies": {
-          "$ref": "#/definitions/metadataDependencies",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDependencies",
           "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
         },
         "categories": {
