@@ -22,7 +22,8 @@ using Azure.ResourceManager;
 @versioned(Versions)
 namespace Microsoft.MachineLearningServices;
 
-interface Operations extends Azure.ResourceManager.Operations {}
+@Autorest.useRef("workspaceRP.json#/definitions/WorkspaceProperties")
+// interface Operations extends Azure.ResourceManager.Operations {}
 
 
 @doc("Azure Machine Learning Services api versions.")
