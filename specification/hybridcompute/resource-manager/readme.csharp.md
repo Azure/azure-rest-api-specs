@@ -17,6 +17,4 @@ csharp:
 directive:
   - remove-operation: 
     - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
 ```
