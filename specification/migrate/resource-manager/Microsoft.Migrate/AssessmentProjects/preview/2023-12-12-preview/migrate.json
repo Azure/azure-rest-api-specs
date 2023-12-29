@@ -113,6 +113,24 @@
     },
     {
       "name": "SqlCollectorOperations"
+    },
+    {
+      "name": "WebAppAssessmentV2SummaryOperations"
+    },
+    {
+      "name": "WebAppAssessmentV2Operations"
+    },
+    {
+      "name": "WebAppAssessmentOptionsOperations"
+    },
+    {
+      "name": "AssessedWebAppV2Operations"
+    },
+    {
+      "name": "WebAppServicePlanV2Operations"
+    },
+    {
+      "name": "WebAppCollectorOperations"
     }
   ],
   "paths": {
@@ -3217,6 +3235,837 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments": {
+      "get": {
+        "operationId": "WebAppAssessmentV2Operations_ListByGroup",
+        "tags": [
+          "WebAppAssessmentV2Operations"
+        ],
+        "description": "List WebAppAssessmentV2 resources by Group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppAssessmentV2ListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WebAppAssessmentV2Operations_ListByGroup_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppAssessmentV2Operations_ListByGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}": {
+      "get": {
+        "operationId": "WebAppAssessmentV2Operations_Get",
+        "tags": [
+          "WebAppAssessmentV2Operations"
+        ],
+        "description": "Get a WebAppAssessmentV2",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Web app Assessment arm name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppAssessmentV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebAppAssessmentV2Operations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppAssessmentV2Operations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebAppAssessmentV2Operations_Create",
+        "tags": [
+          "WebAppAssessmentV2Operations"
+        ],
+        "description": "Create a WebAppAssessmentV2",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Web app Assessment arm name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebAppAssessmentV2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WebAppAssessmentV2' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebAppAssessmentV2"
+            }
+          },
+          "201": {
+            "description": "Resource 'WebAppAssessmentV2' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebAppAssessmentV2"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "WebAppAssessmentV2Operations_Create_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppAssessmentV2Operations_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebAppAssessmentV2Operations_Delete",
+        "tags": [
+          "WebAppAssessmentV2Operations"
+        ],
+        "description": "Delete a WebAppAssessmentV2",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Web app Assessment arm name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebAppAssessmentV2Operations_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppAssessmentV2Operations_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/assessedWebApps": {
+      "get": {
+        "operationId": "AssessedWebAppV2Operations_ListByWebAppAssessmentV2",
+        "tags": [
+          "AssessedWebAppV2Operations"
+        ],
+        "description": "List AssessedWebAppV2 resources by WebAppAssessmentV2",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Optional parameter for page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Optional parameter for continuation token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "totalRecordCount",
+            "in": "query",
+            "description": "Total record count.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Web app Assessment arm name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssessedWebAppV2ListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AssessedWebAppV2Operations_ListByWebAppAssessmentV2_MaximumSet_Gen": {
+            "$ref": "./examples/AssessedWebAppV2Operations_ListByWebAppAssessmentV2_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/assessedWebApps/{assessedWebAppName}": {
+      "get": {
+        "operationId": "AssessedWebAppV2Operations_Get",
+        "tags": [
+          "AssessedWebAppV2Operations"
+        ],
+        "description": "Get a AssessedWebAppV2",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Web app Assessment arm name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessedWebAppName",
+            "in": "path",
+            "description": "Assessed web app ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssessedWebAppV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssessedWebAppV2Operations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/AssessedWebAppV2Operations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/downloadUrl": {
+      "post": {
+        "operationId": "WebAppAssessmentV2Operations_DownloadUrl",
+        "tags": [
+          "WebAppAssessmentV2Operations"
+        ],
+        "summary": "Get download URL for the assessment report.",
+        "description": "Get the URL for downloading the assessment in a report format.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Web app Assessment arm name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "WebAppAssessmentV2Operations_DownloadUrl_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppAssessmentV2Operations_DownloadUrl_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/summaries": {
+      "get": {
+        "operationId": "WebAppAssessmentV2SummaryOperations_ListByWebAppAssessmentV2",
+        "tags": [
+          "WebAppAssessmentV2SummaryOperations"
+        ],
+        "description": "List WebAppAssessmentV2Summary resources by WebAppAssessmentV2",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Web app Assessment arm name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppAssessmentV2SummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WebAppAssessmentV2SummaryOperations_ListByWebAppAssessmentV2_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppAssessmentV2SummaryOperations_ListByWebAppAssessmentV2_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/summaries/{summaryName}": {
+      "get": {
+        "operationId": "WebAppAssessmentV2SummaryOperations_Get",
+        "tags": [
+          "WebAppAssessmentV2SummaryOperations"
+        ],
+        "description": "Get a WebAppAssessmentV2Summary",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Web app Assessment arm name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "summaryName",
+            "in": "path",
+            "description": "Gets the Name of the Web app Summary.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppAssessmentV2Summary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebAppAssessmentV2SummaryOperations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppAssessmentV2SummaryOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/webAppServicePlans": {
+      "get": {
+        "operationId": "WebAppServicePlanV2Operations_ListByWebAppAssessmentV2",
+        "tags": [
+          "WebAppServicePlanV2Operations"
+        ],
+        "description": "List WebAppServicePlanV2 resources by WebAppAssessmentV2",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Optional parameter for page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Optional parameter for continuation token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "totalRecordCount",
+            "in": "query",
+            "description": "Total record count.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Web app Assessment arm name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppServicePlanV2ListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WebAppServicePlanV2Operations_ListByWebAppAssessmentV2_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppServicePlanV2Operations_ListByWebAppAssessmentV2_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/webAppServicePlans/{webAppServicePlanName}": {
+      "get": {
+        "operationId": "WebAppServicePlanV2Operations_Get",
+        "tags": [
+          "WebAppServicePlanV2Operations"
+        ],
+        "description": "Get a WebAppServicePlanV2",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Group ARM name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "Web app Assessment arm name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "webAppServicePlanName",
+            "in": "path",
+            "description": "Web app service plan ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppServicePlanV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebAppServicePlanV2Operations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppServicePlanV2Operations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/hypervcollectors": {
       "get": {
         "operationId": "HypervCollectorsOperations_ListByAssessmentProject",
@@ -5088,6 +5937,348 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webAppAssessmentOptions": {
+      "get": {
+        "operationId": "WebAppAssessmentOptionsOperations_ListByAssessmentProject",
+        "tags": [
+          "WebAppAssessmentOptionsOperations"
+        ],
+        "description": "List WebAppAssessmentOptions resources by AssessmentProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppAssessmentOptionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WebAppAssessmentOptionsOperations_ListByAssessmentProject_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppAssessmentOptionsOperations_ListByAssessmentProject_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webAppAssessmentOptions/{assessmentOptionsName}": {
+      "get": {
+        "operationId": "WebAppAssessmentOptionsOperations_Get",
+        "tags": [
+          "WebAppAssessmentOptionsOperations"
+        ],
+        "description": "Get a WebAppAssessmentOptions",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentOptionsName",
+            "in": "path",
+            "description": "Web app assessment options ARM name. Accepted values is 'default'",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppAssessmentOptions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebAppAssessmentOptionsOperations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppAssessmentOptionsOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webappcollectors": {
+      "get": {
+        "operationId": "WebAppCollectorOperations_ListByAssessmentProject",
+        "tags": [
+          "WebAppCollectorOperations"
+        ],
+        "description": "List WebAppCollector resources by AssessmentProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WebAppCollectorOperations_ListByAssessmentProject_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppCollectorOperations_ListByAssessmentProject_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webappcollectors/{collectorName}": {
+      "get": {
+        "operationId": "WebAppCollectorOperations_Get",
+        "tags": [
+          "WebAppCollectorOperations"
+        ],
+        "description": "Get a WebAppCollector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "collectorName",
+            "in": "path",
+            "description": "Web app collector ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebAppCollectorOperations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppCollectorOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebAppCollectorOperations_Create",
+        "tags": [
+          "WebAppCollectorOperations"
+        ],
+        "description": "Create a WebAppCollector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "collectorName",
+            "in": "path",
+            "description": "Web app collector ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebAppCollector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WebAppCollector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollector"
+            }
+          },
+          "201": {
+            "description": "Resource 'WebAppCollector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebAppCollector"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "WebAppCollectorOperations_Create_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppCollectorOperations_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebAppCollectorOperations_Delete",
+        "tags": [
+          "WebAppCollectorOperations"
+        ],
+        "description": "Delete a WebAppCollector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "collectorName",
+            "in": "path",
+            "description": "Web app collector ARM name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebAppCollectorOperations_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppCollectorOperations_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5099,10 +6290,12 @@
         "2020-01-01",
         "2020-05-01-preview",
         "2022-02-02-preview",
+        "2022-08-01-preview",
         "2023-03-03",
-        "2023-12-12-preview",
+        "2023-03-15",
         "2023-04-01-preview",
-        "2023-07-07-preview"
+        "2023-07-07-preview",
+        "2023-12-12-preview"
       ],
       "x-ms-enum": {
         "name": "ApiVersions",
@@ -5129,14 +6322,19 @@
             "description": "2022-02-02-preview API Version."
           },
           {
+            "name": "v2022_08_01_preview",
+            "value": "2022-08-01-preview",
+            "description": "2022-08-01-preview API Version."
+          },
+          {
             "name": "v2023_03_03",
             "value": "2023-03-03",
             "description": "2023-03-03 API Version."
           },
           {
             "name": "v2023_03_15",
-            "value": "2023-12-12-preview",
-            "description": "2023-12-12-preview API Version."
+            "value": "2023-03-15",
+            "description": "2023-03-15 API Version."
           },
           {
             "name": "v2023_04_01_preview",
@@ -5147,9 +6345,40 @@
             "name": "v2023_07_07_preview",
             "value": "2023-07-07-preview",
             "description": "2023-07-07-preview API Version."
+          },
+          {
+            "name": "v2023_12_12_preview",
+            "value": "2023-12-12-preview",
+            "description": "2023-12-12-preview API Version."
           }
         ]
       }
+    },
+    "AppSvcContainerSettings": {
+      "type": "object",
+      "description": "App service container settings.",
+      "properties": {
+        "isolationRequired": {
+          "type": "boolean",
+          "description": "Gets or sets the isolation required."
+        }
+      },
+      "required": [
+        "isolationRequired"
+      ]
+    },
+    "AppSvcNativeSettings": {
+      "type": "object",
+      "description": "App service native settings.",
+      "properties": {
+        "isolationRequired": {
+          "type": "boolean",
+          "description": "Gets or sets the isolation required."
+        }
+      },
+      "required": [
+        "isolationRequired"
+      ]
     },
     "AssessedDisk": {
       "type": "object",
@@ -6554,6 +7783,123 @@
         }
       }
     },
+    "AssessedWebAppV2": {
+      "type": "object",
+      "description": "Assessed Web app web model class.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssessedWebAppV2Properties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AssessedWebAppV2ListResult": {
+      "type": "object",
+      "description": "The response of a AssessedWebAppV2 list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AssessedWebAppV2 items on this page",
+          "items": {
+            "$ref": "#/definitions/AssessedWebAppV2"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AssessedWebAppV2Properties": {
+      "type": "object",
+      "description": "Assessed Web app database properties web model.",
+      "properties": {
+        "webAppType": {
+          "$ref": "#/definitions/WebAppType",
+          "description": "Gets or sets the web app type.",
+          "readOnly": true
+        },
+        "targetSpecificResult": {
+          "type": "object",
+          "description": "Gets or sets the target specific result.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TargetSpecificResult"
+          },
+          "readOnly": true
+        },
+        "appServicePlanName": {
+          "type": "string",
+          "description": "Gets or sets the app service plan name.",
+          "readOnly": true
+        },
+        "machineName": {
+          "type": "string",
+          "description": "Gets the machine name.",
+          "readOnly": true
+        },
+        "serverArmId": {
+          "type": "string",
+          "description": "Gets or sets the server ARM Id.",
+          "readOnly": true
+        },
+        "webServerName": {
+          "type": "string",
+          "description": "Gets or sets the web server name.",
+          "readOnly": true
+        },
+        "webAppName": {
+          "type": "string",
+          "description": "Gets or sets web app name.",
+          "readOnly": true
+        },
+        "discoveredWebAppId": {
+          "type": "string",
+          "description": "Gets the discovered web app ID.",
+          "readOnly": true
+        },
+        "discoveredMachineId": {
+          "type": "string",
+          "description": "Machine arm id.",
+          "readOnly": true
+        },
+        "confidenceRatingInPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence Rating in Percentage.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When was assessed SQL database first created.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When was assessed Web app database last updated.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "appServicePlanName",
+        "machineName"
+      ]
+    },
     "Assessment": {
       "type": "object",
       "description": "Machine assessment resource.",
@@ -6711,6 +8057,14 @@
           "description": "List of Azure locations that support Savings plan offer for assessments.",
           "items": {
             "type": "string"
+          },
+          "readOnly": true
+        },
+        "premiumV2DiskSupportedLocations": {
+          "type": "array",
+          "description": "List of Azure locations that support Premium SSD V2 disks for assessments.",
+          "items": {
+            "$ref": "#/definitions/AzureLocation"
           },
           "readOnly": true
         }
@@ -6899,6 +8253,39 @@
           "description": "The status of the last operation."
         }
       }
+    },
+    "AssessmentResult": {
+      "type": "object",
+      "description": "Assessment results.",
+      "properties": {
+        "appServicePlanName": {
+          "type": "string",
+          "description": "Gets or sets the app service plan name."
+        },
+        "suitability": {
+          "$ref": "#/definitions/CloudSuitability",
+          "description": "Gets or sets the suitability."
+        },
+        "securitySuitability": {
+          "$ref": "#/definitions/CloudSuitability",
+          "description": "Gets or sets the security suitability."
+        },
+        "webAppSkuName": {
+          "type": "string",
+          "description": "Gets or sets the web app sku name."
+        },
+        "webAppSkuSize": {
+          "type": "string",
+          "description": "Gets or sets the web app sku size."
+        }
+      },
+      "required": [
+        "appServicePlanName",
+        "suitability",
+        "securitySuitability",
+        "webAppSkuName",
+        "webAppSkuSize"
+      ]
     },
     "AssessmentSizingCriterion": {
       "type": "string",
@@ -7438,18 +8825,24 @@
           },
           "readOnly": true
         },
-        "failuresToTolerateAndRaidLevel": {
-          "$ref": "#/definitions/FttAndRaidLevel",
-          "description": "Failures to tolerate and RAID level in a common property."
+        "failuresToTolerateAndRaidLevelList": {
+          "type": "array",
+          "description": "List of Failures to tolerate and RAID levels in a common property.",
+          "items": {
+            "$ref": "#/definitions/FttAndRaidLevel"
+          }
         },
         "vcpuOversubscription": {
           "type": "number",
           "format": "float",
           "description": "VCPU over subscription."
         },
-        "nodeType": {
-          "$ref": "#/definitions/AzureAvsNodeType",
-          "description": "AVS node type."
+        "nodeTypes": {
+          "type": "array",
+          "description": "AVS node types.",
+          "items": {
+            "$ref": "#/definitions/AzureAvsNodeType"
+          }
         },
         "reservedInstance": {
           "$ref": "#/definitions/AzureReservedInstance",
@@ -7512,6 +8905,14 @@
           "format": "float",
           "description": "Predicted total Storage used in GB.",
           "readOnly": true
+        },
+        "recommendedNodes": {
+          "type": "array",
+          "description": "RecommendedNodes AVS SKU for Assessment.",
+          "items": {
+            "$ref": "#/definitions/AvsRecommendedNode"
+          },
+          "x-ms-identifiers": []
         },
         "numberOfMachines": {
           "type": "integer",
@@ -7647,6 +9048,64 @@
         }
       ]
     },
+    "AvsRecommendedNode": {
+      "type": "object",
+      "description": "Details on the Recommended nodes for AVS Assessment.",
+      "properties": {
+        "MonthlyPrice": {
+          "type": "number",
+          "format": "float",
+          "description": "Total monthly cost for type and number of nodes."
+        },
+        "NodeType": {
+          "$ref": "#/definitions/AzureAvsNodeType",
+          "description": "Recommended SKU."
+        },
+        "NodeNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes that will be needed."
+        },
+        "CpuUtilization": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted CPU utilization."
+        },
+        "RamUtilization": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted RAM utilization."
+        },
+        "StorageUtilization": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted storage utilization."
+        },
+        "TotalCpu": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted total CPU cores across the set of nodes."
+        },
+        "TotalRam": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted total RAM used in GB."
+        },
+        "TotalStorage": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted total Storage used in GB."
+        },
+        "PricingModel": {
+          "type": "string",
+          "description": "Pricing model indicates what hour multiplier to use while estimating the Nodes cost."
+        },
+        "FttRaidLevel": {
+          "$ref": "#/definitions/FttAndRaidLevel",
+          "description": "FttRaidLevel recommended for Node."
+        }
+      }
+    },
     "AvsSkuOptions": {
       "type": "object",
       "description": "AVS SKU specific options.",
@@ -7680,7 +9139,8 @@
       "enum": [
         "Unknown",
         "NotApplicable",
-        "UnsupportedLocationForSelectedNode"
+        "UnsupportedLocationForSelectedNode",
+        "InternalErrorInRecommendation"
       ],
       "x-ms-enum": {
         "name": "AzureAvsSuitabilityExplanation",
@@ -8488,6 +9948,17 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
+        }
+      }
+    },
+    "AzureResourceProperties2": {
+      "type": "object",
+      "description": "Common properties for all azure tracked and proxy resources.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       }
     },
@@ -11484,6 +12955,44 @@
         "modelAsString": true
       }
     },
+    "AzureWebAppSuitabilityIssueCategory": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Issue",
+        "Info"
+      ],
+      "x-ms-enum": {
+        "name": "AzureWebAppSuitabilityIssueCategory",
+        "modelAsString": true
+      }
+    },
+    "AzureWebAppTargetType": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "AzureAppService",
+        "AzureAppServiceContainer"
+      ],
+      "x-ms-enum": {
+        "name": "AzureWebAppTargetType",
+        "modelAsString": true
+      }
+    },
+    "AzureWebAppTier": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Free",
+        "Premium_V2",
+        "Premium_V3",
+        "Isolated"
+      ],
+      "x-ms-enum": {
+        "name": "AzureWebAppTier",
+        "modelAsString": true
+      }
+    },
     "CloudSuitability": {
       "type": "string",
       "description": "Cloud Suitability for Azure.",
@@ -11691,12 +13200,81 @@
         "Unknown",
         "MonthlyAzureHybridCostSavings",
         "MonthlySecurityCost",
-        "MonthlyPremiumV2StorageCost"
+        "MonthlyPremiumV2StorageCost",
+        "MonthlyLinuxAzureHybridCostSavings"
       ],
       "x-ms-enum": {
         "name": "CostComponentName",
         "modelAsString": true
       }
+    },
+    "DiscoveredEntitiesSummary": {
+      "type": "object",
+      "description": "Web app discovered entities summary data.",
+      "properties": {
+        "numberOfServers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of web servers",
+          "readOnly": true
+        },
+        "numberOfWebApps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of web apps",
+          "readOnly": true
+        },
+        "numberOfMachines": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of machines",
+          "readOnly": true
+        },
+        "webServerSummary": {
+          "type": "object",
+          "description": "Web server summary data",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        },
+        "webAppSummary": {
+          "type": "object",
+          "description": "Web app summary data",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DiscoveredEntityLightSummary": {
+      "type": "object",
+      "description": "Discovered entity light summary.",
+      "properties": {
+        "numberOfServers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of servers."
+        },
+        "numberOfWebApps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of web apps."
+        },
+        "numberOfMachines": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of machines."
+        }
+      },
+      "required": [
+        "numberOfServers",
+        "numberOfWebApps",
+        "numberOfMachines"
+      ]
     },
     "Disk": {
       "type": "object",
@@ -12246,6 +13824,10 @@
           "$ref": "#/definitions/AzureHybridUseBenefit",
           "description": "Gets or sets the user configurable setting to display the azure hybrid use\nbenefit."
         },
+        "linuxAzureHybridUseBenefit": {
+          "$ref": "#/definitions/AzureHybridUseBenefit",
+          "description": "Gets or sets the user configurable setting to display the linux azure hybrid use\nbenefit."
+        },
         "azureDiskTypes": {
           "type": "array",
           "description": "Gets or sets the azure storage type. Premium, Standard etc.",
@@ -12704,6 +14286,7 @@
     },
     "Percentile": {
       "type": "string",
+      "description": "Percentile for Performance Data.",
       "enum": [
         "Percentile50",
         "Percentile90",
@@ -12712,7 +14295,29 @@
       ],
       "x-ms-enum": {
         "name": "Percentile",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Percentile50",
+            "value": "Percentile50",
+            "description": "Percentile 50."
+          },
+          {
+            "name": "Percentile90",
+            "value": "Percentile90",
+            "description": "Percentile 90."
+          },
+          {
+            "name": "Percentile95",
+            "value": "Percentile95",
+            "description": "Percentile 95."
+          },
+          {
+            "name": "Percentile99",
+            "value": "Percentile99",
+            "description": "Percentile 99."
+          }
+        ]
       }
     },
     "PrivateEndpointConnection": {
@@ -14324,6 +15929,51 @@
         }
       }
     },
+    "TargetSpecificResult": {
+      "type": "object",
+      "description": "Target specific result.",
+      "properties": {
+        "assessmentResult": {
+          "$ref": "#/definitions/AssessmentResult",
+          "description": "Gets or sets the assessment result."
+        },
+        "migrationIssues": {
+          "type": "array",
+          "description": "Gets or sets the web app migration issues.",
+          "items": {
+            "$ref": "#/definitions/WebAppMigrationIssues"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "assessmentResult",
+        "migrationIssues"
+      ]
+    },
+    "TargetSpecificSummary": {
+      "type": "object",
+      "description": "Web app target specific summary data.",
+      "properties": {
+        "readinessSummary": {
+          "type": "object",
+          "description": "Web app readiness summary data",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        },
+        "recommendationResultSkuDetails": {
+          "type": "object",
+          "description": "Web app recommendation sku details data",
+          "additionalProperties": {
+            "$ref": "#/definitions/WebAppSkuDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "TargetType": {
       "type": "string",
       "enum": [
@@ -14341,6 +15991,7 @@
     },
     "TimeRange": {
       "type": "string",
+      "description": "Time Range for Performance Data.",
       "enum": [
         "Day",
         "Week",
@@ -14349,7 +16000,29 @@
       ],
       "x-ms-enum": {
         "name": "TimeRange",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Day",
+            "value": "Day",
+            "description": "Daily."
+          },
+          {
+            "name": "Week",
+            "value": "Week",
+            "description": "Weekly."
+          },
+          {
+            "name": "Month",
+            "value": "Month",
+            "description": "Monthly."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom Time Range."
+          }
+        ]
       }
     },
     "UltraDiskAssessmentOptions": {
@@ -14466,6 +16139,634 @@
       "required": [
         "value"
       ]
+    },
+    "WebAppAssessmentOptions": {
+      "type": "object",
+      "description": "Web app Assessment options web model object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebAppAssessmentOptionsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebAppAssessmentOptionsListResult": {
+      "type": "object",
+      "description": "The response of a WebAppAssessmentOptions list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebAppAssessmentOptions items on this page",
+          "items": {
+            "$ref": "#/definitions/WebAppAssessmentOptions"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebAppAssessmentOptionsProperties": {
+      "type": "object",
+      "description": "Web app Assessment options properties Web model object.",
+      "properties": {
+        "webAppSkus": {
+          "type": "array",
+          "description": "Gets the list of web app target options.",
+          "items": {
+            "$ref": "#/definitions/WebAppTargetOptions"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "savingsPlanSupportedLocations": {
+          "type": "array",
+          "description": "Gets or sets the list of Azure locations supporting Saving Plans for IAAS.",
+          "items": {
+            "$ref": "#/definitions/AzureLocation"
+          },
+          "x-ms-identifiers": []
+        },
+        "reservedInstanceSupportedLocations": {
+          "type": "array",
+          "description": "Gets or sets the list of Azure locations supporting Reserved Instances.",
+          "items": {
+            "$ref": "#/definitions/AzureLocation"
+          },
+          "x-ms-identifiers": []
+        },
+        "reservedInstanceSupportedCurrencies": {
+          "type": "array",
+          "description": "Gets or sets the list of currencies supported for Reserved Instances.",
+          "items": {
+            "$ref": "#/definitions/AzureCurrency"
+          },
+          "x-ms-identifiers": []
+        },
+        "reservedInstanceSupportedOffers": {
+          "type": "array",
+          "description": "Gets or sets the list of offers supported for Reserved Instances.",
+          "items": {
+            "$ref": "#/definitions/AzureOfferCode"
+          },
+          "x-ms-identifiers": []
+        },
+        "reservedInstanceSupportedWebAppTiers": {
+          "type": "array",
+          "description": "Gets or sets the list of currencies supported for Reserved Instances.",
+          "items": {
+            "$ref": "#/definitions/AzureWebAppTier"
+          },
+          "x-ms-identifiers": []
+        },
+        "savingsPlanSupportedWebAppTiers": {
+          "type": "array",
+          "description": "Gets or sets the list of Azure Offers supporting Saving Plans.",
+          "items": {
+            "$ref": "#/definitions/AzureWebAppTier"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "WebAppAssessmentV2": {
+      "type": "object",
+      "description": "Web app Assessment REST resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebAppAssessmentV2Properties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebAppAssessmentV2ListResult": {
+      "type": "object",
+      "description": "The response of a WebAppAssessmentV2 list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebAppAssessmentV2 items on this page",
+          "items": {
+            "$ref": "#/definitions/WebAppAssessmentV2"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebAppAssessmentV2Properties": {
+      "type": "object",
+      "description": "Web app assessment properties class.",
+      "properties": {
+        "environmentType": {
+          "$ref": "#/definitions/EnvironmentType",
+          "description": "Gets or sets user configurable setting to display the environment type."
+        },
+        "entityUptime": {
+          "$ref": "#/definitions/EntityUptime",
+          "description": "Gets or sets the duration for which the entity (Web app, VMs) are up in the\non-premises environment."
+        },
+        "eaSubscriptionId": {
+          "type": "string",
+          "description": "Gets or sets the Enterprise agreement subscription id."
+        },
+        "appSvcNativeSettings": {
+          "$ref": "#/definitions/AppSvcNativeSettings",
+          "description": "Gets or sets user configurable app service native settings."
+        },
+        "appSvcContainerSettings": {
+          "$ref": "#/definitions/AppSvcContainerSettings",
+          "description": "Gets or sets user configurable app service container database settings."
+        },
+        "discoveredEntityLightSummary": {
+          "$ref": "#/definitions/DiscoveredEntityLightSummary",
+          "description": "Gets or sets user configurable discovered entity settings."
+        },
+        "azureSecurityOfferingType": {
+          "$ref": "#/definitions/AzureSecurityOfferingType",
+          "description": "Gets or sets a value indicating azure security offering type."
+        },
+        "reservedInstance": {
+          "$ref": "#/definitions/AzureReservedInstance",
+          "description": "Reserved instance."
+        },
+        "groupType": {
+          "$ref": "#/definitions/GroupType",
+          "description": "Gets the group type for the assessment."
+        },
+        "assessmentType": {
+          "$ref": "#/definitions/AssessmentType",
+          "description": "Assessment type of the assessment."
+        },
+        "azureLocation": {
+          "type": "string",
+          "description": "Azure Location or Azure region where to which the machines will be migrated."
+        },
+        "azureOfferCode": {
+          "$ref": "#/definitions/AzureOfferCode",
+          "description": "Azure Offer Code."
+        },
+        "currency": {
+          "$ref": "#/definitions/AzureCurrency",
+          "description": "Currency in which prices should be reported."
+        },
+        "scalingFactor": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of buffer that user wants on performance metrics when recommending\nAzure sizes."
+        },
+        "percentile": {
+          "$ref": "#/definitions/Percentile",
+          "description": "Percentile of the utilization data values to be considered while assessing\nmachines."
+        },
+        "timeRange": {
+          "$ref": "#/definitions/TimeRange",
+          "description": "Time Range for which the historic utilization data should be considered for\nassessment."
+        },
+        "perfDataStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the start time to consider performance data for assessment."
+        },
+        "perfDataEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the end time to consider performance data for assessment."
+        },
+        "stage": {
+          "$ref": "#/definitions/AssessmentStage",
+          "description": "User configurable setting to display the Stage of Assessment.",
+          "readOnly": true
+        },
+        "discountPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Custom discount percentage."
+        },
+        "sizingCriterion": {
+          "$ref": "#/definitions/AssessmentSizingCriterion",
+          "description": "Assessment sizing criterion."
+        },
+        "confidenceRatingInPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence Rating in Percentage."
+        },
+        "pricesTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time when rates were queried.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and Time when assessment was created.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and Time when assessment was last updated.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/AssessmentStatus",
+          "description": "Whether assessment is in valid state and all machines have been assessed.",
+          "readOnly": true
+        },
+        "schemaVersion": {
+          "type": "string",
+          "description": "Schema version.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceProperties2"
+        }
+      ]
+    },
+    "WebAppAssessmentV2Summary": {
+      "type": "object",
+      "description": "Web app Assessment REST resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebAppAssessmentV2SummaryProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebAppAssessmentV2SummaryListResult": {
+      "type": "object",
+      "description": "The response of a WebAppAssessmentV2Summary list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebAppAssessmentV2Summary items on this page",
+          "items": {
+            "$ref": "#/definitions/WebAppAssessmentV2Summary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebAppAssessmentV2SummaryProperties": {
+      "type": "object",
+      "description": "Web app Assessment V2 summary properties.",
+      "properties": {
+        "assessmentSummary": {
+          "type": "object",
+          "description": "Gets or sets the discovered entities summary.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DiscoveredEntitiesSummary"
+          },
+          "readOnly": true
+        },
+        "targetSpecificSummary": {
+          "type": "object",
+          "description": "Gets the target specific summary.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TargetSpecificSummary"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "WebAppCollector": {
+      "type": "object",
+      "description": "The web app collector REST object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CollectorPropertiesBaseWithAgent",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebAppCollectorListResult": {
+      "type": "object",
+      "description": "The response of a WebAppCollector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebAppCollector items on this page",
+          "items": {
+            "$ref": "#/definitions/WebAppCollector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebAppMigrationIssues": {
+      "type": "object",
+      "description": "Web app migration issues.",
+      "properties": {
+        "issueId": {
+          "type": "string",
+          "description": "Gets or sets the issue Id."
+        },
+        "issueCategory": {
+          "$ref": "#/definitions/AzureWebAppSuitabilityIssueCategory",
+          "description": "Gets or sets the issue category."
+        },
+        "issueDescriptionList": {
+          "type": "array",
+          "description": "Gets or sets the issue description list.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "issueId",
+        "issueCategory",
+        "issueDescriptionList"
+      ]
+    },
+    "WebAppServicePlanV2": {
+      "type": "object",
+      "description": "Assessed Web app web model class.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebAppServicePlanV2Properties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebAppServicePlanV2ListResult": {
+      "type": "object",
+      "description": "The response of a WebAppServicePlanV2 list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebAppServicePlanV2 items on this page",
+          "items": {
+            "$ref": "#/definitions/WebAppServicePlanV2"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebAppServicePlanV2Properties": {
+      "type": "object",
+      "description": "Assessed Web app database properties web model.",
+      "properties": {
+        "webAppType": {
+          "$ref": "#/definitions/WebAppType",
+          "description": "Gets or sets the web app type.",
+          "readOnly": true
+        },
+        "webAppTargetType": {
+          "$ref": "#/definitions/AzureWebAppTargetType",
+          "description": "Gets or sets the target specific result.",
+          "readOnly": true
+        },
+        "webAppServicePlanName": {
+          "type": "string",
+          "description": "Gets or sets the app service plan name.",
+          "readOnly": true
+        },
+        "numberOfWebApps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the machine name.",
+          "readOnly": true
+        },
+        "monthlyCost": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets the server ARM Id.",
+          "readOnly": true
+        },
+        "storage": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the web server name.",
+          "readOnly": true
+        },
+        "scaleOutInstances": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets web app name.",
+          "readOnly": true
+        },
+        "cores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the discovered web app ID.",
+          "readOnly": true
+        },
+        "ram": {
+          "type": "number",
+          "format": "double",
+          "description": "Machine arm id.",
+          "readOnly": true
+        },
+        "webAppSkuName": {
+          "type": "string",
+          "description": "Confidence Rating in Percentage.",
+          "readOnly": true
+        },
+        "webAppSkuSize": {
+          "type": "string",
+          "description": "Confidence Rating in Percentage.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When was assessed SQL database first created.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When was assessed Web app database last updated.",
+          "readOnly": true
+        },
+        "costComponents": {
+          "type": "array",
+          "description": "Confidence Rating in Percentage.",
+          "items": {
+            "$ref": "#/definitions/CostComponent"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "webAppServicePlanName",
+        "numberOfWebApps"
+      ]
+    },
+    "WebAppSkuDetails": {
+      "type": "object",
+      "description": "Web app discovered entities summary data.",
+      "properties": {
+        "totalMonthlyCost": {
+          "type": "number",
+          "format": "float",
+          "description": "Total monthly cost",
+          "readOnly": true
+        },
+        "monthlySecurityCost": {
+          "type": "number",
+          "format": "float",
+          "description": "Monthly security data",
+          "readOnly": true
+        },
+        "skuName": {
+          "type": "string",
+          "description": "Sku name",
+          "readOnly": true
+        },
+        "skuSize": {
+          "type": "string",
+          "description": "Sku size",
+          "readOnly": true
+        },
+        "appServicePlanCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "App service plan count",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "skuName",
+        "skuSize",
+        "appServicePlanCount"
+      ]
+    },
+    "WebAppTargetOptions": {
+      "type": "object",
+      "description": "Web app target options.",
+      "properties": {
+        "webAppTier": {
+          "$ref": "#/definitions/AzureWebAppTier",
+          "description": "Gets or sets the Azure web app tier."
+        },
+        "targetLocations": {
+          "type": "array",
+          "description": "Gets or sets the target location.",
+          "items": {
+            "$ref": "#/definitions/AzureLocation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "WebAppType": {
+      "type": "string",
+      "description": "Web App Type.",
+      "enum": [
+        "Unknown",
+        "IIS",
+        "Tomcat"
+      ],
+      "x-ms-enum": {
+        "name": "WebAppType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown. Indicates Missing Data."
+          },
+          {
+            "name": "IIS",
+            "value": "IIS",
+            "description": "ASP.NET Web App."
+          },
+          {
+            "name": "Tomcat",
+            "value": "Tomcat",
+            "description": "Java Web App."
+          }
+        ]
+      }
     },
     "WorkloadSummary": {
       "type": "object",
