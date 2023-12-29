@@ -55,6 +55,14 @@ suppressions:
     reason: Pattern restriction will be a breaking change. Update for next stable version. Work item to fix https://microsoft.visualstudio.com/OS/_workitems/edit/47527278
 ```
 
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-12'
+input-file:
+  - Microsoft.DesktopVirtualization/preview/2023-12-25-preview/desktopvirtualization.json
+```
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
