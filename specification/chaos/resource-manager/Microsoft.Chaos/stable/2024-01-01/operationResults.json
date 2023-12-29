@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/operationStatuses/{asyncOperationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/operationResults/{asyncOperationId}": {
       "get": {
         "x-ms-examples": {
           "Get specific operation status": {
-            "$ref": "./examples/GetOperationStatus.json"
+            "$ref": "./examples/GetOperationResult.json"
           }
         },
         "tags": [
           "asyncOperations"
         ],
-        "operationId": "OperationStatuses_Get",
-        "description": "Get the status of a long running azure asynchronous operation.",
+        "operationId": "OperationResults_Get",
+        "description": "Get the result of a long running azure asynchronous operation.",
         "parameters": [
           {
             "name": "location",
@@ -70,53 +70,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Operation status.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
+            "description": "OK status code response."
           },
           "default": {
-            "description": "Error response returned if request was unsuccessful.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
+            "description": "Error status code returned if request was unsuccessful."
           }
         }
       }
     }
   },
-  "definitions": {
-    "OperationStatus": {
-      "description": "The status of operation.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-        }
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The operation Id."
-        },
-        "name": {
-          "type": "string",
-          "description": "The operation name."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "The end time of the operation."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the operation."
-        }
-      }
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }
