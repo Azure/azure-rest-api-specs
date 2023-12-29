@@ -677,7 +677,8 @@
           "description": "Type of the dataset.",
           "type": "string",
           "enum": [
-            "StaticDataset"
+            "StaticDataset",
+            "MetricDataset"
           ],
           "x-ms-enum": {
             "name": "datasetType",
@@ -720,6 +721,19 @@
           "$ref": "#/definitions/Dataset"
         }
       ]
+    },
+    "MetricDataset": {
+      "description": "Metric Dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "metricColumn": {
+        "description": "metric column.",
+        "$ref": "#/definitions/ColumnDetail"
+      }
     },
     "ColumnDetail": {
       "description": "Detail of the dataset column.",
