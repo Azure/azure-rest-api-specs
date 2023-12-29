@@ -13,6 +13,14 @@ using Azure.Core.Traits;
 @service({
   title: "Azure.AI.DocumentTranslation",
 })
+@server(
+  "{Endpoint}",
+  "Document Translation Endpoint",
+  {
+    /** Supported document Translation endpoints (protocol and hostname, for example: https://{TranslatorResourceName}.cognitiveservices.azure.com/translator). */
+    Endpoint: url,
+  }
+)
 @versioned(DocumentTranslation.Versions)
 namespace DocumentTranslation;
 
