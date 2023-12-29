@@ -558,10 +558,7 @@
           "$ref": "#/definitions/Ipv4Address",
           "description": "The Ipv4 address"
         }
-      },
-      "required": [
-        "ipv4Address"
-      ]
+      }
     },
     "Ipv6Address": {
       "type": "object",
@@ -590,10 +587,7 @@
           "$ref": "#/definitions/Ipv6Address",
           "description": "The Ipv6 address"
         }
-      },
-      "required": [
-        "ipv6Address"
-      ]
+      }
     },
     "LocationDevice": {
       "type": "object",
@@ -616,11 +610,7 @@
           "$ref": "#/definitions/Ipv6Address",
           "description": "The Ipv6 address"
         }
-      },
-      "required": [
-        "ipv4Address",
-        "ipv6Address"
-      ]
+      }
     },
     "LocationEndpoint": {
       "type": "object",
@@ -969,6 +959,11 @@
       "type": "object",
       "description": "Request to verify SimSwap in period",
       "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
+          "pattern": "^\\+?[0-9]{5,15}$"
+        },
         "maxAgeHours": {
           "type": "integer",
           "format": "int32",

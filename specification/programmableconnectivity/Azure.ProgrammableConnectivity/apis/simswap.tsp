@@ -57,6 +57,8 @@ model SimSwapRetrieveRequest {
 
 @doc("Request to verify SimSwap in period")
 model SimSwapVerifyRequest {
+  ...SimSwapDevice;
+
   @doc("Maximum lookback for SimSwap verification")
   @minValue(1)
   @maxValue(2400)
