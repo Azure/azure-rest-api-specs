@@ -925,6 +925,14 @@
           },
           "readOnly": true,
           "type": "array"
+        },
+        "subTechniques": {
+          "description": "The sub-techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
         }
       },
       "required": [
@@ -1043,6 +1051,14 @@
         },
         "techniques": {
           "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "subTechniques": {
+          "description": "The sub-techniques of the alert rule",
           "items": {
             "type": "string"
           },
@@ -1250,6 +1266,13 @@
           },
           "type": "array"
         },
+        "subTechniques": {
+          "description": "The sub-techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "sourceSettings": {
           "description": "All supported source signal configurations consumed in fusion detection.",
           "items": {
@@ -1387,6 +1410,14 @@
         },
         "techniques": {
           "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "subTechniques": {
+          "description": "The sub-techniques of the alert rule",
           "items": {
             "type": "string"
           },
@@ -1600,6 +1631,9 @@
           "type": "array"
         }
       },
+      "required": [
+        "productFilter"
+      ],
       "type": "object",
       "x-ms-client-flatten": true
     },
@@ -1660,6 +1694,13 @@
           },
           "type": "array"
         },
+        "subTechniques": {
+          "description": "The sub-techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "incidentConfiguration": {
           "$ref": "#/definitions/IncidentConfiguration",
           "description": "The settings of the incidents that created from alerts triggered by this analytics rule"
@@ -1708,6 +1749,13 @@
         },
         "techniques": {
           "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "subTechniques": {
+          "description": "The sub-techniques of the alert rule",
           "items": {
             "type": "string"
           },
@@ -1858,6 +1906,13 @@
         },
         "techniques": {
           "description": "The techniques of the alert rule",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "subTechniques": {
+          "description": "The sub-techniques of the alert rule",
           "items": {
             "type": "string"
           },
@@ -2493,7 +2548,8 @@
         "ProviderName",
         "ProductComponentName",
         "RemediationSteps",
-        "Techniques"
+        "Techniques",
+        "SubTechniques"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2535,6 +2591,10 @@
           {
             "description": "Techniques alert property",
             "value": "Techniques"
+          },
+          {
+            "description": "SubTechniques alert property",
+            "value": "SubTechniques"
           }
         ]
       }
