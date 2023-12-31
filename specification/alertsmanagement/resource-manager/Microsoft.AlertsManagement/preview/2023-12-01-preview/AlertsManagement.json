@@ -1010,6 +1010,10 @@
           "type": "string",
           "description": "Unique Id (GUID) of the alert that this alert was correlated to.",
           "readOnly": true
+        },
+        "correlationTime": {
+          "description": "The alert's correlation time in ISO-8601 format. This is an optional field, it will not be presented for a parent alert.",
+          "readOnly": true
         }
       }
     },
@@ -1168,7 +1172,7 @@
         },
         "hasEnrichments": {
           "type": "boolean",
-          "description": "True if the alert has enrichment, and false if it doesn't.",
+          "description": "True if the alert has at least one enrichment, and false if it doesn't.",
           "readOnly": true
         },
         "isStatefulAlert": {
