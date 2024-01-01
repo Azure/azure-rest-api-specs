@@ -1,0 +1,1392 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft NetApp Dev",
+    "description": "Microsoft NetApp Azure Resource Provider Dev specification",
+    "version": "2024-01-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "AzureNetAppFilesManagementClient-preview"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.NetApp/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Describes the Resource Provider",
+        "description": "Lists all of the available Microsoft.NetApp Rest API operations",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "examples/OperationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/volumeGroups": {
+      "get": {
+        "summary": "Describe all volume groups",
+        "description": "List all volume groups for given account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Volume Groups"
+        ],
+        "operationId": "VolumeGroups_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volumeGroupList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "VolumeGroups_List_SapHana": {
+            "$ref": "examples/VolumeGroups_List_SapHana.json"
+          },
+          "VolumeGroups_List_Oracle": {
+            "$ref": "examples/VolumeGroups_List_Oracle.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/volumeGroups/{volumeGroupName}": {
+      "get": {
+        "summary": "Describe a Volume Group",
+        "description": "Get details of the specified volume group",
+        "tags": [
+          "Volume Groups"
+        ],
+        "operationId": "VolumeGroups_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volumeGroupDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "VolumeGroups_Get_SapHana": {
+            "$ref": "examples/VolumeGroups_Get_SapHana.json"
+          },
+          "VolumeGroups_Get_Oracle": {
+            "$ref": "examples/VolumeGroups_Get_Oracle.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Volume Groups"
+        ],
+        "operationId": "VolumeGroups_Create",
+        "summary": "Create the specified volume group and volumes. Creating volume group will create all the volumes specified in request body implicitly. Once volumes are created using volume group, those will be treated as regular volumes thereafter.",
+        "description": "Create a volume group along with specified volumes",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Volume Group object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/volumeGroupDetails"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Volume group created",
+            "schema": {
+              "$ref": "#/definitions/volumeGroupDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VolumeGroups_Create_SapHana": {
+            "$ref": "examples/VolumeGroups_Create_SapHana.json"
+          },
+          "VolumeGroups_Create_Oracle": {
+            "$ref": "examples/VolumeGroups_Create_Oracle.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Volume Groups"
+        ],
+        "operationId": "VolumeGroups_Delete",
+        "summary": "Delete a volume group",
+        "description": "Delete the specified volume group only if there are no volumes under volume group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously"
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VolumeGroups_Delete": {
+            "$ref": "examples/VolumeGroups_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/UpdateAVSDataStoreInfo": {
+      "post": {
+        "tags": [
+          "AVS datastore"
+        ],
+        "summary": "Update AVS datastore info",
+        "description": "Update AVS datastore info",
+        "operationId": "Volumes_UpdateAVSDataStoreInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "body to update AVS Datastore information.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateAVSDataStoreRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - terminal state"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed"
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_UpdateAVSDataStoreRequest": {
+            "$ref": "examples/Volumes_UpdateAVSDataStoreRequest.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "description": "Result of the request to list Cloud Volume operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "List of Storage operations supported by the Storage resource provider."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Microsoft.NetApp REST API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft NetApp.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Operation description.",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of operations."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of operation, include metric specifications.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of operation, include metric specifications.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "One property of operation, include metric specifications.",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Metric specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "logSpecifications": {
+          "description": "Log specification of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Metric specification of operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit could be Bytes or Count."
+        },
+        "supportedAggregationTypes": {
+          "description": "Support metric aggregation type.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "enum": [
+              "Average"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MetricAggregationType",
+              "modelAsString": true
+            }
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "The supported time grain types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "The internal metric name."
+        },
+        "enableRegionalMdmAccount": {
+          "description": "Whether or not the service is using regional MDM accounts.",
+          "type": "boolean"
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account."
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace."
+        },
+        "dimensions": {
+          "description": "Dimensions of blobs, including blob type and access tier.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type could be Average."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "The property to decide fill gap with zero or not."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category this metric specification belong to, could be Capacity."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "Account Resource Id."
+        },
+        "isInternal": {
+          "description": "Whether the metric is internal.",
+          "type": "boolean"
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Log Definition of a single resource metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of log specification.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of log specification.",
+          "type": "string"
+        }
+      }
+    },
+    "Dimension": {
+      "description": "Dimension of blobs, possibly be blob type or access tier.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
+        }
+      }
+    },
+    "updateAVSDataStoreRequest": {
+      "description": "Update AVS data Datastore request",
+      "type": "object",
+      "required": [
+        "dataStoreResourceId",
+        "setDataStoreInfo"
+      ],
+      "properties": {
+        "dataStoreResourceId": {
+          "type": "string",
+          "description": "Data store resource unique identifier"
+        },
+        "setDataStoreInfo": {
+          "type": "boolean",
+          "description": "Flag to set or reset DataStoreResourceId",
+          "example": false
+        }
+      }
+    },
+    "volumeGroupList": {
+      "description": "List of volume group resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of volume Groups",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/volumeGroup"
+          }
+        }
+      }
+    },
+    "volumeGroup": {
+      "description": "Volume group resource",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "properties": {
+          "description": "Volume group properties",
+          "$ref": "#/definitions/volumeGroupListProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "volumeGroupDetails": {
+      "description": "Volume group resource for create",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "properties": {
+          "description": "Volume group properties",
+          "$ref": "#/definitions/volumeGroupProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "volumeGroupMetaData": {
+      "description": "Volume group properties",
+      "type": "object",
+      "properties": {
+        "groupDescription": {
+          "type": "string",
+          "description": "Group Description",
+          "example": "group description"
+        },
+        "applicationType": {
+          "type": "string",
+          "description": "Application Type",
+          "enum": [
+            "SAP-HANA",
+            "ORACLE"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": true
+          },
+          "example": "SAP-HANA"
+        },
+        "applicationIdentifier": {
+          "type": "string",
+          "description": "Application specific identifier",
+          "example": "SH1"
+        },
+        "globalPlacementRules": {
+          "title": "Global volume placement rules",
+          "description": "Application specific placement rules for the volume group",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/placementKeyValuePairs"
+          }
+        },
+        "volumesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of volumes in volume group",
+          "example": 5,
+          "readOnly": true
+        }
+      }
+    },
+    "volumeGroupProperties": {
+      "description": "Volume group properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Azure lifecycle management",
+          "example": "Available",
+          "readOnly": true
+        },
+        "groupMetaData": {
+          "title": "groupMetaData",
+          "description": "Volume group details",
+          "type": "object",
+          "$ref": "#/definitions/volumeGroupMetaData"
+        },
+        "volumes": {
+          "description": "List of volumes from group",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/volumeGroupVolumeProperties"
+          }
+        }
+      }
+    },
+    "volumeGroupListProperties": {
+      "description": "Volume group properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Azure lifecycle management",
+          "example": "Available",
+          "readOnly": true
+        },
+        "groupMetaData": {
+          "title": "groupMetaData",
+          "description": "Volume group details",
+          "type": "object",
+          "$ref": "#/definitions/volumeGroupMetaData"
+        }
+      }
+    },
+    "volumeGroupVolumeProperties": {
+      "description": "Volume resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "zones": {
+          "type": "array",
+          "description": "Availability Zone",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "items": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "example": "1"
+          }
+        },
+        "properties": {
+          "description": "Volume properties",
+          "$ref": "#/definitions/volumeProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "placementKeyValuePairs": {
+      "description": "Application specific parameters for the placement of volumes in the volume group",
+      "type": "object",
+      "required": [
+        "key",
+        "value"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key for an application specific parameter for the placement of volumes in the volume group",
+          "example": "key1"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value for an application specific parameter for the placement of volumes in the volume group",
+          "example": "value1"
+        }
+      }
+    },
+    "volumeProperties": {
+      "description": "Volume properties",
+      "type": "object",
+      "required": [
+        "creationToken",
+        "usageThreshold",
+        "subnetId"
+      ],
+      "properties": {
+        "fileSystemId": {
+          "title": "FileSystem ID",
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique FileSystem Identifier.",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
+        },
+        "creationToken": {
+          "title": "Creation Token or File Path",
+          "type": "string",
+          "description": "A unique file path for the volume. Used when creating mount targets",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$",
+          "minLength": 1,
+          "maxLength": 80,
+          "example": "some-amazing-filepath"
+        },
+        "serviceLevel": {
+          "title": "serviceLevel",
+          "type": "string",
+          "description": "The service level of the file system",
+          "enum": [
+            "Standard",
+            "Premium",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard service level"
+              },
+              {
+                "value": "Premium",
+                "description": "Premium service level"
+              },
+              {
+                "value": "Ultra",
+                "description": "Ultra service level"
+              }
+            ]
+          },
+          "example": "Ultra",
+          "default": "Premium"
+        },
+        "usageThreshold": {
+          "title": "usageThreshold",
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
+          "minimum": 53687091200,
+          "maximum": 2638827906662400,
+          "default": 107374182400,
+          "example": 107374182400
+        },
+        "exportPolicy": {
+          "title": "exportPolicy",
+          "description": "Set of export policy rules",
+          "properties": {
+            "rules": {
+              "title": "Export policy rule",
+              "description": "Export policy rule",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/exportPolicyRule"
+              }
+            }
+          }
+        },
+        "protocolTypes": {
+          "title": "protocolTypes",
+          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "NFSv4.1"
+          ]
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
+        },
+        "snapshotId": {
+          "title": "Snapshot ID",
+          "type": "string",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "create"
+          ],
+          "description": "UUID v4 or resource identifier used to identify the Snapshot.",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "backupId": {
+          "title": "Backup ID",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "description": "UUID v4 or resource identifier used to identify the Backup.",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "baremetalTenantId": {
+          "title": "Baremetal Tenant ID",
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique Baremetal Tenant Identifier.",
+          "example": "9560acf5-4e3a-12e7-9bdb-02007cca7779"
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
+        },
+        "mountTargets": {
+          "title": "mountTargets",
+          "type": "array",
+          "readOnly": true,
+          "description": "List of mount targets",
+          "items": {
+            "$ref": "#/definitions/mountTargetProperties"
+          }
+        },
+        "volumeType": {
+          "type": "string",
+          "description": "What type of volume is this",
+          "example": "DataProtection"
+        },
+        "dataProtection": {
+          "title": "DataProtection",
+          "description": "DataProtection type volumes include an object containing details of the replication",
+          "properties": {
+            "backup": {
+              "title": "Backup",
+              "description": "Backup Properties",
+              "type": "object",
+              "$ref": "#/definitions/volumeBackupProperties"
+            },
+            "replication": {
+              "title": "Replication",
+              "description": "Replication properties",
+              "type": "object",
+              "$ref": "#/definitions/replicationObject"
+            },
+            "snapshot": {
+              "title": "Snapshot",
+              "description": "Snapshot properties.",
+              "$ref": "#/definitions/volumeSnapshotProperties"
+            }
+          }
+        },
+        "isRestoring": {
+          "type": "boolean",
+          "description": "Restoring"
+        },
+        "snapshotDirectoryVisible": {
+          "type": "boolean",
+          "default": true,
+          "description": "If enabled (true) the volume will contain a read-only snapshot directory which provides access to each of the volume's snapshots (default to true)."
+        },
+        "kerberosEnabled": {
+          "type": "boolean",
+          "description": "Describe if a volume is KerberosEnabled. To be use with swagger version 2020-05-01 or later",
+          "example": false,
+          "default": false
+        },
+        "securityStyle": {
+          "type": "string",
+          "description": "The security style of volume, default unix, defaults to ntfs for dual protocol or CIFS protocol",
+          "default": "unix",
+          "enum": [
+            "ntfs",
+            "unix"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityStyle",
+            "modelAsString": true
+          }
+        },
+        "smbEncryption": {
+          "type": "boolean",
+          "description": "Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol volume. To be used with swagger version 2020-08-01 or later",
+          "example": false,
+          "default": false
+        },
+        "smbContinuouslyAvailable": {
+          "type": "boolean",
+          "description": "Enables continuously available share property for smb volume. Only applicable for SMB volume",
+          "example": false,
+          "default": false
+        },
+        "smbAccessBasedEnumeration": {
+          "title": "smbAccessBasedEnumeration",
+          "type": "string",
+          "description": "Enables access based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "smbAccessBasedEnumeration",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "smbAccessBasedEnumeration share setting is enabled"
+              },
+              {
+                "value": "Disabled",
+                "description": "smbAccessBasedEnumeration share setting is disabled"
+              }
+            ]
+          },
+          "example": "Enabled",
+          "default": "Disabled"
+        },
+        "throughputMibps": {
+          "title": "Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume",
+          "type": "number",
+          "example": 128.223
+        },
+        "actualThroughputMibps": {
+          "type": "number",
+          "description": "Actual throughput in MiB/s for auto qosType volumes calculated based on size and serviceLevel",
+          "example": 164.221,
+          "readOnly": true
+        },
+        "encryptionKeySource": {
+          "description": "Encryption Key Source. Possible values are: 'Microsoft.NetApp'",
+          "type": "string"
+        },
+        "ldapEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether LDAP is enabled or not for a given NFS volume.",
+          "example": false,
+          "default": false
+        },
+        "volumeGroupName": {
+          "type": "string",
+          "description": "Volume Group Name",
+          "readOnly": true
+        },
+        "capacityPoolResourceId": {
+          "type": "string",
+          "description": "Pool Resource Id used in case of creating a volume through volume group"
+        },
+        "proximityPlacementGroup": {
+          "type": "string",
+          "description": "Proximity placement group associated with the volume",
+          "example": "/subscriptions/aaaaaaaa-1234-1234-1224-234567891011/resourceGroups/testGroup/providers/Microsoft.Compute/proximityPlacementGroups/testppg"
+        },
+        "t2Network": {
+          "type": "string",
+          "description": "T2 network information",
+          "example": "Test-T2-Alias",
+          "readOnly": true
+        },
+        "volumeSpecName": {
+          "type": "string",
+          "description": "Volume spec name is the application specific designation or identifier for the particular volume in a volume group for e.g. data, log",
+          "example": "Data"
+        },
+        "provisionedAvailabilityZone": {
+          "title": "Provisioned Availability Zone",
+          "type": "string",
+          "readOnly": true,
+          "description": "The availability zone where the volume is provisioned. This refers to the logical availability zone where the volume resides.",
+          "example": "2",
+          "x-nullable": true
+        },
+        "isLargeVolume": {
+          "title": "Is Large Volume",
+          "type": "boolean",
+          "description": "Specifies whether volume is a Large Volume or Regular Volume.",
+          "example": false,
+          "default": false
+        }
+      }
+    },
+    "resourceTags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Tags are a list of key-value pairs that describe the resource"
+    },
+    "exportPolicyRule": {
+      "description": "Volume Export Policy Rule",
+      "type": "object",
+      "properties": {
+        "ruleIndex": {
+          "type": "integer",
+          "description": "Order index",
+          "format": "int32"
+        },
+        "unixReadOnly": {
+          "type": "boolean",
+          "description": "Read only access"
+        },
+        "unixReadWrite": {
+          "type": "boolean",
+          "description": "Read and write access"
+        },
+        "kerberos5ReadOnly": {
+          "type": "boolean",
+          "description": "Kerberos5 Read only access. To be use with swagger version 2020-05-01 or later",
+          "example": false,
+          "default": false
+        },
+        "kerberos5ReadWrite": {
+          "type": "boolean",
+          "description": "Kerberos5 Read and write access. To be use with swagger version 2020-05-01 or later",
+          "example": true,
+          "default": false
+        },
+        "kerberos5iReadOnly": {
+          "type": "boolean",
+          "description": "Kerberos5i Read only access. To be use with swagger version 2020-05-01 or later",
+          "example": false,
+          "default": false
+        },
+        "kerberos5iReadWrite": {
+          "type": "boolean",
+          "description": "Kerberos5i Read and write access. To be use with swagger version 2020-05-01 or later",
+          "example": true,
+          "default": false
+        },
+        "kerberos5pReadOnly": {
+          "type": "boolean",
+          "description": "Kerberos5p Read only access. To be use with swagger version 2020-05-01 or later",
+          "example": false,
+          "default": false
+        },
+        "kerberos5pReadWrite": {
+          "type": "boolean",
+          "description": "Kerberos5p Read and write access. To be use with swagger version 2020-05-01 or later",
+          "example": true,
+          "default": false
+        },
+        "cifs": {
+          "type": "boolean",
+          "description": "Allows CIFS protocol"
+        },
+        "nfsv3": {
+          "type": "boolean",
+          "description": "Allows NFSv3 protocol. Enable only for NFSv3 type volumes"
+        },
+        "nfsv41": {
+          "type": "boolean",
+          "description": "Allows NFSv4.1 protocol. Enable only for NFSv4.1 type volumes"
+        },
+        "allowedClients": {
+          "type": "string",
+          "description": "Client ingress specification as comma separated string with IPv4 CIDRs, IPv4 host addresses and host names"
+        },
+        "hasRootAccess": {
+          "type": "boolean",
+          "description": "Has root access to volume",
+          "example": true,
+          "default": true
+        }
+      }
+    },
+    "mountTargetProperties": {
+      "description": "Mount target properties",
+      "type": "object",
+      "required": [
+        "fileSystemId"
+      ],
+      "properties": {
+        "mountTargetId": {
+          "title": "mountTargetId",
+          "type": "string",
+          "readOnly": true,
+          "description": "UUID v4 used to identify the MountTarget",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "fileSystemId": {
+          "title": "fileSystemId",
+          "type": "string",
+          "description": "UUID v4 used to identify the MountTarget",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "ipAddress": {
+          "title": "ipAddress",
+          "description": "The mount target's IPv4 address",
+          "type": "string",
+          "readOnly": true,
+          "example": "1.2.3.4"
+        },
+        "smbServerFqdn": {
+          "title": "smbServerFQDN",
+          "description": "The SMB server's Fully Qualified Domain Name, FQDN",
+          "type": "string",
+          "example": "fullyqualified.domainname.com"
+        }
+      }
+    },
+    "volumeBackupProperties": {
+      "description": "Volume Backup Properties",
+      "type": "object",
+      "properties": {
+        "backupPolicyId": {
+          "type": "string",
+          "description": "Backup Policy Resource ID"
+        },
+        "policyEnforced": {
+          "type": "boolean",
+          "description": "Policy Enforced"
+        },
+        "backupEnabled": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Backup Enabled"
+        }
+      }
+    },
+    "replicationObject": {
+      "description": "Replication properties",
+      "type": "object",
+      "required": [
+        "replicationSchedule",
+        "remoteVolumeResourceId"
+      ],
+      "properties": {
+        "replicationId": {
+          "type": "string",
+          "description": "Id"
+        },
+        "endpointType": {
+          "type": "string",
+          "description": "Indicates whether the local volume is the source or destination for the Volume Replication",
+          "enum": [
+            "src",
+            "dst"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointType",
+            "modelAsString": true
+          }
+        },
+        "replicationSchedule": {
+          "type": "string",
+          "description": "Schedule",
+          "enum": [
+            "_10minutely",
+            "hourly",
+            "daily"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationSchedule",
+            "modelAsString": true
+          }
+        },
+        "remoteVolumeResourceId": {
+          "type": "string",
+          "description": "The resource ID of the remote volume.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "remotePath": {
+          "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
+          "type": "object",
+          "$ref": "#/definitions/remotePath",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "remoteVolumeRegion": {
+          "type": "string",
+          "description": "The remote region for the other end of the Volume Replication."
+        }
+      }
+    },
+    "remotePath": {
+      "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
+      "type": "object",
+      "required": [
+        "externalHostName",
+        "serverName",
+        "volumeName"
+      ],
+      "properties": {
+        "externalHostName": {
+          "type": "string",
+          "description": "The Path to a ONTAP Host"
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The name of a server on the ONTAP Host"
+        },
+        "volumeName": {
+          "type": "string",
+          "description": "The name of a volume on the server"
+        }
+      }
+    },
+    "volumeSnapshotProperties": {
+      "description": "Volume Snapshot Properties",
+      "type": "object",
+      "properties": {
+        "snapshotPolicyId": {
+          "type": "string",
+          "description": "Snapshot Policy ResourceId"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "location": {
+      "name": "location",
+      "description": "The location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroup": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "AccountName": {
+      "name": "accountName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The name of the NetApp account",
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeGroupName": {
+      "name": "volumeGroupName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The name of the volumeGroup",
+      "x-ms-parameter-location": "method"
+    },
+    "PoolName": {
+      "name": "poolName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The name of the capacity pool",
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeName": {
+      "name": "volumeName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The name of the volume",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "description": "Version of the API to be used with the client request.",
+      "in": "query",
+      "type": "string",
+      "required": true,
+      "default": "2024-01-01-preview"
+    }
+  }
+}
