@@ -1013,6 +1013,8 @@
         },
         "correlationTime": {
           "description": "The alert's correlation time in ISO-8601 format. This is an optional field, it will not be presented for a parent alert.",
+          "type": "string",
+          "format": "date-time",
           "readOnly": true
         }
       }
@@ -1177,7 +1179,7 @@
         },
         "isStatefulAlert": {
           "type": "boolean",
-          "description": "True if the alert is stateful, and false if it doesn't.",
+          "description": "True if the alert is stateful, and false if it isn't.",
           "readOnly": true
         },
         "correlationDetails": {
