@@ -129,6 +129,14 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 The use of `Record<unkown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the swagger generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations (in `readme.md`).
 
+### `RequestBodyMustExistForPutPatch`
+
+We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/641.  Until fixed, spec authors should **not** suppress the violations in `readme.md`, but rather have label `Approved-LintDiff` applied to their PR to ignore the errors.
+
+### `PatchPropertiesCorrespondToPutProperties`
+
+We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/642.  Until fixed, spec authors should **not** suppress the violations in `readme.md`, but rather have label `Approved-LintDiff` applied to their PR to ignore the errors.
+
 ## Avocado
 
 ### Get help fixing Avocado validation failures
