@@ -423,7 +423,7 @@
   "definitions": {
     "EventSubscriptions": {
       "type": "object",
-      "description": "Tracked Scope Properties defines the properties needed to ",
+      "description": "Event Subscriptions defines the properties needed to create an event subscription.",
       "properties": {
         "scope": {
           "type": "string",
@@ -438,14 +438,12 @@
         },
         "callBackUrl": {
           "type": "string",
-          "description": "The URL to which the Nexus Identity Service will send notifications.",
-          "readOnly": true
+          "description": "The URL to which the Nexus Identity Service will send notifications."
         }
       },
       "required": [
         "scope",
-        "roles",
-        "callBackUrl"
+        "roles"
       ]
     },
     "IdentitySetResource": {
@@ -522,10 +520,7 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
+          "readOnly": true
         }
       },
       "required": [
@@ -572,14 +567,6 @@
         "defaultCallBackUrl": {
           "type": "string",
           "description": "The URL to which the Nexus Identity Service will send notifications."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
         }
       }
     },

@@ -58,19 +58,18 @@ model IdentitySetResourceProperties {
   @visibility("read")
   appName: string;
   @doc("The status of the last operation.")
-  @visibility("read","update")
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("Tracked Scope Properties defines the properties needed to ")
+@doc("Event Subscriptions defines the properties needed to create an event subscription.")
 model EventSubscriptions {
   @doc("Scope on which roles are to be watched. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'")
   scope: string;
   @doc("Roles to be watched.")
   roles: Array<NexusIdentityRoles>;
   @doc("The URL to which the Nexus Identity Service will send notifications.")
-  @visibility("read")
-  callBackUrl: string;
+  callBackUrl?: string;
 }
 
 @doc("Role defined for Nexus Identity Service")
