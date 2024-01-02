@@ -145,7 +145,7 @@ interface DevBoxesOperations {
 
 @put
 @route("projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
-CreateDevBox(@body devBox: DevBox): DevBox;
+CreateDevBox(@path projectName: DevBox.projectName, @path userId: DevBox.userId, @path devBoxName: DevBox.devBoxName, @body devBox: DevBox) : DevBox;
 
   // @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   // @put
