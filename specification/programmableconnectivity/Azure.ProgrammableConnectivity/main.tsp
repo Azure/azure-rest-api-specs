@@ -13,7 +13,7 @@ using Azure.Core;
       {
         type: OAuth2FlowType.implicit,
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-        scopes: ["https://management.azure.com/.default"],
+        scopes: ["https://management.azure.com//.default"],
       }
     ]>
   ]
