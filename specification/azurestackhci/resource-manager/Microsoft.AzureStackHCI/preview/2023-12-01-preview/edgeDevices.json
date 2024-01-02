@@ -339,6 +339,14 @@
           },
           "x-ms-identifiers": []
         },
+        "bootType": {
+          "type": "string",
+          "description": "Specifies the boot type of the machine."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Specifies the mode of creation of the edge devices."
+        },
         "sbeDeploymentPackageInfo": {
           "$ref": "#/definitions/SbeDeploymentPackageInfo",
           "description": "SBE deployment package information.",
@@ -463,6 +471,10 @@
         "defaultIsolationId": {
           "type": "string",
           "description": "Default Isolation of Management NIC"
+        },
+        "switchName":{
+          "type": "string",
+          "description": "The switch attached to the NIC, if any"
         }
       },
       "required": [
