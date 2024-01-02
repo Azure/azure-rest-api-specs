@@ -421,6 +421,33 @@
     }
   },
   "definitions": {
+    "EventSubscriptions": {
+      "type": "object",
+      "description": "Tracked Scope Properties defines the properties needed to ",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "Scope on which roles are to be watched. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'"
+        },
+        "roles": {
+          "type": "array",
+          "description": "Roles to be watched.",
+          "items": {
+            "$ref": "#/definitions/NexusIdentityRoles"
+          }
+        },
+        "callBackUrl": {
+          "type": "string",
+          "description": "The URL to which the Nexus Identity Service will send notifications.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "scope",
+        "roles",
+        "callBackUrl"
+      ]
+    },
     "IdentitySetResource": {
       "type": "object",
       "description": "Identity Set resource definition",
@@ -464,33 +491,49 @@
     },
     "IdentitySetResourceProperties": {
       "type": "object",
-      "description": "Identity Set Properties defines the properties of the Idenity Set.",
+      "description": "Identity Set Properties defines the properties of the Identity Set.",
       "properties": {
         "tenant": {
           "type": "string",
           "description": "Tenant id in which scope is created."
         },
-        "scopes": {
+        "eventSubscriptions": {
           "type": "array",
           "description": "List of scopes to be watched",
           "items": {
-            "$ref": "#/definitions/ScopeProperties"
+            "$ref": "#/definitions/EventSubscriptions"
           },
           "x-ms-identifiers": []
         },
-        "callBackUrl": {
+        "defaultCallBackUrl": {
           "type": "string",
           "description": "The URL to which the Nexus Identity Service will send notifications."
         },
+        "appId": {
+          "type": "string",
+          "description": "The application Id of Identity Set resource",
+          "readOnly": true
+        },
+        "appName": {
+          "type": "string",
+          "description": "The application name of Identity Set resource",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
+          "description": "The status of the last operation.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       },
       "required": [
         "tenant",
-        "scopes",
-        "callBackUrl"
+        "eventSubscriptions",
+        "defaultCallBackUrl",
+        "appId",
+        "appName"
       ]
     },
     "IdentitySetResourceUpdate": {
@@ -518,21 +561,25 @@
           "type": "string",
           "description": "Tenant id in which scope is created."
         },
-        "scopes": {
+        "eventSubscriptions": {
           "type": "array",
           "description": "List of scopes to be watched",
           "items": {
-            "$ref": "#/definitions/ScopeProperties"
+            "$ref": "#/definitions/EventSubscriptions"
           },
           "x-ms-identifiers": []
         },
-        "callBackUrl": {
+        "defaultCallBackUrl": {
           "type": "string",
           "description": "The URL to which the Nexus Identity Service will send notifications."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
+          "description": "The status of the last operation.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       }
     },
@@ -619,27 +666,6 @@
           }
         ]
       }
-    },
-    "ScopeProperties": {
-      "type": "object",
-      "description": "Tracked Scope Properties defines the properties needed to ",
-      "properties": {
-        "scope": {
-          "type": "string",
-          "description": "Scope on which roles are to be watched."
-        },
-        "roles": {
-          "type": "array",
-          "description": "Roles to be watched.",
-          "items": {
-            "$ref": "#/definitions/NexusIdentityRoles"
-          }
-        }
-      },
-      "required": [
-        "scope",
-        "roles"
-      ]
     },
     "Versions": {
       "type": "string",

@@ -43,24 +43,34 @@ enum ProvisioningState {
   Accepted,
 }
 
-@doc("Identity Set Properties defines the properties of the Idenity Set.")
+@doc("Identity Set Properties defines the properties of the Identity Set.")
 model IdentitySetResourceProperties {
   @doc("Tenant id in which scope is created.")
   tenant: string;
   @doc("List of scopes to be watched")
-  scopes: Array<ScopeProperties>;
+  eventSubscriptions: Array<EventSubscriptions>;
   @doc("The URL to which the Nexus Identity Service will send notifications.")
-  callBackUrl: string;
+  defaultCallBackUrl: string;
+  @doc("The application Id of Identity Set resource")
+  @visibility("read")
+  appId: string;
+  @doc("The application name of Identity Set resource")
+  @visibility("read")
+  appName: string;
   @doc("The status of the last operation.")
+  @visibility("read","update")
   provisioningState?: ProvisioningState;
 }
 
 @doc("Tracked Scope Properties defines the properties needed to ")
-model ScopeProperties {
-  @doc("Scope on which roles are to be watched.")
+model EventSubscriptions {
+  @doc("Scope on which roles are to be watched. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'")
   scope: string;
   @doc("Roles to be watched.")
   roles: Array<NexusIdentityRoles>;
+  @doc("The URL to which the Nexus Identity Service will send notifications.")
+  @visibility("read")
+  callBackUrl: string;
 }
 
 @doc("Role defined for Nexus Identity Service")
