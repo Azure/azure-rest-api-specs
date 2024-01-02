@@ -3055,8 +3055,7 @@
         },
         "hub": {
           "description": "Setting for diagnosing the hub",
-          "type": "object",
-          "additionalProperties": {}
+          "type": "object"
         },
         "keyVault": {
           "description": "Setting for diagnosing dependent key vault",
@@ -3757,23 +3756,6 @@
         "status": {
           "description": "Status of the Provisioning for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/ManagedNetworkProvisionStatus"
-        }
-      }
-    },
-    "ManagedNetworkSettingsEx": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManagedNetworkSettings"
-        }
-      ],
-      "properties": {
-        "changeableIsolationModes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IsolationMode"
-          },
-          "readOnly": true
         }
       }
     },
@@ -4941,7 +4923,7 @@
           }
         },
         "managedNetwork": {
-          "$ref": "#/definitions/ManagedNetworkSettingsEx"
+          "$ref": "#/definitions/ManagedNetworkSettings"
         },
         "mlFlowTrackingUri": {
           "description": "The URI associated with this workspace that machine learning flow must point at to set up tracking.",
@@ -5123,7 +5105,7 @@
           }
         },
         "managedNetwork": {
-          "$ref": "#/definitions/ManagedNetworkSettingsEx"
+          "$ref": "#/definitions/ManagedNetworkSettings"
         },
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
