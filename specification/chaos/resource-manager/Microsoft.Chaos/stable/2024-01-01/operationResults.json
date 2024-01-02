@@ -73,10 +73,12 @@
             "description": "Async operation was completed successfully."
           },
           "202": {
-            "description": "Async operation is still ongoing."
-          },
-          "500": {
-            "description": "Async operation failed."
+            "description": "Async operation is still ongoing.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response returned if request was unsuccessful.",
