@@ -678,8 +678,9 @@ example. qualifiedName can be changed to other unique attributes)
 Whether to overwrite the existing business metadata on the entity or not,
 default is false.
 """)
-      @query
-      isOverwrite?: boolean;
+
+      @query("isOverwrite")
+      overwrite?: boolean;
 
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("BusinessMetadata payload")
