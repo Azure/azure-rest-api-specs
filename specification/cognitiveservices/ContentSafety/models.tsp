@@ -542,7 +542,7 @@ enum Task {
 @added(Versions.v2023_10_30_Preview)
 @doc("Connection details for the GPT resource.")
 model GptResource {
-  @doc("Endpoint of Azure OpenAI resource.")
+  @doc("Endpoint for Azure OpenAI resource.")
   azureOpenAIEndpoint: string;
 
   @doc("Deployment model name.")
@@ -550,7 +550,7 @@ model GptResource {
 }
 
 @added(Versions.v2023_10_30_Preview)
-@doc("The request of ungroudedness detection.")
+@doc("The request of ungroundedness detection.")
 model DetectUngroundednessOptions {
   @doc("""
   The domain of the text for analysis.
@@ -566,7 +566,7 @@ model DetectUngroundednessOptions {
 
   @doc("""
   The user's question input in a QnA scenario.
-  This field is optional, but if the Task type is set to QnA, it becomes required.
+  This field is optional, but if the task type is set to QnA, it becomes required.
   """)
   query?: string;
 
@@ -597,15 +597,15 @@ model UngroundedDetails {
 
   @doc("""
   The explanation for identifying the text as ungrounded. 
-  Only when the 'reasoning' field in the input is set to true will the API return this 'reason' field.
+  Only when the 'reasoning' field in the input is set to true 'reason' field will be returned.
   """)
   reason?: string;
 }
 
 @added(Versions.v2023_10_30_Preview)
-@doc("The response of ungroudedness detection.")
+@doc("The response of ungroundedness detection.")
 model DetectUngroundednessResult {
-  @doc("Detection result for ungrouded text.")
+  @doc("Detection result for ungrounded text.")
   ungrounded: boolean;
 
   @doc("Confidence score of the model in the analysis results.")
