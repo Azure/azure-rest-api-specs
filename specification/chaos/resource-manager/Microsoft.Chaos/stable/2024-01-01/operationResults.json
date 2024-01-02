@@ -70,10 +70,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK status code response."
+            "description": "Async operation was completed successfully."
           },
-          "default": {
-            "description": "Error status code returned if request was unsuccessful."
+          "202": {
+            "description": "Async operation is still ongoing."
+          },
+          "500": {
+            "description": "Async operation failed."
           }
         }
       }
