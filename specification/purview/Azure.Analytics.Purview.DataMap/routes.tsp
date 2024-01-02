@@ -1300,7 +1300,7 @@ A map containing keys as attribute names and values as corresponding attribute
 values to be updated.
 """)
       @body
-      partialUpdates: unknown;
+      partialUpdates: Record<string>;
     },
     AtlasGlossaryTerm,
     {},
