@@ -20,7 +20,7 @@ interface Entity {
   batchDelete is PurviewDataMap.Entity.bulkDelete;
   addClassification is PurviewDataMap.Entity.addClassification;
   get is PurviewDataMap.Entity.get;
-  partialUpdateAttributeById is PurviewDataMap.Entity.partialUpdateAttributeByGuid;
+  updateAttributeById is PurviewDataMap.Entity.partialUpdateAttributeByGuid;
   delete is PurviewDataMap.Entity.delete;
   getClassification is PurviewDataMap.Entity.getClassification;
   removeClassification is PurviewDataMap.Entity.removeClassification;
@@ -28,7 +28,7 @@ interface Entity {
   addClassifications is PurviewDataMap.Entity.addClassifications;
   updateClassifications is PurviewDataMap.Entity.updateClassifications;
   getByAttributes is PurviewDataMap.Entity.getByUniqueAttributes;
-  partialUpdateByAttributes is PurviewDataMap.Entity.partialUpdateByUniqueAttributes;
+  updateByAttributes is PurviewDataMap.Entity.partialUpdateByUniqueAttributes;
   deleteByAttribute is PurviewDataMap.Entity.deleteByUniqueAttribute;
   removeClassificationByAttribute is PurviewDataMap.Entity.removeClassificationByUniqueAttribute;
   addClassificationsByAttribute is PurviewDataMap.Entity.addClassificationsByUniqueAttribute;
@@ -40,7 +40,7 @@ interface Entity {
   addOrUpdateBusinessMetadata is PurviewDataMap.Entity.addOrUpdateBusinessMetadata;
   removeBusinessMetadataAttributes is PurviewDataMap.Entity.removeBusinessMetadataAttributes;
   addOrUpdateBusinessMetadataAttributes is PurviewDataMap.Entity.addOrUpdateBusinessMetadataAttributes;
-  getSampleBusinessMetadataTemplate is PurviewDataMap.Entity.getSampleBusinessMetadataTemplate;
+  getBusinessMetadataTemplate is PurviewDataMap.Entity.getSampleBusinessMetadataTemplate;
   #suppress "@azure-tools/typespec-azure-core/byos" "This is Atlas API"
   importBusinessMetadata is PurviewDataMap.Entity.importBusinessMetadata;
   removeLabels is PurviewDataMap.Entity.removeLabels;

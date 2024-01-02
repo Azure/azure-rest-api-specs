@@ -936,10 +936,11 @@ batch, and will return new token in each response unless there's no more data.
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This is a flexible property"
   @doc("The sort order of search results, can specify multiple fields.")
-  orderby?: bytes;
+  orderby?: unknown[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("The filter for the search. See examples for the usage of supported filters.")
-  filter?: bytes;
+  filter?: unknown;
 
   @doc("The facets for search. See examples for the usage of supported facets.")
   facets?: SearchFacetItem[];
@@ -1212,8 +1213,9 @@ must be a number between 1 and 100.
 """)
   limit?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("The filter for the search.")
-  filter?: bytes;
+  filter?: unknown;
 }
 
 @doc("The result item of the search suggest.")
@@ -1319,8 +1321,9 @@ The value must be a number between 1 and 100.
 """)
   limit?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("The filter for the autocomplete request.")
-  filter?: bytes;
+  filter?: unknown;
 }
 
 @doc("The result of the autocomplete request.")

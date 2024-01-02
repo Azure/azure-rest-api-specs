@@ -7200,8 +7200,6 @@
           "description": "The number of autocomplete results we hope to return. The default value is 50.\nThe value must be a number between 1 and 100."
         },
         "filter": {
-          "type": "string",
-          "format": "byte",
           "description": "The filter for the autocomplete request."
         }
       }
@@ -7836,13 +7834,11 @@
           "description": "The token used to get next batch of data. Default 'Null' to get the first\nbatch, and will return new token in each response unless there's no more data."
         },
         "orderby": {
-          "type": "string",
-          "format": "byte",
-          "description": "The sort order of search results, can specify multiple fields."
+          "type": "array",
+          "description": "The sort order of search results, can specify multiple fields.",
+          "items": {}
         },
         "filter": {
-          "type": "string",
-          "format": "byte",
           "description": "The filter for the search. See examples for the usage of supported filters."
         },
         "facets": {
@@ -8398,8 +8394,6 @@
           "description": "The number of suggestions we hope to return. The default value is 5. The value\nmust be a number between 1 and 100."
         },
         "filter": {
-          "type": "string",
-          "format": "byte",
           "description": "The filter for the search."
         }
       }
