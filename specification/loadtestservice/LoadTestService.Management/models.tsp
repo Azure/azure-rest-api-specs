@@ -27,22 +27,14 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
 
 @doc("Resources provisioning states.")
 enum ResourceState{
-  @doc("Succeeded state.")
-  Succeeded: "Succeeded",
-
-  @doc("Failed state.")
-  Failed: "Failed",
-  
-  @doc("Canceled state.")
-  Canceled: "Canceled",
+  ...ResourceProvisioningState,
   
   @doc("Deleted state.")
   Deleted: "Deleted"
 }
 
-//need to update this
 @doc("Managed identity type to use for accessing encryption key Url.")
-enum Type{
+enum IdentityType{
   @doc("System assigned identity.")
   SystemAssigned: "SystemAssigned",
 
@@ -88,7 +80,7 @@ model OutboundEnvironmentEndpoint is ArmResource{
 @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
 model Identity{
   @doc("Managed identity type to use for accessing encryption key Url.")
-  type?: Type;
+  type?: IdentityType;
 
   @doc("User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.")
   resourceId?: string;
@@ -117,28 +109,6 @@ model QuotaResourceProperties {
   @visibility("read")
   provisioningState: ResourceState;
 }
-
-// enum CreatedByType {
-//   User: "User",
-//   Application: "Application",
-//   ManagedIdentity: "ManagedIdentity ",
-//   Key: "Key"
-// }
-
-// model SystemData {
-//   createdBy: string;
-//   createdByType: CreatedByType;
-//   createdAt: string;
-//   lastModifiedBy: string;
-//   lastModifiedType: CreatedByType;
-//   lastModifiedAt: utcDateTime;
-// }
-
-// model Resource {
-//   id: string;
-//   type: string;
-//   systemData: SystemData;
-// }
 
 @doc("The location of quota resource")
 @subscriptionResource
@@ -218,11 +188,11 @@ model QuotaBucketRequestProperties {
   newQuota?: int32;
 
   @doc("Dimensions for new quota request.")
-  dimensions?: Dimensions;
+  dimensions?: QuotaDimensions;
 }
 
 @doc("Dimensions for new quota request.")
-model Dimensions {
+model QuotaDimensions {
   @doc("Subscription Id dimension for new quota request of the quota bucket.")
   @minLength(1)
   subscriptionId?: string;

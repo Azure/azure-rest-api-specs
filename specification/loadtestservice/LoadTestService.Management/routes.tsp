@@ -15,6 +15,7 @@ namespace Microsoft.LoadTestService.Draft;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+// adding a custom operation since we want to override body parameter name to body
 /**
  * A long-running resource CreateOrUpdate (PUT)
  * @template TResource the resource being patched
@@ -42,6 +43,8 @@ op ArmResourceCreateOrUpdateAsyncCustom<
   body: TResource,
 ): ArmResourceUpdatedResponse<TResource> | ArmResourceCreatedResponse<TResource> | ErrorResponse;
 
+// adding a custom operation since we want to override body parameter name to QuotaBucketRequest
+#suppress "@azure-tools/typespec-azure-core/casing-style" "QuotaBucketRequest is already published"
 /**
  * A synchronous resource action.
  * @template TResource The resource being acted upon
