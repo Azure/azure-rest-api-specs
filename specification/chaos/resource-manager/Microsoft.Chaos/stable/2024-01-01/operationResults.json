@@ -71,9 +71,9 @@
         "responses": {
           "200": {
             "description": "Async operation was completed successfully.",
-            "type": "object",
-            "properties": {},
-            "additionalProperties": true
+            "schema": {
+              "$ref": "#/definitions/OperationResultsResponse"
+            }
           },
           "202": {
             "description": "Async operation is still ongoing.",
@@ -93,6 +93,13 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "operationResultsResponse": {
+      "type": "object",
+      "description": "Model that represents the resource response on a successful async operation completion.",
+      "properties": {},
+      "additionalProperties": true
+    }
+  },
   "parameters": {}
 }
