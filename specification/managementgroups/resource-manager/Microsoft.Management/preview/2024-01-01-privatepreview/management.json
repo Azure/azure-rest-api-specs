@@ -344,7 +344,36 @@
         },
         "properties": {
           "title": "properties",
-          "$ref": "#/definitions/ApplicationProperties"
+          "$ref": "#/definitions/CreateApplicationRequestProperties"
+        }
+      }
+    },
+    "CreateApplicationRequestProperties": {
+      "description": "Application creation request body parameters.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the application. For example, Running",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the application. For example, ApplicationTest1"
+        },
+        "memberOf": {
+          "title": "memberOf",
+          "$ref": "#/definitions/CreateApplicationMemberOfProperties"
         }
       }
     },
@@ -388,6 +417,7 @@
             "Failed",
             "Canceled"
           ],
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
