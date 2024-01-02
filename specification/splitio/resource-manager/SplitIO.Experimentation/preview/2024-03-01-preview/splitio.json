@@ -614,15 +614,10 @@
         "dataSource": {
           "$ref": "#/definitions/DataSource",
           "description": "DataSource for an experimentation workspace"
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU of the resource."
         }
       },
       "required": [
-        "accessPolicy",
-        "sku"
+        "accessPolicy"
       ]
     },
     "PartnerExperimentationWorkspacePropertiesUpdate": {
@@ -636,33 +631,6 @@
         "dataSource": {
           "$ref": "#/definitions/DataSourceUpdate",
           "description": "DataSource for an experimentation workspace"
-        },
-        "sku": {
-          "$ref": "#/definitions/SkuUpdate",
-          "description": "SKU of the resource."
-        }
-      }
-    },
-    "Sku": {
-      "type": "object",
-      "description": "The SKU of the experimentation workspace.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The SKU name of the experimentation workspace."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "SkuUpdate": {
-      "type": "object",
-      "description": "The SKU of the experimentation workspace.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The SKU name of the experimentation workspace."
         }
       }
     },

@@ -48,9 +48,6 @@ model PartnerExperimentationWorkspaceProperties {
 
   @doc("DataSource for an experimentation workspace")
   dataSource?: DataSource;
-
-  @doc("SKU of the resource.")
-  sku: Sku;
 }
 
 @doc("Access policy for an experimentation workspace")
@@ -66,12 +63,6 @@ model DataSource {
 
   @doc("Whether experimentation is enabled")
   enabled: boolean;
-}
-
-@doc("The SKU of the experimentation workspace.")
-model Sku {
-  @doc("The SKU name of the experimentation workspace.")
-  name: string;
 }
 
 @doc("A ExperimentationWorkspace Resource by Split.IO")
