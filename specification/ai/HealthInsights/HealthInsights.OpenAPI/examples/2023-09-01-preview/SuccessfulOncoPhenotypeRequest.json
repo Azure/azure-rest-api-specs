@@ -1,0 +1,64 @@
+{
+  "operationId": "OncoPhenotype_CreateJob",
+  "title": "Creates an Onco Phenotype job with the given request body.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2023-09-01-preview",
+    "body": {
+      "patients": [
+        {
+          "id": "Patient ID Example 1",
+          "info": {
+            "sex": "female",
+            "birthDate": "1975-09-27"
+          },
+          "patientDocuments": [
+            {
+              "type": "note",
+              "clinicalType": "historyAndPhysical",
+              "id": "1",
+              "language": "en",
+              "createdDateTime": "2021-10-26T16:54:44.739Z",
+              "content": {
+                "sourceType": "inline",
+                "value": "Sample note 1"
+              }
+            },
+            {
+              "type": "note",
+              "clinicalType": "imaging",
+              "id": "2",
+              "language": "en",
+              "createdDateTime": "2020-11-26T16:39:44.739Z",
+              "content": {
+                "sourceType": "inline",
+                "value": "Sample note 2"
+              }
+            }
+          ]
+        }
+      ],
+      "configuration": {
+        "verbose": true,
+        "includeEvidence": true,
+        "inferenceTypes": [
+          "histology",
+          "clinicalStageT"
+        ],
+        "checkForCancerCase": false
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/health-insights/onco-phenotype/jobs/{id}?api-version=2023-09-01-preview",
+        "Retry-After": "1"
+      },
+      "body": {
+        "status": "notStarted",
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    }
+  }
+}

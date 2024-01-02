@@ -1,5 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
-import "./route.oncophenotype.tsp";
+import "./route.patienttimeline.tsp";
 
 import "@typespec/rest";
 import "@typespec/http";
@@ -12,11 +12,11 @@ using Azure.ClientGenerator.Core;
 namespace ClientForAzureHealthInsights;
 
 @client({
-  name: "CancerProfilingClient",
+  name: "PatientTimelineClient",
   service: AzureHealthInsights,
 })
-interface CancerProfilingClient {
+interface PatientTimelineClient {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
-  inferCancerProfile is AzureHealthInsights.OncoPhenotype.createJob;
+  InferPatientTimeline is AzureHealthInsights.PatientTimeline.createJob;
 }
