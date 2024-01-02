@@ -1440,6 +1440,9 @@
           "Get Endpoint Models": {
             "$ref": "./examples/Endpoint/getModels.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1485,7 +1488,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ServiceAccountApiKeys"
+              "$ref": "#/definitions/AccountApiKeys"
             }
           },
           "default": {
@@ -2677,6 +2680,17 @@
       },
       "x-ms-discriminator-value": "AccessKey"
     },
+    "AccountApiKeys": {
+      "type": "object",
+      "properties": {
+        "key1": {
+          "type": "string"
+        },
+        "key2": {
+          "type": "string"
+        }
+      }
+    },
     "AccountKeyAuthTypeWorkspaceConnectionProperties": {
       "description": "This connection type covers the account key connection for Azure storage",
       "type": "object",
@@ -2736,7 +2750,16 @@
           "format": "int32",
           "type": "integer"
         },
+        "family": {
+          "type": "string"
+        },
         "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "tier": {
           "type": "string"
         }
       }
@@ -3007,6 +3030,10 @@
         "Deleting"
       ],
       "type": "string",
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ],
       "x-ms-enum": {
         "name": "DefaultResourceProvisioningState",
         "modelAsString": true
@@ -3376,6 +3403,10 @@
     "EndpointModels": {
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        },
         "value": {
           "description": "List of models.",
           "type": "array",
@@ -3413,11 +3444,7 @@
         },
         "provisioningState": {
           "description": "Read-only provision state status property.",
-          "$ref": "#/definitions/DefaultResourceProvisioningState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "$ref": "#/definitions/DefaultResourceProvisioningState"
         }
       },
       "discriminator": "endpointType"
@@ -4399,19 +4426,6 @@
         "serverlessComputeNoPublicIP": {
           "description": "The flag to signal if serverless compute nodes deployed in custom vNet would have no public IP addresses for a workspace with private endpoint",
           "type": "boolean"
-        }
-      }
-    },
-    "ServiceAccountApiKeys": {
-      "type": "object",
-      "properties": {
-        "key1": {
-          "type": "string",
-          "readOnly": true
-        },
-        "key2": {
-          "type": "string",
-          "readOnly": true
         }
       }
     },
