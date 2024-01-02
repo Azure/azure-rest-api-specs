@@ -136,10 +136,17 @@ interface DevBoxesOperations {
     DevBox
   >;
 
+/*
   @doc("Creates or replaces a Dev Box.")
   @finalOperation(DevBoxesOperations.GetDevBox)
   @pollingOperation(SharedOperations.GetProjectOperationStatus)
   CreateDevBox is standardOps.LongRunningResourceCreateOrReplace<DevBox>;
+*/
+
+@put
+@route("projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
+CreateDevBox(@body devBox: DevBox): DevBox;
+
   // @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   // @put
   // @createsOrUpdatesResource(DevBox)
