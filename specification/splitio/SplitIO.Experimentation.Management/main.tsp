@@ -1,5 +1,3 @@
-import "./LiftrBase/main.tsp";
-
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
@@ -8,7 +6,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-providerhub";
 
 using Azure.ResourceManager;
-using LiftrBase;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -25,14 +22,17 @@ namespace SplitIO.Experimentation;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v1_preview)
   v1_preview: "2024-03-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The properties of ExperimentationWorkspace")
-model ExperimentationWorkspaceProperties is BaseResourceProperties {
+model ExperimentationWorkspaceProperties {
+  @doc("Provisioning state of the resource.")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+
   @doc("Partner ExperimentationWorkspace properties")
   partnerExperimentationWorkspaceProperties?: PartnerExperimentationWorkspaceProperties;
 }
@@ -48,6 +48,9 @@ model PartnerExperimentationWorkspaceProperties {
 
   @doc("DataSource for an experimentation workspace")
   dataSource?: DataSource;
+
+  @doc("SKU of the resource.")
+  sku: Sku;
 }
 
 @doc("Access policy for an experimentation workspace")
@@ -58,15 +61,17 @@ model AccessPolicy {
 
 @doc("DataSource for an experimentation workspace")
 model DataSource {
-  @doc("Id in partner's system")
-  @visibility("read")
-  id?: string;
-
   @doc("Resource id of the data source")
   resourceId: string;
 
   @doc("Whether experimentation is enabled")
   enabled: boolean;
+}
+
+@doc("The SKU of the experimentation workspace.")
+model Sku {
+  @doc("The SKU name of the experimentation workspace.")
+  name: string;
 }
 
 @doc("A ExperimentationWorkspace Resource by Split.IO")
