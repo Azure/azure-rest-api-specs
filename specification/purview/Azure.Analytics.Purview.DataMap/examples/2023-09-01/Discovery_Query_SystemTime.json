@@ -1,21 +1,18 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "searchRequest": {
+    "queryOptions": {
       "keywords": null,
       "limit": 10,
       "filter": {
-        "kind": "OrFilter",
         "or": [
           {
-            "kind": "CreateTimeFilter",
             "createTime": {
               "operator": "lt",
               "timeThreshold": 1545580800000
             }
           },
           {
-            "kind": "UpdateTimeFilter",
             "updateTime": "LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D"
           }
         ]

@@ -782,7 +782,7 @@ default is false.
 
       @doc("set of labels to be deleted")
       @body
-      body: string[];
+      labels: string[];
     },
     void,
     {},
@@ -802,7 +802,7 @@ default is false.
 
       @doc("set of labels to be set to the entity")
       @body
-      body: string[];
+      labels: string[];
     },
     void,
     {},
@@ -822,7 +822,7 @@ default is false.
 
       @doc("set of labels to be added")
       @body
-      body: string[];
+      labels: string[];
     },
     void,
     {},
@@ -863,7 +863,7 @@ be changed to other unique attributes)
 
       @doc("set of labels to be deleted")
       @body
-      body: string[];
+      labels: string[];
     },
     void,
     {},
@@ -906,7 +906,7 @@ be changed to other unique attributes)
 
       @doc("set of labels to be set")
       @body
-      body: string[];
+      labels: string[];
     },
     void,
     {},
@@ -1680,9 +1680,9 @@ interface Discovery {
     {
       @doc("An object specifying the search criteria.")
       @body
-      searchRequest: SearchOptions;
+      queryOptions: QueryOptions;
     },
-    SearchResult,
+    QueryResult,
     {},
     AtlasErrorResponse
   >;
@@ -1695,7 +1695,7 @@ interface Discovery {
     {
       @doc("An object specifying the suggest criteria.")
       @body
-      suggestRequest: SuggestOptions;
+      suggestOptions: SuggestOptions;
     },
     SuggestResult,
     {},
@@ -1710,7 +1710,7 @@ interface Discovery {
     {
       @doc("An object specifying the autocomplete criteria.")
       @body
-      autoCompleteRequest: AutoCompleteOptions;
+      autoCompleteOptions: AutoCompleteOptions;
     },
     AutoCompleteResult,
     {},

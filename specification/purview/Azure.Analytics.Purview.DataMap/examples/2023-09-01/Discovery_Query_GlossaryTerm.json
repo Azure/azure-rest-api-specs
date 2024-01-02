@@ -1,25 +1,20 @@
 {
   "parameters": {
     "Endpoint": "{Endpoint}",
-    "searchRequest": {
+    "queryOptions": {
       "keywords": "<term name>",
       "limit": 10,
       "filter": {
-        "kind": "AndFilter",
         "and": [
           {
-            "kind": "ObjectTypeFilter",
             "objectType": "Glossary terms"
           },
           {
-            "kind": "OrFilter",
             "or": [
               {
-                "kind": "GlossaryFilter",
                 "glossaryType": "AtlasGlossary"
               },
               {
-                "kind": "GlossaryFilter",
                 "glossaryType": "AtlasGlossaryTerm"
               }
             ]
