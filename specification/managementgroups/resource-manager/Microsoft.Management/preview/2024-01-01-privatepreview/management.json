@@ -356,29 +356,31 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state of the application. For example, Running",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
+        "properties": {
+          "provisioningState": {
+            "type": "string",
+            "description": "The provisioning state of the application. For example, Running",
+            "enum": [
+              "NotStarted",
+              "Running",
+              "Succeeded",
+              "Failed",
+              "Canceled"
+            ],
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            }
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The name of the application. For example, ApplicationTest1"
+          },
+          "memberOf": {
+            "title": "memberOf",
+            "$ref": "#/definitions/CreateApplicationMemberOfProperties"
           }
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The name of the application. For example, ApplicationTest1"
-        },
-        "memberOf": {
-          "title": "memberOf",
-          "$ref": "#/definitions/CreateApplicationMemberOfProperties"
         }
       }
     },
