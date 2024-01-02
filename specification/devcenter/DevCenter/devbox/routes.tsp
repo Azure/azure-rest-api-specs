@@ -143,46 +143,43 @@ interface DevBoxesOperations {
   CreateDevBox is standardOps.LongRunningResourceCreateOrReplace<DevBox>;
 */
 
-@put
-@route("projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
-CreateDevBox(@path projectName: DevBox.projectName, @path userId: DevBox.userId, @path devBoxName: DevBox.devBoxName, @body devBox: DevBox) : DevBox;
 
-  // @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
-  // @put
-  // @createsOrUpdatesResource(DevBox)
-  // CreateDevBox is Azure.Core.Foundations.Operation<
-  //   {
-  //     @projectedName("client", "name")
-  //     @doc("Display name for the Dev Box")
-  //     @path("devBoxName")
-  //     devBoxName: string;
+ @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
+ @put
+ @createsOrUpdatesResource(DevBox)
+ CreateDevBox is Azure.Core.Foundations.Operation<
+   {
+     @projectedName("client", "name")
+     @doc("Display name for the Dev Box")
+     @path("devBoxName")
+     devBoxName: DevBox.devBoxName;
 
-  //     @path("projectName")
-  //     @doc("Name of the project the Dev Box belongs to")
-  //     projectName: string;
+     @path("projectName")
+     @doc("Name of the project the Dev Box belongs to")
+     projectName: DevBox.projectName;
 
-  //     @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-  //     @path("userId")
-  //     userId: string;
+     @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+     @path("userId")
+     userId: DevBox.userId;
 
-  //     @doc("Represents a DevBox.")
-  //     @body
-  //     devBox: DevBox;
-  //   },
-  //   DevBox |
-  //   {
-  //     @statusCode statusCode: 201;
+     @doc("Represents a DevBox.")
+     @body
+     devBox: DevBox;
+   },
+   DevBox |
+   {
+     @statusCode statusCode: 201;
 
-  //     @header("Location")
-  //     location: ResourceLocation<DevBox>;
+     @header("Location")
+     location: ResourceLocation<DevBox>;
 
-  //     @pollingLocation
-  //     @header("Operation-Location")
-  //     operationLocation: string;
+     @pollingLocation
+     @header("Operation-Location")
+     operationLocation: string;
 
-  //     @body body?: DevBox;
-  //   }
-  // >;
+     @body body?: DevBox;
+   }
+ >;
 
   @doc("Deletes a Dev Box.")
   @pollingOperation(SharedOperations.GetProjectOperationStatus)

@@ -304,17 +304,14 @@ model DevBoxListResult is Azure.Core.Page<DevBox>;
 @doc("A Dev Box")
 model DevBox {
   @doc("Name of the project this Dev Box belongs to")
-  @path
   projectName: string;
 
   @doc("The AAD object id of the user this Dev Box is assigned to.")
   @projectedName("csharp", "userId")
   @projectedName("java", "userId")
-  @path
   userId: Azure.Core.uuid;
 
   @doc("Display name for the Dev Box")
-  @path
   devBoxName: string;
 
   @doc("The name of the Dev Box pool this machine belongs to.")
