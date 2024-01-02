@@ -69,10 +69,10 @@ model SolutionTypePermissions {
 
 @doc("Connection status.")
 enum Status {
-  @doc("Connected")
+  @doc("Connected status")
   Connected,
 
-  @doc("Disconnected")
+  @doc("Disconnected status")
   Disconnected,
 }
 
