@@ -1650,14 +1650,12 @@
         "releaseDateTime": {
           "description": "The stamp when the base model was released. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "expirationDateTime": {
           "description": "The timestamp when TTS service will stop serving this base model. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "capabilities": {
           "description": "Capabilities of base model",
@@ -2564,7 +2562,7 @@
     "QueryFilter": {
       "name": "filter",
       "in": "query",
-      "description": "Filter condition.\r\n            <ul><li><b>Supported properties:</b>projectId, createdDateTime, locale, kind\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for created.\r\n              </li><li><b>Example:</b>\r\n                - ```filter=projectId eq Jessica``` (filter by project ID)\r\n                - ```filter=kind eq ProfessionalVoice``` (filter project by kind)\r\n                - ```filter=locale eq en-US``` (filter training set and model by locale)\r\n                - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)</li></ul>",
+      "description": "Filter condition.\r\n            <ul><li><b>Supported properties:</b>projectId, createdDateTime, locale, kind\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for created.\r\n              </li><li><b>Example:</b>\r\n                - ```filter=projectId eq 'Jessica'``` (filter by project ID)\r\n                - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\r\n                - ```filter=locale eq 'en-US'``` (filter training set and model by locale)\r\n                - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)</li></ul>",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
