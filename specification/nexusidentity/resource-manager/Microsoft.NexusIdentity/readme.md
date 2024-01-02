@@ -35,5 +35,5 @@ These settings apply only when `--tag=package-2023-06-15` is specified on the co
 
 ```yaml $(tag) == 'package-2023-06-15'
 input-file:
-  - [[Microsoft.NexusIdentity]]/stable/2023-06-15/openapi.json
+  - stable/2023-06-15/openapi.json
 ```
