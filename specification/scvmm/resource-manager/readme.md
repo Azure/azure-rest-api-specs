@@ -27,18 +27,27 @@ These are the global settings for the scvmm.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-10
+tag: package-2024-01
 ```
 
 
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - Microsoft.ScVmm/stable/2024-01-01/scvmm.json
+```
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-10'
+``` yaml $(tag) == 'package-2023-10'
 input-file:
   - Microsoft.ScVmm/stable/2023-10-07/scvmm.json
 ```
+
 ### Tag: package-2020-06-05-preview
 
 These settings apply only when `--tag=package-2020-06-05-preview` is specified on the command line.
