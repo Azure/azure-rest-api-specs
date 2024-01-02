@@ -90,7 +90,7 @@
           },
           {
             "in": "body",
-            "name": "CreateApplicationRequestBody",
+            "name": "createApplicationRequest",
             "description": "Application creation parameters.",
             "required": true,
             "schema": {
@@ -100,6 +100,12 @@
         ],
         "responses": {
           "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "201": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Application"
@@ -354,6 +360,8 @@
           "type": "string",
           "description": "The provisioning state of the application. For example, Running",
           "enum": [
+            "NotStarted",
+            "Running",
             "Succeeded",
             "Failed",
             "Canceled"
