@@ -180,12 +180,42 @@
         "type": "string"
       }
     },
+    "SolutionType": {
+      "type": "string",
+      "description": "Solution types.",
+      "enum": [
+        "Microsoft.AssetManagement",
+        "Microsoft.HybridCompute.Onboard",
+        "Microsoft.HybridNetwork.VWan.Provision"
+      ],
+      "x-ms-enum": {
+        "name": "SolutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.AssetManagement",
+            "value": "Microsoft.AssetManagement",
+            "description": "Asset Management solution type"
+          },
+          {
+            "name": "Microsoft.HybridCompute.Onboard",
+            "value": "Microsoft.HybridCompute.Onboard",
+            "description": "Hybrid Compute Onboard solution type"
+          },
+          {
+            "name": "Microsoft.HybridNetwork.VWan.Provision",
+            "value": "Microsoft.HybridNetwork.VWan.Provision",
+            "description": "VWan Provisioning solution type"
+          }
+        ]
+      }
+    },
     "SolutionTypePermissions": {
       "type": "object",
       "description": "Solution type permissions.",
       "properties": {
         "solutionType": {
-          "type": "string",
+          "$ref": "#/definitions/SolutionType",
           "description": "The name of solution Type"
         },
         "status": {

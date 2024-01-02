@@ -58,13 +58,25 @@ model TestPermissionResponse {
 @doc("Solution type permissions.")
 model SolutionTypePermissions {
   @doc("The name of solution Type")
-  solutionType: string;
+  solutionType: SolutionType;
 
   @doc("The status")
   status: Status;
 
   @doc("The details of the status")
   statusDetails: string;
+}
+
+@doc("Solution types.")
+enum SolutionType {
+  @doc("Asset Management solution type")
+  `Microsoft.AssetManagement`,
+
+  @doc("Hybrid Compute Onboard solution type")
+  `Microsoft.HybridCompute.Onboard`,
+
+  @doc("VWan Provisioning solution type")
+  `Microsoft.HybridNetwork.VWan.Provision`,
 }
 
 @doc("Connection status.")
