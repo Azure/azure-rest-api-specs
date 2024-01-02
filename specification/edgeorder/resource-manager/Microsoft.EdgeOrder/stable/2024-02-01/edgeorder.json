@@ -1872,9 +1872,9 @@
           "description": "Dimensions of the configuration.",
           "readOnly": true
         },
-        "isCloudBasedProvisioningSupported": {
-          "description": "Determining whether cloud-based provisioning is supported on this configuration.",
-          "type": "boolean",
+        "provisioningSupport": {
+          "description": "Determining nature of provisioning that the configuration supports.",
+          "$ref": "#/definitions/ProvisioningSupport",
           "readOnly": true
         },
         "childConfigurationTypes": {
@@ -2135,9 +2135,9 @@
           "description": "Dimensions of the configuration.",
           "readOnly": true
         },
-        "isCloudBasedProvisioningSupported": {
-          "description": "Determining whether cloud-based provisioning is supported on this configuration.",
-          "type": "boolean",
+        "provisioningSupport": {
+          "description": "Determining nature of provisioning that the configuration supports.",
+          "$ref": "#/definitions/ProvisioningSupport",
           "readOnly": true
         },
         "childConfigurationTypes": {
@@ -2404,13 +2404,30 @@
           "type": "string",
           "readOnly": true
         },
-        "isCloudBasedProvisioningSupported": {
-          "description": "Determining whether cloud-based provisioning is supported on this configuration.",
-          "type": "boolean"
+        "provisioningSupport": {
+          "description": "Determining nature of provisioning that the configuration supports.",
+          "$ref": "#/definitions/ProvisioningSupport",
+          "readOnly": true
         },
         "provisioningDetails": {
           "$ref": "#/definitions/ProvisioningDetails",
           "description": "Provisioning Details for the device.",
+          "readOnly": true
+        }
+      }
+    },
+    "DevicePresenceVerificationDetails": {
+      "description": "Proof of possession details.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Proof of possession status.",
+          "$ref": "#/definitions/DevicePresenceVerificationStatus",
+          "readOnly": true
+        },
+        "Message": {
+          "description": "Insights on current status.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -3534,8 +3551,8 @@
           "$ref": "#/definitions/AutoProvisioningStatus"
         },
         "devicePresenceVerification": {
-          "description": "Proof of possession status.",
-          "$ref": "#/definitions/DevicePresenceVerificationStatus"
+          "description": "Proof of possession details.",
+          "$ref": "#/definitions/DevicePresenceVerificationDetails"
         }
       }
     },
@@ -3755,6 +3772,28 @@
           {
             "value": "Canceled",
             "description": "Canceled state."
+          }
+        ]
+      }
+    },
+    "ProvisioningSupport": {
+      "description": "Determining nature of provisioning that the configuration supports.",
+      "enum": [
+        "CloudBased",
+        "Manual"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningSupport",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "CloudBased",
+            "description": "The configuration can be provisioned from the cloud."
+          },
+          {
+            "value": "Manual",
+            "description": "The configuration need to be provisioned manually by the end user."
           }
         ]
       }
