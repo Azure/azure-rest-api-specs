@@ -1138,7 +1138,7 @@ A map containing keys as attribute names and values as corresponding attribute
 values for partial update.
 """)
       @body
-      partialUpdates: unknown;
+      partialUpdates: Record<string>;
     },
     AtlasGlossaryCategory,
     {},
@@ -1604,7 +1604,7 @@ A map containing keys as attribute names and values as corresponding attribute
 values.
 """)
       @body
-      partialUpdates: unknown;
+      partialUpdates: Record<string>;
     },
     AtlasGlossary,
     {},
