@@ -50,12 +50,24 @@ model InstanceProperties {
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  @doc("Parameters.")
+  parameters?: ParamProperties;
 }
 
 @doc("Properties of the reference target.")
 model TargetSelectorProperties {
   @doc("Name of the target.")
   name?: string;
+}
+
+@doc("Defines parameter properties.")
+model ParamProperties {
+  @doc("Additional properties.")
+  additionalProperties?: string[];
+
+  @doc("Property type.")
+  type: string;
 }
 
 @armResourceOperations
