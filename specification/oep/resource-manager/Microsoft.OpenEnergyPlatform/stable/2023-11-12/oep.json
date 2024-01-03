@@ -1473,12 +1473,28 @@
       "description": "The resource model definition used for updating a tracked ARM resource.",
       "type": "object",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/EnergyServiceUpdateProperties"
+        },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
+        }
+      }
+    },
+    "EnergyServiceUpdateProperties": {
+      "description": "The properties of an Energy service resource patch.",
+      "type": "object",
+      "properties": {
+        "encryption": {
+          "$ref": "#/definitions/Encryption"
         }
       }
     },
