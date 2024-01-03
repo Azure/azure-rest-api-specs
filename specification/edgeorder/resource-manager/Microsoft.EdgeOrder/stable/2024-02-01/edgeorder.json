@@ -2224,11 +2224,6 @@
     },
     "ContactDetails": {
       "description": "Contact Details.",
-      "required": [
-        "contactName",
-        "phone",
-        "emailList"
-      ],
       "type": "object",
       "properties": {
         "contactName": {
@@ -3986,7 +3981,8 @@
             "None",
             "Residential",
             "Commercial",
-            "Site"
+            "Site",
+            "Shipping"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4008,6 +4004,10 @@
               {
                 "value": "Site",
                 "description": "Site Address."
+              },
+              {
+                "value": "Shipping",
+                "description": "Shipping address for the order."
               }
             ]
           }
