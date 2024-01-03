@@ -4,7 +4,10 @@
     "resourceGroupName": "testrg",
     "managedInstanceName": "testcl",
     "distributedAvailabilityGroupName": "dag",
-    "api-version": "2023-08-01-preview"
+    "api-version": "2023-08-01-preview",
+    "parameters": {
+      "failoverType": "ForcedAllowDataLoss"
+    }
   },
   "responses": {
     "200": {
@@ -25,8 +28,7 @@
               "databaseName": "testdb",
               "instanceReplicaId": "4713ed91-1e8c-497d-9bd4-d8a3935ae49a",
               "partnerReplicaId": "8ffa9723-a1ec-4323-b929-c4aedee3894b",
-              "replicaState": "Seeding",
-              "seedingProgress": "80%",
+              "replicaState": "Catchup",
               "synchronizationHealth": "HEALTHY",
               "connectedState": "CONNECTED",
               "lastReceivedLsn": "71000009407900001",
@@ -45,6 +47,11 @@
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
         "name": "dag",
         "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/f2669dff-5f08-45dd-b857-b2a60b72cdc9/providers/Microsoft.Sql/locations/westus/distributedAvailabilityGroupsOperationResults/00000000-1111-2222-3333-444444444444?api-version=2023-08-01-preview"
       }
     }
   }
