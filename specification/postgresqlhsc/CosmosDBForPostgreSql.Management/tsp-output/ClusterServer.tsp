@@ -31,7 +31,7 @@ interface Servers {
 }
 
 @armResourceOperations
-interface Configurations {
+interface Configurations_clusterserver {
   @doc("List all the configurations of a server in cluster.")
   // FIXME: Configurations_ListByServer could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/servers/{serverName}/configurations")

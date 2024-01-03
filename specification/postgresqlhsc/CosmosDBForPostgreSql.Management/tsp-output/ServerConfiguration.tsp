@@ -23,7 +23,7 @@ model ServerConfiguration is ProxyResource<ServerConfigurationProperties> {
 }
 
 @armResourceOperations
-interface Configurations {
+interface Configurations_serverconfig {
   @doc("Gets information of a configuration for coordinator.")
   getCoordinator is ArmResourceRead<ServerConfiguration>;
   @doc("Updates configuration of coordinator in a cluster")

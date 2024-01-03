@@ -1061,7 +1061,7 @@ model TypePropertiesMapping {
 model RoleListResult is Azure.Core.Page<RoleResourceFormat>;
 
 @doc("The role resource format.")
-model RoleResourceFormat extends ProxyResource {
+model RoleResourceFormat {
   @doc("The Role definition.")
   properties?: Role;
 }

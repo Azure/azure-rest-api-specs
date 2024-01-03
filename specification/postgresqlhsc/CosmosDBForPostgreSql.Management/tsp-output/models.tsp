@@ -174,8 +174,9 @@ model ServerNameItem {
   fullyQualifiedDomainName?: string;
 }
 
+// model SimplePrivateEndpointConnection extends ProxyResource {
 @doc("A private endpoint connection.")
-model SimplePrivateEndpointConnection extends ProxyResource {
+  model SimplePrivateEndpointConnection {
   @doc("Properties of the private endpoint connection.")
   properties?: PrivateEndpointConnectionSimpleProperties;
 }
