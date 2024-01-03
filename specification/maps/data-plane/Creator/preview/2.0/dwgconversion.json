@@ -69,7 +69,7 @@
     },
     "UdidQuery": {
       "name": "udid",
-      "description": "The unique data id for the content. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data-v2/upload-preview) call.",
+      "description": "The unique data id for the content. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/rest/api/maps/data-v2/upload-preview) call.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -77,7 +77,7 @@
     },
     "ConversionId": {
       "name": "conversionId",
-      "description": "The conversion id for the content. The `conversionId` must have been obtained from a successful [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion/convert) call.",
+      "description": "The conversion id for the content. The `conversionId` must have been obtained from a successful [Conversion API](https://docs.microsoft.com/rest/api/maps/v2/conversion/convert) call.",
       "type": "string",
       "in": "path",
       "required": true,
@@ -85,7 +85,7 @@
     },
     "OutputOntology": {
       "name": "outputOntology",
-      "description": "Output ontology version. \"facility-2.0\" is the only supported value at this time. Please refer to this [article](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) for more information about Azure Maps Creator ontologies.",
+      "description": "Output ontology version. \"facility-2.0\" is the only supported value at this time. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology) for more information about Azure Maps Creator ontologies.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -165,7 +165,7 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all successful data conversions submitted previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion/convert).   \n\n### Submit List Request\n\nTo list all successful conversions you will issue a `GET` request with no additional parameters.\n\n### List Data Response\n\nThe Conversion List API returns the complete list of all conversion details in `json` format.<br>\n\nHere is a sample response returning the details of two successful conversion requests:  \n\n<br>\n\n```json\n{\n    \"conversions\": \n    [\n        {\n            \"conversionId\": \"54398242-ea6c-1f31-4fa6-79b1ae0fc24d\",\n            \"udid\": \"31838736-8b84-11ea-bc55-0242ac130003\",\n            \"created\": \"5/19/2020 9:00:00 AM +00:00\",\n            \"description\": \"User provided description.\",\n            \"featureCounts\": {\n                \"DIR\": 1,\n                \"LVL\": 3,\n                \"FCL\": 1,\n                \"UNIT\": 150,\n                \"CTG\": 8,\n                \"AEL\": 0,\n                \"OPN\": 10\n            }\n        },\n        {\n            \"conversionId\": \"2acf7d32-8b84-11ea-bc55-0242ac130003\",\n            \"udid\": \"1214bc58-8b84-11ea-bc55-0242ac1300039\",\n            \"created\": \"5/19/2020 9:00:00 AM +00:00\",\n            \"description\": \"User provided description.\",\n            \"featureCounts\": {\n                \"DIR\": 1,\n                \"LVL\": 3,\n                \"FCL\": 1,\n                \"UNIT\": 150,\n                \"CTG\": 8,\n                \"AEL\": 0,\n                \"OPN\": 10\n            }\n        }\n    ]\n}\n```\n\n<br>",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a list of all successful data conversions submitted previously using the [Conversion API](https://docs.microsoft.com/rest/api/maps/v2/conversion/convert).   \n\n### Submit List Request\n\nTo list all successful conversions you will issue a `GET` request with no additional parameters.\n\n### List Data Response\n\nThe Conversion List API returns the complete list of all conversion details in `json` format.<br>\n\nHere is a sample response returning the details of two successful conversion requests:  \n\n<br>\n\n```json\n{\n    \"conversions\": \n    [\n        {\n            \"conversionId\": \"54398242-ea6c-1f31-4fa6-79b1ae0fc24d\",\n            \"udid\": \"31838736-8b84-11ea-bc55-0242ac130003\",\n            \"created\": \"5/19/2020 9:00:00 AM +00:00\",\n            \"description\": \"User provided description.\",\n            \"featureCounts\": {\n                \"DIR\": 1,\n                \"LVL\": 3,\n                \"FCL\": 1,\n                \"UNIT\": 150,\n                \"CTG\": 8,\n                \"AEL\": 0,\n                \"OPN\": 10\n            }\n        },\n        {\n            \"conversionId\": \"2acf7d32-8b84-11ea-bc55-0242ac130003\",\n            \"udid\": \"1214bc58-8b84-11ea-bc55-0242ac1300039\",\n            \"created\": \"5/19/2020 9:00:00 AM +00:00\",\n            \"description\": \"User provided description.\",\n            \"featureCounts\": {\n                \"DIR\": 1,\n                \"LVL\": 3,\n                \"FCL\": 1,\n                \"UNIT\": 150,\n                \"CTG\": 8,\n                \"AEL\": 0,\n                \"OPN\": 10\n            }\n        }\n    ]\n}\n```\n\n<br>",
         "operationId": "Conversion_List",
         "x-ms-examples": {
           "Returns a list of all the data processed by the Conversion Service for the account": {
@@ -199,7 +199,7 @@
     },
     "/conversions/{conversionId}": {
       "get": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a successful data conversion submitted previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion/convert).  ",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to fetch a successful data conversion submitted previously using the [Conversion API](https://docs.microsoft.com/rest/api/maps/v2/conversion/convert).  ",
         "operationId": "Conversion_Get",
         "x-ms-examples": {
           "Get the details for one conversion operation": {
@@ -230,7 +230,7 @@
         }
       },
       "delete": {
-        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete any data conversions created previously using the [Conversion API](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion/convert).\n\n### Submit Delete Request\n\nTo delete your conversion data you will issue a `DELETE` request where the path will contain the `conversionId` of the data to delete.\n\n### Conversion Delete Response\n\nThe Conversion Delete API returns a HTTP `204 No Content` response with an empty body, if the converted data resources were deleted successfully.<br>    \nA HTTP `400 Bad Request` error response will be returned if no resource associated with the passed-in `conversionId` is found.    ",
+        "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThis API allows the caller to delete any data conversions created previously using the [Conversion API](https://docs.microsoft.com/rest/api/maps/v2/conversion/convert).\n\n### Submit Delete Request\n\nTo delete your conversion data you will issue a `DELETE` request where the path will contain the `conversionId` of the data to delete.\n\n### Conversion Delete Response\n\nThe Conversion Delete API returns a HTTP `204 No Content` response with an empty body, if the converted data resources were deleted successfully.<br>    \nA HTTP `400 Bad Request` error response will be returned if no resource associated with the passed-in `conversionId` is found.    ",
         "operationId": "Conversion_Delete",
         "x-ms-examples": {
           "Delete previously converted content": {
