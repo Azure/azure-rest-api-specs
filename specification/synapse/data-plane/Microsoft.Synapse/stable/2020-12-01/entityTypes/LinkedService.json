@@ -7112,6 +7112,72 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
+    },
+    "WarehouseLinkedService": {
+      "x-ms-discriminator-value": "Warehouse",
+      "description": "Microsoft Fabric Warehouse linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric Warehouse linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarehouseLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "WarehouseLinkedServiceTypeProperties": {
+      "description": "Microsoft Fabric Warehouse linked service properties.",
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "type": "object",
+          "description": "The ID of Microsoft Fabric Warehouse artifact. Type: string (or Expression with resultType string)."
+        },
+        "endpoint": {
+          "type": "object",
+          "description": "The endpoint of Microsoft Fabric Warehouse server. Type: string (or Expression with resultType string)."
+        },
+        "workspaceId": {
+          "type": "object",
+          "description": "The ID of Microsoft Fabric workspace. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The ID of the application used to authenticate against Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "The Key of the application used to authenticate against Microsoft Fabric Warehouse.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "tenant": {
+          "type": "object",
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        }
+      },
+      "required": [
+        "artifactId",
+        "endpoint"
+      ]
     }
   }
 }

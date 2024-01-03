@@ -3690,6 +3690,39 @@
           "description": "The Salesforce Service Cloud V2 reportId. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "WarehouseTableDataset": {
+      "x-ms-discriminator-value": "WarehouseTable",
+      "description": "Microsoft Fabric Warehouse dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric Warehouse dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarehouseTableDatasetTypeProperties"
+        }
+      }
+    },
+    "WarehouseTableDatasetTypeProperties": {
+      "description": "Microsoft Fabric Warehouse dataset properties.",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The schema name of the Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The table name of the Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
+        }
+      }
     }
   }
 }
