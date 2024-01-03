@@ -793,13 +793,13 @@
         "description": "Create a springbootapps resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "#/parameters/springbootappsNameParameter"
@@ -854,13 +854,13 @@
         "description": "Delete a springbootapps resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SiteNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
           },
           {
             "$ref": "#/parameters/springbootappsNameParameter"
@@ -895,6 +895,10 @@
           "springbootapps_Delete_MinimumSet_Gen": {
             "$ref": "./examples/springbootapps_Delete_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -1673,6 +1677,7 @@
         },
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "description": "The resource provisioning state.",
           "enum": [
             "Unknown",
