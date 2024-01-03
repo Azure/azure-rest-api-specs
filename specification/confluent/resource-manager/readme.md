@@ -28,18 +28,27 @@ These are the global settings for the Confluent API.
 title: ConfluentManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-10
+tag: package-preview-2023-12
 ```
 
 
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-12'
+input-file:
+  - Microsoft.Confluent/preview/2023-12-27-preview/confluent.json
+```
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.Confluent/preview/2023-10-03-preview/confluent.json
 ```
+
 ### Tag: package-2023-08
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
@@ -213,3 +222,11 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+### AutoRest v3 Suppressions
+``` yaml
+suppressions:
+    
+  - code: ResourceNameRestriction
+    reason: We don't want the the organization name values to be restricted by the regular expressions and we have few more specific logic for validation in the backend code that involves replacing some of the chars and passing the check instead of failing at the ARM level. So the "pattern" property is not defined.
+
