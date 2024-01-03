@@ -3,7 +3,7 @@
   "info": {
     "title": "MicrosoftPki",
     "description": "Describes a certificate authority resource and operations.",
-    "version": "2022-09-01-preview"
+    "version": "2024-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -491,25 +491,9 @@
           "type": "array",
           "description": "The key usages specified in the CA certificate.",
           "items": {
-            "type": "string",
-            "enum": [
-              "ServerAuth",
-              "ClientAuth",
-              "CodeSigning",
-              "EmailProtection",
-              "IpsecEndSystem",
-              "IpsecTunnel",
-              "IpsecUser",
-              "TimeStamping",
-              "OcspSigning",
-              "SmartcardLogon",
-              "MacAddress"
-            ],
-            "x-ms-enum": {
-              "name": "ExtendedKeyUsage",
-              "modelAsString": true
-            }
+            "type": "string"
           },
+          "minItems": 1,
           "maxItems": 100
         },
         "validityNotBefore": {
