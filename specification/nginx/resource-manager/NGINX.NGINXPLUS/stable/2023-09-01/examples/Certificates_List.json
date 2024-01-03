@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-04-01",
+    "api-version": "2023-09-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "deploymentName": "myDeployment"
@@ -17,7 +17,14 @@
               "provisioningState": "Succeeded",
               "keyVirtualPath": "/src/cert/somekey.key",
               "certificateVirtualPath": "/src/cert/somePath.cert",
-              "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID"
+              "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID",
+              "sha1Thumbprint": "1234567890ABCDEF1234567890ABCDEF12345678",
+              "keyVaultSecretVersion": "12345678ef9a12345678ef9a12345678",
+              "keyVaultSecretCreated": "2020-01-01T00:00:00Z",
+              "certificateError": {
+                "code": "CertificateNotYetValid",
+                "message": "The certificate is not yet valid. The certificate is not yet valid. NotBefore: '2020-01-01T00:00:00Z', NotAfter: '2020-01-01T00:00:00Z'"
+              }
             }
           },
           {
@@ -28,7 +35,11 @@
               "provisioningState": "Succeeded",
               "keyVirtualPath": "/src/cert/somekey2.key",
               "certificateVirtualPath": "/src/cert/somePath2.cert",
-              "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID2"
+              "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID2",
+              "sha1Thumbprint": "1234567890ABCDEF1234567890ABCDEF12345678",
+              "keyVaultSecretVersion": "12345678ef9a12345678ef9a12345678",
+              "keyVaultSecretCreated": "2020-01-01T00:00:00Z",
+              "certificateError": null
             }
           }
         ]
