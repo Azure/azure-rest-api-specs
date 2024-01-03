@@ -63,7 +63,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/SearchError"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -585,7 +585,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/SearchError"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -635,7 +635,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/SearchError"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -691,7 +691,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/SearchError"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -841,7 +841,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/SearchError"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -890,7 +890,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/SearchError"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -945,7 +945,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/SearchError"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -1105,7 +1105,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/SearchError"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -1154,7 +1154,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/SearchError"
+              "$ref": "#/definitions/SearchErrorResponse"
             }
           }
         }
@@ -2776,6 +2776,16 @@
         "queryPlusText"
       ],
       "description": "The result of Autocomplete requests."
+    },
+    "SearchErrorResponse": {
+      "description": "An error occurred. The possible HTTP status, code, and message strings are listed below",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/SearchError",
+          "description": "Error object containing error code and error message."
+        }
+      }
     },
     "SearchError": {
       "properties": {
