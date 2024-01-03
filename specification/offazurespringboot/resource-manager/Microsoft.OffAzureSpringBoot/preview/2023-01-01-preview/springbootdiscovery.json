@@ -204,6 +204,7 @@
             "name": "springbootsites",
             "description": "Update a springbootsites payload.",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/springbootsitesPatch"
             }
@@ -1314,11 +1315,6 @@
     },
     "springbootsitesPatch": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/springbootsitesProperties",
