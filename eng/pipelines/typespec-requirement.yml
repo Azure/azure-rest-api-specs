@@ -1,0 +1,16 @@
+trigger: none
+
+jobs:
+- job: Require_TypeSpec
+  pool:
+    name: azsdk-pool-mms-ubuntu-2204-general
+    vmImage: ubuntu-22.04
+
+  steps:
+  - template: /eng/pipelines/templates/steps/npm-install.yml
+
+  - pwsh: |
+      $(Build.SourcesDirectory)/eng/scripts/Require-TypeSpec.ps1
+    displayName: Ensure new specs use TypeSpec
+    ignoreLASTEXITCODE: true
+    condition: succeededOrFailed()
