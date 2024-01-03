@@ -12,6 +12,10 @@
       "properties": {
         "workloadType": "WorkloadType1",
         "workloadProvider": "WorkloadProvider1",
+        "details": {
+          "environment": "Production",
+          "businessPurpose": "Workload testing"
+        },
         "resourcesDiscoveryDataFeeds": [
           {
             "name": "resourcesDiscoveryDataFeed1",
@@ -62,6 +66,26 @@
                   }
                 }
               ]
+            }
+          },
+          {
+            "name": "resourcesDiscoveryDataFeed2",
+            "dataFeedType": "AzureResourceGraphDataFeed",
+            "dataFeedClass": "Raw",
+            "details": {
+              "query": "Resources | where (subscriptionId == '00000000-0000-0000-0000-000000000000')",
+              "subscriptions": [
+                "00000000-0000-0000-0000-000000000000/"
+              ]
+            },
+            "dataStore": {
+              "dataStoreType": "AzureResourceGraphDataStore"
+            },
+            "trigger": {
+              "triggerType": "ScheduleTrigger",
+              "granularity": "seconds",
+              "value": 60,
+              "startFrom": "2023-12-19T15:10:46.196Z"
             }
           }
         ],
@@ -185,6 +209,45 @@
                     "alias": "columnAlias",
                     "columnType": "date"
                   }
+                },
+                {
+                  "name": "dataset22",
+                  "impactCategory": "impactCategory2",
+                  "datasetType": "MetricDataset",
+                  "resourceIdColumns": [
+                    {
+                      "name": "resourceIdColumnName21",
+                      "alias": "columnAlias",
+                      "columnType": "string"
+                    },
+                    {
+                      "name": "resourceIdColumnName22",
+                      "alias": "columnAlias",
+                      "columnType": "string"
+                    }
+                  ],
+                  "dimensionColumns": [
+                    {
+                      "name": "dimensionColumnName21",
+                      "alias": "columnAlias",
+                      "columnType": "string"
+                    },
+                    {
+                      "name": "dimensionColumnName22",
+                      "alias": "columnAlias",
+                      "columnType": "string"
+                    }
+                  ],
+                  "timestampColumn": {
+                    "name": "timestampColumnName2",
+                    "alias": "columnAlias",
+                    "columnType": "date"
+                  },
+                  "metricColumn": {
+                    "name": "metricColumnName2",
+                    "alias": "columnAlias",
+                    "columnType": "float"
+                  }
                 }
               ]
             }
@@ -237,6 +300,10 @@
           ],
           "workloadType": "WorkloadType1",
           "workloadProvider": "WorkloadProvider1",
+          "details": {
+            "environment": "Production",
+            "businessPurpose": "Workload testing"
+          },
           "resourcesDiscoveryDataFeeds": [
             {
               "details": {
@@ -287,6 +354,26 @@
                     }
                   }
                 ]
+              }
+            },
+            {
+              "name": "resourcesDiscoveryDataFeed2",
+              "dataFeedType": "AzureResourceGraphDataFeed",
+              "dataFeedClass": "Raw",
+              "details": {
+                "query": "Resources | where (subscriptionId == '00000000-0000-0000-0000-000000000000')",
+                "subscriptions": [
+                  "00000000-0000-0000-0000-000000000000/"
+                ]
+              },
+              "dataStore": {
+                "dataStoreType": "AzureResourceGraphDataStore"
+              },
+              "trigger": {
+                "triggerType": "ScheduleTrigger",
+                "granularity": "seconds",
+                "value": 60,
+                "startFrom": "2023-12-19T15:10:46.196Z"
               }
             }
           ],
@@ -342,6 +429,45 @@
                       "name": "timestampColumnName2",
                       "alias": "columnAlias",
                       "columnType": "date"
+                    }
+                  },
+                  {
+                    "name": "dataset22",
+                    "impactCategory": "impactCategory2",
+                    "datasetType": "MetricDataset",
+                    "resourceIdColumns": [
+                      {
+                        "name": "resourceIdColumnName21",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      },
+                      {
+                        "name": "resourceIdColumnName22",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      }
+                    ],
+                    "dimensionColumns": [
+                      {
+                        "name": "dimensionColumnName21",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      },
+                      {
+                        "name": "dimensionColumnName22",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      }
+                    ],
+                    "timestampColumn": {
+                      "name": "timestampColumnName2",
+                      "alias": "columnAlias",
+                      "columnType": "date"
+                    },
+                    "metricColumn": {
+                      "name": "metricColumnName2",
+                      "alias": "columnAlias",
+                      "columnType": "float"
                     }
                   }
                 ]
@@ -453,6 +579,10 @@
           ],
           "workloadType": "WorkloadType1",
           "workloadProvider": "WorkloadProvider1",
+          "details": {
+            "environment": "Production",
+            "businessPurpose": "Workload testing"
+          },
           "resourcesDiscoveryDataFeeds": [
             {
               "details": {
@@ -503,6 +633,26 @@
                     }
                   }
                 ]
+              }
+            },
+            {
+              "name": "resourcesDiscoveryDataFeed2",
+              "dataFeedType": "AzureResourceGraphDataFeed",
+              "dataFeedClass": "Raw",
+              "details": {
+                "query": "Resources | where (subscriptionId == '00000000-0000-0000-0000-000000000000')",
+                "subscriptions": [
+                  "00000000-0000-0000-0000-000000000000/"
+                ]
+              },
+              "dataStore": {
+                "dataStoreType": "AzureResourceGraphDataStore"
+              },
+              "trigger": {
+                "triggerType": "ScheduleTrigger",
+                "granularity": "seconds",
+                "value": 60,
+                "startFrom": "2023-12-19T15:10:46.196Z"
               }
             }
           ],
@@ -558,6 +708,45 @@
                       "name": "timestampColumnName2",
                       "alias": "columnAlias",
                       "columnType": "date"
+                    }
+                  },
+                  {
+                    "name": "dataset22",
+                    "impactCategory": "impactCategory2",
+                    "datasetType": "MetricDataset",
+                    "resourceIdColumns": [
+                      {
+                        "name": "resourceIdColumnName21",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      },
+                      {
+                        "name": "resourceIdColumnName22",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      }
+                    ],
+                    "dimensionColumns": [
+                      {
+                        "name": "dimensionColumnName21",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      },
+                      {
+                        "name": "dimensionColumnName22",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      }
+                    ],
+                    "timestampColumn": {
+                      "name": "timestampColumnName2",
+                      "alias": "columnAlias",
+                      "columnType": "date"
+                    },
+                    "metricColumn": {
+                      "name": "metricColumnName2",
+                      "alias": "columnAlias",
+                      "columnType": "float"
                     }
                   }
                 ]

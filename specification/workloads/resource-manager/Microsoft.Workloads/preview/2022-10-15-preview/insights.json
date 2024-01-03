@@ -408,6 +408,20 @@
         "outputDataStores": {
           "description": "DataStore to push insights for the workload instance.",
           "$ref": "#/definitions/OutputDataStores"
+        },
+        "details": {
+          "description": "Details for the workload insight instance",
+          "type": "object",
+          "properties": {
+            "environment": {
+              "description": "Environment of the workload instance",
+              "type": "string"
+            },
+            "businessPurpose": {
+              "description": "Business purpose of the workload instance.",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -440,7 +454,8 @@
           "type": "string",
           "enum": [
             "AzureLogAnalyticsDataFeed",
-            "AzureDataExplorerDataFeed"
+            "AzureDataExplorerDataFeed",
+            "AzureResourceGraphDataFeed"
           ],
           "x-ms-enum": {
             "name": "dataFeedType",
@@ -522,6 +537,42 @@
         },
         "dataStore": {
           "$ref": "#/definitions/AzureLogAnalyticsDataStore"
+        }
+      }
+    },
+    "AzureResourceGraphDataFeed": {
+      "description": "Azure Resource Graph datafeed.",
+      "type": "object",
+      "required": [
+        "details",
+        "trigger"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeed"
+        }
+      ],
+      "properties": {
+        "details": {
+          "description": "Details of Azure Resource Graph datafeed.",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Kusto query to pull data from Azure Resource Graph",
+              "type": "string"
+            },
+            "subscriptions": {
+              "description": "Azure subscriptions against which to execute the query.",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Subscription Id."
+              }
+            }
+          }
+        },
+        "dataStore": {
+          "$ref": "#/definitions/AzureResourceGraphDataStore"
         }
       }
     },
@@ -626,7 +677,8 @@
           "description": "Type of the dataset.",
           "type": "string",
           "enum": [
-            "StaticDataset"
+            "StaticDataset",
+            "MetricDataset"
           ],
           "x-ms-enum": {
             "name": "datasetType",
@@ -669,6 +721,21 @@
           "$ref": "#/definitions/Dataset"
         }
       ]
+    },
+    "MetricDataset": {
+      "description": "Metric Dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "metricColumn": {
+          "description": "metric column.",
+          "$ref": "#/definitions/ColumnDetail"
+        }
+      }
     },
     "ColumnDetail": {
       "description": "Detail of the dataset column.",
@@ -721,7 +788,8 @@
             "AzureLogAnalyticsDataStore",
             "ImpactResourceProviderDataStore",
             "AzureDataExplorerDataStore",
-            "EventHubDataStore"
+            "EventHubDataStore",
+            "AzureResourceGraphDataStore"
           ],
           "x-ms-enum": {
             "name": "dataStoreType",
@@ -778,6 +846,15 @@
           "type": "string"
         }
       }
+    },
+    "AzureResourceGraphDataStore": {
+      "description": "Azure Resource Graph in data store.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataStore"
+        }
+      ]
     },
     "ImpactResourceProviderDataStore": {
       "description": "Impact Resource Provider in data store.",
