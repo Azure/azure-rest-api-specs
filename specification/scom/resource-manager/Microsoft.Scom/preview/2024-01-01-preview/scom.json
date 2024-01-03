@@ -187,7 +187,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedInstance"
+              "$ref": "#/definitions/managedInstance"
             }
           },
           "default": {
@@ -223,12 +223,12 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "ManagedInstance",
+            "name": "managedInstance",
             "description": "SCOM Managed Instance",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedInstance"
+              "$ref": "#/definitions/managedInstance"
             }
           },
           {
@@ -243,13 +243,13 @@
           "200": {
             "description": "Managed instance update successful.",
             "schema": {
-              "$ref": "#/definitions/ManagedInstance"
+              "$ref": "#/definitions/managedInstance"
             }
           },
           "201": {
             "description": "Managed instance create request successful.",
             "schema": {
-              "$ref": "#/definitions/ManagedInstance"
+              "$ref": "#/definitions/managedInstance"
             }
           },
           "default": {
@@ -301,13 +301,13 @@
           "200": {
             "description": "Operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedInstance"
+              "$ref": "#/definitions/managedInstance"
             }
           },
           "202": {
             "description": "accepted operation",
             "schema": {
-              "$ref": "#/definitions/ManagedInstance"
+              "$ref": "#/definitions/managedInstance"
             },
             "headers": {
               "Location": {
@@ -1034,7 +1034,7 @@
     }
   },
   "definitions": {
-    "ManagedInstance": {
+    "managedInstance": {
       "type": "object",
       "description": "A SCOM instance resource",
       "allOf": [
@@ -1376,7 +1376,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ManagedInstance"
+            "$ref": "#/definitions/managedInstance"
           }
         },
         "nextLink": {
@@ -1460,7 +1460,7 @@
             "type": "string"
           }
         },
-        "resourcegroup": {
+        "resourceGroup": {
           "description": "ResourceGroupName List to be used for filtering",
           "type": "array",
           "items": {
