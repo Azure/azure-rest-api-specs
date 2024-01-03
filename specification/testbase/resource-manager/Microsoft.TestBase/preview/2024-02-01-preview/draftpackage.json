@@ -525,6 +525,77 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/draftPackages/{draftPackageName}/suggestPaths": {
+      "post": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_SuggestPaths",
+        "description": "Suggest paths for a draft package",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SuggestPathsOperationParameters"
+            },
+            "description": "Parameters supplied to the Test Base Draft Package suggest paths operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The suggest path operation of Draft Package was accepted. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "The paths are suggested successfully.",
+            "schema": {
+              "$ref": "#/definitions/DraftPackageSuggestPathsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraftPackageSuggestPaths": {
+            "$ref": "./examples/DraftPackageSuggestPaths.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -706,6 +777,16 @@
         "intuneEnrollmentMetadata": {
           "description": "The metadata of Intune enrollment.",
           "$ref": "./testbase.json#/definitions/IntuneEnrollmentMetadata"
+        },
+        "suggestedPaths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuggestedPathList"
+          },
+          "x-ms-identifiers": [
+            "pathType"
+          ],
+          "description": "The suggested paths of the draft package."
         }
       }
     },
@@ -839,8 +920,63 @@
         "intuneEnrollmentMetadata": {
           "description": "The metadata of Intune enrollment.",
           "$ref": "./testbase.json#/definitions/IntuneEnrollmentMetadata"
+        },
+        "suggestedPaths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuggestedPathList"
+          },
+          "x-ms-identifiers": [
+            "pathType"
+          ],
+          "description": "The suggested paths of the draft package."
         }
       }
+    },
+    "PathSuggestionDraftPackageProperties": {
+      "description": "The properties of the draft package to direct path suggestion.",
+      "type": "object",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "description": "Application name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Application version"
+        },
+        "appFileName": {
+          "type": "string",
+          "description": "The name of the app file."
+        },
+        "sourceType": {
+          "$ref": "#/definitions/DraftPackageSourceType",
+          "description": "The source type.",
+          "default": "Native"
+        },
+        "useSample": {
+          "type": "boolean",
+          "description": "Specifies whether a sample package should be used instead of the one uploaded by the user."
+        },
+        "intuneMetadata": {
+          "type": "object",
+          "$ref": "#/definitions/DraftPackageIntuneAppMetadata",
+          "description": "Metadata used to generate draft package folder and scripts."
+        },
+        "galleryApps": {
+          "description": "The list of gallery apps to test along with user application.",
+          "type": "array",
+          "items": {
+            "$ref": "./testbase.json#/definitions/GalleryAppDefinition"
+          },
+          "x-ms-identifiers": [
+            "skuId"
+          ]
+        }
+      },
+      "required": [
+        "sourceType"
+      ]
     },
     "DraftPackageSourceType": {
       "type": "string",
@@ -1114,6 +1250,115 @@
       "required": [
         "packageId"
       ]
+    },
+    "PathType": {
+      "type": "string",
+      "description": "The type of path to be used in a package.",
+      "enum": [
+        "Launch"
+      ],
+      "x-ms-enum": {
+        "name": "pathType",
+        "modelAsString": true
+      }
+    },
+    "SuggestPathsOperationParameters": {
+      "description": "Parameters body to pass to suggest paths operation of Draft Package.",
+      "type": "object",
+      "properties": {
+        "pathType": {
+          "$ref": "#/definitions/PathType"
+        },
+        "draftPackageProperties": {
+          "type": "object",
+          "$ref": "#/definitions/PathSuggestionDraftPackageProperties"
+        }
+      },
+      "required": [
+        "pathType"
+      ]
+    },
+    "DraftPackageSuggestPathsResponse": {
+      "description": "The response of suggest paths operation of Draft Package.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DraftPackageSuggestPathsResponseProperties",
+          "description": "The properties for the suggest path operation."
+        }
+      }
+    },
+    "DraftPackageSuggestPathsResponseProperties": {
+      "description": "The properties for the suggest path operation.",
+      "type": "object",
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuggestedPath"
+          },
+          "x-ms-identifiers": [
+            "path"
+          ],
+          "description": "The suggested paths."
+        }
+      },
+      "required": [
+        "paths"
+      ]
+    },
+    "SuggestedPath": {
+      "description": "The suggested path.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The suggested path."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "Indicates whether the suggested path is a file path or a command.",
+          "enum": [
+            "FilePath",
+            "Command"
+          ],
+          "x-ms-enum": {
+            "name": "contentType",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the suggested path, normally the shortcut name."
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "URL to the icon of the suggested path."
+        }
+      },
+      "required": [
+        "path",
+        "contentType"
+      ]
+    },
+    "SuggestedPathList": {
+      "description": "The list of suggested paths for a specific path type.",
+      "type": "object",
+      "properties": {
+        "pathType": {
+          "$ref": "#/definitions/PathType",
+          "description": "The type of path."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DraftPackageSuggestPathsResponseProperties"
+        }
+      ],
+      "required": [
+        "pathType",
+        "paths"
+      ]
     }
   },
   "parameters": {
@@ -1123,7 +1368,8 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource name of the Test Base Draft Package."
+      "description": "The resource name of the Test Base Draft Package.",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
     },
     "PackageNameQueryParameter": {
       "name": "packageName",
