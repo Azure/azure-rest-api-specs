@@ -89,7 +89,7 @@ need to move an entity to another collection.
 
       @doc("Atlas entity with extended information.")
       @body
-      entity: AtlasEntityWithExtInfo;
+      body: AtlasEntityWithExtInfo;
     },
     EntityMutationResult,
     {},
@@ -153,7 +153,7 @@ entities.
 
       @doc("An array of entities to create or update.")
       @body
-      entities: AtlasEntitiesWithExtInfo;
+      body: AtlasEntitiesWithExtInfo;
     },
     EntityMutationResult,
     {},
@@ -189,7 +189,7 @@ attributes.
     {
       @doc("The request to associate a classification to multiple entities.")
       @body
-      request: ClassificationAssociateOptions;
+      body: ClassificationAssociateOptions;
     },
     void,
     {},
@@ -330,7 +330,7 @@ Null updates are not possible.
 
       @doc("An array of classifications to be added.")
       @body
-      classifications: AtlasClassification[];
+      body: AtlasClassification[];
     },
     void,
     {},
@@ -350,7 +350,7 @@ Null updates are not possible.
 
       @doc("An array of classifications to be updated.")
       @body
-      classifications: AtlasClassification[];
+      body: AtlasClassification[];
     },
     void,
     {},
@@ -438,7 +438,7 @@ be changed to other unique attributes)
 
       @doc("Atlas entity with extended information.")
       @body
-      atlasEntityWithExtInfo: AtlasEntityWithExtInfo;
+      body: AtlasEntityWithExtInfo;
     },
     EntityMutationResult,
     {},
@@ -529,7 +529,7 @@ be changed to other unique attributes)
 
       @doc("An array of classification to be added.")
       @body
-      classifications: AtlasClassification[];
+      body: AtlasClassification[];
     },
     void,
     {},
@@ -556,7 +556,7 @@ be changed to other unique attributes)
 
       @doc("An array of classification to be updated.")
       @body
-      atlasClassificationArray: AtlasClassification[];
+      body: AtlasClassification[];
     },
     void,
     {},
@@ -571,7 +571,7 @@ be changed to other unique attributes)
     {
       @doc("Atlas entity headers.")
       @body
-      entityHeaders: AtlasEntityHeaders;
+      body: AtlasEntityHeaders;
     },
     OkResponse<string[]>,
     {},
@@ -657,7 +657,7 @@ example. qualifiedName can be changed to other unique attributes)
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("Business metadata payload")
       @body
-      businessMetadata: Record<Record<unknown>>;
+      body: Record<Record<unknown>>;
     },
     void,
     {},
@@ -678,14 +678,13 @@ example. qualifiedName can be changed to other unique attributes)
 Whether to overwrite the existing business metadata on the entity or not,
 default is false.
 """)
-
       @query("isOverwrite")
       overwrite?: boolean;
 
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("BusinessMetadata payload")
       @body
-      businessMetadata: Record<Record<unknown>>;
+      body: Record<Record<unknown>>;
     },
     void,
     {},
@@ -710,7 +709,7 @@ default is false.
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("Business metadata attribute payload")
       @body
-      businessMetadataAttributes: Record<unknown>;
+      body: Record<unknown>;
     },
     void,
     {},
@@ -735,7 +734,7 @@ default is false.
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("Business metadata attribute payload")
       @body
-      businessMetadataAttributes: Record<unknown>;
+      body: Record<unknown>;
     },
     void,
     {},
@@ -750,7 +749,7 @@ default is false.
     {},
     {
       @header contentType: "application/octet-stream";
-      @body template: bytes;
+      @body body: bytes;
     },
     {},
     AtlasErrorResponse
@@ -783,7 +782,7 @@ default is false.
 
       @doc("set of labels to be deleted")
       @body
-      labels: string[];
+      body: string[];
     },
     void,
     {},
@@ -803,7 +802,7 @@ default is false.
 
       @doc("set of labels to be set to the entity")
       @body
-      labels: string[];
+      body: string[];
     },
     void,
     {},
@@ -823,7 +822,7 @@ default is false.
 
       @doc("set of labels to be added")
       @body
-      labels: string[];
+      body: string[];
     },
     void,
     {},
@@ -864,7 +863,7 @@ be changed to other unique attributes)
 
       @doc("set of labels to be deleted")
       @body
-      labels: string[];
+      body: string[];
     },
     void,
     {},
@@ -907,7 +906,7 @@ be changed to other unique attributes)
 
       @doc("set of labels to be set")
       @body
-      labels: string[];
+      body: string[];
     },
     void,
     {},
@@ -950,7 +949,7 @@ be changed to other unique attributes)
 
       @doc("set of labels to be added")
       @body
-      labels: string[];
+      body: string[];
     },
     void,
     {},
@@ -969,7 +968,7 @@ be changed to other unique attributes)
 
       @doc("Entity guids to be moved to target collection.")
       @body
-      moveEntitiesRequest: MoveEntitiesOptions;
+      body: MoveEntitiesOptions;
     },
     EntityMutationResult,
     {},
@@ -1027,7 +1026,7 @@ Using
 the anchor attribute when creating the Term/Category.
 """)
       @body
-      atlasGlossary: AtlasGlossary;
+      body: AtlasGlossary;
     },
     AtlasGlossary,
     {},
@@ -1043,7 +1042,7 @@ the anchor attribute when creating the Term/Category.
     {
       @doc("An array of glossary category definitions to be created.")
       @body
-      glossaryCategory: AtlasGlossaryCategory[];
+      body: AtlasGlossaryCategory[];
     },
     OkResponse<AtlasGlossaryCategory[]>,
     {},
@@ -1063,7 +1062,7 @@ Optionally, terms belonging to the category and the hierarchy
 can also be defined during creation.
 """)
       @body
-      glossaryCategory: AtlasGlossaryCategory;
+      body: AtlasGlossaryCategory;
     },
     AtlasGlossaryCategory,
     {},
@@ -1097,7 +1096,7 @@ can also be defined during creation.
 
       @doc("The glossary category to be updated.")
       @body
-      glossaryCategory: AtlasGlossaryCategory;
+      body: AtlasGlossaryCategory;
     },
     AtlasGlossaryCategory,
     {},
@@ -1138,7 +1137,7 @@ A map containing keys as attribute names and values as corresponding attribute
 values for partial update.
 """)
       @body
-      partialUpdates: Record<string>;
+      body: Record<string>;
     },
     AtlasGlossaryCategory,
     {},
@@ -1218,7 +1217,7 @@ of creation.
 Optionally it can be categorized as well.
 """)
       @body
-      glossaryTerm: AtlasGlossaryTerm;
+      body: AtlasGlossaryTerm;
     },
     AtlasGlossaryTerm,
     {},
@@ -1256,7 +1255,7 @@ Optionally it can be categorized as well.
 
       @doc("The glossary term to be updated.")
       @body
-      glossaryTerm: AtlasGlossaryTerm;
+      body: AtlasGlossaryTerm;
     },
     AtlasGlossaryTerm,
     {},
@@ -1301,7 +1300,7 @@ A map containing keys as attribute names and values as corresponding attribute
 values to be updated.
 """)
       @body
-      partialUpdates: Record<string>;
+      body: Record<string>;
     },
     AtlasGlossaryTerm,
     {},
@@ -1321,7 +1320,7 @@ values to be updated.
 
       @doc("An array of glossary term definitions to be created in bulk.")
       @body
-      glossaryTerm: AtlasGlossaryTerm[];
+      body: AtlasGlossaryTerm[];
     },
     OkResponse<AtlasGlossaryTerm[]>,
     {},
@@ -1378,7 +1377,7 @@ is an alternative to assign a term to multiple entities.
 
       @doc("An array of related object IDs to which the term has to be associated.")
       @body
-      relatedObjectIds: AtlasRelatedObjectId[];
+      body: AtlasRelatedObjectId[];
     },
     void,
     {},
@@ -1398,7 +1397,7 @@ is an alternative to assign a term to multiple entities.
 
       @doc("An array of related object IDs from which the term has to be dissociated.")
       @body
-      relatedObjectIds: AtlasRelatedObjectId[];
+      body: AtlasRelatedObjectId[];
     },
     void,
     {},
@@ -1466,7 +1465,7 @@ parameters are currently not being enabled and won't work even they are passed.
 
       @doc("The glossary definition to be updated.")
       @body
-      updatedGlossary: AtlasGlossary;
+      body: AtlasGlossary;
     },
     AtlasGlossary,
     {},
@@ -1604,7 +1603,7 @@ A map containing keys as attribute names and values as corresponding attribute
 values.
 """)
       @body
-      partialUpdates: Record<string>;
+      body: Record<string>;
     },
     AtlasGlossary,
     {},
@@ -1681,7 +1680,7 @@ interface Discovery {
     {
       @doc("An object specifying the search criteria.")
       @body
-      queryOptions: QueryOptions;
+      body: QueryOptions;
     },
     QueryResult,
     {},
@@ -1696,7 +1695,7 @@ interface Discovery {
     {
       @doc("An object specifying the suggest criteria.")
       @body
-      suggestOptions: SuggestOptions;
+      body: SuggestOptions;
     },
     SuggestResult,
     {},
@@ -1711,7 +1710,7 @@ interface Discovery {
     {
       @doc("An object specifying the autocomplete criteria.")
       @body
-      autoCompleteOptions: AutoCompleteOptions;
+      body: AutoCompleteOptions;
     },
     AutoCompleteResult,
     {},
@@ -1830,7 +1829,7 @@ The AtlasRelationship object containing the information for the relationship to
 be created.
 """)
       @body
-      relationship: AtlasRelationship;
+      body: AtlasRelationship;
     },
     AtlasRelationship,
     {},
@@ -1848,7 +1847,7 @@ The AtlasRelationship object containing the information for the relationship to
 be created.
 """)
       @body
-      relationship: AtlasRelationship;
+      body: AtlasRelationship;
     },
     AtlasRelationship,
     {},
@@ -2151,7 +2150,7 @@ Any changes to the existing definitions will be discarded.
     {
       @doc("A composite wrapper object with corresponding lists of the type definition.")
       @body
-      typesDef: AtlasTypesDef;
+      body: AtlasTypesDef;
     },
     AtlasTypesDef,
     {},
@@ -2169,7 +2168,7 @@ persisted.
     {
       @doc("A composite object that captures all type definition changes.")
       @body
-      typesDef: AtlasTypesDef;
+      body: AtlasTypesDef;
     },
     AtlasTypesDef,
     {},
@@ -2184,7 +2183,7 @@ persisted.
     {
       @doc("A composite object that captures all types to be deleted")
       @body
-      typesDef: AtlasTypesDef;
+      body: AtlasTypesDef;
     },
     void,
     {},
