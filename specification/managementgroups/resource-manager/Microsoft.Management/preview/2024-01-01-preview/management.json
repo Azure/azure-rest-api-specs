@@ -2079,18 +2079,11 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The fully qualified ID for the application.  For example, /providers/Microsoft.Management/applications/0000000-0000-0000-0000-000000000000"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.  For example, Microsoft.Management/applications"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the application. For example, 00000000-0000-0000-0000-000000000000"
-        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ARMResourceProperties"
+          }
+        ],
         "properties": {
           "title": "properties",
           "$ref": "#/definitions/CreateApplicationRequestProperties"
@@ -2131,21 +2124,11 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The fully qualified ID for the application.  For example, /providers/Microsoft.Management/applications/0000000-0000-0000-0000-000000000000",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.  For example, Microsoft.Management/applications",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the application. For example, 00000000-0000-0000-0000-000000000000",
-          "readOnly": true
-        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ARMResourceProperties"
+          }
+        ],
         "properties": {
           "title": "properties",
           "$ref": "#/definitions/ApplicationProperties"
@@ -2390,6 +2373,28 @@
       "type": "string",
       "description": "Application ID.",
       "x-ms-parameter-location": "method"
+    },
+    "ARMResourceProperties": {
+      "type": "object",
+      "description": "The core properties of ARM resources.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      },
+      "x-ms-azure-resource": true
     }
   }
 }
