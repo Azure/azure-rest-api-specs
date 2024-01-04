@@ -18,7 +18,7 @@ namespace Microsoft.MachineLearningServices;
 
 @doc("Index resource")
 @parentResource(Workspace)
-model Index is ProxyResource<IndexVersionProperties> {
+model Index is ProxyResource<IndexContainerProperties> {
   @doc("Name of the index")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("indexName")
@@ -38,25 +38,6 @@ model IndexVersion is ProxyResource<IndexVersionProperties> {
   name: string;
 }
 
-@doc("Resource Base class.")
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "property bag is a required attribute for all our resources"
-model ResourceBase {
-  @doc("Tag dictionary. Tags can be added, removed, and updated.")
-  tags: Record<string>;
-
-  @doc("The asset property dictionary.")
-  properties: Record<string>;
-}
-
-@doc("Asset based class.")
-model AssetBased extends ResourceBase {
-  @doc("Is the asset archived? For types where Stage is defined, when Stage is provided it will be used to populate IsArchived.")
-  isArchived: boolean;
-
-  @doc("If the name version are system generated (anonymous registration). For types where Stage is defined, when Stage is provided it will be used to populate IsAnonymous.")
-  isAnonymous: boolean;
-}
-
 @doc("Index properties")
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "not a long running resource"
 model IndexVersionProperties extends AssetBased {
@@ -67,15 +48,34 @@ model IndexVersionProperties extends AssetBased {
   indexConfigurations: Record<string>
 }
 
-@doc("Provides the '$latest' query parameter for list operations.")
-model CustomLatestQueryParameter {
-  @query("$latest")
+@doc("Index properties")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "not a long running resource"
+model IndexContainerProperties extends AssetBased {
+  @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
+  indexVersion: string;
+
+  @doc("Placeholder for extras.")
+  indexVersionDefinition: IndexVersionProperties
+}
+
+// note this is a common ref (todo)
+@doc("[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.")
+model CustomListViewQueryParameter {
+  @query("listViewType")
+  @doc("Defines what set of entities to return in list, default active only.")
+  listViewType?: string = "ActiveOnly";
+}
+
+@doc("Filter for items with a given label.")
+model CustomLabelQueryParameter {
+  @query("label")
   @doc("If set to true, $latest provides the latest of each index.")
-  latest?: boolean;
+  label?: string;
 }
 
 alias ListQueryParameters = {
-  ...CustomLatestQueryParameter;
+  ...CustomLabelQueryParameter;
+  ...CustomListViewQueryParameter;
   ...StandardListQueryParameters;
 };
 
