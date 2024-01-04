@@ -2135,6 +2135,28 @@
         }
       }
     },
+    "ARMResourceProperties": {
+      "type": "object",
+      "description": "The core properties of ARM resources.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "ApplicationProperties": {
       "description": "Application creation request body parameters.",
       "type": "object",
@@ -2373,28 +2395,6 @@
       "type": "string",
       "description": "Application ID.",
       "x-ms-parameter-location": "method"
-    },
-    "ARMResourceProperties": {
-      "type": "object",
-      "description": "The core properties of ARM resources.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unique resource identifier of the ARM resource."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the ARM resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of Azure resource."
-        }
-      },
-      "x-ms-azure-resource": true
     }
   }
 }
