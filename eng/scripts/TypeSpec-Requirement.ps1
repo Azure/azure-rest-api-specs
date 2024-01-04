@@ -27,6 +27,10 @@ else {
 
     if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
       LogInfo "  Swagger was generated from TypeSpec (contains '/info/x-typespec-generated')"
+
+      # ToDo: Verify spec folder includes *.tsp and tspconfig.yaml, to prevent spec authors committing
+      # swagger generated from TypeSpec, without also including the TypeSpec sources.
+
       # Skip further checks, since spec is already using TypeSpec
       continue
     }
