@@ -78,7 +78,7 @@ These settings apply only when `--tag=package-stable-1.0` is specified on the co
 input-file:
   - Microsoft.Maps/Data/preview/1.0/data.json
   - Microsoft.Maps/Render/preview/1.0/render.json
-  - Search/preview/1.0
+  - Search/preview/1.0/search.json
 ```
 
 ### Tag: package-depricated
@@ -91,6 +91,7 @@ input-file:
   - Microsoft.Maps/DEM/preview/1.0/elevation.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
+  - Render/preview/2.0/render.json
   - Microsoft.Maps/Route/preview/1.0/route.json
   - Microsoft.Maps/Search/preview/1.0/search.json
   - Microsoft.Maps/Spatial/preview/1.0/spatial.json
