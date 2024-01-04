@@ -985,6 +985,11 @@
     },
     "ChamberPropertiesFormat": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common-types.json#/definitions/PowerStateProperty"
+        }
+      ],
       "properties": {
         "licenseServices": {
           "x-ms-client-flatten": true,
@@ -1064,9 +1069,6 @@
       "allOf": [
         {
           "$ref": "./modsimworkbenches.json#/definitions/Resource"
-        },
-        {
-          "$ref": "./common-types.json#/definitions/PowerStateProperty"
         }
       ]
     }

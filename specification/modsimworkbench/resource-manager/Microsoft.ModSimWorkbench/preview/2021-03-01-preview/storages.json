@@ -439,6 +439,11 @@
     "StoragePropertiesFormat": {
       "description": "Storage properties.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common-types.json#/definitions/PowerStateProperty"
+        }
+      ],
       "properties": {
         "provisioningState": {
           "$ref": "./modsimworkbenches.json#/definitions/ProvisioningState",
@@ -490,9 +495,6 @@
       "allOf": [
         {
           "$ref": "./modsimworkbenches.json#/definitions/Resource"
-        },
-        {
-          "$ref": "./common-types.json#/definitions/PowerStateProperty"
         }
       ]
     }

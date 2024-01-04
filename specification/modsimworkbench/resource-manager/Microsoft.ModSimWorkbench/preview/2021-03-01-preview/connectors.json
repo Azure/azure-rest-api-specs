@@ -853,6 +853,11 @@
     },
     "ConnectorPropertiesFormat": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common-types.json#/definitions/PowerStateProperty"
+        }
+      ],
       "properties": {
         "accessConfigurations": {
           "type": "object",
@@ -900,9 +905,6 @@
       "allOf": [
         {
           "$ref": "./modsimworkbenches.json#/definitions/Resource"
-        },
-        {
-          "$ref": "./common-types.json#/definitions/PowerStateProperty"
         }
       ]
     },
