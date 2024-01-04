@@ -217,9 +217,42 @@
             "$ref": "#/definitions/OperatorOfferingApi"
           }
         },
+        "limits": {
+          "type": "string",
+          "description": "Details about limits set by the operator for using APIs in this offering. The limits shall be ensured by the operators, if any."
+        },
+        "marketplaceProperties": {
+          "$ref": "#/definitions/MarketplaceProperties",
+          "description": "Azure marketplace properties for this offering."
+        },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "The status of the last operation on the Gateway resource."
+        }
+      }
+    },
+    "MarketplaceProperties": {
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "type": "string",
+          "description": "Azure marketplace Offer ID for this offering."
+        },
+        "legacyOfferId": {
+          "type": "string",
+          "description": "Azure marketplace Legacy Offer ID for this offering. This is used to fetch the details of the offering from the Azure marketplace."
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Azure marketplace Publisher ID for this offering."
+        },
+        "planId": {
+          "type": "string",
+          "description": "Azure marketplace Plan ID for this offering."
+        },
+        "termId": {
+          "type": "string",
+          "description": "Azure marketplace Term ID for this offering."
         }
       }
     },
