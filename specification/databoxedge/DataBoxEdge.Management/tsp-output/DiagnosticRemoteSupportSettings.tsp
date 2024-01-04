@@ -21,7 +21,7 @@ model DiagnosticRemoteSupportSettings
 }
 
 @armResourceOperations
-interface DiagnosticSettings {
+interface DiagnosticSupportSettings {
   @doc("Gets the diagnostic remote support settings of the specified Data Box Edge/Data Box Gateway device.")
   getDiagnosticRemoteSupportSettings is ArmResourceRead<DiagnosticRemoteSupportSettings>;
   @doc("Updates the diagnostic remote support settings on a Data Box Edge/Data Box Gateway device.")

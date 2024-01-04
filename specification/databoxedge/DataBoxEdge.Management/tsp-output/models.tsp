@@ -966,7 +966,7 @@ model VmPlacementRequestResult {
 }
 
 @doc("Object for Capturing DeviceCapacityInfo")
-model DeviceCapacityInfo extends ARMBaseModel {
+model DeviceCapacityInfoModel extends ARMBaseModel {
   @doc("The device capacity properties.")
   properties?: DeviceCapacityInfoProperties;
 
