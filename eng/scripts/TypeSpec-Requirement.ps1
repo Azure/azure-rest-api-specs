@@ -22,6 +22,7 @@ else {
 
     if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
       LogInfo "  Swagger was generated from TypeSpec (contains '/info/x-typespec-generated')"
+      # Skip further checks, since spec is already using TypeSpec
       continue
     }
     else {
