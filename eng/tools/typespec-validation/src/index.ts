@@ -21,6 +21,14 @@ export async function main() {
   const folder = parsedArgs.positionals[0];
   const absolutePath = host.normalizePath(folder);
 
+  if (!(await host.checkFileExists(absolutePath))) {
+    console.log(`Folder ${absolutePath} does not exist`);
+    process.exit(1);
+  }
+  if (!(await host.isDirectory(absolutePath))) {
+    console.log(`Please run TypeSpec Validation on a directory path`);
+    process.exit(1);
+  }
   console.log("Running TypeSpecValidation on folder: ", absolutePath);
 
   const rules = [
