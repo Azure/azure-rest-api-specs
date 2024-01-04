@@ -36,7 +36,7 @@
           "analyzer": null,
           "synonymMaps": [],
           "dimensions": 1536,
-          "vectorSearchProfile": "myHnswProfile"
+          "vectorSearchProfile": "myCompressedHnswProfile"
         },
         {
           "name": "description_fr",
@@ -49,6 +49,22 @@
         {
           "name": "hotelName",
           "type": "Edm.String"
+        },
+        {
+          "name": "nameEmbedding",
+          "type": "Collection(Edm.Float16)",
+          "searchable": true,
+          "filterable": false,
+          "retrievable": true,
+          "sortable": false,
+          "facetable": false,
+          "key": false,
+          "indexAnalyzer": null,
+          "searchAnalyzer": null,
+          "analyzer": null,
+          "synonymMaps": [],
+          "dimensions": 1536,
+          "vectorSearchProfile": "myHnswProfile"
         },
         {
           "name": "category",
@@ -178,6 +194,12 @@
             "vectorizer": "myOpenAi"
           },
           {
+            "name": "myCompressedHnswProfile",
+            "algorithm": "myHnsw",
+            "vectorizer": "myOpenAi",
+            "compression": "mySQ8"
+          },
+          {
             "name": "myAlgorithm",
             "algorithm": "myHnsw"
           }
@@ -199,6 +221,14 @@
             "exhaustiveKnnParameters": {
               "metric": "cosine"
             }
+          }
+        ],
+        "compressions": [
+          {
+            "name": "mySQ8",
+            "kind": "scalar8",
+            "rerankWithOriginalVectors": true,
+            "defaultOversampling": 10
           }
         ],
         "vectorizers": [
@@ -285,7 +315,7 @@
             "analyzer": null,
             "normalizer": null,
             "dimensions": 1536,
-            "vectorSearchProfile": "myHnswProfile",
+            "vectorSearchProfile": "myCompressedHnswProfile",
             "synonymMaps": []
           },
           {
@@ -320,6 +350,23 @@
             "normalizer": null,
             "dimensions": null,
             "vectorSearchProfile": null,
+            "synonymMaps": []
+          },
+          {
+            "name": "nameEmbedding",
+            "type": "Collection(Edm.Float16)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "normalizer": null,
+            "dimensions": 1536,
+            "vectorSearchProfile": "myHnswProfile",
             "synonymMaps": []
           },
           {
@@ -566,8 +613,22 @@
               "vectorizer": "myOpenAi"
             },
             {
+              "name": "myCompressedHnswProfile",
+              "algorithm": "myHnsw",
+              "vectorizer": "myOpenAi",
+              "compression": "mySQ8"
+            },
+            {
               "name": "myAlgorithm",
               "algorithm": "myHnsw"
+            }
+          ],
+          "compressions": [
+            {
+              "name": "mySQ8",
+              "kind": "scalar8",
+              "rerankWithOriginalVectors": true,
+              "defaultOversampling": 10
             }
           ],
           "vectorizers": [

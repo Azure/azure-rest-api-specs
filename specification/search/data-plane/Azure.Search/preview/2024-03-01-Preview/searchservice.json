@@ -3145,7 +3145,10 @@
         "Edm.DateTimeOffset",
         "Edm.GeographyPoint",
         "Edm.ComplexType",
-        "Edm.Single"
+        "Edm.Single",
+        "Edm.Float16",
+        "Edm.Int16",
+        "Edm.SByte"
       ],
       "x-ms-enum": {
         "name": "SearchFieldDataType",
@@ -6159,6 +6162,13 @@
             "$ref": "#/definitions/VectorSearchVectorizer"
           },
           "description": "Contains configuration options on how to vectorize text vector queries."
+        },
+        "compressions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VectorSearchCompressionConfiguration"
+          },
+          "description": "Contains configuration options specific to the compression method used during indexing or querying."
         }
       },
       "description": "Contains configuration options related to vector search."
@@ -6183,6 +6193,12 @@
         "vectorizer": {
           "type": "string",
           "description": "The name of the kind of vectorization method being configured for use with vector search.",
+          "x-nullable": false
+        },
+        "compression": {
+          "x-ms-client-name": "compressionConfigurationName",
+          "type": "string",
+          "description": "The name of the compression method configuration that specifies the compression method and optional parameters.",
           "x-nullable": false
         }
       },
@@ -6351,6 +6367,72 @@
         ]
       },
       "description": "The algorithm used for indexing and querying."
+    },
+    "VectorSearchCompressionConfiguration": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name to associate with this particular configuration.",
+          "x-nullable": false
+        },
+        "kind": {
+          "$ref": "#/definitions/VectorSearchCompressionKind",
+          "description": "The name of the kind of compression method being configured for use with vector search.",
+          "x-nullable": false
+        },
+        "rerankWithOriginalVectors": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indicate whether full-precision reranking will be performed on the set of results that were calculated using compressed vectors. This will improve recall at the expense of latency by recalculating full-precision similarity scores."
+        },
+        "defaultOversampling": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default oversampling factor. Oversampling will internally request more documents (specified by this multiplier) in the initial search, then rerank them by re-calculating similarity with the full-precision original vectors. Minimum value is 1. It can be set only when rerankWithOriginalVectors is true.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "name",
+        "kind"
+      ],
+      "description": "Contains configuration options specific to the compression method used during indexing or querying."
+    },
+    "Scalar8VectorSearchCompressionConfiguration": {
+      "x-ms-client-name": "Scalar8CompressionConfiguration",
+      "type": "object",
+      "x-ms-discriminator-value": "scalar8",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchCompressionConfiguration"
+        }
+      ],
+      "properties": {
+      },
+      "description": "Contains configuration options specific to the scalar8 compression method used during indexing and querying."
+    },
+    "VectorSearchCompressionKind": {
+      "type": "string",
+      "enum": [
+        "scalar8"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchCompressionKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "scalar8",
+            "name": "Scalar8",
+            "description": "Scalar Quantization, a type of compression method. In scalar8, the original vectors are processed and mapped to int8 vectors."
+          }
+        ]
+      },
+      "description": "The compression method used for indexing and querying."
     },
     "VectorSearchVectorizer": {
       "type": "object",

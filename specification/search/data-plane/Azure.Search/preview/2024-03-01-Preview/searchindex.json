@@ -1868,6 +1868,11 @@
         "exhaustive": {
           "type": "boolean",
           "description": "When true, triggers an exhaustive k-nearest neighbor search across all vectors within the vector index. Useful for scenarios where exact matches are critical, such as determining ground truth values."
+        },
+        "oversampling": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Oversampling factor. Minimum value is 1. It overrides the defaultOversampling. It can be set only when 'rerankWithOriginalVectors' is true. This parameter is only permitted when a compression method is used on the underlying vector field."
         }
       },
       "required": [
