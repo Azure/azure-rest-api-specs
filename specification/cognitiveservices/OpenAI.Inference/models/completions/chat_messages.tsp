@@ -64,11 +64,11 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
   imageUrl: ChatMessageImageUrl;
 }
 
-@doc("An internet location from which the model may retrieve an image.")
+@doc("A representation of the image data in a chat message content item.")
 @added(ServiceApiVersions.v2023_12_01_Preview)
 model ChatMessageImageUrl {
-  @doc("The URL of the image.")
-  url: url;
+  @doc("The URL or base64-encoded binary data of the image.")
+  url: string;
 
   @doc("""
   The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
