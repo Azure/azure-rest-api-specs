@@ -187,7 +187,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/managedInstance"
+              "$ref": "#/definitions/ManagedInstance"
             }
           },
           "default": {
@@ -228,7 +228,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/managedInstance"
+              "$ref": "#/definitions/ManagedInstance"
             }
           },
           {
@@ -243,13 +243,13 @@
           "200": {
             "description": "Managed instance update successful.",
             "schema": {
-              "$ref": "#/definitions/managedInstance"
+              "$ref": "#/definitions/ManagedInstance"
             }
           },
           "201": {
             "description": "Managed instance create request successful.",
             "schema": {
-              "$ref": "#/definitions/managedInstance"
+              "$ref": "#/definitions/ManagedInstance"
             }
           },
           "default": {
@@ -301,13 +301,13 @@
           "200": {
             "description": "Operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/managedInstance"
+              "$ref": "#/definitions/ManagedInstance"
             }
           },
           "202": {
             "description": "accepted operation",
             "schema": {
-              "$ref": "#/definitions/managedInstance"
+              "$ref": "#/definitions/ManagedInstance"
             },
             "headers": {
               "Location": {
@@ -1034,7 +1034,7 @@
     }
   },
   "definitions": {
-    "managedInstance": {
+    "ManagedInstance": {
       "type": "object",
       "description": "A SCOM instance resource",
       "allOf": [
@@ -1376,7 +1376,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/managedInstance"
+            "$ref": "#/definitions/ManagedInstance"
           }
         },
         "nextLink": {
