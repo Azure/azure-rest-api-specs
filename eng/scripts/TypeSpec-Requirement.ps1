@@ -6,6 +6,7 @@ Set-StrictMode -Version 3
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
 
+$repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
 $filesToCheck = @(Get-ChangedSwaggerFiles)
@@ -18,7 +19,7 @@ else {
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
-    $jsonContent = Get-Content $file | ConvertFrom-Json -AsHashtable
+    $jsonContent = Get-Content (Join-Path $repoPath $file) | ConvertFrom-Json -AsHashtable
 
     if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
       LogInfo "  Swagger was generated from TypeSpec (contains '/info/x-typespec-generated')"
