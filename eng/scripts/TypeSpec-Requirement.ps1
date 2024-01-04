@@ -47,10 +47,10 @@ else {
     try {
       $response = Invoke-WebRequest -Uri $urlToStableFolder -Method Head -SkipHttpErrorCheck
       if ($response.StatusCode -eq 200) {
-        LogInfo "  Main contains path '$pathToServiceName/stable', so spec already exists and is not required to use TypeSpec"
+        LogInfo "  Branch 'main' contains path '$pathToServiceName/stable', so spec already exists and is not required to use TypeSpec"
       }
       elseif ($response.StatusCode -eq 404) {
-        LogInfo "  Main does not contain path '$pathToServiceName/stable', so spec is new and must use TypeSpec"
+        LogInfo "  Branch 'main' does not contain path '$pathToServiceName/stable', so spec is new and must use TypeSpec"
         $pathsWithErrors += $file
       }
       else {
