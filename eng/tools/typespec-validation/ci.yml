@@ -36,6 +36,8 @@ jobs:
 
   steps:
   - template: /eng/pipelines/templates/steps/npm-install.yml
+    parameters:
+      NodeVersion: $(NodeVersion)
 
   - script: npm test
     displayName: npm test
