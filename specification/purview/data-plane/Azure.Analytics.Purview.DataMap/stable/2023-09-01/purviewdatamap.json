@@ -64,7 +64,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "entity",
+            "name": "body",
             "description": "Atlas entity with extended information.",
             "required": true,
             "schema": {
@@ -161,7 +161,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "entities",
+            "name": "body",
             "description": "An array of entities to create or update.",
             "required": true,
             "schema": {
@@ -249,7 +249,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "request",
+            "name": "body",
             "description": "The request to associate a classification to multiple entities.",
             "required": true,
             "schema": {
@@ -503,7 +503,7 @@
           },
           {
             "in": "body",
-            "name": "classifications",
+            "name": "body",
             "description": "An array of classifications to be added.",
             "required": true,
             "schema": {
@@ -544,7 +544,7 @@
           },
           {
             "in": "body",
-            "name": "classifications",
+            "name": "body",
             "description": "An array of classifications to be updated.",
             "required": true,
             "schema": {
@@ -638,7 +638,7 @@
           },
           {
             "in": "body",
-            "name": "atlasEntityWithExtInfo",
+            "name": "body",
             "description": "Atlas entity with extended information.",
             "required": true,
             "schema": {
@@ -765,7 +765,7 @@
           },
           {
             "in": "body",
-            "name": "atlasClassificationArray",
+            "name": "body",
             "description": "An array of classification to be added.",
             "required": true,
             "schema": {
@@ -813,7 +813,7 @@
           },
           {
             "in": "body",
-            "name": "atlasClassificationArray",
+            "name": "body",
             "description": "An array of classification to be updated.",
             "required": true,
             "schema": {
@@ -853,7 +853,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "entityHeaders",
+            "name": "body",
             "description": "Atlas entity headers.",
             "required": true,
             "schema": {
@@ -980,7 +980,7 @@
             "$ref": "#/parameters/guid"
           },
           {
-            "name": "businessMetadata",
+            "name": "body",
             "required": false,
             "in": "body",
             "schema": {
@@ -1026,7 +1026,7 @@
             "required": false
           },
           {
-            "name": "businessMetadata",
+            "name": "body",
             "required": false,
             "in": "body",
             "schema": {
@@ -1074,7 +1074,7 @@
             "$ref": "#/parameters/guid"
           },
           {
-            "name": "businessMetadataAttributes",
+            "name": "body",
             "required": false,
             "in": "body",
             "schema": {
@@ -1120,7 +1120,7 @@
             "$ref": "#/parameters/guid"
           },
           {
-            "name": "businessMetadataAttributes",
+            "name": "body",
             "required": false,
             "in": "body",
             "schema": {
@@ -1527,7 +1527,7 @@
           },
           {
             "in": "body",
-            "name": "moveEntitiesRequest",
+            "name": "body",
             "description": "Entity guids to be moved to target collection.",
             "required": true,
             "schema": {
@@ -1556,7 +1556,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get all glossaries. Recommend using limit/offset to get pagination result. Recommend using 'ignoreTermsAndCategories=true' and fetch terms/categories separately using \n\n 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and \n\n 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
+        "description": "Get all glossaries. Recommend using limit/offset to get pagination result. Recommend using 'ignoreTermsAndCategories=true' and fetch terms/categories separately using \n\n 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms' and \n\n 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.",
         "operationId": "Glossary_List",
         "x-ms-examples": {
           "Glossary_List": {
@@ -1612,7 +1612,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "atlasGlossary",
+            "name": "body",
             "description": "Glossary definition, terms & categories can be anchored to a glossary.\nUsing the anchor attribute when creating the Term/Category.",
             "required": true,
             "schema": {
@@ -1651,7 +1651,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "glossaryCategory",
+            "name": "body",
             "description": "An array of glossary category definitions to be created.",
             "required": true,
             "schema": {
@@ -1698,7 +1698,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "glossaryCategory",
+            "name": "body",
             "description": "The glossary category definition. A category must be anchored to a Glossary when creating.\nOptionally, terms belonging to the category and the hierarchy can also be defined during creation.",
             "required": true,
             "schema": {
@@ -1722,7 +1722,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}": {
+    "/atlas/v2/glossary/category/{categoryId}": {
       "get": {
         "tags": [
           "Glossary"
@@ -1736,7 +1736,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/categoryGuid"
+            "$ref": "#/parameters/categoryId"
           }
         ],
         "responses": {
@@ -1767,11 +1767,11 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/categoryGuid"
+            "$ref": "#/parameters/categoryId"
           },
           {
             "in": "body",
-            "name": "glossaryCategory",
+            "name": "body",
             "description": "The glossary category to be updated.",
             "required": true,
             "schema": {
@@ -1807,7 +1807,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/categoryGuid"
+            "$ref": "#/parameters/categoryId"
           }
         ],
         "responses": {
@@ -1823,7 +1823,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}/partial": {
+    "/atlas/v2/glossary/category/{categoryId}/partial": {
       "put": {
         "tags": [
           "Glossary"
@@ -1837,11 +1837,11 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/categoryGuid"
+            "$ref": "#/parameters/categoryId"
           },
           {
             "in": "body",
-            "name": "partialUpdates",
+            "name": "body",
             "description": "A map containing keys as attribute names and values as corresponding attribute values for partial update.",
             "required": true,
             "schema": {
@@ -1866,7 +1866,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}/related": {
+    "/atlas/v2/glossary/category/{categoryId}/related": {
       "get": {
         "tags": [
           "Glossary"
@@ -1880,7 +1880,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/categoryGuid"
+            "$ref": "#/parameters/categoryId"
           },
           {
             "$ref": "#/parameters/limit"
@@ -1908,7 +1908,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}/terms": {
+    "/atlas/v2/glossary/category/{categoryId}/terms": {
       "get": {
         "tags": [
           "Glossary"
@@ -1922,7 +1922,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/categoryGuid"
+            "$ref": "#/parameters/categoryId"
           },
           {
             "$ref": "#/parameters/limit"
@@ -1972,7 +1972,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "glossaryTerm",
+            "name": "body",
             "description": "The glossary term definition. A term must be anchored to a Glossary at the time of creation.\nOptionally it can be categorized as well.",
             "required": true,
             "schema": {
@@ -1999,7 +1999,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/term/{termGuid}": {
+    "/atlas/v2/glossary/term/{termId}": {
       "get": {
         "tags": [
           "Glossary"
@@ -2019,7 +2019,7 @@
             "$ref": "#/parameters/atlasAPIVersion"
           },
           {
-            "$ref": "#/parameters/termGuid"
+            "$ref": "#/parameters/termId"
           }
         ],
         "responses": {
@@ -2053,11 +2053,11 @@
             "$ref": "#/parameters/atlasAPIVersion"
           },
           {
-            "$ref": "#/parameters/termGuid"
+            "$ref": "#/parameters/termId"
           },
           {
             "in": "body",
-            "name": "glossaryTerm",
+            "name": "body",
             "description": "The glossary term to be updated.",
             "required": true,
             "schema": {
@@ -2096,7 +2096,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/termGuid"
+            "$ref": "#/parameters/termId"
           }
         ],
         "responses": {
@@ -2112,7 +2112,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/term/{termGuid}/partial": {
+    "/atlas/v2/glossary/term/{termId}/partial": {
       "put": {
         "tags": [
           "Glossary"
@@ -2129,14 +2129,14 @@
             "$ref": "#/parameters/atlasAPIVersion"
           },
           {
-            "$ref": "#/parameters/termGuid"
+            "$ref": "#/parameters/termId"
           },
           {
             "$ref": "#/parameters/includeTermHierarchy"
           },
           {
             "in": "body",
-            "name": "partialUpdates",
+            "name": "body",
             "description": "A map containing keys as attribute names and values as corresponding attribute values to be updated.",
             "required": true,
             "schema": {
@@ -2179,7 +2179,7 @@
           },
           {
             "in": "body",
-            "name": "glossaryTerm",
+            "name": "body",
             "description": "An array of glossary term definitions to be created in bulk.",
             "required": true,
             "schema": {
@@ -2214,7 +2214,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/terms/{termGuid}/assignedEntities": {
+    "/atlas/v2/glossary/terms/{termId}/assignedEntities": {
       "get": {
         "tags": [
           "Glossary"
@@ -2228,7 +2228,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/termGuid"
+            "$ref": "#/parameters/termId"
           },
           {
             "$ref": "#/parameters/limit"
@@ -2272,11 +2272,11 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/termGuid"
+            "$ref": "#/parameters/termId"
           },
           {
             "in": "body",
-            "name": "relatedObjectIds",
+            "name": "body",
             "description": "An array of related object IDs to which the term has to be associated.",
             "required": true,
             "schema": {
@@ -2313,11 +2313,11 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/termGuid"
+            "$ref": "#/parameters/termId"
           },
           {
             "in": "body",
-            "name": "relatedObjectIds",
+            "name": "body",
             "description": "An array of related object IDs from which the term has to be dissociated.",
             "required": true,
             "schema": {
@@ -2342,7 +2342,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/terms/{termGuid}/related": {
+    "/atlas/v2/glossary/terms/{termId}/related": {
       "get": {
         "tags": [
           "Glossary"
@@ -2359,7 +2359,7 @@
             "$ref": "#/parameters/atlasAPIVersion"
           },
           {
-            "$ref": "#/parameters/termGuid"
+            "$ref": "#/parameters/termId"
           },
           {
             "$ref": "#/parameters/limit"
@@ -2387,7 +2387,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}": {
+    "/atlas/v2/glossary/{glossaryId}": {
       "get": {
         "tags": [
           "Glossary"
@@ -2401,7 +2401,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "$ref": "#/parameters/glossaryId"
           }
         ],
         "responses": {
@@ -2435,14 +2435,14 @@
             "$ref": "#/parameters/atlasAPIVersion"
           },
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "$ref": "#/parameters/glossaryId"
           },
           {
             "$ref": "#/parameters/ignoreTermsAndCategories"
           },
           {
             "in": "body",
-            "name": "updatedGlossary",
+            "name": "body",
             "description": "The glossary definition to be updated.",
             "required": true,
             "schema": {
@@ -2478,7 +2478,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "$ref": "#/parameters/glossaryId"
           }
         ],
         "responses": {
@@ -2494,7 +2494,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/categories": {
+    "/atlas/v2/glossary/{glossaryId}/categories": {
       "get": {
         "tags": [
           "Glossary"
@@ -2508,7 +2508,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "$ref": "#/parameters/glossaryId"
           },
           {
             "$ref": "#/parameters/limit"
@@ -2540,7 +2540,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/categories/headers": {
+    "/atlas/v2/glossary/{glossaryId}/categories/headers": {
       "get": {
         "tags": [
           "Glossary"
@@ -2554,7 +2554,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "$ref": "#/parameters/glossaryId"
           },
           {
             "$ref": "#/parameters/limit"
@@ -2586,12 +2586,12 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/detailed": {
+    "/atlas/v2/glossary/{glossaryId}/detailed": {
       "get": {
         "tags": [
           "Glossary"
         ],
-        "description": "Get a specific glossary with detailed information. This API is not recommend.\n\nRecommend to fetch terms/categories details separately using \n\n 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and \n\n 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
+        "description": "Get a specific glossary with detailed information. This API is not recommend.\n\nRecommend to fetch terms/categories details separately using \n\n 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms' and \n\n 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.",
         "operationId": "Glossary_GetDetailed",
         "x-ms-examples": {
           "Glossary_GetDetailed": {
@@ -2603,7 +2603,7 @@
             "$ref": "#/parameters/atlasAPIVersion"
           },
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "$ref": "#/parameters/glossaryId"
           }
         ],
         "responses": {
@@ -2622,7 +2622,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/partial": {
+    "/atlas/v2/glossary/{glossaryId}/partial": {
       "put": {
         "tags": [
           "Glossary"
@@ -2639,14 +2639,14 @@
             "$ref": "#/parameters/atlasAPIVersion"
           },
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "$ref": "#/parameters/glossaryId"
           },
           {
             "$ref": "#/parameters/ignoreTermsAndCategories"
           },
           {
             "in": "body",
-            "name": "partialUpdates",
+            "name": "body",
             "description": "A map containing keys as attribute names and values as corresponding attribute values.",
             "required": true,
             "schema": {
@@ -2671,7 +2671,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/terms": {
+    "/atlas/v2/glossary/{glossaryId}/terms": {
       "get": {
         "tags": [
           "Glossary"
@@ -2688,7 +2688,7 @@
             "$ref": "#/parameters/atlasAPIVersion"
           },
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "$ref": "#/parameters/glossaryId"
           },
           {
             "$ref": "#/parameters/limit"
@@ -2720,7 +2720,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/terms/headers": {
+    "/atlas/v2/glossary/{glossaryId}/terms/headers": {
       "get": {
         "tags": [
           "Glossary"
@@ -2734,7 +2734,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/glossaryGuid"
+            "$ref": "#/parameters/glossaryId"
           },
           {
             "$ref": "#/parameters/limit"
@@ -2841,7 +2841,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "searchRequest",
+            "name": "body",
             "description": "An object specifying the search criteria.",
             "required": true,
             "schema": {
@@ -2883,7 +2883,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "suggestRequest",
+            "name": "body",
             "description": "An object specifying the suggest criteria.",
             "required": true,
             "schema": {
@@ -2925,7 +2925,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "autoCompleteRequest",
+            "name": "body",
             "description": "An object specifying the autocomplete criteria.",
             "required": true,
             "schema": {
@@ -3101,7 +3101,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "relationship",
+            "name": "body",
             "description": "The AtlasRelationship object containing the information for the relationship to be created.",
             "required": true,
             "schema": {
@@ -3138,7 +3138,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "relationship",
+            "name": "body",
             "description": "The AtlasRelationship object containing the information for the relationship to be created.",
             "required": true,
             "schema": {
@@ -3793,7 +3793,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "typesDef",
+            "name": "body",
             "description": "A composite wrapper object with corresponding lists of the type definition.",
             "required": true,
             "schema": {
@@ -3830,7 +3830,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "typesDef",
+            "name": "body",
             "description": "A composite object that captures all type definition changes.",
             "required": true,
             "schema": {
@@ -3867,7 +3867,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "typesDef",
+            "name": "body",
             "description": "A composite object that captures all types to be deleted",
             "required": true,
             "schema": {
@@ -5955,11 +5955,6 @@
       },
       "description": "The number format."
     },
-    "TermGuid": {
-      "type": "string",
-      "title": "termGuid",
-      "description": "The globally unique identifier for glossary term."
-    },
     "PList": {
       "type": "object",
       "properties": {
@@ -6815,8 +6810,8 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "categoryGuid": {
-      "name": "categoryGuid",
+    "categoryId": {
+      "name": "categoryId",
       "description": "The globally unique identifier of the category.",
       "in": "path",
       "required": true,
@@ -6852,8 +6847,8 @@
       "default": "ASC",
       "x-ms-parameter-location": "method"
     },
-    "termGuid": {
-      "name": "termGuid",
+    "termId": {
+      "name": "termId",
       "in": "path",
       "description": "The globally unique identifier for glossary term.",
       "required": true,
@@ -6872,20 +6867,10 @@
       "maxLength": 4096,
       "x-ms-parameter-location": "method"
     },
-    "glossaryGuid": {
-      "name": "glossaryGuid",
+    "glossaryId": {
+      "name": "glossaryId",
       "in": "path",
       "description": "The globally unique identifier for glossary.",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 4096,
-      "x-ms-parameter-location": "method"
-    },
-    "operationGuid": {
-      "name": "operationGuid",
-      "in": "path",
-      "description": "The globally unique identifier for async operation job.",
       "required": true,
       "type": "string",
       "minLength": 1,
