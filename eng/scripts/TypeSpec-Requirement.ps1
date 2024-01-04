@@ -9,7 +9,11 @@ Set-StrictMode -Version 3
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
-$filesToCheck = @(Get-ChangedSwaggerFiles)
+$filesToCheck = @(Get-ChangedSwaggerFiles).Where({
+  ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
+  ($_ -match "specification/(?<relSpecPath>[^/]+/(data-plane|resource-manager).*?/(preview|stable)/([^/]+))/[^/]+\.json$")
+})
+
 if (!$filesToCheck) {
   LogInfo "No swagger files found to check"
 }
@@ -33,6 +37,7 @@ else {
     # Example: specification/foo/resource-manager/Microsoft.Foo
     $pathToServiceName = ($file -split '/')[0..3] -join '/'
 
+    # ToDo: Fetch main and query local git repo to prevent issues with rate limiting
     $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/$pathToServiceName/stable"
 
     try {
