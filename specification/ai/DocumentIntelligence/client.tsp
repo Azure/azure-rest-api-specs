@@ -20,9 +20,13 @@ namespace ClientCustomizations;
 })
 interface DocumentIntelligenceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  analyzeDocument is DocumentModels.analyzeDocument;
+  analyzeDocumentFromUrl is DocumentModels.analyzeDocument;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  classifyDocument is DocumentClassifiers.classifyDocument;
+  analyzeDocument is DocumentModels.analyzeDocumentFromStream;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  classifyDocumentFromUrl is DocumentClassifiers.classifyDocument;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  classifyDocument is DocumentClassifiers.classifyDocumentFromStream;
 }
 
 @client({
