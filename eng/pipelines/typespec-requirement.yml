@@ -1,7 +1,7 @@
 trigger: none
 
 jobs:
-- job: Require_TypeSpec
+- job: TypeSpec_Requirement
   pool:
     name: azsdk-pool-mms-ubuntu-2204-general
     vmImage: ubuntu-22.04
@@ -9,6 +9,6 @@ jobs:
   steps:
   - pwsh: |
       $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Requirement.ps1
-    displayName: Require TypeSpec
+    displayName: TypeSpec Requirement
     ignoreLASTEXITCODE: true
     condition: succeededOrFailed()
