@@ -2083,12 +2083,7 @@
           "title": "properties",
           "$ref": "#/definitions/CreateApplicationRequestProperties"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ARMResourceProperties"
-        }
-      ]
+      }
     },
     "CreateApplicationRequestProperties": {
       "description": "Application creation request body parameters.",
@@ -2124,25 +2119,10 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "properties": {
-          "title": "properties",
-          "$ref": "#/definitions/ApplicationProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ARMResourceProperties"
-        }
-      ]
-    },
-    "ARMResourceProperties": {
-      "type": "object",
-      "description": "The core properties of ARM resources.",
-      "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique resource identifier of the ARM resource."
+          "description": "The unique resource identifier of the ARM resource application."
         },
         "name": {
           "readOnly": true,
@@ -2153,9 +2133,12 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of Azure resource."
+        },
+        "properties": {
+          "title": "properties",
+          "$ref": "#/definitions/ApplicationProperties"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "ApplicationProperties": {
       "description": "Application creation request body parameters.",
