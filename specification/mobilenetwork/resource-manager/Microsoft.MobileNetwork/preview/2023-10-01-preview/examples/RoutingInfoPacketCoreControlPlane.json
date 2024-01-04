@@ -12,7 +12,7 @@
         "name": "default",
         "type": "Microsoft.MobileNetwork/packetCoreControlPlanes/routingInfo",
         "properties": {
-          "ipv4Routes": [
+          "n2Routes": [
             {
               "destination": "198.51.100.1/32",
               "nextHops": [
@@ -26,7 +26,52 @@
                 }
               ]
             }
-          ]
+          ],
+          "accessNetworkRoutes": [
+            {
+              "destination": "198.51.100.2/32",
+              "nextHops": [
+                {
+                  "address": "198.0.2.2",
+                  "priority": 100
+                },
+                {
+                  "address": "198.0.2.129",
+                  "priority": 200
+                }
+              ]
+            }
+          ],
+          "coreNetworkRoutes": {
+            "internet": [
+              {
+                "destination": "2.2.0.0/16",
+                "nextHops": [
+                  {
+                    "address": "203.0.113.1",
+                    "priority": 100
+                  },
+                  {
+                    "address": "203.0.113.128",
+                    "priority": 200
+                  }
+                ]
+              },
+              {
+                "destination": "2.4.0.0/16",
+                "nextHops": [
+                  {
+                    "address": "203.0.113.1",
+                    "priority": 100
+                  },
+                  {
+                    "address": "203.0.113.128",
+                    "priority": 200
+                  }
+                ]
+              }
+            ]
+          }
         }
       }
     }

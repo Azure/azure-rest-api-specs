@@ -685,15 +685,28 @@
     "RoutingInfoPropertiesFormat": {
       "type": "object",
       "properties": {
-        "ipv4Routes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Ipv4Route"
+        "n2Routes": {
+          "$ref": "#/definitions/Ipv4Routes"
+        },
+        "accessNetworkRoutes": {
+          "$ref": "#/definitions/Ipv4Routes"
+        },
+        "coreNetworkRoutes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Ipv4Routes"
           },
-          "description": "A list of IPv4 routes."
+          "description": "A map of core networks to IPv4 routes."
         }
       },
       "description": "Routing information properties"
+    },
+    "Ipv4Routes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Ipv4Route"
+      },
+      "description": "A list of IPv4 routes."
     },
     "Ipv4Route": {
       "type": "object",
