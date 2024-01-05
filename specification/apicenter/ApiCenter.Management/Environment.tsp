@@ -43,7 +43,7 @@ interface Environments {
 
       @doc("OData filter parameter.")
       @query("$filter")
-      $filter?: string;
+      filter?: string;
     }
   >;
 }

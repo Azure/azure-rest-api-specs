@@ -8,68 +8,129 @@ namespace Microsoft.ApiCenter;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+/** The expected types of origin */
 enum Origin {
+  /** Origin with User */
   user,
+
+  /** Origin with System */
   system,
+
+  /** Origin with user and system */
   `user,system`,
 }
 
+/** The type of action */
 enum ActionType {
+  /** an internal action */
   Internal,
 }
 
+/** The provisioning state of the resource */
 enum ProvisioningState {
-  Succeeded,
-  Failed,
-  Canceled,
+  ...Azure.ResourceManager.ResourceProvisioningState,
 }
 
+/** The type of managed service identity */
 enum ManagedServiceIdentityType {
+  /** No identity */
   None,
+
+  /** Assigned by the system */
   SystemAssigned,
+
+  /** assigned by the user */
   UserAssigned,
+
+  /** Both system-assigned and user-assigned identities */
   `SystemAssigned,UserAssigned`,
 }
 
+/** How the resource was created */
 enum CreatedByType {
+  /** Created by user */
   User,
+
+  /** Created by Application */
   Application,
+
+  /** Created by Managed Identity */
   ManagedIdentity,
+
+  /** Created By Key */
   Key,
 }
 
+/** Assignment entity for Metadata */
 enum MetadataAssignmentEntity {
+  /** Assigned to API */
   api,
+
+  /** Assigned to Environment */
   environment,
+
+  /** Assigned to Deployment */
   deployment,
 }
 
+/** The format for schema export */
 enum MetadataSchemaExportFormat {
-  @doc("The inlined content of a schema document.") inline,
-  @doc("The link to a schema document. The URL is valid for 5 minutes.") link,
+  @doc("The inlined content of a schema document.")
+  inline,
+
+  @doc("The link to a schema document. The URL is valid for 5 minutes.")
+  link,
 }
 
+/** The kind of the API */
 enum ApiKind {
+  /** Representational State Transfer */
   rest,
+
+  /** Graph query language */
   graphql,
+
+  /** gRPC */
   grpc,
+
+  /** SOAP */
   soap,
+
+  /** Web Hook */
   webhook,
+
+  /** Web Socket */
   websocket,
 }
 
+/** The stage of the Api development lifecycle */
 enum LifecycleStage {
+  /** design stage */
   design,
+
+  /** development stage */
   development,
+
+  /** testing stage */
   testing,
+
+  /** In preview */
   preview,
+
+  /** In production */
   production,
+
+  /** deprecated stage */
   deprecated,
+
+  /** Retired stage */
   retired,
 }
 
+/** Source format for imported Api spec */
 enum ApiSpecImportSourceFormat {
   @doc("The inlined content of a specification document.") inline,
+
   @doc("""
 The link to a specification document hosted on a publicly accessible internet
 address.
@@ -77,31 +138,59 @@ address.
   link,
 }
 
+/** Result format for exported Api spec */
 enum ApiSpecExportResultFormat {
   @doc("The inlined content of a specification document.") inline,
+
   @doc("The link to the result of the export operation. The URL is valid for 5 minutes.")
   link,
 }
 
+/** State of the Deployment */
 enum DeploymentState {
+  /** Active State */
   active,
+
+  /** Inactive State */
   inactive,
 }
 
+/** The kind of environment */
 enum EnvironmentKind {
+  /** Development environment */
   development,
+
+  /** Testing environment */
   testing,
+
+  /** Staging environment */
   staging,
+
+  /** Production environmane */
   production,
 }
 
+/** The type of environment server */
 enum EnvironmentServerType {
+  /** Api Management Server */
   `Azure API Management`,
+
+  /** Compute server */
   `Azure compute service`,
+
+  /** Apigee server */
   `Apigee API Management`,
+
+  /** AWS Api Gateway server */
   `AWS API Gateway`,
+
+  /** Kong API Gateway server */
   `Kong API Gateway`,
+
+  /** Kubernetes server */
   Kubernetes,
+
+  /** Mulesoft Api Management server */
   `MuleSoft API Management`,
 }
 
@@ -131,28 +220,36 @@ model MetadataSchemaExportRequest {
 
 @doc("The metadata schema export result.")
 model MetadataSchemaExportResult {
+  @doc("The export format for the schema")
   format?: MetadataSchemaExportFormat;
 
   @doc("The result of the export operation.")
   value?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
 @doc("Metadata schema properties.")
 model MetadataSchemaProperties {
   @doc("The schema defining the type.")
   schema: string;
 
+  @doc("The assignees")
   assignedTo?: MetadataAssignment[];
 }
 
+@doc("Assignment metadata")
 model MetadataAssignment {
   @doc("The entities this metadata schema component gets applied to.")
   entity?: MetadataAssignmentEntity;
 
+  @doc("Required assignment")
   required?: boolean;
+
+  @doc("Deprecated assignment")
   deprecated?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
 @doc("Workspace properties.")
 model WorkspaceProperties {
   @doc("Workspace title.")
@@ -164,6 +261,7 @@ model WorkspaceProperties {
   description?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
 @doc("API properties.")
 model ApiProperties {
   @doc("API title.")
@@ -189,12 +287,16 @@ model ApiProperties {
   @doc("Terms of service for the API.")
   termsOfService?: TermsOfService;
 
+  @doc("The set of external documentation")
   externalDocumentation?: ExternalDocumentation[];
+
+  @doc("The set of contacts")
   contacts?: Contact[];
 
   @doc("The license information for the API.")
   license?: License;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing spec"
   @doc("The custom metadata defined for API catalog entities.")
   customProperties?: Record<unknown>;
 }
@@ -219,6 +321,7 @@ model ExternalDocumentation {
   url: string;
 }
 
+@doc("Contact information")
 model Contact {
   @doc("Name of the contact.")
   @maxLength(100)
@@ -251,6 +354,7 @@ exclusive of the URL field.
   identifier?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
 @doc("API version properties entity.")
 model ApiVersionProperties {
   @doc("API version title.")
@@ -262,6 +366,7 @@ model ApiVersionProperties {
   lifecycleStage: LifecycleStage;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
 @doc("API definition properties entity.")
 model ApiDefinitionProperties {
   @doc("API definition title.")
@@ -309,12 +414,14 @@ model ApiSpecImportRequestSpecification {
 
 @doc("The API specification export result.")
 model ApiSpecExportResult {
+  @doc("The format of exported result")
   format?: ApiSpecExportResultFormat;
 
   @doc("The result of the export operation.")
   value?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
 @doc("API deployment entity properties.")
 model DeploymentProperties {
   @doc("API deployment title")
@@ -338,6 +445,7 @@ model DeploymentProperties {
   @doc("Server")
   server?: DeploymentServer;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing spec"
   @doc("The custom metadata defined for API catalog entities.")
   customProperties?: Record<unknown>;
 }
@@ -348,6 +456,7 @@ model DeploymentServer {
   runtimeUri?: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
 @doc("Environment properties entity.")
 model EnvironmentProperties {
   @doc("Environment title.")
@@ -364,8 +473,10 @@ model EnvironmentProperties {
   @doc("Server information of the environment.")
   server?: EnvironmentServer;
 
+  @doc("Environment onboarding information")
   onboarding?: Onboarding;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing spec"
   @doc("The custom metadata defined for API catalog entities.")
   customProperties?: Record<unknown>;
 }
@@ -375,12 +486,15 @@ model EnvironmentServer {
   @doc("Type of the server that represents the environment.")
   type?: EnvironmentServerType;
 
+  @doc("The location of the management portal")
   managementPortalUri?: string[];
 }
 
+@doc("Onboarding information")
 model Onboarding {
   @doc("Onboarding guide.")
   instructions?: string;
 
+  @doc("The location of the development portal")
   developerPortalUri?: string[];
 }

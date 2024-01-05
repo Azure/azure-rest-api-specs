@@ -43,7 +43,7 @@ interface ApiDefinitions {
 
       @doc("OData filter parameter.")
       @query("$filter")
-      $filter?: string;
+      filter?: string;
     }
   >;
   @doc("Imports the API specification.")

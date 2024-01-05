@@ -28,6 +28,7 @@ namespace Microsoft.ApiCenter;
 
 @doc("The available API versions.")
 enum Versions {
+  /** The initial service version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_01: "2024-03-01",
