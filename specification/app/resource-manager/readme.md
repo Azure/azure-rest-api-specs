@@ -44,7 +44,6 @@ input-file:
   - Microsoft.App/preview/2023-11-02-preview/Builds.json
   - Microsoft.App/preview/2023-11-02-preview/CommonDefinitions.json
   - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironments.json
-  - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsSecrets.json
   - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsCertificates.json
   - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsStorages.json
