@@ -561,11 +561,23 @@
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
-        "partnerExperimentationWorkspaceProperties": {
-          "$ref": "#/definitions/PartnerExperimentationWorkspaceProperties",
-          "description": "Partner ExperimentationWorkspace properties"
+        "experimentationWorkspaceId": {
+          "type": "string",
+          "description": "ExperimentationWorkspace id in partner's system",
+          "readOnly": true
+        },
+        "accessPolicy": {
+          "$ref": "#/definitions/AccessPolicy",
+          "description": "Access policy for an experimentation workspace"
+        },
+        "dataSource": {
+          "$ref": "#/definitions/DataSource",
+          "description": "DataSource for an experimentation workspace"
         }
-      }
+      },
+      "required": [
+        "accessPolicy"
+      ]
     },
     "ExperimentationWorkspaceUpdate": {
       "type": "object",
@@ -591,38 +603,6 @@
     "ExperimentationWorkspaceUpdateProperties": {
       "type": "object",
       "description": "The updatable properties of the ExperimentationWorkspace.",
-      "properties": {
-        "partnerExperimentationWorkspaceProperties": {
-          "$ref": "#/definitions/PartnerExperimentationWorkspacePropertiesUpdate",
-          "description": "Partner ExperimentationWorkspace properties"
-        }
-      }
-    },
-    "PartnerExperimentationWorkspaceProperties": {
-      "type": "object",
-      "description": "Properties specific to Partner's ExperimentationWorkspace",
-      "properties": {
-        "experimentationWorkspaceId": {
-          "type": "string",
-          "description": "ExperimentationWorkspace id in partner's system",
-          "readOnly": true
-        },
-        "accessPolicy": {
-          "$ref": "#/definitions/AccessPolicy",
-          "description": "Access policy for an experimentation workspace"
-        },
-        "dataSource": {
-          "$ref": "#/definitions/DataSource",
-          "description": "DataSource for an experimentation workspace"
-        }
-      },
-      "required": [
-        "accessPolicy"
-      ]
-    },
-    "PartnerExperimentationWorkspacePropertiesUpdate": {
-      "type": "object",
-      "description": "Properties specific to Partner's ExperimentationWorkspace",
       "properties": {
         "accessPolicy": {
           "$ref": "#/definitions/AccessPolicyUpdate",

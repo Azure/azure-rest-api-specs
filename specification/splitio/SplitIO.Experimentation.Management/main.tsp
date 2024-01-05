@@ -33,12 +33,6 @@ model ExperimentationWorkspaceProperties {
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("Partner ExperimentationWorkspace properties")
-  partnerExperimentationWorkspaceProperties?: PartnerExperimentationWorkspaceProperties;
-}
-
-@doc("Properties specific to Partner's ExperimentationWorkspace")
-model PartnerExperimentationWorkspaceProperties {
   @doc("ExperimentationWorkspace id in partner's system")
   @visibility("read")
   experimentationWorkspaceId?: string;
