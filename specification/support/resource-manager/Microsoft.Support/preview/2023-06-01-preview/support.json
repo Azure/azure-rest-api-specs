@@ -2315,7 +2315,7 @@
           "format": "arm-id"
         },
         "additionalContext": {
-          "description": "Additional information in the form of a json string.",
+          "description": "Additional information in the form of a string.",
           "type": "string"
         }
       }
@@ -2338,36 +2338,24 @@
       "description": "Service Classification result object.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "URI of the service.",
-          "type": "string",
-          "readOnly": true
-        },
-        "displayName": {
-          "description": "Localized name of the azure service.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceTypes": {
-          "description": "List of applicable ARM resource types for this service.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "childService": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClassificationService",
           "description": "Child service."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClassificationService"
+        }
+      ]
     },
     "ClassificationService": {
       "description": "Service Classification result object.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "URI of the service.",
+        "serviceId": {
+          "description": "Id of the service.",
           "type": "string",
           "readOnly": true
         },
