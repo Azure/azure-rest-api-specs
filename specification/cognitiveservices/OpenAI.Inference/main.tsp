@@ -58,4 +58,7 @@ enum ServiceApiVersions {
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_09_01_Preview: "2023-09-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_12_01_Preview: "2023-12-01-preview",
 }
