@@ -15198,6 +15198,29 @@
         }
       }
     },
+    "InMageRcmAddDisksInput": {
+      "description": "InMageRcm add disk(s) input.",
+      "required": [
+        "disks"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AddDisksProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "disks": {
+          "description": "The list of disk details.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InMageRcmDiskInput"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "InMageRcm"
+    },
     "InMageRcmAgentUpgradeBlockingErrorDetails": {
       "description": "InMageRcm source agent upgrade blocking error details.",
       "type": "object",
@@ -16882,6 +16905,21 @@
           "description": "The disk capacity in bytes.",
           "type": "integer",
           "readOnly": true
+        },
+        "diskState": {
+          "description": "The disk state.",
+          "enum": [
+            "Unavailable",
+            "InitialReplicationPending",
+            "InitialReplicationFailed",
+            "Protected"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DiskState",
+            "modelAsString": true
+          }
         },
         "logStorageAccountId": {
           "description": "The log storage account ARM Id.",
