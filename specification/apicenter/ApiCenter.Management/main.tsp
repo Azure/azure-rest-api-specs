@@ -133,6 +133,31 @@ enum Versions {
   "payload"
 );
 
+@@TypeSpec.OpenAPI.extension(ApiDefinitions.importSpecification::parameters.body,
+  "x-ms-client-name",
+  "payload"
+);
+@@projectedName(ApiDefinitions.importSpecification::parameters.body,
+  "json",
+  "payload"
+);
+@@projectedName(ApiDefinitions.importSpecification::parameters.body,
+  "client",
+  "payload"
+);
+
+@@TypeSpec.OpenAPI.extension(Services.exportMetadataSchema::parameters.body,
+  "x-ms-client-name",
+  "payload"
+);
+@@projectedName(Services.exportMetadataSchema::parameters.body,
+  "json",
+  "payload"
+);
+@@projectedName(Services.exportMetadataSchema::parameters.body,
+  "client",
+  "payload"
+);
 /**
  * A resource list operation, at the scope of the resource's parent
  * @template TResource the resource being patched
