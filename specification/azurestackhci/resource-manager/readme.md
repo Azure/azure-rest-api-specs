@@ -59,6 +59,7 @@ directive:
       - updateSummaries.json
       - deploymentSettings.json
       - edgeDevices.json
+      - securitySettings.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
@@ -86,14 +87,42 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/common.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/galleryImages.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/logicalNetworks.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/networkInterfaces.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/offers.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/operations.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/publishers.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/storageContainers.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/updateRuns.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/updates.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/stable/2024-01-01/virtualMachineInstances.json
+```
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updates.json
 ```
 ### Tag: package-preview-2023-09
 

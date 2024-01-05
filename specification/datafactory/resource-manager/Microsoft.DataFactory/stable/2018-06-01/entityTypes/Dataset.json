@@ -38,7 +38,7 @@
         },
         "schema": {
           "type": "object",
-          "x-ms-format": "dfe-list-generic",
+          "x-ms-format": "dfe-object",
           "x-ms-format-element-type": "DatasetSchemaDataElement",
           "description": "Columns that define the physical type schema of the dataset. Type: array (or Expression with resultType array), itemType: DatasetSchemaDataElement."
         },
@@ -3622,6 +3622,105 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The name of Microsoft Fabric LakeHouse Table. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceV2ObjectDataset": {
+      "x-ms-discriminator-value": "SalesforceV2Object",
+      "description": "The Salesforce V2 object dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce V2 object dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceV2ObjectDatasetTypeProperties"
+        }
+      }
+    },
+    "SalesforceV2ObjectDatasetTypeProperties": {
+      "description": "Salesforce V2 object dataset properties.",
+      "type": "object",
+      "properties": {
+        "objectApiName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce V2 object API name. Type: string (or Expression with resultType string)."
+        },
+        "reportId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce V2 report Id. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceServiceCloudV2ObjectDataset": {
+      "x-ms-discriminator-value": "SalesforceServiceCloudV2Object",
+      "description": "The Salesforce Service Cloud V2 object dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce Service Cloud V2 object dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceServiceCloudV2ObjectDatasetTypeProperties"
+        }
+      }
+    },
+    "SalesforceServiceCloudV2ObjectDatasetTypeProperties": {
+      "description": "Salesforce Service Cloud V2 object dataset properties.",
+      "type": "object",
+      "properties": {
+        "objectApiName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce Service Cloud V2 object API name. Type: string (or Expression with resultType string)."
+        },
+        "reportId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce Service Cloud V2 reportId. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "WarehouseTableDataset": {
+      "x-ms-discriminator-value": "WarehouseTable",
+      "description": "Microsoft Fabric Warehouse dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric Warehouse dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarehouseTableDatasetTypeProperties"
+        }
+      }
+    },
+    "WarehouseTableDatasetTypeProperties": {
+      "description": "Microsoft Fabric Warehouse dataset properties.",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The schema name of the Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The table name of the Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
         }
       }
     }
