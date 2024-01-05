@@ -309,7 +309,8 @@
             "in": "path",
             "description": "The distributed availability group name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "parameters",
@@ -783,6 +784,7 @@
       "description": "The name of the managed instance.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
     }
   },
