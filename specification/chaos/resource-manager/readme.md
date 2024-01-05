@@ -41,7 +41,6 @@ input-file:
   - Microsoft.Chaos/stable/2024-01-01/capabilityTypes.json
   - Microsoft.Chaos/stable/2024-01-01/experiments.json
   - Microsoft.Chaos/stable/2024-01-01/operationStatuses.json
-  - Microsoft.Chaos/stable/2024-01-01/operationResults.json
   - Microsoft.Chaos/stable/2024-01-01/operations.json
   - Microsoft.Chaos/stable/2024-01-01/targetTypes.json
   - Microsoft.Chaos/stable/2024-01-01/targets.json
