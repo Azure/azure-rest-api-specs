@@ -787,7 +787,7 @@
           {
             "name": "imageName",
             "in": "path",
-            "description": "Image name. Use .default for image creation for public preview versions of the API and the image GUID for GA versions of the API.",
+            "description": "Image name. Use an image GUID for GA versions of the API.",
             "required": true,
             "type": "string"
           }
@@ -839,7 +839,7 @@
           {
             "name": "imageName",
             "in": "path",
-            "description": "Image name. Use .default for image creation for public preview versions of the API and the image GUID for GA versions of the API.",
+            "description": "Image name. Use an image GUID for GA versions of the API.",
             "required": true,
             "type": "string"
           },
@@ -917,7 +917,7 @@
           {
             "name": "imageName",
             "in": "path",
-            "description": "Image name. Use .default for image creation for public preview versions of the API and the image GUID for GA versions of the API.",
+            "description": "Image name. Use an image GUID for GA versions of the API.",
             "required": true,
             "type": "string"
           }
@@ -3035,7 +3035,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Creates an image",
+        "description": "Creates an image. Use this action when the image ID is unknown.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3053,6 +3053,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
+            "name": "uploadImageRequest",
+            "in": "body",
+            "description": "Image upload request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
           }
         ],
         "responses": {
@@ -3071,6 +3080,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Catalogs_UploadImage": {
+            "$ref": "./examples/PostUploadImageCatalog.json"
           }
         },
         "x-ms-long-running-operation-options": {

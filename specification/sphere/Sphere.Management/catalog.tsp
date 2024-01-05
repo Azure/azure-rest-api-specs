@@ -140,7 +140,7 @@ interface Catalogs
   @autoRoute
   @armResourceAction(Catalog)
   @added(Versions.v2024_04_01)
-  @doc("Creates an image")
+  @doc("Creates an image. Use this action when the image ID is unknown.")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -150,6 +150,10 @@ interface Catalogs
   )
   @post
   uploadImage(
-    ...ResourceInstanceParameters<Catalog>
+    ...ResourceInstanceParameters<Catalog>,
+
+    @doc("Image upload request body.")
+    @body
+    uploadImageRequest: Image,
   ): ArmAcceptedResponse | ErrorResponse;
 }

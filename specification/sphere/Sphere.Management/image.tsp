@@ -18,7 +18,7 @@ namespace Microsoft.AzureSphere;
 @doc("An image resource belonging to a catalog resource.")
 @parentResource(Catalog)
 model Image is ProxyResource<ImageProperties> {
-  @doc("Image name. Use .default for image creation for public preview versions of the API and the image GUID for GA versions of the API.")
+  @doc("Image name. Use an image GUID for GA versions of the API.")
   @key("imageName")
   @path
   @segment("images")
