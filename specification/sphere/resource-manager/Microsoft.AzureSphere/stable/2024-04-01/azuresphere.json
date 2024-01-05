@@ -787,10 +787,9 @@
           {
             "name": "imageName",
             "in": "path",
-            "description": "Image name. Use .default for image creation.",
+            "description": "Image name. Use .default for image creation for public preview versions of the API and the image GUID for GA versions of the API.",
             "required": true,
-            "type": "string",
-            "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^\\.default$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -840,10 +839,9 @@
           {
             "name": "imageName",
             "in": "path",
-            "description": "Image name. Use .default for image creation.",
+            "description": "Image name. Use .default for image creation for public preview versions of the API and the image GUID for GA versions of the API.",
             "required": true,
-            "type": "string",
-            "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^\\.default$"
+            "type": "string"
           },
           {
             "name": "resource",
@@ -919,10 +917,9 @@
           {
             "name": "imageName",
             "in": "path",
-            "description": "Image name. Use .default for image creation.",
+            "description": "Image name. Use .default for image creation for public preview versions of the API and the image GUID for GA versions of the API.",
             "required": true,
-            "type": "string",
-            "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^\\.default$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -3030,6 +3027,56 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/uploadImage": {
+      "post": {
+        "operationId": "Catalogs_UploadImage",
+        "tags": [
+          "Catalogs"
+        ],
+        "description": "Creates an image",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },

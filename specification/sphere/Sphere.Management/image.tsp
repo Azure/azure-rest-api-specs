@@ -1,9 +1,11 @@
 import "@typespec/rest";
+import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
@@ -16,9 +18,8 @@ namespace Microsoft.AzureSphere;
 @doc("An image resource belonging to a catalog resource.")
 @parentResource(Catalog)
 model Image is ProxyResource<ImageProperties> {
-  @doc("Image name. Use .default for image creation.")
+  @doc("Image name. Use .default for image creation for public preview versions of the API and the image GUID for GA versions of the API.")
   @key("imageName")
-  @pattern("^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^\\.default$")
   @path
   @segment("images")
   name: string;
@@ -26,10 +27,7 @@ model Image is ProxyResource<ImageProperties> {
 
 @armResourceOperations
 interface Images
-  extends ProxyResourceOperationsReadListCreateDelete<
-      Image,
-      ListQueryParameters
-    > {}
+  extends ProxyResourceOperationsReadListCreateDelete<Image, ListQueryParameters> {}
 
 @doc("The properties of image")
 model ImageProperties {
