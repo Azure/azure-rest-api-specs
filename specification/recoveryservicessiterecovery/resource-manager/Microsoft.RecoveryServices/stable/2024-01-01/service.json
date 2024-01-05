@@ -12415,6 +12415,10 @@
             "modelAsString": true
           }
         },
+        "targetVmSecurityProfile": {
+          "$ref": "#/definitions/SecurityProfileProperties",
+          "description": "The target VM security profile."
+        },
         "targetVmSize": {
           "description": "The target VM size.",
           "type": "string"
@@ -12838,6 +12842,10 @@
             "$ref": "#/definitions/OSUpgradeSupportedVersions"
           },
           "x-ms-identifiers": []
+        },
+        "targetVmSecurityProfile": {
+          "$ref": "#/definitions/SecurityProfileProperties",
+          "description": "The target VM security profile."
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -15590,6 +15598,10 @@
           "additionalProperties": {
             "type": "string"
         }
+        },
+        "targetVmSecurityProfile": {
+          "$ref": "#/definitions/SecurityProfileProperties",
+          "description": "The target VM security profile."
         }
       },
       "x-ms-discriminator-value": "InMageRcm"
@@ -17270,6 +17282,10 @@
         "osName": {
           "description": "The OS name associated with VM.",
           "type": "string"
+        },
+        "targetVmSecurityProfile": {
+          "$ref": "#/definitions/SecurityProfileProperties",
+          "description": "The target VM security profile."
         }
       },
       "x-ms-discriminator-value": "InMageRcm"
@@ -22345,6 +22361,41 @@
         }
       },
       "x-ms-discriminator-value": "ScriptActionTaskDetails"
+    },
+    "SecurityProfileProperties": {
+      "description": "Security profile input.",
+      "type": "object",
+      "properties": {
+        "targetVmSecurityType": {
+          "description": "The target VM security type.",
+          "enum": [
+            "None",
+            "TrustedLaunch",
+            "ConfidentialVM"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SecurityType",
+            "modelAsString": true
+          }
+        },
+        "isTargetVmSecureBootEnabled": {
+          "description": "A value indicating whether secure boot to be enabled.",
+          "type": "string"
+        },
+        "isTargetVmTpmEnabled": {
+          "description": "A value indicating whether trusted platform module to be enabled.",
+          "type": "string"
+        },
+        "isTargetVmIntegrityMonitoringEnabled": {
+          "description": "A value indicating whether integrity monitoring to be enabled.",
+          "type": "string"
+        },
+        "isTargetVmConfidentialEncryptionEnabled": {
+          "description": "A value indicating whether confidential compute encryption to be enabled.",
+          "type": "string"
+        }
+      }
     },
     "ServiceError": {
       "description": "ASR error model.",
