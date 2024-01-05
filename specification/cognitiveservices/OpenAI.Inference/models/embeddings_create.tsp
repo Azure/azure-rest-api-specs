@@ -25,7 +25,7 @@ model EmbeddingsOptions {
     resource URI that's connected to.
     """)
   @projectedName("json", "model")
-  @projectedName("csharp", "InternalNonAzureModelName")
+  @projectedName("csharp", "DeploymentName")
   `model`?: string;
 
   @doc("""

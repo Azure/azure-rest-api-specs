@@ -1,0 +1,532 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridContainerService",
+    "description": "The Microsoft.HybridContainerService Rest API spec.",
+    "version": "2024-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworkName}": {
+      "get": {
+        "operationId": "virtualNetworks_Retrieve",
+        "x-ms-examples": {
+          "GetVirtualNetwork": {
+            "$ref": "./examples/GetVirtualNetwork.json"
+          }
+        },
+        "summary": "Gets the specified virtual network resource",
+        "description": "Gets the specified virtual network resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the virtualNetwork resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "virtualNetworks_CreateOrUpdate",
+        "x-ms-examples": {
+          "PutVirtualNetwork": {
+            "$ref": "./examples/PutVirtualNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Creates or updates the virtual network resource",
+        "description": "Creates or updates the virtual network resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualNetworks",
+            "in": "body",
+            "required": true,
+            "description": "Virtual Network resource definition",
+            "schema": {
+              "$ref": "#/definitions/virtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the virtualNetworks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetwork"
+            }
+          },
+          "201": {
+            "description": "Creates the virtualNetworks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "virtualNetworks_Delete",
+        "x-ms-examples": {
+          "DeleteVirtualNetwork": {
+            "$ref": "./examples/DeleteVirtualNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Deletes the specified virtual network resource",
+        "description": "Deletes the specified virtual network resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "virtualNetworks_Update",
+        "x-ms-examples": {
+          "UpdateVirtualNetwork": {
+            "$ref": "./examples/UpdateVirtualNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Patches the virtual network resource",
+        "description": "Patches the virtual network resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualNetworks",
+            "in": "body",
+            "required": true,
+            "description": "Virtual Network resource patch definition",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworksPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the virtualNetworks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetwork"
+            }
+          },
+          "202": {
+            "description": "Updates the virtualNetworks resource."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks": {
+      "get": {
+        "operationId": "virtualNetworks_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListVirtualNetworkByResourceGroup": {
+            "$ref": "./examples/ListVirtualNetworkByResourceGroup.json"
+          }
+        },
+        "summary": "Lists the virtual networks in the specified resource group",
+        "description": "Lists the virtual networks in the specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists the virtual networks in the specified resource group",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworksListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridContainerService/virtualNetworks": {
+      "get": {
+        "operationId": "virtualNetworks_ListBySubscription",
+        "x-ms-examples": {
+          "ListVirtualNetworkBySubscription": {
+            "$ref": "./examples/ListVirtualNetworkBySubscription.json"
+          }
+        },
+        "summary": "Lists the virtual networks in the specified subscription",
+        "description": "Lists the virtual networks in the specified subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists the virtual networks in the specified subscription",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworksListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "virtualNetworkProperties": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "infraVnetProfile": {
+          "type": "object",
+          "properties": {
+            "hci": {
+              "type": "object",
+              "properties": {
+                "mocGroup": {
+                  "type": "string",
+                  "description": "Group in MOC(Microsoft On-premises Cloud)"
+                },
+                "mocLocation": {
+                  "type": "string",
+                  "description": "Location in MOC(Microsoft On-premises Cloud)"
+                },
+                "mocVnetName": {
+                  "type": "string",
+                  "description": "Virtual Network name in MOC(Microsoft On-premises Cloud)"
+                }
+              },
+              "description": "Infrastructure network profile for HCI platform"
+            }
+          }
+        },
+        "vipPool": {
+          "type": "array",
+          "description": "Range of IP Addresses for Kubernetes API Server and services if using HA Proxy load balancer",
+          "x-ms-identifiers": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "endIP": {
+                "type": "string",
+                "description": "Ending IP address for the IP Pool"
+              },
+              "startIP": {
+                "type": "string",
+                "description": "Starting IP address for the IP Pool"
+              }
+            }
+          }
+        },
+        "vmipPool": {
+          "type": "array",
+          "description": "Range of IP Addresses for Kubernetes node VMs",
+          "x-ms-identifiers": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "endIP": {
+                "type": "string",
+                "description": "Ending IP address for the IP Pool"
+              },
+              "startIP": {
+                "type": "string",
+                "description": "Starting IP address for the IP Pool"
+              }
+            }
+          }
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "List of DNS server IP Addresses associated with the network",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gateway": {
+          "type": "string",
+          "description": "IP Address of the Gateway associated with the network"
+        },
+        "ipAddressPrefix": {
+          "type": "string",
+          "description": "IP Address Prefix of the network"
+        },
+        "vlanID": {
+          "type": "integer",
+          "format": "int32",
+          "description": "VLAN Id used by the network"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Pending",
+            "Creating",
+            "Deleting",
+            "Updating",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "provisioningState"
+          }
+        },
+        "status": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "operationStatus": {
+              "type": "object",
+              "description": "The detailed status of the long running operation.",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "description": "The error if any from the operation.",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "The error code from the operation."
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "The error message from the operation."
+                    }
+                  }
+                },
+                "operationId": {
+                  "type": "string",
+                  "description": "The identifier of the operation."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "The status of the operation."
+                }
+              }
+            }
+          },
+          "description": "Status of the virtual network resource"
+        }
+      },
+      "description": "Properties of the virtual network resource"
+    },
+    "virtualNetwork": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/virtualNetworkProperties"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "description": "Extended location pointing to the underlying infrastructure",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type. Allowed value: 'CustomLocation'",
+              "enum": [
+                "CustomLocation"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "ExtendedLocationTypes"
+              }
+            },
+            "name": {
+              "type": "string",
+              "description": "ARM Id of the extended location."
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The Virtual Network resource definition."
+    },
+    "virtualNetworksPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The Virtual Network resource patch definition."
+    },
+    "virtualNetworksListResult": {
+      "type": "object",
+      "description": "A list of virtual network resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/virtualNetwork"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "x-ms-identifiers": []
+    }
+  },
+  "parameters": {
+    "virtualNetworkNameParameter": {
+      "name": "virtualNetworkName",
+      "description": "Parameter for the name of the virtual network",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "x-ms-parameter-location": "method",
+      "maxLength": 64,
+      "minLength": 3
+    }
+  }
+}
