@@ -15544,6 +15544,52 @@
         "multiVmGroupName": {
           "description": "The multi VM group name.",
           "type": "string"
+        },
+        "sqlServerLicenseType": {
+          "description": "The SQL Server license type.",
+          "enum": [
+            "NotSpecified",
+            "NoLicenseType",
+            "PAYG",
+            "AHUB"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SqlServerLicenseType",
+            "modelAsString": true
+          }
+        },
+        "targetVmTags": {
+          "description": "The target VM tags.",
+          "maxLength": 50,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "seedManagedDiskTags": {
+          "description": "The tags for the seed managed disks.",
+          "maxLength": 49,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetManagedDiskTags": {
+          "description": "The tags for the target managed disks.",
+          "maxLength": 49,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetNicTags": {
+          "description": "The tags for the target NICs.",
+          "maxLength": 50,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+        }
         }
       },
       "x-ms-discriminator-value": "InMageRcm"
@@ -16827,6 +16873,10 @@
         "resyncDetails": {
           "$ref": "#/definitions/InMageRcmSyncDetails",
           "description": "The resync details."
+        },
+        "customTargetDiskName": {
+          "description": "The custom target Azure disk name.",
+          "type": "string"
         }
       }
     },
@@ -17177,6 +17227,49 @@
         "discoveredVmDetails": {
           "$ref": "#/definitions/InMageRcmDiscoveredProtectedVmDetails",
           "description": "The discovered VM details."
+        },
+        "targetVmTags": {
+          "description": "The target VM tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "seedManagedDiskTags": {
+          "description": "The tags for the seed managed disks.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetManagedDiskTags": {
+          "description": "The tags for the target managed disks.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetNicTags": {
+          "description": "The tags for the target NICs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sqlServerLicenseType": {
+          "description": "The SQL Server license type.",
+          "type": "string"
+        },
+        "supportedOSVersions": {
+          "description": "A value indicating the inplace OS Upgrade version.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "osName": {
+          "description": "The OS name associated with VM.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMageRcm"
@@ -17417,6 +17510,44 @@
           "x-ms-enum": {
             "name": "LicenseType",
             "modelAsString": true
+          }
+        },
+        "sqlServerLicenseType": {
+          "description": "The SQL Server license type.",
+          "enum": [
+            "NotSpecified",
+            "NoLicenseType",
+            "PAYG",
+            "AHUB"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SqlServerLicenseType",
+            "modelAsString": true
+          }
+        },
+        "targetVmTags": {
+          "description": "The target VM tags.",
+          "maxLength": 50,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetManagedDiskTags": {
+          "description": "The tags for the target managed disks.",
+          "maxLength": 49,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetNicTags": {
+          "description": "The tags for the target NICs.",
+          "maxLength": 50,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       },
