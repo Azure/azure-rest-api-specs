@@ -20,7 +20,7 @@ interface LocationInterface {
 
 /// Endpoints
 
-@resource("DeviceLocation")
+@resource("device-location")
 @doc("Static endpoint to access the Device Location API family.")
 model LocationEndpoint {
   @key
@@ -34,7 +34,7 @@ model LocationEndpoint {
 @doc("Location static endpoint enum")
 enum LocationEnum {
   @doc("Static endpoint")
-  location: "Location",
+  location: "location",
 }
 
 /// Request models

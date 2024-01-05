@@ -21,7 +21,7 @@ interface Networks {
 
 /// Endpoints
 
-@resource("DeviceNetwork")
+@resource("device-network")
 @doc("Static endpoint to access the Device Network API family.")
 model NetworkRetrieveEndpoint {
   @key
@@ -35,7 +35,7 @@ model NetworkRetrieveEndpoint {
 @doc("Network static endpoint enum")
 enum NetworkEnum {
   @doc("Static endpoint")
-  network: "Network",
+  network: "network",
 }
 
 /// Common models

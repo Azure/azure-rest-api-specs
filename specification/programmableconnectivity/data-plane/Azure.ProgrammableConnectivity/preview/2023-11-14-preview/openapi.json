@@ -34,7 +34,7 @@
   "security": [
     {
       "OAuth2Auth": [
-        "https://management.azure.com/.default"
+        "https://management.azure.com//.default"
       ]
     }
   ],
@@ -44,13 +44,13 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "https://management.azure.com/.default": ""
+        "https://management.azure.com//.default": ""
       }
     }
   },
   "tags": [],
   "paths": {
-    "/DeviceLocation/{location}:verify": {
+    "/device-location/{location}:verify": {
       "post": {
         "operationId": "LocationInterface_Verify",
         "description": "Verifies whether a device is within a specified location area, defined as an accuracy (radius) around a point, specified by longitude and latitude.",
@@ -65,7 +65,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "Location"
+              "location"
             ],
             "x-ms-enum": {
               "name": "LocationEnum",
@@ -73,7 +73,7 @@
               "values": [
                 {
                   "name": "location",
-                  "value": "Location",
+                  "value": "location",
                   "description": "Static endpoint"
                 }
               ]
@@ -122,7 +122,7 @@
         }
       }
     },
-    "/DeviceNetwork/{network}:retrieve": {
+    "/device-network/{network}:retrieve": {
       "post": {
         "operationId": "Networks_Retrieve",
         "description": "Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.",
@@ -137,7 +137,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "Network"
+              "network"
             ],
             "x-ms-enum": {
               "name": "NetworkEnum",
@@ -145,7 +145,7 @@
               "values": [
                 {
                   "name": "network",
-                  "value": "Network",
+                  "value": "network",
                   "description": "Static endpoint"
                 }
               ]
@@ -194,7 +194,7 @@
         }
       }
     },
-    "/NumberVerification/{number}:verify": {
+    "/number-verification/{number}:verify": {
       "post": {
         "operationId": "NumberInterface_Verify",
         "description": "Verifies the phone number (MSISDN) associated with a device.",
@@ -209,7 +209,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "Number"
+              "number"
             ],
             "x-ms-enum": {
               "name": "NumberEnum",
@@ -217,7 +217,7 @@
               "values": [
                 {
                   "name": "number",
-                  "value": "Number",
+                  "value": "number",
                   "description": "Static endpoint"
                 }
               ]
@@ -266,7 +266,7 @@
         }
       }
     },
-    "/NumberVerification/{number}:retrieve": {
+    "/number-verification/{number}:retrieve": {
       "post": {
         "operationId": "NumberInterface_Retrieve",
         "description": "Retrieves the phone number (MSISDN) associated with a device.",
@@ -281,7 +281,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "Number"
+              "number"
             ],
             "x-ms-enum": {
               "name": "NumberEnum",
@@ -289,7 +289,7 @@
               "values": [
                 {
                   "name": "number",
-                  "value": "Number",
+                  "value": "number",
                   "description": "Static endpoint"
                 }
               ]
@@ -338,7 +338,7 @@
         }
       }
     },
-    "/SimSwap/{simSwap}:retrieve": {
+    "/sim-swap/{simSwap}:retrieve": {
       "post": {
         "operationId": "SimSwapInterface_Retrieve",
         "description": "Provides timestamp of latest SIM swap",
@@ -353,7 +353,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "SimSwap"
+              "sim-swap"
             ],
             "x-ms-enum": {
               "name": "SimSwapEnum",
@@ -361,7 +361,7 @@
               "values": [
                 {
                   "name": "simSwap",
-                  "value": "SimSwap",
+                  "value": "sim-swap",
                   "description": "Static endpoint"
                 }
               ]
@@ -410,7 +410,7 @@
         }
       }
     },
-    "/SimSwap/{simSwap}:verify": {
+    "/sim-swap/{simSwap}:verify": {
       "post": {
         "operationId": "SimSwapInterface_Verify",
         "description": "Verifies if a SIM swap has been performed during a past period (defined in the request with 'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.",
@@ -425,7 +425,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "SimSwap"
+              "sim-swap"
             ],
             "x-ms-enum": {
               "name": "SimSwapEnum",
@@ -433,7 +433,7 @@
               "values": [
                 {
                   "name": "simSwap",
-                  "value": "SimSwap",
+                  "value": "sim-swap",
                   "description": "Static endpoint"
                 }
               ]
@@ -630,7 +630,7 @@
       "type": "string",
       "description": "Location static endpoint enum",
       "enum": [
-        "Location"
+        "location"
       ],
       "x-ms-enum": {
         "name": "LocationEnum",
@@ -638,7 +638,7 @@
         "values": [
           {
             "name": "location",
-            "value": "Location",
+            "value": "location",
             "description": "Static endpoint"
           }
         ]
@@ -727,7 +727,7 @@
       "type": "string",
       "description": "Network static endpoint enum",
       "enum": [
-        "Network"
+        "network"
       ],
       "x-ms-enum": {
         "name": "NetworkEnum",
@@ -735,7 +735,7 @@
         "values": [
           {
             "name": "network",
-            "value": "Network",
+            "value": "network",
             "description": "Static endpoint"
           }
         ]
@@ -806,7 +806,7 @@
       "type": "string",
       "description": "Number static endpoint enum",
       "enum": [
-        "Number"
+        "number"
       ],
       "x-ms-enum": {
         "name": "NumberEnum",
@@ -814,7 +814,7 @@
         "values": [
           {
             "name": "number",
-            "value": "Number",
+            "value": "number",
             "description": "Static endpoint"
           }
         ]
@@ -909,7 +909,7 @@
       "type": "string",
       "description": "Number static endpoint enum",
       "enum": [
-        "SimSwap"
+        "sim-swap"
       ],
       "x-ms-enum": {
         "name": "SimSwapEnum",
@@ -917,7 +917,7 @@
         "values": [
           {
             "name": "simSwap",
-            "value": "SimSwap",
+            "value": "sim-swap",
             "description": "Static endpoint"
           }
         ]

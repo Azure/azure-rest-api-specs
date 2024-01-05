@@ -28,7 +28,7 @@ interface SimSwapInterface {
 
 /// Endpoints
 
-@resource("SimSwap")
+@resource("sim-swap")
 @doc("Static endpoint to access the Sim Swap API family")
 model SimSwapEndpoint {
   @key
@@ -42,7 +42,7 @@ model SimSwapEndpoint {
 @doc("Number static endpoint enum")
 enum SimSwapEnum {
   @doc("Static endpoint")
-  simSwap: "SimSwap",
+  simSwap: "sim-swap",
 }
 
 /// Request models
