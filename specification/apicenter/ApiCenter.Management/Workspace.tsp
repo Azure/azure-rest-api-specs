@@ -36,14 +36,5 @@ interface Workspaces {
   @doc("Deletes specified workspace.")
   delete is ArmResourceDeleteSync<Workspace>;
   @doc("Returns a collection of workspaces.")
-  list is ArmResourceListByParent<
-    Workspace,
-    {
-      ...BaseParameters<Workspace>;
-
-      @doc("OData filter parameter.")
-      @query("$filter")
-      filter?: string;
-    }
-  >;
+  list is ArmResourceListByParent<Workspace>;
 }

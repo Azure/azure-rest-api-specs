@@ -36,14 +36,5 @@ interface Apis {
   @doc("Deletes specified API.")
   delete is ArmResourceDeleteSync<Api>;
   @doc("Returns a collection of APIs.")
-  list is ArmResourceListByParent<
-    Api,
-    {
-      ...BaseParameters<Api>;
-
-      @doc("OData filter parameter.")
-      @query("$filter")
-      filter?: string;
-    }
-  >;
+  list is ArmResourceListByParent<Api>;
 }

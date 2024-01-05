@@ -8,6 +8,13 @@ namespace Microsoft.ApiCenter;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The odata filter")
+model OdataFilterParameter {
+  @doc("OData filter parameter.")
+  @query("$filter")
+  filter?: string;
+}
+
 /** The expected types of origin */
 enum Origin {
   /** Origin with User */
