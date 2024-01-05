@@ -36,14 +36,5 @@ interface Deployments {
   @doc("Deletes API deployment.")
   delete is ArmResourceDeleteSync<Deployment>;
   @doc("Returns a collection of API deployments.")
-  list is ArmResourceListByParent<
-    Deployment,
-    {
-      ...BaseParameters<Deployment>;
-
-      @doc("OData filter parameter.")
-      @query("$filter")
-      filter?: string;
-    }
-  >;
+  list is ArmResourceListByParent<Deployment>;
 }

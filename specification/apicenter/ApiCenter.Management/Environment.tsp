@@ -36,14 +36,5 @@ interface Environments {
   @doc("Deletes the environment.")
   delete is ArmResourceDeleteSync<Environment>;
   @doc("Returns a collection of environments.")
-  list is ArmResourceListByParent<
-    Environment,
-    {
-      ...BaseParameters<Environment>;
-
-      @doc("OData filter parameter.")
-      @query("$filter")
-      filter?: string;
-    }
-  >;
+  list is ArmResourceListByParent<Environment>;
 }

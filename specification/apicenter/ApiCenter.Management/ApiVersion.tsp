@@ -36,14 +36,5 @@ interface ApiVersions {
   @doc("Deletes specified API version")
   delete is ArmResourceDeleteSync<ApiVersion>;
   @doc("Returns a collection of API versions.")
-  list is ArmResourceListByParent<
-    ApiVersion,
-    {
-      ...BaseParameters<ApiVersion>;
-
-      @doc("OData filter parameter.")
-      @query("$filter")
-      filter?: string;
-    }
-  >;
+  list is ArmResourceListByParent<ApiVersion>;
 }

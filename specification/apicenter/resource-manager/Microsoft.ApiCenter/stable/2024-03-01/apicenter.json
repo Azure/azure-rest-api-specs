@@ -253,13 +253,14 @@
             "maxLength": 90
           },
           {
-            "name": "resource",
+            "name": "payload",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Service"
-            }
+            },
+            "x-ms-client-name": "payload"
           }
         ],
         "responses": {
@@ -449,7 +450,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/metadataSchemas": {
       "get": {
-        "operationId": "MetadataSchemas_ListByService",
+        "operationId": "MetadataSchemas_List",
         "tags": [
           "MetadataSchemas"
         ],
@@ -465,14 +466,6 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter parameter.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          },
-          {
             "name": "serviceName",
             "in": "path",
             "description": "The name of Azure API Center service.",
@@ -480,6 +473,9 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
           }
         ],
         "responses": {
@@ -597,13 +593,14 @@
             "maxLength": 90
           },
           {
-            "name": "resource",
+            "name": "payload",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MetadataSchema"
-            }
+            },
+            "x-ms-client-name": "payload"
           }
         ],
         "responses": {
@@ -742,7 +739,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces": {
       "get": {
-        "operationId": "Workspaces_ListByService",
+        "operationId": "Workspaces_List",
         "tags": [
           "Workspaces"
         ],
@@ -758,14 +755,6 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter parameter.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          },
-          {
             "name": "serviceName",
             "in": "path",
             "description": "The name of Azure API Center service.",
@@ -773,6 +762,9 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
           }
         ],
         "responses": {
@@ -890,13 +882,14 @@
             "maxLength": 90
           },
           {
-            "name": "resource",
+            "name": "payload",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Workspace"
-            }
+            },
+            "x-ms-client-name": "payload"
           }
         ],
         "responses": {
@@ -1035,7 +1028,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis": {
       "get": {
-        "operationId": "Apis_ListByWorkspace",
+        "operationId": "Apis_List",
         "tags": [
           "Apis"
         ],
@@ -1049,14 +1042,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter parameter.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
           },
           {
             "name": "serviceName",
@@ -1075,6 +1060,9 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
           }
         ],
         "responses": {
@@ -1210,13 +1198,14 @@
             "maxLength": 90
           },
           {
-            "name": "resource",
+            "name": "payload",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Api"
-            }
+            },
+            "x-ms-client-name": "payload"
           }
         ],
         "responses": {
@@ -1373,7 +1362,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/deployments": {
       "get": {
-        "operationId": "Deployments_ListByApi",
+        "operationId": "Deployments_List",
         "tags": [
           "Deployments"
         ],
@@ -1387,14 +1376,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter parameter.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
           },
           {
             "name": "serviceName",
@@ -1422,6 +1403,9 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
           }
         ],
         "responses": {
@@ -1575,13 +1559,14 @@
             "maxLength": 90
           },
           {
-            "name": "resource",
+            "name": "payload",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Deployment"
-            }
+            },
+            "x-ms-client-name": "payload"
           }
         ],
         "responses": {
@@ -1756,7 +1741,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions": {
       "get": {
-        "operationId": "ApiVersions_ListByApi",
+        "operationId": "ApiVersions_List",
         "tags": [
           "ApiVersions"
         ],
@@ -1770,14 +1755,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter parameter.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
           },
           {
             "name": "serviceName",
@@ -1805,6 +1782,9 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
           }
         ],
         "responses": {
@@ -1958,13 +1938,14 @@
             "maxLength": 90
           },
           {
-            "name": "resource",
+            "name": "payload",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApiVersion"
-            }
+            },
+            "x-ms-client-name": "payload"
           }
         ],
         "responses": {
@@ -2139,7 +2120,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions": {
       "get": {
-        "operationId": "ApiDefinitions_ListByApiVersion",
+        "operationId": "ApiDefinitions_List",
         "tags": [
           "ApiDefinitions"
         ],
@@ -2153,14 +2134,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter parameter.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
           },
           {
             "name": "serviceName",
@@ -2197,6 +2170,9 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
           }
         ],
         "responses": {
@@ -2368,13 +2344,14 @@
             "maxLength": 90
           },
           {
-            "name": "resource",
+            "name": "payload",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApiDefinition"
-            }
+            },
+            "x-ms-client-name": "payload"
           }
         ],
         "responses": {
@@ -2753,7 +2730,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/environments": {
       "get": {
-        "operationId": "Environments_ListByWorkspace",
+        "operationId": "Environments_List",
         "tags": [
           "Environments"
         ],
@@ -2767,14 +2744,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter parameter.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
           },
           {
             "name": "serviceName",
@@ -2793,6 +2762,9 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
           }
         ],
         "responses": {
@@ -2928,13 +2900,14 @@
             "maxLength": 90
           },
           {
-            "name": "resource",
+            "name": "payload",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Environment"
-            }
+            },
+            "x-ms-client-name": "payload"
           }
         ],
         "responses": {
@@ -4401,5 +4374,15 @@
       ]
     }
   },
-  "parameters": {}
+  "parameters": {
+    "OdataFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "OData filter parameter.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    }
+  }
 }

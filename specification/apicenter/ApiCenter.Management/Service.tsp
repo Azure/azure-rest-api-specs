@@ -33,7 +33,7 @@ interface Services {
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Service>;
   @doc("Returns a collection of services within the resource group.")
-  listByResourceGroup is ArmResourceListByParent<Service>;
+  listByResourceGroup is Azure.ResourceManager.ArmResourceListByParent<Service>;
   @doc("Lists services within an Azure subscription.")
   listBySubscription is ArmListBySubscription<Service>;
   @doc("Exports the effective metadata schema.")
