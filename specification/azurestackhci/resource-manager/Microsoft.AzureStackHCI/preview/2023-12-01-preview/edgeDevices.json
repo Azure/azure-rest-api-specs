@@ -339,6 +339,14 @@
           },
           "x-ms-identifiers": []
         },
+        "switchDetails": {
+          "type": "array",
+          "description": "Switch Details of device.",
+          "items": {
+            "$ref": "#/definitions/SwitchDetail"
+          },
+          "x-ms-identifiers": []
+        },
         "bootType": {
           "type": "string",
           "description": "Specifies the boot type of the machine."
@@ -554,6 +562,22 @@
         "sbeManifest": {
           "type": "string",
           "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
+          "readOnly": true
+        }
+      }
+    },
+    "SwitchDetail": {
+      "type": "object",
+      "description": "Switch Details Obtained from the device",
+      "properties": {
+        "switchName": {
+          "type": "string",
+          "description": "The name of the switch.",
+          "readOnly": true
+        },
+        "switchType": {
+          "type": "string",
+          "description": "The type of the switch.",
           "readOnly": true
         }
       }
