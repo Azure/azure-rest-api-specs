@@ -40,7 +40,7 @@ interface NumberInterface {
 
 /// Endpoints
 
-@resource("NumberVerification")
+@resource("number-verification")
 @doc("Static endpoint to access Number Verification API family")
 model NumberEndpoint {
   @key
@@ -54,7 +54,7 @@ model NumberEndpoint {
 @doc("Number static endpoint enum")
 enum NumberEnum {
   @doc("Static endpoint")
-  number: "Number",
+  number: "number",
 }
 
 /// Request models
