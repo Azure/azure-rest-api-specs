@@ -15,7 +15,7 @@ $filesToCheck = @(Get-ChangedSwaggerFiles).Where({
 })
 
 if (!$filesToCheck) {
-  LogInfo "No swagger files found to check"
+  LogInfo "No OpenAPI files found to check"
 }
 else {
   # Example: specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
@@ -26,16 +26,16 @@ else {
     $jsonContent = Get-Content (Join-Path $repoPath $file) | ConvertFrom-Json -AsHashtable
 
     if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
-      LogInfo "  Swagger was generated from TypeSpec (contains '/info/x-typespec-generated')"
+      LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
 
       # ToDo: Verify spec folder includes *.tsp and tspconfig.yaml, to prevent spec authors committing
-      # swagger generated from TypeSpec, without also including the TypeSpec sources.
+      # openapi generated from TypeSpec, without also including the TypeSpec sources.
 
       # Skip further checks, since spec is already using TypeSpec
       continue
     }
     else {
-      LogInfo "  Swagger was not generated from TypeSpec (missing '/info/x-typespec-generated')"
+      LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
     }
 
     # Example: specification/foo/resource-manager/Microsoft.Foo
@@ -71,12 +71,12 @@ if ($pathsWithErrors.Count -gt 0)
 {
   # DevOps only adds the first 4 errors to the github checks list so lets always add the generic one first
   # and then as many of the individual ones as can be found afterwards
-  LogError "New specs must use TypeSpec.  For more detailed docs see https://aka.ms/azsdk/specs/typespec-requirement"
+  LogError "New specs must use TypeSpec.  For more detailed docs see https://aka.ms/azsdk/typespec"
   LogJobFailure
 
   foreach ($path in $pathsWithErrors)
   {
-    LogErrorForFile $path "Swagger was not generated from TypeSpec, and spec appears to be new"
+    LogErrorForFile $path "OpenAPI was not generated from TypeSpec, and spec appears to be new"
   }
   exit 1
 }
