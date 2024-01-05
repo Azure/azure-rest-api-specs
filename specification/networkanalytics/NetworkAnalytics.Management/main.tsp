@@ -161,16 +161,22 @@ model DataConnectorsProperties {
 enum ProvisioningState {
   /** Represents a succeeded operation. */
   Succeeded,
+
   /** Represents a failed operation. */
   Failed,
+
   /** Represents a canceled operation. */
   Canceled,
+
   /** Represents a pending operation. */
   Provisioning,
+
   /** Represents a pending operation. */
   Updating,
+
   /** Represents an operation under deletion. */
   Deleting,
+
   /** Represents an accepted operation. */
   Accepted,
 }
@@ -940,14 +946,6 @@ model DataProductProperties {
   @doc("Key vault url.")
   @visibility("read")
   keyVaultUrl?: string;
-
-  @doc("Dependent data products.")
-  @visibility("read","create")
-  dependentDataProducts?: Record<ResourceIdentifier<[
-    {
-      type: "Microsoft.NetworkAnalytics/dataProducts";
-    }
-  ]>[]>;
 }
 
 @doc("Encryption key details.")
@@ -1270,7 +1268,7 @@ interface MetricsIngestionEndpoints {
 interface DataProductsCatalogs {
   @doc("Retrieve data type resource.")
   get is ArmResourceRead<DataProductsCatalog>;
-  
+
   @doc("List data catalog by resource group.")
   listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
 
