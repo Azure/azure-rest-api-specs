@@ -40,7 +40,6 @@ else {
     # Example: specification/foo/resource-manager/Microsoft.Foo
     $pathToServiceName = ($file -split '/')[0..3] -join '/'
 
-    # ToDo: Fetch main and query local git repo to prevent issues with rate limiting
     $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/$pathToServiceName/stable"
 
     LogInfo "  Checking $urlToStableFolder"
