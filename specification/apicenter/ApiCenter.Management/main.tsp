@@ -146,6 +146,19 @@ enum Versions {
   "payload"
 );
 
+@@TypeSpec.OpenAPI.extension(ApiDefinitions.exportSpecification::parameters.body,
+  "x-ms-client-name",
+  "payload"
+);
+@@projectedName(ApiDefinitions.exportSpecification::parameters.body,
+  "json",
+  "payload"
+);
+@@projectedName(ApiDefinitions.exportSpecification::parameters.body,
+  "client",
+  "payload"
+);
+
 @@TypeSpec.OpenAPI.extension(Services.exportMetadataSchema::parameters.body,
   "x-ms-client-name",
   "payload"
@@ -181,3 +194,61 @@ op ArmResourceListByParent<
   ...ResourceParentParameters<TResource, TBaseParameters>,
   ...OdataFilterParameter,
 ): ArmResponse<ResourceListResult<TResource>> | ErrorResponse;
+
+/**
+ * A resource GET operation
+ * @template TResource the resource being patched
+ * @template TBaseParameters Optional. Allows overriding the operation parameters
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
+@autoRoute
+@doc("Get a {name}", TResource)
+@get
+@armResourceRead(TResource)
+op ArmResourceRead<
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+): ArmResponseWithEtag<TResource> | ErrorResponse;
+
+/**
+ * Synchronous PUT operation for ARM resources
+ * @template TResource the resource being patched
+ * @template TBaseParameters Optional. Allows overriding the operation parameters
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
+@autoRoute
+@doc("Create a {name}", TResource)
+@armResourceCreateOrUpdate(TResource)
+@put
+op ArmResourceCreateOrReplaceSync<
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("Resource create parameters.")
+  @body
+  resource: TResource,
+): ArmResourceUpdatedResponseWithEtag<TResource> | ArmResourceCreatedSyncResponseWithEtag<TResource> | ErrorResponse;
+
+@doc("Resource '{name}' create operation succeeded", TResource)
+model ArmResourceCreatedSyncResponseWithEtag<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+  is Body<TResource> {
+  ...CreatedResponse;
+  ...Azure.Core.EtagResponseEnvelope;
+}
+
+@doc("Resource '{name}' update operation succeeded", TResource)
+model ArmResourceUpdatedResponseWithEtag<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+  is ArmResponseWithEtag<TResource>;
+
+@doc("Azure operation completed successfully.")
+model ArmResponseWithEtag<T> {
+  ...OkResponse;
+  ...Azure.Core.EtagResponseEnvelope;
+  ...Body<T>;
+}

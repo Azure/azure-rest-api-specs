@@ -295,6 +295,7 @@ model ApiProperties {
   termsOfService?: TermsOfService;
 
   @doc("The set of external documentation")
+  @maxItems(20)
   externalDocumentation?: ExternalDocumentation[];
 
   @doc("The set of contacts")
@@ -311,6 +312,7 @@ model ApiProperties {
 @doc("Terms of service for the API.")
 model TermsOfService {
   @doc("URL pointing to the terms of service.")
+  @maxLength(200)
   url: string;
 }
 
@@ -325,6 +327,7 @@ model ExternalDocumentation {
   description?: string;
 
   @doc("URL pointing to the documentation.")
+  @maxLength(200)
   url: string;
 }
 
@@ -335,6 +338,7 @@ model Contact {
   name?: string;
 
   @doc("URL for the contact.")
+  @maxLength(200)
   url?: string;
 
   @doc("Email address of the contact.")
@@ -352,12 +356,14 @@ model License {
 URL pointing to the license details. The URL field is mutually exclusive of the
 identifier field.
 """)
+  @maxLength(200)
   url?: string;
 
   @doc("""
 SPDX license information for the API. The identifier field is mutually
 exclusive of the URL field.
 """)
+  @maxLength(50)
   identifier?: string;
 }
 
@@ -460,8 +466,12 @@ model DeploymentProperties {
 @doc("Server")
 model DeploymentServer {
   @doc("Base runtime URLs for this deployment.")
-  runtimeUri?: string[];
+  runtimeUri?: SmallString[];
 }
+
+/** Used for restricted length uris */
+@maxLength(200)
+scalar SmallString extends string;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
 @doc("Environment properties entity.")
@@ -493,6 +503,7 @@ model EnvironmentServer {
   @doc("Type of the server that represents the environment.")
   type?: EnvironmentServerType;
 
+  @maxItems(1)
   @doc("The location of the management portal")
   managementPortalUri?: string[];
 }
@@ -502,6 +513,7 @@ model Onboarding {
   @doc("Onboarding guide.")
   instructions?: string;
 
+  @maxItems(1)
   @doc("The location of the development portal")
   developerPortalUri?: string[];
 }

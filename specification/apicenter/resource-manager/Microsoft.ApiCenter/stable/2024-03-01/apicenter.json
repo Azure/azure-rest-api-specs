@@ -209,9 +209,15 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Service"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -268,12 +274,24 @@
             "description": "Resource 'Service' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Service"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "201": {
             "description": "Resource 'Service' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Service"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -435,6 +453,20 @@
               "$ref": "#/definitions/MetadataSchemaExportResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -446,7 +478,11 @@
           "Services_ExportMetadataSchema": {
             "$ref": "./examples/Services_ExportMetadataSchema.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/metadataSchemas": {
@@ -541,9 +577,15 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MetadataSchema"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -609,12 +651,24 @@
             "description": "Resource 'MetadataSchema' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/MetadataSchema"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "201": {
             "description": "Resource 'MetadataSchema' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/MetadataSchema"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -830,9 +884,15 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Workspace"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -898,12 +958,24 @@
             "description": "Resource 'Workspace' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Workspace"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "201": {
             "description": "Resource 'Workspace' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Workspace"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -1137,9 +1209,15 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Api"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -1214,12 +1292,24 @@
             "description": "Resource 'Api' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Api"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "201": {
             "description": "Resource 'Api' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Api"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -1489,9 +1579,15 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -1575,12 +1671,24 @@
             "description": "Resource 'Deployment' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "201": {
             "description": "Resource 'Deployment' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -1868,9 +1976,15 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ApiVersion"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -1954,12 +2068,24 @@
             "description": "Resource 'ApiVersion' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ApiVersion"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "201": {
             "description": "Resource 'ApiVersion' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ApiVersion"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -2265,9 +2391,15 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ApiDefinition"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -2360,12 +2492,24 @@
             "description": "Resource 'ApiDefinition' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ApiDefinition"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "201": {
             "description": "Resource 'ApiDefinition' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ApiDefinition"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -2606,13 +2750,14 @@
             "maxLength": 90
           },
           {
-            "name": "body",
+            "name": "payload",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
               "type": "object"
-            }
+            },
+            "x-ms-client-name": "payload"
           }
         ],
         "responses": {
@@ -2620,6 +2765,20 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ApiSpecExportResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -2633,7 +2792,11 @@
           "ApiDefinitions_ExportSpecification": {
             "$ref": "./examples/ApiDefinitions_ExportSpecification.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}/importSpecification": {
@@ -2716,6 +2879,20 @@
               "type": "object"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2727,7 +2904,11 @@
           "ApiDefinitions_ImportSpecification": {
             "$ref": "./examples/ApiDefinitions_ImportSpecification.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/environments": {
@@ -2840,9 +3021,15 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -2917,12 +3104,24 @@
             "description": "Resource 'Environment' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "201": {
             "description": "Resource 'Environment' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
             }
           },
           "default": {
@@ -3288,6 +3487,7 @@
         "externalDocumentation": {
           "type": "array",
           "description": "The set of external documentation",
+          "maxItems": 20,
           "items": {
             "$ref": "#/definitions/ExternalDocumentation"
           },
@@ -3482,7 +3682,8 @@
         },
         "url": {
           "type": "string",
-          "description": "URL for the contact."
+          "description": "URL for the contact.",
+          "maxLength": 200
         },
         "email": {
           "type": "string",
@@ -3614,7 +3815,7 @@
           "type": "array",
           "description": "Base runtime URLs for this deployment.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/SmallString"
           }
         }
       }
@@ -3768,6 +3969,7 @@
         "managementPortalUri": {
           "type": "array",
           "description": "The location of the management portal",
+          "maxItems": 1,
           "items": {
             "type": "string"
           }
@@ -3844,7 +4046,8 @@
         },
         "url": {
           "type": "string",
-          "description": "URL pointing to the documentation."
+          "description": "URL pointing to the documentation.",
+          "maxLength": 200
         }
       },
       "required": [
@@ -3862,11 +4065,13 @@
         },
         "url": {
           "type": "string",
-          "description": "URL pointing to the license details. The URL field is mutually exclusive of the\nidentifier field."
+          "description": "URL pointing to the license details. The URL field is mutually exclusive of the\nidentifier field.",
+          "maxLength": 200
         },
         "identifier": {
           "type": "string",
-          "description": "SPDX license information for the API. The identifier field is mutually\nexclusive of the URL field."
+          "description": "SPDX license information for the API. The identifier field is mutually\nexclusive of the URL field.",
+          "maxLength": 50
         }
       }
     },
@@ -4129,6 +4334,7 @@
         "developerPortalUri": {
           "type": "array",
           "description": "The location of the development portal",
+          "maxItems": 1,
           "items": {
             "type": "string"
           }
@@ -4268,13 +4474,19 @@
         }
       }
     },
+    "SmallString": {
+      "type": "string",
+      "description": "Used for restricted length uris",
+      "maxLength": 200
+    },
     "TermsOfService": {
       "type": "object",
       "description": "Terms of service for the API.",
       "properties": {
         "url": {
           "type": "string",
-          "description": "URL pointing to the terms of service."
+          "description": "URL pointing to the terms of service.",
+          "maxLength": 200
         }
       },
       "required": [

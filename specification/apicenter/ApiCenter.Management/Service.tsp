@@ -37,7 +37,7 @@ interface Services {
   @doc("Lists services within an Azure subscription.")
   listBySubscription is ArmListBySubscription<Service>;
   @doc("Exports the effective metadata schema.")
-  exportMetadataSchema is ArmResourceActionSync<
+  exportMetadataSchema is ArmResourceActionAsync<
     Service,
     MetadataSchemaExportRequest,
     MetadataSchemaExportResult
