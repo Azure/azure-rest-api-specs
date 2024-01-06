@@ -9,7 +9,7 @@ using Azure.Core;
 
 @useAuth(AzureAuth)
 @service({
-  title: "Azure.SchemaRegistry",
+  title: "Azure Schema Registry",
 })
 
 // Supported operations.
@@ -33,11 +33,11 @@ namespace Azure.SchemaRegistry;
 
 @doc("Represents the Schema Registry API version to use for requests.")
 enum ServiceApiVersions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("Azure Schema Registry 2021-10 Version")
   V2021_10: "2021-10",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("Azure Schema Registry 2022-10 Version")
   V2022_10: "2022-10",
 
@@ -142,14 +142,13 @@ union SchemaContentTypeValues {
 
 @doc("The content type for the schema.")
 enum ContentTypeEnum {
+  @doc("The custom schema content type.")
+  custom: "application/octet-stream",
   @doc("The Avro schema content type.")
   avro: "application/json; serialization=Avro",
   @doc("The JSON schema content type.")
   @added(ServiceApiVersions.V2022_10)
   json: "application/json; serialization=json",
-  @doc("The custom schema content type.")
-  @added(ServiceApiVersions.V2022_10)
-  custom: "text/plain; charset=utf-8",
   @doc("The protobuf schema content type.")
   @added(ServiceApiVersions.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
@@ -211,7 +210,7 @@ model SchemaContent {
   content: bytes;
 }
 
-@doc("No Content.")
+@doc("Headers for metadata of a schema.")
 model SchemaHeaders {
   @doc("URL location of schema, identified by schema group, schema name, and version.")
   @header("Location")
