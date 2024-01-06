@@ -18,6 +18,7 @@ if (!$filesToCheck) {
   LogInfo "No OpenAPI files found to check"
 }
 else {
+  # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
   $responseCache = @{}
 
   # Example: specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
