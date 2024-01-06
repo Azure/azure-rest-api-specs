@@ -370,6 +370,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alertTemplates": {
+      "get": {
+        "tags": [
+          "AlertTemplates"
+        ],
+        "operationId": "AlertTemplates_List",
+        "summary": "Gets a list of alert templates in the specified SAP monitor.",
+        "description": "Gets a list of alert templates in the specified SAP monitor. The operations returns various properties of each alert template.",
+        "x-ms-examples": {
+          "List all Alert Templates in a monitor": {
+            "$ref": "./examples/workloadmonitor/AlertTemplates/AlertTemplates_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertTemplatesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/db2JobConfigurations": {
       "get": {
         "tags": [
@@ -1282,6 +1325,196 @@
         }
       },
       "description": "The response from the List provider instances operation."
+    },
+    "AlertTemplatesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertTemplate"
+          },
+          "description": "The list of alert templates."
+        }
+      },
+      "description": "The response from the List alert templates operation."
+    },
+    "AlertTemplate": {
+      "type": "object",
+      "properties": {
+        "templateId": {
+          "type": "string",
+          "description": "ID of the alert template."
+        },
+        "providerType": {
+          "type": "string",
+          "description": "The provider type for alert template. For example, the value can be SapHana."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short Description of the alert template."
+        },
+        "alertTemplateProperties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertTemplateProperties",
+          "description": "Alert Template properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "An Alert Template associated with SAP monitor."
+    },
+    "AlertTemplateProperties": {
+      "type": "object",
+      "properties": {
+        "severity": {
+          "type": "string",
+          "description": "Severity Associated with the Alert Template"
+        },
+        "query": {
+          "type": "string",
+          "description": "Query Associated with the Alert Template"
+        },
+        "thresholdOperator": {
+          "type": "string",
+          "enum": [
+            "LessThan",
+            "GreaterThan",
+            "Equal",
+            "GreaterThanOrEqual",
+            "LessThanOrEqual"
+          ],
+          "default": "LessThan",
+          "x-ms-enum": {
+            "name": "alertTemplateThresholdOperator",
+            "modelAsString": true
+          },
+          "description": "Threshold Operator for the alert template"
+        },
+        "defaultThreshold": {
+          "type": "integer",
+          "description": "Default Threshold Value Associated with the Alert Template"
+        },
+        "minThresholdValue": {
+          "type": "integer",
+          "description": "Minimum possible Default Threshold Value Associated with the Alert Template"
+        },
+        "maxThresholdValue": {
+          "type": "integer",
+          "description": "Maximum possible Default Threshold Value Associated with the Alert Template"
+        },
+        "isThresholdInputRequired": {
+          "type": "boolean",
+          "description": "Is input required for Default Threshold Value Associated with the Alert Template"
+        },
+        "alertUnit": {
+          "type": "string",
+          "description": "Alert Unit Value Associated with the Alert Template"
+        },
+        "metricMeasurement": {
+          "description": "Defines the metric measurement properties.",
+          "$ref": "#/definitions/AlertTemplateMetricMeasurement"
+        },
+        "queryInputParameters": {
+          "description": "Defines the query input properties.",
+          "$ref": "#/definitions/AlertTemplateQueryInputParameters"
+        },
+        "laParameters": {
+          "description": "Defines the LA parameter properties.",
+          "$ref": "#/definitions/AlertTemplateLAParameters"
+        }
+      },
+      "description": "Describes the properties of a alert template."
+    },
+    "AlertTemplateMetricMeasurement": {
+      "type": "object",
+      "properties": {
+        "thresholdOperator": {
+          "type": "string",
+          "enum": [
+            "LessThan",
+            "GreaterThan",
+            "Equal",
+            "GreaterThanOrEqual",
+            "LessThanOrEqual"
+          ],
+          "default": "LessThan",
+          "x-ms-enum": {
+            "name": "alertTemplateThresholdOperatorMetricMeasurement",
+            "modelAsString": true
+          },
+          "description": "Threshold Operator for the alert template [Metric Mesurement]"
+        },
+        "threshold": {
+          "type": "integer",
+          "description": "The Threshold Value Associated with the Alert Template for Metric Measurement"
+        },
+        "metricTriggerType": {
+          "type": "string",
+          "description": "Metric Trigger Type Associated with the Alert Template for Metric Measurement"
+        },
+        "metricColumn": {
+          "type": "string",
+          "description": "Metric Column Associated with the Alert Template for Metric Measurement"
+        },
+        "frequencyInMinutes": {
+          "type": "integer",
+          "description": "Frequency (mins) value Associated with the Alert Template for Metric Measurement"
+        },
+        "timeWindowInMinutes": {
+          "type": "integer",
+          "description": "Time Window (mins) Value Associated with the Alert Template for Metric Measurement"
+        }
+      },
+      "description": "Describes the properties for metric measurement in alerts template."
+    },
+    "AlertTemplateQueryInputParameters": {
+      "type": "object",
+      "properties": {
+        "providerInstances": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Provider Instances we need to query in the Alert Template"
+        },
+        "alertThreshold": {
+          "type": "integer",
+          "description": "The Alert Threshold Value Associated with the Alert Template for Query Input Parameters"
+        },
+        "haClusters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "HA Cluster Instances we need to query in the Alert Template"
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Describes the LA Parameter properties in alerts template."
+    },
+    "AlertTemplateLAParameters": {
+      "type": "object",
+      "properties": {
+        "queryParameterName": {
+          "type": "string",
+          "description": "Query Parameter Name for LA queries in alerts template"
+        },
+        "laQuery": {
+          "type": "string",
+          "description": "Actual LA query for alerts template"
+        },
+        "parameterName": {
+          "type": "string",
+          "description": "LA parameter name that we need to query"
+        }
+      },
+      "description": "Describes the LA Parameter properties in alerts template."
     },
     "db2JobConfigurationsListResult": {
       "type": "object",
