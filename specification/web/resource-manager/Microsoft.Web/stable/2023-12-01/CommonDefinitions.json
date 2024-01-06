@@ -957,8 +957,9 @@
       "type": "object",
       "properties": {
         "subnetResourceId": {
-          "description": "The Virtual Network subnet's ARM ID",
-          "type": "string"
+          "description": "The Virtual Network subnet's Azure resource ID",
+          "type": "string",
+          "format": "arm-id"
         },
         "swiftSupported": {
           "description": "Boolean flag indicating whether Swift integration is supported",
@@ -1001,17 +1002,19 @@
           "type": "object",
           "properties": {
             "connectedServerFarmsId": {
-              "description": "The list of all ServerFarms' ARM ID that are using the VNET",
+              "description": "The list of all ServerFarms' Azure resource ID that are using the VNET",
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "string",
+                "format": "arm-id"
               }
             },
             "connectedSitesId": {
-              "description": "The list of all Sites' ARM ID that are using the VNET",
+              "description": "The list of all Sites' Azure resource ID that are using the VNET",
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "string",
+                "format": "arm-id"
               }
             }
           }

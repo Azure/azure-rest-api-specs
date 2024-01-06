@@ -1706,14 +1706,23 @@
       "type": "object",
       "properties": {
         "subnetResourceId": {
-          "description": "The ARM Resource ID of the subnet",
-          "type": "string"
+          "description": "The Azure Resource ID of the subnet",
+          "type": "string",
+          "format": "arm-id"
         }
       }
     },
     "PurgedUnusedVirtualNetworkSuccessResponse": {
       "description": "Response content upon successful deletion of an unused virtual network.",
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "Purged unused virtual network integration.",
+        "No unused virtual network integration."
+      ],
+      "x-ms-enum": {
+        "name": "PurgedUnusedVirtualNetworkSuccessResponse",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
