@@ -306,7 +306,7 @@ model ApiProperties {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing spec"
   @doc("The custom metadata defined for API catalog entities.")
-  customProperties?: Record<unknown>;
+  customProperties?: CustomProperties;
 }
 
 @doc("Terms of service for the API.")
@@ -460,8 +460,12 @@ model DeploymentProperties {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing spec"
   @doc("The custom metadata defined for API catalog entities.")
-  customProperties?: Record<unknown>;
+  customProperties?: CustomProperties;
 }
+
+@summary("Custom Properties")
+@doc("The custom metadata defined for API catalog entities.")
+model CustomProperties {}
 
 @doc("Server")
 model DeploymentServer {
@@ -495,7 +499,7 @@ model EnvironmentProperties {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing spec"
   @doc("The custom metadata defined for API catalog entities.")
-  customProperties?: Record<unknown>;
+  customProperties?: CustomProperties;
 }
 
 @doc("Server information of the environment.")
