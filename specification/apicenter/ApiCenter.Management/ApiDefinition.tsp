@@ -38,13 +38,13 @@ interface ApiDefinitions {
   @doc("Returns a collection of API definitions.")
   list is ArmResourceListByParent<ApiDefinition>;
   @doc("Imports the API specification.")
-  importSpecification is ArmResourceActionSync<
+  importSpecification is ArmResourceActionAsync<
     ApiDefinition,
     ApiSpecImportRequest,
     {}
   >;
   @doc("Exports the API specification.")
-  exportSpecification is ArmResourceActionSync<
+  exportSpecification is ArmResourceActionAsync<
     ApiDefinition,
     {},
     ApiSpecExportResult
