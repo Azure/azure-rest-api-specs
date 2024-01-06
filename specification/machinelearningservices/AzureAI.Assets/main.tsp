@@ -1,31 +1,46 @@
+import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "./index.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
-using Azure.ResourceManager;
+using Azure.Core.Traits;
 
-@armProviderNamespace
+//todo clean up
+
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.contoso.com/common/oauth2/v2.0/authorize",
+      scopes: ["https://widget.contoso.com/.default"],
+    }
+  ]>
+)
 @service({
   title: "Azure Machine Learning Services",
-  description: "Azure AI Management API.",
 })
-
-@doc("Azure AI api client.")
+@server(
+  "{endpoint}/managementfrontend",
+  "Machinelearning Services APIs",
+  {
+    @doc("""
+Supported Machine Learning Services endpoints (protocol and hostname, for example:
+https://westus.api.managementfrontend.com).
+""")
+    endpoint: string,
+  }
+)
 @versioned(Versions)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "ref:workspaceRP.json#Microsoft.MachineLearningServices/operations"
 namespace Microsoft.MachineLearningServices;
 
 @doc("Azure Machine Learning Services api versions.")
 enum Versions {
   @doc("Azure Machine Learning Services api version 2021-10-01-dataplanepreview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2021_10_01_dataplanepreview: "2021-10-01-dataplanepreview",
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `2021-10-01-dataplanepreview`,
 }
