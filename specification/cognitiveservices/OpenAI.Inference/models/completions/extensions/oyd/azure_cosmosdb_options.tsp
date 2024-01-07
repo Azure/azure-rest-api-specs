@@ -29,7 +29,7 @@ model AzureCosmosDBChatExtensionConfiguration
 @added(ServiceApiVersions.v2023_12_01_Preview)
 @doc("""
 Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for
-MongoDB vCore.
+MongoDB vCore. The supported authentication type is ConnectionString.
 """)
 model AzureCosmosDBChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
