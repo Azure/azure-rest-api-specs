@@ -1315,7 +1315,7 @@
     },
     "AzureCosmosDBChatExtensionConfiguration": {
       "type": "object",
-      "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
+      "description": "A specific representation of configurable options for Azure Cosmos DB when using it as an Azure OpenAI chat\nextension.",
       "properties": {
         "parameters": {
           "$ref": "#/definitions/AzureCosmosDBChatExtensionParameters",
@@ -1385,13 +1385,37 @@
         "databaseName",
         "containerName",
         "indexName",
-        "fieldsMapping"
+        "fieldsMapping",
+        "embeddingDependency"
       ]
     },
     "AzureCosmosDBFieldMappingOptions": {
       "type": "object",
       "description": "Optional settings to control how fields are processed when using a configured Azure Cosmos DB resource.",
       "properties": {
+        "titleField": {
+          "type": "string",
+          "description": "The name of the index field to use as a title."
+        },
+        "urlField": {
+          "type": "string",
+          "description": "The name of the index field to use as a URL."
+        },
+        "filepathField": {
+          "type": "string",
+          "description": "The name of the index field to use as a filepath."
+        },
+        "contentFields": {
+          "type": "array",
+          "description": "The names of index fields that should be treated as content.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contentFieldsSeparator": {
+          "type": "string",
+          "description": "The separator pattern that content fields should use."
+        },
         "vectorFields": {
           "type": "array",
           "description": "The names of fields that represent vector data.",
@@ -1401,6 +1425,7 @@
         }
       },
       "required": [
+        "contentFields",
         "vectorFields"
       ]
     },
@@ -3495,22 +3520,11 @@
         "contentFieldsSeparator": {
           "type": "string",
           "description": "The separator pattern that content fields should use."
-        },
-        "vectorFields": {
-          "type": "array",
-          "description": "The names of fields that represent vector data.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "imageVectorFields": {
-          "type": "array",
-          "description": "The names of fields that represent image vector data.",
-          "items": {
-            "type": "string"
-          }
         }
-      }
+      },
+      "required": [
+        "contentFields"
+      ]
     },
     "StopFinishDetails": {
       "type": "object",

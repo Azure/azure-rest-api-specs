@@ -62,18 +62,9 @@ model PineconeFieldMappingOptions {
 
   @doc("The names of index fields that should be treated as content.")
   @projectedName("csharp", "ContentFieldNames")
-  contentFields?: string[];
+  contentFields: string[];
 
   @doc("The separator pattern that content fields should use.")
   @projectedName("csharp", "ContentFieldSeparator")
   contentFieldsSeparator?: string;
-
-  @doc("The names of fields that represent vector data.")
-  @projectedName("csharp", "VectorFieldNames")
-  vectorFields?: string[];
-
-  @added(ServiceApiVersions.v2023_12_01_Preview)
-  @doc("The names of fields that represent image vector data.")
-  @projectedName("csharp", "ImageVectorFieldNames")
-  imageVectorFields?: string[];
 }
