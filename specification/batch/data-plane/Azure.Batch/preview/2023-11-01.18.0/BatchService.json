@@ -10305,7 +10305,7 @@
         },
         "applicationPackageReferences": {
           "type": "array",
-          "description": "A list of Application Packages that the Batch service will deploy to the \nCompute Node before running the command line.Application Packages are \ndownloaded and deployed to a shared directory, not the Task working \ndirectory. Therefore, if a referenced Application Package is already \non the Compute Node, and is up to date, then it is not re-downloaded;\nthe existing copy on the Compute Node is used. If a referenced Application\nPackage cannot be installed, for example because the package has been deleted\nor because download failed, the Task fails.",
+          "description": "A list of Application Packages that the Batch service will deploy to the\nCompute Node before running the command line.Application Packages are\ndownloaded and deployed to a shared directory, not the Task working\ndirectory. Therefore, if a referenced Application Package is already\non the Compute Node, and is up to date, then it is not re-downloaded;\nthe existing copy on the Compute Node is used. If a referenced Application\nPackage cannot be installed, for example because the package has been deleted\nor because download failed, the Task fails.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
           },
@@ -10392,7 +10392,7 @@
         },
         "applicationPackageReferences": {
           "type": "array",
-          "description": "A list of Application Packages that the Batch service will deploy to the \nCompute Node before running the command line.Application Packages are \ndownloaded and deployed to a shared directory, not the Task working \ndirectory. Therefore, if a referenced Application Package is already \non the Compute Node, and is up to date, then it is not re-downloaded;\nthe existing copy on the Compute Node is used. If a referenced Application\nPackage cannot be installed, for example because the package has been deleted\nor because download failed, the Task fails.",
+          "description": "A list of Application Packages that the Batch service will deploy to the\nCompute Node before running the command line.Application Packages are\ndownloaded and deployed to a shared directory, not the Task working\ndirectory. Therefore, if a referenced Application Package is already\non the Compute Node, and is up to date, then it is not re-downloaded;\nthe existing copy on the Compute Node is used. If a referenced Application\nPackage cannot be installed, for example because the package has been deleted\nor because download failed, the Task fails.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
           },
@@ -11614,7 +11614,7 @@
         },
         "certificateReferences": {
           "type": "array",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. \nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. \nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
           },
@@ -12526,7 +12526,7 @@
         },
         "certificateReferences": {
           "type": "array",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. \nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. \nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
           },
@@ -12682,7 +12682,7 @@
         },
         "certificateReferences": {
           "type": "array",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. \nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. \nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
           },
@@ -12988,7 +12988,7 @@
         },
         "certificateReferences": {
           "type": "array",
-          "description": "This list replaces any existing Certificate references configured on the Pool. \nIf you specify an empty collection, any existing Certificate references are removed from the Pool. \nFor Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. \nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. \nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "description": "This list replaces any existing Certificate references configured on the Pool.\nIf you specify an empty collection, any existing Certificate references are removed from the Pool.\nFor Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
           },
@@ -13208,7 +13208,7 @@
         },
         "certificateReferences": {
           "type": "array",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory. \nWarning: This property is deprecated and will be removed after February, 2024. \nPlease use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024.\nPlease use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
           },
@@ -13337,7 +13337,7 @@
         },
         "certificateReferences": {
           "type": "array",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory. \nWarning: This property is deprecated and will be removed after February, 2024. \nPlease use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024.\nPlease use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
           },
@@ -13455,7 +13455,7 @@
         },
         "certificateReferences": {
           "type": "array",
-          "description": "If this element is present, it replaces any existing Certificate references configured on the Pool. \nIf omitted, any existing Certificate references are left unchanged. \nFor Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. \nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. \nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "description": "If this element is present, it replaces any existing Certificate references configured on the Pool.\nIf omitted, any existing Certificate references are left unchanged.\nFor Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
           },
@@ -15029,7 +15029,7 @@
     },
     "DiskEncryptionConfiguration": {
       "type": "object",
-      "description": "The disk encryption configuration applied on compute nodes in the pool. \nDisk encryption configuration is not supported on Linux pool created with \nAzure Compute Gallery Image.",
+      "description": "The disk encryption configuration applied on compute nodes in the pool.\nDisk encryption configuration is not supported on Linux pool created with\nAzure Compute Gallery Image.",
       "properties": {
         "targets": {
           "type": "array",
@@ -15368,7 +15368,7 @@
     },
     "ImageReference": {
       "type": "object",
-      "description": "A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image. \nTo get the list of all Azure Marketplace Image references verified by Azure Batch, see the \n' List Supported Images ' operation.",
+      "description": "A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image.\nTo get the list of all Azure Marketplace Image references verified by Azure Batch, see the\n' List Supported Images ' operation.",
       "properties": {
         "publisher": {
           "type": "string",
@@ -16264,7 +16264,7 @@
     },
     "ServiceArtifactReference": {
       "type": "object",
-      "description": "Specifies the service artifact reference id used to set same image version \nfor all virtual machines in the scale set when using 'latest' image version.",
+      "description": "Specifies the service artifact reference id used to set same image version\nfor all virtual machines in the scale set when using 'latest' image version.",
       "properties": {
         "id": {
           "type": "string",
@@ -16277,7 +16277,7 @@
     },
     "ServiceArtifactReferenceUpdate": {
       "type": "object",
-      "description": "Specifies the service artifact reference id used to set same image version \nfor all virtual machines in the scale set when using 'latest' image version.",
+      "description": "Specifies the service artifact reference id used to set same image version\nfor all virtual machines in the scale set when using 'latest' image version.",
       "properties": {
         "id": {
           "type": "string",
