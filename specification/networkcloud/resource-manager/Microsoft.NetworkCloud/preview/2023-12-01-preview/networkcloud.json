@@ -2038,6 +2038,9 @@
         "x-ms-examples": {
           "Create or update cluster manager": {
             "$ref": "./examples/ClusterManagers_Create.json"
+          },
+          "Create or update cluster manager with user assigned identity": {
+            "$ref": "./examples/ClusterManagers_Create_Uami.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -2942,6 +2945,63 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/continueUpdateVersion": {
+      "post": {
+        "description": "Trigger the continuation of an update for a cluster with a matching update strategy that has paused after completing a segment of the update.",
+        "summary": "Continue a paused update to the cluster version.",
+        "operationId": "Clusters_ContinueUpdateVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "clusterContinueUpdateVersionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterContinueUpdateVersionParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update cluster version": {
+            "$ref": "./examples/Clusters_ContinueUpdateVersion.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
+          "final-state-via": "location"
         }
       }
     },
