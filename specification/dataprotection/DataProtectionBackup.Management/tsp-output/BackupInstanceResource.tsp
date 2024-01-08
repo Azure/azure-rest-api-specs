@@ -20,7 +20,7 @@ model BackupInstanceResource is ProxyResource<BackupInstance> {
 }
 
 @armResourceOperations
-interface BackupInstances {
+interface BackupInstances_F {
   @doc("Gets a backup instance with name in a backup vault")
   get is ArmResourceRead<BackupInstanceResource>;
   @doc("Create or update a backup instance in a backup vault")

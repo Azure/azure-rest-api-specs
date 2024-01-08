@@ -156,7 +156,7 @@ interface ScalingPlans {
 }
 
 @armResourceOperations
-interface UserSessions {
+interface FUserSessions {
   @doc("List userSessions.")
   // FIXME: UserSessions_ListByHostPool could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/userSessions")

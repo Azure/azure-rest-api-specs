@@ -21,7 +21,7 @@ model PrivateEndpointConnection
 }
 
 @armResourceOperations
-interface IotDpsResource {
+interface XXXIotDpsResource {
   @doc("Get private endpoint connection properties")
   getPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection>;
   @doc("Create or update the status of a private endpoint connection with the specified name")

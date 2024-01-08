@@ -21,7 +21,7 @@ model HealthCheckStatusDetails
 }
 
 @armResourceOperations
-interface NetworkConnections {
+interface FDFNetworkConnections {
   @doc("Gets health check status details.")
   getHealthDetails is ArmResourceRead<HealthCheckStatusDetails>;
   @doc("Lists health check status details")

@@ -53,7 +53,7 @@ interface Workspaces {
 }
 
 @armResourceOperations
-interface PrivateLinkResources {
+interface FFFPrivateLinkResources {
   @doc("List the private link resources available for this workspace.")
   // FIXME: PrivateLinkResources_ListByWorkspace could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateLinkResources")

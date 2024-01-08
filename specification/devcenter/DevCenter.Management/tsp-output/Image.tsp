@@ -20,7 +20,7 @@ model Image is ProxyResource<ImageProperties> {
 }
 
 @armResourceOperations
-interface Images {
+interface FfImages {
   @doc("Gets a gallery image.")
   get is ArmResourceRead<Image>;
   @doc("Lists images for a gallery.")

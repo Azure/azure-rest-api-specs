@@ -20,7 +20,7 @@ model ScalingPlan is TrackedResource<ScalingPlanProperties> {
 }
 
 @armResourceOperations
-interface ScalingPlans {
+interface FScalingPlans {
   @doc("Get a scaling plan.")
   get is ArmResourceRead<ScalingPlan>;
   @doc("Create or update a scaling plan.")

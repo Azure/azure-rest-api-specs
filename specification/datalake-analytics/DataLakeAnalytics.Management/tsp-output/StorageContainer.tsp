@@ -20,7 +20,7 @@ model StorageContainer is ProxyResource<StorageContainerProperties> {
 }
 
 @armResourceOperations
-interface StorageAccounts {
+interface FStorageAccounts {
   @doc("Gets the specified Azure Storage container associated with the given Data Lake Analytics and Azure Storage accounts.")
   getStorageContainer is ArmResourceRead<StorageContainer>;
   @doc("Lists the Azure Storage containers, if any, associated with the specified Data Lake Analytics and Azure Storage account combination. The response includes a link to the next page of results, if any.")

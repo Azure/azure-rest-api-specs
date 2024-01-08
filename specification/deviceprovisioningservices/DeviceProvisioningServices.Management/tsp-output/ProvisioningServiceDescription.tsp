@@ -24,7 +24,7 @@ model ProvisioningServiceDescription
 }
 
 @armResourceOperations
-interface IotDpsResource {
+interface XXFIotDpsResource {
   @doc("Get the metadata of the provisioning service without SAS keys.")
   get is ArmResourceRead<ProvisioningServiceDescription>;
   @doc("Create or update the metadata of the provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.")

@@ -100,7 +100,7 @@ model LabelResourceProperties extends ResourceBaseProperties {
 model LabelPatchResource extends LabelResource {}
 
 @doc("Task details")
-model TaskResource extends ProxyResource {
+model TaskResource {
   @doc("Task properties")
   properties?: TaskResourceProperties;
 }
