@@ -108,7 +108,7 @@ interface ThreadRuns {
   submitRunToolOutputs(
     @path threadId: string,
     @path runId: string,
-    @projectedName("json", "tool_outputs") toolOutputs: ToolOutputSubmission[],
+    @projectedName("json", "tool_outputs") toolOutputs: ToolOutput[],
   ): ThreadRun;
 
   /**

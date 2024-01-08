@@ -168,7 +168,7 @@ model MessageImageFileDetails {
 @doc("An encapsulation of an image file ID, as used by message image content.")
 @added(ServiceApiVersions.v2023_11_06_beta)
 model MessageImageFileIdDetails {
-  @doc("The ID of the specific file that the citation is from.")
+  @doc("The ID of the specific image file.")
   @projectedName("json", "file_id")
   fileId: string;
 }

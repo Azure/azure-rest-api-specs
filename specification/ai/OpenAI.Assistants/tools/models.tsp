@@ -87,7 +87,7 @@ model CodeInterpreterToolCall extends ToolCall {
 
   @projectedName("json", "code_interpreter")
   @doc("The details of the tool call to the code interpreter tool.")
-  codeInterpreter: CodeInterpreterCallDetails;
+  codeInterpreter: CodeInterpreterToolCallDetails;
 }
 
 @doc("""
@@ -113,32 +113,32 @@ model FunctionToolCall extends ToolCall {
   type: "function";
 
   @doc("The detailed information about the function called by the model.")
-  function: FunctionCallDetails;
+  function: FunctionToolCallDetails;
 }
 
 // Call details: Code Interpreter
 
 @doc("The detailed information about a code interpreter invocation by the model.")
 @added(ServiceApiVersions.v2023_11_06_beta)
-model CodeInterpreterCallDetails {
+model CodeInterpreterToolCallDetails {
   @doc("The input provided by the model to the code interpreter tool.")
   input: string;
 
   @doc("The outputs produced by the code interpreter tool back to the model in response to the tool call.")
-  outputs: CodeInterpreterCallOutput[];
+  outputs: CodeInterpreterToolCallOutput[];
 }
 
 @discriminator("type")
 @doc("An abstract representation of an emitted output from a code interpreter tool.")
 @added(ServiceApiVersions.v2023_11_06_beta)
-model CodeInterpreterCallOutput {
+model CodeInterpreterToolCallOutput {
   @doc("The object type.")
   type: string;
 }
 
 @doc("A representation of a log output emitted by a code interpreter tool in response to a tool call by the model.")
 @added(ServiceApiVersions.v2023_11_06_beta)
-model CodeInterpreterLogOutput extends CodeInterpreterCallOutput {
+model CodeInterpreterLogOutput extends CodeInterpreterToolCallOutput {
   @doc("The object type, which is always 'logs'.")
   type: "logs";
 
@@ -148,7 +148,7 @@ model CodeInterpreterLogOutput extends CodeInterpreterCallOutput {
 
 @doc("A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.")
 @added(ServiceApiVersions.v2023_11_06_beta)
-model CodeInterpreterImageOutput extends CodeInterpreterCallOutput {
+model CodeInterpreterImageOutput extends CodeInterpreterToolCallOutput {
   @doc("The object type, which is always 'image'.")
   type: "image";
 
@@ -168,7 +168,7 @@ model CodeInterpreterImageReference {
 
 @doc("The detailed information about the function called by the model.")
 @added(ServiceApiVersions.v2023_11_06_beta)
-model FunctionCallDetails {
+model FunctionToolCallDetails {
   @doc("The name of the function.")
   name: string;
 
@@ -186,7 +186,7 @@ model FunctionCallDetails {
 
 @doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
 @added(ServiceApiVersions.v2023_11_06_beta)
-model ToolOutputSubmission {
+model ToolOutput {
   @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
   @projectedName("json", "tool_call_id")
   toolCallId?: string;
