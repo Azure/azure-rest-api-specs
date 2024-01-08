@@ -33,29 +33,25 @@ model ExperimentationWorkspaceProperties {
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("ExperimentationWorkspace id in partner's system")
-  @visibility("read")
-  experimentationWorkspaceId?: string;
-
-  @doc("Access policy for an experimentation workspace")
+  @doc("Access policy for an experimentation workspace.")
   accessPolicy: AccessPolicy;
 
-  @doc("DataSource for an experimentation workspace")
+  @doc("Data source that telemetry data required for experimenation will be retrieved from.")
   dataSource?: DataSource;
 }
 
-@doc("Access policy for an experimentation workspace")
+@doc("Access policy for an experimentation workspace.")
 model AccessPolicy {
-  @doc("Application id used for access to the experimentation workspace")
-  authApplicationId: string;
+  @doc("Application id used for access to the experimentation workspace.")
+  applicationId: string;
 }
 
 @doc("DataSource for an experimentation workspace")
 model DataSource {
-  @doc("Resource id of the data source")
+  @doc("Resource id of the data source.")
   resourceId: string;
 
-  @doc("Whether experimentation is enabled")
+  @doc("Controls whether data flow from the configured data source into the experimentation workspace is enabled.")
   enabled: boolean;
 }
 

@@ -424,24 +424,24 @@
   "definitions": {
     "AccessPolicy": {
       "type": "object",
-      "description": "Access policy for an experimentation workspace",
+      "description": "Access policy for an experimentation workspace.",
       "properties": {
-        "authApplicationId": {
+        "applicationId": {
           "type": "string",
-          "description": "Application id used for access to the experimentation workspace"
+          "description": "Application id used for access to the experimentation workspace."
         }
       },
       "required": [
-        "authApplicationId"
+        "applicationId"
       ]
     },
     "AccessPolicyUpdate": {
       "type": "object",
-      "description": "Access policy for an experimentation workspace",
+      "description": "Access policy for an experimentation workspace.",
       "properties": {
-        "authApplicationId": {
+        "applicationId": {
           "type": "string",
-          "description": "Application id used for access to the experimentation workspace"
+          "description": "Application id used for access to the experimentation workspace."
         }
       }
     },
@@ -481,11 +481,11 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Resource id of the data source"
+          "description": "Resource id of the data source."
         },
         "enabled": {
           "type": "boolean",
-          "description": "Whether experimentation is enabled"
+          "description": "Controls whether data flow from the configured data source into the experimentation workspace is enabled."
         }
       },
       "required": [
@@ -499,11 +499,11 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Resource id of the data source"
+          "description": "Resource id of the data source."
         },
         "enabled": {
           "type": "boolean",
-          "description": "Whether experimentation is enabled"
+          "description": "Controls whether data flow from the configured data source into the experimentation workspace is enabled."
         }
       }
     },
@@ -561,18 +561,13 @@
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
-        "experimentationWorkspaceId": {
-          "type": "string",
-          "description": "ExperimentationWorkspace id in partner's system",
-          "readOnly": true
-        },
         "accessPolicy": {
           "$ref": "#/definitions/AccessPolicy",
-          "description": "Access policy for an experimentation workspace"
+          "description": "Access policy for an experimentation workspace."
         },
         "dataSource": {
           "$ref": "#/definitions/DataSource",
-          "description": "DataSource for an experimentation workspace"
+          "description": "Data source that telemetry data required for experimenation will be retrieved from."
         }
       },
       "required": [
@@ -606,11 +601,11 @@
       "properties": {
         "accessPolicy": {
           "$ref": "#/definitions/AccessPolicyUpdate",
-          "description": "Access policy for an experimentation workspace"
+          "description": "Access policy for an experimentation workspace."
         },
         "dataSource": {
           "$ref": "#/definitions/DataSourceUpdate",
-          "description": "DataSource for an experimentation workspace"
+          "description": "Data source that telemetry data required for experimenation will be retrieved from."
         }
       }
     },
