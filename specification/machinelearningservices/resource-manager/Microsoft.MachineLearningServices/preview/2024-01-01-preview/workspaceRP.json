@@ -2032,11 +2032,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "in": "path",
-            "name": "policyName",
-            "description": "Azure Machine Learning Hub Workspace policy name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PolicyNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2094,11 +2090,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "policyName",
-            "description": "Azure Machine Learning Hub Workspace policy name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PolicyNameParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
@@ -2150,11 +2142,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "in": "path",
-            "name": "policyName",
-            "description": "Azure Machine Learning Hub Workspace policy name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PolicyNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3056,7 +3044,7 @@
         "Deleting"
       ],
       "type": "string",
-      "readOnly": true,
+"readOnly": true,
       "x-ms-mutability": [
         "read"
       ],
@@ -3418,7 +3406,7 @@
         "keys": {
           "description": "Dictionary of Keys for the endpoint.",
           "type": "object",
-          "x-ms-secret": true
+                    "x-ms-secret": true
         }
       }
     },
@@ -5280,6 +5268,15 @@
       "in": "path",
       "name": "ruleName",
       "description": "Name of the workspace managed network outbound rule",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "PolicyNameParameter": {
+      "in": "path",
+      "name": "policyName",
+      "description": "Azure Machine Learning Hub Workspace policy name",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
