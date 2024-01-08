@@ -1475,6 +1475,10 @@
             "modelAsString": true
           },
           "description": "Property to specify whether the Maps Account will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked."
+        },
+        "locations": {
+          "$ref": "#/definitions/Locations",
+          "description": "List of enabled data processing locations for the Maps Account. If no locations are set, Azure REST APIs will only enable features available in the Maps Account's location."
         }
       }
     },
@@ -1535,6 +1539,26 @@
         "allowedOrigins"
       ],
       "description": "Specifies a CORS rule for the Maps Account."
+    },
+    "Locations": {
+      "description": "The list of data processing locations for the Maps Account.",
+      "type": "array",
+      "items": {
+        "description": "Data processing location.",
+        "type": "object",
+        "properties": {
+          "locationName": {
+            "type": "string",
+            "description": "The location name."
+          }
+        },
+        "required": [
+          "locationName"
+        ]
+      },
+      "x-ms-identifiers": [
+        "locationName"
+      ]
     },
     "CreatorProperties": {
       "description": "Creator resource properties",
