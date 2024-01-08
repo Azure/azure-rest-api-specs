@@ -13,8 +13,8 @@ interface LocationInterface {
   @doc("Verifies whether a device is within a specified location area, defined as an accuracy (radius) around a point, specified by longitude and latitude.")
   verify is Operations.ResourceAction<
     LocationEndpoint,
-    LocationVerifyRequest,
-    LocationVerifyResponse
+    LocationVerifyContent,
+    LocationVerifyResult
   >;
 }
 
@@ -40,7 +40,7 @@ enum LocationEnum {
 /// Request models
 
 @doc("Request to verify Location")
-model LocationVerifyRequest {
+model LocationVerifyContent {
   @doc("Network to query for this device, or device information to enable network routing.")
   networkIdentifier: NetworkIdentifier;
 
@@ -66,7 +66,7 @@ model LocationVerifyRequest {
 /// Response models
 
 @doc("Response verifying location")
-model LocationVerifyResponse {
+model LocationVerifyResult {
   @doc("True if the location is in the specified area, False otherwise")
   verificationResult: boolean;
 }
