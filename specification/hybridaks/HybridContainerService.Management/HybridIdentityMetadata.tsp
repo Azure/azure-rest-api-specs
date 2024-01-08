@@ -15,7 +15,7 @@ namespace Microsoft.HybridContainerService;
 @singleton("default")
 model HybridIdentityMetadata
   is ProxyResource<HybridIdentityMetadataProperties> {
-  @key("default")
+  @key("hybridIdentityMetadata")
   @segment("hybridIdentityMetadata")
   name: string;
 }
