@@ -519,7 +519,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -527,6 +531,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "204": {
+          "description": "NoContent"
         },
         "deprecated": false,
         "x-ms-examples": {
