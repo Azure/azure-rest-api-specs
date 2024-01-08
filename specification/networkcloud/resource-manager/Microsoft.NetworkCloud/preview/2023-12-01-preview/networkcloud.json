@@ -13711,6 +13711,40 @@
         }
       }
     },
+    "ListUserCredentialParameters": {
+      "type": "object",
+      "title": "ListUserCredentialParameters represents the options for listing the cluster user credentials.",
+      "required": [
+        "authenticationMethod",
+        "clientProxy"
+      ],
+      "properties": {
+        "authenticationMethod": {
+          "description": "The mode of client authentication.",
+          "type": "string",
+          "enum": [
+            "AAD",
+            "Token"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "UserCredentialAuthenticationMethod"
+          }
+        },
+        "clientProxy": {
+          "description": "Client proxy indicates if the returned credentials are for the client-side proxy.",
+          "type": "string",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ListEdgeClusterUserCredentialClientProxy"
+          }
+        }
+      }
+    },
     "LldpNeighbor": {
       "type": "object",
       "title": "Type Deprecated. Will be removed in an upcoming version. LldpNeighbor represents the details about the device connected to the NIC.",
@@ -13871,6 +13905,21 @@
           "type": "integer",
           "format": "int64",
           "readOnly": true
+        }
+      }
+    },
+    "MachineSkuSupportRange": {
+      "type": "object",
+      "title": "MachineSkuSupportRange represents a range of supported machine SKUs for an edge cluster.",
+      "properties": {
+        "machineSkuId": {
+          "description": "The resource ID of the edge cluster machine SKU supported.",
+          "type": "string",
+          "readOnly": true
+        },
+        "versionRange": {
+          "$ref": "#/definitions/VersionRange",
+          "description": "The range of versions supported for the edge cluster machine SKU."
         }
       }
     },
