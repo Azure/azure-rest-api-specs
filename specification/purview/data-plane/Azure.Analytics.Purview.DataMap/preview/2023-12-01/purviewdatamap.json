@@ -1571,7 +1571,13 @@
             "$ref": "#/parameters/purviewAPIVersion"
           },
           {
-            "$ref": "#/definitions/batchUpdateAssetRequest"
+            "in": "body",
+            "name": "request",
+            "description": "Batch update operations.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/batchUpdateAssetRequest"
+            }
           }
         ],
         "responses": {
