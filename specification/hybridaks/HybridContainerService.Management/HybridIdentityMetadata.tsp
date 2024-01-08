@@ -21,7 +21,8 @@ model HybridIdentityMetadata
 }
 
 @armResourceOperations
-interface HybridIdentityMetadata {
+@projectedName("client", "HybridIdentityMetadata")
+interface HybridIdentityMetadataOperationGroup {
   @doc("Get the hybrid identity metadata proxy resource.")
   get is ArmResourceRead<HybridIdentityMetadata>;
   @doc("Creates the hybrid identity metadata proxy resource that facilitates the managed identity provisioning.")
