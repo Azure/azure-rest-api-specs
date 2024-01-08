@@ -1469,14 +1469,25 @@
           "$ref": "#/definitions/Ipv4Routes"
         },
         "userPlaneDataRoutes": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Ipv4Routes"
-          },
-          "description": "A map of core networks to IPv4 routes."
+          "$ref": "#/definitions/UserPlaneDataRoutes",
+          "description": "A list of attached data networks and their IPv4 routes."
         }
       },
       "description": "Routing information properties"
+    },
+    "UserPlaneDataRoutes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "attachedDataNetwork": {
+            "$ref": "./common.json#/definitions/AttachedDataNetworkResourceId"
+          },
+          "routes": {
+            "$ref": "#/definitions/Ipv4Routes"
+          }
+        }
+      }
     },
     "Ipv4Routes": {
       "type": "array",

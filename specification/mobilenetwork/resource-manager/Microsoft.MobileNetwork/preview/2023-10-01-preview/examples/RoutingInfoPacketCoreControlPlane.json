@@ -42,36 +42,41 @@
               ]
             }
           ],
-          "userPlaneDataRoutes": {
-            "internet": [
-              {
-                "destination": "2.2.0.0/16",
-                "nextHops": [
-                  {
-                    "address": "203.0.113.1",
-                    "priority": 100
-                  },
-                  {
-                    "address": "203.0.113.128",
-                    "priority": 200
-                  }
-                ]
+          "userPlaneDataRoutes": [
+            {
+              "attachedDataNetwork": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestAttachedDataNetwork"
               },
-              {
-                "destination": "2.4.0.0/16",
-                "nextHops": [
-                  {
-                    "address": "203.0.113.1",
-                    "priority": 100
-                  },
-                  {
-                    "address": "203.0.113.128",
-                    "priority": 200
-                  }
-                ]
-              }
-            ]
-          }
+              "routes": [
+                {
+                  "destination": "2.2.0.0/16",
+                  "nextHops": [
+                    {
+                      "address": "203.0.113.1",
+                      "priority": 100
+                    },
+                    {
+                      "address": "203.0.113.128",
+                      "priority": 200
+                    }
+                  ]
+                },
+                {
+                  "destination": "2.4.0.0/16",
+                  "nextHops": [
+                    {
+                      "address": "203.0.113.1",
+                      "priority": 100
+                    },
+                    {
+                      "address": "203.0.113.128",
+                      "priority": 200
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       }
     }
