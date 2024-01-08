@@ -34,7 +34,7 @@
   },
   "tags": [
     {
-      "name": "Validations"
+      "name": "ValidationJobs"
     },
     {
       "name": "TestSuites"
@@ -367,7 +367,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Certify/validations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Certify/validationJobs": {
       "get": {
         "operationId": "Validations_ListBySubscription",
         "summary": "List Validations by subscription ID",
@@ -383,7 +383,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidationsListResult"
+              "$ref": "#/definitions/ValidationJobsListResult"
             }
           },
           "default": {
@@ -394,24 +394,24 @@
           }
         },
         "tags": [
-          "Validations"
+          "ValidationJobs"
         ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Validations_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/Validations_ListBySubscription_MaximumSet_Gen.json"
+            "$ref": "./examples/ValidationJobs_ListBySubscription_MaximumSet_Gen.json"
           },
           "Validations_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/Validations_ListBySubscription_MinimumSet_Gen.json"
+            "$ref": "./examples/ValidationJobs_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/validations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/validationJobs": {
       "get": {
-        "operationId": "Validations_ListByResourceGroup",
+        "operationId": "ValidationJobs_ListByResourceGroup",
         "summary": "List validation name resources by resource group",
         "parameters": [
           {
@@ -428,7 +428,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidationsListResult"
+              "$ref": "#/definitions/ValidationJobsListResult"
             }
           },
           "default": {
@@ -439,24 +439,24 @@
           }
         },
         "tags": [
-          "Validations"
+          "ValidationJobs"
         ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Validations_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/Validations_ListByResourceGroup_MaximumSet_Gen.json"
+            "$ref": "./examples/ValidationJobs_ListByResourceGroup_MaximumSet_Gen.json"
           },
           "Validations_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/Validations_ListByResourceGroup_MinimumSet_Gen.json"
+            "$ref": "./examples/ValidationJobs_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/validations/{validationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/validationJobs/{validationName}": {
       "put": {
-        "operationId": "Validations_CreateOrUpdate",
+        "operationId": "ValidationJobs_CreateOrUpdate",
         "summary": "Create or update a Validations Resource.",
         "parameters": [
           {
@@ -477,7 +477,7 @@
             "required": true,
             "description": "Create or update resource parameters.",
             "schema": {
-              "$ref": "#/definitions/Validations"
+              "$ref": "#/definitions/ValidationJobs"
             }
           }
         ],
@@ -485,13 +485,13 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Validations"
+              "$ref": "#/definitions/ValidationJobs"
             }
           },
           "201": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Validations"
+              "$ref": "#/definitions/ValidationJobs"
             }
           },
           "default": {
@@ -502,20 +502,20 @@
           }
         },
         "tags": [
-          "Validations"
+          "ValidationJobs"
         ],
         "x-ms-examples": {
-          "Validations_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Validations_CreateOrUpdate_MaximumSet_Gen.json"
+          "ValidationJobs_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "Validations_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/Validations_CreateOrUpdate_MinimumSet_Gen.json"
+          "ValidationJobs_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_CreateOrUpdate_MinimumSet_Gen.json"
           }
         }
       },
       "get": {
-        "operationId": "Validations_Get",
-        "summary": "Get a Validations",
+        "operationId": "ValidationJobs_Get",
+        "summary": "Get a ValidationJobs",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -527,14 +527,14 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ValidationNameParameter"
+            "$ref": "#/parameters/ValidationJobNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Validations"
+              "$ref": "#/definitions/ValidationJobs"
             }
           },
           "default": {
@@ -545,20 +545,20 @@
           }
         },
         "tags": [
-          "Validations"
+          "ValidationJobs"
         ],
         "x-ms-examples": {
           "Validations_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Validations_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/ValidationJobs_Get_MaximumSet_Gen.json"
           },
           "Validations_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Validations_Get_MinimumSet_Gen.json"
+            "$ref": "./examples/ValidationJobs_Get_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "Validations_Delete",
-        "description": "Delete a Validation",
+        "operationId": "ValidationJobs_Delete",
+        "description": "Delete a ValidationJob",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -570,7 +570,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ValidationNameParameter"
+            "$ref": "#/parameters/ValidationJobNameParameter"
           }
         ],
         "responses": {
@@ -588,14 +588,14 @@
           }
         },
         "tags": [
-          "Validations"
+          "ValidationJobs"
         ],
         "x-ms-examples": {
-          "Validations_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Validations_Delete_MaximumSet_Gen.json"
+          "ValidationJobs_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_Delete_MaximumSet_Gen.json"
           },
-          "Validations_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Validations_Delete_MinimumSet_Gen.json"
+          "ValidationJobs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ValidationJobs_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -673,11 +673,11 @@
         "value"
       ]
     },
-    "Validations": {
+    "ValidationJobs": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ValidationsProperties",
+          "$ref": "#/definitions/ValidationJobsProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-mutability": [
             "read",
@@ -691,7 +691,7 @@
           "readOnly": true
         }
       },
-      "description": "The details about Validations.",
+      "description": "The details about ValidationJobs.",
       "required": [
         "properties"
       ],
@@ -701,28 +701,28 @@
         }
       ]
     },
-    "ValidationsProperties": {
+    "ValidationJobsProperties": {
       "type": "object",
       "properties": {
         "resourceCategory": {
           "type": "string",
-          "description": "Resource Category of Validations ie; VM or Container"
+          "description": "Resource Category of ValidationJob ie; VM or Container"
         },
         "resourceType": {
           "type": "string",
-          "description": "Resource Type of Validations ie Image"
+          "description": "Resource Type of ValidationJob ie Image"
         },
         "os": {
           "type": "string",
-          "description": "OS of Image in Validations"
+          "description": "OS of Image in ValidationJob"
         },
         "sku": {
           "type": "string",
-          "description": "SKU of Image in Validations"
+          "description": "SKU of Image in ValidationJob"
         },
         "imageId": {
           "type": "string",
-          "description": "ImageId of Image in Validations"
+          "description": "ImageId of Image in ValidationJob"
         },
         "deleteResources": {
           "$ref": "#/definitions/DeleteResources",
@@ -737,7 +737,7 @@
           "description": "An array of Test definition references."
         }
       },
-      "description": "Properties of Validations Resource",
+      "description": "Properties of ValidationJobs Resource",
       "required": [
         "resourceCategory",
         "resourceType",
@@ -746,13 +746,13 @@
         "sku"
       ]
     },
-    "ValidationsListResult": {
+    "ValidationJobsListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Validations"
+            "$ref": "#/definitions/ValidationJobs"
           },
           "description": "The items on this page"
         },
@@ -761,7 +761,7 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a Validations list operation.",
+      "description": "The response of a ValidationJobs list operation.",
       "required": [
         "value"
       ]
@@ -805,9 +805,9 @@
     }
   },
   "parameters": {
-    "ValidationNameParameter": {
+    "ValidationJobNameParameter": {
       "x-ms-parameter-location": "method",
-      "name": "validationName",
+      "name": "validationJobName",
       "in": "path",
       "required": true,
       "description": "Name of the validation Job Parameter.",
