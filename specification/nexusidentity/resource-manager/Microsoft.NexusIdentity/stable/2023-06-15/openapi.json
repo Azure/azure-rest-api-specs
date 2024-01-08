@@ -56,28 +56,28 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Operations_List": {
+          "Operations_List_Maximum": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           },
-          "Operations_Listing": {
+          "Operations_List_Minimum": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
@@ -95,10 +95,10 @@
         "description": "List IdentitySetResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -111,13 +111,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "IdentitySet_ListBySubscription": {
+          "IdentitySet_ListBySubscription_Maximum": {
             "$ref": "./examples/IdentitySet_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "IdentitySet_ListBySubscription_Minimum": {
+            "$ref": "./examples/IdentitySet_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -134,13 +137,13 @@
         "description": "List IdentitySetResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -153,13 +156,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "IdentitySet_ListByResourceGroup": {
+          "IdentitySet_ListByResourceGroup_Maximum": {
             "$ref": "./examples/IdentitySet_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "IdentitySet_ListByResourceGroup_Minimum": {
+            "$ref": "./examples/IdentitySet_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -176,13 +182,13 @@
         "description": "Get a IdentitySetResource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -202,13 +208,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "IdentitySet_Get": {
+          "IdentitySet_Get_Maximum": {
             "$ref": "./examples/IdentitySet_Get_MaximumSet_Gen.json"
+          },
+          "IdentitySet_Get_Minimum": {
+            "$ref": "./examples/IdentitySet_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -220,13 +229,13 @@
         "description": "Create a IdentitySetResource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -268,13 +277,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "IdentitySet_Create": {
+          "IdentitySet_Create_Max": {
             "$ref": "./examples/IdentitySet_Create_MaximumSet_Gen.json"
+          },
+          "IdentitySet_Create_Min": {
+            "$ref": "./examples/IdentitySet_Create_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -290,13 +302,13 @@
         "description": "Update a IdentitySetResource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -339,13 +351,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "IdentitySet_Update": {
+          "IdentitySet_Update_Maximum": {
             "$ref": "./examples/IdentitySet_Update_MaximumSet_Gen.json"
+          },
+          "IdentitySet_Update_Minimum": {
+            "$ref": "./examples/IdentitySet_Update_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -361,13 +376,13 @@
         "description": "Delete a IdentitySetResource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -401,15 +416,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "IdentitySet_Delete": {
+          "IdentitySet_Delete_Max": {
             "$ref": "./examples/IdentitySet_Delete_MaximumSet_Gen.json"
           },
-          "IdentitySet_Deletion": {
+          "IdentitySet_Delete_Min": {
             "$ref": "./examples/IdentitySet_Delete_MinimumSet_Gen.json"
           }
         },
@@ -421,13 +436,44 @@
     }
   },
   "definitions": {
-    "EventSubscriptions": {
+    "AccessType": {
+      "type": "string",
+      "description": "Access Type defines the type of access needed for the Roles.",
+      "enum": [
+        "Ssh",
+        "Web"
+      ],
+      "x-ms-enum": {
+        "name": "AccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ssh",
+            "value": "Ssh",
+            "description": "SSH access"
+          },
+          {
+            "name": "Web",
+            "value": "Web",
+            "description": "Web access"
+          }
+        ]
+      }
+    },
+    "EventSubscription": {
       "type": "object",
-      "description": "Event Subscriptions defines the properties needed to create an event subscription.",
+      "description": "Event Subscriptions defines the properties needed to create an event subscription. \nUsers should create EventSubscription for each distinct combination of Roles to be watched",
       "properties": {
-        "scope": {
+        "eventSubscriptionId": {
           "type": "string",
-          "description": "Scope on which roles are to be watched. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'"
+          "description": "The name of the event subscription. Event subscription names must be unique in a Identity Set."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Scopes on which roles are to be watched. Valid scope are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'",
+          "items": {
+            "type": "string"
+          }
         },
         "roles": {
           "type": "array",
@@ -436,14 +482,23 @@
             "$ref": "#/definitions/NexusIdentityRoles"
           }
         },
-        "callBackUrl": {
+        "accessTypes": {
+          "type": "array",
+          "description": "The type of access needed for the Roles. Only the specified access types data will be sent.",
+          "items": {
+            "$ref": "#/definitions/AccessType"
+          }
+        },
+        "notifcationUrl": {
           "type": "string",
-          "description": "The URL to which the Nexus Identity Service will send notifications."
+          "description": "The URL to which the Nexus Identity Service will send notifications for this Event subscription."
         }
       },
       "required": [
-        "scope",
-        "roles"
+        "eventSubscriptionId",
+        "scopes",
+        "roles",
+        "accessTypes"
       ]
     },
     "IdentitySetResource": {
@@ -462,7 +517,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -491,7 +546,7 @@
       "type": "object",
       "description": "Identity Set Properties defines the properties of the Identity Set.",
       "properties": {
-        "tenant": {
+        "tenantId": {
           "type": "string",
           "description": "Tenant id in which scope is created."
         },
@@ -499,11 +554,11 @@
           "type": "array",
           "description": "List of scopes to be watched",
           "items": {
-            "$ref": "#/definitions/EventSubscriptions"
+            "$ref": "#/definitions/EventSubscription"
           },
           "x-ms-identifiers": []
         },
-        "defaultCallBackUrl": {
+        "defaultNotificationUrl": {
           "type": "string",
           "description": "The URL to which the Nexus Identity Service will send notifications."
         },
@@ -524,11 +579,9 @@
         }
       },
       "required": [
-        "tenant",
+        "tenantId",
         "eventSubscriptions",
-        "defaultCallBackUrl",
-        "appId",
-        "appName"
+        "defaultNotificationUrl"
       ]
     },
     "IdentitySetResourceUpdate": {
@@ -552,7 +605,7 @@
       "type": "object",
       "description": "The updatable properties of the IdentitySetResource.",
       "properties": {
-        "tenant": {
+        "tenantId": {
           "type": "string",
           "description": "Tenant id in which scope is created."
         },
@@ -560,11 +613,11 @@
           "type": "array",
           "description": "List of scopes to be watched",
           "items": {
-            "$ref": "#/definitions/EventSubscriptions"
+            "$ref": "#/definitions/EventSubscription"
           },
           "x-ms-identifiers": []
         },
-        "defaultCallBackUrl": {
+        "defaultNotificationUrl": {
           "type": "string",
           "description": "The URL to which the Nexus Identity Service will send notifications."
         }
@@ -656,18 +709,18 @@
     },
     "Versions": {
       "type": "string",
-      "description": "The available API versions.",
+      "description": "API Versions",
       "enum": [
-        "2021-10-01-preview"
+        "2023-06-15"
       ],
       "x-ms-enum": {
         "name": "Versions",
         "modelAsString": true,
         "values": [
           {
-            "name": "v2021_10_01_preview",
-            "value": "2021-10-01-preview",
-            "description": "2021-10-01-preview version"
+            "name": "v2023_06_15",
+            "value": "2023-06-15",
+            "description": "2023-06-15 version"
           }
         ]
       }

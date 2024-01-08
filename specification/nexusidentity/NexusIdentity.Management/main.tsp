@@ -10,26 +10,24 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-@armProviderNamespace
+/** Microsoft.NexusIdentity Resource Provider management API. */
+@doc("Microsoft.NexusIdentity Resource Provider management API.")
+@armProviderNamespace("Microsoft.NexusIdentity")
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @service({
   title: "Microsoft.NexusIdentity management service",
-  version: "2023-06-15",
 })
-/** Microsoft.NexusIdentity Resource Provider management API. */
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@versioned(Versions)
 namespace Microsoft.NexusIdentity;
 
-/** The available API versions. */
-enum Versions {
-  /** 2021-10-01-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2021_10_01_preview: "2021-10-01-preview",
-}
-
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@doc("API Versions")
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("2023-06-15 version")
+  v2023_06_15: "2023-06-15",
+}
 
 @lroStatus
 @doc("The provisioning state of Identity Set resource.")
@@ -46,30 +44,47 @@ enum ProvisioningState {
 @doc("Identity Set Properties defines the properties of the Identity Set.")
 model IdentitySetResourceProperties {
   @doc("Tenant id in which scope is created.")
-  tenant: string;
+  tenantId: string;
   @doc("List of scopes to be watched")
-  eventSubscriptions: Array<EventSubscriptions>;
+  eventSubscriptions: Array<EventSubscription>;
   @doc("The URL to which the Nexus Identity Service will send notifications.")
-  defaultCallBackUrl: string;
+  defaultNotificationUrl: string;
   @doc("The application Id of Identity Set resource")
   @visibility("read")
-  appId: string;
+  appId?: string;
   @doc("The application name of Identity Set resource")
   @visibility("read")
-  appName: string;
+  appName?: string;
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-@doc("Event Subscriptions defines the properties needed to create an event subscription.")
-model EventSubscriptions {
-  @doc("Scope on which roles are to be watched. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'")
-  scope: string;
+@doc("""
+Event Subscriptions defines the properties needed to create an event subscription. 
+Users should create EventSubscription for each distinct combination of Roles to be watched
+""")
+model EventSubscription {
+  @doc("The name of the event subscription. Event subscription names must be unique in a Identity Set.")
+  eventSubscriptionId: string;
+  @doc("""
+  Scopes on which roles are to be watched. Valid scope are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+  """)
+  scopes: Array<string>;
   @doc("Roles to be watched.")
   roles: Array<NexusIdentityRoles>;
-  @doc("The URL to which the Nexus Identity Service will send notifications.")
-  callBackUrl?: string;
+  @doc("The type of access needed for the Roles. Only the specified access types data will be sent.")
+  accessTypes: Array<AccessType>;
+  @doc("The URL to which the Nexus Identity Service will send notifications for this Event subscription.")
+  notifcationUrl?: string;
+}
+
+@doc("Access Type defines the type of access needed for the Roles.")
+enum AccessType {
+  @doc("SSH access")
+  Ssh,
+  @doc("Web access")
+  Web
 }
 
 @doc("Role defined for Nexus Identity Service")
