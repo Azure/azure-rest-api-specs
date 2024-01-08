@@ -90,7 +90,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LocationVerifyRequest"
+              "$ref": "#/definitions/LocationVerifyContent"
             }
           }
         ],
@@ -98,7 +98,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LocationVerifyResponse"
+              "$ref": "#/definitions/LocationVerifyResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -234,7 +234,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NumberVerifyRequest"
+              "$ref": "#/definitions/NumberVerifyContent"
             }
           }
         ],
@@ -242,7 +242,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NumberVerifyResponse"
+              "$ref": "#/definitions/NumberVerifyResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -314,7 +314,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NumberRetrieveResponse"
+              "$ref": "#/definitions/NumberRetrieveResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -378,7 +378,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SimSwapRetrieveRequest"
+              "$ref": "#/definitions/SimSwapRetrieveContent"
             }
           }
         ],
@@ -386,7 +386,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SimSwapRetrieveResponse"
+              "$ref": "#/definitions/SimSwapRetrieveResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -458,7 +458,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SimSwapVerifyResponse"
+              "$ref": "#/definitions/SimSwapVerifyResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -644,7 +644,7 @@
         ]
       }
     },
-    "LocationVerifyRequest": {
+    "LocationVerifyContent": {
       "type": "object",
       "description": "Request to verify Location",
       "properties": {
@@ -686,7 +686,7 @@
         "locationDevice"
       ]
     },
-    "LocationVerifyResponse": {
+    "LocationVerifyResult": {
       "type": "object",
       "description": "Response verifying location",
       "properties": {
@@ -820,7 +820,7 @@
         ]
       }
     },
-    "NumberRetrieveResponse": {
+    "NumberRetrieveResult": {
       "type": "object",
       "description": "Response with number of device",
       "properties": {
@@ -834,7 +834,7 @@
         "phoneNumber"
       ]
     },
-    "NumberVerifyRequest": {
+    "NumberVerifyContent": {
       "type": "object",
       "description": "Request to verify number of device",
       "properties": {
@@ -856,7 +856,7 @@
         "networkIdentifier"
       ]
     },
-    "NumberVerifyResponse": {
+    "NumberVerifyResult": {
       "type": "object",
       "description": "Response verifying number of device",
       "properties": {
@@ -923,7 +923,7 @@
         ]
       }
     },
-    "SimSwapRetrieveRequest": {
+    "SimSwapRetrieveContent": {
       "type": "object",
       "description": "Request to retrieve SimSwap date",
       "properties": {
@@ -941,7 +941,7 @@
         "networkIdentifier"
       ]
     },
-    "SimSwapRetrieveResponse": {
+    "SimSwapRetrieveResult": {
       "type": "object",
       "description": "Response with SimSwap date",
       "properties": {
@@ -981,7 +981,7 @@
         "networkIdentifier"
       ]
     },
-    "SimSwapVerifyResponse": {
+    "SimSwapVerifyResult": {
       "type": "object",
       "description": "Response verifying SimSwap in period",
       "properties": {

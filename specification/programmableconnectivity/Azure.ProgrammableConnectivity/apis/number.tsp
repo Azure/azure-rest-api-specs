@@ -26,15 +26,15 @@ interface NumberInterface {
   @doc("Verifies the phone number (MSISDN) associated with a device.")
   verify is Operations.ResourceAction<
     NumberEndpoint,
-    NumberVerifyRequest,
-    NumberVerifyResponse
+    NumberVerifyContent,
+    NumberVerifyResult
   >;
 
   @doc("Retrieves the phone number (MSISDN) associated with a device.")
   retrieve is Operations.ResourceAction<
     NumberEndpoint,
     NetworkIdentifier,
-    NumberRetrieveResponse
+    NumberRetrieveResult
   >;
 }
 
@@ -60,7 +60,7 @@ enum NumberEnum {
 /// Request models
 
 @doc("Request to verify number of device")
-model NumberVerifyRequest {
+model NumberVerifyContent {
   @doc("Identifier for the network to query for this device.")
   networkIdentifier: NetworkIdentifier;
 
@@ -70,13 +70,13 @@ model NumberVerifyRequest {
 /// Response models
 
 @doc("Response verifying number of device")
-model NumberVerifyResponse {
+model NumberVerifyResult {
   @doc("True if number if the phone number matches the device, False otherwise")
   verificationResult: boolean;
 }
 
 @doc("Response with number of device")
-model NumberRetrieveResponse {
+model NumberRetrieveResult {
   @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
   @pattern("^\\+?[0-9]{5,15}$")
   phoneNumber: string;
