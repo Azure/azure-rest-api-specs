@@ -1334,6 +1334,28 @@
         }
       }
     },
+    "AddressClassification": {
+      "description": "Type of address based on its usage context.",
+      "enum": [
+        "Shipping",
+        "Site"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AddressClassification",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Shipping",
+            "description": "Shipping address for the order."
+          },
+          {
+            "value": "Site",
+            "description": "Site Address."
+          }
+        ]
+      }
+    },
     "AddressDetails": {
       "description": "Address details for an order item.",
       "required": [
@@ -1356,6 +1378,10 @@
       "description": "Address Properties.",
       "type": "object",
       "properties": {
+        "addressClassification": {
+          "$ref": "#/definitions/AddressClassification",
+          "description": "Type of address based on its usage context."
+        },
         "shippingAddress": {
           "$ref": "#/definitions/ShippingAddress",
           "description": "Shipping details for the address."
@@ -3980,9 +4006,7 @@
           "enum": [
             "None",
             "Residential",
-            "Commercial",
-            "Site",
-            "Shipping"
+            "Commercial"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4000,14 +4024,6 @@
               {
                 "value": "Commercial",
                 "description": "Commercial Address."
-              },
-              {
-                "value": "Site",
-                "description": "Site Address."
-              },
-              {
-                "value": "Shipping",
-                "description": "Shipping address for the order."
               }
             ]
           }
