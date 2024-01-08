@@ -4753,6 +4753,275 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/kubernetesClusters/{kubernetesClusterName}/features": {
+      "get": {
+        "description": "Get a list of features for the provided Kubernetes cluster.",
+        "summary": "List features for the Kubernetes cluster.",
+        "operationId": "KubernetesClusterFeatures_ListByKubernetesCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KubernetesClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubernetesClusterFeatureList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List features for the Kubernetes cluster.": {
+            "$ref": "./examples/KubernetesClusterFeatures_ListByKubernetesCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/kubernetesClusters/{kubernetesClusterName}/features/{featureName}": {
+      "get": {
+        "description": "Get properties of the provided the Kubernetes cluster feature.",
+        "summary": "Retrieve the Kubernetes cluster feature.",
+        "operationId": "KubernetesClusterFeatures_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KubernetesClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FeatureNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubernetesClusterFeature"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Kubernetes cluster feature": {
+            "$ref": "./examples/KubernetesClusterFeatures_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create a new Kubernetes cluster feature or update properties of the Kubernetes cluster feature if it exists.",
+        "summary": "Create or update the Kubernetes cluster feature.",
+        "operationId": "KubernetesClusterFeatures_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KubernetesClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FeatureNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "kubernetesClusterFeatureParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KubernetesClusterFeature"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubernetesClusterFeature"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/KubernetesClusterFeature"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Kubernetes cluster feature": {
+            "$ref": "./examples/KubernetesClusterFeatures_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete the provided Kubernetes cluster feature.",
+        "summary": "Delete the Kubernetes cluster feature.",
+        "operationId": "KubernetesClusterFeatures_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KubernetesClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FeatureNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Kubernetes cluster feature": {
+            "$ref": "./examples/KubernetesClusterFeatures_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "description": "Patch properties of the provided Kubernetes cluster feature.",
+        "summary": "Patch the Kubernetes cluster feature.",
+        "operationId": "KubernetesClusterFeatures_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KubernetesClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FeatureNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "kubernetesClusterFeatureUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/KubernetesClusterFeaturePatchParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KubernetesClusterFeature"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/KubernetesClusterFeature"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Kubernetes cluster feature": {
+            "$ref": "./examples/KubernetesClusterFeatures_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/kubernetesClusters/{kubernetesClusterName}/restartNode": {
       "post": {
         "description": "Restart a targeted node of a Kubernetes cluster.",
