@@ -10089,6 +10089,24 @@
         }
       }
     },
+    "ClusterContinueUpdateVersionParameters": {
+      "type": "object",
+      "title": "ClusterContinueUpdateVersionParameters represents the body of the request to continue the update of a cluster version.",
+      "properties": {
+        "machineGroupTargetingMode": {
+          "description": "The mode by which the cluster will target the next grouping of servers to continue the update.",
+          "type": "string",
+          "default": "AlphaByRack",
+          "enum": [
+            "AlphaByRack"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterContinueUpdateVersionMachineGroupTargetingMode"
+          }
+        }
+      }
+    },
     "ClusterDeployParameters": {
       "type": "object",
       "title": "ClusterDeployParameters represents the body of the request to deploy cluster.",
@@ -10126,6 +10144,10 @@
         "properties"
       ],
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the cluster manager."
+        },
         "properties": {
           "$ref": "#/definitions/ClusterManagerProperties",
           "description": "The list of the resource properties.",
@@ -10160,6 +10182,10 @@
       "type": "object",
       "title": "ClusterManagerPatchParameters represents the body of the request to patch the cluster properties.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity for the resource."
+        },
         "tags": {
           "description": "The Azure resource tags that will replace the existing ones.",
           "type": "object",
@@ -10506,7 +10532,19 @@
         },
         "analyticsWorkspaceId": {
           "description": "The resource ID of the Log Analytics Workspace that will be used for storing relevant logs.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "availableUpgradeVersions": {
           "description": "The list of cluster runtime version upgrades available for this cluster.",
@@ -10625,6 +10663,7 @@
             "Deploying",
             "Running",
             "Updating",
+            "UpdatePaused",
             "Degraded",
             "Deleting",
             "Disconnected",
@@ -10781,7 +10820,8 @@
           "description": "The mode of operation for runtime protection.",
           "type": "string",
           "enum": [
-            "Rack"
+            "Rack",
+            "PauseAfterRack"
           ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -11055,6 +11095,43 @@
           "type": "integer",
           "format": "int64",
           "minimum": 1
+        }
+      }
+    },
+    "CredentialResult": {
+      "type": "object",
+      "title": "CredentialResult represents the result of the cluster user credential request.",
+      "properties": {
+        "name": {
+          "description": "The name of the credential.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The Base64-encoded Kubernetes configuration file.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CredentialResults": {
+      "type": "object",
+      "title": "CredentialResults represents the results of the cluster user credential request.",
+      "properties": {
+        "hybridConnectionConfig": {
+          "$ref": "#/definitions/HybridConnectionConfig",
+          "description": "Contains the REP (rendezvous endpoint) and “Sender” access token."
+        },
+        "kubeconfigs": {
+          "description": "List of base64-encoded Kubernetes configuration files.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialResult"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
         }
       }
     },
