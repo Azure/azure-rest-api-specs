@@ -117,8 +117,6 @@ interface DeviceGroups
   ): ArmAcceptedLroResponse | ErrorResponse;
 }
 
-
-
 @doc("The properties of deviceGroup")
 model DeviceGroupProperties {
   @doc("Description of the device group.")

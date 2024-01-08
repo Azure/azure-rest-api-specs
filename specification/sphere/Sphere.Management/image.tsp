@@ -27,7 +27,10 @@ model Image is ProxyResource<ImageProperties> {
 
 @armResourceOperations
 interface Images
-  extends ProxyResourceOperationsReadListCreateDelete<Image, ListQueryParameters> {}
+  extends ProxyResourceOperationsReadListCreateDelete<
+      Image,
+      ListQueryParameters
+    > {}
 
 @doc("The properties of image")
 model ImageProperties {
