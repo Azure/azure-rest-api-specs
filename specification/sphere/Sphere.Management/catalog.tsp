@@ -148,12 +148,11 @@ interface Catalogs
       `final-state-via`: "location",
     }
   )
-  @post
   uploadImage(
     ...ResourceInstanceParameters<Catalog>,
 
     @doc("Image upload request body.")
     @body
     uploadImageRequest: Image,
-  ): ArmAcceptedResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse | ErrorResponse;
 }
