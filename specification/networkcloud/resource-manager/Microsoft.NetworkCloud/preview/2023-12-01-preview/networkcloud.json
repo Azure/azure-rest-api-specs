@@ -2994,7 +2994,7 @@
           }
         },
         "x-ms-examples": {
-          "Update cluster version": {
+          "Continue update cluster version": {
             "$ref": "./examples/Clusters_ContinueUpdateVersion.json"
           }
         },
@@ -4219,7 +4219,7 @@
           }
         },
         "x-ms-examples": {
-          "Stage a runtme version to the edge cluster nodes": {
+          "Stage a runtime version to the edge cluster nodes": {
             "$ref": "./examples/EdgeClusters_StageRuntime.json"
           }
         },
@@ -11504,11 +11504,14 @@
           }
         },
         "nodeMatchingIdentifiers": {
-          "description": "Tthe identifiers used to match the node to a machine in the registration hub.",
+          "description": "The identifiers used to match the node to a machine in the registration hub.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EdgeClusterNodeMatchingIdentifier"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "registrationHubMachineId": {
           "description": "The resource ID of the machine in the registration hub that the node is registered against.",
@@ -11517,7 +11520,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.NetworkCloud/regisrationHubs/machines"
+                "type": "Microsoft.NetworkCloud/registrationHubs/machines"
               }
             ]
           }
@@ -11590,6 +11593,9 @@
           "items": {
             "$ref": "#/definitions/EdgeClusterNodeNetworkInterface"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "nodeMatchingIdentifiers": {
@@ -11597,7 +11603,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EdgeClusterNodeMatchingIdentifier"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "provisioningState": {
           "description": "The provisioning state of the edge cluster node.",
@@ -11621,7 +11630,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.NetworkCloud/regisrationHubs/machines"
+                "type": "Microsoft.NetworkCloud/registrationHubs/machines"
               }
             ]
           }
@@ -11881,6 +11890,7 @@
           "items": {
             "$ref": "#/definitions/EndpointDependency"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "runtimeVersionId": {
@@ -12713,7 +12723,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StringKeyValuePair"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       }
     },
@@ -12758,7 +12771,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StringKeyValuePair"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "provisioningState": {
           "description": "The provisioning state of the Kubernetes cluster feature.",
@@ -14771,6 +14787,7 @@
           "items": {
             "$ref": "#/definitions/RegistrationHubMachineCpu"
           },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -14782,6 +14799,7 @@
           "items": {
             "$ref": "#/definitions/RegistrationHubMachineDevice"
           },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -15108,7 +15126,7 @@
           ]
         },
         "boardSerialNumber": {
-          "description": "The serial number of the mainboard.",
+          "description": "The serial number of the main board.",
           "type": "string",
           "x-ms-mutability": [
             "read",
