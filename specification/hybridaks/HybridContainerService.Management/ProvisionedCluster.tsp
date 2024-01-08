@@ -12,7 +12,7 @@ namespace Microsoft.HybridContainerService;
 @doc("The provisioned cluster resource definition.")
 @singleton("default")
 model ProvisionedCluster is ExtensionResource<ProvisionedClusterProperties> {
-  @key("default")
+  @key("provisionedClusterInstance")
   @segment("provisionedClusterInstances")
   name: string;
 
