@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Maps Resource Provider",
     "description": "Resource Provider",
-    "version": "2023-12-01-preview"
+    "version": "2024-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1475,6 +1475,10 @@
             "modelAsString": true
           },
           "description": "Property to specify whether the Maps Account will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked."
+        },
+        "locations": {
+          "$ref": "#/definitions/Locations",
+          "description": "List of data processing locations for the Maps Account. If no locations are set, Azure REST APIs will only enable features available in the Maps Account's location.\n\nPlease refer to [Azure Maps Data Processing Locations](https://https://learn.microsoft.com/en-us/azure/azure-maps/) for features enabled on select locations."
         }
       }
     },
@@ -1535,6 +1539,26 @@
         "allowedOrigins"
       ],
       "description": "Specifies a CORS rule for the Maps Account."
+    },
+    "Locations": {
+      "description": "The list of data processing locations for the Map account.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Data processing location.",
+        "properties": {
+          "locationName": {
+            "type": "string",
+            "description": "The locations name."
+          }
+        },
+        "required": [
+          "locationName"
+        ]
+      },
+      "x-ms-identifiers": [
+        "locationName"
+      ]
     },
     "CreatorProperties": {
       "description": "Creator resource properties",
