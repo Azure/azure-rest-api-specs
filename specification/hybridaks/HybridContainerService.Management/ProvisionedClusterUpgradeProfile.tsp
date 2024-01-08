@@ -15,7 +15,7 @@ namespace Microsoft.HybridContainerService;
 @singleton("default")
 model ProvisionedClusterUpgradeProfile
   is ProxyResource<ProvisionedClusterUpgradeProfileProperties> {
-  @key("default")
+  @key("upgradeProfile")
   @segment("upgradeProfiles")
   name: string;
 }
