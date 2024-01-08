@@ -4,7 +4,7 @@ parameters:
   "java-sdk-folder":
     default: "{project-root}/azure-sdk-for-java/"
   "js-sdk-folder":
-    default: "{project-root}/azure-sdk-for-js/"
+    default: "{project-root}/azure-sdk-for-js-pr/"
   "csharp-sdk-folder":
     default: "{project-root}/azure-sdk-for-net/"
   "service-directory-name":
@@ -14,7 +14,7 @@ parameters:
   "python-output-dir":
     default: "azure/communication/messages/_generated"
 emit: [
-  "@azure-tools/typespec-autorest"
+  "@azure-tools/typespec-ts"
 ]
 
 linter:
@@ -55,3 +55,4 @@ options:
     packageDetails:
       name: "@azure-rest/communication-messages"
       description: "Azure client library for Azure Communication Messages services"
+      version: "1.0.0-beta.1"
