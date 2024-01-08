@@ -1319,20 +1319,19 @@
     },
     "springbootsitesPatch": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
         "properties": {
           "$ref": "#/definitions/springbootsitesProperties",
           "description": "The springbootsites resource definition."
         }
       },
-      "required": [
-        "location"
-      ],
       "description": "The springbootsites resource patch definition."
     },
     "springbootsitesListResult": {
