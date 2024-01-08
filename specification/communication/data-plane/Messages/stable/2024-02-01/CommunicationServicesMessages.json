@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "CommunicationMessagesClient",
+    "title": "CommunicationMessagesService",
     "version": "2024-02-01",
     "description": "Azure Communication Messages Service",
     "x-typespec-generated": [
@@ -34,6 +34,32 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://communication.azure.com//.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+      "scopes": {
+        "https://communication.azure.com//.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
+    }
+  },
   "tags": [
     {
       "name": "Template"

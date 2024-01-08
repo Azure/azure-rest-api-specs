@@ -12,12 +12,6 @@ using Azure.Core.Traits;
 
 namespace AzureCommunicationMessagesService;
 
-alias ServiceTraits = SupportsRepeatableRequests &
-  SupportsConditionalRequests &
-  SupportsClientRequestId;
-
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
-
 interface TemplateOperations {
   @summary("List all templates for given ACS channel")
   @doc("List all templates for given ACS channel")

@@ -10,8 +10,18 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "Authorization"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.authorizationCode,
+      authorizationUrl: "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+      tokenUrl: "https://login.microsoftonline.com/common/v2.0/oauth2/token",
+      scopes: ["https://communication.azure.com//.default"],
+    }
+  ]>
+)
 @service({
-  title: "CommunicationMessagesClient",
+  title: "CommunicationMessagesService",
 })
 @server(
   "{endpoint}",
