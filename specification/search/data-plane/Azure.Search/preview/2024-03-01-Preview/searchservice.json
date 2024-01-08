@@ -3198,6 +3198,21 @@
             "value": "Edm.Single",
             "name": "Single",
             "description": "Indicates that a field contains a single-precision floating point number. This is only valid when used with Collection(Edm.Single)."
+          },
+          {
+            "value": "Edm.Float16",
+            "name": "Float16",
+            "description": "Indicates that a field contains a half-precision floating point number. This is only valid when used with Collection(Edm.Float16)."
+          },
+          {
+            "value": "Edm.Int16",
+            "name": "Int16",
+            "description": "Indicates that a field contains a 16-bit signed integer. This is only valid when used with Collection(Edm.Int16)."
+          },
+          {
+            "value": "Edm.SByte",
+            "name": "SByte",
+            "description": "Indicates that a field contains a 8-bit signed integer. This is only valid when used with Collection(Edm.SByte)."
           }
         ]
       },
@@ -6391,9 +6406,9 @@
           "description": "Indicate whether full-precision reranking will be performed on the set of results that were calculated using compressed vectors. This will improve recall at the expense of latency by recalculating full-precision similarity scores."
         },
         "defaultOversampling": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Default oversampling factor. Oversampling will internally request more documents (specified by this multiplier) in the initial search, then rerank them by re-calculating similarity with the full-precision original vectors. Minimum value is 1. It can be set only when rerankWithOriginalVectors is true.",
+          "type": "number",
+          "format": "double",
+          "description": "Default oversampling factor. Oversampling will internally request more documents (specified by this multiplier) in the initial search, then rerank them by re-calculating similarity with the full-precision (original) vectors. Minimum value is 1. It can be set only when rerankWithOriginalVectors is true.",
           "x-nullable": true
         }
       },
@@ -6403,32 +6418,65 @@
       ],
       "description": "Contains configuration options specific to the compression method used during indexing or querying."
     },
-    "Scalar8VectorSearchCompressionConfiguration": {
-      "x-ms-client-name": "Scalar8CompressionConfiguration",
+    "ScalarQuantizationVectorSearchCompressionConfiguration": {
+      "x-ms-client-name": "ScalarQuantizationCompressionConfiguration",
       "type": "object",
-      "x-ms-discriminator-value": "scalar8",
+      "x-ms-discriminator-value": "scalarQuantization",
       "allOf": [
         {
           "$ref": "#/definitions/VectorSearchCompressionConfiguration"
         }
       ],
       "properties": {
+        "sqParameters": {
+          "x-ms-client-name": "Parameters",
+          "$ref": "#/definitions/SqParameters",
+          "description": "Contains the parameters specific to Scalar Quantization."
+        }
       },
-      "description": "Contains configuration options specific to the scalar8 compression method used during indexing and querying."
+      "description": "Contains configuration options specific to the scalarQuantization compression method used during indexing and querying."
+    },
+    "SqParameters": {
+      "type": "object",
+      "properties": {
+        "quantizedType": {
+          "$ref": "#/definitions/VectorSearchCompressionTargetType",
+          "x-nullable": true,
+          "description": "The quantized type for each number of the compressed vector."
+        }
+      },
+      "description": "Contains the parameters specific to the Scalar Quantization."
+    },
+    "VectorSearchCompressionTargetType": {
+      "type": "string",
+      "enum": [
+        "int8"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchCompressionTargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "int8",
+            "name": "Int8"
+          }
+        ]
+      },
+      "description": "The quantized type for each number of the compressed vector."
     },
     "VectorSearchCompressionKind": {
       "type": "string",
       "enum": [
-        "scalar8"
+        "scalarQuantization"
       ],
       "x-ms-enum": {
         "name": "VectorSearchCompressionKind",
         "modelAsString": true,
         "values": [
           {
-            "value": "scalar8",
-            "name": "Scalar8",
-            "description": "Scalar Quantization, a type of compression method. In scalar8, the original vectors are processed and mapped to int8 vectors."
+            "value": "scalarQuantization",
+            "name": "ScalarQuantization",
+            "description": "Scalar Quantization, a type of compression method. In scalarQuantization, the original vectors are processed and mapped to narrower type vectors."
           }
         ]
       },
