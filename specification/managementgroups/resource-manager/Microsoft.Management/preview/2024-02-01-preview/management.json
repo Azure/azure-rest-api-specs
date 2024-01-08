@@ -4,7 +4,7 @@
   "info": {
     "version": "2024-02-01-preview",
     "title": "Management Groups API",
-    "description": "The Azure Management Groups API enables consolidation of multiple \nsubscriptions/resources into an organizational hierarchy and centrally \nmanage access control, policies, alerting and reporting for those resources.\n"
+    "description": "The Azure Management Groups API enables consolidation of multiple \nsubscriptions/resources into an organizational hierarchy and centrally \nmanage access control, policies, alerting and reporting for those resources.\n This preview version will also include APIs for new resource type called Applications.\n"
   },
   "schemes": [
     "https"
@@ -45,6 +45,10 @@
     {
       "name": "Entities",
       "description": "A list of entities that belong to the Management Groups.\n"
+    },
+    {
+      "name": "Applications",
+      "description": "An Application is a customer created scope, where multiple subscriptions or applications can be grouped by. \n"
     }
   ],
   "paths": {
@@ -889,6 +893,92 @@
             "$ref": "./examples/TenantBackfillStatusRequest.json"
           }
         }
+      }
+    },
+    "/providers/Microsoft.Management/applications/{applicationId}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "Applications_Get",
+        "description": "Get the details of the application.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetApplication": {
+            "$ref": "./examples/GetApplication.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "Application_Create",
+        "description": "Create an Application.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApplicationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "createApplicationRequest",
+            "description": "Application creation parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutApplication"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutApplication": {
+            "$ref": "./examples/PutApplication.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1983,6 +2073,112 @@
           "description": "fully qualified resource type which includes provider namespace"
         }
       }
+    },
+    "PutApplication": {
+      "description": "The application details.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "title": "properties",
+          "$ref": "#/definitions/CreateApplicationRequestProperties"
+        }
+      }
+    },
+    "CreateApplicationRequestProperties": {
+      "description": "Application creation request body parameters.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the application. For example, Running",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the application. For example, ApplicationTest1"
+        },
+        "memberOf": {
+          "title": "memberOf",
+          "$ref": "#/definitions/CreateApplicationMemberOfProperties"
+        }
+      }
+    },
+    "Application": {
+      "description": "The application details.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource application."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "properties": {
+          "title": "properties",
+          "$ref": "#/definitions/ApplicationProperties"
+        }
+      }
+    },
+    "ApplicationProperties": {
+      "description": "Application creation request body parameters.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the application. For example, Running",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the application. For example, ApplicationTest1"
+        },
+        "memberOf": {
+          "title": "memberOf",
+          "$ref": "#/definitions/CreateApplicationMemberOfProperties"
+        }
+      }
+    },
+    "CreateApplicationMemberOfProperties": {
+      "description": "The details of the parent management group or application.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID of the parent management group or applications.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000 or /providers/Microsoft.Management/applications/TestApplication"
+        }
+      }
     }
   },
   "parameters": {
@@ -2174,6 +2370,14 @@
       },
       "x-ms-parameter-location": "method",
       "description": "The view parameter allows clients to filter the type of data that is returned by the getEntities call."
+    },
+    "ApplicationIdParameter": {
+      "name": "applicationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Application ID.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
