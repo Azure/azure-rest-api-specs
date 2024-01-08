@@ -18,6 +18,9 @@ if (!$filesToCheck) {
   LogInfo "No OpenAPI files found to check"
 }
 else {
+  # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
+  $responseCache = @{}
+
   # Example: specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
   # - Forward slashes on both Linux and Windows
   foreach ($file in $filesToCheck) {
@@ -27,10 +30,6 @@ else {
 
     if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
       LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
-
-      # ToDo: Verify spec folder includes *.tsp and tspconfig.yaml, to prevent spec authors committing
-      # openapi generated from TypeSpec, without also including the TypeSpec sources.
-
       # Skip further checks, since spec is already using TypeSpec
       continue
     }
@@ -41,26 +40,39 @@ else {
     # Example: specification/foo/resource-manager/Microsoft.Foo
     $pathToServiceName = ($file -split '/')[0..3] -join '/'
 
-    # ToDo: Fetch main and query local git repo to prevent issues with rate limiting
     $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/$pathToServiceName/stable"
 
-    try {
-      $response = Invoke-WebRequest -Uri $urlToStableFolder -Method Head -SkipHttpErrorCheck
-      if ($response.StatusCode -eq 200) {
-        LogInfo "  Branch 'main' contains path '$pathToServiceName/stable', so spec already exists and is not required to use TypeSpec"
+    LogInfo "  Checking $urlToStableFolder"
+
+    $responseStatus = $responseCache[$urlToStableFolder];
+    if ($null -ne $responseStatus) {
+      LogInfo "    Found in cache"
+    }
+    else {
+      LogInfo "    Not found in cache, making web request"
+      try {
+        $response = Invoke-WebRequest -Uri $urlToStableFolder -Method Head -SkipHttpErrorCheck
+        $responseStatus = $response.StatusCode
+        $responseCache[$urlToStableFolder] = $responseStatus
       }
-      elseif ($response.StatusCode -eq 404) {
-        LogInfo "  Branch 'main' does not contain path '$pathToServiceName/stable', so spec is new and must use TypeSpec"
-        $pathsWithErrors += $file
-      }
-      else {
-        LogError "Unexpected response from ${urlToStableFolder}: ${response.StatusCode}"
+      catch {
+        LogError "  Exception making web request to ${urlToStableFolder}: $_"
         LogJobFailure
         exit 1
       }
     }
-    catch {
-      LogError "  Exception making web request to ${urlToStableFolder}: $_"
+
+    LogInfo "    Status: $responseStatus"
+
+    if ($responseStatus -eq 200) {
+      LogInfo "  Branch 'main' contains path '$pathToServiceName/stable', so spec already exists and is not required to use TypeSpec"
+    }
+    elseif ($response.StatusCode -eq 404) {
+      LogInfo "  Branch 'main' does not contain path '$pathToServiceName/stable', so spec is new and must use TypeSpec"
+      $pathsWithErrors += $file
+    }
+    else {
+      LogError "Unexpected response from ${urlToStableFolder}: ${response.StatusCode}"
       LogJobFailure
       exit 1
     }
