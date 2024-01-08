@@ -14557,6 +14557,672 @@
         }
       }
     },
+    "RegistrationHub": {
+      "type": "object",
+      "title": "RegistrationHub represents the resource responsible for onboarding and bootstrapping of machines that are used in Edge Clusters.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegistrationHubProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "RegistrationHubImage": {
+      "type": "object",
+      "title": "RegistrationHubImage represents the image used to bootstrap a machine in Edge Cluster.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegistrationHubImageProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "RegistrationHubImageList": {
+      "type": "object",
+      "title": "RegistrationHubImageList represents a list of registration hub images.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of registration hub images.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistrationHubImage"
+          }
+        }
+      }
+    },
+    "RegistrationHubImagePatchParameters": {
+      "type": "object",
+      "title": "RegistrationHubImagePatchParameters represents the body of the request to patch the registration hub image properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegistrationHubImagePatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegistrationHubImagePatchProperties": {
+      "type": "object",
+      "title": "RegistrationHubImagePatchProperties represents the properties of the registration hub image during patching.",
+      "properties": {
+        "allowRegistration": {
+          "description": "The indicator of whether the image can be used to register machines.",
+          "type": "string",
+          "default": "True",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AllowRegistration"
+          }
+        },
+        "description": {
+          "description": "User provided information about the registration hub image.",
+          "type": "string",
+          "maxLength": 4000
+        }
+      }
+    },
+    "RegistrationHubImageProperties": {
+      "type": "object",
+      "title": "RegistrationHubImageProperties represents the properties of a registration hub image.",
+      "properties": {
+        "allowRegistration": {
+          "description": "The indicator of whether the image can be used to register machines.",
+          "type": "string",
+          "default": "True",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AllowRegistration"
+          }
+        },
+        "clientConfiguration": {
+          "description": "The base64 encoded client configuration that contains the system provided information for the bootstrap process.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customConfiguration": {
+          "description": "The base64 encoded configuration that can be modified with custom settings for the bootstrap process.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The user provided information about the registration hub image.",
+          "type": "string",
+          "maxLength": 4000
+        },
+        "imageDownloadUri": {
+          "description": "The URI where the bootstrap image can be downloaded from.",
+          "type": "string",
+          "readOnly": true
+        },
+        "imageUniqueId": {
+          "description": "The unique identifier that represents this image.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the registration hub image resource.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RegistrationHubImageProvisioningState"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "RegistrationHubList": {
+      "type": "object",
+      "title": "RegistrationHubList represents a list of registration hubs.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of registration hubs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistrationHub"
+          }
+        }
+      }
+    },
+    "RegistrationHubMachine": {
+      "type": "object",
+      "title": "RegistrationHubMachine represents the registration of a machine to a registration hub.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegistrationHubMachineProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "RegistrationHubMachineConfiguration": {
+      "type": "object",
+      "title": "RegistrationHubMachineConfiguration represents details of the hardware configuration of the machine supplied during the registration process.",
+      "required": [
+        "cpus",
+        "system",
+        "memory",
+        "devices"
+      ],
+      "properties": {
+        "cpus": {
+          "description": "The CPU information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistrationHubMachineCpu"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "devices": {
+          "description": "The inventory of devices detected on the machine’s buses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistrationHubMachineDevice"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "memory": {
+          "$ref": "#/definitions/RegistrationHubMachineMemory",
+          "description": "System memory information."
+        },
+        "system": {
+          "$ref": "#/definitions/RegistrationHubMachineSystem",
+          "description": "The bios and system board related information."
+        }
+      }
+    },
+    "RegistrationHubMachineCpu": {
+      "type": "object",
+      "title": "RegistrationHubMachineCpu represents CPU properties of a registration hub machine.",
+      "required": [
+        "architecture",
+        "family",
+        "model",
+        "modelName",
+        "physicalCoresPerSocket",
+        "vendor"
+      ],
+      "properties": {
+        "architecture": {
+          "description": "The architecture of the CPU.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "family": {
+          "description": "The CPU family.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "model": {
+          "description": "The model of the CPU.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "modelName": {
+          "description": "The model name of the CPU.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "physicalCoresPerSocket": {
+          "description": "The number of physical CPU cores per socket.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vendor": {
+          "description": "The vendor of the CPU.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "RegistrationHubMachineDevice": {
+      "type": "object",
+      "title": "RegistrationHubMachineDevice represents the inventory of devices detected on the machine’s buses.",
+      "required": [
+        "address",
+        "bus",
+        "class",
+        "macAddress",
+        "model",
+        "serialNumber",
+        "sizeGB",
+        "vendor"
+      ],
+      "properties": {
+        "address": {
+          "description": "The PCI/bus address of the device.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "bus": {
+          "description": "The bus that connects this device.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "class": {
+          "description": "The device class.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "macAddress": {
+          "description": "The MAC address of a network device.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "model": {
+          "description": "The model of the device.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serialNumber": {
+          "description": "The serial number of the device.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sizeGB": {
+          "description": "The reported capacity of a storage device in GB.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vendor": {
+          "description": "The vendor for the device.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "RegistrationHubMachineList": {
+      "type": "object",
+      "title": "RegistrationHubMachineList represents a list of registration hub machines.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of registration hub machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistrationHubMachine"
+          }
+        }
+      }
+    },
+    "RegistrationHubMachineMemory": {
+      "type": "object",
+      "title": "RegistrationHubMachineMemory represents the system memory information of a registration hub machine.",
+      "required": [
+        "sizeGB"
+      ],
+      "properties": {
+        "sizeGB": {
+          "description": "The size of the memory in GB.",
+          "type": "integer",
+          "format": "int64",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "RegistrationHubMachinePatchParameters": {
+      "type": "object",
+      "title": "RegistrationHubMachinePatchParameters represents the body of the request to patch the registration hub machine properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegistrationHubMachinePatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegistrationHubMachinePatchProperties": {
+      "type": "object",
+      "title": "RegistrationHubMachinePatchProperties represents the properties of the registration hub machine during patching.",
+      "properties": {
+        "description": {
+          "description": "The user-provided freeform description for the machine.",
+          "type": "string",
+          "maxLength": 400
+        }
+      }
+    },
+    "RegistrationHubMachineProperties": {
+      "type": "object",
+      "title": "RegistrationHubMachineProperties represents the properties of a registration hub machine.",
+      "required": [
+        "machineConfiguration"
+      ],
+      "properties": {
+        "associatedResourceId": {
+          "description": "The resource ID of the edge cluster node that has been associated with this machine.",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The user-provided freeform description for the machine.",
+          "type": "string",
+          "maxLength": 400
+        },
+        "lastRegistrationPollTime": {
+          "description": "The timestamp of the last polling request from a machine that is undergoing registration.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "machineConfiguration": {
+          "$ref": "#/definitions/RegistrationHubMachineConfiguration",
+          "description": "The hardware configuration of the machine supplied during the registration process."
+        },
+        "machineSkuId": {
+          "description": "The resource ID of the machine SKU that is identified by the hardware information provided for the machine.",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the registration hub machine resource.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RegistrationHubMachineProvisioningState"
+          },
+          "readOnly": true
+        },
+        "registrationHubImageId": {
+          "description": "The resource ID of the registration hub image that was used to bootstrap the machine.",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "registrationState": {
+          "description": "The stage and disposition of the registration for the machine.",
+          "type": "string",
+          "enum": [
+            "Unapproved",
+            "Approved",
+            "Declined",
+            "Complete"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RegistrationHubMachineRegistrationState"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "RegistrationHubMachineSystem": {
+      "type": "object",
+      "title": "RegistrationHubMachineSystem represents the bios and system board related information.",
+      "required": [
+        "biosVendor",
+        "biosVersion",
+        "boardSerialNumber",
+        "chassisSerialNumber",
+        "productName",
+        "productSerialNumber",
+        "vendor",
+        "tpmEndorsementKey"
+      ],
+      "properties": {
+        "biosVendor": {
+          "description": "The vendor for the BIOS.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "biosVersion": {
+          "description": "The version of the BIOS.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "boardSerialNumber": {
+          "description": "The serial number of the mainboard.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "chassisSerialNumber": {
+          "description": "The serial number of the chassis.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "productName": {
+          "description": "The product name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "productSerialNumber": {
+          "description": "The product serial number.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tpmEndorsementKey": {
+          "description": "The tpm endorsement key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vendor": {
+          "description": "The system vendor.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "RegistrationHubPatchParameters": {
+      "type": "object",
+      "title": "RegistrationHubPatchParameters represents the body of the request to patch the registration hub properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegistrationHubPatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegistrationHubPatchProperties": {
+      "type": "object",
+      "title": "RegistrationHubPatchProperties represents the properties of the registration hub during patching.",
+      "properties": {
+        "description": {
+          "description": "The user-provided information about the registration hub.",
+          "type": "string",
+          "maxLength": 4000
+        }
+      }
+    },
+    "RegistrationHubProperties": {
+      "type": "object",
+      "title": "RegistrationHubProperties represents the user-provided information about the registration hub.",
+      "properties": {
+        "azureRelayEndpoint": {
+          "description": "The URL to access the azure relay for the registration hub.",
+          "type": "string",
+          "readOnly": true
+        },
+        "azureRelayId": {
+          "description": "The resource ID of the relay that has been set up to serve the registration hub.",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The user-provided information about the registration hub.",
+          "type": "string",
+          "maxLength": 4000
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the registration hub resource.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RegistrationHubProvisioningState"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "RuntimeProtectionConfiguration": {
       "type": "object",
       "title": "RuntimeProtectionConfiguration represents the runtime protection configuration for the cluster.",
