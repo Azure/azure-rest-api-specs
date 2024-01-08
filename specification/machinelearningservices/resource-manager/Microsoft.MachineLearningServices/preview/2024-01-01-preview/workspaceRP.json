@@ -1991,7 +1991,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ListComputePoliciesResponse"
+              "$ref": "#/definitions/ComputePolicyDtoBasicResourceArmPaginatedResult"
             }
           },
           "default": {
@@ -2005,6 +2005,9 @@
           "List hub policy under a hub": {
             "$ref": "./examples/HubPolicy/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2108,7 +2111,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ComputePolicyDto"
+              "$ref": "#/definitions/ComputePolicyDtoBasicResource"
             }
           },
           "default": {
@@ -2776,6 +2779,36 @@
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
+        }
+      }
+    },
+    "ComputePolicyDtoBasicResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ComputePolicyDto"
+        }
+      }
+    },
+    "ComputePolicyDtoBasicResourceArmPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputePolicyDtoBasicResource"
+          }
         }
       }
     },
@@ -3609,17 +3642,6 @@
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
-        }
-      }
-    },
-    "ListComputePoliciesResponse": {
-      "type": "object",
-      "properties": {
-        "policies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ComputePolicyDto"
-          }
         }
       }
     },
