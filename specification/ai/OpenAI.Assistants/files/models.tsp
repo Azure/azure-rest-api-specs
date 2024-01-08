@@ -6,6 +6,7 @@ using TypeSpec.Versioning;
 
 @doc("Represents an assistant that can call the model and use tools.")
 @added(ServiceApiVersions.v2023_11_06_beta)
+@projectedName("javascript", "InputFile")
 model File {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
