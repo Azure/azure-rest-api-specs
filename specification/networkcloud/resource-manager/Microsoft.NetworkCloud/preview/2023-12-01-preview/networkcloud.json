@@ -12649,6 +12649,154 @@
       ],
       "x-ms-azure-resource": true
     },
+    "KubernetesClusterFeature": {
+      "type": "object",
+      "title": "KubernetesClusterFeature represents the feature of a Kubernetes cluster.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KubernetesClusterFeatureProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "KubernetesClusterFeatureList": {
+      "type": "object",
+      "title": "KubernetesClusterFeatureList represents the list of Kubernetes cluster feature resources.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Kubernetes cluster features.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KubernetesClusterFeature"
+          }
+        }
+      }
+    },
+    "KubernetesClusterFeaturePatchParameters": {
+      "type": "object",
+      "title": "KubernetesClusterFeaturePatchParameters represents the body of the request to patch the Kubernetes cluster feature.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KubernetesClusterFeaturePatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "KubernetesClusterFeaturePatchProperties": {
+      "type": "object",
+      "title": "KubernetesClusterFeaturePatchProperties represents the Kubernetes cluster feature properties for patching.",
+      "properties": {
+        "options": {
+          "description": "The configured options for the feature.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StringKeyValuePair"
+          }
+        }
+      }
+    },
+    "KubernetesClusterFeatureProperties": {
+      "type": "object",
+      "title": "KubernetesClusterFeatureProperties represents the properties of a Kubernetes cluster feature.",
+      "properties": {
+        "availabilityLifecycle": {
+          "description": "The lifecycle indicator of the feature.",
+          "type": "string",
+          "enum": [
+            "Preview",
+            "GenerallyAvailable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "KubernetesClusterFeatureAvailabilityLifecycle"
+          },
+          "readOnly": true
+        },
+        "detailedStatus": {
+          "description": "The detailed status of the feature.",
+          "type": "string",
+          "enum": [
+            "Error",
+            "Provisioning",
+            "Installed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "KubernetesClusterFeatureDetailedStatus"
+          },
+          "readOnly": true
+        },
+        "detailedStatusMessage": {
+          "description": "The descriptive message for the detailed status of the feature.",
+          "type": "string",
+          "readOnly": true
+        },
+        "options": {
+          "description": "The configured options for the feature.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StringKeyValuePair"
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the Kubernetes cluster feature.",
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Canceled",
+            "Deleting",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "KubernetesClusterFeatureProvisioningState"
+          },
+          "readOnly": true
+        },
+        "required": {
+          "description": "The indicator of if the feature is required or optional. Optional features may be deleted by the user, while required features are managed with the kubernetes cluster lifecycle.",
+          "type": "string",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "KubernetesClusterFeatureRequired"
+          },
+          "readOnly": true
+        },
+        "version": {
+          "description": "The version of the feature.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "KubernetesClusterList": {
       "type": "object",
       "title": "KubernetesClusterList represents a list of Kubernetes clusters.",
@@ -12863,7 +13011,7 @@
           "description": "The defining characteristics of the control plane that can be patched for this Kubernetes cluster."
         },
         "kubernetesVersion": {
-          "description": "The Kubernetes version for this cluster. Accepts n.n, n.n.n, and n.n.n-n format. The interpreted version used will be resolved into this field after creation or update.",
+          "description": "The Kubernetes version for this cluster.",
           "type": "string"
         }
       }
@@ -12981,7 +13129,7 @@
           ]
         },
         "kubernetesVersion": {
-          "description": "The Kubernetes version for this cluster. Accepts n.n, n.n.n, and n.n.n-n format. The interpreted version used will be resolved into this field after creation or update.",
+          "description": "The Kubernetes version for this cluster.",
           "type": "string"
         },
         "managedResourceGroupConfiguration": {
