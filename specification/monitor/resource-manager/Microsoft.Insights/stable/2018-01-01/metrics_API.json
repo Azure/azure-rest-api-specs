@@ -93,7 +93,7 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/MetadataValue",
+        "x-ms-odata": "../../../../commonDefinitions.json#/definitions/MetadataValue",
         "x-ms-examples": {
           "Get Metric for data": {
             "$ref": "./examples/GetMetric.json"
@@ -109,98 +109,6 @@
     }
   },
   "definitions": {
-    "LocalizableString": {
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "the invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "the locale specific value."
-        }
-      },
-      "description": "The localizable string class."
-    },
-    "Unit": {
-      "type": "string",
-      "description": "The unit of the metric.",
-      "enum": [
-        "Count",
-        "Bytes",
-        "Seconds",
-        "CountPerSecond",
-        "BytesPerSecond",
-        "Percent",
-        "MilliSeconds",
-        "ByteSeconds",
-        "Unspecified",
-        "Cores",
-        "MilliCores",
-        "NanoCores",
-        "BitsPerSecond"
-      ],
-      "x-ms-enum": {
-        "name": "MetricUnit",
-        "modelAsString": true
-      }
-    },
-    "MetricValue": {
-      "type": "object",
-      "required": [
-        "timeStamp"
-      ],
-      "properties": {
-        "timeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "the timestamp for the metric value in ISO 8601 format."
-        },
-        "average": {
-          "type": "number",
-          "format": "double",
-          "description": "the average value in the time range."
-        },
-        "minimum": {
-          "type": "number",
-          "format": "double",
-          "description": "the least value in the time range."
-        },
-        "maximum": {
-          "type": "number",
-          "format": "double",
-          "description": "the greatest value in the time range."
-        },
-        "total": {
-          "type": "number",
-          "format": "double",
-          "description": "the sum of all of the values in the time range."
-        },
-        "count": {
-          "type": "number",
-          "format": "double",
-          "description": "the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
-        }
-      },
-      "description": "Represents a metric value."
-    },
-    "MetadataValue": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/LocalizableString",
-          "description": "the name of the metadata."
-        },
-        "value": {
-          "type": "string",
-          "description": "the value of the metadata."
-        }
-      },
-      "description": "Represents a metric metadata value."
-    },
     "Response": {
       "type": "object",
       "properties": {
@@ -216,8 +124,7 @@
         },
         "interval": {
           "type": "string",
-          "format": "duration",
-          "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+          "description": "The interval (window size) for which the metric data was returned in ISO 8601 duration format with a special case for 'FULL' value that returns single datapoint for entire time span requested (*Examples: PT15M, PT1H, P1D, FULL*). \nThis may be adjusted and different from what was originally requested if AutoAdjustTimegrain=true is specified. This is not present if a metadata request was made."
         },
         "namespace": {
           "type": "string",
@@ -230,7 +137,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Metric"
+            "$ref": "../../../../common-types/v1/commonMonitoringTypes.json#/definitions/Metric"
           },
           "description": "the value of the collection."
         }
@@ -240,81 +147,6 @@
         "value"
       ],
       "description": "The response to a metrics query."
-    },
-    "Metric": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "the metric Id."
-        },
-        "type": {
-          "type": "string",
-          "description": "the resource type of the metric resource."
-        },
-        "name": {
-          "$ref": "#/definitions/LocalizableString",
-          "description": "the name and the display name of the metric, i.e. it is localizable string."
-        },
-        "displayDescription": {
-          "type": "string",
-          "description": "Detailed description of this metric."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "'Success' or the error details on query failures for this metric."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message encountered querying this specific metric."
-        },
-        "unit": {
-          "$ref": "#/definitions/Unit",
-          "description": "The unit of the metric."
-        },
-        "timeseries": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesElement"
-          },
-          "x-ms-identifiers": [],
-          "description": "the time series returned when a data query is performed."
-        }
-      },
-      "required": [
-        "id",
-        "type",
-        "name",
-        "unit",
-        "timeseries"
-      ],
-      "description": "The result data of a query."
-    },
-    "TimeSeriesElement": {
-      "type": "object",
-      "properties": {
-        "metadatavalues": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetadataValue"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "the metadata values returned if $filter was specified in the call."
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricValue"
-          },
-          "x-ms-identifiers": [
-            "timeStamp"
-          ],
-          "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
-        }
-      },
-      "description": "A time series result type. The discriminator value is always TimeSeries in this case."
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
@@ -354,8 +186,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "duration",
-      "description": "The interval (i.e. timegrain) of the query.",
+      "description": "The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.\n*Examples: PT15M, PT1H, P1D, FULL*",
       "x-ms-parameter-location": "method"
     },
     "MetricNamesParameter": {

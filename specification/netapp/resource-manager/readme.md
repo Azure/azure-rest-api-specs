@@ -28,18 +28,38 @@ These are the global settings for the Azure NetApp Files API.
 title: NetAppManagementClient
 description: Microsoft NetApp Files Azure Resource Provider specification
 openapi-type: arm
-tag: package-netapp-2023-05-01
+tag: package-netapp-2023-07-01
 ```
 
+
+### Tag: package-netapp-2023-07-01
+
+These settings apply only when `--tag=package-netapp-2023-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-netapp-2023-07-01'
+input-file:
+  - Microsoft.NetApp/stable/2023-07-01/netapp.json
+```
+
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.NetApp/preview/2023-05-01-preview/netapp.json
+tag: package-2023-07
+```
 
 ### Tag: package-netapp-2023-05-01
 
 These settings apply only when `--tag=package-netapp-2023-05-01` is specified on the command line.
 
-```yaml $(tag) == 'package-netapp-2023-05-01'
+``` yaml $(tag) == 'package-netapp-2023-05-01'
 input-file:
   - Microsoft.NetApp/stable/2023-05-01/netapp.json
 ```
+
 ### Tag: package-netapp-2022-11-01
 
 These settings apply only when `--tag=package-netapp-2022-11-01` is specified on the command line.
@@ -57,7 +77,6 @@ These settings apply only when `--tag=package-netapp-2022-11-01-preview` is spec
 input-file:
 - Microsoft.NetApp/preview/2022-11-01-preview/netapp.json
 ```
-
 
 ### Tag: package-netapp-2022-09-01
 
@@ -309,7 +328,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-trenton  
+  - repo: azure-sdk-for-trenton
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
@@ -358,6 +377,6 @@ suppressions:
     from: netapp.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups/{backupName}/restoreFiles"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/migrateBackups"].post      
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/migrateBackups"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateBackups"].post
 ```

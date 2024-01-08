@@ -315,6 +315,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Options for adding or updating blocklist items.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AddOrUpdateTextBlocklistItemsOptions"
@@ -369,6 +370,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Options for removing blocklist items.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RemoveTextBlocklistItemsOptions"
@@ -622,8 +624,7 @@
       "type": "string",
       "description": "The type of image analysis output.",
       "enum": [
-        "FourSeverityLevels",
-        "EightSeverityLevels"
+        "FourSeverityLevels"
       ],
       "x-ms-enum": {
         "name": "AnalyzeImageOutputType",
@@ -633,11 +634,6 @@
             "name": "FourSeverityLevels",
             "value": "FourSeverityLevels",
             "description": "Output severities in four levels, the value could be 0,2,4,6."
-          },
-          {
-            "name": "EightSeverityLevels",
-            "value": "EightSeverityLevels",
-            "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
           }
         ]
       }
@@ -817,7 +813,7 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7."
+          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6."
         }
       },
       "required": [
@@ -1022,7 +1018,7 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "The value increases with the severity of the input content. The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' or 'EightSeverityLevels' is chosen, this field will be included in the output."
+          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7."
         }
       },
       "required": [
@@ -1041,22 +1037,6 @@
       "x-ms-enum": {
         "name": "TextCategory",
         "modelAsString": true
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "enum": [
-        "2023-10-01"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_10_01",
-            "value": "2023-10-01"
-          }
-        ]
       }
     }
   },
