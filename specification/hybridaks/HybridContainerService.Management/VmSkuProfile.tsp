@@ -12,7 +12,7 @@ namespace Microsoft.HybridContainerService;
 @doc("The list of supported VM SKUs.")
 @singleton("default")
 model VmSkuProfile is ExtensionResource<VmSkuProfileProperties> {
-  @key("default")
+  @key("sku")
   @segment("skus")
   name: string;
 
