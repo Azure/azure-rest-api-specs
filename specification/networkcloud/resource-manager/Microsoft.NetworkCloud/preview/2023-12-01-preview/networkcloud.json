@@ -12334,6 +12334,33 @@
         }
       }
     },
+    "HybridConnectionConfig": {
+      "type": "object",
+      "title": "HybridConnectionConfig represents the rendezvous endpoint and sender access token.",
+      "properties": {
+        "expirationTime": {
+          "description": "ExpirationTime the the timestamp when the token will be expired.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "hybridConnectionName": {
+          "description": "HybridConnectionName is the name of the hybrid connection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "relay": {
+          "description": "Relay is the name of the relay.",
+          "type": "string",
+          "readOnly": true
+        },
+        "token": {
+          "description": "Token is the sender access token.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ImageRepositoryCredentials": {
       "type": "object",
       "title": "ImageRepositoryCredentials represents the credentials used to login to the image repository.",
