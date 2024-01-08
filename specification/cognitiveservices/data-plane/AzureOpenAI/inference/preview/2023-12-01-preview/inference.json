@@ -816,62 +816,6 @@
         }
       }
     },
-    "/deployments/{deployment-id}/audio/speech": {
-      "post": {
-        "summary": "Generates audio from the input text.",
-        "operationId": "Speech_Create",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "deployment-id",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "tts-1",
-              "description": "Deployment id of the tts model which was deployed."
-            }
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "2023-12-01-preview",
-              "description": "api version"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/createSpeechRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create an audio from text with response format mp3.": {
-            "$ref": "./examples/audio_speech.json"
-          }
-        }
-      }
-    },
     "/deployments/{deployment-id}/images/generations": {
       "post": {
         "summary": "Generates a batch of images from a text caption on a given DALLE model deployment",
@@ -3345,50 +3289,6 @@
             "type": "number",
             "description": "Probability of 'no speech'."
           }
-        }
-      },
-      "createSpeechRequest": {
-        "type": "object",
-        "description": "Speech request.",
-        "properties": {
-          "input": {
-            "type": "string",
-            "description": "The text to synthesize audio for. The maximum length is 4096 characters.",
-            "maxLength": 4096
-          },
-          "voice": {
-            "type": "string",
-            "description": "The voice to use for speech synthesis.",
-            "enum": [
-              "alloy",
-              "echo",
-              "fable",
-              "onyx",
-              "nova",
-              "shimmer"
-            ]
-          },
-          "response_format": {
-            "type": "string",
-            "description": "The format to synthesize the audio in.",
-            "enum": [
-              "mp3",
-              "opus",
-              "aac",
-              "flac"
-            ]
-          },
-          "speed": {
-            "description": "The speed of the synthesize audio. Select a value from `0.25` to `4.0`. `1.0` is the default.",
-            "type": "number",
-            "default": 1.0,
-            "minimum": 0.25,
-            "maximum": 4.0
-          },
-          "required": [
-            "input",
-            "voice"
-          ]
         }
       },
       "imageQuality": {
