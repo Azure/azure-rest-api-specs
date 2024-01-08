@@ -32,20 +32,19 @@ model AcsUserDisconnectedEventData {
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.")
-model AcsChatMessageReceivedEventData {
-  ...AcsChatMessageEventBaseProperties;
+model AcsChatMessageReceivedEventData
+  extends AcsChatMessageEventBaseProperties {
   ...AcsChatMessageBaseEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.")
-model AcsChatMessageReceivedInThreadEventData {
-  ...AcsChatMessageEventInThreadBaseProperties;
+model AcsChatMessageReceivedInThreadEventData
+  extends AcsChatMessageEventInThreadBaseProperties {
   ...AcsChatMessageBaseEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.")
-model AcsChatMessageEditedEventData {
-  ...AcsChatMessageEventBaseProperties;
+model AcsChatMessageEditedEventData extends AcsChatMessageEventBaseProperties {
   ...AcsChatMessageBaseEventData;
 
   @doc("The time at which the message was edited")
@@ -53,8 +52,8 @@ model AcsChatMessageEditedEventData {
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.")
-model AcsChatMessageEditedInThreadEventData {
-  ...AcsChatMessageEventInThreadBaseProperties;
+model AcsChatMessageEditedInThreadEventData
+  extends AcsChatMessageEventInThreadBaseProperties {
   ...AcsChatMessageBaseEventData;
 
   @doc("The time at which the message was edited")
@@ -62,67 +61,63 @@ model AcsChatMessageEditedInThreadEventData {
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.")
-model AcsChatMessageDeletedEventData {
-  ...AcsChatMessageEventBaseProperties;
-
+model AcsChatMessageDeletedEventData extends AcsChatMessageEventBaseProperties {
   @doc("The time at which the message was deleted")
   deleteTime?: utcDateTime;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.")
-model AcsChatMessageDeletedInThreadEventData {
-  ...AcsChatMessageEventInThreadBaseProperties;
-
+model AcsChatMessageDeletedInThreadEventData
+  extends AcsChatMessageEventInThreadBaseProperties {
   @doc("The time at which the message was deleted")
   deleteTime?: utcDateTime;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.")
-model AcsChatThreadCreatedWithUserEventData {
-  ...AcsChatThreadEventBaseProperties;
+model AcsChatThreadCreatedWithUserEventData
+  extends AcsChatThreadEventBaseProperties {
   ...AcsChatThreadBaseEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.")
-model AcsChatThreadCreatedEventData {
-  ...AcsChatThreadEventInThreadBaseProperties;
+model AcsChatThreadCreatedEventData
+  extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadBaseEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.")
-model AcsChatThreadWithUserDeletedEventData {
-  ...AcsChatThreadEventBaseProperties;
+model AcsChatThreadWithUserDeletedEventData
+  extends AcsChatThreadEventBaseProperties {
   ...AcsChatThreadDeletedBaseEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.")
-model AcsChatThreadDeletedEventData {
-  ...AcsChatThreadEventInThreadBaseProperties;
+model AcsChatThreadDeletedEventData
+  extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadDeletedBaseEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.")
-model AcsChatThreadPropertiesUpdatedPerUserEventData {
-  ...AcsChatThreadEventBaseProperties;
+model AcsChatThreadPropertiesUpdatedPerUserEventData
+  extends AcsChatThreadEventBaseProperties {
   ...AcsChatThredPropertiesBaseEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.")
-model AcsChatThreadPropertiesUpdatedEventData {
-  ...AcsChatThreadEventInThreadBaseProperties;
+model AcsChatThreadPropertiesUpdatedEventData
+  extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThredPropertiesBaseEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.")
-model AcsChatParticipantAddedToThreadWithUserEventData {
-  ...AcsChatThreadEventBaseProperties;
+model AcsChatParticipantAddedToThreadWithUserEventData
+  extends AcsChatThreadEventBaseProperties {
   ...AcsChatParticipantBaseEventData;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.")
-model AcsChatParticipantRemovedFromThreadWithUserEventData {
-  ...AcsChatThreadEventBaseProperties;
-
+model AcsChatParticipantRemovedFromThreadWithUserEventData
+  extends AcsChatThreadEventBaseProperties {
   @doc("The time at which the user was removed to the thread")
   time?: utcDateTime;
 
@@ -134,8 +129,8 @@ model AcsChatParticipantRemovedFromThreadWithUserEventData {
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.")
-model AcsChatParticipantAddedToThreadEventData {
-  ...AcsChatEventInThreadBaseProperties;
+model AcsChatParticipantAddedToThreadEventData
+  extends AcsChatEventInThreadBaseProperties {
   ...AcsChatParticipantBaseEventData;
 
   @doc("The version of the thread")
@@ -143,9 +138,8 @@ model AcsChatParticipantAddedToThreadEventData {
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.")
-model AcsChatParticipantRemovedFromThreadEventData {
-  ...AcsChatEventInThreadBaseProperties;
-
+model AcsChatParticipantRemovedFromThreadEventData
+  extends AcsChatEventInThreadBaseProperties {
   @doc("The time at which the user was removed to the thread")
   time?: utcDateTime;
 
@@ -160,9 +154,7 @@ model AcsChatParticipantRemovedFromThreadEventData {
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.")
-model AcsSmsDeliveryReportReceivedEventData {
-  ...AcsSmsEventBaseProperties;
-
+model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   @doc("Status of Delivery")
   deliveryStatus?: string;
 
@@ -180,9 +172,7 @@ model AcsSmsDeliveryReportReceivedEventData {
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.")
-model AcsSmsReceivedEventData {
-  ...AcsSmsEventBaseProperties;
-
+model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   @doc("The SMS content")
   message?: string;
 
@@ -266,9 +256,7 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobCancelled event
 """)
-model AcsRouterJobCancelledEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobCancelledEventData extends AcsRouterJobEventData {
   @doc("Router Job Note")
   note?: string;
 
@@ -280,9 +268,7 @@ model AcsRouterJobCancelledEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobClassificationFailed event
 """)
-model AcsRouterJobClassificationFailedEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobClassificationFailedEventData extends AcsRouterJobEventData {
   @doc("Router Job Classification Policy Id")
   classificationPolicyId?: string;
 
@@ -294,9 +280,7 @@ model AcsRouterJobClassificationFailedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobClassified event
 """)
-model AcsRouterJobClassifiedEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
   @doc("Router Job Queue Info")
   queueDetails?: AcsRouterQueueDetails;
 
@@ -314,9 +298,7 @@ model AcsRouterJobClassifiedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobClosed event
 """)
-model AcsRouterJobClosedEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobClosedEventData extends AcsRouterJobEventData {
   @doc("Router Job Closed Assignment Id")
   assignmentId?: string;
 
@@ -331,9 +313,7 @@ model AcsRouterJobClosedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobCompleted event
 """)
-model AcsRouterJobCompletedEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobCompletedEventData extends AcsRouterJobEventData {
   @doc("Router Job Completed Assignment Id")
   assignmentId?: string;
 
@@ -345,17 +325,13 @@ model AcsRouterJobCompletedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobDeleted event
 """)
-model AcsRouterJobDeletedEventData {
-  ...AcsRouterJobEventData;
-}
+model AcsRouterJobDeletedEventData extends AcsRouterJobEventData {}
 
 @doc("""
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobExceptionTriggered event
 """)
-model AcsRouterJobExceptionTriggeredEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobExceptionTriggeredEventData extends AcsRouterJobEventData {
   @doc("Router Job Exception Triggered Rule Key")
   ruleKey?: string;
 
@@ -367,9 +343,7 @@ model AcsRouterJobExceptionTriggeredEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobQueued event
 """)
-model AcsRouterJobQueuedEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
   @doc("Router Job Priority")
   priority?: int32;
 
@@ -384,9 +358,7 @@ model AcsRouterJobQueuedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobReceived event
 """)
-model AcsRouterJobReceivedEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   @doc("Router Job Received Job Status")
   jobStatus?: AcsRouterJobStatus;
 
@@ -450,9 +422,7 @@ enum AcsRouterJobStatus {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobSchedulingFailed event
 """)
-model AcsRouterJobSchedulingFailedEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
   @doc("Router Job Priority")
   priority?: int32;
 
@@ -474,9 +444,7 @@ model AcsRouterJobSchedulingFailedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobUnassigned event
 """)
-model AcsRouterJobUnassignedEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobUnassignedEventData extends AcsRouterJobEventData {
   @doc("Router Job Unassigned Assignment Id")
   assignmentId?: string;
 
@@ -488,9 +456,7 @@ model AcsRouterJobUnassignedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobWaitingForActivation event
 """)
-model AcsRouterJobWaitingForActivationEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   @doc("Router Job Waiting For Activation Priority")
   priority?: int32;
 
@@ -512,9 +478,8 @@ model AcsRouterJobWaitingForActivationEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterJobWorkerSelectorsExpired event
 """)
-model AcsRouterJobWorkerSelectorsExpiredEventData {
-  ...AcsRouterJobEventData;
-
+model AcsRouterJobWorkerSelectorsExpiredEventData
+  extends AcsRouterJobEventData {
   @doc("Router Job Worker Selectors Expired Requested Worker Selectors")
   expiredRequestedWorkerSelectors?: AcsRouterWorkerSelector[];
 
@@ -526,9 +491,7 @@ model AcsRouterJobWorkerSelectorsExpiredEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterWorkerDeleted event
 """)
-model AcsRouterWorkerDeletedEventData {
-  ...AcsRouterWorkerEventData;
-}
+model AcsRouterWorkerDeletedEventData extends AcsRouterWorkerEventData {}
 
 @doc("""
 Schema of the Data property of an EventGridEvent for a
@@ -543,9 +506,7 @@ model AcsRouterWorkerDeregisteredEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterWorkerOfferAccepted event
 """)
-model AcsRouterWorkerOfferAcceptedEventData {
-  ...AcsRouterWorkerEventData;
-
+model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
   @doc("Router Worker Offer Accepted Queue Id")
   queueId?: string;
 
@@ -575,9 +536,7 @@ model AcsRouterWorkerOfferAcceptedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterWorkerOfferDeclined event
 """)
-model AcsRouterWorkerOfferDeclinedEventData {
-  ...AcsRouterWorkerEventData;
-
+model AcsRouterWorkerOfferDeclinedEventData extends AcsRouterWorkerEventData {
   @doc("Router Worker Offer Declined Queue Id")
   queueId?: string;
 
@@ -589,9 +548,7 @@ model AcsRouterWorkerOfferDeclinedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterWorkerOfferExpired event
 """)
-model AcsRouterWorkerOfferExpiredEventData {
-  ...AcsRouterWorkerEventData;
-
+model AcsRouterWorkerOfferExpiredEventData extends AcsRouterWorkerEventData {
   @doc("Router Worker Offer Expired Queue Id")
   queueId?: string;
 
@@ -603,9 +560,7 @@ model AcsRouterWorkerOfferExpiredEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterWorkerOfferIssued event
 """)
-model AcsRouterWorkerOfferIssuedEventData {
-  ...AcsRouterWorkerEventData;
-
+model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   @doc("Router Worker Offer Issued Queue Id")
   queueId?: string;
 
@@ -640,9 +595,7 @@ model AcsRouterWorkerOfferIssuedEventData {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.Communication.RouterWorkerOfferRevoked event
 """)
-model AcsRouterWorkerOfferRevokedEventData {
-  ...AcsRouterWorkerEventData;
-
+model AcsRouterWorkerOfferRevokedEventData extends AcsRouterWorkerEventData {
   @doc("Router Worker Offer Revoked Queue Id")
   queueId?: string;
 
@@ -677,9 +630,7 @@ model AcsRouterWorkerRegisteredEventData {
 // Base Properties
 
 @doc("Schema of common properties of all Router Job events")
-model AcsRouterJobEventData {
-  ...AcsRouterEventData;
-
+model AcsRouterJobEventData extends AcsRouterEventData {
   @doc("Router Job events Queue Id")
   queueId?: string;
 
@@ -691,9 +642,7 @@ model AcsRouterJobEventData {
 }
 
 @doc("Schema of common properties of all Router Worker events")
-model AcsRouterWorkerEventData {
-  ...AcsRouterEventData;
-
+model AcsRouterWorkerEventData extends AcsRouterEventData {
   @doc("Router Worker events Worker Id")
   workerId?: string;
 }
@@ -914,9 +863,7 @@ model AcsEmailDeliveryReportStatusDetails {
 }
 
 @doc("Schema of common properties of all chat thread events")
-model AcsChatThreadEventBaseProperties {
-  ...AcsChatEventBaseProperties;
-
+model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
   @doc("The original creation time of the thread")
   createTime?: utcDateTime;
 
@@ -925,9 +872,8 @@ model AcsChatThreadEventBaseProperties {
 }
 
 @doc("Schema of common properties of all chat thread events")
-model AcsChatThreadEventInThreadBaseProperties {
-  ...AcsChatEventInThreadBaseProperties;
-
+model AcsChatThreadEventInThreadBaseProperties
+  extends AcsChatEventInThreadBaseProperties {
   @doc("The original creation time of the thread")
   createTime?: utcDateTime;
 
@@ -936,9 +882,7 @@ model AcsChatThreadEventInThreadBaseProperties {
 }
 
 @doc("Schema of common properties of all chat message events")
-model AcsChatMessageEventBaseProperties {
-  ...AcsChatEventBaseProperties;
-
+model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   @doc("The chat message id")
   messageId?: string;
 
@@ -959,9 +903,8 @@ model AcsChatMessageEventBaseProperties {
 }
 
 @doc("Schema of common properties of all thread-level chat message events")
-model AcsChatMessageEventInThreadBaseProperties {
-  ...AcsChatEventInThreadBaseProperties;
-
+model AcsChatMessageEventInThreadBaseProperties
+  extends AcsChatEventInThreadBaseProperties {
   @doc("The chat message id")
   messageId?: string;
 

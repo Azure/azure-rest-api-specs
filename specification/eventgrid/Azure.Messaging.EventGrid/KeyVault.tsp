@@ -51,32 +51,32 @@ namespace Microsoft.EventGrid {
   }
 
   alias KeyVaultCertificateBase = {
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     @doc("The id of the object that triggered this event.")
-    Id?: string;
+    @projectedName("json", "Id")
+    id?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     @doc("Key vault name of the object that triggered this event.")
-    VaultName?: string;
+    @projectedName("json", "VaultName")
+    vaultName?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     @doc("The type of the object that triggered this event")
-    ObjectType?: string;
+    @projectedName("json", "ObjectType")
+    objectType?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     @doc("The name of the object that triggered this event")
-    ObjectName?: string;
+    @projectedName("json", "ObjectName")
+    objectName?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     @doc("The version of the object that triggered this event")
-    Version?: string;
+    @projectedName("json", "Version")
+    version?: string;
 
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     @doc("Not before date of the object that triggered this event")
-    NBF?: float64;
+    NBF?: float32;
 
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     @doc("The expiration date of the object that triggered this event")
-    EXP?: float64;
+    EXP?: float32;
   };
 }
