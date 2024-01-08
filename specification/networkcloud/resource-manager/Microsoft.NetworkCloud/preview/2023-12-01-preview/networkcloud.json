@@ -15324,7 +15324,7 @@
           ]
         },
         "holdTime": {
-          "description": "The requested BGP hold time value. This field uses ISO 8601 duration format, for example P1H.",
+          "description": "Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The requested BGP hold time value. This field uses ISO 8601 duration format, for example P1H.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -15332,7 +15332,7 @@
           ]
         },
         "keepAliveTime": {
-          "description": "The requested BGP keepalive time value. This field uses ISO 8601 duration format, for example P1H.",
+          "description": "Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The requested BGP keepalive time value. This field uses ISO 8601 duration format, for example P1H.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -15746,6 +15746,32 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "StringKeyValuePair": {
+      "type": "object",
+      "title": "StringKeyValuePair represents a single entry in a mapping of keys to values.",
+      "required": [
+        "key",
+        "value"
+      ],
+      "properties": {
+        "key": {
+          "description": "The key to the mapped value.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "value": {
+          "description": "The value of the mapping key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
