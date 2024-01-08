@@ -31,4 +31,5 @@ using Azure.Core;
     endpoint: string,
   }
 )
+@versioned(Versions)
 namespace Azure.ProgrammableConnectivity;
