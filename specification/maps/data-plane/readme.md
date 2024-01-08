@@ -58,9 +58,9 @@ These settings apply only when `--tag=package-stable-2023-07-01` is specified on
 ```yaml $(tag) == 'package-stable-2023-07-01'
 input-file:
   - Common/stable/2023-06-01/common.json
-  - Microsoft.Maps/Data/preview/2.0/data.json
   - DataRegistry/stable/2023-06-01/dataregistry.json
   - Geolocation/preview/1.0/geolocation.json
+  - Microsoft.Maps/Data/preview/2.0/data.json
   - Render/stable/2022-08-01/render.json
   - Route/preview/1.0/route.json
   - Search/stable/2023-06-01/search.json
@@ -70,43 +70,27 @@ input-file:
   - Weather/stable/1.1/weather.json
 ```
 
-### Tag: package-preview-2.0
+### Tag: package-stable-1.0
 
-These settings apply only when `--tag=package-preview-2.0` is specified on the command line.
+These settings apply only when `--tag=package-stable-1.0` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2.0'
-input-file:
-  - Microsoft.Maps/Alias/preview/2.0/alias.json
-  - Microsoft.Maps/Data/preview/2.0/data.json
-  - Microsoft.Maps/Dataset/preview/2.0/dataset.json
-  - Microsoft.Maps/DEM/preview/1.0/elevation.json
-  - Microsoft.Maps/DwgConversion/preview/2.0/dwgconversion.json
-  - Microsoft.Maps/FeatureState/preview/2.0/featurestate.json
-  - Microsoft.Maps/Feedback/preview/1.0/feedback.json
-  - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
-  - Microsoft.Maps/Render/preview/1.0/render.json
-  - Microsoft.Maps/Render/preview/2.0/render.json
-  - Microsoft.Maps/Route/preview/1.0/route.json
-  - Microsoft.Maps/Search/preview/1.0/search.json
-  - Microsoft.Maps/Spatial/preview/1.0/spatial.json
-  - Microsoft.Maps/Tileset/preview/2.0/tileset.json
-  - Microsoft.Maps/Timezone/preview/1.0/timezone.json
-  - Microsoft.Maps/Traffic/preview/1.0/traffic.json
-  - Microsoft.Maps/Weather/preview/1.0/weather.json
-  - Microsoft.Maps/WFS/preview/2.0/wfs.json
-```
-
-### Tag: package-1.0-preview
-
-These settings apply only when `--tag=package-1.0-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-1.0-preview'
+```yaml $(tag) == 'package-stable-1.0'
 input-file:
   - Microsoft.Maps/Data/preview/1.0/data.json
+  - Microsoft.Maps/Render/preview/1.0/render.json
+  - Search/preview/1.0/search.json
+```
+
+### Tag: package-deprecated
+
+These settings apply only when `--tag=package-deprecated` is specified on the command line.
+
+``` yaml $(tag) == 'package-deprecated'
+input-file:
+  - Microsoft.Maps/Alias/preview/2.0/alias.json
   - Microsoft.Maps/DEM/preview/1.0/elevation.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
-  - Microsoft.Maps/Render/preview/1.0/render.json
   - Microsoft.Maps/Render/preview/2.0/render.json
   - Microsoft.Maps/Route/preview/1.0/route.json
   - Microsoft.Maps/Search/preview/1.0/search.json
@@ -114,4 +98,17 @@ input-file:
   - Microsoft.Maps/Timezone/preview/1.0/timezone.json
   - Microsoft.Maps/Traffic/preview/1.0/traffic.json
   - Microsoft.Maps/Weather/preview/1.0/weather.json
+```
+
+### Tag: package-creator
+
+These settings apply only when `--tag=package-creator` is specified on the command line.
+
+``` yaml $(tag) == 'package-creator'
+input-file:
+  - Microsoft.Maps/Dataset/preview/2.0/dataset.json
+  - Microsoft.Maps/DwgConversion/preview/2.0/dwgconversion.json
+  - Microsoft.Maps/FeatureState/preview/2.0/featurestate.json
+  - Microsoft.Maps/Tileset/preview/2.0/tileset.json
+  - Microsoft.Maps/WFS/preview/2.0/wfs.json
 ```
