@@ -16016,6 +16016,34 @@
         }
       }
     },
+    "UsageDomain": {
+      "type": "object",
+      "title": "UsageDomain represents the usage domain that is associated with a solution.",
+      "properties": {
+        "platform": {
+          "description": "The infrastructure category for the domain.",
+          "type": "string",
+          "enum": [
+            "Edge"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "UsageDomainPlatform"
+          },
+          "readOnly": true
+        },
+        "purpose": {
+          "description": "The more specific use case for the domain.",
+          "type": "string",
+          "readOnly": true
+        },
+        "variant": {
+          "description": "Variant is a qualifying term that differentiates between similar use cases.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ValidationThreshold": {
       "type": "object",
       "title": "ValidationThreshold indicates allowed machine and node hardware and deployment failures.",
@@ -16054,6 +16082,30 @@
           "type": "integer",
           "format": "int64",
           "minimum": 0
+        }
+      }
+    },
+    "VersionRange": {
+      "type": "object",
+      "title": "VersionRange represents a range of versions.",
+      "properties": {
+        "excluded": {
+          "description": "The versions that are not included in the range.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "supportedBegin": {
+          "description": "The first version that is included in the range.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unsupportedBegin": {
+          "description": "The first version that is no longer included in the range.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
