@@ -11135,6 +11135,1017 @@
         }
       }
     },
+    "EdgeCluster": {
+      "type": "object",
+      "title": "EdgeCluster represents a cluster that encompasses one or more nodes used to host network functions.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the edge cluster."
+        },
+        "properties": {
+          "$ref": "#/definitions/EdgeClusterProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "EdgeClusterAvailableUpgradeRuntimeVersion": {
+      "type": "object",
+      "title": "EdgeClusterAvailableUpgradeRuntimeVersion represents the available edge cluster upgrades.",
+      "properties": {
+        "availabilityLifecycle": {
+          "description": "The indicator if the upgrade runtime version is generally available or in a different lifecycle phase.",
+          "type": "string",
+          "enum": [
+            "Preview",
+            "GenerallyAvailable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AvailabilityLifecycle"
+          },
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the upgrade.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportExpiryDate": {
+          "description": "The last date the version of the platform is supported.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetRuntimeVersionId": {
+          "description": "The resource ID of the runtime version.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeClusterEntraConfiguration": {
+      "type": "object",
+      "title": "EdgeClusterEntraConfiguration represents the Entra (Azure Active Directory) integration properties.",
+      "required": [
+        "adminGroupObjectIds"
+      ],
+      "properties": {
+        "adminGroupObjectIds": {
+          "description": "The list of Entra (Azure Active Directory) group object IDs that will have an administrative role on the edge cluster.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "EdgeClusterList": {
+      "type": "object",
+      "title": "EdgeClusterList represents a list of edge cluster objects.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of edge clusters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeCluster"
+          }
+        }
+      }
+    },
+    "EdgeClusterMachineSku": {
+      "type": "object",
+      "title": "EdgeClusterMachineSku represents a machine or server configuration that is supported by one or more edge cluster SKUs.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeClusterMachineSkuProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "EdgeClusterMachineSkuCpu": {
+      "type": "object",
+      "title": "EdgeClusterMachineSkuCpu represents the CPU configuration of an edge cluster machine.",
+      "properties": {
+        "modelName": {
+          "description": "The vendor supplied model name of the CPU reported by processor inspection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeClusterMachineSkuDevice": {
+      "type": "object",
+      "title": "EdgeClusterMachineSkuDevice represents a device of an edge cluster machine.",
+      "properties": {
+        "address": {
+          "description": "The bus address of the device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "bus": {
+          "description": "The bus that connects this device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "class": {
+          "description": "The class of the device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "model": {
+          "description": "The model of the device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sizeGB": {
+          "description": "The advertised size of a storage device in gigabytes.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "vendor": {
+          "description": "The vendor for the device.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeClusterMachineSkuList": {
+      "type": "object",
+      "title": "EdgeClusterMachineSkuList represents a list of edge cluster machine SKUs.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of edge cluster machine SKUs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeClusterMachineSku"
+          }
+        }
+      }
+    },
+    "EdgeClusterMachineSkuMemory": {
+      "type": "object",
+      "title": "EdgeClusterMachineSkuMemory represents the memory configuration of an edge cluster machine.",
+      "properties": {
+        "sizeGB": {
+          "description": "The size of the memory in gigabytes.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeClusterMachineSkuProperties": {
+      "type": "object",
+      "title": "EdgeClusterMachineSkuProperties represents the defining characteristics of an edge cluster machine.",
+      "properties": {
+        "cpus": {
+          "description": "The list of cpus for the machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeClusterMachineSkuCpu"
+          },
+          "x-ms-identifiers": [
+            "modelName"
+          ],
+          "readOnly": true
+        },
+        "devices": {
+          "description": "The list of devices for the machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeClusterMachineSkuDevice"
+          },
+          "x-ms-identifiers": [
+            "address"
+          ],
+          "readOnly": true
+        },
+        "memory": {
+          "$ref": "#/definitions/EdgeClusterMachineSkuMemory",
+          "description": "The memory configuration for the machine."
+        },
+        "system": {
+          "$ref": "#/definitions/EdgeClusterMachineSkuSystem",
+          "description": "The bios and top-level system related information."
+        }
+      }
+    },
+    "EdgeClusterMachineSkuSystem": {
+      "type": "object",
+      "title": "EdgeClusterMachineSkuSystem represents the BIOS and top-level system related information of an edge cluster machine.",
+      "properties": {
+        "productName": {
+          "description": "The system product name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vendor": {
+          "description": "The system vendor.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeClusterNode": {
+      "type": "object",
+      "title": "EdgeClusterNode represents the node of an edge cluster.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeClusterNodeProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "EdgeClusterNodeList": {
+      "type": "object",
+      "title": "EdgeClusterNodeList represents the list of edge cluster node objects.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of edge cluster nodes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeClusterNode"
+          }
+        }
+      }
+    },
+    "EdgeClusterNodeMatchingIdentifier": {
+      "type": "object",
+      "title": "EdgeClusterNodeMatchingIdentifier represents a field to match against a machine in the registration hub during association with an edge cluster node.",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name is the name of the identifier.",
+          "type": "string",
+          "enum": [
+            "ProductSerialNumber",
+            "AnyMacAddress"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EdgeClusterNodeMatchingIdentifierName"
+          }
+        },
+        "value": {
+          "description": "Value is the value of the identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "EdgeClusterNodeNetworkInterface": {
+      "type": "object",
+      "title": "EdgeClusterNodeNetworkInterface represents the properties of the network interface of an edge cluster node.",
+      "properties": {
+        "ipv4Address": {
+          "description": "The IPv4 address of the network interface.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipv6Address": {
+          "description": "The IPv6 address of the network interface.",
+          "type": "string",
+          "readOnly": true
+        },
+        "macAddress": {
+          "description": "The MAC address of the network interface.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the network interface as represented on the host.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeClusterNodePatchParameters": {
+      "type": "object",
+      "title": "EdgeClusterNodePatchParameters represents the body of the request to patch the edge cluster node.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeClusterNodePatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EdgeClusterNodePatchProperties": {
+      "type": "object",
+      "title": "EdgeClusterNodePatchProperties represents the edge cluster node properties for patching.",
+      "properties": {
+        "machineSkuId": {
+          "description": "The resource ID of the SKU of the edge cluster node.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/edgeClusterMachineSkus"
+              }
+            ]
+          }
+        },
+        "nodeMatchingIdentifiers": {
+          "description": "Tthe identifiers used to match the node to a machine in the registration hub.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeClusterNodeMatchingIdentifier"
+          }
+        },
+        "registrationHubMachineId": {
+          "description": "The resource ID of the machine in the registration hub that the node is registered against.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/regisrationHubs/machines"
+              }
+            ]
+          }
+        },
+        "schedulingLabels": {
+          "description": "The labels used to schedule resources on this node.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KubernetesLabel"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        }
+      }
+    },
+    "EdgeClusterNodeProperties": {
+      "type": "object",
+      "title": "EdgeClusterNodeProperties represents the properties of an edge cluster node.",
+      "required": [
+        "machineSkuId"
+      ],
+      "properties": {
+        "infrastructureResourceIds": {
+          "description": "The resource IDs of the resources that depend on the Edge Cluster. This includes both infrastructure resources added automatically and workload resources that are added through orchestration.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id"
+          },
+          "readOnly": true
+        },
+        "kubernetesVersion": {
+          "description": "The version of Kubernetes running on the node. This will typically match the Edge Cluster’s Kubernetes version, but may differ during upgrade activities.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lifecycleStatus": {
+          "description": "The lifecycle status of the edge cluster node resource.",
+          "type": "string",
+          "enum": [
+            "Unassociated",
+            "Registering",
+            "Joined",
+            "PlatformReady",
+            "UpdatingRuntime",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EdgeClusterNodeLifecycleStatus"
+          },
+          "readOnly": true
+        },
+        "machineSkuId": {
+          "description": "The resource ID of the SKU of the edge cluster node.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/edgeClusterMachineSkus"
+              }
+            ]
+          }
+        },
+        "networkInterfaces": {
+          "description": "The network interfaces of the node.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeClusterNodeNetworkInterface"
+          },
+          "readOnly": true
+        },
+        "nodeMatchingIdentifiers": {
+          "description": "The identifiers used to match the node to a machine in the registration hub.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeClusterNodeMatchingIdentifier"
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the edge cluster node.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EdgeClusterNodeProvisioningState"
+          },
+          "readOnly": true
+        },
+        "registrationHubMachineId": {
+          "description": "The resource ID of the machine in the registration hub that the node is registered against.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/regisrationHubs/machines"
+              }
+            ]
+          }
+        },
+        "runtimeVersionId": {
+          "description": "The resource ID of the runtime version of the Nexus software running on the machine of the node. This will typically match the Edge Cluster’s runtime, but may differ during upgrade activities.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/edgeClusterRuntimeVersions"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "schedulingLabels": {
+          "description": "The labels used to schedule resources on this node.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KubernetesLabel"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "stagedRuntimeVersionId": {
+          "description": "The resource ID of the runtime version of the Nexus software that has been pre-staged to the machine, pending a cluster runtime update. If no runtime has been staged, this field will be omitted. During the process of staging a runtime, this field will be empty. It will only be populated when the staging has completed.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/edgeClusterRuntimeVersions"
+              }
+            ]
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeClusterPatchParameters": {
+      "type": "object",
+      "title": "EdgeClusterPatchParameters represents the body of the request to patch the edge cluster properties.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity for the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/EdgeClusterPatchProperties",
+          "description": "Edge cluster properties for patching.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EdgeClusterPatchProperties": {
+      "type": "object",
+      "title": "Edge cluster properties for patching.",
+      "properties": {
+        "description": {
+          "description": "User provided description information about the edge cluster.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "entraConfiguration": {
+          "$ref": "#/definitions/EdgeClusterEntraConfiguration",
+          "description": "The attributes used for Entra (Azure Active Directory) integration."
+        },
+        "registrationHubId": {
+          "description": "The resource ID of the registration hub that the edge cluster will use to register machines for edge cluster nodes.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/registrationHubs"
+              }
+            ]
+          }
+        },
+        "runtimeVersionId": {
+          "description": "The resource ID of the edge cluster runtime version for the edge cluster.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/edgeClusterRuntimeVersions"
+              }
+            ]
+          }
+        },
+        "workloadResourceIds": {
+          "description": "The list of user-managed workload resource IDs that are dependent upon the edge cluster. The presence of workload resource IDs inform lifecycle events for the edge cluster.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "EdgeClusterProperties": {
+      "type": "object",
+      "title": "EdgeClusterProperties represents the properties of an edge cluster.",
+      "required": [
+        "edgeClusterSkuId",
+        "networkFabricId",
+        "runtimeVersionId"
+      ],
+      "properties": {
+        "availableUpgradeRuntimeVersions": {
+          "description": "The list of runtimes upgrades that are available for the Edge Cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeClusterAvailableUpgradeRuntimeVersion"
+          },
+          "x-ms-identifiers": [
+            "targetRuntimeVersionId"
+          ],
+          "readOnly": true
+        },
+        "clusterExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location that represents the edge cluster's control plane location and is used to route the requests for workload infrastructure resources.",
+          "readOnly": true
+        },
+        "connectedClusterId": {
+          "description": "The resource ID of the connected cluster set up when this edge cluster is created.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Kubernetes/connectedClusters"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "description": {
+          "description": "User provided description information about the edge cluster.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "edgeClusterSkuId": {
+          "description": "The resource ID of the SKU of the edge cluster.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/edgeClusterSkus"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "entraConfiguration": {
+          "$ref": "#/definitions/EdgeClusterEntraConfiguration",
+          "description": "The attributes used for Entra (Azure Active Directory) integration."
+        },
+        "infrastructureResourceIds": {
+          "description": "The list of system-controlled workload resource IDs that are dependent upon the edge cluster. The presence of resource IDs inform lifecycle events for the edge cluster.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "kubernetesVersion": {
+          "description": "The Kubernetes version that is currently running on the edge cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lifecycleStatus": {
+          "description": "The status representing the lifecycle stage of the edge cluster.",
+          "type": "string",
+          "enum": [
+            "Defined",
+            "ControlPlaneOnly",
+            "Upgrading",
+            "Ready",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EdgeClusterLifecycleStatus"
+          },
+          "readOnly": true
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "The configuration of the managed resource group associated with the resource."
+        },
+        "managementServicesVersion": {
+          "description": "The version of the running management services.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkFabricId": {
+          "description": "The resource ID of the network fabric that defines the network configuration for the edge cluster.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the edge cluster.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EdgeClusterProvisioningState"
+          },
+          "readOnly": true
+        },
+        "ptpConfiguration": {
+          "$ref": "#/definitions/EdgeClusterPtpConfiguration",
+          "description": "The PTP clock information for the edge cluster, if applicable.",
+          "readOnly": true
+        },
+        "registrationHubId": {
+          "description": "The resource ID of the registration hub that the edge cluster will use to register machines for edge cluster nodes.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/registrationHubs"
+              }
+            ]
+          }
+        },
+        "requiredEndpointAllowList": {
+          "description": "The list of endpoints that must be accessible to the edge cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          },
+          "readOnly": true
+        },
+        "runtimeVersionId": {
+          "description": "The resource ID of the edge cluster runtime version for the edge cluster.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/edgeClusterRuntimeVersions"
+              }
+            ]
+          }
+        },
+        "supportExpiryDate": {
+          "description": "The date after which the Edge Cluster is no longer supported using the currently configured runtime version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "workloadResourceIds": {
+          "description": "The list of user-managed workload resource IDs that are dependent upon the edge cluster. The presence of workload resource IDs inform lifecycle events for the edge cluster.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "EdgeClusterPtpConfiguration": {
+      "type": "object",
+      "title": "EdgeClusterPtpConfiguration represents the PTP clock configuration for the edge cluster, if applicable.",
+      "required": [
+        "domainNumber",
+        "networkTransportType"
+      ],
+      "properties": {
+        "domainNumber": {
+          "description": "The IEEE 1588-2008 domain number.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "l2VlanNumber": {
+          "description": "The L2 VLAN number.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "networkTransportType": {
+          "description": "The network transport type for PTP.",
+          "type": "string",
+          "enum": [
+            "UDPv4",
+            "UDPv6",
+            "L2"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EdgeClusterPtpConfigurationNetworkTransportType"
+          }
+        },
+        "udpAddress": {
+          "description": "The IPv4 or IPv6 address if the networkTransportType is set to UDPv4 or UDPv6 respectively.",
+          "type": "string"
+        }
+      }
+    },
+    "EdgeClusterRuntimeVersion": {
+      "type": "object",
+      "title": "EdgeClusterRuntimeVersion represents a version of the use case specific software that runs an Edge Cluster.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeClusterRuntimeVersionProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "EdgeClusterRuntimeVersionList": {
+      "type": "object",
+      "title": "EdgeClusterRuntimeVersionList represents a list of edge cluster runtime versions.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of edge cluster runtime versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeClusterRuntimeVersion"
+          }
+        }
+      }
+    },
+    "EdgeClusterRuntimeVersionProperties": {
+      "type": "object",
+      "title": "EdgeClusterRuntimeVersionProperties represents the defining characteristics of an edge cluster configuration.",
+      "properties": {
+        "attributes": {
+          "description": "The key to value mapping of other descriptive information that is not represented in another field of this runtime version.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StringKeyValuePair"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ],
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the edge cluster runtime version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostImageName": {
+          "description": "The name of the host image that is used for this edge cluster runtime version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "kubernetesVersion": {
+          "description": "The Kubernetes version associated with this edge cluster runtime version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "upgradableFromVersion": {
+          "$ref": "#/definitions/VersionRange",
+          "description": "The range of versions that can be upgraded to from this edge cluster runtime version."
+        },
+        "usageDomain": {
+          "$ref": "#/definitions/UsageDomain",
+          "description": "The domain of use of the edge cluster runtime version."
+        },
+        "version": {
+          "description": "The version number for this runtime version.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeClusterSku": {
+      "type": "object",
+      "title": "EdgeClusterSku represents the use case and overall configuration parameters of an edge cluster.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeClusterSkuProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "EdgeClusterSkuList": {
+      "type": "object",
+      "title": "EdgeClusterSkuList represents a list of edge cluster SKUs.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of edge cluster SKUs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeClusterSku"
+          }
+        }
+      }
+    },
+    "EdgeClusterSkuProperties": {
+      "type": "object",
+      "title": "EdgeClusterSkuProperties represents the defining characteristics of an edge cluster configuration.",
+      "properties": {
+        "fabricManagedBy": {
+          "description": "Indicates if the network fabric is managed by the user or by the system.",
+          "type": "string",
+          "enum": [
+            "System",
+            "User"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EdgeClusterSkuFabricManagedBy"
+          },
+          "readOnly": true
+        },
+        "machineSkuSupport": {
+          "description": "The list of supported edge cluster machine SKUs that can be used for this edge cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineSkuSupportRange"
+          },
+          "x-ms-identifiers": [
+            "machineSkuId"
+          ],
+          "readOnly": true
+        },
+        "maximumNodeQuantity": {
+          "description": "The largest number of nodes that can be created in this edge cluster.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "minimumNodeQuantity": {
+          "description": "The smallest number of nodes that can be created for this edge cluster.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "ptpRequired": {
+          "description": "Indicates if the edge cluster uses the Precision Time Protocol (PTP) for time synchronization.",
+          "type": "string",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EdgeClusterSkuPtpRequired"
+          },
+          "readOnly": true
+        },
+        "usageDomain": {
+          "$ref": "#/definitions/UsageDomain",
+          "description": "The use case of the edge cluster."
+        }
+      }
+    },
+    "EdgeClusterStageRuntimeParameters": {
+      "type": "object",
+      "title": "EdgeClusterStageRuntimeParameters represents the body of the request to stage a runtime version for an edge cluster.",
+      "required": [
+        "targetRuntimeVersionId"
+      ],
+      "properties": {
+        "targetRuntimeVersionId": {
+          "description": "TargetRuntimeVersionId represents the resource ID of the runtime to stage. This runtime must be a valid upgrade for the Edge Cluster.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/edgeClusterRuntimeVersions"
+              }
+            ]
+          }
+        }
+      }
+    },
     "EgressEndpoint": {
       "type": "object",
       "title": "EgressEndpoint represents the connection from a cloud services network to the specified endpoint for a common purpose.",
