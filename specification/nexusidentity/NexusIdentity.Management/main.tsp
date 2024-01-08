@@ -33,10 +33,13 @@ enum Versions {
 @doc("The provisioning state of Identity Set resource.")
 enum ProvisioningState {
   ...ResourceProvisioningState,
+
   @doc("The operation is accepted and in progress.")
   Updating,
+
   @doc("The resource is being deleted.")
   Deleting,
+
   @doc("The operation is accepted.")
   Accepted,
 }
@@ -45,16 +48,21 @@ enum ProvisioningState {
 model IdentitySetResourceProperties {
   @doc("Tenant id in which scope is created.")
   tenantId: string;
+
   @doc("List of scopes to be watched")
   eventSubscriptions: Array<EventSubscription>;
+
   @doc("The URL to which the Nexus Identity Service will send notifications.")
   defaultNotificationUrl: string;
+
   @doc("The application Id of Identity Set resource")
   @visibility("read")
   appId?: string;
+
   @doc("The application name of Identity Set resource")
   @visibility("read")
   appName?: string;
+
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -67,36 +75,44 @@ Users should create EventSubscription for each distinct combination of Roles to 
 model EventSubscription {
   @doc("The name of the event subscription. Event subscription names must be unique in a Identity Set.")
   eventSubscriptionId: string;
+
   @doc("""
   Scopes on which roles are to be watched. Valid scope are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
   """)
   scopes: Array<string>;
+
   @doc("Roles to be watched.")
   roles: Array<NexusIdentityRoles>;
+
   @doc("The type of access needed for the Roles. Only the specified access types data will be sent.")
   accessTypes: Array<AccessType>;
+
   @doc("The URL to which the Nexus Identity Service will send notifications for this Event subscription.")
-  notifcationUrl?: string;
+  notificationUrl?: string;
 }
 
 @doc("Access Type defines the type of access needed for the Roles.")
 enum AccessType {
   @doc("SSH access")
   Ssh,
+
   @doc("Web access")
-  Web
+  Web,
 }
 
 @doc("Role defined for Nexus Identity Service")
 enum NexusIdentityRoles {
   @doc("Full access to all NNF resources and read-write access to network devices")
   NexusFabricServiceAdministrator,
+
   @doc("No access to ARM resources. Full RW access to network devices")
   NexusFabricDeviceAdministrator,
+
   @doc("Read-only access to all NNF resources and network devices (RW)​")
   NexusFabricServiceReader,
+
   @doc("No access to ARM resources. Read-only access to network devices​")
-  NexusFabricDeviceReader
+  NexusFabricDeviceReader,
 }
 
 @doc("Identity Set resource definition")
@@ -112,7 +128,10 @@ model IdentitySetResource is TrackedResource<IdentitySetResourceProperties> {
 interface IdentitySet {
   get is ArmResourceRead<IdentitySetResource>;
   create is ArmResourceCreateOrUpdateAsync<IdentitySetResource>;
-  update is ArmResourcePatchAsync<IdentitySetResource, IdentitySetResourceProperties>;
+  update is ArmResourcePatchAsync<
+    IdentitySetResource,
+    IdentitySetResourceProperties
+  >;
   delete is ArmResourceDeleteAsync<IdentitySetResource>;
   listByResourceGroup is ArmResourceListByParent<IdentitySetResource>;
   listBySubscription is ArmListBySubscription<IdentitySetResource>;
