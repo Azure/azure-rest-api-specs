@@ -13,7 +13,7 @@ namespace Microsoft.HybridContainerService;
 @singleton("default")
 model KubernetesVersionProfile
   is ExtensionResource<KubernetesVersionProfileProperties> {
-  @key("default")
+  @key("kubernetesVersion")
   @segment("kubernetesVersions")
   name: string;
 
