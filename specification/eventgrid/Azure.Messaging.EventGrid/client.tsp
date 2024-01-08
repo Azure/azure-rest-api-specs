@@ -1080,6 +1080,60 @@ using Azure.ClientGenerator.Core;
   Usage.input | Usage.output
 );
 @@access(Microsoft.EventGrid.RedisImportRDBCompletedEventData, Access.public);
+@@usage(Microsoft.EventGrid.ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.ResourceNotificationsResourceUpdatedEventData,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.ResourceNotificationsResourceUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.ResourceNotificationsResourceUpdatedDetails,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.ResourceNotificationsResourceUpdatedDetails,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.ResourceNotificationsOperationalDetails,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.ResourceNotificationsOperationalDetails,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.ResourceNotificationsHealthResourcesAnnotatedEventData,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.ResourceNotificationsHealthResourcesAnnotatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.ResourceNotificationsResourceManagementCreatedOrUpdatedEventData,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.ResourceNotificationsResourceManagementCreatedOrUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.ResourceNotificationsResourceManagementDeletedEventData,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.ResourceNotificationsResourceManagementDeletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.ResourceNotificationsResourceDeletedEventData,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.ResourceNotificationsResourceDeletedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.ResourceNotificationsResourceDeletedDetails,
+  Usage.input | Usage.output
+);
+@@access(Microsoft.EventGrid.ResourceNotificationsResourceDeletedDetails,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.ResourceWriteSuccessData,
   Usage.input | Usage.output
 );

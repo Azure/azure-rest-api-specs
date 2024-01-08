@@ -9,9 +9,8 @@ Schema of the Data property of an EventGridEvent for a
 Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged
 event.
 """)
-model ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData {
-  ...ResourceNotificationsResourceUpdatedEventData;
-}
+model ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData
+  extends ResourceNotificationsResourceUpdatedEventData {}
 
 @doc("Describes the schema of the common properties across all ARN system topic events")
 model ResourceNotificationsResourceUpdatedEventData {
@@ -63,6 +62,50 @@ model ResourceNotificationsOperationalDetails {
 Schema of the Data property of an EventGridEvent for a
 Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event.
 """)
-model ResourceNotificationsHealthResourcesAnnotatedEventData {
-  ...ResourceNotificationsResourceUpdatedEventData;
+model ResourceNotificationsHealthResourcesAnnotatedEventData
+  extends ResourceNotificationsResourceUpdatedEventData {}
+
+// Resources.json
+
+@doc("""
+Schema of the Data property of an EventGridEvent for a
+Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.
+""")
+model ResourceNotificationsResourceManagementCreatedOrUpdatedEventData
+  extends ResourceNotificationsResourceUpdatedEventData {}
+
+@doc("""
+Schema of the Data property of an EventGridEvent for a
+Microsoft.ResourceNotifications.Resources.Deleted event.
+""")
+model ResourceNotificationsResourceManagementDeletedEventData
+  extends ResourceNotificationsResourceDeletedEventData {}
+
+@doc("""
+Describes the schema of the common properties across all ARN system topic
+delete events
+""")
+model ResourceNotificationsResourceDeletedEventData {
+  @doc("resourceInfo details for delete event")
+  @projectedName("json", "resourceInfo")
+  resourceDetails?: ResourceNotificationsResourceDeletedDetails;
+
+  @doc("details about operational info")
+  @projectedName("json", "operationalInfo")
+  operationalDetails?: ResourceNotificationsOperationalDetails;
+}
+
+@doc("""
+Describes the schema of the properties under resource info which are common
+across all ARN system topic delete events
+""")
+model ResourceNotificationsResourceDeletedDetails {
+  @doc("id of the resource for which the event is being emitted")
+  id?: string;
+
+  @doc("name of the resource for which the event is being emitted")
+  name?: string;
+
+  @doc("the type of the resource for which the event is being emitted")
+  type?: string;
 }
