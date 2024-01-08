@@ -46,7 +46,7 @@ model AccessPolicy {
   applicationId: string;
 }
 
-@doc("DataSource for an experimentation workspace")
+@doc("Data source that telemetry data required for experimenation will be retrieved from.")
 model DataSource {
   @doc("Resource id of the data source.")
   resourceId: string;
