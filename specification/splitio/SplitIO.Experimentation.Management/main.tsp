@@ -36,7 +36,7 @@ model ExperimentationWorkspaceProperties {
   @doc("Access policy for an experimentation workspace.")
   accessPolicy: AccessPolicy;
 
-  @doc("Data source that telemetry data required for experimenation will be retrieved from.")
+  @doc("Data source that telemetry data required for experimentation will be retrieved from.")
   dataSource?: DataSource;
 }
 
@@ -46,7 +46,7 @@ model AccessPolicy {
   applicationId: string;
 }
 
-@doc("Data source that telemetry data required for experimenation will be retrieved from.")
+@doc("Data source that telemetry data required for experimentation will be retrieved from.")
 model DataSource {
   @doc("Resource id of the data source.")
   resourceId: string;
