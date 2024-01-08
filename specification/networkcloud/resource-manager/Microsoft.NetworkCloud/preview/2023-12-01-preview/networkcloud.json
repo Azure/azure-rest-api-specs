@@ -10,9 +10,9 @@
   ],
   "swagger": "2.0",
   "info": {
-    "description": "The Network Cloud APIs provide management of the on-premises clusters and their resources, such as, racks, bare metal hosts, virtual machines, workload networks and more.",
+    "description": "The Network Cloud APIs provide management of the Azure Operator Nexus compute resources such as on-premises clusters, hardware resources, and workload infrastructure resources.",
     "title": "NetworkCloud",
-    "version": "2023-10-01-preview"
+    "version": "2023-12-01-preview"
   },
   "host": "management.azure.com",
   "paths": {
@@ -191,6 +191,265 @@
         "x-ms-examples": {
           "List clusters for subscription": {
             "$ref": "./examples/Clusters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/edgeClusterMachineSkus": {
+      "get": {
+        "description": "Get a list of edge cluster machine SKUs in the provided subscription.",
+        "summary": "List edge cluster machine SKUs.",
+        "operationId": "EdgeClusterMachineSkus_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgeClusterMachineSkuList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List edge cluster machine SKUs for subscription": {
+            "$ref": "./examples/EdgeClusterMachineSkus_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/edgeClusterMachineSkus/{edgeClusterMachineSkuName}": {
+      "get": {
+        "description": "Get the properties of the specified edge cluster machine SKU.",
+        "summary": "Retrieve the edge cluster machine SKU.",
+        "operationId": "EdgeClusterMachineSkus_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EdgeClusterMachineSkuNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgeClusterMachineSku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get edge cluster machine SKU resource": {
+            "$ref": "./examples/EdgeClusterMachineSkus_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/edgeClusterRuntimeVersions": {
+      "get": {
+        "description": "Get a list of edge cluster runtime versions in the provided subscription.",
+        "summary": "List edge cluster runtime versions.",
+        "operationId": "EdgeClusterRuntimeVersions_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgeClusterRuntimeVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List edge cluster runtime versions for subscription": {
+            "$ref": "./examples/EdgeClusterRuntimeVersions_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/edgeClusterRuntimeVersions/{edgeClusterRuntimeVersionName}": {
+      "get": {
+        "description": "Get the properties of the specified edge cluster runtime version.",
+        "summary": "Retrieve the edge cluster runtime version.",
+        "operationId": "EdgeClusterRuntimeVersions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EdgeClusterRuntimeVersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgeClusterRuntimeVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get edge cluster runtime version resource": {
+            "$ref": "./examples/EdgeClusterRuntimeVersions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/edgeClusterSkus": {
+      "get": {
+        "description": "Get a list of edge cluster SKUs in the provided subscription.",
+        "summary": "List edge cluster SKUs.",
+        "operationId": "EdgeClusterSkus_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgeClusterSkuList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List edge cluster SKUs for subscription": {
+            "$ref": "./examples/EdgeClusterSkus_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/edgeClusterSkus/{edgeClusterSkuName}": {
+      "get": {
+        "description": "Get the properties of the specified edge cluster SKU.",
+        "summary": "Retrieve the edge cluster SKU.",
+        "operationId": "EdgeClusterSkus_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EdgeClusterSkuNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgeClusterSku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get edge cluster SKU resource": {
+            "$ref": "./examples/EdgeClusterSkus_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/edgeClusters": {
+      "get": {
+        "description": "Get a list of edge clusters in the provided subscription.",
+        "summary": "List edge clusters in the subscription.",
+        "operationId": "EdgeClusters_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgeClusterList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List edge clusters for subscription": {
+            "$ref": "./examples/EdgeClusters_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -413,6 +672,43 @@
         "x-ms-examples": {
           "List racks for subscription": {
             "$ref": "./examples/Racks_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/registrationHubs": {
+      "get": {
+        "description": "Get a list of registration hubs in the provided subscription.",
+        "summary": "List registration hubs in the subscription.",
+        "operationId": "RegistrationHubs_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistrationHubList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List registration hubs for subscription": {
+            "$ref": "./examples/RegistrationHubs_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
