@@ -33,9 +33,9 @@ using TypeSpec.Versioning;
   title: "DevCenter",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 @doc("DevCenter Management API")
-namespace Azure.ResourceManager.DevCenter;
+namespace Microsoft.DevCenter;
 
 @doc("The available API versions.")
 enum Versions {

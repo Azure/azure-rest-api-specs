@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.DevCenter;
+namespace Microsoft.DevCenter;
 @doc("Represents an environment type.")
 @parentResource(Project)
 model ProjectEnvironmentType

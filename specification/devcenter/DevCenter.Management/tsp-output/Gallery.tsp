@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.DevCenter;
+namespace Microsoft.DevCenter;
 @doc("Represents a gallery.")
 @parentResource(DevCenter)
 model Gallery is ProxyResource<GalleryProperties> {

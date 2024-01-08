@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.DevCenter;
+namespace Microsoft.DevCenter;
 @doc("Health Check details.")
 @singleton("latest")
 @parentResource(NetworkConnection)
@@ -21,7 +21,7 @@ model HealthCheckStatusDetails
 }
 
 @armResourceOperations
-interface FDFNetworkConnections {
+interface NetworkConnections {
   @doc("Gets health check status details.")
   getHealthDetails is ArmResourceRead<HealthCheckStatusDetails>;
   @doc("Lists health check status details")

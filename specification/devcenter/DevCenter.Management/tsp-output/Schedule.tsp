@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.DevCenter;
+namespace Microsoft.DevCenter;
 @doc("Represents a Schedule to execute a task.")
 @parentResource(Pool)
 model Schedule is ProxyResource<ScheduleProperties> {

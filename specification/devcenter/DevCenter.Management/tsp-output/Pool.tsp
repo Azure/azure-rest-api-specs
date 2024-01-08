@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.DevCenter;
+namespace Microsoft.DevCenter;
 @doc("A pool of Virtual Machines.")
 @parentResource(Project)
 model Pool is TrackedResource<PoolProperties> {

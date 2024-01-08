@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.DevCenter;
+namespace Microsoft.DevCenter;
 @doc("Represents an image.")
 @parentResource(Gallery)
 model Image is ProxyResource<ImageProperties> {
@@ -20,7 +20,7 @@ model Image is ProxyResource<ImageProperties> {
 }
 
 @armResourceOperations
-interface FfImages {
+interface Images {
   @doc("Gets a gallery image.")
   get is ArmResourceRead<Image>;
   @doc("Lists images for a gallery.")

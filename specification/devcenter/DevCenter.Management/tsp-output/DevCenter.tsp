@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.DevCenter;
+namespace Microsoft.DevCenter;
 @doc("Represents a devcenter resource.")
 model DevCenter is TrackedResource<DevCenterProperties> {
   @doc("The name of the devcenter.")

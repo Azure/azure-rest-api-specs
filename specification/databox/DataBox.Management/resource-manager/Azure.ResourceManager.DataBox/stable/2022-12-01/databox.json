@@ -277,51 +277,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/jobs": {
-      "get": {
-        "operationId": "Jobs_ListByResourceGroup",
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Lists all the jobs available under the given resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "$skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/JobResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/jobs/{jobName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox": {
       "get": {
         "operationId": "Jobs_Get",
         "tags": [
@@ -344,16 +300,6 @@
             "description": "$expand is supported on details parameter for job, which provides details on the job stages.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[-\\w\\.]+$"
           }
         ],
         "responses": {
@@ -386,16 +332,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[-\\w\\.]+$"
           },
           {
             "name": "resource",
@@ -464,16 +400,6 @@
             "x-ms-client-name": "If-Match"
           },
           {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[-\\w\\.]+$"
-          },
-          {
             "name": "properties",
             "in": "body",
             "description": "The resource properties to be updated.",
@@ -531,16 +457,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[-\\w\\.]+$"
           }
         ],
         "responses": {
@@ -577,7 +493,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/jobs/{jobName}/bookShipmentPickUp": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/bookShipmentPickUp": {
       "post": {
         "operationId": "Jobs_BookShipmentPickUp",
         "tags": [
@@ -593,16 +509,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[-\\w\\.]+$"
           },
           {
             "name": "body",
@@ -630,7 +536,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/jobs/{jobName}/cancel": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/cancel": {
       "post": {
         "operationId": "Jobs_Cancel",
         "tags": [
@@ -646,16 +552,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[-\\w\\.]+$"
           },
           {
             "name": "body",
@@ -680,7 +576,51 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/jobs/{jobName}/listCredentials": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/jobs": {
+      "get": {
+        "operationId": "Jobs_ListByResourceGroup",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Lists all the jobs available under the given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "$skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/listCredentials": {
       "post": {
         "operationId": "Jobs_ListCredentials",
         "tags": [
@@ -696,16 +636,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[-\\w\\.]+$"
           }
         ],
         "responses": {
@@ -727,7 +657,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/jobs/{jobName}/markDevicesShipped": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/markDevicesShipped": {
       "post": {
         "operationId": "Jobs_MarkDevicesShipped",
         "tags": [
@@ -743,16 +673,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[-\\w\\.]+$"
           },
           {
             "name": "body",
@@ -777,7 +697,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/jobs/{jobName}/mitigate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.DataBox/mitigate": {
       "post": {
         "operationId": "DataBoxJobs_Mitigate",
         "tags": [
@@ -793,16 +713,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
-            "pattern": "^[-\\w\\.]+$"
           },
           {
             "name": "body",

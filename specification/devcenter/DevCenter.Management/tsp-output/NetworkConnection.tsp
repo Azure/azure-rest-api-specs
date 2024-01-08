@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
-namespace Azure.ResourceManager.DevCenter;
+namespace Microsoft.DevCenter;
 @doc("Network related settings")
 model NetworkConnection is TrackedResource<NetworkProperties> {
   @doc("Name of the Network Connection that can be applied to a Pool.")

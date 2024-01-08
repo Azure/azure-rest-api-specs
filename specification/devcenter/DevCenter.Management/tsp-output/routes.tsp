@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
-namespace Azure.ResourceManager.DevCenter;
+namespace Microsoft.DevCenter;
 
 interface AttachedNetworksOperations {
   @doc("Lists the attached NetworkConnections for a DevCenter.")

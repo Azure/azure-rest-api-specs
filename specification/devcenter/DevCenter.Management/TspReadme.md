@@ -4,7 +4,6 @@
 
 generate-model-factory: true
 library-name: DevCenter
-namespace: Azure.ResourceManager.DevCenter
 isAzureSpec: true
 isArm: true
 require: https://github.com/Azure/azure-rest-api-specs/blob/07c55de803057861912799405580ea9d022853fc/specification/devcenter/resource-manager/readme.md
