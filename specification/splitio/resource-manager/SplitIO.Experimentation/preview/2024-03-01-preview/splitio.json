@@ -554,7 +554,7 @@
     },
     "ExperimentationWorkspaceProperties": {
       "type": "object",
-      "description": "The properties of ExperimentationWorkspace",
+      "description": "Properties of the experimentation workspace",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -568,10 +568,15 @@
         "dataSource": {
           "$ref": "#/definitions/DataSource",
           "description": "Data source that telemetry data required for experimentation will be retrieved from."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the experimentation workspace."
         }
       },
       "required": [
-        "accessPolicy"
+        "accessPolicy",
+        "sku"
       ]
     },
     "ExperimentationWorkspaceUpdate": {
@@ -606,6 +611,33 @@
         "dataSource": {
           "$ref": "#/definitions/DataSourceUpdate",
           "description": "Data source that telemetry data required for experimentation will be retrieved from."
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuUpdate",
+          "description": "SKU of the experimentation workspace."
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "SKU of the experimentation workspace.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the SKU."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SkuUpdate": {
+      "type": "object",
+      "description": "SKU of the experimentation workspace.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the SKU."
         }
       }
     },

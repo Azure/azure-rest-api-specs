@@ -27,7 +27,7 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The properties of ExperimentationWorkspace")
+@doc("Properties of the experimentation workspace")
 model ExperimentationWorkspaceProperties {
   @doc("Provisioning state of the resource.")
   @visibility("read")
@@ -38,6 +38,9 @@ model ExperimentationWorkspaceProperties {
 
   @doc("Data source that telemetry data required for experimentation will be retrieved from.")
   dataSource?: DataSource;
+
+  @doc("SKU of the experimentation workspace.")
+  sku: Sku;
 }
 
 @doc("Access policy for an experimentation workspace.")
@@ -53,6 +56,12 @@ model DataSource {
 
   @doc("Controls whether data flow from the configured data source into the experimentation workspace is enabled.")
   enabled: boolean;
+}
+
+@doc("SKU of the experimentation workspace.")
+model Sku {
+  @doc("Name of the SKU.")
+  name: string;
 }
 
 @doc("A ExperimentationWorkspace Resource by Split.IO")
