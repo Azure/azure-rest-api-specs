@@ -1883,7 +1883,7 @@
           }
         },
         "capabilities": {
-          "$ref": "#/definitions/PhoneNumberCapabilitiesRequest"
+          "$ref": "#/definitions/PhoneNumberBrowseCapabilitiesRequest"
         },
         "assignmentType": {
           "description": "Represents the assignment type of the offering. Also known as the use case.",
@@ -1907,6 +1907,40 @@
             "1425",
             "1626"
           ]
+        }
+      }
+    },
+    "PhoneNumberBrowseCapabilitiesRequest": {
+      "description": "The minimum desired capabilities for the browse opertion request.",
+      "type": "object",
+      "properties": {
+        "calling": {
+          "description": "Capability value for calling.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        },
+        "sms": {
+          "description": "Capability value for SMS.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
         }
       }
     },
