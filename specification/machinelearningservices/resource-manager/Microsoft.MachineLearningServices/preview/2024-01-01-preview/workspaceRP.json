@@ -2171,7 +2171,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ComputePolicyDto"
+              "$ref": "#/definitions/ComputePolicyDtoBasicResource"
             }
           },
           "202": {
@@ -3778,6 +3778,13 @@
         "status": {
           "description": "Status of the Provisioning for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/ManagedNetworkProvisionStatus"
+        },
+        "changeableIsolationModes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IsolationMode"
+          },
+          "readOnly": true
         }
       }
     },
