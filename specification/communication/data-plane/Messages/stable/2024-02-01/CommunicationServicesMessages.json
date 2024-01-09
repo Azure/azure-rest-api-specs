@@ -63,6 +63,9 @@
             "description": "The registration ID of the channel.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -70,6 +73,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedMessageTemplateResponse"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -113,6 +123,9 @@
             "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
           },
           {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -135,6 +148,11 @@
                   "accepted",
                   "rejected"
                 ]
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
             }
           },
@@ -166,7 +184,7 @@
         ],
         "description": "Download the Media payload from a User to Business message.",
         "produces": [
-          "application/octect-stream",
+          "application/octet-stream",
           "application/json"
         ],
         "parameters": [
@@ -176,8 +194,12 @@
           {
             "name": "id",
             "in": "path",
+            "description": "The stream ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -185,6 +207,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "file"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -274,54 +303,6 @@
       "type": "string",
       "format": "uuid",
       "description": "Universally Unique Identifier"
-    },
-    "CommunicationMessageType": {
-      "type": "string",
-      "description": "The type of message. Supports text, image, template.",
-      "enum": [
-        "text",
-        "image",
-        "template"
-      ],
-      "x-ms-enum": {
-        "name": "CommunicationMessageType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Text message type."
-          },
-          {
-            "name": "image",
-            "value": "image",
-            "description": "Image message type."
-          },
-          {
-            "name": "template",
-            "value": "template",
-            "description": "Template message type."
-          }
-        ]
-      }
-    },
-    "CommunicationMessagesChannel": {
-      "type": "string",
-      "description": "The Communication Messages Channel.",
-      "enum": [
-        "whatsApp"
-      ],
-      "x-ms-enum": {
-        "name": "CommunicationMessagesChannel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "whatsApp",
-            "value": "whatsApp",
-            "description": "The Communication Messages Channel is WhatsApp."
-          }
-        ]
-      }
     },
     "MessageReceipt": {
       "type": "object",
@@ -495,31 +476,29 @@
       "type": "object",
       "description": "The Message Template Response.",
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for MessageTemplateResponse."
+        },
         "name": {
           "type": "string",
-          "description": "Get the template's Name"
+          "description": "Get the template's Name",
+          "readOnly": true
         },
         "language": {
           "type": "string",
           "description": "Get the template's language"
         },
-        "channelType": {
-          "$ref": "#/definitions/CommunicationMessagesChannel",
-          "description": "The Communication Messages Channel."
-        },
         "status": {
           "$ref": "#/definitions/MessageTemplateStatus",
           "description": "The aggregated template status."
-        },
-        "whatsApp": {
-          "$ref": "#/definitions/WhatsAppMessageTemplateResponse",
-          "description": "The WhatsApp-specific template response contract"
         }
       },
+      "discriminator": "kind",
       "required": [
+        "kind",
         "name",
         "language",
-        "channelType",
         "status"
       ]
     },
@@ -647,6 +626,30 @@
         "value"
       ]
     },
+    "SendMediaNotificationRequest": {
+      "type": "object",
+      "description": "A request to send a media notification.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Message content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media\ntypes, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SendNotificationRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "image"
+    },
     "SendMessageResult": {
       "type": "object",
       "description": "Result of the send message operation.",
@@ -668,6 +671,10 @@
       "type": "object",
       "description": "Details of the message to send.",
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for SendNotificationRequest."
+        },
         "channelRegistrationId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Channel Registration ID for the Business Identifier."
@@ -678,29 +685,52 @@
           "items": {
             "type": "string"
           }
-        },
-        "type": {
-          "$ref": "#/definitions/CommunicationMessageType",
-          "description": "The type of message. Supports text, image, template."
-        },
-        "content": {
-          "type": "string",
-          "description": "Message content."
-        },
-        "mediaUri": {
-          "type": "string",
-          "description": "A media url for the file. Required if the type is one of the supported media\ntypes, e.g. image"
-        },
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "channelRegistrationId",
+        "to"
+      ]
+    },
+    "SendTemplateNotificationRequest": {
+      "type": "object",
+      "description": "A request to send a template notification.",
+      "properties": {
         "template": {
           "$ref": "#/definitions/MessageTemplate",
           "description": "The template object used to create templates."
         }
       },
       "required": [
-        "channelRegistrationId",
-        "to",
-        "type"
-      ]
+        "template"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SendNotificationRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "template"
+    },
+    "SendTextNotificationRequest": {
+      "type": "object",
+      "description": "A request to send a text notification.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Message content."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SendNotificationRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
     },
     "WhatsAppMessageTemplateBindings": {
       "type": "object",
@@ -783,7 +813,13 @@
         "content": {
           "description": "WhatsApp platform's template content\nThis is the payload returned from WhatsApp\nAPI."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "whatsApp"
     },
     "WhatsAppMessageTemplateValueSubType": {
       "type": "string",
@@ -811,6 +847,16 @@
     }
   },
   "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",

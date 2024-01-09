@@ -13,6 +13,7 @@ using Azure.Core.Traits;
 namespace AzureCommunicationMessagesService;
 
 alias ServiceTraits = SupportsRepeatableRequests &
+  NoConditionalRequests &
   SupportsClientRequestId;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
