@@ -379,7 +379,7 @@
               "fail"
             ],
             "x-ms-enum": {
-              "name": "SemanticErrorHandling",
+              "name": "SemanticErrorMode",
               "modelAsString": true,
               "values": [
                 {
@@ -419,7 +419,7 @@
               "extractive"
             ],
             "x-ms-enum": {
-              "name": "Answers",
+              "name": "QueryAnswerType",
               "modelAsString": true,
               "values": [
                 {
@@ -434,7 +434,7 @@
                 }
               ]
             },
-            "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1. The confidence threshold can be configured by appending the pipe character '|' followed by the 'threshold-<confidence threshold>' option after the answers parameter value, such as 'extractive|threshold-0.9'. Default threshold is 0.7.",
+            "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -448,7 +448,7 @@
               "extractive"
             ],
             "x-ms-enum": {
-              "name": "Captions",
+              "name": "QueryCaptionType",
               "modelAsString": true,
               "values": [
                 {
@@ -463,7 +463,7 @@
                 }
               ]
             },
-            "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to 'extractive', highlighting is enabled by default, and can be configured by appending the pipe character '|' followed by the 'highlight-<true/false>' option, such as 'extractive|highlight-true'. Defaults to 'None'.",
+            "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to `extractive`, highlighting is enabled by default, and can be configured by appending the pipe character `|` followed by the `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults to `None`.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -1118,7 +1118,7 @@
           "format": "int64",
           "readOnly": true,
           "x-ms-client-name": "Count",
-          "description": "The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if Azure Cognitive Search can't return all the requested documents in a single Search response."
+          "description": "The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if the query can't return all the requested documents in a single response."
         },
         "@search.coverage": {
           "type": "number",
@@ -1153,7 +1153,7 @@
           "$ref": "#/definitions/SearchRequest",
           "readOnly": true,
           "x-ms-client-name": "NextPageParameters",
-          "description": "Continuation JSON payload returned when Azure Cognitive Search can't return all the requested results in a single Search response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response."
+          "description": "Continuation JSON payload returned when the query can't return all the requested results in a single response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response."
         },
         "value": {
           "type": "array",
@@ -1168,19 +1168,19 @@
           "type": "string",
           "readOnly": true,
           "x-ms-client-name": "NextLink",
-          "description": "Continuation URL returned when Azure Cognitive Search can't return all the requested results in a single Search response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response."
+          "description": "Continuation URL returned when the query can't return all the requested results in a single response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response."
         },
         "@search.semanticPartialResponseReason": {
           "$ref": "#/definitions/SemanticPartialResponseReason",
           "readOnly": true,
           "x-ms-client-name": "SemanticPartialResponseReason",
-          "description": "Reason that a partial response was returned for a semantic search request."
+          "description": "Reason that a partial response was returned for a semantic ranking request."
         },
         "@search.semanticPartialResponseType": {
           "$ref": "#/definitions/SemanticPartialResponseType",
           "readOnly": true,
           "x-ms-client-name": "SemanticPartialResponseType",
-          "description": "Type of partial response that was returned for a semantic search request."
+          "description": "Type of partial response that was returned for a semantic ranking request."
         }
       },
       "required": [
@@ -1204,7 +1204,7 @@
           "readOnly": true,
           "x-ms-client-name": "RerankerScore",
           "x-nullable": true,
-          "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'."
+          "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type `semantic`."
         },
         "@search.highlights": {
           "type": "object",
@@ -1226,7 +1226,7 @@
           "readOnly": true,
           "x-ms-client-name": "Captions",
           "x-nullable": true,
-          "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'."
+          "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type `semantic`."
         }
       },
       "required": [
@@ -1451,6 +1451,9 @@
           "description": "The vector representation of a search query."
         }
       },
+      "required": [
+        "vector"
+      ],
       "description": "The query parameters to use for vector search when a raw vector value is provided."
     },
     "VectorQueryKind": {
@@ -1867,9 +1870,10 @@
       "required": [
         "message"
       ],
-      "description": "Describes an error condition for the Azure Cognitive Search API."
+      "description": "Describes an error condition for the API."
     },
     "AnswerResult": {
+      "x-ms-client-name": "QueryAnswerResult",
       "properties": {
         "score": {
           "type": "number",
@@ -1898,6 +1902,7 @@
       "description": "An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected."
     },
     "CaptionResult": {
+      "x-ms-client-name": "QueryCaptionResult",
       "properties": {
         "text": {
           "type": "string",
@@ -1912,7 +1917,7 @@
         }
       },
       "additionalProperties": true,
-      "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'.."
+      "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type `semantic`."
     },
     "SemanticPartialResponseReason": {
       "type": "string",
@@ -1922,13 +1927,13 @@
         "transient"
       ],
       "x-ms-enum": {
-        "name": "SemanticPartialResponseReason",
+        "name": "SemanticErrorReason",
         "modelAsString": true,
         "values": [
           {
             "value": "maxWaitExceeded",
             "name": "MaxWaitExceeded",
-            "description": "If 'semanticMaxWaitInMilliseconds' was set and the semantic processing duration exceeded that value. Only the base results were returned."
+            "description": "If `semanticMaxWaitInMilliseconds` was set and the semantic processing duration exceeded that value. Only the base results were returned."
           },
           {
             "value": "capacityOverloaded",
@@ -1942,7 +1947,7 @@
           }
         ]
       },
-      "description": "Reason that a partial response was returned for a semantic search request."
+      "description": "Reason that a partial response was returned for a semantic ranking request."
     },
     "SemanticPartialResponseType": {
       "type": "string",
@@ -1951,7 +1956,7 @@
         "rerankedResults"
       ],
       "x-ms-enum": {
-        "name": "SemanticPartialResponseType",
+        "name": "SemanticSearchResultsType",
         "modelAsString": true,
         "values": [
           {
@@ -1966,7 +1971,7 @@
           }
         ]
       },
-      "description": "Type of partial response that was returned for a semantic search request."
+      "description": "Type of partial response that was returned for a semantic ranking request."
     },
     "SemanticErrorHandling": {
       "type": "string",
@@ -1975,7 +1980,7 @@
         "fail"
       ],
       "x-ms-enum": {
-        "name": "SemanticErrorHandling",
+        "name": "SemanticErrorMode",
         "modelAsString": true,
         "values": [
           {
@@ -2014,7 +2019,7 @@
           }
         ]
       },
-      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1. The confidence threshold can be configured by appending the pipe character '|' followed by the 'threshold-<confidence threshold>' option after the answers parameter value, such as 'extractive|threshold-0.9'. Default threshold is 0.7."
+      "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7."
     },
     "Captions": {
       "type": "string",
@@ -2038,7 +2043,7 @@
           }
         ]
       },
-      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to 'extractive', highlighting is enabled by default, and can be configured by appending the pipe character '|' followed by the 'highlight-<true/false>' option, such as 'extractive|highlight-true'. Defaults to 'None'."
+      "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to `extractive`, highlighting is enabled by default, and can be configured by appending the pipe character `|` followed by the `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults to `None`."
     }
   },
   "parameters": {
