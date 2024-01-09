@@ -26,15 +26,15 @@ These are the global settings for the Azure Programmable Connectivity.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2023-11-14-preview
+tag: package-v2024_01_09_preview
 title: AzureProgrammableConnectivity
 ```
 
-### Tag: package-2023-11-14-preview
+### Tag: package-v2024_01_09_preview
 
-These settings apply only when `--tag=package-2023-11-14-preview` is specified on the command line.
+These settings apply only when `--tag=package-v2024_01_09_preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11-14-preview'
+```yaml $(tag) == 'package-v2024_01_09_preview'
 input-file:
-  - Azure.ProgrammableConnectivity/preview/2023-11-14-preview/openapi.json
+  - Azure.ProgrammableConnectivity/preview/v2024_01_09_preview/openapi.json
 ```
