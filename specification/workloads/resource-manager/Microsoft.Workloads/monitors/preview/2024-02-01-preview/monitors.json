@@ -1551,6 +1551,12 @@
     },
     "Alert": {
       "type": "object",
+      "required": [
+        "templateId",
+        "providerType",
+        "providerNames",
+        "alertProperties"
+      ],
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -1579,6 +1585,11 @@
         "templateId": {
           "type": "string",
           "description": "ID of the alert template from which it was created."
+        },
+        "alertRuleResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ID of the alert rule resource created."
         },
         "providerType": {
           "type": "string",
@@ -1611,53 +1622,63 @@
     },
     "AlertProperties": {
       "type": "object",
+      "required": [
+        "isEnabled",
+        "severity",
+        "actionGroups",
+        "threshold",
+        "windowSize",
+        "evaluationFrequency",
+        "minimumFailingPeriodsToAlert",
+        "muteActionsDuration",
+        "alertQueryParameter"
+      ],
       "properties": {
         "isEnabled": {
           "type": "boolean",
-          "description": "Is the alert enabled or not (alert state)"
+          "description": "The flag which indicates whether this scheduled query rule is enabled. Value should be true or false"
         },
         "severity": {
-          "type": "string",
+          "type": "integer",
           "enum": [
-            "0",
-            "1",
-            "2",
-            "3",
-            "4"
+            0,
+            1,
+            2,
+            3,
+            4
           ],
-          "default": "0",
+          "default": 0,
           "x-ms-enum": {
-            "name": "alertSeverity",
-            "modelAsString": true
+            "name": "alertSeverity"
           },
-          "description": "Severity Associated with the Alert"
+          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest."
         },
         "actionGroups": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Action Groups for Alert"
+          "description": "Action Group resource Ids to invoke when the alert fires"
         },
         "threshold": {
           "type": "integer",
-          "description": "threshold value for the alert"
+          "description": "the criteria threshold value that activates the alert"
         },
         "windowSize": {
           "type": "integer",
-          "description": "window size value for the alert"
+          "description": "The period of time on which the Alert query will be executed"
         },
         "evaluationFrequency": {
           "type": "integer",
-          "description": "evaluation Frequency value for the alert"
+          "description": "How often the scheduled query rule is evaluated."
         },
-        "numberOfEvaluationPeriods": {
+        "minimumFailingPeriodsToAlert": {
           "type": "integer",
-          "description": "number Of Evaluation Periods value for the alert"
+          "description": "The number of violations to trigger an alert."
         },
         "muteActionsDuration": {
           "type": "integer",
-          "description": "mute Actions Duration value for the alert"
+          "description": "Mute actions for the chosen period of time after the alert is fired"
         },
         "alertQueryParameter": {
           "description": "Defines the alert query properties.",
@@ -1701,6 +1722,12 @@
     },
     "AlertTemplate": {
       "type": "object",
+      "required": [
+        "templateId",
+        "providerType",
+        "description",
+        "alertTemplateProperties"
+      ],
       "properties": {
         "templateId": {
           "type": "string",
@@ -1729,22 +1756,34 @@
     },
     "AlertTemplateProperties": {
       "type": "object",
+      "required": [
+        "severity",
+        "query",
+        "thresholdOperator",
+        "defaultThreshold",
+        "minThresholdValue",
+        "maxThresholdValue",
+        "isThresholdInputRequired",
+        "alertUnit",
+        "metricMeasurement",
+        "queryInputParameters",
+        "laParameters"
+      ],
       "properties": {
         "severity": {
-          "type": "string",
+          "type": "integer",
           "enum": [
-            "0",
-            "1",
-            "2",
-            "3",
-            "4"
+            0,
+            1,
+            2,
+            3,
+            4
           ],
-          "default": "0",
+          "default": 0,
           "x-ms-enum": {
-            "name": "alertTemplateSeverity",
-            "modelAsString": true
+            "name": "alertTemplateSeverity"
           },
-          "description": "Severity Associated with the Alert Template"
+          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest."
         },
         "query": {
           "type": "string",
@@ -1759,7 +1798,7 @@
             "GreaterThanOrEqual",
             "LessThanOrEqual"
           ],
-          "default": "LessThan",
+          "default": "GreaterThanOrEqual",
           "x-ms-enum": {
             "name": "alertTemplateThresholdOperator",
             "modelAsString": true
@@ -1795,14 +1834,25 @@
           "$ref": "#/definitions/AlertTemplateQueryInputParameters"
         },
         "laParameters": {
-          "description": "Defines the LA parameter properties.",
-          "$ref": "#/definitions/AlertTemplateLAParameters"
+          "description": "List of the LA parameter properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertTemplateLAParameter"
+          }
         }
       },
       "description": "Describes the properties of a alert template."
     },
     "AlertTemplateMetricMeasurement": {
       "type": "object",
+      "required": [
+        "thresholdOperator",
+        "threshold",
+        "metricTriggerType",
+        "metricColumn",
+        "frequencyInMinutes",
+        "timeWindowInMinutes"
+      ],
       "properties": {
         "thresholdOperator": {
           "type": "string",
@@ -1813,7 +1863,7 @@
             "GreaterThanOrEqual",
             "LessThanOrEqual"
           ],
-          "default": "LessThan",
+          "default": "GreaterThanOrEqual",
           "x-ms-enum": {
             "name": "alertTemplateThresholdOperatorMetricMeasurement",
             "modelAsString": true
@@ -1879,8 +1929,13 @@
       },
       "description": "Describes the LA Parameter properties in alerts template."
     },
-    "AlertTemplateLAParameters": {
+    "AlertTemplateLAParameter": {
       "type": "object",
+      "required": [
+        "queryParameterName",
+        "laQuery",
+        "parameterName"
+      ],
       "properties": {
         "queryParameterName": {
           "type": "string",
