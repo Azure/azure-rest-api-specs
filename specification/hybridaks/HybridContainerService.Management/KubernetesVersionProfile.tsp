@@ -22,13 +22,21 @@ model KubernetesVersionProfile
 }
 
 @armResourceOperations
-interface KubernetesVersionProfiles {
+@projectedName("client", "")
+interface KubernetesVersionProfilesTo {
   @doc("Lists the supported kubernetes versions for the specified custom location")
   getKubernetesVersions is ArmResourceRead<KubernetesVersionProfile>;
+
   @doc("Puts the default kubernetes version resource type (one time operation, before listing the kubernetes versions)")
   putKubernetesVersions is ArmResourceCreateOrUpdateAsync<KubernetesVersionProfile>;
+
   @doc("Delete the default kubernetes versions resource type")
   deleteKubernetesVersions is ArmResourceDeleteWithoutOkAsync<KubernetesVersionProfile>;
+}
+
+@armResourceOperations
+@projectedName("client", "KubernetesVersions")
+interface KubernetesVersionProfilesToKubernetesVersions {
   @doc("Lists the supported kubernetes versions for the specified custom location")
-  listByArm is ArmResourceListByParent<KubernetesVersionProfile>;
+  list is ArmResourceListByParent<KubernetesVersionProfile>;
 }

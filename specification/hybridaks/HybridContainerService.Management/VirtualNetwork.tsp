@@ -15,7 +15,6 @@ model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
   @maxLength(64)
   @minLength(3)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$")
-  @path
   @key("virtualNetworkName")
   @segment("virtualNetworks")
   name: string;
@@ -25,17 +24,23 @@ model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
 }
 
 @armResourceOperations
-interface VirtualNetworks {
+@projectedName("client", "virtualNetworks")
+interface VirtualNetworksToVirtualNetworks {
   @doc("Gets the specified virtual network resource")
   retrieve is ArmResourceRead<VirtualNetwork>;
+
   @doc("Creates or updates the virtual network resource")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualNetwork>;
+
   @doc("Patches the virtual network resource")
-  update is ArmTagsPatchAsync<VirtualNetwork>;
+  update is ArmCustomPatchAsync<VirtualNetwork, VirtualNetworksPatch>;
+
   @doc("Deletes the specified virtual network resource")
   delete is ArmResourceDeleteWithoutOkAsync<VirtualNetwork>;
+
   @doc("Lists the virtual networks in the specified resource group")
   listByResourceGroup is ArmResourceListByParent<VirtualNetwork>;
+
   @doc("Lists the virtual networks in the specified subscription")
   listBySubscription is ArmListBySubscription<VirtualNetwork>;
 }

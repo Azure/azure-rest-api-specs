@@ -12,7 +12,7 @@ namespace Microsoft.HybridContainerService;
 @doc("The list of supported VM SKUs.")
 @singleton("default")
 model VmSkuProfile is ExtensionResource<VmSkuProfileProperties> {
-  @key("sku")
+  @key("skus")
   @segment("skus")
   name: string;
 
@@ -21,13 +21,21 @@ model VmSkuProfile is ExtensionResource<VmSkuProfileProperties> {
 }
 
 @armResourceOperations
-interface VmSkuProfiles {
+@projectedName("client", "")
+interface VmSkuProfilesTo {
   @doc("Lists the supported VM skus for the specified custom location")
   getVMSkus is ArmResourceRead<VmSkuProfile>;
+
   @doc("Puts the default VM skus resource type (one time operation, before listing the VM skus)")
   putVMSkus is ArmResourceCreateOrUpdateAsync<VmSkuProfile>;
+
   @doc("Deletes the default VM skus resource type")
   deleteVMSkus is ArmResourceDeleteWithoutOkAsync<VmSkuProfile>;
+}
+
+@armResourceOperations
+@projectedName("client", "VMSkus")
+interface VmSkuProfilesToVMSkus {
   @doc("Lists the supported VM skus for the specified custom location")
-  listByArm is ArmResourceListByParent<VmSkuProfile>;
+  list is ArmResourceListByParent<VmSkuProfile>;
 }

@@ -30,5 +30,6 @@ namespace Microsoft.HybridContainerService;
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @doc("version 2024-01-01")
   v2024_01_01: "2024-01-01",
 }

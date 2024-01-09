@@ -11,8 +11,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.HybridContainerService;
 @doc("The list of available kubernetes version upgrades for the provisioned cluster.")
-@parentResource(ProvisionedCluster)
 @singleton("default")
+@parentResource(ProvisionedCluster)
 model ProvisionedClusterUpgradeProfile
   is ProxyResource<ProvisionedClusterUpgradeProfileProperties> {
   @key("upgradeProfile")
@@ -21,7 +21,8 @@ model ProvisionedClusterUpgradeProfile
 }
 
 @armResourceOperations
-interface ProvisionedClusterUpgradeProfiles {
+@projectedName("client", "provisionedClusterInstances")
+interface ProvisionedClusterUpgradeProfilesToProvisionedClusterInstances {
   @doc("Gets the upgrade profile of a provisioned cluster")
   getUpgradeProfile is ArmResourceRead<ProvisionedClusterUpgradeProfile>;
 }

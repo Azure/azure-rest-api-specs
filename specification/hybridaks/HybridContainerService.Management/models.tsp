@@ -5,26 +5,31 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.HybridContainerService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("Network policy used for building Kubernetes network. Possible values include: 'calico'.")
 enum NetworkPolicy {
   calico,
 }
 
+@doc("OSType to be used to specify OS type for the VMs. Choose from Linux and Windows. Default to Linux. Possible values include: 'Linux', 'Windows'")
 enum OsType {
   Windows,
   Linux,
 }
 
+@doc("Specifies the OS SKU used by the agent pool. The default is CBLMariner if OSType is Linux. The default is Windows2019 when OSType is Windows.")
 enum Ossku {
   @doc("Use Mariner as the OS for node images.") CBLMariner,
   @doc("Use Windows2019 as the OS for node images.") Windows2019,
   @doc("Use Windows2022 as the OS for node images.") Windows2022,
 }
 
+@doc("Provisioning state of the resource")
 enum ResourceProvisioningState {
   Succeeded,
   Failed,
@@ -37,6 +42,7 @@ enum ResourceProvisioningState {
   Accepted,
 }
 
+@doc("Observed phase of the addon or component on the provisioned cluster. Possible values include: 'pending', 'provisioning', 'provisioning {HelmChartInstalled}', 'provisioning {MSICertificateDownloaded}', 'provisioned', 'deleting', 'failed', 'upgrading'")
 enum AddonPhase {
   pending,
   provisioning,
@@ -48,44 +54,34 @@ enum AddonPhase {
   upgrading,
 }
 
+@doc("Indicates whether Azure Hybrid Benefit is opted in. Default value is false")
 enum AzureHybridBenefit {
   True,
   False,
   NotApplicable,
 }
 
+@doc("The expander to use when scaling up")
 enum Expander {
   @doc("Selects the node group that will have the least idle CPU (if tied, unused memory) after scale-up. This is useful when you have different classes of nodes, for example, high CPU or high memory nodes, and only want to expand those when there are pending pods that need a lot of those resources.")
   `least-waste`,
+
   @doc("Selects the node group that would be able to schedule the most pods when scaling up. This is useful when you are using nodeSelector to make sure certain pods land on certain nodes. Note that this won't cause the autoscaler to select bigger nodes vs. smaller, as it can add multiple smaller nodes at once.")
   `most-pods`,
+
   @doc("Selects the node group that has the highest priority assigned by the user. It's configuration is described in more details [here](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md).")
   priority,
+
   @doc("Used when you don't have a particular need for the node groups to scale differently.")
   random,
 }
 
+@doc("The extended location type. Allowed value: 'CustomLocation'")
 enum ExtendedLocationTypes {
   CustomLocation,
 }
 
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
-}
-
-enum Origin {
-  user,
-  system,
-  `user,system`,
-}
-
-enum ActionType {
-  Internal,
-}
-
+@doc("Provisioning state")
 enum ProvisioningState {
   Succeeded,
   Failed,
@@ -401,6 +397,25 @@ model ExtendedLocation {
 
   @doc("ARM Id of the extended location.")
   name?: string;
+}
+
+@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
+model Resource {
+  @doc("Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"")
+  @visibility("read")
+  id?: ResourceIdentifier;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
+  @visibility("read")
+  type?: string;
+
+  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
 }
 
 @doc("Control plane and agent pool upgrade profiles.")
@@ -719,6 +734,12 @@ model VirtualNetworkExtendedLocation {
 
   @doc("ARM Id of the extended location.")
   name?: string;
+}
+
+@doc("The Virtual Network resource patch definition.")
+model VirtualNetworksPatch {
+  @doc("Resource tags")
+  tags?: Record<string>;
 }
 
 @doc("The profile for Linux VMs in the provisioned cluster.")

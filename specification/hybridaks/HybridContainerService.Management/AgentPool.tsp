@@ -17,7 +17,6 @@ model AgentPool is ProxyResource<AgentPoolProperties> {
   @maxLength(12)
   @minLength(3)
   @pattern("^[a-z][a-z0-9]{2,11}$")
-  @path
   @key("agentPoolName")
   @segment("agentPools")
   name: string;
@@ -27,13 +26,17 @@ model AgentPool is ProxyResource<AgentPoolProperties> {
 }
 
 @armResourceOperations
-interface AgentPools {
+@projectedName("client", "agentPool")
+interface AgentPoolsToAgentPool {
   @doc("Gets the specified agent pool in the provisioned cluster")
   get is ArmResourceRead<AgentPool>;
+
   @doc("Creates or updates the agent pool in the provisioned cluster")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AgentPool>;
+
   @doc("Deletes the specified agent pool in the provisioned cluster")
   delete is ArmResourceDeleteWithoutOkAsync<AgentPool>;
+
   @doc("Gets the list of agent pools in the specified provisioned cluster")
   listByProvisionedCluster is ArmResourceListByParent<AgentPool>;
 }
