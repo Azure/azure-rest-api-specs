@@ -209,15 +209,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Service"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              }
             }
           },
           "default": {
@@ -274,24 +268,12 @@
             "description": "Resource 'Service' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Service"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              }
             }
           },
           "201": {
             "description": "Resource 'Service' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Service"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              }
             }
           },
           "default": {
@@ -333,13 +315,14 @@
             "maxLength": 90
           },
           {
-            "name": "properties",
+            "name": "payload",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServiceUpdate"
-            }
+            },
+            "x-ms-client-name": "payload"
           }
         ],
         "responses": {
@@ -3332,12 +3315,14 @@
           "description": "The ApiDefinition items on this page",
           "items": {
             "$ref": "#/definitions/ApiDefinition"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -3439,12 +3424,14 @@
           "description": "The Api items on this page",
           "items": {
             "$ref": "#/definitions/Api"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -3638,12 +3625,14 @@
           "description": "The ApiVersion items on this page",
           "items": {
             "$ref": "#/definitions/ApiVersion"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -3760,12 +3749,14 @@
           "description": "The Deployment items on this page",
           "items": {
             "$ref": "#/definitions/Deployment"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -3911,12 +3902,14 @@
           "description": "The Environment items on this page",
           "items": {
             "$ref": "#/definitions/Environment"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -4291,12 +4284,14 @@
           "description": "The MetadataSchema items on this page",
           "items": {
             "$ref": "#/definitions/MetadataSchema"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -4400,7 +4395,8 @@
             "description": "Resource creation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "Service": {
       "type": "object",
@@ -4435,12 +4431,14 @@
           "description": "The Service items on this page",
           "items": {
             "$ref": "#/definitions/Service"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -4557,12 +4555,14 @@
           "description": "The Workspace items on this page",
           "items": {
             "$ref": "#/definitions/Workspace"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
