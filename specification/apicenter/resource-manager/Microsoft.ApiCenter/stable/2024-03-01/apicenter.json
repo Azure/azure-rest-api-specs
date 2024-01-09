@@ -3659,6 +3659,11 @@
         "lifecycleStage"
       ]
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Contact": {
       "type": "object",
       "description": "Contact information",
@@ -3670,6 +3675,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "URL for the contact.",
           "maxLength": 200
         },
@@ -4040,6 +4046,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "URL pointing to the documentation.",
           "maxLength": 200
         }
@@ -4059,11 +4066,13 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "URL pointing to the license details. The URL field is mutually exclusive of the\nidentifier field.",
           "maxLength": 200
         },
         "identifier": {
           "type": "string",
+          "format": "uri",
           "description": "SPDX license information for the API. The identifier field is mutually\nexclusive of the URL field.",
           "maxLength": 50
         }
@@ -4475,6 +4484,7 @@
     },
     "SmallString": {
       "type": "string",
+      "format": "uri",
       "description": "Used for restricted length uris",
       "maxLength": 200
     },
@@ -4484,6 +4494,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "URL pointing to the terms of service.",
           "maxLength": 200
         }
@@ -4497,12 +4508,12 @@
       "description": "User assigned identity properties",
       "properties": {
         "principalId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The principal ID of the assigned identity.",
           "readOnly": true
         },
         "clientId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The client ID of the assigned identity.",
           "readOnly": true
         }

@@ -212,11 +212,11 @@ model ServiceProperties {
 model UserAssignedIdentity {
   @doc("The principal ID of the assigned identity.")
   @visibility("read")
-  principalId?: string;
+  principalId?: Azure.Core.uuid;
 
   @doc("The client ID of the assigned identity.")
   @visibility("read")
-  clientId?: string;
+  clientId?: Azure.Core.uuid;
 }
 
 @doc("The metadata schema export request.")
@@ -313,7 +313,7 @@ model ApiProperties {
 model TermsOfService {
   @doc("URL pointing to the terms of service.")
   @maxLength(200)
-  url: string;
+  url: url;
 }
 
 @doc("Additional, external documentation for the API.")
@@ -328,7 +328,7 @@ model ExternalDocumentation {
 
   @doc("URL pointing to the documentation.")
   @maxLength(200)
-  url: string;
+  url: url;
 }
 
 @doc("Contact information")
@@ -339,7 +339,7 @@ model Contact {
 
   @doc("URL for the contact.")
   @maxLength(200)
-  url?: string;
+  url?: url;
 
   @doc("Email address of the contact.")
   @maxLength(100)
@@ -357,14 +357,14 @@ URL pointing to the license details. The URL field is mutually exclusive of the
 identifier field.
 """)
   @maxLength(200)
-  url?: string;
+  url?: url;
 
   @doc("""
 SPDX license information for the API. The identifier field is mutually
 exclusive of the URL field.
 """)
   @maxLength(50)
-  identifier?: string;
+  identifier?: url;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
@@ -475,7 +475,7 @@ model DeploymentServer {
 
 /** Used for restricted length uris */
 @maxLength(200)
-scalar SmallString extends string;
+scalar SmallString extends url;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
 @doc("Environment properties entity.")
