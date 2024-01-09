@@ -3782,11 +3782,6 @@
         "lifecycleStage"
       ]
     },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "Contact": {
       "type": "object",
       "description": "Contact information",
@@ -4017,7 +4012,7 @@
           {
             "name": "production",
             "value": "production",
-            "description": "Production environmane"
+            "description": "Production environment"
           }
         ]
       }
@@ -4631,12 +4626,12 @@
       "description": "User assigned identity properties",
       "properties": {
         "principalId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "The principal ID of the assigned identity.",
           "readOnly": true
         },
         "clientId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "The client ID of the assigned identity.",
           "readOnly": true
         }

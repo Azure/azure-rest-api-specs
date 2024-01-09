@@ -173,7 +173,7 @@ enum EnvironmentKind {
   /** Staging environment */
   staging,
 
-  /** Production environmane */
+  /** Production environment */
   production,
 }
 
@@ -212,11 +212,11 @@ model ServiceProperties {
 model UserAssignedIdentity {
   @doc("The principal ID of the assigned identity.")
   @visibility("read")
-  principalId?: Azure.Core.uuid;
+  principalId?: string;
 
   @doc("The client ID of the assigned identity.")
   @visibility("read")
-  clientId?: Azure.Core.uuid;
+  clientId?: string;
 }
 
 @doc("The metadata schema export request.")
