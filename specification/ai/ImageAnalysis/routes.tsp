@@ -75,7 +75,7 @@ alias SharedAnalyzeQuery = {
 @route("imageanalysis:analyze")
 @post
 @sharedRoute
-op analyzeFromBuffer is Azure.Core.RpcOperation<
+op analyzeFromImageData is Azure.Core.RpcOperation<
   {
     @doc("The format of the HTTP payload.")
     @header
