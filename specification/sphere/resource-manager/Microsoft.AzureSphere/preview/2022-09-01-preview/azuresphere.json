@@ -304,7 +304,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CatalogTagsUpdate"
+              "$ref": "#/definitions/CatalogUpdate"
             }
           }
         ],
@@ -542,15 +542,6 @@
             "description": "Serial number of the certificate. Use '.default' to get current active certificate.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -651,15 +642,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -1004,15 +986,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -1182,15 +1155,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -1271,15 +1235,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -1643,15 +1598,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -2174,15 +2120,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -3047,15 +2984,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -3147,8 +3075,17 @@
             "read",
             "create"
           ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of catalog",
+          "pattern": "^[A-Za-z0-9_-]{1,50}$",
+          "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -3187,9 +3124,9 @@
         }
       }
     },
-    "CatalogTagsUpdate": {
+    "CatalogUpdate": {
       "type": "object",
-      "description": "The type used for updating tags in Catalog resources.",
+      "description": "The type used for update operations of the Catalog.",
       "properties": {
         "tags": {
           "type": "object",
@@ -3212,8 +3149,16 @@
             "read",
             "create"
           ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Serial number of the certificate. Use '.default' to get current active certificate.",
+          "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -3349,15 +3294,10 @@
     "CountDeviceResponse": {
       "type": "object",
       "description": "Response to the action call for count devices in a catalog.",
-      "properties": {
-        "value": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of children resources in parent resource."
+      "allOf": [
+        {
+          "$ref": "#/definitions/CountElementsResponse"
         }
-      },
-      "required": [
-        "value"
       ]
     },
     "CountElementsResponse": {
@@ -3399,8 +3339,16 @@
             "read",
             "create"
           ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.",
+          "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -3476,8 +3424,17 @@
             "read",
             "create"
           ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Device name",
+          "pattern": "^[a-zA-Z0-9-]{128}$",
+          "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -3496,8 +3453,17 @@
             "read",
             "create"
           ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of device group.",
+          "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
+          "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -3567,7 +3533,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeviceGroupUpdateProperties",
-          "x-ms-client-flatten": true
+          "description": "The updatable properties of the DeviceGroup."
         }
       }
     },
@@ -3730,7 +3696,23 @@
     },
     "DeviceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Device."
+      "description": "The type used for update operations of the Device.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceUpdateProperties",
+          "description": "The updatable properties of the Device."
+        }
+      }
+    },
+    "DeviceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Device.",
+      "properties": {
+        "deviceGroupId": {
+          "type": "string",
+          "description": "Device group id"
+        }
+      }
     },
     "GenerateCapabilityImageRequest": {
       "type": "object",
@@ -3760,8 +3742,16 @@
             "read",
             "create"
           ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Image name. Use .default for image creation.",
+          "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -4096,8 +4086,17 @@
             "read",
             "create"
           ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of product.",
+          "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
+          "readOnly": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -4149,7 +4148,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductUpdateProperties",
-          "x-ms-client-flatten": true
+          "description": "The updatable properties of the Product."
         }
       }
     },
@@ -4179,45 +4178,11 @@
     "ProofOfPossessionNonceResponse": {
       "type": "object",
       "description": "Result of the action to generate a proof of possession nonce",
-      "properties": {
-        "certificate": {
-          "type": "string",
-          "description": "The certificate as a UTF-8 encoded base 64 string.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/CertificateStatus",
-          "description": "The certificate status.",
-          "readOnly": true
-        },
-        "subject": {
-          "type": "string",
-          "description": "The certificate subject.",
-          "readOnly": true
-        },
-        "thumbprint": {
-          "type": "string",
-          "description": "The certificate thumbprint.",
-          "readOnly": true
-        },
-        "expiryUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The certificate expiry date.",
-          "readOnly": true
-        },
-        "notBeforeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The certificate not before date.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateProperties"
         }
-      }
+      ]
     },
     "ProvisioningState": {
       "type": "string",
@@ -4293,6 +4258,32 @@
             "description": "EU data boundary"
           }
         ]
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
       }
     },
     "SignedCapabilityImageResponse": {

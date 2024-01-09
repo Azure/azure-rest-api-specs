@@ -13,7 +13,6 @@ namespace Microsoft.AzureSphere;
 model Catalog is TrackedResource<CatalogProperties> {
   @doc("Name of catalog")
   @pattern("^[A-Za-z0-9_-]{1,50}$")
-  @path
   @key("catalogName")
   @segment("catalogs")
   name: string;
@@ -26,7 +25,7 @@ interface Catalogs {
   @doc("Create a Catalog")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Catalog>;
   @doc("Update a Catalog")
-  update is ArmTagsPatchSync<Catalog>;
+  update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
   @doc("Delete a Catalog")
   delete is ArmResourceDeleteAsync<Catalog>;
   @doc("List Catalog resources by resource group")
@@ -34,11 +33,11 @@ interface Catalogs {
   @doc("List Catalog resources by subscription ID")
   listBySubscription is ArmListBySubscription<Catalog>;
   @doc("Counts devices in catalog.")
-  countDevices is ArmResourceActionSync<Catalog, {}, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<Catalog, void, CountDeviceResponse>;
   @doc("Lists deployments for catalog.")
   listDeployments is ArmResourceActionSync<
     Catalog,
-    {},
+    void,
     ResourceListResult<Deployment>,
     {
       ...BaseParameters<Catalog>;
@@ -88,7 +87,7 @@ interface Catalogs {
   @doc("Lists device insights for catalog.")
   listDeviceInsights is ArmResourceActionSync<
     Catalog,
-    {},
+    void,
     PagedDeviceInsight,
     {
       ...BaseParameters<Catalog>;
@@ -113,7 +112,7 @@ interface Catalogs {
   @doc("Lists devices for catalog.")
   listDevices is ArmResourceActionSync<
     Catalog,
-    {},
+    void,
     ResourceListResult<Device>,
     {
       ...BaseParameters<Catalog>;

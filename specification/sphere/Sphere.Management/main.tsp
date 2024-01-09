@@ -3,13 +3,13 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./catalog.tsp";
-import "./certificate.tsp";
-import "./image.tsp";
-import "./product.tsp";
-import "./deviceGroup.tsp";
-import "./deployment.tsp";
-import "./device.tsp";
+import "./Catalog.tsp";
+import "./Certificate.tsp";
+import "./Image.tsp";
+import "./Product.tsp";
+import "./DeviceGroup.tsp";
+import "./Deployment.tsp";
+import "./Device.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -22,6 +22,7 @@ using TypeSpec.Versioning;
   title: "AzureSphereManagementClient",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 @doc("Azure Sphere resource management API.")
 namespace Microsoft.AzureSphere;
 

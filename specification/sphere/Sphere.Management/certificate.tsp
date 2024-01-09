@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./catalog.tsp";
+import "./Catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,7 +14,6 @@ namespace Microsoft.AzureSphere;
 @parentResource(Catalog)
 model Certificate is ProxyResource<CertificateProperties> {
   @doc("Serial number of the certificate. Use '.default' to get current active certificate.")
-  @path
   @key("serialNumber")
   @segment("certificates")
   name: string;
@@ -50,7 +49,7 @@ interface Certificates {
   @doc("Retrieves cert chain.")
   retrieveCertChain is ArmResourceActionSync<
     Certificate,
-    {},
+    void,
     CertificateChainResponse
   >;
   @doc("Gets the proof of possession nonce.")

@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./catalog.tsp";
+import "./Catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -15,7 +15,6 @@ namespace Microsoft.AzureSphere;
 model Product is ProxyResource<ProductProperties> {
   @doc("Name of product.")
   @pattern("^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$")
-  @path
   @key("productName")
   @segment("products")
   name: string;
@@ -28,17 +27,17 @@ interface Products {
   @doc("Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Product>;
   @doc("Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  update is ArmResourcePatchAsync<Product, ProductProperties>;
+  update is ArmCustomPatchAsync<Product, ProductUpdate>;
   @doc("Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'")
   delete is ArmResourceDeleteAsync<Product>;
   @doc("List Product resources by Catalog")
   listByCatalog is ArmResourceListByParent<Product>;
   @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  countDevices is ArmResourceActionSync<Product, {}, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<Product, void, CountDeviceResponse>;
   @doc("Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   generateDefaultDeviceGroups is ArmResourceActionSync<
     Product,
-    {},
+    void,
     ResourceListResult<DeviceGroup>
   >;
 }

@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./models.tsp";
-import "./product.tsp";
+import "./Product.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -15,7 +15,6 @@ namespace Microsoft.AzureSphere;
 model DeviceGroup is ProxyResource<DeviceGroupProperties> {
   @doc("Name of device group.")
   @pattern("^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$")
-  @path
   @key("deviceGroupName")
   @segment("deviceGroups")
   name: string;
@@ -28,7 +27,7 @@ interface DeviceGroups {
   @doc("Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
   @doc("Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupProperties>;
+  update is ArmCustomPatchAsync<DeviceGroup, DeviceGroupUpdate>;
   @doc("Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   delete is ArmResourceDeleteAsync<DeviceGroup>;
   @doc("List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
@@ -60,5 +59,5 @@ interface DeviceGroups {
     ClaimDevicesRequest
   >;
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  countDevices is ArmResourceActionSync<DeviceGroup, {}, CountDeviceResponse>;
+  countDevices is ArmResourceActionSync<DeviceGroup, void, CountDeviceResponse>;
 }
