@@ -208,17 +208,6 @@ model ServiceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("User assigned identity properties")
-model UserAssignedIdentity {
-  @doc("The principal ID of the assigned identity.")
-  @visibility("read")
-  principalId?: string;
-
-  @doc("The client ID of the assigned identity.")
-  @visibility("read")
-  clientId?: string;
-}
-
 @doc("The metadata schema export request.")
 model MetadataSchemaExportRequest {
   @doc("An entity the metadata schema is requested for.")
