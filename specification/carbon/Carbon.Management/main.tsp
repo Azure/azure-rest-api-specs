@@ -171,7 +171,7 @@ model ItemDetailsQueryFilter extends QueryFilter {
 
 @doc("Access Decision for each Subscription")
 model SubscriptionAccessDecision {
-  @doc("SubscrptionId")
+  @doc("SubscriptionId")
   subscriptionId: string;
 
   @doc("Access decision to subscription")
