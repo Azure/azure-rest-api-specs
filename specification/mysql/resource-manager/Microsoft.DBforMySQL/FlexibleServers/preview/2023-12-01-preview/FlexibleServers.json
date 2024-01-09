@@ -397,6 +397,57 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/validateEstimateHighAvailability": {
+      "post": {
+        "tags": [
+          "ServerValidateEstimateHighAvailability"
+        ],
+        "operationId": "Servers_ValidateEstimateHighAvailability",
+        "x-ms-examples": {
+          "Validate a validation and estimation of high availability.": {
+            "$ref": "./examples/ServerValidateEstimateHighAvailability.json"
+          }
+        },
+        "description": "Validate a deployment of high availability.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HighAvailabilityValidationEstimation"
+            },
+            "description": "The required parameters for validation of high availability deployment."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HighAvailabilityValidationEstimation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/restart": {
       "post": {
         "tags": [
@@ -820,6 +871,11 @@
           "format": "int32",
           "description": "Backup retention days for the server."
         },
+        "backupIntervalHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Backup interval hours for the server."
+        },
         "geoRedundantBackup": {
           "$ref": "#/definitions/EnableStatusEnum",
           "description": "Whether or not geo redundant backup is enabled.",
@@ -952,7 +1008,28 @@
           "description": "Availability zone of the standby server."
         }
       },
-      "description": "Network related properties of a server"
+      "description": "High availability properties of a server"
+    },
+    "HighAvailabilityValidationEstimation": {
+      "type": "object",
+      "properties": {
+        "estimatedDowntime": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "Estimated seconds of downtime for the deployment."
+        },
+        "scheduledStandbyAvailabilityZone": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Scheduled Availability zone of the standby server."
+        },
+        "expectedStandbyAvailabilityZone": {
+          "type": "string",
+          "description": "Expected Availability zone of the standby server."
+        }
+      },
+      "description": "High availability validation properties of a server"
     },
     "ImportSourceProperties": {
       "type": "object",

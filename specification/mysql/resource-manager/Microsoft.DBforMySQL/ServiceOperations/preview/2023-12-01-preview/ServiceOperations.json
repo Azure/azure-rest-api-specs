@@ -352,6 +352,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/operationProgress/{operationId}": {
+      "get": {
+        "tags": [
+          "OperationProgress"
+        ],
+        "summary": "Get the operation result for a long running operation.",
+        "operationId": "OperationProgress_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v2/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../common-types/v2/common-types.json#/definitions/OperationProgressResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationProgress_Get BackupAndExport": {
+            "$ref": "./examples/OperationProgress_Get_BackupAndExport.json"
+          },
+          "OperationProgress_Get ImportFromStorage": {
+            "$ref": "./examples/OperationProgress_Get_ImportFromStorage.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.DBforMySQL/getPrivateDnsZoneSuffix": {
       "post": {
         "tags": [
@@ -610,6 +658,18 @@
           "type": "integer",
           "format": "int64",
           "description": "Maximum backup retention days",
+          "readOnly": true
+        },
+        "minBackupIntervalHours": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimal backup interval hours",
+          "readOnly": true
+        },
+        "maxBackupIntervalHours": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum backup interval hours",
           "readOnly": true
         }
       },
