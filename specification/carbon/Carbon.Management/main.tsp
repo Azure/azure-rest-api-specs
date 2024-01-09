@@ -16,7 +16,7 @@ using OpenAPI;
 @armProviderNamespace
 @service({
   title: "Carbon",
-  version: "2023-04-01-preview",
+  version: "2024-02-01-preview",
 })
 @doc("Carbon Report Resource Provider query API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -49,6 +49,9 @@ enum CategoryTypeEnum {
 
   @doc("Resource level aggregation granularity")
   Resource,
+
+  @doc("ResourceType level aggregation granularity")
+  ResourceType,
 }
 
 @doc("Supported emission scopes to be used with QueryParameter")
@@ -61,6 +64,15 @@ enum EmissionScopeEnum {
 
   @doc("Scope3 carbon emission")
   Scope3,
+}
+
+@doc("Enum for Access Decision")
+enum AccessDecisionEnum {
+  @doc("Access allowed")
+  Allowed,
+
+  @doc("Access denied")
+  Denied,
 }
 
 @doc("Query filter parameter specified by users")
@@ -79,6 +91,14 @@ model QueryFilter {
   @doc("resourceGroupUrl list for carbon emissions data")
   @extension("x-ms-identifiers", [])
   resourceGroupUrlList?: string[];
+
+  @doc("resource type list for carbon emissions data")
+  @extension("x-ms-identifiers", [])
+  resourceTypeList?: string[];
+
+  @doc("Location list for carbon emissions data")
+  @extension("x-ms-identifiers", [])
+  locationList?: string[];
 
   @doc("Carbon emission scope for carbon emissions data")
   @extension("x-ms-identifiers", [])
@@ -147,6 +167,15 @@ model ItemDetailsQueryFilter extends QueryFilter {
 
   @doc("The number of result items to skip")
   skipToken?: string;
+}
+
+@doc("Access Decision for each Subscription")
+model SubscriptionAccessDecision {
+  @doc("SubscrptionId")
+  subscriptionId: string;
+
+  @doc("Access decision to subscription")
+  decision: AccessDecisionEnum;
 }
 
 @discriminator("dataType")
@@ -309,6 +338,21 @@ model CarbonEmissionItemDetailData extends CarbonEmissionData {
   categoryType: CategoryTypeEnum;
 }
 
+@doc("Response for detailed carbon emissions")
+model ResourceTypeCarbonEmissionItemDetailData extends CarbonEmissionData {
+  @doc("Resource Type level details data")
+  dataType: "ResourceTypeItemDetailsData";
+
+  @doc("Item name, resource type name")
+  itemName: string;
+
+  @doc("Item group name")
+  resourceTypeFriendlyName: string;
+
+  @doc("Item category, which is ResourceType")
+  categoryType: CategoryTypeEnum;
+}
+
 @doc("Response for Resource detailed carbon emissions")
 model ResourceCarbonEmissionItemDetailData extends CarbonEmissionData {
   @doc("Item details data")
@@ -337,6 +381,9 @@ model ResourceCarbonEmissionItemDetailData extends CarbonEmissionData {
 
   @doc("Resource Type")
   resourceType?: string;
+
+  @doc("Friendly name of Resource Type")
+  resourceTypeFriendlyName?: string;
 
   @doc("Resource Provider")
   resourceProvider?: string;
@@ -374,6 +421,10 @@ model CarbonEmissionDataListResult {
   @doc("The link to the next page of items")
   @Azure.Core.nextLink
   nextLink?: string;
+
+  @doc("The access decision list for each input subscription ")
+  @extension("x-ms-identifiers", [])
+  subscriptionAccessDecisionList?: SubscriptionAccessDecision[];
 }
 
 @doc("Response for available date range of carbon emission data")
