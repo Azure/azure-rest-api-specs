@@ -2279,8 +2279,6 @@
       "required": [
         "catalogName",
         "metastoreDbConnectionURL",
-        "metastoreDbConnectionUserName",
-        "metastoreDbConnectionPasswordSecret",
         "metastoreWarehouseDir"
       ],
       "properties": {
@@ -2288,6 +2286,29 @@
           "description": "Name of trino catalog which should use specified hive metastore.",
           "minLength": 1,
           "type": "string"
+        },
+        "metastoreDbConnectionAuthenticationMode": {
+          "description": "The authentication mode to connect to your Hive metastore database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": [
+            "SqlAuth",
+            "IdentityAuth"
+          ],
+          "x-ms-enum": {
+            "name": "MetastoreDbConnectionAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SqlAuth",
+                "description": "The password-based authentication to connect to your Hive metastore database. "
+              },
+              {
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
+              }
+            ]
+          },
+          "default": "IdentityAuth"
         },
         "metastoreDbConnectionPasswordSecret": {
           "description": "Secret reference name from secretsProfile.secrets containing password for database connection.",
@@ -2320,11 +2341,32 @@
       "type": "object",
       "description": "Hive Catalog Option for Flink cluster.",
       "required": [
-        "metastoreDbConnectionURL",
-        "metastoreDbConnectionUserName",
-        "metastoreDbConnectionPasswordSecret"
+        "metastoreDbConnectionURL"
       ],
       "properties": {
+        "metastoreDbConnectionAuthenticationMode": {
+          "description": "The authentication mode to connect to your Hive metastore database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": [
+            "SqlAuth",
+            "IdentityAuth"
+          ],
+          "x-ms-enum": {
+            "name": "MetastoreDbConnectionAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SqlAuth",
+                "description": "The password-based authentication to connect to your Hive metastore database. "
+              },
+              {
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
+              }
+            ]
+          },
+          "default": "IdentityAuth"
+        },
         "metastoreDbConnectionPasswordSecret": {
           "description": "Secret reference name from secretsProfile.secrets containing password for database connection.",
           "type": "string"
@@ -2561,10 +2603,7 @@
       "description": "The metastore specification for Spark cluster.",
       "required": [
         "dbServerHost",
-        "dbName",
-        "dbUserName",
-        "dbPasswordSecretName",
-        "keyVaultId"
+        "dbName"
       ],
       "properties": {
         "dbServerHost": {
@@ -2574,6 +2613,29 @@
         "dbName": {
           "type": "string",
           "description": "The database name."
+        },
+        "dbConnectionAuthenticationMode": {
+          "description": "The authentication mode to connect to your Hive metastore database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": [
+            "SqlAuth",
+            "IdentityAuth"
+          ],
+          "x-ms-enum": {
+            "name": "DbConnectionAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SqlAuth",
+                "description": "The password-based authentication to connect to your Hive metastore database. "
+              },
+              {
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
+              }
+            ]
+          },
+          "default": "IdentityAuth"
         },
         "dbUserName": {
           "type": "string",
