@@ -63,14 +63,18 @@ model SendNotificationRequest {
   to: string[];
 }
 
+@doc("A request to send a text notification.")
 model SendTextNotificationRequest extends SendNotificationRequest {
+  @doc("Message notification type is text.")
   kind: "text";
 
   @doc("Message content.")
   content: string;
 }
 
+@doc("A request to send a media notification.")
 model SendMediaNotificationRequest extends SendNotificationRequest {
+  @doc("Message notification type is image.")
   kind: "image";
 
   @doc("Message content.")
@@ -83,7 +87,9 @@ types, e.g. image
   mediaUri: url;
 }
 
+@doc("A request to send a template notification.")
 model SendTemplateNotificationRequest extends SendNotificationRequest {
+  @doc("Message notification type is template.")
   kind: "template";
 
   @doc("The template object used to create templates.")
@@ -279,8 +285,11 @@ API.
 }
 
 @resource("messages/notifications")
+@doc("A notification.")
 model Notifications {
   @key
+  @visibility("read")
+  @doc("The notification ID.")
   id: string;
 }
 
@@ -288,18 +297,24 @@ model Notifications {
 @doc("A communication channel.")
 model CommunicationChannel {
   @key
+  @visibility("read")
   @doc("The registration ID of the channel.")
   channelId: string;
 }
 
 @resource("messages/streams")
+@doc("A data stream.")
 model Stream {
   @key
+  @visibility("read")
+  @doc("The stream ID.")
   id: string;
   @body
+  @doc("The stream body.")
   body: bytes;
   @header 
-  contentType: "application/octect-stream";
+  @doc("The stream content type.")
+  contentType: "application/octet-stream";
 }
 
 @access(Access.public, "csharp")
@@ -309,6 +324,7 @@ model Stream {
 @doc("The Message Template Response.")
 model MessageTemplateResponse {
   @key
+  @visibility("read")
   @doc("Get the template's Name")
   name: string;
 
