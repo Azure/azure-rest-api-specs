@@ -24,18 +24,6 @@ namespace Microsoft.EventGrid {
     Scheduled,
   }
 
-  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobStateChange event.")
-  model MediaJobStateChangeEventData {
-    @doc("The previous state of the Job.")
-    previousState?: MediaJobState;
-
-    @doc("The new state of the Job.")
-    state?: MediaJobState;
-
-    @doc("Gets the Job correlation data.")
-    correlationData?: Record<string>;
-  }
-
   @doc("Media Job Error Codes.")
   enum MediaJobErrorCode {
     @doc("Fatal service error, please contact support.")
@@ -99,6 +87,21 @@ namespace Microsoft.EventGrid {
     MayRetry,
   }
 
+  @doc("""
+  Schema of the Data property of an EventGridEvent for a
+  Microsoft.Media.JobStateChange event.
+  """)
+  model MediaJobStateChangeEventData {
+  @doc("The previous state of the Job.")
+  @visibility("read")
+  "previousState"?: MediaJobState;
+  @doc("The new state of the Job.")
+  @visibility("read")
+  "state"?: MediaJobState;
+  @doc("Gets the Job correlation data.")
+  "correlationData"?: Record<string>;
+  }
+
   @doc("Details of JobOutput errors.")
   model MediaJobError {
     @visibility("read")
@@ -134,13 +137,8 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("The event data for a Job output.")
-  @discriminator("@odata.type")
+  @discriminator("ODataType")
   model MediaJobOutput {
-    // TODO: OData Key Issue
-    // #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
-    // @doc("The discriminator for derived types.")
-    // @projectedName("json", "@odata.type")
-    // OdataType?: string;
 
     @doc("Gets the Job output error.")
     error?: MediaJobError;
@@ -156,117 +154,129 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("The event data for a Job output asset.")
-  @discriminator("#Microsoft.Media.JobOutputAsset")
-  model MediaJobOutputAsset is MediaJobOutput {
+  model MediaJobOutputAsset extends MediaJobOutput {
     @doc("Gets the Job output asset name.")
     assetName?: string;
+    @doc("The discriminator for derived types.")
+    "ODataType": "#Microsoft.Media.JobOutputAsset";
   }
 
-  @doc("Job Output Progress Event Data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputProgress event.")
-  @discriminator("#Microsoft.Media.JobOutputProgress")
+  @doc("""
+  Job Output Progress Event Data. Schema of the Data property of an
+  EventGridEvent for a Microsoft.Media.JobOutputProgress event.
+  """)
   model MediaJobOutputProgressEventData {
-    @doc("Gets the Job output label.")
-    label?: string;
-
-    @doc("Gets the Job output progress.")
-    progress?: int64;
-
-    @doc("Gets the Job correlation data.")
-    jobCorrelationData?: Record<string>;
+  @doc("Gets the Job output label.")
+  "label"?: string;
+  @doc("Gets the Job output progress.")
+  "progress"?: int32;
+  @doc("Gets the Job correlation data.")
+  "jobCorrelationData"?: Record<string>;
   }
-
-  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event.")
+  
+  @doc("""
+  Schema of the Data property of an EventGridEvent for a
+  Microsoft.Media.JobOutputStateChange event.
+  """)
   model MediaJobOutputStateChangeEventData {
-    @doc("The previous state of the Job.")
-    previousState?: MediaJobState;
-
-    @doc("Gets the output.")
-    output?: MediaJobOutput;
-
-    @doc("Gets the Job correlation data.")
-    jobCorrelationData?: Record<string>;
+  @doc("The previous state of the Job.")
+  @visibility("read")
+  "previousState"?: MediaJobState;
+  @doc("Gets the output.")
+  "output"?: MediaJobOutput;
+  @doc("Gets the Job correlation data.")
+  "jobCorrelationData"?: Record<string>;
   }
+  
+@doc("""
+Job scheduled event data. Schema of the data property of an EventGridEvent for
+a Microsoft.Media.JobScheduled event.
+""")
+model MediaJobScheduledEventData extends MediaJobStateChangeEventData {
+}
 
-  @doc("Job scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobScheduled event.")
-  @discriminator("#Microsoft.Media.JobScheduled")
-  model MediaJobScheduledEventData {
-    ...MediaJobStateChangeEventData;
-  }
+@doc("""
+Job processing event data. Schema of the data property of an EventGridEvent for
+a Microsoft.Media.JobProcessing event.
+""")
+model MediaJobProcessingEventData extends MediaJobStateChangeEventData {
+}
 
-  @doc("Job processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobProcessing event.")
-  @discriminator("#Microsoft.Media.JobProcessing")
-  model MediaJobProcessingEventData {
-    ...MediaJobStateChangeEventData;
-  }
+@doc("""
+Job canceling event data. Schema of the data property of an EventGridEvent for
+a Microsoft.Media.JobCanceling event.
+""")
+model MediaJobCancelingEventData extends MediaJobStateChangeEventData {
+}
 
-  @doc("Job canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceling event.")
-  @discriminator("#Microsoft.Media.JobCanceling")
-  model MediaJobCancelingEventData {
-    ...MediaJobStateChangeEventData;
-  }
+@doc("""
+Job finished event data. Schema of the data property of an EventGridEvent for a
+Microsoft.Media.JobFinished event.
+""")
+model MediaJobFinishedEventData extends MediaJobStateChangeEventData {
+@doc("Gets the Job outputs.")
+"outputs"?: MediaJobOutput[];
+}
 
-  @doc("Job finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobFinished event.")
-  @discriminator("#Microsoft.Media.JobFinished")
-  model MediaJobFinishedEventData {
-    ...MediaJobStateChangeEventData;
+@doc("""
+Job canceled event data. Schema of the data property of an EventGridEvent for a
+Microsoft.Media.JobCanceled event.
+""")
+model MediaJobCanceledEventData extends MediaJobStateChangeEventData {
+@doc("Gets the Job outputs.")
+"outputs"?: MediaJobOutput[];
+}
 
-    @doc("Gets the Job outputs.")
-    outputs?: MediaJobOutput[];
-  }
+@doc("""
+Job error state event data. Schema of the data property of an EventGridEvent
+for a Microsoft.Media.JobErrored event.
+""")
+model MediaJobErroredEventData extends MediaJobStateChangeEventData {
+@doc("Gets the Job outputs.")
+"outputs"?: MediaJobOutput[];
+}
 
-  @doc("Job canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceled event.")
-  @discriminator("#Microsoft.Media.JobCanceled")
-  model MediaJobCanceledEventData {
-    ...MediaJobStateChangeEventData;
+@doc("""
+Job output canceled event data. Schema of the data property of an
+EventGridEvent for a Microsoft.Media.JobOutputCanceled event.
+""")
+model MediaJobOutputCanceledEventData extends MediaJobOutputStateChangeEventData {
+}
 
-    @doc("Gets the Job outputs.")
-    outputs?: MediaJobOutput[];
-  }
+@doc("""
+Job output canceling event data. Schema of the data property of an
+EventGridEvent for a Microsoft.Media.JobOutputCanceling event.
+""")
+model MediaJobOutputCancelingEventData extends MediaJobOutputStateChangeEventData {
+}
 
-  @doc("Job error state event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobErrored event.")
-  @discriminator("#Microsoft.Media.JobErrored")
-  model MediaJobErroredEventData {
-    ...MediaJobStateChangeEventData;
+@doc("""
+Job output error event data. Schema of the data property of an EventGridEvent
+for a Microsoft.Media.JobOutputErrored event.
+""")
+model MediaJobOutputErroredEventData extends MediaJobOutputStateChangeEventData {
+}
 
-    @doc("Gets the Job outputs.")
-    outputs?: MediaJobOutput[];
-  }
+@doc("""
+Job output finished event data. Schema of the data property of an
+EventGridEvent for a Microsoft.Media.JobOutputFinished event.
+""")
+model MediaJobOutputFinishedEventData extends MediaJobOutputStateChangeEventData {
+}
 
-  @doc("Job output canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceled event.")
-  @discriminator("#Microsoft.Media.JobOutputCanceled")
-  model MediaJobOutputCanceledEventData {
-    ...MediaJobOutputStateChangeEventData;
-  }
+@doc("""
+Job output processing event data. Schema of the data property of an
+EventGridEvent for a Microsoft.Media.JobOutputProcessing event.
+""")
+model MediaJobOutputProcessingEventData extends MediaJobOutputStateChangeEventData {
+}
 
-  @doc("Job output canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceling event.")
-  @discriminator("#Microsoft.Media.JobOutputCanceling")
-  model MediaJobOutputCancelingEventData {
-    ...MediaJobOutputStateChangeEventData;
-  }
-
-  @doc("Job output error event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputErrored event.")
-  @discriminator("#Microsoft.Media.JobOutputErrored")
-  model MediaJobOutputErroredEventData {
-    ...MediaJobOutputStateChangeEventData;
-  }
-
-  @doc("Job output finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputFinished event.")
-  @discriminator("#Microsoft.Media.JobOutputFinished")
-  model MediaJobOutputFinishedEventData {
-    ...MediaJobOutputStateChangeEventData;
-  }
-
-  @doc("Job output processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputProcessing event.")
-  @discriminator("#Microsoft.Media.JobOutputProcessing")
-  model MediaJobOutputProcessingEventData {
-    ...MediaJobOutputStateChangeEventData;
-  }
-
-  @doc("Job output scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputScheduled event.")
-  @discriminator("#Microsoft.Media.JobOutputCanceled")
-  model MediaJobOutputScheduledEventData {
-    ...MediaJobOutputStateChangeEventData;
-  }
+@doc("""
+Job output scheduled event data. Schema of the data property of an
+EventGridEvent for a Microsoft.Media.JobOutputScheduled event.
+""")
+model MediaJobOutputScheduledEventData extends MediaJobOutputStateChangeEventData {
+}
 
   @doc("Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event.")
   model MediaLiveEventEncoderConnectedEventData {
