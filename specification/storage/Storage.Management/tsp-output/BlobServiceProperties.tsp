@@ -25,25 +25,11 @@ model BlobServiceProperties is ProxyResource<BlobServicePropertiesProperties> {
 interface BlobServices {
   @doc("Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.")
   getServiceProperties is ArmResourceRead<
-    BlobServiceProperties,
-    {
-      ...BaseParameters<BlobServiceProperties>;
-
-      @doc("The name of the blob Service within the specified storage account. Blob Service Name must be 'default'")
-      @path
-      BlobServicesName: "default";
-    }
+    BlobServiceProperties
   >;
   @doc("Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ")
   setServiceProperties is ArmResourceCreateOrReplaceSync<
-    BlobServiceProperties,
-    {
-      ...BaseParameters<BlobServiceProperties>;
-
-      @doc("The name of the blob Service within the specified storage account. Blob Service Name must be 'default'")
-      @path
-      BlobServicesName: "default";
-    }
+    BlobServiceProperties
   >;
   @doc("List blob services of storage account. It returns a collection of one object named default.")
   list is ArmResourceListByParent<BlobServiceProperties>;
