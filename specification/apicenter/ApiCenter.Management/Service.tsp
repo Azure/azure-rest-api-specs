@@ -14,6 +14,7 @@ model Service is TrackedResource<ServiceProperties> {
   @doc("The name of Azure API Center service.")
   @maxLength(90)
   @minLength(1)
+  @pattern("^[a-zA-Z0-9-]{3,90}$")
   @path
   @key("serviceName")
   @segment("services")

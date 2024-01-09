@@ -16,6 +16,7 @@ model ApiDefinition is ProxyResource<ApiDefinitionProperties> {
   @doc("The name of the API definition.")
   @maxLength(90)
   @minLength(1)
+  @pattern("^[a-zA-Z0-9-]{3,90}$")
   @path
   @key("definitionName")
   @segment("definitions")

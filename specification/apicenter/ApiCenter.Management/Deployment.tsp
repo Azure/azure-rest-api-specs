@@ -16,6 +16,7 @@ model Deployment is ProxyResource<DeploymentProperties> {
   @doc("The name of the API deployment.")
   @maxLength(90)
   @minLength(1)
+  @pattern("^[a-zA-Z0-9-]{3,90}$")
   @path
   @key("deploymentName")
   @segment("deployments")

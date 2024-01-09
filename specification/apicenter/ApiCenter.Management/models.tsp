@@ -91,16 +91,16 @@ enum MetadataSchemaExportFormat {
 
 /** The kind of the API */
 enum ApiKind {
-  /** Representational State Transfer */
+  /** A Representational State Transfer Api */
   rest,
 
-  /** Graph query language */
+  /** A Graph query language Api */
   graphql,
 
-  /** gRPC */
+  /** A gRPC Api */
   grpc,
 
-  /** SOAP */
+  /** A SOAP Api */
   soap,
 
   /** Web Hook */
@@ -455,7 +455,7 @@ model DeploymentProperties {
   @doc("State of API deployment.")
   state?: DeploymentState;
 
-  @doc("Server")
+  @doc("The deployment server")
   server?: DeploymentServer;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing spec"
@@ -485,7 +485,7 @@ model EnvironmentProperties {
   @minLength(1)
   title: string;
 
-  @doc("Description.")
+  @doc("The environment description.")
   description?: string;
 
   @doc("Environment kind.")

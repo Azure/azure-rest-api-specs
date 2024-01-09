@@ -16,6 +16,7 @@ model MetadataSchema is ProxyResource<MetadataSchemaProperties> {
   @doc("The name of the metadata schema.")
   @maxLength(90)
   @minLength(1)
+  @pattern("^[a-zA-Z0-9-]{3,90}$")
   @path
   @key("metadataSchemaName")
   @segment("metadataSchemas")
