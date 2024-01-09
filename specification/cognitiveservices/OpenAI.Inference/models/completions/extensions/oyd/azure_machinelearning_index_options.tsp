@@ -29,6 +29,7 @@ model AzureMachineLearningIndexChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
   @doc("The resource ID of the Azure Machine Learning project.")
+  @projectedName("json", "project_resource_id")
   @projectedName("csharp", "ProjectResourceId")
   projectResourceId: string;
 

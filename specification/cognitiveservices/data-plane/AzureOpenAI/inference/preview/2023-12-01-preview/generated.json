@@ -209,6 +209,24 @@
           "Creates a completion based on Azure Cognitive Services data and system-assigned managed identity. Uses Azure OpenAI chat extensions.": {
             "$ref": "./examples/extensions_chat_completions_azure_search_minimum.json"
           },
+          "Creates a completion based on Azure Cognitive Services image vector data. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/extensions_chat_completions_azure_search_image_vector.json"
+          },
+          "Creates a completion based on Azure Cognitive Services vector data and user-assigned managed identity. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/extensions_chat_completions_azure_search_advanced.json"
+          },
+          "Creates a completion for the provided AML index. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/extensions_chat_completions_aml_index.json"
+          },
+          "Creates a completion for the provided Azure Cosmos DB. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/extensions_chat_completions_cosmos_db.json"
+          },
+          "Creates a completion for the provided Elasticsearch. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/extensions_chat_completions_elasticsearch.json"
+          },
+          "Creates a completion for the provided Pinecone resource. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/extensions_chat_completions_pinecone.json"
+          },
           "Creates a completion for the provided prompt, parameters and chosen model.": {
             "$ref": "./examples/chat_completions.json"
           }
@@ -1002,11 +1020,11 @@
       "type": "string",
       "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
       "enum": [
-        "AzureCognitiveSearch",
-        "AzureMLIndex",
-        "AzureCosmosDB",
-        "Elasticsearch",
-        "Pinecone"
+        "azure_search",
+        "azure_ml_index",
+        "azure_cosmos_db",
+        "elasticsearch",
+        "pinecone"
       ],
       "x-ms-enum": {
         "name": "AzureChatExtensionType",
@@ -1014,27 +1032,27 @@
         "values": [
           {
             "name": "azureCognitiveSearch",
-            "value": "AzureCognitiveSearch",
+            "value": "azure_search",
             "description": "Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension."
           },
           {
             "name": "azureMachineLearningIndex",
-            "value": "AzureMLIndex",
+            "value": "azure_ml_index",
             "description": "Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension."
           },
           {
             "name": "azureCosmosDB",
-            "value": "AzureCosmosDB",
+            "value": "azure_cosmos_db",
             "description": "Represents the use of Azure Cosmos DB as an Azure OpenAI chat extension."
           },
           {
             "name": "elasticsearch",
-            "value": "Elasticsearch",
+            "value": "elasticsearch",
             "description": "Represents the use of Elasticsearch® index as an Azure OpenAI chat extension."
           },
           {
             "name": "pinecone",
-            "value": "Pinecone",
+            "value": "pinecone",
             "description": "Represents the use of Pinecone index as an Azure OpenAI chat extension."
           }
         ]
@@ -1051,6 +1069,21 @@
             "$ref": "#/definitions/ChatResponseMessage"
           },
           "x-ms-identifiers": []
+        },
+        "citations": {
+          "type": "array",
+          "description": "The data source retrieval result, used to generate the assistent message in the response.",
+          "items": {
+            "$ref": "#/definitions/Citation"
+          },
+          "x-ms-identifiers": []
+        },
+        "intents": {
+          "type": "array",
+          "description": "The detected intents from the chat history, used to query the data source.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1097,7 +1130,7 @@
           "$ref": "#/definitions/AzureChatExtensionConfiguration"
         }
       ],
-      "x-ms-discriminator-value": "AzureCognitiveSearch"
+      "x-ms-discriminator-value": "azure_search"
     },
     "AzureCognitiveSearchChatExtensionParameters": {
       "type": "object",
@@ -1107,14 +1140,16 @@
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
-        "topNDocuments": {
+        "top_n_documents": {
           "type": "integer",
           "format": "int32",
-          "description": "The configured top number of documents to feature for the configured query."
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
         },
-        "inScope": {
+        "in_scope": {
           "type": "boolean",
-          "description": "Whether queries should be restricted to use of indexed data."
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
         },
         "strictness": {
           "type": "integer",
@@ -1123,85 +1158,98 @@
           "minimum": 1,
           "maximum": 5
         },
-        "roleInformation": {
+        "role_information": {
           "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
         },
         "endpoint": {
           "type": "string",
           "format": "uri",
           "description": "The absolute endpoint path for the Azure Cognitive Search resource to use."
         },
-        "indexName": {
+        "index_name": {
           "type": "string",
-          "description": "The name of the index to use as available in the referenced Azure Cognitive Search resource."
+          "description": "The name of the index to use as available in the referenced Azure Cognitive Search resource.",
+          "x-ms-client-name": "indexName"
         },
-        "fieldsMapping": {
+        "fields_mapping": {
           "$ref": "#/definitions/AzureCognitiveSearchIndexFieldMappingOptions",
-          "description": "Customized field mapping behavior to use when interacting with the search index."
+          "description": "Customized field mapping behavior to use when interacting with the search index.",
+          "x-ms-client-name": "fieldsMapping"
         },
-        "queryType": {
+        "query_type": {
           "$ref": "#/definitions/AzureCognitiveSearchQueryType",
-          "description": "The query type to use with Azure Cognitive Search."
+          "description": "The query type to use with Azure Cognitive Search.",
+          "x-ms-client-name": "queryType"
         },
-        "semanticConfiguration": {
+        "semantic_configuration": {
           "type": "string",
-          "description": "The additional semantic configuration for the query."
+          "description": "The additional semantic configuration for the query.",
+          "x-ms-client-name": "semanticConfiguration"
         },
         "filter": {
           "type": "string",
           "description": "Search filter."
         },
-        "embeddingDependency": {
+        "embedding_dependency": {
           "$ref": "#/definitions/OnYourDataVectorizationSource",
-          "description": "The embedding dependency for vector search."
+          "description": "The embedding dependency for vector search.",
+          "x-ms-client-name": "embeddingDependency"
         }
       },
       "required": [
         "endpoint",
-        "indexName"
+        "index_name"
       ]
     },
     "AzureCognitiveSearchIndexFieldMappingOptions": {
       "type": "object",
       "description": "Optional settings to control how fields are processed when using a configured Azure Cognitive Search resource.",
       "properties": {
-        "titleField": {
+        "title_field": {
           "type": "string",
-          "description": "The name of the index field to use as a title."
+          "description": "The name of the index field to use as a title.",
+          "x-ms-client-name": "titleField"
         },
-        "urlField": {
+        "url_field": {
           "type": "string",
-          "description": "The name of the index field to use as a URL."
+          "description": "The name of the index field to use as a URL.",
+          "x-ms-client-name": "urlField"
         },
-        "filepathField": {
+        "filepath_field": {
           "type": "string",
-          "description": "The name of the index field to use as a filepath."
+          "description": "The name of the index field to use as a filepath.",
+          "x-ms-client-name": "filepathField"
         },
-        "contentFields": {
+        "content_fields": {
           "type": "array",
           "description": "The names of index fields that should be treated as content.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "contentFields"
         },
-        "contentFieldsSeparator": {
+        "content_fields_separator": {
           "type": "string",
-          "description": "The separator pattern that content fields should use."
+          "description": "The separator pattern that content fields should use.",
+          "x-ms-client-name": "contentFieldsSeparator"
         },
-        "vectorFields": {
+        "vector_fields": {
           "type": "array",
           "description": "The names of fields that represent vector data.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "vectorFields"
         },
-        "imageVectorFields": {
+        "image_vector_fields": {
           "type": "array",
           "description": "The names of fields that represent image vector data.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "imageVectorFields"
         }
       }
     },
@@ -1212,8 +1260,8 @@
         "simple",
         "semantic",
         "vector",
-        "vectorSimpleHybrid",
-        "vectorSemanticHybrid"
+        "vector_simple_hybrid",
+        "vector_semantic_hybrid"
       ],
       "x-ms-enum": {
         "name": "AzureCognitiveSearchQueryType",
@@ -1236,12 +1284,12 @@
           },
           {
             "name": "vectorSimpleHybrid",
-            "value": "vectorSimpleHybrid",
+            "value": "vector_simple_hybrid",
             "description": "Represents a combination of the simple query strategy with vector data."
           },
           {
             "name": "vectorSemanticHybrid",
-            "value": "vectorSemanticHybrid",
+            "value": "vector_semantic_hybrid",
             "description": "Represents a combination of semantic search and vector data querying."
           }
         ]
@@ -1264,7 +1312,7 @@
           "$ref": "#/definitions/AzureChatExtensionConfiguration"
         }
       ],
-      "x-ms-discriminator-value": "AzureCosmosDB"
+      "x-ms-discriminator-value": "azure_cosmos_db"
     },
     "AzureCosmosDBChatExtensionParameters": {
       "type": "object",
@@ -1274,14 +1322,16 @@
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
-        "topNDocuments": {
+        "top_n_documents": {
           "type": "integer",
           "format": "int32",
-          "description": "The configured top number of documents to feature for the configured query."
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
         },
-        "inScope": {
+        "in_scope": {
           "type": "boolean",
-          "description": "Whether queries should be restricted to use of indexed data."
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
         },
         "strictness": {
           "type": "integer",
@@ -1290,77 +1340,89 @@
           "minimum": 1,
           "maximum": 5
         },
-        "roleInformation": {
+        "role_information": {
           "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
         },
-        "databaseName": {
+        "database_name": {
           "type": "string",
-          "description": "The MongoDB vCore database name to use with Azure Cosmos DB."
+          "description": "The MongoDB vCore database name to use with Azure Cosmos DB.",
+          "x-ms-client-name": "databaseName"
         },
-        "containerName": {
+        "container_name": {
           "type": "string",
-          "description": "The name of the Azure Cosmos DB resource container."
+          "description": "The name of the Azure Cosmos DB resource container.",
+          "x-ms-client-name": "containerName"
         },
-        "indexName": {
+        "index_name": {
           "type": "string",
-          "description": "The MongoDB vCore index name to use with Azure Cosmos DB."
+          "description": "The MongoDB vCore index name to use with Azure Cosmos DB.",
+          "x-ms-client-name": "indexName"
         },
-        "fieldsMapping": {
+        "fields_mapping": {
           "$ref": "#/definitions/AzureCosmosDBFieldMappingOptions",
-          "description": "Customized field mapping behavior to use when interacting with the search index."
+          "description": "Customized field mapping behavior to use when interacting with the search index.",
+          "x-ms-client-name": "fieldsMapping"
         },
-        "embeddingDependency": {
+        "embedding_dependency": {
           "$ref": "#/definitions/OnYourDataVectorizationSource",
-          "description": "The embedding dependency for vector search."
+          "description": "The embedding dependency for vector search.",
+          "x-ms-client-name": "embeddingDependency"
         }
       },
       "required": [
-        "databaseName",
-        "containerName",
-        "indexName",
-        "fieldsMapping",
-        "embeddingDependency"
+        "database_name",
+        "container_name",
+        "index_name",
+        "fields_mapping",
+        "embedding_dependency"
       ]
     },
     "AzureCosmosDBFieldMappingOptions": {
       "type": "object",
       "description": "Optional settings to control how fields are processed when using a configured Azure Cosmos DB resource.",
       "properties": {
-        "titleField": {
+        "title_field": {
           "type": "string",
-          "description": "The name of the index field to use as a title."
+          "description": "The name of the index field to use as a title.",
+          "x-ms-client-name": "titleField"
         },
-        "urlField": {
+        "url_field": {
           "type": "string",
-          "description": "The name of the index field to use as a URL."
+          "description": "The name of the index field to use as a URL.",
+          "x-ms-client-name": "urlField"
         },
-        "filepathField": {
+        "filepath_field": {
           "type": "string",
-          "description": "The name of the index field to use as a filepath."
+          "description": "The name of the index field to use as a filepath.",
+          "x-ms-client-name": "filepathField"
         },
-        "contentFields": {
+        "content_fields": {
           "type": "array",
           "description": "The names of index fields that should be treated as content.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "contentFields"
         },
-        "contentFieldsSeparator": {
+        "content_fields_separator": {
           "type": "string",
-          "description": "The separator pattern that content fields should use."
+          "description": "The separator pattern that content fields should use.",
+          "x-ms-client-name": "contentFieldsSeparator"
         },
-        "vectorFields": {
+        "vector_fields": {
           "type": "array",
           "description": "The names of fields that represent vector data.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "vectorFields"
         }
       },
       "required": [
-        "contentFields",
-        "vectorFields"
+        "content_fields",
+        "vector_fields"
       ]
     },
     "AzureGroundingEnhancement": {
@@ -1473,7 +1535,7 @@
           "$ref": "#/definitions/AzureChatExtensionConfiguration"
         }
       ],
-      "x-ms-discriminator-value": "AzureMLIndex"
+      "x-ms-discriminator-value": "azure_ml_index"
     },
     "AzureMachineLearningIndexChatExtensionParameters": {
       "type": "object",
@@ -1483,14 +1545,16 @@
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
-        "topNDocuments": {
+        "top_n_documents": {
           "type": "integer",
           "format": "int32",
-          "description": "The configured top number of documents to feature for the configured query."
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
         },
-        "inScope": {
+        "in_scope": {
           "type": "boolean",
-          "description": "Whether queries should be restricted to use of indexed data."
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
         },
         "strictness": {
           "type": "integer",
@@ -1499,13 +1563,15 @@
           "minimum": 1,
           "maximum": 5
         },
-        "roleInformation": {
+        "role_information": {
           "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
         },
-        "projectResourceId": {
+        "project_resource_id": {
           "type": "string",
-          "description": "The resource ID of the Azure Machine Learning project."
+          "description": "The resource ID of the Azure Machine Learning project.",
+          "x-ms-client-name": "projectResourceId"
         },
         "name": {
           "type": "string",
@@ -1521,7 +1587,7 @@
         }
       },
       "required": [
-        "projectResourceId",
+        "project_resource_id",
         "name",
         "version"
       ]
@@ -2086,6 +2152,37 @@
         "finish_reason"
       ]
     },
+    "Citation": {
+      "type": "object",
+      "description": "Citation information for a chat completions response message.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the citation."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the citation."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the citation."
+        },
+        "file_path": {
+          "type": "string",
+          "description": "The file path of the citation.",
+          "x-ms-client-name": "filePath"
+        },
+        "chunk_id": {
+          "type": "string",
+          "description": "The chunk ID of the citation.",
+          "x-ms-client-name": "chunkId"
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
     "Completions": {
       "type": "object",
       "description": "Representation of the response data from a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
@@ -2593,7 +2690,7 @@
           "$ref": "#/definitions/AzureChatExtensionConfiguration"
         }
       ],
-      "x-ms-discriminator-value": "Elasticsearch"
+      "x-ms-discriminator-value": "elasticsearch"
     },
     "ElasticsearchChatExtensionParameters": {
       "type": "object",
@@ -2603,14 +2700,16 @@
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
-        "topNDocuments": {
+        "top_n_documents": {
           "type": "integer",
           "format": "int32",
-          "description": "The configured top number of documents to feature for the configured query."
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
         },
-        "inScope": {
+        "in_scope": {
           "type": "boolean",
-          "description": "Whether queries should be restricted to use of indexed data."
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
         },
         "strictness": {
           "type": "integer",
@@ -2619,9 +2718,10 @@
           "minimum": 1,
           "maximum": 5
         },
-        "roleInformation": {
+        "role_information": {
           "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
         },
         "endpoint": {
           "type": "string",
@@ -2632,17 +2732,20 @@
           "type": "string",
           "description": "The index name of Elasticsearch®."
         },
-        "fieldsMapping": {
+        "fields_mapping": {
           "$ref": "#/definitions/ElasticsearchIndexFieldMappingOptions",
-          "description": "The index field mapping options of Elasticsearch®."
+          "description": "The index field mapping options of Elasticsearch®.",
+          "x-ms-client-name": "fieldsMapping"
         },
-        "queryType": {
+        "query_type": {
           "$ref": "#/definitions/ElasticsearchQueryType",
-          "description": "The query type of Elasticsearch®."
+          "description": "The query type of Elasticsearch®.",
+          "x-ms-client-name": "queryType"
         },
-        "embeddingDependency": {
+        "embedding_dependency": {
           "$ref": "#/definitions/OnYourDataVectorizationSource",
-          "description": "The embedding dependency for vector search."
+          "description": "The embedding dependency for vector search.",
+          "x-ms-client-name": "embeddingDependency"
         }
       },
       "required": [
@@ -2654,35 +2757,41 @@
       "type": "object",
       "description": "Optional settings to control how fields are processed when using a configured Elasticsearch® resource.",
       "properties": {
-        "titleField": {
+        "title_field": {
           "type": "string",
-          "description": "The name of the index field to use as a title."
+          "description": "The name of the index field to use as a title.",
+          "x-ms-client-name": "titleField"
         },
-        "urlField": {
+        "url_field": {
           "type": "string",
-          "description": "The name of the index field to use as a URL."
+          "description": "The name of the index field to use as a URL.",
+          "x-ms-client-name": "urlField"
         },
-        "filepathField": {
+        "filepath_field": {
           "type": "string",
-          "description": "The name of the index field to use as a filepath."
+          "description": "The name of the index field to use as a filepath.",
+          "x-ms-client-name": "filepathField"
         },
-        "contentFields": {
+        "content_fields": {
           "type": "array",
           "description": "The names of index fields that should be treated as content.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "contentFields"
         },
-        "contentFieldsSeparator": {
+        "content_fields_separator": {
           "type": "string",
-          "description": "The separator pattern that content fields should use."
+          "description": "The separator pattern that content fields should use.",
+          "x-ms-client-name": "contentFieldsSeparator"
         },
-        "vectorFields": {
+        "vector_fields": {
           "type": "array",
           "description": "The names of fields that represent vector data.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "vectorFields"
         }
       }
     },
@@ -3059,20 +3168,21 @@
       "type": "object",
       "description": "The authentication options for Azure OpenAI On Your Data when using access token.",
       "properties": {
-        "accessToken": {
+        "access_token": {
           "type": "string",
-          "description": "The access token to use for authentication."
+          "description": "The access token to use for authentication.",
+          "x-ms-client-name": "accessToken"
         }
       },
       "required": [
-        "accessToken"
+        "access_token"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions"
         }
       ],
-      "x-ms-discriminator-value": "AccessToken"
+      "x-ms-discriminator-value": "access_token"
     },
     "OnYourDataApiKeyAuthenticationOptions": {
       "type": "object",
@@ -3091,7 +3201,7 @@
           "$ref": "#/definitions/OnYourDataAuthenticationOptions"
         }
       ],
-      "x-ms-discriminator-value": "APIKey"
+      "x-ms-discriminator-value": "api_key"
     },
     "OnYourDataAuthenticationOptions": {
       "type": "object",
@@ -3111,13 +3221,13 @@
       "type": "string",
       "description": "The authentication types supported with Azure OpenAI On Your Data.",
       "enum": [
-        "APIKey",
-        "ConnectionString",
-        "KeyAndKeyId",
-        "EncodedAPIKey",
-        "AccessToken",
-        "SystemAssignedManagedIdentity",
-        "UserAssignedManagedIdentity"
+        "api_key",
+        "connection_string",
+        "key_and_key_id",
+        "encoded_api_key",
+        "access_token",
+        "system_assigned_managed_identity",
+        "user_assigned_managed_identity"
       ],
       "x-ms-enum": {
         "name": "OnYourDataAuthenticationType",
@@ -3125,37 +3235,37 @@
         "values": [
           {
             "name": "apiKey",
-            "value": "APIKey",
+            "value": "api_key",
             "description": "Authentication via API key."
           },
           {
             "name": "connectionString",
-            "value": "ConnectionString",
+            "value": "connection_string",
             "description": "Authentication via connection string."
           },
           {
             "name": "keyAndKeyId",
-            "value": "KeyAndKeyId",
+            "value": "key_and_key_id",
             "description": "Authentication via key and key ID pair."
           },
           {
             "name": "encodedApiKey",
-            "value": "EncodedAPIKey",
+            "value": "encoded_api_key",
             "description": "Authentication via encoded API key."
           },
           {
             "name": "accessToken",
-            "value": "AccessToken",
+            "value": "access_token",
             "description": "Authentication via access token."
           },
           {
             "name": "systemAssignedManagedIdentity",
-            "value": "SystemAssignedManagedIdentity",
+            "value": "system_assigned_managed_identity",
             "description": "Authentication via system-assigned managed identity."
           },
           {
             "name": "userAssignedManagedIdentity",
-            "value": "UserAssignedManagedIdentity",
+            "value": "user_assigned_managed_identity",
             "description": "Authentication via user-assigned managed identity."
           }
         ]
@@ -3165,58 +3275,61 @@
       "type": "object",
       "description": "The authentication options for Azure OpenAI On Your Data when using a connection string.",
       "properties": {
-        "connectionString": {
+        "connection_string": {
           "type": "string",
-          "description": "The connection string to use for authentication."
+          "description": "The connection string to use for authentication.",
+          "x-ms-client-name": "connectionString"
         }
       },
       "required": [
-        "connectionString"
+        "connection_string"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions"
         }
       ],
-      "x-ms-discriminator-value": "ConnectionString"
+      "x-ms-discriminator-value": "connection_string"
     },
     "OnYourDataDeploymentNameVectorizationSource": {
       "type": "object",
       "description": "The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based\non an internal embeddings model deployment name in the same Azure OpenAI resource.",
       "properties": {
-        "deploymentName": {
+        "deployment_name": {
           "type": "string",
-          "description": "The embedding model deployment name within the same Azure OpenAI resource. This enables you to use vector search without Azure OpenAI api-key and without Azure OpenAI public network access."
+          "description": "The embedding model deployment name within the same Azure OpenAI resource. This enables you to use vector search without Azure OpenAI api-key and without Azure OpenAI public network access.",
+          "x-ms-client-name": "deploymentName"
         }
       },
       "required": [
-        "deploymentName"
+        "deployment_name"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/OnYourDataVectorizationSource"
         }
       ],
-      "x-ms-discriminator-value": "DeploymentName"
+      "x-ms-discriminator-value": "deployment_name"
     },
     "OnYourDataEncodedApiKeyAuthenticationOptions": {
       "type": "object",
       "description": "The authentication options for Azure OpenAI On Your Data when using an Elasticsearch encoded API key.",
       "properties": {
-        "encodedApiKey": {
+        "encoded_api_key": {
           "type": "string",
-          "description": "The encoded API key to use for authentication."
+          "description": "The encoded API key to use for authentication.",
+          "x-ms-client-name": "encodedApiKey"
         }
       },
       "required": [
-        "encodedApiKey"
+        "encoded_api_key"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions"
         }
       ],
-      "x-ms-discriminator-value": "EncodedAPIKey"
+      "x-ms-discriminator-value": "encoded_api_key"
     },
     "OnYourDataEndpointVectorizationSource": {
       "type": "object",
@@ -3241,7 +3354,7 @@
           "$ref": "#/definitions/OnYourDataVectorizationSource"
         }
       ],
-      "x-ms-discriminator-value": "Endpoint"
+      "x-ms-discriminator-value": "endpoint"
     },
     "OnYourDataKeyAndKeyIdAuthenticationOptions": {
       "type": "object",
@@ -3251,40 +3364,42 @@
           "type": "string",
           "description": "The key to use for authentication."
         },
-        "keyId": {
+        "key_id": {
           "type": "string",
-          "description": "The key ID to use for authentication."
+          "description": "The key ID to use for authentication.",
+          "x-ms-client-name": "keyId"
         }
       },
       "required": [
         "key",
-        "keyId"
+        "key_id"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions"
         }
       ],
-      "x-ms-discriminator-value": "KeyAndKeyId"
+      "x-ms-discriminator-value": "key_and_key_id"
     },
     "OnYourDataModelIdVectorizationSource": {
       "type": "object",
       "description": "The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based\non a search service model ID. Currently only supported by Elasticsearch®.",
       "properties": {
-        "modelId": {
+        "model_id": {
           "type": "string",
-          "description": "The embedding model ID build inside the search service. Currently only supported by Elasticsearch®."
+          "description": "The embedding model ID build inside the search service. Currently only supported by Elasticsearch®.",
+          "x-ms-client-name": "modelId"
         }
       },
       "required": [
-        "modelId"
+        "model_id"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/OnYourDataVectorizationSource"
         }
       ],
-      "x-ms-discriminator-value": "ModelId"
+      "x-ms-discriminator-value": "model_id"
     },
     "OnYourDataSystemAssignedManagedIdentityAuthenticationOptions": {
       "type": "object",
@@ -3294,26 +3409,27 @@
           "$ref": "#/definitions/OnYourDataAuthenticationOptions"
         }
       ],
-      "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
+      "x-ms-discriminator-value": "system_assigned_managed_identity"
     },
     "OnYourDataUserAssignedManagedIdentityAuthenticationOptions": {
       "type": "object",
       "description": "The authentication options for Azure OpenAI On Your Data when using a user-assigned managed identity.",
       "properties": {
-        "managedIdentityResourceId": {
+        "managed_identity_resource_id": {
           "type": "string",
-          "description": "The resource ID of the user-assigned managed identity to use for authentication."
+          "description": "The resource ID of the user-assigned managed identity to use for authentication.",
+          "x-ms-client-name": "managedIdentityResourceId"
         }
       },
       "required": [
-        "managedIdentityResourceId"
+        "managed_identity_resource_id"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions"
         }
       ],
-      "x-ms-discriminator-value": "UserAssignedManagedIdentity"
+      "x-ms-discriminator-value": "user_assigned_managed_identity"
     },
     "OnYourDataVectorizationSource": {
       "type": "object",
@@ -3333,9 +3449,9 @@
       "type": "string",
       "description": "Represents the available sources Azure OpenAI On Your Data can use to configure vectorization of data for use with\nvector search.",
       "enum": [
-        "Endpoint",
-        "DeploymentName",
-        "ModelId"
+        "endpoint",
+        "deployment_name",
+        "model_id"
       ],
       "x-ms-enum": {
         "name": "OnYourDataVectorizationSourceType",
@@ -3343,17 +3459,17 @@
         "values": [
           {
             "name": "endpoint",
-            "value": "Endpoint",
+            "value": "endpoint",
             "description": "Represents vectorization performed by public service calls to an Azure OpenAI embedding model."
           },
           {
             "name": "deploymentName",
-            "value": "DeploymentName",
+            "value": "deployment_name",
             "description": "Represents an Ada model deployment name to use. This model deployment must be in the same Azure OpenAI resource, but\nOn Your Data will use this model deployment via an internal call rather than a public one, which enables vector\nsearch even in private networks."
           },
           {
             "name": "modelId",
-            "value": "ModelId",
+            "value": "model_id",
             "description": "Represents a specific embedding model ID as defined in the search service.\nCurrently only supported by Elasticsearch®."
           }
         ]
@@ -3376,7 +3492,7 @@
           "$ref": "#/definitions/AzureChatExtensionConfiguration"
         }
       ],
-      "x-ms-discriminator-value": "Pinecone"
+      "x-ms-discriminator-value": "pinecone"
     },
     "PineconeChatExtensionParameters": {
       "type": "object",
@@ -3386,14 +3502,16 @@
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
         },
-        "topNDocuments": {
+        "top_n_documents": {
           "type": "integer",
           "format": "int32",
-          "description": "The configured top number of documents to feature for the configured query."
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
         },
-        "inScope": {
+        "in_scope": {
           "type": "boolean",
-          "description": "Whether queries should be restricted to use of indexed data."
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
         },
         "strictness": {
           "type": "integer",
@@ -3402,64 +3520,73 @@
           "minimum": 1,
           "maximum": 5
         },
-        "roleInformation": {
+        "role_information": {
           "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
         },
         "environment": {
           "type": "string",
           "description": "The environment name of Pinecone."
         },
-        "indexName": {
+        "index_name": {
           "type": "string",
-          "description": "The name of the Pinecone database index."
+          "description": "The name of the Pinecone database index.",
+          "x-ms-client-name": "indexName"
         },
-        "fieldsMapping": {
+        "field_mapping": {
           "$ref": "#/definitions/PineconeFieldMappingOptions",
-          "description": "Customized field mapping behavior to use when interacting with the search index."
+          "description": "Customized field mapping behavior to use when interacting with the search index.",
+          "x-ms-client-name": "fieldsMapping"
         },
-        "embeddingDependency": {
+        "embedding_dependency": {
           "$ref": "#/definitions/OnYourDataVectorizationSource",
-          "description": "The embedding dependency for vector search."
+          "description": "The embedding dependency for vector search.",
+          "x-ms-client-name": "embeddingDependency"
         }
       },
       "required": [
         "environment",
-        "indexName",
-        "fieldsMapping",
-        "embeddingDependency"
+        "index_name",
+        "field_mapping",
+        "embedding_dependency"
       ]
     },
     "PineconeFieldMappingOptions": {
       "type": "object",
       "description": "Optional settings to control how fields are processed when using a configured Pinecone resource.",
       "properties": {
-        "titleField": {
+        "title_field": {
           "type": "string",
-          "description": "The name of the index field to use as a title."
+          "description": "The name of the index field to use as a title.",
+          "x-ms-client-name": "titleField"
         },
-        "urlField": {
+        "url_field": {
           "type": "string",
-          "description": "The name of the index field to use as a URL."
+          "description": "The name of the index field to use as a URL.",
+          "x-ms-client-name": "urlField"
         },
-        "filepathField": {
+        "filepath_field": {
           "type": "string",
-          "description": "The name of the index field to use as a filepath."
+          "description": "The name of the index field to use as a filepath.",
+          "x-ms-client-name": "filepathField"
         },
-        "contentFields": {
+        "content_fields": {
           "type": "array",
           "description": "The names of index fields that should be treated as content.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "contentFields"
         },
-        "contentFieldsSeparator": {
+        "content_fields_separator": {
           "type": "string",
-          "description": "The separator pattern that content fields should use."
+          "description": "The separator pattern that content fields should use.",
+          "x-ms-client-name": "contentFieldsSeparator"
         }
       },
       "required": [
-        "contentFields"
+        "content_fields"
       ]
     },
     "StopFinishDetails": {

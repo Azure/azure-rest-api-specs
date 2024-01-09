@@ -19,23 +19,23 @@ using TypeSpec.Versioning;
 """)
 enum AzureChatExtensionType {
   @doc("Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension.")
-  azureCognitiveSearch: "AzureCognitiveSearch",
+  azureCognitiveSearch: "azure_search",
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension.")
-  azureMachineLearningIndex: "AzureMLIndex",
+  azureMachineLearningIndex: "azure_ml_index",
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("Represents the use of Azure Cosmos DB as an Azure OpenAI chat extension.")
-  azureCosmosDB: "AzureCosmosDB",
+  azureCosmosDB: "azure_cosmos_db",
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("Represents the use of Elasticsearch® index as an Azure OpenAI chat extension.")
-  elasticsearch: "Elasticsearch",
+  elasticsearch: "elasticsearch",
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("Represents the use of Pinecone index as an Azure OpenAI chat extension.")
-  pinecone: "Pinecone",
+  pinecone: "pinecone",
 }
 
 @discriminator("type")
@@ -67,6 +67,32 @@ model AzureChatExtensionsMessageContext {
     extensions.
   """)
   messages?: ChatResponseMessage[];
+  
+  @doc("The data source retrieval result, used to generate the assistent message in the response.")
+  citations?: Citation[];
+
+  @doc("The detected intents from the chat history, used to query the data source.")
+  intents?: string[];
+}
+@added(ServiceApiVersions.v2023_08_01_Preview)
+@doc("Citation information for a chat completions response message.")
+model Citation {
+  @doc("The content of the citation.")
+  content: string;
+
+  @doc("The title of the citation.")
+  title?: string;
+
+  @doc("The URL of the citation.")
+  url?: string;
+
+  @doc("The file path of the citation.")
+  @projectedName("json", "file_path")
+  filePath?: string;
+
+  @doc("The chunk ID of the citation.")
+  @projectedName("json", "chunk_id")
+  chunkId?: string;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)

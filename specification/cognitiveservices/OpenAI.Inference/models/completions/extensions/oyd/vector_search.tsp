@@ -14,20 +14,20 @@ enum OnYourDataVectorizationSourceType {
   @doc("""
   Represents vectorization performed by public service calls to an Azure OpenAI embedding model.
   """)
-  endpoint: "Endpoint",
+  endpoint: "endpoint",
 
   @doc("""
   Represents an Ada model deployment name to use. This model deployment must be in the same Azure OpenAI resource, but
   On Your Data will use this model deployment via an internal call rather than a public one, which enables vector
   search even in private networks.
   """)
-  deploymentName: "DeploymentName",
+  deploymentName: "deployment_name",
 
   @doc("""
   Represents a specific embedding model ID as defined in the search service.
   Currently only supported by Elasticsearch®.
   """)
-  modelId: "ModelId",
+  modelId: "model_id",
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
@@ -66,6 +66,7 @@ model OnYourDataDeploymentNameVectorizationSource
   type: OnYourDataVectorizationSourceType.deploymentName;
 
   @doc("The embedding model deployment name within the same Azure OpenAI resource. This enables you to use vector search without Azure OpenAI api-key and without Azure OpenAI public network access.")
+  @projectedName("json", "deployment_name")
   deploymentName: string;
 }
 
@@ -80,5 +81,6 @@ model OnYourDataModelIdVectorizationSource
   type: OnYourDataVectorizationSourceType.modelId;
 
   @doc("The embedding model ID build inside the search service. Currently only supported by Elasticsearch®.")
+  @projectedName("json", "model_id")
   modelId: string;
 }

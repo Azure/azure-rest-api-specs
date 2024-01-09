@@ -35,6 +35,7 @@ model AzureCognitiveSearchChatExtensionParameters {
   endpoint: url;
 
   @doc("The name of the index to use as available in the referenced Azure Cognitive Search resource.")
+  @projectedName("json", "index_name")
   indexName: string;
 
   @doc("The API key to use when interacting with the Azure Cognitive Search resource.")
@@ -43,13 +44,16 @@ model AzureCognitiveSearchChatExtensionParameters {
   key?: string;
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
+  @projectedName("json", "fields_mapping")
   @projectedName("csharp", "FieldMappingOptions")
   fieldsMapping?: AzureCognitiveSearchIndexFieldMappingOptions;
 
   @doc("The query type to use with Azure Cognitive Search.")
+  @projectedName("json", "query_type")
   queryType?: AzureCognitiveSearchQueryType;
 
   @doc("The additional semantic configuration for the query.")
+  @projectedName("json", "semantic_configuration")
   semanticConfiguration?: string;
 
   @doc("Search filter.")
@@ -67,6 +71,7 @@ model AzureCognitiveSearchChatExtensionParameters {
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("The embedding dependency for vector search.")
+  @projectedName("json", "embedding_dependency")
   embeddingDependency?: OnYourDataVectorizationSource;
 }
 
@@ -74,31 +79,38 @@ model AzureCognitiveSearchChatExtensionParameters {
 @added(ServiceApiVersions.v2023_08_01_Preview)
 model AzureCognitiveSearchIndexFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
+  @projectedName("json", "title_field")
   @projectedName("csharp", "TitleFieldName")
   titleField?: string;
 
   @doc("The name of the index field to use as a URL.")
+  @projectedName("json", "url_field")
   @projectedName("csharp", "UrlFieldName")
   urlField?: string;
 
   @doc("The name of the index field to use as a filepath.")
+  @projectedName("json", "filepath_field")
   @projectedName("csharp", "FilepathFieldName")
   filepathField?: string;
 
   @doc("The names of index fields that should be treated as content.")
+  @projectedName("json", "content_fields")
   @projectedName("csharp", "ContentFieldNames")
   contentFields?: string[];
 
   @doc("The separator pattern that content fields should use.")
+  @projectedName("json", "content_fields_separator")
   @projectedName("csharp", "ContentFieldSeparator")
   contentFieldsSeparator?: string;
 
   @doc("The names of fields that represent vector data.")
+  @projectedName("json", "vector_fields")
   @projectedName("csharp", "VectorFieldNames")
   vectorFields?: string[];
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("The names of fields that represent image vector data.")
+  @projectedName("json", "image_vector_fields")
   @projectedName("csharp", "ImageVectorFieldNames")
   imageVectorFields?: string[];
 }
@@ -118,8 +130,8 @@ enum AzureCognitiveSearchQueryType {
   vector: "vector",
 
   @doc("Represents a combination of the simple query strategy with vector data.")
-  vectorSimpleHybrid: "vectorSimpleHybrid",
+  vectorSimpleHybrid: "vector_simple_hybrid",
 
   @doc("Represents a combination of semantic search and vector data querying.")
-  vectorSemanticHybrid: "vectorSemanticHybrid",
+  vectorSemanticHybrid: "vector_semantic_hybrid",
 }
