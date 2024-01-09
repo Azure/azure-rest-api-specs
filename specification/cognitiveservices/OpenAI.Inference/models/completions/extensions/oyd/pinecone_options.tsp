@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @added(ServiceApiVersions.v2023_12_01_Preview)
 @doc("""
-A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
+A specific representation of configurable options for Pinecone when using it as an Azure OpenAI chat
 extension.
 """)
 model PineconeChatExtensionConfiguration
