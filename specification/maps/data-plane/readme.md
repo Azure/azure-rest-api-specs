@@ -53,7 +53,7 @@ directive:
 
 ### Tag: package-stable-2023-06-01
 
-These settings apply only when `--tag=package-stable-2023-07-01` is specified on the command line.
+These settings apply only when `--tag=package-stable-2023-06-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-stable-2023-06-01'
 input-file:
@@ -79,7 +79,14 @@ input-file:
   - Microsoft.Maps/Data/preview/1.0/data.json
   - Microsoft.Maps/Render/preview/1.0/render.json
   - Search/preview/1.0/search.json
-exclude-file:
+```
+
+### Tag: package-deprecated
+
+These settings apply only when `--tag=package-deprecated` is specified on the command line.
+
+``` yaml $(tag) == 'package-deprecated'
+input-file:
   - Microsoft.Maps/Alias/preview/2.0/alias.json
   - Microsoft.Maps/DEM/preview/1.0/elevation.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json
@@ -91,6 +98,14 @@ exclude-file:
   - Microsoft.Maps/Timezone/preview/1.0/timezone.json
   - Microsoft.Maps/Traffic/preview/1.0/traffic.json
   - Microsoft.Maps/Weather/preview/1.0/weather.json
+```
+
+### Tag: package-creator
+
+These settings apply only when `--tag=package-creator` is specified on the command line.
+
+``` yaml $(tag) == 'package-creator'
+input-file:
   - Microsoft.Maps/Dataset/preview/2.0/dataset.json
   - Microsoft.Maps/DwgConversion/preview/2.0/dwgconversion.json
   - Microsoft.Maps/FeatureState/preview/2.0/featurestate.json
