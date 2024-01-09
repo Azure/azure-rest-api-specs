@@ -2923,6 +2923,10 @@
               "$ref": "#/definitions/SiteConfig",
               "description": "Configuration of the app."
             },
+            "functionAppConfig": {
+              "$ref": "#/definitions/FunctionAppConfig",
+              "description": "Configuration specific of the Azure Function app."
+            },
             "daprConfig": {
               "$ref": "#/definitions/DaprConfig",
               "description": "Dapr configuration of the app."
@@ -3583,6 +3587,105 @@
         "publicNetworkAccess": {
           "description": "Property to allow or block all public traffic.",
           "type": "string"
+        }
+      }
+    },
+    "FunctionsDeployment": {
+      "description": "Configuration section for Azure Function app deployment.",
+      "type": "object",
+      "properties": {
+        "storage": {
+          "description": "Storage for deployed package used by the Azure Function app.",
+          "type": "object",
+          "properties": {
+            "type": {
+              "description": "Property to select Azure Storage Type. Available option: blobContainer.",
+              "type": "string"
+            },
+            "value": {
+              "description": "Property to set the URL for the selected Azure Storage Type. Example: For blobContainer, value will be like https://<storageAccountName>.blob.core.windows.net/<containerName>.",
+              "type": "string"
+            },
+            "authentication": {
+              "description": "Authentication method to access the storage for deployment.",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "description": "Property to select Authentication Type to access the selected storage. Available options: SystemAssignedIdentity, UserAssignedIdentity, StorageAccountAccessKey.",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Property to set the value for the selected Authentication Type. Example: For SystemAssignedIdentity, do not set value. For UserAssignedIdentity, set resource ID of identity. For StorageAccountAccessKey, set name of the app setting that has the storage account access key.",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "FunctionsAlwaysReadyConfig": {
+      "description": "Sets the number of 'Always Ready' instances for a specific Azure Function or a specific trigger type.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Either an Azure Functions trigger or an Azure Function name."
+        },
+        "instanceCount": {
+          "type": "number",
+          "description": "Sets the number of 'Always Ready' instances for a given trigger or a specific Azure Function."
+        }
+      }
+    },
+    "FunctionsScaleAndConcurrency": {
+      "description": "Scale and concurrency settings for an Azure Functions app.",
+      "type": "object",
+      "properties": {
+        "alwaysReady": {
+          "description": "'Always Ready' configuration for an Azure Function app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FunctionsAlwaysReadyConfig"
+          }
+        },
+        "maximumInstanceCount": {
+          "description": "The maximum number of VM instances for the Azure Functions app.",
+          "type": "number"
+        },
+        "instanceMemoryMB": {
+          "description": "Set the amount of memory allocated to each instance of the function app in MiB; CPU and network bandwidth are allocated proportionally.",
+          "type": "number"
+        },
+        "triggers": {
+          "type": "object",
+          "description": "Scale and concurrency settings for Azure Functions triggers.",
+          "properties": {
+            "http": {
+              "type": "object",
+              "description": "Scale and concurrency settings for the HTTP trigger.",
+              "properties": {
+                "perInstanceConcurrency": {
+                  "type": "number",
+                  "description": "The maximum number of concurrent HTTP trigger invocations per VM instance."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "FunctionAppConfig": {
+      "description": "Function App configuration.",
+      "type": "object",
+      "properties": {
+        "deployment": {
+          "$ref": "#/definitions/FunctionsDeployment",
+          "description": "Azure Functions deployment configuration."
+        },
+        "scaleAndConcurrency": {
+          "$ref": "#/definitions/FunctionsScaleAndConcurrency",
+          "description": "Azure Functions scale and concurrency settings."
         }
       }
     },
