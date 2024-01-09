@@ -25,6 +25,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @doc("Azure API Center Resource Provider.")
+@Azure.ResourceManager.armCommonTypesVersion("v5")
 namespace Microsoft.ApiCenter;
 
 @doc("The available API versions.")
