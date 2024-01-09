@@ -19,8 +19,7 @@ namespace Azure.Batch;
 interface Ops {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
   @access(Access.internal, "java")
-  @get
-  ListOperation<TFilter, TResponse> is Azure.Core.RpcOperation<
+  @get ListOperation<TFilter, TResponse> is Azure.Core.RpcOperation<
     BatchCommonListHeaders & TFilter,
     BatchResponseHeaders & TResponse,
     NoFilter,
@@ -29,12 +28,11 @@ interface Ops {
 
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
   @access(Access.internal, "java")
-  @get
-  ReadOperation<
+  @get ReadOperation<
     TPathParams extends TypeSpec.Reflection.Model,
     TResource
   > is Azure.Core.RpcOperation<
-    TPathParams & BatchClientRequestHeaders,
+    BatchClientRequestHeaders & TPathParams,
     BatchResponseHeaders & TResource,
     NoFilter,
     BatchError
@@ -42,8 +40,7 @@ interface Ops {
 
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
   @access(Access.internal, "java")
-  @delete
-  DeleteOperation<
+  @delete DeleteOperation<
     TFilter,
     TResponse extends TypeSpec.Reflection.Model
   > is Azure.Core.RpcOperation<
@@ -55,9 +52,8 @@ interface Ops {
 
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
   @access(Access.internal, "java")
-  @post
-  CreateOperation<TResource, TResponse> is RpcOperation<
-    TResource & MinimalMetadata & BatchClientRequestHeaders,
+  @post CreateOperation<TResource, TResponse> is RpcOperation<
+    BatchClientRequestHeaders & MinimalMetadata & TResource,
     BatchResponseHeaders & Created<TResponse>,
     NoFilter,
     BatchError
@@ -65,9 +61,8 @@ interface Ops {
 
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
   @access(Access.internal, "java")
-  @patch
-  UpdateOperation<TResource, TResponse> is RpcOperation<
-    TResource & MinimalMetadata & BatchClientRequestHeaders,
+  @patch UpdateOperation<TResource, TResponse> is RpcOperation<
+    BatchClientRequestHeaders & MinimalMetadata & TResource,
     BatchResponseHeaders & TResponse,
     NoFilter,
     BatchError
@@ -75,9 +70,8 @@ interface Ops {
 
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
   @access(Access.internal, "java")
-  @put
-  ReplaceOperation<TResource, TResponse> is RpcOperation<
-    TResource & MinimalMetadata & BatchClientRequestHeaders,
+  @put ReplaceOperation<TResource, TResponse> is RpcOperation<
+    BatchClientRequestHeaders & MinimalMetadata & TResource,
     BatchResponseHeaders & TResponse,
     NoFilter,
     BatchError
@@ -85,9 +79,8 @@ interface Ops {
 
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
   @access(Access.internal, "java")
-  @head
-  ResourceInfoOperation<TResource, TResponse> is RpcOperation<
-    TResource & BatchClientRequestHeaders,
+  @head ResourceInfoOperation<TResource, TResponse> is RpcOperation<
+    BatchClientRequestHeaders & TResource,
     BatchResponseHeaders & TResponse,
     NoFilter,
     BatchError
@@ -98,8 +91,7 @@ interface Ops {
   @doc("New rpc operation allowing multiple repsonses")
   @Foundations.Private.needsRoute
   @access(Access.internal, "java")
-  @head
-  ResourceInfoOperationWithAdditionalResponse<
+  @head ResourceInfoOperationWithAdditionalResponse<
     TParams extends TypeSpec.Reflection.Model,
     TResponse extends TypeSpec.Reflection.Model,
     TAdditionalResponse extends {} = {}
@@ -112,9 +104,8 @@ interface Ops {
 
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
   @access(Access.internal, "java")
-  @post
-  PostOperation<TResource, TResponse> is RpcOperation<
-    TResource & BatchClientRequestHeaders,
+  @post PostOperation<TResource, TResponse> is RpcOperation<
+    BatchClientRequestHeaders & TResource,
     BatchResponseHeaders & TResponse,
     NoFilter,
     BatchError
