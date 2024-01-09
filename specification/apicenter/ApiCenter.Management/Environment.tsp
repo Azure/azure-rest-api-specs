@@ -16,6 +16,7 @@ model Environment is ProxyResource<EnvironmentProperties> {
   @doc("The name of the environment.")
   @maxLength(90)
   @minLength(1)
+  @pattern("^[a-zA-Z0-9-]{3,90}$")
   @path
   @key("environmentName")
   @segment("environments")
