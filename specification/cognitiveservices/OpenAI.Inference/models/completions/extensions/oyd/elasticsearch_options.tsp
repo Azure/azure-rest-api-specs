@@ -32,6 +32,7 @@ model ElasticsearchChatExtensionParameters {
   endpoint: url;
 
   @doc("The index name of Elasticsearch®.")
+  @projectedName("json", "index_name")
   indexName: string;
 
   @doc("The index field mapping options of Elasticsearch®.")

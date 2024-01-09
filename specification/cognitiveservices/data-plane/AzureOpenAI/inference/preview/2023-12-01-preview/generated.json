@@ -2731,9 +2731,10 @@
           "format": "uri",
           "description": "The endpoint of Elasticsearch®."
         },
-        "indexName": {
+        "index_name": {
           "type": "string",
-          "description": "The index name of Elasticsearch®."
+          "description": "The index name of Elasticsearch®.",
+          "x-ms-client-name": "indexName"
         },
         "fields_mapping": {
           "$ref": "#/definitions/ElasticsearchIndexFieldMappingOptions",
@@ -2754,7 +2755,7 @@
       "required": [
         "authentication",
         "endpoint",
-        "indexName"
+        "index_name"
       ]
     },
     "ElasticsearchIndexFieldMappingOptions": {
