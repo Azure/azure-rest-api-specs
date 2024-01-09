@@ -16,6 +16,7 @@ model Workspace is ProxyResource<WorkspaceProperties> {
   @doc("The name of the workspace.")
   @maxLength(90)
   @minLength(1)
+  @pattern("^[a-zA-Z0-9-]{3,90}$")
   @path
   @key("workspaceName")
   @segment("workspaces")
