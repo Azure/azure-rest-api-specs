@@ -61,7 +61,7 @@ model DataSource {
 @doc("SKU of the experimentation workspace.")
 model Sku {
   @doc("Name of the SKU.")
-  name: string;
+  skuName: string;
 }
 
 @doc("A ExperimentationWorkspace Resource by Split.IO")
