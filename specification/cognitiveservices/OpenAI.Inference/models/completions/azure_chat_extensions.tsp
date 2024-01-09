@@ -68,7 +68,7 @@ model AzureChatExtensionsMessageContext {
   """)
   messages?: ChatResponseMessage[];
   
-  @doc("The data source retrieval result, used to generate the assistent message in the response.")
+  @doc("The data source retrieval result, used to generate the assistant message in the response.")
   citations?: Citation[];
 
   @doc("The detected intents from the chat history, used to query the data source.")
