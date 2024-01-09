@@ -206,6 +206,9 @@
           }
         },
         "x-ms-examples": {
+          "Creates a completion based on Azure Cognitive Services data and system-assigned managed identity. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/extensions_chat_completions_azure_search_minimum.json"
+          },
           "Creates a completion for the provided prompt, parameters and chosen model.": {
             "$ref": "./examples/chat_completions.json"
           }
@@ -310,75 +313,6 @@
         "x-ms-examples": {
           "Return the embeddings for a given prompt.": {
             "$ref": "./examples/embeddings.json"
-          }
-        }
-      }
-    },
-    "/deployments/{deploymentId}/extensions/chat/completions": {
-      "post": {
-        "operationId": "GetChatCompletionsWithAzureExtensions",
-        "description": "Gets chat completions for the provided chat messages.\nThis is an Azure-specific version of chat completions that supports integration with configured data sources and\nother augmentations to the base chat completions capabilities.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "deploymentId",
-            "in": "path",
-            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatCompletionsOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ChatCompletions"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a completion based on Azure Cognitive Services data and system-assigned managed identity. Uses Azure OpenAI chat extensions.": {
-            "$ref": "./examples/extensions_chat_completions_azure_search_minimum.json"
-          },
-          "Creates a completion based on Azure Cognitive Services image vector data. Uses Azure OpenAI chat extensions.": {
-            "$ref": "./examples/extensions_chat_completions_azure_search_image_vector.json"
-          },
-          "Creates a completion based on Azure Cognitive Services vector data and user-assigned managed identity. Uses Azure OpenAI chat extensions.": {
-            "$ref": "./examples/extensions_chat_completions_azure_search_advanced.json"
-          },
-          "Creates a completion for the provided AML index. Uses Azure OpenAI chat extensions.": {
-            "$ref": "./examples/extensions_chat_completions_aml_index.json"
-          },
-          "Creates a completion for the provided Azure Cosmos DB. Uses Azure OpenAI chat extensions.": {
-            "$ref": "./examples/extensions_chat_completions_cosmos_db.json"
-          },
-          "Creates a completion for the provided Elasticsearch. Uses Azure OpenAI chat extensions.": {
-            "$ref": "./examples/extensions_chat_completions_elasticsearch.json"
-          },
-          "Creates a completion for the provided Pinecone resource. Uses Azure OpenAI chat extensions.": {
-            "$ref": "./examples/extensions_chat_completions_pinecone.json"
           }
         }
       }
@@ -1804,12 +1738,13 @@
           "type": "string",
           "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
         },
-        "dataSources": {
+        "data_sources": {
           "type": "array",
           "description": "  The configuration entries for Azure OpenAI chat extensions that use them.\n  This additional specification is only compatible with Azure OpenAI.",
           "items": {
             "$ref": "#/definitions/AzureChatExtensionConfiguration"
           },
+          "x-ms-client-name": "dataSources",
           "x-ms-identifiers": []
         },
         "enhancements": {
