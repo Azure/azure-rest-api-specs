@@ -20,9 +20,7 @@ using Azure.Core;
 )
 @service({
   title: "Programmable Connectivity",
-  version: "2023-11-14-preview",
 })
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @server(
   "{endpoint}",
   "Azure Programmable Connectivity Endpoint.",
@@ -31,4 +29,11 @@ using Azure.Core;
     endpoint: string,
   }
 )
+@versioned(APCVersions)
 namespace Azure.ProgrammableConnectivity;
+
+enum APCVersions {
+  @doc("Version 2024-01-09-preview")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_01_09_preview: "v2024_01_09_preview",
+}
