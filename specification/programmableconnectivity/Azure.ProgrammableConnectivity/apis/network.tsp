@@ -15,7 +15,7 @@ interface DeviceNetworks {
   retrieve is Operations.ResourceAction<
     NetworkRetrieveEndpoint,
     DeviceNetworkIdentifier,
-    NetworkDevice
+    NetworkRetrieveResult
   >;
 }
 
@@ -51,7 +51,7 @@ model DeviceNetworkIdentifier {
 }
 
 @doc("The network that the device is on.")
-model NetworkDevice {
+model NetworkRetrieveResult {
   @pattern("[a-z0-9-]+$")
   @doc("The identifier for the network. This can be used as the networkIdentifier for the service APIs.")
   networkCode: string;
