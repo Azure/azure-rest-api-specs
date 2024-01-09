@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Programmable Connectivity",
-    "version": "2023-11-14-preview",
+    "version": "v2024_01_09_preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -124,7 +124,7 @@
     },
     "/device-network/{network}:retrieve": {
       "post": {
-        "operationId": "Networks_Retrieve",
+        "operationId": "DeviceNetworks_Retrieve",
         "description": "Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.",
         "parameters": [
           {
@@ -185,11 +185,6 @@
             "schema": {
               "$ref": "#/definitions/ApcErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Networks_Retrieve": {
-            "$ref": "./examples/Networks_Retrieve_MaximumSet_Gen.json"
           }
         }
       }
@@ -484,6 +479,24 @@
     }
   },
   "definitions": {
+    "APCVersions": {
+      "type": "string",
+      "description": "APC Versions",
+      "enum": [
+        "v2024_01_09_preview"
+      ],
+      "x-ms-enum": {
+        "name": "APCVersions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_01_09_preview",
+            "value": "v2024_01_09_preview",
+            "description": "Version 2024-01-09-preview"
+          }
+        ]
+      }
+    },
     "ApcErrorResponse": {
       "type": "object",
       "description": "A custom error type for APC.",
@@ -699,20 +712,6 @@
         "verificationResult"
       ]
     },
-    "NetworkRetrieveResult": {
-      "type": "object",
-      "description": "The network that the device is on.",
-      "properties": {
-        "networkCode": {
-          "type": "string",
-          "description": "The identifier for the network. This can be used as the networkIdentifier for the service APIs.",
-          "pattern": "[a-z0-9-]+$"
-        }
-      },
-      "required": [
-        "networkCode"
-      ]
-    },
     "NetworkAccessIdentifierModel": {
       "type": "object",
       "description": "The network access ID/external ID of the device",
@@ -771,6 +770,20 @@
       },
       "required": [
         "network"
+      ]
+    },
+    "NetworkRetrieveResult": {
+      "type": "object",
+      "description": "The network that the device is on.",
+      "properties": {
+        "networkCode": {
+          "type": "string",
+          "description": "The identifier for the network. This can be used as the networkIdentifier for the service APIs.",
+          "pattern": "[a-z0-9-]+$"
+        }
+      },
+      "required": [
+        "networkCode"
       ]
     },
     "NumberDevice": {
