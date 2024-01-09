@@ -121,6 +121,13 @@ enum Versions {
   "payload"
 );
 
+@@TypeSpec.OpenAPI.extension(Services.update::parameters.properties,
+  "x-ms-client-name",
+  "payload"
+);
+@@projectedName(Services.update::parameters.properties, "json", "payload");
+@@projectedName(Services.update::parameters.properties, "client", "payload");
+
 @@TypeSpec.OpenAPI.extension(Workspaces.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "payload"
@@ -172,6 +179,9 @@ enum Versions {
   "client",
   "payload"
 );
+
+@@visibility(Azure.Core.Page.nextLink, "read");
+@@visibility(Azure.Core.Page.value, "read");
 /**
  * A resource list operation, at the scope of the resource's parent
  * @template TResource the resource being patched

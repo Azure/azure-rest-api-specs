@@ -25,9 +25,9 @@ model Service is TrackedResource<ServiceProperties> {
 @armResourceOperations
 interface Services {
   @doc("Returns details of the service.")
-  get is ArmResourceRead<Service>;
+  get is Azure.ResourceManager.ArmResourceRead<Service>;
   @doc("Creates new or updates existing API.")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Service>;
+  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Service>;
   @doc("Updates existing service.")
   update is ArmResourcePatchSync<Service, ServiceProperties>;
   @doc("Deletes specified service.")
