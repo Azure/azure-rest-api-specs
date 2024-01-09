@@ -130,6 +130,64 @@ interface StoragePools {
   getAvsParameters(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<AvsDetails> | ErrorResponse;
+
+  @doc("Lists all the storage pools.")
+  @armResourceAction(StoragePool)
+  @action("listStoragePools")
+  @post
+  listStoragePools(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): OkResponse<StoragePoolList> | ErrorResponse;
+
+  @doc("Enable AVS on storage pool")
+  @armResourceAction(StoragePool)
+  @action("enableAVS")
+  @post
+  enableAVS(
+    ...ResourceInstanceParameters<StoragePool>,
+    storagePoolEnableAvs: StoragePoolEnableAvs,
+  ): AcceptedResponse | ErrorResponse;
+
+  @doc("Disable AVS on storage pool")
+  @armResourceAction(StoragePool)
+  @action("disableAVS")
+  @post
+  disableAVS(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): AcceptedResponse | ErrorResponse;
+
+  @doc("Finalize AVS on storage pool")
+  @armResourceAction(StoragePool)
+  @action("finalizeAVS")
+  @post
+  finalizeAVS(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): AcceptedResponse | ErrorResponse;
+
+  @doc("Enable Vsphere plugins on storage pool")
+  @armResourceAction(StoragePool)
+  @action("enableVspherePlugins")
+  @post
+  enableVspherePlugins(
+    ...ResourceInstanceParameters<StoragePool>,
+    storagePoolEnableVspherePlugin: StoragePoolEnableVspherePlugin,
+  ): AcceptedResponse | ErrorResponse;
+
+  @doc("Disable Vsphere plugins on storage pool")
+  @armResourceAction(StoragePool)
+  @action("disableVspherePlugins")
+  @post
+  disableVspherePlugins(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): AcceptedResponse | ErrorResponse;
+
+  @doc("Update Vsphere plugins on storage pool")
+  @armResourceAction(StoragePool)
+  @action("updateVspherePlugins")
+  @post
+  updateVspherePlugins(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): AcceptedResponse | ErrorResponse;
 }
 
 @doc("AVS (Azure VMware Solution) related properties.")
@@ -223,6 +281,37 @@ enum AlertLevel {
   @doc("Error level.")
   Error: "error",
 }
+
+@doc("Get the list of all storage pools")
+model StoragePoolList {
+  @doc("Storage pool info")
+  items: StoragePool[];
+
+  @doc("Paging Continuation Token.")
+  ContinuationToken: string;
+}
+
+@doc("Storage Pool enable AVS")
+model StoragePoolEnableAvs {
+  @doc("Unique identifier of the vSphere software package in the SDDC")
+  vSphereUuid: string;
+
+  @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
+  sddcResourceId: string;
+
+  @doc("Password for VASA service login.")
+  vasaProviderPassword: string;
+}
+
+@doc("Storage Pool enable Vsphere plugins")
+model StoragePoolEnableVspherePlugin {
+  @doc("Storage Pool Vsphere id")
+  vSphereIp: string;
+
+  @doc("Storage Pool Vsphere cert thumb print")
+  vSphereCertThumbprint: string; 
+}
+
 
 @doc("The AVS Storage Container resource type.")
 @parentResource(StoragePool)
