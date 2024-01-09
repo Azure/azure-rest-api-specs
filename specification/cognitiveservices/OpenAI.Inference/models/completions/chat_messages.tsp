@@ -143,6 +143,12 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   completions request to resolve as configured.
   """)
   functionCall?: FunctionCall;
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("""
+  Represents the incremental steps performed by the extensions while processing the chat completions request.
+  """)
+  context?: AzureChatExtensionsMessageContext;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
@@ -203,8 +209,7 @@ model ChatResponseMessage {
 
   @added(ServiceApiVersions.v2023_08_01_Preview)
   @doc("""
-  If Azure OpenAI chat extensions are configured, this array represents the incremental steps performed by those
-  extensions while processing the chat completions request.
+  Represents the incremental steps performed by the extensions while processing the chat completions request.
   """)
   context?: AzureChatExtensionsMessageContext;
 }
