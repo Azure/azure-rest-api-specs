@@ -38,9 +38,6 @@ model ExperimentationWorkspaceProperties {
 
   @doc("Data source that telemetry data required for experimentation will be retrieved from.")
   dataSource?: DataSource;
-
-  @doc("SKU of the experimentation workspace.")
-  sku: Sku;
 }
 
 @doc("Access policy for an experimentation workspace.")
@@ -61,7 +58,7 @@ model DataSource {
 @doc("SKU of the experimentation workspace.")
 model Sku {
   @doc("Name of the SKU.")
-  skuName: string;
+  name: string;
 }
 
 @doc("A ExperimentationWorkspace Resource by Split.IO")
@@ -74,6 +71,9 @@ model ExperimentationWorkspace
   @doc("The name of the ExperimentationWorkspace resource")
   @path
   name: string;
+
+  @doc("SKU of the experimentation workspace.")
+  sku: Sku;
 
   ...ManagedServiceIdentity;
 }

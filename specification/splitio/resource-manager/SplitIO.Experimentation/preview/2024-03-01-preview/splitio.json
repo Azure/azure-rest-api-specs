@@ -520,11 +520,18 @@
             "create"
           ]
         },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the experimentation workspace."
+        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
+      "required": [
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -568,21 +575,20 @@
         "dataSource": {
           "$ref": "#/definitions/DataSource",
           "description": "Data source that telemetry data required for experimentation will be retrieved from."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU of the experimentation workspace."
         }
       },
       "required": [
-        "accessPolicy",
-        "sku"
+        "accessPolicy"
       ]
     },
     "ExperimentationWorkspaceUpdate": {
       "type": "object",
       "description": "The type used for update operations of the ExperimentationWorkspace.",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/SkuUpdate",
+          "description": "SKU of the experimentation workspace."
+        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
@@ -611,10 +617,6 @@
         "dataSource": {
           "$ref": "#/definitions/DataSourceUpdate",
           "description": "Data source that telemetry data required for experimentation will be retrieved from."
-        },
-        "sku": {
-          "$ref": "#/definitions/SkuUpdate",
-          "description": "SKU of the experimentation workspace."
         }
       }
     },
@@ -622,20 +624,20 @@
       "type": "object",
       "description": "SKU of the experimentation workspace.",
       "properties": {
-        "skuName": {
+        "name": {
           "type": "string",
           "description": "Name of the SKU."
         }
       },
       "required": [
-        "skuName"
+        "name"
       ]
     },
     "SkuUpdate": {
       "type": "object",
       "description": "SKU of the experimentation workspace.",
       "properties": {
-        "skuName": {
+        "name": {
           "type": "string",
           "description": "Name of the SKU."
         }
