@@ -2221,7 +2221,7 @@
     },
     "Azure.Core.eTag": {
       "type": "string",
-      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+            "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
     "BestWorkerMode": {
       "type": "object",
@@ -4121,6 +4121,11 @@
         "availableForOffers": {
           "type": "boolean",
           "description": "A flag indicating this worker is open to receive offers or not."
+        },
+        "maxConcurrentOffers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If this is set, the worker will only receive up to this many new offers at a time."
         }
       },
       "required": [
@@ -4195,6 +4200,11 @@
         "availableForOffers": {
           "type": "boolean",
           "description": "A flag indicating this worker is open to receive offers or not."
+        },
+        "maxConcurrentOffers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If this is set, the worker will only receive up to this many new offers at a time."
         }
       }
     },

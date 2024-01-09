@@ -778,6 +778,9 @@ model RouterWorker {
 
   @doc("A flag indicating this worker is open to receive offers or not.")
   availableForOffers?: boolean;
+  
+  @doc("If this is set, the worker will only receive up to this many new offers at a time.")
+  maxConcurrentOffers?: int32;
 }
 
 @doc("Represents the capacity a job in this channel will consume from a worker.")
