@@ -12,7 +12,8 @@ using Azure.Core.Traits;
 
 namespace AzureCommunicationMessagesService;
 
-alias ServiceTraits = SupportsRepeatableRequests;
+alias ServiceTraits = SupportsRepeatableRequests &
+  SupportsClientRequestId;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
