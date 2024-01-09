@@ -32,6 +32,7 @@ using Azure.Core;
 @versioned(APCVersions)
 namespace Azure.ProgrammableConnectivity;
 
+@doc("APC Versions")
 enum APCVersions {
   @doc("Version 2024-01-09-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
