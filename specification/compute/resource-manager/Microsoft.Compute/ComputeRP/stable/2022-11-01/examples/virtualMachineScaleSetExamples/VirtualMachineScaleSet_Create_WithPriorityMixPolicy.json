@@ -15,62 +15,62 @@
         "orchestrationMode": "Flexible",
         "platformFaultDomainCount": 1,
         "priorityMixPolicy": {
-            "baseRegularPriorityCount": 10,
-            "regularPriorityPercentageAboveBase": 50
+          "baseRegularPriorityCount": 10,
+          "regularPriorityPercentageAboveBase": 50
         },
         "virtualMachineProfile": {
           "priority": "spot",
           "storageProfile": {
-              "imageReference": {
-                  "publisher": "Canonical",
-                  "offer": "0001-com-ubuntu-server-focal",
-                  "sku": "20_04-lts-gen2",
-                  "version": "latest"
-              },
-              "osDisk": {
-                  "createOption": "fromImage",
-                  "caching": "ReadWrite",
-                  "managedDisk": {
-                      "storageAccountType": "Standard_LRS"
-                  }
+            "imageReference": {
+              "publisher": "Canonical",
+              "offer": "0001-com-ubuntu-server-focal",
+              "sku": "20_04-lts-gen2",
+              "version": "latest"
+            },
+            "osDisk": {
+              "createOption": "fromImage",
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
               }
+            }
           },
           "osProfile": {
-              "computerNamePrefix": "{vmss-name}",
-              "adminUsername": "{your-username}",
-              "adminPassword": "{your-password}"
+            "computerNamePrefix": "{vmss-name}",
+            "adminUsername": "{your-username}",
+            "adminPassword": "{your-password}"
           },
           "networkProfile": {
-              "networkInterfaceConfigurations": [
-                  {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "{vmss-name}",
+                "properties": {
+                  "primary": true,
+                  "enableIPForwarding": true,
+                  "enableAcceleratedNetworking": false,
+                  "ipConfigurations": [
+                    {
                       "name": "{vmss-name}",
                       "properties": {
-                          "primary": true,
-                          "enableIPForwarding": true,
-                          "enableAcceleratedNetworking": false,
-                          "ipConfigurations": [
-                              {
-                                  "name": "{vmss-name}",
-                                  "properties": {
-                                      "subnet": {
-                                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
-                                      },
-                                      "primary": true,
-                                      "applicationGatewayBackendAddressPools": [],
-                                      "loadBalancerBackendAddressPools": [],
-                                      "publicIPAddressConfiguration": {
-                                          "name": "{vmss-name}",
-                                          "properties": {
-                                              "idleTimeoutInMinutes": 15
-                                          }
-                                      }
-                                  }
-                              }
-                          ]
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                        },
+                        "primary": true,
+                        "applicationGatewayBackendAddressPools": [],
+                        "loadBalancerBackendAddressPools": [],
+                        "publicIPAddressConfiguration": {
+                          "name": "{vmss-name}",
+                          "properties": {
+                            "idleTimeoutInMinutes": 15
+                          }
+                        }
                       }
-                  }
-              ],
-              "networkApiVersion": "2020-11-01"
+                    }
+                  ]
+                }
+              }
+            ],
+            "networkApiVersion": "2020-11-01"
           }
         }
       }
@@ -89,62 +89,62 @@
           "orchestrationMode": "Flexible",
           "platformFaultDomainCount": 1,
           "priorityMixPolicy": {
-              "baseRegularPriorityCount": 10,
-              "regularPriorityPercentageAboveBase": 50
+            "baseRegularPriorityCount": 10,
+            "regularPriorityPercentageAboveBase": 50
           },
           "virtualMachineProfile": {
             "priority": "spot",
             "storageProfile": {
-                "imageReference": {
-                    "publisher": "Canonical",
-                    "offer": "0001-com-ubuntu-server-focal",
-                    "sku": "20_04-lts-gen2",
-                    "version": "latest"
-                },
-                "osDisk": {
-                    "createOption": "fromImage",
-                    "caching": "ReadWrite",
-                    "managedDisk": {
-                        "storageAccountType": "Standard_LRS"
-                    }
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "0001-com-ubuntu-server-focal",
+                "sku": "20_04-lts-gen2",
+                "version": "latest"
+              },
+              "osDisk": {
+                "createOption": "fromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
                 }
+              }
             },
             "osProfile": {
-                "computerNamePrefix": "{vmss-name}",
-                "adminUsername": "{your-username}",
-                "adminPassword": "{your-password}"
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "adminPassword": "{your-password}"
             },
             "networkProfile": {
-                "networkInterfaceConfigurations": [
-                    {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "enableAcceleratedNetworking": false,
+                    "ipConfigurations": [
+                      {
                         "name": "{vmss-name}",
                         "properties": {
-                            "primary": true,
-                            "enableIPForwarding": true,
-                            "enableAcceleratedNetworking": false,
-                            "ipConfigurations": [
-                                {
-                                    "name": "{vmss-name}",
-                                    "properties": {
-                                        "subnet": {
-                                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
-                                        },
-                                        "primary": true,
-                                        "applicationGatewayBackendAddressPools": [],
-                                        "loadBalancerBackendAddressPools": [],
-                                        "publicIPAddressConfiguration": {
-                                            "name": "{vmss-name}",
-                                            "properties": {
-                                                "idleTimeoutInMinutes": 15
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                          },
+                          "primary": true,
+                          "applicationGatewayBackendAddressPools": [],
+                          "loadBalancerBackendAddressPools": [],
+                          "publicIPAddressConfiguration": {
+                            "name": "{vmss-name}",
+                            "properties": {
+                              "idleTimeoutInMinutes": 15
+                            }
+                          }
                         }
-                    }
-                ],
-                "networkApiVersion": "2020-11-01"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "networkApiVersion": "2020-11-01"
             }
           }
         },
@@ -165,62 +165,62 @@
           "orchestrationMode": "Flexible",
           "platformFaultDomainCount": 1,
           "priorityMixPolicy": {
-              "baseRegularPriorityCount": 10,
-              "regularPriorityPercentageAboveBase": 50
+            "baseRegularPriorityCount": 10,
+            "regularPriorityPercentageAboveBase": 50
           },
           "virtualMachineProfile": {
             "priority": "spot",
             "storageProfile": {
-                "imageReference": {
-                    "publisher": "Canonical",
-                    "offer": "0001-com-ubuntu-server-focal",
-                    "sku": "20_04-lts-gen2",
-                    "version": "latest"
-                },
-                "osDisk": {
-                    "createOption": "fromImage",
-                    "caching": "ReadWrite",
-                    "managedDisk": {
-                        "storageAccountType": "Standard_LRS"
-                    }
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "0001-com-ubuntu-server-focal",
+                "sku": "20_04-lts-gen2",
+                "version": "latest"
+              },
+              "osDisk": {
+                "createOption": "fromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
                 }
+              }
             },
             "osProfile": {
-                "computerNamePrefix": "{vmss-name}",
-                "adminUsername": "{your-username}",
-                "adminPassword": "{your-password}"
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "adminPassword": "{your-password}"
             },
             "networkProfile": {
-                "networkInterfaceConfigurations": [
-                    {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "enableAcceleratedNetworking": false,
+                    "ipConfigurations": [
+                      {
                         "name": "{vmss-name}",
                         "properties": {
-                            "primary": true,
-                            "enableIPForwarding": true,
-                            "enableAcceleratedNetworking": false,
-                            "ipConfigurations": [
-                                {
-                                    "name": "{vmss-name}",
-                                    "properties": {
-                                        "subnet": {
-                                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
-                                        },
-                                        "primary": true,
-                                        "applicationGatewayBackendAddressPools": [],
-                                        "loadBalancerBackendAddressPools": [],
-                                        "publicIPAddressConfiguration": {
-                                            "name": "{vmss-name}",
-                                            "properties": {
-                                                "idleTimeoutInMinutes": 15
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                          },
+                          "primary": true,
+                          "applicationGatewayBackendAddressPools": [],
+                          "loadBalancerBackendAddressPools": [],
+                          "publicIPAddressConfiguration": {
+                            "name": "{vmss-name}",
+                            "properties": {
+                              "idleTimeoutInMinutes": 15
+                            }
+                          }
                         }
-                    }
-                ],
-                "networkApiVersion": "2020-11-01"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "networkApiVersion": "2020-11-01"
             }
           }
         },
