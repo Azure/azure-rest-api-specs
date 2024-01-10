@@ -41,7 +41,7 @@ else {
       LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
     }
 
-    # Extract path between folder "specification/" and "/(preview|stable)"
+    # Extract path between "specification/" and "/(preview|stable)"
     if ($file -match "specification/(?<servicePath>[^/]+/(data-plane|resource-manager).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
       $servicePath = $Matches["servicePath"]
     }
