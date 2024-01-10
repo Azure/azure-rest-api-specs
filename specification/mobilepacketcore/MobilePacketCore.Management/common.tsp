@@ -112,7 +112,7 @@ enum InfrastructureType {
 
 @doc("Deployment Type Definitions")
 enum SkuDeploymentType {
-  @doc("Producton Deployment")
+  @doc("Production Deployment")
   Production,
 
   @doc("Lab Deployment")
@@ -148,7 +148,7 @@ scalar ComponentDeploymentType extends string;
 
 @doc("Containerized Network Function (CNF) Qualified Deployment Parameters")
 model QualifiedComponentDeploymentParameters {
-  @doc("Federaton Type")
+  @doc("Federation Type")
   type: ComponentDeploymentType;
 
   @doc("Deployment Parameters")

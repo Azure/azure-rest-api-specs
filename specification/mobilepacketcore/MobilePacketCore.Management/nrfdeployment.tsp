@@ -15,7 +15,7 @@ using OpenAPI;
 
 namespace Microsoft.MobilePacketCore;
 
-@doc("Azure for Operators 5G Core Network Repository Functoin (NRF) Deployment Resource")
+@doc("Azure for Operators 5G Core Network Repository Function (NRF) Deployment Resource")
 @resource("nrfDeployments")
 model NrfDeploymentResource
   is TrackedResource<NrfDeploymentResourceProperties> {
