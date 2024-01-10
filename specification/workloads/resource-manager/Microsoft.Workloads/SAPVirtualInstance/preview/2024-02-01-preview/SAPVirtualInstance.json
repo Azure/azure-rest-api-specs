@@ -349,6 +349,9 @@
           },
           "Register with trusted access enabled": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Discover_TrustedAccessEnable.json"
+          },
+          "Installation with SAP CAL API": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_SAPInstallThroughCAL_Distributed.json"
           }
         },
         "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
@@ -2056,6 +2059,7 @@
       "enum": [
         "ServiceInitiated",
         "SAPInstallWithoutOSConfig",
+        "SAPInstallThroughCAL",
         "External"
       ],
       "type": "string",
@@ -3522,6 +3526,81 @@
         "bomUrl",
         "sapBitsStorageAccountId",
         "softwareVersion"
+      ]
+    },
+    "SAPInstallThroughCALSoftwareConfiguration": {
+      "description": "The SAP Software configuration Input when the software is to be installed through CAL",
+      "type": "object",
+      "x-ms-discriminator-value": "SAPInstallThroughCAL",
+      "x-ms-client-flatten": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/SoftwareConfiguration"
+        }
+      ],
+      "properties": {
+        "calAccountId": {
+          "type": "string",
+          "description": "The CAL account ID."
+        },
+        "calProductId": {
+          "type": "string",
+          "description": "The CAL product ID."
+        },
+        "useAdaptiveDeployment": {
+          "type": "string",
+          "description": "The value indicating whether to use adaptive deployment."
+        },
+        "planTemplateId": {
+          "type": "string",
+          "description": "The plan template ID."
+        },
+        "privateDnsZoneId": {
+          "type": "string",
+          "description": "The private DNS zone."
+        },
+        "transitNetworkId": {
+          "type": "string",
+          "description": "The transit network."
+        },
+        "sharedServicesSubnetId": {
+          "type": "string",
+          "description": "The shared services subnet."
+        },
+        "keyVaultId": {
+          "type": "string",
+          "description": "The keyvault ID."
+        },
+        "deploymentServerResourceGroup": {
+          "type": "string",
+          "description": "The deployment server resource group."
+        },
+        "technicalCommunicationUser": {
+          "type": "string",
+          "description": "The CAL technical communication user."
+        },
+        "technicalCommunicationUserPasswordSecretName": {
+          "type": "string",
+          "description": "The technical communication user password secret name. The password should be stored in the keyvault ID against this secret name."
+        },
+        "frontendHostname": {
+          "type": "string",
+          "description": "The frontend hostname."
+        }
+      },
+      "required": [
+        "calAccountId",
+        "calProductId",
+        "useAdaptiveDeployment",
+        "planTemplateId",
+        "privateDnsZoneId",
+        "transitNetworkId",
+        "sharedServicesSubnetId",
+        "keyVaultId",
+        "deploymentServerResourceGroup",
+        "technicalCommunicationUser",
+        "technicalCommunicationUserPasswordSecretName",
+        "frontendHostname"
       ]
     },
     "ExternalInstallationSoftwareConfiguration": {
