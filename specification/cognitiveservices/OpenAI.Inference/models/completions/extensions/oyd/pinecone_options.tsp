@@ -70,6 +70,7 @@ model PineconeFieldMappingOptions {
   @projectedName("json", "content_fields")
   @projectedName("csharp", "ContentFieldNames")
   contentFields: string[];
+  contentFields: string[];
 
   @doc("The separator pattern that content fields should use.")
   @projectedName("json", "content_fields_separator")
