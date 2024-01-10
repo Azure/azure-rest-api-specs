@@ -24,7 +24,7 @@ model ElasticsearchChatExtensionConfiguration
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are KeyAndKeyId and EncodedAPIKey.")
+@doc("Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are `key_and_key_id` and `encoded_api_key`.")
 model ElasticsearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
@@ -44,7 +44,7 @@ model ElasticsearchChatExtensionParameters {
   @projectedName("json", "query_type")
   queryType?: ElasticsearchQueryType;
 
-  @doc("The embedding dependency for vector search.")
+  @doc("The embedding dependency for vector search. The supported types are `endpoint`, `deployment_name` and `model_id`.")
   @projectedName("json", "embedding_dependency")
   embeddingDependency?: OnYourDataVectorizationSource;
 }

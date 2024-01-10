@@ -26,7 +26,7 @@ model PineconeChatExtensionConfiguration
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is APIKey.")
+@doc("Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is `api_key`.")
 model PineconeChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
@@ -43,7 +43,7 @@ model PineconeChatExtensionParameters {
   @projectedName("csharp", "FieldMappingOptions")
   fieldsMapping: PineconeFieldMappingOptions;
 
-  @doc("The embedding dependency for vector search.")
+  @doc("The embedding dependency for vector search. The supported type is `deployment_name`.")
   @projectedName("json", "embedding_dependency")
   embeddingDependency: OnYourDataVectorizationSource;
 }

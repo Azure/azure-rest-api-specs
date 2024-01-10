@@ -207,25 +207,25 @@
         },
         "x-ms-examples": {
           "Creates a completion based on Azure Search data and system-assigned managed identity.": {
-            "$ref": "./examples/extensions_chat_completions_azure_search_minimum.json"
+            "$ref": "./examples/chat_completions_azure_search_minimum.json"
           },
           "Creates a completion based on Azure Search image vector data.": {
-            "$ref": "./examples/extensions_chat_completions_azure_search_image_vector.json"
+            "$ref": "./examples/chat_completions_azure_search_image_vector.json"
           },
           "Creates a completion based on Azure Search vector data, previous assistant message and user-assigned managed identity.": {
-            "$ref": "./examples/extensions_chat_completions_azure_search_advanced.json"
+            "$ref": "./examples/chat_completions_azure_search_advanced.json"
           },
           "Creates a completion for the provided AML index.": {
-            "$ref": "./examples/extensions_chat_completions_aml_index.json"
+            "$ref": "./examples/chat_completions_aml_index.json"
           },
           "Creates a completion for the provided Azure Cosmos DB.": {
-            "$ref": "./examples/extensions_chat_completions_cosmos_db.json"
+            "$ref": "./examples/chat_completions_cosmos_db.json"
           },
           "Creates a completion for the provided Elasticsearch.": {
-            "$ref": "./examples/extensions_chat_completions_elasticsearch.json"
+            "$ref": "./examples/chat_completions_elasticsearch.json"
           },
           "Creates a completion for the provided Pinecone resource.": {
-            "$ref": "./examples/extensions_chat_completions_pinecone.json"
+            "$ref": "./examples/chat_completions_pinecone.json"
           },
           "Creates a completion for the provided prompt, parameters and chosen model.": {
             "$ref": "./examples/chat_completions.json"
@@ -1134,7 +1134,7 @@
     },
     "AzureCognitiveSearchChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension. The supported authentication types are APIKey, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
+      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -1317,7 +1317,7 @@
     },
     "AzureCosmosDBChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for\nMongoDB vCore. The supported authentication type is ConnectionString.",
+      "description": "Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for\nMongoDB vCore. The supported authentication type is `connection_string`.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -1368,7 +1368,7 @@
         },
         "embedding_dependency": {
           "$ref": "#/definitions/OnYourDataVectorizationSource",
-          "description": "The embedding dependency for vector search.",
+          "description": "The embedding dependency for vector search. The supported types are `endpoint` and `deployment_name`.",
           "x-ms-client-name": "embeddingDependency"
         }
       },
@@ -1541,7 +1541,7 @@
     },
     "AzureMachineLearningIndexChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters for the Azure Machine Learning vector index chat extension. The supported authentication types are AccessToken, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
+      "description": "Parameters for the Azure Machine Learning vector index chat extension. The supported authentication types are `access_token`, `system_assigned_managed_identity` and `user_assigned_managed_identity`.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -2701,7 +2701,7 @@
     },
     "ElasticsearchChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are KeyAndKeyId and EncodedAPIKey.",
+      "description": "Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are `key_and_key_id` and `encoded_api_key`.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -2752,7 +2752,7 @@
         },
         "embedding_dependency": {
           "$ref": "#/definitions/OnYourDataVectorizationSource",
-          "description": "The embedding dependency for vector search.",
+          "description": "The embedding dependency for vector search. The supported types are `endpoint`, `deployment_name` and `model_id`.",
           "x-ms-client-name": "embeddingDependency"
         }
       },
@@ -3505,7 +3505,7 @@
     },
     "PineconeChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is APIKey.",
+      "description": "Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is `api_key`.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -3550,7 +3550,7 @@
         },
         "embedding_dependency": {
           "$ref": "#/definitions/OnYourDataVectorizationSource",
-          "description": "The embedding dependency for vector search.",
+          "description": "The embedding dependency for vector search. The supported type is `deployment_name`.",
           "x-ms-client-name": "embeddingDependency"
         }
       },
