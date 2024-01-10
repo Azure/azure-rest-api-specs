@@ -1,0 +1,86 @@
+
+
+``` yaml
+
+library-name: DataShare
+isAzureSpec: true
+isArm: true
+require: https://github.com/Azure/azure-rest-api-specs/blob/df70965d3a207eb2a628c96aa6ed935edc6b7911/specification/datashare/resource-manager/readme.md
+tag: package-2021-08-01
+skip-csproj: true
+modelerfour:
+  flatten-payloads: false
+
+format-by-name-rules:
+  'tenantId': 'uuid'
+  'ETag': 'etag'
+  'location': 'azure-location'
+  'sourceShareLocation': 'azure-location'
+  'dataSetLocation': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
+  'invitationId': 'uuid'
+  'dataSetId': 'uuid'
+  'synchronizationId': 'uuid'
+  '*ResourceId': 'arm-id'
+
+
+list-exception:
+  - /providers/Microsoft.DataShare/locations/{location}/consumerInvitations/{invitationId}
+
+prepend-rp-prefix:
+  - Account
+  - Invitation
+  - InvitationStatus
+  - Trigger
+  - TriggerStatus
+  - EmailRegistration
+  - ProvisioningState
+  - SynchronizationSetting
+  - ConsumerInvitation
+
+rename-mapping:
+  Share: DataShare
+  ShareKind: DataShareKind
+#   ShareSubscription: ConsumerShareSubscription
+  AccountUpdateParameters: DataShareAccountPatch
+  EmailRegistration.activationExpirationDate: ActivationExpireOn
+  OperationResponse: DataShareOperationResult
+  Status: DataShareOperationStatus
+  OutputType: DataShareOutputType
+  ScheduledSourceSynchronizationSetting.properties.synchronizationTime: SynchronizeOn
+  ScheduledSynchronizationSetting.properties.synchronizationTime: SynchronizeOn
+  ScheduledTrigger.properties.synchronizationTime: SynchronizeOn
+  ShareSubscriptionSynchronization.durationMs: DurationInMilliSeconds
+  ShareSynchronization.durationMs: DurationInMilliSeconds
+  SynchronizationDetails.durationMs: DurationInMilliSeconds
+  Synchronize: DataShareSynchronizeContent
+  DataSet: ShareDataSet
+  DataSetMapping: ShareDataSetMapping
+  DataSetType: ShareDataSetType
+  RecurrenceInterval: DataShareSynchronizationRecurrenceInterval
+  RegistrationStatus: DataShareEmailRegistrationStatus
+
+override-operation-name:
+  EmailRegistrations_ActivateEmail: ActivateEmail
+  EmailRegistrations_RegisterEmail: RegisterEmail
+  ConsumerInvitations_ListInvitations: GetAll
+  ConsumerInvitations_RejectInvitation: RejectConsumerInvitation
+
+request-path-to-parent:
+  /providers/Microsoft.DataShare/listInvitations: /providers/Microsoft.DataShare/locations/{location}/consumerInvitations/{invitationId}
+
+operation-positions:
+  ConsumerInvitations_ListInvitations: collection
+
+directive:
+  - from: DataShare.json
+    where: $.definitions
+    transform: >
+      $.Identity.properties.type['x-ms-enum']['name'] = 'ServiceIdentityType';
+  - from: DataShare.json
+    where: $.paths..parameters[?(@.name == 'invitationId')]
+    transform: >
+      $.format = 'uuid';
+
+```

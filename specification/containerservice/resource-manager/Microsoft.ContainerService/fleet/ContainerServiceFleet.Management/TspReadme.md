@@ -1,0 +1,64 @@
+
+
+``` yaml
+library-name: ContainerServiceFleet
+isAzureSpec: true
+isArm: true
+require: https://github.com/Azure/azure-rest-api-specs/blob/9837baba3ca259b4f2a3f736593311f445c35c63/specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/readme.md
+#tag: package-2023-10
+skip-csproj: true
+modelerfour:
+  flatten-payloads: false
+
+#mgmt-debug:
+#  show-serialized-names: true
+
+rename-mapping:
+  Fleet: ContainerServiceFleet
+  FleetListResult: ContainerServiceFleetListResult
+  FleetMember: ContainerServiceFleetMember
+  FleetMemberListResult: ContainerServiceFleetMemberListResult
+  MemberUpdateStatus.clusterResourceId: -|arm-id
+
+prepend-rp-prefix:
+  - AgentProfile
+  - APIServerAccessProfile
+  - ManagedClusterUpdate
+  - ManagedClusterUpgradeSpec
+  - ManagedClusterUpgradeType
+  - UpdateGroup
+  - UpdateGroupStatus
+  - UpdateRun
+  - UpdateRunListResult
+  - UpdateRunProvisioningState
+  - UpdateRunStatus
+  - UpdateRunStrategy
+  - UpdateStage
+  - UpdateStageStatus
+  - UpdateState
+  - UpdateStatus
+  - WaitStatus
+
+format-by-name-rules:
+  'tenantId': 'uuid'
+  'ETag': 'etag'
+  'location': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
+
+
+operations-to-lro-api-version-override:
+  Fleets_CreateOrUpdate: "2016-03-30"
+  Fleets_Update: "2016-03-30"
+  Fleets_Delete: "2016-03-30"
+  FleetMembers_Create: "2016-03-30"
+  FleetMembers_Update: "2016-03-30"
+  FleetMembers_Delete: "2016-03-30"
+  UpdateRuns_CreateOrUpdate: "2016-03-30"
+  UpdateRuns_Delete: "2016-03-30"
+  FleetUpdateStrategies_CreateOrUpdate: "2016-03-30"
+  FleetUpdateStrategies_Delete: "2016-03-30"
+  
+models-to-treat-empty-string-as-null:
+- SubnetResourceId
+```

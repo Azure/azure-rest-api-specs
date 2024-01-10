@@ -1,0 +1,30 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./SecurityAssessmentResponse.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Microsoft.Security;
+@doc("Security sub-assessment on a resource")
+@parentResource(SecurityAssessmentResponse)
+model SecuritySubAssessment is ProxyResource<SecuritySubAssessmentProperties> {
+  @doc("The Sub-Assessment Key - Unique key for the sub-assessment type")
+  @key("subAssessmentName")
+  @segment("subAssessments")
+  name: string;
+}
+
+@armResourceOperations
+@projectedName("client", "SubAssessments")
+interface SecuritySubAssessments_SubAssessments {
+  @doc("Get a security sub-assessment on your scanned resource")
+  get is ArmResourceRead<SecuritySubAssessment>;
+
+  @doc("Get security sub-assessments on all your scanned resources inside a scope")
+  list is ArmResourceListByParent<SecuritySubAssessment>;
+}

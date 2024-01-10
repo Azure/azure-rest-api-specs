@@ -1,0 +1,787 @@
+##output folder is C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\compute\Compute.Management
+##Generating metadata with csharp codegen in C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\compute\Compute.Management with https://aka.ms/azsdk/openapi-to-typespec-csharp
+autorest --csharp --max-memory-size=8192 --use="https://aka.ms/azsdk/openapi-to-typespec-csharp" --output-folder=C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\compute\Compute.Management --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\compute\Compute.Management\TspReadme.md
+AutoRest code generation utility [cli version: 3.6.3; node: v20.9.0]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+info    | AutoRest core version selected from configuration: ^3.7.0.
+
+There is a new version of AutoRest available (3.7.1).
+ > You can install the newer version with with npm install -g autorest@latest
+
+info    |    Loading AutoRest core      'C:\Users\v-cruan\.autorest\@autorestcore@3.9.7\nodemodules\@autorest\core\dist' (3.9.7)
+warning | DeprecatedConfig | Using directive.0.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.1.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.2.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.3.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.4.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.5.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.6.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.7.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.8.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.9.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.10.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.11.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.12.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.13.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.14.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.15.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.16.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.17.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.18.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.19.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.20.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.21.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.22.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.23.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.24.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.25.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.26.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.27.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.28.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.29.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.30.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.31.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.32.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.33.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.34.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.35.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.36.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.37.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.38.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.39.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.40.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.41.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.42.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.43.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.44.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.45.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.46.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.47.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.48.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.49.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.50.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.51.suppress which is deprecated and will be removed in the future.
+info    |    Loading AutoRest extension '@autorest/csharp' (https://aka.ms/azsdk/openapi-to-typespec-csharp->3.0.0-alpha.20231017.8)
+info    |    Loading AutoRest extension '@autorest/modelerfour' (4.26.0->4.26.0)
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > SharingStatus > properties > aggregatedState)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1905:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RegionalSharingStatus > properties > state)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1947:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > OSDiskImageEncryption > properties > securityProfile)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2624:9
+warning | PreCheck/SchemaMissingType | The schema 'ComputeOperationListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:178:5
+warning | PreCheck/SchemaMissingType | The schema 'ComputeOperationValue' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:194:5
+warning | PreCheck/SchemaMissingType | The schema 'ComputeOperationValueDisplay' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:213:5
+warning | PreCheck/SchemaMissingType | The schema 'UsageName' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:238:5
+warning | PreCheck/SchemaMissingType | The schema 'Usage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:251:5
+warning | PreCheck/SchemaMissingType | The schema 'ListUsagesResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:287:5
+warning | PreCheck/SchemaMissingType | The schema 'SubResourceWithColocationStatus' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:355:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineSize' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:369:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineSizeListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:403:5
+warning | PreCheck/SchemaMissingType | The schema 'Plan' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:418:5
+warning | PreCheck/SchemaMissingType | The schema 'HardwareProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:439:5
+warning | PreCheck/SchemaMissingType | The schema 'ImageReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:640:5
+warning | PreCheck/SchemaMissingType | The schema 'KeyVaultSecretReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:691:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskEncryptionSetParameters' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:708:5
+warning | PreCheck/SchemaMissingType | The schema 'KeyVaultKeyReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:717:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskEncryptionSettings' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:734:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualHardDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:773:5
+warning | PreCheck/SchemaMissingType | The schema 'DiffDiskSettings' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:871:5
+warning | PreCheck/SchemaMissingType | The schema 'ManagedDiskParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:884:5
+warning | PreCheck/SchemaMissingType | The schema 'OSDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:906:5
+warning | PreCheck/SchemaMissingType | The schema 'DataDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:971:5
+warning | PreCheck/SchemaMissingType | The schema 'StorageProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1052:5
+warning | PreCheck/SchemaMissingType | The schema 'UefiSettings' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1079:5
+warning | PreCheck/SchemaMissingType | The schema 'SecurityProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1092:5
+warning | PreCheck/SchemaMissingType | The schema 'AdditionalCapabilities' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1167:5
+warning | PreCheck/SchemaMissingType | The schema 'AdditionalUnattendContent' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1180:5
+warning | PreCheck/SchemaMissingType | The schema 'WinRMListener' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1223:5
+warning | PreCheck/SchemaMissingType | The schema 'WinRMConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1244:5
+warning | PreCheck/SchemaMissingType | The schema 'WindowsConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1257:5
+warning | PreCheck/SchemaMissingType | The schema 'SshPublicKey' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1294:5
+warning | PreCheck/SchemaMissingType | The schema 'SshConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1307:5
+warning | PreCheck/SchemaMissingType | The schema 'LinuxConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1322:5
+warning | PreCheck/SchemaMissingType | The schema 'VaultCertificate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1347:5
+warning | PreCheck/SchemaMissingType | The schema 'VaultSecretGroup' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1360:5
+warning | PreCheck/SchemaMissingType | The schema 'OSProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1379:5
+warning | PreCheck/SchemaMissingType | The schema 'NetworkInterfaceReferenceProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1427:5
+warning | PreCheck/SchemaMissingType | The schema 'NetworkInterfaceReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1448:5
+warning | PreCheck/SchemaMissingType | The schema 'PublicIPAddressSku' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1463:5
+warning | PreCheck/SchemaMissingType | The schema 'NetworkProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1492:5
+warning | PreCheck/SchemaMissingType | The schema 'BootDiagnostics' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1525:5
+warning | PreCheck/SchemaMissingType | The schema 'DiagnosticsProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1538:5
+warning | PreCheck/SchemaMissingType | The schema 'BillingProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1572:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskInstanceView' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1582:5
+warning | PreCheck/SchemaMissingType | The schema 'BootDiagnosticsInstanceView' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1609:5
+warning | PreCheck/SchemaMissingType | The schema 'MaintenanceRedeployStatus' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1629:5
+warning | PreCheck/SchemaMissingType | The schema 'Sku' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1676:5
+warning | PreCheck/SchemaMissingType | The schema 'ApiEntityReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1694:5
+warning | PreCheck/SchemaMissingType | The schema 'RollbackStatusInfo' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1703:5
+warning | PreCheck/SchemaMissingType | The schema 'ProxyResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1764:5
+warning | PreCheck/SchemaMissingType | The schema 'PatchSettings' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1798:5
+warning | PreCheck/SchemaMissingType | The schema 'LinuxPatchSettings' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json:1836:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMExtension' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3498:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMExtensionUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3531:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMExtensionsListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3556:5
+warning | PreCheck/SchemaMissingType | The schema 'AutomaticRepairsPolicy' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3578:5
+warning | PreCheck/SchemaMissingType | The schema 'AutomaticOSUpgradePolicy' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3604:5
+warning | PreCheck/SchemaMissingType | The schema 'UpgradePolicy' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3621:5
+warning | PreCheck/SchemaMissingType | The schema 'RollingUpgradePolicy' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3647:5
+warning | PreCheck/SchemaMissingType | The schema 'ScaleInPolicy' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3693:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetIdentity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3763:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetOSProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3796:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdateOSProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3844:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetManagedDiskParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3871:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetOSDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3888:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdateOSDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3952:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetDataDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:3989:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetStorageProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4042:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdateStorageProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4073:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetIPConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4104:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdateIPConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4161:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetIPConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4218:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdateIPConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4234:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetNetworkConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4248:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdateNetworkConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4334:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetNetworkConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4417:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdateNetworkConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4433:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetNetworkConfigurationDnsSettings' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4447:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4459:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetIpTag' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4485:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetPublicIPAddressConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4498:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdatePublicIPAddressConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4517:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetPublicIPAddressConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4530:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4580:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetNetworkProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4610:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdateNetworkProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4638:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetExtensionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4668:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetExtension' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4725:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetExtensionUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4748:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetExtensionListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4773:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetExtensionProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4792:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4808:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdateVMProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4881:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:4930:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5016:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSet' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5065:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMReimageParameters' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5102:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetReimageParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5110:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5127:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMInstanceIDs' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5153:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMInstanceRequiredIDs' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5165:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineStatusCodeCount' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5180:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetInstanceViewStatusesSummary' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5196:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMExtensionsSummary' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5210:5
+warning | PreCheck/SchemaMissingType | The schema 'OrchestrationServiceSummary' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5229:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetInstanceView' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5260:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5300:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetListWithLinkResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5319:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetSkuCapacity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5338:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetSku' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5374:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetListSkusResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5394:5
+warning | PreCheck/SchemaMissingType | The schema 'UpgradeOperationHistoryStatus' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5417:5
+warning | PreCheck/SchemaMissingType | The schema 'UpgradeOperationHistoricalStatusInfoProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5449:5
+warning | PreCheck/SchemaMissingType | The schema 'UpgradeOperationHistoricalStatusInfo' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5493:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetListOSUpgradeHistory' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5513:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5536:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVM' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5620:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMInstanceView' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5668:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMNetworkProfileConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5766:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMProtectionPolicy' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5781:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineScaleSetVMListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5794:5
+warning | PreCheck/SchemaMissingType | The schema 'RollingUpgradeStatusInfo' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5813:5
+warning | PreCheck/SchemaMissingType | The schema 'RollingUpgradeStatusInfoProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5827:5
+warning | PreCheck/SchemaMissingType | The schema 'RollingUpgradeRunningStatus' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5852:5
+warning | PreCheck/SchemaMissingType | The schema 'RollingUpgradeProgressInfo' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5897:5
+warning | PreCheck/SchemaMissingType | The schema 'RecoveryWalkResponse' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5926:5
+warning | PreCheck/SchemaMissingType | The schema 'VMScaleSetConvertToSinglePlacementGroupInput' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5941:5
+warning | PreCheck/SchemaMissingType | The schema 'OrchestrationServiceStateInput' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json:5949:5
+warning | PreCheck/SchemaMissingType | The schema 'RetrieveBootDiagnosticsDataResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:1900:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineExtensionInstanceView' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:1915:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineExtensionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:1948:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineExtensionUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2009:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineExtension' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2054:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineExtensionUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2068:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineExtensionsListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2082:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineSoftwarePatchProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2094:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineAssessPatchesResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2172:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineInstallPatchesParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2238:5
+warning | PreCheck/SchemaMissingType | The schema 'WindowsParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2271:5
+warning | PreCheck/SchemaMissingType | The schema 'LinuxParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2320:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineInstallPatchesResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2359:5
+warning | PreCheck/SchemaMissingType | The schema 'PatchInstallationDetail' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2460:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineReimageParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2510:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineCaptureParameters' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2542:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineCaptureResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2564:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineIpTag' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2600:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachinePublicIPAddressDnsSettingsConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2613:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachinePublicIPAddressConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2639:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachinePublicIPAddressConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2701:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineNetworkInterfaceIPConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2720:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineNetworkInterfaceIPConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2770:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineNetworkInterfaceDnsSettingsConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2786:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineNetworkInterfaceConfigurationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2798:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineNetworkInterfaceConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2887:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineExtensionHandlerInstanceView' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2903:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineAgentInstanceView' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2920:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineIdentity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2945:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineInstanceView' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:2978:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:3076:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachine' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:3191:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:3232:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:3261:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineHealthStatus' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:3280:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachinePatchStatus' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:3290:5
+warning | PreCheck/SchemaMissingType | The schema 'AvailablePatchSummary' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:3312:5
+warning | PreCheck/SchemaMissingType | The schema 'LastPatchInstallationSummary' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json:3372:5
+warning | PreCheck/SchemaMissingType | The schema 'DisallowedConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json:793:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineImageResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json:810:5
+warning | PreCheck/SchemaMissingType | The schema 'PurchasePlan' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json:843:5
+warning | PreCheck/SchemaMissingType | The schema 'OSDiskImage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json:865:5
+warning | PreCheck/SchemaMissingType | The schema 'DataDiskImage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json:885:5
+warning | PreCheck/SchemaMissingType | The schema 'AutomaticOSUpgradeProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json:896:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineImageFeature' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json:958:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineImageProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json:971:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineImage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineImage.json:1016:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineExtensionImageProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineExtensionImage.json:240:5
+warning | PreCheck/SchemaMissingType | The schema 'VirtualMachineExtensionImage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineExtensionImage.json:270:5
+warning | PreCheck/SchemaMissingType | The schema 'AvailabilitySetProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/availabilitySet.json:411:5
+warning | PreCheck/SchemaMissingType | The schema 'AvailabilitySet' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/availabilitySet.json:458:5
+warning | PreCheck/SchemaMissingType | The schema 'AvailabilitySetUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/availabilitySet.json:476:5
+warning | PreCheck/SchemaMissingType | The schema 'AvailabilitySetListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/availabilitySet.json:494:5
+warning | PreCheck/SchemaMissingType | The schema 'ProximityPlacementGroupProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/proximityPlacementGroup.json:346:5
+warning | PreCheck/SchemaMissingType | The schema 'ProximityPlacementGroup' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/proximityPlacementGroup.json:405:5
+warning | PreCheck/SchemaMissingType | The schema 'ProximityPlacementGroupUpdate' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/proximityPlacementGroup.json:427:5
+warning | PreCheck/SchemaMissingType | The schema 'ProximityPlacementGroupListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/proximityPlacementGroup.json:435:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostGroupInstanceView' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:824:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostGroupProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:838:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostGroup' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:879:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostGroupUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:900:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostGroupListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:921:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostAllocatableVM' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:953:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostAvailableCapacity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:967:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostInstanceView' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:980:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostInstanceViewWithName' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:1002:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:1017:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHost' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:1071:5
+warning | PreCheck/SchemaMissingType | The schema 'DedicatedHostListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/dedicatedHost.json:1111:5
+warning | PreCheck/SchemaMissingType | The schema 'SshPublicKeyGenerateKeyPairResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/sshPublicKey.json:404:5
+warning | PreCheck/SchemaMissingType | The schema 'SshPublicKeyResourceProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/sshPublicKey.json:426:5
+warning | PreCheck/SchemaMissingType | The schema 'SshPublicKeyResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/sshPublicKey.json:435:5
+warning | PreCheck/SchemaMissingType | The schema 'SshPublicKeyUpdateResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/sshPublicKey.json:450:5
+warning | PreCheck/SchemaMissingType | The schema 'SshPublicKeysGroupListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/sshPublicKey.json:465:5
+warning | PreCheck/SchemaMissingType | The schema 'ImageOSDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json:391:5
+warning | PreCheck/SchemaMissingType | The schema 'ImageDataDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json:439:5
+warning | PreCheck/SchemaMissingType | The schema 'ImageDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json:457:5
+warning | PreCheck/SchemaMissingType | The schema 'ImageStorageProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json:500:5
+warning | PreCheck/SchemaMissingType | The schema 'ImageProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json:523:5
+warning | PreCheck/SchemaMissingType | The schema 'Image' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json:545:5
+warning | PreCheck/SchemaMissingType | The schema 'ImageUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json:563:5
+warning | PreCheck/SchemaMissingType | The schema 'ImageListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/image.json:577:5
+warning | PreCheck/SchemaMissingType | The schema 'RestorePointCollectionSourceProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json:567:5
+warning | PreCheck/SchemaMissingType | The schema 'RestorePointCollectionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json:581:5
+warning | PreCheck/SchemaMissingType | The schema 'RestorePointCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json:607:5
+warning | PreCheck/SchemaMissingType | The schema 'RestorePointCollectionUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json:621:5
+warning | PreCheck/SchemaMissingType | The schema 'RestorePointCollectionListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json:635:5
+warning | PreCheck/SchemaMissingType | The schema 'RestorePointSourceMetadata' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json:651:5
+warning | PreCheck/SchemaMissingType | The schema 'RestorePointSourceVMStorageProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json:705:5
+warning | PreCheck/SchemaMissingType | The schema 'RestorePointSourceVMOSDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json:724:5
+warning | PreCheck/SchemaMissingType | The schema 'RestorePointSourceVMDataDisk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json:776:5
+warning | PreCheck/SchemaMissingType | The schema 'RestorePoint' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/restorePoint.json:873:5
+warning | PreCheck/SchemaMissingType | The schema 'RequestRateByIntervalInput' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/logAnalytic.json:159:5
+warning | PreCheck/SchemaMissingType | The schema 'ThrottledRequestsInput' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/logAnalytic.json:186:5
+warning | PreCheck/SchemaMissingType | The schema 'LogAnalyticsInputBase' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/logAnalytic.json:194:5
+warning | PreCheck/SchemaMissingType | The schema 'LogAnalyticsOperationResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/logAnalytic.json:238:5
+warning | PreCheck/SchemaMissingType | The schema 'LogAnalyticsOutput' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-07-01/logAnalytic.json:248:5
+warning | PreCheck/SchemaMissingType | The schema 'EncryptionSettingsCollection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:38:5
+warning | PreCheck/SchemaMissingType | The schema 'EncryptionSettingsElement' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:64:5
+warning | PreCheck/SchemaMissingType | The schema 'KeyVaultAndSecretReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:77:5
+warning | PreCheck/SchemaMissingType | The schema 'KeyVaultAndKeyReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:94:5
+warning | PreCheck/SchemaMissingType | The schema 'SourceVault' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:111:5
+warning | PreCheck/SchemaMissingType | The schema 'Encryption' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:147:5
+warning | PreCheck/SchemaMissingType | The schema 'CreationData' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:261:5
+warning | PreCheck/SchemaMissingType | The schema 'ImageDiskReference' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:383:5
+warning | PreCheck/SchemaMissingType | The schema 'PurchasePlan' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:405:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskSecurityProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:520:5
+warning | PreCheck/SchemaMissingType | The schema 'GrantAccessData' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:532:5
+warning | PreCheck/SchemaMissingType | The schema 'AccessUri' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json:584:5
+warning | PreCheck/SchemaMissingType | The schema 'Disk' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json:476:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json:517:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json:536:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskSku' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json:555:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json:612:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json:785:5
+warning | PreCheck/SchemaMissingType | The schema 'ShareInfoElement' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json:882:5
+warning | PreCheck/SchemaMissingType | The schema 'PropertyUpdatesInProgress' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json:891:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskAccessProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:553:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskAccess' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:576:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskAccessList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:594:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskAccessUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:613:5
+warning | PreCheck/SchemaMissingType | The schema 'PrivateLinkResourceListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:625:5
+warning | PreCheck/SchemaMissingType | The schema 'PrivateLinkResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:637:5
+warning | PreCheck/SchemaMissingType | The schema 'PrivateLinkResourceProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:662:5
+warning | PreCheck/SchemaMissingType | The schema 'PrivateEndpoint' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:687:5
+warning | PreCheck/SchemaMissingType | The schema 'PrivateLinkServiceConnectionState' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:725:5
+warning | PreCheck/SchemaMissingType | The schema 'PrivateEndpointConnectionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:742:5
+warning | PreCheck/SchemaMissingType | The schema 'PrivateEndpointConnection' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:763:5
+warning | PreCheck/SchemaMissingType | The schema 'PrivateEndpointConnectionListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json:789:5
+warning | PreCheck/SchemaMissingType | The schema 'EncryptionSetProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json:378:5
+warning | PreCheck/SchemaMissingType | The schema 'EncryptionSetIdentity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json:424:5
+warning | PreCheck/SchemaMissingType | The schema 'KeyForDiskEncryptionSet' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json:484:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskEncryptionSet' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json:500:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskEncryptionSetUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json:517:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskEncryptionSetUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json:536:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskEncryptionSetList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json:555:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceUriList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json:574:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskRestorePoint' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRestorePoint.json:254:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskRestorePointList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRestorePoint.json:268:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskRestorePointProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRestorePoint.json:287:5
+warning | PreCheck/SchemaMissingType | The schema 'ProxyOnlyResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/diskRestorePoint.json:383:5
+warning | PreCheck/SchemaMissingType | The schema 'Snapshot' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json:392:5
+warning | PreCheck/SchemaMissingType | The schema 'SnapshotUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json:418:5
+warning | PreCheck/SchemaMissingType | The schema 'SnapshotList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json:437:5
+warning | PreCheck/SchemaMissingType | The schema 'SnapshotSku' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json:456:5
+warning | PreCheck/SchemaMissingType | The schema 'SnapshotProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json:493:5
+warning | PreCheck/SchemaMissingType | The schema 'SnapshotUpdateProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json:614:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceSkuCapacity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json:89:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceSkuCosts' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json:126:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceSkuCapabilities' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json:147:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceSkuZoneDetails' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json:162:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceSkuRestrictions' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json:186:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceSku' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json:230:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceSkuLocationInfo' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json:326:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceSkuRestrictionInfo' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json:375:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceSkusResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json:396:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageFeature' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json:38:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageIdentifier' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json:51:5
+warning | PreCheck/SchemaMissingType | The schema 'RecommendedMachineConfiguration' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json:73:5
+warning | PreCheck/SchemaMissingType | The schema 'ResourceRange' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json:84:5
+warning | PreCheck/SchemaMissingType | The schema 'Disallowed' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json:99:5
+warning | PreCheck/SchemaMissingType | The schema 'ImagePurchasePlan' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json:111:5
+warning | PreCheck/SchemaMissingType | The schema 'SharedGalleryOSDiskImage' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json:147:5
+warning | PreCheck/SchemaMissingType | The schema 'Gallery' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1738:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1752:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1766:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryIdentifier' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1792:5
+warning | PreCheck/SchemaMissingType | The schema 'SharingProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1802:5
+warning | PreCheck/SchemaMissingType | The schema 'SharingProfileGroup' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1833:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryApplication' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1958:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryApplicationUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1972:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryApplicationProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:1986:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryApplicationVersion' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2037:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryApplicationVersionUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2051:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryApplicationVersionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2065:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryApplicationVersionPublishingProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2087:5
+warning | PreCheck/SchemaMissingType | The schema 'UserArtifactSource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2210:5
+warning | PreCheck/SchemaMissingType | The schema 'UserArtifactManage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2226:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2260:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2274:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2288:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageVersion' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2384:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageVersionUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2398:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageVersionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2412:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryArtifactPublishingProfileBase' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2437:5
+warning | PreCheck/SchemaMissingType | The schema 'TargetRegion' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2508:5
+warning | PreCheck/SchemaMissingType | The schema 'EncryptionImages' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2603:5
+warning | PreCheck/SchemaMissingType | The schema 'DataDiskImageEncryption' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2660:5
+warning | PreCheck/SchemaMissingType | The schema 'DiskImageEncryption' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2678:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryArtifactSource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2687:5
+warning | PreCheck/SchemaMissingType | The schema 'ManagedArtifact' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2698:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageVersionPublishingProfile' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2710:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageVersionStorageProfile' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2718:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryArtifactVersionSource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2754:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryOSDiskImage' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2763:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryDataDiskImage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2771:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryDiskImage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2789:5
+warning | PreCheck/SchemaMissingType | The schema 'ReplicationStatus' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2894:5
+warning | PreCheck/SchemaMissingType | The schema 'RegionalReplicationStatus' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2925:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2961:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2980:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryImageVersionList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:2999:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryApplicationList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:3018:5
+warning | PreCheck/SchemaMissingType | The schema 'GalleryApplicationVersionList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:3037:5
+warning | PreCheck/SchemaMissingType | The schema 'UpdateResourceDefinition' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:3056:5
+warning | PreCheck/SchemaMissingType | The schema 'SharingUpdate' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json:3084:5
+warning | PreCheck/SchemaMissingType | The schema 'PirResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:387:5
+warning | PreCheck/SchemaMissingType | The schema 'PirSharedGalleryResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:402:5
+warning | PreCheck/SchemaMissingType | The schema 'SharedGalleryIdentifier' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:416:5
+warning | PreCheck/SchemaMissingType | The schema 'SharedGalleryList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:425:5
+warning | PreCheck/SchemaMissingType | The schema 'SharedGallery' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:447:5
+warning | PreCheck/SchemaMissingType | The schema 'SharedGalleryImageList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:456:5
+warning | PreCheck/SchemaMissingType | The schema 'SharedGalleryImage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:476:5
+warning | PreCheck/SchemaMissingType | The schema 'SharedGalleryImageProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:490:5
+warning | PreCheck/SchemaMissingType | The schema 'SharedGalleryImageVersionList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:574:5
+warning | PreCheck/SchemaMissingType | The schema 'SharedGalleryImageVersion' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:594:5
+warning | PreCheck/SchemaMissingType | The schema 'SharedGalleryImageVersionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json:608:5
+warning | PreCheck/SchemaMissingType | The schema 'PirCommunityGalleryResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json:267:5
+warning | PreCheck/SchemaMissingType | The schema 'CommunityGalleryIdentifier' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json:291:5
+warning | PreCheck/SchemaMissingType | The schema 'CommunityGallery' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json:300:5
+warning | PreCheck/SchemaMissingType | The schema 'CommunityGalleryImage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json:330:5
+warning | PreCheck/SchemaMissingType | The schema 'CommunityGalleryImageProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json:344:5
+warning | PreCheck/SchemaMissingType | The schema 'CommunityGalleryImageVersion' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json:449:5
+warning | PreCheck/SchemaMissingType | The schema 'CommunityGalleryImageVersionProperties' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json:463:5
+warning | PreCheck/SchemaMissingType | The schema 'CommunityGalleryImageIdentifier' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json:486:5
+warning | PreCheck/BinarySchema | 'The schema paths路1djjsnh路subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-compute-cloudservices-cloudservicename-roleinstances-roleinstancename-remotedesktopfile路get路responses路200路content路application-x_rdp路schema with 'type: file', format: binary' will be treated as a binary blob for binary media types.
+    - https://github.com/Azure/azure-rest-api-specs/blob/cd53bce8cf73f7e7ba6cf5ab32baffbe529ae1fb/specification/compute/resource-manager/Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json:511:11
+warning | PreCheck/CheckDuplicateSchemas | Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+warning | SecurityDefinedSpecAndConfig | OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.
+fatal   | The ResourceCollection RestorePointCollection (RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}) does not have a GetAll method
+fatal   | Process() cancelled due to failure 
+error   |   Error: Plugin csharpgen reported failure.
+error   | Autorest completed with an error. If you think the error message is unclear, or is a bug, please declare an issues at https://github.com/Azure/autorest/issues with the error message you are seeing.

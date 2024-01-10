@@ -1,0 +1,36 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./ServiceResource.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Microsoft.AppPlatform;
+@doc("Config Server resource")
+@singleton("default")
+@parentResource(ServiceResource)
+model ConfigServerResource is ProxyResource<ConfigServerProperties> {
+  @key("configServer")
+  @segment("configServers")
+  name: string;
+}
+
+@armResourceOperations
+@projectedName("client", "ConfigServers")
+interface ConfigServerResources_ConfigServers {
+  @doc("Get the config server and its properties.")
+  get is ArmResourceRead<ConfigServerResource>;
+
+  @doc("Update the config server.")
+  updatePut is ArmResourceCreateOrUpdateAsync<ConfigServerResource>;
+
+  @doc("Update the config server.")
+  updatePatch is ArmCustomPatchAsync<
+    ConfigServerResource,
+    ConfigServerResource
+  >;
+}

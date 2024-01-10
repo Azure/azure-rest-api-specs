@@ -1,0 +1,58 @@
+
+
+``` yaml
+library-name: Qumulo
+isAzureSpec: true
+isArm: true
+require: https://github.com/Azure/azure-rest-api-specs/blob/b73e2d320f1ae530ea5e78625dfe14a921dcf011/specification/liftrqumulo/resource-manager/readme.md
+skip-csproj: true
+modelerfour:
+  flatten-payloads: false
+
+#mgmt-debug: 
+#  show-serialized-names: true
+
+directive:
+  - from: Qumulo.Storage.json
+    where: $.definitions
+    transform: delete $.UserDetails.required
+
+format-by-name-rules:
+  'tenantId': 'uuid'
+  'ETag': 'etag'
+  'location': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
+
+
+prepend-rp-prefix:
+  - ProvisionState
+  - OperationStatus
+  - ProvisioningState
+  - UserDetails
+  - FileSystemResource
+  - FileSystemResourceListResult
+  - FileSystemsRestOperations
+
+rename-mapping:
+    Agent: QumuloAgent
+    Endpoint: QumuloEndpoint
+    JobDefinitionData: QumuloJobDefinitionData
+    JobRun: QumuloJobRun
+    Project: QumuloProject
+    StorageMover: QumuloStorageMover
+    AzureStorageBlobContainerEndpointProperties: StorageBlobContainerEndpointProperties
+    AgentData.ArcResourceId: -|arm-id
+    AgentData.ArcVmUuid: -|uuid
+    JobDefinitionData.AgentResourceId: -|arm-id
+    JobDefinitionData.LatestJobRunResourceId: -|arm-id
+    JobDefinitionData.SourceResourceId: -|arm-id
+    JobDefinitionData.TargetResourceId: -|arm-id
+    JobRunData.AgentResourceId: -|arm-id
+    JobRunData.SourceResourceId: -|arm-id
+    QumuloAgentData.LocalIPAddress: -|ip-address
+    AzureStorageBlobContainerQumuloEndpointProperties.StorageAccountResourceId: -|arm-id
+    FileSystemResourceUpdateProperties.delegatedSubnetId: -|arm-id
+    FileSystemResource.properties.privateIPs: -|ip-address
+
+```

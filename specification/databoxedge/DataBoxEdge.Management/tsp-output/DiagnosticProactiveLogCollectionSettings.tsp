@@ -1,0 +1,31 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./DataBoxEdgeDevice.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Microsoft.DataBoxEdge;
+@doc("The diagnostic proactive log collection settings of a device.")
+@singleton("default")
+@parentResource(DataBoxEdgeDevice)
+model DiagnosticProactiveLogCollectionSettings
+  is ProxyResource<ProactiveLogCollectionSettingsProperties> {
+  @key("diagnosticProactiveLogCollectionSetting")
+  @segment("diagnosticProactiveLogCollectionSettings")
+  name: string;
+}
+
+@armResourceOperations
+@projectedName("client", "DiagnosticSettings")
+interface DiagnosticProactiveLogCollectionSettings_DiagnosticSettings {
+  @doc("Gets the proactive log collection settings of the specified Data Box Edge/Data Box Gateway device.")
+  getDiagnosticProactiveLogCollectionSettings is ArmResourceRead<DiagnosticProactiveLogCollectionSettings>;
+
+  @doc("Updates the proactive log collection settings on a Data Box Edge/Data Box Gateway device.")
+  updateDiagnosticProactiveLogCollectionSettings is ArmResourceCreateOrUpdateAsync<DiagnosticProactiveLogCollectionSettings>;
+}
