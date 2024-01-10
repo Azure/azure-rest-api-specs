@@ -104,20 +104,25 @@ model DeviceConnectionStateEventInfo {
   sequenceNumber?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Event data for Microsoft.Devices.DeviceCreated event.")
 model IotHubDeviceCreatedEventData extends DeviceLifeCycleEventProperties {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Event data for Microsoft.Devices.DeviceDeleted event.")
 model IotHubDeviceDeletedEventData extends DeviceLifeCycleEventProperties {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Event data for Microsoft.Devices.DeviceConnected event.")
 model IotHubDeviceConnectedEventData
   extends DeviceConnectionStateEventProperties {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Event data for Microsoft.Devices.DeviceDisconnected event.")
 model IotHubDeviceDisconnectedEventData
   extends DeviceConnectionStateEventProperties {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Event data for Microsoft.Devices.DeviceTelemetry event.")
 model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
 

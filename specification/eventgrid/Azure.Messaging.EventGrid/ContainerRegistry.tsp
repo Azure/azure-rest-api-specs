@@ -1,17 +1,22 @@
 @doc("Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace Microsoft.EventGrid;
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.")
 model ContainerRegistryImagePushedEventData
   extends ContainerRegistryEventData {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event.")
 model ContainerRegistryImageDeletedEventData
   extends ContainerRegistryEventData {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event.")
 model ContainerRegistryChartPushedEventData
   extends ContainerRegistryArtifactEventData {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event.")
 model ContainerRegistryChartDeletedEventData
   extends ContainerRegistryArtifactEventData {}

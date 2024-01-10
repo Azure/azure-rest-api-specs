@@ -4,6 +4,7 @@ Grid. This corresponds to the Data property of an EventGridEvent.
 """)
 namespace Microsoft.EventGrid;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("""
 Schema of the Data property of an EventGridEvent for a
 Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged
@@ -58,6 +59,7 @@ model ResourceNotificationsOperationalDetails {
   resourceEventTime?: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("""
 Schema of the Data property of an EventGridEvent for a
 Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event.
@@ -67,6 +69,7 @@ model ResourceNotificationsHealthResourcesAnnotatedEventData
 
 // Resources.json
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("""
 Schema of the Data property of an EventGridEvent for a
 Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.
@@ -74,6 +77,7 @@ Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.
 model ResourceNotificationsResourceManagementCreatedOrUpdatedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("""
 Schema of the Data property of an EventGridEvent for a
 Microsoft.ResourceNotifications.Resources.Deleted event.

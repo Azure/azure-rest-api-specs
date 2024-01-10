@@ -1,12 +1,15 @@
 @doc("Describes the schema of the Azure Maps events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace Microsoft.EventGrid;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.")
 model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.")
 model MapsGeofenceExitedEventData extends MapsGeofenceEventProperties {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.")
 model MapsGeofenceResultEventData extends MapsGeofenceEventProperties {}
 

@@ -16,22 +16,27 @@ model ContainerServiceNewKubernetesVersionAvailableEventData {
   latestPreviewKubernetesVersion?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event")
 model ContainerServiceClusterSupportEndedEventData
   extends ContainerServiceClusterSupportEventData {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event")
 model ContainerServiceClusterSupportEndingEventData
   extends ContainerServiceClusterSupportEventData {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event")
 model ContainerServiceNodePoolRollingStartedEventData
   extends ContainerServiceNodePoolRollingEventData {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event")
 model ContainerServiceNodePoolRollingSucceededEventData
   extends ContainerServiceNodePoolRollingEventData {}
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event")
 model ContainerServiceNodePoolRollingFailedEventData
   extends ContainerServiceNodePoolRollingEventData {}
