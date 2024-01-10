@@ -1657,6 +1657,48 @@
         }
       }
     },
+    "/entity/guid/{guid}/updateOperations": {
+      "put": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Edit a group of sub assets and/or its main asset",
+        "operationId": "Entity_BulkEditAssetSubAssets",
+        "x-ms-examples": {
+          "Entity_BulkEditAssetSubAssets": {
+            "$ref": "./examples/Entity_BulkEditAssetSubAssets.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/guid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "updateOperations",
+            "description": "Updated operations.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetBulkUpdateOperation"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK. Bulk update succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
@@ -7223,6 +7265,29 @@
         "message": {
           "type": "string",
           "description": "Message from async job if fail"
+        }
+      }
+    },
+    "AssetBulkUpdateOperation": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "Operation name"
+        },
+        "message": {
+          "type": "object",
+          "description": "Operation content",
+          "properties": {
+            "guid": {
+              "type": "string",
+              "description": "Guid of asset or sub asset to be edited"
+            },
+            "operationContent": {
+              "type": "object",
+              "description": "New value"
+            }
+          }
         }
       }
     }
