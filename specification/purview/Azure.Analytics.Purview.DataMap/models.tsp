@@ -290,7 +290,8 @@ model AtlasEntity {
   classifications?: AtlasClassification[];
 
   @doc("The created time of the record.")
-  createTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  createTime?: utcDateTime;
 
   @doc("The user who created the record.")
   createdBy?: string;
@@ -334,7 +335,8 @@ removed.
   status?: EntityStatus;
 
   @doc("The update time of the record.")
-  updateTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  updateTime?: utcDateTime;
 
   @doc("The user who updated the record.")
   updatedBy?: string;
@@ -677,13 +679,15 @@ model AtlasGlossaryBaseObject {
   lastModifiedTS?: string;
 
   @doc("The created time of the record.")
-  createTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  createTime?: utcDateTime;
 
   @doc("The user who created the record.")
   createdBy?: string;
 
   @doc("The update time of the record.")
-  updateTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  updateTime?: utcDateTime;
 
   @doc("The user who updated the record.")
   updatedBy?: string;
@@ -1087,10 +1091,12 @@ distinguish whether a record is an asset or a term.
   objectType?: string;
 
   @doc("The create time of the record. The Unix epoch format.")
-  createTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  createTime?: utcDateTime;
 
   @doc("The last update time of the record. The Unix epoch format.")
-  updateTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  updateTime?: utcDateTime;
 
   @doc("The GUID of the record.")
   id?: string;
@@ -1247,10 +1253,12 @@ distinguish whether a record is an asset or a term.
   objectType?: string;
 
   @doc("The create time of the record. The Unix epoch format.")
-  createTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  createTime?: utcDateTime;
 
   @doc("The last update time of the record. The Unix epoch format.")
-  updateTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  updateTime?: utcDateTime;
 
   @doc("The GUID of the record.")
   id?: string;
@@ -1401,7 +1409,8 @@ model AtlasRelationship {
   ...AtlasStruct;
 
   @doc("The created time of the record.")
-  createTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  createTime?: utcDateTime;
 
   @doc("The user who created the record.")
   createdBy?: string;
@@ -1428,7 +1437,8 @@ model AtlasRelationship {
   status?: StatusAtlasRelationship;
 
   @doc("The update time of the record.")
-  updateTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  updateTime?: utcDateTime;
 
   @doc("The user who updated the record.")
   updatedBy?: string;
@@ -1517,7 +1527,8 @@ model AtlasBaseTypeDef {
   category?: TypeCategory;
 
   @doc("The created time of the record.")
-  createTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  createTime?: utcDateTime;
 
   @doc("The user who created the record.")
   createdBy?: string;
@@ -1544,7 +1555,8 @@ model AtlasBaseTypeDef {
   typeVersion?: string;
 
   @doc("The update time of the record.")
-  updateTime?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  updateTime?: utcDateTime;
 
   @doc("The user who updated the record.")
   updatedBy?: string;
