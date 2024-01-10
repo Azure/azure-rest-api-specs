@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="SendAsync(SendNotificationRequest,CancellationToken)">
+      <example>
+This sample shows how to call SendAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+SendNotificationRequest sendNotificationRequest = new SendTextNotificationRequest(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), new string[] { "<to>" }, "<content>");
+Response<SendMessageResult> response = await client.SendAsync(sendNotificationRequest);
+]]></code>
+This sample shows how to call SendAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+SendNotificationRequest sendNotificationRequest = new SendTextNotificationRequest(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), new string[] { "<to>" }, "<content>");
+Response<SendMessageResult> response = await client.SendAsync(sendNotificationRequest);
+]]></code></example>
+    </member>
+    <member name="Send(SendNotificationRequest,CancellationToken)">
+      <example>
+This sample shows how to call Send.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+SendNotificationRequest sendNotificationRequest = new SendTextNotificationRequest(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), new string[] { "<to>" }, "<content>");
+Response<SendMessageResult> response = client.Send(sendNotificationRequest);
+]]></code>
+This sample shows how to call Send with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+SendNotificationRequest sendNotificationRequest = new SendTextNotificationRequest(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), new string[] { "<to>" }, "<content>");
+Response<SendMessageResult> response = client.Send(sendNotificationRequest);
+]]></code></example>
+    </member>
+    <member name="SendAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SendAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    content = "<content>",
+    kind = "text",
+    channelRegistrationId = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+    to = new object[]
+    {
+        "<to>"
+    },
+});
+Response response = await client.SendAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("receipts")[0].GetProperty("messageId").ToString());
+Console.WriteLine(result.GetProperty("receipts")[0].GetProperty("to").ToString());
+]]></code>
+This sample shows how to call SendAsync with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    content = "<content>",
+    kind = "text",
+    channelRegistrationId = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+    to = new object[]
+    {
+        "<to>"
+    },
+});
+Response response = await client.SendAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("receipts")[0].GetProperty("messageId").ToString());
+Console.WriteLine(result.GetProperty("receipts")[0].GetProperty("to").ToString());
+]]></code></example>
+    </member>
+    <member name="Send(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Send and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    content = "<content>",
+    kind = "text",
+    channelRegistrationId = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+    to = new object[]
+    {
+        "<to>"
+    },
+});
+Response response = client.Send(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("receipts")[0].GetProperty("messageId").ToString());
+Console.WriteLine(result.GetProperty("receipts")[0].GetProperty("to").ToString());
+]]></code>
+This sample shows how to call Send with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    content = "<content>",
+    kind = "text",
+    channelRegistrationId = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+    to = new object[]
+    {
+        "<to>"
+    },
+});
+Response response = client.Send(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("receipts")[0].GetProperty("messageId").ToString());
+Console.WriteLine(result.GetProperty("receipts")[0].GetProperty("to").ToString());
+]]></code></example>
+    </member>
+    <member name="GetStreamAsync(string,CancellationToken)">
+      <example>
+This sample shows how to call GetStreamAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+Response<BinaryData> response = await client.GetStreamAsync("<id>");
+]]></code>
+This sample shows how to call GetStreamAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+Response<BinaryData> response = await client.GetStreamAsync("<id>");
+]]></code></example>
+    </member>
+    <member name="GetStream(string,CancellationToken)">
+      <example>
+This sample shows how to call GetStream.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+Response<BinaryData> response = client.GetStream("<id>");
+]]></code>
+This sample shows how to call GetStream with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+Response<BinaryData> response = client.GetStream("<id>");
+]]></code></example>
+    </member>
+    <member name="GetStreamAsync(string,RequestContext)">
+      <example>
+This sample shows how to call GetStreamAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+Response response = await client.GetStreamAsync("<id>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetStreamAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+Response response = await client.GetStreamAsync("<id>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
+    </member>
+    <member name="GetStream(string,RequestContext)">
+      <example>
+This sample shows how to call GetStream and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+Response response = client.GetStream("<id>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetStream with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+Response response = client.GetStream("<id>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
+    </member>
+    <member name="GetMessageTemplateResponsesAsync(string,CancellationToken)">
+      <example>
+This sample shows how to call GetMessageTemplateResponsesAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+await foreach (MessageTemplateResponse item in client.GetMessageTemplateResponsesAsync("<channelId>"))
+{
+}
+]]></code>
+This sample shows how to call GetMessageTemplateResponsesAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+await foreach (MessageTemplateResponse item in client.GetMessageTemplateResponsesAsync("<channelId>"))
+{
+}
+]]></code></example>
+    </member>
+    <member name="GetMessageTemplateResponses(string,CancellationToken)">
+      <example>
+This sample shows how to call GetMessageTemplateResponses.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+foreach (MessageTemplateResponse item in client.GetMessageTemplateResponses("<channelId>"))
+{
+}
+]]></code>
+This sample shows how to call GetMessageTemplateResponses with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+foreach (MessageTemplateResponse item in client.GetMessageTemplateResponses("<channelId>"))
+{
+}
+]]></code></example>
+    </member>
+    <member name="GetMessageTemplateResponsesAsync(string,RequestContext)">
+      <example>
+This sample shows how to call GetMessageTemplateResponsesAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+await foreach (BinaryData item in client.GetMessageTemplateResponsesAsync("<channelId>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("kind").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+}
+]]></code>
+This sample shows how to call GetMessageTemplateResponsesAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+await foreach (BinaryData item in client.GetMessageTemplateResponsesAsync("<channelId>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("kind").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+}
+]]></code></example>
+    </member>
+    <member name="GetMessageTemplateResponses(string,RequestContext)">
+      <example>
+This sample shows how to call GetMessageTemplateResponses and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+foreach (BinaryData item in client.GetMessageTemplateResponses("<channelId>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("kind").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+}
+]]></code>
+This sample shows how to call GetMessageTemplateResponses with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureCommunicationMessagesServiceClient client = new AzureCommunicationMessagesServiceClient(endpoint);
+
+foreach (BinaryData item in client.GetMessageTemplateResponses("<channelId>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("kind").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("status").ToString());
+}
+]]></code></example>
+    </member>
+  </members>
+</doc>
