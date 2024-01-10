@@ -316,7 +316,6 @@ model SkipRequest {
   target: string;
 }
 
-
 @doc("The properties of a skip operation containing multiple skip requests.")
 @added(Versions.v2024_02_02_preview)
 model SkipProperties {
