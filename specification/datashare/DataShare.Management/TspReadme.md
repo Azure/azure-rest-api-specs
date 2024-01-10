@@ -24,6 +24,28 @@ format-by-name-rules:
   'synchronizationId': 'uuid'
   '*ResourceId': 'arm-id'
 
+acronym-mapping:
+  CPU: Cpu
+  CPUs: Cpus
+  Os: OS
+  Ip: IP
+  Ips: IPs|ips
+  ID: Id
+  IDs: Ids
+  VM: Vm
+  VMs: Vms
+  Vmos: VmOS
+  VMScaleSet: VmScaleSet
+  DNS: Dns
+  VPN: Vpn
+  NAT: Nat
+  WAN: Wan
+  Ipv4: IPv4|ipv4
+  Ipv6: IPv6|ipv6
+  Ipsec: IPsec|ipsec
+  SSO: Sso
+  URI: Uri
+  Etag: ETag|etag
 
 list-exception:
   - /providers/Microsoft.DataShare/locations/{location}/consumerInvitations/{invitationId}

@@ -51,7 +51,7 @@ interface Profiles {
   >;
 
   @doc("Checks the quota and actual usage of endpoints under the given Azure Front Door Standard or Azure Front Door Premium or CDN profile.")
-  listResourceUsage is ArmResourceActionSync<
+  listResourceUsageFoo is ArmResourceActionSync<
     Profile,
     void,
     ResourceUsageListResult
