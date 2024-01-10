@@ -295,7 +295,7 @@ enum TargetType {
   @doc("Skip the update of a group.")
   Group,
 
-  @doc("Skip the update of an entire stage inclusing the after stage wait.")
+  @doc("Skip the update of an entire stage including the after stage wait.")
   Stage,
 
   @doc("Skip the update of the after stage wait of a certain stage.")
@@ -311,7 +311,7 @@ model SkipRequest {
   @doc("""
   The skip target. 
   To skip a member/group/stage, use the member/group/stage's name;
-  Tp skip an after satge wait, use the parent stage's name.
+  Tp skip an after stage wait, use the parent stage's name.
   """)
   target: string;
 }
