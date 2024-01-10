@@ -33,5 +33,5 @@ interface NotificationMessagesOperations {
 interface StreamOperations {
   @tag("Stream")
   @doc("Download the Media payload from a User to Business message.")
-  getStream is Operations.ResourceRead<Stream>;
+  getStream is Operations.ResourceRead<MessageDataStream>;
 }
