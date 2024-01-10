@@ -37,3 +37,12 @@ These settings apply only when `--tag=package-2023-08-01-preview` is specified o
 input-file:
   - Astronomer.Astro/preview/2023-08-01-preview/astronomer.json
 ```
+
+### Tag: package-2023-08-01
+
+These settings apply only when `--tag=package-2023-08-01` is specified on the command line. 
+
+```yaml $(tag) == 'package-2023-08-01'
+input-file:
+  - Astronomer.Astro/stable/2023-08-01/astronomer.json
+```

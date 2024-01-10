@@ -1,0 +1,508 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2024-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scopeId}/providers/Microsoft.Security/pricings/{pricingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get pricings on subscription - VirtualMachines plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameVirtualMachines_example.json"
+          },
+          "Get pricings on resource - VirtualMachines plan": {
+            "$ref": "./examples/Pricings/GetResourcePricingByNameVirtualMachines_example.json"
+          },
+          "Get pricings on subscription - Dns plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameDns_example.json"
+          },
+          "Get pricings on subscription - StorageAccounts plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameStorageAccounts_example.json"
+          },
+          "Get pricings on subscription - Containers plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameContainers_example.json"
+          },
+          "Get pricings on subscription - CloudPosture plan": {
+            "$ref": "./examples/Pricings/GetPricingByNameCloudPosture_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Get the Defender plans pricing configurations of the selected scope (valid scopes are resource id or a subscription id). At the resource level, supported resource types are 'VirtualMachines, VMSS and ARC Machines'.",
+        "operationId": "Pricings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update pricing on subscription (example for CloudPosture plan)": {
+            "$ref": "./examples/Pricings/PutPricingByName_example.json"
+          },
+          "Update pricing on subscription (example for VirtualMachines plan)": {
+            "$ref": "./examples/Pricings/PutPricingVMsByName_example.json"
+          },
+          "Update pricing on resource (example for VirtualMachines plan)": {
+            "$ref": "./examples/Pricings/PutResourcePricingByNameVirtualMachines_example.json"
+          },
+          "Update pricing on subscription (example for CloudPosture plan) - partial success": {
+            "$ref": "./examples/Pricings/PutPricingByNamePartialSuccess_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines' and only for plan='VirtualMachines' and subPlan='P1').",
+        "operationId": "Pricings_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          },
+          {
+            "$ref": "#/parameters/Pricing"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "201": {
+            "description": "Successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a pricing on resource": {
+            "$ref": "./examples/Pricings/DeleteResourcePricing_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines, VMSS and ARC MachinesS').",
+        "operationId": "Pricings_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeResourceId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the pricing configuration of the resource."
+          },
+          "204": {
+            "description": "No Content - Pricing does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{scopeId}/providers/Microsoft.Security/pricings": {
+      "get": {
+        "x-ms-examples": {
+          "Get pricings on subscription": {
+            "$ref": "./examples/Pricings/ListPricings_example.json"
+          },
+          "Get pricings on subscription with plans filter": {
+            "$ref": "./examples/Pricings/ListPricingsWithPlanFilter_example.json"
+          },
+          "Get pricings on resource": {
+            "$ref": "./examples/Pricings/ListResourcePricings_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.",
+        "operationId": "Pricings_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ODataFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PricingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PricingList": {
+      "type": "object",
+      "description": "List of pricing configurations response.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pricing configurations",
+          "items": {
+            "$ref": "#/definitions/Pricing"
+          }
+        }
+      }
+    },
+    "Pricing": {
+      "type": "object",
+      "description": "Microsoft Defender for Cloud is provided in two pricing tiers: free and standard. The standard tier offers advanced security capabilities, while the free tier offers basic security features.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Pricing data",
+          "$ref": "#/definitions/PricingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PricingProperties": {
+      "type": "object",
+      "description": "Pricing properties for the relevant scope",
+      "properties": {
+        "pricingTier": {
+          "type": "string",
+          "description": "Indicates whether the Defender plan is enabled on the selected scope. Microsoft Defender for Cloud is provided in two pricing tiers: free and standard. The standard tier offers advanced security capabilities, while the free tier offers basic security features.",
+          "enum": [
+            "Free",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "pricingTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Free",
+                "description": "Get free Microsoft Defender for Cloud experience with basic security features"
+              },
+              {
+                "value": "Standard",
+                "description": "Get the standard Microsoft Defender for Cloud experience with advanced security features"
+              }
+            ]
+          }
+        },
+        "subPlan": {
+          "type": "string",
+          "description": "The sub-plan selected for a Standard pricing configuration, when more than one sub-plan is available. Each sub-plan enables a set of security features. When not specified, full plan is applied. For VirtualMachines plan, available sub plans are 'P1' & 'P2', where for resource level only 'P1' sub plan is supported."
+        },
+        "freeTrialRemainingTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "The duration left for the subscriptions free trial period - in ISO 8601 format (e.g. P3Y6M4DT12H30M5S)."
+        },
+        "enablementTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Optional. If `pricingTier` is `Standard` then this property holds the date of the last time the `pricingTier` was set to `Standard`, when available (e.g 2023-03-01T12:42:42.1921106Z)."
+        },
+        "enforce": {
+          "type": "string",
+          "description": "If set to \"False\", it allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inherited=\"False\"). If set to \"True\", it prevents overrides and forces this pricing configuration on all the descendants of this scope. This field is only available for subscription-level pricing.",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "name": "enforce",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "False",
+                "description": "Allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inherited=\"False\")"
+              },
+              {
+                "value": "True",
+                "description": "Prevents overrides and forces the current scope's pricing configuration to all descendants"
+              }
+            ]
+          }
+        },
+        "inherited": {
+          "type": "string",
+          "readOnly": true,
+          "description": "\"inherited\" = \"True\" indicates that the current scope inherits its pricing configuration from its parent. The ID of the parent scope that provides the inherited configuration is displayed in the \"inheritedFrom\" field. On the other hand, \"inherited\" = \"False\" indicates that the current scope has its own pricing configuration explicitly set, and does not inherit from its parent. This field is read only and available only for resource-level pricing.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "inherited",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "True",
+                "description": "Indicates that the current scope is inheriting its pricing configuration from its parent"
+              },
+              {
+                "value": "False",
+                "description": "Indicates that the current scope sets its own pricing configuration and does not inherit it from its parent"
+              }
+            ]
+          }
+        },
+        "inheritedFrom": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the scope inherited from. \"Null\" if not inherited. This field is only available for resource-level pricing."
+        },
+        "resourcesCoverageStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This field is available for subscription-level only, and reflects the coverage status of the resources under the subscription. Please note: The \"pricingTier\" field reflects the plan status of the subscription. However, since the plan status can also be defined at the resource level, there might be misalignment between the subscription's plan status and the resource status. This field helps indicate the coverage status of the resources.",
+          "enum": [
+            "FullyCovered",
+            "PartiallyCovered",
+            "NotCovered"
+          ],
+          "x-ms-enum": {
+            "name": "resourcesCoverageStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "FullyCovered",
+                "description": "This value indicates that all resources associated with the subscription have the Defender plan enabled."
+              },
+              {
+                "value": "PartiallyCovered",
+                "description": "This value indicates that some resources under the subscription have the Defender plan enabled, while others have it disabled. There is a mixed coverage status among resources."
+              },
+              {
+                "value": "NotCovered",
+                "description": "This value indicates that the Defender plan is disabled for all resources under the subscription. None of the resources are protected by the Defender plan."
+              }
+            ]
+          }
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "description": "Optional. List of extensions offered under a plan.",
+          "x-ms-identifiers": []
+        },
+        "deprecated": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Optional. True if the plan is deprecated. If there are replacing plans they will appear in `replacedBy` property"
+        },
+        "replacedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Optional. List of plans that replace this plan. This property exists only if this plan is deprecated."
+        }
+      },
+      "required": [
+        "pricingTier"
+      ]
+    },
+    "Extension": {
+      "type": "object",
+      "description": "A plan's extension properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The extension name. Supported values are: <br><br>**AgentlessDiscoveryForKubernetes** - API-based discovery of information about Kubernetes cluster architecture, workload objects, and setup. Required for Kubernetes inventory, identity and network exposure detection, attack path analysis and risk hunting as part of the cloud security explorer.\r\nAvailable for CloudPosture plan.<br><br>**OnUploadMalwareScanning** - Limits the GB to be scanned per month for each storage account within the subscription. Once this limit reached on a given storage account, Blobs won't be scanned during current calendar month.\r\nAvailable for StorageAccounts plan.<br><br>**SensitiveDataDiscovery** - Sensitive data discovery identifies Blob storage container with sensitive data such as credentials, credit cards, and more, to help prioritize and investigate security events.\r\nAvailable for StorageAccounts and CloudPosture plans.<br><br>**ContainerRegistriesVulnerabilityAssessments** - Provides vulnerability management for images stored in your container registries.\r\nAvailable for CloudPosture and Containers plans."
+        },
+        "isEnabled": {
+          "type": "string",
+          "description": "Indicates whether the extension is enabled.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "isEnabled",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "True",
+                "description": "Indicates the extension is enabled"
+              },
+              {
+                "value": "False",
+                "description": "Indicates the extension is disabled"
+              }
+            ]
+          }
+        },
+        "additionalExtensionProperties": {
+          "type": "object",
+          "description": "Property values associated with the extension.",
+          "additionalProperties": {}
+        },
+        "operationStatus": {
+          "type": "object",
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true,
+          "description": "Optional. A status describing the success/failure of the extension's enablement/disablement operation."
+        }
+      },
+      "required": [
+        "name",
+        "isEnabled"
+      ]
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "A status describing the success/failure of the extension's enablement/disablement operation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The operation status code.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "code",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "Extension was created/updated successfully."
+              },
+              {
+                "value": "Failed",
+                "description": "Extension was not created/updated successfully. See operation status message for more details."
+              }
+            ]
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional information regarding the success/failure of the operation."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PricingName": {
+      "name": "pricingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the pricing configuration",
+      "x-ms-parameter-location": "method"
+    },
+    "Pricing": {
+      "name": "pricing",
+      "in": "body",
+      "required": true,
+      "description": "Pricing object",
+      "schema": {
+        "$ref": "#/definitions/Pricing"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

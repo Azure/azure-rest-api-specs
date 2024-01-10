@@ -1526,10 +1526,45 @@
       "description": "MySQL linked service properties.",
       "type": "object",
       "properties": {
+        "driverVersion": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The version of the MySQL driver. Type: string. V1 or empty for legacy driver, V2 for new driver. V1 can support connection string and property bag, V2 can only support connection string."
+        },
         "connectionString": {
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
+        },
+        "server": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port for the connection. Type: integer."
+        },
+        "username": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database name for connection. Type: string."
+        },
+        "sslMode": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "SSL mode for connection. Type: integer. 0: disable, 1: prefer, 2: require, 3: verify-ca, 4: verify-full."
+        },
+        "useSystemTrustStore": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Use system trust store for connection. Type: integer. 0: enable, 1: disable."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -1539,10 +1574,7 @@
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "PostgreSqlLinkedService": {
       "x-ms-discriminator-value": "PostgreSql",
@@ -2203,8 +2235,8 @@
         },
         "authHeaders": {
           "type": "object",
-          "x-ms-format": "dfe-object",
-          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: key value pairs (value should be string type)."
         },
         "tenant": {
           "type": "object",
@@ -4003,8 +4035,8 @@
         },
         "authHeaders": {
           "type": "object",
-          "x-ms-format": "dfe-object",
-          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: key value pairs (value should be string type)."
         },
         "embeddedCertData": {
           "type": "object",
@@ -5304,12 +5336,37 @@
       "description": "MariaDB server linked service properties.",
       "type": "object",
       "properties": {
+        "driverVersion": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The version of the MariaDB driver. Type: string. V1 or empty for legacy driver, V2 for new driver. V1 can support connection string and property bag, V2 can only support connection string."
+        },
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object",
           "x-ms-format": "dfe-string"
         },
-        "pwd": {
+        "server": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port for the connection. Type: integer."
+        },
+        "username": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database name for connection. Type: string."
+        },
+        "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
           "description": "The Azure key vault secret reference of password in connection string."
         },
@@ -6369,8 +6426,8 @@
       "properties": {
         "clusterSize": {
           "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "Number of worker/data nodes in the cluster. Suggestion value: 4. Type: string (or Expression with resultType string)."
+          "x-ms-format": "dfe-int",
+          "description": "Number of worker/data nodes in the cluster. Suggestion value: 4. Type: int (or Expression with resultType int)."
         },
         "timeToLive": {
           "type": "object",
@@ -7322,8 +7379,9 @@
       "type": "object",
       "properties": {
         "functionAppUrl": {
-          "description": "The endpoint of the Azure Function App. URL will be in the format https://<accountName>.azurewebsites.net.",
-          "type": "object"
+          "description": "The endpoint of the Azure Function App. URL will be in the format https://<accountName>.azurewebsites.net. Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "functionKey": {
           "description": "Function or Host key for Azure Function App.",
@@ -7338,8 +7396,9 @@
           "description": "The credential reference containing authentication information."
         },
         "resourceId": {
-          "description": "Allowed token audiences for azure function.",
-          "type": "object"
+          "description": "Allowed token audiences for azure function. Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "authentication": {
           "type": "object",
@@ -7377,7 +7436,8 @@
       "properties": {
         "connectionString": {
           "description": "The connection string of snowflake. Type: string, SecureString.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -7553,6 +7613,176 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         }
       }
+    },
+    "SalesforceV2LinkedService": {
+      "x-ms-discriminator-value": "SalesforceV2",
+      "description": "Linked service for Salesforce V2.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce V2 linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceV2LinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SalesforceV2LinkedServiceTypeProperties": {
+      "description": "Salesforce V2 linked service properties.",
+      "type": "object",
+      "properties": {
+        "environmentUrl": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The URL of Salesforce instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string)."
+        },
+        "clientId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The client Id for OAuth 2.0 Client Credentials Flow authentication of the Salesforce instance. Type: string (or Expression with resultType string)."
+        },
+        "clientSecret": {
+          "description": "The client secret for OAuth 2.0 Client Credentials Flow authentication of the Salesforce instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce API version used in ADF. The version must be larger than or equal to 47.0 which is required by Salesforce BULK API 2.0. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        }
+      }
+    },
+    "SalesforceServiceCloudV2LinkedService": {
+      "x-ms-discriminator-value": "SalesforceServiceCloudV2",
+      "description": "Linked service for Salesforce Service Cloud V2.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce Service Cloud V2 linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceServiceCloudV2LinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SalesforceServiceCloudV2LinkedServiceTypeProperties": {
+      "description": "Salesforce Service Cloud V2 linked service properties.",
+      "type": "object",
+      "properties": {
+        "environmentUrl": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The URL of Salesforce Service Cloud instance. For example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string)."
+        },
+        "clientId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The client Id for OAuth 2.0 Client Credentials Flow authentication of the Salesforce instance. Type: string (or Expression with resultType string)."
+        },
+        "clientSecret": {
+          "description": "The client secret for OAuth 2.0 Client Credentials Flow authentication of the Salesforce instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce API version used in ADF. The version must be larger than or equal to 47.0 which is required by Salesforce BULK API 2.0. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        }
+      }
+    },
+    "WarehouseLinkedService": {
+      "x-ms-discriminator-value": "Warehouse",
+      "description": "Microsoft Fabric Warehouse linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric Warehouse linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarehouseLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "WarehouseLinkedServiceTypeProperties": {
+      "description": "Microsoft Fabric Warehouse linked service properties.",
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The ID of Microsoft Fabric Warehouse artifact. Type: string (or Expression with resultType string)."
+        },
+        "endpoint": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The endpoint of Microsoft Fabric Warehouse server. Type: string (or Expression with resultType string)."
+        },
+        "workspaceId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The ID of Microsoft Fabric workspace. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The ID of the application used to authenticate against Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "The Key of the application used to authenticate against Microsoft Fabric Warehouse.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "tenant": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        }
+      },
+      "required": [
+        "artifactId",
+        "endpoint"
+      ]
     }
   }
 }
