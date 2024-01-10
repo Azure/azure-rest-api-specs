@@ -64,13 +64,14 @@ model StoragePoolProperties {
 
   @doc("Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in.")
   @visibility("read", "create")
-  delegatedSubnetId: string;
+  vnetInjection: VnetInjection;
 
   @doc("How long a deleted object is kept before eradication (time in seconds).")
   @visibility("read")
   dataRetentionPeriod?: int64;
 
   @doc("if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost).")
+  @visibility("read", "create")
   avsEnabled: boolean;
 
   @doc("Total bandwidth provisioned for the pool (in MB/s).")
@@ -81,6 +82,7 @@ model StoragePoolProperties {
   provisionedIops?: int64;
 
   @doc("Presented if avsEnabled is true.")
+  @visibility("read", "create")
   avs?: AzureVmwareService;
 
   @doc("Provisioning state of the resource.")
@@ -90,6 +92,15 @@ model StoragePoolProperties {
   @doc("Resource id of the reservation resource. The RP should make sure this is a valid resource before allowing StoragePool creation to continue.")
   @visibility("create", "read")
   reservationResourceId: string;
+}
+
+@doc("Describes Virtual Network Subnet the Pool is visible in.")
+model VnetInjection {
+  @doc("Full Azure Resource ID of the Virtual Network subnet to inject pool in.")
+  subnetId: string;
+
+  @doc("Full Azure Resource ID of the Virtual Network to inject pool in.")
+  vnetId?: string;
 }
 
 @doc("Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.")
@@ -137,7 +148,7 @@ interface StoragePools {
   @post
   listStoragePools(
     ...ResourceInstanceParameters<StoragePool>,
-  ): OkResponse<StoragePoolList> | ErrorResponse;
+  ): ArmResponse<StoragePoolList> | ErrorResponse;
 
   @doc("Enable AVS on storage pool")
   @armResourceAction(StoragePool)
@@ -192,6 +203,63 @@ interface StoragePools {
 
 @doc("AVS (Azure VMware Solution) related properties.")
 model AvsDetails {
+  @doc("Flag which tells if the AVS support is enabled.")
+  avsEnabled: boolean;
+
+  @doc("AVS configuration properties")
+  avs: Avs;
+
+  @doc("vSphere configuration properties")
+  vSphere: VSphere;
+
+  @doc("tells if the plugin has been enabled or not")
+  vSpherePluginEnabled: boolean;
+
+  @doc("vSpherePluginKey associated with the plugin")
+  vSpherePluginKey: string;
+
+  @doc("vSphere plugin configuration properties")
+  vSpherePlugin: VSpherePlugin;
+}
+
+@doc("vSphere plugin configuration properties")
+model VSpherePlugin {
+  @doc("URL for registration of vSphere plugin")
+  registrationUrl: string;
+
+  @doc("Company name for vSphere plugin")
+  companyName: string;
+
+  @doc("Description of vSphere plugin")
+  description: string;
+
+  @doc("Protocol used by vSphere plugin")
+  protocol: string;
+
+  @doc("Admin email for vSphere plugin")
+  adminEmail: string;
+
+  @doc("Version of vSphere plugin")
+  version: string;
+
+  @doc("Certificate for vSphere plugin")
+  certificate: string;
+}
+
+@doc("vSphere configuration properties")
+model VSphere {
+  @doc("Unique identifier of the vSphere software package in the SDDC")
+  vSphereUuid: string;
+
+  @doc("Resource id pointing at the AVS SDDC the pool is configured with")
+  sddcResourceId: string;
+
+  @doc("IP address of the vSphere software installed in the SDDC")
+  vSphereIp: string;
+}
+
+@doc("AVS (Azure VMware Solution) related properties.")
+model Avs {
   @doc("Username for VMware VASA service login.")
   vasaProviderUsername: string;
 
@@ -309,9 +377,8 @@ model StoragePoolEnableVspherePlugin {
   vSphereIp: string;
 
   @doc("Storage Pool Vsphere cert thumb print")
-  vSphereCertThumbprint: string; 
+  vSphereCertThumbprint: string;
 }
-
 
 @doc("The AVS Storage Container resource type.")
 @parentResource(StoragePool)
