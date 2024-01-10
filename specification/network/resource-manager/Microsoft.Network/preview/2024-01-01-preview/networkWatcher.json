@@ -2066,7 +2066,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FlowLogRequest"
+              "$ref": "#/definitions/FlowLogRequestWithUserManagedIdentity"
             },
             "description": "Parameters that define the create or update flow log resource."
           },
@@ -2081,13 +2081,13 @@
           "201": {
             "description": "Request successful. The operation returns the resulting flow log resource.",
             "schema": {
-              "$ref": "#/definitions/FlowLogResponse"
+              "$ref": "#/definitions/FlowLogResponseWithUserManagedIdentity"
             }
           },
           "200": {
             "description": "Update successful. The operation returns the resulting flow log resource.",
             "schema": {
-              "$ref": "#/definitions/FlowLogResponse"
+              "$ref": "#/definitions/FlowLogResponseWithUserManagedIdentity"
             }
           },
           "default": {
@@ -2155,7 +2155,7 @@
           "200": {
             "description": "Request successful. The operation returns updated flow log.",
             "schema": {
-              "$ref": "#/definitions/FlowLogResponse"
+              "$ref": "#/definitions/FlowLogResponseWithUserManagedIdentity"
             }
           },
           "default": {
@@ -2210,7 +2210,7 @@
           "200": {
             "description": "Request successful. The operation returns a flow log resource.",
             "schema": {
-              "$ref": "#/definitions/FlowLogResponse"
+              "$ref": "#/definitions/FlowLogResponseWithUserManagedIdentity"
             }
           },
           "default": {
@@ -3091,7 +3091,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FlowLogResponse"
+            "$ref": "#/definitions/FlowLogResponseWithUserManagedIdentity"
           },
           "description": "Information about flow log resource."
         },
@@ -3103,7 +3103,27 @@
       },
       "description": "List of flow logs."
     },
-    "FlowLogRequest": {
+    "FlowLog": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FlowLogPropertiesFormat",
+          "description": "Properties of the flow log."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "A flow log resource."
+    },
+    "FlowLogRequestWithUserManagedIdentity": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3127,7 +3147,7 @@
       ],
       "description": "A flow log resource."
     },
-    "FlowLogResponse": {
+    "FlowLogResponseWithUserManagedIdentity": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
