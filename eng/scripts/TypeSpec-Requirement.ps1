@@ -42,9 +42,16 @@ else {
     }
 
     # Extract path between folder "specification/" and "/(preview|stable)"
-    $file -match "specification/(?<servicePath>[^/]+/(data-plane|resource-manager).*?)/(preview|stable)/[^/]+/[^/]+\.json$"
+    if ($file -match "specification/(?<servicePath>[^/]+/(data-plane|resource-manager).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
+      $servicePath = $Matches["servicePath"]
+    }
+    else {
+      LogError "  Path to OpenAPI did not match expected regex.  Unable to extract service path."
+      LogJobFailure
+      exit 1
+    }
 
-    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/${Matches.servicePath}/stable"
+    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/$servicePath/stable"
 
     LogInfo "  Checking $urlToStableFolder"
 
@@ -69,10 +76,10 @@ else {
     LogInfo "    Status: $responseStatus"
 
     if ($responseStatus -eq 200) {
-      LogInfo "  Branch 'main' contains path '$pathToServiceName/stable', so spec already exists and is not required to use TypeSpec"
+      LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
     }
     elseif ($response.StatusCode -eq 404) {
-      LogInfo "  Branch 'main' does not contain path '$pathToServiceName/stable', so spec is new and must use TypeSpec"
+      LogInfo "  Branch 'main' does not contain path '$servicePath/stable', so spec is new and must use TypeSpec"
       $pathsWithErrors += $file
     }
     else {
