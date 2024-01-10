@@ -167,7 +167,7 @@ model NumberResponse {
   ...PhoneNumber;
   ...AccountName;
   details: NumberDetails;
-  status: NumberStatus;
+  status: AssignmentStatus;
   Etag?: string | null;
   serviceProvisioningStatus: ServiceProvisioningState;
   serviceProvisioningErrors?: ServiceProvisioningErrors;
@@ -227,17 +227,13 @@ model TeamsTpmNumberConfig {
   displayedCountryCode?: string;
 }
 
-model NumberStatus {
-  teamsOcNumberStatus?: TeamsOcNumberStatus;
-  teamsTpmNumberStatus?: TeamsTpmNumberStatus;
-}
-
-model TeamsOcNumberStatus {
-  assignmentStatus: string;
-}
-
-model TeamsTpmNumberStatus {
-  assignmentStatus: string;
+@doc("Indicates whether a number is assigned to a user. This is only relevant for some UC providers.")
+enum AssignmentStatus {
+  TpmAssigned: "TPM Assigned",
+  TpmUnassigned: "TPM Unassigned",
+  OcAssigned: "OC Assigned",
+  OcUnassigned: "OC Unassigned",
+  NA: "Not Applicable"
 }
 
 model ProblemDetails {
