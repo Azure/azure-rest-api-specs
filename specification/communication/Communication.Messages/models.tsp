@@ -14,11 +14,41 @@ using Azure.ClientGenerator.Core;
 @versioned(AzureCommunicationMessagesService.Versions)
 namespace AzureCommunicationMessagesService;
 
-alias CommunicationMessageType = "text" | "image" | "template";
+@doc("The type of message. Supports text, image, template.")
+enum CommunicationMessageType {
+  @doc("Text message type.")
+  text,
 
-alias WhatsAppMessageTemplateValueSubType = "quickReply" | "url";
+  @doc("Image message type.")
+  image,
 
-alias MessageTemplateStatus = "approved" | "rejected" | "pending" | "paused";
+  @doc("Template message type.")
+  template,
+}
+
+@doc("The WhatsApp button sub type.")
+enum WhatsAppMessageButtonSubType {
+  @doc("The WhatsApp button sub type is quick reply.")
+  quickReply,
+
+  @doc("The WhatsApp button sub type is url.")
+  url,
+}
+
+@doc("The aggregated template status.")
+enum MessageTemplateStatus {
+  @doc("Message template is approved.")
+  approved,
+
+  @doc("Message template is rejected.")
+  rejected,
+
+  @doc("Message template is pending.")
+  pending,
+
+  @doc("Message template is paused.")
+  paused,
+}
 
 @discriminator("kind")
 @doc("Details of the message to send.")
@@ -200,7 +230,7 @@ dictionary.
 @doc("The template bindings component button for WhatsApp")
 model WhatsAppMessageTemplateBindingsButton {
   @doc("The WhatsApp button sub type")
-  subType?: WhatsAppMessageTemplateValueSubType;
+  subType?: WhatsAppMessageButtonSubType;
 
   @doc("""
 The reference to the value in the
