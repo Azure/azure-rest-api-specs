@@ -34,7 +34,6 @@ model Role {
 
 @doc("Permissions")
 model Permissions {
-
   @doc("Chat permissions")
   chat: ChatPermissions;
 
@@ -88,7 +87,7 @@ model ChatPermissions {
 
   @doc("Get messages")
   getMessages: boolean;
-  
+
   @doc("Get messages")
   readMessages: boolean;
 
@@ -143,7 +142,6 @@ model ChatPermissions {
 
 @doc("Calling permissions")
 model CallingPermissions {
-
   @doc("Add participants")
   addParticipants: boolean;
 
@@ -242,7 +240,7 @@ model CallingPermissions {
 
   @doc("Mute others in a call")
   muteOthers: boolean;
-  
+
   @doc("Highlight video feeds for everyone in the call")
   spotlightParticipants: boolean;
 

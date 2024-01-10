@@ -43,7 +43,7 @@ interface Roles {
 
   @doc("List roles.")
   listRoles is Operations.ResourceList<Role>;
-  
+
   @doc("Create a role.")
   createRole is Operations.ResourceCreateWithServiceProvidedName<Role>;
 }
