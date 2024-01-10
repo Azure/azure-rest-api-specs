@@ -70,10 +70,6 @@ model StoragePoolProperties {
   @visibility("read")
   dataRetentionPeriod?: int64;
 
-  @doc("if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost).")
-  @visibility("read", "create")
-  avsEnabled: boolean;
-
   @doc("Total bandwidth provisioned for the pool (in MB/s).")
   provisionedBandwidthMbPerSec: int64;
 
@@ -82,7 +78,7 @@ model StoragePoolProperties {
   provisionedIops?: int64;
 
   @doc("Presented if avsEnabled is true.")
-  @visibility("read", "create")
+  @visibility("read")
   avs?: AzureVmwareService;
 
   @doc("Provisioning state of the resource.")
@@ -105,16 +101,17 @@ model VnetInjection {
 
 @doc("Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.")
 model AzureVmwareService {
-  @doc("Internal VMware id identifying this StoragePool as a storage provider.")
-  storageProviderId: string;
+  @doc("if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost).")
+  avsEnabled: boolean;
 
-  @doc("Resource id pointing at the AVS SDDC the pool is configured with (used by AVS Resource Provider to keep track of attached pools).")
-  sddc?: string;
+  @doc("Unique identifier of the vSphere software installation in the SDDC the storage pool belongs to.")
+  vSphereUuid: string;
 
-  @doc("Password for VASA service login, disabled if omitted or set to null.")
-  @visibility("create", "update")
-  @secret
-  vasaProviderPassword?: string;
+  @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
+  sddcResourceId?: string;
+
+  @doc("Immutable identifier for the vSpherePlugin provided by Pure Storage. The value is available if the vSpherePlugin has been enabled for the storage pool.")
+  vSpherePluginKey?: string;
 }
 
 @armResourceOperations
@@ -156,7 +153,7 @@ interface StoragePools {
   @post
   enableAVS(
     ...ResourceInstanceParameters<StoragePool>,
-    storagePoolEnableAvs: StoragePoolEnableAvs,
+    properties: StoragePoolEnableAvs,
   ): AcceptedResponse | ErrorResponse;
 
   @doc("Disable AVS on storage pool")
@@ -181,7 +178,7 @@ interface StoragePools {
   @post
   enableVspherePlugins(
     ...ResourceInstanceParameters<StoragePool>,
-    storagePoolEnableVspherePlugin: StoragePoolEnableVspherePlugin,
+    properties: StoragePoolEnableVspherePlugin,
   ): AcceptedResponse | ErrorResponse;
 
   @doc("Disable Vsphere plugins on storage pool")
@@ -299,10 +296,31 @@ model HealthDetails {
   usedCapacityPercentage: float64;
 
   @doc("Bandwidth usage metrics reported for a given resource.")
-  bandwidthUsage: string;
+  bandwidthUsage: BandwidthUsage;
 
   @doc("IOPS usage metrics reported for a given resource.")
-  iopsUsage: string;
+  iopsUsage: IopsUsage;
+
+  @doc("Contains properties related to used Flash space.")
+  space: Space;
+}
+
+@doc("Contains properties related to used Flash space.")
+model Space {
+  @doc("The total space used by customer data. Measured in bytes.")
+  totalUsed: int64;
+
+  @doc("The unique physical space occupied by customer data. Unique physical space does not include shared space or snapshots. Measured in bytes.")
+  unique: int64;
+
+  @doc("The physical space occupied by data unique to one or more snapshots. Measured in bytes.")
+  snapshots: int64;
+
+  @doc("The physical space occupied by deduplicated data, meaning that the space is shared with other volumes and snapshots as a result of data deduplication. Measured in bytes.")
+  shared: int64;
+
+  @doc("Data reduction ratio achieved on this pool, used to set price per TB for billing.")
+  dataReductionRatio: float64;
 }
 
 @doc("Bandwidth usage metrics reported for a given resource.")
@@ -368,6 +386,7 @@ model StoragePoolEnableAvs {
   sddcResourceId: string;
 
   @doc("Password for VASA service login.")
+  @secret
   vasaProviderPassword: string;
 }
 
