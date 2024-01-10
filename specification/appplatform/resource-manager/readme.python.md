@@ -19,6 +19,7 @@ Generate all API versions currently shipped for this package
 
 
 ```yaml $(python)
+default-api-version: "2023-12-01"
 multiapi: true
 clear-output-folder: true
 batch:
