@@ -15,10 +15,7 @@ alias ServiceTraits = NoRepeatableRequests &
   SupportsClientRequestId &
   RequestHeadersTrait<ApcGatewayIdHeader>;
 
-alias Operations = Azure.Core.ResourceOperations<
-  ServiceTraits,
-  ApcErrorResponse
->;
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits, APCError>;
 
 @doc("Header to identify APC Gateway resource.")
 model ApcGatewayIdHeader {
@@ -56,7 +53,7 @@ model NetworkAccessIdentifierModel {
 
 @error
 @doc("A custom error type for APC.")
-model ApcErrorResponse {
+model APCError {
   @doc("The numerical error status eg 500, 404")
   status: int32;
 

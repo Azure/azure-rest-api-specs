@@ -26,8 +26,8 @@ interface NumberInterface {
   @doc("Verifies the phone number (MSISDN) associated with a device.")
   verify is Operations.ResourceAction<
     NumberEndpoint,
-    NumberVerifyContent,
-    NumberVerifyResult
+    NumberVerificationContent,
+    NumberVerificationResult
   >;
 
   @doc("Retrieves the phone number (MSISDN) associated with a device.")
@@ -60,7 +60,7 @@ enum NumberEnum {
 /// Request models
 
 @doc("Request to verify number of device")
-model NumberVerifyContent {
+model NumberVerificationContent {
   @doc("Identifier for the network to query for this device.")
   networkIdentifier: NetworkIdentifier;
 
@@ -70,7 +70,7 @@ model NumberVerifyContent {
 /// Response models
 
 @doc("Response verifying number of device")
-model NumberVerifyResult {
+model NumberVerificationResult {
   @doc("True if number if the phone number matches the device, False otherwise")
   verificationResult: boolean;
 }
