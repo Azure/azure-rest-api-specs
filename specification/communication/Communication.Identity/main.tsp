@@ -16,8 +16,10 @@ using Azure.Core.Traits;
 @versioned(Communication.Identity.Versions)
 namespace Communication.Identity;
 
+@doc("ACS Auth versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("Private preview version for Roles APIs.")
   `2023-08-30-preview`,
 }
 
