@@ -162,13 +162,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "applicationId",
-            "in": "path",
-            "description": "The ID of the Application",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -202,6 +195,13 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "description": "The ID of the Application",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -468,31 +468,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "thumbprintAlgorithm",
-            "in": "path",
-            "description": "The algorithm used to derive the thumbprint parameter. This must be sha1.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "thumbprint",
-            "in": "path",
-            "description": "The thumbprint of the Certificate to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$select",
-            "in": "query",
-            "description": "An OData $select clause.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -526,6 +501,31 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "thumbprintAlgorithm",
+            "in": "path",
+            "description": "The algorithm used to derive the thumbprint parameter. This must be sha1.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "thumbprint",
+            "in": "path",
+            "description": "The thumbprint of the Certificate to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "An OData $select clause.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           }
         ],
         "responses": {
@@ -674,20 +674,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "thumbprintAlgorithm",
-            "in": "path",
-            "description": "The algorithm used to derive the thumbprint parameter. This must be sha1.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "thumbprint",
-            "in": "path",
-            "description": "The thumbprint of the Certificate being deleted.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -721,6 +707,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "thumbprintAlgorithm",
+            "in": "path",
+            "description": "The algorithm used to derive the thumbprint parameter. This must be sha1.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "thumbprint",
+            "in": "path",
+            "description": "The thumbprint of the Certificate being deleted.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1002,6 +1002,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -1063,41 +1098,6 @@
               "type": "string"
             },
             "collectionFormat": "csv"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -1151,6 +1151,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -1190,41 +1225,6 @@
             "description": "The ID of the Job whose properties you want to update.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "job",
@@ -1288,6 +1288,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -1327,41 +1362,6 @@
             "description": "The ID of the Job whose properties you want to update.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "job",
@@ -1539,13 +1539,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "description": "The ID of the Job to which the Task collection is to be added.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -1579,6 +1572,13 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The ID of the Job to which the Task collection is to be added.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "taskCollection",
@@ -1646,6 +1646,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -1685,41 +1720,6 @@
             "description": "The ID of the Job to disable.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "parameters",
@@ -1782,6 +1782,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -1821,41 +1856,6 @@
             "description": "The ID of the Job to enable.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -2033,13 +2033,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "description": "The ID of the Job.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -2073,6 +2066,13 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The ID of the Job.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2261,13 +2261,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "description": "The ID of the Job to which the Task is to be created.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -2301,6 +2294,13 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The ID of the Job to which the Task is to be created.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "task",
@@ -2372,6 +2372,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -2440,41 +2475,6 @@
               "type": "string"
             },
             "collectionFormat": "csv"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -2531,6 +2531,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -2577,41 +2612,6 @@
             "description": "The ID of the Task to update.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "task",
@@ -2923,6 +2923,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "jobId",
             "in": "path",
             "description": "The ID of the Job that contains the Task.",
@@ -2967,41 +3002,6 @@
             "description": "The byte range to be retrieved. The default is to retrieve the entire file. The\nformat is bytes=startRange-endRange.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -3172,6 +3172,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "jobId",
             "in": "path",
             "description": "The ID of the Job that contains the Task.",
@@ -3209,41 +3244,6 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -3315,6 +3315,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -3361,41 +3396,6 @@
             "description": "The ID of the Task to reactivate.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -3449,31 +3449,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "description": "The ID of the Job.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "taskId",
-            "in": "path",
-            "description": "The ID of the Task.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$select",
-            "in": "query",
-            "description": "An OData $select clause.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -3507,6 +3482,31 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The ID of the Job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "The ID of the Task.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "An OData $select clause.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           }
         ],
         "responses": {
@@ -3562,6 +3562,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -3608,41 +3643,6 @@
             "description": "The ID of the Task to terminate.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -3699,6 +3699,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -3738,41 +3773,6 @@
             "description": "The ID of the Job to terminate.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "parameters",
@@ -4061,6 +4061,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -4122,41 +4157,6 @@
               "type": "string"
             },
             "collectionFormat": "csv"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -4210,6 +4210,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -4249,41 +4284,6 @@
             "description": "The ID of the Job Schedule to update.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "jobSchedule",
@@ -4347,6 +4347,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -4386,41 +4421,6 @@
             "description": "The ID of the Job Schedule to update.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "jobSchedule",
@@ -4719,6 +4719,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -4758,41 +4793,6 @@
             "description": "The ID of the Job Schedule to disable.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -4846,6 +4846,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -4885,41 +4920,6 @@
             "description": "The ID of the Job Schedule to enable.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -5108,6 +5108,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -5147,41 +5182,6 @@
             "description": "The ID of the Job Schedule to terminates.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -5590,6 +5590,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -5651,41 +5686,6 @@
               "type": "string"
             },
             "collectionFormat": "csv"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -5754,6 +5754,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -5793,41 +5828,6 @@
             "description": "The ID of the Pool to get.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "pool",
@@ -6125,13 +6125,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool on which to disable automatic scaling.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -6165,6 +6158,13 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool on which to disable automatic scaling.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -6221,6 +6221,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -6260,41 +6295,6 @@
             "description": "The ID of the Pool to get.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "parameters",
@@ -6360,13 +6360,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool on which to evaluate the automatic scaling formula.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -6400,6 +6393,13 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool on which to evaluate the automatic scaling formula.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -6589,31 +6589,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the Compute Node that you want to get information about.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$select",
-            "in": "query",
-            "description": "An OData $select clause.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -6647,6 +6622,31 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the Compute Node that you want to get information about.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "An OData $select clause.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           }
         ],
         "responses": {
@@ -6702,20 +6702,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the Compute Node on which you want to disable Task scheduling.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -6749,6 +6735,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the Compute Node on which you want to disable Task scheduling.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -6811,20 +6811,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the Compute Node on which you want to enable Task scheduling.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -6858,6 +6844,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the Compute Node on which you want to enable Task scheduling.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -7035,38 +7035,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the Compute Node that contains the extensions.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "extensionName",
-            "in": "path",
-            "description": "The name of the Compute Node Extension that you want to get information about.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$select",
-            "in": "query",
-            "description": "An OData $select clause.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -7100,6 +7068,38 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the Compute Node that contains the extensions.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "The name of the Compute Node Extension that you want to get information about.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "An OData $select clause.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           }
         ],
         "responses": {
@@ -7278,6 +7278,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "poolId",
             "in": "path",
             "description": "The ID of the Pool that contains the Compute Node.",
@@ -7322,41 +7357,6 @@
             "description": "The byte range to be retrieved. The default is to retrieve the entire file. The\nformat is bytes=startRange-endRange.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -7528,6 +7528,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "poolId",
             "in": "path",
             "description": "The ID of the Pool that contains the Compute Node.",
@@ -7565,41 +7600,6 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -7671,20 +7671,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the Compute Node for which you want to get the Remote Desktop\nProtocol file.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -7718,6 +7704,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the Compute Node for which you want to get the Remote Desktop\nProtocol file.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -7774,20 +7774,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the Compute Node that you want to restart.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -7821,6 +7807,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the Compute Node that you want to restart.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -7886,20 +7886,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the Compute Node that you want to restart.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -7933,6 +7919,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the Compute Node that you want to restart.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -7995,20 +7995,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the Compute Node for which to obtain the remote login settings.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -8042,6 +8028,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the Compute Node for which to obtain the remote login settings.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -8097,20 +8097,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the Compute Node for which you want to get the Remote Desktop\nProtocol file.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -8144,6 +8130,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the Compute Node for which you want to get the Remote Desktop\nProtocol file.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -8208,20 +8208,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the machine on which you want to create a user Account.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -8255,6 +8241,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the machine on which you want to create a user Account.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "user",
@@ -8320,27 +8320,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool that contains the Compute Node.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nodeId",
-            "in": "path",
-            "description": "The ID of the machine on which you want to update a user Account.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "userName",
-            "in": "path",
-            "description": "The name of the user Account to update.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -8374,6 +8353,27 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool that contains the Compute Node.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "description": "The ID of the machine on which you want to update a user Account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "The name of the user Account to update.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -8531,6 +8531,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -8570,41 +8605,6 @@
             "description": "The ID of the Pool to get.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "parameters",
@@ -8670,6 +8670,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -8709,41 +8744,6 @@
             "description": "The ID of the Pool to get.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           },
           {
             "name": "parameters",
@@ -8806,6 +8806,41 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "timeOut",
+            "in": "query",
+            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientrequestid"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnclientrequestid"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
             "name": "If-Modified-Since",
             "in": "header",
             "description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
@@ -8845,41 +8880,6 @@
             "description": "The ID of the Pool to get.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "timeOut",
-            "in": "query",
-            "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientrequestid"
-          },
-          {
-            "name": "return-client-request-id",
-            "in": "header",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "x-ms-client-name": "returnclientrequestid"
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc7231",
-            "x-ms-client-name": "ocpdate"
           }
         ],
         "responses": {
@@ -8936,13 +8936,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "poolId",
-            "in": "path",
-            "description": "The ID of the Pool to update.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeOut",
             "in": "query",
             "description": "Sets the maximum time that the server can spend processing the request,\nin seconds. The default is 30 seconds.",
@@ -8976,6 +8969,13 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "poolId",
+            "in": "path",
+            "description": "The ID of the Pool to update.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "pool",
