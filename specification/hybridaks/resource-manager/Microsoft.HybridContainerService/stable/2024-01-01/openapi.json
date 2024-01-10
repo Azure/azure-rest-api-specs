@@ -43,31 +43,25 @@
       "name": "Operations"
     },
     {
-      "name": "ProvisionedClustersToProvisionedClusterInstances"
+      "name": "ProvisionedClusters"
     },
     {
-      "name": "ProvisionedClusterUpgradeProfilesToProvisionedClusterInstances"
+      "name": "ProvisionedClusterUpgradeProfiles"
     },
     {
       "name": "HybridIdentityMetadataOperationGroup"
     },
     {
-      "name": "AgentPoolsToAgentPool"
+      "name": "AgentPools"
     },
     {
-      "name": "KubernetesVersionProfilesTo"
+      "name": "KubernetesVersionProfiles"
     },
     {
-      "name": "KubernetesVersionProfilesToKubernetesVersions"
+      "name": "VmSkuProfiles"
     },
     {
-      "name": "VmSkuProfilesTo"
-    },
-    {
-      "name": "VmSkuProfilesToVMSkus"
-    },
-    {
-      "name": "VirtualNetworksToVirtualNetworks"
+      "name": "VirtualNetworks"
     }
   ],
   "paths": {
@@ -75,7 +69,7 @@
       "get": {
         "operationId": "KubernetesVersions_List",
         "tags": [
-          "KubernetesVersionProfilesToKubernetesVersions"
+          "KubernetesVersionProfiles"
         ],
         "description": "Lists the supported kubernetes versions for the specified custom location",
         "parameters": [
@@ -100,6 +94,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListKubernetesVersions": {
+            "$ref": "./examples/KubernetesVersions_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -107,9 +106,9 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridContainerService/kubernetesVersions/default": {
       "get": {
-        "operationId": "_GetKubernetesVersions",
+        "operationId": "GetKubernetesVersions",
         "tags": [
-          "KubernetesVersionProfilesTo"
+          "KubernetesVersionProfiles"
         ],
         "description": "Lists the supported kubernetes versions for the specified custom location",
         "parameters": [
@@ -133,12 +132,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetKubernetesVersions": {
+            "$ref": "./examples/GetKubernetesVersions.json"
+          }
         }
       },
       "put": {
-        "operationId": "_PutKubernetesVersions",
+        "operationId": "PutKubernetesVersions",
         "tags": [
-          "KubernetesVersionProfilesTo"
+          "KubernetesVersionProfiles"
         ],
         "description": "Puts the default kubernetes version resource type (one time operation, before listing the kubernetes versions)",
         "parameters": [
@@ -175,6 +179,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -185,15 +193,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "PutKubernetesVersions": {
+            "$ref": "./examples/PutKubernetesVersions.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "_DeleteKubernetesVersions",
+        "operationId": "DeleteKubernetesVersions",
         "tags": [
-          "KubernetesVersionProfilesTo"
+          "KubernetesVersionProfiles"
         ],
         "description": "Delete the default kubernetes versions resource type",
         "parameters": [
@@ -213,9 +226,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -229,6 +242,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteKubernetesVersions": {
+            "$ref": "./examples/DeleteKubernetesVersions.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -237,9 +255,9 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances": {
       "get": {
-        "operationId": "ProvisionedClusterInstances_List",
+        "operationId": "provisionedClusterInstances_List",
         "tags": [
-          "ProvisionedClustersToProvisionedClusterInstances"
+          "ProvisionedClusters"
         ],
         "description": "Lists the ProvisionedClusterInstance resource associated with the ConnectedCluster",
         "parameters": [
@@ -264,6 +282,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListProvisionedClusterInstances": {
+            "$ref": "./examples/provisionedClusterInstances_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -271,9 +294,9 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default": {
       "get": {
-        "operationId": "ProvisionedClusterInstances_Get",
+        "operationId": "provisionedClusterInstances_Get",
         "tags": [
-          "ProvisionedClustersToProvisionedClusterInstances"
+          "ProvisionedClusters"
         ],
         "description": "Gets the provisioned cluster instance",
         "parameters": [
@@ -297,12 +320,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetProvisionedClusterInstance": {
+            "$ref": "./examples/provisionedClusterInstances_Get.json"
+          }
         }
       },
       "put": {
-        "operationId": "ProvisionedClusterInstances_CreateOrUpdate",
+        "operationId": "provisionedClusterInstances_CreateOrUpdate",
         "tags": [
-          "ProvisionedClustersToProvisionedClusterInstances"
+          "ProvisionedClusters"
         ],
         "description": "Creates or updates the provisioned cluster instance",
         "parameters": [
@@ -339,6 +367,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -349,15 +381,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "PutProvisionedClusterInstance": {
+            "$ref": "./examples/provisionedClusterInstances_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "ProvisionedClusterInstances_Delete",
+        "operationId": "provisionedClusterInstances_Delete",
         "tags": [
-          "ProvisionedClustersToProvisionedClusterInstances"
+          "ProvisionedClusters"
         ],
         "description": "Deletes the provisioned cluster instance",
         "parameters": [
@@ -377,9 +414,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -393,6 +430,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteProvisionedClusterInstance": {
+            "$ref": "./examples/provisionedClusterInstances_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -401,9 +443,9 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools": {
       "get": {
-        "operationId": "AgentPool_ListByProvisionedCluster",
+        "operationId": "agentPool_ListByProvisionedCluster",
         "tags": [
-          "AgentPoolsToAgentPool"
+          "AgentPools"
         ],
         "description": "Gets the list of agent pools in the specified provisioned cluster",
         "parameters": [
@@ -428,6 +470,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListAgentPoolByProvisionedClusterInstance": {
+            "$ref": "./examples/agentPool_ListByProvisionedCluster.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -435,9 +482,9 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}": {
       "get": {
-        "operationId": "AgentPool_Get",
+        "operationId": "agentPool_Get",
         "tags": [
-          "AgentPoolsToAgentPool"
+          "AgentPools"
         ],
         "description": "Gets the specified agent pool in the provisioned cluster",
         "parameters": [
@@ -471,12 +518,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetAgentPool": {
+            "$ref": "./examples/agentPool_Get.json"
+          }
         }
       },
       "put": {
-        "operationId": "AgentPool_CreateOrUpdate",
+        "operationId": "agentPool_CreateOrUpdate",
         "tags": [
-          "AgentPoolsToAgentPool"
+          "AgentPools"
         ],
         "description": "Creates or updates the agent pool in the provisioned cluster",
         "parameters": [
@@ -523,6 +575,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -533,15 +589,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "PutAgentPool": {
+            "$ref": "./examples/agentPool_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "AgentPool_Delete",
+        "operationId": "agentPool_Delete",
         "tags": [
-          "AgentPoolsToAgentPool"
+          "AgentPools"
         ],
         "description": "Deletes the specified agent pool in the provisioned cluster",
         "parameters": [
@@ -571,9 +632,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -585,6 +646,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAgentPool": {
+            "$ref": "./examples/agentPool_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -655,6 +721,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/HybridIdentityMetadata_Get.json"
+          }
         }
       },
       "put": {
@@ -699,6 +770,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "CreateHybridIdentityMetadata": {
+            "$ref": "./examples/HybridIdentityMetadata_Put.json"
+          }
         }
       },
       "delete": {
@@ -724,9 +800,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -740,6 +816,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteHybridIdentityMetadata": {
+            "$ref": "./examples/HybridIdentityMetadata_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -748,9 +829,9 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/listAdminKubeconfig": {
       "post": {
-        "operationId": "ProvisionedClusterInstances_ListAdminKubeconfig",
+        "operationId": "provisionedClusterInstances_ListAdminKubeconfig",
         "tags": [
-          "ProvisionedClustersToProvisionedClusterInstances"
+          "ProvisionedClusters"
         ],
         "description": "Lists the admin credentials of the provisioned cluster (can only be used within private network)",
         "parameters": [
@@ -776,9 +857,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -789,6 +870,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListClusterAdminCredentials": {
+            "$ref": "./examples/provisionedClusterInstances_ListAdminKubeconfig.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -797,9 +883,9 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/listUserKubeconfig": {
       "post": {
-        "operationId": "ProvisionedClusterInstances_ListUserKubeconfig",
+        "operationId": "provisionedClusterInstances_ListUserKubeconfig",
         "tags": [
-          "ProvisionedClustersToProvisionedClusterInstances"
+          "ProvisionedClusters"
         ],
         "description": "Lists the user credentials of the provisioned cluster (can only be used within private network)",
         "parameters": [
@@ -825,9 +911,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -838,6 +924,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListClusterUserCredentials": {
+            "$ref": "./examples/provisionedClusterInstances_ListUserKubeconfig.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -846,9 +937,9 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/upgradeProfiles/default": {
       "get": {
-        "operationId": "ProvisionedClusterInstances_GetUpgradeProfile",
+        "operationId": "provisionedClusterInstances_GetUpgradeProfile",
         "tags": [
-          "ProvisionedClusterUpgradeProfilesToProvisionedClusterInstances"
+          "ProvisionedClusterUpgradeProfiles"
         ],
         "description": "Gets the upgrade profile of a provisioned cluster",
         "parameters": [
@@ -872,14 +963,19 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetUpgradeProfileForProvisionedClusterInstance": {
+            "$ref": "./examples/provisionedClusterInstances_GetUpgradeProfile.json"
+          }
         }
       }
     },
     "/{resourceUri}/providers/Microsoft.HybridContainerService/skus": {
       "get": {
-        "operationId": "VmSkus_List",
+        "operationId": "VMSkus_List",
         "tags": [
-          "VmSkuProfilesToVMSkus"
+          "VmSkuProfiles"
         ],
         "description": "Lists the supported VM skus for the specified custom location",
         "parameters": [
@@ -904,6 +1000,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListVmSkus": {
+            "$ref": "./examples/VMSkus_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -911,9 +1012,9 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridContainerService/skus/default": {
       "get": {
-        "operationId": "_GetVmSkus",
+        "operationId": "GetVMSkus",
         "tags": [
-          "VmSkuProfilesTo"
+          "VmSkuProfiles"
         ],
         "description": "Lists the supported VM skus for the specified custom location",
         "parameters": [
@@ -937,12 +1038,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetVMSkus": {
+            "$ref": "./examples/GetVMSkus.json"
+          }
         }
       },
       "put": {
-        "operationId": "_PutVmSkus",
+        "operationId": "PutVMSkus",
         "tags": [
-          "VmSkuProfilesTo"
+          "VmSkuProfiles"
         ],
         "description": "Puts the default VM skus resource type (one time operation, before listing the VM skus)",
         "parameters": [
@@ -979,6 +1085,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -989,15 +1099,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "PutVMSkus": {
+            "$ref": "./examples/PutVMSkus.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "_DeleteVmSkus",
+        "operationId": "DeleteVMSkus",
         "tags": [
-          "VmSkuProfilesTo"
+          "VmSkuProfiles"
         ],
         "description": "Deletes the default VM skus resource type",
         "parameters": [
@@ -1017,9 +1132,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -1031,6 +1146,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteVMSkus": {
+            "$ref": "./examples/DeleteVMSkus.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1072,9 +1192,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridContainerService/virtualNetworks": {
       "get": {
-        "operationId": "VirtualNetworks_ListBySubscription",
+        "operationId": "virtualNetworks_ListBySubscription",
         "tags": [
-          "VirtualNetworksToVirtualNetworks"
+          "VirtualNetworks"
         ],
         "description": "Lists the virtual networks in the specified subscription",
         "parameters": [
@@ -1099,6 +1219,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListVirtualNetworkBySubscription": {
+            "$ref": "./examples/virtualNetworks_ListBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1106,9 +1231,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks": {
       "get": {
-        "operationId": "VirtualNetworks_ListByResourceGroup",
+        "operationId": "virtualNetworks_ListByResourceGroup",
         "tags": [
-          "VirtualNetworksToVirtualNetworks"
+          "VirtualNetworks"
         ],
         "description": "Lists the virtual networks in the specified resource group",
         "parameters": [
@@ -1136,6 +1261,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListVirtualNetworkByResourceGroup": {
+            "$ref": "./examples/virtualNetworks_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1143,9 +1273,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworkName}": {
       "get": {
-        "operationId": "VirtualNetworks_Retrieve",
+        "operationId": "virtualNetworks_Retrieve",
         "tags": [
-          "VirtualNetworksToVirtualNetworks"
+          "VirtualNetworks"
         ],
         "description": "Gets the specified virtual network resource",
         "parameters": [
@@ -1182,12 +1312,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetwork": {
+            "$ref": "./examples/virtualNetworks_Retrieve.json"
+          }
         }
       },
       "put": {
-        "operationId": "VirtualNetworks_CreateOrUpdate",
+        "operationId": "virtualNetworks_CreateOrUpdate",
         "tags": [
-          "VirtualNetworksToVirtualNetworks"
+          "VirtualNetworks"
         ],
         "description": "Creates or updates the virtual network resource",
         "parameters": [
@@ -1237,6 +1372,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -1247,15 +1386,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "PutVirtualNetwork": {
+            "$ref": "./examples/virtualNetworks_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "VirtualNetworks_Update",
+        "operationId": "virtualNetworks_Update",
         "tags": [
-          "VirtualNetworksToVirtualNetworks"
+          "VirtualNetworks"
         ],
         "description": "Patches the virtual network resource",
         "parameters": [
@@ -1303,9 +1447,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -1316,15 +1460,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateVirtualNetwork": {
+            "$ref": "./examples/virtualNetworks_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "VirtualNetworks_Delete",
+        "operationId": "virtualNetworks_Delete",
         "tags": [
-          "VirtualNetworksToVirtualNetworks"
+          "VirtualNetworks"
         ],
         "description": "Deletes the specified virtual network resource",
         "parameters": [
@@ -1357,9 +1506,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -1373,6 +1522,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteVirtualNetwork": {
+            "$ref": "./examples/virtualNetworks_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1383,7 +1537,6 @@
   "definitions": {
     "AddonPhase": {
       "type": "string",
-      "description": "Observed phase of the addon or component on the provisioned cluster. Possible values include: 'pending', 'provisioning', 'provisioning {HelmChartInstalled}', 'provisioning {MSICertificateDownloaded}', 'provisioned', 'deleting', 'failed', 'upgrading'",
       "enum": [
         "pending",
         "provisioning",
@@ -1396,7 +1549,41 @@
       ],
       "x-ms-enum": {
         "name": "AddonPhase",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Provisioning",
+            "value": "provisioning"
+          },
+          {
+            "name": "ProvisioningHelmChartInstalled",
+            "value": "provisioning {HelmChartInstalled}"
+          },
+          {
+            "name": "ProvisioningMSICertificateDownloaded",
+            "value": "provisioning {MSICertificateDownloaded}"
+          },
+          {
+            "name": "Provisioned",
+            "value": "provisioned"
+          },
+          {
+            "name": "Deleting",
+            "value": "deleting"
+          },
+          {
+            "name": "Failed",
+            "value": "failed"
+          },
+          {
+            "name": "Upgrading",
+            "value": "upgrading"
+          }
+        ]
       }
     },
     "AddonStatusProfile": {
@@ -1434,22 +1621,11 @@
             "create"
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "Parameter for the name of the agent pool in the provisioned cluster.",
-          "minLength": 3,
-          "maxLength": 12,
-          "pattern": "^[a-z][a-z0-9]{2,11}$",
-          "readOnly": true
-        },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Extended location pointing to the underlying infrastructure"
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -1663,7 +1839,6 @@
     },
     "AzureHybridBenefit": {
       "type": "string",
-      "description": "Indicates whether Azure Hybrid Benefit is opted in. Default value is false",
       "enum": [
         "True",
         "False",
@@ -1767,7 +1942,6 @@
     },
     "Expander": {
       "type": "string",
-      "description": "The expander to use when scaling up",
       "enum": [
         "least-waste",
         "most-pods",
@@ -1779,22 +1953,22 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "least-waste",
+            "name": "LeastWaste",
             "value": "least-waste",
             "description": "Selects the node group that will have the least idle CPU (if tied, unused memory) after scale-up. This is useful when you have different classes of nodes, for example, high CPU or high memory nodes, and only want to expand those when there are pending pods that need a lot of those resources."
           },
           {
-            "name": "most-pods",
+            "name": "MostPods",
             "value": "most-pods",
             "description": "Selects the node group that would be able to schedule the most pods when scaling up. This is useful when you are using nodeSelector to make sure certain pods land on certain nodes. Note that this won't cause the autoscaler to select bigger nodes vs. smaller, as it can add multiple smaller nodes at once."
           },
           {
-            "name": "priority",
+            "name": "Priority",
             "value": "priority",
             "description": "Selects the node group that has the highest priority assigned by the user. It's configuration is described in more details [here](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md)."
           },
           {
-            "name": "random",
+            "name": "Random",
             "value": "random",
             "description": "Used when you don't have a particular need for the node groups to scale differently."
           }
@@ -1817,7 +1991,6 @@
     },
     "ExtendedLocationTypes": {
       "type": "string",
-      "description": "The extended location type. Allowed value: 'CustomLocation'",
       "enum": [
         "CustomLocation"
       ],
@@ -2208,13 +2381,18 @@
     },
     "NetworkPolicy": {
       "type": "string",
-      "description": "Network policy used for building Kubernetes network. Possible values include: 'calico'.",
       "enum": [
         "calico"
       ],
       "x-ms-enum": {
         "name": "NetworkPolicy",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Calico",
+            "value": "calico"
+          }
+        ]
       }
     },
     "NetworkProfile": {
@@ -2248,7 +2426,6 @@
     },
     "OsType": {
       "type": "string",
-      "description": "OSType to be used to specify OS type for the VMs. Choose from Linux and Windows. Default to Linux. Possible values include: 'Linux', 'Windows'",
       "enum": [
         "Windows",
         "Linux"
@@ -2260,7 +2437,6 @@
     },
     "Ossku": {
       "type": "string",
-      "description": "Specifies the OS SKU used by the agent pool. The default is CBLMariner if OSType is Linux. The default is Windows2019 when OSType is Windows.",
       "enum": [
         "CBLMariner",
         "Windows2019",
@@ -2610,7 +2786,6 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning state",
       "enum": [
         "Succeeded",
         "Failed",
@@ -2658,7 +2833,6 @@
     },
     "ResourceProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the resource",
       "enum": [
         "Succeeded",
         "Failed",
@@ -2739,22 +2913,11 @@
             "create"
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "Parameter for the name of the virtual network",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-          "readOnly": true
-        },
         "extendedLocation": {
           "$ref": "#/definitions/VirtualNetworkExtendedLocation",
           "description": "Extended location pointing to the underlying infrastructure"
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"

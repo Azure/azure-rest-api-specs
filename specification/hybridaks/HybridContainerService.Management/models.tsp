@@ -11,25 +11,21 @@ namespace Microsoft.HybridContainerService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("Network policy used for building Kubernetes network. Possible values include: 'calico'.")
 enum NetworkPolicy {
-  calico,
+  Calico: "calico",
 }
 
-@doc("OSType to be used to specify OS type for the VMs. Choose from Linux and Windows. Default to Linux. Possible values include: 'Linux', 'Windows'")
 enum OsType {
   Windows,
   Linux,
 }
 
-@doc("Specifies the OS SKU used by the agent pool. The default is CBLMariner if OSType is Linux. The default is Windows2019 when OSType is Windows.")
 enum Ossku {
   @doc("Use Mariner as the OS for node images.") CBLMariner,
   @doc("Use Windows2019 as the OS for node images.") Windows2019,
   @doc("Use Windows2022 as the OS for node images.") Windows2022,
 }
 
-@doc("Provisioning state of the resource")
 enum ResourceProvisioningState {
   Succeeded,
   Failed,
@@ -42,46 +38,38 @@ enum ResourceProvisioningState {
   Accepted,
 }
 
-@doc("Observed phase of the addon or component on the provisioned cluster. Possible values include: 'pending', 'provisioning', 'provisioning {HelmChartInstalled}', 'provisioning {MSICertificateDownloaded}', 'provisioned', 'deleting', 'failed', 'upgrading'")
 enum AddonPhase {
-  pending,
-  provisioning,
-  `provisioning {HelmChartInstalled}`,
-  `provisioning {MSICertificateDownloaded}`,
-  provisioned,
-  deleting,
-  failed,
-  upgrading,
+  Pending: "pending",
+  Provisioning: "provisioning",
+  ProvisioningHelmChartInstalled: "provisioning {HelmChartInstalled}",
+  ProvisioningMSICertificateDownloaded: "provisioning {MSICertificateDownloaded}",
+  Provisioned: "provisioned",
+  Deleting: "deleting",
+  Failed: "failed",
+  Upgrading: "upgrading",
 }
 
-@doc("Indicates whether Azure Hybrid Benefit is opted in. Default value is false")
 enum AzureHybridBenefit {
   True,
   False,
   NotApplicable,
 }
 
-@doc("The expander to use when scaling up")
 enum Expander {
   @doc("Selects the node group that will have the least idle CPU (if tied, unused memory) after scale-up. This is useful when you have different classes of nodes, for example, high CPU or high memory nodes, and only want to expand those when there are pending pods that need a lot of those resources.")
-  `least-waste`,
-
+  LeastWaste: "least-waste",
   @doc("Selects the node group that would be able to schedule the most pods when scaling up. This is useful when you are using nodeSelector to make sure certain pods land on certain nodes. Note that this won't cause the autoscaler to select bigger nodes vs. smaller, as it can add multiple smaller nodes at once.")
-  `most-pods`,
-
+  MostPods: "most-pods",
   @doc("Selects the node group that has the highest priority assigned by the user. It's configuration is described in more details [here](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/expander/priority/readme.md).")
-  priority,
-
+  Priority: "priority",
   @doc("Used when you don't have a particular need for the node groups to scale differently.")
-  random,
+  Random: "random",
 }
 
-@doc("The extended location type. Allowed value: 'CustomLocation'")
 enum ExtendedLocationTypes {
   CustomLocation,
 }
 
-@doc("Provisioning state")
 enum ProvisioningState {
   Succeeded,
   Failed,
