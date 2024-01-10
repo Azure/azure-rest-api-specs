@@ -1138,7 +1138,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FlowLogInformation"
+              "$ref": "#/definitions/FlowLogInformationRequest"
             },
             "description": "Parameters that define the configuration of flow log."
           },
@@ -1153,13 +1153,13 @@
           "200": {
             "description": "Successful request for setting flow log and traffic analytics (optional) configuration.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformation"
+              "$ref": "#/definitions/FlowLogInformationResponse"
             }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformation"
+              "$ref": "#/definitions/FlowLogInformationResponse"
             }
           },
           "default": {
@@ -1223,13 +1223,13 @@
           "200": {
             "description": "Successful request for query flow log and traffic analytics (optional) status.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformation"
+              "$ref": "#/definitions/FlowLogInformationResponse"
             }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformation"
+              "$ref": "#/definitions/FlowLogInformationResponse"
             }
           },
           "default": {
@@ -2066,7 +2066,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/FlowLogRequest"
             },
             "description": "Parameters that define the create or update flow log resource."
           },
@@ -2081,13 +2081,13 @@
           "201": {
             "description": "Request successful. The operation returns the resulting flow log resource.",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/FlowLogResponse"
             }
           },
           "200": {
             "description": "Update successful. The operation returns the resulting flow log resource.",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/FlowLogResponse"
             }
           },
           "default": {
@@ -2155,7 +2155,7 @@
           "200": {
             "description": "Request successful. The operation returns updated flow log.",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/FlowLogResponse"
             }
           },
           "default": {
@@ -2210,7 +2210,7 @@
           "200": {
             "description": "Request successful. The operation returns a flow log resource.",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/FlowLogResponse"
             }
           },
           "default": {
@@ -3091,7 +3091,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FlowLog"
+            "$ref": "#/definitions/FlowLogResponse"
           },
           "description": "Information about flow log resource."
         },
@@ -3103,7 +3103,7 @@
       },
       "description": "List of flow logs."
     },
-    "FlowLog": {
+    "FlowLogRequest": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3114,6 +3114,34 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "identity": {
+          "description": "Identity of the workspace",
+          "$ref": "#/definitions/RequestIdentityObjectForUserAssigned"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "A flow log resource."
+    },
+    "FlowLogResponse": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FlowLogPropertiesFormat",
+          "description": "Properties of the flow log."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "identity": {
+          "description": "Identity of the workspace",
+          "$ref": "#/definitions/ResultIdentityObjectForUserAssigned"
         }
       },
       "allOf": [
@@ -3260,6 +3288,71 @@
         "flowAnalyticsConfiguration": {
           "$ref": "#/definitions/TrafficAnalyticsProperties",
           "description": "Parameters that define the configuration of traffic analytics."
+        },
+        "identity": {
+          "description": "Identity of the workspace",
+          "$ref": "#/definitions/RequestIdentityObjectForUserAssigned"
+        }
+      }
+    },
+    "RequestIdentityObjectForUserAssigned": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the resource."
+    },
+    "ResultIdentityObjectForUserAssigned": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/UserIdentityProperties"
+          },
+          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the resource."
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },

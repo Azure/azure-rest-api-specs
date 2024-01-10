@@ -15,6 +15,13 @@
           "type": "JSON",
           "version": 1
         }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {},
+          "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {}
+        }
       }
     }
   },
@@ -41,7 +48,20 @@
           }
         },
         "type": "Microsoft.Network/networkWatchers/FlowLogs",
-        "location": "centraluseuap"
+        "location": "centraluseuap",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "clientId",
+              "principalId": "principalId"
+            },
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "clientId": "clientId",
+              "principalId": "principalId"
+            }
+          }
+        }
       }
     },
     "201": {
@@ -66,7 +86,20 @@
           }
         },
         "type": "Microsoft.Network/networkWatchers/FlowLogs",
-        "location": "centraluseuap"
+        "location": "centraluseuap",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "clientId",
+              "principalId": "principalId"
+            },
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "clientId": "clientId",
+              "principalId": "principalId"
+            }
+          }
+        }
       }
     }
   }

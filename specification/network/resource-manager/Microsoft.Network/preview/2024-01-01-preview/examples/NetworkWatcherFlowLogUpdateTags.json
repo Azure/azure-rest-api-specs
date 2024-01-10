@@ -39,7 +39,20 @@
           "tag2": "value2"
         },
         "type": "Microsoft.Network/networkWatchers/FlowLogs",
-        "location": "centralus"
+        "location": "centralus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "clientId",
+              "principalId": "principalId"
+            },
+            "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "clientId": "clientId",
+              "principalId": "principalId"
+            }
+          }
+        }
       }
     }
   }
