@@ -20,7 +20,7 @@ namespace Azure.Communication.Messages
         /// <param name="language"> Get the template's language. </param>
         /// <param name="status"> The aggregated template status. </param>
         /// <returns> A new <see cref="Messages.MessageTemplateResponse"/> instance for mocking. </returns>
-        public static MessageTemplateResponse MessageTemplateResponse(string kind = null, string name = null, string language = null, MessageTemplateStatus status = default)
+        public static MessageTemplateResponse MessageTemplateResponse(string kind = null, string name = null, string language = null, MessageTemplateResponseStatus status = default)
         {
             return new UnknownMessageTemplateResponse(kind, name, language, status);
         }
@@ -64,7 +64,7 @@ namespace Azure.Communication.Messages
         /// API.
         /// </param>
         /// <returns> A new <see cref="Messages.WhatsAppMessageTemplateResponse"/> instance for mocking. </returns>
-        public static WhatsAppMessageTemplateResponse WhatsAppMessageTemplateResponse(string name = null, string language = null, MessageTemplateStatus status = default, BinaryData content = null)
+        public static WhatsAppMessageTemplateResponse WhatsAppMessageTemplateResponse(string name = null, string language = null, MessageTemplateResponseStatus status = default, BinaryData content = null)
         {
             return new WhatsAppMessageTemplateResponse("whatsApp", name, language, status, content);
         }
