@@ -9119,7 +9119,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "JobExecutions_List": {
@@ -9172,51 +9172,6 @@
         "x-ms-examples": {
           "JobExecution_Get": {
             "$ref": "./examples/JobExecution_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/getResourceUploadUrl": {
-      "post": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Get an resource upload URL for a Job, which may be artifacts or source archive.",
-        "operationId": "Jobs_GetResourceUploadUrl",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/JobNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the resource upload URL.",
-            "schema": {
-              "$ref": "#/definitions/ResourceUploadDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Jobs_GetResourceUploadUrl": {
-            "$ref": "./examples/Jobs_GetResourceUploadUrl.json"
           }
         }
       }
