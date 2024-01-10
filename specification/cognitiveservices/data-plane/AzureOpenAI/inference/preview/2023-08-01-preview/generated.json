@@ -395,9 +395,9 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "azureCognitiveSearch",
+            "name": "azureSearch",
             "value": "azure_search",
-            "description": "Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension."
+            "description": "Represents the use of Azure Search as an Azure OpenAI chat extension."
           }
         ]
       }
@@ -429,189 +429,6 @@
             "type": "string"
           }
         }
-      }
-    },
-    "AzureCognitiveSearchChatExtensionConfiguration": {
-      "type": "object",
-      "description": "A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat\nextension.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/AzureCognitiveSearchChatExtensionParameters",
-          "description": "The parameters to use when configuring Azure Cognitive Search."
-        }
-      },
-      "required": [
-        "parameters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "azure_search"
-    },
-    "AzureCognitiveSearchChatExtensionParameters": {
-      "type": "object",
-      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`.",
-      "properties": {
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nauthentication."
-        },
-        "top_n_documents": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The configured top number of documents to feature for the configured query.",
-          "x-ms-client-name": "topNDocuments"
-        },
-        "in_scope": {
-          "type": "boolean",
-          "description": "Whether queries should be restricted to use of indexed data.",
-          "x-ms-client-name": "inScope"
-        },
-        "strictness": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
-          "minimum": 1,
-          "maximum": 5
-        },
-        "role_information": {
-          "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
-          "x-ms-client-name": "roleInformation"
-        },
-        "endpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "The absolute endpoint path for the Azure Cognitive Search resource to use."
-        },
-        "index_name": {
-          "type": "string",
-          "description": "The name of the index to use as available in the referenced Azure Cognitive Search resource.",
-          "x-ms-client-name": "indexName"
-        },
-        "key": {
-          "type": "string",
-          "description": "The API key to use when interacting with the Azure Cognitive Search resource."
-        },
-        "fields_mapping": {
-          "$ref": "#/definitions/AzureCognitiveSearchIndexFieldMappingOptions",
-          "description": "Customized field mapping behavior to use when interacting with the search index.",
-          "x-ms-client-name": "fieldsMapping"
-        },
-        "query_type": {
-          "$ref": "#/definitions/AzureCognitiveSearchQueryType",
-          "description": "The query type to use with Azure Cognitive Search.",
-          "x-ms-client-name": "queryType"
-        },
-        "semantic_configuration": {
-          "type": "string",
-          "description": "The additional semantic configuration for the query.",
-          "x-ms-client-name": "semanticConfiguration"
-        },
-        "filter": {
-          "type": "string",
-          "description": "Search filter."
-        },
-        "embeddingEndpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "When using embeddings for search, specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of format https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings?api-version={api-version}."
-        },
-        "embeddingKey": {
-          "type": "string",
-          "description": "When using embeddings, specifies the API key to use with the provided embeddings endpoint."
-        }
-      },
-      "required": [
-        "authentication",
-        "endpoint",
-        "index_name"
-      ]
-    },
-    "AzureCognitiveSearchIndexFieldMappingOptions": {
-      "type": "object",
-      "description": "Optional settings to control how fields are processed when using a configured Azure Cognitive Search resource.",
-      "properties": {
-        "title_field": {
-          "type": "string",
-          "description": "The name of the index field to use as a title.",
-          "x-ms-client-name": "titleField"
-        },
-        "url_field": {
-          "type": "string",
-          "description": "The name of the index field to use as a URL.",
-          "x-ms-client-name": "urlField"
-        },
-        "filepath_field": {
-          "type": "string",
-          "description": "The name of the index field to use as a filepath.",
-          "x-ms-client-name": "filepathField"
-        },
-        "content_fields": {
-          "type": "array",
-          "description": "The names of index fields that should be treated as content.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "contentFields"
-        },
-        "content_fields_separator": {
-          "type": "string",
-          "description": "The separator pattern that content fields should use.",
-          "x-ms-client-name": "contentFieldsSeparator"
-        },
-        "vector_fields": {
-          "type": "array",
-          "description": "The names of fields that represent vector data.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "vectorFields"
-        }
-      }
-    },
-    "AzureCognitiveSearchQueryType": {
-      "type": "string",
-      "description": "The type of Azure Cognitive Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.",
-      "enum": [
-        "simple",
-        "semantic",
-        "vector",
-        "vector_simple_hybrid",
-        "vector_semantic_hybrid"
-      ],
-      "x-ms-enum": {
-        "name": "AzureCognitiveSearchQueryType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "simple",
-            "value": "simple",
-            "description": "Represents the default, simple query parser."
-          },
-          {
-            "name": "semantic",
-            "value": "semantic",
-            "description": "Represents the semantic query parser for advanced semantic modeling."
-          },
-          {
-            "name": "vector",
-            "value": "vector",
-            "description": "Represents vector search over computed data."
-          },
-          {
-            "name": "vectorSimpleHybrid",
-            "value": "vector_simple_hybrid",
-            "description": "Represents a combination of the simple query strategy with vector data."
-          },
-          {
-            "name": "vectorSemanticHybrid",
-            "value": "vector_semantic_hybrid",
-            "description": "Represents a combination of semantic search and vector data querying."
-          }
-        ]
       }
     },
     "AzureOpenAIOperationState": {
@@ -652,6 +469,189 @@
             "name": "failed",
             "value": "failed",
             "description": "The operation has completed processing with a failure and cannot be further consumed."
+          }
+        ]
+      }
+    },
+    "AzureSearchChatExtensionConfiguration": {
+      "type": "object",
+      "description": "A specific representation of configurable options for Azure  Search when using it as an Azure OpenAI chat\nextension.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureSearchChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure Search."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_search"
+    },
+    "AzureSearchChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for Azure Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nauthentication."
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
+        },
+        "in_scope": {
+          "type": "boolean",
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "role_information": {
+          "type": "string",
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The absolute endpoint path for the Azure Search resource to use."
+        },
+        "index_name": {
+          "type": "string",
+          "description": "The name of the index to use as available in the referenced Azure Search resource.",
+          "x-ms-client-name": "indexName"
+        },
+        "key": {
+          "type": "string",
+          "description": "The API key to use when interacting with the Azure Search resource."
+        },
+        "fields_mapping": {
+          "$ref": "#/definitions/AzureSearchIndexFieldMappingOptions",
+          "description": "Customized field mapping behavior to use when interacting with the search index.",
+          "x-ms-client-name": "fieldsMapping"
+        },
+        "query_type": {
+          "$ref": "#/definitions/AzureSearchQueryType",
+          "description": "The query type to use with Azure  Search.",
+          "x-ms-client-name": "queryType"
+        },
+        "semantic_configuration": {
+          "type": "string",
+          "description": "The additional semantic configuration for the query.",
+          "x-ms-client-name": "semanticConfiguration"
+        },
+        "filter": {
+          "type": "string",
+          "description": "Search filter."
+        },
+        "embeddingEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "When using embeddings for search, specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of format https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings?api-version={api-version}."
+        },
+        "embeddingKey": {
+          "type": "string",
+          "description": "When using embeddings, specifies the API key to use with the provided embeddings endpoint."
+        }
+      },
+      "required": [
+        "authentication",
+        "endpoint",
+        "index_name"
+      ]
+    },
+    "AzureSearchIndexFieldMappingOptions": {
+      "type": "object",
+      "description": "Optional settings to control how fields are processed when using a configured Azure Search resource.",
+      "properties": {
+        "title_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a title.",
+          "x-ms-client-name": "titleField"
+        },
+        "url_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a URL.",
+          "x-ms-client-name": "urlField"
+        },
+        "filepath_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a filepath.",
+          "x-ms-client-name": "filepathField"
+        },
+        "content_fields": {
+          "type": "array",
+          "description": "The names of index fields that should be treated as content.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "contentFields"
+        },
+        "content_fields_separator": {
+          "type": "string",
+          "description": "The separator pattern that content fields should use.",
+          "x-ms-client-name": "contentFieldsSeparator"
+        },
+        "vector_fields": {
+          "type": "array",
+          "description": "The names of fields that represent vector data.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "vectorFields"
+        }
+      }
+    },
+    "AzureSearchQueryType": {
+      "type": "string",
+      "description": "The type of Azure Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.",
+      "enum": [
+        "simple",
+        "semantic",
+        "vector",
+        "vector_simple_hybrid",
+        "vector_semantic_hybrid"
+      ],
+      "x-ms-enum": {
+        "name": "AzureSearchQueryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simple",
+            "value": "simple",
+            "description": "Represents the default, simple query parser."
+          },
+          {
+            "name": "semantic",
+            "value": "semantic",
+            "description": "Represents the semantic query parser for advanced semantic modeling."
+          },
+          {
+            "name": "vector",
+            "value": "vector",
+            "description": "Represents vector search over computed data."
+          },
+          {
+            "name": "vectorSimpleHybrid",
+            "value": "vector_simple_hybrid",
+            "description": "Represents a combination of the simple query strategy with vector data."
+          },
+          {
+            "name": "vectorSemanticHybrid",
+            "value": "vector_semantic_hybrid",
+            "description": "Represents a combination of semantic search and vector data querying."
           }
         ]
       }

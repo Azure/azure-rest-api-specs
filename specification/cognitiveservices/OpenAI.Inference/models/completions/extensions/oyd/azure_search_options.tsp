@@ -9,36 +9,36 @@ using TypeSpec.Versioning;
 
 @added(ServiceApiVersions.v2023_08_01_Preview)
 @doc("""
-A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat
+A specific representation of configurable options for Azure Search when using it as an Azure OpenAI chat
 extension.
 """)
 @added(ServiceApiVersions.v2023_08_01_Preview)
-model AzureCognitiveSearchChatExtensionConfiguration
+model AzureSearchChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
-  default value for Azure Cognitive Search.
+  default value for Azure Search.
   """)
-  type: AzureChatExtensionType.azureCognitiveSearch;
+  type: AzureChatExtensionType.azureSearch;
 
-  @doc("The parameters to use when configuring Azure Cognitive Search.")
-  parameters: AzureCognitiveSearchChatExtensionParameters;
+  @doc("The parameters to use when configuring Azure Search.")
+  parameters: AzureSearchChatExtensionParameters;
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)
-@doc("Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`.")
-model AzureCognitiveSearchChatExtensionParameters {
+@doc("Parameters for Azure Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`.")
+model AzureSearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
-  @doc("The absolute endpoint path for the Azure Cognitive Search resource to use.")
+  @doc("The absolute endpoint path for the Azure Search resource to use.")
   @projectedName("csharp", "SearchEndpoint")
   endpoint: url;
 
-  @doc("The name of the index to use as available in the referenced Azure Cognitive Search resource.")
+  @doc("The name of the index to use as available in the referenced Azure Search resource.")
   @projectedName("json", "index_name")
   indexName: string;
 
-  @doc("The API key to use when interacting with the Azure Cognitive Search resource.")
+  @doc("The API key to use when interacting with the Azure Search resource.")
   @added(ServiceApiVersions.v2023_08_01_Preview)
   @removed(ServiceApiVersions.v2023_12_01_Preview)
   key?: string;
@@ -46,11 +46,11 @@ model AzureCognitiveSearchChatExtensionParameters {
   @doc("Customized field mapping behavior to use when interacting with the search index.")
   @projectedName("json", "fields_mapping")
   @projectedName("csharp", "FieldMappingOptions")
-  fieldsMapping?: AzureCognitiveSearchIndexFieldMappingOptions;
+  fieldsMapping?: AzureSearchIndexFieldMappingOptions;
 
-  @doc("The query type to use with Azure Cognitive Search.")
+  @doc("The query type to use with Azure  Search.")
   @projectedName("json", "query_type")
-  queryType?: AzureCognitiveSearchQueryType;
+  queryType?: AzureSearchQueryType;
 
   @doc("The additional semantic configuration for the query.")
   @projectedName("json", "semantic_configuration")
@@ -75,9 +75,9 @@ model AzureCognitiveSearchChatExtensionParameters {
   embeddingDependency?: OnYourDataVectorizationSource;
 }
 
-@doc("Optional settings to control how fields are processed when using a configured Azure Cognitive Search resource.")
+@doc("Optional settings to control how fields are processed when using a configured Azure Search resource.")
 @added(ServiceApiVersions.v2023_08_01_Preview)
-model AzureCognitiveSearchIndexFieldMappingOptions {
+model AzureSearchIndexFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
   @projectedName("json", "title_field")
   @projectedName("csharp", "TitleFieldName")
@@ -116,10 +116,10 @@ model AzureCognitiveSearchIndexFieldMappingOptions {
 }
 
 @doc("""
-The type of Azure Cognitive Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.
+The type of Azure Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.
 """)
 @added(ServiceApiVersions.v2023_08_01_Preview)
-enum AzureCognitiveSearchQueryType {
+enum AzureSearchQueryType {
   @doc("Represents the default, simple query parser.")
   simple: "simple",
 
