@@ -360,6 +360,31 @@
     }
   },
   "definitions": {
+    "ActionParameters" : {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "What action the tile should do when clicked. Enum permitting the value: \"updateParameters\".",
+          "enum": [
+            "updateParameters"
+          ],
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DashboardParameterValuesList"
+        }
+      ],
+      "required": [
+        "action",
+        "parameters"
+      ]
+    },
     "DashboardListResult": {
       "type": "object",
       "properties": {
@@ -394,6 +419,12 @@
         },
         "layout": {
           "$ref": "#/definitions/DashboardTileLayout"
+        },
+        "visible": {
+          "$ref": "#/definitions/DashboardParameterValuesList"
+        },
+        "highlight": {
+          "$ref": "#/definitions/DashboardParameterValuesList"
         }
       },
       "discriminator": "type",
@@ -831,6 +862,45 @@
         "defaultValues",
         "showOnPages"
       ],
+      "additionalProperties": false
+    },
+    "DashboardParameterValues": {
+      "type": "object",
+      "description": "The dashboard parameter values.",
+      "properties": {
+        "parameterNames": {
+          "type": "array",
+          "description": "The unique names to serve as placeholders for the parameter values.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "The parameter value(s) that will be selected by default when the parameter is displayed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "parameterNames",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "DashboardParameterValuesList": {
+      "type": "object",
+      "description": "The dashboard parameter list.",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "description": "The array of dashboard parameter values.",
+          "items": {
+            "$ref": "#/definitions/DashboardParameterValues"
+          }
+        }
+      },
       "additionalProperties": false
     },
     "DashboardParameterType": {
