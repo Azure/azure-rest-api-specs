@@ -24,7 +24,7 @@ model ElasticsearchChatExtensionConfiguration
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension.")
+@doc("Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are KeyAndKeyId and EncodedAPIKey.")
 model ElasticsearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 

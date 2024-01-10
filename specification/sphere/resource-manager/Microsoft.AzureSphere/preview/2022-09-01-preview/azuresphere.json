@@ -787,7 +787,7 @@
           {
             "name": "imageName",
             "in": "path",
-            "description": "Image name. Use .default for image creation.",
+            "description": "Image name. Use an image GUID for GA versions of the API.",
             "required": true,
             "type": "string"
           }
@@ -839,7 +839,7 @@
           {
             "name": "imageName",
             "in": "path",
-            "description": "Image name. Use .default for image creation.",
+            "description": "Image name. Use an image GUID for GA versions of the API.",
             "required": true,
             "type": "string"
           },
@@ -917,7 +917,7 @@
           {
             "name": "imageName",
             "in": "path",
-            "description": "Image name. Use .default for image creation.",
+            "description": "Image name. Use an image GUID for GA versions of the API.",
             "required": true,
             "type": "string"
           }
@@ -3293,6 +3293,15 @@
     },
     "CountDeviceResponse": {
       "type": "object",
+      "description": "Response to the action call for count devices in a catalog (preview API).",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CountElementsResponse"
+        }
+      ]
+    },
+    "CountDevicesResponse": {
+      "type": "object",
       "description": "Response to the action call for count devices in a catalog.",
       "allOf": [
         {
@@ -3948,19 +3957,6 @@
         ]
       }
     },
-    "ImageUploadRequestBody": {
-      "type": "object",
-      "description": "Image upload request body.",
-      "properties": {
-        "images": {
-          "type": "string",
-          "description": "."
-        }
-      },
-      "required": [
-        "images"
-      ]
-    },
     "ListDeviceGroupsRequest": {
       "type": "object",
       "description": "Request of the action to list device groups for a catalog.",
@@ -4120,7 +4116,7 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the resource.",
+      "description": "Provisioning state of resource.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -4227,6 +4223,30 @@
             "name": "No3rdPartyAppUpdates",
             "value": "No3rdPartyAppUpdates",
             "description": "No update for 3rd party app policy."
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Azure Sphere API versions.",
+      "enum": [
+        "2022-09-01-preview",
+        "2024-04-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_09_01",
+            "value": "2022-09-01-preview",
+            "description": "Public preview API version."
+          },
+          {
+            "name": "v2024_04_01",
+            "value": "2024-04-01",
+            "description": "Initial GA API version."
           }
         ]
       }
