@@ -49,12 +49,17 @@ model CustomSipHeader {
   customSipHeader: string;
 }
 
+@doc("A list of phone numbers")
+model PhoneNumbers {
+  numbers: PhoneNumber[]
+}
+
 @doc("Details of the account.")
 model AccountDetails {
   ...AccountName;
 
   @doc("The opaque correlator id for this account.")
-  correlatorId: string;
+  correlatorId?: string;
 
   // TODO: finalise requirements on this.
   // @doc("Default preferred region for numbers under this account.")
@@ -66,35 +71,23 @@ model AccountDetails {
   @doc("Indicates that Teams Operator Connect (OC) is enabled for this account.")
   teamsOcEnabled: boolean;
 
-  @doc("Count of Teams Operator Connect subscribers for this account.")
-  teamsOcSubCount: int64;
-
   @doc("Teams Operator Connect (OC) Account Configuration. Only accepted if OC is enabled.")
   teamsOcConfig?: TeamsOcConfig;
 
   @doc("Indicates that Teams Direct Routing (DR) enabled for this account.")
-  teamsDrEnabled: boolean;
-
-  @doc("Count of Teams Direct Routing subscribers for this account.")
-  teamsDrSubCount: int64;
+  directRoutingEnabled: boolean;
 
   @doc("Teams Direct Routing (DR) Account Configuration. Only accepted if DR is enabled.")
-  teamsDrConfig?: TeamsDrConfig;
+  directRouting?: TeamsDrConfig;
 
   @doc("Indicates that Teams Phone Mobile (TPM) is enabled for this account.")
   teamsTpmEnabled: boolean;
-
-  @doc("Count of Teams Phone Mobile subscribers for this account.")
-  teamsTpmSubCount: int64;
 
   @doc("Teams Phone Mobile (TPM) Account Configuration. Only accepted if TPM is enabled.")
   teamsTpmConfig?: TeamsTpmConfig;
 
   @doc("Indicates that Zoom is enabled for this account.")
   zoomEnabled: boolean;
-
-  @doc("Count of Zoom subscribers for this account.")
-  zoomSubCount: int64;
 
   @doc("Zoom Account Configuration. Only accepted if Zoom is enabled.")
   zoomConfig?: ZoomConfig;
@@ -107,8 +100,23 @@ model AccountResponse {
   name: string;
 
   details?: AccountDetails;
+
   @doc("ETag for use with If-Match headers for optimistic concurrency.")
   etag?: string;
+
+  directRoutingProvisioningState?: TeamsDrSubdomainProvisioningState;
+
+  @doc("Count of Teams Operator Connect subscribers for this account.")
+  teamsOcSubCount: int64;
+
+  @doc("Count of Teams Direct Routing subscribers for this account.")
+  teamsDrSubCount: int64;
+
+  @doc("Count of Teams Phone Mobile subscribers for this account.")
+  teamsTpmSubCount: int64;
+
+  @doc("Count of Zoom subscribers for this account.")
+  zoomSubCount: int64;
 
   @doc("Status of syncing changes to this object to relevant backend services.")
   serviceProvisioningStatus: ServiceProvisioningState;
@@ -173,13 +181,13 @@ model NumberServices {
   teamsOcEnabled: boolean;
 
   @doc("Teams Operator Connect (OC) Number Configuration")
-  teamsOcConfig?: TeamsOcNumberConfig;
+  teamsOcNumberConfig?: TeamsOcNumberConfig;
 
   @doc("Indicates that Teams Direct Routing (DR) is enabled for this number.")
   teamsDrEnabled: boolean;
 
   @doc("Teams Phone Mobile (TPM) Number Configuration")
-  teamsTpmConfig?: TeamsTpmNumberConfig;
+  teamsTpmNumberConfig?: TeamsTpmNumberConfig;
 
   @doc("Indicates that Teams Phone Mobile (TPM) is enabled for this number.")
   teamsTpmEnabled: boolean;
@@ -285,24 +293,28 @@ model TeamsDrConfig {
 }
 
 enum DNSProvisioningState {
-  "0": 0,
-  "1": 1,
-  "2": 2
+  Provisioned: "Provisioned",
+  NotProvisioned: "NotProvisioned",
+  Inconsistent: "Inconsistent"
 }
 
 @doc("DNS TXT values (tokens) for the account.")
 model TeamsDrSubdomainTokens {
-  @doc("DNS TXT value for the first region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.")
-  @minLength(1)
-  @maxLength(100)
-  @pattern("^([A-Za-z0-9=_-]+)$")
-  region1Token: string;
+  region1Token: TeamsDrSubdomainToken;
+  region2Token: TeamsDrSubdomainToken;
+}
 
+model TeamsDrSubdomainToken {
   @doc("DNS TXT value for the first region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.")
   @minLength(1)
   @maxLength(100)
   @pattern("^([A-Za-z0-9=_-]+)$")
-  region2Token: string;
+  token: string;
+}
+
+model TeamsDrSubdomainProvisioningState {
+  teamsDrSubdomainTokens?: TeamsDrSubdomainTokens;
+  teamsDrSubdomainStatus: DNSProvisioningState;
 }
 
 enum ServiceEnum {
@@ -829,7 +841,7 @@ namespace Accounts {
     @maxLength(100)
     @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
     @query
-    @doc("The Teams service to query capabilities for.") teamsServiceType?: TeamsService
+    @doc("The phone numbers to query capabilities for.") phoneNumbers: PhoneNumbers
   ): {
     @header contentType: "application/json";
     @body success: TeamsCapabilitiesPaginatedList;
