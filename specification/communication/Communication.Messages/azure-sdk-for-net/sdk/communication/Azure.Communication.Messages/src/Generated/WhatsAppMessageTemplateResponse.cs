@@ -17,7 +17,7 @@ namespace Azure.Communication.Messages
         /// <param name="language"> Get the template's language. </param>
         /// <param name="status"> The aggregated template status. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="language"/> is null. </exception>
-        internal WhatsAppMessageTemplateResponse(string language, MessageTemplateStatus status) : base(language, status)
+        internal WhatsAppMessageTemplateResponse(string language, MessageTemplateResponseStatus status) : base(language, status)
         {
             Argument.AssertNotNull(language, nameof(language));
 
@@ -34,7 +34,7 @@ namespace Azure.Communication.Messages
         /// This is the payload returned from WhatsApp
         /// API.
         /// </param>
-        internal WhatsAppMessageTemplateResponse(string kind, string name, string language, MessageTemplateStatus status, BinaryData content) : base(kind, name, language, status)
+        internal WhatsAppMessageTemplateResponse(string kind, string name, string language, MessageTemplateResponseStatus status, BinaryData content) : base(kind, name, language, status)
         {
             Content = content;
         }

@@ -14,44 +14,11 @@ using Azure.ClientGenerator.Core;
 @versioned(AzureCommunicationMessagesService.Versions)
 namespace AzureCommunicationMessagesService;
 
-@access(Access.public, "csharp")
-@doc("The type of message. Supports text, image, template.")
-enum CommunicationMessageType {
-  @doc("Text message type.")
-  text,
+alias CommunicationMessageType = "text" | "image" | "template";
 
-  @doc("Image message type.")
-  image,
+alias WhatsAppMessageTemplateValueSubType = "quickReply" | "url";
 
-  @doc("Template message type.")
-  template,
-}
-
-@access(Access.public, "csharp")
-@doc("The WhatsApp button sub type.")
-enum WhatsAppMessageTemplateValueSubType {
-  @doc("The WhatsApp button sub type is quick reply.")
-  quickReply,
-
-  @doc("The WhatsApp button sub type is url.")
-  url,
-}
-
-@access(Access.public, "csharp")
-@doc("The aggregated template status.")
-enum MessageTemplateStatus {
-  @doc("Message template is approved.")
-  approved,
-
-  @doc("Message template is rejected.")
-  rejected,
-
-  @doc("Message template is pending.")
-  pending,
-
-  @doc("Message template is paused.")
-  paused,
-}
+alias MessageTemplateStatus = "approved" | "rejected" | "pending" | "paused";
 
 @discriminator("kind")
 @doc("Details of the message to send.")
@@ -96,7 +63,7 @@ model SendTemplateNotificationRequest extends SendNotificationRequest {
   template: MessageTemplate;
 }
 
-@access(Access.public, "csharp")
+
 @doc("The template object used to create templates.")
 model MessageTemplate {
   @doc("Name of the template.")
@@ -112,7 +79,7 @@ model MessageTemplate {
   bindings?: MessageTemplateBindings;
 }
 
-@access(Access.public, "csharp")
+
 @discriminator("kind")
 @doc("The class describes a parameter of a template.")
 model MessageTemplateValue {
@@ -120,7 +87,7 @@ model MessageTemplateValue {
   name: string;
 }
 
-@access(Access.public, "csharp")
+
 @doc("The message template's text value information.")
 model MessageTemplateText extends MessageTemplateValue {
   @doc("Message parameter type is text.")
@@ -130,7 +97,7 @@ model MessageTemplateText extends MessageTemplateValue {
   text: string;
 }
 
-@access(Access.public, "csharp")
+
 @doc("""
 The message template's media value information.
 Could be an image, document or
@@ -148,7 +115,7 @@ model MessageTemplateMedia {
 }
 
 @doc("The message template's image value information.")
-@access(Access.public, "csharp")
+
 model MessageTemplateImage extends MessageTemplateValue {
   @doc("Message parameter type is image.")
   kind: "image",
@@ -156,7 +123,7 @@ model MessageTemplateImage extends MessageTemplateValue {
 }
 
 @doc("The message template's document value information.")
-@access(Access.public, "csharp")
+
 model MessageTemplateDocument extends MessageTemplateValue {
   @doc("Message parameter type is document.")
   kind: "document",
@@ -164,14 +131,14 @@ model MessageTemplateDocument extends MessageTemplateValue {
 }
 
 @doc("The message template's video value information.")
-@access(Access.public, "csharp")
+
 model MessageTemplateVideo extends MessageTemplateValue {
   @doc("Message parameter type is video.")
   kind: "video",
   ...MessageTemplateMedia
 }
 
-@access(Access.public, "csharp")
+
 @doc("The message template's location value information.")
 model MessageTemplateLocation extends MessageTemplateValue {
   @doc("Message parameter type is location.")
@@ -190,7 +157,7 @@ model MessageTemplateLocation extends MessageTemplateValue {
   longitude?: float64;
 }
 
-@access(Access.public, "csharp")
+
 @doc("The message template's quick action value information.")
 model MessageTemplateQuickAction extends MessageTemplateValue {
   @doc("Message parameter type is quick action.")
@@ -203,13 +170,13 @@ model MessageTemplateQuickAction extends MessageTemplateValue {
   payload?: string;
 }
 
-@access(Access.public, "csharp")
+
 @discriminator("kind")
 @doc("The binding object to link values to the template specific locations")
 model MessageTemplateBindings {
 }
 
-@access(Access.public, "csharp")
+
 @doc("The template bindings for WhatsApp")
 model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   @doc("MessageTemplateBindings is whatsApp")
@@ -228,7 +195,7 @@ model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   button?: WhatsAppMessageTemplateBindingsButton[];
 }
 
-@access(Access.public, "csharp")
+
 @doc("The template bindings component for WhatsApp")
 model WhatsAppMessageTemplateBindingsComponent {
   @doc("""
@@ -239,7 +206,7 @@ dictionary.
   refValue: string;
 }
 
-@access(Access.public, "csharp")
+
 @doc("The template bindings component button for WhatsApp")
 model WhatsAppMessageTemplateBindingsButton {
   @doc("The WhatsApp button sub type")
@@ -253,14 +220,14 @@ dictionary.
   refValue: string;
 }
 
-@access(Access.public, "csharp")
+
 @doc("Result of the send message operation.")
 model SendMessageResult {
   @doc("Receipts of the send message operation.")
   receipts: MessageReceipt[];
 }
 
-@access(Access.public, "csharp")
+
 @doc("Receipt of the sending one message.")
 model MessageReceipt {
   @doc("The message id.")
@@ -270,7 +237,7 @@ model MessageReceipt {
   to: string;
 }
 
-@access(Access.public, "csharp")
+
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateResponse extends MessageTemplateResponse{
   @doc("""
@@ -317,7 +284,7 @@ model Stream {
   contentType: "application/octet-stream";
 }
 
-@access(Access.public, "csharp")
+
 @resource("templates")
 @parentResource(CommunicationChannel)
 @discriminator("kind")
