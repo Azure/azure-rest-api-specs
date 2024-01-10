@@ -90,7 +90,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LocationVerifyContent"
+              "$ref": "#/definitions/LocationVerificationContent"
             }
           }
         ],
@@ -98,7 +98,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LocationVerifyResult"
+              "$ref": "#/definitions/LocationVerificationResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -111,7 +111,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/APCError"
             }
           }
         },
@@ -124,7 +124,7 @@
     },
     "/device-network/{network}:retrieve": {
       "post": {
-        "operationId": "DeviceNetworks_Retrieve",
+        "operationId": "NetworkInterface_Retrieve",
         "description": "Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.",
         "parameters": [
           {
@@ -183,13 +183,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/APCError"
             }
           }
         },
         "x-ms-examples": {
-          "DeviceNetworks_Retrieve": {
-            "$ref": "./examples/DeviceNetworks_Retrieve_MaximumSet_Gen.json"
+          "NetworkInterface_Retrieve": {
+            "$ref": "./examples/NetworkInterface_Retrieve_MaximumSet_Gen.json"
           }
         }
       }
@@ -234,7 +234,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NumberVerifyContent"
+              "$ref": "#/definitions/NumberVerificationContent"
             }
           }
         ],
@@ -242,7 +242,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NumberVerifyResult"
+              "$ref": "#/definitions/NumberVerificationResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -255,7 +255,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/APCError"
             }
           }
         },
@@ -327,7 +327,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/APCError"
             }
           }
         },
@@ -399,7 +399,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/APCError"
             }
           }
         },
@@ -450,7 +450,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SimSwapVerifyContent"
+              "$ref": "#/definitions/SimSwapVerificationContent"
             }
           }
         ],
@@ -458,7 +458,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SimSwapVerifyResult"
+              "$ref": "#/definitions/SimSwapVerificationResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -471,7 +471,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/APCError"
             }
           }
         },
@@ -502,7 +502,7 @@
         ]
       }
     },
-    "ApcErrorResponse": {
+    "APCError": {
       "type": "object",
       "description": "A custom error type for APC.",
       "properties": {
@@ -662,7 +662,7 @@
         ]
       }
     },
-    "LocationVerifyContent": {
+    "LocationVerificationContent": {
       "type": "object",
       "description": "Request to verify Location",
       "properties": {
@@ -704,7 +704,7 @@
         "locationDevice"
       ]
     },
-    "LocationVerifyResult": {
+    "LocationVerificationResult": {
       "type": "object",
       "description": "Response verifying location",
       "properties": {
@@ -852,7 +852,7 @@
         "phoneNumber"
       ]
     },
-    "NumberVerifyContent": {
+    "NumberVerificationContent": {
       "type": "object",
       "description": "Request to verify number of device",
       "properties": {
@@ -874,7 +874,7 @@
         "networkIdentifier"
       ]
     },
-    "NumberVerifyResult": {
+    "NumberVerificationResult": {
       "type": "object",
       "description": "Response verifying number of device",
       "properties": {
@@ -973,7 +973,7 @@
         "date"
       ]
     },
-    "SimSwapVerifyContent": {
+    "SimSwapVerificationContent": {
       "type": "object",
       "description": "Request to verify SimSwap in period",
       "properties": {
@@ -999,7 +999,7 @@
         "networkIdentifier"
       ]
     },
-    "SimSwapVerifyResult": {
+    "SimSwapVerificationResult": {
       "type": "object",
       "description": "Response verifying SimSwap in period",
       "properties": {

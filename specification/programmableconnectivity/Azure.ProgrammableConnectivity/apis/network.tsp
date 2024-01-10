@@ -10,7 +10,7 @@ namespace Azure.ProgrammableConnectivity;
 
 /// Interfaces
 
-interface DeviceNetworks {
+interface NetworkInterface {
   @doc("Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.")
   retrieve is Operations.ResourceAction<
     NetworkRetrieveEndpoint,
