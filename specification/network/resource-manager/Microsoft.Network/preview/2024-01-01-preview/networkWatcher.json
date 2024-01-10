@@ -3269,7 +3269,7 @@
         }
       }
     },
-    "FlowLogInformation": {
+    "FlowLogInformationRequest": {
       "description": "Information on the configuration of flow log and traffic analytics (optional) .",
       "required": [
         "targetResourceId",
@@ -3295,11 +3295,37 @@
         }
       }
     },
+    "FlowLogInformationResponse": {
+      "description": "Information on the configuration of flow log and traffic analytics (optional) .",
+      "required": [
+        "targetResourceId",
+        "properties"
+      ],
+      "properties": {
+        "targetResourceId": {
+          "description": "The ID of the resource to configure for flow log and traffic analytics (optional) .",
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FlowLogProperties",
+          "description": "Properties of the flow log."
+        },
+        "flowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsProperties",
+          "description": "Parameters that define the configuration of traffic analytics."
+        },
+        "identity": {
+          "description": "Identity of the workspace",
+          "$ref": "#/definitions/ResultIdentityObjectForUserAssigned"
+        }
+      }
+    },
     "RequestIdentityObjectForUserAssigned": {
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of identity used for the resource. The type 'UserAssigned' includes set of user assigned identities. The type 'None' will remove any identities from the flowlog.",
+          "description": "The type of identity used for the resource. The type userassigned includes set of user assigned identities. The type none will remove any identities from the flowlog.",
           "enum": [
             "UserAssigned",
             "None"
