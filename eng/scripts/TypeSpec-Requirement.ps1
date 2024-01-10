@@ -53,7 +53,10 @@ else {
 
     $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/$servicePath/stable"
 
-    LogInfo "  Checking $urlToStableFolder"
+    # Avoid conflict with pipeline secret
+    $logUrlToStableFolder = $urlToStableFolder -replace '^https://',''
+
+    LogInfo "  Checking $logUrlToStableFolder"
 
     $responseStatus = $responseCache[$urlToStableFolder];
     if ($null -ne $responseStatus) {
@@ -67,7 +70,7 @@ else {
         $responseCache[$urlToStableFolder] = $responseStatus
       }
       catch {
-        LogError "  Exception making web request to ${urlToStableFolder}: $_"
+        LogError "  Exception making web request to ${logUrlToStableFolder}: $_"
         LogJobFailure
         exit 1
       }
@@ -83,7 +86,7 @@ else {
       $pathsWithErrors += $file
     }
     else {
-      LogError "Unexpected response from ${urlToStableFolder}: ${response.StatusCode}"
+      LogError "Unexpected response from ${logUrlToStableFolder}: ${response.StatusCode}"
       LogJobFailure
       exit 1
     }
