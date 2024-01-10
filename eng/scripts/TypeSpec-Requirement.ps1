@@ -11,7 +11,7 @@ $pathsWithErrors = @()
 
 $filesToCheck = @(Get-ChangedSwaggerFiles).Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
-  ($_ -match "specification/(?<relSpecPath>[^/]+/(data-plane|resource-manager).*?/(preview|stable)/([^/]+))/[^/]+\.json$")
+  ($_ -match "specification/[^/]+/(data-plane|resource-manager).*?/(preview|stable)/[^/]+/[^/]+\.json$")
 })
 
 if (!$filesToCheck) {
@@ -21,8 +21,12 @@ else {
   # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
   $responseCache = @{}
 
-  # Example: specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
   # - Forward slashes on both Linux and Windows
+  # - May be nested 4 or 5 levels deep, perhaps even deeper
+  # - Examples
+  #   - specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json
+  #   - specification/foo/data-plane/Foo/bar/stable/2023-01-01/Foo.json
+  #   - specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
@@ -37,10 +41,10 @@ else {
       LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
     }
 
-    # Example: specification/foo/resource-manager/Microsoft.Foo
-    $pathToServiceName = ($file -split '/')[0..3] -join '/'
+    # Extract path between folder "specification/" and "/(preview|stable)"
+    $file -match "specification/(?<servicePath>[^/]+/(data-plane|resource-manager).*?)/(preview|stable)/[^/]+/[^/]+\.json$"
 
-    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/$pathToServiceName/stable"
+    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/${Matches.servicePath}/stable"
 
     LogInfo "  Checking $urlToStableFolder"
 
