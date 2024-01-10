@@ -39,7 +39,7 @@ model PineconeChatExtensionParameters {
   indexName: string;
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
-  @projectedName("json", "field_mapping")
+  @projectedName("json", "fields_mapping")
   @projectedName("csharp", "FieldMappingOptions")
   fieldsMapping: PineconeFieldMappingOptions;
 
