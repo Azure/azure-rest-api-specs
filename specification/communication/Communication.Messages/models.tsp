@@ -214,16 +214,12 @@ model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   footer?: WhatsAppMessageTemplateBindingsComponent[];
 
   @doc("The button template bindings")
-  button?: WhatsAppMessageTemplateBindingsButton[];
+  buttons?: WhatsAppMessageTemplateBindingsButton[];
 }
 
 @doc("The template bindings component for WhatsApp")
 model WhatsAppMessageTemplateBindingsComponent {
-  @doc("""
-The reference to the value in the
-Microsoft.Azure.Communication.CrossPlatformMessages.Contract.Model.VNext.Notifications.Requests.MessageTemplate.Values
-dictionary.
-""")
+  @doc("The name of the referenced item in the template values.")
   refValue: string;
 }
 
@@ -232,11 +228,7 @@ model WhatsAppMessageTemplateBindingsButton {
   @doc("The WhatsApp button sub type")
   subType?: WhatsAppMessageButtonSubType;
 
-  @doc("""
-The reference to the value in the
-Microsoft.Azure.Communication.CrossPlatformMessages.Contract.Model.VNext.Notifications.Requests.MessageTemplate.Values
-dictionary.
-""")
+  @doc("The name of the referenced item in the template values.")
   refValue: string;
 }
 
