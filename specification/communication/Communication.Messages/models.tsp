@@ -14,6 +14,7 @@ using Azure.ClientGenerator.Core;
 @versioned(AzureCommunicationMessagesService.Versions)
 namespace AzureCommunicationMessagesService;
 
+@access(Access.public)
 @doc("The type of message. Supports text, image, template.")
 enum CommunicationMessageType {
   @doc("Text message type.")
@@ -26,6 +27,7 @@ enum CommunicationMessageType {
   template,
 }
 
+@access(Access.public)
 @doc("The WhatsApp button sub type.")
 enum WhatsAppMessageButtonSubType {
   @doc("The WhatsApp button sub type is quick reply.")
@@ -35,6 +37,7 @@ enum WhatsAppMessageButtonSubType {
   url,
 }
 
+@access(Access.public)
 @doc("The aggregated template status.")
 enum MessageTemplateStatus {
   @doc("Message template is approved.")
