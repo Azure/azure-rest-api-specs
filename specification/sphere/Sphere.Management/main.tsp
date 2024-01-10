@@ -22,9 +22,20 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "AzureSphereProviderClient",
-  version: "2022-09-01-preview",
 })
 @doc("Azure Sphere resource management API.")
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Microsoft.AzureSphere.Versions)
 namespace Microsoft.AzureSphere;
+
+@doc("Azure Sphere API versions.")
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Public preview API version.")
+  v2022_09_01: "2022-09-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Initial GA API version.")
+  v2024_04_01: "2024-04-01",
+}
