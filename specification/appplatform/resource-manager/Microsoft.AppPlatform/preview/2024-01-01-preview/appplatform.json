@@ -8794,9 +8794,6 @@
         "x-ms-examples": {
           "Jobs_List": {
             "$ref": "./examples/Jobs_List.json"
-          },
-          "Jobs_List_VNetInjection": {
-            "$ref": "./examples/Jobs_List_VNetInjection.json"
           }
         }
       }
@@ -8842,9 +8839,6 @@
         "x-ms-examples": {
           "Jobs_Get": {
             "$ref": "./examples/Jobs_Get.json"
-          },
-          "Jobs_Get_VNetInjection": {
-            "$ref": "./examples/Jobs_Get_VNetInjection.json"
           }
         }
       },
@@ -8893,12 +8887,6 @@
               "$ref": "#/definitions/JobResource"
             }
           },
-          "202": {
-            "description": "Accepted. The response indicates the exiting Job is now updating and contains a Location\r\nheader to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/JobResource"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -8910,9 +8898,6 @@
         "x-ms-examples": {
           "Jobs_CreateOrUpdate": {
             "$ref": "./examples/Jobs_CreateOrUpdate.json"
-          },
-          "Jobs_CreateOrUpdate_VNetInjection": {
-            "$ref": "./examples/Jobs_CreateOrUpdate_VNetInjection.json"
           }
         }
       },
@@ -8920,7 +8905,7 @@
         "tags": [
           "AppPlatform"
         ],
-        "description": "Operation to delete an Job.",
+        "description": "Operation to delete a Job.",
         "operationId": "Jobs_Delete",
         "parameters": [
           {
@@ -8940,11 +8925,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success. The response indicates the resource is deleted."
-          },
           "202": {
-            "description": "Accepted. The response indicates the delete operation is performed in the background."
+            "description": "Accepted. The response indicates the delete operation is performed in the background.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success. The response indicates the resource doesn't exist."
@@ -9062,7 +9049,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success."
+            "description": "Operation completed.",
+            "schema": {
+              "$ref": "#/definitions/JobExecutionBase"
+            }
           },
           "202": {
             "description": "Accepted. The response indicates the Job is now stopping and contains a Location header to\r\nquery the operation result.",
@@ -9127,6 +9117,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
         },
         "x-ms-examples": {
           "JobExecutions_List": {
@@ -15657,10 +15650,6 @@
           "$ref": "#/definitions/JobResourceProperties",
           "description": "Properties of the Job resource",
           "x-ms-client-flatten": false
-        },
-        "location": {
-          "description": "The GEO location of the Job, always the same with its parent resource",
-          "type": "string"
         }
       }
     },
@@ -15910,8 +15899,7 @@
         },
         "nextLink": {
           "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "required": [
