@@ -64,5 +64,6 @@ OR
 
 1. Install OpenAPI (Swagger) Editor extension in VS code 
 
-2. Select the generated swagger `CommunicationIdentity.json` and press Shift+Alt+P. 
-![Alt text](image.png)
+2. Select the generated swagger `CommunicationIdentity.json` and open the swagger preview. 
+
+![Alt text](image-1.png)
