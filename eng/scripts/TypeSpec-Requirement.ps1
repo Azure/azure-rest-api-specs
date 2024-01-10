@@ -51,7 +51,7 @@ else {
       exit 1
     }
 
-    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/$servicePath/stable"
+    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable"
 
     # Avoid conflict with pipeline secret
     $logUrlToStableFolder = $urlToStableFolder -replace '^https://',''
