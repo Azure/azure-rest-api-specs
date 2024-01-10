@@ -10,23 +10,23 @@ using TypeSpec.Versioning;
 @useDependency(AzureCommunicationMessagesService.Versions.c2024_02_01)
 namespace ClientForAcsMessages;
 
-@client({
-  name: "NotificationMessagesClient",
-  service: AzureCommunicationMessagesService,
-})
-interface NotificationMessagesRestClient {
-  @access(Access.internal, "csharp")
-  send is AzureCommunicationMessagesService.NotificationMessagesOperations.send;
+// @client({
+//   name: "NotificationMessagesClient",
+//   service: AzureCommunicationMessagesService,
+// })
+// interface NotificationMessagesRestClient {
+//   @access(Access.internal, "csharp")
+//   send is AzureCommunicationMessagesService.NotificationMessagesOperations.send;
 
-  @access(Access.internal, "csharp")
-  getMedia is AzureCommunicationMessagesService.StreamOperations.getStream;
-}
+//   @access(Access.internal, "csharp")
+//   getMedia is AzureCommunicationMessagesService.StreamOperations.getStream;
+// }
 
-@client({
-  name: "MessageTemplateClient",
-  service: AzureCommunicationMessagesService,
-})
-interface MessageTemplateRestClient {
-  @access(Access.internal, "csharp")
-  getTemplates is AzureCommunicationMessagesService.TemplateOperations.list;
-}
+// @client({
+//   name: "MessageTemplateClient",
+//   service: AzureCommunicationMessagesService,
+// })
+// interface MessageTemplateRestClient {
+//   @access(Access.internal, "csharp")
+//   getTemplates is AzureCommunicationMessagesService.TemplateOperations.list;
+// }

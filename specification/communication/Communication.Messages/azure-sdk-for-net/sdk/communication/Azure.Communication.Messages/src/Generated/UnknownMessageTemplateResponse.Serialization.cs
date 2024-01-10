@@ -21,7 +21,7 @@ namespace Azure.Communication.Messages
             string kind = "Unknown";
             string name = default;
             string language = default;
-            MessageTemplateStatus status = default;
+            MessageTemplateResponseStatus status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"u8))
@@ -41,7 +41,7 @@ namespace Azure.Communication.Messages
                 }
                 if (property.NameEquals("status"u8))
                 {
-                    status = new MessageTemplateStatus(property.Value.GetString());
+                    status = new MessageTemplateResponseStatus(property.Value.GetString());
                     continue;
                 }
             }
