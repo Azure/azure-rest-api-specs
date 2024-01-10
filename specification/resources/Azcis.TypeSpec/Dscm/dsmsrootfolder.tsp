@@ -15,7 +15,7 @@ namespace Microsoft.AzureCIS;
 model DsmsRootFolderResourceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Duplicate property found in the resource envelope and resource properties."
   @doc("The name of the root folder to add. This should be the full folder path starting with a \"$\", with \"$\" replacing all \"/\" characters")
-  name: string;
+  folderName: string;
 
   @doc("The cloud ID where the root folder should be added. Acceptable values: Public, Fairfax, Mooncake, USSec, USNat")
   cloudId?: string;
