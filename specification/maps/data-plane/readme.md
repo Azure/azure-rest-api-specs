@@ -60,7 +60,7 @@ input-file:
   - Common/stable/2023-06-01/common.json
   - DataRegistry/stable/2023-06-01/dataregistry.json
   - Geolocation/preview/1.0/geolocation.json
-  - Microsoft.Maps/Data/preview/2.0/data.json
+  - Creator/preview/2.0/data.json
   - Render/stable/2022-08-01/render.json
   - Route/preview/1.0/route.json
   - Search/stable/2023-06-01/search.json
