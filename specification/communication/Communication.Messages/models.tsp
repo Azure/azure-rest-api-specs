@@ -258,7 +258,8 @@ model CommunicationChannel {
 
 @resource("messages/streams")
 @doc("A data stream.")
-model Stream {
+@access(Access.internal)
+model MessageDataStream {
   @key
   @visibility("read")
   @doc("The stream ID.")
