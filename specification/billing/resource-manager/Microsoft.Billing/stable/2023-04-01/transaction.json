@@ -6,7 +6,7 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
@@ -57,7 +57,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "Unknown",
+              "Other",
               "Billed",
               "Unbilled"
             ],
@@ -96,7 +96,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -158,7 +158,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "Unknown",
+              "Other",
               "Billed",
               "Unbilled"
             ],
@@ -197,7 +197,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -256,7 +256,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "Unknown",
+              "Other",
               "Billed",
               "Unbilled"
             ],
@@ -277,7 +277,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -329,11 +329,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -400,7 +404,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -466,7 +470,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -519,7 +523,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "Unknown",
+              "Other",
               "Billed",
               "Unbilled"
             ],
@@ -540,7 +544,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -579,7 +583,7 @@
       "type": "object",
       "properties": {
         "amountRequested": {
-          "description": "The amount.",
+          "description": "The amount of refund requested.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -587,7 +591,7 @@
           ]
         },
         "amountRefunded": {
-          "description": "The amount.",
+          "description": "The amount refunded.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -648,7 +652,7 @@
       "type": "object",
       "properties": {
         "azureCreditApplied": {
-          "description": "The amount.",
+          "description": "The amount of any Azure credits automatically applied to this transaction.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -664,14 +668,14 @@
           "type": "string"
         },
         "billingProfileDisplayName": {
-          "description": "The name of the billing profile for the invoice section or customer."
+          "description": "The name of the billing profile."
         },
         "billingProfileId": {
           "description": "The fully qualified ID that uniquely identifies a billing profile.",
           "type": "string"
         },
         "consumptionCommitmentDecremented": {
-          "description": "The amount.",
+          "description": "The amount of Microsoft Azure Consumption Commitment(MACC) decrement through the transaction.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -711,7 +715,7 @@
           "type": "number"
         },
         "effectivePrice": {
-          "description": "The amount.",
+          "description": "The price of the product after applying any discounts.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -757,7 +761,7 @@
           }
         },
         "marketPrice": {
-          "description": "The amount.",
+          "description": "The retail price of the product.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -806,7 +810,7 @@
           "type": "string"
         },
         "subTotal": {
-          "description": "The amount.",
+          "description": "The pre-tax charged amount for the transaction.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -814,7 +818,7 @@
           ]
         },
         "tax": {
-          "description": "The amount.",
+          "description": "The tax amount applied to the transaction.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -822,7 +826,7 @@
           ]
         },
         "transactionAmount": {
-          "description": "The amount.",
+          "description": "The charge associated with the transaction.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"

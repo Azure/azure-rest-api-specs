@@ -10,7 +10,7 @@
     },
     "version": "2023-04-01"
   },
-  "paths": { },
+  "paths": {},
   "definitions": {
     "ArmError": {
       "description": "The error detail.",
@@ -38,7 +38,7 @@
             "$ref": "#/definitions/ArmError"
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         },
         "additionalInfo": {
           "description": "The resource management error additional info.",
@@ -60,7 +60,7 @@
             }
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -82,11 +82,6 @@
       "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
       "type": "object",
       "properties": {
-        "type": {
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\".",
-          "type": "string",
-          "readOnly": true
-        },
         "id": {
           "description": "Fully qualified resource ID for the resource.",
           "type": "string",
@@ -94,6 +89,11 @@
         },
         "name": {
           "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
           "type": "string",
           "readOnly": true
         },

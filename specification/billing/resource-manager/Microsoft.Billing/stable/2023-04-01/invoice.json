@@ -6,7 +6,7 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
@@ -75,7 +75,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -100,7 +100,7 @@
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "Invoices_DownloadMultipleByBillingAccount",
+        "operationId": "Invoices_DownloadDocumentsByBillingAccount",
         "consumes": [
           "application/json"
         ],
@@ -139,11 +139,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -154,8 +158,8 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "InvoicesDownloadMultipleByBillingAccount": {
-            "$ref": "./examples/invoicesDownloadMultipleByBillingAccount.json"
+          "InvoicesDownloadDocumentsByBillingAccount": {
+            "$ref": "./examples/invoicesDownloadDocumentsByBillingAccount.json"
           }
         }
       }
@@ -193,11 +197,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -256,11 +264,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -313,11 +325,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -366,7 +382,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -440,7 +456,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -465,7 +481,7 @@
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "Invoices_DownloadMultipleByBillingSubscription",
+        "operationId": "Invoices_DownloadDocumentsByBillingSubscription",
         "consumes": [
           "application/json"
         ],
@@ -504,11 +520,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -519,8 +539,8 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "InvoicesDownloadMultipleByBillingSubscription": {
-            "$ref": "./examples/invoicesDownloadMultipleByBillingSubscription.json"
+          "InvoicesDownloadDocumentsByBillingSubscription": {
+            "$ref": "./examples/invoicesDownloadDocumentsByBillingSubscription.json"
           }
         }
       }
@@ -567,11 +587,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -620,7 +644,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -694,7 +718,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -739,7 +763,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -852,7 +876,7 @@
         "kind": {
           "description": "The type of the document.",
           "enum": [
-            "Unknown",
+            "Other",
             "Invoice",
             "VoidNote",
             "TaxReceipt",
@@ -906,7 +930,7 @@
       "type": "object",
       "properties": {
         "amountDue": {
-          "description": "The amount.",
+          "description": "The amount due as of now.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -914,7 +938,7 @@
           ]
         },
         "azurePrepaymentApplied": {
-          "description": "The amount.",
+          "description": "The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -922,7 +946,7 @@
           ]
         },
         "billedAmount": {
-          "description": "The amount.",
+          "description": "The total charges for the invoice billing period.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -945,7 +969,7 @@
           "readOnly": true
         },
         "creditAmount": {
-          "description": "The amount.",
+          "description": "The total refund for returns and cancellations during the invoice billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -969,7 +993,7 @@
         "documentType": {
           "description": "The type of the document.",
           "enum": [
-            "Unknown",
+            "Other",
             "Invoice",
             "VoidNote",
             "TaxReceipt",
@@ -1004,7 +1028,7 @@
           "x-ms-identifiers": []
         },
         "freeAzureCreditApplied": {
-          "description": "The amount.",
+          "description": "The amount of free Azure credits applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -1029,7 +1053,7 @@
         "invoiceType": {
           "description": "Invoice type.",
           "enum": [
-            "Unknown",
+            "Other",
             "AzureServices",
             "AzureMarketplace",
             "AzureSupport"
@@ -1061,7 +1085,7 @@
           "readOnly": true
         },
         "rebillDetails": {
-          "description": "The rebill details of an invoice.",
+          "description": "Rebill details for an invoice.",
           "allOf": [
             {
               "$ref": "#/definitions/RebillDetails"
@@ -1071,7 +1095,7 @@
         "status": {
           "description": "The current status of the invoice.",
           "enum": [
-            "Unknown",
+            "Other",
             "Due",
             "OverDue",
             "Paid",
@@ -1086,7 +1110,7 @@
           }
         },
         "subscriptionDisplayName": {
-          "description": "",
+          "description": "The name of the billing subscription for which the invoice is generated.",
           "type": "string",
           "readOnly": true
         },
@@ -1109,7 +1133,7 @@
           }
         },
         "subTotal": {
-          "description": "The amount.",
+          "description": "The pre-tax amount due. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -1117,7 +1141,7 @@
           ]
         },
         "taxAmount": {
-          "description": "The amount.",
+          "description": "The amount of tax charged for the billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -1125,7 +1149,7 @@
           ]
         },
         "totalAmount": {
-          "description": "The amount.",
+          "description": "The amount due when the invoice was generated. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -1133,7 +1157,7 @@
           ]
         },
         "refundDetails": {
-          "description": "The details of refund request.",
+          "description": "The details of a refund request.",
           "allOf": [
             {
               "$ref": "#/definitions/RefundDetailsSummary"
@@ -1147,7 +1171,7 @@
       "type": "object",
       "properties": {
         "amount": {
-          "description": "The amount.",
+          "description": "The paid amount.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -1222,7 +1246,7 @@
           "readOnly": true
         },
         "amountRequested": {
-          "description": "The amount.",
+          "description": "The amount refunded.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -1230,7 +1254,7 @@
           ]
         },
         "amountRefunded": {
-          "description": "The amount.",
+          "description": "The amount of refund requested.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -1251,7 +1275,7 @@
         "refundStatus": {
           "description": "The status of refund request.",
           "enum": [
-            "Unknown",
+            "Other",
             "Pending",
             "Approved",
             "Declined",
@@ -1274,7 +1298,6 @@
         "refundReason": {
           "description": "The reason for refund.",
           "enum": [
-            "Unknown",
             "Other",
             "AccidentalConversion",
             "UnclearPricing",
