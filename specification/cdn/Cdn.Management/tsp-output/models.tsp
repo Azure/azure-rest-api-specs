@@ -2321,7 +2321,7 @@ model DimensionProperties {
 model EdgenodeResult is Azure.Core.Page<EdgeNode>;
 
 @doc("Edgenode is a global Point of Presence (POP) location used to deliver CDN content to end users.")
-model EdgeNode extends ProxyResource {
+model EdgeNode {
   @doc("The JSON object that contains the properties required to create an edgenode.")
   properties?: EdgeNodeProperties;
 }

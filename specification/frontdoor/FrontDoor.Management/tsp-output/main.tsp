@@ -21,5 +21,14 @@ using TypeSpec.Versioning;
 @service({
   title: "FrontDoorManagementClient",
 })
+// @versioned(Versions)
 @doc("FrontDoor Client")
 namespace Microsoft.Network;
+
+// @doc("The available API versions.")
+// enum Versions {
+//   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+//   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+//   v2016_11_01: "2016-11-01",
+// }
+
