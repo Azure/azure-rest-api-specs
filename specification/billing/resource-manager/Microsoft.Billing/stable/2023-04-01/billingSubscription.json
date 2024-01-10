@@ -76,7 +76,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -146,7 +146,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -225,7 +225,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -285,11 +285,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -353,11 +357,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -417,7 +425,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -469,11 +477,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -528,7 +540,7 @@
           {
             "in": "query",
             "name": "expand",
-            "description": "The expand query option specifies the related resources or media streams to be included in line with retrieved resources.",
+            "description": "Can be used to expand `Reseller` and `ConsumptionCostCenter`",
             "type": "string"
           }
         ],
@@ -540,7 +552,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -598,11 +610,15 @@
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -687,7 +703,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -760,7 +776,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -826,7 +842,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1175,7 +1191,7 @@
             }
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "suspensionReasonDetails": {
           "description": "The suspension details for a subscription. This field is not available for Enterprise Agreement billing accounts.",
@@ -1184,7 +1200,7 @@
             "$ref": "#/definitions/BillingSubscriptionStatusDetails"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
       }
     },

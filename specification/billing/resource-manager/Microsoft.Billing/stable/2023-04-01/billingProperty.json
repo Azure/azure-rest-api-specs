@@ -54,7 +54,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -111,7 +111,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -252,8 +252,8 @@
             "Other",
             "None",
             "Individual",
-            "Standard",
-            "Premier"
+            "Professional",
+            "Enterprise"
           ],
           "type": "string",
           "readOnly": true,
@@ -297,7 +297,7 @@
             "$ref": "#/definitions/SpendingLimitDetails"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "billingProfileStatus": {
           "description": "The status of the billing profile.",
@@ -336,8 +336,10 @@
           "description": "The payment method type of the primary payment method for the billing profile.",
           "enum": [
             "Other",
-            "Credits",
+            "Check",
             "CreditCard",
+            "Credits",
+            "InvoicePayment",
             "WireTransfer"
           ],
           "type": "string",
@@ -365,6 +367,24 @@
           "description": "The fully qualified ID that uniquely identifies a customer.",
           "type": "string",
           "readOnly": true
+        },
+        "customerStatus": {
+          "description": "Identifies the status of an customer. This is an upcoming property that will be populated in the future.",
+          "enum": [
+            "Other",
+            "Active",
+            "Pending",
+            "Disabled",
+            "Warned",
+            "Deleted",
+            "UnderReview"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CustomerStatus",
+            "modelAsString": true
+          }
         },
         "invoiceSectionDisplayName": {
           "description": "The name of the invoice section.",
@@ -455,7 +475,7 @@
             "$ref": "#/definitions/BillingSubscriptionStatusDetails"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "subscriptionBillingType": {
           "description": "The type of billing subscription.",
