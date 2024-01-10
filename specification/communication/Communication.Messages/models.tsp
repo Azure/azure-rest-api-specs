@@ -22,7 +22,7 @@ alias MessageTemplateStatus = "approved" | "rejected" | "pending" | "paused";
 
 @discriminator("kind")
 @doc("Details of the message to send.")
-model SendNotificationRequest {
+model NotificationContent {
   @doc("The Channel Registration ID for the Business Identifier.")
   channelRegistrationId: uuid;
 
@@ -31,7 +31,7 @@ model SendNotificationRequest {
 }
 
 @doc("A request to send a text notification.")
-model SendTextNotificationRequest extends SendNotificationRequest {
+model TextNotificationContent extends NotificationContent {
   @doc("Message notification type is text.")
   kind: "text";
 
@@ -40,11 +40,11 @@ model SendTextNotificationRequest extends SendNotificationRequest {
 }
 
 @doc("A request to send a media notification.")
-model SendMediaNotificationRequest extends SendNotificationRequest {
+model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: "image";
 
-  @doc("Message content.")
+  @doc("Optional text content.")
   content?: string;
 
   @doc("""
@@ -55,14 +55,13 @@ types, e.g. image
 }
 
 @doc("A request to send a template notification.")
-model SendTemplateNotificationRequest extends SendNotificationRequest {
+model TemplateNotificationContent extends NotificationContent {
   @doc("Message notification type is template.")
   kind: "template";
 
   @doc("The template object used to create templates.")
   template: MessageTemplate;
 }
-
 
 @doc("The template object used to create templates.")
 model MessageTemplate {
@@ -79,14 +78,12 @@ model MessageTemplate {
   bindings?: MessageTemplateBindings;
 }
 
-
 @discriminator("kind")
 @doc("The class describes a parameter of a template.")
 model MessageTemplateValue {
   @doc("Name of the Template value")
   name: string;
 }
-
 
 @doc("The message template's text value information.")
 model MessageTemplateText extends MessageTemplateValue {
@@ -96,7 +93,6 @@ model MessageTemplateText extends MessageTemplateValue {
   @doc("The text value.")
   text: string;
 }
-
 
 @doc("""
 The message template's media value information.
@@ -138,7 +134,6 @@ model MessageTemplateVideo extends MessageTemplateValue {
   ...MessageTemplateMedia
 }
 
-
 @doc("The message template's location value information.")
 model MessageTemplateLocation extends MessageTemplateValue {
   @doc("Message parameter type is location.")
@@ -157,7 +152,6 @@ model MessageTemplateLocation extends MessageTemplateValue {
   longitude?: float64;
 }
 
-
 @doc("The message template's quick action value information.")
 model MessageTemplateQuickAction extends MessageTemplateValue {
   @doc("Message parameter type is quick action.")
@@ -170,12 +164,10 @@ model MessageTemplateQuickAction extends MessageTemplateValue {
   payload?: string;
 }
 
-
 @discriminator("kind")
 @doc("The binding object to link values to the template specific locations")
 model MessageTemplateBindings {
 }
-
 
 @doc("The template bindings for WhatsApp")
 model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
@@ -195,7 +187,6 @@ model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   button?: WhatsAppMessageTemplateBindingsButton[];
 }
 
-
 @doc("The template bindings component for WhatsApp")
 model WhatsAppMessageTemplateBindingsComponent {
   @doc("""
@@ -205,7 +196,6 @@ dictionary.
 """)
   refValue: string;
 }
-
 
 @doc("The template bindings component button for WhatsApp")
 model WhatsAppMessageTemplateBindingsButton {
@@ -220,13 +210,11 @@ dictionary.
   refValue: string;
 }
 
-
 @doc("Result of the send message operation.")
 model SendMessageResult {
   @doc("Receipts of the send message operation.")
   receipts: MessageReceipt[];
 }
-
 
 @doc("Receipt of the sending one message.")
 model MessageReceipt {
@@ -237,9 +225,8 @@ model MessageReceipt {
   to: string;
 }
 
-
 @doc("The WhatsApp-specific template response contract")
-model WhatsAppMessageTemplateResponse extends MessageTemplateResponse{
+model WhatsAppMessageTemplateItem extends MessageTemplateItem{
   @doc("""
 WhatsApp platform's template content
 This is the payload returned from WhatsApp
@@ -284,24 +271,22 @@ model Stream {
   contentType: "application/octet-stream";
 }
 
-
 @resource("templates")
 @parentResource(CommunicationChannel)
 @discriminator("kind")
-@doc("The Message Template Response.")
-model MessageTemplateResponse {
+@doc("The message template as returned from the service.")
+model MessageTemplateItem {
   @key
   @visibility("read")
-  @doc("Get the template's Name")
+  @doc("The template's name.")
   name: string;
 
-  @doc("Get the template's language")
+  @doc("The template's language.")
   language: string;
 
   @doc("The aggregated template status.")
   status: MessageTemplateStatus;
 }
-
 
 @doc("Azure Communication Messages Versions")
 enum Versions {
