@@ -71,12 +71,6 @@ model ImageProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Image upload request body.")
-model ImageUploadRequestBody {
-  @doc("Image as a UTF-8 encoded base 64 string.")
-  images: string;
-}
-
 @doc("Image type values.")
 enum ImageType {
   /** Invalid image. */
