@@ -47,6 +47,31 @@ interface ProxyResourceOperationsDevice<
 @armResourceOperations
 interface Devices extends ProxyResourceOperationsDevice<Device> {
   @autoRoute
+  @removed(Versions.v2024_04_01)
+  @renamedFrom(Versions.v2024_04_01, "generateCapabilityImage")
+  @armResourceAction(Device)
+  @action("generateCapabilityImage")
+  @post
+  @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  deprecatedGenerateCapabilityImage(
+    ...ResourceInstanceParameters<Device>,
+
+    @doc("Generate capability image request body.")
+    @body
+    generateDeviceCapabilityRequest: GenerateCapabilityImageRequest,
+  ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @autoRoute
+  @sharedRoute
+  @added(Versions.v2024_04_01)
   @armResourceAction(Device)
   @post
   @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")
@@ -63,7 +88,7 @@ interface Devices extends ProxyResourceOperationsDevice<Device> {
     @doc("Generate capability image request body.")
     @body
     generateDeviceCapabilityRequest: GenerateCapabilityImageRequest,
-  ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
+  ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedLroResponse | ErrorResponse;
 }
 
 @doc("The properties of device")
