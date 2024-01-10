@@ -21,13 +21,13 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 interface TemplateOperations {
   @tag("Template")
   @doc("List all templates for given ACS channel")
-  list is Operations.ResourceList<MessageTemplateItem>;
+  getTemplates is Operations.ResourceList<MessageTemplateItem>;
 }
 
 interface NotificationMessagesOperations {
   @tag("Notifications")
   @doc("Sends a notification message from Business to User.")
-  send is Operations.ResourceCollectionAction<Notifications, NotificationContent, AcceptedResponse & SendMessageResult>
+  sendMessage is Operations.ResourceCollectionAction<Notifications, NotificationContent, AcceptedResponse & SendMessageResult>
 }
 
 interface StreamOperations {
