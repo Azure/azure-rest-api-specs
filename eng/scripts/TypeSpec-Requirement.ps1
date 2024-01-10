@@ -1,5 +1,10 @@
 [CmdletBinding()]
 param (
+  [Parameter(Position = 0)]
+  [string] $BaseCommitish = "HEAD^",
+  [Parameter(Position = 1)]
+  [string] $TargetCommitish = "HEAD"
+
 )
 Set-StrictMode -Version 3
 
@@ -9,7 +14,7 @@ Set-StrictMode -Version 3
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
-$filesToCheck = @(Get-ChangedSwaggerFiles).Where({
+$filesToCheck = (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish)).Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
   ($_ -match "specification/[^/]+/(data-plane|resource-manager).*?/(preview|stable)/[^/]+/[^/]+\.json$")
 })
