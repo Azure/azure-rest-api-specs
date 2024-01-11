@@ -10,7 +10,7 @@ namespace Azure.ProgrammableConnectivity;
 
 /// Interfaces
 @doc("SIM Swap API provides the customer the ability to obtain information on any recent SIM pairing change related to the User's mobile account.")
-interface SimSwapInterface {
+interface SimSwap {
   @doc("Provides timestamp of latest SIM swap")
   retrieve is Operations.ResourceAction<
     SimSwapEndpoint,

@@ -52,7 +52,7 @@
   "paths": {
     "/device-location/{location}:verify": {
       "post": {
-        "operationId": "LocationInterface_Verify",
+        "operationId": "DeviceLocation_Verify",
         "description": "Verifies whether a device is within a specified location area, defined as an accuracy (radius) around a point, specified by longitude and latitude.",
         "parameters": [
           {
@@ -116,15 +116,15 @@
           }
         },
         "x-ms-examples": {
-          "LocationInterface_Verify": {
-            "$ref": "./examples/LocationInterface_Verify_MaximumSet_Gen.json"
+          "DeviceLocation_Verify": {
+            "$ref": "./examples/DeviceLocation_Verify_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/device-network/{network}:retrieve": {
       "post": {
-        "operationId": "NetworkInterface_Retrieve",
+        "operationId": "DeviceNetwork_Retrieve",
         "description": "Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.",
         "parameters": [
           {
@@ -188,15 +188,15 @@
           }
         },
         "x-ms-examples": {
-          "NetworkInterface_Retrieve": {
-            "$ref": "./examples/NetworkInterface_Retrieve_MaximumSet_Gen.json"
+          "DeviceNetwork_Retrieve": {
+            "$ref": "./examples/DeviceNetwork_Retrieve_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/number-verification/{number}:verify": {
       "post": {
-        "operationId": "NumberInterface_Verify",
+        "operationId": "NumberVerification_Verify",
         "description": "Verifies the phone number (MSISDN) associated with a device.",
         "parameters": [
           {
@@ -260,7 +260,7 @@
           }
         },
         "x-ms-examples": {
-          "NumberInterface_Verify": {
+          "NumberVerification_Verify": {
             "$ref": "./examples/NumberInterface_Verify_MaximumSet_Gen.json"
           }
         }
@@ -268,7 +268,7 @@
     },
     "/number-verification/{number}:retrieve": {
       "post": {
-        "operationId": "NumberInterface_Retrieve",
+        "operationId": "NumberVerification_Retrieve",
         "description": "Retrieves the phone number (MSISDN) associated with a device.",
         "parameters": [
           {
@@ -332,15 +332,15 @@
           }
         },
         "x-ms-examples": {
-          "NumberInterface_Retrieve": {
-            "$ref": "./examples/NumberInterface_Retrieve_MaximumSet_Gen.json"
+          "NumberVerification_Retrieve": {
+            "$ref": "./examples/NumberVerification_Retrieve_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/sim-swap/{simSwap}:retrieve": {
       "post": {
-        "operationId": "SimSwapInterface_Retrieve",
+        "operationId": "SimSwap_Retrieve",
         "description": "Provides timestamp of latest SIM swap",
         "parameters": [
           {
@@ -404,15 +404,15 @@
           }
         },
         "x-ms-examples": {
-          "SimSwapInterface_Retrieve": {
-            "$ref": "./examples/SimSwapInterface_Retrieve_MaximumSet_Gen.json"
+          "SimSwap_Retrieve": {
+            "$ref": "./examples/SimSwap_Retrieve_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/sim-swap/{simSwap}:verify": {
       "post": {
-        "operationId": "SimSwapInterface_Verify",
+        "operationId": "SimSwap_Verify",
         "description": "Verifies if a SIM swap has been performed during a past period (defined in the request with 'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.",
         "parameters": [
           {
@@ -476,8 +476,8 @@
           }
         },
         "x-ms-examples": {
-          "SimSwapInterface_Verify": {
-            "$ref": "./examples/SimSwapInterface_Verify_MaximumSet_Gen.json"
+          "SimSwap_Verify": {
+            "$ref": "./examples/SimSwap_Verify_MaximumSet_Gen.json"
           }
         }
       }

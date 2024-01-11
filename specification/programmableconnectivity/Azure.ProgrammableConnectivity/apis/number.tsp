@@ -22,7 +22,7 @@ namespace Azure.ProgrammableConnectivity;
   This flow takes place automatically without user interaction, and so only the result
   of the entire flow (the 200 response) is included in this document.
 """)
-interface NumberInterface {
+interface NumberVerification {
   @doc("Verifies the phone number (MSISDN) associated with a device.")
   verify is Operations.ResourceAction<
     NumberEndpoint,
