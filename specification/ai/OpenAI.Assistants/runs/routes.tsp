@@ -95,7 +95,7 @@ interface ThreadRuns {
   /**
    * Submits outputs from tools as requested by tool calls in a run. Runs that need submitted tool outputs will have a status of 'requires_action' with a required_action.type of 'submit_tool_outputs'.
    *
-   * @param threadId The ID of the the thread that was run.
+   * @param threadId The ID of the thread that was run.
    * @param runId The ID of the run that requires tool outputs.
    * @param toolOutputs The list of tool outputs requested by tool calls from the specified run.
    * @returns Updated information about the run.
