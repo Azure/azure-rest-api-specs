@@ -2037,6 +2037,14 @@
         "optionalLoadTestConfig": {
           "$ref": "#/definitions/OptionalLoadTestConfig",
           "description": "Configuration for quick load test"
+        },
+        "regionConfiguration": {
+          "type": "array",
+          "description": "Configure engine instances to be split into multiple regions",
+          "items": {
+            "$ref": "#/definitions/RegionConfig"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2619,6 +2627,21 @@
           "$ref": "#/definitions/PFResult",
           "description": "Outcome of the test run.",
           "readOnly": true
+        }
+      }
+    },
+    "RegionConfig": {
+      "type": "object",
+      "description": "Region configuration for load test",
+      "properties": {
+        "regionName": {
+          "type": "string",
+          "description": "Region to apply this configuration"
+        },
+        "engineInstances": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of engine instances to execute load test in this region. Supported values are in range of 1-400."
         }
       }
     },
@@ -3241,6 +3264,15 @@
         "loadTestConfiguration": {
           "$ref": "#/definitions/LoadTestConfiguration",
           "description": "The load test configuration."
+        },
+        "regionConfiguration": {
+          "type": "array",
+          "description": "Region configuration applied of load test run",
+          "items": {
+            "$ref": "#/definitions/RegionConfig"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "testArtifacts": {
           "$ref": "#/definitions/TestRunArtifacts",

@@ -337,6 +337,22 @@ not required to upload.
 
   @doc("Configuration for quick load test")
   optionalLoadTestConfig?: OptionalLoadTestConfig;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Configure engine instances to be split into multiple regions")
+  regionConfiguration?: RegionConfig[];
+}
+
+@added(APIVersions.v2023_04_01_preview)
+@doc("Region configuration for load test")
+model RegionConfig {
+  @doc("Region to apply this configuration")
+  regionName?: string;
+
+  @doc("""
+  The number of engine instances to execute load test in this region. Supported values are in range of 1-400.
+  """)
+  engineInstances?: int32;
 }
 
 @doc("Configuration for quick load test")
@@ -546,6 +562,11 @@ SECRET_VALUE.
 
   @doc("The load test configuration.")
   loadTestConfiguration?: LoadTestConfiguration;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Region configuration applied of load test run")
+  @visibility("read")
+  regionConfiguration?: RegionConfig[];
 
   @doc("Collection of test run artifacts")
   @visibility("read")
