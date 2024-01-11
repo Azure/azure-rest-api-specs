@@ -52,6 +52,15 @@ input-file:
   - Microsoft.Migrate/AssessmentProjects/stable/2023-03-15/migrate.json
 ```
 
+### Tag: package-migrate-2023-04
+
+These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-migrate-2023-04'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
+```
+
 ### Tag: package-migrate-2018-02 and java
 
 These settings apply only when `--tag=package-migrate-2018-02 --java` is specified on the command line.
@@ -186,6 +195,15 @@ These settings apply only when `--tag=package-migrate-2023-03` is specified on t
 ``` yaml $(tag) == 'package-migrate-2023-03'
 input-file:
   - Microsoft.Migrate/AssessmentProjects/stable/2023-03-15/migrate.json
+```
+
+### Tag: package-migrate-2023-04
+
+These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-migrate-2023-04'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
 ```
 
 ### Tag: package-migrate-2018-02
