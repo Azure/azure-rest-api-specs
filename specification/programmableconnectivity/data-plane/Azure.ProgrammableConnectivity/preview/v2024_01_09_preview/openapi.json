@@ -52,7 +52,7 @@
   "paths": {
     "/device-location/{location}:verify": {
       "post": {
-        "operationId": "LocationInterface_Verify",
+        "operationId": "DeviceLocation_Verify",
         "description": "Verifies whether a device is within a specified location area, defined as an accuracy (radius) around a point, specified by longitude and latitude.",
         "parameters": [
           {
@@ -68,7 +68,7 @@
               "location"
             ],
             "x-ms-enum": {
-              "name": "LocationEnum",
+              "name": "DeviceLocationEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -90,7 +90,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LocationVerifyContent"
+              "$ref": "#/definitions/DeviceLocationVerificationContent"
             }
           }
         ],
@@ -98,7 +98,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LocationVerifyResult"
+              "$ref": "#/definitions/DeviceLocationVerificationResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -111,20 +111,20 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/ApcError"
             }
           }
         },
         "x-ms-examples": {
-          "LocationInterface_Verify": {
-            "$ref": "./examples/LocationInterface_Verify_MaximumSet_Gen.json"
+          "DeviceLocation_Verify": {
+            "$ref": "./examples/DeviceLocation_Verify_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/device-network/{network}:retrieve": {
       "post": {
-        "operationId": "DeviceNetworks_Retrieve",
+        "operationId": "DeviceNetwork_Retrieve",
         "description": "Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.",
         "parameters": [
           {
@@ -140,7 +140,7 @@
               "network"
             ],
             "x-ms-enum": {
-              "name": "NetworkEnum",
+              "name": "DeviceNetworkEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -170,7 +170,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NetworkRetrieveResult"
+              "$ref": "#/definitions/NetworkRetrievalResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -183,20 +183,20 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/ApcError"
             }
           }
         },
         "x-ms-examples": {
-          "DeviceNetworks_Retrieve": {
-            "$ref": "./examples/DeviceNetworks_Retrieve_MaximumSet_Gen.json"
+          "DeviceNetwork_Retrieve": {
+            "$ref": "./examples/DeviceNetwork_Retrieve_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/number-verification/{number}:verify": {
       "post": {
-        "operationId": "NumberInterface_Verify",
+        "operationId": "NumberVerification_Verify",
         "description": "Verifies the phone number (MSISDN) associated with a device.",
         "parameters": [
           {
@@ -212,7 +212,7 @@
               "number"
             ],
             "x-ms-enum": {
-              "name": "NumberEnum",
+              "name": "NumberVerificationEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -234,7 +234,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NumberVerifyContent"
+              "$ref": "#/definitions/NumberVerificationContent"
             }
           }
         ],
@@ -242,7 +242,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NumberVerifyResult"
+              "$ref": "#/definitions/NumberVerificationResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -255,20 +255,20 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/ApcError"
             }
           }
         },
         "x-ms-examples": {
-          "NumberInterface_Verify": {
-            "$ref": "./examples/NumberInterface_Verify_MaximumSet_Gen.json"
+          "NumberVerification_Verify": {
+            "$ref": "./examples/NumberVerification_Verify_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/number-verification/{number}:retrieve": {
       "post": {
-        "operationId": "NumberInterface_Retrieve",
+        "operationId": "NumberVerification_Retrieve",
         "description": "Retrieves the phone number (MSISDN) associated with a device.",
         "parameters": [
           {
@@ -284,7 +284,7 @@
               "number"
             ],
             "x-ms-enum": {
-              "name": "NumberEnum",
+              "name": "NumberVerificationEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -314,7 +314,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/NumberRetrieveResult"
+              "$ref": "#/definitions/NumberRetrievalResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -327,20 +327,20 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/ApcError"
             }
           }
         },
         "x-ms-examples": {
-          "NumberInterface_Retrieve": {
-            "$ref": "./examples/NumberInterface_Retrieve_MaximumSet_Gen.json"
+          "NumberVerification_Retrieve": {
+            "$ref": "./examples/NumberVerification_Retrieve_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/sim-swap/{simSwap}:retrieve": {
       "post": {
-        "operationId": "SimSwapInterface_Retrieve",
+        "operationId": "SimSwap_Retrieve",
         "description": "Provides timestamp of latest SIM swap",
         "parameters": [
           {
@@ -378,7 +378,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SimSwapRetrieveContent"
+              "$ref": "#/definitions/SimSwapRetrievalContent"
             }
           }
         ],
@@ -386,7 +386,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SimSwapRetrieveResult"
+              "$ref": "#/definitions/SimSwapRetrievalResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -399,20 +399,20 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/ApcError"
             }
           }
         },
         "x-ms-examples": {
-          "SimSwapInterface_Retrieve": {
-            "$ref": "./examples/SimSwapInterface_Retrieve_MaximumSet_Gen.json"
+          "SimSwap_Retrieve": {
+            "$ref": "./examples/SimSwap_Retrieve_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/sim-swap/{simSwap}:verify": {
       "post": {
-        "operationId": "SimSwapInterface_Verify",
+        "operationId": "SimSwap_Verify",
         "description": "Verifies if a SIM swap has been performed during a past period (defined in the request with 'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.",
         "parameters": [
           {
@@ -450,7 +450,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SimSwapVerifyContent"
+              "$ref": "#/definitions/SimSwapVerificationContent"
             }
           }
         ],
@@ -458,7 +458,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SimSwapVerifyResult"
+              "$ref": "#/definitions/SimSwapVerificationResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -471,13 +471,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ApcErrorResponse"
+              "$ref": "#/definitions/ApcError"
             }
           }
         },
         "x-ms-examples": {
-          "SimSwapInterface_Verify": {
-            "$ref": "./examples/SimSwapInterface_Verify_MaximumSet_Gen.json"
+          "SimSwap_Verify": {
+            "$ref": "./examples/SimSwap_Verify_MaximumSet_Gen.json"
           }
         }
       }
@@ -502,7 +502,7 @@
         ]
       }
     },
-    "ApcErrorResponse": {
+    "ApcError": {
       "type": "object",
       "description": "A custom error type for APC.",
       "properties": {
@@ -531,6 +531,111 @@
         "message"
       ]
     },
+    "DeviceLocationEndpoint": {
+      "type": "object",
+      "description": "Static endpoint to access the Device Location API family.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DeviceLocationEnum",
+          "description": "Static endpoint",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "DeviceLocationEnum": {
+      "type": "string",
+      "description": "Location static endpoint enum",
+      "enum": [
+        "location"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceLocationEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "location",
+            "value": "location",
+            "description": "Static endpoint"
+          }
+        ]
+      }
+    },
+    "DeviceLocationVerificationContent": {
+      "type": "object",
+      "description": "Request to verify Location",
+      "properties": {
+        "networkIdentifier": {
+          "$ref": "#/definitions/NetworkIdentifier",
+          "description": "Network to query for this device, or device information to enable network routing."
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "description": "Latitude of location to be verified",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "description": "Longitude of location to be verified",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "accuracy": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Accuracy expected for location verification in kilometers",
+          "minimum": 2,
+          "maximum": 100
+        },
+        "locationDevice": {
+          "$ref": "#/definitions/LocationDevice",
+          "description": "The device to find the location for."
+        }
+      },
+      "required": [
+        "networkIdentifier",
+        "latitude",
+        "longitude",
+        "accuracy",
+        "locationDevice"
+      ]
+    },
+    "DeviceLocationVerificationResult": {
+      "type": "object",
+      "description": "Response verifying location",
+      "properties": {
+        "verificationResult": {
+          "type": "boolean",
+          "description": "True if the location is in the specified area, False otherwise"
+        }
+      },
+      "required": [
+        "verificationResult"
+      ]
+    },
+    "DeviceNetworkEnum": {
+      "type": "string",
+      "description": "Network static endpoint enum",
+      "enum": [
+        "network"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceNetworkEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "network",
+            "value": "network",
+            "description": "Static endpoint"
+          }
+        ]
+      }
+    },
     "DeviceNetworkIdentifier": {
       "type": "object",
       "description": "The device for which to find the network.",
@@ -547,6 +652,20 @@
       "required": [
         "identifierType",
         "deviceIdentifier"
+      ]
+    },
+    "DeviceNetworkRetrievalEndpoint": {
+      "type": "object",
+      "description": "Static endpoint to access the Device Network API family.",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/DeviceNetworkEnum",
+          "description": "Static endpoint",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "network"
       ]
     },
     "Ipv4Address": {
@@ -630,93 +749,6 @@
         }
       }
     },
-    "LocationEndpoint": {
-      "type": "object",
-      "description": "Static endpoint to access the Device Location API family.",
-      "properties": {
-        "location": {
-          "$ref": "#/definitions/LocationEnum",
-          "description": "Static endpoint",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "location"
-      ]
-    },
-    "LocationEnum": {
-      "type": "string",
-      "description": "Location static endpoint enum",
-      "enum": [
-        "location"
-      ],
-      "x-ms-enum": {
-        "name": "LocationEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "location",
-            "value": "location",
-            "description": "Static endpoint"
-          }
-        ]
-      }
-    },
-    "LocationVerifyContent": {
-      "type": "object",
-      "description": "Request to verify Location",
-      "properties": {
-        "networkIdentifier": {
-          "$ref": "#/definitions/NetworkIdentifier",
-          "description": "Network to query for this device, or device information to enable network routing."
-        },
-        "latitude": {
-          "type": "number",
-          "format": "float",
-          "description": "Latitude of location to be verified",
-          "minimum": -90,
-          "maximum": 90
-        },
-        "longitude": {
-          "type": "number",
-          "format": "float",
-          "description": "Longitude of location to be verified",
-          "minimum": -180,
-          "maximum": 180
-        },
-        "accuracy": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Accuracy expected for location verification in kilometers",
-          "minimum": 2,
-          "maximum": 100
-        },
-        "locationDevice": {
-          "$ref": "#/definitions/LocationDevice",
-          "description": "The device to find the location for."
-        }
-      },
-      "required": [
-        "networkIdentifier",
-        "latitude",
-        "longitude",
-        "accuracy",
-        "locationDevice"
-      ]
-    },
-    "LocationVerifyResult": {
-      "type": "object",
-      "description": "Response verifying location",
-      "properties": {
-        "verificationResult": {
-          "type": "boolean",
-          "description": "True if the location is in the specified area, False otherwise"
-        }
-      },
-      "required": [
-        "verificationResult"
-      ]
-    },
     "NetworkAccessIdentifierModel": {
       "type": "object",
       "description": "The network access ID/external ID of the device",
@@ -725,24 +757,6 @@
           "type": "string",
           "description": "External identifier or network access identifier of the device"
         }
-      }
-    },
-    "NetworkEnum": {
-      "type": "string",
-      "description": "Network static endpoint enum",
-      "enum": [
-        "network"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "network",
-            "value": "network",
-            "description": "Static endpoint"
-          }
-        ]
       }
     },
     "NetworkIdentifier": {
@@ -763,21 +777,7 @@
         "identifier"
       ]
     },
-    "NetworkRetrieveEndpoint": {
-      "type": "object",
-      "description": "Static endpoint to access the Device Network API family.",
-      "properties": {
-        "network": {
-          "$ref": "#/definitions/NetworkEnum",
-          "description": "Static endpoint",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "network"
-      ]
-    },
-    "NetworkRetrieveResult": {
+    "NetworkRetrievalResult": {
       "type": "object",
       "description": "The network that the device is on.",
       "properties": {
@@ -806,39 +806,7 @@
         }
       }
     },
-    "NumberEndpoint": {
-      "type": "object",
-      "description": "Static endpoint to access Number Verification API family",
-      "properties": {
-        "number": {
-          "$ref": "#/definitions/NumberEnum",
-          "description": "Static endpoint",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "number"
-      ]
-    },
-    "NumberEnum": {
-      "type": "string",
-      "description": "Number static endpoint enum",
-      "enum": [
-        "number"
-      ],
-      "x-ms-enum": {
-        "name": "NumberEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "number",
-            "value": "number",
-            "description": "Static endpoint"
-          }
-        ]
-      }
-    },
-    "NumberRetrieveResult": {
+    "NumberRetrievalResult": {
       "type": "object",
       "description": "Response with number of device",
       "properties": {
@@ -852,7 +820,7 @@
         "phoneNumber"
       ]
     },
-    "NumberVerifyContent": {
+    "NumberVerificationContent": {
       "type": "object",
       "description": "Request to verify number of device",
       "properties": {
@@ -874,7 +842,39 @@
         "networkIdentifier"
       ]
     },
-    "NumberVerifyResult": {
+    "NumberVerificationEndpoint": {
+      "type": "object",
+      "description": "Static endpoint to access Number Verification API family",
+      "properties": {
+        "number": {
+          "$ref": "#/definitions/NumberVerificationEnum",
+          "description": "Static endpoint",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "number"
+      ]
+    },
+    "NumberVerificationEnum": {
+      "type": "string",
+      "description": "Number static endpoint enum",
+      "enum": [
+        "number"
+      ],
+      "x-ms-enum": {
+        "name": "NumberVerificationEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "number",
+            "value": "number",
+            "description": "Static endpoint"
+          }
+        ]
+      }
+    },
+    "NumberVerificationResult": {
       "type": "object",
       "description": "Response verifying number of device",
       "properties": {
@@ -941,7 +941,7 @@
         ]
       }
     },
-    "SimSwapRetrieveContent": {
+    "SimSwapRetrievalContent": {
       "type": "object",
       "description": "Request to retrieve SimSwap date",
       "properties": {
@@ -959,7 +959,7 @@
         "networkIdentifier"
       ]
     },
-    "SimSwapRetrieveResult": {
+    "SimSwapRetrievalResult": {
       "type": "object",
       "description": "Response with SimSwap date",
       "properties": {
@@ -973,7 +973,7 @@
         "date"
       ]
     },
-    "SimSwapVerifyContent": {
+    "SimSwapVerificationContent": {
       "type": "object",
       "description": "Request to verify SimSwap in period",
       "properties": {
@@ -999,7 +999,7 @@
         "networkIdentifier"
       ]
     },
-    "SimSwapVerifyResult": {
+    "SimSwapVerificationResult": {
       "type": "object",
       "description": "Response verifying SimSwap in period",
       "properties": {

@@ -10,19 +10,19 @@ namespace Azure.ProgrammableConnectivity;
 
 /// Interfaces
 @doc("SIM Swap API provides the customer the ability to obtain information on any recent SIM pairing change related to the User's mobile account.")
-interface SimSwapInterface {
+interface SimSwap {
   @doc("Provides timestamp of latest SIM swap")
   retrieve is Operations.ResourceAction<
     SimSwapEndpoint,
-    SimSwapRetrieveContent,
-    SimSwapRetrieveResult
+    SimSwapRetrievalContent,
+    SimSwapRetrievalResult
   >;
 
   @doc("Verifies if a SIM swap has been performed during a past period (defined in the request with 'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.")
   verify is Operations.ResourceAction<
     SimSwapEndpoint,
-    SimSwapVerifyContent,
-    SimSwapVerifyResult
+    SimSwapVerificationContent,
+    SimSwapVerificationResult
   >;
 }
 
@@ -48,7 +48,7 @@ enum SimSwapEnum {
 /// Request models
 
 @doc("Request to retrieve SimSwap date")
-model SimSwapRetrieveContent {
+model SimSwapRetrievalContent {
   ...SimSwapDevice;
 
   @doc("Network to query for this device")
@@ -56,7 +56,7 @@ model SimSwapRetrieveContent {
 }
 
 @doc("Request to verify SimSwap in period")
-model SimSwapVerifyContent {
+model SimSwapVerificationContent {
   ...SimSwapDevice;
 
   @doc("Maximum lookback for SimSwap verification")
@@ -71,13 +71,13 @@ model SimSwapVerifyContent {
 /// Response Models
 
 @doc("Response with SimSwap date")
-model SimSwapRetrieveResult {
+model SimSwapRetrievalResult {
   @doc("Datetime of most recent swap for SIM")
   date: utcDateTime;
 }
 
 @doc("Response verifying SimSwap in period")
-model SimSwapVerifyResult {
+model SimSwapVerificationResult {
   @doc("True if the SIM has swapped in the specified period, False otherwise")
   verificationResult: boolean;
 }

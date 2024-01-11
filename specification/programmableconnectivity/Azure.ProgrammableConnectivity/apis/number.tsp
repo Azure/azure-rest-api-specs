@@ -22,19 +22,19 @@ namespace Azure.ProgrammableConnectivity;
   This flow takes place automatically without user interaction, and so only the result
   of the entire flow (the 200 response) is included in this document.
 """)
-interface NumberInterface {
+interface NumberVerification {
   @doc("Verifies the phone number (MSISDN) associated with a device.")
   verify is Operations.ResourceAction<
-    NumberEndpoint,
-    NumberVerifyContent,
-    NumberVerifyResult
+    NumberVerificationEndpoint,
+    NumberVerificationContent,
+    NumberVerificationResult
   >;
 
   @doc("Retrieves the phone number (MSISDN) associated with a device.")
   retrieve is Operations.ResourceAction<
-    NumberEndpoint,
+    NumberVerificationEndpoint,
     NetworkIdentifier,
-    NumberRetrieveResult
+    NumberRetrievalResult
   >;
 }
 
@@ -42,17 +42,17 @@ interface NumberInterface {
 
 @resource("number-verification")
 @doc("Static endpoint to access Number Verification API family")
-model NumberEndpoint {
+model NumberVerificationEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
-  number: NumberEnum;
+  number: NumberVerificationEnum;
 }
 
 /* Needed to add this enum because typespec was creating an x-ms-enum without a name
    which was causing a failure during linting. */
 @doc("Number static endpoint enum")
-enum NumberEnum {
+enum NumberVerificationEnum {
   @doc("Static endpoint")
   number: "number",
 }
@@ -60,7 +60,7 @@ enum NumberEnum {
 /// Request models
 
 @doc("Request to verify number of device")
-model NumberVerifyContent {
+model NumberVerificationContent {
   @doc("Identifier for the network to query for this device.")
   networkIdentifier: NetworkIdentifier;
 
@@ -70,13 +70,13 @@ model NumberVerifyContent {
 /// Response models
 
 @doc("Response verifying number of device")
-model NumberVerifyResult {
+model NumberVerificationResult {
   @doc("True if number if the phone number matches the device, False otherwise")
   verificationResult: boolean;
 }
 
 @doc("Response with number of device")
-model NumberRetrieveResult {
+model NumberRetrievalResult {
   @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
   @pattern("^\\+?[0-9]{5,15}$")
   phoneNumber: string;

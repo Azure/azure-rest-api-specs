@@ -10,12 +10,12 @@ namespace Azure.ProgrammableConnectivity;
 
 /// Interfaces
 
-interface DeviceNetworks {
+interface DeviceNetwork {
   @doc("Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.")
   retrieve is Operations.ResourceAction<
-    NetworkRetrieveEndpoint,
+    DeviceNetworkRetrievalEndpoint,
     DeviceNetworkIdentifier,
-    NetworkRetrieveResult
+    NetworkRetrievalResult
   >;
 }
 
@@ -23,17 +23,17 @@ interface DeviceNetworks {
 
 @resource("device-network")
 @doc("Static endpoint to access the Device Network API family.")
-model NetworkRetrieveEndpoint {
+model DeviceNetworkRetrievalEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
-  network: NetworkEnum;
+  network: DeviceNetworkEnum;
 }
 
 /* Needed to add this enum because typespec was creating an x-ms-enum without a name
    which was causing a failure during linting. */
 @doc("Network static endpoint enum")
-enum NetworkEnum {
+enum DeviceNetworkEnum {
   @doc("Static endpoint")
   network: "network",
 }
@@ -51,7 +51,7 @@ model DeviceNetworkIdentifier {
 }
 
 @doc("The network that the device is on.")
-model NetworkRetrieveResult {
+model NetworkRetrievalResult {
   @pattern("[a-z0-9-]+$")
   @doc("The identifier for the network. This can be used as the networkIdentifier for the service APIs.")
   networkCode: string;
