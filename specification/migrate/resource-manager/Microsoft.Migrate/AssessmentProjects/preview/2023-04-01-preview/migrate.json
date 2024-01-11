@@ -13490,7 +13490,7 @@
       "description": "Common properties for all azure tracked and proxy resources.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningState2",
           "description": "The status of the last operation.",
           "readOnly": true
         }
@@ -21166,6 +21166,60 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is being Provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being Updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being Deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource is being Accepted."
+          }
+        ]
+      }
+    },
+    "ProvisioningState2": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState2",
         "modelAsString": true,
         "values": [
           {
