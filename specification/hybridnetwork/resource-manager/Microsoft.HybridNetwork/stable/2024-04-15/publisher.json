@@ -698,8 +698,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/listNetworkFabricControllerEndPoints": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/listNetworkFabricControllerPrivateEndPoints": {
+      "get": {
         "tags": [
           "ArtifactStores"
         ],
@@ -726,7 +726,7 @@
           "200": {
             "description": "Request is successful. The operations returns the credential for publishing artifacts.",
             "schema": {
-              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsFormat"
+              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsListFormat"
             }
           },
           "default": {
@@ -740,6 +740,9 @@
           "List Network Fabric Endpoints": {
             "$ref": "./examples/ArtifactStoreListNFCEndPoints.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -865,8 +868,69 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/listPrivateEndPoints": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/removePrivateEndPoints": {
       "post": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_RemovePrivateEndPoints",
+        "description": "Reject manual private endpoints on artifact stores",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactStorePrivateEndPointsFormat"
+            },
+            "description": "Parameters supplied to the create or update application group operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reject Manual Endpoint": {
+            "$ref": "./examples/ArtifactStoreRemovePrivateEndPoints.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/listPrivateEndPoints": {
+      "get": {
         "tags": [
           "ArtifactStores"
         ],
@@ -891,9 +955,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operations returns the credential for publishing artifacts.",
+            "description": "Request is successful.",
             "schema": {
-              "$ref": "#/definitions/ArtifactStorePrivateEndPointsFormat"
+              "$ref": "#/definitions/ArtifactStorePrivateEndPointsListResult"
             }
           },
           "default": {
@@ -907,6 +971,9 @@
           "List Manual Private Endpoints": {
             "$ref": "./examples/ArtifactStoreListPrivateEndPoints.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1487,12 +1554,30 @@
         "networkFabricControllerIds": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "./common.json#/definitions/ReferencedResource"
           },
-          "description": "list of network fabric controllers."
+          "description": "list of network fabric controllers.",
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       },
       "description": "List of network fabric controller ids."
+    },
+    "ArtifactStoreNetworkFabricControllerEndPointsListFormat": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsFormat",
+          "description": "A list of artifact manifests."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to get the next set of results."
+        }
+      },
+      "description": "List of manual private endpoints."
     },
     "ArtifactStorePrivateEndPointsFormat": {
       "type": "object",
@@ -1500,9 +1585,26 @@
         "manualPrivateEndPointConnections": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "./common.json#/definitions/ReferencedResource"
           },
-          "description": "list of private endpoints."
+          "description": "list of private endpoints.",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "description": "List of manual private endpoints."
+    },
+    "ArtifactStorePrivateEndPointsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ArtifactStorePrivateEndPointsFormat"
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to get the next set of results."
         }
       },
       "description": "List of manual private endpoints."
