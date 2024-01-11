@@ -25,14 +25,14 @@ namespace Azure.ProgrammableConnectivity;
 interface NumberVerification {
   @doc("Verifies the phone number (MSISDN) associated with a device.")
   verify is Operations.ResourceAction<
-    NumberEndpoint,
+    NumberVerificationEndpoint,
     NumberVerificationContent,
     NumberVerificationResult
   >;
 
   @doc("Retrieves the phone number (MSISDN) associated with a device.")
   retrieve is Operations.ResourceAction<
-    NumberEndpoint,
+    NumberVerificationEndpoint,
     NetworkIdentifier,
     NumberRetrievalResult
   >;
@@ -42,17 +42,17 @@ interface NumberVerification {
 
 @resource("number-verification")
 @doc("Static endpoint to access Number Verification API family")
-model NumberEndpoint {
+model NumberVerificationEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
-  number: NumberEnum;
+  number: NumberVerificationEnum;
 }
 
 /* Needed to add this enum because typespec was creating an x-ms-enum without a name
    which was causing a failure during linting. */
 @doc("Number static endpoint enum")
-enum NumberEnum {
+enum NumberVerificationEnum {
   @doc("Static endpoint")
   number: "number",
 }

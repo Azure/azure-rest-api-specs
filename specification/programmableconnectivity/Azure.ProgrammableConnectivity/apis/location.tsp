@@ -12,9 +12,9 @@ namespace Azure.ProgrammableConnectivity;
 interface DeviceLocation {
   @doc("Verifies whether a device is within a specified location area, defined as an accuracy (radius) around a point, specified by longitude and latitude.")
   verify is Operations.ResourceAction<
-    LocationEndpoint,
-    LocationVerificationContent,
-    LocationVerificationResult
+    DeviceLocationEndpoint,
+    DeviceLocationVerificationContent,
+    DeviceLocationVerificationResult
   >;
 }
 
@@ -22,17 +22,17 @@ interface DeviceLocation {
 
 @resource("device-location")
 @doc("Static endpoint to access the Device Location API family.")
-model LocationEndpoint {
+model DeviceLocationEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
-  location: LocationEnum;
+  location: DeviceLocationEnum;
 }
 
 /* Needed to add this enum because typespec was creating an x-ms-enum without a name
    which was causing a failure during linting. */
 @doc("Location static endpoint enum")
-enum LocationEnum {
+enum DeviceLocationEnum {
   @doc("Static endpoint")
   location: "location",
 }
@@ -40,7 +40,7 @@ enum LocationEnum {
 /// Request models
 
 @doc("Request to verify Location")
-model LocationVerificationContent {
+model DeviceLocationVerificationContent {
   @doc("Network to query for this device, or device information to enable network routing.")
   networkIdentifier: NetworkIdentifier;
 
@@ -66,7 +66,7 @@ model LocationVerificationContent {
 /// Response models
 
 @doc("Response verifying location")
-model LocationVerificationResult {
+model DeviceLocationVerificationResult {
   @doc("True if the location is in the specified area, False otherwise")
   verificationResult: boolean;
 }
