@@ -85,7 +85,7 @@ model AnalyzeTextResult {
   @doc("The incident match details.")
   incidentMatches?: IncidentMatch[];
 
-  @added(ContentSafety.Versions.v2023_12_30_Preview)
+  @added(ContentSafety.Versions.v2024_01_30_Preview)
   @doc("Chunks in the original text detected as harmful content. Analysis result and scores are caused by these.")
   citation?: string[];
 }
@@ -523,7 +523,7 @@ model AnalyzeImageWithTextResult {
   categoriesAnalysis: ImageWithTextCategoriesAnalysis[];
 }
 
-@added(Versions.v2023_11_30_Preview)
+@added(Versions.v2023_10_30_Preview)
 @doc("Connection information for GPT resource.")
 model GptResource {
   @doc("Endpoint of Azure OpenAI resource.")
@@ -534,7 +534,7 @@ model GptResource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@added(ContentSafety.Versions.v2023_11_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("domain category.")
 enum Domain {
   Generic,
@@ -542,14 +542,14 @@ enum Domain {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@added(ContentSafety.Versions.v2023_11_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("task type.")
 enum Task {
   Summarization,
   QnA,
 }
 
-@added(Versions.v2023_11_30_Preview)
+@added(Versions.v2023_10_30_Preview)
 @doc("The request of ungroudedness detection.")
 model DetectUngroundednessOptions {
   @doc("Domain of the text to be analyzed.")
@@ -571,7 +571,7 @@ model DetectUngroundednessOptions {
   gptResource?: GptResource;
 }
 
-@added(Versions.v2023_11_30_Preview)
+@added(Versions.v2023_10_30_Preview)
 @doc("The detailed information about a text identified as ungroundness.")
 model UngroundedDetails {
   @doc("The ungrounded text.")
@@ -581,7 +581,7 @@ model UngroundedDetails {
   reason: string;
 }
 
-@added(Versions.v2023_11_30_Preview)
+@added(Versions.v2023_10_30_Preview)
 @doc("The response of ungroudedness detection.")
 model DetectUngroundednessResult {
   @doc("Detection result for ungrouded text.")

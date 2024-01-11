@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContentSafety Service",
-    "version": "2023-10-30-preview",
+    "version": "2024-01-30-preview",
     "description": "Analyze harmful content",
     "x-typespec-generated": [
       {
@@ -472,11 +472,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Analyze Image": {
-            "$ref": "./examples/AnalyzeImage.json"
-          }
         }
       }
     },
@@ -551,11 +546,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get All Text Blocklists": {
-            "$ref": "./examples/ListTextBlocklists.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -598,11 +588,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Text Blocklist By blocklistName": {
-            "$ref": "./examples/GetTextBlocklist.json"
           }
         }
       },
@@ -661,11 +646,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Create Or Update Text Blocklist": {
-            "$ref": "./examples/CreateOrUpdateTextBlocklist.json"
-          }
         }
       },
       "delete": {
@@ -701,11 +681,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Text Blocklist By blocklistName": {
-            "$ref": "./examples/DeleteTextBlocklist.json"
           }
         }
       }
@@ -757,11 +732,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Add or Update BlocklistItems To Text Blocklist": {
-            "$ref": "./examples/AddOrUpdateBlocklistItems.json"
-          }
         }
       }
     },
@@ -808,11 +778,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Remove BlockItems From Text Blocklist": {
-            "$ref": "./examples/RemoveBlocklistItems.json"
           }
         }
       }
@@ -865,11 +830,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get All BlockItems By blocklistName": {
-            "$ref": "./examples/ListTextBlocklistItems.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -920,11 +880,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get BlockItem By blocklistName And blocklistItemId": {
-            "$ref": "./examples/GetTextBlocklistItem.json"
           }
         }
       }
@@ -1554,11 +1509,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Analyze Text": {
-            "$ref": "./examples/AnalyzeText.json"
-          }
         }
       }
     },
@@ -2054,6 +2004,13 @@
             "$ref": "#/definitions/IncidentMatch"
           },
           "x-ms-identifiers": []
+        },
+        "citation": {
+          "type": "array",
+          "description": "Chunks in the original text detected as harmful content. Analysis result and scores are caused by these.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
