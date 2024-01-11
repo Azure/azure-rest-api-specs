@@ -28,7 +28,7 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 ```yaml $(tag) == 'package-preview-2023-04'
 input-file:
   - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
-  suppressions:
+suppressions:
   - code: AvoidAdditionalProperties
     reason: Migrate feature is widely adopted and requires additionalProperties for most of the swagger properties.
   - code: ProvisioningStateMustBeReadOnly
