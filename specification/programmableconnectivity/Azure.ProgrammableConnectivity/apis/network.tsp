@@ -13,9 +13,9 @@ namespace Azure.ProgrammableConnectivity;
 interface DeviceNetwork {
   @doc("Retrieves the network a given device is on. Returns network in a networkCode format that can be used for other APIs.")
   retrieve is Operations.ResourceAction<
-    NetworkRetrieveEndpoint,
+    NetworkRetrievalEndpoint,
     DeviceNetworkIdentifier,
-    NetworkRetrieveResult
+    NetworkRetrievalResult
   >;
 }
 
@@ -23,7 +23,7 @@ interface DeviceNetwork {
 
 @resource("device-network")
 @doc("Static endpoint to access the Device Network API family.")
-model NetworkRetrieveEndpoint {
+model NetworkRetrievalEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
@@ -51,7 +51,7 @@ model DeviceNetworkIdentifier {
 }
 
 @doc("The network that the device is on.")
-model NetworkRetrieveResult {
+model NetworkRetrievalResult {
   @pattern("[a-z0-9-]+$")
   @doc("The identifier for the network. This can be used as the networkIdentifier for the service APIs.")
   networkCode: string;
