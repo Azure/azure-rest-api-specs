@@ -84,7 +84,7 @@
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -129,7 +129,7 @@
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -200,25 +200,25 @@
           "400": {
             "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "409": {
             "description": "The request conflicts with the current state of the server.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "412": {
             "description": "Precondition failed.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -258,7 +258,7 @@
           "400": {
             "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -305,13 +305,13 @@
           "400": {
             "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -353,7 +353,7 @@
           "400": {
             "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -643,25 +643,25 @@
           "400": {
             "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "409": {
             "description": "The request conflicts with the current state of the server.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "412": {
             "description": "Precondition failed.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -726,25 +726,25 @@
           "400": {
             "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "409": {
             "description": "The request conflicts with the current state of the server.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "412": {
             "description": "Precondition failed.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -785,7 +785,7 @@
           "400": {
             "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -831,7 +831,7 @@
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -986,25 +986,25 @@
           "400": {
             "description": "The server could not understand the request due to invalid syntax.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "409": {
             "description": "The request conflicts with the current state of the server.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "412": {
             "description": "Precondition failed.",
             "schema": {
-              "$ref": "#/definitions/ProblemDetails"
+              "$ref": "#/definitions/ErrorDetail"
             }
           },
           "500": {
@@ -1469,6 +1469,53 @@
         ]
       }
     },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The code and message for an error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine readable error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError",
+          "description": "An object containing more specific information about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "InnerError": {
+      "type": "object",
+      "description": "More specific information on an error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine readable error code."
+        },
+        "innerError": {
+          "type": "string",
+          "description": "Inner error details if they exist."
+        }
+      },
+      "required": [
+        "innerError"
+      ]
+    },
     "Location": {
       "type": "object",
       "properties": {
@@ -1715,27 +1762,6 @@
       "required": [
         "numbers"
       ]
-    },
-    "ProblemDetails": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "status": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "detail": {
-          "type": "string"
-        },
-        "instance": {
-          "type": "string"
-        }
-      }
     },
     "ProvisioningError": {
       "type": "object",

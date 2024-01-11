@@ -104,7 +104,7 @@ model AccountResponse {
   @doc("ETag for use with If-Match headers for optimistic concurrency.")
   etag?: string;
 
-  directRoutingProvisioningState?: TeamsDrSubdomainProvisioningState; //JAMES this isn't in here in the original API
+  directRoutingProvisioningState?: TeamsDrSubdomainProvisioningState;
 
   @doc("Count of Teams Operator Connect subscribers for this account.")
   teamsOcSubCount: int64;
@@ -157,7 +157,7 @@ model BatchNumbersResponse {
 model NumberDetails {
   ...PhoneNumber;
   services: NumberServices;
-  ...CustomSipHeader;  //JAMES this was 'NumberConfiguration' in the previous iteration
+  ...CustomSipHeader;
 
   // TODO: finalise requirements on this.
   // @doc("Preferred region for this number.")
@@ -237,12 +237,28 @@ enum AssignmentStatus {
   NA: "Not Applicable"
 }
 
-model ProblemDetails {
-  type?: string;
-  title?: string;
-  status?: int32;
-  detail?: string;
-  instance?: string;
+@doc("The code and message for an error.")
+model ErrorDetail {
+  @doc("A machine readable error code.")
+  code: string;
+
+  @doc("A human readable representation of the error.")
+  message: string;
+
+  @doc("An array of details about specific errors that led to this error.")
+  details?: ErrorDetail[];
+
+  @doc("An object containing more specific information about the error.")
+  innerError?: InnerError;
+}
+
+@doc("More specific information on an error object.")
+model InnerError {
+  @doc("A machine readable error code.")
+  code?: string;
+
+  @doc("Inner error details if they exist.")
+  innerError: string;
 }
 
 model ProvisioningError {
@@ -562,7 +578,7 @@ namespace Account {
   } | {
     @statusCode statusCode: 404;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500;
   };
@@ -589,7 +605,7 @@ namespace Account {
   } | {
     @statusCode statusCode: 400 | 404 | 409 | 412;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500;
   };
@@ -616,7 +632,7 @@ namespace Account {
   } | {
     @statusCode statusCode: 400 | 404 | 409 | 412;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500;
   };
@@ -637,7 +653,7 @@ namespace Account {
   } | {
     @statusCode statusCode: 400;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500;
   };
@@ -664,7 +680,7 @@ namespace Accounts {
   } | {
     @statusCode statusCode: 400 | 404;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500
   };
@@ -687,7 +703,7 @@ namespace Accounts {
   } | {
     @statusCode statusCode: 400;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500
   };
@@ -710,7 +726,7 @@ namespace Accounts {
   } | {
     @statusCode statusCode: 404;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500;
   };
@@ -731,7 +747,7 @@ namespace Accounts {
   } | {
     @statusCode statusCode: 404;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500;
   };
@@ -761,7 +777,7 @@ namespace Accounts {
   } | {
     @statusCode statusCode: 400 | 404 | 409 | 412;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500;
   };
@@ -782,7 +798,7 @@ namespace Accounts {
   } | {
     @statusCode statusCode: 400;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500;
   };
@@ -949,7 +965,7 @@ namespace Rfi {
   } | {
     @statusCode statusCode: 400 | 404 | 409 | 412;
     @header contentType: "application/json";
-    @body error: ProblemDetails;
+    @body error: ErrorDetail;
   } | {
     @statusCode statusCode: 500;
   };
