@@ -290,6 +290,37 @@ interface TextCategoryCustomization {
     TextCustomizedCategory,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
+
+  @action("trainModel")
+  @added(Versions.v2024_01_30_Preview)
+  trainModel is CategoryOps.ResourceAction<
+    TextCustomizedCategory,
+    {},
+    SubmitModelTrainingResponse
+  >;
+} 
+
+interface TextCustomizedMdoelOps
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
+@added(Versions.v2024_01_30_Preview)
+interface TextCustomizedModelOperations {
+  @summary("List all existing models")
+  @doc("List existing models.")
+  listTextCustomizedModels is TextCustomizedMdoelOps.ResourceList<
+    TextTrainedModel,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+  @doc("Get a model that is not deleted.")
+  getTextCustomizedModels is TextCustomizedMdoelOps.ResourceRead<TextTrainedModel>;
+
+  @doc("If the model is training, the training process will be cancelled and the model will also be deleted.")
+  deleteCustomizedModel is TextCustomizedMdoelOps.ResourceDelete<
+    TextTrainedModel
+  >;
 }
 
 @added(Versions.v2023_10_30_Preview)
