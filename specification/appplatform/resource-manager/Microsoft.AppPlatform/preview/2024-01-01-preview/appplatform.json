@@ -8993,9 +8993,6 @@
           },
           "202": {
             "description": "Accepted. The response indicates the Job is now starting and contains a Location header to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/JobExecutionBase"
-            },
             "headers": {
               "Location": {
                 "type": "string"
@@ -15656,72 +15653,35 @@
         "triggerType"
       ],
       "properties": {
-        "triggerType": {
-          "description": "Trigger type of the job",
-          "enum": [
-            "Manual",
-            "Schedule",
-            "Event"
-          ],
-          "type": "string",
-          "default": "Manual",
-          "x-ms-enum": {
-            "name": "TriggerType",
-            "modelAsString": true
-          }
-        },
-        "replicaTimeout": {
-          "description": "Maximum number of seconds a replica is allowed to run.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "replicaRetryLimit": {
-          "format": "int32",
-          "description": "Maximum number of retries before failing the job.",
-          "type": "integer"
-        },
-        "manualTriggerConfig": {
-          "type": "object",
-          "description": "Manual trigger configuration for a single execution job. Properties replicaCompletionCount and parallelism would be set to 1 by default",
-          "properties": {
-            "replicaCompletionCount": {
-              "$ref": "#/definitions/ReplicaCompletionCount"
-            },
-            "parallelism": {
-              "$ref": "#/definitions/Parallelism"
-            }
-          }
-        },
-        "scheduleTriggerConfig": {
-          "description": "Cron formatted repeating trigger schedule (\"* * * * *\") for cronjobs. Properties completions and parallelism would be set to 1 by default",
-          "required": [
-            "cronExpression"
-          ],
-          "type": "object",
-          "properties": {
-            "replicaCompletionCount": {
-              "$ref": "#/definitions/ReplicaCompletionCount"
-            },
-            "cronExpression": {
-              "description": "Cron formatted repeating schedule (\"* * * * *\") of a Cron Job.",
-              "type": "string"
-            },
-            "parallelism": {
-              "$ref": "#/definitions/Parallelism"
-            }
-          }
+        "triggerConfig": {
+          "$ref": "#/definitions/JobTriggerConfig"
         }
       }
     },
-    "ReplicaCompletionCount": {
-      "description": "Minimum number of successful replica completions before overall job completion.",
-      "format": "int32",
-      "type": "integer"
+    "JobTriggerConfig": {
+      "description": "Configuration for different trigger types",
+      "type": "object",
+      "required": [
+        "triggerType"
+      ],
+      "properties": {
+        "triggerType": {
+          "description": "Type of job trigger",
+          "type": "string"
+        }
+      },
+      "discriminator": "triggerType"
     },
-    "Parallelism": {
-      "description": "Number of parallel replicas of a job that can run at a given time.",
-      "format": "int32",
-      "type": "integer"
+    "ManualJobTriggerConfig": {
+      "description": "Configuration for manual triggered job",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobTriggerConfig"
+        }
+      ],
+      "properties": {
+      }
     },
     "JobResourceCollection": {
       "description": "List of Azure Spring Apps Jobs and a possible link for next set.",
@@ -15769,19 +15729,25 @@
             }
           }
         },
-        "commands": {
-          "description": "Start commands of a Job execution",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "replicaTimeout": {
+          "description": "Maximum number of seconds a replica is allowed to run.",
+          "format": "int32",
+          "type": "integer"
         },
-        "args": {
-          "description": "Start command arguments of a Job execution",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "replicaRetryLimit": {
+          "format": "int32",
+          "description": "Maximum number of retries before failing the job.",
+          "type": "integer"
+        },
+        "replicaCompletionCount": {
+          "format": "int32",
+          "description": "Minimum number of successful replica completions before overall job completion.",
+          "type": "integer"
+        },
+        "parallelism": {
+          "format": "int32",
+          "description": "Number of parallel replicas of a job that can run at a given time.",
+          "type": "integer"
         },
         "resourceRequests": {
           "$ref": "#/definitions/ResourceRequests",
@@ -15811,9 +15777,7 @@
           "description": "Current state of the job execution",
           "enum": [
             "Running",
-            "Processing",
             "Stopped",
-            "Degraded",
             "Failed",
             "Unknown",
             "Succeeded"
