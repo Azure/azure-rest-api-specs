@@ -1,0 +1,361 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-02-01",
+    "title": "DevCenter"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "devcenter.json#/parameters/EndpointParameter"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AADToken": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Lists all projects.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "DevCenter_ListProjects",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenter_ListProjects": {
+            "$ref": "./examples/Projects_ListByDevCenter.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "Gets a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ProjectNameMethodParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "operationId": "DevCenter_GetProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenter_GetProject": {
+            "$ref": "./examples/Projects_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProjectListResult": {
+      "description": "Results of the project list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Project": {
+      "description": "Project details.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "The unique URI of the project",
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the project"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the project."
+        },
+        "maxDevBoxesPerUser": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "When specified, indicates the maximum number of Dev Boxes a single user can create across all pools in the project."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the project."
+        }
+      },
+      "required": [
+        "uri",
+        "name"
+      ]
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "description": "Error body",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "description": "An error response from the service.",
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "The current status of an async operation",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the operation status.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The operation id name",
+          "type": "string"
+        },
+        "status": {
+          "description": "Provisioning state of the resource.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "The id of the resource.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start time of the operation",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time of the operation",
+          "type": "string",
+          "format": "date-time"
+        },
+        "percentComplete": {
+          "description": "Percent of the operation that is complete",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "properties": {
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "type": "object"
+        },
+        "error": {
+          "description": "Operation Error message",
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "type": "string",
+              "description": "The error message."
+            }
+          }
+        }
+      },
+      "required": [
+        "status"
+      ]
+    }
+  },
+  "parameters": {
+    "ProjectNameParameter": {
+      "name": "projectName",
+      "description": "The DevCenter Project upon which to execute operations.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "in": "path",
+      "x-ms-parameter-location": "client"
+    },
+    "ProjectNameMethodParameter": {
+      "name": "projectName",
+      "description": "The DevCenter Project upon which to execute operations.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request.",
+      "x-ms-parameter-location": "client"
+    },
+    "FilterParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "An OData filter clause to apply to the operation.",
+      "type": "string",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
+      "type": "integer",
+      "format": "int32",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "UserIdParameter": {
+      "name": "userId",
+      "in": "path",
+      "required": true,
+      "x-ms-client-default": "me",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$",
+      "minLength": 2,
+      "maxLength": 36,
+      "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+      "x-ms-parameter-location": "method"
+    },
+    "EndpointParameter": {
+      "name": "endpoint",
+      "description": "The DevCenter-specific URI to operate on.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "CatalogNameParameter": {
+      "name": "catalogName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of the catalog",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
