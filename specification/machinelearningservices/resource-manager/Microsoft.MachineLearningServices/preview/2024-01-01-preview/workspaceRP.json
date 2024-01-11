@@ -2802,11 +2802,11 @@
     },
     "ComputePolicyRequest": {
       "required": [
-        "armScope"
+        "azureScope "
       ],
       "type": "object",
       "properties": {
-        "armScope": {
+        "azureScope ": {
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
@@ -3076,7 +3076,8 @@
         },
         "hub": {
           "description": "Setting for diagnosing the hub",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {}
         },
         "keyVault": {
           "description": "Setting for diagnosing dependent key vault",
@@ -3420,7 +3421,9 @@
         "value": {
           "description": "List of models.",
           "type": "array",
-          "items": {}
+          "items": {
+            "$ref": "../../../../../cognitiveservices/resource-manager/Microsoft.CognitiveServices/preview/2023-10-01-preview/cognitiveservices.json#/definitions/AccountModel"
+          }
         }
       }
     },
@@ -3432,7 +3435,8 @@
       "properties": {
         "associatedResourceId": {
           "description": "Byo resource id for creating the built-in model service endpoints.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "endpointType": {
           "description": "Type of the endpoint.",
@@ -3442,7 +3446,8 @@
         },
         "endpointUri": {
           "description": "Uri of the endpoint.",
-          "type": "string"
+          "type": "string",
+          "format":"arm-id"
         },
         "failureReason": {
           "description": "The failure reason if the creation failed.",
@@ -4143,7 +4148,8 @@
       "type": "object",
       "properties": {
         "serviceResourceId": {
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "sparkEnabled": {
           "type": "boolean"
@@ -4410,7 +4416,8 @@
       "properties": {
         "serverlessComputeCustomSubnet": {
           "description": "The resource ID of an existing virtual network subnet in which serverless compute nodes should be deployed",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "serverlessComputeNoPublicIP": {
           "description": "The flag to signal if serverless compute nodes deployed in custom vNet would have no public IP addresses for a workspace with private endpoint",
@@ -4639,24 +4646,30 @@
       "properties": {
         "authUrl": {
           "description": "Required by Concur connection category",
-          "type": "string"
+          "type": "string",
+          "format": "url"
         },
         "clientId": {
-          "type": "string"
+          "type": "string",
+          "format": "uuid"
         },
         "clientSecret": {
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "developerToken": {
           "description": "Required by GoogleAdWords connection category",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "refreshToken": {
           "description": "Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho\r\nwhere user needs to get RefreshToken offline",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "tenantId": {
           "description": "Required by QuickBooks and Xero connection categories",
@@ -4691,7 +4704,9 @@
           "$ref": "#/definitions/ConnectionCategory"
         },
         "createdByWorkspaceArmId": {
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
         },
         "expiryTime": {
           "format": "date-time",
@@ -4790,7 +4805,8 @@
         },
         "securityToken": {
           "description": "Optional, required by connections like SalesForce for extra security in addition to UsernamePassword",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "username": {
           "type": "string"
