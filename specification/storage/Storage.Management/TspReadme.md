@@ -1,7 +1,6 @@
 
 
 ``` yaml
-namespace: Azure.ResourceManager.Storage
 isAzureSpec: true
 isArm: true
 require: https://github.com/Azure/azure-rest-api-specs/blob/da0cfefaa0e6c237e1e3819f1cb2e11d7606878d/specification/storage/resource-manager/readme.md
@@ -30,40 +29,6 @@ format-by-name-rules:
   '*Uris': 'Uri'
   '*Guid': 'uuid'
   'ifMatch': 'etag'
-
-acronym-mapping:
-  CPU: Cpu
-  CPUs: Cpus
-  Os: OS
-  Ip: IP
-  Ips: IPs|ips
-  ID: Id
-  IDs: Ids
-  VM: Vm
-  VMs: Vms
-  Vmos: VmOS
-  VMScaleSet: VmScaleSet
-  DNS: Dns
-  VPN: Vpn
-  NAT: Nat
-  WAN: Wan
-  Ipv4: IPv4|ipv4
-  Ipv6: IPv6|ipv6
-  Ipsec: IPsec|ipsec
-  SSO: Sso
-  URI: Uri
-  Etag: ETag|etag
-  SAS: Sas
-  SKU: Sku
-  SMB: Smb
-  NFS: Nfs
-  LRS: Lrs
-  ZRS: Zrs
-  GRS: Grs
-  TLS: Tls
-  AAD: Aad
-  GET: Get
-  PUT: Put
 
 prepend-rp-prefix:
 - CorsRules

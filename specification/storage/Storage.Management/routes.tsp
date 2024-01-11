@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
-namespace Azure.ResourceManager.Storage;
+namespace Microsoft.Storage;
 
 interface SkusOperations {
   @doc("Lists the available SKUs supported by Microsoft.Storage for given subscription.")
