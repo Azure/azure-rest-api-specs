@@ -210,27 +210,6 @@ enum RelationshipCategory {
   Composition: "COMPOSITION",
 }
 
-@doc("Type")
-enum TypeFilter {
-  @doc("enum")
-  Enum: "enum",
-
-  @doc("entity")
-  Entity: "entity",
-
-  @doc("classification")
-  Classification: "classification",
-
-  @doc("relationship")
-  Relationship: "relationship",
-
-  @doc("struct")
-  Struct: "struct",
-
-  @doc("term template")
-  TermTemplate: "term_template",
-}
-
 @doc("Search Filter Operator")
 enum FilterOperator {
   @doc("equal")

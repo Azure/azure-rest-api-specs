@@ -27,14 +27,14 @@ interface Entity {
   getClassifications is PurviewDataMap.Entity.getClassifications;
   addClassifications is PurviewDataMap.Entity.addClassifications;
   updateClassifications is PurviewDataMap.Entity.updateClassifications;
-  getByAttributes is PurviewDataMap.Entity.getByUniqueAttributes;
-  updateByAttributes is PurviewDataMap.Entity.partialUpdateByUniqueAttributes;
-  deleteByAttribute is PurviewDataMap.Entity.deleteByUniqueAttribute;
-  removeClassificationByAttribute is PurviewDataMap.Entity.removeClassificationByUniqueAttribute;
-  addClassificationsByAttribute is PurviewDataMap.Entity.addClassificationsByUniqueAttribute;
-  updateClassificationsByAttribute is PurviewDataMap.Entity.updateClassificationsByUniqueAttribute;
+  getByUniqueAttribute is PurviewDataMap.Entity.getByUniqueAttributes;
+  updateByUniqueAttribute is PurviewDataMap.Entity.partialUpdateByUniqueAttributes;
+  deleteByUniqueAttribute is PurviewDataMap.Entity.deleteByUniqueAttribute;
+  removeClassificationByUniqueAttribute is PurviewDataMap.Entity.removeClassificationByUniqueAttribute;
+  addClassificationsByUniqueAttribute is PurviewDataMap.Entity.addClassificationsByUniqueAttribute;
+  updateClassificationsUniqueByAttribute is PurviewDataMap.Entity.updateClassificationsByUniqueAttribute;
   batchSetClassifications is PurviewDataMap.Entity.bulkSetClassifications;
-  batchGetByAttributes is PurviewDataMap.Entity.listByUniqueAttributes;
+  batchGetByUniqueAttributes is PurviewDataMap.Entity.listByUniqueAttributes;
   getHeader is PurviewDataMap.Entity.getHeader;
   removeBusinessMetadata is PurviewDataMap.Entity.removeBusinessMetadata;
   addOrUpdateBusinessMetadata is PurviewDataMap.Entity.addOrUpdateBusinessMetadata;
@@ -46,9 +46,9 @@ interface Entity {
   removeLabels is PurviewDataMap.Entity.removeLabels;
   setLabels is PurviewDataMap.Entity.setLabels;
   addLabel is PurviewDataMap.Entity.addLabel;
-  removeLabelsByAttribute is PurviewDataMap.Entity.removeLabelsByUniqueAttribute;
-  setLabelsByAttribute is PurviewDataMap.Entity.setLabelsByUniqueAttribute;
-  addLabelsByAttribute is PurviewDataMap.Entity.addLabelsByUniqueAttribute;
+  removeLabelsByUniqueAttribute is PurviewDataMap.Entity.removeLabelsByUniqueAttribute;
+  setLabelsByUniqueAttribute is PurviewDataMap.Entity.setLabelsByUniqueAttribute;
+  addLabelsByUniqueAttribute is PurviewDataMap.Entity.addLabelsByUniqueAttribute;
   moveEntitiesToCollection is PurviewDataMap.Entity.moveEntitiesToCollection;
 }
 
