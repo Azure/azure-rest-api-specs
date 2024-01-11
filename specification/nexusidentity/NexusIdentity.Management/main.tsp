@@ -82,7 +82,7 @@ model EventSubscription {
   scopes: Array<string>;
 
   @doc("Roles to be watched.")
-  roles: Array<NexusIdentityRoles>;
+  roles: Array<string>;
 
   @doc("The type of access needed for the Roles. Only the specified access types data will be sent.")
   accessTypes: Array<AccessType>;
@@ -98,21 +98,6 @@ enum AccessType {
 
   @doc("Web access")
   Web,
-}
-
-@doc("Role defined for Nexus Identity Service")
-enum NexusIdentityRoles {
-  @doc("Full access to all NNF resources and read-write access to network devices")
-  NexusFabricServiceAdministrator,
-
-  @doc("No access to ARM resources. Full RW access to network devices")
-  NexusFabricDeviceAdministrator,
-
-  @doc("Read-only access to all NNF resources and network devices (RW)​")
-  NexusFabricServiceReader,
-
-  @doc("No access to ARM resources. Read-only access to network devices​")
-  NexusFabricDeviceReader,
 }
 
 @doc("Identity Set resource definition")
