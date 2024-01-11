@@ -96,12 +96,11 @@
         "parameters": [
           {
             "in": "body",
-            "name": "validationParameters",
+            "name": "preBackupOperationParameters",
             "schema": {
-              "$ref": "#/definitions/ValidationParameters"
+              "$ref": "#/definitions/PreBackupOperationParameters"
             },
-            "description": "Optional parameters to validate prior to performing a full backup operation.",
-            "x-nullable": true
+            "description": "Optional parameters to validate prior to performing a full backup operation."
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -197,8 +196,7 @@
             "schema": {
               "$ref": "#/definitions/PreRestoreOperationParameters"
             },
-            "description": "Optional pre restore parameters to validate prior to performing a full restore operation.",
-            "x-nullable": true
+            "description": "Optional pre restore parameters to validate prior to performing a full restore operation."
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -491,7 +489,7 @@
         "storageResourceUri"
       ]
     },
-    "ValidationParameters": {
+    "PreBackupOperationParameters": {
       "properties": {
         "storageResourceUri": {
           "type": "string",
