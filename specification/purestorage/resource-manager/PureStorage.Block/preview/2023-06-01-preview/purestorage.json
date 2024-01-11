@@ -2369,50 +2369,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/listStoragePools": {
-      "post": {
-        "operationId": "StoragePools_ListStoragePools",
-        "tags": [
-          "StoragePools"
-        ],
-        "description": "Lists all the storage pools.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the Storage Pool.",
-            "required": true,
-            "type": "string",
-            "minLength": 4,
-            "maxLength": 20,
-            "pattern": "^[a-zA-Z0-9_]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StoragePoolList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/updateVspherePlugins": {
       "post": {
         "operationId": "StoragePools_UpdateVspherePlugins",
@@ -3564,27 +3520,6 @@
       "required": [
         "vSphereIp",
         "vSphereCertThumbprint"
-      ]
-    },
-    "StoragePoolList": {
-      "type": "object",
-      "description": "Get the list of all storage pools",
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "Storage pool info",
-          "items": {
-            "$ref": "#/definitions/StoragePool"
-          }
-        },
-        "continuationToken": {
-          "type": "string",
-          "description": "Paging Continuation Token."
-        }
-      },
-      "required": [
-        "items",
-        "continuationToken"
       ]
     },
     "StoragePoolListResult": {

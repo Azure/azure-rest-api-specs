@@ -139,14 +139,6 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<AvsDetails> | ErrorResponse;
 
-  @doc("Lists all the storage pools.")
-  @armResourceAction(StoragePool)
-  @action("listStoragePools")
-  @post
-  listStoragePools(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmResponse<StoragePoolList> | ErrorResponse;
-
   @doc("Enable AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("enableAvs")
@@ -432,15 +424,6 @@ enum AlertLevel {
 
   @doc("Error level.")
   Error: "error",
-}
-
-@doc("Get the list of all storage pools")
-model StoragePoolList {
-  @doc("Storage pool info")
-  items: StoragePool[];
-
-  @doc("Paging Continuation Token.")
-  continuationToken: string;
 }
 
 @doc("Storage Pool enable AVS")
