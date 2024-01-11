@@ -400,7 +400,7 @@
         "tags": [
           "Invoice"
         ],
-        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement, or Microsoft Online Services Program.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -550,7 +550,7 @@
         "tags": [
           "Invoice"
         ],
-        "description": "ets a URL to download an invoice by billing subscription.",
+        "description": "Gets a URL to download an invoice by billing subscription.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -802,7 +802,7 @@
           "readOnly": true
         },
         "url": {
-          "description": "The URL to the PDF file.",
+          "description": "The URL to the PDF or .zip file.",
           "type": "string",
           "readOnly": true
         }
@@ -1007,11 +1007,6 @@
             "name": "InvoiceDocumentType",
             "modelAsString": true
           }
-        },
-        "chargeDate": {
-          "description": "Upcoming feature.",
-          "type": "string",
-          "readOnly": true
         },
         "dueDate": {
           "description": "The due date for the invoice.",
@@ -1246,7 +1241,7 @@
           "readOnly": true
         },
         "amountRequested": {
-          "description": "The amount refunded.",
+          "description": "The amount of refund requested.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -1254,7 +1249,7 @@
           ]
         },
         "amountRefunded": {
-          "description": "The amount of refund requested.",
+          "description": "The amount refunded.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
