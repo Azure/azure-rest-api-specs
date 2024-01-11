@@ -67,7 +67,6 @@ model ExperimentationWorkspace
   name: string;
 
   ...ResourceSku;
-
   ...ManagedServiceIdentity;
 }
 
