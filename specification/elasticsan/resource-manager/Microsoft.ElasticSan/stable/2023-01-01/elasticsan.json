@@ -1809,6 +1809,7 @@
   "definitions": {
     "Action": {
       "type": "string",
+      "description": "The action of virtual network rule.",
       "enum": [
         "Allow"
       ],
@@ -1819,6 +1820,7 @@
     },
     "ActionType": {
       "type": "string",
+      "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
       "enum": [
         "Internal"
       ],
@@ -1970,6 +1972,7 @@
     },
     "CreatedByType": {
       "type": "string",
+      "description": "The type of identity that created the resource.",
       "enum": [
         "User",
         "Application",
@@ -2180,6 +2183,7 @@
     },
     "EncryptionType": {
       "type": "string",
+      "description": "The type of key used to encrypt the data of the disk.",
       "enum": [
         "EncryptionAtRestWithPlatformKey",
         "EncryptionAtRestWithCustomerManagedKey"
@@ -2220,6 +2224,7 @@
     },
     "IdentityType": {
       "type": "string",
+      "description": "The identity type.",
       "enum": [
         "None",
         "SystemAssigned",
@@ -2322,6 +2327,7 @@
     },
     "OperationalStatus": {
       "type": "string",
+      "description": "Operational status of the resource.",
       "enum": [
         "Invalid",
         "Unknown",
@@ -2339,6 +2345,7 @@
     },
     "Origin": {
       "type": "string",
+      "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
       "enum": [
         "user",
         "system",
@@ -2454,6 +2461,7 @@
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
+      "description": "The private endpoint connection status.",
       "enum": [
         "Pending",
         "Approved",
@@ -2544,6 +2552,7 @@
     },
     "ProvisioningStates": {
       "type": "string",
+      "description": "Provisioning state of the iSCSI Target.",
       "enum": [
         "Invalid",
         "Succeeded",
@@ -2561,6 +2570,7 @@
     },
     "PublicNetworkAccess": {
       "type": "string",
+      "description": "Allow or disallow public network access to ElasticSan. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -2698,6 +2708,7 @@
     },
     "SkuName": {
       "type": "string",
+      "description": "The sku name.",
       "enum": [
         "Premium_LRS",
         "Premium_ZRS"
@@ -2721,6 +2732,7 @@
     },
     "SkuTier": {
       "type": "string",
+      "description": "The sku tier.",
       "enum": [
         "Premium"
       ],
@@ -2835,6 +2847,7 @@
     },
     "StorageTargetType": {
       "type": "string",
+      "description": "Storage Target type.",
       "enum": [
         "Iscsi",
         "None"
@@ -2856,7 +2869,8 @@
         "values": [
           {
             "name": "v2023_01_01",
-            "value": "2023-01-01"
+            "value": "2023-01-01",
+            "description": "The 2023-01-01 API version."
           }
         ]
       }
@@ -2901,6 +2915,7 @@
     },
     "VolumeCreateOption": {
       "type": "string",
+      "description": "This enumerates the possible sources of a volume creation.",
       "enum": [
         "None",
         "VolumeSnapshot",
