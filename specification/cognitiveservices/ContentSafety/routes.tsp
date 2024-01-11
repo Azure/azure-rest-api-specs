@@ -37,6 +37,9 @@ interface TextOperations {
     {
       @body
       @doc("The text jailbreak analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeTextJailbreakOptions;
     },
     AnalyzeTextJailbreakResult
@@ -50,7 +53,10 @@ interface TextOperations {
   detectTextProtectedMaterial is Azure.Core.RpcOperation<
     {
       @body
-      @doc("The text analysis request.")
+      @doc("The text protected material analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeTextProtectedMaterialOptions;
     },
     AnalyzeTextProtectedMaterialResult
@@ -303,7 +309,7 @@ interface ImageWithTextOperations {
 }
 
 @added(Versions.v2023_10_30_Preview)
-interface TextUngroundednessDetectionOperations{
+interface TextUngroundednessDetectionOperations {
   @summary("Detect Ungrounded Information")
   @doc("A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.")
   @route("/text:detectUngroundedness")

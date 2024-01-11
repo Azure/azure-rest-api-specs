@@ -18,6 +18,12 @@ enum OnYourDataAuthenticationType {
   @doc("Authentication via key and key ID pair.")
   keyAndKeyId: "KeyAndKeyId",
 
+  @doc("Authentication via encoded API key.")
+  encodedApiKey: "EncodedAPIKey",
+
+  @doc("Authentication via access token.")
+  accessToken: "AccessToken",
+
   @doc("Authentication via system-assigned managed identity.")
   systemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
 
@@ -73,6 +79,32 @@ model OnYourDataKeyAndKeyIdAuthenticationOptions
 
   @doc("The key ID to use for authentication.")
   keyId: string;
+}
+
+@doc("""
+The authentication options for Azure OpenAI On Your Data when using an Elasticsearch encoded API key.
+""")
+@added(ServiceApiVersions.v2023_08_01_Preview)
+model OnYourDataEncodedApiKeyAuthenticationOptions
+  extends OnYourDataAuthenticationOptions {
+  @doc("The authentication type of Elasticsearch encoded API Key.")
+  type: OnYourDataAuthenticationType.encodedApiKey;
+
+  @doc("The encoded API key to use for authentication.")
+  encodedApiKey: string;
+}
+
+@doc("""
+The authentication options for Azure OpenAI On Your Data when using access token.
+""")
+@added(ServiceApiVersions.v2023_08_01_Preview)
+model OnYourDataAccessTokenAuthenticationOptions
+  extends OnYourDataAuthenticationOptions {
+  @doc("The authentication type of access token.")
+  type: OnYourDataAuthenticationType.accessToken;
+
+  @doc("The access token to use for authentication.")
+  accessToken: string;
 }
 
 @doc("""

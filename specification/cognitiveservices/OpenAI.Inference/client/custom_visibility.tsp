@@ -8,11 +8,19 @@ using Azure.ClientGenerator.Core;
 // configuration options on the request payload options model.
 @@access(Azure.OpenAI.getChatCompletionsWithAzureExtensions, Access.internal);
 
+// In C#, the functionality provided by the `response_format` property used in image generations is handled by unique
+// method signatures for the different response types (i.e. blob URL versus base64 methods).
+@@access(Azure.OpenAI.ImageGenerationResponseFormat, Access.internal, "csharp");
+
 // Some models from routes with suppressed visibility are still desired for custom public surface.
 @@access(Azure.OpenAI.ImageGenerationOptions, Access.public);
 @@usage(Azure.OpenAI.ImageGenerationOptions, Usage.input | Usage.output);
 @@access(Azure.OpenAI.ImageSize, Access.public);
 @@usage(Azure.OpenAI.ImageGenerations, Usage.input | Usage.output);
+
+// The purpose of this enum is to identify the type of a given result. In C#, this is redundant because we have
+// strongly-typed classes for each possible result.
+@@access(Azure.OpenAI.AudioTaskLabel, Access.internal, "csharp");
 
 // Java will need to have those models expose in public surface.
 @@access(Azure.OpenAI.AudioTranscription, Access.public, "java");
@@ -44,4 +52,28 @@ using Azure.ClientGenerator.Core;
 @@projectedName(Azure.OpenAI.ChatResponseMessage.context,
   "csharp",
   "AzureExtensionsContext"
+);
+
+@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.json, "csharp", "Simple");
+
+@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.verbose_json,
+  "csharp",
+  "Verbose"
+);
+
+@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.text,
+  "csharp",
+  "InternalPlainText"
+);
+
+@@projectedName(Azure.OpenAI.AudioTranslationFormat.json, "csharp", "Simple");
+
+@@projectedName(Azure.OpenAI.AudioTranslationFormat.verbose_json,
+  "csharp",
+  "Verbose"
+);
+
+@@projectedName(Azure.OpenAI.AudioTranslationFormat.text,
+  "csharp",
+  "InternalPlainText"
 );
