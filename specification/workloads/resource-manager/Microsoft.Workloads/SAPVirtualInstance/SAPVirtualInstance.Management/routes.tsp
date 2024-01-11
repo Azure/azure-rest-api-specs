@@ -2,17 +2,21 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.Workloads;
 
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 @doc("Get SAP sizing recommendations by providing input SAPS for application tier and memory required for database tier")
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getSizingRecommendations")
 @post
-op SAPSizingRecommendations is Azure.Core.Foundations.Operation<
+@operationId("SAPSizingRecommendations")
+op getSizingRecommendations is Azure.Core.Foundations.Operation<
   {
     @doc("The ID of the target subscription.")
     @minLength(1)
@@ -31,12 +35,12 @@ op SAPSizingRecommendations is Azure.Core.Foundations.Operation<
   SAPSizingRecommendationResult
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 @doc("Get a list of SAP supported SKUs for ASCS, Application and Database tier.")
-// FIXME: (name-collision-error) There is a potential collision with Operation, Parameter and Response names.
-// Problematic names: [SAPSupportedSku]
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getSapSupportedSku")
 @post
-op SAPSupportedSku is Azure.Core.Foundations.Operation<
+@operationId("SAPSupportedSku")
+op getSapSupportedSku is Azure.Core.Foundations.Operation<
   {
     @doc("The ID of the target subscription.")
     @minLength(1)
@@ -55,12 +59,12 @@ op SAPSupportedSku is Azure.Core.Foundations.Operation<
   SAPSupportedResourceSkusResult
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 @doc("Get the SAP Disk Configuration Layout prod/non-prod SAP System.")
-// FIXME: (name-collision-error) There is a potential collision with Operation, Parameter and Response names.
-// Problematic names: [SAPDiskConfigurations]
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getDiskConfigurations")
 @post
-op SAPDiskConfigurations is Azure.Core.Foundations.Operation<
+@operationId("SAPDiskConfigurations")
+op getDiskConfigurations is Azure.Core.Foundations.Operation<
   {
     @doc("The ID of the target subscription.")
     @minLength(1)
@@ -79,12 +83,12 @@ op SAPDiskConfigurations is Azure.Core.Foundations.Operation<
   SAPDiskConfigurationsResult
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 @doc("Get the recommended SAP Availability Zone Pair Details for your region.")
-// FIXME: (name-collision-error) There is a potential collision with Operation, Parameter and Response names.
-// Problematic names: [SAPAvailabilityZoneDetails]
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getAvailabilityZoneDetails")
 @post
-op SAPAvailabilityZoneDetails is Azure.Core.Foundations.Operation<
+@operationId("SAPAvailabilityZoneDetails")
+op getAvailabilityZoneDetails is Azure.Core.Foundations.Operation<
   {
     @doc("The ID of the target subscription.")
     @minLength(1)
