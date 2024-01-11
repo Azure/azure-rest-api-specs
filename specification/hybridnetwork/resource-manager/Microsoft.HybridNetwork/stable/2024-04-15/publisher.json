@@ -1568,8 +1568,11 @@
       "type": "object",
       "properties": {
         "value": {
-          "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsFormat",
-          "description": "A list of artifact manifests."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsFormat"
+          },
+          "description": "A list of network fabric controllers."
         },
         "nextLink": {
           "readOnly": true,
@@ -1599,7 +1602,11 @@
       "type": "object",
       "properties": {
         "value": {
-          "$ref": "#/definitions/ArtifactStorePrivateEndPointsFormat"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactStorePrivateEndPointsFormat"
+          },
+          "description": "A list of private endpoints."
         },
         "nextLink": {
           "readOnly": true,
