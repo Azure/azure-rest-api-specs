@@ -1948,7 +1948,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/disableAVS": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/disableAvs": {
       "post": {
         "operationId": "StoragePools_DisableAvs",
         "tags": [
@@ -1978,7 +1978,23 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "Resource Operation accepted",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1986,7 +2002,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/disableVspherePlugins": {
@@ -2019,7 +2039,23 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "Resource Operation accepted",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2027,10 +2063,14 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/enableAVS": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/enableAvs": {
       "post": {
         "operationId": "StoragePools_EnableAvs",
         "tags": [
@@ -2058,25 +2098,34 @@
             "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
-            "name": "body",
+            "name": "properties",
             "in": "body",
+            "description": "Storage pool enable Avs properties",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "properties": {
-                  "$ref": "#/definitions/StoragePoolEnableAvs"
-                }
-              },
-              "required": [
-                "properties"
-              ]
+              "$ref": "#/definitions/StoragePoolEnableAvs"
             }
           }
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "Resource Operation accepted",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2084,7 +2133,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/enableVspherePlugins": {
@@ -2115,25 +2168,34 @@
             "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
-            "name": "body",
+            "name": "properties",
             "in": "body",
+            "description": "Vsphere plugin properties",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "properties": {
-                  "$ref": "#/definitions/StoragePoolEnableVspherePlugin"
-                }
-              },
-              "required": [
-                "properties"
-              ]
+              "$ref": "#/definitions/StoragePoolEnableVspherePlugin"
             }
           }
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "Resource Operation accepted",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2141,10 +2203,14 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/finalizeAVS": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/finalizeAvs": {
       "post": {
         "operationId": "StoragePools_FinalizeAvs",
         "tags": [
@@ -2174,7 +2240,23 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "Resource Operation accepted",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2182,7 +2264,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/getAvsParameters": {
@@ -2357,7 +2443,23 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "Resource Operation accepted",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2365,7 +2467,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -2461,7 +2567,7 @@
           "description": "AVS configuration properties"
         },
         "vSphere": {
-          "$ref": "#/definitions/VSphere",
+          "$ref": "#/definitions/Vsphere",
           "description": "vSphere configuration properties"
         },
         "vSpherePluginEnabled": {
@@ -2473,7 +2579,7 @@
           "description": "vSpherePluginKey associated with the plugin"
         },
         "vSpherePlugin": {
-          "$ref": "#/definitions/VSpherePlugin",
+          "$ref": "#/definitions/VspherePlugin",
           "description": "vSphere plugin configuration properties"
         }
       },
@@ -3471,14 +3577,14 @@
             "$ref": "#/definitions/StoragePool"
           }
         },
-        "ContinuationToken": {
+        "continuationToken": {
           "type": "string",
           "description": "Paging Continuation Token."
         }
       },
       "required": [
         "items",
-        "ContinuationToken"
+        "continuationToken"
       ]
     },
     "StoragePoolListResult": {
@@ -3666,72 +3772,6 @@
           "description": "Company details of the user."
         }
       }
-    },
-    "VSphere": {
-      "type": "object",
-      "description": "vSphere configuration properties",
-      "properties": {
-        "vSphereUuid": {
-          "type": "string",
-          "description": "Unique identifier of the vSphere software package in the SDDC"
-        },
-        "sddcResourceId": {
-          "type": "string",
-          "description": "Resource id pointing at the AVS SDDC the pool is configured with"
-        },
-        "vSphereIp": {
-          "type": "string",
-          "description": "IP address of the vSphere software installed in the SDDC"
-        }
-      },
-      "required": [
-        "vSphereUuid",
-        "sddcResourceId",
-        "vSphereIp"
-      ]
-    },
-    "VSpherePlugin": {
-      "type": "object",
-      "description": "vSphere plugin configuration properties",
-      "properties": {
-        "registrationUrl": {
-          "type": "string",
-          "description": "URL for registration of vSphere plugin"
-        },
-        "companyName": {
-          "type": "string",
-          "description": "Company name for vSphere plugin"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of vSphere plugin"
-        },
-        "protocol": {
-          "type": "string",
-          "description": "Protocol used by vSphere plugin"
-        },
-        "adminEmail": {
-          "type": "string",
-          "description": "Admin email for vSphere plugin"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of vSphere plugin"
-        },
-        "certificate": {
-          "type": "string",
-          "description": "Certificate for vSphere plugin"
-        }
-      },
-      "required": [
-        "registrationUrl",
-        "companyName",
-        "description",
-        "protocol",
-        "adminEmail",
-        "version",
-        "certificate"
-      ]
     },
     "VasaIscsiEndpoints": {
       "type": "object",
@@ -3949,6 +3989,72 @@
           }
         ]
       }
+    },
+    "Vsphere": {
+      "type": "object",
+      "description": "vSphere configuration properties",
+      "properties": {
+        "vSphereUuid": {
+          "type": "string",
+          "description": "Unique identifier of the vSphere software package in the SDDC"
+        },
+        "sddcResourceId": {
+          "type": "string",
+          "description": "Resource id pointing at the AVS SDDC the pool is configured with"
+        },
+        "vSphereIp": {
+          "type": "string",
+          "description": "IP address of the vSphere software installed in the SDDC"
+        }
+      },
+      "required": [
+        "vSphereUuid",
+        "sddcResourceId",
+        "vSphereIp"
+      ]
+    },
+    "VspherePlugin": {
+      "type": "object",
+      "description": "vSphere plugin configuration properties",
+      "properties": {
+        "registrationUrl": {
+          "type": "string",
+          "description": "URL for registration of vSphere plugin"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Company name for vSphere plugin"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of vSphere plugin"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Protocol used by vSphere plugin"
+        },
+        "adminEmail": {
+          "type": "string",
+          "description": "Admin email for vSphere plugin"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of vSphere plugin"
+        },
+        "certificate": {
+          "type": "string",
+          "description": "Certificate for vSphere plugin"
+        }
+      },
+      "required": [
+        "registrationUrl",
+        "companyName",
+        "description",
+        "protocol",
+        "adminEmail",
+        "version",
+        "certificate"
+      ]
     }
   },
   "parameters": {}

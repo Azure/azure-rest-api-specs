@@ -149,53 +149,119 @@ interface StoragePools {
 
   @doc("Enable AVS on storage pool")
   @armResourceAction(StoragePool)
-  @action("enableAVS")
+  @action("enableAvs")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   @post
-  enableAVS(
+  enableAvs(
     ...ResourceInstanceParameters<StoragePool>,
+
+    @doc("Storage pool enable Avs properties")
+    @body
     properties: StoragePoolEnableAvs,
-  ): AcceptedResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
 
   @doc("Disable AVS on storage pool")
   @armResourceAction(StoragePool)
-  @action("disableAVS")
+  @action("disableAvs")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   @post
-  disableAVS(
+  disableAvs(
     ...ResourceInstanceParameters<StoragePool>,
-  ): AcceptedResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
 
   @doc("Finalize AVS on storage pool")
   @armResourceAction(StoragePool)
-  @action("finalizeAVS")
+  @action("finalizeAvs")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   @post
-  finalizeAVS(
+  finalizeAvs(
     ...ResourceInstanceParameters<StoragePool>,
-  ): AcceptedResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
 
   @doc("Enable Vsphere plugins on storage pool")
   @armResourceAction(StoragePool)
   @action("enableVspherePlugins")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   @post
   enableVspherePlugins(
     ...ResourceInstanceParameters<StoragePool>,
+
+    @doc("Vsphere plugin properties")
+    @body
     properties: StoragePoolEnableVspherePlugin,
-  ): AcceptedResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
 
   @doc("Disable Vsphere plugins on storage pool")
   @armResourceAction(StoragePool)
   @action("disableVspherePlugins")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   @post
   disableVspherePlugins(
     ...ResourceInstanceParameters<StoragePool>,
-  ): AcceptedResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
 
   @doc("Update Vsphere plugins on storage pool")
   @armResourceAction(StoragePool)
   @action("updateVspherePlugins")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   @post
   updateVspherePlugins(
     ...ResourceInstanceParameters<StoragePool>,
-  ): AcceptedResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders
+  > | ErrorResponse;
 }
 
 @doc("AVS (Azure VMware Solution) related properties.")
@@ -207,7 +273,7 @@ model AvsDetails {
   avs: Avs;
 
   @doc("vSphere configuration properties")
-  vSphere: VSphere;
+  vSphere: Vsphere;
 
   @doc("tells if the plugin has been enabled or not")
   vSpherePluginEnabled: boolean;
@@ -216,11 +282,11 @@ model AvsDetails {
   vSpherePluginKey: string;
 
   @doc("vSphere plugin configuration properties")
-  vSpherePlugin: VSpherePlugin;
+  vSpherePlugin: VspherePlugin;
 }
 
 @doc("vSphere plugin configuration properties")
-model VSpherePlugin {
+model VspherePlugin {
   @doc("URL for registration of vSphere plugin")
   registrationUrl: string;
 
@@ -244,7 +310,7 @@ model VSpherePlugin {
 }
 
 @doc("vSphere configuration properties")
-model VSphere {
+model Vsphere {
   @doc("Unique identifier of the vSphere software package in the SDDC")
   vSphereUuid: string;
 
@@ -374,7 +440,7 @@ model StoragePoolList {
   items: StoragePool[];
 
   @doc("Paging Continuation Token.")
-  ContinuationToken: string;
+  continuationToken: string;
 }
 
 @doc("Storage Pool enable AVS")
