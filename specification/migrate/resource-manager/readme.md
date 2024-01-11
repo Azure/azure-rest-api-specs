@@ -31,6 +31,8 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     reason: Migrate feature is widely adopted and requires additionalProperties for most of the swagger properties.
+  - code: ProvisioningStateMustBeReadOnly
+    reason: All Provisioning states for resources introduced in the current swagger version are readOnly, and are incorrectly flagging.
 ```
 ### Tag: package-2023-06
 
