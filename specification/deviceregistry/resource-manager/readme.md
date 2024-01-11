@@ -35,7 +35,35 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-11'
 input-file:
-  - Microsoft.DeviceRegistry/preview/2023-11-01-preview/asset.json
-  - Microsoft.DeviceRegistry/preview/2023-11-01-preview/assetendpointprofile.json
-  - Microsoft.DeviceRegistry/preview/2023-11-01-preview/operations.json
+  - Microsoft.DeviceRegistry/preview/2023-11-01-preview/openapi.json
+
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.Asset.properties.properties.properties.attributes
+      - $.definitions.AssetListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.AssetProperties.properties.attributes
+      - $.definitions.AssetUpdate.properties.properties.properties.attributes
+      - $.definitions.AssetUpdateProperties.properties.attributes
+      - $.definitions.Device.properties.properties.properties.attributes
+      - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.DeviceProperties.properties.attributes
+      - $.definitions.DeviceUpdate.properties.properties.properties.attributes
+      - $.definitions.DeviceUpdateProperties.properties.attributes
+    reason: attributes is a customer-defined property of any shape
+  - code: PropertiesTypeObjectNoDefinition
+    from: openapi.json
+    where:
+      - $.definitions.Asset.properties.properties.properties.attributes
+      - $.definitions.AssetListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.AssetProperties.properties.attributes
+      - $.definitions.AssetUpdate.properties.properties.properties.attributes
+      - $.definitions.AssetUpdateProperties.properties.attributes
+      - $.definitions.Device.properties.properties.properties.attributes
+      - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.DeviceProperties.properties.attributes
+      - $.definitions.DeviceUpdate.properties.properties.properties.attributes
+      - $.definitions.DeviceUpdateProperties.properties.attributes
+    reason: attributes is a customer-defined property of any shape
 ```
