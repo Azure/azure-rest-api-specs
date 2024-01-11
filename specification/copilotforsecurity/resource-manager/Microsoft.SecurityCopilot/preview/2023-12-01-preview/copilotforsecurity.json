@@ -1,0 +1,622 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SecurityCopilotClient",
+    "version": "2023-12-01-preview",
+    "description": "SecurityCopilot Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Capacities"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.SecurityCopilot/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityCopilot/capacities": {
+      "get": {
+        "operationId": "Capacities_ListBySubscription",
+        "tags": [
+          "Capacities"
+        ],
+        "description": "List Capacity resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Capacities_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Capacities_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityCopilot/checkNameAvailability": {
+      "post": {
+        "operationId": "Capacities_CheckGlobalNameAvailability",
+        "tags": [
+          "Capacities"
+        ],
+        "description": "Implements global CheckNameAvailability operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Capacities_CheckGlobalNameAvailability_MaximumSet_Gen": {
+            "$ref": "./examples/Capacities_CheckGlobalNameAvailability_MaximumSet_Gen.json"
+          },
+          "Capacities_CheckGlobalNameAvailability_MinimumSet_Gen": {
+            "$ref": "./examples/Capacities_CheckGlobalNameAvailability_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityCopilot/capacities": {
+      "get": {
+        "operationId": "Capacities_ListByResourceGroup",
+        "tags": [
+          "Capacities"
+        ],
+        "description": "List Capacity resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Capacities_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Capacities_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityCopilot/capacities/{name}": {
+      "get": {
+        "operationId": "Capacities_Get",
+        "tags": [
+          "Capacities"
+        ],
+        "description": "Get a Capacity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of capacity unit",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Capacity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Capacities_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Capacities_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Capacities_CreateOrUpdate",
+        "tags": [
+          "Capacities"
+        ],
+        "description": "Create a Capacity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of capacity unit",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Capacity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Capacity' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Capacity"
+            }
+          },
+          "201": {
+            "description": "Resource 'Capacity' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Capacity"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Capacities_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Capacities_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Capacities_Update",
+        "tags": [
+          "Capacities"
+        ],
+        "description": "Update a Capacity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of capacity unit",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacityUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Capacity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Capacities_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Capacities_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Capacities_Delete",
+        "tags": [
+          "Capacities"
+        ],
+        "description": "Delete a Capacity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of capacity unit",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Capacities_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Capacities_Delete_MaximumSet_Gen.json"
+          },
+          "Capacities_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Capacities_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Capacity": {
+      "type": "object",
+      "description": "A Capacity resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapacityProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CapacityListResult": {
+      "type": "object",
+      "description": "The response of a Capacity list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Capacity items on this page",
+          "items": {
+            "$ref": "#/definitions/Capacity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CapacityProperties": {
+      "type": "object",
+      "description": "Capacity properties",
+      "properties": {
+        "numberOfUnits": {
+          "type": "integer",
+          "format": "int64",
+          "description": "No of Units",
+          "minimum": 1,
+          "maximum": 999
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "crossRegionCompute": {
+          "$ref": "#/definitions/IsAllowed",
+          "description": "Is cross region compute allowed"
+        }
+      },
+      "required": [
+        "numberOfUnits",
+        "crossRegionCompute"
+      ]
+    },
+    "CapacityUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Capacity.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CapacityUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CapacityUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Capacity.",
+      "properties": {
+        "numberOfUnits": {
+          "type": "integer",
+          "format": "int64",
+          "description": "No of Units",
+          "minimum": 1,
+          "maximum": 999
+        },
+        "crossRegionCompute": {
+          "$ref": "#/definitions/IsAllowed",
+          "description": "Is cross region compute allowed"
+        }
+      }
+    },
+    "IsAllowed": {
+      "type": "string",
+      "description": "Enum to represent Allowed or NotAllowed",
+      "enum": [
+        "Allowed",
+        "NotAllowed"
+      ],
+      "x-ms-enum": {
+        "name": "IsAllowed",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allowed",
+            "value": "Allowed",
+            "description": "Allowed to do"
+          },
+          {
+            "name": "NotAllowed",
+            "value": "NotAllowed",
+            "description": "Not allowed to do"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

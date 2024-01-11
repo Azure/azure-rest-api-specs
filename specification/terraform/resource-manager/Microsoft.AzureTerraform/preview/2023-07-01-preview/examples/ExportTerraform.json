@@ -1,0 +1,21 @@
+{
+  "title": "ExportTerraform",
+  "operationId": "ExportTerraform",
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "exportParameter": {
+      "type": "ExportResourceGroupParameter",
+      "resourceGroupName": "rg1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "configuration": "resource \"azurerm_resource_group\" \"res-0\" {\n    location = \"westeurope\"\n    name     = \"rg1\"\n}",
+        "errors": null,
+        "skippedResources": null
+      }
+    }
+  }
+}
