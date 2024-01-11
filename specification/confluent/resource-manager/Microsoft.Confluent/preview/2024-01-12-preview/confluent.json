@@ -1540,64 +1540,6 @@
             "$ref": "./examples/Organization_GetClusterAPIKey.json"
           }
         }
-      },
-      "put": {
-        "tags": [
-          "service connectors"
-        ],
-        "summary": "Update API key details of a kafka or schema registry cluster",
-        "operationId": "Organization_UpdateClusterAPIKey",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/OrganizationResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConfluentAPIKeyParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "description": "Update API Key request mddel",
-            "schema": {
-              "$ref": "#/definitions/CreateAPIKeyModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/APIKeyRecord"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Organization_UpdateClusterAPIKey": {
-            "$ref": "./examples/Organization_UpdateClusterAPIKey.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/schemaRegistryClusters/{clusterId}": {
