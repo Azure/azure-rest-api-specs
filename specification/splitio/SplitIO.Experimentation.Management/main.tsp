@@ -55,12 +55,6 @@ model DataSource {
   enabled: boolean;
 }
 
-@doc("SKU of the experimentation workspace.")
-model Sku {
-  @doc("Name of the SKU.")
-  name: string;
-}
-
 @doc("A ExperimentationWorkspace Resource by Split.IO")
 model ExperimentationWorkspace
   is TrackedResource<ExperimentationWorkspaceProperties> {
@@ -72,8 +66,7 @@ model ExperimentationWorkspace
   @path
   name: string;
 
-  @doc("SKU of the experimentation workspace.")
-  sku: Sku;
+  ...ResourceSku;
 
   ...ManagedServiceIdentity;
 }

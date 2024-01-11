@@ -521,17 +521,14 @@
           ]
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU of the experimentation workspace."
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
-      "required": [
-        "sku"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -586,8 +583,8 @@
       "description": "The type used for update operations of the ExperimentationWorkspace.",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/SkuUpdate",
-          "description": "SKU of the experimentation workspace."
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -617,29 +614,6 @@
         "dataSource": {
           "$ref": "#/definitions/DataSourceUpdate",
           "description": "Data source that telemetry data required for experimentation will be retrieved from."
-        }
-      }
-    },
-    "Sku": {
-      "type": "object",
-      "description": "SKU of the experimentation workspace.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the SKU."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "SkuUpdate": {
-      "type": "object",
-      "description": "SKU of the experimentation workspace.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the SKU."
         }
       }
     },
