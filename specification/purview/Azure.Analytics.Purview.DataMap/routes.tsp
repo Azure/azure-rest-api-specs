@@ -2131,7 +2131,7 @@ when search filter type=term_template
 
       @doc("Typedef name as search filter when get typedefs.")
       @query
-      type?: TypeDef;
+      type?: TypeFilter;
     },
     AtlasTypesDef,
     {},
@@ -2206,7 +2206,7 @@ when search filter type=term_template
 
       @doc("Typedef name as search filter when get typedefs.")
       @query
-      type?: TypeDef;
+      type?: TypeFilter;
     },
     OkResponse<AtlasTypeDefHeader[]>,
     {},

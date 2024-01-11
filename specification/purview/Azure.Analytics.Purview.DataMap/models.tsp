@@ -211,7 +211,7 @@ enum RelationshipCategory {
 }
 
 @doc("Type")
-enum TypeDef {
+enum TypeFilter {
   @doc("enum")
   Enum: "enum",
 
