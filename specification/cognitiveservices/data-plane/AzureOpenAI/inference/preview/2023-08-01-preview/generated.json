@@ -494,7 +494,7 @@
     },
     "AzureSearchChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters for Azure Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`.",
+      "description": "Parameters for Azure Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`. The supported vectorization source types are `endpoint` and `deployment_name`",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -555,15 +555,6 @@
         "filter": {
           "type": "string",
           "description": "Search filter."
-        },
-        "embeddingEndpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "When using embeddings for search, specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of format https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings?api-version={api-version}."
-        },
-        "embeddingKey": {
-          "type": "string",
-          "description": "When using embeddings, specifies the API key to use with the provided embeddings endpoint."
         }
       },
       "required": [

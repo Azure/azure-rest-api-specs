@@ -26,7 +26,7 @@ model AzureSearchChatExtensionConfiguration
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)
-@doc("Parameters for Azure Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`.")
+@doc("Parameters for Azure Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`. The supported vectorization source types are `endpoint` and `deployment_name`")
 model AzureSearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
@@ -58,16 +58,6 @@ model AzureSearchChatExtensionParameters {
 
   @doc("Search filter.")
   filter?: string;
-
-  @doc("When using embeddings for search, specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of format https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings?api-version={api-version}.")
-  @added(ServiceApiVersions.v2023_08_01_Preview)
-  @removed(ServiceApiVersions.v2023_12_01_Preview)
-  embeddingEndpoint?: url;
-
-  @added(ServiceApiVersions.v2023_08_01_Preview)
-  @removed(ServiceApiVersions.v2023_12_01_Preview)
-  @doc("When using embeddings, specifies the API key to use with the provided embeddings endpoint.")
-  embeddingKey?: string;
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("The embedding dependency for vector search.")

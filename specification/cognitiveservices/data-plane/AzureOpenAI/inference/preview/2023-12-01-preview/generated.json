@@ -1134,7 +1134,7 @@
     },
     "AzureCosmosDBChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for\nMongoDB vCore. The supported authentication type is `connection_string`.",
+      "description": "Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for\nMongoDB vCore. The supported authentication type is `connection_string`. The supported vectorization source types are `endpoint` and `deployment_name`.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -1433,7 +1433,7 @@
     },
     "AzureSearchChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters for Azure Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`.",
+      "description": "Parameters for Azure Search when used as an Azure OpenAI chat extension. The supported authentication types are `api_key`, `system_assigned_managed_identity` and `user_assigned_managed_identity`. The supported vectorization source types are `endpoint` and `deployment_name`",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -2701,7 +2701,7 @@
     },
     "ElasticsearchChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are `key_and_key_id` and `encoded_api_key`.",
+      "description": "Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are `key_and_key_id` and `encoded_api_key`. The supported vectorization source types are `endpoint`, `deployment_name` and `model_id`.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -2752,7 +2752,7 @@
         },
         "embedding_dependency": {
           "$ref": "#/definitions/OnYourDataVectorizationSource",
-          "description": "The embedding dependency for vector search. The supported types are `endpoint`, `deployment_name` and `model_id`.",
+          "description": "The embedding dependency for vector search.",
           "x-ms-client-name": "embeddingDependency"
         }
       },
@@ -3505,7 +3505,7 @@
     },
     "PineconeChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is `api_key`.",
+      "description": "Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is `api_key`. The supported vectorization source type is `deployment_name`.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -3550,7 +3550,7 @@
         },
         "embedding_dependency": {
           "$ref": "#/definitions/OnYourDataVectorizationSource",
-          "description": "The embedding dependency for vector search. The supported type is `deployment_name`.",
+          "description": "The embedding dependency for vector search.",
           "x-ms-client-name": "embeddingDependency"
         }
       },
