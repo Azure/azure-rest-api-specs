@@ -24144,7 +24144,7 @@
       "description": "The web app collector REST object.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CollectorPropertiesBaseWithAgent",
+          "$ref": "#/definitions/WebAppCollectorPropertiesBaseWithAgent",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -24178,6 +24178,37 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "WebAppCollectorPropertiesBaseWithAgent": {
+      "type": "object",
+      "description": "Collector properties class.",
+      "properties": {
+        "agentProperties": {
+          "$ref": "#/definitions/CollectorAgentPropertiesBase",
+          "description": "Gets or sets the collector agent properties."
+        },
+        "discoverySiteId": {
+          "type": "string",
+          "description": "Gets the discovery site id."
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the Timestamp when collector was created.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when collector was last updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceProperties2"
+        }
       ]
     },
     "WebAppDistribution": {
