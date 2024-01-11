@@ -14,8 +14,7 @@ using Azure.Core;
   title: "Image Analysis",
 })
 @versioned(ImageAnalysis.Versions)
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
-@useAuth(BearerAuth)
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | BearerAuth)
 @server(
   "{endpoint}/computervision",
   "Analyze an image to generate a description of its content, detect text, objects and more.",
