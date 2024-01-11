@@ -18,7 +18,7 @@ interface ThreadRuns {
    *
    * @param threadId The ID of the thread to run.
    * @param assistantId The ID of the assistant that should run the thread.
-   * @param model The overriden model name that the assistant should use to run the thread.
+   * @param model The overridden model name that the assistant should use to run the thread.
    * @param instructions The overridden system instructions that the assistant should use to run the thread.
    * @param tools The overridden list of enabled tools that the assistant should use to run the thread.
    * @returns Information about the new thread run.
