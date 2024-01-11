@@ -34,16 +34,16 @@ model SimSwapEndpoint {
   @key
   @doc("Static endpoint")
   @visibility("read")
-  simSwap: SimSwapEnum;
+  simSwap: "sim-swap";
 }
 
 /* Needed to add this enum because typespec was creating an x-ms-enum without a name
    which was causing a failure during linting. */
-@doc("Number static endpoint enum")
-enum SimSwapEnum {
-  @doc("Static endpoint")
-  simSwap: "sim-swap",
-}
+// @doc("Number static endpoint enum")
+// enum SimSwapEnum {
+//   @doc("Static endpoint")
+//   simSwap: "sim-swap",
+// }
 
 /// Request models
 
