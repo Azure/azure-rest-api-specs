@@ -1699,6 +1699,156 @@
         }
       }
     },
+    "/icon": {
+      "post":{
+        "tags": [
+          "icon"
+        ],
+        "description": "Upload icon.",
+        "operationId": "Icon_Upload",
+        "x-ms-examples": {
+          "Icon_Upload": {
+            "$ref": "./examples/Icon_Upload.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "iconInputStream",
+            "in": "formData",
+            "type": "file",
+            "description": "InputStream of icon"
+          },
+          {
+            "$ref": "#/parameters/atlasAPIVersion"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Icon upload response.",
+            "schema": {
+              "$ref": "#/definitions/IconUploadResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get":{
+        "tags": [
+          "icon"
+        ],
+        "description": "Download icon.",
+        "operationId": "Icon_Download",
+        "x-ms-examples": {
+          "Icon_Upload": {
+            "$ref": "./examples/Icon_Download.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/iconUrl"
+          },
+          {
+            "$ref": "#/parameters/atlasAPIVersion"
+          }
+        ],
+        "responses":{
+          "200": {
+            "schema": {
+              "description": "Icon file",
+              "type": "file"
+            },
+            "description": "Returned icon file"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete":{
+        "tags": [
+          "icon"
+        ],
+        "description": "Delete icon.",
+        "operationId": "Icon_Delete",
+        "x-ms-examples": {
+          "Icon_Delete": {
+            "$ref": "./examples/Icon_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/iconUrl"
+          },
+          {
+            "$ref": "#/parameters/atlasAPIVersion"
+          }
+        ],
+        "responses":{
+          "204": {
+            "description": "OK. The deletion is successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/icon/list": {
+      "get": {
+        "tags": [
+          "icon"
+        ],
+        "description": "List icons and their usages.",
+        "operationId": "Icon_List",
+        "x-ms-examples": {
+          "Icon_List": {
+            "$ref": "./examples/Icon_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/atlasAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of icons owned and their references (usage).",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconWithReferences"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
@@ -7285,6 +7435,52 @@
           "description": "Operation: add contact"
         }
       }
+    },
+    "IconUploadResponse": {
+      "type": "object",
+      "description": "Icon upload response",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "icon name."
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "icon url generated."
+        }
+      }
+    },
+    "IconWithReferences": {
+      "type": "list",
+      "description": "An array of icons owned and their references (usage).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "icon name."
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "icon url, with date or timestamp included, as an user friendly identifier to access an icon."
+        },
+        "references": {
+          "type": "object",
+          "description": "Usage of icon. An icon can be applied to entity type or service type.",
+          "properties": {
+            "serviceTypes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "entityTypes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -7772,6 +7968,14 @@
         "name": "businessAttributeUpdateBehavior",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "iconUrl": {
+      "name": "iconUrl",
+      "description": "A user friendly identifier to access icon.",
+      "in": "query",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
