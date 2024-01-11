@@ -34,7 +34,7 @@ interface NumberVerification {
   retrieve is Operations.ResourceAction<
     NumberEndpoint,
     NetworkIdentifier,
-    NumberRetrieveResult
+    NumberRetrievalResult
   >;
 }
 
@@ -76,7 +76,7 @@ model NumberVerificationResult {
 }
 
 @doc("Response with number of device")
-model NumberRetrieveResult {
+model NumberRetrievalResult {
   @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
   @pattern("^\\+?[0-9]{5,15}$")
   phoneNumber: string;
