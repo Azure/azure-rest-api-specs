@@ -104,7 +104,7 @@ model AccountResponse {
   @doc("ETag for use with If-Match headers for optimistic concurrency.")
   etag?: string;
 
-  directRoutingProvisioningState?: TeamsDrSubdomainProvisioningState;
+  directRoutingProvisioningState?: TeamsDrSubdomainProvisioningState; //JAMES this isn't in here in the original API
 
   @doc("Count of Teams Operator Connect subscribers for this account.")
   teamsOcSubCount: int64;
@@ -130,6 +130,7 @@ model PaginatedList<T> {
   value: T[];
   @doc("Link to the next page (if appropriate).")
   nextLink?: string;
+  ...ListQueryParameters
 }
 
 model AccountResponsePaginatedList is PaginatedList<AccountResponse>{}
@@ -156,7 +157,7 @@ model BatchNumbersResponse {
 model NumberDetails {
   ...PhoneNumber;
   services: NumberServices;
-  ...CustomSipHeader;
+  ...CustomSipHeader;  //JAMES this was 'NumberConfiguration' in the previous iteration
 
   // TODO: finalise requirements on this.
   // @doc("Preferred region for this number.")
@@ -257,7 +258,7 @@ model OcErrorDetails {
 }
 
 @doc("Error body to return when requests to Teams API fails")
-model OcErrorResponseBody {
+model OcErrorResponseBody { //JAMES need to update tihs to match ErrorResponse on the original API
   code: string;
   message: string;
   details: OcErrorDetails[];
@@ -294,7 +295,7 @@ enum DNSProvisioningState {
   Inconsistent: "Inconsistent"
 }
 
-@doc("DNS TXT values (tokens) for the account.")
+@doc("DNS TXT value for the region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.")
 model TeamsDrSubdomainTokens {
   region1Token: TeamsDrSubdomainToken;
   region2Token: TeamsDrSubdomainToken;
@@ -489,7 +490,8 @@ model CustomMaxPageSizeQueryParameter {
   @query("maxpagesize")
   @doc("The maximum number of result items per page.")
   @minValue(1)
-  maxPageSize?: int32 = 10;
+  @maxValue(500)
+  maxPageSize?: int32 = 200;
 }
 
 @doc("Provides the custom 'filter' query parameter for list operations")
@@ -551,7 +553,10 @@ namespace Account {
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string): {
+    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
+    @path
+    @doc("Additionally return the provisioning state of the backends configured for this account (e.g. DNS subdomain provisioning for Microsoft Teams Direct Routing).")
+    status: boolean): {
     @header contentType: "application/json";
     @body success: AccountResponse;
   } | {
@@ -574,9 +579,13 @@ namespace Account {
     @header ifMatch?: string,
     @header ifNoneMatch?: string,
     @header contentType: "application/json",
-    @body account: AccountDetails): {
+    @body body: AccountDetails): {
     @header contentType: "application/json";
     @body success: AccountResponse;
+  } | {
+    @statusCode statusCode: 201;
+    @header contentType: "application/json";
+    @body body: AccountResponse;
   } | {
     @statusCode statusCode: 400 | 404 | 409 | 412;
     @header contentType: "application/json";
@@ -648,7 +657,7 @@ namespace Accounts {
     @maxLength(100)
     @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
     @header contentType: "application/json",
-    @body account: BatchNumbersPut
+    @body body: BatchNumbersPut
   ) : {
     @header contentType: "application/json";
     @body success: BatchNumbersResponse;
@@ -716,7 +725,7 @@ namespace Accounts {
     @minLength(1)
     @maxLength(100)
     @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @path phoneNumber: string): {
+    @path phoneNumber: PhoneNumber): {
     @header contentType: "application/json";
     @body success: NumberResponse;
   } | {
@@ -738,11 +747,11 @@ namespace Accounts {
     @minLength(1)
     @maxLength(100)
     @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @path phoneNumber: string,
+    @path phoneNumber: NumberResponse,
     @header ifMatch?: string,
     @header ifNoneMatch?: string,
     @header contentType: "application/json",
-    @body account: NumberDetails): {
+    @body body: NumberDetails): {
       @header contentType: "application/json";
       @body success: NumberResponse;
   } | {
@@ -768,7 +777,7 @@ namespace Accounts {
     @minLength(1)
     @maxLength(100)
     @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @path phoneNumber: string) : {
+    @path phoneNumber: PhoneNumber) : {
       @statusCode statusCode: 204;
   } | {
     @statusCode statusCode: 400;
@@ -874,7 +883,13 @@ namespace NumbersFromAllAccounts {
   @summary("Get list of numbers")
   @doc("Get a list of Numbers from all Accounts. The returned list is paginated.")
   op listAllNumbers(
-    ...FilterListQueryParameters): {
+    ...FilterListQueryParameters,
+    @query
+    @doc("Query information for a specific number.")
+    @pattern("^\\+[1-9]\\d+$")
+    @minLength(1)
+    @maxLength(16)
+    number: string): {
     @header contentType: "application/json";
     @body success: NumberResponsePaginatedList;
   } | {
