@@ -68,7 +68,7 @@
               "location"
             ],
             "x-ms-enum": {
-              "name": "LocationEnum",
+              "name": "DeviceLocationEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -90,7 +90,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LocationVerificationContent"
+              "$ref": "#/definitions/DeviceLocationVerificationContent"
             }
           }
         ],
@@ -98,7 +98,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LocationVerificationResult"
+              "$ref": "#/definitions/DeviceLocationVerificationResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -140,7 +140,7 @@
               "network"
             ],
             "x-ms-enum": {
-              "name": "NetworkEnum",
+              "name": "DeviceNetworkEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -212,7 +212,7 @@
               "number"
             ],
             "x-ms-enum": {
-              "name": "NumberEnum",
+              "name": "NumberVerificationEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -284,7 +284,7 @@
               "number"
             ],
             "x-ms-enum": {
-              "name": "NumberEnum",
+              "name": "NumberVerificationEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -531,6 +531,111 @@
         "message"
       ]
     },
+    "DeviceLocationEndpoint": {
+      "type": "object",
+      "description": "Static endpoint to access the Device Location API family.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DeviceLocationEnum",
+          "description": "Static endpoint",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "DeviceLocationEnum": {
+      "type": "string",
+      "description": "Location static endpoint enum",
+      "enum": [
+        "location"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceLocationEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "location",
+            "value": "location",
+            "description": "Static endpoint"
+          }
+        ]
+      }
+    },
+    "DeviceLocationVerificationContent": {
+      "type": "object",
+      "description": "Request to verify Location",
+      "properties": {
+        "networkIdentifier": {
+          "$ref": "#/definitions/NetworkIdentifier",
+          "description": "Network to query for this device, or device information to enable network routing."
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "description": "Latitude of location to be verified",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "description": "Longitude of location to be verified",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "accuracy": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Accuracy expected for location verification in kilometers",
+          "minimum": 2,
+          "maximum": 100
+        },
+        "locationDevice": {
+          "$ref": "#/definitions/LocationDevice",
+          "description": "The device to find the location for."
+        }
+      },
+      "required": [
+        "networkIdentifier",
+        "latitude",
+        "longitude",
+        "accuracy",
+        "locationDevice"
+      ]
+    },
+    "DeviceLocationVerificationResult": {
+      "type": "object",
+      "description": "Response verifying location",
+      "properties": {
+        "verificationResult": {
+          "type": "boolean",
+          "description": "True if the location is in the specified area, False otherwise"
+        }
+      },
+      "required": [
+        "verificationResult"
+      ]
+    },
+    "DeviceNetworkEnum": {
+      "type": "string",
+      "description": "Network static endpoint enum",
+      "enum": [
+        "network"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceNetworkEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "network",
+            "value": "network",
+            "description": "Static endpoint"
+          }
+        ]
+      }
+    },
     "DeviceNetworkIdentifier": {
       "type": "object",
       "description": "The device for which to find the network.",
@@ -547,6 +652,20 @@
       "required": [
         "identifierType",
         "deviceIdentifier"
+      ]
+    },
+    "DeviceNetworkRetrievalEndpoint": {
+      "type": "object",
+      "description": "Static endpoint to access the Device Network API family.",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/DeviceNetworkEnum",
+          "description": "Static endpoint",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "network"
       ]
     },
     "Ipv4Address": {
@@ -630,93 +749,6 @@
         }
       }
     },
-    "LocationEndpoint": {
-      "type": "object",
-      "description": "Static endpoint to access the Device Location API family.",
-      "properties": {
-        "location": {
-          "$ref": "#/definitions/LocationEnum",
-          "description": "Static endpoint",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "location"
-      ]
-    },
-    "LocationEnum": {
-      "type": "string",
-      "description": "Location static endpoint enum",
-      "enum": [
-        "location"
-      ],
-      "x-ms-enum": {
-        "name": "LocationEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "location",
-            "value": "location",
-            "description": "Static endpoint"
-          }
-        ]
-      }
-    },
-    "LocationVerificationContent": {
-      "type": "object",
-      "description": "Request to verify Location",
-      "properties": {
-        "networkIdentifier": {
-          "$ref": "#/definitions/NetworkIdentifier",
-          "description": "Network to query for this device, or device information to enable network routing."
-        },
-        "latitude": {
-          "type": "number",
-          "format": "float",
-          "description": "Latitude of location to be verified",
-          "minimum": -90,
-          "maximum": 90
-        },
-        "longitude": {
-          "type": "number",
-          "format": "float",
-          "description": "Longitude of location to be verified",
-          "minimum": -180,
-          "maximum": 180
-        },
-        "accuracy": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Accuracy expected for location verification in kilometers",
-          "minimum": 2,
-          "maximum": 100
-        },
-        "locationDevice": {
-          "$ref": "#/definitions/LocationDevice",
-          "description": "The device to find the location for."
-        }
-      },
-      "required": [
-        "networkIdentifier",
-        "latitude",
-        "longitude",
-        "accuracy",
-        "locationDevice"
-      ]
-    },
-    "LocationVerificationResult": {
-      "type": "object",
-      "description": "Response verifying location",
-      "properties": {
-        "verificationResult": {
-          "type": "boolean",
-          "description": "True if the location is in the specified area, False otherwise"
-        }
-      },
-      "required": [
-        "verificationResult"
-      ]
-    },
     "NetworkAccessIdentifierModel": {
       "type": "object",
       "description": "The network access ID/external ID of the device",
@@ -725,24 +757,6 @@
           "type": "string",
           "description": "External identifier or network access identifier of the device"
         }
-      }
-    },
-    "NetworkEnum": {
-      "type": "string",
-      "description": "Network static endpoint enum",
-      "enum": [
-        "network"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "network",
-            "value": "network",
-            "description": "Static endpoint"
-          }
-        ]
       }
     },
     "NetworkIdentifier": {
@@ -761,20 +775,6 @@
       "required": [
         "identifierType",
         "identifier"
-      ]
-    },
-    "NetworkRetrievalEndpoint": {
-      "type": "object",
-      "description": "Static endpoint to access the Device Network API family.",
-      "properties": {
-        "network": {
-          "$ref": "#/definitions/NetworkEnum",
-          "description": "Static endpoint",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "network"
       ]
     },
     "NetworkRetrievalResult": {
@@ -804,38 +804,6 @@
           "type": "string",
           "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
         }
-      }
-    },
-    "NumberEndpoint": {
-      "type": "object",
-      "description": "Static endpoint to access Number Verification API family",
-      "properties": {
-        "number": {
-          "$ref": "#/definitions/NumberEnum",
-          "description": "Static endpoint",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "number"
-      ]
-    },
-    "NumberEnum": {
-      "type": "string",
-      "description": "Number static endpoint enum",
-      "enum": [
-        "number"
-      ],
-      "x-ms-enum": {
-        "name": "NumberEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "number",
-            "value": "number",
-            "description": "Static endpoint"
-          }
-        ]
       }
     },
     "NumberRetrievalResult": {
@@ -873,6 +841,38 @@
       "required": [
         "networkIdentifier"
       ]
+    },
+    "NumberVerificationEndpoint": {
+      "type": "object",
+      "description": "Static endpoint to access Number Verification API family",
+      "properties": {
+        "number": {
+          "$ref": "#/definitions/NumberVerificationEnum",
+          "description": "Static endpoint",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "number"
+      ]
+    },
+    "NumberVerificationEnum": {
+      "type": "string",
+      "description": "Number static endpoint enum",
+      "enum": [
+        "number"
+      ],
+      "x-ms-enum": {
+        "name": "NumberVerificationEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "number",
+            "value": "number",
+            "description": "Static endpoint"
+          }
+        ]
+      }
     },
     "NumberVerificationResult": {
       "type": "object",
