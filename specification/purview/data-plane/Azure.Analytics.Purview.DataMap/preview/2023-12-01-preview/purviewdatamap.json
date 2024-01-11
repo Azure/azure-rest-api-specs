@@ -7270,24 +7270,19 @@
     },
     "AssetBulkUpdateOperation": {
       "type": "object",
+      "description": "Operations to edit asset/sub assets. key is operation name, value is map of <guid, operation content>",
       "properties": {
-        "operation": {
-          "type": "string",
-          "description": "Operation name"
-        },
-        "message": {
+        "AssignSensitivityLabel": {
           "type": "object",
-          "description": "Operation content",
-          "properties": {
-            "guid": {
-              "type": "string",
-              "description": "Guid of asset or sub asset to be edited"
-            },
-            "operationContent": {
-              "type": "object",
-              "description": "New value"
-            }
-          }
+          "description": "Operation: assign sensitivity label"
+        },
+        "DeleteSensitivityLabel": {
+          "type": "object",
+          "description": "Operation: assign sensitivity label"
+        },
+        "AddContact": {
+          "type": "object",
+          "description": "Operation: add contact"
         }
       }
     }
