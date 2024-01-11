@@ -24,6 +24,7 @@
             "in": "query",
             "name": "model-version",
             "description": "Model version. Please refer https://aka.ms/image-retrieval for supported model versions.",
+            "required": true,
             "type": "string"
           },
           {
@@ -35,7 +36,7 @@
             "description": "Request of VectorizeText.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VectorizeTextRequestApiModel"
+              "$ref": "#/definitions/VectorizeTextRequest"
             }
           }
         ],
@@ -43,7 +44,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SingleVectorResultApiModel"
+              "$ref": "#/definitions/SingleVectorResult"
             }
           },
           "default": {
@@ -86,6 +87,7 @@
             "in": "query",
             "name": "model-version",
             "description": "Model version. Please refer https://aka.ms/image-retrieval for supported model versions.",
+            "required": true,
             "type": "string"
           },
           {
@@ -105,7 +107,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SingleVectorResultApiModel"
+              "$ref": "#/definitions/SingleVectorResult"
             }
           },
           "default": {
@@ -742,7 +744,7 @@
         }
       }
     },
-    "SingleVectorResultApiModel": {
+    "SingleVectorResult": {
       "description": "Results of image vectorization.",
       "type": "object",
       "properties": {
@@ -792,7 +794,7 @@
         }
       }
     },
-    "VectorizeTextRequestApiModel": {
+    "VectorizeTextRequest": {
       "description": "Model for VectorizeText request.",
       "required": [
         "text"
@@ -818,6 +820,75 @@
     }
   },
   "x-ms-paths": {
+    "/retrieval:vectorizeImage?overload=stream": {
+      "post": {
+        "tags": [
+          "ImageRetrievalApi"
+        ],
+        "summary": "Return vector from an image.",
+        "operationId": "VectorizeImageFromImageStream",
+        "consumes": [
+          "application/octet-stream",
+          "image/jpeg",
+          "image/gif",
+          "image/tiff",
+          "image/bmp",
+          "image/png"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model-version",
+            "description": "Model version. Please refer https://aka.ms/image-retrieval for supported model versions.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An image stream.",
+            "required": true,
+            "schema": {
+              "format": "file",
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SingleVectorResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorizeImage_Stream_MaximumSet_Gen": {
+            "$ref": "./examples/VectorizeImage_Stream_MaximumSet_Gen.json"
+          },
+          "VectorizeImage_Stream_MinimumSet_Gen": {
+            "$ref": "./examples/VectorizeImage_Stream_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/imageanalysis:analyze?overload=stream": {
       "post": {
         "tags": [
