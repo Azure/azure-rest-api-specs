@@ -86,7 +86,7 @@ interface ImageBatchOperations {
   @summary("Start Batch Analyze Images")
   @doc("An asynchronous API for the batch analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.")
   @route("/image:batchAnalyze")
-  batchAnalyzeImage is ImageLongRunningRpcOperation<
+  batchAnalyzeImage is ContentSafetyLongRunningRpcOperation<
     {
       @body
       @doc("The image batch analysis request.")
@@ -102,7 +102,7 @@ interface ImageBatchOperations {
 }
 
 @doc("Long running RPC operation template")
-op ImageLongRunningRpcOperation<
+op ContentSafetyLongRunningRpcOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model
 > is Azure.Core.Foundations.Operation<
@@ -326,14 +326,33 @@ interface TextCategoryCustomization {
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
-  @action("trainModel")
   @added(Versions.v2024_01_30_Preview)
+  @action("trainModel")
   trainModel is CategoryOps.ResourceAction<
     TextCustomizedCategory,
     {},
     SubmitModelTrainingResponse
   >;
-} 
+
+  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @route("/text/categories/{categoryName}:generatePrompt")
+  @post
+  @summary("Trigger prompt generation")
+  @doc("An asynchronous API to generate prompt from customized category.")
+  generateCustomizedCategoryPrompt is ContentSafetyLongRunningRpcOperation<
+    {
+      @path
+      @doc("The customized category name.")
+      categoryName: string;
+    },
+    GeneratePromptTaskDetail
+  >;
+
+  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @summary("Get Generate Prompt Task Status")
+  @doc("Check the status of a generate prompt task.")
+  getGeneratePromptTaskStatus is Azure.Core.ResourceRead<GeneratePromptTaskDetail>;
+}
 
 interface TextCustomizedMdoelOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
@@ -353,9 +372,7 @@ interface TextCustomizedModelOperations {
   getTextCustomizedModels is TextCustomizedMdoelOps.ResourceRead<TextTrainedModel>;
 
   @doc("If the model is training, the training process will be cancelled and the model will also be deleted.")
-  deleteCustomizedModel is TextCustomizedMdoelOps.ResourceDelete<
-    TextTrainedModel
-  >;
+  deleteCustomizedModel is TextCustomizedMdoelOps.ResourceDelete<TextTrainedModel>;
 }
 
 @added(Versions.v2023_10_30_Preview)

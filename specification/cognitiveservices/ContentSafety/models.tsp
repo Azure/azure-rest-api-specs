@@ -68,10 +68,17 @@ enum BatchTaskStatus {
 
 @added(ContentSafety.Versions.v2024_01_30_Preview)
 enum ModelStatus {
-  created,
-  training,
-  ready,
-  failed,
+  Created,
+  Training,
+  Ready,
+  Failed,
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+enum GeneratePromptStatus {
+  Running,
+  Ready,
+  Failed,
 }
 
 @doc("The text analysis request.")
@@ -156,6 +163,7 @@ model TextCustomizedCategoryAnalysis {
 @doc("customized category analysis result")
 model TextCustomizedCategoryClassResult {
   id: int32;
+
   @renamedFrom(Versions.v2024_01_30_Preview, "name")
   className: string;
 }
@@ -574,8 +582,10 @@ model PreDefinedConcept {
 @renamedFrom(Versions.v2024_01_30_Preview, "SubCategory")
 model Class {
   id: int32;
+
   @renamedFrom(Versions.v2024_01_30_Preview, "name")
   className: string;
+
   statements: string[];
 }
 
@@ -611,7 +621,7 @@ model TextCustomizedCategory {
 @doc("The response for async training triggering.")
 model SubmitModelTrainingResponse {
   ...AcceptedResponse;
-  
+
   @header("operation-location")
   @doc("The location of the status API for monitoring the triggered model.")
   modelUrl: string;
@@ -621,6 +631,22 @@ model SubmitModelTrainingResponse {
 model AsyncJobWarning {
   code: string;
   messgae: string;
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@resource("text/generatePromptTasks")
+model GeneratePromptTaskDetail {
+  @doc("The id of image batch analysis task.")
+  @key("taskId")
+  @visibility("read")
+  @maxLength(64)
+  taskId: string;
+
+  @doc("The status of the batch image analysis task.")
+  status: GeneratePromptStatus;
+
+  @doc("Return error detail when the task failed.")
+  error?: Azure.Core.Foundations.Error;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
@@ -639,6 +665,7 @@ enum ImageWithTextCategory {
 model TextTrainedModel {
   @key
   modelId: string;
+
   status: ModelStatus;
   createdTime: utcDateTime;
   lastUpdateTime: utcDateTime;

@@ -1179,6 +1179,45 @@
         }
       }
     },
+    "/text/categories/{categoryName}:generatePrompt": {
+      "post": {
+        "operationId": "TextCategoryCustomization_GenerateCustomizedCategoryPrompt",
+        "summary": "Trigger prompt generation",
+        "description": "An asynchronous API to generate prompt from customized category.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "The customized category name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/GeneratePromptTaskDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/text/categories/{categoryName}/models": {
       "get": {
         "operationId": "TextCustomizedModelOperations_ListTextCustomizedModels",
@@ -1303,6 +1342,46 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/generatePromptTasks/{taskId}": {
+      "get": {
+        "operationId": "TextCategoryCustomization_GetGeneratePromptTaskStatus",
+        "summary": "Get Generate Prompt Task Status",
+        "description": "Check the status of a generate prompt task.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "The id of image batch analysis task.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GeneratePromptTaskDetail"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2646,6 +2725,41 @@
         "modelAsString": true
       }
     },
+    "GeneratePromptStatus": {
+      "type": "string",
+      "enum": [
+        "Running",
+        "Ready",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "GeneratePromptStatus",
+        "modelAsString": true
+      }
+    },
+    "GeneratePromptTaskDetail": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "description": "The id of image batch analysis task.",
+          "maxLength": 64,
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/GeneratePromptStatus",
+          "description": "The status of the batch image analysis task."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Return error detail when the task failed."
+        }
+      },
+      "required": [
+        "taskId",
+        "status"
+      ]
+    },
     "GptResource": {
       "type": "object",
       "description": "Connection details for the GPT resource.",
@@ -2954,10 +3068,10 @@
     "ModelStatus": {
       "type": "string",
       "enum": [
-        "created",
-        "training",
-        "ready",
-        "failed"
+        "Created",
+        "Training",
+        "Ready",
+        "Failed"
       ],
       "x-ms-enum": {
         "name": "ModelStatus",
