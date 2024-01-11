@@ -1138,7 +1138,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FlowLogInformationRequest"
+              "$ref": "#/definitions/FlowLogInformation"
             },
             "description": "Parameters that define the configuration of flow log."
           },
@@ -1153,13 +1153,13 @@
           "200": {
             "description": "Successful request for setting flow log and traffic analytics (optional) configuration.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformationResponse"
+              "$ref": "#/definitions/FlowLogInformation"
             }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformationResponse"
+              "$ref": "#/definitions/FlowLogInformation"
             }
           },
           "default": {
@@ -1223,13 +1223,13 @@
           "200": {
             "description": "Successful request for query flow log and traffic analytics (optional) status.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformationResponse"
+              "$ref": "#/definitions/FlowLogInformation"
             }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/FlowLogInformationResponse"
+              "$ref": "#/definitions/FlowLogInformation"
             }
           },
           "default": {
@@ -2066,7 +2066,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FlowLogRequestWithUserManagedIdentity"
+              "$ref": "#/definitions/FlowLog"
             },
             "description": "Parameters that define the create or update flow log resource."
           },
@@ -2081,13 +2081,13 @@
           "201": {
             "description": "Request successful. The operation returns the resulting flow log resource.",
             "schema": {
-              "$ref": "#/definitions/FlowLogResponseWithUserManagedIdentity"
+              "$ref": "#/definitions/FlowLog"
             }
           },
           "200": {
             "description": "Update successful. The operation returns the resulting flow log resource.",
             "schema": {
-              "$ref": "#/definitions/FlowLogResponseWithUserManagedIdentity"
+              "$ref": "#/definitions/FlowLog"
             }
           },
           "default": {
@@ -2155,7 +2155,7 @@
           "200": {
             "description": "Request successful. The operation returns updated flow log.",
             "schema": {
-              "$ref": "#/definitions/FlowLogResponseWithUserManagedIdentity"
+              "$ref": "#/definitions/FlowLog"
             }
           },
           "default": {
@@ -2210,7 +2210,7 @@
           "200": {
             "description": "Request successful. The operation returns a flow log resource.",
             "schema": {
-              "$ref": "#/definitions/FlowLogResponseWithUserManagedIdentity"
+              "$ref": "#/definitions/FlowLog"
             }
           },
           "default": {
@@ -3091,7 +3091,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FlowLogResponseWithUserManagedIdentity"
+            "$ref": "#/definitions/FlowLog"
           },
           "description": "Information about flow log resource."
         },
@@ -3114,54 +3114,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/Resource"
-        }
-      ],
-      "description": "A flow log resource."
-    },
-    "FlowLogRequestWithUserManagedIdentity": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FlowLogPropertiesFormat",
-          "description": "Properties of the flow log."
-        },
-        "etag": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "identity": {
           "description": "Identity of the workspace",
-          "$ref": "#/definitions/RequestIdentityObjectForUserAssigned"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/Resource"
-        }
-      ],
-      "description": "A flow log resource."
-    },
-    "FlowLogResponseWithUserManagedIdentity": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FlowLogPropertiesFormat",
-          "description": "Properties of the flow log."
-        },
-        "etag": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
-        },
-        "identity": {
-          "description": "Identity of the workspace",
-          "$ref": "#/definitions/ResultIdentityObjectForUserAssigned"
+          "$ref": "#/definitions/ManagedIdentityObjectForUserAssigned",
+          "required": false
         }
       },
       "allOf": [
@@ -3289,7 +3246,7 @@
         }
       }
     },
-    "FlowLogInformationRequest": {
+    "FlowLogInformation": {
       "description": "Information on the configuration of flow log and traffic analytics (optional) .",
       "required": [
         "targetResourceId",
@@ -3311,58 +3268,11 @@
         },
         "identity": {
           "description": "Identity of the workspace",
-          "$ref": "#/definitions/RequestIdentityObjectForUserAssigned"
+          "$ref": "#/definitions/ManagedIdentityObjectForUserAssigned"
         }
       }
     },
-    "FlowLogInformationResponse": {
-      "description": "Information on the configuration of flow log and traffic analytics (optional) .",
-      "required": [
-        "targetResourceId",
-        "properties"
-      ],
-      "properties": {
-        "targetResourceId": {
-          "description": "The ID of the resource to configure for flow log and traffic analytics (optional) .",
-          "type": "string"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FlowLogProperties",
-          "description": "Properties of the flow log."
-        },
-        "flowAnalyticsConfiguration": {
-          "$ref": "#/definitions/TrafficAnalyticsProperties",
-          "description": "Parameters that define the configuration of traffic analytics."
-        },
-        "identity": {
-          "description": "Identity of the workspace",
-          "$ref": "#/definitions/ResultIdentityObjectForUserAssigned"
-        }
-      }
-    },
-    "RequestIdentityObjectForUserAssigned": {
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of identity used for the resource. The type userassigned includes set of user assigned identities. The type none will remove any identities from the flowlog.",
-          "enum": [
-            "UserAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
-        }
-      },
-      "description": "Identity for the resource."
-    },
-    "ResultIdentityObjectForUserAssigned": {
+    "ManagedIdentityObjectForUserAssigned": {
       "properties": {
         "type": {
           "type": "string",
