@@ -11623,6 +11623,7 @@
             "type": "string",
             "format": "arm-id"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "kubernetesVersion": {
@@ -11881,7 +11882,8 @@
           "description": "The list of system-controlled workload resource IDs that are dependent upon the edge cluster. The presence of resource IDs inform lifecycle events for the edge cluster.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id"
           },
           "x-ms-identifiers": [],
           "readOnly": true
@@ -11919,6 +11921,7 @@
         "networkFabricId": {
           "description": "The resource ID of the network fabric that defines the network configuration for the edge cluster.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "read",
             "create"
@@ -14779,6 +14782,7 @@
         "imageDownloadUri": {
           "description": "The URI where the bootstrap image can be downloaded from.",
           "type": "string",
+          "format": "uri",
           "readOnly": true
         },
         "imageUniqueId": {
@@ -15283,6 +15287,7 @@
         "azureRelayEndpoint": {
           "description": "The URL to access the azure relay for the registration hub.",
           "type": "string",
+          "format": "uri",
           "readOnly": true
         },
         "azureRelayId": {
