@@ -347,9 +347,10 @@
           },
           "x-ms-identifiers": []
         },
-        "bootType": {
-          "type": "string",
-          "description": "Specifies the boot type of the machine."
+        "systemInfo": {
+          "$ref": "#/definitions/SystemInfo",
+          "description": "Specifies the System Info obtained from the device.",
+          "readOnly": true
         },
         "sbeDeploymentPackageInfo": {
           "$ref": "#/definitions/SbeDeploymentPackageInfo",
@@ -570,6 +571,17 @@
         "sbeManifest": {
           "type": "string",
           "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
+          "readOnly": true
+        }
+      }
+    },
+    "SystemInfo": {
+      "type": "object",
+      "description": "The system info obtained from the device.",
+      "properties": {
+        "bootType": {
+          "type": "string",
+          "description": "The boot type of the device.",
           "readOnly": true
         }
       }
