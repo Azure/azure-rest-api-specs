@@ -2931,6 +2931,7 @@
         },
         "preDefinedConcepts": {
           "type": "array",
+          "description": "A predefined concept with its definition can be used directly in the subcategories.",
           "items": {
             "$ref": "#/definitions/PreDefinedConcept"
           },
@@ -2938,6 +2939,7 @@
         },
         "subCategories": {
           "type": "array",
+          "description": "Subcategories are detailed classes of the category. It is required there is a class 'safe' with id=0.",
           "items": {
             "$ref": "#/definitions/SubCategory"
           }
@@ -2950,7 +2952,8 @@
         },
         "exampleBlobUrl": {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "description": "Blob that stores the examples."
         }
       },
       "required": [

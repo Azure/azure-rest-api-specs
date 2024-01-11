@@ -40,6 +40,40 @@ enum AnalyzeImageOutputType {
   FourSeverityLevels,
 }
 
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("The type of batch results storage mode.")
+enum BatchResultsStorageMode {
+  @doc("Merge each result into one file.")
+  CollectiveResultFile,
+
+  @doc("Store each result in a single file.")
+  IndividualResultFiles,
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("The type of batch analysis task status.")
+enum BatchTaskStatus {
+  @doc("The task has not started yet.")
+  NotStarted,
+
+  @doc("The task is in progress.")
+  Running,
+
+  @doc("The task has failed.")
+  Failed,
+
+  @doc("The task has been succeeded.")
+  Succeeded,
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+enum ModelStatus {
+  created,
+  training,
+  ready,
+  failed,
+}
+
 @doc("The text analysis request.")
 model AnalyzeTextOptions {
   @doc("The text needs to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
@@ -61,6 +95,20 @@ model AnalyzeTextOptions {
   @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("The incidents to detect.")
   incidents?: IncidentOptions;
+
+  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @doc("The customized categories will be analyzed. If they are not assigned, the analysis results for all available customized categories will be returned.")
+  customizedCategories?: CustomizedCategory[];
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("Customized category for inference.")
+model CustomizedCategory {
+  @doc("Category name")
+  categoryName: string;
+
+  @doc("Model ID for the category. If not provided, the latest available model will be used.")
+  modelId: string;
 }
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
@@ -88,6 +136,28 @@ model AnalyzeTextResult {
   @added(ContentSafety.Versions.v2024_01_30_Preview)
   @doc("Chunks in the original text detected as harmful content. Analysis result and scores are caused by these.")
   citation?: string[];
+
+  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @doc("Analysis result for customized categories.")
+  customizedCategoriesAnalysis: TextCustomizedCategoryAnalysis[];
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("Text customized category analysis result.")
+model TextCustomizedCategoryAnalysis {
+  @doc("Customized category name")
+  categoryName: string;
+
+  @doc("customized category analysis")
+  customizedCategoriesAnalysis: TextCustomizedCategoryClassResult[];
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("customized category analysis result")
+model TextCustomizedCategoryClassResult {
+  id: int32;
+  @renamedFrom(Versions.v2024_01_30_Preview, "name")
+  className: string;
 }
 
 @doc("The result of blocklist match.")
@@ -167,6 +237,51 @@ model ImageCategoriesAnalysis {
 
   @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6.")
   severity?: int32;
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("The image batch analysis request.")
+model BatchAnalyzeImagesOptions {
+  @doc("The URL of the Azure Storage Blob containing all the images to be analyzed in the batch task.")
+  imagesBlobFolderUrl: url;
+
+  @doc("The URL of the Azure Storage Blob where the batch task results will be written.")
+  analysisResultsBlobFolderUrl: url;
+
+  @doc("The storage mode for the batch task results, either 'CollectiveResultFile' or 'IndividualResultFiles'.")
+  resultsStorageMode?: BatchResultsStorageMode = BatchResultsStorageMode.CollectiveResultFile;
+
+  @doc("The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
+  categories?: ImageCategory[];
+
+  @doc("This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
+  outputType?: AnalyzeImageOutputType = AnalyzeImageOutputType.FourSeverityLevels;
+
+  @doc("The incidents to detect.")
+  incidents?: IncidentOptions;
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("Image batch analyze task.")
+@resource("image/batchAnalyzeTasks")
+model ImageBatchTaskDetail {
+  @doc("The id of image batch analysis task.")
+  @key("taskId")
+  @visibility("read")
+  @maxLength(64)
+  taskId: string;
+
+  @doc("The status of the batch image analysis task.")
+  status: BatchTaskStatus;
+
+  @doc("The progress of the batch image analysis task, represented as a percentage (0-100).")
+  progressPercentage: float64;
+
+  @doc("The timestamp of when batch image analysis task was created.")
+  taskCreatedTime: utcDateTime;
+
+  @doc("Return error detail when the task failed.")
+  error?: Azure.Core.Foundations.Error;
 }
 
 @doc("Text Blocklist.")
@@ -456,9 +571,11 @@ model PreDefinedConcept {
 
 @added(Versions.v2023_10_30_Preview)
 @doc("Label definition.")
-model SubCategory {
+@renamedFrom(Versions.v2024_01_30_Preview, "SubCategory")
+model Class {
   id: int32;
-  name: string;
+  @renamedFrom(Versions.v2024_01_30_Preview, "name")
+  className: string;
   statements: string[];
 }
 
@@ -473,10 +590,37 @@ model TextCustomizedCategory {
   @maxLength(64)
   categoryName: string;
 
+  @doc("A predefined concept with its definition can be used directly in the subcategories.")
+  @added(Versions.v2023_10_30_Preview)
+  @removed(Versions.v2024_01_30_Preview)
   preDefinedConcepts?: PreDefinedConcept[];
-  subCategories: SubCategory[];
+
+  @doc("Subcategories are detailed classes of the category. It is required there is a class 'safe' with id=0.")
+  @renamedFrom(Versions.v2024_01_30_Preview, "subCategories")
+  classes: Class[];
+
+  @added(Versions.v2023_10_30_Preview)
+  @removed(Versions.v2024_01_30_Preview)
   emphases?: string[];
+
+  @doc("Blob that stores the examples.")
   exampleBlobUrl?: url;
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("The response for async training triggering.")
+model SubmitModelTrainingResponse {
+  ...AcceptedResponse;
+  
+  @header("operation-location")
+  @doc("The location of the status API for monitoring the triggered model.")
+  modelUrl: string;
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+model AsyncJobWarning {
+  code: string;
+  messgae: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
@@ -487,6 +631,19 @@ enum ImageWithTextCategory {
   SelfHarm,
   Sexual,
   Violence,
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@parentResource(TextCustomizedCategory)
+@resource("models")
+model TextTrainedModel {
+  @key
+  modelId: string;
+  status: ModelStatus;
+  createdTime: utcDateTime;
+  lastUpdateTime: utcDateTime;
+  warnings?: AsyncJobWarning[];
+  errors?: string[];
 }
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
