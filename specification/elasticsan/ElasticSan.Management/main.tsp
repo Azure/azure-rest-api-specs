@@ -29,5 +29,6 @@ namespace Microsoft.ElasticSan;
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @doc("The 2023-01-01 API version.")
   v2023_01_01: "2023-01-01",
 }

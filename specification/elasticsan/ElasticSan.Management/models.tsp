@@ -12,25 +12,30 @@ namespace Microsoft.ElasticSan;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"")
 enum Origin {
   user,
   system,
   `user,system`,
 }
 
+@doc("Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.")
 enum ActionType {
   Internal,
 }
 
+@doc("The sku name.")
 enum SkuName {
   @doc("Premium locally redundant storage") Premium_LRS,
   @doc("Premium zone redundant storage") Premium_ZRS,
 }
 
+@doc("The sku tier.")
 enum SkuTier {
   @doc("Premium Tier") Premium,
 }
 
+@doc("Provisioning state of the iSCSI Target.")
 enum ProvisioningStates {
   Invalid,
   Succeeded,
@@ -42,6 +47,7 @@ enum ProvisioningStates {
   Deleting,
 }
 
+@doc("The private endpoint connection status.")
 enum PrivateEndpointServiceConnectionStatus {
   Pending,
   Approved,
@@ -49,6 +55,7 @@ enum PrivateEndpointServiceConnectionStatus {
   Rejected,
 }
 
+@doc("The type of identity that created the resource.")
 enum CreatedByType {
   User,
   Application,
@@ -56,22 +63,26 @@ enum CreatedByType {
   Key,
 }
 
+@doc("Allow or disallow public network access to ElasticSan. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.")
 enum PublicNetworkAccess {
   Enabled,
   Disabled,
 }
 
+@doc("The identity type.")
 enum IdentityType {
   None,
   SystemAssigned,
   UserAssigned,
 }
 
+@doc("Storage Target type.")
 enum StorageTargetType {
   Iscsi,
   None,
 }
 
+@doc("The type of key used to encrypt the data of the disk.")
 enum EncryptionType {
   @doc("Volume is encrypted at rest with Platform managed key. It is the default encryption type.")
   EncryptionAtRestWithPlatformKey,
@@ -79,10 +90,12 @@ enum EncryptionType {
   EncryptionAtRestWithCustomerManagedKey,
 }
 
+@doc("The action of virtual network rule.")
 enum Action {
   Allow,
 }
 
+@doc("This enumerates the possible sources of a volume creation.")
 enum VolumeCreateOption {
   None,
   VolumeSnapshot,
@@ -91,6 +104,7 @@ enum VolumeCreateOption {
   DiskRestorePoint,
 }
 
+@doc("Operational status of the resource.")
 enum OperationalStatus {
   Invalid,
   Unknown,
