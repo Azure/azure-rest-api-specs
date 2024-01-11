@@ -31,30 +31,21 @@ namespace Azure.OpenAI;
 @@access(AudioTranslation, Access.public, "java");
 @@access(AudioTranslationOptions, Access.public, "java");
 
-@@access(AzureCognitiveSearchIndexFieldMappingOptions,
-  Access.public
-);
+@@access(AzureCognitiveSearchIndexFieldMappingOptions, Access.public);
 @@usage(AzureCognitiveSearchIndexFieldMappingOptions, Usage.input);
 
 @@access(AzureCognitiveSearchQueryType, Access.public);
 @@usage(AzureCognitiveSearchQueryType, Usage.input);
 
-@@access(AzureCognitiveSearchChatExtensionConfiguration,
-  Access.public
-);
-@@usage(AzureCognitiveSearchChatExtensionConfiguration,
-  Usage.input
-);
+@@access(AzureCognitiveSearchChatExtensionConfiguration, Access.public);
+@@usage(AzureCognitiveSearchChatExtensionConfiguration, Usage.input);
 
 // .NET maps the input bifurcation of URL vs. image data via distinct parameterization; it should hide the combined
 // string-based container used on the wire and plumb the relevant information through the parent content item.
 @@access(ChatMessageImageUrl, Access.internal, "csharp");
 
 // Remap "model" nomenclature to "DeploymentName" in appropriate containers; comments should clarify the dual use
-@@projectedName(ImageGenerationOptions.`model`,
-  "csharp",
-  "DeploymentName"
-);
+@@projectedName(ImageGenerationOptions.`model`, "csharp", "DeploymentName");
 
 @@projectedName(ChatResponseMessage.context,
   "csharp",
@@ -63,29 +54,20 @@ namespace Azure.OpenAI;
 
 @@projectedName(AudioTranscriptionFormat.json, "csharp", "Simple");
 
-@@projectedName(AudioTranscriptionFormat.verbose_json,
-  "csharp",
-  "Verbose"
-);
+@@projectedName(AudioTranscriptionFormat.verbose_json, "csharp", "Verbose");
 
-@@projectedName(AudioTranscriptionFormat.text,
-  "csharp",
-  "InternalPlainText"
-);
+@@projectedName(AudioTranscriptionFormat.text, "csharp", "InternalPlainText");
 
 @@projectedName(AudioTranslationFormat.json, "csharp", "Simple");
 
-@@projectedName(AudioTranslationFormat.verbose_json,
-  "csharp",
-  "Verbose"
-);
+@@projectedName(AudioTranslationFormat.verbose_json, "csharp", "Verbose");
 
-@@projectedName(AudioTranslationFormat.text,
-  "csharp",
-  "InternalPlainText"
-);
+@@projectedName(AudioTranslationFormat.text, "csharp", "InternalPlainText");
 
 // .NET maps the input bifurcation of URL vs. image data via distinct parameterization; it should hide the combined
 // string-based container used on the wire and plumb the relevant information through the parent content item.
 @@projectedName(ChatMessageImageUrl, "csharp", "InternalChatMessageImageUrl");
-@@projectedName(ChatMessageImageContentItem.imageUrl, "csharp", "InternalImageUrlOrData");
+@@projectedName(ChatMessageImageContentItem.imageUrl,
+  "csharp",
+  "InternalImageUrlOrData"
+);
