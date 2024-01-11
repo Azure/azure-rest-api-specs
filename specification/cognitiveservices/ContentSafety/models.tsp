@@ -41,6 +41,32 @@ enum AnalyzeImageOutputType {
 }
 
 @added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("The type of batch results storage mode.")
+enum BatchResultsStorageMode {
+  @doc("Merge each result into one file.")
+  CollectiveResultFile,
+
+  @doc("Store each result in a single file.")
+  IndividualResultFiles,
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("The type of batch analysis task status.")
+enum BatchTaskStatus {
+  @doc("The task has not started yet.")
+  NotStarted,
+
+  @doc("The task is in progress.")
+  Running,
+
+  @doc("The task has failed.")
+  Failed,
+
+  @doc("The task has been succeeded.")
+  Succeeded,
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
 enum ModelStatus {
   created,
   training,
@@ -211,6 +237,51 @@ model ImageCategoriesAnalysis {
 
   @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6.")
   severity?: int32;
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("The image batch analysis request.")
+model BatchAnalyzeImagesOptions {
+  @doc("The URL of the Azure Storage Blob containing all the images to be analyzed in the batch task.")
+  imagesBlobFolderUrl: url;
+
+  @doc("The URL of the Azure Storage Blob where the batch task results will be written.")
+  analysisResultsBlobFolderUrl: url;
+
+  @doc("The storage mode for the batch task results, either 'CollectiveResultFile' or 'IndividualResultFiles'.")
+  resultsStorageMode?: BatchResultsStorageMode = BatchResultsStorageMode.CollectiveResultFile;
+
+  @doc("The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
+  categories?: ImageCategory[];
+
+  @doc("This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
+  outputType?: AnalyzeImageOutputType = AnalyzeImageOutputType.FourSeverityLevels;
+
+  @doc("The incidents to detect.")
+  incidents?: IncidentOptions;
+}
+
+@added(ContentSafety.Versions.v2024_01_30_Preview)
+@doc("Image batch analyze task.")
+@resource("image/batchAnalyzeTasks")
+model ImageBatchTaskDetail {
+  @doc("The id of image batch analysis task.")
+  @key("taskId")
+  @visibility("read")
+  @maxLength(64)
+  taskId: string;
+
+  @doc("The status of the batch image analysis task.")
+  status: BatchTaskStatus;
+
+  @doc("The progress of the batch image analysis task, represented as a percentage (0-100).")
+  progressPercentage: float64;
+
+  @doc("The timestamp of when batch image analysis task was created.")
+  taskCreatedTime: utcDateTime;
+
+  @doc("Return error detail when the task failed.")
+  error?: Azure.Core.Foundations.Error;
 }
 
 @doc("Text Blocklist.")
