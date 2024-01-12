@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft.VoiceServices.ACG.ProvisioningPlatform.API",
+    "title": "Microsoft.VoiceServices.ProvisioningAPI",
     "version": "2024-01-30-preview",
     "x-typespec-generated": [
       {
@@ -52,6 +52,9 @@
         "description": "Get a list of Numbers on the specified Account. The returned list is paginated.",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "accountName",
             "in": "path",
             "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
@@ -69,6 +72,9 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomPageNumberQueryParameter"
           }
         ],
         "responses": {
@@ -90,6 +96,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Accounts_GetNumbers_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_GetNumbers_MaximumSet_Gen.json"
+          },
+          "Accounts_GetNumbers_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_GetNumbers_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -103,6 +117,9 @@
         "description": "Get details of a specific Number associated with an Account.",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "accountName",
             "in": "path",
             "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
@@ -115,8 +132,12 @@
           {
             "name": "phoneNumber",
             "in": "path",
+            "description": "The phone numberto get configuration for.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 16,
+            "pattern": "^\\+[1-9]\\d{1,14}$"
           }
         ],
         "responses": {
@@ -135,6 +156,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Accounts_GetPhoneNumbers_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_GetPhoneNumbers_MaximumSet_Gen.json"
+          },
+          "Accounts_GetPhoneNumbers_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_GetPhoneNumbers_MinimumSet_Gen.json"
+          }
         }
       },
       "put": {
@@ -145,6 +174,9 @@
         "summary": "Create or update a Number.",
         "description": "Create or update a Number on the specified Account. The Number must have a UC service enabled and other configuration.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "accountName",
             "in": "path",
@@ -158,12 +190,17 @@
           {
             "name": "phoneNumber",
             "in": "path",
+            "description": "The phone number to request details of.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 16,
+            "pattern": "^\\+[1-9]\\d{1,14}$"
           },
           {
             "name": "if-match",
             "in": "header",
+            "description": "Makes a request conditional on a matching etag.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifMatch"
@@ -171,6 +208,7 @@
           {
             "name": "if-none-match",
             "in": "header",
+            "description": "Makes a request conditional on a non-matching etag.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifNoneMatch"
@@ -178,6 +216,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The number details for the phone numbers to upload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NumberDetails"
@@ -224,6 +263,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Accounts_PutPhoneNumbers_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_PutPhoneNumbers_MaximumSet_Gen.json"
+          },
+          "Accounts_PutPhoneNumbers_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_PutPhoneNumbers_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -234,6 +281,9 @@
         "summary": "Delete Number",
         "description": "Delete a Number on the specified Account.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "accountName",
             "in": "path",
@@ -247,8 +297,12 @@
           {
             "name": "phoneNumber",
             "in": "path",
+            "description": "The phone number of the number to delete.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 16,
+            "pattern": "^\\+[1-9]\\d{1,14}$"
           }
         ],
         "responses": {
@@ -264,6 +318,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Accounts_DeletePhoneNumbers_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_DeletePhoneNumbers_MaximumSet_Gen.json"
+          },
+          "Accounts_DeletePhoneNumbers_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_DeletePhoneNumbers_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -277,6 +339,9 @@
         "description": "Create or update up to 100 Numbers on the specified account. Each Number must have a UC service enabled and other configuration.",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "accountName",
             "in": "path",
             "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
@@ -289,6 +354,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The numbers to upload in a batch.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BatchNumbersPut"
@@ -317,6 +383,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Accounts_PatchBatchNumbers_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_PatchBatchNumbers_MaximumSet_Gen.json"
+          },
+          "Accounts_PatchBatchNumbers_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_PatchBatchNumbers_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -324,9 +398,12 @@
         "tags": [
           "BatchNumbers"
         ],
-        "summary": "Delete batches of numbers",
-        "description": "Delete up to 100 numbers on the specified account",
+        "summary": "Delete batches of numbers.",
+        "description": "Delete up to 100 numbers on the specified account.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "accountName",
             "in": "path",
@@ -340,6 +417,7 @@
           {
             "name": "account",
             "in": "body",
+            "description": "The phone numbers to delete.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BatchNumbersDelete"
@@ -359,6 +437,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Accounts_DeleteBatchNumbers_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_DeleteBatchNumbers_MaximumSet_Gen.json"
+          },
+          "Accounts_DeleteBatchNumbers_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_DeleteBatchNumbers_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -368,6 +454,9 @@
         "summary": "Get the list of usages available",
         "description": "Get a list of usages that can be used by a partner for teams enabled number. Returned as JSON mapping use case to capabilities",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "accountName",
             "in": "path",
@@ -380,10 +469,12 @@
           },
           {
             "name": "phoneNumbers",
-            "in": "query",
+            "in": "body",
             "description": "The phone numbers to query capabilities for.",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbers"
+            }
           }
         ],
         "responses": {
@@ -402,6 +493,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Accounts_GetCapabilities_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_GetCapabilities_MaximumSet_Gen.json"
+          },
+          "Accounts_GetCapabilities_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_GetCapabilities_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -411,6 +510,9 @@
         "summary": "Get a Civic Address.",
         "description": "Get a specific Civic Address and its associated locations.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "accountName",
             "in": "path",
@@ -424,6 +526,7 @@
           {
             "name": "civicAddressId",
             "in": "path",
+            "description": "The ID of the civic address to retrieve.",
             "required": true,
             "type": "string"
           }
@@ -450,15 +553,26 @@
               "$ref": "#/definitions/OcErrorResponseBody"
             }
           }
+        },
+        "x-ms-examples": {
+          "Accounts_GetTeamsCivicAddress_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_GetTeamsCivicAddress_MaximumSet_Gen.json"
+          },
+          "Accounts_GetTeamsCivicAddress_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_GetTeamsCivicAddress_MinimumSet_Gen.json"
+          }
         }
       }
     },
     "/account/{accountName}/teams/civic-addresses": {
-      "post": {
+      "get": {
         "operationId": "Accounts_GetTeamsCivicAddresses",
         "summary": "Get a list of Civic Addresses.",
         "description": "Get a list of Civic Addresses and its associated locations for a specific Account. The returned list is paginated.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "accountName",
             "in": "path",
@@ -470,21 +584,16 @@
             "pattern": "^([A-Za-z0-9_-]+)$"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "FilterListQueryParameters": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "required": [
-                "FilterListQueryParameters"
-              ]
-            }
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomPageNumberQueryParameter"
           }
         ],
         "responses": {
@@ -506,6 +615,14 @@
               "$ref": "#/definitions/OcErrorResponseBody"
             }
           }
+        },
+        "x-ms-examples": {
+          "Accounts_GetTeamsCivicAddresses_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_GetTeamsCivicAddresses_MaximumSet_Gen.json"
+          },
+          "Accounts_GetTeamsCivicAddresses_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_GetTeamsCivicAddresses_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -519,6 +636,9 @@
         "description": "Enable or disable syncing of provisioned data to Teams",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "accountName",
             "in": "path",
             "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
@@ -529,8 +649,9 @@
             "pattern": "^([A-Za-z0-9_-]+)$"
           },
           {
-            "name": "account",
+            "name": "body",
             "in": "body",
+            "description": "JSON to indicate if data should by synced to Teams.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TeamsSyncEnabled"
@@ -546,6 +667,14 @@
           },
           "500": {
             "description": "Server error"
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_SetTeamsSync_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_SetTeamsSync_MaximumSet_Gen.json"
+          },
+          "Accounts_SetTeamsSync_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_SetTeamsSync_MinimumSet_Gen.json"
           }
         }
       }
@@ -567,6 +696,12 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomPageNumberQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -582,6 +717,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Accounts_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_MaximumSet_Gen.json"
+          },
+          "Accounts_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -595,6 +738,9 @@
         "description": "Create of update the details of an Account.",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "accountName",
             "in": "path",
             "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
@@ -607,6 +753,7 @@
           {
             "name": "if-match",
             "in": "header",
+            "description": "Makes a request conditional on a matching etag.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifMatch"
@@ -614,6 +761,7 @@
           {
             "name": "if-none-match",
             "in": "header",
+            "description": "Makes a request conditional on a non-matching etag.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifNoneMatch"
@@ -621,6 +769,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The details of the account to create",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccountDetails"
@@ -667,6 +816,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Account_Put_MaximumSet_Gen": {
+            "$ref": "./examples/Account_Put_MaximumSet_Gen.json"
+          },
+          "Account_Put_MinimumSet_Gen": {
+            "$ref": "./examples/Account_Put_MinimumSet_Gen.json"
+          }
         }
       },
       "patch": {
@@ -677,6 +834,9 @@
         "summary": "Create or update Account.",
         "description": "Create of update the details of an Account.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "accountName",
             "in": "path",
@@ -690,6 +850,7 @@
           {
             "name": "if-match",
             "in": "header",
+            "description": "Makes a request conditional on a matching etag.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifMatch"
@@ -697,6 +858,7 @@
           {
             "name": "if-none-match",
             "in": "header",
+            "description": "Makes a request conditional on a non-matching etag.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifNoneMatch"
@@ -704,6 +866,7 @@
           {
             "name": "account",
             "in": "body",
+            "description": "The Account to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccountDetailsUpdate"
@@ -750,6 +913,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Account_Patch_MaximumSet_Gen": {
+            "$ref": "./examples/Account_Patch_MaximumSet_Gen.json"
+          },
+          "Account_Patch_MinimumSet_Gen": {
+            "$ref": "./examples/Account_Patch_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -760,6 +931,9 @@
         "summary": "Delete Account.",
         "description": "Delete a specific Account using its Name. This will fail if any Numbers are provisioned on the Account.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "accountName",
             "in": "path",
@@ -791,6 +965,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Account_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Account_Delete_MaximumSet_Gen.json"
+          },
+          "Account_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Account_Delete_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -803,6 +985,9 @@
         "summary": "Get Account.",
         "description": "Get details of a specific Account using its Name. An Account represents an Enterprise or collection of users.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "accountName",
             "in": "path",
@@ -837,6 +1022,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Account_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Account_Get_MaximumSet_Gen.json"
+          },
+          "Account_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Account_Get_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -849,6 +1042,9 @@
         "summary": "Get accounts with with Teams services using the specified Tenant ID",
         "description": "Get accounts with with Teams services using the specified Tenant ID",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "tenantId",
             "in": "path",
@@ -870,6 +1066,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "GetAccountsByTenant_MaximumSet_Gen": {
+            "$ref": "./examples/GetAccountsByTenant_MaximumSet_Gen.json"
+          },
+          "GetAccountsByTenant_MinimumSet_Gen": {
+            "$ref": "./examples/GetAccountsByTenant_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -890,6 +1094,12 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomPageNumberQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "number",
@@ -915,6 +1125,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "NumbersFromAllAccounts_ListAllNumbers_MaximumSet_Gen": {
+            "$ref": "./examples/NumbersFromAllAccounts_ListAllNumbers_MaximumSet_Gen.json"
+          },
+          "NumbersFromAllAccounts_ListAllNumbers_MinimumSet_Gen": {
+            "$ref": "./examples/NumbersFromAllAccounts_ListAllNumbers_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -928,6 +1146,9 @@
         "description": "Get a specific RFT from the tenant ID.",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "tenantId",
             "in": "path",
             "description": "The tenant ID of the RFI.",
@@ -939,7 +1160,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RFIDetails"
+              "$ref": "#/definitions/RfiDetails"
             }
           },
           "404": {
@@ -947,6 +1168,14 @@
           },
           "500": {
             "description": "Server error"
+          }
+        },
+        "x-ms-examples": {
+          "Rfi_GetRfiByTenant_MaximumSet_Gen": {
+            "$ref": "./examples/Rfi_GetRfiByTenant_MaximumSet_Gen.json"
+          },
+          "Rfi_GetRfiByTenant_MinimumSet_Gen": {
+            "$ref": "./examples/Rfi_GetRfiByTenant_MinimumSet_Gen.json"
           }
         }
       }
@@ -961,6 +1190,9 @@
         "description": "Update the Customer Relationship on the specified RFI.",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "tenantId",
             "in": "path",
             "description": "The tenant ID of the RFI.",
@@ -968,8 +1200,9 @@
             "type": "string"
           },
           {
-            "name": "account",
+            "name": "body",
             "in": "body",
+            "description": "The customer relationship to insert.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CustomerRelationship"
@@ -1010,6 +1243,14 @@
           "500": {
             "description": "Server error"
           }
+        },
+        "x-ms-examples": {
+          "Rfi_UpdateCustomerRelationship_MaximumSet_Gen": {
+            "$ref": "./examples/Rfi_UpdateCustomerRelationship_MaximumSet_Gen.json"
+          },
+          "Rfi_UpdateCustomerRelationship_MinimumSet_Gen": {
+            "$ref": "./examples/Rfi_UpdateCustomerRelationship_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1023,8 +1264,12 @@
         "description": "Get the list of Accounts that have submitted a Request for Information (i.e. have consented to being contacted).",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "productContext",
             "in": "query",
+            "description": "The Teams product context for the RFIs.",
             "required": false,
             "type": "string"
           },
@@ -1036,13 +1281,16 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomPageNumberQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RFIDetailsPaginatedList"
+              "$ref": "#/definitions/RfiDetailsPaginatedList"
             }
           },
           "204": {
@@ -1050,6 +1298,14 @@
           },
           "500": {
             "description": "Server error"
+          }
+        },
+        "x-ms-examples": {
+          "Rfis_GetRfis_MaximumSet_Gen": {
+            "$ref": "./examples/Rfis_GetRfis_MaximumSet_Gen.json"
+          },
+          "Rfis_GetRfis_MinimumSet_Gen": {
+            "$ref": "./examples/Rfis_GetRfis_MinimumSet_Gen.json"
           }
         }
       }
@@ -1060,7 +1316,7 @@
       "type": "object",
       "description": "Details of the account.",
       "properties": {
-        "accountName": {
+        "accountNameString": {
           "type": "string",
           "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
           "minLength": 1,
@@ -1109,7 +1365,7 @@
         }
       },
       "required": [
-        "accountName",
+        "accountNameString",
         "teamsOcEnabled",
         "directRoutingEnabled",
         "teamsTpmEnabled",
@@ -1120,7 +1376,7 @@
       "type": "object",
       "description": "Details of the account.",
       "properties": {
-        "accountName": {
+        "accountNameString": {
           "type": "string",
           "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
           "minLength": 1,
@@ -1171,8 +1427,9 @@
     },
     "AccountName": {
       "type": "object",
+      "description": "Utility model for Account names.",
       "properties": {
-        "accountName": {
+        "accountNameString": {
           "type": "string",
           "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
           "minLength": 1,
@@ -1181,7 +1438,7 @@
         }
       },
       "required": [
-        "accountName"
+        "accountNameString"
       ]
     },
     "AccountResponse": {
@@ -1194,14 +1451,16 @@
           "minLength": 1
         },
         "details": {
-          "$ref": "#/definitions/AccountDetails"
+          "$ref": "#/definitions/AccountDetails",
+          "description": "The details of the account."
         },
         "etag": {
           "type": "string",
           "description": "ETag for use with If-Match headers for optimistic concurrency."
         },
         "directRoutingProvisioningState": {
-          "$ref": "#/definitions/TeamsDrSubdomainProvisioningState"
+          "$ref": "#/definitions/TeamsDrSubdomainProvisioningState",
+          "description": "The provisioning state of Teams Direct Routing DNS domains."
         },
         "teamsOcSubCount": {
           "type": "integer",
@@ -1243,6 +1502,7 @@
     },
     "AccountResponsePaginatedList": {
       "type": "object",
+      "description": "Paginated list of Account Responses",
       "properties": {
         "value": {
           "type": "array",
@@ -1251,6 +1511,11 @@
             "$ref": "#/definitions/AccountResponse"
           },
           "x-ms-identifiers": []
+        },
+        "numberOfRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of records returned for this page."
         },
         "nextLink": {
           "type": "string",
@@ -1269,10 +1534,18 @@
           "default": 200,
           "minimum": 1,
           "maximum": 500
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The page number of the current page.",
+          "default": 1,
+          "minimum": 1
         }
       },
       "required": [
-        "value"
+        "value",
+        "numberOfRecords"
       ]
     },
     "AssignmentStatus": {
@@ -1291,32 +1564,39 @@
         "values": [
           {
             "name": "TpmAssigned",
-            "value": "TPM Assigned"
+            "value": "TPM Assigned",
+            "description": "The phone number a TPM number and is assigned to a user."
           },
           {
             "name": "TpmUnassigned",
-            "value": "TPM Unassigned"
+            "value": "TPM Unassigned",
+            "description": "The phone number a TPM number and is not assigned to a user."
           },
           {
             "name": "OcAssigned",
-            "value": "OC Assigned"
+            "value": "OC Assigned",
+            "description": "The phone number is a Teams Operator Connect number and is assigned to a user."
           },
           {
             "name": "OcUnassigned",
-            "value": "OC Unassigned"
+            "value": "OC Unassigned",
+            "description": "The phone number is a Teams Operator Connect number and is not assigned to a user."
           },
           {
             "name": "NA",
-            "value": "Not Applicable"
+            "value": "Not Applicable",
+            "description": "The phone number is not configured for use with any services that require the number to be assigned to a user."
           }
         ]
       }
     },
     "BatchNumbersDelete": {
       "type": "object",
+      "description": "A list of phone numbers to delete.",
       "properties": {
         "numbers": {
           "type": "array",
+          "description": "The list of number to delete. At most 100 can be deleted in one request.",
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/PhoneNumber"
@@ -1330,9 +1610,11 @@
     },
     "BatchNumbersPut": {
       "type": "object",
+      "description": "List of phone numbers to be uploaded to an account via a PUT request.",
       "properties": {
         "numbers": {
           "type": "array",
+          "description": "The list of numbers to upload. At most 100 can be uploaded in one request.",
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/BatchNumbersPutItem"
@@ -1343,8 +1625,9 @@
     },
     "BatchNumbersPutItem": {
       "type": "object",
+      "description": "And individual phone number and configuration to be uploaded as part of a bulk request.",
       "properties": {
-        "phoneNumber": {
+        "phoneNumberString": {
           "type": "string",
           "description": "Phone number in E.164 format.",
           "minLength": 3,
@@ -1352,19 +1635,22 @@
           "pattern": "^\\+[1-9]\\d{1,14}$"
         },
         "details": {
-          "$ref": "#/definitions/NumberDetails"
+          "$ref": "#/definitions/NumberDetails",
+          "description": "The configuration for the number uploaded."
         }
       },
       "required": [
-        "phoneNumber",
+        "phoneNumberString",
         "details"
       ]
     },
     "BatchNumbersResponse": {
       "type": "object",
+      "description": "The response to a bulk upload of phone numbers.",
       "properties": {
         "numbers": {
           "type": "array",
+          "description": "A list of configurations for a set of phone numbers provisioned in ACG.",
           "items": {
             "$ref": "#/definitions/NumberResponse"
           },
@@ -1377,6 +1663,7 @@
     },
     "ContactDetails": {
       "type": "object",
+      "description": "Contact details for an individual.",
       "properties": {
         "fullName": {
           "type": "string",
@@ -1408,8 +1695,9 @@
     },
     "CustomSipHeader": {
       "type": "object",
+      "description": "Utility model for custom SIP headers.",
       "properties": {
-        "customSipHeader": {
+        "customSipHeaderString": {
           "type": "string",
           "description": "Contents of the custom SIP header to use with this number. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length. The name of the custom header is set as part of deploying Azure Communications Gateway.",
           "minLength": 1,
@@ -1418,11 +1706,12 @@
         }
       },
       "required": [
-        "customSipHeader"
+        "customSipHeaderString"
       ]
     },
     "CustomerRelationship": {
       "type": "object",
+      "description": "Details of a customer relationship.",
       "properties": {
         "status": {
           "type": "string",
@@ -1445,6 +1734,7 @@
     },
     "DNSProvisioningState": {
       "type": "string",
+      "description": "Possible values for DNS provisioning state of Teams Direct Routing domains",
       "enum": [
         "Provisioned",
         "NotProvisioned",
@@ -1456,15 +1746,18 @@
         "values": [
           {
             "name": "Provisioned",
-            "value": "Provisioned"
+            "value": "Provisioned",
+            "description": "The DNS provisioning state Provisioned."
           },
           {
             "name": "NotProvisioned",
-            "value": "NotProvisioned"
+            "value": "NotProvisioned",
+            "description": "The DNS provisioning state Not Provisioned."
           },
           {
             "name": "Inconsistent",
-            "value": "Inconsistent"
+            "value": "Inconsistent",
+            "description": "The DNS provisioning state Inconsistent."
           }
         ]
       }
@@ -1507,17 +1800,18 @@
           "type": "string",
           "description": "A machine readable error code."
         },
-        "innerError": {
+        "innerErrorString": {
           "type": "string",
           "description": "Inner error details if they exist."
         }
       },
       "required": [
-        "innerError"
+        "innerErrorString"
       ]
     },
     "Location": {
       "type": "object",
+      "description": "A location used by Team Operator Connect or Teams Phone Mobile phone numbers.",
       "properties": {
         "id": {
           "type": "string",
@@ -1531,13 +1825,11 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the location.",
-          "x-nullable": true
+          "description": "The description of the location."
         },
         "additionalInfo": {
           "type": "string",
-          "description": "The additional information of the location.",
-          "x-nullable": true
+          "description": "The additional information of the location."
         },
         "isDefault": {
           "type": "boolean",
@@ -1545,8 +1837,7 @@
         },
         "elin": {
           "type": "string",
-          "description": "The elin of the location.",
-          "x-nullable": true
+          "description": "The elin of the location."
         }
       },
       "required": [
@@ -1556,8 +1847,9 @@
     },
     "NumberDetails": {
       "type": "object",
+      "description": "Read/Write configuration for a phone number provisioned in ACG.",
       "properties": {
-        "phoneNumber": {
+        "phoneNumberString": {
           "type": "string",
           "description": "Phone number in E.164 format.",
           "minLength": 3,
@@ -1565,9 +1857,10 @@
           "pattern": "^\\+[1-9]\\d{1,14}$"
         },
         "services": {
-          "$ref": "#/definitions/NumberServices"
+          "$ref": "#/definitions/NumberServices",
+          "description": "Configuration for the individual UC services for this number."
         },
-        "customSipHeader": {
+        "customSipHeaderString": {
           "type": "string",
           "description": "Contents of the custom SIP header to use with this number. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length. The name of the custom header is set as part of deploying Azure Communications Gateway.",
           "minLength": 1,
@@ -1576,22 +1869,23 @@
         }
       },
       "required": [
-        "phoneNumber",
+        "phoneNumberString",
         "services",
-        "customSipHeader"
+        "customSipHeaderString"
       ]
     },
     "NumberResponse": {
       "type": "object",
+      "description": "The configuration for a phone number provisioned in ACG.",
       "properties": {
-        "phoneNumber": {
+        "phoneNumberString": {
           "type": "string",
           "description": "Phone number in E.164 format.",
           "minLength": 3,
           "maxLength": 16,
           "pattern": "^\\+[1-9]\\d{1,14}$"
         },
-        "accountName": {
+        "accountNameString": {
           "type": "string",
           "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
           "minLength": 1,
@@ -1599,25 +1893,29 @@
           "pattern": "^([A-Za-z0-9_-]+)$"
         },
         "details": {
-          "$ref": "#/definitions/NumberDetails"
+          "$ref": "#/definitions/NumberDetails",
+          "description": "The read/write configuration for this phone number."
         },
         "status": {
-          "$ref": "#/definitions/AssignmentStatus"
+          "$ref": "#/definitions/AssignmentStatus",
+          "description": "The assigment status of this phone number."
         },
-        "Etag": {
+        "etag": {
           "type": "string",
-          "x-nullable": true
+          "description": "ETag for use with If-Match headers for optimistic concurrency."
         },
         "serviceProvisioningStatus": {
-          "$ref": "#/definitions/ServiceProvisioningState"
+          "$ref": "#/definitions/ServiceProvisioningState",
+          "description": "The provisioning state of the phone number with any UC services."
         },
         "serviceProvisioningErrors": {
-          "$ref": "#/definitions/ServiceProvisioningErrors"
+          "$ref": "#/definitions/ServiceProvisioningErrors",
+          "description": "Any error details returned by UC services."
         }
       },
       "required": [
-        "phoneNumber",
-        "accountName",
+        "phoneNumberString",
+        "accountNameString",
         "details",
         "status",
         "serviceProvisioningStatus"
@@ -1625,6 +1923,7 @@
     },
     "NumberResponsePaginatedList": {
       "type": "object",
+      "description": "A paginated list of phone number configuration.",
       "properties": {
         "value": {
           "type": "array",
@@ -1633,6 +1932,11 @@
             "$ref": "#/definitions/NumberResponse"
           },
           "x-ms-identifiers": []
+        },
+        "numberOfRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of records returned for this page."
         },
         "nextLink": {
           "type": "string",
@@ -1651,14 +1955,23 @@
           "default": 200,
           "minimum": 1,
           "maximum": 500
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The page number of the current page.",
+          "default": 1,
+          "minimum": 1
         }
       },
       "required": [
-        "value"
+        "value",
+        "numberOfRecords"
       ]
     },
     "NumberServices": {
       "type": "object",
+      "description": "Configuration for UC services for a phone number.",
       "properties": {
         "teamsOcEnabled": {
           "type": "boolean",
@@ -1694,18 +2007,19 @@
     },
     "OcErrorDetails": {
       "type": "object",
-      "description": "Error details returned from the Teams API",
+      "description": "Error details returned from the Teams API for queries passed through to Teams.",
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "The error code returned from the Teams API"
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "The error message returned from the Teams API"
         }
       },
       "required": [
-        "code",
-        "message"
+        "code"
       ]
     },
     "OcErrorResponseBody": {
@@ -1713,13 +2027,16 @@
       "description": "Error body to return when requests to Teams API fails",
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "The error code returned by the Teams API."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "The error message returned by the Teams API."
         },
         "details": {
           "type": "array",
+          "description": "The error details returned from the Teams API.",
           "items": {
             "$ref": "#/definitions/OcErrorDetails"
           },
@@ -1734,8 +2051,9 @@
     },
     "PhoneNumber": {
       "type": "object",
+      "description": "Utility model for phone numbers.",
       "properties": {
-        "phoneNumber": {
+        "phoneNumberString": {
           "type": "string",
           "description": "Phone number in E.164 format.",
           "minLength": 3,
@@ -1744,7 +2062,7 @@
         }
       },
       "required": [
-        "phoneNumber"
+        "phoneNumberString"
       ]
     },
     "PhoneNumbers": {
@@ -1753,6 +2071,7 @@
       "properties": {
         "numbers": {
           "type": "array",
+          "description": "Array containing a list of phone numbers.",
           "items": {
             "$ref": "#/definitions/PhoneNumber"
           },
@@ -1765,25 +2084,59 @@
     },
     "ProvisioningError": {
       "type": "object",
+      "description": "A provisioning error reported from a UC service.",
       "properties": {
         "service": {
-          "$ref": "#/definitions/ServiceEnum"
+          "$ref": "#/definitions/ServiceEnum",
+          "description": "The service the error relates to."
         },
         "errorCode": {
-          "type": "string"
+          "type": "string",
+          "description": "The error code returned from the service."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "The error message returned from the service."
         }
       },
       "required": [
         "service",
-        "errorCode",
-        "message"
+        "errorCode"
       ]
     },
-    "RFIDetails": {
+    "RFIStatus": {
+      "type": "string",
+      "description": "The possible state for an RFI.",
+      "enum": [
+        "Active",
+        "Suspended",
+        "Removed"
+      ],
+      "x-ms-enum": {
+        "name": "RFIStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The RFI is active."
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "The RFI is suspended."
+          },
+          {
+            "name": "Removed",
+            "value": "Removed",
+            "description": "The RFI is removed."
+          }
+        ]
+      }
+    },
+    "RfiDetails": {
       "type": "object",
+      "description": "Details of an RFI.",
       "properties": {
         "id": {
           "type": "string",
@@ -1803,8 +2156,7 @@
         },
         "status": {
           "$ref": "#/definitions/RFIStatus",
-          "description": "The status of the operator consent.",
-          "x-nullable": true
+          "description": "The status of the operator consent."
         },
         "consentedOn": {
           "type": "string",
@@ -1841,15 +2193,21 @@
         "customerRelationship"
       ]
     },
-    "RFIDetailsPaginatedList": {
+    "RfiDetailsPaginatedList": {
       "type": "object",
+      "description": "A paginated list of RFI details.",
       "properties": {
         "value": {
           "type": "array",
           "description": "The list of records for this page.",
           "items": {
-            "$ref": "#/definitions/RFIDetails"
+            "$ref": "#/definitions/RfiDetails"
           }
+        },
+        "numberOfRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of records returned for this page."
         },
         "nextLink": {
           "type": "string",
@@ -1868,26 +2226,23 @@
           "default": 200,
           "minimum": 1,
           "maximum": 500
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The page number of the current page.",
+          "default": 1,
+          "minimum": 1
         }
       },
       "required": [
-        "value"
+        "value",
+        "numberOfRecords"
       ]
-    },
-    "RFIStatus": {
-      "type": "string",
-      "enum": [
-        "Active",
-        "Suspended",
-        "Removed"
-      ],
-      "x-ms-enum": {
-        "name": "RFIStatus",
-        "modelAsString": true
-      }
     },
     "ServiceEnum": {
       "type": "string",
+      "description": "The UC service supported by the API.",
       "enum": [
         "oc",
         "tpm",
@@ -1900,28 +2255,34 @@
         "values": [
           {
             "name": "Oc",
-            "value": "oc"
+            "value": "oc",
+            "description": "Teams Operator Connect."
           },
           {
             "name": "Tpm",
-            "value": "tpm"
+            "value": "tpm",
+            "description": "Teams Phone Mobile."
           },
           {
             "name": "Dr",
-            "value": "dr"
+            "value": "dr",
+            "description": "Teams Direct Routing."
           },
           {
             "name": "Zoom",
-            "value": "zoom"
+            "value": "zoom",
+            "description": "Zoom"
           }
         ]
       }
     },
     "ServiceProvisioningErrors": {
       "type": "object",
+      "description": "List of all service provisioning errors for the object.",
       "properties": {
         "allErrors": {
           "type": "array",
+          "description": "List of service provisioning errors.",
           "items": {
             "$ref": "#/definitions/ProvisioningError"
           },
@@ -1934,6 +2295,7 @@
     },
     "ServiceProvisioningState": {
       "type": "string",
+      "description": "The provisioning states of an object on any relevant UC service.",
       "enum": [
         "Pending",
         "Success",
@@ -1945,15 +2307,18 @@
         "values": [
           {
             "name": "Pending",
-            "value": "Pending"
+            "value": "Pending",
+            "description": "The object is pending provisioning."
           },
           {
             "name": "Success",
-            "value": "Success"
+            "value": "Success",
+            "description": "The object has been provisioned in the relevnat UC service."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The object provisioning operation failed with the relevant UC service."
           }
         ]
       }
@@ -1963,28 +2328,33 @@
       "description": "The Teams capabilities available for numbers with OC or TPM services enabled.",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The capability plan name."
         },
         "offerTypes": {
           "type": "array",
+          "description": "The offer types available.",
           "items": {
             "type": "string"
           }
         },
         "mandatoryCapabilities": {
           "type": "array",
+          "description": "Mandatory capabilities for phone numbers.",
           "items": {
             "type": "string"
           }
         },
         "choosableCapabilities": {
           "type": "array",
+          "description": "Choosable capabilities for phone numbers.",
           "items": {
             "type": "string"
           }
         },
         "supportsTollFree": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Boolean indicating if Toll free is supported."
         }
       },
       "required": [
@@ -1997,6 +2367,7 @@
     },
     "TeamsCapabilitiesPaginatedList": {
       "type": "object",
+      "description": "Paginated list of Teams capabilities.",
       "properties": {
         "value": {
           "type": "array",
@@ -2005,6 +2376,11 @@
             "$ref": "#/definitions/TeamsCapabilities"
           },
           "x-ms-identifiers": []
+        },
+        "numberOfRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of records returned for this page."
         },
         "nextLink": {
           "type": "string",
@@ -2023,14 +2399,23 @@
           "default": 200,
           "minimum": 1,
           "maximum": 500
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The page number of the current page.",
+          "default": 1,
+          "minimum": 1
         }
       },
       "required": [
-        "value"
+        "value",
+        "numberOfRecords"
       ]
     },
     "TeamsCivicAddress": {
       "type": "object",
+      "description": "A civic address available for Teams OC or TPM users.",
       "properties": {
         "id": {
           "type": "string",
@@ -2039,78 +2424,63 @@
         },
         "country": {
           "type": "string",
-          "description": "The country of the civic address.",
-          "x-nullable": true
+          "description": "The country of the civic address."
         },
         "houseNumber": {
           "type": "string",
-          "description": "The house number of the civic address.",
-          "x-nullable": true
+          "description": "The house number of the civic address."
         },
         "houseNumberSuffix": {
           "type": "string",
-          "description": "The house number suffix of the civic address.",
-          "x-nullable": true
+          "description": "The house number suffix of the civic address."
         },
         "preDirectional": {
           "type": "string",
-          "description": "The pre directional of the civic address.",
-          "x-nullable": true
+          "description": "The pre directional of the civic address."
         },
         "streetName": {
           "type": "string",
-          "description": "The street name of the civic address.",
-          "x-nullable": true
+          "description": "The street name of the civic address."
         },
         "streetSuffix": {
           "type": "string",
-          "description": "The street suffix of the civic address.",
-          "x-nullable": true
+          "description": "The street suffix of the civic address."
         },
         "postDirectional": {
           "type": "string",
-          "description": "The post directional of the civic address.",
-          "x-nullable": true
+          "description": "The post directional of the civic address."
         },
         "stateOrProvince": {
           "type": "string",
-          "description": "The state or province of the civic address.",
-          "x-nullable": true
+          "description": "The state or province of the civic address."
         },
         "countyOrDistrict": {
           "type": "string",
-          "description": "The county or district of the civic address.",
-          "x-nullable": true
+          "description": "The county or district of the civic address."
         },
         "cityOrTown": {
           "type": "string",
-          "description": "The city or town of the civic address.",
-          "x-nullable": true
+          "description": "The city or town of the civic address."
         },
         "cityOrTownAlias": {
           "type": "string",
-          "description": "The city or town alias of the civic address.",
-          "x-nullable": true
+          "description": "The city or town alias of the civic address."
         },
         "postalOrZipCode": {
           "type": "string",
-          "description": "The postal or zip code of the civic address.",
-          "x-nullable": true
+          "description": "The postal or zip code of the civic address."
         },
         "description": {
           "type": "string",
-          "description": "The description of the civic address.",
-          "x-nullable": true
+          "description": "The description of the civic address."
         },
         "companyName": {
           "type": "string",
-          "description": "The company name of the civic address.",
-          "x-nullable": true
+          "description": "The company name of the civic address."
         },
         "companyId": {
           "type": "string",
-          "description": "The company ID of the civic address.",
-          "x-nullable": true
+          "description": "The company ID of the civic address."
         },
         "defaultLocationId": {
           "type": "string",
@@ -2119,18 +2489,15 @@
         },
         "validationStatus": {
           "$ref": "#/definitions/ValidationStatus",
-          "description": "The validation status of the civic address.",
-          "x-nullable": true
+          "description": "The validation status of the civic address."
         },
         "tenantId": {
           "type": "string",
-          "description": "The customer tenant ID of the civic address.",
-          "x-nullable": true
+          "description": "The customer tenant ID of the civic address."
         },
         "partnerId": {
           "type": "string",
-          "description": "The partner ID of the civic address.",
-          "x-nullable": true
+          "description": "The partner ID of the civic address."
         },
         "locations": {
           "type": "array",
@@ -2141,13 +2508,11 @@
         },
         "latitude": {
           "type": "string",
-          "description": "The latitude of the civic address.",
-          "x-nullable": true
+          "description": "The latitude of the civic address."
         },
         "longitude": {
           "type": "string",
-          "description": "The longitude of the civic address.",
-          "x-nullable": true
+          "description": "The longitude of the civic address."
         }
       },
       "required": [
@@ -2157,6 +2522,7 @@
     },
     "TeamsCivicAddressPaginatedList": {
       "type": "object",
+      "description": "A paginated list of civic addresses available for Teams OC or TPM users.",
       "properties": {
         "value": {
           "type": "array",
@@ -2164,6 +2530,11 @@
           "items": {
             "$ref": "#/definitions/TeamsCivicAddress"
           }
+        },
+        "numberOfRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of records returned for this page."
         },
         "nextLink": {
           "type": "string",
@@ -2182,14 +2553,23 @@
           "default": 200,
           "minimum": 1,
           "maximum": 500
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The page number of the current page.",
+          "default": 1,
+          "minimum": 1
         }
       },
       "required": [
-        "value"
+        "value",
+        "numberOfRecords"
       ]
     },
     "TeamsCommonConfig": {
       "type": "object",
+      "description": "Configuration that is common for all Teams services on a given account.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -2207,6 +2587,7 @@
     },
     "TeamsCommonConfigUpdate": {
       "type": "object",
+      "description": "Configuration that is common for all Teams services on a given account.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -2220,6 +2601,7 @@
     },
     "TeamsDrConfig": {
       "type": "object",
+      "description": "Configuration specific to Teams Direct Routing.",
       "properties": {
         "callScreening": {
           "type": "boolean",
@@ -2233,13 +2615,16 @@
           "pattern": "^([A-Za-z0-9_-]+)$"
         },
         "subdomainTokens": {
-          "$ref": "#/definitions/TeamsDrSubdomainTokens"
+          "$ref": "#/definitions/TeamsDrSubdomainTokens",
+          "description": "DNS TXT value for the Direct Routing regions, as provided by the customer from their Microsoft 365 Admin Center."
         },
         "subdomainProvisionedState": {
-          "$ref": "#/definitions/DNSProvisioningState"
+          "$ref": "#/definitions/DNSProvisioningState",
+          "description": "Status of DNS configuration and the DNS TXT values for the DNS records"
         },
         "actualSubdomainTokens": {
-          "$ref": "#/definitions/TeamsDrSubdomainTokens"
+          "$ref": "#/definitions/TeamsDrSubdomainTokens",
+          "description": "DNS TXT value for the Direct Routing regions, as provided by the customer from their Microsoft 365 Admin Center."
         }
       },
       "required": [
@@ -2250,6 +2635,7 @@
     },
     "TeamsDrConfigUpdate": {
       "type": "object",
+      "description": "Configuration specific to Teams Direct Routing.",
       "properties": {
         "callScreening": {
           "type": "boolean",
@@ -2263,24 +2649,30 @@
           "pattern": "^([A-Za-z0-9_-]+)$"
         },
         "subdomainTokens": {
-          "$ref": "#/definitions/TeamsDrSubdomainTokensUpdate"
+          "$ref": "#/definitions/TeamsDrSubdomainTokensUpdate",
+          "description": "DNS TXT value for the Direct Routing regions, as provided by the customer from their Microsoft 365 Admin Center."
         },
         "subdomainProvisionedState": {
-          "$ref": "#/definitions/DNSProvisioningState"
+          "$ref": "#/definitions/DNSProvisioningState",
+          "description": "Status of DNS configuration and the DNS TXT values for the DNS records"
         },
         "actualSubdomainTokens": {
-          "$ref": "#/definitions/TeamsDrSubdomainTokensUpdate"
+          "$ref": "#/definitions/TeamsDrSubdomainTokensUpdate",
+          "description": "DNS TXT value for the Direct Routing regions, as provided by the customer from their Microsoft 365 Admin Center."
         }
       }
     },
     "TeamsDrSubdomainProvisioningState": {
       "type": "object",
+      "description": "The provisioning state of Teams Direct Routing domains.",
       "properties": {
         "teamsDrSubdomainTokens": {
-          "$ref": "#/definitions/TeamsDrSubdomainTokens"
+          "$ref": "#/definitions/TeamsDrSubdomainTokens",
+          "description": "The DNS TXT values of the domains the state relates to."
         },
         "teamsDrSubdomainStatus": {
-          "$ref": "#/definitions/DNSProvisioningState"
+          "$ref": "#/definitions/DNSProvisioningState",
+          "description": "The provisioning status of the domains."
         }
       },
       "required": [
@@ -2289,6 +2681,7 @@
     },
     "TeamsDrSubdomainToken": {
       "type": "object",
+      "description": "A DNS TXT value.",
       "properties": {
         "token": {
           "type": "string",
@@ -2304,6 +2697,7 @@
     },
     "TeamsDrSubdomainTokenUpdate": {
       "type": "object",
+      "description": "A DNS TXT value.",
       "properties": {
         "token": {
           "type": "string",
@@ -2319,10 +2713,12 @@
       "description": "DNS TXT value for the region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.",
       "properties": {
         "region1Token": {
-          "$ref": "#/definitions/TeamsDrSubdomainToken"
+          "$ref": "#/definitions/TeamsDrSubdomainToken",
+          "description": "The DNS TXT value of the first region."
         },
         "region2Token": {
-          "$ref": "#/definitions/TeamsDrSubdomainToken"
+          "$ref": "#/definitions/TeamsDrSubdomainToken",
+          "description": "The DNS TXT value of the second region."
         }
       },
       "required": [
@@ -2335,46 +2731,57 @@
       "description": "DNS TXT value for the region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.",
       "properties": {
         "region1Token": {
-          "$ref": "#/definitions/TeamsDrSubdomainTokenUpdate"
+          "$ref": "#/definitions/TeamsDrSubdomainTokenUpdate",
+          "description": "The DNS TXT value of the first region."
         },
         "region2Token": {
-          "$ref": "#/definitions/TeamsDrSubdomainTokenUpdate"
+          "$ref": "#/definitions/TeamsDrSubdomainTokenUpdate",
+          "description": "The DNS TXT value of the second region."
         }
       }
     },
     "TeamsOcConfig": {
-      "type": "object"
+      "type": "object",
+      "description": "Account onfiguration specific to Teams Operator Connect."
     },
     "TeamsOcNumberConfig": {
       "type": "object",
+      "description": "Phone number configuration for Teams OC phone numbers.",
       "properties": {
         "usage": {
-          "type": "string"
+          "type": "string",
+          "description": "The usage for this phone number."
         },
         "choosableCapabilities": {
           "type": "array",
+          "description": "The choosable capabilities for this phone number.",
           "items": {
             "type": "string"
           }
         },
         "additionalUsages": {
           "type": "array",
+          "description": "The additional usages for this phone number.",
           "items": {
             "type": "string"
           }
         },
         "civicAddressId": {
-          "type": "string"
+          "type": "string",
+          "description": "The ID of the civic address to be used as the emergency address for this phone number."
         },
         "locationId": {
-          "type": "string"
+          "type": "string",
+          "description": "The ID of the location to be used as the emergency address for this phone number."
         },
         "allowTenantAddressUpdate": {
           "type": "boolean",
+          "description": "If the enterprise is allowed to update the address for this phone number.",
           "default": false
         },
         "displayedCountryCode": {
-          "type": "string"
+          "type": "string",
+          "description": "The country code to be displayed with this phone number"
         }
       },
       "required": [
@@ -2384,6 +2791,7 @@
     },
     "TeamsService": {
       "type": "string",
+      "description": "The Teams Service supported by this API that require provisioning in Teams.",
       "enum": [
         "oc",
         "tpm"
@@ -2394,59 +2802,72 @@
         "values": [
           {
             "name": "Oc",
-            "value": "oc"
+            "value": "oc",
+            "description": "Teams Operator Connect."
           },
           {
             "name": "Tpm",
-            "value": "tpm"
+            "value": "tpm",
+            "description": "Teams Phone Mobile."
           }
         ]
       }
     },
     "TeamsSyncEnabled": {
       "type": "object",
+      "description": "Indicating if the account should be syncing configuration from ACG to Teams.",
       "properties": {
-        "teamsSyncEnabled": {
-          "type": "boolean"
+        "teamsSyncEnabledBool": {
+          "type": "boolean",
+          "description": "Boolean indicating if account configuration is synced to Teams."
         }
       },
       "required": [
-        "teamsSyncEnabled"
+        "teamsSyncEnabledBool"
       ]
     },
     "TeamsTpmConfig": {
-      "type": "object"
+      "type": "object",
+      "description": "Account configuration specific to Teams Phone Mobile."
     },
     "TeamsTpmNumberConfig": {
       "type": "object",
+      "description": "Phone number configuration for Teams Phone Mobile phone numbers.",
       "properties": {
         "usage": {
-          "type": "string"
+          "type": "string",
+          "description": "The usage for this phone number."
         },
         "choosableCapabilities": {
           "type": "array",
+          "description": "The choosable capabilities for this phone number.",
           "items": {
             "type": "string"
           }
         },
         "additionalUsages": {
           "type": "array",
+          "description": "The additional usages for this phone number.",
           "items": {
             "type": "string"
           }
         },
         "civicAddressId": {
-          "type": "string"
+          "type": "string",
+          "description": "The ID of the civic address to be used as the emergency address for this phone number."
         },
         "locationId": {
-          "type": "string"
+          "type": "string",
+          "description": "The ID of the location to be used as the emergency address for this phone number."
         },
         "allowTenantAddressUpdate": {
           "type": "boolean",
+          "description": "If the enterprise is allowed to update the address for this phone number.",
           "default": false
         },
         "displayedCountryCode": {
-          "type": "string"
+          "type": "string",
+          "description": "The country code to be displayed with this phone number"
         }
       },
       "required": [
@@ -2456,13 +2877,26 @@
     },
     "ValidationStatus": {
       "type": "string",
+      "description": "The possible validation status of Teams Civic Addresses.",
       "enum": [
         "NotValidated",
         "Validated"
       ],
       "x-ms-enum": {
         "name": "ValidationStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotValidated",
+            "value": "NotValidated",
+            "description": "The civic address is not validated."
+          },
+          {
+            "name": "Validated",
+            "value": "Validated",
+            "description": "The civic address is validated."
+          }
+        ]
       }
     },
     "Versions": {
@@ -2484,10 +2918,20 @@
       }
     },
     "ZoomConfig": {
-      "type": "object"
+      "type": "object",
+      "description": "Account configuration specific to Zoom."
     }
   },
   "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
     "CustomFilterQueryParameter": {
       "name": "filter",
       "in": "query",
@@ -2508,6 +2952,18 @@
       "maximum": 500,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "maxPageSize"
+    },
+    "CustomPageNumberQueryParameter": {
+      "name": "pagenumber",
+      "in": "query",
+      "description": "The page number of the current page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 1,
+      "minimum": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "pageNumber"
     },
     "CustomSkipQueryParameter": {
       "name": "skip",
