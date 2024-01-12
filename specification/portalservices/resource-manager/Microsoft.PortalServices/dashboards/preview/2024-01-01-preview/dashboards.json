@@ -360,6 +360,30 @@
     }
   },
   "definitions": {
+    "ActionOpenBlade": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "What action the tile should do when clicked. Enum permitting the value: \"openBlade\".",
+          "enum": [
+            "openBlade"
+          ],
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true
+          }
+        },
+        "blade": {
+          "$ref": "#/definitions/BladeReferenceWithContextPane"
+        }
+      },
+      "required": [
+        "action",
+        "blade"
+      ],
+      "additionalProperties": false      
+    },
     "ActionParameters" : {
       "type": "object",
       "properties": {
@@ -384,6 +408,107 @@
         "action",
         "parameters"
       ]
+    },
+    "ActionReference": {
+      "type": "object",
+      "properties": {
+          "type": {
+            "$ref": "#/definitions/ActionReferenceType"
+          }       
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ActionReferenceType": {
+      "description": "Types of action references.",
+      "enum": [
+        "blade",
+        "url"
+      ],
+      "x-ms-enum": {
+        "name": "ActionReferenceType",
+        "modelAsString": true
+      },
+      "type": "string"
+    },
+    "ActionReferenceUrl": {
+      "x-ms-discriminator-value": "url",
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URI that will be opened"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the link"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionReference"
+        }      
+      ],
+      "required": [
+        "url",
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "ActionReferenceBlade": {
+      "x-ms-discriminator-value": "blade",
+      "type": "object",
+      "properties": {
+        "blade": {
+          "$ref": "#/definitions/BladeReferenceWithContextPane"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the link"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionReference"
+        }      
+      ],
+      "required": [
+        "blade",
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "BladeReferenceWithContextPane": {
+      "type": "object",
+      "description": "open a blade in context pane",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the blade to open."
+        },
+        "extension": {
+          "type": "string",
+          "description": "The extension name of the blade to open."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameters to pass to the blade."
+        },
+        "inContextPane": {
+          "type": "boolean",
+          "description": "Whether the blade should be opened in the context pane."
+        },
+        "doesProvisioning": {
+          "type": "boolean",
+          "description": "Specify whether to open this blade as Provisioning blade"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
     },
     "DashboardListResult": {
       "type": "object",
