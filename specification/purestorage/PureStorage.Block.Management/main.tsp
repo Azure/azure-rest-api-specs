@@ -194,9 +194,9 @@ interface StoragePools {
     ArmCombinedLroHeaders
   > | ErrorResponse;
 
-  @doc("Enable Vsphere plugins on storage pool")
+  @doc("Enable Vsphere plugin on storage pool")
   @armResourceAction(StoragePool)
-  @action("enableVspherePlugins")
+  @action("enableVspherePlugin")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -205,7 +205,7 @@ interface StoragePools {
     }
   )
   @post
-  enableVspherePlugins(
+  enableVspherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
 
     @doc("Vsphere plugin properties")
@@ -216,9 +216,9 @@ interface StoragePools {
     ArmCombinedLroHeaders
   > | ErrorResponse;
 
-  @doc("Disable Vsphere plugins on storage pool")
+  @doc("Disable Vsphere plugin on storage pool")
   @armResourceAction(StoragePool)
-  @action("disableVspherePlugins")
+  @action("disableVspherePlugin")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -227,16 +227,16 @@ interface StoragePools {
     }
   )
   @post
-  disableVspherePlugins(
+  disableVspherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
     ArmCombinedLroHeaders
   > | ErrorResponse;
 
-  @doc("Upgrade Vsphere plugins on storage pool")
+  @doc("Upgrade Vsphere plugin on storage pool")
   @armResourceAction(StoragePool)
-  @action("upgradeVspherePlugins")
+  @action("upgradeVspherePlugin")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -245,7 +245,7 @@ interface StoragePools {
     }
   )
   @post
-  upgradeVspherePlugins(
+  upgradeVspherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
