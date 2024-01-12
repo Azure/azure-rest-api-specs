@@ -50,15 +50,54 @@ interface DeviceGroups
       DeviceGroup,
       ListQueryParameters
     > {
-  @autoRoute
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  @removed(Versions.v2024_04_01)
+  @autoRoute
+  @renamedFrom(Versions.v2024_04_01, "countDevices")
+  @armResourceAction(DeviceGroup)
+  @action("countDevices")
+  @post
+  deprecatedCountDevices(
+    ...ResourceInstanceParameters<DeviceGroup>,
+  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  @added(Versions.v2024_04_01)
+  @autoRoute
+  @sharedRoute
   @armResourceAction(DeviceGroup)
   @post
   countDevices(
     ...ResourceInstanceParameters<DeviceGroup>,
-  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+  ): ArmResponse<CountDevicesResponse> | ErrorResponse;
 
   @autoRoute
+  @armResourceAction(DeviceGroup)
+  @action("claimDevices")
+  @removed(Versions.v2024_04_01)
+  @renamedFrom(Versions.v2024_04_01, "claimDevices")
+  @doc("Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  @post
+  deprecatedClaimDevices(
+    ...ResourceInstanceParameters<DeviceGroup>,
+
+    @doc("Bulk claim devices request body.")
+    @body
+    claimDevicesRequest: ClaimDevicesRequest,
+  ): ArmAcceptedResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @autoRoute
+  @sharedRoute
+  @added(Versions.v2024_04_01)
   @armResourceAction(DeviceGroup)
   @doc("Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.")
   @extension("x-ms-long-running-operation", true)
@@ -75,7 +114,7 @@ interface DeviceGroups
     @doc("Bulk claim devices request body.")
     @body
     claimDevicesRequest: ClaimDevicesRequest,
-  ): ArmAcceptedResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse | ErrorResponse;
 }
 
 @doc("The properties of deviceGroup")

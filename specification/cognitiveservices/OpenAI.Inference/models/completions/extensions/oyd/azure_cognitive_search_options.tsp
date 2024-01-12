@@ -26,7 +26,7 @@ model AzureCognitiveSearchChatExtensionConfiguration
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)
-@doc("Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension.")
+@doc("Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension. The supported authentication types are APIKey, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.")
 model AzureCognitiveSearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
