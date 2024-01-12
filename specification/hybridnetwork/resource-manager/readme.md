@@ -29,6 +29,31 @@ openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2023-09-01
 ```
+
+### Tag: package-2024-04-01-preview
+
+These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-01-preview'
+input-file:
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/common.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/configurationGroupSchema.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/configurationGroupValues.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/networkFunction.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/networkFunctionDefinition.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/networkServiceDesign.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/operation.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/publisher.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/pureProxyArtifact.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/site.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/siteNetworkService.json
+  - Microsoft.HybridNetwork/preview/2024-04-01-preview/serviceManagementContainer.json
+suppressions:
+  - code: PatchSkuProperty
+    from: siteNetworkService.json
+    reason: sku cannot be patched
+```
+
 ### Tag: package-2023-09-01
 
 These settings apply only when `--tag=package-2023-09-01` is specified on the command line.

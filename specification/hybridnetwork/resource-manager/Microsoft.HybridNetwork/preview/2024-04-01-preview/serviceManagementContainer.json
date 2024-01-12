@@ -3,7 +3,7 @@
   "info": {
     "description": "Definitions for Service Management Container and sub-resources used by Azure Operator Service Manager (AOSM) Multi-Site. AOSM is a service enabling network operators to perform lifecycle management of telecom infrastructure.",
     "title": "HybridNetworkManagementClient",
-    "version": "2023-04-01-preview"
+    "version": "2024-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -60,10 +60,7 @@
       "delete": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -72,7 +69,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
           }
         ],
         "responses": {
@@ -112,10 +112,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -124,7 +121,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
           }
         ],
         "responses": {
@@ -155,10 +155,7 @@
       "put": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -167,16 +164,19 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
           },
           {
             "in": "body",
             "name": "parameters",
             "required": true,
+            "description": "Parameters supplied to create a rollout sequence.",
             "schema": {
               "$ref": "#/definitions/RolloutSequence"
-            },
-            "description": "Parameters supplied to create a rollout sequence."
+            }
           }
         ],
         "responses": {
@@ -217,10 +217,7 @@
       "patch": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -229,16 +226,19 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutSequenceNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
+            "description": "Parameters supplied to update rollout script tags.",
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update rollout script tags."
+            }
           }
         ],
         "responses": {
@@ -271,7 +271,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -280,7 +280,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
           }
         ],
         "responses": {
@@ -316,7 +316,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -325,7 +325,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
           }
         ],
         "responses": {
@@ -361,7 +361,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -370,7 +370,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
           }
         ],
         "responses": {
@@ -406,10 +406,7 @@
       "delete": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -418,7 +415,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
           }
         ],
         "responses": {
@@ -458,10 +458,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -470,7 +467,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
           }
         ],
         "responses": {
@@ -501,10 +501,7 @@
       "put": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -513,16 +510,19 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
           },
           {
             "in": "body",
             "name": "parameters",
             "required": true,
+            "description": "Parameters supplied to create a rollout tier.",
             "schema": {
               "$ref": "#/definitions/RolloutTier"
-            },
-            "description": "Parameters supplied to create a rollout tier."
+            }
           }
         ],
         "responses": {
@@ -559,10 +559,7 @@
       "patch": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -571,16 +568,19 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutTierNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
+            "description": "Parameters supplied to update rollout tier tags.",
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update rollout tier tags."
+            }
           }
         ],
         "responses": {
@@ -613,13 +613,7 @@
       "delete": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -628,7 +622,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
           }
         ],
         "responses": {
@@ -668,6 +668,15 @@
       "put": {
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
           },
           {
@@ -677,22 +686,13 @@
             "$ref": "./common.json#/parameters/RolloutNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "in": "body",
             "name": "parameters",
             "required": true,
+            "description": "Parameters supplied to create or update a rollout.",
             "schema": {
               "$ref": "#/definitions/Rollout"
-            },
-            "description": "Parameters supplied to create or update a rollout."
+            }
           }
         ],
         "responses": {
@@ -736,13 +736,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -751,7 +745,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
           }
         ],
         "responses": {
@@ -782,6 +782,15 @@
       "patch": {
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
           },
           {
@@ -791,22 +800,13 @@
             "$ref": "./common.json#/parameters/RolloutNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
+            "description": "Parameters supplied to update rollout tags.",
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update rollout tags."
+            }
           }
         ],
         "responses": {
@@ -839,13 +839,7 @@
       "post": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -854,7 +848,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
           }
         ],
         "responses": {
@@ -893,13 +893,7 @@
       "post": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -908,7 +902,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
           }
         ],
         "responses": {
@@ -947,13 +947,7 @@
       "post": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -962,7 +956,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
           }
         ],
         "responses": {
@@ -1001,13 +1001,7 @@
       "post": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1016,7 +1010,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
           }
         ],
         "responses": {
@@ -1041,7 +1041,7 @@
         "operationId": "Rollouts_Suspend",
         "summary": "Suspends the specified rollout",
         "x-ms-examples": {
-          "RolloutContinue": {
+          "RolloutSuspend": {
             "$ref": "./examples/AOSMMultiSite/RolloutSuspend.json"
           }
         },
@@ -1055,13 +1055,7 @@
       "post": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1070,7 +1064,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
           }
         ],
         "responses": {
@@ -1095,7 +1095,7 @@
         "operationId": "Rollouts_Resume",
         "summary": "Resumes the specified rollout if it has been previously suspended",
         "x-ms-examples": {
-          "RolloutContinue": {
+          "RolloutResume": {
             "$ref": "./examples/AOSMMultiSite/RolloutResume.json"
           }
         },
@@ -1109,13 +1109,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1124,7 +1118,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
           }
         ],
         "responses": {
@@ -1145,9 +1145,9 @@
           "RolloutStatus"
         ],
         "operationId": "RolloutStatuses_ListByRollout",
-        "summary": "Lists all the Rollouts in an UpdateSpecification",
+        "summary": "List all rollout statuses of the rollout.",
         "x-ms-examples": {
-          "RolloutListByUpdateSpecification": {
+          "RolloutListByRollout": {
             "$ref": "./examples/AOSMMultiSite/RolloutStatusListByRollout.json"
           }
         },
@@ -1160,13 +1160,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/RolloutNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1175,7 +1169,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/RolloutNameParameter"
           }
         ],
         "responses": {
@@ -1208,10 +1208,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1220,7 +1217,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
           }
         ],
         "responses": {
@@ -1256,7 +1256,7 @@
       "put": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1265,16 +1265,16 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
           },
           {
             "in": "body",
             "name": "parameters",
             "required": true,
+            "description": "Parameters supplied to create a service management container.",
             "schema": {
               "$ref": "#/definitions/ServiceManagementContainer"
-            },
-            "description": "Parameters supplied to create a service management container."
+            }
           }
         ],
         "responses": {
@@ -1312,7 +1312,7 @@
       "patch": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1321,16 +1321,16 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
+            "description": "Parameters supplied to update service management container tags.",
             "schema": {
               "$ref": "#/definitions/TagsAndIdentityObject"
-            },
-            "description": "Parameters supplied to update service management container tags."
+            }
           }
         ],
         "responses": {
@@ -1361,7 +1361,7 @@
       "delete": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1370,7 +1370,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
           }
         ],
         "responses": {
@@ -1410,7 +1410,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1419,7 +1419,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
           }
         ],
         "responses": {
@@ -1452,13 +1452,13 @@
       "get": {
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1494,10 +1494,10 @@
       "get": {
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1533,10 +1533,7 @@
       "put": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1545,16 +1542,19 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
           },
           {
             "in": "body",
             "name": "parameters",
             "required": true,
+            "description": "Parameters supplied to create an update specification.",
             "schema": {
               "$ref": "#/definitions/UpdateSpecification"
-            },
-            "description": "Parameters supplied to create an update specification."
+            }
           }
         ],
         "responses": {
@@ -1592,10 +1592,7 @@
       "patch": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1604,16 +1601,19 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
+            "description": "Parameters supplied to update update spec tags.",
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update update spec tags."
+            }
           }
         ],
         "responses": {
@@ -1644,10 +1644,7 @@
       "delete": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1656,7 +1653,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
           }
         ],
         "responses": {
@@ -1696,10 +1696,7 @@
       "get": {
         "parameters": [
           {
-            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1708,7 +1705,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./common.json#/parameters/ServiceManagementContainerNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/UpdateSpecificationNameParameter"
           }
         ],
         "responses": {
@@ -1761,7 +1761,8 @@
             "read",
             "create",
             "update"
-          ]
+          ],
+          "x-ms-identifiers": []
         }
       },
       "description": "Actions to be associated with an individual rollout site."
@@ -1809,11 +1810,11 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "A list of Rollout statuses.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RolloutStatus"
-          },
-          "description": "A list of Rollout statuses."
+          }
         },
         "nextLink": {
           "readOnly": true,
@@ -1824,6 +1825,7 @@
       "description": "A list of Rollout statuses."
     },
     "RolloutStatus": {
+      "type": "object",
       "description": "Status of a rollout.",
       "properties": {
         "properties": {
@@ -1832,7 +1834,6 @@
           "description": "Rollout progress status properties."
         }
       },
-      "type": "object",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -1867,7 +1868,8 @@
           "x-ms-mutability": [
             "read",
             "update"
-          ]
+          ],
+          "x-ms-identifiers": []
         },
         "configurationGroupValueChanges": {
           "additionalProperties": {
@@ -1911,7 +1913,8 @@
           "type": "array",
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-ms-identifiers": []
         },
         "configurationGroupValueChanges": {
           "additionalProperties": {
@@ -2013,6 +2016,7 @@
             "create",
             "update"
           ],
+          "x-ms-identifiers": [],
           "description": "The rollout tier action list."
         }
       }
@@ -2125,7 +2129,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Gate"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2292,42 +2297,51 @@
     "NetworkServiceDesignVersionChange": {
       "type": "object",
       "required": [
-        "publisherName",
-        "publisherScope",
-        "newNetworkServiceDesignGroupName",
-        "newNetworkServiceDesignVersionName",
-        "networkServiceDesignVersionOfferingLocation"
+        "networkServiceDesignVersionResourceReference"
       ],
       "properties": {
         "publisherName": {
+          "readOnly": true,
           "type": "string",
           "description": "The publisher name for the site network service."
         },
         "publisherScope": {
+          "readOnly": true,
           "$ref": "./common.json#/definitions/PublisherScope",
           "description": "The scope of the publisher."
         },
-        "existingNetworkServiceDesignGroupName": {
+        "lastStateNetworkServiceDesignGroupName": {
+          "readOnly": true,
           "type": "string",
           "description": "The current network service design group name for the site network service."
         },
-        "newNetworkServiceDesignGroupName": {
+        "networkServiceDesignGroupName": {
+          "readOnly": true,
           "type": "string",
           "description": "The desired network service design group name for the site network service."
         },
-        "existingNetworkServiceDesignVersionName": {
+        "lastStateNetworkServiceDesignVersionName": {
+          "readOnly": true,
           "type": "string",
-          "description": "The current network service design version for the site network service.",
-          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          "description": "The current network service design version for the site network service."
         },
-        "newNetworkServiceDesignVersionName": {
+        "networkServiceDesignVersionName": {
+          "readOnly": true,
           "type": "string",
-          "description": "The desired network service design version for the site network service.",
-          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          "description": "The desired network service design version for the site network service."
         },
         "networkServiceDesignVersionOfferingLocation": {
+          "readOnly": true,
           "type": "string",
           "description": "The location of the network service design offering."
+        },
+        "lastStateNetworkServiceDesignVersionResourceReference": {
+          "$ref": "./common.json#/definitions/DeploymentResourceIdReference",
+          "description": "The current network service design version resource reference."
+        },
+        "networkServiceDesignVersionResourceReference": {
+          "$ref": "./common.json#/definitions/DeploymentResourceIdReference",
+          "description": "The network service design version resource reference."
         }
       },
       "description": "Change to network service design version."
@@ -2335,10 +2349,10 @@
     "ConfigurationGroupValueChange": {
       "type": "object",
       "required": [
-        "newConfigurationGroupValueReference"
+        "desiredStateConfigurationGroupValueReference"
       ],
       "properties": {
-        "existingConfigurationGroupValueReference": {
+        "lastStateConfigurationGroupValueReference": {
           "$ref": "./common.json#/definitions/ReferencedResource",
           "description": "ConfigurationGroupValue to be replaced",
           "x-ms-mutability": [
@@ -2347,7 +2361,7 @@
             "update"
           ]
         },
-        "newConfigurationGroupValueReference": {
+        "desiredStateConfigurationGroupValueReference": {
           "$ref": "./common.json#/definitions/ReferencedResource",
           "description": "Target ConfigurationGroupValue.",
           "x-ms-mutability": [
@@ -2381,7 +2395,8 @@
         "durationInMinutes": {
           "description": "Time in minutes AOSM should wait before proceeding to the next SiteNetworkService, only applicable when Gate is a WaitingGate.",
           "type": "integer",
-          "example": "10"
+          "format": "int32",
+          "example": 10
         }
       }
     },
@@ -2413,6 +2428,9 @@
             "read",
             "create",
             "update"
+          ],
+          "x-ms-identifiers": [
+            "siteNetworkServiceReference"
           ]
         },
         "excludedSiteNetworkServices": {
@@ -2440,6 +2458,9 @@
           "type": "array",
           "x-ms-mutability": [
             "read"
+          ],
+          "x-ms-identifiers": [
+            "siteNetworkServiceReference"
           ]
         },
         "excludedSiteNetworkServices": {
@@ -2476,6 +2497,7 @@
             "$ref": "#/definitions/GateSnapshot"
           },
           "type": "array",
+          "x-ms-identifiers": [],
           "description": "The post-actions associated with the site."
         }
       }
@@ -2503,6 +2525,7 @@
             "$ref": "#/definitions/GateRolloutState"
           },
           "type": "array",
+          "x-ms-identifiers": [],
           "description": "Statuses of the post-actions associated with the site."
         }
       }

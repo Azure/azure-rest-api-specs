@@ -3,7 +3,7 @@
     "resourceGroupName": "rg1",
     "serviceManagementContainerName": "testServiceManagementContainer",
     "updateSpecificationName": "testUpdateSpecification",
-    "api-version": "2023-04-01-preview",
+    "api-version": "2024-04-01-preview",
     "subscriptionId": "b7173c9f-853f-45b5-8b75-3fb7d1e78388",
     "parameters": {
       "location": "westus",
@@ -13,32 +13,29 @@
       "properties": {
         "configurationGroupValueChanges": {
           "CGV1": {
-            "existingConfigurationGroupValueReference": {
+            "lastStateConfigurationGroupValueReference": {
               "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/testExistingConfigurationGroupValue"
             },
-            "newConfigurationGroupValueReference": {
+            "desiredStateConfigurationGroupValueReference": {
               "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/testNewConfigurationGroupValue"
             }
           },
           "CGV2": {
-            "newConfigurationGroupValueReference": {
+            "desiredStateConfigurationGroupValueReference": {
               "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/test2ConfigurationGroupValue"
             }
           },
           "CGV3": {
-            "newConfigurationGroupValueReference": {
+            "desiredStateConfigurationGroupValueReference": {
               "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/test3ConfigurationGroupValue"
             }
           }
         },
         "networkServiceDesignVersionChange": {
-          "publisherName": "TestPublisher",
-          "publisherScope": "Public",
-          "existingNetworkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
-          "newNetworkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
-          "existingNetworkServiceDesignVersionName": "1.0.0",
-          "newNetworkServiceDesignVersionName": "1.0.1",
-          "networkServiceDesignVersionOfferingLocation": "eastus"
+          "networkServiceDesignVersionResourceReference": {
+            "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/testRg/providers/Microsoft.Hybridnetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName/networkServiceDesignVersions/1.0.1",
+            "idType": "Open"
+          }
         },
         "restrictions": [
           {
@@ -70,20 +67,20 @@
           "provisioningState": "Succeeded",
           "configurationGroupValueChanges": {
             "CGV1": {
-              "existingConfigurationGroupValueReference": {
+              "lastStateConfigurationGroupValueReference": {
                 "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/testExistingConfigurationGroupValue"
               },
-              "newConfigurationGroupValueReference": {
+              "desiredStateConfigurationGroupValueReference": {
                 "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/testNewConfigurationGroupValue"
               }
             },
             "CGV2": {
-              "newConfigurationGroupValueReference": {
+              "desiredStateConfigurationGroupValueReference": {
                 "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/test2ConfigurationGroupValue"
               }
             },
             "CGV3": {
-              "newConfigurationGroupValueReference": {
+              "desiredStateConfigurationGroupValueReference": {
                 "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/test3ConfigurationGroupValue"
               }
             }
@@ -91,11 +88,15 @@
           "networkServiceDesignVersionChange": {
             "publisherName": "TestPublisher",
             "publisherScope": "Public",
-            "existingNetworkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
-            "newNetworkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
-            "existingNetworkServiceDesignVersionName": "1.0.0",
-            "newNetworkServiceDesignVersionName": "1.0.1",
-            "networkServiceDesignVersionOfferingLocation": "eastus"
+            "lastStateNetworkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
+            "networkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
+            "lastStateNetworkServiceDesignVersionName": "1.0.0",
+            "networkServiceDesignVersionName": "1.0.1",
+            "networkServiceDesignVersionOfferingLocation": "eastus",
+            "networkServiceDesignVersionResourceReference": {
+              "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/testRg/providers/Microsoft.Hybridnetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName/networkServiceDesignVersions/1.0.1",
+              "idType": "Open"
+            }
           },
           "restrictions": [
             {
@@ -126,20 +127,20 @@
           "provisioningState": "Accepted",
           "configurationGroupValueChanges": {
             "CGV1": {
-              "existingConfigurationGroupValueReference": {
+              "lastStateConfigurationGroupValueReference": {
                 "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/testExistingConfigurationGroupValue"
               },
-              "newConfigurationGroupValueReference": {
+              "desiredStateConfigurationGroupValueReference": {
                 "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/testNewConfigurationGroupValue"
               }
             },
             "CGV2": {
-              "newConfigurationGroupValueReference": {
+              "desiredStateConfigurationGroupValueReference": {
                 "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/test2ConfigurationGroupValue"
               }
             },
             "CGV3": {
-              "newConfigurationGroupValueReference": {
+              "desiredStateConfigurationGroupValueReference": {
                 "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/providers/Microsoft.HybridNetwork/configurationGroupValues/test3ConfigurationGroupValue"
               }
             }
@@ -147,11 +148,15 @@
           "networkServiceDesignVersionChange": {
             "publisherName": "TestPublisher",
             "publisherScope": "Public",
-            "existingNetworkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
-            "newNetworkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
-            "existingNetworkServiceDesignVersionName": "1.0.0",
-            "newNetworkServiceDesignVersionName": "1.0.1",
-            "networkServiceDesignVersionOfferingLocation": "eastus"
+            "lastStateNetworkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
+            "networkServiceDesignGroupName": "TestNetworkServiceDesignGroupName",
+            "lastStateNetworkServiceDesignVersionName": "1.0.0",
+            "networkServiceDesignVersionName": "1.0.1",
+            "networkServiceDesignVersionOfferingLocation": "eastus",
+            "networkServiceDesignVersionResourceReference": {
+              "id": "/subscriptions/b7173c9f-853f-45b5-8b75-3fb7d1e78388/resourceGroups/testRg/providers/Microsoft.Hybridnetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName/networkServiceDesignVersions/1.0.1",
+              "idType": "Open"
+            }
           },
           "restrictions": [
             {
