@@ -11,9 +11,6 @@
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.workloads/monitor/alerts/myalert",
         "name": "myalert",
-        "location": "eastus",
-        "createdWithApiVersion": "2024-02-01-preview",
-        "provisioningState": "Succeeded",
         "type": "Microsoft.insights/scheduledqueryrules",
         "systemData": {
           "createdBy": "user@xyz.com",
@@ -23,29 +20,33 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2021-08-19T15:10:46.196Z"
         },
-        "templateId": "saphana-cpu-memory-health",
-        "alertRuleResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/scheduledqueryrules/myalert",
-        "providerType": "SapHana",
-        "providerNames": [
-          "hana-provider"
-        ],
-        "alertProperties": {
-          "isEnabled": true,
-          "severity": 3,
-          "actionGroups": [
-            "actiongroupid1",
-            "actiongroupid2"
+        "properties": {
+          "createdWithApiVersion": "2024-02-01-preview",
+          "provisioningState": "Succeeded",
+          "templateId": "saphana-cpu-memory-health",
+          "alertRuleResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/scheduledqueryrules/myalert",
+          "providerType": "SapHana",
+          "providerNames": [
+            "hana-provider"
           ],
-          "threshold": 80,
-          "windowSize": 15,
-          "evaluationFrequency": 5,
-          "numberOfEvaluationPeriods": 3,
-          "muteActionsDuration": 0,
-          "alertQueryParameter": {
-            "providerInstances": [
-              "hana-provider"
+          "alertProperties": {
+            "isEnabled": true,
+            "severity": 3,
+            "actionGroups": [
+              "actiongroupid1",
+              "actiongroupid2"
             ],
-            "aggregate": ""
+            "threshold": 80,
+            "windowSize": 15,
+            "evaluationFrequency": 5,
+            "numberOfEvaluationPeriods": 3,
+            "muteActionsDuration": 0,
+            "alertQueryParameter": {
+              "providerInstances": [
+                "hana-provider"
+              ],
+              "aggregate": ""
+            }
           }
         }
       }

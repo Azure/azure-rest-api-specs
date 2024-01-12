@@ -1561,6 +1561,22 @@
     },
     "Alert": {
       "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertInstanceProperties",
+          "description": "Alert Instance properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A alert associated with SAP monitor."
+    },
+    "AlertInstanceProperties": {
+      "type": "object",
       "required": [
         "templateId",
         "providerType",
@@ -1623,12 +1639,7 @@
           "description": "Alert properties"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "An Alert associated with SAP monitor."
+      "description": "Describes the properties of a alert instance."
     },
     "AlertProperties": {
       "type": "object",
@@ -1736,6 +1747,22 @@
     },
     "AlertTemplate": {
       "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertTemplateInstanceProperties",
+          "description": "Alert Template Instance properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A alert template associated with SAP monitor."
+    },
+    "AlertTemplateInstanceProperties": {
+      "type": "object",
       "required": [
         "templateId",
         "providerType",
@@ -1761,12 +1788,7 @@
           "description": "Alert Template properties"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "An Alert Template associated with SAP monitor."
+      "description": "Describes the properties of a alert template instance."
     },
     "AlertTemplateProperties": {
       "type": "object",
