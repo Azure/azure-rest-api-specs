@@ -374,7 +374,7 @@ model Space {
   @doc("The physical space occupied by data unique to one or more snapshots. Measured in bytes.")
   snapshots: int64;
 
-  @doc("The physical space occupied by deduplicated data, meaning that the space is shared with other volumes and snapshots as a result of data deduplication. Measured in bytes.")
+  @doc("The physical space occupied by de-duplicated data, meaning that the space is shared with other volumes and snapshots as a result of data deduplication. Measured in bytes.")
   shared: int64;
 
   @doc("Data reduction ratio achieved on this pool, used to set price per TB for billing.")
