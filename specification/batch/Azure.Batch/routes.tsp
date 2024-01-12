@@ -373,9 +373,7 @@ scaling enabled in order to evaluate a formula.
   @route("/pools/{poolId}/evaluateautoscale")
   @projectedName("java", "evaluatePoolAutoScaleInternal")
   evaluatePoolAutoScale is Ops.PostOperation<
-    {
-      ...MinimalMetadata;
-
+    MinimalMetadata & {
       @doc("The ID of the Pool on which to evaluate the automatic scaling formula.")
       @path
       poolId: string;
