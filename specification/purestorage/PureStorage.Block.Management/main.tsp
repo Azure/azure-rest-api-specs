@@ -104,9 +104,6 @@ model AzureVmwareService {
   @doc("if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost).")
   avsEnabled: boolean;
 
-  @doc("Unique identifier of the vSphere software installation in the SDDC the storage pool belongs to.")
-  vSphereUuid: string;
-
   @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
   sddcResourceId?: string;
 
@@ -237,9 +234,9 @@ interface StoragePools {
     ArmCombinedLroHeaders
   > | ErrorResponse;
 
-  @doc("Update Vsphere plugins on storage pool")
+  @doc("Upgrade Vsphere plugins on storage pool")
   @armResourceAction(StoragePool)
-  @action("updateVspherePlugins")
+  @action("upgradeVspherePlugins")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -248,7 +245,7 @@ interface StoragePools {
     }
   )
   @post
-  updateVspherePlugins(
+  upgradeVspherePlugins(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
@@ -303,9 +300,6 @@ model VspherePlugin {
 
 @doc("vSphere configuration properties")
 model Vsphere {
-  @doc("Unique identifier of the vSphere software package in the SDDC")
-  vSphereUuid: string;
-
   @doc("Resource id pointing at the AVS SDDC the pool is configured with")
   sddcResourceId: string;
 
@@ -428,9 +422,6 @@ enum AlertLevel {
 
 @doc("Storage Pool enable AVS")
 model StoragePoolEnableAvs {
-  @doc("Unique identifier of the vSphere software package in the SDDC")
-  vSphereUuid: string;
-
   @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
   sddcResourceId: string;
 
