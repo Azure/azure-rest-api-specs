@@ -37,7 +37,7 @@
       "properties": {
         "properties": {
           "description": "The response properties specific to the operation",
-          "$ref": "#/definitions/OperationProgressResponseProperties",
+          "$ref": "#/definitions/OperationProgressResponseType",
           "x-ms-client-flatten": true
         }
       },
@@ -47,7 +47,7 @@
         }
       ]
     },
-    "OperationProgressResponseProperties": {
+    "OperationProgressResponseType": {
       "description": "Represents the response properties specific to the operation",
       "type": "object",
       "discriminator": "objectType",
@@ -69,7 +69,7 @@
         }
       }
     },
-    "BackupAndExportResponseProperties": {
+    "BackupAndExportResponseType": {
       "description": "BackupAndExport Response Properties",
       "type": "object",
       "x-ms-discriminator-value": "BackupAndExportResponse",
@@ -91,11 +91,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/OperationProgressResponseProperties"
+          "$ref": "#/definitions/OperationProgressResponseType"
         }
       ]
     },
-    "ImportFromStorageResponseProperties": {
+    "ImportFromStorageResponseType": {
       "description": "ImportFromStorage Response Properties",
       "type": "object",
       "x-ms-discriminator-value": "ImportFromStorageResponse",
@@ -108,7 +108,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/OperationProgressResponseProperties"
+          "$ref": "#/definitions/OperationProgressResponseType"
         }
       ]
     }
