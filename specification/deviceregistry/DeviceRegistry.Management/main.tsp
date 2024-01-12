@@ -39,7 +39,7 @@ interface OperationStatus {
   @doc("Returns the current status of an async operation.")
   @autoRoute
   @armUpdateProviderNamespace
-  @Autorest.example("./examples/assets/Get_OperationStatus.json", "Get the status of an async operation")
+  @Autorest.example("./examples/Get_OperationStatus.json", "Get the status of an async operation")
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
