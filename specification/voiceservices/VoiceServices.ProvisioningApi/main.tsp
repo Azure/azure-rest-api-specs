@@ -1027,7 +1027,10 @@ namespace Accounts {
 
     @path
     @doc("The phone numberto get configuration for.")
-    phoneNumber: PhoneNumber): {
+    @minLength(3)
+    @maxLength(16)
+    @pattern("^\\+[1-9]\\d{1,14}$")
+    phoneNumber: string): {
     @header contentType: "application/json";
     @body success: NumberResponse;
   } | {
@@ -1055,7 +1058,10 @@ namespace Accounts {
 
     @path
     @doc("The phone number to request details of.")
-    phoneNumber: NumberResponse,
+    @minLength(3)
+    @maxLength(16)
+    @pattern("^\\+[1-9]\\d{1,14}$")
+    phoneNumber: string,
 
     @header
     @doc("Makes a request conditional on a matching etag.")
@@ -1103,7 +1109,10 @@ namespace Accounts {
 
     @path
     @doc("The phone number of the number to delete.")
-    phoneNumber: PhoneNumber) : {
+    @minLength(3)
+    @maxLength(16)
+    @pattern("^\\+[1-9]\\d{1,14}$")
+    phoneNumber: string) : {
       @statusCode statusCode: 204;
   } | {
     @statusCode statusCode: 400;
@@ -1182,9 +1191,16 @@ namespace Accounts {
     @doc("The account name to query.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @query
-    @doc("The phone numbers to query capabilities for.") phoneNumbers: PhoneNumbers
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    @header
+    @doc("The contenct type for the request.")
+    contentType: "application/json",
+
+    @body
+    @doc("The phone numbers to query capabilities for.")
+    phoneNumbers: PhoneNumbers
   ): {
     @header contentType: "application/json";
     @body success: TeamsCapabilitiesPaginatedList;
