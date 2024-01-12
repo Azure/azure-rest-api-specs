@@ -23,34 +23,38 @@ enum Versions {
 }
 
 /* This is not used directly, is just to simplify the code */
+@doc("Utility model for Account names.")
 model AccountName {
   @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
   @minLength(1)
   @maxLength(100)
   @pattern("^([A-Za-z0-9_-]+)$")
-  accountName: string;
+  accountNameString: string;
 }
 
 /* This is not used directly, is just to simplify the code */
+@doc("Utility model for phone numbers.")
 model PhoneNumber {
   @doc("Phone number in E.164 format.")
   @minLength(3)
   @maxLength(16)
   @pattern("^\\+[1-9]\\d{1,14}$")
-  phoneNumber: string;
+  phoneNumberString: string;
 }
 
 /* This is not used directly, is just to simplify the code */
+@doc("Utility model for custom SIP headers.")
 model CustomSipHeader {
   @doc("Contents of the custom SIP header to use with this number. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length. The name of the custom header is set as part of deploying Azure Communications Gateway.")
   @minLength(1)
   @maxLength(100)
   @pattern("^([A-Za-z0-9_-])+$")
-  customSipHeader: string;
+  customSipHeaderString: string;
 }
 
 @doc("A list of phone numbers")
 model PhoneNumbers {
+  @doc("Array containing a list of phone numbers.")
   numbers: PhoneNumber[]
 }
 
@@ -63,7 +67,7 @@ model AccountDetails {
 
   // TODO: finalise requirements on this.
   // @doc("Default preferred region for numbers under this account.")
-  // defaultPreferredRegion?: string | null;
+  // defaultPreferredRegion?: string;
 
   @doc("Teams Common Account Configuration required for OC and TPM")
   teamsCommonConfig?: TeamsCommonConfig;
@@ -99,11 +103,13 @@ model AccountResponse {
   @minLength(1)
   name: string;
 
+  @doc("The details of the account.")
   details?: AccountDetails;
 
   @doc("ETag for use with If-Match headers for optimistic concurrency.")
   etag?: string;
 
+  @doc("The provisioning state of Teams Direct Routing DNS domains.")
   directRoutingProvisioningState?: TeamsDrSubdomainProvisioningState;
 
   @doc("Count of Teams Operator Connect subscribers for this account.")
@@ -128,56 +134,87 @@ model AccountResponse {
 model PaginatedList<T> {
   @doc("The list of records for this page.")
   value: T[];
+
+  @doc("The number of records returned for this page.")
+  numberOfRecords: int32;
+
   @doc("Link to the next page (if appropriate).")
   nextLink?: string;
+
   ...ListQueryParameters
 }
 
+@doc("Paginated list of Account Responses")
 model AccountResponsePaginatedList is PaginatedList<AccountResponse>{}
 
+@doc("List of phone numbers to be uploaded to an account via a PUT request.")
 model BatchNumbersPut {
+  @doc("The list of numbers to upload. At most 100 can be uploaded in one request.")
   @maxItems(100)
   numbers: BatchNumbersPutItem[];
 }
 
+@doc("And individual phone number and configuration to be uploaded as part of a bulk request.")
 model BatchNumbersPutItem {
   ...PhoneNumber;
+
+  @doc("The configuration for the number uploaded.")
   details: NumberDetails;
 }
 
+@doc("A list of phone numbers to delete.")
 model BatchNumbersDelete {
+  @doc("The list of number to delete. At most 100 can be deleted in one request.")
   @maxItems(100)
   numbers: PhoneNumber[]
 }
 
+@doc("The response to a bulk upload of phone numbers.")
 model BatchNumbersResponse {
+  @doc("A list of configurations for a set of phone numbers provisioned in ACG.")
   numbers: NumberResponse[];
 }
 
+@doc("Read/Write configuration for a phone number provisioned in ACG.")
 model NumberDetails {
   ...PhoneNumber;
+
+  @doc("Configuration for the individual UC services for this number.")
   services: NumberServices;
+
   ...CustomSipHeader;
 
   // TODO: finalise requirements on this.
   // @doc("Preferred region for this number.")
-  // preferredRegion?: string | null;
+  // preferredRegion?: string;
 }
 
+@doc("The configuration for a phone number provisioned in ACG.")
 model NumberResponse {
   ...PhoneNumber;
   ...AccountName;
+
+  @doc("The read/write configuration for this phone number.")
   details: NumberDetails;
+
+  @doc("The assigment status of this phone number.")
   status: AssignmentStatus;
-  Etag?: string | null;
+
+  @doc("ETag for use with If-Match headers for optimistic concurrency.")
+  etag?: string;
+
+  @doc("The provisioning state of the phone number with any UC services.")
   serviceProvisioningStatus: ServiceProvisioningState;
+
+  @doc("Any error details returned by UC services.")
   serviceProvisioningErrors?: ServiceProvisioningErrors;
 }
 
+@doc("A paginated list of phone number configuration.")
 model NumberResponsePaginatedList is PaginatedList<NumberResponse>{}
 
+@doc("Configuration for UC services for a phone number.")
 model NumberServices {
-
   @doc("Indicates that Teams Operator Connect (OC) is enabled for this number.")
   teamsOcEnabled: boolean;
 
@@ -199,41 +236,88 @@ model NumberServices {
 
 @doc("The Teams capabilities available for numbers with OC or TPM services enabled.")
 model TeamsCapabilities {
+  @doc("The capability plan name.")
   name: string;
+
+  @doc("The offer types available.")
   offerTypes: string[];
+
+  @doc("Mandatory capabilities for phone numbers.")
   mandatoryCapabilities: string[];
+
+  @doc("Choosable capabilities for phone numbers.")
   choosableCapabilities: string[];
+
+  @doc("Boolean indicating if Toll free is supported.")
   supportsTollFree: boolean;
 }
 
+@doc("Paginated list of Teams capabilities.")
 model TeamsCapabilitiesPaginatedList is PaginatedList<TeamsCapabilities>{}
 
+@doc("Phone number configuration for Teams OC phone numbers.")
 model TeamsOcNumberConfig {
+  @doc("The usage for this phone number.")
   usage: string;
+
+  @doc("The choosable capabilities for this phone number.")
   choosableCapabilities: string[];
+
+  @doc("The additional usages for this phone number.")
   additionalUsages?: string[];
+
+  @doc("The ID of the civic address to be used as the emergency address for this phone number.")
   civicAddressId?: string;
+
+  @doc("The ID of the location to be used as the emergency address for this phone number.")
   locationId?: string;
+
+  @doc("If the enterprise is allowed to update the address for this phone number.")
   allowTenantAddressUpdate?: boolean = false;
+
+  @doc("The country code to be displayed with this phone number")
   displayedCountryCode?: string;
 }
 
+@doc("Phone number configuration for Teams Phone Mobile phone numbers.")
 model TeamsTpmNumberConfig {
+  @doc("The usage for this phone number.")
   usage: string;
+
+  @doc("The choosable capabilities for this phone number.")
   choosableCapabilities: string[];
+
+  @doc("The additional usages for this phone number.")
   additionalUsages?: string[];
+
+  @doc("The ID of the civic address to be used as the emergency address for this phone number.")
   civicAddressId?: string;
+
+  @doc("The ID of the location to be used as the emergency address for this phone number.")
   locationId?: string;
+
+  @doc("If the enterprise is allowed to update the address for this phone number.")
   allowTenantAddressUpdate?: boolean = false;
+
+  @doc("The country code to be displayed with this phone number")
   displayedCountryCode?: string;
 }
 
 @doc("Indicates whether a number is assigned to a user. This is only relevant for some UC providers.")
 enum AssignmentStatus {
+  @doc("The phone number a TPM number and is assigned to a user.")
   TpmAssigned: "TPM Assigned",
+
+  @doc("The phone number a TPM number and is not assigned to a user.")
   TpmUnassigned: "TPM Unassigned",
+
+  @doc("The phone number is a Teams Operator Connect number and is assigned to a user.")
   OcAssigned: "OC Assigned",
+
+  @doc("The phone number is a Teams Operator Connect number and is not assigned to a user.")
   OcUnassigned: "OC Unassigned",
+
+  @doc("The phone number is not configured for use with any services that require the number to be assigned to a user.")
   NA: "Not Applicable"
 }
 
@@ -258,38 +342,61 @@ model InnerError {
   code?: string;
 
   @doc("Inner error details if they exist.")
-  innerError: string;
+  innerErrorString: string;
 }
 
+@doc("A provisioning error reported from a UC service.")
 model ProvisioningError {
+  @doc("The service the error relates to.")
   service: ServiceEnum;
+
+  @doc("The error code returned from the service.")
   errorCode: string;
-  message: string;
+
+  @doc("The error message returned from the service.")
+  message?: string;
 }
 
-@doc("Error details returned from the Teams API")
+@doc("Error details returned from the Teams API for queries passed through to Teams.")
 model OcErrorDetails {
+  @doc("The error code returned from the Teams API")
   code: string;
-  message: string;
+
+  @doc("The error message returned from the Teams API")
+  message?: string;
 }
 
 @doc("Error body to return when requests to Teams API fails")
-model OcErrorResponseBody { //JAMES need to update tihs to match ErrorResponse on the original API
+model OcErrorResponseBody {
+  @doc("The error code returned by the Teams API.")
   code: string;
+
+  @doc("The error message returned by the Teams API.")
   message: string;
+
+  @doc("The error details returned from the Teams API.")
   details: OcErrorDetails[];
 }
 
+@doc("List of all service provisioning errors for the object.")
 model ServiceProvisioningErrors {
+  @doc("List of service provisioning errors.")
   allErrors: ProvisioningError[]
 }
 
+@doc("The provisioning states of an object on any relevant UC service.")
 enum ServiceProvisioningState {
+  @doc("The object is pending provisioning.")
   Pending: "Pending",
+
+  @doc("The object has been provisioned in the relevnat UC service.")
   Success: "Success",
+
+  @doc("The object provisioning operation failed with the relevant UC service.")
   Failed: "Failed",
 }
 
+@doc("Configuration specific to Teams Direct Routing.")
 model TeamsDrConfig {
   @doc("Enables/disables caller ID screening for the account. Caller ID screening is enabled by default.")
   callScreening: boolean;
@@ -300,23 +407,38 @@ model TeamsDrConfig {
   @pattern("^([A-Za-z0-9_-]+)$")
   subdomain: string;
 
+  @doc("DNS TXT value for the Direct Routing regions, as provided by the customer from their Microsoft 365 Admin Center.")
   subdomainTokens: TeamsDrSubdomainTokens;
+
+  @doc("Status of DNS configuration and the DNS TXT values for the DNS records")
   subdomainProvisionedState?: DNSProvisioningState;
+
+  @doc("DNS TXT value for the Direct Routing regions, as provided by the customer from their Microsoft 365 Admin Center.")
   actualSubdomainTokens?: TeamsDrSubdomainTokens;
 }
 
+@doc("Possible values for DNS provisioning state of Teams Direct Routing domains")
 enum DNSProvisioningState {
+  @doc("The DNS provisioning state Provisioned.")
   Provisioned: "Provisioned",
+
+  @doc("The DNS provisioning state Not Provisioned.")
   NotProvisioned: "NotProvisioned",
+
+  @doc("The DNS provisioning state Inconsistent.")
   Inconsistent: "Inconsistent"
 }
 
 @doc("DNS TXT value for the region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.")
 model TeamsDrSubdomainTokens {
+  @doc("The DNS TXT value of the first region.")
   region1Token: TeamsDrSubdomainToken;
+
+  @doc("The DNS TXT value of the second region.")
   region2Token: TeamsDrSubdomainToken;
 }
 
+@doc("A DNS TXT value.")
 model TeamsDrSubdomainToken {
   @doc("DNS TXT value for the first region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.")
   @minLength(1)
@@ -325,23 +447,40 @@ model TeamsDrSubdomainToken {
   token: string;
 }
 
+@doc("The provisioning state of Teams Direct Routing domains.")
 model TeamsDrSubdomainProvisioningState {
+  @doc("The DNS TXT values of the domains the state relates to.")
   teamsDrSubdomainTokens?: TeamsDrSubdomainTokens;
+
+  @doc("The provisioning status of the domains.")
   teamsDrSubdomainStatus: DNSProvisioningState;
 }
 
+@doc("The UC service supported by the API.")
 enum ServiceEnum {
+  @doc("Teams Operator Connect.")
   Oc: "oc",
+
+  @doc("Teams Phone Mobile.")
   Tpm: "tpm",
+
+  @doc("Teams Direct Routing.")
   Dr: "dr",
+
+  @doc("Zoom")
   Zoom: "zoom",
 }
 
+@doc("The Teams Service supported by this API that require provisioning in Teams.")
 enum TeamsService {
+  @doc("Teams Operator Connect.")
   Oc: "oc",
+
+  @doc("Teams Phone Mobile.")
   Tpm: "tpm",
 }
 
+@doc("Configuration that is common for all Teams services on a given account.")
 model TeamsCommonConfig {
   @doc("The Microsoft Teams Tenant ID of the Account. This can only be updated if no OC or TPM numbers are configured in this account.")
   tenantId: string;
@@ -350,147 +489,211 @@ model TeamsCommonConfig {
   syncEnabled: boolean;
 }
 
+@doc("Indicating if the account should be syncing configuration from ACG to Teams.")
 model TeamsSyncEnabled {
-  teamsSyncEnabled: boolean;
+  @doc("Boolean indicating if account configuration is synced to Teams.")
+  teamsSyncEnabledBool: boolean;
 }
 
+@doc("Account onfiguration specific to Teams Operator Connect.")
 model TeamsOcConfig {
 }
 
+@doc("Account configuration specific to Teams Phone Mobile.")
 model TeamsTpmConfig {
 }
 
+@doc("Account configuration specific to Zoom.")
 model ZoomConfig {
 }
 
-model RFIDetailsPaginatedList is PaginatedList<RFIDetails>{}
+@doc("A paginated list of RFI details.")
+model RfiDetailsPaginatedList is PaginatedList<RfiDetails>{}
 
-model RFIDetails {
+@doc("Details of an RFI.")
+model RfiDetails {
   @doc("The ID of the Request for Information.")
   id?: string;
+
   @doc("The AAD tenant ID of the Request for Information.")
   tenantId?: string;
+
   @doc("Will always be 'teams'.")
   productContext?: string;
+
   @doc("The operator ID of the operator consent.")
   operatorId?: string;
+
   @doc("The status of the operator consent.")
-  status?: RFIStatus | null;
+  status?: RFIStatus;
+
   @doc("The time (ISO8601 format) when the operator consent is created.")
   consentedOn?: utcDateTime;
+
   @doc("The time (ISO8601 format) when the operator consent is last modified.")
   lastModifiedOn?: utcDateTime;
+
   @doc("The list of consented countries.")
   consentedCountries: string[];
+
   @doc("The list of tenant contacts.")
   contacts?: ContactDetails[];
+
   @doc("The customer relationship of the operator consent.")
   customerRelationship: CustomerRelationship;
 }
 
+@doc("The possible state for an RFI.")
 enum RFIStatus {
+  @doc("The RFI is active.")
   Active,
+
+  @doc("The RFI is suspended.")
   Suspended,
+
+  @doc("The RFI is removed.")
   Removed
 }
 
+@doc("Contact details for an individual.")
 model ContactDetails {
   @doc("The full name of the contact detail.")
   @minLength(1)
   fullName: string;
+
   @doc("The email of the contact detail.")
   @minLength(1)
   email: string;
+
   @doc("The phone number of the contact detail.")
   phoneNumber?: string;
+
   @doc("The company name of the contact detail.")
   companyName?: string;
+
   @doc("The company size of the contact detail.")
   companySize?: string
 }
 
+@doc("Details of a customer relationship.")
 model CustomerRelationship {
   @doc("The status of the customer relationship.")
   status: string;
+
   @doc("The time (ISO8601 format) when the customer relationship is last modified.")
   lastModifiedOn?: utcDateTime;
+
   @doc("The comment of the customer relationship.")
   comment: string;
 }
 
+@doc("A paginated list of civic addresses available for Teams OC or TPM users.")
 model TeamsCivicAddressPaginatedList is PaginatedList<TeamsCivicAddress>{}
 
+@doc("A civic address available for Teams OC or TPM users.")
 model TeamsCivicAddress {
   @minLength(1)
   @doc("The ID of the civic address.")
   id: string;
+
   @doc("The country of the civic address.")
-  country?: string | null;
+  country?: string;
+
   @doc("The house number of the civic address.")
-  houseNumber?: string | null;
+  houseNumber?: string;
+
   @doc("The house number suffix of the civic address.")
-  houseNumberSuffix?: string | null;
+  houseNumberSuffix?: string;
+
   @doc("The pre directional of the civic address.")
-  preDirectional?: string | null;
+  preDirectional?: string;
+
   @doc("The street name of the civic address.")
-  streetName?: string | null;
+  streetName?: string;
+
   @doc("The street suffix of the civic address.")
-  streetSuffix?: string | null;
+  streetSuffix?: string;
+
   @doc("The post directional of the civic address.")
-  postDirectional?: string | null;
+  postDirectional?: string;
+
   @doc("The state or province of the civic address.")
-  stateOrProvince?: string | null;
+  stateOrProvince?: string;
+
   @doc("The county or district of the civic address.")
-  countyOrDistrict?: string | null;
+  countyOrDistrict?: string;
+
   @doc("The city or town of the civic address.")
-  cityOrTown?: string | null;
+  cityOrTown?: string;
+
   @doc("The city or town alias of the civic address.")
-  cityOrTownAlias?: string | null;
+  cityOrTownAlias?: string;
+
   @doc("The postal or zip code of the civic address.")
-  postalOrZipCode?: string | null;
+  postalOrZipCode?: string;
+
   @doc("The description of the civic address.")
-  description?: string | null;
+  description?: string;
+
   @doc("The company name of the civic address.")
-  companyName?: string | null;
+  companyName?: string;
+
   @doc("The company ID of the civic address.")
-  companyId?: string | null;
+  companyId?: string;
+
   @minLength(1)
   @doc("The default location ID of the civic address.")
   defaultLocationId: string;
+
   @doc("The validation status of the civic address.")
-  validationStatus?: ValidationStatus | null;
+  validationStatus?: ValidationStatus;
+
   @doc("The customer tenant ID of the civic address.")
-  tenantId?: string | null;
+  tenantId?: string;
+
   @doc("The partner ID of the civic address.")
-  partnerId?: string | null;
+  partnerId?: string;
+
   @doc("The list of locations associated with the civic address.")
   locations?: Location[];
+
   @doc("The latitude of the civic address.")
-  latitude?: string | null;
+  latitude?: string;
+
   @doc("The longitude of the civic address.")
-  longitude?: string | null;
+  longitude?: string;
 }
 
+@doc("The possible validation status of Teams Civic Addresses.")
 enum ValidationStatus {
+  @doc("The civic address is not validated.")
   NotValidated,
+
+  @doc("The civic address is validated.")
   Validated
 }
 
+@doc("A location used by Team Operator Connect or Teams Phone Mobile phone numbers.")
 model Location {
   @minLength(1)
   @doc("The ID of the location.")
   id: string;
+
   @minLength(1)
   @doc("The civic address ID of the location.")
   civicAddressId: string;
+
   @doc("The description of the location.")
-  description?: string | null;
+  description?: string;
+
   @doc("The additional information of the location.")
-  additionalInfo?: string | null;
+  additionalInfo?: string;
+
   @doc("Flag indicating whether the location is default or not.")
   isDefault?: boolean;
+
   @doc("The elin of the location.")
-  elin?: string | null;
+  elin?: string;
 }
 
 @doc("Provides the custom '$skip' query parameter for list operations.")
@@ -510,6 +713,14 @@ model CustomMaxPageSizeQueryParameter {
   maxPageSize?: int32 = 200;
 }
 
+@doc("Provides the custom 'pageNumber' query parameter for list operations.")
+model CustomPageNumberQueryParameter {
+  @query("pagenumber")
+  @doc("The page number of the current page.")
+  @minValue(1)
+  pageNumber?: int32 = 1;
+}
+
 @doc("Provides the custom 'filter' query parameter for list operations")
 model CustomFilterQueryParameter {
   @query("filter")
@@ -520,6 +731,7 @@ model CustomFilterQueryParameter {
 alias ListQueryParameters = {
   ...CustomSkipQueryParameter;
   ...CustomMaxPageSizeQueryParameter;
+  ...CustomPageNumberQueryParameter;
 };
 
 alias FilterListQueryParameters = {
@@ -924,7 +1136,7 @@ namespace Rfis {
     @query productContext?: string,
     ...FilterListQueryParameters): {
     @header contentType: "application/json";
-    @body success: RFIDetailsPaginatedList;
+    @body success: RfiDetailsPaginatedList;
   } | {
     @statusCode statusCode: 204;
   } | {
@@ -943,7 +1155,7 @@ namespace Rfi {
     @doc("The tenant ID of the RFI.") tenantId: string,
   ): {
     @header contentType: "application/json";
-    @body success: RFIDetails;
+    @body success: RfiDetails;
   } | {
     @statusCode statusCode: 404;
   } | {
