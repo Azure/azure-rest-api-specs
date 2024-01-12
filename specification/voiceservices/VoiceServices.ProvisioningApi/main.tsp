@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @service({
-  title: "Microsoft.VoiceServices.ACG.ProvisioningPlatform.API",
+  title: "Microsoft.VoiceServices.ProvisioningAPI",
 })
 @versioned(Microsoft.Voiceservices.Versions)
 
@@ -17,7 +17,7 @@ namespace Microsoft.Voiceservices;
 
 @doc("The Microsoft.Voiceservices service versions.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2024-01-30-preview version of the Microsoft.Voiceservices service.")
   `2024-01-30-preview`,
 }
@@ -747,7 +747,7 @@ alias FilterListQueryParameters = {
 @doc("Get list of Accounts with details. An Account represents an Enterprise or collection of users.")
 op accounts(...FilterListQueryParameters): {
   @header contentType: "application/json";
-  @body success: AccountResponsePaginatedList;
+  @body body: AccountResponsePaginatedList;
 } | {
   @statusCode statusCode: 204;
 } | {
@@ -803,11 +803,24 @@ namespace Account {
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @header ifMatch?: string,
-    @header ifNoneMatch?: string,
-    @header contentType: "application/json",
-    @body body: AccountDetails): {
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    @header
+    @doc("Makes a request conditional on a matching etag.")
+    ifMatch?: string,
+
+    @header
+    @doc("Makes a request conditional on a non-matching etag.")
+    ifNoneMatch?: string,
+
+    @header
+    @doc("The content type of the reqeust body.")
+    contentType: "application/json",
+
+    @body
+    @doc("The details of the account to create")
+    body: AccountDetails): {
     @header contentType: "application/json";
     @body success: AccountResponse;
   } | {
@@ -830,11 +843,24 @@ namespace Account {
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @header ifMatch?: string,
-    @header ifNoneMatch?: string,
-    @header contentType: "application/json",
-    @body account: AccountDetails): {
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    @header
+    @doc("Makes a request conditional on a matching etag.")
+    ifMatch?: string,
+
+    @header
+    @doc("Makes a request conditional on a non-matching etag.")
+    ifNoneMatch?: string,
+
+    @header
+    @doc("The content type for the request body.")
+    contentType: "application/json",
+
+    @body
+    @doc("The Account to create or update.")
+    account: AccountDetails): {
     @header contentType: "application/json";
     @body success: AccountResponse;
   } | {
@@ -883,9 +909,16 @@ namespace Accounts {
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @header contentType: "application/json",
-    @body body: BatchNumbersPut
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    @header
+    @doc("The content type of the request body.")
+    contentType: "application/json",
+
+    @body
+    @doc("The numbers to upload in a batch.")
+    body: BatchNumbersPut
   ) : {
     @header contentType: "application/json";
     @body success: BatchNumbersResponse;
@@ -952,8 +985,12 @@ namespace Accounts {
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @path phoneNumber: PhoneNumber): {
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    @path
+    @doc("The phone numberto get configuration for.")
+    phoneNumber: PhoneNumber): {
     @header contentType: "application/json";
     @body success: NumberResponse;
   } | {
@@ -974,12 +1011,28 @@ namespace Accounts {
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @path phoneNumber: NumberResponse,
-    @header ifMatch?: string,
-    @header ifNoneMatch?: string,
-    @header contentType: "application/json",
-    @body body: NumberDetails): {
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    @path
+    @doc("The phone number to request details of.")
+    phoneNumber: NumberResponse,
+
+    @header
+    @doc("Makes a request conditional on a matching etag.")
+    ifMatch?: string,
+
+    @header
+    @doc("Makes a request conditional on a non-matching etag.")
+    ifNoneMatch?: string,
+
+    @header
+    @doc("The contenct type for the request.")
+    contentType: "application/json",
+
+    @body
+    @doc("The number details for the phone numbers to upload.")
+    body: NumberDetails): {
       @header contentType: "application/json";
       @body success: NumberResponse;
   } | {
@@ -1004,8 +1057,12 @@ namespace Accounts {
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @path phoneNumber: PhoneNumber) : {
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    @path
+    @doc("The phone number of the number to delete.")
+    phoneNumber: PhoneNumber) : {
       @statusCode statusCode: 204;
   } | {
     @statusCode statusCode: 400;
@@ -1023,8 +1080,12 @@ namespace Accounts {
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @path civicAddressId: string,
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    @path
+    @doc("The ID of the civic address to retrieve.")
+    civicAddressId: string,
   ) : {
     @header contentType: "application/json";
     @body success: TeamsCivicAddress;
@@ -1048,8 +1109,10 @@ namespace Accounts {
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    FilterListQueryParameters: int32
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    ...FilterListQueryParameters
   ) : {
     @header contentType: "application/json";
     @body success: TeamsCivicAddressPaginatedList;
@@ -1094,9 +1157,16 @@ namespace Accounts {
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @header contentType: "application/json",
-    @body account: TeamsSyncEnabled): {
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    @header
+    @doc("The contenct type for the request.")
+    contentType: "application/json",
+
+    @body
+    @doc("JSON to indicate if data should by synced to Teams.")
+    body: TeamsSyncEnabled): {
     @statusCode statusCode: 200;
   } | {
     @statusCode statusCode: 400;
@@ -1133,7 +1203,10 @@ namespace Rfis {
   @summary("Get list of Requests for Information (Consents).")
   @doc("Get the list of Accounts that have submitted a Request for Information (i.e. have consented to being contacted).")
   op getRfis(
-    @query productContext?: string,
+    @query
+    @doc("The Teams product context for the RFIs.")
+    productContext?: string,
+
     ...FilterListQueryParameters): {
     @header contentType: "application/json";
     @body success: RfiDetailsPaginatedList;
@@ -1168,11 +1241,18 @@ namespace Rfi {
   @put
   op updateCustomerRelationship(
     @path
-    @doc("The tenant ID of the RFI.") tenantId: string,
-    @header contentType: "application/json",
-    @body account: CustomerRelationship
+    @doc("The tenant ID of the RFI.")
+    tenantId: string,
+
+    @header
+    @doc("The contenct type for the request.")
+    contentType: "application/json",
+
+    @body
+    @doc("The customer relationship to insert.")
+    body: CustomerRelationship
   ) : {
-      @header contentType: "application/json";
+    @header contentType: "application/json";
     @body success: CustomerRelationship;
   } | {
     @statusCode statusCode: 400 | 404 | 409 | 412;
