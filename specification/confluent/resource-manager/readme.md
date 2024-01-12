@@ -40,14 +40,6 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 input-file:
   - Microsoft.Confluent/preview/2024-01-12-preview/confluent.json
 ```
-### Tag: package-preview-2023-12
-
-These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-12'
-input-file:
-  - Microsoft.Confluent/preview/2023-12-27-preview/confluent.json
-```
 
 ### Tag: package-preview-2023-10
 
