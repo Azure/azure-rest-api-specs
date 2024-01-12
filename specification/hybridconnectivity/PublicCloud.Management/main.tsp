@@ -88,6 +88,40 @@ enum Status {
   Disconnected,
 }
 
+@doc("Provisioning State.")
+enum ProvisioningState {
+  @doc("Succeeded state")
+  Succeeded,
+
+  @doc("Failed state")
+  Failed,
+
+  @doc("Canceled state")
+  Canceled,
+}
+
+@doc("Public Cloud Connector")
+model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
+  @doc("Represent public cloud connectors resource.")
+  @key("publicCloudConnector")
+  @path
+  @segment("publicCloudConnectors")
+  name: string;
+}
+
+@doc("The properties of public cloud connectors, - will need to update this later")
+model PublicCloudConnectorProperties {
+  @doc("The cloud profile for AWS.")
+  awsCloudProfile?: string;
+
+  @doc("Profile of employee")
+  hostType?: string;
+
+  @visibility("read")
+  @doc("The resource provisioning state.")
+  provisioningState?: ProvisioningState;
+}
+
 //---------------------------------------------- Operations ----------------------------------------------
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
@@ -125,4 +159,17 @@ interface TestPermissions {
     @doc("ConnectorId to check permissions of.")
     publicCloudConnectorId: string,
   ): Azure.ResourceManager.ArmAcceptedLroResponse<"Asynchronous operation in progress."> | TestPermissionResponse | Azure.ResourceManager.ErrorResponse;
+}
+
+@armResourceOperations
+interface PublicCloudConnectors {
+  get is ArmResourceRead<PublicCloudConnector>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<PublicCloudConnector>;
+  update is ArmResourcePatchSync<
+    PublicCloudConnector,
+    PublicCloudConnectorProperties
+  >;
+  delete is ArmResourceDeleteSync<PublicCloudConnector>;
+  listByResourceGroup is ArmResourceListByParent<PublicCloudConnector>;
+  listBySubscription is ArmListBySubscription<PublicCloudConnector>;
 }

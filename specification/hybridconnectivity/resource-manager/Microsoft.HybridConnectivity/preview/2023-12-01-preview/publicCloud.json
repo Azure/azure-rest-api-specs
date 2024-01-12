@@ -44,6 +44,9 @@
     },
     {
       "name": "TestPermissions"
+    },
+    {
+      "name": "PublicCloudConnectors"
     }
   ],
   "paths": {
@@ -89,6 +92,45 @@
           "GenerateAwsTemplate_Post": {
             "$ref": "./examples/GenerateAwsTemplate_Post.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/publicCloudConnectors": {
+      "get": {
+        "operationId": "PublicCloudConnectors_ListBySubscription",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "List PublicCloudConnector resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_ListBySubscription": {
+            "$ref": "./examples/PublicCloudConnectors_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -149,6 +191,261 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/publicCloudConnectors": {
+      "get": {
+        "operationId": "PublicCloudConnectors_ListByResourceGroup",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "List PublicCloudConnector resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_ListByResourceGroup": {
+            "$ref": "./examples/PublicCloudConnectors_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnector}": {
+      "get": {
+        "operationId": "PublicCloudConnectors_Get",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "Get a PublicCloudConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicCloudConnector",
+            "in": "path",
+            "description": "Represent public cloud connectors resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_Get": {
+            "$ref": "./examples/PublicCloudConnectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PublicCloudConnectors_CreateOrUpdate",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "Create a PublicCloudConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicCloudConnector",
+            "in": "path",
+            "description": "Represent public cloud connectors resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PublicCloudConnector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnector"
+            }
+          },
+          "201": {
+            "description": "Resource 'PublicCloudConnector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnector"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_CreateOrUpdate": {
+            "$ref": "./examples/PublicCloudConnectors_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PublicCloudConnectors_Update",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "Update a PublicCloudConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicCloudConnector",
+            "in": "path",
+            "description": "Represent public cloud connectors resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnectorUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_Update": {
+            "$ref": "./examples/PublicCloudConnectors_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PublicCloudConnectors_Delete",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "Delete a PublicCloudConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicCloudConnector",
+            "in": "path",
+            "description": "Represent public cloud connectors resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_Delete": {
+            "$ref": "./examples/PublicCloudConnectors_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -172,6 +469,127 @@
       "required": [
         "connectorId"
       ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded state"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed state"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled state"
+          }
+        ]
+      }
+    },
+    "PublicCloudConnector": {
+      "type": "object",
+      "description": "Public Cloud Connector",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicCloudConnectorProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PublicCloudConnectorListResult": {
+      "type": "object",
+      "description": "The response of a PublicCloudConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PublicCloudConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/PublicCloudConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PublicCloudConnectorProperties": {
+      "type": "object",
+      "description": "The properties of public cloud connectors, - will need to update this later",
+      "properties": {
+        "awsCloudProfile": {
+          "type": "string",
+          "description": "The cloud profile for AWS."
+        },
+        "hostType": {
+          "type": "string",
+          "description": "Profile of employee"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The resource provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "PublicCloudConnectorUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the PublicCloudConnector.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PublicCloudConnectorUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PublicCloudConnectorUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the PublicCloudConnector.",
+      "properties": {
+        "awsCloudProfile": {
+          "type": "string",
+          "description": "The cloud profile for AWS."
+        },
+        "hostType": {
+          "type": "string",
+          "description": "Profile of employee"
+        }
+      }
     },
     "SolutionSettings": {
       "type": "object",
