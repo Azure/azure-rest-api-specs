@@ -360,7 +360,55 @@
     }
   },
   "definitions": {
+    "Actions": {
+      "type": "object",
+      "description": "Actions available on the tile.",
+      "properties": {
+        "onClick": {
+          "$ref": "#/definitions/ActionsOnClick"
+        },
+        "footer": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionReference"
+          }
+        },
+        "contextMenu": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionReference"
+          },
+          "maxItems": 2          
+        }
+      },
+      "additionalProperties": false
+    },
+    "ActionsOnClick": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ActionsOnClickType"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "discriminator": "type"
+    },
+    "ActionsOnClickType": {
+      "description": "Types of action on click.",
+      "enum": [
+        "actionParameter",
+        "actionOpenBlade"
+      ],
+      "x-ms-enum": {
+        "name": "ActionsOnClickType",
+        "modelAsString": true
+      },
+      "type": "string"
+    },
     "ActionOpenBlade": {
+      "x-ms-discriminator-value": "actionOpenBlade",
       "type": "object",
       "properties": {
         "action": {
@@ -382,9 +430,15 @@
         "action",
         "blade"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionsOnClick"
+        }
+      ],      
       "additionalProperties": false      
     },
     "ActionParameters" : {
+      "x-ms-discriminator-value": "actionParameter",
       "type": "object",
       "properties": {
         "action": {
@@ -402,6 +456,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/DashboardParameterValuesList"
+        },
+        {
+          "$ref": "#/definitions/ActionsOnClick"
         }
       ],
       "required": [
@@ -550,6 +607,9 @@
         },
         "highlight": {
           "$ref": "#/definitions/DashboardParameterValuesList"
+        },
+        "actions": {
+          "$ref": "#/definitions/Actions"
         }
       },
       "discriminator": "type",
