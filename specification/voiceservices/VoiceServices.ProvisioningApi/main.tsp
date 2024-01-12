@@ -22,6 +22,13 @@ enum Versions {
   `2024-01-30-preview`,
 }
 
+@doc("API version query parameter.")
+model ApiVersionParameter {
+  @query("api-version")
+  @doc("The API version to use")
+  apiVersion: string;
+}
+
 /* This is not used directly, is just to simplify the code */
 @doc("Utility model for Account names.")
 model AccountName {
@@ -745,7 +752,7 @@ alias FilterListQueryParameters = {
 @tag("Account")
 @summary("Get list of Accounts")
 @doc("Get list of Accounts with details. An Account represents an Enterprise or collection of users.")
-op accounts(...FilterListQueryParameters): {
+op accounts(...FilterListQueryParameters, ...ApiVersionParameter): {
   @header contentType: "application/json";
   @body body: AccountResponsePaginatedList;
 } | {
@@ -759,6 +766,8 @@ op accounts(...FilterListQueryParameters): {
 @summary("Get accounts with with Teams services using the specified Tenant ID")
 @doc("Get accounts with with Teams services using the specified Tenant ID")
 op getAccountsByTenant(
+  ...ApiVersionParameter,
+
   @path
   @doc("The Teams tenant ID")
   tenantId: string): {
@@ -777,15 +786,22 @@ namespace Account {
   @summary("Get Account.")
   @doc("Get details of a specific Account using its Name. An Account represents an Enterprise or collection of users.")
   op get(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
     @path
     @doc("Additionally return the provisioning state of the backends configured for this account (e.g. DNS subdomain provisioning for Microsoft Teams Direct Routing).")
     status: boolean): {
-    @header contentType: "application/json";
+
+    @header
+    contentType: "application/json";
+
     @body success: AccountResponse;
   } | {
     @statusCode statusCode: 404;
@@ -799,6 +815,8 @@ namespace Account {
   @summary("Create or update Account.")
   @doc("Create of update the details of an Account.")
   op put(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -839,6 +857,8 @@ namespace Account {
   @summary("Create or update Account.")
   @doc("Create of update the details of an Account.")
   op patch(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -879,6 +899,8 @@ namespace Account {
   @summary("Delete Account.")
   @doc("Delete a specific Account using its Name. This will fail if any Numbers are provisioned on the Account.")
   op delete(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -905,6 +927,8 @@ namespace Accounts {
   @doc("Create or update up to 100 Numbers on the specified account. Each Number must have a UC service enabled and other configuration.")
   @patch
   op patchBatchNumbers(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -933,16 +957,25 @@ namespace Accounts {
   @delete
   @route("/numbers/batch")
   @tag("BatchNumbers")
-  @summary("Delete batches of numbers")
-  @doc("Delete up to 100 numbers on the specified account")
+  @summary("Delete batches of numbers.")
+  @doc("Delete up to 100 numbers on the specified account.")
   op deleteBatchNumbers(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
     @maxLength(100)
-    @pattern("^([A-Za-z0-9_-]+)$") accountName: string,
-    @header contentType: "application/json",
-    @body account: BatchNumbersDelete
+    @pattern("^([A-Za-z0-9_-]+)$")
+    accountName: string,
+
+    @header
+    @doc("The content type for the request body.")
+    contentType: "application/json",
+
+    @body
+    @doc("The phone numbers to delete.")
+    account: BatchNumbersDelete
   ) : {
     @statusCode statusCode: 204
   } | {
@@ -958,6 +991,8 @@ namespace Accounts {
   @summary("Get list of Numbers on an Account.")
   @doc("Get a list of Numbers on the specified Account. The returned list is paginated.")
   op getNumbers(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -981,6 +1016,8 @@ namespace Accounts {
   @summary("Get a Number")
   @doc("Get details of a specific Number associated with an Account.")
   op getPhoneNumbers(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -1007,6 +1044,8 @@ namespace Accounts {
   @doc("Create or update a Number on the specified Account. The Number must have a UC service enabled and other configuration.")
   @put
   op putPhoneNumbers(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -1053,6 +1092,8 @@ namespace Accounts {
   @doc("Delete a Number on the specified Account.")
   @delete
   op deletePhoneNumbers(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -1076,6 +1117,8 @@ namespace Accounts {
   @summary("Get a Civic Address.")
   @doc("Get a specific Civic Address and its associated locations.")
   op getTeamsCivicAddress(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -1105,6 +1148,8 @@ namespace Accounts {
   @summary("Get a list of Civic Addresses.",)
   @doc("Get a list of Civic Addresses and its associated locations for a specific Account. The returned list is paginated.")
   op getTeamsCivicAddresses(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -1131,6 +1176,8 @@ namespace Accounts {
   @doc("Get a list of usages that can be used by a partner for teams enabled number. Returned as JSON mapping use case to capabilities")
   @get
   op getCapabilities(
+    ...ApiVersionParameter,
+
     @path
     @doc("The account name to query.")
     @minLength(1)
@@ -1153,6 +1200,8 @@ namespace Accounts {
   @doc("Enable or disable syncing of provisioned data to Teams")
   @post
   op setTeamsSync(
+    ...ApiVersionParameter,
+
     @path
     @doc("Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.")
     @minLength(1)
@@ -1182,6 +1231,8 @@ namespace NumbersFromAllAccounts {
   @doc("Get a list of Numbers from all Accounts. The returned list is paginated.")
   op listAllNumbers(
     ...FilterListQueryParameters,
+    ...ApiVersionParameter,
+
     @query
     @doc("Query information for a specific number.")
     @pattern("^\\+[1-9]\\d+$")
@@ -1203,6 +1254,8 @@ namespace Rfis {
   @summary("Get list of Requests for Information (Consents).")
   @doc("Get the list of Accounts that have submitted a Request for Information (i.e. have consented to being contacted).")
   op getRfis(
+    ...ApiVersionParameter,
+
     @query
     @doc("The Teams product context for the RFIs.")
     productContext?: string,
@@ -1224,8 +1277,11 @@ namespace Rfi {
   @doc("Get a specific RFT from the tenant ID.")
   @get
   op getRfiByTenant(
+    ...ApiVersionParameter,
+
     @path
-    @doc("The tenant ID of the RFI.") tenantId: string,
+    @doc("The tenant ID of the RFI.")
+    tenantId: string,
   ): {
     @header contentType: "application/json";
     @body success: RfiDetails;
@@ -1240,6 +1296,8 @@ namespace Rfi {
   @doc("Update the Customer Relationship on the specified RFI.")
   @put
   op updateCustomerRelationship(
+    ...ApiVersionParameter,
+
     @path
     @doc("The tenant ID of the RFI.")
     tenantId: string,
