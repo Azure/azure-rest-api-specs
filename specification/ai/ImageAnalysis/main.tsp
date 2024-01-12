@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+#suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme" "The emitter does not support bearer auth"
 @service({
   title: "Image Analysis",
 })
