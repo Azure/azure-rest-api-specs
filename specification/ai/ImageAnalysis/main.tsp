@@ -10,14 +10,11 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-#suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme" "The emitter does not support bearer auth"
 @service({
   title: "Image Analysis",
 })
 @versioned(ImageAnalysis.Versions)
-@useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | BearerAuth
-)
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
   "{endpoint}/computervision",
   "Analyze an image to generate a description of its content, detect text, objects and more.",
