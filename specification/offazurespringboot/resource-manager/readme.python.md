@@ -17,3 +17,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/springappdiscovery/azure-mgmt-springappdiscovery/azure/mgmt/springappdiscovery
 ```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```

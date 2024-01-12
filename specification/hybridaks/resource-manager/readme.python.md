@@ -17,3 +17,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/hybridcontainerservice/azure-mgmt-hybridcontainerservice/azure/mgmt/hybridcontainerservice
 ```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```

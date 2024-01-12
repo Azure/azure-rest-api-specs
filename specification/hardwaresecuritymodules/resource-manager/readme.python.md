@@ -17,3 +17,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/hardwaresecuritymodules/azure-mgmt-hardwaresecuritymodules/azure/mgmt/hardwaresecuritymodules
 ```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```

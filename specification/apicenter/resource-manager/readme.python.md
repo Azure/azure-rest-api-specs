@@ -17,3 +17,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/apicenter/azure-mgmt-apicenter/azure/mgmt/apicenter
 ```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```
