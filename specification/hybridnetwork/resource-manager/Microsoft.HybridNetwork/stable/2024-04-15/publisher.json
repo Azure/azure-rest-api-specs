@@ -729,6 +729,15 @@
               "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsListFormat"
             }
           },
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -740,6 +749,10 @@
           "List Network Fabric Endpoints": {
             "$ref": "./examples/ArtifactStoreListNFCEndPoints.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -807,74 +820,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/rejectPrivateEndPoints": {
-      "post": {
-        "tags": [
-          "ArtifactStores"
-        ],
-        "operationId": "ArtifactStores_RejectPrivateEndPoints",
-        "description": "Reject manual private endpoints on artifact stores",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/PublisherNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ArtifactStorePrivateEndPointsFormat"
-            },
-            "description": "Parameters supplied to the create or update application group operation."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
-            "headers": {
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reject Manual Endpoint": {
-            "$ref": "./examples/ArtifactStoreRejectPrivateEndPoints.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/removePrivateEndPoints": {
       "post": {
         "tags": [
           "ArtifactStores"
         ],
         "operationId": "ArtifactStores_RemovePrivateEndPoints",
-        "description": "Reject manual private endpoints on artifact stores",
+        "description": "Remove manual private endpoints on artifact stores",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -919,7 +871,7 @@
           }
         },
         "x-ms-examples": {
-          "Reject Manual Endpoint": {
+          "Remove Manual Endpoint": {
             "$ref": "./examples/ArtifactStoreRemovePrivateEndPoints.json"
           }
         },
@@ -930,7 +882,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/listPrivateEndPoints": {
-      "get": {
+      "post": {
         "tags": [
           "ArtifactStores"
         ],
@@ -960,6 +912,15 @@
               "$ref": "#/definitions/ArtifactStorePrivateEndPointsListResult"
             }
           },
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -971,6 +932,10 @@
           "List Manual Private Endpoints": {
             "$ref": "./examples/ArtifactStoreListPrivateEndPoints.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
