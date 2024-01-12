@@ -65,3 +65,16 @@ interface Volumes {
   @doc("List Volumes in a VolumeGroup.")
   listByVolumeGroup is ArmResourceListByParent<Volume>;
 }
+
+@@projectedName(Volumes.create::parameters.resource, "json", "parameters");
+@@extension(Volumes.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(Volumes.create::parameters.resource, "Volume object.");
+@@projectedName(Volumes.update::parameters.properties, "json", "parameters");
+@@extension(Volumes.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(Volumes.update::parameters.properties, "Volume object.");

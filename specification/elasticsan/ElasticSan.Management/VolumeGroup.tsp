@@ -57,3 +57,19 @@ interface VolumeGroups {
   @doc("List VolumeGroups.")
   listByElasticSan is ArmResourceListByParent<VolumeGroup>;
 }
+
+@@projectedName(VolumeGroups.create::parameters.resource, "json", "parameters");
+@@extension(VolumeGroups.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VolumeGroups.create::parameters.resource, "Volume Group object.");
+@@projectedName(VolumeGroups.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(VolumeGroups.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VolumeGroups.update::parameters.properties, "Volume Group object.");

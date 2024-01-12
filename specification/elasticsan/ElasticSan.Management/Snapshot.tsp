@@ -64,3 +64,10 @@ interface Snapshots {
     }
   >;
 }
+
+@@projectedName(Snapshots.create::parameters.resource, "json", "parameters");
+@@extension(Snapshots.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(Snapshots.create::parameters.resource, "Snapshot object.");

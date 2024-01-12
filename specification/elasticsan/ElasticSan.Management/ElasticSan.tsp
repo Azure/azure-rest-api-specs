@@ -62,7 +62,7 @@ interface ElasticSans {
   // FIXME: PrivateLinkResources_ListByElasticSan could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateLinkResources")
   @get
-  ListByElasticSan is Azure.Core.Foundations.Operation<
+  listByElasticSan is Azure.Core.Foundations.Operation<
     {
       @doc("The ID of the target subscription.")
       @minLength(1)
@@ -85,3 +85,19 @@ interface ElasticSans {
     PrivateLinkResourceListResult
   >;
 }
+
+@@projectedName(ElasticSans.create::parameters.resource, "json", "parameters");
+@@extension(ElasticSans.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ElasticSans.create::parameters.resource, "Elastic San object.");
+@@projectedName(ElasticSans.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(ElasticSans.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ElasticSans.update::parameters.properties, "Elastic San object.");

@@ -45,3 +45,15 @@ interface PrivateEndpointConnections {
   @doc("List all Private Endpoint Connections associated with the Elastic San.")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
+
+@@projectedName(PrivateEndpointConnections.create::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(PrivateEndpointConnections.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(PrivateEndpointConnections.create::parameters.resource,
+  "Private Endpoint Connection Approval object."
+);
