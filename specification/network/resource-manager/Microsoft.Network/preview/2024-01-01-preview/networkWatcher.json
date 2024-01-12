@@ -3114,10 +3114,6 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
-        },
-        "identity": {
-          "description": "Identity of the workspace",
-          "$ref": "#/definitions/ManagedIdentityObjectForUserAssigned"
         }
       },
       "allOf": [
@@ -3167,6 +3163,10 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the flow log."
+        },
+        "identity": {
+          "description": "Identity of the workspace",
+          "$ref": "#/definitions/ManagedIdentityObjectForUserAssigned"
         }
       }
     },
@@ -3192,6 +3192,10 @@
         "format": {
           "$ref": "#/definitions/FlowLogFormatParameters",
           "description": "Parameters that define the flow log format."
+        },
+        "identity": {
+          "description": "Identity of the workspace",
+          "$ref": "#/definitions/ManagedIdentityObjectForUserAssigned"
         }
       }
     },
@@ -3264,10 +3268,6 @@
         "flowAnalyticsConfiguration": {
           "$ref": "#/definitions/TrafficAnalyticsProperties",
           "description": "Parameters that define the configuration of traffic analytics."
-        },
-        "identity": {
-          "description": "Identity of the workspace",
-          "$ref": "#/definitions/ManagedIdentityObjectForUserAssigned"
         }
       }
     },
