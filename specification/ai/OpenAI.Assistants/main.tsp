@@ -27,7 +27,7 @@ using Azure.Core;
   title: "Azure OpenAI",
 })
 @server(
-  "{endpoint}/openai",
+  "{endpoint}",
   "Azure OpenAI APIs for Assistants.",
   {
     @doc("An OpenAI endpoint supporting assistants functionality.")
@@ -42,5 +42,5 @@ namespace Azure.AI.OpenAI.Assistants;
 enum ServiceApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @doc("The initial, beta version of assistants associated with OpenAI's 11/06/23 model releases.")
-  v2023_11_06_beta: "2023-11-06-beta",
+  v2023_02_15_preview: "2024-02-15-preview",
 }

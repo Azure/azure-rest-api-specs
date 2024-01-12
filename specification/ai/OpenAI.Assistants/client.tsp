@@ -10,60 +10,43 @@ namespace Azure.AI.OpenAI.Assistants;
 
 // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
 // operation that exposes the underlying data directly.
-@@access(DeletionStatus, Access.internal);
-@@projectedName(DeletionStatus, "csharp", "InternalDeletionStatus");
 @@access(AssistantDeletionStatus, Access.internal);
 @@projectedName(AssistantDeletionStatus,
   "csharp",
   "InternalAssistantDeletionStatus"
 );
-@@access(Assistants.deleteAssistant, Access.internal);
-@@projectedName(Assistants.deleteAssistant,
-  "csharp",
-  "InternalDeleteAssistant"
-);
+@@access(deleteAssistant, Access.internal);
+@@projectedName(deleteAssistant, "csharp", "InternalDeleteAssistant");
 @@access(AssistantFileDeletionStatus, Access.internal);
 @@projectedName(AssistantFileDeletionStatus,
   "csharp",
   "InternalAssistantFileDeletionStatus"
 );
-@@access(Assistants.deleteAssistantFile, Access.internal);
-@@projectedName(Assistants.deleteAssistantFile,
-  "csharp",
-  "InternalUnlinkAssistantFile"
-);
+@@access(deleteAssistantFile, Access.internal);
+@@projectedName(deleteAssistantFile, "csharp", "InternalUnlinkAssistantFile");
 @@access(ThreadDeletionStatus, Access.internal);
-@@access(AssistantThreads.deleteThread, Access.internal);
-@@projectedName(AssistantThreads.deleteThread,
-  "csharp",
-  "InternalDeleteThread"
-);
-@@access(Assistants.listAssistants, Access.internal);
-@@projectedName(Assistants.listAssistants, "csharp", "InternalGetAssistants");
-@@access(Assistants.listAssistantFiles, Access.internal);
-@@projectedName(Assistants.listAssistantFiles,
-  "csharp",
-  "InternalGetAssistantFiles"
-);
-@@access(ThreadMessages.listMessageFiles, Access.internal);
-@@projectedName(ThreadMessages.listMessageFiles,
-  "csharp",
-  "InternalGetMessageFiles"
-);
-@@access(RunSteps.listRunSteps, Access.internal);
-@@projectedName(RunSteps.listRunSteps, "csharp", "InternalGetRunSteps");
-@@access(ThreadMessages.listMessages, Access.internal);
-@@projectedName(ThreadMessages.listMessages, "csharp", "InternalGetMessages");
-@@access(ThreadRuns.listRuns, Access.internal);
-@@projectedName(ThreadRuns.listRuns, "csharp", "InternalGetRuns");
+@@access(deleteThread, Access.internal);
+@@projectedName(deleteThread, "csharp", "InternalDeleteThread");
+@@access(listAssistants, Access.internal);
+@@projectedName(listAssistants, "csharp", "InternalGetAssistants");
+@@access(listAssistantFiles, Access.internal);
+@@projectedName(listAssistantFiles, "csharp", "InternalGetAssistantFiles");
+@@access(listMessageFiles, Access.internal);
+@@projectedName(listMessageFiles, "csharp", "InternalGetMessageFiles");
+@@access(listRunSteps, Access.internal);
+@@projectedName(listRunSteps, "csharp", "InternalGetRunSteps");
+@@access(listMessages, Access.internal);
+@@projectedName(listMessages, "csharp", "InternalGetMessages");
+@@access(listRuns, Access.internal);
+@@projectedName(listRuns, "csharp", "InternalGetRuns");
 @@access(FileListResponse, Access.internal);
 @@projectedName(FileListResponse, "csharp", "InternalFileListResponse");
-@@access(Files.listFiles, Access.internal);
-@@projectedName(Files.listFiles, "csharp", "InternalListFiles");
+@@access(listFiles, Access.internal);
+@@projectedName(listFiles, "csharp", "InternalListFiles");
 @@access(FileDeletionStatus, Access.internal);
 @@projectedName(FileDeletionStatus, "csharp", "InternalFileDeletionStatus");
-@@access(Files.deleteFile, Access.internal);
-@@projectedName(Files.deleteFile, "csharp", "InternalDeleteFile");
+@@access(deleteFile, Access.internal);
+@@projectedName(deleteFile, "csharp", "InternalDeleteFile");
 
 // In addition to top-level response value containers, trivial intermediate structure -- levels of single-use model
 // hierarchy that don't convey explanatory or functional benefit to consumers of the surface -- should also be
@@ -173,8 +156,8 @@ namespace Azure.AI.OpenAI.Assistants;
 
 // Additional, language-specific idiomatic renames
 
-@@projectedName(File, "csharp", "OpenAIFile");
-@@projectedName(File.bytes, "csharp", "Size");
+@@projectedName(OpenAIFile, "csharp", "OpenAIFile");
+@@projectedName(OpenAIFile.bytes, "csharp", "Size");
 @@projectedName(FilePurpose, "csharp", "OpenAIFilePurpose");
 @@projectedName(ThreadMessage.content, "csharp", "ContentItems");
 @@projectedName(MessageTextDetails.value, "csharp", "Text");
@@ -187,9 +170,9 @@ namespace Azure.AI.OpenAI.Assistants;
   "OverrideInstructions"
 );
 @@projectedName(CreateAndRunThreadOptions.tools, "csharp", "OverrideTools");
-
+@@projectedName(createFile, "csharp", "UploadFile");
 // From https://platform.openai.com/docs/assistants/how-it-works
 // "Note that deleting an AssistantFile doesn’t delete the original File object, it simply deletes the association
 // between that File and the Assistant."
-@@projectedName(Assistants.createAssistantFile, "csharp", "LinkAssistantFile");
+@@projectedName(createAssistantFile, "csharp", "LinkAssistantFile");
 // 'Unlink' counterpart already renamed for DeletionStatus merge
