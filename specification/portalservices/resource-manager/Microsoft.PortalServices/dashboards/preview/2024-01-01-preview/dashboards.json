@@ -654,15 +654,138 @@
     "DashboardTileType": {
       "description": "Dashboard tile type.",
       "enum": [
+        "ArcSnapshotTile",
         "MarkdownTile",
+        "NavigationTile",
+        "PolicyTile",
         "QueryTile",
-        "ResourceTile"
+        "ResourceTile"        
       ],
       "type": "string",
       "x-ms-enum": {
         "name": "type",
         "modelAsString": true
       }
+    },
+    "ArcSnapshotTile": {
+      "x-ms-discriminator-value": "ArcSnapshotTile",
+      "description": "Display information of your Arc enabled resources with the arc snapshot tile.",
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "The definition of data for the arc snapshot tile.",
+          "$ref": "#/definitions/ArcSnapshotTileData"
+        },
+        "visualization": {
+          "$ref": "#/definitions/QueryTileVisualization"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DashboardTile"
+        }
+      ],
+      "required": [
+        "data",
+        "visualization"
+      ]
+    },
+    "ArcSnapshotTileData": {
+      "type": "object",
+      "description": "Data definition for a arc snapshot tile.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The ARG data source of the query tile. Enum permitting the value: \"arg\"",
+          "enum": [
+            "arg"
+          ]
+        },
+        "query": {
+          "type": "string",
+          "description": "A valid ARG query used to fetch the data."
+        },
+        "columns": {
+          "$ref": "#/definitions/ArcSnapshotTileDataColumn"
+        },
+        "allResourcesConfiguredText": {
+          "type": "string",
+          "description": "The text to be shown when all the resources are configured with the servce."
+        },
+        "usedParameters": {
+          "type": "array",
+          "description": "Parameter names that are applied to the tile. It can be used within the query.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "noResources": {
+          "$ref": "#/definitions/ArcSnapshotTileDataNoResources"
+        },
+        "actions": {
+          "$ref": "#/definitions/ArcSnapshotTileDataActions"
+        }
+      },
+      "required": [
+        "kind",
+        "query",
+        "columns"
+      ],
+      "additionalProperties": false
+    },
+    "ArcSnapshotTileDataActions": {
+      "type": "object",
+      "description": "Actions that can be taken on the arc snapshot tile.",
+      "properties": {
+        "configureService": {
+          "$ref": "#/definitions/ActionReference"
+        },
+        "viewConfiguredService": {
+          "$ref": "#/definitions/ActionReference"        
+        },
+        "viewNotConfiguredResources": {
+          "$ref": "#/definitions/ActionReference"
+        }
+      }      
+    },
+    "ArcSnapshotTileDataNoResources": {
+      "type": "object",
+      "description": "Used when the resource count returned from the count is zero.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to be shown when there are no resources to be configured with the service."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon to be shown when there are no resources to be configured with."
+        }
+      },
+      "required": [
+        "text",
+        "icon"
+      ],
+      "additionalProperties": false
+    },
+    "ArcSnapshotTileDataColumn": {
+      "type": "object",
+      "description": "The column names to get from the query result.",
+      "properties": {
+        "notConfiguredResourcesCount": {
+          "type": "string",
+          "description": "The column name that will return the count of resources that are not configured."
+        },
+        "totalCount": {
+          "type": "string",
+          "description": "The column name that will return the total count of resources."        
+        }
+      },
+      "required": [
+        "notConfiguredResourcesCount",
+        "totalCount"
+      ],
+      "additionalProperties": false
     },
     "MarkdownTile": {
       "x-ms-discriminator-value": "MarkdownTile",
@@ -808,6 +931,7 @@
             "bar",
             "card",
             "column",
+            "donut",
             "line",
             "multistat",
             "pie",
