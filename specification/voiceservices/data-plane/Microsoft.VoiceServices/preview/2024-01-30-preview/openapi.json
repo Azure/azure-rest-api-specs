@@ -1,0 +1,2523 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.VoiceServices.ACG.ProvisioningPlatform.API",
+    "version": "2024-01-30-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "Account"
+    },
+    {
+      "name": "BatchNumbers"
+    },
+    {
+      "name": "Number"
+    },
+    {
+      "name": "TeamsSync"
+    },
+    {
+      "name": "Numbers"
+    },
+    {
+      "name": "RFIs"
+    },
+    {
+      "name": "RFI"
+    }
+  ],
+  "paths": {
+    "/account/{accountName}/numbers": {
+      "get": {
+        "operationId": "Accounts_GetNumbers",
+        "tags": [
+          "Number"
+        ],
+        "summary": "Get list of Numbers on an Account.",
+        "description": "Get a list of Numbers on the specified Account. The returned list is paginated.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NumberResponsePaginatedList"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/account/{accountName}/numbers/{phoneNumber}": {
+      "get": {
+        "operationId": "Accounts_GetPhoneNumbers",
+        "tags": [
+          "Number"
+        ],
+        "summary": "Get a Number",
+        "description": "Get details of a specific Number associated with an Account.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "phoneNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NumberResponse"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Accounts_PutPhoneNumbers",
+        "tags": [
+          "Number"
+        ],
+        "summary": "Create or update a Number.",
+        "description": "Create or update a Number on the specified Account. The Number must have a UC service enabled and other configuration.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "phoneNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "if-match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NumberDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NumberResponse"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/NumberResponse"
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "409": {
+            "description": "The request conflicts with the current state of the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "412": {
+            "description": "Precondition failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Accounts_DeletePhoneNumbers",
+        "tags": [
+          "Number"
+        ],
+        "summary": "Delete Number",
+        "description": "Delete a Number on the specified Account.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "phoneNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/account/{accountName}/numbers/batch": {
+      "patch": {
+        "operationId": "Accounts_PatchBatchNumbers",
+        "tags": [
+          "BatchNumbers"
+        ],
+        "summary": "Create or update Numbers.",
+        "description": "Create or update up to 100 Numbers on the specified account. Each Number must have a UC service enabled and other configuration.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchNumbersPut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BatchNumbersResponse"
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Accounts_DeleteBatchNumbers",
+        "tags": [
+          "BatchNumbers"
+        ],
+        "summary": "Delete batches of numbers",
+        "description": "Delete up to 100 numbers on the specified account",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchNumbersDelete"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/account/{accountName}/teams/capabilities": {
+      "get": {
+        "operationId": "Accounts_GetCapabilities",
+        "summary": "Get the list of usages available",
+        "description": "Get a list of usages that can be used by a partner for teams enabled number. Returned as JSON mapping use case to capabilities",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The account name to query.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "phoneNumbers",
+            "in": "query",
+            "description": "The phone numbers to query capabilities for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TeamsCapabilitiesPaginatedList"
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax."
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/account/{accountName}/teams/civic-address/{civicAddressId}": {
+      "get": {
+        "operationId": "Accounts_GetTeamsCivicAddress",
+        "summary": "Get a Civic Address.",
+        "description": "Get a specific Civic Address and its associated locations.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "civicAddressId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TeamsCivicAddress"
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/OcErrorResponseBody"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/OcErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/account/{accountName}/teams/civic-addresses": {
+      "post": {
+        "operationId": "Accounts_GetTeamsCivicAddresses",
+        "summary": "Get a list of Civic Addresses.",
+        "description": "Get a list of Civic Addresses and its associated locations for a specific Account. The returned list is paginated.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "FilterListQueryParameters": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "required": [
+                "FilterListQueryParameters"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TeamsCivicAddressPaginatedList"
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/OcErrorResponseBody"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/OcErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/account/{accountName}/teams/sync": {
+      "post": {
+        "operationId": "Accounts_SetTeamsSync",
+        "tags": [
+          "TeamsSync"
+        ],
+        "summary": "Enable or disable syncing of provisioned data to Teams",
+        "description": "Enable or disable syncing of provisioned data to Teams",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsSyncEnabled"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax."
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/accounts": {
+      "get": {
+        "operationId": "Accounts",
+        "tags": [
+          "Account"
+        ],
+        "summary": "Get list of Accounts",
+        "description": "Get list of Accounts with details. An Account represents an Enterprise or collection of users.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccountResponsePaginatedList"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/accounts/{accountName}": {
+      "put": {
+        "operationId": "Account_Put",
+        "tags": [
+          "Account"
+        ],
+        "summary": "Create or update Account.",
+        "description": "Create of update the details of an Account.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "if-match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccountResponse"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AccountResponse"
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "409": {
+            "description": "The request conflicts with the current state of the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "412": {
+            "description": "Precondition failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Account_Patch",
+        "tags": [
+          "Account"
+        ],
+        "summary": "Create or update Account.",
+        "description": "Create of update the details of an Account.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "if-match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountDetailsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccountResponse"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AccountResponse"
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "409": {
+            "description": "The request conflicts with the current state of the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "412": {
+            "description": "Precondition failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Account_Delete",
+        "tags": [
+          "Account"
+        ],
+        "summary": "Delete Account.",
+        "description": "Delete a specific Account using its Name. This will fail if any Numbers are provisioned on the Account.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "deleteAllSubs",
+            "in": "query",
+            "description": "Indicates if all subscribers under the account should also be deleted.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/accounts/{accountName}/{status}": {
+      "get": {
+        "operationId": "Account_Get",
+        "tags": [
+          "Account"
+        ],
+        "summary": "Get Account.",
+        "description": "Get details of a specific Account using its Name. An Account represents an Enterprise or collection of users.",
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "description": "Additionally return the provisioning state of the backends configured for this account (e.g. DNS subdomain provisioning for Microsoft Teams Direct Routing).",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccountResponse"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/accounts/teamstenant/{tenantId}": {
+      "get": {
+        "operationId": "GetAccountsByTenant",
+        "tags": [
+          "Account"
+        ],
+        "summary": "Get accounts with with Teams services using the specified Tenant ID",
+        "description": "Get accounts with with Teams services using the specified Tenant ID",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The Teams tenant ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccountResponsePaginatedList"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/numbers": {
+      "get": {
+        "operationId": "NumbersFromAllAccounts_ListAllNumbers",
+        "tags": [
+          "Numbers"
+        ],
+        "summary": "Get list of numbers",
+        "description": "Get a list of Numbers from all Accounts. The returned list is paginated.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          },
+          {
+            "name": "number",
+            "in": "query",
+            "description": "Query information for a specific number.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16,
+            "pattern": "^\\+[1-9]\\d+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NumberResponsePaginatedList"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/teams/rfi/{tenantId}": {
+      "get": {
+        "operationId": "Rfi_GetRfiByTenant",
+        "tags": [
+          "RFI"
+        ],
+        "summary": "Get an RFI by tenant ID",
+        "description": "Get a specific RFT from the tenant ID.",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The tenant ID of the RFI.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RFIDetails"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/teams/rfi/{tenantId}/customer-relationship": {
+      "put": {
+        "operationId": "Rfi_UpdateCustomerRelationship",
+        "tags": [
+          "RFI"
+        ],
+        "summary": "Update the Customer Relationship.",
+        "description": "Update the Customer Relationship on the specified RFI.",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The tenant ID of the RFI.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerRelationship"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomerRelationship"
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "409": {
+            "description": "The request conflicts with the current state of the server.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "412": {
+            "description": "Precondition failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/teams/rfis": {
+      "get": {
+        "operationId": "Rfis_GetRfis",
+        "tags": [
+          "RFIs"
+        ],
+        "summary": "Get list of Requests for Information (Consents).",
+        "description": "Get the list of Accounts that have submitted a Request for Information (i.e. have consented to being contacted).",
+        "parameters": [
+          {
+            "name": "productContext",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RFIDetailsPaginatedList"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountDetails": {
+      "type": "object",
+      "description": "Details of the account.",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9_-]+)$"
+        },
+        "correlatorId": {
+          "type": "string",
+          "description": "The opaque correlator id for this account."
+        },
+        "teamsCommonConfig": {
+          "$ref": "#/definitions/TeamsCommonConfig",
+          "description": "Teams Common Account Configuration required for OC and TPM"
+        },
+        "teamsOcEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Teams Operator Connect (OC) is enabled for this account."
+        },
+        "teamsOcConfig": {
+          "$ref": "#/definitions/TeamsOcConfig",
+          "description": "Teams Operator Connect (OC) Account Configuration. Only accepted if OC is enabled."
+        },
+        "directRoutingEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Teams Direct Routing (DR) enabled for this account."
+        },
+        "directRouting": {
+          "$ref": "#/definitions/TeamsDrConfig",
+          "description": "Teams Direct Routing (DR) Account Configuration. Only accepted if DR is enabled."
+        },
+        "teamsTpmEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Teams Phone Mobile (TPM) is enabled for this account."
+        },
+        "teamsTpmConfig": {
+          "$ref": "#/definitions/TeamsTpmConfig",
+          "description": "Teams Phone Mobile (TPM) Account Configuration. Only accepted if TPM is enabled."
+        },
+        "zoomEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Zoom is enabled for this account."
+        },
+        "zoomConfig": {
+          "$ref": "#/definitions/ZoomConfig",
+          "description": "Zoom Account Configuration. Only accepted if Zoom is enabled."
+        }
+      },
+      "required": [
+        "accountName",
+        "teamsOcEnabled",
+        "directRoutingEnabled",
+        "teamsTpmEnabled",
+        "zoomEnabled"
+      ]
+    },
+    "AccountDetailsUpdate": {
+      "type": "object",
+      "description": "Details of the account.",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9_-]+)$"
+        },
+        "correlatorId": {
+          "type": "string",
+          "description": "The opaque correlator id for this account."
+        },
+        "teamsCommonConfig": {
+          "$ref": "#/definitions/TeamsCommonConfigUpdate",
+          "description": "Teams Common Account Configuration required for OC and TPM"
+        },
+        "teamsOcEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Teams Operator Connect (OC) is enabled for this account."
+        },
+        "teamsOcConfig": {
+          "$ref": "#/definitions/TeamsOcConfig",
+          "description": "Teams Operator Connect (OC) Account Configuration. Only accepted if OC is enabled."
+        },
+        "directRoutingEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Teams Direct Routing (DR) enabled for this account."
+        },
+        "directRouting": {
+          "$ref": "#/definitions/TeamsDrConfigUpdate",
+          "description": "Teams Direct Routing (DR) Account Configuration. Only accepted if DR is enabled."
+        },
+        "teamsTpmEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Teams Phone Mobile (TPM) is enabled for this account."
+        },
+        "teamsTpmConfig": {
+          "$ref": "#/definitions/TeamsTpmConfig",
+          "description": "Teams Phone Mobile (TPM) Account Configuration. Only accepted if TPM is enabled."
+        },
+        "zoomEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Zoom is enabled for this account."
+        },
+        "zoomConfig": {
+          "$ref": "#/definitions/ZoomConfig",
+          "description": "Zoom Account Configuration. Only accepted if Zoom is enabled."
+        }
+      }
+    },
+    "AccountName": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9_-]+)$"
+        }
+      },
+      "required": [
+        "accountName"
+      ]
+    },
+    "AccountResponse": {
+      "type": "object",
+      "description": "Details of the account as returned on a GET request.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the account.",
+          "minLength": 1
+        },
+        "details": {
+          "$ref": "#/definitions/AccountDetails"
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag for use with If-Match headers for optimistic concurrency."
+        },
+        "directRoutingProvisioningState": {
+          "$ref": "#/definitions/TeamsDrSubdomainProvisioningState"
+        },
+        "teamsOcSubCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of Teams Operator Connect subscribers for this account."
+        },
+        "teamsDrSubCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of Teams Direct Routing subscribers for this account."
+        },
+        "teamsTpmSubCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of Teams Phone Mobile subscribers for this account."
+        },
+        "zoomSubCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of Zoom subscribers for this account."
+        },
+        "serviceProvisioningStatus": {
+          "$ref": "#/definitions/ServiceProvisioningState",
+          "description": "Status of syncing changes to this object to relevant backend services."
+        },
+        "serviceProvisioningErrors": {
+          "$ref": "#/definitions/ServiceProvisioningErrors",
+          "description": "Error messages where syncing to UC services has failed."
+        }
+      },
+      "required": [
+        "name",
+        "teamsOcSubCount",
+        "teamsDrSubCount",
+        "teamsTpmSubCount",
+        "zoomSubCount",
+        "serviceProvisioningStatus"
+      ]
+    },
+    "AccountResponsePaginatedList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of records for this page.",
+          "items": {
+            "$ref": "#/definitions/AccountResponse"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page (if appropriate)."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to skip.",
+          "minimum": 0
+        },
+        "maxPageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of result items per page.",
+          "default": 200,
+          "minimum": 1,
+          "maximum": 500
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AssignmentStatus": {
+      "type": "string",
+      "description": "Indicates whether a number is assigned to a user. This is only relevant for some UC providers.",
+      "enum": [
+        "TPM Assigned",
+        "TPM Unassigned",
+        "OC Assigned",
+        "OC Unassigned",
+        "Not Applicable"
+      ],
+      "x-ms-enum": {
+        "name": "AssignmentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TpmAssigned",
+            "value": "TPM Assigned"
+          },
+          {
+            "name": "TpmUnassigned",
+            "value": "TPM Unassigned"
+          },
+          {
+            "name": "OcAssigned",
+            "value": "OC Assigned"
+          },
+          {
+            "name": "OcUnassigned",
+            "value": "OC Unassigned"
+          },
+          {
+            "name": "NA",
+            "value": "Not Applicable"
+          }
+        ]
+      }
+    },
+    "BatchNumbersDelete": {
+      "type": "object",
+      "properties": {
+        "numbers": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/PhoneNumber"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "numbers"
+      ]
+    },
+    "BatchNumbersPut": {
+      "type": "object",
+      "properties": {
+        "numbers": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/BatchNumbersPutItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "BatchNumbersPutItem": {
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format.",
+          "minLength": 3,
+          "maxLength": 16,
+          "pattern": "^\\+[1-9]\\d{1,14}$"
+        },
+        "details": {
+          "$ref": "#/definitions/NumberDetails"
+        }
+      },
+      "required": [
+        "phoneNumber",
+        "details"
+      ]
+    },
+    "BatchNumbersResponse": {
+      "type": "object",
+      "properties": {
+        "numbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NumberResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "numbers"
+      ]
+    },
+    "ContactDetails": {
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "description": "The full name of the contact detail.",
+          "minLength": 1
+        },
+        "email": {
+          "type": "string",
+          "description": "The email of the contact detail.",
+          "minLength": 1
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number of the contact detail."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The company name of the contact detail."
+        },
+        "companySize": {
+          "type": "string",
+          "description": "The company size of the contact detail."
+        }
+      },
+      "required": [
+        "fullName",
+        "email"
+      ]
+    },
+    "CustomSipHeader": {
+      "type": "object",
+      "properties": {
+        "customSipHeader": {
+          "type": "string",
+          "description": "Contents of the custom SIP header to use with this number. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length. The name of the custom header is set as part of deploying Azure Communications Gateway.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9_-])+$"
+        }
+      },
+      "required": [
+        "customSipHeader"
+      ]
+    },
+    "CustomerRelationship": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the customer relationship."
+        },
+        "lastModifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time (ISO8601 format) when the customer relationship is last modified."
+        },
+        "comment": {
+          "type": "string",
+          "description": "The comment of the customer relationship."
+        }
+      },
+      "required": [
+        "status",
+        "comment"
+      ]
+    },
+    "DNSProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Provisioned",
+        "NotProvisioned",
+        "Inconsistent"
+      ],
+      "x-ms-enum": {
+        "name": "DNSProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioned",
+            "value": "Provisioned"
+          },
+          {
+            "name": "NotProvisioned",
+            "value": "NotProvisioned"
+          },
+          {
+            "name": "Inconsistent",
+            "value": "Inconsistent"
+          }
+        ]
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The code and message for an error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine readable error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError",
+          "description": "An object containing more specific information about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "InnerError": {
+      "type": "object",
+      "description": "More specific information on an error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine readable error code."
+        },
+        "innerError": {
+          "type": "string",
+          "description": "Inner error details if they exist."
+        }
+      },
+      "required": [
+        "innerError"
+      ]
+    },
+    "Location": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the location.",
+          "minLength": 1
+        },
+        "civicAddressId": {
+          "type": "string",
+          "description": "The civic address ID of the location.",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the location.",
+          "x-nullable": true
+        },
+        "additionalInfo": {
+          "type": "string",
+          "description": "The additional information of the location.",
+          "x-nullable": true
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Flag indicating whether the location is default or not."
+        },
+        "elin": {
+          "type": "string",
+          "description": "The elin of the location.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "id",
+        "civicAddressId"
+      ]
+    },
+    "NumberDetails": {
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format.",
+          "minLength": 3,
+          "maxLength": 16,
+          "pattern": "^\\+[1-9]\\d{1,14}$"
+        },
+        "services": {
+          "$ref": "#/definitions/NumberServices"
+        },
+        "customSipHeader": {
+          "type": "string",
+          "description": "Contents of the custom SIP header to use with this number. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length. The name of the custom header is set as part of deploying Azure Communications Gateway.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9_-])+$"
+        }
+      },
+      "required": [
+        "phoneNumber",
+        "services",
+        "customSipHeader"
+      ]
+    },
+    "NumberResponse": {
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format.",
+          "minLength": 3,
+          "maxLength": 16,
+          "pattern": "^\\+[1-9]\\d{1,14}$"
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9_-]+)$"
+        },
+        "details": {
+          "$ref": "#/definitions/NumberDetails"
+        },
+        "status": {
+          "$ref": "#/definitions/AssignmentStatus"
+        },
+        "Etag": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "serviceProvisioningStatus": {
+          "$ref": "#/definitions/ServiceProvisioningState"
+        },
+        "serviceProvisioningErrors": {
+          "$ref": "#/definitions/ServiceProvisioningErrors"
+        }
+      },
+      "required": [
+        "phoneNumber",
+        "accountName",
+        "details",
+        "status",
+        "serviceProvisioningStatus"
+      ]
+    },
+    "NumberResponsePaginatedList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of records for this page.",
+          "items": {
+            "$ref": "#/definitions/NumberResponse"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page (if appropriate)."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to skip.",
+          "minimum": 0
+        },
+        "maxPageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of result items per page.",
+          "default": 200,
+          "minimum": 1,
+          "maximum": 500
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NumberServices": {
+      "type": "object",
+      "properties": {
+        "teamsOcEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Teams Operator Connect (OC) is enabled for this number."
+        },
+        "teamsOcNumberConfig": {
+          "$ref": "#/definitions/TeamsOcNumberConfig",
+          "description": "Teams Operator Connect (OC) Number Configuration"
+        },
+        "teamsDrEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Teams Direct Routing (DR) is enabled for this number."
+        },
+        "teamsTpmNumberConfig": {
+          "$ref": "#/definitions/TeamsTpmNumberConfig",
+          "description": "Teams Phone Mobile (TPM) Number Configuration"
+        },
+        "teamsTpmEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Teams Phone Mobile (TPM) is enabled for this number."
+        },
+        "zoomEnabled": {
+          "type": "boolean",
+          "description": "Indicates that Zoom is enabled for this number."
+        }
+      },
+      "required": [
+        "teamsOcEnabled",
+        "teamsDrEnabled",
+        "teamsTpmEnabled",
+        "zoomEnabled"
+      ]
+    },
+    "OcErrorDetails": {
+      "type": "object",
+      "description": "Error details returned from the Teams API",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "OcErrorResponseBody": {
+      "type": "object",
+      "description": "Error body to return when requests to Teams API fails",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OcErrorDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "details"
+      ]
+    },
+    "PhoneNumber": {
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in E.164 format.",
+          "minLength": 3,
+          "maxLength": 16,
+          "pattern": "^\\+[1-9]\\d{1,14}$"
+        }
+      },
+      "required": [
+        "phoneNumber"
+      ]
+    },
+    "PhoneNumbers": {
+      "type": "object",
+      "description": "A list of phone numbers",
+      "properties": {
+        "numbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhoneNumber"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "numbers"
+      ]
+    },
+    "ProvisioningError": {
+      "type": "object",
+      "properties": {
+        "service": {
+          "$ref": "#/definitions/ServiceEnum"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "service",
+        "errorCode",
+        "message"
+      ]
+    },
+    "RFIDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the Request for Information."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The AAD tenant ID of the Request for Information."
+        },
+        "productContext": {
+          "type": "string",
+          "description": "Will always be 'teams'."
+        },
+        "operatorId": {
+          "type": "string",
+          "description": "The operator ID of the operator consent."
+        },
+        "status": {
+          "$ref": "#/definitions/RFIStatus",
+          "description": "The status of the operator consent.",
+          "x-nullable": true
+        },
+        "consentedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time (ISO8601 format) when the operator consent is created."
+        },
+        "lastModifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time (ISO8601 format) when the operator consent is last modified."
+        },
+        "consentedCountries": {
+          "type": "array",
+          "description": "The list of consented countries.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contacts": {
+          "type": "array",
+          "description": "The list of tenant contacts.",
+          "items": {
+            "$ref": "#/definitions/ContactDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "customerRelationship": {
+          "$ref": "#/definitions/CustomerRelationship",
+          "description": "The customer relationship of the operator consent."
+        }
+      },
+      "required": [
+        "consentedCountries",
+        "customerRelationship"
+      ]
+    },
+    "RFIDetailsPaginatedList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of records for this page.",
+          "items": {
+            "$ref": "#/definitions/RFIDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page (if appropriate)."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to skip.",
+          "minimum": 0
+        },
+        "maxPageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of result items per page.",
+          "default": 200,
+          "minimum": 1,
+          "maximum": 500
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RFIStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Suspended",
+        "Removed"
+      ],
+      "x-ms-enum": {
+        "name": "RFIStatus",
+        "modelAsString": true
+      }
+    },
+    "ServiceEnum": {
+      "type": "string",
+      "enum": [
+        "oc",
+        "tpm",
+        "dr",
+        "zoom"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Oc",
+            "value": "oc"
+          },
+          {
+            "name": "Tpm",
+            "value": "tpm"
+          },
+          {
+            "name": "Dr",
+            "value": "dr"
+          },
+          {
+            "name": "Zoom",
+            "value": "zoom"
+          }
+        ]
+      }
+    },
+    "ServiceProvisioningErrors": {
+      "type": "object",
+      "properties": {
+        "allErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProvisioningError"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "allErrors"
+      ]
+    },
+    "ServiceProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Success",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Success",
+            "value": "Success"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
+      }
+    },
+    "TeamsCapabilities": {
+      "type": "object",
+      "description": "The Teams capabilities available for numbers with OC or TPM services enabled.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "offerTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mandatoryCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "choosableCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportsTollFree": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "offerTypes",
+        "mandatoryCapabilities",
+        "choosableCapabilities",
+        "supportsTollFree"
+      ]
+    },
+    "TeamsCapabilitiesPaginatedList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of records for this page.",
+          "items": {
+            "$ref": "#/definitions/TeamsCapabilities"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page (if appropriate)."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to skip.",
+          "minimum": 0
+        },
+        "maxPageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of result items per page.",
+          "default": 200,
+          "minimum": 1,
+          "maximum": 500
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TeamsCivicAddress": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the civic address.",
+          "minLength": 1
+        },
+        "country": {
+          "type": "string",
+          "description": "The country of the civic address.",
+          "x-nullable": true
+        },
+        "houseNumber": {
+          "type": "string",
+          "description": "The house number of the civic address.",
+          "x-nullable": true
+        },
+        "houseNumberSuffix": {
+          "type": "string",
+          "description": "The house number suffix of the civic address.",
+          "x-nullable": true
+        },
+        "preDirectional": {
+          "type": "string",
+          "description": "The pre directional of the civic address.",
+          "x-nullable": true
+        },
+        "streetName": {
+          "type": "string",
+          "description": "The street name of the civic address.",
+          "x-nullable": true
+        },
+        "streetSuffix": {
+          "type": "string",
+          "description": "The street suffix of the civic address.",
+          "x-nullable": true
+        },
+        "postDirectional": {
+          "type": "string",
+          "description": "The post directional of the civic address.",
+          "x-nullable": true
+        },
+        "stateOrProvince": {
+          "type": "string",
+          "description": "The state or province of the civic address.",
+          "x-nullable": true
+        },
+        "countyOrDistrict": {
+          "type": "string",
+          "description": "The county or district of the civic address.",
+          "x-nullable": true
+        },
+        "cityOrTown": {
+          "type": "string",
+          "description": "The city or town of the civic address.",
+          "x-nullable": true
+        },
+        "cityOrTownAlias": {
+          "type": "string",
+          "description": "The city or town alias of the civic address.",
+          "x-nullable": true
+        },
+        "postalOrZipCode": {
+          "type": "string",
+          "description": "The postal or zip code of the civic address.",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the civic address.",
+          "x-nullable": true
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The company name of the civic address.",
+          "x-nullable": true
+        },
+        "companyId": {
+          "type": "string",
+          "description": "The company ID of the civic address.",
+          "x-nullable": true
+        },
+        "defaultLocationId": {
+          "type": "string",
+          "description": "The default location ID of the civic address.",
+          "minLength": 1
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/ValidationStatus",
+          "description": "The validation status of the civic address.",
+          "x-nullable": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The customer tenant ID of the civic address.",
+          "x-nullable": true
+        },
+        "partnerId": {
+          "type": "string",
+          "description": "The partner ID of the civic address.",
+          "x-nullable": true
+        },
+        "locations": {
+          "type": "array",
+          "description": "The list of locations associated with the civic address.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "latitude": {
+          "type": "string",
+          "description": "The latitude of the civic address.",
+          "x-nullable": true
+        },
+        "longitude": {
+          "type": "string",
+          "description": "The longitude of the civic address.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "id",
+        "defaultLocationId"
+      ]
+    },
+    "TeamsCivicAddressPaginatedList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of records for this page.",
+          "items": {
+            "$ref": "#/definitions/TeamsCivicAddress"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page (if appropriate)."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to skip.",
+          "minimum": 0
+        },
+        "maxPageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of result items per page.",
+          "default": 200,
+          "minimum": 1,
+          "maximum": 500
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TeamsCommonConfig": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The Microsoft Teams Tenant ID of the Account. This can only be updated if no OC or TPM numbers are configured in this account."
+        },
+        "syncEnabled": {
+          "type": "boolean",
+          "description": "Is data provisioned through ACG being synced to Teams."
+        }
+      },
+      "required": [
+        "tenantId",
+        "syncEnabled"
+      ]
+    },
+    "TeamsCommonConfigUpdate": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The Microsoft Teams Tenant ID of the Account. This can only be updated if no OC or TPM numbers are configured in this account."
+        },
+        "syncEnabled": {
+          "type": "boolean",
+          "description": "Is data provisioned through ACG being synced to Teams."
+        }
+      }
+    },
+    "TeamsDrConfig": {
+      "type": "object",
+      "properties": {
+        "callScreening": {
+          "type": "boolean",
+          "description": "Enables/disables caller ID screening for the account. Caller ID screening is enabled by default."
+        },
+        "subdomain": {
+          "type": "string",
+          "description": "Customer-specific domain name label. Can only contain letters, numbers, underscores and dashes. Can be up to 10 characters in length.",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^([A-Za-z0-9_-]+)$"
+        },
+        "subdomainTokens": {
+          "$ref": "#/definitions/TeamsDrSubdomainTokens"
+        },
+        "subdomainProvisionedState": {
+          "$ref": "#/definitions/DNSProvisioningState"
+        },
+        "actualSubdomainTokens": {
+          "$ref": "#/definitions/TeamsDrSubdomainTokens"
+        }
+      },
+      "required": [
+        "callScreening",
+        "subdomain",
+        "subdomainTokens"
+      ]
+    },
+    "TeamsDrConfigUpdate": {
+      "type": "object",
+      "properties": {
+        "callScreening": {
+          "type": "boolean",
+          "description": "Enables/disables caller ID screening for the account. Caller ID screening is enabled by default."
+        },
+        "subdomain": {
+          "type": "string",
+          "description": "Customer-specific domain name label. Can only contain letters, numbers, underscores and dashes. Can be up to 10 characters in length.",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^([A-Za-z0-9_-]+)$"
+        },
+        "subdomainTokens": {
+          "$ref": "#/definitions/TeamsDrSubdomainTokensUpdate"
+        },
+        "subdomainProvisionedState": {
+          "$ref": "#/definitions/DNSProvisioningState"
+        },
+        "actualSubdomainTokens": {
+          "$ref": "#/definitions/TeamsDrSubdomainTokensUpdate"
+        }
+      }
+    },
+    "TeamsDrSubdomainProvisioningState": {
+      "type": "object",
+      "properties": {
+        "teamsDrSubdomainTokens": {
+          "$ref": "#/definitions/TeamsDrSubdomainTokens"
+        },
+        "teamsDrSubdomainStatus": {
+          "$ref": "#/definitions/DNSProvisioningState"
+        }
+      },
+      "required": [
+        "teamsDrSubdomainStatus"
+      ]
+    },
+    "TeamsDrSubdomainToken": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "DNS TXT value for the first region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9=_-]+)$"
+        }
+      },
+      "required": [
+        "token"
+      ]
+    },
+    "TeamsDrSubdomainTokenUpdate": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "DNS TXT value for the first region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9=_-]+)$"
+        }
+      }
+    },
+    "TeamsDrSubdomainTokens": {
+      "type": "object",
+      "description": "DNS TXT value for the region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.",
+      "properties": {
+        "region1Token": {
+          "$ref": "#/definitions/TeamsDrSubdomainToken"
+        },
+        "region2Token": {
+          "$ref": "#/definitions/TeamsDrSubdomainToken"
+        }
+      },
+      "required": [
+        "region1Token",
+        "region2Token"
+      ]
+    },
+    "TeamsDrSubdomainTokensUpdate": {
+      "type": "object",
+      "description": "DNS TXT value for the region, as provided by the customer from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.",
+      "properties": {
+        "region1Token": {
+          "$ref": "#/definitions/TeamsDrSubdomainTokenUpdate"
+        },
+        "region2Token": {
+          "$ref": "#/definitions/TeamsDrSubdomainTokenUpdate"
+        }
+      }
+    },
+    "TeamsOcConfig": {
+      "type": "object"
+    },
+    "TeamsOcNumberConfig": {
+      "type": "object",
+      "properties": {
+        "usage": {
+          "type": "string"
+        },
+        "choosableCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalUsages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "civicAddressId": {
+          "type": "string"
+        },
+        "locationId": {
+          "type": "string"
+        },
+        "allowTenantAddressUpdate": {
+          "type": "boolean",
+          "default": false
+        },
+        "displayedCountryCode": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "usage",
+        "choosableCapabilities"
+      ]
+    },
+    "TeamsService": {
+      "type": "string",
+      "enum": [
+        "oc",
+        "tpm"
+      ],
+      "x-ms-enum": {
+        "name": "TeamsService",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Oc",
+            "value": "oc"
+          },
+          {
+            "name": "Tpm",
+            "value": "tpm"
+          }
+        ]
+      }
+    },
+    "TeamsSyncEnabled": {
+      "type": "object",
+      "properties": {
+        "teamsSyncEnabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "teamsSyncEnabled"
+      ]
+    },
+    "TeamsTpmConfig": {
+      "type": "object"
+    },
+    "TeamsTpmNumberConfig": {
+      "type": "object",
+      "properties": {
+        "usage": {
+          "type": "string"
+        },
+        "choosableCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalUsages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "civicAddressId": {
+          "type": "string"
+        },
+        "locationId": {
+          "type": "string"
+        },
+        "allowTenantAddressUpdate": {
+          "type": "boolean",
+          "default": false
+        },
+        "displayedCountryCode": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "usage",
+        "choosableCapabilities"
+      ]
+    },
+    "ValidationStatus": {
+      "type": "string",
+      "enum": [
+        "NotValidated",
+        "Validated"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationStatus",
+        "modelAsString": true
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The Microsoft.Voiceservices service versions.",
+      "enum": [
+        "2024-01-30-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-01-30-preview",
+            "value": "2024-01-30-preview",
+            "description": "The 2024-01-30-preview version of the Microsoft.Voiceservices service."
+          }
+        ]
+      }
+    },
+    "ZoomConfig": {
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "CustomFilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomMaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 200,
+      "minimum": 1,
+      "maximum": 500,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "maxPageSize"
+    },
+    "CustomSkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
