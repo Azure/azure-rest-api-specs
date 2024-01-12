@@ -1192,12 +1192,6 @@
           },
           {
             "in": "header",
-            "name": "storageEndpoint",
-            "description": "The blob storage endpoint hosting the data that will be ingested. Required for ResourceId format of storageConnectionString.",
-            "type": "string"
-          },
-          {
-            "in": "header",
             "name": "embeddingEndpoint",
             "description": "The endpoint of the embeddings model to be used for embeddings calculations if enabled.",
             "type": "string"
@@ -1206,6 +1200,12 @@
             "in": "header",
             "name": "embeddingKey",
             "description": "The key to use for accessing the embeddings model if enabled and if Managed Identity is not setup.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "storageEndpoint",
+            "description": "The blob storage endpoint hosting the data that will be ingested. Required for ResourceId format of storageConnectionString.",
             "type": "string"
           },
           {
@@ -2375,6 +2375,12 @@
         },
         "completionAction": {
           "$ref": "#/definitions/IngestionJobCompletionAction"
+        },
+        "chunkSize": {
+          "type": "integer",
+          "format": "int32",
+          "default": 1024,
+          "description": "This number defines the maximum number of tokens in each chunk produced by the ingestion flow."
         },
         "status": {
           "$ref": "#/definitions/OperationState"
