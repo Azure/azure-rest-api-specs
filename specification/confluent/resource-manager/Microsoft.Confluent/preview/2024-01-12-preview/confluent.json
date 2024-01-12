@@ -1373,9 +1373,6 @@
           "Organization_ListSchemaRegistryRegions": {
             "$ref": "./examples/Organization_SchemaRegistryRegionList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3123,20 +3120,16 @@
       }
     },
     "ListRegionsSuccessResponse": {
-      "description": "Result of GET request to list schema registry clusters in the environment of a confluent organization",
+      "description": "Result of POST request to list regions supported by confluent",
       "type": "object",
       "properties": {
-        "value": {
-          "description": "List of schema registry clusters in an environment of a confluent organization",
+        "data": {
+          "description": "List of regions supported by confluent",
           "type": "array",
           "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/RegionRecord"
           }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of schema registry cluster records if there are any.",
-          "type": "string"
         }
       }
     },
@@ -3209,7 +3202,7 @@
           "type": "string"
         },
         "kind": {
-          "description": "Type of the owner service or user account",
+          "description": "Type of the owner which can be service or user account",
           "type": "string"
         }
       }
