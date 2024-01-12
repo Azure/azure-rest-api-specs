@@ -1,6 +1,8 @@
 # ARM (Control Plane) API Specification Update Pull Request 
 
-> Tip: overwhelmed by all this guidance? See the `Getting help` section at the bottom of this PR description.
+> Tip: Overwhelmed by all this guidance? See the `Getting help` section at the bottom of this PR description.
+
+> Important note: If you dont see any 'Assignee' for your PR, there is nothing to worry as this is expected. Please see the `Getting help` section for more information.
 
 ## PR review workflow diagram
 
@@ -39,20 +41,21 @@ If the automation determines you have breaking changes, i.e. Step 1 from the dia
 ### Diagram footnotes
 
 [1] [ARM review queue] (for **merge** queues, see [2])  
-The PRs are processed by time opened, ascending. Your PR may show up on 2nd or later page. 
-If you addressed Step 1 from the diagram and your PR is not showing up in the queue, ensure the label `ARMChangesRequested` 
+The PRs are processed by time opened, ascending. Your PR may show up on 2nd or later page. The ARM API reviewer reviews approximately 10 PRs in a business day.This could vary based on the complexity of the PRs at any given time in the review queue. The ETA for a review therefore is approximately equal to (The position of your PR in the review queue / 10) + 1 business days. For eg: If the position of your PR in the review queue is 12, then the approxiamte ETA is 2 business days. 
+If you addressed Step 1 from the diagram and your PR is not showing up in the review queue, ensure the label `ARMChangesRequested` 
 is removed from your PR. This should cause the label `WaitForARMFeedback` to be added.
 [2] [public repo merge queue], [private repo merge queue] (for **ARM review** queue, [1])
-
+The ARM API reviewer on-call visits the merge queue twice a day, so the approximate ETA for merges is 12 - 24 hours.
 If you need further help with anything, see `Getting help` section below.
 
 </details>
 
 ## Purpose of this PR
 
-What's the purpose of this PR? Check all that apply. This is **mandatory**!
+What's the purpose of this PR? Check the specific option that applies. This is **mandatory**!
 
-  - [ ] New API version. (If API spec is not defined in TypeSpec, the PR should have been generated using [OpenAPI Hub](https://aka.ms/openapihub)).
+  - [ ] New Resource provider.
+  - [ ] New API version for an existing Resource provider. (If API spec is not defined in TypeSpec, the PR should have been generated using [OpenAPI Hub](https://aka.ms/openapihub)).
   - [ ] Update existing version for a new feature. (This is applicable only when you are revising a private preview API version.)
   - [ ] Update existing version to fix swagger quality issues in S360.
   - [ ] Other, please clarify:
@@ -95,6 +98,7 @@ to get approval.
   and https://aka.ms/ci-fix.
 - If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
   This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.
+- All reviews and merges for control plane PRs are done by the ARM API reviewer on-call. There will no longer be a designated assignee for control plane PRs. The ARM API reviewer on-call works through the appropriate queues that are maintained for each intended action. The queue is maintained in First In First Out order. Details on how to get your PR in the appropriate queue is mentioned in the PR workflow diagram. If you need help from the ARM API reviewer, pl book the ARM API review office hours slot by visiting aka.ms\armofficehoursinfo. If you are from a timezone that makes it difficult for you to attend the office hours slot, please still book the office hours slot and call out your question or ask clearly. If your question cannot be answered offline, the API reviewer on-call will reach out to you over Teams to have a conversation and take the issue to closure. For help with other topics, please use the prescribed methods mentioned in the PR workflow diagram and this getting help section.
 - If the help provided by the previous points is not enough, post to https://aka.ms/azsdk/support/specreview-channel and link to this PR.
 
 [ARM review queue]: https://github.com/search?q=org%3AAzure+is%3Apr+is%3Aopen+label%3AWaitForARMFeedback+-label%3AIDCDevDiv++draft%3Afalse+sort%3Acreated-asc+&type=pullrequests
