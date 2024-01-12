@@ -362,7 +362,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NotificationContent"
+          "$ref": "#/definitions/NotificationType"
         }
       ],
       "x-ms-discriminator-value": "image"
@@ -700,6 +700,21 @@
             "type": "string"
           }
         },
+        "type": {
+          "$ref": "#/definitions/NotificationType",
+          "description": "The notification type."
+        }
+      },
+      "required": [
+        "channelRegistrationId",
+        "to",
+        "type"
+      ]
+    },
+    "NotificationType": {
+      "type": "object",
+      "description": "Details of the message to send.",
+      "properties": {
         "kind": {
           "$ref": "#/definitions/CommunicationMessageType",
           "description": "The type discriminator describing a notification type."
@@ -707,8 +722,6 @@
       },
       "discriminator": "kind",
       "required": [
-        "channelRegistrationId",
-        "to",
         "kind"
       ]
     },
@@ -765,7 +778,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NotificationContent"
+          "$ref": "#/definitions/NotificationType"
         }
       ],
       "x-ms-discriminator-value": "template"
@@ -832,7 +845,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NotificationContent"
+          "$ref": "#/definitions/NotificationType"
         }
       ],
       "x-ms-discriminator-value": "text"
