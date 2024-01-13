@@ -2714,12 +2714,6 @@
                 "format": "int64",
                 "description": "The number of bytes present in the response body."
               },
-              "x-ms-structured-content-length": {
-                "x-ms-client-name": "StructuredContentLength",
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the blob/file content when the response body is returned as a structured body. Will always be smaller than Content-Length."
-              },
               "Content-Type": {
                 "type": "string",
                 "description": "The media type of the body of the response. For Download Blob this is 'application/octet-stream'"
@@ -2957,6 +2951,17 @@
                 "x-ms-client-name": "LegalHold",
                 "type": "boolean",
                 "description": "Indicates if a legal hold is present on the blob."
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBody",
+                "type": "string",
+                "description": "Indicates the response body is in structured body format and specifies the message schema version and properties."
+              },
+              "x-ms-structured-content-length": {
+                "x-ms-client-name": "StructuredContentLength",
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the blob/file content when the response body is returned as a structured body. Will always be smaller than Content-Length."
               }
             },
             "schema": {
@@ -2998,12 +3003,6 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The number of bytes present in the response body."
-              },
-              "x-ms-structured-content-length": {
-                "x-ms-client-name": "StructuredContentLength",
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of blob/file content when the response body is returned as a structured body. Will always be smaller than Content-Length."
               },
               "Content-Type": {
                 "type": "string",
@@ -3239,6 +3238,17 @@
                 "x-ms-client-name": "LegalHold",
                 "type": "boolean",
                 "description": "Indicates if a legal hold is present on the blob."
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBody",
+                "type": "string",
+                "description": "Indicates the response body is in structured body format and specifies the message schema version and properties."
+              },
+              "x-ms-structured-content-length": {
+                "x-ms-client-name": "StructuredContentLength",
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the blob/file content when the response body is returned as a structured body. Will always be smaller than Content-Length."
               }
             },
             "schema": {
@@ -11758,7 +11768,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Specifies the response content should be returned in structured body format and specifies the desired format."
+      "description": "Specifies the response content should be returned in structured body format and specifies the message schema version and properties."
     },
     "IfMatch": {
       "name": "If-Match",
