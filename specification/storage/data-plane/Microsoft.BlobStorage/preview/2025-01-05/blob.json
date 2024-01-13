@@ -2645,6 +2645,9 @@
             "$ref": "#/parameters/GetRangeContentCRC64"
           },
           {
+            "$ref": "#/parameters/StructuredBody"
+          },
+          {
             "$ref": "#/parameters/EncryptionKey"
           },
           {
@@ -2710,6 +2713,12 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The number of bytes present in the response body."
+              },
+              "x-ms-structured-content-length": {
+                "x-ms-client-name": "StructuredContentLength",
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the blob/file content when the response body is returned as a structured body. Will always be smaller than Content-Length."
               },
               "Content-Type": {
                 "type": "string",
@@ -2989,6 +2998,12 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The number of bytes present in the response body."
+              },
+              "x-ms-structured-content-length": {
+                "x-ms-client-name": "StructuredContentLength",
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of blob/file content when the response body is returned as a structured body. Will always be smaller than Content-Length."
               },
               "Content-Type": {
                 "type": "string",
@@ -11735,6 +11750,15 @@
       "type": "boolean",
       "x-ms-parameter-location": "method",
       "description": "When set to true and specified together with the Range, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MB in size."
+    },
+    "StructuredBody": {
+      "name": "x-ms-structured-body",
+      "x-ms-client-name": "StructuredBody",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Specifies the response content should be returned in structured body format and specifies the desired format."
     },
     "IfMatch": {
       "name": "If-Match",
