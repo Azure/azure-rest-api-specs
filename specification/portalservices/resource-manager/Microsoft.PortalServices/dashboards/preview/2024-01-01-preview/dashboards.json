@@ -386,20 +386,20 @@
     "ActionsOnClick": {
       "type": "object",
       "properties": {
-        "type": {
+        "action": {
           "$ref": "#/definitions/ActionsOnClickType"
         }
       },
       "required": [
-        "type"
+        "action"
       ],
-      "discriminator": "type"
+      "discriminator": "action"
     },
     "ActionsOnClickType": {
       "description": "Types of action on click.",
       "enum": [
-        "actionParameter",
-        "actionOpenBlade"
+        "openBlade",
+        "updateParameters"
       ],
       "x-ms-enum": {
         "name": "ActionsOnClickType",
@@ -408,26 +408,14 @@
       "type": "string"
     },
     "ActionOpenBlade": {
-      "x-ms-discriminator-value": "actionOpenBlade",
+      "x-ms-discriminator-value": "openBlade",
       "type": "object",
       "properties": {
-        "action": {
-          "type": "string",
-          "description": "What action the tile should do when clicked. Enum permitting the value: \"openBlade\".",
-          "enum": [
-            "openBlade"
-          ],
-          "x-ms-enum": {
-            "name": "action",
-            "modelAsString": true
-          }
-        },
         "blade": {
           "$ref": "#/definitions/BladeReferenceWithContextPane"
         }
       },
       "required": [
-        "action",
         "blade"
       ],
       "allOf": [
@@ -438,21 +426,8 @@
       "additionalProperties": false      
     },
     "ActionParameters" : {
-      "x-ms-discriminator-value": "actionParameter",
-      "type": "object",
-      "properties": {
-        "action": {
-          "type": "string",
-          "description": "What action the tile should do when clicked. Enum permitting the value: \"updateParameters\".",
-          "enum": [
-            "updateParameters"
-          ],
-          "x-ms-enum": {
-            "name": "action",
-            "modelAsString": true
-          }
-        }
-      },
+      "x-ms-discriminator-value": "updateParameters",
+      "type": "object",      
       "allOf": [
         {
           "$ref": "#/definitions/DashboardParameterValuesList"
@@ -462,7 +437,6 @@
         }
       ],
       "required": [
-        "action",
         "parameters"
       ]
     },
