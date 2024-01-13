@@ -865,6 +865,64 @@
         "uri"
       ]
     },
+    "NavigationTile": {
+      "x-ms-discriminator-value": "NavigationTile",
+      "type": "object",
+      "description": "Navigate with a click to assets or blades within Azure Portal with the navigation tile.",
+      "properties": {
+        "data": {
+          "description": "The definition of data for the navigation tile.",
+          "$ref": "#/definitions/NavigationTileData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DashboardTile"
+        }
+      ],
+      "required": [
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "NavigationTileData": {
+      "type": "object",
+      "description": "The data that determines the content of the navigation tile.",
+      "properties": {
+        "icon": {
+          "type": "string",
+          "description": "Icon to be displayed on the navigation tile."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description displayed within the navigation tile."
+        }
+      },
+      "required": [
+        "icon"
+      ],
+      "additionalProperties": false
+    },
+    "PolicyTile": {
+      "x-ms-discriminator-value": "PolicyTile",
+      "type": "object",
+      "description": "Display information of your resources that are compliant with configured Azure policies with the policy tile.",
+      "properties": {
+        "data": {
+          "description": "The definition of data for the policy tile.",
+          "$ref": "#/definitions/QueryTileData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DashboardTile"
+        }      
+      ],
+      "required": [
+        "data"
+      ],
+      "additionalProperties": false
+    },
     "QueryTile": {
       "x-ms-discriminator-value": "QueryTile",
       "description": "A query tile.",
@@ -911,7 +969,8 @@
       "description": "Dashboard Query tile kind.",
       "enum": [
         "arg",
-        "app-insights"
+        "app-insights",
+        "policy"
       ],
       "x-ms-enum": {
         "name": "kind",
@@ -990,6 +1049,16 @@
       ],
       "required": [
         "metrics"
+      ]
+    },    
+    "PolicyTileDataDefinition": {
+      "x-ms-discriminator-value": "policy",
+      "type": "object",
+      "description": "The data that determines the content of the policy tile.",      
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueryTileData"
+        }
       ]
     },
     "QueryTileMetricsItem": {
