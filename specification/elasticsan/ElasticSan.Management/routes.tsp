@@ -9,22 +9,17 @@ using Azure.ResourceManager;
 
 namespace Microsoft.ElasticSan;
 
-interface SkusOperations {
+interface Skus {
   @summary("List all the available Skus in the region and information related to them")
   @doc("List all the available Skus in the region and information related to them")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ElasticSan/skus")
   @get
-  list is Azure.Core.Foundations.Operation<
-    {
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
-      @doc("Specify $filter='location eq <location>' to filter on location.")
-      @query("$filter")
-      $filter?: string;
-    },
-    SkuInformationList
-  >;
+    @doc("Specify $filter='location eq <location>' to filter on location.")
+    @query("$filter")
+    $filter?: string,
+  ): ArmResponse<SkuInformationList> | ErrorResponse;
 }

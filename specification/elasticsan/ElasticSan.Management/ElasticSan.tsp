@@ -55,35 +55,6 @@ interface ElasticSans {
 
   @doc("Gets a list of ElasticSans in a subscription")
   listBySubscription is ArmListBySubscription<ElasticSan>;
-
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PrivateLinkResources_ListByElasticSan")
-  @doc("Gets the private link resources that need to be created for a elastic San.")
-  // FIXME: PrivateLinkResources_ListByElasticSan could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateLinkResources")
-  @get
-  listByElasticSan is Azure.Core.Foundations.Operation<
-    {
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      @doc("The name of the ElasticSan.")
-      @maxLength(24)
-      @minLength(3)
-      @pattern("^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$")
-      @path
-      elasticSanName: string;
-    },
-    PrivateLinkResourceListResult
-  >;
 }
 
 @@projectedName(ElasticSans.create::parameters.resource, "json", "parameters");

@@ -7,6 +7,7 @@ import "./ElasticSan.tsp";
 import "./VolumeGroup.tsp";
 import "./Volume.tsp";
 import "./PrivateEndpointConnection.tsp";
+import "./PrivateLinkResource.tsp";
 import "./Snapshot.tsp";
 import "./routes.tsp";
 

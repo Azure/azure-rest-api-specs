@@ -61,6 +61,7 @@ enum StorageTargetType {
 enum EncryptionType {
   @doc("Volume is encrypted at rest with Platform managed key. It is the default encryption type.")
   EncryptionAtRestWithPlatformKey,
+
   @doc("Volume is encrypted at rest with Customer managed key that can be changed and revoked by a customer.")
   EncryptionAtRestWithCustomerManagedKey,
 }
@@ -484,22 +485,6 @@ model VolumeUpdateProperties {
 
   @doc("Parent resource information.")
   managedBy?: ManagedByInfo;
-}
-
-@doc("A list of private link resources")
-model PrivateLinkResourceListResult {
-  @doc("Array of private link resources")
-  value?: PrivateLinkResource[];
-
-  @doc("URI to fetch the next section of the paginated response.")
-  @visibility("read")
-  nextLink?: string;
-}
-
-@doc("A private link resource")
-model PrivateLinkResource extends Resource {
-  @doc("Resource properties.")
-  properties?: PrivateLinkResourceProperties;
 }
 
 @doc("Properties of a private link resource.")
