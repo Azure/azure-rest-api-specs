@@ -2012,86 +2012,6 @@
         "modelAsString": true
       }
     },
-    "Azure.ResourceManager.Foundations.ManagedIdentityProperties": {
-      "type": "object",
-      "description": "The properties of the managed service identities assigned to this resource.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The Active Directory tenant id of the principal.",
-          "readOnly": true
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier of this principal.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
-      "type": "string",
-      "description": "The kind of managed identity assigned to this resource.",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned, UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned managed identity."
-          },
-          {
-            "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned, UserAssigned",
-            "description": "System and user assigned managed identity."
-          }
-        ]
-      }
-    },
-    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
-      "type": "object",
-      "description": "A managed identity assigned by the user.",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The active directory client identifier for this principal."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier for this principal."
-        }
-      }
-    },
     "ElasticSan": {
       "type": "object",
       "description": "Response for ElasticSan request.",
@@ -2317,6 +2237,16 @@
       "type": "object",
       "description": "Identity for the resource.",
       "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
         "type": {
           "$ref": "#/definitions/IdentityType",
           "description": "The identity type."
@@ -2328,7 +2258,10 @@
             "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "IdentityType": {
       "type": "string",
@@ -2341,6 +2274,23 @@
       "x-ms-enum": {
         "name": "IdentityType",
         "modelAsString": true
+      }
+    },
+    "IdentityUpdate": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The identity type."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this volume group. The key is the ARM resource identifier of the identity.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
       }
     },
     "IscsiTargetInfo": {
@@ -3035,8 +2985,8 @@
           ]
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityProperties",
-          "description": "The managed service identities assigned to this resource."
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       },
       "allOf": [
@@ -3110,7 +3060,7 @@
       "description": "Volume Group request.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/IdentityUpdate",
           "description": "The identity of the resource."
         },
         "properties": {

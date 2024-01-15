@@ -24,7 +24,8 @@ model VolumeGroup is ProxyResource<VolumeGroupProperties> {
   @segment("volumegroups")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  @doc("The identity of the resource.")
+  identity?: Identity;
 }
 
 @armResourceOperations
