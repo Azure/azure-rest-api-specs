@@ -6,7 +6,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ElasticSan;
 
@@ -90,6 +89,12 @@ enum OperationalStatus {
   Running,
   Stopped,
   `Stopped (deallocated)`,
+}
+
+@doc("The sku tier.")
+enum SkuTier {
+  @doc("Premium Tier")
+  Premium,
 }
 
 enum XMsDeleteSnapshots {
@@ -244,25 +249,6 @@ model PrivateLinkServiceConnectionState {
   actionsRequired?: string;
 }
 
-@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
-model Resource {
-  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
-  @visibility("read")
-  id?: string;
-
-  @doc("The name of the resource")
-  @visibility("read")
-  name?: string;
-
-  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
-  @visibility("read")
-  type?: string;
-
-  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
-}
-
 @doc("Response for ElasticSan update request.")
 model ElasticSanUpdate {
   @doc("Properties of ElasticSan.")
@@ -301,6 +287,17 @@ model Identity {
 
   @doc("Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this volume group. The key is the ARM resource identifier of the identity.")
   userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+@doc("UserAssignedIdentity for the resource.")
+model UserAssignedIdentity {
+  @doc("The principal ID of the identity.")
+  @visibility("read")
+  principalId?: string;
+
+  @doc("The client ID of the identity.")
+  @visibility("read")
+  clientId?: string;
 }
 
 @doc("VolumeGroup response properties.")

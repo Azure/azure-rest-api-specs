@@ -2062,42 +2062,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.Foundations.SkuTier": {
-      "type": "string",
-      "description": "Available service tiers for the SKU.",
-      "enum": [
-        "Free",
-        "Basic",
-        "Standard",
-        "Premium"
-      ],
-      "x-ms-enum": {
-        "name": "SkuTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Free",
-            "value": "Free",
-            "description": "The Free service tier."
-          },
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "The Basic service tier."
-          },
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "The Standard service tier."
-          },
-          {
-            "name": "Premium",
-            "value": "Premium",
-            "description": "The Premium service tier."
-          }
-        ]
-      }
-    },
     "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
       "type": "object",
       "description": "A managed identity assigned by the user.",
@@ -2345,7 +2309,7 @@
           "type": "object",
           "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this volume group. The key is the ARM resource identifier of the identity.",
           "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+            "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
       }
@@ -2703,32 +2667,6 @@
         "modelAsString": true
       }
     },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      }
-    },
     "SKUCapability": {
       "type": "object",
       "description": "The capability information in the specified SKU.",
@@ -2754,7 +2692,7 @@
           "description": "The sku name."
         },
         "tier": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SkuTier",
+          "$ref": "#/definitions/SkuTier",
           "description": "The sku tier."
         }
       },
@@ -2771,7 +2709,7 @@
           "description": "Sku Name"
         },
         "tier": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SkuTier",
+          "$ref": "#/definitions/SkuTier",
           "description": "Sku Tier"
         },
         "resourceType": {
@@ -2849,6 +2787,24 @@
             "name": "Premium_ZRS",
             "value": "Premium_ZRS",
             "description": "Premium zone redundant storage"
+          }
+        ]
+      }
+    },
+    "SkuTier": {
+      "type": "string",
+      "description": "The sku tier.",
+      "enum": [
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium Tier"
           }
         ]
       }
@@ -2960,6 +2916,22 @@
       "x-ms-enum": {
         "name": "StorageTargetType",
         "modelAsString": true
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "UserAssignedIdentity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of the identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the identity.",
+          "readOnly": true
+        }
       }
     },
     "Versions": {
