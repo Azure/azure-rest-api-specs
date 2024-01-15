@@ -12,31 +12,34 @@ using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "This is defined in other swagger file - hybridconnectivity.json"
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
+@versioned(Versions)
 @service({
   title: "Hybrid Connectivity Management API",
-  version: "2023-12-01-preview",
 })
 @doc("REST API for public clouds.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.HybridConnectivity;
+
+@doc("Hybrid Connectivity Management service version.")
+enum Versions {
+  @doc("Version 2023-04-01")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_04_01: "2023-04-01-preview",
+
+  @doc("Version 2023-12-01")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_12_01: "2023-12-01-preview",
+}
+
 
 //---------------------------------------------- Models ----------------------------------------------
 
-@doc("The properties of Solution Type")
-model SolutionTypeProperties {
-  @doc("The type of the solution")
-  solutionType: string;
+//------------------- Generate Aws Template -------------------
 
-  @doc("Solution settings")
-  solutionSettings?: SolutionSettings;
-}
-
-@doc("Solution settings")
-model SolutionSettings is Record<string>;
-
+@added(Versions.v2023_12_01)
 @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
 model GenerateAwsTemplateRequest {
   @doc("The name of public cloud connector")
@@ -46,6 +49,19 @@ model GenerateAwsTemplateRequest {
   solutionTypes?: Array<SolutionTypeProperties>;
 }
 
+@added(Versions.v2023_12_01)
+@doc("The properties of Solution Type")
+model SolutionTypeProperties {
+  @doc("The type of the solution")
+  solutionType: string;
+
+  @doc("Solution settings")
+  solutionSettings?: SolutionSettings;
+}
+
+//------------------- Test Permissions -------------------
+
+@added(Versions.v2023_12_01)
 @doc("Public connector permissions.")
 model TestPermissionResponse {
   @doc("The name of public cloud connector")
@@ -55,6 +71,7 @@ model TestPermissionResponse {
   solutionTypes: Array<SolutionTypePermissions>;
 }
 
+@added(Versions.v2023_12_01)
 @doc("Solution type permissions.")
 model SolutionTypePermissions {
   @doc("The name of solution Type")
@@ -67,6 +84,7 @@ model SolutionTypePermissions {
   statusDetails: string;
 }
 
+@added(Versions.v2023_12_01)
 @doc("Solution types.")
 enum SolutionType {
   @doc("Asset Management solution type")
@@ -79,6 +97,7 @@ enum SolutionType {
   `Microsoft.HybridNetwork.VWan.Provision`,
 }
 
+@added(Versions.v2023_12_01)
 @doc("Connection status.")
 enum Status {
   @doc("Connected status")
@@ -88,6 +107,153 @@ enum Status {
   Disconnected,
 }
 
+//------------------- Public Cloud Connector -------------------
+
+@added(Versions.v2023_04_01)
+@doc("Public Cloud Connector")
+model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
+  @doc("Represent public cloud connectors resource.")
+  @key("publicCloudConnector")
+  @path
+  @segment("publicCloudConnectors")
+  name: string;
+}
+
+@added(Versions.v2023_04_01)
+@doc("Properties of public cloud connectors.")
+model PublicCloudConnectorProperties {
+  @doc("Cloud profile for AWS.")
+  awsCloudProfile?: AwsCloudProfile;
+
+  @doc("Host cloud the public cloud connector.")
+  @visibility("create")
+  hostType?: HostType;
+
+  @visibility("read")
+  @doc("The resource provisioning state.")
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2023_04_01)
+@doc("Enum of host cloud the public cloud connector is referencing.")
+enum HostType {
+  @doc("AWS state")
+  AWS
+}
+
+@added(Versions.v2023_04_01)
+@doc("cloud profile for AWS.")
+model AwsCloudProfile {
+  @doc("Account id for the AWS account.")
+  @visibility("create")
+  accountId: string;
+
+  @doc("List of AWS accounts which need to be excluded.")
+  excludedAccounts?: string[];
+
+  @doc("Boolean value that indicates whether the account is organizational or not. True represents organization account, whereas false represents a single account.")
+  @visibility("create")
+  isOrganizationalAccount?: boolean;
+}
+
+//------------------- Solution Configuration -------------------
+
+@added(Versions.v2023_04_01)
+@doc("Solution Configuration")
+model SolutionConfiguration is TrackedResource<SolutionConfigurationResource> {
+  @doc("Represent Solution Configuration Resource.")
+  @key("solutionConfiguration")
+  @path
+  @segment("solutionConfigurations")
+  name: string;
+}
+
+@added(Versions.v2023_04_01)
+@doc("Solution configuration resource.")
+model SolutionConfigurationResource {
+  @doc("The solution configuration properties")
+  properties?: SolutionConfigurationProperties;
+}
+
+@added(Versions.v2023_04_01)
+@doc("The properties of Solution Configuration")
+model SolutionConfigurationProperties {
+  @doc("The resource provisioning state.")
+  provisioningState?: ProvisioningState;
+
+  @doc("The type of the solution")
+  solutionType: string;
+
+  @doc("Solution settings")
+  solutionSettings?: SolutionSettings;
+
+  @doc("The status of solution configurations")
+  status?: SolutionConfigurationStatus;
+
+  @doc("The detailed message of status details")
+  statusDetails?: string;
+
+  @doc("The last execution time of solution configuration")
+  lastExecutionTime?: string;
+}
+
+@added(Versions.v2023_04_01)
+@doc("Solution Configuration Status.")
+enum SolutionConfigurationStatus {
+  @doc("New status")
+  New,
+
+  @doc("InProgress status")
+  InProgress,
+
+  @doc("Canceled status")
+  Completed,
+
+  @doc("Failed status")
+  Failed,
+}
+
+//------------------- Inventory -------------------
+
+@added(Versions.v2023_04_01)
+@doc("Definition of inventory.")
+model Inventory {
+  @doc("Gets or sets the id of the inventory.")
+  properties?: InventoryProperties;
+}
+
+@added(Versions.v2023_04_01)
+@doc("Definition of inventory.")
+model InventoryProperties {
+  @doc("Gets or sets the cloud native resource type.")
+  cloudNativeType?: CloudNativeType;
+
+  @doc("Gets or sets the cloud native resource name.")
+  cloudNativeResourceId?: string;
+
+  @doc("Gets or sets the mapped azure resource id.")
+  azureResourceId?: string;
+
+  @doc("Gets or sets the status of the inventory.")
+  status?: SolutionConfigurationStatus;
+
+  @doc("Gets or sets the status details.")
+  statusDetails?: string;
+
+  @doc("The resource provisioning state.")
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2023_04_01)
+@doc("Cloud Native Type enum.")
+enum CloudNativeType {
+  @doc("ec2 enum.")
+  ec2,
+}
+
+//------------------- Shared -------------------
+
+@added(Versions.v2023_04_01)
 @doc("Provisioning State.")
 enum ProvisioningState {
   @doc("Succeeded state")
@@ -100,30 +266,13 @@ enum ProvisioningState {
   Canceled,
 }
 
-@doc("Public Cloud Connector")
-model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
-  @doc("Represent public cloud connectors resource.")
-  @key("publicCloudConnector")
-  @path
-  @segment("publicCloudConnectors")
-  name: string;
-}
 
-@doc("The properties of public cloud connectors, - will need to update this later")
-model PublicCloudConnectorProperties {
-  @doc("The cloud profile for AWS.")
-  awsCloudProfile?: string;
-
-  @doc("Profile of employee")
-  hostType?: string;
-
-  @visibility("read")
-  @doc("The resource provisioning state.")
-  provisioningState?: ProvisioningState;
-}
+@doc("Solution settings")
+model SolutionSettings is Record<string>;
 
 //---------------------------------------------- Operations ----------------------------------------------
 
+@added(Versions.v2023_12_01)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/")
 interface GenerateAwsTemplate {
@@ -143,6 +292,7 @@ interface GenerateAwsTemplate {
   ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
 }
 
+@added(Versions.v2023_12_01)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnectorId}")
 interface TestPermissions {
@@ -161,6 +311,7 @@ interface TestPermissions {
   ): Azure.ResourceManager.ArmAcceptedLroResponse<"Asynchronous operation in progress."> | TestPermissionResponse | Azure.ResourceManager.ErrorResponse;
 }
 
+@added(Versions.v2023_04_01)
 @armResourceOperations
 interface PublicCloudConnectors {
   get is ArmResourceRead<PublicCloudConnector>;
@@ -172,4 +323,18 @@ interface PublicCloudConnectors {
   delete is ArmResourceDeleteSync<PublicCloudConnector>;
   listByResourceGroup is ArmResourceListByParent<PublicCloudConnector>;
   listBySubscription is ArmListBySubscription<PublicCloudConnector>;
+}
+
+@added(Versions.v2023_04_01)
+@armResourceOperations
+interface SolutionConfigurations {
+  get is ArmResourceRead<SolutionConfiguration>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<SolutionConfiguration>;
+  update is ArmResourcePatchSync<
+    SolutionConfiguration,
+    SolutionConfigurationProperties
+  >;
+  delete is ArmResourceDeleteSync<SolutionConfiguration>;
+  listByResourceGroup is ArmResourceListByParent<SolutionConfiguration>;
+  listBySubscription is ArmListBySubscription<SolutionConfiguration>;
 }
