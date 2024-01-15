@@ -343,7 +343,7 @@ model KeyVaultProperties {
   keyVersion?: string;
 
   @doc("The Uri of KeyVault.")
-  keyVaultUri?: string;
+  keyVaultUri?: url;
 
   @doc("The object identifier of the current versioned Key Vault Key in use.")
   @visibility("read")
