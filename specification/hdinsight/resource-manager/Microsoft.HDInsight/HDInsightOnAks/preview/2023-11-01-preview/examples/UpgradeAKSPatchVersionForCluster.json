@@ -5,14 +5,18 @@
     "api-version": "2023-11-01-preview",
     "clusterPoolName": "clusterpool1",
     "clusterName": "cluster1",
-    "ClusterResizeRequest": {
-      "location": "West US 2",
+    "ClusterUpgradeRequest": {
       "properties": {
-        "targetWorkerNodeCount": 5
+        "upgradeType": "AKSPatchUpgrade"
       }
     }
   },
   "responses": {
+    "202": {
+      "headers": {
+        "location": "http://azure.async.operation/status"
+      }
+    },
     "200": {
       "body": {
         "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1/clusters/cluster1",
@@ -20,25 +24,20 @@
         "type": "Microsoft.HDInsight/clusterPools/clusters",
         "properties": {
           "provisioningState": "Succeeded",
-          "clusterType": "Trino",
+          "clusterType": "trino",
           "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
           "computeProfile": {
             "nodes": [
               {
-                "type": "Head",
-                "vmSize": "Standard_E8as_v5",
-                "count": 2
-              },
-              {
-                "type": "Worker",
-                "vmSize": "Standard_E8as_v5",
-                "count": 5
+                "type": "worker",
+                "vmSize": "Standard_D3_v2",
+                "count": 3
               }
             ]
           },
           "clusterProfile": {
-            "clusterVersion": "1.0.6",
-            "ossVersion": "0.410.0",
+            "clusterVersion": "1.0.1",
+            "ossVersion": "2.4.1",
             "identityProfile": {
               "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
               "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
@@ -132,11 +131,6 @@
           "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
         },
         "location": "West US 2"
-      }
-    },
-    "202": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2023-06-01-preview"
       }
     }
   }

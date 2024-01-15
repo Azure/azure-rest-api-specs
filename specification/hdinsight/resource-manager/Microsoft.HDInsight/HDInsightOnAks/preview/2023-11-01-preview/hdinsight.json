@@ -78,6 +78,12 @@
         "x-ms-examples": {
           "ClusterPoolPut": {
             "$ref": "./examples/CreateClusterPool.json"
+          },
+          "ClusterPoolPutWithPrivateAks": {
+            "$ref": "./examples/CreateClusterPoolWithPrivateAks.json"
+          },
+          "ClusterPoolPutWithUDRAks": {
+            "$ref": "./examples/CreateClusterPoolWithUDRAks.json"
           }
         },
         "parameters": [
@@ -212,9 +218,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successful."
-          },
           "202": {
             "description": "Accepted response definition.",
             "headers": {
@@ -311,6 +314,112 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/upgrade": {
+      "post": {
+        "description": "Upgrade a cluster pool.",
+        "operationId": "ClusterPools_Upgrade",
+        "x-ms-examples": {
+          "ClusterPoolsUpgradeAKSPatchVersion": {
+            "$ref": "./examples/UpgradeAKSPatchVersionForClusterPool.json"
+          },
+          "ClusterPoolsUpgradeNodeOs": {
+            "$ref": "./examples/UpgradeNodeOsForClusterPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "name": "ClusterPoolUpgradeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolUpgrade"
+            },
+            "description": "Upgrade a cluster pool."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
+            }
+          },
+          "202": {
+            "description": "Cluster Pool Upgrade request accepted.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to get the status of the resize operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/availableUpgrades": {
+      "get": {
+        "description": "List a cluster pool available upgrade.",
+        "operationId": "ClusterPoolAvailableUpgrades_List",
+        "x-ms-examples": {
+          "GetClusterPoolAvailableUpgrade": {
+            "$ref": "./examples/ListClusterPoolAvailableUpgrades.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clusterpool Available Upgrade details.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolAvailableUpgradeList"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters": {
       "get": {
         "operationId": "Clusters_ListByClusterPoolName",
@@ -339,6 +448,118 @@
             "description": "Clusters successfully returned.",
             "schema": {
               "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/upgrade": {
+      "post": {
+        "description": "Upgrade a cluster.",
+        "operationId": "Clusters_Upgrade",
+        "x-ms-examples": {
+          "ClustersUpgradeAKSPatchVersion": {
+            "$ref": "./examples/UpgradeAKSPatchVersionForCluster.json"
+          },
+          "ClustersUpgradeHotfix": {
+            "$ref": "./examples/UpgradeHotfixForCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "ClusterUpgradeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgrade"
+            },
+            "description": "Upgrade a cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Cluster Upgrade request accepted.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to get the status of the resize operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/availableUpgrades": {
+      "get": {
+        "description": "List a cluster available upgrade.",
+        "operationId": "ClusterAvailableUpgrades_List",
+        "x-ms-examples": {
+          "GetClusterAvailableUpgrade": {
+            "$ref": "./examples/ListClusterAvailableUpgrades.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster Available Upgrade details.",
+            "schema": {
+              "$ref": "#/definitions/ClusterAvailableUpgradeList"
             }
           },
           "default": {
@@ -467,6 +688,12 @@
           },
           "HDInsightSparkClusterPut": {
             "$ref": "./examples/CreateSparkCluster.json"
+          },
+          "HDInsightSparkClusterPutWithInternalIngress": {
+            "$ref": "./examples/CreateSparkClusterWithInternalIngress.json"
+          },
+          "HDInsightRangerClusterPut": {
+            "$ref": "./examples/CreateRangerCluster.json"
           }
         },
         "parameters": [
@@ -526,6 +753,9 @@
         "x-ms-examples": {
           "HDInsightClustersPatchTags": {
             "$ref": "./examples/PatchCluster.json"
+          },
+          "HDInsightRangerClusterPatchTags": {
+            "$ref": "./examples/PatchRangerCluster.json"
           }
         },
         "parameters": [
@@ -610,9 +840,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successful."
-          },
           "202": {
             "description": "Cluster delete request accepted.",
             "headers": {
@@ -725,6 +952,13 @@
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The system query option to filter job returned in the response. Allowed value is 'jobName eq {jobName}' or 'jarName eq {jarName}'."
           }
         ],
         "responses": {
@@ -1104,6 +1338,46 @@
               }
             ]
           }
+        },
+        "outboundType": {
+          "type": "string",
+          "enum": [
+            "loadBalancer",
+            "userDefinedRouting"
+          ],
+          "x-ms-enum": {
+            "name": "outboundType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "loadBalancer",
+                "description": "The load balancer is used for egress through an AKS assigned public IP. This supports Kubernetes services of type 'loadBalancer'. "
+              },
+              {
+                "value": "userDefinedRouting",
+                "description": "Egress paths must be defined by the user. This is an advanced scenario and requires proper network configuration. "
+              }
+            ]
+          },
+          "default": "loadBalancer",
+          "title": "The outbound (egress) routing method.",
+          "description": "This can only be set at cluster pool creation time and cannot be changed later. "
+        },
+        "enablePrivateApiServer": {
+          "type": "boolean",
+          "description": "ClusterPool is based on AKS cluster. Aks cluster exposes the apiserver to public internet by default. If you set this property to true, a private aks cluster will be created, and it will use private apiserver, which is not exposed to public internet.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "apiServerAuthorizedIpRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The IP ranges authorized to access the AKS API server.",
+          "description": "IP ranges are specified in CIDR format, e.g. 137.117.106.88/29. This feature is not compatible with private AKS clusters. So you cannot set enablePrivateApiServer to true and apiServerAuthorizedIpRanges at the same time."
         }
       }
     },
@@ -1583,6 +1857,36 @@
       },
       "readOnly": true
     },
+    "ClusterAccessProfile": {
+      "type": "object",
+      "description": "Cluster access profile.",
+      "required": [
+        "enableInternalIngress"
+      ],
+      "properties": {
+        "enableInternalIngress": {
+          "type": "boolean",
+          "description": "Whether to create cluster using private IP instead of public IP.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "privateLinkServiceId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateLinkServices"
+              }
+            ]
+          },
+          "description": "Private link service resource id. Only when enableInternalIngress is true, this property will be returned."
+        }
+      }
+    },
     "WebConnectivityEndpoint": {
       "type": "object",
       "description": "Web connectivity endpoint details.",
@@ -1593,7 +1897,12 @@
         "fqdn": {
           "type": "string",
           "description": "Web connectivity endpoint.",
-          "example": "clusterName11223344.clusterPoolName55667788.eastus.hdinsightaks.net"
+          "example": "clusterName11223344.clusterPoolName55667788.subid.eastus.hdinsightaks.net"
+        },
+        "privateFqdn": {
+          "type": "string",
+          "description": "Private web connectivity endpoint. This property will only be returned when enableInternalIngress is true.",
+          "example": "clusterName11223344-int.clusterPoolName55667788.subid.eastus.hdinsightaks.net"
         }
       },
       "readOnly": true
@@ -1609,13 +1918,17 @@
           "type": "string",
           "description": "SSH connectivity endpoint.",
           "example": "clusterName11223344.clusterPoolName55667788.eastus.hdinsightaks.net/ssh/host/podPrefix-0"
+        },
+        "privateSshEndpoint": {
+          "type": "string",
+          "description": "Private ssh connectivity endpoint. This property will only be returned when enableInternalIngress is true.",
+          "example": "clusterName11223344-int.clusterPoolName55667788.eastus.hdinsightaks.net/ssh/host/podPrefix-0"
         }
       }
     },
     "ClusterProfile": {
       "type": "object",
       "required": [
-        "identityProfile",
         "authorizationProfile",
         "clusterVersion",
         "ossVersion"
@@ -1631,6 +1944,7 @@
           "$ref": "#/definitions/ClusterComponents"
         },
         "identityProfile": {
+          "description": "This property is required by Trino, Spark and Flink cluster but is optional for Kafka cluster.",
           "$ref": "#/definitions/IdentityProfile"
         },
         "authorizationProfile": {
@@ -1650,6 +1964,9 @@
         "connectivityProfile": {
           "$ref": "#/definitions/ConnectivityProfile"
         },
+        "clusterAccessProfile": {
+          "$ref": "#/definitions/ClusterAccessProfile"
+        },
         "logAnalyticsProfile": {
           "$ref": "#/definitions/ClusterLogAnalyticsProfile"
         },
@@ -1662,10 +1979,11 @@
         "autoscaleProfile": {
           "$ref": "#/definitions/AutoscaleProfile"
         },
+        "rangerPluginProfile": {
+          "$ref": "#/definitions/ClusterRangerPluginProfile"
+        },
         "kafkaProfile": {
-          "type": "object",
-          "description": "Kafka cluster profile.",
-          "additionalProperties": true
+          "$ref": "#/definitions/KafkaProfile"
         },
         "trinoProfile": {
           "$ref": "#/definitions/TrinoProfile"
@@ -1680,6 +1998,9 @@
         },
         "sparkProfile": {
           "$ref": "#/definitions/SparkProfile"
+        },
+        "rangerProfile": {
+          "$ref": "#/definitions/RangerProfile"
         },
         "stubProfile": {
           "type": "object",
@@ -1970,8 +2291,6 @@
       "required": [
         "catalogName",
         "metastoreDbConnectionURL",
-        "metastoreDbConnectionUserName",
-        "metastoreDbConnectionPasswordSecret",
         "metastoreWarehouseDir"
       ],
       "properties": {
@@ -1979,6 +2298,29 @@
           "description": "Name of trino catalog which should use specified hive metastore.",
           "minLength": 1,
           "type": "string"
+        },
+        "metastoreDbConnectionAuthenticationMode": {
+          "description": "The authentication mode to connect to your Hive metastore database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": [
+            "SqlAuth",
+            "IdentityAuth"
+          ],
+          "x-ms-enum": {
+            "name": "MetastoreDbConnectionAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SqlAuth",
+                "description": "The password-based authentication to connect to your Hive metastore database. "
+              },
+              {
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
+              }
+            ]
+          },
+          "default": "IdentityAuth"
         },
         "metastoreDbConnectionPasswordSecret": {
           "description": "Secret reference name from secretsProfile.secrets containing password for database connection.",
@@ -2011,11 +2353,32 @@
       "type": "object",
       "description": "Hive Catalog Option for Flink cluster.",
       "required": [
-        "metastoreDbConnectionURL",
-        "metastoreDbConnectionUserName",
-        "metastoreDbConnectionPasswordSecret"
+        "metastoreDbConnectionURL"
       ],
       "properties": {
+        "metastoreDbConnectionAuthenticationMode": {
+          "description": "The authentication mode to connect to your Hive metastore database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": [
+            "SqlAuth",
+            "IdentityAuth"
+          ],
+          "x-ms-enum": {
+            "name": "MetastoreDbConnectionAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SqlAuth",
+                "description": "The password-based authentication to connect to your Hive metastore database. "
+              },
+              {
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
+              }
+            ]
+          },
+          "default": "IdentityAuth"
+        },
         "metastoreDbConnectionPasswordSecret": {
           "description": "Secret reference name from secretsProfile.secrets containing password for database connection.",
           "type": "string"
@@ -2222,7 +2585,7 @@
         "url": {
           "type": "string",
           "description": "Url of the script file.",
-          "pattern": "^(https)|(http)|(abfss)|(abfs)|(wasbs)|(wasb)://.*$"
+          "pattern": "^(https)|(http)://.*$"
         },
         "parameters": {
           "type": "string",
@@ -2252,10 +2615,7 @@
       "description": "The metastore specification for Spark cluster.",
       "required": [
         "dbServerHost",
-        "dbName",
-        "dbUserName",
-        "dbPasswordSecretName",
-        "keyVaultId"
+        "dbName"
       ],
       "properties": {
         "dbServerHost": {
@@ -2265,6 +2625,29 @@
         "dbName": {
           "type": "string",
           "description": "The database name."
+        },
+        "dbConnectionAuthenticationMode": {
+          "description": "The authentication mode to connect to your Hive metastore database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": [
+            "SqlAuth",
+            "IdentityAuth"
+          ],
+          "x-ms-enum": {
+            "name": "DbConnectionAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SqlAuth",
+                "description": "The password-based authentication to connect to your Hive metastore database. "
+              },
+              {
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
+              }
+            ]
+          },
+          "default": "IdentityAuth"
         },
         "dbUserName": {
           "type": "string",
@@ -2315,6 +2698,65 @@
         },
         "catalogOptions": {
           "$ref": "#/definitions/FlinkCatalogOptions"
+        },
+        "deploymentMode": {
+          "description": "A string property that indicates the deployment mode of Flink cluster. It can have one of the following enum values => Application, Session. Default value is Session",
+          "type": "string",
+          "enum": [
+            "Application",
+            "Session"
+          ],
+          "x-ms-enum": {
+            "name": "deploymentMode",
+            "modelAsString": true
+          }
+        },
+        "jobSpec": {
+          "$ref": "#/definitions/FlinkJobProfile"
+        }
+      }
+    },
+    "FlinkJobProfile": {
+      "type": "object",
+      "description": "Job specifications for flink clusters in application deployment mode. The specification is immutable even if job properties are changed by calling the RunJob API, please use the ListJob API to get the latest job information.",
+      "required": [
+        "jobJarDirectory",
+        "jarName",
+        "upgradeMode"
+      ],
+      "properties": {
+        "jobJarDirectory": {
+          "description": "A string property that specifies the directory where the job JAR is located.",
+          "type": "string"
+        },
+        "jarName": {
+          "description": "A string property that represents the name of the job JAR.",
+          "type": "string"
+        },
+        "entryClass": {
+          "description": "A string property that specifies the entry class for the Flink job.",
+          "type": "string"
+        },
+        "args": {
+          "description": "A string property representing additional JVM arguments for the Flink job. It should be space separated value.",
+          "type": "string"
+        },
+        "savePointName": {
+          "description": "A string property that represents the name of the savepoint for the Flink job",
+          "type": "string"
+        },
+        "upgradeMode": {
+          "description": "A string property that indicates the upgrade mode to be performed on the Flink job. It can have one of the following enum values => STATELESS_UPDATE, SAVEPOINT, LAST_STATE_UPDATE.",
+          "type": "string",
+          "enum": [
+            "STATELESS_UPDATE",
+            "UPDATE",
+            "LAST_STATE_UPDATE"
+          ],
+          "x-ms-enum": {
+            "name": "upgradeMode",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2327,7 +2769,7 @@
       "properties": {
         "storageUri": {
           "type": "string",
-          "pattern": "^(\\w{4,5})://(.*)@(.*).\\b(blob|dfs)\\b\\.core\\.windows\\.net$",
+          "pattern": "^(\\w{4,5})://(.*)@(.*).\\b(blob|dfs)\\b.*$",
           "description": "Storage account uri which is used for savepoint and checkpoint state."
         },
         "storagekey": {
@@ -2336,6 +2778,137 @@
           "x-ms-secret": true
         }
       }
+    },
+    "ClusterRangerPluginProfile": {
+      "type": "object",
+      "description": "Cluster Ranger plugin profile.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable ranger for cluster or not.",
+          "default": false
+        }
+      }
+    },
+    "RangerProfile": {
+      "type": "object",
+      "description": "The ranger cluster profile.",
+      "required": [
+        "rangerAdmin",
+        "rangerUsersync"
+      ],
+      "properties": {
+        "rangerAdmin": {
+          "$ref": "#/definitions/RangerAdminSpec"
+        },
+        "rangerAudit": {
+          "$ref": "#/definitions/RangerAuditSpec"
+        },
+        "rangerUsersync": {
+          "$ref": "#/definitions/RangerUsersyncSpec"
+        }
+      }
+    },
+    "RangerAdminSpec": {
+      "type": "object",
+      "description": "Specification for the Ranger Admin service.",
+      "properties": {
+        "admins": {
+          "description": "List of usernames that should be marked as ranger admins. These usernames should match the User principal name of the respective AAD users.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "database": {
+          "properties": {
+            "host": {
+              "description": "The database url",
+              "type": "string"
+            },
+            "name": {
+              "description": "The database name",
+              "type": "string"
+            },
+            "passwordSecretRef": {
+              "description": "Reference for the database password",
+              "type": "string"
+            },
+            "username": {
+              "description": "The name of the database user",
+              "type": "string"
+            }
+          },
+          "required": [
+            "host",
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "admins",
+        "database"
+      ]
+    },
+    "RangerAuditSpec": {
+      "description": "Properties required to describe audit log storage.",
+      "properties": {
+        "storageAccount": {
+          "description": "Azure storage location of the blobs. MSI should have read/write access to this Storage account.",
+          "minLength": 1,
+          "pattern": "^(https)|(abfss)://.*$",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RangerUsersyncSpec": {
+      "description": "Specification for the Ranger Usersync service",
+      "properties": {
+        "enabled": {
+          "description": "Denotes whether usersync service should be enabled",
+          "type": "boolean",
+          "default": true
+        },
+        "groups": {
+          "description": "List of groups that should be synced. These group names should match the object id of the respective AAD groups.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mode": {
+          "default": "automatic",
+          "description": "User & groups can be synced automatically or via a static list that's refreshed.",
+          "type": "string",
+          "enum": [
+            "static",
+            "automatic"
+          ],
+          "x-ms-enum": {
+            "name": "RangerUsersyncMode",
+            "modelAsString": true
+          }
+        },
+        "userMappingLocation": {
+          "description": "Azure storage location of a mapping file that lists user & group associations.",
+          "minLength": 1,
+          "pattern": "^(https)|(abfss)://.*$",
+          "type": "string"
+        },
+        "users": {
+          "description": "List of user names that should be synced. These usernames should match the User principal name of the respective AAD users.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
     },
     "ComputeResourceDefinition": {
       "type": "object",
@@ -2354,6 +2927,92 @@
           "type": "integer",
           "format": "int64",
           "description": "The required memory in MB, Container memory will be 110 percentile"
+        }
+      }
+    },
+    "KafkaProfile": {
+      "type": "object",
+      "description": "The Kafka cluster profile.",
+      "required": [
+        "diskStorage"
+      ],
+      "properties": {
+        "enableKRaft": {
+          "description": "Expose Kafka cluster in KRaft mode.",
+          "default": true,
+          "type": "boolean"
+        },
+        "enablePublicEndpoints": {
+          "description": "Expose worker nodes as public endpoints.",
+          "default": false,
+          "type": "boolean"
+        },
+        "remoteStorageUri": {
+          "description": "Fully qualified path of Azure Storage container used for Tiered Storage.",
+          "type": "string",
+          "pattern": "^(https?|abfss?):\\/\\/[^/]+(?:\\/|$)"
+        },
+        "diskStorage": {
+          "$ref": "#/definitions/DiskStorageProfile"
+        },
+        "clusterIdentity": {
+          "description": "Identity of the internal service components inside the Kafka cluster.",
+          "$ref": "#/definitions/IdentityProfile",
+          "readOnly": true
+        },
+        "kafkaConnectivityProfile": {
+          "description": "Kafka bootstrap server and brokers related connectivity profile.",
+          "$ref": "#/definitions/KafkaConnectivityProfile",
+          "readOnly": true
+        }
+      }
+    },
+    "DiskStorageProfile": {
+      "type": "object",
+      "description": "Kafka disk storage profile.",
+      "required": [
+        "dataDiskSize",
+        "dataDiskType"
+      ],
+      "properties": {
+        "dataDiskSize": {
+          "description": "Managed Disk size in GB. The maximum supported disk size for Standard and Premium HDD/SSD is 32TB, except for Premium SSD v2, which supports up to 64TB.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "dataDiskType": {
+          "description": "Managed Disk Type.",
+          "type": "string",
+          "enum": [
+            "Standard_HDD_LRS",
+            "Standard_SSD_LRS",
+            "Standard_SSD_ZRS",
+            "Premium_SSD_LRS",
+            "Premium_SSD_ZRS",
+            "Premium_SSD_v2_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "DataDiskType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KafkaConnectivityProfile": {
+      "type": "object",
+      "description": "Kafka bootstrap server and broker related connectivity profile.",
+      "properties": {
+        "bootstrapServerEndpoint": {
+          "type": "string",
+          "description": "bootstrap server connectivity endpoint."
+        },
+        "brokerEndpoints": {
+          "description": "Kafka broker endpoint list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2451,7 +3110,7 @@
           "description": "The number of virtual machines.",
           "type": "integer",
           "format": "int32",
-          "minimum": 1.0
+          "minimum": 1
         }
       }
     },
@@ -2484,13 +3143,28 @@
           "x-ms-client-flatten": true,
           "description": "Define cluster patch specific properties.",
           "$ref": "#/definitions/ClusterPatchProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
+      }
     },
     "ClusterPatchProperties": {
       "type": "object",
@@ -2526,6 +3200,12 @@
         },
         "prometheusProfile": {
           "$ref": "#/definitions/ClusterPrometheusProfile"
+        },
+        "rangerPluginProfile": {
+          "$ref": "#/definitions/ClusterRangerPluginProfile"
+        },
+        "rangerProfile": {
+          "$ref": "#/definitions/RangerProfile"
         },
         "scriptActionProfiles": {
           "$ref": "#/definitions/ScriptActionProfiles"
@@ -3031,15 +3711,16 @@
     "FlinkJobProperties": {
       "description": "Properties of flink job.",
       "type": "object",
-      "required": [
-        "jobName"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ClusterJobProperties"
         }
       ],
       "properties": {
+        "runId": {
+          "description": "Run id of job",
+          "type": "string"
+        },
         "jobName": {
           "description": "Name of job",
           "type": "string"
@@ -3076,7 +3757,9 @@
             "CANCEL",
             "SAVEPOINT",
             "LIST_SAVEPOINT",
-            "DELETE"
+            "DELETE",
+            "LAST_STATE_UPDATE",
+            "RE_LAUNCH"
           ],
           "x-ms-enum": {
             "name": "action",
@@ -3117,6 +3800,417 @@
         }
       },
       "x-ms-discriminator-value": "FlinkJob"
+    },
+    "ClusterPoolAvailableUpgradeList": {
+      "type": "object",
+      "description": "Collection of Cluster pool available upgrade.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of Cluster pool available upgrade.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ClusterPoolAvailableUpgrade"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterPoolAvailableUpgrade": {
+      "type": "object",
+      "description": "Cluster pool available upgrade.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define cluster pool upgrade specific properties.",
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterPoolAvailableUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster pool available upgrade properties.",
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "NodeOsUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterPoolAvailableUpgradeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterPoolAvailableUpgradeAksPatchUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster pool available aks patch version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "currentVersion": {
+          "description": "Current AKS version.",
+          "type": "string"
+        },
+        "currentVersionStatus": {
+          "description": "Current AKS version's status: whether it is deprecated or supported",
+          "enum": [
+            "Deprecated",
+            "Supported"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "currentClusterPoolAksVersionStatus",
+            "modelAsString": true
+          }
+        },
+        "latestVersion": {
+          "description": "Latest AKS patch version.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterPoolAvailableUpgradeNodeOsUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster pool available node os update.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "latestVersion": {
+          "description": "The latest node os version.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "NodeOsUpgrade"
+    },
+    "ClusterAvailableUpgradeList": {
+      "type": "object",
+      "description": "Collection of Cluster available upgrade.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of Cluster available upgrade.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ClusterAvailableUpgrade"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterAvailableUpgrade": {
+      "type": "object",
+      "description": "Cluster available upgrade.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define cluster upgrade specific properties.",
+          "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterAvailableUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster available upgrade properties.",
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "HotfixUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterAvailableUpgradeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterAvailableUpgradeAksPatchUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster available aks patch version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "currentVersion": {
+          "description": "Current node pool version.",
+          "type": "string"
+        },
+        "currentVersionStatus": {
+          "description": "Current AKS version's status: whether it is deprecated or supported",
+          "enum": [
+            "Deprecated",
+            "Supported"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "currentClusterAksVersionStatus",
+            "modelAsString": true
+          }
+        },
+        "latestVersion": {
+          "description": "Latest available version, which should be equal to aks control plane version if it's not deprecated.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterAvailableUpgradeHotfixUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster available hotfix version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Hotfix version upgrade description."
+        },
+        "sourceOssVersion": {
+          "description": "Source OSS version of current cluster component.",
+          "type": "string"
+        },
+        "sourceClusterVersion": {
+          "description": "Source cluster version of current cluster component.",
+          "type": "string"
+        },
+        "sourceBuildNumber": {
+          "description": "Source build number of current cluster component.",
+          "type": "string"
+        },
+        "targetOssVersion": {
+          "description": "Target OSS version of component to be upgraded.",
+          "type": "string"
+        },
+        "targetClusterVersion": {
+          "description": "Target cluster version of component to be upgraded.",
+          "type": "string"
+        },
+        "targetBuildNumber": {
+          "description": "Target build number of component to be upgraded.",
+          "type": "string"
+        },
+        "componentName": {
+          "description": "Name of component to be upgraded.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity of this upgrade.",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "extendedProperties": {
+          "description": "Extended properties of current available upgrade version",
+          "type": "string"
+        },
+        "createdTime": {
+          "description": "Created time of current available upgrade version",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "x-ms-discriminator-value": "HotfixUpgrade"
+    },
+    "ClusterPoolUpgrade": {
+      "description": "Cluster Pool Upgrade.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPoolUpgradeProperties"
+        }
+      }
+    },
+    "ClusterPoolUpgradeProperties": {
+      "description": "Properties of upgrading cluster pool.",
+      "type": "object",
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "NodeOsUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterPoolUpgradeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterPoolAKSPatchVersionUpgradeProperties": {
+      "description": "Properties of upgrading cluster pool's aks patch version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "upgradeClusterPool": {
+          "description": "whether upgrade cluster pool or not. If it's true, upgradeAllClusterNodes should be false.",
+          "type": "boolean",
+          "default": false
+        },
+        "upgradeAllClusterNodes": {
+          "description": "whether upgrade all clusters' nodes. If it's true, upgradeClusterPool should be false.",
+          "type": "boolean",
+          "default": false
+        },
+        "targetAksVersion": {
+          "description": "Target aks version. When it's not set, latest version will be used. When upgradeClusterPool is true and upgradeAllClusterNodes is false, target version should be greater or equal to current version. When upgradeClusterPool is false and upgradeAllClusterNodes is true, target version should be equal to aks version of cluster pool.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterPoolNodeOsImageUpdateProperties": {
+      "description": "Properties of upgrading cluster pool's aks patch version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolUpgradeProperties"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "NodeOsUpgrade"
+    },
+    "ClusterUpgrade": {
+      "description": "Cluster Upgrade.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterUpgradeProperties"
+        }
+      }
+    },
+    "ClusterUpgradeProperties": {
+      "description": "Properties of upgrading cluster.",
+      "type": "object",
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "HotfixUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterUpgradeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterAKSPatchVersionUpgradeProperties": {
+      "description": "Properties of upgrading cluster's aks patch version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterUpgradeProperties"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterHotfixUpgradeProperties": {
+      "description": "Properties of upgrading cluster's hotfix.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "targetOssVersion": {
+          "description": "Target OSS version of component to be upgraded.",
+          "type": "string"
+        },
+        "targetClusterVersion": {
+          "description": "Target cluster version of component to be upgraded.",
+          "type": "string"
+        },
+        "targetBuildNumber": {
+          "description": "Target build number of component to be upgraded.",
+          "type": "string"
+        },
+        "componentName": {
+          "description": "Name of component to be upgraded.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "HotfixUpgrade"
     }
   },
   "parameters": {

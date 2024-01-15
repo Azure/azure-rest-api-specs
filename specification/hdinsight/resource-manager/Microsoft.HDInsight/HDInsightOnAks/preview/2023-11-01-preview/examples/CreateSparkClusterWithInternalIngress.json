@@ -80,8 +80,8 @@
           "sshProfile": {
             "count": 2
           },
-          "rangerPluginProfile": {
-            "enabled": false
+          "clusterAccessProfile": {
+            "enableInternalIngress": true
           }
         }
       }
@@ -172,14 +172,17 @@
             ],
             "connectivityProfile": {
               "web": {
-                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
+                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net",
+                "privateFqdn": "cluster1-int.clusterpool1.westus2.projecthilo.net"
               },
               "ssh": [
                 {
-                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0",
+                  "privateSshEndpoint": "cluster1-int.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
                 },
                 {
-                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1",
+                  "privateSshEndpoint": "cluster1-int.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
                 }
               ]
             },
@@ -188,8 +191,9 @@
               "count": 2,
               "podPrefix": "sshnode"
             },
-            "rangerPluginProfile": {
-              "enabled": false
+            "clusterAccessProfile": {
+              "enableInternalIngress": true,
+              "privateLinkServiceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.Network/privateLinkServices/testpls"
             }
           }
         },
@@ -287,14 +291,17 @@
             ],
             "connectivityProfile": {
               "web": {
-                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
+                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net",
+                "privateFqdn": "cluster1-int.clusterpool1.westus2.projecthilo.net"
               },
               "ssh": [
                 {
-                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0",
+                  "privateSshEndpoint": "cluster1-int.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
                 },
                 {
-                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1",
+                  "privateSshEndpoint": "cluster1-int.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
                 }
               ]
             },
@@ -303,8 +310,9 @@
               "count": 2,
               "podPrefix": "sshnode"
             },
-            "rangerPluginProfile": {
-              "enabled": false
+            "clusterAccessProfile": {
+              "enableInternalIngress": true,
+              "privateLinkServiceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.Network/privateLinkServices/testpls"
             }
           }
         },
