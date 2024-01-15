@@ -171,31 +171,31 @@ model ElasticSanProperties {
 
   @doc("Base size of the Elastic San appliance in TiB.")
   @visibility("read", "create")
-  baseSizeTiB: int32;
+  baseSizeTiB: int64;
 
   @doc("Extended size of the Elastic San appliance in TiB.")
   @visibility("read", "create")
-  extendedCapacitySizeTiB: int32;
+  extendedCapacitySizeTiB: int64;
 
   @doc("Total size of the provisioned Volumes in GiB.")
   @visibility("read")
-  totalVolumeSizeGiB?: int32;
+  totalVolumeSizeGiB?: int64;
 
   @doc("Total number of volume groups in this Elastic San appliance.")
   @visibility("read")
-  volumeGroupCount?: int32;
+  volumeGroupCount?: int64;
 
   @doc("Total Provisioned IOPS of the Elastic San appliance.")
   @visibility("read")
-  totalIops?: int32;
+  totalIops?: int64;
 
   @doc("Total Provisioned MBps Elastic San appliance.")
   @visibility("read")
-  totalMBps?: int32;
+  totalMBps?: int64;
 
   @doc("Total size of the Elastic San appliance in TB.")
   @visibility("read")
-  totalSizeTiB?: int32;
+  totalSizeTiB?: int64;
 
   @doc("The list of Private Endpoint Connections.")
   @visibility("read")
@@ -262,11 +262,11 @@ model ElasticSanUpdate {
 model ElasticSanUpdateProperties {
   @doc("Base size of the Elastic San appliance in TiB.")
   @visibility("update")
-  baseSizeTiB?: int32;
+  baseSizeTiB?: int64;
 
   @doc("Extended size of the Elastic San appliance in TiB.")
   @visibility("update")
-  extendedCapacitySizeTiB?: int32;
+  extendedCapacitySizeTiB?: int64;
 
   @doc("Allow or disallow public network access to ElasticSan Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.")
   publicNetworkAccess?: PublicNetworkAccess;
@@ -418,7 +418,7 @@ model VolumeProperties {
   creationData?: SourceCreationData;
 
   @doc("Volume size.")
-  sizeGiB: int32;
+  sizeGiB: int64;
 
   @doc("Storage target information")
   @visibility("read")
@@ -478,7 +478,7 @@ model VolumeUpdate {
 @doc("Volume response properties.")
 model VolumeUpdateProperties {
   @doc("Volume size.")
-  sizeGiB?: int32;
+  sizeGiB?: int64;
 
   @doc("Parent resource information.")
   managedBy?: ManagedByInfo;
@@ -509,7 +509,7 @@ model SnapshotProperties {
 
   @doc("Size of Source Volume")
   @visibility("read")
-  sourceVolumeSizeGiB?: int32;
+  sourceVolumeSizeGiB?: int64;
 
   @doc("Source Volume Name of a snapshot")
   @visibility("read")
