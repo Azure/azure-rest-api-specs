@@ -17,3 +17,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/playwrighttesting/azure-mgmt-playwrighttesting/azure/mgmt/playwrighttesting
 ```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```
