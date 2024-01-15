@@ -380,7 +380,7 @@ model VirtualNetworkRule {
   virtualNetworkResourceId: string;
 
   @doc("The action of virtual network rule.")
-  action?: Action;
+  action?: Action = Action.Allow;
 }
 
 @doc("Volume Group request.")

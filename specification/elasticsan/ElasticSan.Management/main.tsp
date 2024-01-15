@@ -23,7 +23,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-@doc("// FIXME: (miissing-service-description) Add service description")
+@doc("Microsoft Elastic San Management API")
 namespace Microsoft.ElasticSan;
 
 @doc("The available API versions.")
