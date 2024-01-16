@@ -8988,7 +8988,7 @@
           "200": {
             "description": "Success.",
             "schema": {
-              "$ref": "#/definitions/JobExecutionBase"
+              "$ref": "#/definitions/JobExecution"
             }
           },
           "202": {
@@ -9017,13 +9017,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/executions/{jobExecutionName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/executions/{jobExecutionName}/cancel": {
       "post": {
         "tags": [
           "AppPlatform"
         ],
         "description": "Terminate execution of a running Azure Spring Apps job",
-        "operationId": "JobExecution_Stop",
+        "operationId": "JobExecution_Cancel",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -9046,13 +9046,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed.",
-            "schema": {
-              "$ref": "#/definitions/JobExecutionBase"
-            }
+            "description": "Operation completed."
           },
           "202": {
-            "description": "Accepted. The response indicates the Job is now stopping and contains a Location header to\r\nquery the operation result.",
+            "description": "Accepted. The response indicates the Job is now canceled and contains a Location header to\r\nquery the operation result.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -9067,8 +9064,8 @@
           }
         },
         "x-ms-examples": {
-          "JobExecution_Stop": {
-            "$ref": "./examples/JobExecution_Stop.json"
+          "JobExecution_Cancel": {
+            "$ref": "./examples/JobExecution_Cancel.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -15616,7 +15613,8 @@
             "Failed",
             "Creating",
             "Updating",
-            "Deleting"
+            "Deleting",
+            "Canceled"
           ],
           "type": "string",
           "readOnly": true,
@@ -15755,16 +15753,6 @@
         }
       }
     },
-    "JobExecutionBase": {
-      "description": "Basic information about Azure Spring App's Job execution.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Job execution name.",
-          "type": "string"
-        }
-      }
-    },
     "JobExecution": {
       "description": "Azure Spring Apps Job execution.",
       "type": "object",
@@ -15777,10 +15765,10 @@
           "description": "Current state of the job execution",
           "enum": [
             "Running",
-            "Stopped",
+            "Pending",
+            "Canceled",
             "Failed",
-            "Unknown",
-            "Succeeded"
+            "Completed"
           ],
           "type": "string",
           "readOnly": true,
