@@ -9,7 +9,16 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.authorizationCode,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
+)
 @service({
   title: "Azure.AI.DocumentTranslation",
 })
@@ -32,7 +41,7 @@ enum Versions {
 }
 
 /** Document Translate Request / Content. */
-model DocumentTranslateContent {
+model DocumentContent {
   /** Specifies source language of the input document.
    * If this parameter isn't specified, automatic language detection is applied to determine the source language.
    * For example if the source document is written in English, then use sourceLanguage=en */
@@ -63,11 +72,11 @@ model DocumentTranslateContent {
   document: bytes;
 
   /** Glossary / translation memory will be used during translation in the form. */
-  glossary?: bytes[];
+  glossaries?: bytes[];
 }
 
 /** Document Translate Result / Response. */
-model DocumentTranslateResult {
+model DocumentResult {
   /** response content type */
   @header
   contentType: "application/octet-stream";
@@ -86,7 +95,7 @@ alias ServiceTraits = SupportsRepeatableRequests &
 @post
 @route("document:translate")
 op documentTranslate is RpcOperation<
-  DocumentTranslateContent,
-  DocumentTranslateResult,
+  DocumentContent,
+  DocumentResult,
   ServiceTraits
 >;
