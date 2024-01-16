@@ -77,25 +77,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DocumentContent.sourceLanguage"
+            "$ref": "#/parameters/DocumentTranslateContent.sourceLanguage"
           },
           {
-            "$ref": "#/parameters/DocumentContent.targetLanguage"
+            "$ref": "#/parameters/DocumentTranslateContent.targetLanguage"
           },
           {
-            "$ref": "#/parameters/DocumentContent.category"
+            "$ref": "#/parameters/DocumentTranslateContent.category"
           },
           {
-            "$ref": "#/parameters/DocumentContent.allowFallback"
+            "$ref": "#/parameters/DocumentTranslateContent.allowFallback"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "$ref": "#/parameters/DocumentContent.document"
+            "$ref": "#/parameters/DocumentTranslateContent.document"
           },
           {
-            "$ref": "#/parameters/DocumentContent.glossary"
+            "$ref": "#/parameters/DocumentTranslateContent.glossary"
           }
         ],
         "responses": {
@@ -195,7 +195,7 @@
         }
       }
     },
-    "DocumentContent": {
+    "DocumentTranslateContent": {
       "type": "object",
       "description": "Document Translate Request / Content.",
       "properties": {
@@ -217,7 +217,7 @@
         "document"
       ]
     },
-    "DocumentResult": {
+    "DocumentTranslateResult": {
       "type": "object",
       "description": "Document Translate Result / Response.",
       "properties": {
@@ -271,7 +271,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "DocumentContent.allowFallback": {
+    "DocumentTranslateContent.allowFallback": {
       "name": "allowFallback",
       "in": "query",
       "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \n    Possible values are: true (default) or false.",
@@ -279,7 +279,7 @@
       "type": "boolean",
       "x-ms-parameter-location": "method"
     },
-    "DocumentContent.category": {
+    "DocumentTranslateContent.category": {
       "name": "category",
       "in": "query",
       "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \n    from a customized system built with Custom Translator. Add the Category ID from your Custom Translator \n    project details to this parameter to use your deployed customized system. Default value is: general.",
@@ -288,7 +288,7 @@
       "default": "general",
       "x-ms-parameter-location": "method"
     },
-    "DocumentContent.document": {
+    "DocumentTranslateContent.document": {
       "name": "document",
       "in": "formData",
       "description": "Document to be translated in the form",
@@ -296,7 +296,7 @@
       "type": "file",
       "x-ms-parameter-location": "method"
     },
-    "DocumentContent.glossary": {
+    "DocumentTranslateContent.glossary": {
       "name": "glossary",
       "in": "formData",
       "description": "Glossary / translation memory will be used during translation in the form.",
@@ -308,7 +308,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "DocumentContent.sourceLanguage": {
+    "DocumentTranslateContent.sourceLanguage": {
       "name": "sourceLanguage",
       "in": "query",
       "description": "Specifies source language of the input document.\nIf this parameter isn't specified, automatic language detection is applied to determine the source language.\nFor example if the source document is written in English, then use sourceLanguage=en",
@@ -316,7 +316,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "DocumentContent.targetLanguage": {
+    "DocumentTranslateContent.targetLanguage": {
       "name": "targetLanguage",
       "in": "query",
       "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de",
