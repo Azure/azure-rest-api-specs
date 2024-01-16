@@ -610,10 +610,10 @@ model DiscoveryRuleProperties {
   authenticationSetting: string;
 
   @doc("Whether to create an entity for the discovery rule itself.")
-  showEntity?: boolean;
+  showEntity?: boolean = true;
 
   @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
-  discoverRelationships?: boolean;
+  discoverRelationships?: boolean = true;
 
 // Will be added later
 //  @doc("Whether to add all suggested signals to the discovered entities.")
