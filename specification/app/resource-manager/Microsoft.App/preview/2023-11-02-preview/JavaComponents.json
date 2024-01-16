@@ -458,6 +458,66 @@
         }
       }
     },
+    "SpringBootAdminComponent": {
+      "description": "Spring Boot Admin properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponent"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Java Component resource specific properties",
+          "type": "object",
+          "properties": {},
+          "x-ms-discriminator-value": "SpringBootAdmin"
+        }
+      }
+    },
+    "SpringCloudEurekaComponent": {
+      "description": "Spring Cloud Eureka properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponent"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Java Component resource specific properties",
+          "type": "object",
+          "properties": {},
+          "x-ms-discriminator-value": "SpringCloudEureka"
+        }
+      }
+    },
+    "SpringCloudConfigComponent": {
+      "description": "Spring Cloud Config properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponent"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Java Component resource specific properties",
+          "type": "object",
+          "properties": {},
+          "x-ms-discriminator-value": "SpringCloudConfig"
+        }
+      }
+    },
     "SpringCloudGatewayComponent": {
       "description": "Spring Cloud Gateway properties.",
       "type": "object",
