@@ -805,7 +805,7 @@
   "definitions": {
     "AgeMismatchInference": {
       "type": "object",
-      "description": "Age mismatch returns when there is a conflict between an age that mentioned in the clinical note and the age of the patient.\nThe age of the patient is calculated by the date of birth that is set in the patient information along with the time of the service that is being documented.\nEvidenceExtension with DocumentReference evidence may be added to this inference as an extension.",
+      "description": "A notification for age mismatch is displayed when the age mentioned in a document for a specific patient does not match the age specified in the patient information.",
       "allOf": [
         {
           "$ref": "#/definitions/RadiologyInsightsInference"
@@ -1412,22 +1412,22 @@
     },
     "CompleteOrderDiscrepancyInference": {
       "type": "object",
-      "description": "Completed Order mismatch\nA complete order requires that all the body parts listed in the order will be document (some body parts requires measurements).\nThis inference is relevant only for ultrasound procedure/order of type US ABDOMEN, US RETROPERITONEAL, US PELVIS, or US BREAST.\nThis inference returns when there is a missing body part or a missing measurement of a body part that is required by the order.",
+      "description": "A complete order discrepancy is shown when one or more body parts and/or measurements that should be in the document (because there is a complete order) are not present.",
       "properties": {
         "orderType": {
           "$ref": "#/definitions/FHIR.R4.CodeableConcept",
-          "description": "Order Type."
+          "description": "Order type : CPT ultrasound complete code for abdomen, retroperitoneal, pelvis or breast."
         },
         "missingBodyParts": {
           "type": "array",
-          "description": "List of missing body parts required by a complete order.",
+          "description": "List of missing body parts required by a complete order : SNOMED CT codes.",
           "items": {
             "$ref": "#/definitions/FHIR.R4.CodeableConcept"
           }
         },
         "missingBodyPartMeasurements": {
           "type": "array",
-          "description": "List of missing body parts that require measurement by a complete order.",
+          "description": "List of missing body parts that require measurement by a complete order : SNOMED CT codes.",
           "items": {
             "$ref": "#/definitions/FHIR.R4.CodeableConcept"
           }
@@ -1463,15 +1463,15 @@
     },
     "CriticalResult": {
       "type": "object",
-      "description": "Critical Result",
+      "description": "Criticul Result consists of two properties.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "description of the critical result"
+          "description": "Description : medical problem."
         },
         "finding": {
           "$ref": "#/definitions/FHIR.R4.Observation",
-          "description": "finding inference"
+          "description": "Finding linked to the critical result."
         }
       },
       "required": [
@@ -1480,11 +1480,11 @@
     },
     "CriticalResultInference": {
       "type": "object",
-      "description": "Identifies and highlights potential Critical Findings found in a clinical document.",
+      "description": "Critical results refer to findings of utmost importance that may require timely attention due to their potential impact on patient care.",
       "properties": {
         "result": {
           "$ref": "#/definitions/CriticalResult",
-          "description": "Critical Result"
+          "description": "The complete Critical Result, as outlined below, will be reused for the recommendation."
         }
       },
       "required": [
@@ -3104,11 +3104,11 @@
     },
     "FindingInference": {
       "type": "object",
-      "description": "Finding Inference\nClinical Finding can be an observation or condition that is mentioned in the clinical document.",
+      "description": "Findings in a radiology report typically describe abnormalities, lesions, or other notable observations related to the anatomy or pathology of the imaged area.",
       "properties": {
         "finding": {
           "$ref": "#/definitions/FHIR.R4.Observation",
-          "description": "The finding data"
+          "description": "Finding data : contains extensions, fields and components linked with the finding."
         }
       },
       "required": [
@@ -3123,21 +3123,21 @@
     },
     "FindingOptions": {
       "type": "object",
-      "description": "Finding Options",
+      "description": "Finding options.",
       "properties": {
         "provideFocusedSentenceEvidence": {
           "type": "boolean",
-          "description": "Provide a single focused sentence as evidence for the finding, default is false."
+          "description": "If this is true, provide the sentence that contains the first token of the finding's clinical indicator (i.e. the medical problem), if there is one. This sentence is provided as an extension with url 'ci_sentence', next to the token evidence. Default is false."
         }
       }
     },
     "FollowupCommunicationInference": {
       "type": "object",
-      "description": "Communication Inference",
+      "description": "Follow-up communication involves the exchange of important information, recommendations, or updates between radiologists and other healthcare professionals involved in a patient's care.",
       "properties": {
         "dateTime": {
           "type": "array",
-          "description": "The communication date/time.",
+          "description": "Communication date and time.",
           "items": {
             "type": "string",
             "format": "date-time"
@@ -3145,14 +3145,14 @@
         },
         "recipient": {
           "type": "array",
-          "description": "The recipient of the communication.",
+          "description": "Recipient of the communication.",
           "items": {
             "$ref": "#/definitions/MedicalProfessionalType"
           }
         },
         "wasAcknowledged": {
           "type": "boolean",
-          "description": "Communication was acknowledged"
+          "description": "Communication was acknowledged."
         }
       },
       "required": [
@@ -3167,19 +3167,19 @@
     },
     "FollowupRecommendationInference": {
       "type": "object",
-      "description": "Recommendation Inference",
+      "description": "Follow-up recommendations offer guidance to healthcare providers on managing and monitoring patients based on the findings of imaging studies.",
       "properties": {
         "effectiveDateTime": {
           "$ref": "#/definitions/FHIR.R4.fhirDateTime",
-          "description": "Clinically relevant time/time-period for recommendation"
+          "description": "Date and time are displayed when the procedure is recommended to be done at a specific point in time."
         },
         "effectivePeriod": {
           "$ref": "#/definitions/FHIR.R4.Period",
-          "description": "Clinically relevant time/time-period for recommendation"
+          "description": "The period is shown if a specific period is mentioned, with a start and end date-time."
         },
         "findings": {
           "type": "array",
-          "description": "Findings related to this recommendation.",
+          "description": "Findings related to the recommendation.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/RecommendationFinding"
@@ -3188,23 +3188,23 @@
         },
         "isConditional": {
           "type": "boolean",
-          "description": "Indicate that the sentence with the recommendation holds a conditional statement.\nExamples of conditional phrases: If the patient remains clinically symptomatic, Unless otherwise indicated clinically in the interim."
+          "description": "The conditional value indicates whether or not the sentence containing the recommendation includes a conditional statement. Keywords for conditional statements include 'if', 'when', 'unless', and so on."
         },
         "isOption": {
           "type": "boolean",
-          "description": "Indicate that the sentence with the recommendation holds an optional statement.\nExamples of Optional phrases: 'If there is suspicion for a fracture, recommend a dedicated x-ray of the right clavicle.\nConsider F/U exam in 6-12 months if patient has severe primary hyperparathyroidism, is being treated with high dose steroids or in any medical condition where rapid and severe loss of bone mass could occur.\nIf the patient is high risk, follow-up CT thorax is recommended in 12 months to ensure stability."
+          "description": "The option value indicates whether or not the sentence containing the recommendation includes an optional statement. Keywords for optional statements include 'recommend', 'consider', and so on."
         },
         "isGuideline": {
           "type": "boolean",
-          "description": "Recommendation is a guideline section describing all the recommendations for the follow-up of a particular finding."
+          "description": "The guideline value indicates whether or not the recommendation is part of a guideline section that compiles all recommendations applicable to various findings."
         },
         "isHedging": {
           "type": "boolean",
-          "description": "Ambiguous, vague, or imprecise language, that can be considered a Hedging Statement within the sentence of the recommendation.\nExamples of hedging: 'can be considered', 'may be further evaluated', 'correlate clinically', 'as clinically indicated'."
+          "description": "Hedging refers to ambiguous, vague or imprecise language within the sentence of the recommendation. Keywords for hedging are 'can be','may be',and so on."
         },
         "recommendedProcedure": {
           "$ref": "#/definitions/ProcedureRecommendation",
-          "description": "Recommended procedure."
+          "description": "The procedure recommendation can be a generic procedure or an imaging procedure."
         }
       },
       "required": [
@@ -3223,19 +3223,19 @@
     },
     "FollowupRecommendationOptions": {
       "type": "object",
-      "description": "Followup Recommendation Options",
+      "description": "Follow-up recommendation options.",
       "properties": {
         "includeRecommendationsWithNoSpecifiedModality": {
           "type": "boolean",
-          "description": "Include/Exclude followup recommendations with no specific radiologic modality, default is false."
+          "description": "Include/Exclude follow-up recommendations without a specific radiology procedure. Default is false."
         },
         "includeRecommendationsInReferences": {
           "type": "boolean",
-          "description": "Include/Exclude followup recommendations in references to a guideline or article, default is false."
+          "description": "Include/Exclude follow-up recommendations in references to a guideline or article. Default is false."
         },
         "provideFocusedSentenceEvidence": {
           "type": "boolean",
-          "description": "Provide a single focused sentence as evidence for the recommendation, default is false."
+          "description": "If this is true, provide one or more sentences as evidence for the recommendation, next to the token evidence. The start and end positions of these sentences will be put in an extension with url 'modality_sentences'. Default is false."
         }
       }
     },
@@ -3245,11 +3245,11 @@
       "properties": {
         "code": {
           "$ref": "#/definitions/FHIR.R4.CodeableConcept",
-          "description": "The procedure modality"
+          "description": "Procedure modality : SNOMED CT code."
         },
         "description": {
           "type": "string",
-          "description": "The procedure description"
+          "description": "Procedure description : MANAGEMENT PROCEDURE (PROCEDURE) or CONSULTATION (PROCEDURE) based on SNOMED CT."
         }
       },
       "required": [
@@ -3359,27 +3359,27 @@
     },
     "ImagingProcedure": {
       "type": "object",
-      "description": "Order Procedure - is this always a radiology procedure?",
+      "description": "Imaging procedure.",
       "properties": {
         "modality": {
           "$ref": "#/definitions/FHIR.R4.CodeableConcept",
-          "description": "The procedure modality"
+          "description": "Modality : SNOMED CT code."
         },
         "anatomy": {
           "$ref": "#/definitions/FHIR.R4.CodeableConcept",
-          "description": "The procedure anatomy"
+          "description": "Anatomy : SNOMED CT code."
         },
         "laterality": {
           "$ref": "#/definitions/FHIR.R4.CodeableConcept",
-          "description": "The procedure laterality"
+          "description": "Laterality : SNOMED CT code."
         },
         "contrast": {
           "$ref": "#/definitions/RadiologyCodeWithTypes",
-          "description": "The procedure contrast"
+          "description": "Contrast : see RadiologyCodeWithTypes (below)."
         },
         "view": {
           "$ref": "#/definitions/RadiologyCodeWithTypes",
-          "description": "The procedure view"
+          "description": "View : see RadiologyCodeWithTypes (below)."
         }
       },
       "required": [
@@ -3389,18 +3389,18 @@
     },
     "ImagingProcedureRecommendation": {
       "type": "object",
-      "description": "Radiology procedure.",
+      "description": "Imaging procedures.",
       "properties": {
         "procedureCodes": {
           "type": "array",
-          "description": "The LOINC codes for the procedure.",
+          "description": "LOINC codes for the procedure.",
           "items": {
             "$ref": "#/definitions/FHIR.R4.CodeableConcept"
           }
         },
         "imagingProcedures": {
           "type": "array",
-          "description": "Imaging procedure.",
+          "description": "Imaging procedures.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ImagingProcedure"
@@ -3478,15 +3478,15 @@
     },
     "LateralityDiscrepancyInference": {
       "type": "object",
-      "description": "Laterality discrepancy, returns in 3 different cases:\nOrderLateralityMismatch: there is a discrepancy between the text and the procedure/order related to the clinical document.\nTextLateralityContradiction: there is a contradiction within the text of the clinical document.\nTextLateralityMissing: laterality is missing/not mentioned in the clinical document.",
+      "description": "A laterality mismatch occurs when there is a discrepancy between the clinical documentation and the ordered procedure (orderLateralityMismatch), a contradiction within the clinical document (textLateralityContradiction), or when no laterality is mentioned (textLateralityMissing).",
       "properties": {
         "lateralityIndication": {
           "$ref": "#/definitions/FHIR.R4.CodeableConcept",
-          "description": "laterality indication"
+          "description": "Laterality indication : SNOMED CT code for laterality qualifier value."
         },
         "discrepancyType": {
           "$ref": "#/definitions/LateralityDiscrepancyType",
-          "description": "mismatch type"
+          "description": "Mismatch type : orderLateralityMismatch, textLateralityContradiction, textLateralityMissing."
         }
       },
       "required": [
@@ -3531,22 +3531,22 @@
     },
     "LimitedOrderDiscrepancyInference": {
       "type": "object",
-      "description": "Limited Order mismatch\nA limited order requires that not all the body parts listed in the order will be document.\nThis inference is relevant only for ultrasound procedure/order of type US ABDOMEN, US RETROPERITONEAL, US PELVIS, or US BREAST.\nThis inference returns when all body parts and measurement of a body part required by the order, mentioned in the text.",
+      "description": "A limited order discrepancy occurs when there is a limited order, but all body parts and measurements that are needed for a complete order are present in the document.",
       "properties": {
         "orderType": {
           "$ref": "#/definitions/FHIR.R4.CodeableConcept",
-          "description": "Order Type."
+          "description": "Order type : CPT ultrasound complete code for abdomen, retroperitoneal, pelvis or breast."
         },
         "presentBodyParts": {
           "type": "array",
-          "description": "Complete list of body parts found in the document.",
+          "description": "List of body parts found in the document : SNOMED CT codes.",
           "items": {
             "$ref": "#/definitions/FHIR.R4.CodeableConcept"
           }
         },
         "presentBodyPartMeasurements": {
           "type": "array",
-          "description": "Complete list of body parts that require measurement by a complete order.",
+          "description": "List of body parts that are measured according to the document : SNOMED CT codes.",
           "items": {
             "$ref": "#/definitions/FHIR.R4.CodeableConcept"
           }
@@ -4182,7 +4182,7 @@
     },
     "ProcedureRecommendation": {
       "type": "object",
-      "description": "Radiology Insights abstract procedure.",
+      "description": "The procedure recommendation can be a generic procedure or an imaging procedure.",
       "properties": {
         "kind": {
           "type": "string",
@@ -4196,15 +4196,15 @@
     },
     "RadiologyCodeWithTypes": {
       "type": "object",
-      "description": "Code with types",
+      "description": "Radiology code with types : used in imaging procedure recommendation for contrast and view.",
       "properties": {
         "code": {
           "$ref": "#/definitions/FHIR.R4.CodeableConcept",
-          "description": "Code"
+          "description": "The SNOMED CT code indicates whether imaging was conducted with or without contrast in the case of contrast, and in the case of views, it denotes the number of views."
         },
         "types": {
           "type": "array",
-          "description": "Collection of types",
+          "description": "The collection of types will indicate the contrast substance used in the case of contrast and, in the case of views, it will specify the types of views, such as lateral and frontal, etc.",
           "items": {
             "$ref": "#/definitions/FHIR.R4.CodeableConcept"
           }
@@ -4217,7 +4217,7 @@
     },
     "RadiologyInsightsData": {
       "type": "object",
-      "description": "The body of the Radiology Insights request.",
+      "description": "Contains the list of patients, and configuration data.",
       "properties": {
         "patients": {
           "type": "array",
@@ -4256,21 +4256,21 @@
     },
     "RadiologyInsightsInferenceOptions": {
       "type": "object",
-      "description": "The options for the Radiology Insights Inferences",
+      "description": "Options regarding follow up recommendation inferences and finding inferences.",
       "properties": {
         "followupRecommendation": {
           "$ref": "#/definitions/FollowupRecommendationOptions",
-          "description": "Followup Recommendation Options"
+          "description": "Follow-up recommendation options."
         },
         "finding": {
           "$ref": "#/definitions/FindingOptions",
-          "description": "Finding Options"
+          "description": "Finding options."
         }
       }
     },
     "RadiologyInsightsInferenceResult": {
       "type": "object",
-      "description": "The inference results for the Radiology Insights request.",
+      "description": "The inference results for the Radiology Insights request. If field 'status' has value 'succeeded', then field 'result' will contain an instance of RadiologyInsightsInferenceResult.",
       "properties": {
         "patientResults": {
           "type": "array",
@@ -4378,28 +4378,28 @@
         },
         "inferenceTypes": {
           "type": "array",
-          "description": "A list of inference types to be inferred for the current request.\nThis could be used if only part of the Radiology Insights inferences are required.\nIf this list is omitted or empty, the model will return all the inference types.",
+          "description": "This is a list of inference types to be inferred for the current request. It could be used if only part of the Radiology Insights inferences are required. If this list is omitted or empty, the model will return all the inference types.",
           "items": {
             "$ref": "#/definitions/RadiologyInsightsInferenceType"
           }
         },
         "inferenceOptions": {
           "$ref": "#/definitions/RadiologyInsightsInferenceOptions",
-          "description": "The options for the Radiology Insights Inferences"
+          "description": "Options regarding follow up recommendation inferences and finding inferences."
         },
         "locale": {
           "type": "string",
-          "description": "Local for the model to use. If not specified, the model will use the default locale"
+          "description": "Local for the model to use. If not specified, the model will use the default locale."
         }
       }
     },
     "RadiologyInsightsPatientResult": {
       "type": "object",
-      "description": "The results of the model's work for a single patient.",
+      "description": "Results of the model's work for a single patient.",
       "properties": {
         "patientId": {
           "type": "string",
-          "description": "The identifier given for the patient in the request."
+          "description": "Identifier given for the patient in the request."
         },
         "inferences": {
           "type": "array",
@@ -4417,7 +4417,7 @@
     },
     "RadiologyInsightsResult": {
       "type": "object",
-      "description": "The response for the Radiology Insights request.",
+      "description": "Response for the Radiology Insights request.",
       "properties": {
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
@@ -4463,18 +4463,18 @@
     },
     "RadiologyProcedureInference": {
       "type": "object",
-      "description": "Procedures found in the document text or associated with the document administrative metadata.",
+      "description": "Radiology procedures are the specific imaging studies or examinations ordered for the patient, extracted from the document information and text.",
       "properties": {
         "procedureCodes": {
           "type": "array",
-          "description": "The LOINC codes for the procedure.",
+          "description": "LOINC codes for the procedure.",
           "items": {
             "$ref": "#/definitions/FHIR.R4.CodeableConcept"
           }
         },
         "imagingProcedures": {
           "type": "array",
-          "description": "Imaging procedure.",
+          "description": "Imaging procedures.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ImagingProcedure"
@@ -4483,7 +4483,7 @@
         },
         "orderedProcedure": {
           "$ref": "#/definitions/OrderedProcedure",
-          "description": "The related procedure information from the document administration information or as extracted from the document."
+          "description": "Ordered procedure information from the document information or text."
         }
       },
       "required": [
@@ -4499,19 +4499,19 @@
     },
     "RecommendationFinding": {
       "type": "object",
-      "description": "Recommendation Finding - finding reference for recommendation",
+      "description": "Finding reference for recommendation.",
       "properties": {
         "finding": {
           "$ref": "#/definitions/FHIR.R4.Observation",
-          "description": "finding inference"
+          "description": "Finding linked to a recommendation."
         },
         "criticalFinding": {
           "$ref": "#/definitions/CriticalResult",
-          "description": "critical finding inference"
+          "description": "Critical result linked to a recommendation."
         },
         "recommendationFindingStatus": {
           "$ref": "#/definitions/RecommendationFindingStatusType",
-          "description": "recommendation finding status"
+          "description": "Recommendation finding status."
         }
       },
       "required": [
@@ -4561,11 +4561,11 @@
     },
     "SexMismatchInference": {
       "type": "object",
-      "description": "Sex mismatch returns when there is a conflict between the patient references (female/male, he/she/his/her), documented clinical procedures, or documented body parts to the patient Sex that mentioned in the patient info.",
+      "description": "A notification for a sex mismatch is displayed when the gender, personal pronouns, gender-related body parts, or gender-related procedures mentioned in a patient's clinical document are either inconsistent or do not match the gender specified in the patient information.",
       "properties": {
         "sexIndication": {
           "$ref": "#/definitions/FHIR.R4.CodeableConcept",
-          "description": "sex indication"
+          "description": "Sex indication : SNOMED CT code for gender finding."
         }
       },
       "required": [

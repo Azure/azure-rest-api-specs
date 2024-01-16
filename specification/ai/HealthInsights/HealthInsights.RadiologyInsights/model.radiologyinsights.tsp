@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
 
-@doc("The body of the Radiology Insights request.")
+@doc("Contains the list of patients, and configuration data.")
 model RadiologyInsightsData {
   ...Request;
 
@@ -20,53 +20,49 @@ model RadiologyInsightsData {
 model RadiologyInsightsModelConfiguration {
   ...ModelConfiguration;
 
-  @doc("""
-A list of inference types to be inferred for the current request.
-This could be used if only part of the Radiology Insights inferences are required.
-If this list is omitted or empty, the model will return all the inference types.
-""")
+  @doc("This is a list of inference types to be inferred for the current request. It could be used if only part of the Radiology Insights inferences are required. If this list is omitted or empty, the model will return all the inference types.")
   inferenceTypes?: RadiologyInsightsInferenceType[];
 
-  @doc("The options for the Radiology Insights Inferences")
+  @doc("Options regarding follow up recommendation inferences and finding inferences.")
   inferenceOptions?: RadiologyInsightsInferenceOptions;
 
-  @doc("Local for the model to use. If not specified, the model will use the default locale")
+  @doc("Local for the model to use. If not specified, the model will use the default locale.")
   locale?: string;
 }
 
-@doc("The options for the Radiology Insights Inferences")
+@doc("Options regarding follow up recommendation inferences and finding inferences.")
 model RadiologyInsightsInferenceOptions {
-  @doc("Followup Recommendation Options")
+  @doc("Follow-up recommendation options.")
   followupRecommendation?: FollowupRecommendationOptions;
 
-  @doc("Finding Options")
+  @doc("Finding options.")
   finding?: FindingOptions;
 }
 
-@doc("Followup Recommendation Options")
+@doc("Follow-up recommendation options.")
 model FollowupRecommendationOptions {
-  @doc("Include/Exclude followup recommendations with no specific radiologic modality, default is false.")
+  @doc("Include/Exclude follow-up recommendations without a specific radiology procedure. Default is false.")
   includeRecommendationsWithNoSpecifiedModality?: boolean;
 
-  @doc("Include/Exclude followup recommendations in references to a guideline or article, default is false.")
+  @doc("Include/Exclude follow-up recommendations in references to a guideline or article. Default is false.")
   includeRecommendationsInReferences?: boolean;
 
-  @doc("Provide a single focused sentence as evidence for the recommendation, default is false.")
+  @doc("If this is true, provide one or more sentences as evidence for the recommendation, next to the token evidence. The start and end positions of these sentences will be put in an extension with url 'modality_sentences'. Default is false.")
   provideFocusedSentenceEvidence?: boolean;
 }
 
-@doc("Finding Options")
+@doc("Finding options.")
 model FindingOptions {
-  @doc("Provide a single focused sentence as evidence for the finding, default is false.")
+  @doc("If this is true, provide the sentence that contains the first token of the finding's clinical indicator (i.e. the medical problem), if there is one. This sentence is provided as an extension with url 'ci_sentence', next to the token evidence. Default is false.")
   provideFocusedSentenceEvidence?: boolean;
 }
 
 @resource("radiology-insights/jobs")
-@doc("The response for the Radiology Insights request.")
+@doc("Response for the Radiology Insights request.")
 model RadiologyInsightsResult
   is HealthInsightsOperationStatus<RadiologyInsightsInferenceResult>;
 
-@doc("The inference results for the Radiology Insights request.")
+@doc("The inference results for the Radiology Insights request. If field 'status' has value 'succeeded', then field 'result' will contain an instance of RadiologyInsightsInferenceResult.")
 model RadiologyInsightsInferenceResult {
   @doc("Results for the patients given in the request.")
   patientResults: RadiologyInsightsPatientResult[];
@@ -75,9 +71,9 @@ model RadiologyInsightsInferenceResult {
   modelVersion: ModelVersion;
 }
 
-@doc("The results of the model's work for a single patient.")
+@doc("Results of the model's work for a single patient.")
 model RadiologyInsightsPatientResult {
-  @doc("The identifier given for the patient in the request.")
+  @doc("Identifier given for the patient in the request.")
   patientId: string;
 
   @doc("The model's inferences for the given patient.")
@@ -100,261 +96,216 @@ An inference made by the Radiology Insights model regarding a patient.
 @discriminator("kind")
 model RadiologyInsightsInference extends FHIR.R4.Extendible {}
 
-@doc("""
-Age mismatch returns when there is a conflict between an age that mentioned in the clinical note and the age of the patient.
-The age of the patient is calculated by the date of birth that is set in the patient information along with the time of the service that is being documented.
-EvidenceExtension with DocumentReference evidence may be added to this inference as an extension.
-""")
+@doc("A notification for age mismatch is displayed when the age mentioned in a document for a specific patient does not match the age specified in the patient information.")
 model AgeMismatchInference extends RadiologyInsightsInference {
-  @doc("The type of the inference.")
+  @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.AgeMismatch;
 }
 
-@doc("""
-Sex mismatch returns when there is a conflict between the patient references (female/male, he/she/his/her), documented clinical procedures, or documented body parts to the patient Sex that mentioned in the patient info.
-""")
+@doc("A notification for a sex mismatch is displayed when the gender, personal pronouns, gender-related body parts, or gender-related procedures mentioned in a patient's clinical document are either inconsistent or do not match the gender specified in the patient information.")
 model SexMismatchInference extends RadiologyInsightsInference {
-  @doc("The type of the inference.")
+  @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.SexMismatch;
 
-  @doc("sex indication")
+  @doc("Sex indication : SNOMED CT code for gender finding.")
   sexIndication: FHIR.R4.CodeableConcept;
 }
 
-@doc("""
-Laterality discrepancy, returns in 3 different cases:
-OrderLateralityMismatch: there is a discrepancy between the text and the procedure/order related to the clinical document.
-TextLateralityContradiction: there is a contradiction within the text of the clinical document.
-TextLateralityMissing: laterality is missing/not mentioned in the clinical document.
-""")
+@doc("A laterality mismatch occurs when there is a discrepancy between the clinical documentation and the ordered procedure (orderLateralityMismatch), a contradiction within the clinical document (textLateralityContradiction), or when no laterality is mentioned (textLateralityMissing).")
 model LateralityDiscrepancyInference extends RadiologyInsightsInference {
-  @doc("The type of the inference.")
+  @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.LateralityDiscrepancy;
 
-  @doc("laterality indication")
+  @doc("Laterality indication : SNOMED CT code for laterality qualifier value.")
   lateralityIndication?: FHIR.R4.CodeableConcept;
 
-  @doc("mismatch type")
+  @doc("Mismatch type : orderLateralityMismatch, textLateralityContradiction, textLateralityMissing.")
   discrepancyType: LateralityDiscrepancyType;
 }
 
-@doc("""
-Completed Order mismatch
-A complete order requires that all the body parts listed in the order will be document (some body parts requires measurements).
-This inference is relevant only for ultrasound procedure/order of type US ABDOMEN, US RETROPERITONEAL, US PELVIS, or US BREAST.
-This inference returns when there is a missing body part or a missing measurement of a body part that is required by the order.
-""")
+@doc("A complete order discrepancy is shown when one or more body parts and/or measurements that should be in the document (because there is a complete order) are not present.")
 model CompleteOrderDiscrepancyInference extends RadiologyInsightsInference {
-  @doc("The type of the inference.")
+  @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.CompleteOrderDiscrepancy;
 
-  @doc("Order Type.")
+  @doc("Order type : CPT ultrasound complete code for abdomen, retroperitoneal, pelvis or breast.")
   orderType: FHIR.R4.CodeableConcept;
 
-  @doc("""
-  List of missing body parts required by a complete order.
-  """)
+  @doc("List of missing body parts required by a complete order : SNOMED CT codes.")
   missingBodyParts?: Array<FHIR.R4.CodeableConcept>;
 
-  @doc("""
-  List of missing body parts that require measurement by a complete order.
-  """)
+  @doc("List of missing body parts that require measurement by a complete order : SNOMED CT codes.")
   missingBodyPartMeasurements?: Array<FHIR.R4.CodeableConcept>;
 }
 
-@doc("""
-Limited Order mismatch
-A limited order requires that not all the body parts listed in the order will be document.
-This inference is relevant only for ultrasound procedure/order of type US ABDOMEN, US RETROPERITONEAL, US PELVIS, or US BREAST.
-This inference returns when all body parts and measurement of a body part required by the order, mentioned in the text.
-""")
+@doc("A limited order discrepancy occurs when there is a limited order, but all body parts and measurements that are needed for a complete order are present in the document.")
 model LimitedOrderDiscrepancyInference extends RadiologyInsightsInference {
-  @doc("The type of the inference.")
+  @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.LimitedOrderDiscrepancy;
 
-  @doc("Order Type.")
+  @doc("Order type : CPT ultrasound complete code for abdomen, retroperitoneal, pelvis or breast.")
   orderType: FHIR.R4.CodeableConcept;
 
-  @doc("""
-  Complete list of body parts found in the document.
-  """)
+  @doc("List of body parts found in the document : SNOMED CT codes.")
   presentBodyParts?: Array<FHIR.R4.CodeableConcept>;
 
-  @doc("""
-  Complete list of body parts that require measurement by a complete order.
-  """)
+  @doc("List of body parts that are measured according to the document : SNOMED CT codes.")
   presentBodyPartMeasurements?: Array<FHIR.R4.CodeableConcept>;
 }
 
-@doc("""
-Finding Inference
-Clinical Finding can be an observation or condition that is mentioned in the clinical document.
-""")
+@doc("Findings in a radiology report typically describe abnormalities, lesions, or other notable observations related to the anatomy or pathology of the imaged area.")
 model FindingInference extends RadiologyInsightsInference {
-  @doc("The type of the inference.")
+  @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.Finding;
 
-  @doc("The finding data")
+  @doc("Finding data : contains extensions, fields and components linked with the finding.")
   finding: FHIR.R4.Observation;
 }
 
-@doc("""
-Identifies and highlights potential Critical Findings found in a clinical document.
-""")
+@doc("Critical results refer to findings of utmost importance that may require timely attention due to their potential impact on patient care.")
 model CriticalResultInference extends RadiologyInsightsInference {
-  @doc("The type of the inference.")
+  @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.CriticalResult;
 
-  @doc("Critical Result")
+  @doc("The complete Critical Result, as outlined below, will be reused for the recommendation.")
   result: CriticalResult;
 }
 
-@doc("Critical Result")
+@doc("Criticul Result consists of two properties.")
 model CriticalResult {
-  @doc("description of the critical result")
+  @doc("Description : medical problem.")
   description: string;
 
-  @doc("finding inference")
+  @doc("Finding linked to the critical result.")
   finding?: FHIR.R4.Observation;
 }
 
-@doc("Procedures found in the document text or associated with the document administrative metadata.")
+@doc("Radiology procedures are the specific imaging studies or examinations ordered for the patient, extracted from the document information and text.")
 model RadiologyProcedureInference extends RadiologyInsightsInference {
-  @doc("The type of the inference.")
+  @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.RadiologyProcedure;
 
-  @doc("The LOINC codes for the procedure.")
+  @doc("LOINC codes for the procedure.")
   procedureCodes?: Array<FHIR.R4.CodeableConcept>;
 
   @minItems(1)
-  @doc("Imaging procedure.")
+  @doc("Imaging procedures.")
   imagingProcedures: Array<ImagingProcedure>;
 
-  @doc("The related procedure information from the document administration information or as extracted from the document.")
+  @doc("Ordered procedure information from the document information or text.")
   orderedProcedure: OrderedProcedure;
 }
 
-@doc("Recommendation Inference")
+@doc("Follow-up recommendations offer guidance to healthcare providers on managing and monitoring patients based on the findings of imaging studies.")
 model FollowupRecommendationInference extends RadiologyInsightsInference {
-  @doc("The type of the inference.")
+  @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.FollowupRecommendation;
 
-  @doc("Clinically relevant time/time-period for recommendation")
+  @doc("Date and time are displayed when the procedure is recommended to be done at a specific point in time.")
   effectiveDateTime?: FHIR.R4.fhirDateTime;
 
-  @doc("Clinically relevant time/time-period for recommendation")
+  @doc("The period is shown if a specific period is mentioned, with a start and end date-time.")
   effectivePeriod?: FHIR.R4.Period;
 
-  @doc("Findings related to this recommendation.")
+  @doc("Findings related to the recommendation.")
   @minItems(1)
   findings?: Array<RecommendationFinding>;
 
-  @doc("""
-  Indicate that the sentence with the recommendation holds a conditional statement.
-  Examples of conditional phrases: If the patient remains clinically symptomatic, Unless otherwise indicated clinically in the interim.
-  """)
+  @doc("The conditional value indicates whether or not the sentence containing the recommendation includes a conditional statement. Keywords for conditional statements include 'if', 'when', 'unless', and so on.")
   isConditional: boolean;
 
-  @doc("""
-  Indicate that the sentence with the recommendation holds an optional statement.
-  Examples of Optional phrases: 'If there is suspicion for a fracture, recommend a dedicated x-ray of the right clavicle.
-  Consider F/U exam in 6-12 months if patient has severe primary hyperparathyroidism, is being treated with high dose steroids or in any medical condition where rapid and severe loss of bone mass could occur.
-  If the patient is high risk, follow-up CT thorax is recommended in 12 months to ensure stability.
-  """)
+  @doc("The option value indicates whether or not the sentence containing the recommendation includes an optional statement. Keywords for optional statements include 'recommend', 'consider', and so on.")
   isOption: boolean;
 
-  @doc("Recommendation is a guideline section describing all the recommendations for the follow-up of a particular finding.")
+  @doc("The guideline value indicates whether or not the recommendation is part of a guideline section that compiles all recommendations applicable to various findings.")
   isGuideline: boolean;
 
-  @doc("""
-  Ambiguous, vague, or imprecise language, that can be considered a Hedging Statement within the sentence of the recommendation.
-  Examples of hedging: 'can be considered', 'may be further evaluated', 'correlate clinically', 'as clinically indicated'.
-  """)
+  @doc("Hedging refers to ambiguous, vague or imprecise language within the sentence of the recommendation. Keywords for hedging are 'can be','may be',and so on.")
   isHedging: boolean;
 
-  @doc("Recommended procedure.")
+  @doc("The procedure recommendation can be a generic procedure or an imaging procedure.")
   recommendedProcedure: ProcedureRecommendation;
 }
 
-@doc("Radiology Insights abstract procedure.")
+@doc("The procedure recommendation can be a generic procedure or an imaging procedure.")
 @discriminator("kind")
 model ProcedureRecommendation {}
 
 @doc("Generic procedure information.")
 model GenericProcedureRecommendation extends ProcedureRecommendation {
-  @doc("The type of the procedure.")
+  @doc("Procedure type : generic.")
   kind: "genericProcedureRecommendation";
 
-  @doc("The procedure modality")
+  @doc("Procedure modality : SNOMED CT code.")
   code: FHIR.R4.CodeableConcept;
 
-  @doc("The procedure description")
+  @doc("Procedure description : MANAGEMENT PROCEDURE (PROCEDURE) or CONSULTATION (PROCEDURE) based on SNOMED CT.")
   description?: string;
 }
 
-@doc("Radiology procedure.")
+@doc("Imaging procedures.")
 model ImagingProcedureRecommendation extends ProcedureRecommendation {
-  @doc("The type of the procedure.")
+  @doc("Procedure type : imaging.")
   kind: "imagingProcedureRecommendation";
 
-  @doc("The LOINC codes for the procedure.")
+  @doc("LOINC codes for the procedure.")
   procedureCodes?: Array<FHIR.R4.CodeableConcept>;
 
   @minItems(1)
-  @doc("Imaging procedure.")
+  @doc("Imaging procedures.")
   imagingProcedures: Array<ImagingProcedure>;
 }
 
-@doc("Order Procedure - is this always a radiology procedure?")
+@doc("Imaging procedure.")
 model ImagingProcedure {
-  @doc("The procedure modality")
+  @doc("Modality : SNOMED CT code.")
   modality: FHIR.R4.CodeableConcept;
 
-  @doc("The procedure anatomy")
+  @doc("Anatomy : SNOMED CT code.")
   anatomy: FHIR.R4.CodeableConcept;
 
-  @doc("The procedure laterality")
+  @doc("Laterality : SNOMED CT code.")
   laterality?: FHIR.R4.CodeableConcept;
 
-  @doc("The procedure contrast")
+  @doc("Contrast : see RadiologyCodeWithTypes (below).")
   contrast?: RadiologyCodeWithTypes;
 
-  @doc("The procedure view")
+  @doc("View : see RadiologyCodeWithTypes (below).")
   view?: RadiologyCodeWithTypes;
 }
 
-@doc("Code with types")
+@doc("Radiology code with types : used in imaging procedure recommendation for contrast and view.")
 model RadiologyCodeWithTypes {
-  @doc("Code")
+  @doc("The SNOMED CT code indicates whether imaging was conducted with or without contrast in the case of contrast, and in the case of views, it denotes the number of views.")
   code: FHIR.R4.CodeableConcept;
 
-  @doc("Collection of types")
+  @doc("The collection of types will indicate the contrast substance used in the case of contrast and, in the case of views, it will specify the types of views, such as lateral and frontal, etc.")
   types: Array<FHIR.R4.CodeableConcept>;
 }
 
-@doc("Recommendation Finding - finding reference for recommendation")
+@doc("Finding reference for recommendation.")
 model RecommendationFinding extends FHIR.R4.Extendible {
-  @doc("finding inference")
+  @doc("Finding linked to a recommendation.")
   finding?: FHIR.R4.Observation;
 
-  @doc("critical finding inference")
+  @doc("Critical result linked to a recommendation.")
   criticalFinding?: CriticalResult;
 
-  @doc("recommendation finding status")
+  @doc("Recommendation finding status.")
   recommendationFindingStatus: RecommendationFindingStatusType;
 }
 
-@doc("Communication Inference")
+@doc("Follow-up communication involves the exchange of important information, recommendations, or updates between radiologists and other healthcare professionals involved in a patient's care.")
 model FollowupCommunicationInference extends RadiologyInsightsInference {
-  @doc("The type of the inference.")
+  @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.FollowupCommunication;
 
-  @doc("The communication date/time.")
+  @doc("Communication date and time.")
   dateTime?: Array<utcDateTime>;
 
-  @doc("The recipient of the communication.")
+  @doc("Recipient of the communication.")
   recipient?: Array<MedicalProfessionalType>;
 
-  @doc("Communication was acknowledged")
+  @doc("Communication was acknowledged.")
   wasAcknowledged: boolean;
 }
