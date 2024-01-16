@@ -45,6 +45,8 @@ These settings apply only when `--tag=package-2023-12` is specified on the comma
 ```yaml $(tag) == 'package-2023-12'
 input-file:
   - Microsoft.Insights/stable/2023-12-01/scheduledQueryRule_API.json
+  - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
+  - Microsoft.Monitor/stable/2023-04-03/operations_API.json
 ```
 ### Tag: package-2023-10
 
