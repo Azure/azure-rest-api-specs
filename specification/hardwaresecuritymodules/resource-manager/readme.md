@@ -31,7 +31,7 @@ openapi-type: arm
 tag: package-2023-12-preview
 ```
 
-``` yaml
+``` yaml !$(typescript)
 modelerfour:
   flatten-models: false
 ```
