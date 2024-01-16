@@ -81,6 +81,7 @@ enum MessageTemplateType {
   whatsApp,
 }
 
+@discriminator("kind")
 @doc("Details of the message to send.")
 model NotificationContent {
   @doc("The Channel Registration ID for the Business Identifier.")
@@ -89,19 +90,12 @@ model NotificationContent {
   @doc("The native external platform user identifiers of the recipient.")
   to: string[];
 
-  @doc("The notification type.")
-  type: NotificationType;
-}
-
-@discriminator("kind")
-@doc("Details of the message to send.")
-model NotificationType {
   @doc("The type discriminator describing a notification type.")
   kind: CommunicationMessageType;
 }
 
 @doc("A request to send a text notification.")
-model TextNotificationContent extends NotificationType {
+model TextNotificationContent extends NotificationContent {
   @doc("Message notification type is text.")
   kind: CommunicationMessageType.text;
 
@@ -110,7 +104,7 @@ model TextNotificationContent extends NotificationType {
 }
 
 @doc("A request to send a media notification.")
-model MediaNotificationContent extends NotificationType {
+model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageType.image;
 
@@ -125,7 +119,7 @@ model MediaNotificationContent extends NotificationType {
 }
 
 @doc("A request to send a template notification.")
-model TemplateNotificationContent extends NotificationType {
+model TemplateNotificationContent extends NotificationContent {
   @doc("Message notification type is template.")
   kind: CommunicationMessageType.template;
 
