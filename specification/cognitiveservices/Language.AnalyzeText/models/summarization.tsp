@@ -15,6 +15,10 @@ model ExtractiveSummarizationTaskParameters extends PreBuiltTaskParameters {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType;
+
+  @added(Versions.v2023_11_15_preview)
+  @doc("(Optional) If provided, the query will be used to extract most relevant sentences from the document.")
+  query?: string;
 }
 
 @added(Versions.v2023_04_01)

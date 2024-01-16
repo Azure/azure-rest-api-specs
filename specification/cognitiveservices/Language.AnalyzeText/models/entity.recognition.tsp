@@ -32,6 +32,10 @@ model EntitiesTaskParameters extends PreBuiltTaskParameters {
   @added(Versions.v2023_04_15_preview)
   @doc("(Optional) describes the type of overlap policy to apply to the ner output.")
   overlapPolicy?: BaseEntityOverlapPolicy;
+
+  @added(Versions.v2023_11_15_preview)
+  @doc("(Optional) request parameter that allows the user to provide settings for running the inference.")
+  inferenceOptions?: EntityInferenceOptions;
 }
 
 @doc("An object representing the task definition for an Entities Recognition task.")
@@ -264,6 +268,13 @@ enum EntityCategory {
 }
 
 alias EntityList = Array<EntityCategory>;
+
+@added(Versions.v2023_11_15_preview)
+@doc("The class that houses the inference options allowed for named entity recognition.")
+model EntityInferenceOptions {
+  @doc("Option to include/exclude the detected entity values to be normalized and included in the metadata. The numeric and temporal entity types support value normalization.")
+  excludeNormalizedValues: boolean = false;
+}
 
 @added(Versions.v2023_04_15_preview)
 @discriminator("policyKind")

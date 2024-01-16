@@ -497,14 +497,35 @@ model SentimentConfidenceScores {
     negative: float64;
 }
 
+@added(Versions.v2023_11_15_preview)
+@doc("Enum that defines the length of the output summaries.")
+enum SummaryLengthBucket {
+    @doc("Instructs model to generate shorter length summaries.")
+    short,
+
+    @doc("Instructs model to generate medium length summaries.")
+    medium,
+
+    @doc("Instructs model to generate longer length summaries.")
+    long,
+}
+
 @added(Versions.v2023_04_01)
 @doc("Supported parameters for an Abstractive Summarization task.")
 model AbstractiveSummarizationTaskParametersBase {
-    @doc("It controls the approximate number of sentences in the output summaries.")
+    @doc("Controls the approximate number of sentences in the output summaries.")
     sentenceCount: int32;
 
     @doc("String index type")
     stringIndexType: StringIndexType;
+
+    @added(Versions.v2023_11_15_preview)
+    @doc("(NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries.")
+    summaryLength?: SummaryLengthBucket;
+
+    @added(Versions.v2023_11_15_preview)
+    @doc("(Optional) If provided, the query will be used to extract most relevant sentences from the document.")
+    query?: string;
 }
 
 @doc("The context of the summary.")
