@@ -26,8 +26,8 @@ model AssistantThread {
 @doc("The details used to create a new assistant thread.")
 @added(ServiceApiVersions.v2023_02_15_preview)
 model AssistantThreadCreationOptions {
-  @doc("The messages to associate with the new thread.")
-  messages?: ThreadMessage[];
+  @doc("The initial messages to associate with the new thread.")
+  messages?: ThreadInitializationMessage[];
 
   ...OptionalNullableMetadata;
 }

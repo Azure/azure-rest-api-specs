@@ -1352,8 +1352,8 @@ components:
         messages:
           type: array
           items:
-            $ref: '#/components/schemas/ThreadMessage'
-          description: The messages to associate with the new thread.
+            $ref: '#/components/schemas/ThreadInitializationMessage'
+          description: The initial messages to associate with the new thread.
         metadata:
           type: object
           additionalProperties:
@@ -2160,6 +2160,34 @@ components:
             - thread.deleted
           description: The object type, which is always 'thread.deleted'.
       description: The status of a thread deletion operation.
+    ThreadInitializationMessage:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          allOf:
+            - $ref: '#/components/schemas/MessageRole'
+          description: The role associated with the assistant thread message. Currently, only 'user' is supported when providing initial messages to a new thread.
+        content:
+          type: string
+          description: The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API.
+        file_ids:
+          type: array
+          items:
+            type: string
+          description: |-
+            A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
+            access files.
+          default: []
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
     ThreadMessage:
       type: object
       required:
@@ -2215,7 +2243,7 @@ components:
             type: string
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-      description: A single message within an assistant thread.
+      description: A single, existing message within an assistant thread.
     ThreadRun:
       type: object
       required:

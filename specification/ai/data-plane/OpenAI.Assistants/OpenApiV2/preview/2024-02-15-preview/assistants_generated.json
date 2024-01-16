@@ -2016,10 +2016,11 @@
       "properties": {
         "messages": {
           "type": "array",
-          "description": "The messages to associate with the new thread.",
+          "description": "The initial messages to associate with the new thread.",
           "items": {
-            "$ref": "#/definitions/ThreadMessage"
-          }
+            "$ref": "#/definitions/ThreadInitializationMessage"
+          },
+          "x-ms-identifiers": []
         },
         "metadata": {
           "type": "object",
@@ -3170,9 +3171,44 @@
         "object"
       ]
     },
+    "ThreadInitializationMessage": {
+      "type": "object",
+      "description": "A single message within an assistant thread, as provided during that thread's creation for its initial state.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/MessageRole",
+          "description": "The role associated with the assistant thread message. Currently, only 'user' is supported when providing initial messages to a new thread."
+        },
+        "content": {
+          "type": "string",
+          "description": "The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API."
+        },
+        "file_ids": {
+          "type": "array",
+          "description": "A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can\naccess files.",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "fileIds"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
     "ThreadMessage": {
       "type": "object",
-      "description": "A single message within an assistant thread.",
+      "description": "A single, existing message within an assistant thread.",
       "properties": {
         "id": {
           "type": "string",

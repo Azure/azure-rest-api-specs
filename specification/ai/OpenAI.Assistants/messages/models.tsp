@@ -4,7 +4,26 @@ namespace Azure.AI.OpenAI.Assistants;
 
 using TypeSpec.Versioning;
 
-@doc("A single message within an assistant thread.")
+@doc("A single message within an assistant thread, as provided during that thread's creation for its initial state.")
+@added(ServiceApiVersions.v2023_02_15_preview)
+model ThreadInitializationMessage {
+  @doc("The role associated with the assistant thread message. Currently, only 'user' is supported when providing initial messages to a new thread.")
+  role: MessageRole;
+
+  @doc("The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API.")
+  content: string;
+
+  @projectedName("json", "file_ids")
+  @doc("""
+  A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
+  access files.
+  """)
+  fileIds?: string[] = [];
+
+  ...OptionalNullableMetadata;
+}
+
+@doc("A single, existing message within an assistant thread.")
 @added(ServiceApiVersions.v2023_02_15_preview)
 model ThreadMessage {
   @doc("The identifier, which can be referenced in API endpoints.")
