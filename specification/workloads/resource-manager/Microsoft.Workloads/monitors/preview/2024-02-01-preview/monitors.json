@@ -1648,10 +1648,13 @@
         "severity",
         "actionGroups",
         "threshold",
+        "thresholdOperator",
         "windowSize",
         "evaluationFrequency",
-        "minimumFailingPeriodsToAlert",
+        "failingPeriodsToAlert",
+        "failingPeriodsOperator",
         "muteActionsDuration",
+        "dimension",
         "alertQueryParameter"
       ],
       "properties": {
@@ -1685,6 +1688,22 @@
           "type": "integer",
           "description": "the criteria threshold value that activates the alert"
         },
+        "thresholdOperator": {
+          "type": "string",
+          "enum": [
+            "LessThan",
+            "GreaterThan",
+            "Equal",
+            "GreaterThanOrEqual",
+            "LessThanOrEqual"
+          ],
+          "default": "GreaterThanOrEqual",
+          "x-ms-enum": {
+            "name": "alertThresholdOperator",
+            "modelAsString": true
+          },
+          "description": "Threshold Operator for the alert"
+        },
         "windowSize": {
           "type": "integer",
           "description": "The period of time on which the Alert query will be executed"
@@ -1693,13 +1712,33 @@
           "type": "integer",
           "description": "How often the scheduled query rule is evaluated."
         },
-        "minimumFailingPeriodsToAlert": {
+        "failingPeriodsToAlert": {
           "type": "integer",
           "description": "The number of violations to trigger an alert."
+        },
+        "failingPeriodsOperator": {
+          "type": "string",
+          "enum": [
+            "LessThan",
+            "GreaterThan",
+            "Equal",
+            "GreaterThanOrEqual",
+            "LessThanOrEqual"
+          ],
+          "default": "GreaterThanOrEqual",
+          "x-ms-enum": {
+            "name": "alertFailingPeriodsOperator",
+            "modelAsString": true
+          },
+          "description": "Failing Periods Operator for the alert template"
         },
         "muteActionsDuration": {
           "type": "integer",
           "description": "Mute actions for the chosen period of time after the alert is fired"
+        },
+        "dimension": {
+          "type": "string",
+          "description": "The dimension for the alert"
         },
         "alertQueryParameter": {
           "description": "Defines the alert query properties.",
@@ -1969,8 +2008,8 @@
       "type": "object",
       "required": [
         "queryParameterName",
-        "laQuery",
-        "parameterName"
+        "parameterName",
+        "selectionMode"
       ],
       "properties": {
         "queryParameterName": {
@@ -1984,6 +2023,14 @@
         "parameterName": {
           "type": "string",
           "description": "LA parameter name that we need to query"
+        },
+        "selectionMode": {
+          "type": "string",
+          "description": "It specifies the selection mode whether it would be single or multiple"
+        },
+        "dependancy": {
+          "type": "string",
+          "description": "It specifies if there are any dependencies for the LA query"
         }
       },
       "description": "Describes the LA Parameter properties in alerts template."

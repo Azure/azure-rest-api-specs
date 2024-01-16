@@ -37,10 +37,13 @@
               "actiongroupid2"
             ],
             "threshold": 80,
+            "thresholdOperator": "GreaterThan",
             "windowSize": 15,
             "evaluationFrequency": 5,
-            "numberOfEvaluationPeriods": 3,
+            "failingPeriodsToAlert": 3,
+            "failingPeriodsOperator": "GreaterThan",
             "muteActionsDuration": 0,
+            "dimension": "cpu",
             "alertQueryParameter": {
               "providerInstances": [
                 "hana-provider"
