@@ -407,7 +407,8 @@
               "enum": [
                 "SpringBootAdmin",
                 "SpringCloudEureka",
-                "SpringCloudConfig"
+                "SpringCloudConfig",
+                "SpringCloudGateway"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -452,7 +453,64 @@
               ]
             }
           },
+          "discriminator": "componentType",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SpringCloudGatewayComponent": {
+      "description": "Spring Cloud Gateway properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponent"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Java Component resource specific properties",
+          "type": "object",
+          "properties": {
+            "routes": {
+              "description": "The route definitions of Spring Cloud Gateway.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SpringCloudGatewayRoute"
+              }
+            }
+          },
+          "x-ms-discriminator-value": "SpringCloudGateway"
+        }
+      }
+    },
+    "SpringCloudGatewayRoute": {
+      "description": "Spring Cloud Gateway route definitions.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The route id of Spring Cloud Gateway.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The uri of Spring Cloud Gateway.",
+          "type": "string"
+        },
+        "predicates": {
+          "description": "The predicates of Spring Cloud Gateway.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filters": {
+          "description": "The filters of Spring Cloud Gateway.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
