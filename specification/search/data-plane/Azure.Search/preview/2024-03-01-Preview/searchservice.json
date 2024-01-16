@@ -6428,32 +6428,32 @@
         }
       ],
       "properties": {
-        "sqParameters": {
+        "scalarQuantizationParameters": {
           "x-ms-client-name": "Parameters",
-          "$ref": "#/definitions/SqParameters",
+          "$ref": "#/definitions/ScalarQuantizationParameters",
           "description": "Contains the parameters specific to Scalar Quantization."
         }
       },
       "description": "Contains configuration options specific to the scalar quantization compression method used during indexing and querying."
     },
-    "SqParameters": {
+    "ScalarQuantizationParameters": {
       "type": "object",
       "properties": {
-        "quantizedType": {
-          "$ref": "#/definitions/VectorSearchCompressionTargetType",
+        "quantizedDataType": {
+          "$ref": "#/definitions/VectorSearchCompressionTargetDataType",
           "x-nullable": true,
-          "description": "The quantized type of compressed vector values."
+          "description": "The quantized data type of compressed vector values."
         }
       },
       "description": "Contains the parameters specific to Scalar Quantization."
     },
-    "VectorSearchCompressionTargetType": {
+    "VectorSearchCompressionTargetDataType": {
       "type": "string",
       "enum": [
         "int8"
       ],
       "x-ms-enum": {
-        "name": "VectorSearchCompressionTargetType",
+        "name": "VectorSearchCompressionTargetDataType",
         "modelAsString": true,
         "values": [
           {
@@ -6462,7 +6462,7 @@
           }
         ]
       },
-      "description": "The quantized type of compressed vector values."
+      "description": "The quantized data type of compressed vector values."
     },
     "VectorSearchCompressionKind": {
       "type": "string",
