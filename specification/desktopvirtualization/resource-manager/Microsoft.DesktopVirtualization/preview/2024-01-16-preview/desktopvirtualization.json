@@ -5760,6 +5760,62 @@
             "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "description": "List of private endpoint connection associated with the specified resource"
+        },
+        "managedPrivateUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "HostpoolManagedPrivateUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "directUDP": {
+        "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "HostpoolDirectUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "publicUDP": {
+       "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "HostpoolPublicUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "relayUDP": {
+        "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "HostpoolRelayUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
         }
       }
     },
