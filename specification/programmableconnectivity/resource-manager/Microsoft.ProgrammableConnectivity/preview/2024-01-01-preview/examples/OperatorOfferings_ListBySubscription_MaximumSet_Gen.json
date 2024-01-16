@@ -4,7 +4,7 @@
   "parameters": {
     "api-version": "2024-01-01-preview",
     "subscriptionId": "6C1A091E-891D-404C-9906-2D8AA56211E3",
-    "$filter": "ff",
+    "$filter": "offerName eq 'example-operator-offering'",
     "$top": 7,
     "$skip": 0
   },
@@ -14,16 +14,24 @@
         "value": [
           {
             "properties": {
-              "offerName": "example-opeartor-offering",
+              "offerName": "example-operator-offering",
               "operatorName": "example-operator",
               "region": "eatsus",
               "operatorRegion": "eastus",
               "supportedApis": [
                 {
-                  "displayName": "Sim Swap Detector",
-                  "version": "SimSwap"
+                  "displayName": "SimSwapDetector",
+                  "version": "v1"
                 }
               ],
+              "limits": "100 requests per month",
+              "marketplaceProperties": {
+                "offerId": "biyeayspwivoqfiazkuspvflvjfow",
+                "legacyOfferId": "xsidaarafwobcnbwwjdcypbciycnrk",
+                "publisherId": "jzsinzeaezmkiqvjbvnsgdlrrmk",
+                "planId": "fqunpma",
+                "termId": "wsrkddpgw"
+              },
               "provisioningState": "Succeeded"
             },
             "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ProgrammableConnectivity/operatorofferings/example-operator-offering",

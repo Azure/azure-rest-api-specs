@@ -1,0 +1,31 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-03-01-preview",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "PowerState": {
+      "description": "The power state of resource.",
+      "enum": [
+        "Running",
+        "Stopped",
+        "Starting",
+        "Stopping"
+      ],
+      "type": "string",
+      "readOnly": true
+    },
+    "PowerStateProperty": {
+      "type": "object",
+      "properties": {
+        "powerState": {
+          "readOnly": true,
+          "$ref": "#/definitions/PowerState",
+          "description": "Gets the power state at the time the operation was called"
+        }
+      }
+    }
+  }
+}
