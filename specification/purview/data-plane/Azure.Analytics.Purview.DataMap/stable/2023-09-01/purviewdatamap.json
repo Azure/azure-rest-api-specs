@@ -574,7 +574,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "Get complete definition of an entity given its type and unique attribute.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:\\<attrName>=<attrValue>. \nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nGET /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
+        "description": "Get complete definition of an entity given its type and unique attribute.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:\\<attrName>=<attrValue>.\n\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\n\nThe REST request would look something like this:\nGET /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "operationId": "Entity_GetByUniqueAttributes",
         "x-ms-examples": {
           "Entity_GetByUniqueAttributes": {
@@ -618,7 +618,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "Update entity partially - Allow a subset of attributes to be updated on\nan entity which is identified by its type and unique attribute  eg: Referenceable.qualifiedName.\nNull updates are not possible.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:<attrName>=<attrValue>.\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nPUT /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
+        "description": "Update entity partially - Allow a subset of attributes to be updated on an entity which is identified by its type and unique attribute eg: Referenceable.qualifiedName. Null updates are not possible.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\n\nattr:<attrName>=<attrValue>.\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\n\nThe REST request would look something like this:\nPUT /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "operationId": "Entity_PartialUpdateByUniqueAttributes",
         "x-ms-examples": {
           "Entity_PartialUpdateEntityByUniqueAttributes": {
@@ -665,7 +665,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "Delete an entity identified by its type and unique attributes.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:\\<attrName>=\\<attrValue>.\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nDELETE /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
+        "description": "Delete an entity identified by its type and unique attributes.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:\\<attrName>=\\<attrValue>.\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\n\nThe REST request would look something like this:\nDELETE /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "operationId": "Entity_DeleteByUniqueAttribute",
         "x-ms-examples": {
           "Entity_DeleteByUniqueAttribute": {
@@ -886,7 +886,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "Bulk API to retrieve list of entities identified by its unique attributes.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format\n\ntypeName=\\<typeName>&attr_1:\\<attrName>=\\<attrValue>&attr_2:\\<attrName>=\\<attrValue>&attr_3:\\<attrName>=\\<attrValue>\n\nNOTE: The attrName should be an unique attribute for the given entity-type\n\nThe REST request would look something like this\n\nGET /v2/entity/bulk/uniqueAttribute/type/hive_db?attr_1:qualifiedName=db1@cl1&attr_2:qualifiedName=db2@cl1\nNote: at least one unique attribute must be provided.",
+        "description": "Bulk API to retrieve list of entities identified by its unique attributes.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format\n\ntypeName=\\<typeName>&attr_1:\\<attrName>=\\<attrValue>&attr_2:\\<attrName>=\\<attrValue>&attr_3:\\<attrName>=\\<attrValue>\n\nNOTE: The attrName should be an unique attribute for the given entity-type.\nThe REST request would look something like this\n\nGET /v2/entity/bulk/uniqueAttribute/type/hive_db?attr_1:qualifiedName=db1@cl1&attr_2:qualifiedName=db2@cl1\n\nNote: at least one unique attribute must be provided.",
         "operationId": "Entity_ListByUniqueAttributes",
         "x-ms-examples": {
           "Entity_ListByUniqueAttributes": {
@@ -1098,7 +1098,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "Add or update business metadata attributes",
+        "description": "Add or update business metadata attributes.",
         "operationId": "Entity_AddOrUpdateBusinessMetadataAttributes",
         "consumes": [
           "application/json"
@@ -1222,7 +1222,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "delete given labels to a given entity",
+        "description": "Delete given labels to a given entity.",
         "operationId": "Entity_RemoveLabels",
         "consumes": [
           "application/json"
@@ -1266,7 +1266,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "Set labels to a given entity",
+        "description": "Set labels to a given entity.",
         "operationId": "Entity_SetLabels",
         "consumes": [
           "application/json"
@@ -1310,7 +1310,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "add given labels to a given entity",
+        "description": "Add given labels to a given entity.",
         "operationId": "Entity_AddLabel",
         "consumes": [
           "application/json"
@@ -1357,7 +1357,7 @@
           "Entity"
         ],
         "operationId": "Entity_RemoveLabelsByUniqueAttribute",
-        "description": "Delete given labels to a given entity identified by its type and unique attributes, if labels is null/empty, no labels will be removed. If any labels in labels set are non-existing labels, they will be ignored, only existing labels will be removed. In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName. The REST request would look something like this: DELETE /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue. ",
+        "description": "Delete given labels to a given entity identified by its type and unique attribute.\n\nIf labels is null/empty, no labels will be removed.\n\nIf any labels in labels set are non-existing labels, they will be ignored, only existing labels will be removed. In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName. The REST request would look something like this: DELETE /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "consumes": [
           "application/json"
         ],
@@ -1408,7 +1408,7 @@
           "Entity"
         ],
         "operationId": "Entity_SetLabelsByUniqueAttribute",
-        "description": "Set labels to a given entity identified by its type and unique attributes, if labels is null/empty, existing labels will all be removed. In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName. The REST request would look something like this: POST /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
+        "description": "Set labels to a given entity identified by its type and unique attributes.\n\nIf labels is null/empty, existing labels will all be removed.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>.\n\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\n\nThe REST request would look something like this: POST /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "consumes": [
           "application/json"
         ],
@@ -1459,7 +1459,7 @@
           "Entity"
         ],
         "operationId": "Entity_AddLabelsByUniqueAttribute",
-        "description": "Add given labels to a given entity identified by its type and unique attributes, if labels is null/empty, no labels will be added. In addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName. The REST request would look something like this: PUT /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
+        "description": "Add given labels to a given entity identified by its type and unique attributes.\n\nIf labels is null/empty, no labels will be added.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format: attr:<attrName>=<attrValue>.\n\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\n\nThe REST request would look something like this: PUT /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "consumes": [
           "application/json"
         ],
@@ -1556,7 +1556,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get all glossaries. Recommend using limit/offset to get pagination result. Recommended using 'ignoreTermsAndCategories=true' and fetch terms/categories separately using 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
+        "description": "Get all glossaries. Recommend using limit/offset to get pagination result. Recommend using 'ignoreTermsAndCategories=true' and fetch terms/categories separately using \n\n 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and \n\n 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
         "operationId": "Glossary_List",
         "x-ms-examples": {
           "Glossary_List": {
@@ -2263,7 +2263,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Assign the given term to the provided list of related objects. Recommend using small batches with multiple API calls.",
+        "description": "Assign the given term to the provided list of related objects. Recommend using small batches with multiple API calls.\n\n[Entities Create Or Update operation](https://learn.microsoft.com/en-us/rest/api/purview/datamapdataplane/entity/bulk-create-or-update?tabs=HTTP) is an alternative to assign a term to multiple entities.",
         "operationId": "Glossary_AssignTermToEntities",
         "x-ms-examples": {
           "Glossary_AssignTermToEntities": {
@@ -2591,7 +2591,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get a specific glossary with detailed information. This API is not recommend. Recommended fetch terms/categories details separately using 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
+        "description": "Get a specific glossary with detailed information. This API is not recommend.\n\nRecommend to fetch terms/categories details separately using \n\n 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and \n\n 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
         "operationId": "Glossary_GetDetailed",
         "x-ms-examples": {
           "Glossary_GetDetailed": {
@@ -2627,7 +2627,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Update the glossary partially. Some properties such as qualifiedName are not allowed to be updated. So far we only supports partial updating shortDescription, longDescription, language and usage for glossary. Recommend using 'ignoreTermsAndCategories=true' to reduce response body size.",
+        "description": "Update the glossary partially. Some properties such as qualifiedName are not allowed to be updated.\n\nSo far we only supports partial updating shortDescription, longDescription, language and usage for glossary. \n\nRecommend using 'ignoreTermsAndCategories=true' to reduce response body size.",
         "operationId": "Glossary_PartialUpdate",
         "x-ms-examples": {
           "Glossary_PartialUpdate": {
@@ -2771,7 +2771,7 @@
         "tags": [
           "Discovery"
         ],
-        "description": "Gets data using search.",
+        "description": "Get data using search.",
         "operationId": "Discovery_Query",
         "x-ms-examples": {
           "Discovery_Query": {
@@ -3041,7 +3041,7 @@
         "tags": [
           "Lineage"
         ],
-        "description": "Returns lineage info about entity.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format\n\nattr:[attrName]=[attrValue]\n\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nGET /v2/lineage/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
+        "description": "Return lineage info about entity.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format\n\nattr:[attrName]=[attrValue]\n\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\n\nThe REST request would look something like this:\n\nGET /v2/lineage/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "operationId": "Lineage_GetByUniqueAttribute",
         "x-ms-examples": {
           "Lineage_GetByUniqueAttribute": {
@@ -3231,7 +3231,7 @@
         "tags": [
           "Type"
         ],
-        "description": "Get the businessMetadata definition for the given guid",
+        "description": "Get the businessMetadata definition for the given guid.",
         "operationId": "Type_GetBusinessMetadataDefByGuid",
         "x-ms-examples": {
           "Type_GetBusinessMetadataDefByGuid": {
@@ -3272,7 +3272,7 @@
         "tags": [
           "Type"
         ],
-        "description": "Get the businessMetadata definition by it's name (unique)",
+        "description": "Get the businessMetadata definition by it's name (unique).",
         "operationId": "Type_GetBusinessMetadataDefByName",
         "x-ms-examples": {
           "Type_GetBusinessMetadataDefByName": {
