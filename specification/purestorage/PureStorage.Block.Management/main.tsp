@@ -96,7 +96,7 @@ model VnetInjection {
   subnetId: string;
 
   @doc("Full Azure Resource ID of the Virtual Network to inject pool in.")
-  vnetId?: string;
+  vnetId: string;
 }
 
 @doc("Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.")
@@ -196,7 +196,7 @@ interface StoragePools {
 
   @doc("Enable Vsphere plugin on storage pool")
   @armResourceAction(StoragePool)
-  @action("enableVspherePlugin")
+  @action("enableVSpherePlugin")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -205,7 +205,7 @@ interface StoragePools {
     }
   )
   @post
-  enableVspherePlugin(
+  enableVSpherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
 
     @doc("Vsphere plugin properties")
@@ -259,19 +259,19 @@ model AvsDetails {
   avsEnabled: boolean;
 
   @doc("AVS configuration properties")
-  avs: Avs;
+  avs?: Avs;
 
   @doc("vSphere configuration properties")
-  vSphere: Vsphere;
+  vSphere?: Vsphere;
 
   @doc("tells if the plugin has been enabled or not")
   vSpherePluginEnabled: boolean;
 
   @doc("vSpherePluginKey associated with the plugin")
-  vSpherePluginKey: string;
+  vSpherePluginKey?: string;
 
   @doc("vSphere plugin configuration properties")
-  vSpherePlugin: VspherePlugin;
+  vSpherePlugin?: VspherePlugin;
 }
 
 @doc("vSphere plugin configuration properties")
@@ -436,7 +436,7 @@ model StoragePoolEnableVspherePlugin {
   vSphereIp: string;
 
   @doc("Storage Pool Vsphere cert thumb print")
-  vSphereCertThumbprint: string;
+  vSphereCertThumbprint?: string;
 }
 
 @doc("The AVS Storage Container resource type.")

@@ -2015,7 +2015,7 @@
         "tags": [
           "StoragePools"
         ],
-        "description": "Disable Vsphere plugins on storage pool",
+        "description": "Disable Vsphere plugin on storage pool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2140,13 +2140,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/enableVspherePlugin": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/enableVSpherePlugin": {
       "post": {
-        "operationId": "StoragePools_EnableVspherePlugin",
+        "operationId": "StoragePools_EnableVSpherePlugin",
         "tags": [
           "StoragePools"
         ],
-        "description": "Enable Vsphere plugins on storage pool",
+        "description": "Enable Vsphere plugin on storage pool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2375,7 +2375,7 @@
         "tags": [
           "StoragePools"
         ],
-        "description": "Upgrade Vsphere plugins on storage pool",
+        "description": "Upgrade Vsphere plugin on storage pool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2541,11 +2541,7 @@
       },
       "required": [
         "avsEnabled",
-        "avs",
-        "vSphere",
-        "vSpherePluginEnabled",
-        "vSpherePluginKey",
-        "vSpherePlugin"
+        "vSpherePluginEnabled"
       ]
     },
     "AvsDiskDetails": {
@@ -3508,8 +3504,7 @@
         }
       },
       "required": [
-        "vSphereIp",
-        "vSphereCertThumbprint"
+        "vSphereIp"
       ]
     },
     "StoragePoolListResult": {
@@ -3772,7 +3767,8 @@
         }
       },
       "required": [
-        "subnetId"
+        "subnetId",
+        "vnetId"
       ]
     },
     "VolumeConsistencyGroup": {
