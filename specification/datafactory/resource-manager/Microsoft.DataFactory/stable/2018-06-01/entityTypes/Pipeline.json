@@ -9159,38 +9159,12 @@
         },
         "value": {
           "description": "Child expression that can have its own children forming a tree-like structure of expressions. Hierarchy of expressions defines the precendence order to evaluate them. For Constant/Field Type: string.",
-          "oneOf": [
-            {
-              "$ref": "#/definitions/SubExpression",
-              "type": "string"
-            }
-          ]
+          "type": "object"
         }
       },
       "required": [
         "type",
         "value"
-      ]
-    },
-    "SubExpression": {
-      "description": "Child expression representation.",
-      "type": "object",
-      "properties": {
-        "operator": {
-          "description": "Operator value",
-          "type": "string"
-        },
-        "operands": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Expression"
-          },
-          "description": "List of child expressions."
-        }
-      },
-      "required": [
-        "operator",
-        "operands"
       ]
     }
   }
