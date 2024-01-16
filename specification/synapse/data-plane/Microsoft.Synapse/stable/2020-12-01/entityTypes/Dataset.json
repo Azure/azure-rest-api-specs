@@ -3361,6 +3361,26 @@
         "typeProperties"
       ]
     },
+    "SnowflakeV2Dataset": {
+      "x-ms-discriminator-value": "SnowflakeV2Table",
+      "description": "The snowflake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
     "SnowflakeDatasetTypeProperties": {
       "description": "Snowflake dataset properties.",
       "type": "object",
