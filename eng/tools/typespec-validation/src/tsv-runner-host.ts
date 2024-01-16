@@ -3,11 +3,15 @@ import { readFile } from "fs/promises";
 import { IGitOperation, TsvHost } from "./tsv-host.js";
 import { globby } from "globby";
 import { simpleGit } from "simple-git";
-import { checkFileExists, normalizePath, runCmd } from "./utils.js";
+import { checkFileExists, isDirectory, normalizePath, runCmd } from "./utils.js";
 
 export class TsvRunnerHost implements TsvHost {
   checkFileExists(file: string): Promise<boolean> {
     return checkFileExists(file);
+  }
+
+  isDirectory(path: string) {
+    return isDirectory(path);
   }
 
   gitOperation(folder: string): IGitOperation {

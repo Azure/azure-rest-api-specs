@@ -1,9 +1,11 @@
 import "@typespec/rest";
+import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
@@ -25,6 +27,11 @@ model Catalog is TrackedResource<CatalogProperties> {
 
 @doc("Catalog properties")
 model CatalogProperties {
+  @visibility("read")
+  @doc("The Azure Sphere tenant ID associated with the catalog.")
+  @added(Microsoft.AzureSphere.Versions.v2024_04_01)
+  tenantId?: string;
+
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -68,13 +75,27 @@ interface Catalogs
       Catalog,
       CatalogProperties
     > {
+  @removed(Versions.v2024_04_01)
+  @autoRoute
+  @doc("Counts devices in catalog.")
+  @armResourceAction(Catalog)
+  @action("countDevices")
+  @renamedFrom(Versions.v2024_04_01, "countDevices")
+  @post
+  deprecated(
+    ...ResourceInstanceParameters<Catalog>,
+  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @added(Versions.v2024_04_01)
+  @sharedRoute
   @autoRoute
   @doc("Counts devices in catalog.")
   @armResourceAction(Catalog)
   @post
   countDevices(
     ...ResourceInstanceParameters<Catalog>,
-  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+  ): ArmResponse<CountDevicesResponse> | ErrorResponse;
 
   @autoRoute
   @doc("Lists device insights for catalog.")
@@ -115,4 +136,23 @@ interface Catalogs
     @body
     listDeviceGroupsRequest: ListDeviceGroupsRequest,
   ): ArmResponse<ResourceListResult<DeviceGroup>> | ErrorResponse;
+
+  @autoRoute
+  @armResourceAction(Catalog)
+  @added(Versions.v2024_04_01)
+  @doc("Creates an image. Use this action when the image ID is unknown.")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  uploadImage(
+    ...ResourceInstanceParameters<Catalog>,
+
+    @doc("Image upload request body.")
+    @body
+    uploadImageRequest: Image,
+  ): ArmAcceptedLroResponse | ErrorResponse;
 }
