@@ -26,7 +26,7 @@ These are the global settings for the communicationservices.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2024-03
+tag: package-2024-03-07
 ```
 
 ### Tag: package-2020-09-21-preview2
