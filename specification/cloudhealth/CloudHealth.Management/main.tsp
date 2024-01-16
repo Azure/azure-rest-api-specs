@@ -612,9 +612,10 @@ model DiscoveryRuleProperties {
   @doc("Whether to create an entity for the discovery rule itself.")
   showEntity?: boolean;
 
-  @doc("Whether to create relationships between the discovered entities based on a set of built-in rulese. These relationships cannot be manually deleted.")
+  @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
   discoverRelationships?: boolean;
 
+// Will be added later
 //  @doc("Whether to add all suggested signals to the discovered entities.")
 //  addAllSuggestedSignals?: boolean;
 }
