@@ -194,7 +194,7 @@ interface StoragePools {
     ArmCombinedLroHeaders
   > | ErrorResponse;
 
-  @doc("Enable Vsphere plugin on storage pool")
+  @doc("Enable VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
   @action("enableVSpherePlugin")
   @extension("x-ms-long-running-operation", true)
@@ -208,17 +208,17 @@ interface StoragePools {
   enableVSpherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
 
-    @doc("Vsphere plugin properties")
+    @doc("VSphere plugin properties")
     @body
-    properties: StoragePoolEnableVspherePlugin,
+    properties: StoragePoolEnableVSpherePlugin,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
     ArmCombinedLroHeaders
   > | ErrorResponse;
 
-  @doc("Disable Vsphere plugin on storage pool")
+  @doc("Disable VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
-  @action("disableVspherePlugin")
+  @action("disableVSpherePlugin")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -227,16 +227,16 @@ interface StoragePools {
     }
   )
   @post
-  disableVspherePlugin(
+  disableVSpherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
     ArmCombinedLroHeaders
   > | ErrorResponse;
 
-  @doc("Upgrade Vsphere plugin on storage pool")
+  @doc("Upgrade VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
-  @action("upgradeVspherePlugin")
+  @action("upgradeVSpherePlugin")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -245,7 +245,7 @@ interface StoragePools {
     }
   )
   @post
-  upgradeVspherePlugin(
+  upgradeVSpherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
@@ -430,8 +430,8 @@ model StoragePoolEnableAvs {
   vasaProviderPassword: string;
 }
 
-@doc("Storage Pool enable Vsphere plugins")
-model StoragePoolEnableVspherePlugin {
+@doc("Storage Pool enable VSphere plugins")
+model StoragePoolEnableVSpherePlugin {
   @doc("Storage Pool Vsphere id")
   vSphereIp: string;
 
