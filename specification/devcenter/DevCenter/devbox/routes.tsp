@@ -141,7 +141,7 @@ interface DevBoxesOperations {
   @put
   CreateDevBox is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
+      @doc("The DevCenter Project upon which to execute the operation.")
       @path
       projectName: string;
 
@@ -153,9 +153,9 @@ interface DevBoxesOperations {
       @path
       devBoxName: string;
 
-      @doc("Represents a environment.")
+      @doc("The name of the Pool upon which to execute the operation.")
       @body
-      devBox: DevBox;
+      poolName: string;
     },
     DevBox | {
       @statusCode statusCode: 201;
