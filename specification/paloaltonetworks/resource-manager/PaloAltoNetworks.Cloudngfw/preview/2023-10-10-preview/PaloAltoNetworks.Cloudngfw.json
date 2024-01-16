@@ -4497,6 +4497,153 @@
           }
         }
       }
+    },
+    "/susbscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/createSupportAccount": {
+      "post": {
+        "operationId": "PAN_createSupportAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "The request has been received but not yet acted upon."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PAN_createSupportAccount_MaximumSet_Gen": {
+            "$ref": "./examples/PAN_createSupportAccount_MaximumSet_Gen.json"
+          },
+          "PAN_createSupportAccount_MinimumSet_Gen": {
+            "$ref": "./examples/PAN_createSupportAccount_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/susbscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/getCloudManagerTenants": {
+      "post": {
+        "operationId": "PAN_getCloudManagerTenants",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "x-cadl-name": "string[]"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PAN_getCloudManagerTenants_MaximumSet_Gen": {
+            "$ref": "./examples/PAN_getCloudManagerTenants_MaximumSet_Gen.json"
+          },
+          "PAN_getCloudManagerTenants_MinimumSet_Gen": {
+            "$ref": "./examples/PAN_getCloudManagerTenants_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/susbscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/getSupportAccountStatus": {
+      "post": {
+        "operationId": "PAN_getSupportAccountStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductSerialNumberStatus"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PAN_getSupportAccountStatus_MaximumSet_Gen": {
+            "$ref": "./examples/PAN_getSupportAccountStatus_MaximumSet_Gen.json"
+          },
+          "PAN_getSupportAccountStatus_MinimumSet_Gen": {
+            "$ref": "./examples/PAN_getSupportAccountStatus_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/susbscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/supportInfo": {
+      "post": {
+        "operationId": "PAN_supportInfo",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupportInfoModel"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PAN_supportInfo_MaximumSet_Gen": {
+            "$ref": "./examples/PAN_supportInfo_MaximumSet_Gen.json"
+          },
+          "PAN_supportInfo_MinimumSet_Gen": {
+            "$ref": "./examples/PAN_supportInfo_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4679,7 +4826,11 @@
           "description": "The active directory identifier for this principal."
         }
       },
-      "description": "A managed identity assigned by the user."
+      "description": "A managed identity assigned by the user.",
+      "required": [
+        "clientId",
+        "principalId"
+      ]
     },
     "BillingCycle": {
       "type": "string",
@@ -5118,9 +5269,17 @@
           "$ref": "#/definitions/BooleanEnum",
           "description": "Panorama Managed: Default is False. Default will be CloudSec managed"
         },
+        "isStrataCloudManaged": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "Strata Cloud Managed: Default is False. Default will be CloudSec managed"
+        },
         "panoramaConfig": {
           "$ref": "#/definitions/PanoramaConfig",
           "description": "Panorama Configuration"
+        },
+        "strataCloudManagerConfig": {
+          "$ref": "#/definitions/StrataCloudManagerConfig",
+          "description": "Strata Cloud Manager Configuration, only applicable if Strata Cloud Manager is selected."
         },
         "associatedRulestack": {
           "$ref": "#/definitions/RulestackDetails",
@@ -5249,9 +5408,17 @@
           "$ref": "#/definitions/BooleanEnum",
           "description": "Panorama Managed: Default is False. Default will be CloudSec managed"
         },
+        "isStrataCloudManaged": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "Strata Cloud Managed: Default is False. Default will be CloudSec managed"
+        },
         "panoramaConfig": {
           "$ref": "#/definitions/PanoramaConfig",
           "description": "Panorama Configuration"
+        },
+        "strataCloudManagerConfig": {
+          "$ref": "#/definitions/StrataCloudManagerConfig",
+          "description": "Strata Cloud Manager Configuration, only applicable if Strata Cloud Manager is selected."
         },
         "associatedRulestack": {
           "$ref": "#/definitions/RulestackDetails",
@@ -5308,6 +5475,15 @@
           "$ref": "#/definitions/ReadOnlyProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
+        },
+        "isStrataCloudManaged": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "Strata Cloud Manager",
+          "readOnly": true
+        },
+        "strataCloudManagerInfo": {
+          "$ref": "#/definitions/StrataCloudManagerInfo",
+          "description": "This field is only present if Strata Cloud Manager is managing the policy for this firewall"
         }
       },
       "description": "Firewall Status"
@@ -6498,6 +6674,23 @@
         "prefixList"
       ]
     },
+    "ProductSerialNumberStatus": {
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "product Serial associated with given resource"
+        },
+        "status": {
+          "$ref": "#/definitions/productSerialStatusValues",
+          "description": "allocation status of the product serial number"
+        }
+      },
+      "description": "Product serial and status for the service",
+      "required": [
+        "status"
+      ]
+    },
     "ProtocolType": {
       "type": "string",
       "description": "Protocol Enum",
@@ -6900,6 +7093,33 @@
       },
       "description": "Storage Account configurations"
     },
+    "StrataCloudManagerConfig": {
+      "type": "object",
+      "properties": {
+        "cloudManagerName": {
+          "type": "string",
+          "description": "Strata Cloud Manager name which is intended to manage the policy for this firewall."
+        }
+      },
+      "description": "This field is only present if Strata Cloud Manager is managing the policy for this firewall",
+      "required": [
+        "cloudManagerName"
+      ]
+    },
+    "StrataCloudManagerInfo": {
+      "type": "object",
+      "properties": {
+        "folderName": {
+          "type": "string",
+          "description": "Strata Cloud Manager folder in which this firewall has been placed"
+        },
+        "hubUrl": {
+          "type": "string",
+          "description": "URL for Strata Cloud Manager"
+        }
+      },
+      "description": "Strata Cloud Manager Info"
+    },
     "SupportInfo": {
       "type": "object",
       "properties": {
@@ -6955,6 +7175,84 @@
         }
       },
       "description": "Support information for the resource"
+    },
+    "SupportInfoModel": {
+      "type": "object",
+      "properties": {
+        "productSku": {
+          "type": "string",
+          "description": "product SKU associated with given resource"
+        },
+        "productSerial": {
+          "type": "string",
+          "description": "product Serial associated with given resource"
+        },
+        "accountRegistered": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "account registered in Customer Support Portal"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Support account associated with given resource"
+        },
+        "userDomainSupported": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "user domain is supported in Customer Support Portal"
+        },
+        "userRegistered": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "user registered in Customer Support Portal"
+        },
+        "freeTrial": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "Product usage is in free trial period"
+        },
+        "freeTrialDaysLeft": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Free trial days remaining"
+        },
+        "freeTrialCreditLeft": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Free trial credit remaining"
+        },
+        "helpURL": {
+          "type": "string",
+          "description": "URL for paloaltonetworks live community"
+        },
+        "supportURL": {
+          "type": "string",
+          "description": "URL for paloaltonetworks Customer Service Portal"
+        },
+        "registerURL": {
+          "type": "string",
+          "description": "URL for registering product in paloaltonetworks Customer Service Portal"
+        },
+        "hubUrl": {
+          "type": "string",
+          "description": "URL for Strata Cloud Manager"
+        },
+        "credits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "credits purchased, unit per hour"
+        },
+        "monthlyCreditLeft": {
+          "type": "integer",
+          "format": "int32",
+          "description": "monthly credit is computed as credits * days in calendar month"
+        },
+        "startDateForCredits": {
+          "type": "string",
+          "description": "date in format yyyy-mm-dd"
+        },
+        "endDateForCredits": {
+          "type": "string",
+          "description": "date in format yyyy-mm-dd"
+        }
+      },
+      "description": "Support information for the service"
     },
     "TagInfo": {
       "type": "object",
@@ -7080,6 +7378,18 @@
       "required": [
         "entry"
       ]
+    },
+    "productSerialStatusValues": {
+      "type": "string",
+      "description": "allocation status of the product serial number",
+      "enum": [
+        "Allocated",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "productSerialStatusValues",
+        "modelAsString": false
+      }
     },
     "securityServices": {
       "type": "object",
