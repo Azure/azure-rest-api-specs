@@ -72,7 +72,7 @@ model DocumentContent {
   document: bytes;
 
   /** Glossary / translation memory will be used during translation in the form. */
-  glossaries?: bytes[];
+  glossary?: bytes[];
 }
 
 /** Document Translate Result / Response. */
