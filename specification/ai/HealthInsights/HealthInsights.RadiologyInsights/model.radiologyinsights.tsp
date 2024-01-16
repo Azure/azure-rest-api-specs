@@ -171,7 +171,7 @@ model CriticalResultInference extends RadiologyInsightsInference {
   result: CriticalResult;
 }
 
-@doc("Criticul Result consists of two properties.")
+@doc("Critical Result consists of two properties.")
 model CriticalResult {
   @doc("Description : medical problem.")
   description: string;
