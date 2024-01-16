@@ -339,6 +339,19 @@
           },
           "x-ms-identifiers": []
         },
+        "switchDetails": {
+          "type": "array",
+          "description": "Switch Details of device.",
+          "items": {
+            "$ref": "#/definitions/SwitchDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "systemInfo": {
+          "$ref": "#/definitions/SystemInfo",
+          "description": "Specifies the System Info obtained from the device.",
+          "readOnly": true
+        },
         "sbeDeploymentPackageInfo": {
           "$ref": "#/definitions/SbeDeploymentPackageInfo",
           "description": "SBE deployment package information.",
@@ -463,6 +476,18 @@
         "defaultIsolationId": {
           "type": "string",
           "description": "Default Isolation of Management NIC"
+        },
+        "switchName": {
+          "type": "string",
+          "description": "The switch attached to the NIC, if any"
+        },
+        "nicType": {
+          "type": "string",
+          "description": "The type of NIC, physical, virtual, management"
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "The vlan Id of the physical NIC."
         }
       },
       "required": [
@@ -546,6 +571,33 @@
         "sbeManifest": {
           "type": "string",
           "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
+          "readOnly": true
+        }
+      }
+    },
+    "SystemInfo": {
+      "type": "object",
+      "description": "The system info obtained from the device.",
+      "properties": {
+        "bootType": {
+          "type": "string",
+          "description": "The boot type of the device.",
+          "readOnly": true
+        }
+      }
+    },
+    "SwitchDetail": {
+      "type": "object",
+      "description": "Switch Details Obtained from the device",
+      "properties": {
+        "switchName": {
+          "type": "string",
+          "description": "The name of the switch.",
+          "readOnly": true
+        },
+        "switchType": {
+          "type": "string",
+          "description": "The type of the switch.",
           "readOnly": true
         }
       }
