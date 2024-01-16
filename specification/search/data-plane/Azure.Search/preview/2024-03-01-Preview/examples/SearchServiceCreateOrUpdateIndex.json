@@ -193,6 +193,12 @@
             "vectorizer": "myOpenAi"
           },
           {
+            "name": "myCompressedHnswProfile",
+            "algorithm": "myHnsw",
+            "vectorizer": "myOpenAi",
+            "compression": "mySQ8"
+          },
+          {
             "name": "myAlgorithm",
             "algorithm": "myHnsw"
           }
@@ -214,6 +220,17 @@
             "exhaustiveKnnParameters": {
               "metric": "cosine"
             }
+          }
+        ],
+        "compressions": [
+          {
+            "name": "mySQ8",
+            "kind": "scalarQuantization",
+            "sqParameters": {
+              "quantizedDataType": "int8"
+            },
+            "rerankWithOriginalVectors": true,
+            "defaultOversampling": 10.0
           }
         ],
         "vectorizers": [
@@ -591,11 +608,28 @@
               }
             }
           ],
+          "compressions": [
+            {
+              "name": "mySQ8",
+              "kind": "scalarQuantization",
+              "sqParameters": {
+                "quantizedDataType": "int8"
+              },
+              "rerankWithOriginalVectors": true,
+              "defaultOversampling": 10.0
+            }
+          ],
           "profiles": [
             {
               "name": "myHnswProfile",
               "algorithm": "myHnsw",
               "vectorizer": "myOpenAi"
+            },
+            {
+              "name": "myCompressedHnswProfile",
+              "algorithm": "myHnsw",
+              "vectorizer": "myOpenAi",
+              "compression": "mySQ8"
             },
             {
               "name": "myAlgorithm",
@@ -969,11 +1003,28 @@
               }
             }
           ],
+          "compressions": [
+            {
+              "name": "mySQ8",
+              "kind": "scalarQuantization",
+              "sqParameters": {
+                "quantizedDataType": "int8"
+              },
+              "rerankWithOriginalVectors": true,
+              "defaultOversampling": 10.0
+            }
+          ],
           "profiles": [
             {
               "name": "myHnswProfile",
               "algorithm": "myHnsw",
               "vectorizer": "myOpenAi"
+            },
+            {
+              "name": "myCompressedHnswProfile",
+              "algorithm": "myHnsw",
+              "vectorizer": "myOpenAi",
+              "compression": "mySQ8"
             },
             {
               "name": "myAlgorithm",
