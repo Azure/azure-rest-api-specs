@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "recommendationId": "6d4b54eb-8684-4aa3-a156-3aa37b8014bc",
+    "recommendationPatch": [
+      {
+        "state": "Active"
+      }
+    ]
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.SecurityInsights/recommendations/6d4b54eb-8684-4aa3-a156-3aa37b8014bc?api-version=2024-01-01-preview"
+      },
+      "body": {
+        "recommendationTypeId": "ThreatIntelligence_Example",
+        "state": "CompletedByUser",
+        "title": "someText",
+        "description": "someText",
+        "creationTimeUtc": "2022-02-19T03:09:03.4888396+00:00",
+        "lastEvaluatedTimeUtc": "2022-02-19T03:09:03.4888396+00:00",
+        "lastModifiedTimeUtc": "2022-02-19T03:57:31.7964447+00:00",
+        "suggestions": [
+          {
+            "suggestionTypeId": "ThreatIntelligence_Example_Suggestion_Example",
+            "title": "someText",
+            "description": "someText",
+            "action": "someText",
+            "additionalProperties": {
+              "someKey": "someValue"
+            }
+          }
+        ],
+        "resourceId": "someId",
+        "additionalProperties": {
+          "someKey": "someValue"
+        }
+      }
+    }
+  }
+}
