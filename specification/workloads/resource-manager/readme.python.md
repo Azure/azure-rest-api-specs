@@ -17,8 +17,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/workloads/azure-mgmt-workloads/azure/mgmt/workloads
 ```
-
-``` yaml $(python)
-modelerfour:
-  flatten-models: false
-```
