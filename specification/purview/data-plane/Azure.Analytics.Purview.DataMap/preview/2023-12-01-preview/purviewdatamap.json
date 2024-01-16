@@ -1688,7 +1688,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The bulk update is successful.",
+            "description": "OK. The bulk update is successful. 'failureOperations' in response will be an empty map.",
+            "schema": {
+              "$ref": "#/definitions/AssetBulkUpdateResponse"
+            }
+          },
+          "207": {
+            "description": "OK. The bulk update is partial successful. 'failureOperations' in response will contain operation, entity guid and error message.",
             "schema": {
               "$ref": "#/definitions/AssetBulkUpdateResponse"
             }
