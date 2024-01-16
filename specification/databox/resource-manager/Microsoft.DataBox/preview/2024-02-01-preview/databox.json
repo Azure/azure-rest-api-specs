@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-12-01",
+    "version": "2024-02-01-preview",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -4769,6 +4769,11 @@
         "isCancellableWithoutFee": {
           "description": "Flag to indicate cancellation of scheduled job.",
           "type": "boolean",
+          "readOnly": true
+        },
+        "allDevicesLost": {
+          "type": "boolean",
+          "description": "Flag to indicate if all devices associated with the job are lost.",
           "readOnly": true
         }
       }
