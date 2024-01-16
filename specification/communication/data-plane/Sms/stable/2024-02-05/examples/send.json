@@ -28,10 +28,11 @@
       "message": "Hello world!",
       "smsSendOptions": {
         "enableDeliveryReport": true,
-        "tag": "testSmsRequest"
+        "tag": "testSmsRequest",
+        "validityPeriodSeconds": 300
       }
     },
-    "api-version": "2021-03-07",
+    "api-version": "2024-02-05",
     "endpoint": "https://contoso.communication.azure.com/"
   },
   "responses": {
@@ -59,7 +60,6 @@
           },
           {
             "to": "+11234567892",
-            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
             "httpStatusCode": 503,
             "errorMessage": "ServiceUnavailable",
             "successful": false
@@ -73,7 +73,6 @@
           },
           {
             "to": "+11234567894",
-            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
             "httpStatusCode": 400,
             "repeatabilityResult": "rejected",
             "errorMessage": "Request sent with Invalid DateTime value for repeatability-first-sent. Expected is DateTime ,RFC1123 pattern.",

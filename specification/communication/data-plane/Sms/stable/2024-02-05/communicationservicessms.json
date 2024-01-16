@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Communication SMS Service",
     "description": "Azure Communication SMS Service",
-    "version": "2021-03-07"
+    "version": "2024-02-05"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -100,6 +100,13 @@
         "tag": {
           "description": "Use this field to provide metadata that will then be sent back in the corresponding Delivery Report.",
           "type": "string"
+        },
+        "validityPeriodSeconds": {
+          "format": "int32",
+          "description": "Expresses how long the message is considered valid for processing (retried to be sent or waited for delivery report). After this time the message will be considered as failed to deliver or carrier does not support delivery report.",
+          "maximum": 43200,
+          "minimum": 60,
+          "type": "integer"
         }
       }
     },
