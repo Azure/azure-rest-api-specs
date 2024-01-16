@@ -38,6 +38,7 @@ batch:
   - tag: package-2020-04
   - tag: package-2019-09
   - tag: package-2018-01
+  - tag: package-2024-02-preview
   - multiapiscript: true
 ```
 
@@ -184,4 +185,14 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-01' && $(python)
 namespace: azure.mgmt.databox.v2018_01_01
 output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2018_01_01
+```
+
+### Tag: package-2024-02-preview and python
+
+These settings apply only when `--tag=package-2024-02-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-02-preview' && $(python)
+namespace: azure.mgmt.databox.v2024_02_01_preview
+output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2024_02_01_preview
 ```
