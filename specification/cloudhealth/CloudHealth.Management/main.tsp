@@ -381,7 +381,7 @@ model ManagedIdentityAuthenticationSettingProperties
   managedIdentityName: string;
 }
 
-@doc("An entity (aka node) a health model")
+@doc("An entity (aka node) of a health model")
 @parentResource(HealthModel)
 model Entity is ProxyResource<EntityProperties> {
   @doc("Name of the entity. Must be unique within a health model.")
@@ -423,8 +423,8 @@ model EntityProperties {
   signals?: SignalGroup;
 
   @visibility("read")
-  @doc("Indicates whether this entity was dynamically discovered. If true, the entity cannot be deleted manually.")
-  isDynamicallyDiscovered?: boolean;
+  @doc("Discovered by which discovery rule. If set, the entity cannot be deleted manually.")
+  discoveredBy?: stringResourceName;
 
   @visibility("read")
   @doc("Date when the entity was (soft-)deleted")
@@ -572,12 +572,51 @@ model RelationshipProperties {
   labels?: Record<string4096>;
 
   @visibility("read")
-  @doc("Indicates whether this relationship was dynamically discovered. If true, the relationship cannot be deleted manually.")
-  isDynamicallyDiscovered?: boolean;
+  @doc("Discovered by which discovery rule. If set, the relationship cannot be deleted manually.")
+  discoveredBy?: stringResourceName;
 
   @visibility("read")
   @doc("Date when the relationship was (soft-)deleted")
   deletionDate?: utcDateTime;
+}
+
+@doc("A discovery rule which automatically finds entities and relationships in a health model based on an Azure Resource Graph query")
+@parentResource(HealthModel)
+model DiscoveryRule is ProxyResource<DiscoveryRuleProperties> {
+  @doc("Name of the discovery rule. Must be unique within a health model.")
+  @key("discoveryRuleName")
+  @segment("discoveryrules")
+  @path
+  name: stringResourceName;
+}
+
+@doc("Discovery rule properties")
+model DiscoveryRuleProperties {
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: HealthModelProvisioningState;
+
+  @doc("Display name")
+  @minLength(1)
+  @maxLength(100)
+  displayName?: string;
+
+  @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
+  @minLength(1)
+  @maxLength(5000)
+  resourceGraphQuery: string;
+
+  @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
+  authenticationSetting: string;
+
+  @doc("Whether to create an entity for the discovery rule itself.")
+  showEntity?: boolean;
+
+  @doc("Whether to create relationships between the discovered entities based on a set of built-in rulese. These relationships cannot be manually deleted.")
+  discoverRelationships?: boolean;
+
+//  @doc("Whether to add all suggested signals to the discovered entities.")
+//  addAllSuggestedSignals?: boolean;
 }
 
 alias TimestampQueryParam = {
@@ -638,5 +677,17 @@ interface Relationships {
   listByParent is ArmResourceListByParent<
     Relationship,
     BaseParameters<Relationship> & TimestampQueryParam
+  >;
+}
+
+@armResourceOperations
+interface DiscoveryRules {
+  get is ArmResourceRead<DiscoveryRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<DiscoveryRule>;
+  delete is ArmResourceDeleteSync<DiscoveryRule>;
+
+  listByParent is ArmResourceListByParent<
+    DiscoveryRule,
+    BaseParameters<DiscoveryRule> & TimestampQueryParam
   >;
 }
