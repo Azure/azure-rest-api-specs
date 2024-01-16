@@ -8044,6 +8044,76 @@
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
         }
       }
+    },
+    "ServiceNowV2Source": {
+      "description": "A copy activity ServiceNowV2 server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "expression": {
+          "type": "object",
+          "description": "Expression to filter data from source.",
+          "$ref": "#/definitions/Expression"
+        }
+      }
+    },
+    "Expression": {
+      "description": "Nested representation of a complex expression.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "x-ms-enum": {
+            "name": "ExpressionType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Constant",
+            "Field",
+            "Unary",
+            "Binary"
+          ],
+          "type": "string",
+          "description": "Type of expressions supported by the system. Type: string."
+        },
+        "value": {
+          "description": "Child expression that can have its own children forming a tree-like structure of expressions. Hierarchy of expressions defines the precendence order to evaluate them. For Constant/Field Type: string.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SubExpression",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "SubExpression": {
+      "description": "Child expression representation.",
+      "type": "object",
+      "properties": {
+        "operator": {
+          "description": "Operator value",
+          "type": "string"
+        },
+        "operands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Expression"
+          },
+          "description": "List of child expressions."
+        }
+      },
+      "required": [
+        "operator",
+        "operands"
+      ]
     }
   }
 }
