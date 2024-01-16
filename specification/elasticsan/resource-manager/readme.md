@@ -29,6 +29,10 @@ openapi-type: arm
 tag: package-2023-01
 ```
 
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```
 
 ### Tag: package-2023-01
 
