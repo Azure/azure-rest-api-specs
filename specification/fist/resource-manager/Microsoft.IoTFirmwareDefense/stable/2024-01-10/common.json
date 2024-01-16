@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2024-01-10",
-    "title": "fist",
+    "title": "IoT Firmware Defense",
     "description": "The definitions and parameters in this swagger specification will be used to manage the IoT Firmware Defense resources."
   },
   "host": "management.azure.com",
@@ -39,132 +39,60 @@
       "type": "object",
       "properties": {
         "url": {
-          "description": "Token URL for creating or accessing a blob file.",
+          "description": "SAS URL for creating or accessing a blob file.",
           "type": "string",
-          "x-nullable": true
-        },
-        "uploadUrl": {
-          "description": "Url for file uploading. Kept for backwards compatibility",
-          "type": "string",
-          "x-nullable": true
+          "format": "uri",
+          "readOnly": true
         }
       },
       "description": "Url data for creating or accessing a blob file."
     },
-    "Firmware": {
+    "Resource": {
+      "title": "Resource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources (copied from common-types because of lintdiff false positives)",
       "type": "object",
-      "description": "Firmware definition",
       "properties": {
-        "properties": {
-          "title": "Firmware properties",
-          "description": "The properties of a firmware",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FirmwareProperties"
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
+      "x-ms-azure-resource": true
     },
-    "FirmwareUpdateDefinition": {
+    "PairedKey": {
       "type": "object",
-      "description": "Firmware definition",
+      "description": "Details of a matching paired key or certificate.",
       "properties": {
-        "properties": {
-          "title": "Firmware properties",
-          "description": "The editable properties of a firmware",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FirmwareProperties"
+        "id": {
+          "type": "string",
+          "description": "ID of the paired key or certificate."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type indicating whether the paired object is a key or certificate."
         }
       }
-    },
-    "FirmwareProperties": {
-      "type": "object",
-      "properties": {
-        "fileName": {
-          "type": "string",
-          "description": "File name for a firmware that user uploaded."
-        },
-        "vendor": {
-          "type": "string",
-          "description": "Firmware vendor."
-        },
-        "model": {
-          "type": "string",
-          "description": "Firmware model."
-        },
-        "version": {
-          "type": "string",
-          "description": "Firmware version."
-        },
-        "description": {
-          "type": "string",
-          "description": "User-specified description of the firmware."
-        },
-        "fileSize": {
-          "description": "File size of the uploaded firmware image.",
-          "type": "integer",
-          "format": "int64",
-          "x-nullable": true
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of firmware scan.",
-          "enum": [
-            "Pending",
-            "Extracting",
-            "Analyzing",
-            "Ready",
-            "Error"
-          ],
-          "default": "Pending",
-          "x-ms-enum": {
-            "name": "status",
-            "modelAsString": true
-          }
-        },
-        "statusMessages": {
-          "type": "array",
-          "description": "A list of errors or other messages generated during firmware analysis",
-          "items": {
-            "$ref": "#/definitions/StatusMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the resource.",
-          "type": "string",
-          "enum": [
-            "Accepted",
-            "Succeeded",
-            "Canceled",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true
-        }
-      },
-      "description": "Firmware properties."
-    },
-    "StatusMessage": {
-      "type": "object",
-      "description": "Error and status message"
     }
   },
   "parameters": {
-    "FirmwareGroupNameParameter": {
-      "name": "firmwareGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the firmware group.",
-      "x-ms-parameter-location": "method"
-    },
     "FirmwareIdParameter": {
       "name": "firmwareId",
       "in": "path",
