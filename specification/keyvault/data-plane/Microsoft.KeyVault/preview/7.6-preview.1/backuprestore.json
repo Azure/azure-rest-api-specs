@@ -396,13 +396,11 @@
     "PreRestoreOperationParameters": {
       "properties": {
         "sasTokenParameters": {
-          "$ref": "#/definitions/SASTokenParameter",
-          "x-nullable": true
+          "$ref": "#/definitions/SASTokenParameter"
         },
         "folderToRestore": {
           "type": "string",
-          "description": "The Folder name of the blob where the previous successful full backup was stored",
-          "x-nullable": true
+          "description": "The Folder name of the blob where the previous successful full backup was stored"
         }
       },
       "type": "object"
@@ -463,8 +461,7 @@
         "endTime": {
           "type": "integer",
           "format": "unixtime",
-          "description": "The end time of the restore operation",
-          "x-nullable": true
+          "description": "The end time of the restore operation"
         }
       },
       "description": "Selective Key Restore operation"
@@ -493,19 +490,16 @@
       "properties": {
         "storageResourceUri": {
           "type": "string",
-          "description": "Azure Blob storage container Uri",
-          "x-nullable": true
+          "description": "Azure Blob storage container Uri"
         },
         "token": {
           "type": "string",
-          "description": "The SAS token pointing to an Azure Blob storage container",
-          "x-nullable": true
+          "description": "The SAS token pointing to an Azure Blob storage container"
         },
         "useManagedIdentity": {
           "type": "boolean",
           "default": false,
-          "description": "Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.",
-          "x-nullable": true
+          "description": "Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified."
         }
       },
       "type": "object"
