@@ -1687,8 +1687,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "OK. The bulk update is successful."
+          "200": {
+            "description": "OK. The bulk update is successful.",
+            "schema": {
+              "$ref": "#/definitions/AssetBulkUpdateResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -7433,6 +7436,19 @@
         "AddContact": {
           "type": "object",
           "description": "This operation adds a contact to an asset."
+        }
+      }
+    },
+    "AssetBulkUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "successOperations": {
+          "type": "object",
+          "description": "Successful operations with update result returned."
+        },
+        "failureOperations": {
+          "type": "object",
+          "description": "Failed operations with error message returned."
         }
       }
     },
