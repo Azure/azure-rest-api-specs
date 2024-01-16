@@ -40,12 +40,8 @@ directive:
   - suppress: NOT_LATEST_API_VERSION_IN_DEFAULT_TAG
     from: /specification/maps/data-plane/Creator/preview/2023-07-01-preview
     reason: The files in '/specification/maps/data-plane/Creator/stable/2023-07-01-preview' were never released. Please ignore them, they should not appear in the TOC. '/specification/maps/data-plane/Creator/preview/2023-03-01-preview/' contains the latest preview.
-<<<<<<< HEAD
   - suppress: RESPONSE_SCHEMA_NOT_IN_SPEC
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
-=======
-
->>>>>>> d03ae7850ed8716105b8228802fdbaf2b85ee010
 ```
 
 ### Tag: package-stable-V2
