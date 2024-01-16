@@ -36,10 +36,17 @@ jobs:
     vmImage: $(OSVmImage)
 
   steps:
-  - template: /eng/pipelines/templates/steps/npm-install.yml
+  - script: npm --version --loglevel info
+    displayName: npm --version
+
+  - script: npm ci
+    displayName: npm ci
+
+  - script: npm ls -a
+    displayName: npm ls -a
+    condition: succeededOrFailed()
 
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 -CheckAll -GitClean -Verbose
+      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory) -GitClean
     displayName: Validate All Specs
-    ignoreLASTEXITCODE: true
     condition: succeededOrFailed()

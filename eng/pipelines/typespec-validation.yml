@@ -1,5 +1,10 @@
 trigger: none
 
+pr:
+  branches:
+    include:
+    - '*'
+
 jobs:
 - job: Validate_Impacted_Specs
   pool:
@@ -7,10 +12,21 @@ jobs:
     vmImage: ubuntu-22.04
 
   steps:
-  - template: /eng/pipelines/templates/steps/npm-install.yml
+  - script: npm --version --loglevel info
+    displayName: npm --version
+
+  - script: npm ci
+    displayName: npm ci
+
+  - script: npm ls -a
+    displayName: npm ls -a
+    condition: succeededOrFailed()
 
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 -GitClean -Verbose
+      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 `
+        $(Build.SourcesDirectory) `
+        "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" `
+        "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}" `
+        -GitClean
     displayName: Validate Impacted Specs
-    ignoreLASTEXITCODE: true
     condition: succeededOrFailed()
