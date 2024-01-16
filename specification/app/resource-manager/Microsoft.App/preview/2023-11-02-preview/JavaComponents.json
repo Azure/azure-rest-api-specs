@@ -401,64 +401,69 @@
         "properties": {
           "description": "Java Component resource specific properties",
           "type": "object",
-          "required": [
-            "componentType"
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      }
+    },
+    "JavaComponentProperties": {
+      "description": "Java Component common properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "properties": {
+        "componentType": {
+          "description": "Type of the Java Component.",
+          "enum": [
+            "SpringBootAdmin",
+            "SpringCloudEureka",
+            "SpringCloudConfig",
+            "SpringCloudGateway"
           ],
-          "properties": {
-            "componentType": {
-              "description": "Type of the Java Component.",
-              "enum": [
-                "SpringBootAdmin",
-                "SpringCloudEureka",
-                "SpringCloudConfig",
-                "SpringCloudGateway"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "JavaComponentType",
-                "modelAsString": true
-              }
-            },
-            "provisioningState": {
-              "description": "Provisioning state of the Java Component.",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "Deleting",
-                "InProgress"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "JavaComponentProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "configurations": {
-              "description": "List of Java Components configuration properties",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JavaComponentConfigurationProperty"
-              },
-              "x-ms-identifiers": [
-                "propertyName"
-              ]
-            },
-            "serviceBinds": {
-              "description": "List of Java Components that are bound to the Java component",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JavaComponentServiceBind"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            }
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JavaComponentType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Java Component.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JavaComponentProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "configurations": {
+          "description": "List of Java Components configuration properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JavaComponentConfigurationProperty"
           },
-          "x-ms-client-flatten": true
+          "x-ms-identifiers": [
+            "propertyName"
+          ]
+        },
+        "serviceBinds": {
+          "description": "List of Java Components that are bound to the Java component",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JavaComponentServiceBind"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
+      "x-ms-client-flatten": true,
       "discriminator": "componentType"
     },
     "SpringBootAdminComponent": {
@@ -469,16 +474,10 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JavaComponent"
+          "$ref": "#/definitions/JavaComponentProperties"
         }
       ],
-      "properties": {
-        "properties": {
-          "description": "Java Component resource specific properties",
-          "type": "object",
-          "properties": {}
-        }
-      },
+      "properties": {},
       "x-ms-discriminator-value": "SpringBootAdmin"
     },
     "SpringCloudEurekaComponent": {
@@ -489,17 +488,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JavaComponent"
+          "$ref": "#/definitions/JavaComponentProperties"
         }
       ],
-      "properties": {
-        "properties": {
-          "description": "Java Component resource specific properties",
-          "type": "object",
-          "properties": {},
-          "x-ms-discriminator-value": "SpringCloudEureka"
-        }
-      }
+      "properties": {},
+      "x-ms-discriminator-value": "SpringCloudEureka"
     },
     "SpringCloudConfigComponent": {
       "description": "Spring Cloud Config properties.",
@@ -509,17 +502,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JavaComponent"
+          "$ref": "#/definitions/JavaComponentProperties"
         }
       ],
-      "properties": {
-        "properties": {
-          "description": "Java Component resource specific properties",
-          "type": "object",
-          "properties": {},
-          "x-ms-discriminator-value": "SpringCloudConfig"
-        }
-      }
+      "properties": {},
+      "x-ms-discriminator-value": "SpringCloudConfig"
     },
     "SpringCloudGatewayComponent": {
       "description": "Spring Cloud Gateway properties.",
@@ -529,25 +516,19 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JavaComponent"
+          "$ref": "#/definitions/JavaComponentProperties"
         }
       ],
       "properties": {
-        "properties": {
-          "description": "Java Component resource specific properties",
-          "type": "object",
-          "properties": {
-            "routes": {
-              "description": "The route definitions of Spring Cloud Gateway.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SpringCloudGatewayRoute"
-              }
-            }
-          },
-          "x-ms-discriminator-value": "SpringCloudGateway"
+        "routes": {
+          "description": "The route definitions of Spring Cloud Gateway.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpringCloudGatewayRoute"
+          }
         }
-      }
+      },
+      "x-ms-discriminator-value": "SpringCloudGateway"
     },
     "SpringCloudGatewayRoute": {
       "description": "Spring Cloud Gateway route definitions.",
