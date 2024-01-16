@@ -488,7 +488,7 @@
     },
     "AzureCognitiveSearchChatExtensionParameters": {
       "type": "object",
-      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension.",
+      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension. The supported authentication types are APIKey, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -1750,6 +1750,25 @@
         ]
       }
     },
+    "OnYourDataAccessTokenAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using access token.",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "description": "The access token to use for authentication."
+        }
+      },
+      "required": [
+        "accessToken"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessToken"
+    },
     "OnYourDataApiKeyAuthenticationOptions": {
       "type": "object",
       "description": "The authentication options for Azure OpenAI On Your Data when using an API key.",
@@ -1790,6 +1809,8 @@
         "APIKey",
         "ConnectionString",
         "KeyAndKeyId",
+        "EncodedAPIKey",
+        "AccessToken",
         "SystemAssignedManagedIdentity",
         "UserAssignedManagedIdentity"
       ],
@@ -1811,6 +1832,16 @@
             "name": "keyAndKeyId",
             "value": "KeyAndKeyId",
             "description": "Authentication via key and key ID pair."
+          },
+          {
+            "name": "encodedApiKey",
+            "value": "EncodedAPIKey",
+            "description": "Authentication via encoded API key."
+          },
+          {
+            "name": "accessToken",
+            "value": "AccessToken",
+            "description": "Authentication via access token."
           },
           {
             "name": "systemAssignedManagedIdentity",
@@ -1843,6 +1874,25 @@
         }
       ],
       "x-ms-discriminator-value": "ConnectionString"
+    },
+    "OnYourDataEncodedApiKeyAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an Elasticsearch encoded API key.",
+      "properties": {
+        "encodedApiKey": {
+          "type": "string",
+          "description": "The encoded API key to use for authentication."
+        }
+      },
+      "required": [
+        "encodedApiKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "EncodedAPIKey"
     },
     "OnYourDataKeyAndKeyIdAuthenticationOptions": {
       "type": "object",
