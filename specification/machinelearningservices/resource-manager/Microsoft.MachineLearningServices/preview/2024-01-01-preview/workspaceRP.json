@@ -2054,7 +2054,7 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "Resource has already been deleted or not found."
           },
           "default": {
             "description": "Error",
@@ -2152,7 +2152,9 @@
             "name": "body",
             "description": "The request object for creating or updating Hub Workspace policy",
             "required": true,
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/ComputePolicyDtoBasicResource"
+            }
           }
         ],
         "responses": {
@@ -2716,7 +2718,6 @@
           "description": "Model used for the endpoint deployment.",
           "$ref": "#/definitions/EndpointDeploymentModel"
         },
-        "properties": {},
         "raiPolicyName": {
           "type": "string"
         },
@@ -3438,9 +3439,18 @@
         },
         "endpointType": {
           "description": "Type of the endpoint.",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Azure.OpenAI",
+            "Azure.Speech",
+            "Azure.ContentSafety",
+            "Azure.Llama",
+            "managedOnlineEndpoint"
+          ],
+          "x-ms-enum": {
+            "name": "endpointType",
+            "modelAsString": true
+          }
         },
         "endpointUri": {
           "description": "Uri of the endpoint.",
@@ -4938,7 +4948,7 @@
           "type": "string"
         },
         "ipAllowlist": {
-          "description": "The list of IP addresses that are allowed to access the workspace.",
+          "description": "The list of IPv4  addresses that are allowed to access the workspace.",
           "type": "array",
           "items": {
             "type": "string"
@@ -5259,6 +5269,17 @@
       "name": "endpointType",
       "description": "Endpoint type filter",
       "type": "string",
+      "enum": [
+        "Azure.OpenAI",
+        "Azure.Speech",
+        "Azure.ContentSafety",
+        "Azure.Llama",
+        "managedOnlineEndpoint"
+      ],
+      "x-ms-enum": {
+        "name": "endpointType",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     },
     "EndpointNameParameter": {
