@@ -43,7 +43,6 @@ directive:
 
   - suppress: RESPONSE_SCHEMA_NOT_IN_SPEC
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
-
 ```
 
 ### Tag: package-stable-V2
