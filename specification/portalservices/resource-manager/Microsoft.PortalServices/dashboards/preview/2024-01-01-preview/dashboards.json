@@ -378,7 +378,7 @@
           "items": {
             "$ref": "#/definitions/ActionReference"
           },
-          "maxItems": 2          
+          "maxItems": 2
         }
       },
       "additionalProperties": false
@@ -422,12 +422,12 @@
         {
           "$ref": "#/definitions/ActionsOnClick"
         }
-      ],      
-      "additionalProperties": false      
+      ],
+      "additionalProperties": false
     },
-    "ActionParameters" : {
+    "ActionParameters": {
       "x-ms-discriminator-value": "updateParameters",
-      "type": "object",      
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DashboardParameterValuesList"
@@ -443,9 +443,9 @@
     "ActionReference": {
       "type": "object",
       "properties": {
-          "type": {
-            "$ref": "#/definitions/ActionReferenceType"
-          }       
+        "type": {
+          "$ref": "#/definitions/ActionReferenceType"
+        }
       },
       "discriminator": "type",
       "required": [
@@ -480,7 +480,7 @@
       "allOf": [
         {
           "$ref": "#/definitions/ActionReference"
-        }      
+        }
       ],
       "required": [
         "url",
@@ -503,7 +503,7 @@
       "allOf": [
         {
           "$ref": "#/definitions/ActionReference"
-        }      
+        }
       ],
       "required": [
         "blade",
@@ -633,7 +633,7 @@
         "NavigationTile",
         "PolicyTile",
         "QueryTile",
-        "ResourceTile"        
+        "ResourceTile"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -716,12 +716,12 @@
           "$ref": "#/definitions/ActionReference"
         },
         "viewConfiguredService": {
-          "$ref": "#/definitions/ActionReference"        
+          "$ref": "#/definitions/ActionReference"
         },
         "viewNotConfiguredResources": {
           "$ref": "#/definitions/ActionReference"
         }
-      }      
+      }
     },
     "ArcSnapshotTileDataNoResources": {
       "type": "object",
@@ -752,7 +752,7 @@
         },
         "totalCount": {
           "type": "string",
-          "description": "The column name that will return the total count of resources."        
+          "description": "The column name that will return the total count of resources."
         }
       },
       "required": [
@@ -890,7 +890,7 @@
       "allOf": [
         {
           "$ref": "#/definitions/DashboardTile"
-        }      
+        }
       ],
       "required": [
         "data"
@@ -1024,11 +1024,11 @@
       "required": [
         "metrics"
       ]
-    },    
+    },
     "PolicyTileDataDefinition": {
       "x-ms-discriminator-value": "policy",
       "type": "object",
-      "description": "The data that determines the content of the policy tile.",      
+      "description": "The data that determines the content of the policy tile.",
       "allOf": [
         {
           "$ref": "#/definitions/QueryTileData"
