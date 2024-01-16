@@ -1,0 +1,214 @@
+{
+  "parameters": {
+    "dashboardName": "testdashboard",
+    "resourceGroupName": "testRG",
+    "api-version": "2024-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "dashboard": {
+      "properties": {
+        "title": "testdashboard",
+        "pages": [
+          {
+            "title": "New 1",
+            "tiles": [
+              {
+                "title": "My title",
+                "subtitle": "My subtitle",
+                "type": "MarkdownTile",
+                "layout": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 4,
+                  "height": 4
+                },
+                "visible": {
+                  "parameters": [
+                    {
+                      "parameterNames": [
+                        "Location"
+                      ],
+                      "values": [
+                        "eastus"
+                      ]
+                    }
+                  ]
+                },
+                "highlight" : {
+                  "parameters": [
+                    {
+                      "parameterNames": [
+                        "Location"
+                      ],
+                      "values": [
+                        "eastus"
+                      ]
+                    }
+                  ]
+                },
+                "actions": {
+                  "onClick": {
+                    "type": "updateParameters",                    
+                    "parameters": [
+                      {
+                        "parameterNames": [
+                          "Location"
+                        ],
+                        "values": [
+                          "eastus"
+                        ]
+                      }
+                    ]
+                  },
+                  "footer": {
+                    "type": "url",
+                    "uri": "https://www.bing.com",
+                    "displayName": "Bing"
+                  },
+                  "contextMenu": [
+                    {
+                      "type": "url",
+                      "uri": "https://www.bing.com",
+                      "displayName": "Bing"
+                    },
+                    {
+                      "type": "blade",
+                      "blade": {
+                        "name": "ArgQueryBlade",
+                        "extension": "HubsExtension"
+                      },
+                      "displayName": "Resource Graph Explorer"
+                    }
+                  ]
+                },
+                "data": {
+                  "source": "inline",
+                  "content": "Markdown with visible, highlight, and actions."
+                }
+              }
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "title": "Location",
+            "kind": "location",
+            "parameterNames": [
+              "sampleLocationParameter"
+            ],
+            "defaultValues": [
+              "eastus"
+            ],
+            "showOnPages": []
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "title": "testdashboard",
+          "pages": [
+            {
+              "title": "New 1",
+              "tiles": [
+                {
+                  "title": "My title",
+                  "subtitle": "My subtitle",
+                  "type": "MarkdownTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "visible": {
+                    "parameters": [
+                      {
+                        "parameterNames": [
+                          "Location"
+                        ],
+                        "values": [
+                          "eastus"
+                        ]
+                      }
+                    ]
+                  },
+                  "highlight" : {
+                    "parameters": [
+                      {
+                        "parameterNames": [
+                          "Location"
+                        ],
+                        "values": [
+                          "eastus"
+                        ]
+                      }
+                    ]
+                  },
+                  "actions": {
+                    "onClick": {
+                      "type": "updateParameters",                    
+                      "parameters": [
+                        {
+                          "parameterNames": [
+                            "Location"
+                          ],
+                          "values": [
+                            "eastus"
+                          ]
+                        }
+                      ]
+                    },
+                    "footer": {
+                      "type": "url",
+                      "uri": "https://www.bing.com",
+                      "displayName": "Bing"
+                    },
+                    "contextMenu": [
+                      {
+                        "type": "url",
+                        "uri": "https://www.bing.com",
+                        "displayName": "Bing"
+                      },
+                      {
+                        "type": "blade",
+                        "blade": {
+                          "name": "ArgQueryBlade",
+                          "extension": "HubsExtension"
+                        },
+                        "displayName": "Resource Graph Explorer"
+                      }
+                    ]
+                  },
+                  "data": {
+                    "source": "inline",
+                    "content": "Markdown with visible, highlight, and actions."
+                  }
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "title": "Location",
+              "kind": "location",
+              "parameterNames": [
+                "sampleLocationParameter"
+              ],
+              "defaultValues": [
+                "eastus"
+              ],
+              "showOnPages": []
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testdashboard",
+        "name": "testdashboard",
+        "type": "Microsoft.PortalServices/dashboards"
+      }
+    }
+  }
+}
