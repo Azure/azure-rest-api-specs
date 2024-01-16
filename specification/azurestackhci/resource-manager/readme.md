@@ -60,7 +60,6 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
-      - jobs.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
@@ -88,7 +87,6 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
-      - jobs.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -135,7 +133,6 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
-  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/jobs.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/hciCommon.json
 
 ### Tag: package-2024-01
