@@ -34,7 +34,6 @@ enum Versions {
   v2023_12_01: "2023-12-01-preview",
 }
 
-
 //---------------------------------------------- Models ----------------------------------------------
 
 //------------------- Generate Aws Template -------------------
@@ -46,12 +45,12 @@ model GenerateAwsTemplateRequest {
   connectorId: string;
 
   @doc("The list of solution types and their settings")
-  solutionTypes?: Array<SolutionTypeProperties>;
+  solutionTypes?: Array<SolutionTypeSettings>;
 }
 
 @added(Versions.v2023_12_01)
 @doc("The properties of Solution Type")
-model SolutionTypeProperties {
+model SolutionTypeSettings {
   @doc("The type of the solution")
   solutionType: string;
 
@@ -75,7 +74,7 @@ model TestPermissionResponse {
 @doc("Solution type permissions.")
 model SolutionTypePermissions {
   @doc("The name of solution Type")
-  solutionType: SolutionType;
+  solutionType: SolutionTypeEnum;
 
   @doc("The status")
   status: Status;
@@ -86,7 +85,7 @@ model SolutionTypePermissions {
 
 @added(Versions.v2023_12_01)
 @doc("Solution types.")
-enum SolutionType {
+enum SolutionTypeEnum {
   @doc("Asset Management solution type")
   `Microsoft.AssetManagement`,
 
@@ -110,6 +109,7 @@ enum Status {
 //------------------- Public Cloud Connector -------------------
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @doc("Public Cloud Connector")
 model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   @doc("Represent public cloud connectors resource.")
@@ -120,6 +120,7 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
 }
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @doc("Properties of public cloud connectors.")
 model PublicCloudConnectorProperties {
   @doc("Cloud profile for AWS.")
@@ -135,13 +136,15 @@ model PublicCloudConnectorProperties {
 }
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @doc("Enum of host cloud the public cloud connector is referencing.")
 enum HostType {
   @doc("AWS state")
-  AWS
+  AWS,
 }
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @doc("cloud profile for AWS.")
 model AwsCloudProfile {
   @doc("Account id for the AWS account.")
@@ -159,8 +162,10 @@ model AwsCloudProfile {
 //------------------- Solution Configuration -------------------
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @doc("Solution Configuration")
-model SolutionConfiguration is TrackedResource<SolutionConfigurationResource> {
+model SolutionConfiguration
+  is TrackedResource<SolutionConfigurationProperties> {
   @doc("Represent Solution Configuration Resource.")
   @key("solutionConfiguration")
   @path
@@ -169,14 +174,8 @@ model SolutionConfiguration is TrackedResource<SolutionConfigurationResource> {
 }
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @doc("Solution configuration resource.")
-model SolutionConfigurationResource {
-  @doc("The solution configuration properties")
-  properties?: SolutionConfigurationProperties;
-}
-
-@added(Versions.v2023_04_01)
-@doc("The properties of Solution Configuration")
 model SolutionConfigurationProperties {
   @doc("The resource provisioning state.")
   provisioningState?: ProvisioningState;
@@ -198,6 +197,7 @@ model SolutionConfigurationProperties {
 }
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @doc("Solution Configuration Status.")
 enum SolutionConfigurationStatus {
   @doc("New status")
@@ -213,16 +213,57 @@ enum SolutionConfigurationStatus {
   Failed,
 }
 
-//------------------- Inventory -------------------
+//------------------- Solution Type -------------------
 
 @added(Versions.v2023_04_01)
-@doc("Definition of inventory.")
-model Inventory {
-  @doc("Gets or sets the id of the inventory.")
-  properties?: InventoryProperties;
+@removed(Versions.v2023_12_01)
+model SolutionTypeResource is ProxyResource<SolutionTypeProperties> {
+  @doc("Solution Type resource")
+  @segment("solutionTypes")
+  @key("solutionTypes")
+  @path
+  name: string;
 }
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
+@doc("Represent Solution type resource.")
+model SolutionTypeProperties {
+  @doc("The name of the solution type.")
+  solutionType?: string;
+
+  @doc("Short description of solution type")
+  description?: string;
+
+  @doc("The link to AWS CloudFormation template.")
+  awsIamConfigurationTemplateUri?: string;
+
+  @doc("The link to GCP script.")
+  gcpProjectConfigurationTemplateUri?: string;
+
+  @doc("The locations this solution is supported")
+  supportedAzureRegions?: string[];
+
+  @doc("The resource provisioning state.")
+  provisioningState?: ProvisioningState;
+}
+
+//------------------- Inventory -------------------
+
+@added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
+@parentResource(SolutionConfiguration)
+model InventoryResource is ProxyResource<InventoryProperties> {
+  @doc("Inventory resource")
+  @segment("inventoryId")
+  @key("inventory")
+  @visibility("read")
+  @path
+  name: string;
+}
+
+@added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @doc("Definition of inventory.")
 model InventoryProperties {
   @doc("Gets or sets the cloud native resource type.")
@@ -245,6 +286,7 @@ model InventoryProperties {
 }
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @doc("Cloud Native Type enum.")
 enum CloudNativeType {
   @doc("ec2 enum.")
@@ -266,14 +308,13 @@ enum ProvisioningState {
   Canceled,
 }
 
-
 @doc("Solution settings")
 model SolutionSettings is Record<string>;
 
 //---------------------------------------------- Operations ----------------------------------------------
 
-@added(Versions.v2023_12_01)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
+@added(Versions.v2023_12_01)
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/")
 interface GenerateAwsTemplate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
@@ -292,8 +333,8 @@ interface GenerateAwsTemplate {
   ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
 }
 
-@added(Versions.v2023_12_01)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
+@added(Versions.v2023_12_01)
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnectorId}")
 interface TestPermissions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
@@ -312,6 +353,7 @@ interface TestPermissions {
 }
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @armResourceOperations
 interface PublicCloudConnectors {
   get is ArmResourceRead<PublicCloudConnector>;
@@ -326,6 +368,7 @@ interface PublicCloudConnectors {
 }
 
 @added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
 @armResourceOperations
 interface SolutionConfigurations {
   get is ArmResourceRead<SolutionConfiguration>;
@@ -335,6 +378,21 @@ interface SolutionConfigurations {
     SolutionConfigurationProperties
   >;
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
-  listByResourceGroup is ArmResourceListByParent<SolutionConfiguration>;
   listBySubscription is ArmListBySubscription<SolutionConfiguration>;
+}
+
+@added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
+@armResourceOperations
+interface Inventory {
+  get is ArmResourceRead<InventoryResource>;
+  listByWidget is ArmResourceListByParent<InventoryResource>;
+}
+
+@added(Versions.v2023_04_01)
+@removed(Versions.v2023_12_01)
+@armResourceOperations
+interface SolutionTypes {
+  get is ArmResourceRead<SolutionTypeResource>;
+  listByWidget is ArmResourceListAtScope<SolutionTypeResource>;
 }
