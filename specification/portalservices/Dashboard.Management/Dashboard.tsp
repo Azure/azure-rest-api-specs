@@ -10,6 +10,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.PortalServices;
 @doc("The shared dashboard resource definition.")
+@resource("dashboards")
 model Dashboard is TrackedResource<DashboardProperties> {
   @doc("The name of the dashboard.")
   @maxLength(64)
@@ -17,6 +18,8 @@ model Dashboard is TrackedResource<DashboardProperties> {
   @pattern("^[a-z][a-z0-9]*$")
   @key("dashboardName")
   @segment("dashboards")
+  @path
+  @visibility("read")
   name: string;
 }
 
