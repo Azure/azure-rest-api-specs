@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-@useAuth(AadOauth2Auth<["https://communication.azure.com/.default"]>)
+@useAuth(AadOauth2Auth<["https://communication.azure.com/.default"]> | ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
 @service({
   title: "CommunicationMessagesClient",
 })

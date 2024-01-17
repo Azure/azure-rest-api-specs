@@ -27,11 +27,11 @@ interface TemplateOperations {
 interface NotificationMessagesOperations {
   @tag("Notifications")
   @doc("Sends a notification message from Business to User.")
-  sendMessage is Operations.ResourceCollectionAction<Notifications, NotificationContent, AcceptedResponse & SendMessageResult>
+  send is Operations.ResourceCollectionAction<Notifications, NotificationContent, AcceptedResponse & SendMessageResult>
 }
 
 interface StreamOperations {
   @tag("Stream")
   @doc("Download the Media payload from a User to Business message.")
-  getStream is Operations.ResourceRead<MessageDataStream>;
+  downloadMedia is Operations.ResourceRead<MessageDataStream>;
 }

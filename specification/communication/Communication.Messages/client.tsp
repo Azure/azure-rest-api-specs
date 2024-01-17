@@ -16,8 +16,8 @@ namespace ClientForAcsMessages;
 })
 interface NotificationMessagesClient extends AzureCommunicationMessagesService.NotificationMessagesOperations
 {
-  @access(Access.internal)
-  getMedia is AzureCommunicationMessagesService.StreamOperations.getStream;
+  @access(Access.public)
+  downloadMedia is AzureCommunicationMessagesService.StreamOperations.downloadMedia;
 }
 
 @client({
