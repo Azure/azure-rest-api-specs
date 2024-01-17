@@ -71,6 +71,8 @@ input-file:
   - Microsoft.ProgrammableConnectivity/preview/2023-12-15-preview/OpenApiGateways.json
   - Microsoft.ProgrammableConnectivity/preview/2023-12-15-preview/OperatorConnections.json
   - Microsoft.ProgrammableConnectivity/preview/2023-12-15-preview/OperatorOfferings.json
+  - Microsoft.ProgrammableConnectivity/preview/2023-12-15-preview/OperatorApiConnections.json
+  - Microsoft.ProgrammableConnectivity/preview/2023-12-15-preview/OperatorApiOfferings.json
   - Microsoft.ProgrammableConnectivity/preview/2023-12-15-preview/Operations.json
   - Microsoft.ProgrammableConnectivity/preview/2023-12-15-preview/common.json
 ```

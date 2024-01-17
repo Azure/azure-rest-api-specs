@@ -3,7 +3,7 @@
   "info": {
     "title": "ProgrammableConnectivity",
     "version": "2024-01-15-preview",
-    "description": "Azure Programmable Connectivity Provider management API.",
+    "description": "Azure Programmable Connectivity Provider management API",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -40,17 +40,17 @@
   },
   "tags": [
     {
-      "name": "Gateways"
+      "name": "OperatorApiConnections"
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/gateways": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections": {
       "get": {
-        "operationId": "Gateways_ListBySubscription",
+        "operationId": "OperatorApiConnections_ListBySubscription",
         "tags": [
-          "Gateways"
+          "OperatorApiConnections"
         ],
-        "description": "List Gateway resources by subscription ID",
+        "description": "List OperatorConnection resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -61,13 +61,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Gateway' list operation on subscription ID succeeded",
+            "description": "Resource 'OperatorConnection' list operation on subscription ID completed.",
             "schema": {
-              "$ref": "#/definitions/GatewayListResult"
+              "$ref": "#/definitions/OperatorConnectionListResult"
             }
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "Operator Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -77,19 +77,19 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gateways_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/Gateways_ListBySubscription_MaximumSet_Gen.json"
+          "OperatorApiConnections_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorApiConnections_ListBySubscription_MaximumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections": {
       "get": {
-        "operationId": "Gateways_ListByResourceGroup",
+        "operationId": "OperatorApiConnections_ListByResourceGroup",
         "tags": [
-          "Gateways"
+          "OperatorApiConnections"
         ],
-        "description": "List Gateway resources by resource group",
+        "description": "List OperatorConnection resources by resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -103,13 +103,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Gateway' list operation on resource group succeeded.",
+            "description": "Resource 'OperatorConnection' list operation on resource group completed.",
             "schema": {
-              "$ref": "#/definitions/GatewayListResult"
+              "$ref": "#/definitions/OperatorConnectionListResult"
             }
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "Operator Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -119,19 +119,19 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gateways_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/Gateways_ListByResourceGroup_MaximumSet_Gen.json"
+          "OperatorApiConnections_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorApiConnections_ListByResourceGroup_MaximumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways/{gatewayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections/{operatorConnectionName}": {
       "get": {
-        "operationId": "Gateways_Get",
+        "operationId": "OperatorApiConnections_Get",
         "tags": [
-          "Gateways"
+          "OperatorApiConnections"
         ],
-        "description": "Get a Gateway resource by name.",
+        "description": "Get an Operator Connection.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -143,35 +143,35 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/GatewayName"
+            "$ref": "#/parameters/OperatorConnectionName"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Gateway' get by name operation succeeded.",
+            "description": "Resource 'OperatorConnection' get by name operation completed.",
             "schema": {
-              "$ref": "#/definitions/Gateway"
+              "$ref": "#/definitions/OperatorConnection"
             }
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "Operator Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Gateways_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Gateways_Get_MaximumSet_Gen.json"
+          "OperatorApiConnections_Get_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorApiConnections_Get_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "Gateways_CreateOrUpdate",
+        "operationId": "OperatorApiConnections_CreateOrUpdate",
         "tags": [
-          "Gateways"
+          "OperatorApiConnections"
         ],
-        "description": "Create or update an APC Gateway",
+        "description": "Create an Operator Connection.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -183,29 +183,29 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/GatewayName"
+            "$ref": "#/parameters/OperatorConnectionName"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Gateway resource create parameters.",
+            "description": "Operator Connection resource create or update request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Gateway"
+              "$ref": "#/definitions/OperatorConnection"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Gateway' update operation succeeded",
+            "description": "Resource 'OperatorConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Gateway"
+              "$ref": "#/definitions/OperatorConnection"
             }
           },
           "201": {
-            "description": "Resource 'Gateway' create operation succeeded",
+            "description": "Resource 'OperatorConnection' create operation succeeded. Although the resource may be created but there could be other operations in progress on the resource. The current status can be queried via an HTTP GET operation on the URL returned in the HTTP header 'azure-async-operation' of the response.",
             "schema": {
-              "$ref": "#/definitions/Gateway"
+              "$ref": "#/definitions/OperatorConnection"
             },
             "headers": {
               "Retry-After": {
@@ -216,7 +216,7 @@
             }
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "Operator Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -227,17 +227,17 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Gateways_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Gateways_CreateOrUpdate_MaximumSet_Gen.json"
+          "OperatorApiConnections_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorApiConnections_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       },
       "patch": {
-        "operationId": "Gateways_Update",
+        "operationId": "OperatorApiConnections_Update",
         "tags": [
-          "Gateways"
+          "OperatorApiConnections"
         ],
-        "description": "Update a Gateway",
+        "description": "Update an Operator Connection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -249,27 +249,27 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/GatewayName"
+            "$ref": "#/parameters/OperatorConnectionName"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Updatable properties for a Gateway resource.",
+            "description": "Operator Connection properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GatewayUpdate"
+              "$ref": "#/definitions/OperatorConnectionUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Gateway' update operation succeeded",
+            "description": "Resource 'OperatorConnection' update operation completed.",
             "schema": {
-              "$ref": "#/definitions/Gateway"
+              "$ref": "#/definitions/OperatorConnection"
             }
           },
           "202": {
-            "description": "Resource 'Gateway' update operation accepted.",
+            "description": "Resource 'OperatorConnection' update request accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -283,7 +283,7 @@
             }
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "Operator Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -294,17 +294,17 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Gateways_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Gateways_Update_MaximumSet_Gen.json"
+          "OperatorApiConnections_Update_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorApiConnections_Update_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "Gateways_Delete",
+        "operationId": "OperatorApiConnections_Delete",
         "tags": [
-          "Gateways"
+          "OperatorApiConnections"
         ],
-        "description": "Delete a Gateway",
+        "description": "Delete an Operator Connection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -316,12 +316,12 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/GatewayName"
+            "$ref": "#/parameters/OperatorConnectionName"
           }
         ],
         "responses": {
           "202": {
-            "description": "Resource 'Gateway' delete operation succeeded.",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -335,10 +335,10 @@
             }
           },
           "204": {
-            "description": "Resource 'Gateway' delete operation succeeded."
+            "description": "Resource doesn't exist."
           },
           "default": {
-            "description": "Gateway error response.",
+            "description": "Operator Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -349,20 +349,78 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Gateways_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Gateways_Delete_MaximumSet_Gen.json"
+          "OperatorApiConnections_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorApiConnections_Delete_MaximumSet_Gen.json"
           },
-          "Gateways_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Gateways_Delete_MinimumSet_Gen.json"
+          "OperatorApiConnections_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/OperatorApiConnections_Delete_MinimumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Gateway": {
+    "AccountType": {
+      "type": "string",
+      "description": "The Account Type of the Operator Connections",
+      "enum": [
+        "AzureManaged",
+        "UserManaged"
+      ],
+      "x-ms-enum": {
+        "name": "AccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureManaged",
+            "value": "AzureManaged",
+            "description": "Managed by Azure on-behalf-of the user"
+          },
+          {
+            "name": "UserManaged",
+            "value": "UserManaged",
+            "description": "Managed by the User themselves on the Operator end"
+          }
+        ]
+      }
+    },
+    "AppCredentials": {
       "type": "object",
-      "description": "A Programmable Connectivity Gateway resource",
+      "description": "Application credentials needed to authenticate to the operator's Network APIs in a specific country/region.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "Application ID of the App Developer that is registered with the Operator in a specific country/region."
+        },
+        "appSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "Application secret linked to the 'appId'. This should be stored securely and is not returned back when the resource information is read.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ApplicationProperties": {
+      "type": "object",
+      "description": "Details about the Application that would use the Operator's Network APIs.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the application. Example: Contoso App."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the application."
+        },
+        "legalName": {
+          "type": "string",
+          "description": "Legal name of the organization owning the application."
+        }
+      }
+    },
+    "OperatorConnection": {
+      "type": "object",
+      "description": "A Programmable Connectivity Operator Connection resource",
       "properties": {
         "tags": {
           "type": "object",
@@ -372,8 +430,8 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/GatewayProperties",
-          "description": "Properties for the Gateway resource.",
+          "$ref": "#/definitions/OperatorConnectionProperties",
+          "description": "Operator Connection resource properties.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read",
@@ -387,15 +445,15 @@
         }
       ]
     },
-    "GatewayListResult": {
+    "OperatorConnectionListResult": {
       "type": "object",
-      "description": "The response of a Gateway list operation.",
+      "description": "The response of an Operator Connection list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Gateway items on this page",
+          "description": "The OperatorConnection items on this page",
           "items": {
-            "$ref": "#/definitions/Gateway"
+            "$ref": "#/definitions/OperatorConnection"
           }
         },
         "nextLink": {
@@ -408,33 +466,54 @@
         "value"
       ]
     },
-    "GatewayProperties": {
+    "OperatorConnectionProperties": {
       "type": "object",
-      "description": "Gateway resource properties",
+      "description": "Operator Connection resource properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AppCredentials"
+        }
+      ],
       "properties": {
-        "operatorApiConnections": {
-          "type": "array",
-          "description": "List of Operator Connections selected by the user",
-          "items": {
-            "$ref": "./common.json#/definitions/OperatorApiConnectionResourceId"
-          },
-          "readOnly": true
+        "gatewayId": {
+          "$ref": "./common.json#/definitions/GatewayResourceId",
+          "description": "Reference to the APC Gateway resource ID."
         },
-        "gatewayBaseUrl": {
-          "type": "string",
-          "description": "Base URL of the Gateway resource. This is the URL that the users would use to make Open API Gateway requests to the Operators via Azure.",
-          "readOnly": true
+        "operatorApiOfferingId": {
+          "$ref": "./common.json#/definitions/OperatorApiOfferingResourceId",
+          "description": "Reference to the Operator API Offering Resource ID"
+        },
+        "selectedApis": {
+          "type": "array",
+          "description": "List of selected Network APIs the user has selected for the current operator in the country/region provided in the Offering.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accountType": {
+          "$ref": "#/definitions/AccountType",
+          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged"
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The status of the last operation on the Gateway resource.",
+          "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "configuredApplication": {
+          "description": "Details about the Application that would use the Operator's Network APIs.",
+          "$ref": "#/definitions/ApplicationProperties"
         }
-      }
+      },
+      "required": [
+        "gatewayId",
+        "operatorApiOfferingId",
+        "selectedApis",
+        "accountType"
+      ]
     },
-    "GatewayUpdate": {
+    "OperatorConnectionUpdate": {
       "type": "object",
-      "description": "Properties for update operations of the Gateway.",
+      "description": "The type used for update operations of the OperatorConnection.",
       "properties": {
         "tags": {
           "type": "object",
@@ -444,33 +523,42 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/GatewayUpdateProperties",
+          "$ref": "#/definitions/OperatorConnectionUpdateProperties",
           "x-ms-client-flatten": true
         }
       }
     },
-    "GatewayUpdateProperties": {
+    "OperatorConnectionUpdateProperties": {
       "type": "object",
-      "description": "Updatable properties of the Gateway.",
+      "description": "The updatable properties of the OperatorConnection.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AppCredentials"
+        }
+      ],
       "properties": {
-        "operatorApiConnections": {
+        "selectedApis": {
           "type": "array",
-          "description": "List of Operator Connections selected by the user",
+          "description": "List of selected Network APIs the user has selected for the current operator in the country/region provided in the Offering.",
           "items": {
-            "$ref": "./common.json#/definitions/OperatorApiConnectionResourceId"
+            "type": "string"
           }
+        },
+        "accountType": {
+          "$ref": "#/definitions/AccountType",
+          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged"
         }
       }
     }
   },
   "parameters": {
-    "GatewayName": {
-      "name": "gatewayName",
+    "OperatorConnectionName": {
+      "name": "operatorConnectionName",
       "in": "path",
-      "description": "Azure Programmable Connectivity Gateway Name",
+      "description": "Azure Programmable Connectivity (APC) Operator Connection Name",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$"
+      "pattern": "^[a-zA-Z0-9-]{3,64}$"
     }
   }
 }
