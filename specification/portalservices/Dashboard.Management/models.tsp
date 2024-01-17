@@ -11,22 +11,42 @@ namespace Microsoft.PortalServices;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The types of dashboard tiles.")
 enum Type {
+  @doc("The tile type for Arc Snapshot tile.")
   ArcSnapshotTile,
+
+  @doc("The tile type for Markdown tile.")
   MarkdownTile,
+
+  @doc("The tile type for Navigation tile.")
   NavigationTile,
+
+  @doc("The tile type for Policy tile.")
   PolicyTile,
+
+  @doc("The tile type for Query tile.")
   QueryTile,
+
+  @doc("The tile type for Resource tile.")
   ResourceTile,
 }
 
+@doc("The types of dashboard tile on click actions.")
 enum ActionsOnClickType {
+  @doc("The on click action type for openBlade.")
   openBlade,
+
+  @doc("The on click action type for updateParameters.")
   updateParameters,
 }
 
+@doc("The types of dashboard tile action references.")
 enum ActionReferenceType {
+  @doc("The action reference type for blade.")
   blade,
+
+  @doc("The action reference type for url.")
   url,
 }
 
