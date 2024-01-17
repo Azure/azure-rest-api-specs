@@ -803,6 +803,12 @@
               "$ref": "#/definitions/OpenAIIntegrationRPModel"
             }
           },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OpenAIIntegrationRPModel"
+            }
+          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -849,10 +855,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OpenAIIntegrationRPModel"
-            }
+            "description": "Success"
           },
           "204": {
             "description": "No Content"
@@ -2536,6 +2539,7 @@
     "OpenAIIntegrationRPModel": {
       "description": "Capture properties of Open AI resource Integration.",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "openAIResourceId": {
           "description": "The resource id of Open AI resource",
@@ -3058,7 +3062,8 @@
       "description": "OpenAI Integration name",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
-    },
+    }
   }
 }
