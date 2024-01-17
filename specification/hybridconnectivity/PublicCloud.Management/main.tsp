@@ -34,7 +34,6 @@ enum Versions {
   v2023_12_01: "2023-12-01-preview",
 }
 
-
 //---------------------------------------------- Models ----------------------------------------------
 
 //------------------- Generate Aws Template -------------------
@@ -141,7 +140,7 @@ model PublicCloudConnectorProperties {
 @doc("Enum of host cloud the public cloud connector is referencing.")
 enum HostType {
   @doc("AWS state")
-  AWS
+  AWS,
 }
 
 @added(Versions.v2023_04_01)
@@ -165,7 +164,8 @@ model AwsCloudProfile {
 @added(Versions.v2023_04_01)
 @removed(Versions.v2023_12_01)
 @doc("Solution Configuration")
-model SolutionConfiguration is TrackedResource<SolutionConfigurationProperties> {
+model SolutionConfiguration
+  is TrackedResource<SolutionConfigurationProperties> {
   @doc("Represent Solution Configuration Resource.")
   @key("solutionConfiguration")
   @path
@@ -308,7 +308,6 @@ enum ProvisioningState {
   @doc("Canceled state")
   Canceled,
 }
-
 
 @doc("Solution settings")
 model SolutionSettings is Record<string>;
