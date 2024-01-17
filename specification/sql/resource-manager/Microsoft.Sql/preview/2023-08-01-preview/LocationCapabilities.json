@@ -65,7 +65,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -417,6 +420,14 @@
         "supportedPerDatabaseAutoPauseDelay": {
           "$ref": "#/definitions/PerDatabaseAutoPauseDelayTimeRange",
           "description": "Supported time range for per database auto pause delay",
+          "readOnly": true
+        },
+        "supportedZones": {
+          "description": "List of supported availability zones",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZonePinningCapability"
+          },
           "readOnly": true
         },
         "status": {
@@ -1539,6 +1550,14 @@
           "type": "boolean",
           "readOnly": true
         },
+        "supportedZones": {
+          "description": "List of supported availability zones",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZonePinningCapability"
+          },
+          "readOnly": true
+        },
         "supportedFreeLimitExhaustionBehaviors": {
           "description": "List of supported free limit exhaustion behaviors",
           "type": "array",
@@ -1581,6 +1600,36 @@
             "ZRS",
             "GZRS"
           ],
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "ZonePinningCapability": {
+      "description": "The zone pinning capability",
+      "type": "object",
+      "properties": {
+        "availabilityZone": {
+          "description": "Name of the availability zone",
           "type": "string",
           "readOnly": true
         },
