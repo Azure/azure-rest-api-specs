@@ -248,8 +248,13 @@ model DashboardParameterValues {
 
 @doc("Actions available on the tile.")
 model Actions {
+  @doc("Actions available on the tile on click.")
   onClick?: ActionsOnClick;
+
+  @doc("Actions available on the tile on footer.")
   footer?: ActionReference[];
+
+  @doc("Actions available on the tile on context menu.")
   contextMenu?: ActionReference[];
 }
 
