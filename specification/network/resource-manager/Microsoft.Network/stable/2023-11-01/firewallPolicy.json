@@ -956,7 +956,7 @@
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$",
             "type": "string",
             "description": "The name of the Firewall Policy."
           },
@@ -995,6 +995,11 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "create or update firewall policy draft": {
+            "$ref": "./examples/FirewallPolicyDraftPut.json"
+          }
         }
       },
       "delete": {
@@ -1012,7 +1017,7 @@
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$",
             "type": "string",
             "description": "The name of the Firewall Policy."
           },
@@ -1036,6 +1041,11 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "delete firewall policy draft": {
+            "$ref": "./examples/FirewallPolicyDraftDelete.json"
+          }
         }
       },
       "get": {
@@ -1053,7 +1063,7 @@
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$",
             "type": "string",
             "description": "The name of the Firewall Policy."
           },
@@ -1077,6 +1087,11 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "get firewall policy draft": {
+            "$ref": "./examples/FirewallPolicyDraftGet.json"
+          }
         }
       }
     },
@@ -1085,6 +1100,9 @@
         "description": "Deploy a draft policy to become the parent firewall policy.",
         "operationId": "FirewallPolicyDeployments_Deploy",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1097,7 +1115,7 @@
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$",
             "type": "string",
             "description": "The name of the Firewall Policy."
           },
@@ -1128,6 +1146,11 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "deploy firewall policy draft": {
+            "$ref": "./examples/FirewallPolicyDraftDeploy.json"
+          }
         }
       }
     },
@@ -1147,7 +1170,7 @@
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$",
             "type": "string",
             "description": "The name of the Firewall Policy."
           },
@@ -1155,7 +1178,7 @@
             "name": "ruleCollectionGroupName",
             "in": "path",
             "required": true,
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$",
             "type": "string",
             "description": "The name of the FirewallPolicyRuleCollectionGroup."
           },
@@ -1179,6 +1202,11 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "delete firewall rule collection group draft": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupDraftDelete.json"
+          }
         }
       },
       "put": {
@@ -1197,7 +1225,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$",
             "description": "The name of the Firewall Policy."
           },
           {
@@ -1205,7 +1233,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$",
             "description": "The name of the FirewallPolicyRuleCollectionGroup."
           },
           {
@@ -1243,6 +1271,11 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "create or update rule collection group darft": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupDraftPut.json"
+          }
         }
       },
       "get": {
@@ -1260,7 +1293,7 @@
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$",
             "type": "string",
             "description": "The name of the Firewall Policy."
           },
@@ -1269,7 +1302,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$",
             "description": "The name of the FirewallPolicyRuleCollectionGroup."
           },
           {
@@ -1291,6 +1324,11 @@
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "get rule collection group draft": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupDraftGet.json"
           }
         }
       }
