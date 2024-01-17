@@ -41,6 +41,7 @@ interface VolumeGroups {
   >;
 
   @doc("Update an VolumeGroup.")
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     VolumeGroup,
     VolumeGroupUpdate,

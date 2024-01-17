@@ -2276,23 +2276,6 @@
         "modelAsString": true
       }
     },
-    "IdentityUpdate": {
-      "type": "object",
-      "description": "Identity for the resource.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The identity type."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this volume group. The key is the ARM resource identifier of the identity.",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
-          }
-        }
-      }
-    },
     "IscsiTargetInfo": {
       "type": "object",
       "description": "Iscsi target information",
@@ -2620,7 +2603,8 @@
       "x-ms-enum": {
         "name": "ProvisioningStates",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "PublicNetworkAccess": {
       "type": "string",
@@ -3062,12 +3046,13 @@
       "description": "Volume Group request.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/IdentityUpdate",
+          "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
         },
         "properties": {
           "$ref": "#/definitions/VolumeGroupUpdateProperties",
-          "description": "Properties of VolumeGroup."
+          "description": "Properties of VolumeGroup.",
+          "x-ms-client-flatten": true
         }
       }
     },
