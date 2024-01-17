@@ -177,6 +177,7 @@ model SolutionConfiguration is ProxyResource<SolutionConfigurationProperties> {
 @doc("Solution configuration resource.")
 model SolutionConfigurationProperties {
   @doc("The resource provisioning state.")
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   @doc("The type of the solution")
@@ -244,6 +245,7 @@ model SolutionTypeProperties {
   supportedAzureRegions?: string[];
 
   @doc("The resource provisioning state.")
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -281,6 +283,7 @@ model InventoryProperties {
   statusDetails?: string;
 
   @doc("The resource provisioning state.")
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
