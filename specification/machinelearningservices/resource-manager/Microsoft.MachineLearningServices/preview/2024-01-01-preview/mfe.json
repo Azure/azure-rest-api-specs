@@ -23669,189 +23669,189 @@
       "additionalProperties": false
     },
     "MarketplacePlan": {
-        "type": "object",
-        "properties": {
-            "offerId": {
-                "description": "The Offer ID of the Marketplace Plan.",
-                "type": "string",
-                "readOnly": true,
-                "x-ms-mutability": [
-                    "read"
-                ],
-                "x-nullable": true
-            },
-            "planId": {
-                "description": "The Plan ID of the Marketplace Plan.",
-                "type": "string",
-                "readOnly": true,
-                "x-ms-mutability": [
-                    "read"
-                ],
-                "x-nullable": true
-            },
-            "publisherId": {
-                "description": "The Publisher ID of the Marketplace Plan.",
-                "type": "string",
-                "readOnly": true,
-                "x-ms-mutability": [
-                    "read"
-                ],
-                "x-nullable": true
-            }
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "description": "The Offer ID of the Marketplace Plan.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
         },
-        "additionalProperties": false
+        "planId": {
+          "description": "The Plan ID of the Marketplace Plan.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "publisherId": {
+          "description": "The Publisher ID of the Marketplace Plan.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
     },
     "MarketplaceSubscription": {
-        "required": [
-            "modelId"
-        ],
-        "type": "object",
-        "properties": {
-            "marketplacePlan": {
-                "description": "Marketplace Plan associated with the Marketplace Subscription.",
-                "$ref": "#/definitions/MarketplacePlan",
-                "readOnly": true,
-                "x-ms-mutability": [
-                    "read"
-                ],
-                "x-nullable": true
-            },
-            "marketplaceSubscriptionStatus": {
-                "description": "Current status of the Marketplace Subscription.",
-                "$ref": "#/definitions/MarketplaceSubscriptionStatus",
-                "readOnly": true,
-                "x-ms-mutability": [
-                    "read"
-                ]
-            },
-            "modelId": {
-                "description": "[Required] Target Marketplace Model ID to create a Marketplace Subscription for.",
-                "minLength": 1,
-                "pattern": "[a-zA-Z0-9_]",
-                "type": "string"
-            },
-            "provisioningState": {
-                "description": "Provisioning State of the Marketplace Subscription.",
-                "$ref": "#/definitions/MarketplaceSubscriptionProvisioningState",
-                "readOnly": true,
-                "x-ms-mutability": [
-                    "read"
-                ]
-            }
+      "required": [
+        "modelId"
+      ],
+      "type": "object",
+      "properties": {
+        "marketplacePlan": {
+          "description": "Marketplace Plan associated with the Marketplace Subscription.",
+          "$ref": "#/definitions/MarketplacePlan",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
         },
-        "x-ms-client-name": "MarketplaceSubscriptionProperties",
-        "additionalProperties": false
+        "marketplaceSubscriptionStatus": {
+          "description": "Current status of the Marketplace Subscription.",
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "modelId": {
+          "description": "[Required] Target Marketplace Model ID to create a Marketplace Subscription for.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning State of the Marketplace Subscription.",
+          "$ref": "#/definitions/MarketplaceSubscriptionProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-client-name": "MarketplaceSubscriptionProperties",
+      "additionalProperties": false
     },
     "MarketplaceSubscriptionProvisioningState": {
-        "enum": [
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Canceled"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-            "name": "MarketplaceSubscriptionProvisioningState",
-            "modelAsString": true,
-            "values": [
-                {
-                    "value": "Creating",
-                    "description": "MarketplaceSubscription is being created."
-                },
-                {
-                    "value": "Deleting",
-                    "description": "MarketplaceSubscription is being deleted."
-                },
-                {
-                    "value": "Succeeded",
-                    "description": "MarketplaceSubscription is successfully provisioned."
-                },
-                {
-                    "value": "Failed",
-                    "description": "MarketplaceSubscription provisioning failed."
-                },
-                {
-                    "value": "Updating",
-                    "description": "MarketplaceSubscription is being updated."
-                },
-                {
-                    "value": "Canceled"
-                }
-            ]
-        },
-        "additionalProperties": false
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Updating",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Creating",
+            "description": "MarketplaceSubscription is being created."
+          },
+          {
+            "value": "Deleting",
+            "description": "MarketplaceSubscription is being deleted."
+          },
+          {
+            "value": "Succeeded",
+            "description": "MarketplaceSubscription is successfully provisioned."
+          },
+          {
+            "value": "Failed",
+            "description": "MarketplaceSubscription provisioning failed."
+          },
+          {
+            "value": "Updating",
+            "description": "MarketplaceSubscription is being updated."
+          },
+          {
+            "value": "Canceled"
+          }
+        ]
+      },
+      "additionalProperties": false
     },
     "MarketplaceSubscriptionResource": {
-        "description": "Azure Resource Manager resource envelope.",
-        "required": [
-            "properties"
-        ],
-        "type": "object",
-        "allOf": [
-            {
-                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-            }
-        ],
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
         "properties": {
-            "properties": {
-                "description": "[Required] Additional attributes of the entity.",
-                "$ref": "#/definitions/MarketplaceSubscription"
-            }
-        },
-        "x-ms-client-name": "MarketplaceSubscription",
-        "additionalProperties": false
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/MarketplaceSubscription"
+        }
+      },
+      "x-ms-client-name": "MarketplaceSubscription",
+      "additionalProperties": false
     },
     "MarketplaceSubscriptionResourceArmPaginatedResult": {
-        "description": "A paginated list of MarketplaceSubscription entities.",
-        "type": "object",
-        "properties": {
-            "nextLink": {
-                "description": "The link to the next page of MarketplaceSubscription objects. If null, there are no additional pages.",
-                "type": "string"
-            },
-            "value": {
-                "description": "An array of objects of type MarketplaceSubscription.",
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/MarketplaceSubscriptionResource"
-                }
-            }
+      "description": "A paginated list of MarketplaceSubscription entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of MarketplaceSubscription objects. If null, there are no additional pages.",
+          "type": "string"
         },
-        "additionalProperties": false
+        "value": {
+          "description": "An array of objects of type MarketplaceSubscription.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MarketplaceSubscriptionResource"
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "MarketplaceSubscriptionStatus": {
-        "enum": [
-            "PendingFulfillmentStart",
-            "Subscribed",
-            "Suspended",
-            "Unsubscribed"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-            "name": "MarketplaceSubscriptionStatus",
-            "modelAsString": true,
-            "values": [
-                {
-                    "value": "PendingFulfillmentStart",
-                    "description": "The Marketplace Subscription is being fulfilled."
-                },
-                {
-                    "value": "Subscribed",
-                    "description": "The customer can now use the Marketplace Subscription's\nmodel and will be billed."
-                },
-                {
-                    "value": "Suspended",
-                    "description": "The customer could not be billed for the Marketplace Subscription.\nThe customer will not be able to access the model."
-                },
-                {
-                    "value": "Unsubscribed",
-                    "description": "Marketplace Subscriptions reach this state in response to an explicit customer or CSP action.\nA Marketplace Subscription can also be canceled implicitly, as a result of nonpayment of dues,\nafter being in the Suspended state for some time."
-                }
-            ]
-        },
-        "additionalProperties": false
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "PendingFulfillmentStart",
+            "description": "The Marketplace Subscription is being fulfilled."
+          },
+          {
+            "value": "Subscribed",
+            "description": "The customer can now use the Marketplace Subscription's\nmodel and will be billed."
+          },
+          {
+            "value": "Suspended",
+            "description": "The customer could not be billed for the Marketplace Subscription.\nThe customer will not be able to access the model."
+          },
+          {
+            "value": "Unsubscribed",
+            "description": "Marketplace Subscriptions reach this state in response to an explicit customer or CSP action.\nA Marketplace Subscription can also be canceled implicitly, as a result of nonpayment of dues,\nafter being in the Suspended state for some time."
+          }
+        ]
+      },
+      "additionalProperties": false
     },
     "MaterializationComputeResource": {
       "description": "Dto object representing compute resource",
