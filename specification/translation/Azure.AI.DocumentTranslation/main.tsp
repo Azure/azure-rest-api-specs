@@ -1,9 +1,15 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "./routes.tsp";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
+
 @service({
   title: "Batch Document Translation Client",
 })
@@ -15,4 +21,12 @@ using TypeSpec.Http;
   }
 )
 @doc("// FIXME: (miissing-service-description) Add service description")
+@versioned(BatchDocumentTranslationClient.Versions)
 namespace BatchDocumentTranslationClient;
+
+/** The Azure.AI.DocumentTranslation versions. */
+enum Versions {
+  /** BatchDocumentTranslationClient versions. */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  `v1.0`,
+}
