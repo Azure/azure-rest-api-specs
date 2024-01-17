@@ -3,7 +3,7 @@
   "info": {
     "title": "ProgrammableConnectivity",
     "version": "2024-01-15-preview",
-    "description": "Azure Programmable Connectivity Provider management API",
+    "description": "Azure Programmable Connectivity Provider management API.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -50,7 +50,7 @@
         "tags": [
           "OperatorApiConnections"
         ],
-        "description": "List OperatorApiConnection resources by subscription ID",
+        "description": "List OperatorApiConnection resources by subscription ID.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -197,13 +197,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OperatorApiConnection' update operation succeeded",
+            "description": "Resource 'OperatorApiConnection' update operation succeeded.",
             "schema": {
               "$ref": "#/definitions/OperatorApiConnection"
             }
           },
           "201": {
-            "description": "Resource 'OperatorApiConnection' create operation succeeded. Although the resource may be created but there could be other operations in progress on the resource. The current status can be queried via an HTTP GET operation on the URL returned in the HTTP header 'azure-async-operation' of the response.",
+            "description": "Resource 'OperatorApiConnection' create operation succeeded.",
             "schema": {
               "$ref": "#/definitions/OperatorApiConnection"
             },
@@ -237,7 +237,7 @@
         "tags": [
           "OperatorApiConnections"
         ],
-        "description": "Update an Operator API Connection",
+        "description": "Update an Operator API Connection.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -304,7 +304,7 @@
         "tags": [
           "OperatorApiConnections"
         ],
-        "description": "Delete an Operator API Connection",
+        "description": "Delete an Operator API Connection.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -362,7 +362,7 @@
   "definitions": {
     "AccountType": {
       "type": "string",
-      "description": "The Account Type of the Operator API Connections",
+      "description": "The Account Type of the Operator API Connections.",
       "enum": [
         "AzureManaged",
         "UserManaged"
@@ -374,12 +374,12 @@
           {
             "name": "AzureManaged",
             "value": "AzureManaged",
-            "description": "Managed by Azure on-behalf-of the user"
+            "description": "Managed by Azure on-behalf-of the user."
           },
           {
             "name": "UserManaged",
             "value": "UserManaged",
-            "description": "Managed by the User themselves on the Operator end"
+            "description": "Managed by the User themselves on the Operator end."
           }
         ]
       }
@@ -467,7 +467,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items."
         }
       },
       "required": [
@@ -489,15 +489,15 @@
         },
         "operatorApiOfferingId": {
           "$ref": "./common.json#/definitions/OperatorApiOfferingResourceId",
-          "description": "Reference to the Operator API Offering Resource ID"
+          "description": "Reference to the Operator API Offering Resource ID."
         },
         "camaraApiName": {
           "type": "string",
-          "description": "Name of the CAMARA defined Network API user has selected for the current operator in the country/region provided in the linked Operator API Offering."
+          "description": "Network API user has selected for the current operator in the country/region provided in the linked Operator API Offering."
         },
         "accountType": {
           "$ref": "#/definitions/AccountType",
-          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged"
+          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged."
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",
@@ -535,7 +535,7 @@
     },
     "OperatorApiConnectionUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the OperatorApiConnection.",
+      "description": "The updatable properties of the OperatorApiConnection. These properties can be updated only when the `accountType` is `UserManaged`.",
       "allOf": [
         {
           "$ref": "#/definitions/AppCredentials"
@@ -544,11 +544,11 @@
       "properties": {
         "camaraApiName": {
           "type": "string",
-          "description": "Name of the CAMARA defined Network API user has selected for the current operator in the country/region provided in the linked Operator API Offering."
+          "description": "Name of the Network API user has selected for the current operator in the country/region provided in the linked Operator API Offering."
         },
         "accountType": {
           "$ref": "#/definitions/AccountType",
-          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged"
+          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged."
         }
       }
     }
@@ -557,10 +557,10 @@
     "OperatorApiConnectionName": {
       "name": "operatorApiConnectionName",
       "in": "path",
-      "description": "Azure Programmable Connectivity (APC) Operator API Connection Name",
+      "description": "Azure Programmable Connectivity (APC) Operator API Connection Name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]{3,64}$"
+      "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
     }
   }
 }

@@ -3,7 +3,7 @@
   "info": {
     "title": "ProgrammableConnectivity",
     "version": "2024-01-15-preview",
-    "description": "Azure Programmable Connectivity Provider management API",
+    "description": "Azure Programmable Connectivity Provider management API.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -89,7 +89,7 @@
         "tags": [
           "OperatorApiOfferings"
         ],
-        "description": "List OperatorApiOffering resources by subscription ID",
+        "description": "List OperatorApiOffering resources by subscription ID.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -135,7 +135,7 @@
   "definitions": {
     "OperatorApiOffering": {
       "type": "object",
-      "description": "A Programmable Connectivity Operator API Offerings resource. This is a readonly resource that helps get the available Operator API Offerings.",
+      "description": "A Programmable Connectivity Operator API Offerings resource. This is a readonly resource that indicates which Operator Network APIs are available in the user's subscription.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/OperatorApiOfferingProperties",
@@ -158,7 +158,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The OperatorApiOffering items on this page",
+          "description": "The OperatorApiOffering items on this page.",
           "items": {
             "$ref": "#/definitions/OperatorApiOffering"
           }
@@ -166,7 +166,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items."
         }
       },
       "required": [
@@ -175,7 +175,7 @@
     },
     "OperatorApiOfferingProperties": {
       "type": "object",
-      "description": "Operator API Offering properties",
+      "description": "Operator API Offering properties.",
       "properties": {
         "operatorName": {
           "type": "string",
@@ -187,7 +187,7 @@
         },
         "supportedLocations": {
           "type": "array",
-          "description": "List of country/region names where this offering is being supported on Azure.",
+          "description": "List of Azure regions where this offer is supported.",
           "x-ms-identifiers": [
             "supportedLocations"
           ],
@@ -217,7 +217,7 @@
         },
         "limits": {
           "type": "string",
-          "description": "Details about limits set by the operator for using APIs in this offering. The limits shall be ensured by the operators, if any."
+          "description": "The limits, if any, will be imposed by the operator."
         },
         "marketplaceProperties": {
           "$ref": "#/definitions/MarketplaceProperties",
@@ -253,52 +253,16 @@
           "description": "Azure marketplace Term ID for this offering."
         }
       }
-    },
-    "OpenApiGatewayAuthenticationMode": {
-      "type": "string",
-      "description": "The authentication mode accepted by the Open API based Network APIs hosted by the operators.",
-      "enum": [
-        "OpenGatewayCiba",
-        "OAuthClientCreds",
-        "Basic",
-        "Custom"
-      ],
-      "x-ms-enum": {
-        "name": "OpenApiGatewayAuthenticationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "OpenGatewayCiba",
-            "value": "OpenGatewayCiba",
-            "description": "Open API Gateway CIBA based authentication. OIDC Client-Initiated Back-channel Authentication (CIBA) flow like regular OpenID Connect."
-          },
-          {
-            "name": "OAuthClientCreds",
-            "value": "OAuthClientCreds",
-            "description": "Standard OAuth2 based client credentials authentication flow."
-          },
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "Basic auth flow where the username and password is shared in the Authorization header."
-          },
-          {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "Custom auth flow where the authentication is done by the operator."
-          }
-        ]
-      }
     }
   },
   "parameters": {
     "OperatorApiOfferingNameParamter": {
       "name": "operatorApiOfferingName",
       "in": "path",
-      "description": "APC Gateway Offering Name",
+      "description": "APC Gateway Offering Name.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]{3,64}$"
+      "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
     },
     "FilterParameter": {
       "name": "$filter",
