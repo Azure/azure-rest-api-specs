@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Elastic",
-    "version": "2023-11-01-preview"
+    "version": "202z-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -646,6 +646,251 @@
         "x-ms-examples": {
           "ConnectedPartnerResources_List": {
             "$ref": "./examples/ConnectedPartnerResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/openAIIntegration": {
+      "get": {
+        "tags": [
+          "OpenAIIntegration"
+        ],
+        "summary": "List OpenAI integration rule for a given monitor resource.",
+        "operationId": "OpenAI_List",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "monitorName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OpenAIIntegrationRPModelListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OpenAI_List": {
+            "$ref": "./examples/OpenAI_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/openAIIntegration/{integrationName}": {
+      "get": {
+        "tags": [
+          "OpenAIIntegration"
+        ],
+        "summary": "Get OpenAI integration rule for a given monitor resource.",
+        "operationId": "OpenAI_Get",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "monitorName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "integrationName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OpenAIIntegrationRPModel"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenAI_Get": {
+            "$ref": "./examples/OpenAI_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OpenAIIntegration"
+        ],
+        "summary": "Create or update a OpenAI integration rule for a given monitor resource.",
+        "operationId": "OpenAI_CreateOrUpdate",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "monitorName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "integrationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OpenAIIntegrationRPModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OpenAIIntegrationRPModel"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenAI_CreateOrUpdate": {
+            "$ref": "./examples/OpenAI_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OpenAIIntegration"
+        ],
+        "summary": "Delete OpenAI integration rule for a given monitor resource.",
+        "operationId": "OpenAI_Delete",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "monitorName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "integrationName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OpenAIIntegrationRPModel"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenAI_Delete": {
+            "$ref": "./examples/OpenAI_Delete.json"
           }
         }
       }
@@ -2304,6 +2549,48 @@
           "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/MonitoringTagRules"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "OpenAIIntegrationRPModel": {
+      "description": "Capture properties of Open AI resource Integration.",
+      "type": "object",
+      "properties": {
+        "openAIResourceId": {
+          "description": "The resource id of Open AI resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "openAIResourceEndpoint": {
+          "description": "The API endpoint for Open AI resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "key": {
+          "description": "Value of API key for Open AI resource",
+          "type": "string"
+        },
+        "lastRefreshAt": {
+          "format": "date-time",
+          "description": "Last Update Timestamp for key updation",
+          "type": "string"
+        }
+      }
+    },
+    "OpenAIIntegrationRPModelListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenAIIntegrationRPModel"
           }
         },
         "nextLink": {
