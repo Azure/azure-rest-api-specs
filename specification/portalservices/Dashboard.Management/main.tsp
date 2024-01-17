@@ -17,11 +17,12 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-@doc("Allows creation and deletion of Azure Shared Dashboards.")
+@doc("Azure Portal Services API Reference")
 namespace Microsoft.PortalServices;
 
-@doc("The available API versions.")
+@doc("Azure Portal Services Dashboards Management API versions.")
 enum Versions {
+  @doc("Azure Portal Services Dashboards Management API version 2024-01-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_01_01_preview: "2024-01-01-preview",
