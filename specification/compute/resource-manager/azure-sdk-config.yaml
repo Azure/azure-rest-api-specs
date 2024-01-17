@@ -1,17 +1,22 @@
 suppressions:
   sdk: 
-    azure-sdk-for-go:
+    - azure-sdk-for-go:
       - package: armcognitiveservices
         breaking-changes: 
         - Function `*LocalRulestacksClient.ListAppIDs` has been removed
         - Function `*LocalRulestacksClient.ListCountries` has been removed
+        - Function `*LocalRulestacksClient.ListPredefinedURLCategories` has been removed
+      - package: armcompute
+        breaking-changes: 
+        - Type of `CloudServiceExtensionProperties.ProtectedSettings` has been changed from `any` to `interface{}
+        - Function `NewClientFactory` has been removed
         - Function `*LocalRulestacksClient.ListPredefinedURLCategories` has been removed
       - package: armresourcemover
         breaking-changes: 
         - "Type of `OperationStatus.Properties` has been changed from `map[string]interface{}` to `interface{}`"
         - "Type of `OperationsDiscovery.Properties` has been changed from `map[string]interface{}` to `interface{}`"
 
-    azure-sdk-for-js:
+    - azure-sdk-for-js:
       - package: arm-operationalinsights
         breaking-changes:
         - "Removed operation group Schema"
@@ -21,7 +26,7 @@ suppressions:
         - "Interface CanceledSubscriptionId no longer has parameter value"
         - "Interface EnabledSubscriptionId no longer has parameter value"
 
-    azure-sdk-for-python-track2:
+    - azure-sdk-for-python-track2:
       - package: track2_azure-mgmt-sql
         breaking-changes:
         - "Removed operation ReplicationLinksOperations.delete"
