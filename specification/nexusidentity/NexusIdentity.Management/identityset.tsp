@@ -46,8 +46,8 @@ enum ProvisioningState {
 
 @doc("Identity Set Properties defines the properties of the Identity Set.")
 model IdentitySetResourceProperties {
-  @doc("Tenant id in which scope is created.")
-  tenantId: string;
+  @doc("Tenant id in which scopes are present. Identity service should have the User.Read.All permission on this tenant.")
+  scopesTenantId: string;
 
   @doc("List of scopes to be watched")
   eventSubscriptions: Array<EventSubscription>;
@@ -74,7 +74,7 @@ Users should create EventSubscription for each distinct combination of Roles to 
 """)
 model EventSubscription {
   @doc("The name of the event subscription. Event subscription names must be unique in a Identity Set.")
-  eventSubscriptionId: string;
+  eventSubscriptionId?: string;
 
   @doc("""
   Scopes on which roles are to be watched. Valid scope are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
