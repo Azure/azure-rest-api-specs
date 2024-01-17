@@ -165,3 +165,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)

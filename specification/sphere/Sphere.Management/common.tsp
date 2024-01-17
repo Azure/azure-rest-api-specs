@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 
@@ -18,15 +18,20 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 // Common models
 /** Provisioning state of the resource. */
+@doc("Provisioning state of resource.")
 @lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
+
   /** The resource is being provisioned */
   Provisioning,
+
   /** The resource is being updated */
   Updating,
+
   /** The resource is being deleted */
   Deleting,
+
   /** The resource create request has been accepted */
   Accepted,
 }
@@ -35,6 +40,7 @@ enum ProvisioningState {
 enum RegionalDataBoundary {
   /** No data boundary */
   None,
+
   /** EU data boundary */
   EU,
 }
@@ -43,6 +49,7 @@ enum RegionalDataBoundary {
 enum AllowCrashDumpCollection {
   /** Crash dump collection enabled */
   Enabled,
+
   /** Crash dump collection disabled */
   Disabled,
 }
@@ -51,10 +58,13 @@ enum AllowCrashDumpCollection {
 enum CertificateStatus {
   /** Certificate is active */
   Active,
+
   /** Certificate is inactive */
   Inactive,
+
   /** Certificate has expired */
   Expired,
+
   /** Certificate has been revoked */
   Revoked,
 }
@@ -94,8 +104,11 @@ alias StandardListQueryParametersWithCorrectNames = {
   ...CustomMaxPageSizeQueryParameter;
 };
 
-@doc("Response to the action call for count devices in a catalog.")
+@doc("Response to the action call for count devices in a catalog (preview API).")
 model CountDeviceResponse extends CountElementsResponse {}
+
+@doc("Response to the action call for count devices in a catalog.")
+model CountDevicesResponse extends CountElementsResponse {}
 
 @doc("Response of the count for elements.")
 model CountElementsResponse {

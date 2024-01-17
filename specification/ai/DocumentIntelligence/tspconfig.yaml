@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    "default": "sdk/documentintelligence"
+
+emit:
+  - "@azure-tools/typespec-autorest"
+  # - "@azure-tools/typespec-csharp",
+  # - "@azure-tools/typespec-python",
+  # - "@azure-tools/typespec-ts"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DocumentIntelligence.json"
+  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
+  "@azure-tools/typespec-python":
+    "basic-setup-py": true
+    "package-version": 1.0.0b1
+    "package-dir": "azure-ai-documentintelligence"
+    "package-name": "azure-ai-documentintelligence"
+    # "output-path":
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-documentintelligence"
+    namespace: "com.azure.ai.documentintelligence"
+    enable-sync-stack: true
+    custom-types-subpackage: "implementation.models"
+    polling:
+      buildDocumentModel:
+        final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
+      buildClassifier:
+        final-type: com.azure.ai.documentintelligence.models.DocumentClassifierDetails
+      composeModel:
+        final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
+      copyModelTo:
+        final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
+  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  # "@azure-tools/typespec-csharp": true
+  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
+  "@azure-tools/typespec-ts":
+    title: DocumentIntelligence
+    package-dir: "ai-document-intelligence-rest"
+    generateMetadata: true
+    packageDetails:
+      name: "@azure-rest/ai-document-intelligence"
+      description: "Document Intelligence Rest Client"
+      version: "1.0.0-beta.1"

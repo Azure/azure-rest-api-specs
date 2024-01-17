@@ -4177,6 +4177,7 @@
         "taskSlotsPerNode": {
           "type": "integer",
           "format": "int32",
+          "default": 1,
           "title": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool.",
           "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
         },
@@ -4363,6 +4364,7 @@
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
+          "default": "PT15M",
           "title": "The timeout for allocation of compute nodes to the pool.",
           "description": "The default value is 15 minutes. Timeout values use ISO 8601 format. For example, use PT10M for 10 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
@@ -4922,6 +4924,7 @@
         },
         "version": {
           "type": "string",
+          "default": "latest",
           "title": "The version of the Azure Virtual Machines Marketplace image.",
           "description": "A value of 'latest' can be specified to select the latest version of an image. If omitted, the default is 'latest'."
         },
@@ -4969,6 +4972,7 @@
       "properties": {
         "nodeFillType": {
           "type": "string",
+          "default": "Spread",
           "title": "How tasks should be distributed across compute nodes.",
           "enum": [
             "Spread",
@@ -5118,8 +5122,9 @@
         "maxTaskRetryCount": {
           "type": "integer",
           "format": "int32",
+          "default": 0,
           "title": "The maximum number of times the task may be retried.",
-          "description": "The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit."
+          "description": "The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit. Default is 0."
         },
         "waitForSuccess": {
           "type": "boolean",
@@ -5486,6 +5491,7 @@
         },
         "dynamicVnetAssignmentScope": {
           "type": "string",
+          "default": "none",
           "title": "The scope of dynamic vnet assignment.",
           "enum": [
             "none",

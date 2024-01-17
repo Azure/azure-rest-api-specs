@@ -62,8 +62,7 @@ model MultivariateDetectionResult {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @doc("Result identifier that's used to fetch the results of an inference call.")
   @key
-  @format("uuid")
-  resultId: string;
+  resultId: uuid;
 
   @doc("Multivariate anomaly detection status.")
   summary: MultivariateBatchDetectionResultSummary;
@@ -327,8 +326,7 @@ model AnomalyDetectionModel {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @doc("Model identifier.")
   @key
-  @format("uuid")
-  modelId: string;
+  modelId: uuid;
 
   @doc("Date and time (UTC) when the model was created.")
   createdTime: utcDateTime;

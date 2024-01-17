@@ -13,28 +13,68 @@ namespace ContentSafety;
 
 interface TextOperations {
   @summary("Analyze Text")
-  @doc("A sync API for harmful content analysis for text. Currently, we support four categories: Hate, SelfHarm, Sexual, Violence.")
+  @doc("A synchronous API for the analysis of potentially harmful text content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.")
   @route("/text:analyze")
   @post
   analyzeText is Azure.Core.RpcOperation<
     {
       @body
-      @doc("The request of text analysis.")
+      @doc("The text analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeTextOptions;
     },
     AnalyzeTextResult
+  >;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Text Jailbreak")
+  @doc("A synchronous API for the analysis of text jailbreak.")
+  @route("/text:detectJailbreak")
+  @post
+  detectTextJailbreak is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text jailbreak analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: AnalyzeTextJailbreakOptions;
+    },
+    AnalyzeTextJailbreakResult
+  >;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Protected Material")
+  @doc("A synchronous API for the analysis of protected material.")
+  @route("/text:detectProtectedMaterial")
+  @post
+  detectTextProtectedMaterial is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text protected material analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: AnalyzeTextProtectedMaterialOptions;
+    },
+    AnalyzeTextProtectedMaterialResult
   >;
 }
 
 interface ImageOperations {
   @summary("Analyze Image")
-  @doc("A sync API for harmful content analysis for image. Currently, we support four categories: Hate, SelfHarm, Sexual, Violence.")
+  @doc("A synchronous API for the analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.")
   @route("/image:analyze")
   @post
   analyzeImage is Azure.Core.RpcOperation<
     {
-      @doc("The analysis request of the image.")
+      @doc("The image analysis request.")
       @body
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeImageOptions;
     },
     AnalyzeImageResult
@@ -46,13 +86,18 @@ interface BlockOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
+@@projectedName(Azure.Core.Foundations.ResourceBody.resource,
+  "client",
+  "options"
+);
+
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
   @doc("Returns text blocklist details.")
   getTextBlocklist is BlockOps.ResourceRead<TextBlocklist>;
 
   @summary("Create Or Update Text Blocklist")
-  @doc("Updates a text blocklist, if blocklistName does not exist, create a new blocklist.")
+  @doc("Updates a text blocklist. If the blocklistName does not exist, a new blocklist will be created.")
   createOrUpdateTextBlocklist is BlockOps.ResourceCreateOrUpdate<TextBlocklist>;
 
   @summary("Delete Text Blocklist By blocklistName")
@@ -63,30 +108,44 @@ interface TextBlocklists {
   @doc("Get all text blocklists details.")
   listTextBlocklists is BlockOps.ResourceList<TextBlocklist>;
 
-  @summary("Add BlockItems To Text Blocklist")
-  @doc("Add blockItems to a text blocklist. You can add at most 100 BlockItems in one request.")
-  addBlockItems is BlockOps.ResourceAction<
+  @summary("Add or update BlocklistItems To Text Blocklist")
+  @doc("Add or update blocklistItems to a text blocklist. You can add or update at most 100 blocklistItems in one request.")
+  addOrUpdateBlocklistItems is BlockOps.ResourceAction<
     TextBlocklist,
-    AddBlockItemsOptions,
-    AddBlockItemsResult
+    {
+      @doc("Options for adding or updating blocklist items.")
+      @body
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: AddOrUpdateTextBlocklistItemsOptions;
+    },
+    AddOrUpdateTextBlocklistItemsResult
   >;
 
-  @summary("Remove BlockItems From Text Blocklist")
-  @doc("Remove blockItems from a text blocklist. You can remove at most 100 BlockItems in one request.")
-  removeBlockItems is BlockOps.ResourceAction<
+  @summary("Remove BlocklistItems From Text Blocklist")
+  @doc("Remove blocklistItems from a text blocklist. You can remove at most 100 BlocklistItems in one request.")
+  removeBlocklistItems is BlockOps.ResourceAction<
     TextBlocklist,
-    RemoveBlockItemsOptions,
+    {
+      @doc("Options for removing blocklist items.")
+      @body
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: RemoveTextBlocklistItemsOptions;
+    },
     NoContentResponse
   >;
 
-  @summary("Get BlockItem By blocklistName And blockItemId")
-  @doc("Get blockItem By blockItemId from a text blocklist.")
-  getTextBlocklistItem is BlockOps.ResourceRead<TextBlockItem>;
+  @summary("Get BlocklistItem By blocklistName And blocklistItemId")
+  @doc("Get blocklistItem by blocklistName and blocklistItemId from a text blocklist.")
+  getTextBlocklistItem is BlockOps.ResourceRead<TextBlocklistItem>;
 
-  @summary("Get All BlockItems By blocklistName")
-  @doc("Get all blockItems in a text blocklist")
+  @summary("Get All BlocklistItems By blocklistName")
+  @doc("Get all blocklistItems in a text blocklist.")
   listTextBlocklistItems is BlockOps.ResourceList<
-    TextBlockItem,
+    TextBlocklistItem,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 }

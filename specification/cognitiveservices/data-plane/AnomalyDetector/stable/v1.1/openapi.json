@@ -20,15 +20,15 @@
       {
         "name": "Endpoint",
         "in": "path",
-        "required": true,
         "description": "Supported Azure Cognitive Services endpoints (protocol and host name, such as\nhttps://westus2.api.cognitive.microsoft.com).",
+        "required": true,
         "type": "string"
       },
       {
         "name": "ApiVersion",
         "in": "path",
-        "required": true,
         "description": "Api Version",
+        "required": true,
         "type": "string",
         "enum": [
           "v1.1"
@@ -96,8 +96,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
+                "type": "string",
+                "description": "Error code."
               }
             }
           }
@@ -136,8 +136,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
+                "type": "string",
+                "description": "Error code."
               }
             }
           }
@@ -186,8 +186,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
+                "type": "string",
+                "description": "Error code."
               }
             }
           }
@@ -227,8 +227,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
+                "type": "string",
+                "description": "Error code."
               }
             }
           }
@@ -263,8 +263,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
+                "type": "string",
+                "description": "Error code."
               }
             }
           }
@@ -323,8 +323,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
+                "type": "string",
+                "description": "Error code."
               }
             }
           }
@@ -373,8 +373,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
+                "type": "string",
+                "description": "Error code."
               }
             }
           }
@@ -416,8 +416,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
+                "type": "string",
+                "description": "Error code."
               }
             }
           }
@@ -459,8 +459,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
+                "type": "string",
+                "description": "Error code."
               }
             }
           }
@@ -502,8 +502,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
+                "type": "string",
+                "description": "Error code."
               }
             }
           }
@@ -517,6 +517,11 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Multivariate.AlignMode": {
       "type": "string",
       "enum": [
@@ -552,8 +557,7 @@
       "description": "Response of getting a model.",
       "properties": {
         "modelId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Model identifier."
         },
         "createdTime": {
@@ -1018,8 +1022,7 @@
       "description": "Detection results for the resultId value.",
       "properties": {
         "resultId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Result identifier that's used to fetch the results of an inference call."
         },
         "summary": {

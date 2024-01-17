@@ -1,0 +1,3110 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API Center",
+    "version": "2024-03-01",
+    "description": "Azure API Center Resource Provider."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Provider"
+    },
+    {
+      "name": "Services"
+    },
+    {
+      "name": "Environment"
+    },
+    {
+      "name": "MetadataSchema"
+    },
+    {
+      "name": "Workspace"
+    },
+    {
+      "name": "Api"
+    },
+    {
+      "name": "ApiVersion"
+    },
+    {
+      "name": "ApiDefinition"
+    },
+    {
+      "name": "Deployment"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ApiCenter/operations": {
+      "get": {
+        "tags": [
+          "Provider"
+        ],
+        "operationId": "Operations_List",
+        "summary": "List resource provider operations",
+        "description": "Returns a collection of resource provider operations.",
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiCenter/services": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "operationId": "Services_ListBySubscription",
+        "description": "Lists services within an Azure subscription.",
+        "x-ms-examples": {
+          "Services_ListBySubscription": {
+            "$ref": "./examples/Services_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service list.",
+            "schema": {
+              "$ref": "#/definitions/ServiceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_ListByResourceGroup",
+        "description": "Returns a collection of services within the resource group.",
+        "x-ms-examples": {
+          "Services_ListByResourceGroup": {
+            "$ref": "./examples/Services_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Get",
+        "summary": "Get service",
+        "description": "Returns details of the service.",
+        "x-ms-examples": {
+          "Services_Get": {
+            "$ref": "./examples/Services_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_CreateOrUpdate",
+        "summary": "Create or update service",
+        "description": "Creates new or updates existing API.",
+        "x-ms-examples": {
+          "Services_Create": {
+            "$ref": "./examples/Services_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "The service entity.",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          },
+          "201": {
+            "description": "The service was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Update",
+        "summary": "Update service",
+        "description": "Updates existing service.",
+        "x-ms-examples": {
+          "Services_Update": {
+            "$ref": "./examples/Services_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "The service properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/ServiceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Delete",
+        "summary": "Delete service",
+        "description": "Deletes specified service.",
+        "x-ms-examples": {
+          "Services_Delete": {
+            "$ref": "./examples/Services_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service was successfully deleted."
+          },
+          "204": {
+            "description": "The service was successfully deleted."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/exportMetadataSchema": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "MetadataSchema"
+        ],
+        "operationId": "Services_ExportMetadataSchema",
+        "summary": "Export effective metadata schema",
+        "description": "Exports the effective metadata schema.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetadataSchemaExportRequest"
+            },
+            "description": "The metadata schema request details."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The result of export operation.",
+            "schema": {
+              "$ref": "#/definitions/MetadataSchemaExportResult"
+            }
+          },
+          "202": {
+            "description": "Request to export the metadata schema was accepted. The 'Location' response header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Services_ExportMetadataSchema": {
+            "$ref": "./examples/Services_ExportMetadataSchema.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/metadataSchemas": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ODataFilterParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "MetadataSchema"
+        ],
+        "operationId": "MetadataSchemas_List",
+        "summary": "List metadata schemas",
+        "description": "Returns a collection of metadata schemas.",
+        "responses": {
+          "200": {
+            "description": "Paginated collection of metadata schemas.",
+            "schema": {
+              "$ref": "#/definitions/MetadataSchemaCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataSchemas_List": {
+            "$ref": "./examples/MetadataSchemas_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/metadataSchemas/{metadataSchemaName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/MetadataSchemaNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "operationId": "MetadataSchemas_Get",
+        "summary": "Get metadata schema",
+        "description": "Returns details of the metadata schema.",
+        "tags": [
+          "MetadataSchema"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the metadata schema entity.",
+            "schema": {
+              "$ref": "#/definitions/MetadataSchema"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataSchemas_Get": {
+            "$ref": "./examples/MetadataSchemas_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MetadataSchema"
+        ],
+        "operationId": "MetadataSchemas_CreateOrUpdate",
+        "summary": "Create or update metadata schema",
+        "description": "Creates new or updates existing metadata schema.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetadataSchema"
+            },
+            "description": "Metadata schema entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Metadata schema was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/MetadataSchema"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "Metadata schema was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/MetadataSchema"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataSchemas_CreateOrUpdate": {
+            "$ref": "./examples/MetadataSchemas_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MetadataSchema"
+        ],
+        "operationId": "MetadataSchemas_Delete",
+        "summary": "Delete metadata schema",
+        "description": "Deletes specified metadata schema.",
+        "responses": {
+          "200": {
+            "description": "The metadata schema was successfully deleted."
+          },
+          "204": {
+            "description": "The metadata schema was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataSchemas_Delete": {
+            "$ref": "./examples/MetadataSchemas_Delete.json"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "MetadataSchema"
+        ],
+        "operationId": "MetadataSchemas_Head",
+        "summary": "Check if metadata schema exists",
+        "description": "Checks if specified metadata schema exists.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetadataSchemas_Head": {
+            "$ref": "./examples/MetadataSchemas_Head.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_List",
+        "summary": "List workspaces",
+        "description": "Returns a collection of workspaces.",
+        "responses": {
+          "200": {
+            "description": "Paginated collection of workspaces.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_List": {
+            "$ref": "./examples/Workspaces_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ODataFilterParameter"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "operationId": "Workspaces_Get",
+        "summary": "Get workspace",
+        "description": "Returns details of the workspace.",
+        "tags": [
+          "Workspace"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the workspace entity.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Get": {
+            "$ref": "./examples/Workspaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_CreateOrUpdate",
+        "summary": "Create or update workspace",
+        "description": "Creates new or updates existing workspace.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": "Workspace entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The workspace was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "The workspace was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspace_CreateOrUpdate": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_Delete",
+        "summary": "Delete workspace",
+        "description": "Deletes specified workspace.",
+        "responses": {
+          "200": {
+            "description": "The workspace was successfully deleted."
+          },
+          "204": {
+            "description": "The workspace was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Delete": {
+            "$ref": "./examples/Workspaces_Delete.json"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_Head",
+        "summary": "Check if workspace exists",
+        "description": "Checks if specified workspace exists.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_Head": {
+            "$ref": "./examples/Workspaces_Head.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis": {
+      "get": {
+        "tags": [
+          "Api"
+        ],
+        "operationId": "Apis_List",
+        "summary": "List APIs",
+        "description": "Returns a collection of APIs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ODataFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated collection of APIs.",
+            "schema": {
+              "$ref": "#/definitions/ApiCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apis_List": {
+            "$ref": "./examples/Apis_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "operationId": "Apis_Get",
+        "summary": "Get API",
+        "description": "Returns details of the API.",
+        "tags": [
+          "Api"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the API entity.",
+            "schema": {
+              "$ref": "#/definitions/Api"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apis_Get": {
+            "$ref": "./examples/Apis_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Api"
+        ],
+        "operationId": "Apis_CreateOrUpdate",
+        "summary": "Create or update API",
+        "description": "Creates new or updates existing API.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Api"
+            },
+            "description": "API entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Api"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "API was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Api"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apis_CreateOrUpdate": {
+            "$ref": "./examples/Apis_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Api"
+        ],
+        "operationId": "Apis_Delete",
+        "summary": "Delete API",
+        "description": "Deletes specified API.",
+        "responses": {
+          "200": {
+            "description": "The API was successfully deleted."
+          },
+          "204": {
+            "description": "The API was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apis_Delete": {
+            "$ref": "./examples/Apis_Delete.json"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Api"
+        ],
+        "operationId": "Apis_Head",
+        "summary": "Check if API exists",
+        "description": "Checks if specified API exists.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apis_Head": {
+            "$ref": "./examples/Apis_Head.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ODataFilterParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ApiVersion"
+        ],
+        "operationId": "ApiVersions_List",
+        "summary": "List API versions",
+        "description": "Returns a collection of API versions.",
+        "responses": {
+          "200": {
+            "description": "Paginated collection of API versions.",
+            "schema": {
+              "$ref": "#/definitions/ApiVersionCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiVersions_List": {
+            "$ref": "./examples/ApiVersions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ApiVersion"
+        ],
+        "summary": "Get API version",
+        "operationId": "ApiVersions_Get",
+        "description": "Returns details of the API version.",
+        "responses": {
+          "200": {
+            "description": "The response body contains the API version entity.",
+            "schema": {
+              "$ref": "#/definitions/ApiVersion"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiVersions_Get": {
+            "$ref": "./examples/ApiVersions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiVersion"
+        ],
+        "summary": "Create or update API version",
+        "operationId": "ApiVersions_CreateOrUpdate",
+        "description": "Creates new or updates existing API version.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiVersion"
+            },
+            "description": "API version entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API version was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ApiVersion"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "API version was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ApiVersion"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiVersions_CreateOrUpdate": {
+            "$ref": "./examples/ApiVersions_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiVersion"
+        ],
+        "summary": "Delete API version",
+        "operationId": "ApiVersions_Delete",
+        "description": "Deletes specified API version",
+        "responses": {
+          "200": {
+            "description": "The API version was successfully deleted."
+          },
+          "204": {
+            "description": "The API version was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiVersions_Delete": {
+            "$ref": "./examples/ApiVersions_Delete.json"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "ApiVersion"
+        ],
+        "summary": "Check if API version exists",
+        "operationId": "ApiVersions_Head",
+        "description": "Checks if specified API version exists.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiVersions_Head": {
+            "$ref": "./examples/ApiVersions_Head.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ODataFilterParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ApiDefinition"
+        ],
+        "operationId": "ApiDefinitions_List",
+        "summary": "List API definitions",
+        "description": "Returns a collection of API definitions.",
+        "responses": {
+          "200": {
+            "description": "Paginated collection of API definitions.",
+            "schema": {
+              "$ref": "#/definitions/ApiDefinitionCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_List": {
+            "$ref": "./examples/ApiDefinitions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiDefinitionNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ApiDefinition"
+        ],
+        "summary": "Get API definition",
+        "operationId": "ApiDefinitions_Get",
+        "description": "Returns details of the API definition.",
+        "responses": {
+          "200": {
+            "description": "The response body contains the API definition entity.",
+            "schema": {
+              "$ref": "#/definitions/ApiDefinition"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state definition. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_Get": {
+            "$ref": "./examples/ApiDefinitions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiDefinition"
+        ],
+        "operationId": "ApiDefinitions_CreateOrUpdate",
+        "summary": "Create or update API definition",
+        "description": "Creates new or updates existing API definition.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiDefinition"
+            },
+            "description": "API definition entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API definition was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ApiDefinition"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state definition. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "API definition was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ApiDefinition"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state definition. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_CreateOrUpdate": {
+            "$ref": "./examples/ApiDefinitions_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiDefinition"
+        ],
+        "operationId": "ApiDefinitions_Delete",
+        "summary": "Delete API definition",
+        "description": "Deletes specified API definition.",
+        "responses": {
+          "200": {
+            "description": "The API definition was successfully deleted."
+          },
+          "204": {
+            "description": "The API definition was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_Delete": {
+            "$ref": "./examples/ApiDefinitions_Delete.json"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "ApiDefinition"
+        ],
+        "summary": "Check if API definition exists",
+        "operationId": "ApiDefinitions_Head",
+        "description": "Checks if specified API definition exists.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_Head": {
+            "$ref": "./examples/ApiDefinitions_Head.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}/importSpecification": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiDefinitionNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "ApiVersion"
+        ],
+        "summary": "Import API specification",
+        "operationId": "ApiDefinitions_ImportSpecification",
+        "description": "Imports the API specification.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiSpecImportRequest"
+            },
+            "description": "The API specification source entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The API specification was successfully imported."
+          },
+          "202": {
+            "description": "Request to import an API specification was accepted. The 'Location' response header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_ImportSpecification": {
+            "$ref": "./examples/ApiDefinitions_ImportSpecification.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}/exportSpecification": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiDefinitionNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "ApiVersion"
+        ],
+        "summary": "Export API specification",
+        "operationId": "ApiDefinitions_ExportSpecification",
+        "description": "Exports the API specification.",
+        "responses": {
+          "200": {
+            "description": "The result of export operation.",
+            "schema": {
+              "$ref": "#/definitions/ApiSpecExportResult"
+            }
+          },
+          "202": {
+            "description": "Request to export the API specification was accepted. The 'Location' response header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_ExportSpecification": {
+            "$ref": "./examples/ApiDefinitions_ExportSpecification.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/deployments": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ODataFilterParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Deployment"
+        ],
+        "operationId": "Deployments_List",
+        "summary": "List deployments",
+        "description": "Returns a collection of API deployments.",
+        "responses": {
+          "200": {
+            "description": "Paginated collection of API deployments.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_List": {
+            "$ref": "./examples/Deployments_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/apis/{apiName}/deployments/{deploymentName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiDeploymentNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "Deployment"
+        ],
+        "summary": "Delete API deployment",
+        "operationId": "Deployments_Delete",
+        "description": "Deletes API deployment.",
+        "responses": {
+          "200": {
+            "description": "The API deployment was successfully deleted."
+          },
+          "204": {
+            "description": "The API deployment was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Delete": {
+            "$ref": "./examples/Deployments_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Deployment"
+        ],
+        "operationId": "Deployments_Get",
+        "summary": "Get API deployment",
+        "description": "Returns details of the API deployment.",
+        "responses": {
+          "200": {
+            "description": "The response body contains the API deployment entity.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Get": {
+            "$ref": "./examples/Deployments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Deployment"
+        ],
+        "operationId": "Deployments_CreateOrUpdate",
+        "summary": "Create or update API deployment",
+        "description": "Creates new or updates existing API deployment.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "API deployment entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API deployment was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "API deployment was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_CreateOrUpdate": {
+            "$ref": "./examples/Deployments_CreateOrUpdate.json"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Deployment"
+        ],
+        "operationId": "Deployments_Head",
+        "summary": "Check if API deployment exists",
+        "description": "Checks if specified API deployment exists.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Head": {
+            "$ref": "./examples/Deployments_Head.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/environments": {
+      "get": {
+        "tags": [
+          "Environment"
+        ],
+        "operationId": "Environments_List",
+        "summary": "List environments",
+        "description": "Returns a collection of environments.",
+        "responses": {
+          "200": {
+            "description": "The response body contains the environment entity.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_List": {
+            "$ref": "./examples/Environments_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ODataFilterParameter"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/environments/{environmentName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/EnvironmentNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "put": {
+        "tags": [
+          "Environment"
+        ],
+        "operationId": "Environments_CreateOrUpdate",
+        "summary": "Create or update environment",
+        "description": "Creates new or updates existing environment.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            },
+            "description": "Environment entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The environment was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "The environment was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_CreateOrUpdate": {
+            "$ref": "./examples/Environments_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Environment"
+        ],
+        "operationId": "Environments_Delete",
+        "summary": "Delete environment",
+        "description": "Deletes the environment.",
+        "responses": {
+          "200": {
+            "description": "The environment was successfully deleted."
+          },
+          "204": {
+            "description": "The environment was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Delete": {
+            "$ref": "./examples/Environments_Delete.json"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Environment"
+        ],
+        "operationId": "Environments_Head",
+        "summary": "Check if environment exists",
+        "description": "Checks if specified environment exists.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Head": {
+            "$ref": "./examples/Environments_Head.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Environment"
+        ],
+        "operationId": "Environments_Get",
+        "summary": "Get environment",
+        "description": "Returns details of the environment.",
+        "responses": {
+          "200": {
+            "description": "The response body contains the environment entity.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Get": {
+            "$ref": "./examples/Environments_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the service.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "Service": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceProperties",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+      },
+      "description": "The service entity.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ServiceCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Service"
+          },
+          "x-typespec-name": "Service[]",
+          "description": "The Service items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a Service list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "ServiceProperties": {
+      "type": "object",
+      "description": "The properties of the service.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      },
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ]
+    },
+    "ServiceUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The service properties to be updated."
+    },
+    "MetadataSchema": {
+      "type": "object",
+      "title": "Metadata schema",
+      "description": "Metadata schema entity. Used to define metadata for the entities in API catalog.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MetadataSchemaProperties"
+        }
+      }
+    },
+    "MetadataSchemaProperties": {
+      "type": "object",
+      "title": "Metadata schema properties",
+      "description": "Metadata schema properties.",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "description": "The schema defining the type."
+        },
+        "assignedTo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataAssignment"
+          },
+          "x-ms-identifiers": [
+            "entity"
+          ]
+        }
+      },
+      "required": [
+        "schema"
+      ]
+    },
+    "MetadataSchemaCollection": {
+      "type": "object",
+      "title": "Metadata schema collection",
+      "description": "Paginated collection of metadata schemas.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataSchema"
+          },
+          "description": "Page items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "title": "Workspace",
+      "description": "Workspace entity.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceProperties"
+        }
+      }
+    },
+    "WorkspaceProperties": {
+      "title": "Workspace properties",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Workspace title.",
+          "example": "Contoso API contributors",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "Workspace description."
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "description": "Workspace properties."
+    },
+    "WorkspaceCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          },
+          "description": "Page items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "title": "Workspace collection",
+      "description": "Paginated collection of workspaces."
+    },
+    "Api": {
+      "type": "object",
+      "title": "API",
+      "description": "API entity.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiProperties"
+        }
+      }
+    },
+    "ApiProperties": {
+      "type": "object",
+      "title": "API properties",
+      "description": "API properties.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "API title.",
+          "example": "Echo API",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "kind": {
+          "type": "string",
+          "title": "API kind",
+          "description": "Kind of API. For example, REST or GraphQL.",
+          "enum": [
+            "rest",
+            "graphql",
+            "grpc",
+            "soap",
+            "webhook",
+            "websocket"
+          ],
+          "x-ms-enum": {
+            "name": "ApiKind",
+            "modelAsString": true
+          },
+          "example": "graphql"
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description of the API.",
+          "maxLength": 1000
+        },
+        "summary": {
+          "type": "string",
+          "description": "Short description of the API.",
+          "maxLength": 200
+        },
+        "lifecycleStage": {
+          "$ref": "#/definitions/LifecycleStage",
+          "readOnly": true
+        },
+        "termsOfService": {
+          "$ref": "#/definitions/TermsOfService"
+        },
+        "externalDocumentation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExternalDocumentation"
+          },
+          "maxItems": 20,
+          "x-ms-identifiers": []
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          },
+          "x-ms-identifiers": []
+        },
+        "license": {
+          "$ref": "#/definitions/License"
+        },
+        "customProperties": {
+          "$ref": "#/definitions/CustomProperties"
+        }
+      },
+      "required": [
+        "title",
+        "kind"
+      ]
+    },
+    "ApiCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Api"
+          },
+          "description": "Page items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "title": "API collection",
+      "description": "Paginated collection of APIs."
+    },
+    "ApiVersion": {
+      "type": "object",
+      "title": "API version",
+      "description": "API version entity.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApiVersionProperties": {
+      "type": "object",
+      "title": "API version properties",
+      "description": "API version properties entity.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "API version title.",
+          "example": "1.0.1",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "lifecycleStage": {
+          "$ref": "#/definitions/LifecycleStage"
+        }
+      },
+      "required": [
+        "title",
+        "lifecycleStage"
+      ]
+    },
+    "ApiVersionCollection": {
+      "type": "object",
+      "title": "API version collection",
+      "description": "Paginated collection of API versions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          },
+          "description": "Page items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "ApiDefinition": {
+      "type": "object",
+      "title": "API definition",
+      "description": "API definition entity.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiDefinitionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApiDefinitionProperties": {
+      "type": "object",
+      "title": "API definition properties",
+      "description": "API definition properties entity.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "API definition title.",
+          "example": "OpenAPI",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "API definition description."
+        },
+        "specification": {
+          "type": "object",
+          "description": "API specification details.",
+          "readOnly": true,
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Specification name.",
+              "example": "openapi"
+            },
+            "version": {
+              "type": "string",
+              "description": "Specification version.",
+              "example": "3.0.1"
+            }
+          }
+        }
+      },
+      "required": [
+        "title"
+      ]
+    },
+    "ApiDefinitionCollection": {
+      "type": "object",
+      "title": "API version collection",
+      "description": "Paginated collection of API definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiDefinition"
+          },
+          "description": "Page items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "Environment": {
+      "title": "Environment",
+      "type": "object",
+      "description": "Environment entity.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnvironmentProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "EnvironmentProperties": {
+      "type": "object",
+      "title": "Environment entity properties",
+      "description": "Environment properties entity.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Environment title.",
+          "example": "Contoso Europe Azure API Management",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "title": "Description.",
+          "example": "The primary Azure API Management service for the European division of Contoso."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Environment kind.",
+          "enum": [
+            "development",
+            "testing",
+            "staging",
+            "production"
+          ],
+          "x-ms-enum": {
+            "name": "EnvironmentKind",
+            "modelAsString": true
+          },
+          "example": "production"
+        },
+        "server": {
+          "$ref": "#/definitions/EnvironmentServer"
+        },
+        "onboarding": {
+          "$ref": "#/definitions/Onboarding"
+        },
+        "customProperties": {
+          "$ref": "#/definitions/CustomProperties"
+        }
+      },
+      "required": [
+        "title",
+        "kind"
+      ]
+    },
+    "EnvironmentCollection": {
+      "type": "object",
+      "title": "Environments collection",
+      "description": "Paginated collection of environments.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Environment"
+          },
+          "description": "Page items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "Deployment": {
+      "type": "object",
+      "title": "API deployment",
+      "description": "API deployment entity.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeploymentProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "DeploymentProperties": {
+      "type": "object",
+      "title": "API deployment properties",
+      "description": "API deployment entity properties.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "API deployment title",
+          "example": "Production deployment",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description of the deployment.",
+          "maxLength": 500,
+          "example": "Public cloud production deployment."
+        },
+        "environmentId": {
+          "type": "string",
+          "description": "API center-scoped environment resource ID.",
+          "example": "/workspaces/default/environments/production"
+        },
+        "definitionId": {
+          "type": "string",
+          "description": "API center-scoped definition resource ID.",
+          "example": "/workspaces/default/apis/echo-api/versions/2023-01-01/definitions/openapi"
+        },
+        "state": {
+          "$ref": "#/definitions/DeploymentState"
+        },
+        "server": {
+          "$ref": "#/definitions/DeploymentServer"
+        },
+        "customProperties": {
+          "$ref": "#/definitions/CustomProperties"
+        }
+      }
+    },
+    "DeploymentCollection": {
+      "type": "object",
+      "title": "API deployment collection",
+      "description": "Paginated collection of API deployments.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          },
+          "description": "Page items.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "ApiSpecImportRequest": {
+      "type": "object",
+      "description": "The API specification source entity properties.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of the API specification source."
+        },
+        "format": {
+          "type": "string",
+          "description": "Format of the API specification source.",
+          "enum": [
+            "inline",
+            "link"
+          ],
+          "x-ms-enum": {
+            "name": "ApiSpecImportSourceFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "inline",
+                "description": "The inlined content of a specification document."
+              },
+              {
+                "value": "link",
+                "description": "The link to a specification document hosted on a publicly accessible internet address."
+              }
+            ]
+          }
+        },
+        "specification": {
+          "type": "object",
+          "description": "API specification details.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Specification name.",
+              "example": "openapi"
+            },
+            "version": {
+              "type": "string",
+              "description": "Specification version.",
+              "example": "3.0.1"
+            }
+          }
+        }
+      }
+    },
+    "ApiSpecExportResult": {
+      "type": "object",
+      "description": "The API specification export result.",
+      "properties": {
+        "format": {
+          "type": "string",
+          "enum": [
+            "link",
+            "inline"
+          ],
+          "x-ms-enum": {
+            "name": "ApiSpecExportResultFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "inline",
+                "description": "The inlined content of a specification document."
+              },
+              {
+                "value": "link",
+                "description": "The link to the result of the export operation. The URL is valid for 5 minutes."
+              }
+            ]
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "The result of the export operation."
+        }
+      }
+    },
+    "MetadataSchemaExportRequest": {
+      "type": "object",
+      "description": "The metadata schema export request.",
+      "properties": {
+        "assignedTo": {
+          "type": "string",
+          "description": "An entity the metadata schema is requested for.",
+          "enum": [
+            "api",
+            "environment",
+            "deployment"
+          ],
+          "x-ms-enum": {
+            "name": "MetadataAssignmentEntity",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MetadataSchemaExportResult": {
+      "type": "object",
+      "description": "The metadata schema export result.",
+      "properties": {
+        "format": {
+          "type": "string",
+          "enum": [
+            "inline",
+            "link"
+          ],
+          "x-ms-enum": {
+            "name": "MetadataSchemaExportFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "inline",
+                "description": "The inlined content of a schema document."
+              },
+              {
+                "value": "link",
+                "description": "The link to a schema document. The URL is valid for 5 minutes."
+              }
+            ]
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "The result of the export operation."
+        }
+      }
+    },
+    "CustomProperties": {
+      "title": "Custom properties",
+      "description": "The custom metadata defined for API catalog entities.",
+      "type": "object"
+    },
+    "LifecycleStage": {
+      "type": "string",
+      "description": "Current lifecycle stage of the API.",
+      "enum": [
+        "design",
+        "development",
+        "testing",
+        "preview",
+        "production",
+        "deprecated",
+        "retired"
+      ],
+      "x-ms-enum": {
+        "name": "LifecycleStage",
+        "modelAsString": true
+      },
+      "example": "development"
+    },
+    "TermsOfService": {
+      "type": "object",
+      "title": "Terms of service",
+      "description": "Terms of service for the API.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "title": "URL",
+          "description": "URL pointing to the terms of service.",
+          "format": "uri",
+          "maxLength": 200,
+          "example": "https://www.contoso.com/terms"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "ExternalDocumentation": {
+      "type": "object",
+      "title": "External documentation",
+      "description": "Additional, external documentation for the API.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the documentation.",
+          "example": "API developer guide",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description of the documentation.",
+          "maxLength": 500
+        },
+        "url": {
+          "title": "URL",
+          "description": "URL pointing to the documentation.",
+          "type": "string",
+          "format": "uri",
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "description": "Name of the contact.",
+          "type": "string",
+          "maxLength": 100,
+          "example": "John Doe"
+        },
+        "url": {
+          "title": "URL",
+          "description": "URL for the contact.",
+          "type": "string",
+          "format": "uri",
+          "maxLength": 200
+        },
+        "email": {
+          "title": "Email address",
+          "description": "Email address of the contact.",
+          "type": "string",
+          "maxLength": 100,
+          "example": "john@contoso.com"
+        }
+      }
+    },
+    "License": {
+      "type": "object",
+      "title": "License",
+      "description": "The license information for the API.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "description": "Name of the license.",
+          "type": "string",
+          "maxLength": 100
+        },
+        "url": {
+          "title": "URL",
+          "description": "URL pointing to the license details. The URL field is mutually exclusive of the identifier field.",
+          "type": "string",
+          "format": "uri",
+          "maxLength": 200
+        },
+        "identifier": {
+          "title": "Identifier",
+          "description": "SPDX license information for the API. The identifier field is mutually exclusive of the URL field.",
+          "type": "string",
+          "format": "uri",
+          "maxLength": 50
+        }
+      }
+    },
+    "EnvironmentServer": {
+      "type": "object",
+      "title": "Server",
+      "description": "Server information of the environment.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the server that represents the environment.",
+          "enum": [
+            "Azure API Management",
+            "Azure compute service",
+            "Apigee API Management",
+            "AWS API Gateway",
+            "Kong API Gateway",
+            "Kubernetes",
+            "MuleSoft API Management"
+          ],
+          "x-ms-enum": {
+            "name": "EnvironmentServerType",
+            "modelAsString": true
+          },
+          "example": "Azure API Management"
+        },
+        "managementPortalUri": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "title": "Management portal URI",
+            "example": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-resource-group/providers/Microsoft.ApiManagement/service/my-api-management-service"
+          },
+          "maxItems": 1
+        }
+      }
+    },
+    "DeploymentServer": {
+      "type": "object",
+      "title": "Server",
+      "properties": {
+        "runtimeUri": {
+          "title": "Server runtime base URI",
+          "description": "Base runtime URLs for this deployment.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 200,
+            "example": "https://api.contoso.com"
+          }
+        }
+      }
+    },
+    "DeploymentState": {
+      "type": "string",
+      "title": "State",
+      "description": "State of API deployment.",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentState",
+        "modelAsString": true
+      }
+    },
+    "Onboarding": {
+      "type": "object",
+      "properties": {
+        "instructions": {
+          "type": "string",
+          "description": "Onboarding guide.",
+          "example": "Sign in or sign up in the specified developer portal to request API access. You must complete the internal privacy training for your account to be approved."
+        },
+        "developerPortalUri": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Developer portal URI.",
+            "example": "https://developer.contoso.com"
+          },
+          "maxItems": 1
+        }
+      }
+    },
+    "MetadataAssignment": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "type": "string",
+          "description": "The entities this metadata schema component gets applied to.",
+          "enum": [
+            "api",
+            "deployment",
+            "environment"
+          ],
+          "x-ms-enum": {
+            "name": "MetadataAssignmentEntity",
+            "modelAsString": true
+          },
+          "example": "api"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "deprecated": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServiceNameParameter": {
+      "type": "string",
+      "name": "serviceName",
+      "in": "path",
+      "required": true,
+      "description": "The name of Azure API Center service.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiNameParameter": {
+      "type": "string",
+      "name": "apiName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the API.",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "ApiVersionNameParameter": {
+      "type": "string",
+      "name": "versionName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the API version.",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "ApiDefinitionNameParameter": {
+      "type": "string",
+      "name": "definitionName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the API definition.",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "ApiDeploymentNameParameter": {
+      "type": "string",
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the API deployment.",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "EnvironmentNameParameter": {
+      "type": "string",
+      "name": "environmentName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the environment.",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "MetadataSchemaNameParameter": {
+      "type": "string",
+      "name": "metadataSchemaName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the metadata schema.",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "WorkspaceNameParameter": {
+      "type": "string",
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the workspace.",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "ODataFilterParameter": {
+      "type": "string",
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "description": "OData filter parameter."
+    }
+  }
+}

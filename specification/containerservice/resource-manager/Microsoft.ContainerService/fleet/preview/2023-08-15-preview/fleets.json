@@ -1,0 +1,2731 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerServiceFleetClient",
+    "version": "2023-08-15-preview",
+    "description": "Azure Kubernetes Fleet Manager api client.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Fleets"
+    },
+    {
+      "name": "FleetMembers"
+    },
+    {
+      "name": "UpdateRuns"
+    },
+    {
+      "name": "FleetUpdateStrategies"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ContainerService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/fleets": {
+      "get": {
+        "operationId": "Fleets_ListBySubscription",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Lists fleets in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Fleet resources in a subscription.": {
+            "$ref": "./examples/Fleets_ListBySub.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets": {
+      "get": {
+        "operationId": "Fleets_ListByResourceGroup",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Lists fleets in the specified subscription and resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Fleet resources in a resource group.": {
+            "$ref": "./examples/Fleets_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}": {
+      "get": {
+        "operationId": "Fleets_Get",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Gets a Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Fleet resource.": {
+            "$ref": "./examples/Fleets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Fleets_CreateOrUpdate",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Creates or updates a Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Fleet' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          },
+          "201": {
+            "description": "Resource 'Fleet' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a Fleet resource with a long running operation.": {
+            "$ref": "./examples/Fleets_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Fleets_Update",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Update a Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a Fleet.": {
+            "$ref": "./examples/Fleets_PatchTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Fleets_Delete",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Delete a Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a Fleet resource asynchronously with a long running operation.": {
+            "$ref": "./examples/Fleets_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/listCredentials": {
+      "post": {
+        "operationId": "Fleets_ListCredentials",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Lists the user credentials of a Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetCredentialResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the user credentials of a Fleet.": {
+            "$ref": "./examples/Fleets_ListCredentialsResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/members": {
+      "get": {
+        "operationId": "FleetMembers_ListByFleet",
+        "tags": [
+          "FleetMembers"
+        ],
+        "description": "List FleetMember resources by Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetMemberListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the members of a Fleet.": {
+            "$ref": "./examples/FleetMembers_ListByFleet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/members/{fleetMemberName}": {
+      "get": {
+        "operationId": "FleetMembers_Get",
+        "tags": [
+          "FleetMembers"
+        ],
+        "description": "Get a FleetMember",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "fleetMemberName",
+            "in": "path",
+            "description": "The name of the Fleet member resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetMember"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a FleetMember resource.": {
+            "$ref": "./examples/FleetMembers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FleetMembers_Create",
+        "tags": [
+          "FleetMembers"
+        ],
+        "description": "Create a FleetMember",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "fleetMemberName",
+            "in": "path",
+            "description": "The name of the Fleet member resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetMember"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FleetMember' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetMember"
+            }
+          },
+          "201": {
+            "description": "Resource 'FleetMember' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetMember"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a FleetMember resource with a long running operation.": {
+            "$ref": "./examples/FleetMembers_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FleetMembers_Update",
+        "tags": [
+          "FleetMembers"
+        ],
+        "description": "Update a FleetMember",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "fleetMemberName",
+            "in": "path",
+            "description": "The name of the Fleet member resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetMemberUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetMember"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a FleetMember resource synchronously.": {
+            "$ref": "./examples/FleetMembers_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FleetMembers_Delete",
+        "tags": [
+          "FleetMembers"
+        ],
+        "description": "Delete a FleetMember",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "fleetMemberName",
+            "in": "path",
+            "description": "The name of the Fleet member resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a FleetMember resource asynchronously with a long running operation.": {
+            "$ref": "./examples/FleetMembers_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns": {
+      "get": {
+        "operationId": "UpdateRuns_ListByFleet",
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "List UpdateRun resources by Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRunListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the UpdateRun resources by fleet.": {
+            "$ref": "./examples/UpdateRuns_ListByFleet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}": {
+      "get": {
+        "operationId": "UpdateRuns_Get",
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Get a UpdateRun",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateRunName",
+            "in": "path",
+            "description": "The name of the UpdateRun resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an UpdateRun resource.": {
+            "$ref": "./examples/UpdateRuns_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateRuns_CreateOrUpdate",
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Create a UpdateRun",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateRunName",
+            "in": "path",
+            "description": "The name of the UpdateRun resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'UpdateRun' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          },
+          "201": {
+            "description": "Resource 'UpdateRun' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an UpdateRun.": {
+            "$ref": "./examples/UpdateRuns_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "UpdateRuns_Delete",
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Delete a UpdateRun",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateRunName",
+            "in": "path",
+            "description": "The name of the UpdateRun resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an updateRun resource.": {
+            "$ref": "./examples/UpdateRuns_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}/start": {
+      "post": {
+        "operationId": "UpdateRuns_Start",
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Starts an UpdateRun.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateRunName",
+            "in": "path",
+            "description": "The name of the UpdateRun resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Starts an UpdateRun.": {
+            "$ref": "./examples/UpdateRuns_Start.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}/stop": {
+      "post": {
+        "operationId": "UpdateRuns_Stop",
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Stops an UpdateRun.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateRunName",
+            "in": "path",
+            "description": "The name of the UpdateRun resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stops an UpdateRun.": {
+            "$ref": "./examples/UpdateRuns_Stop.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateStrategies": {
+      "get": {
+        "operationId": "FleetUpdateStrategies_ListByFleet",
+        "tags": [
+          "FleetUpdateStrategies"
+        ],
+        "description": "List FleetUpdateStrategy resources by Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetUpdateStrategyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the FleetUpdateStrategy resources by fleet.": {
+            "$ref": "./examples/UpdateStrategies_ListByFleet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateStrategies/{updateStrategyName}": {
+      "get": {
+        "operationId": "FleetUpdateStrategies_Get",
+        "tags": [
+          "FleetUpdateStrategies"
+        ],
+        "description": "Get a FleetUpdateStrategy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateStrategyName",
+            "in": "path",
+            "description": "The name of the UpdateStrategy resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetUpdateStrategy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a FleetUpdateStrategy resource.": {
+            "$ref": "./examples/UpdateStrategies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FleetUpdateStrategies_CreateOrUpdate",
+        "tags": [
+          "FleetUpdateStrategies"
+        ],
+        "description": "Create a FleetUpdateStrategy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateStrategyName",
+            "in": "path",
+            "description": "The name of the UpdateStrategy resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetUpdateStrategy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FleetUpdateStrategy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetUpdateStrategy"
+            }
+          },
+          "201": {
+            "description": "Resource 'FleetUpdateStrategy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetUpdateStrategy"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a FleetUpdateStrategy.": {
+            "$ref": "./examples/UpdateStrategies_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FleetUpdateStrategies_Delete",
+        "tags": [
+          "FleetUpdateStrategies"
+        ],
+        "description": "Delete a FleetUpdateStrategy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateStrategyName",
+            "in": "path",
+            "description": "The name of the UpdateStrategy resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a FleetUpdateStrategy resource.": {
+            "$ref": "./examples/UpdateStrategies_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "APIServerAccessProfile": {
+      "type": "object",
+      "description": "Access profile for the Fleet hub API server.",
+      "properties": {
+        "enablePrivateCluster": {
+          "type": "boolean",
+          "description": "Whether to create the Fleet hub as a private cluster or not.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "enableVnetIntegration": {
+          "type": "boolean",
+          "description": "Whether to enable apiserver vnet integration for the Fleet hub or not.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "subnetId": {
+          "$ref": "#/definitions/SubnetResourceId",
+          "description": "The subnet to be used when apiserver vnet integration is enabled. It is required when creating a new Fleet with BYO vnet.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "AgentProfile": {
+      "type": "object",
+      "description": "Agent profile for the Fleet hub.",
+      "properties": {
+        "subnetId": {
+          "$ref": "#/definitions/SubnetResourceId",
+          "description": "The ID of the subnet which the Fleet hub node will join on startup. If this is not specified, a vnet and subnet will be generated and used.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine size of the Fleet hub.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ClusterResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/managedClusters"
+          }
+        ]
+      }
+    },
+    "Fleet": {
+      "type": "object",
+      "description": "The Fleet resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed identity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FleetCredentialResult": {
+      "type": "object",
+      "description": "One credential result item.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the credential.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64-encoded Kubernetes configuration file.",
+          "readOnly": true
+        }
+      }
+    },
+    "FleetCredentialResults": {
+      "type": "object",
+      "description": "The Credential results response.",
+      "properties": {
+        "kubeconfigs": {
+          "type": "array",
+          "description": "Array of base64-encoded Kubernetes configuration files.",
+          "items": {
+            "$ref": "#/definitions/FleetCredentialResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "FleetHubProfile": {
+      "type": "object",
+      "description": "The FleetHubProfile configures the fleet hub.",
+      "properties": {
+        "dnsPrefix": {
+          "type": "string",
+          "description": "DNS prefix used to create the FQDN for the Fleet hub.",
+          "minLength": 1,
+          "maxLength": 54,
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][a-zA-Z0-9-]{0,52}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "apiServerAccessProfile": {
+          "$ref": "#/definitions/APIServerAccessProfile",
+          "description": "The access profile for the Fleet hub API server.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "agentProfile": {
+          "$ref": "#/definitions/AgentProfile",
+          "description": "The agent profile for the Fleet hub.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "The FQDN of the Fleet hub.",
+          "readOnly": true
+        },
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version of the Fleet hub.",
+          "readOnly": true
+        },
+        "portalFqdn": {
+          "type": "string",
+          "description": "The Azure Portal FQDN of the Fleet hub.",
+          "readOnly": true
+        }
+      }
+    },
+    "FleetListResult": {
+      "type": "object",
+      "description": "The response of a Fleet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Fleet items on this page",
+          "items": {
+            "$ref": "#/definitions/Fleet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetMember": {
+      "type": "object",
+      "description": "A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetMemberProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FleetMemberListResult": {
+      "type": "object",
+      "description": "The response of a FleetMember list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FleetMember items on this page",
+          "items": {
+            "$ref": "#/definitions/FleetMember"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetMemberProperties": {
+      "type": "object",
+      "description": "A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.",
+      "properties": {
+        "clusterResourceId": {
+          "$ref": "#/definitions/ClusterResourceId",
+          "description": "The ARM resource id of the cluster that joins the Fleet. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}'.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "group": {
+          "type": "string",
+          "description": "The group this member belongs to for multi-cluster update management.",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/FleetMemberProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "clusterResourceId"
+      ]
+    },
+    "FleetMemberProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the last accepted operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Joining",
+        "Leaving",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "FleetMemberProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Joining",
+            "value": "Joining",
+            "description": "The provisioning state of a member joining a fleet."
+          },
+          {
+            "name": "Leaving",
+            "value": "Leaving",
+            "description": "The provisioning state of a member leaving a fleet."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The provisioning state of a member being updated."
+          }
+        ]
+      }
+    },
+    "FleetMemberUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the FleetMember.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetMemberUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FleetMemberUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the FleetMember.",
+      "properties": {
+        "group": {
+          "type": "string",
+          "description": "The group this member belongs to for multi-cluster update management.",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        }
+      }
+    },
+    "FleetPatch": {
+      "type": "object",
+      "description": "Properties of a Fleet that can be patched.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed identity."
+        }
+      }
+    },
+    "FleetProperties": {
+      "type": "object",
+      "description": "Fleet properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/FleetProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "hubProfile": {
+          "$ref": "#/definitions/FleetHubProfile",
+          "description": "The FleetHubProfile configures the Fleet's hub."
+        }
+      }
+    },
+    "FleetProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the last accepted operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "FleetProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The provisioning state of a fleet being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The provisioning state of a fleet being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The provisioning state of a fleet being deleted."
+          }
+        ]
+      }
+    },
+    "FleetUpdateStrategy": {
+      "type": "object",
+      "description": "Defines a multi-stage process to perform update operations across members of a Fleet.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetUpdateStrategyProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FleetUpdateStrategyListResult": {
+      "type": "object",
+      "description": "The response of a FleetUpdateStrategy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FleetUpdateStrategy items on this page",
+          "items": {
+            "$ref": "#/definitions/FleetUpdateStrategy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetUpdateStrategyProperties": {
+      "type": "object",
+      "description": "The properties of the UpdateStrategy.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/FleetUpdateStrategyProvisioningState",
+          "description": "The provisioning state of the UpdateStrategy resource.",
+          "readOnly": true
+        },
+        "strategy": {
+          "$ref": "#/definitions/UpdateRunStrategy",
+          "description": "Defines the update sequence of the clusters.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "strategy"
+      ]
+    },
+    "FleetUpdateStrategyProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the UpdateStrategy resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "FleetUpdateStrategyProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "FleetUpdateStrategyResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/fleets/updateStrategies"
+          }
+        ]
+      }
+    },
+    "KubernetesVersion": {
+      "type": "string"
+    },
+    "ManagedClusterUpdate": {
+      "type": "object",
+      "description": "The update to be applied to the ManagedClusters.",
+      "properties": {
+        "upgrade": {
+          "$ref": "#/definitions/ManagedClusterUpgradeSpec",
+          "description": "The upgrade to apply to the ManagedClusters."
+        },
+        "nodeImageSelection": {
+          "$ref": "#/definitions/NodeImageSelection",
+          "description": "The node image upgrade to be applied to the target nodes in update run.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "upgrade"
+      ]
+    },
+    "ManagedClusterUpgradeSpec": {
+      "type": "object",
+      "description": "The upgrade to apply to a ManagedCluster.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedClusterUpgradeType",
+          "description": "The upgrade type.\nFull requires the KubernetesVersion property to be set.\nNodeImageOnly requires the KubernetesVersion property not to be set."
+        },
+        "kubernetesVersion": {
+          "$ref": "#/definitions/KubernetesVersion",
+          "description": "The Kubernetes version to upgrade the member clusters to."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ManagedClusterUpgradeType": {
+      "type": "string",
+      "description": "The type of upgrade to perform when targeting ManagedClusters.",
+      "enum": [
+        "Full",
+        "NodeImageOnly"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedClusterUpgradeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Full",
+            "value": "Full",
+            "description": "Full upgrades the control plane and all agent pools of the target ManagedClusters."
+          },
+          {
+            "name": "NodeImageOnly",
+            "value": "NodeImageOnly",
+            "description": "NodeImageOnly upgrades only the node images of the target ManagedClusters."
+          }
+        ]
+      }
+    },
+    "MemberUpdateStatus": {
+      "type": "object",
+      "description": "The status of a member update operation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status of the MemberUpdate operation.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the FleetMember.",
+          "readOnly": true
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "description": "The Azure resource id of the target Kubernetes cluster.",
+          "readOnly": true
+        },
+        "operationId": {
+          "type": "string",
+          "description": "The operation resource id of the latest attempt to perform the operation.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The status message after processing the member update operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "NodeImageSelection": {
+      "type": "object",
+      "description": "The node image upgrade to be applied to the target nodes in update run.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/NodeImageSelectionType",
+          "description": "The node image upgrade type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "NodeImageSelectionStatus": {
+      "type": "object",
+      "description": "The node image upgrade specs for the update run.",
+      "properties": {
+        "selectedNodeImageVersions": {
+          "type": "array",
+          "description": "The image versions to upgrade the nodes to.",
+          "items": {
+            "$ref": "#/definitions/NodeImageVersion"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "version"
+          ]
+        }
+      }
+    },
+    "NodeImageSelectionType": {
+      "type": "string",
+      "description": "The node image upgrade type.",
+      "enum": [
+        "Latest",
+        "Consistent"
+      ],
+      "x-ms-enum": {
+        "name": "NodeImageSelectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Latest",
+            "value": "Latest",
+            "description": "Use the latest image version when upgrading nodes. Clusters may use different image versions (e.g., 'AKSUbuntu-1804gen2containerd-2021.10.12' and 'AKSUbuntu-1804gen2containerd-2021.10.19') because, for example, the latest available version is different in different regions."
+          },
+          {
+            "name": "Consistent",
+            "value": "Consistent",
+            "description": "The image versions to upgrade nodes to are selected as described below: for each node pool in managed clusters affected by the update run, the system selects the latest image version such that it is available across all other node pools (in all other clusters) of the same image type. As a result, all node pools of the same image type will be upgraded to the same image version. For example, if the latest image version for image type 'AKSUbuntu-1804gen2containerd' is 'AKSUbuntu-1804gen2containerd-2021.10.12' for a node pool in cluster A in region X, and is 'AKSUbuntu-1804gen2containerd-2021.10.17' for a node pool in cluster B in region Y, the system will upgrade both node pools to image version 'AKSUbuntu-1804gen2containerd-2021.10.12'."
+          }
+        ]
+      }
+    },
+    "NodeImageVersion": {
+      "type": "object",
+      "description": "The node upgrade image version.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The image version to upgrade the nodes to (e.g., 'AKSUbuntu-1804gen2containerd-2022.12.13').",
+          "readOnly": true
+        }
+      }
+    },
+    "SubnetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      }
+    },
+    "UpdateGroup": {
+      "type": "object",
+      "description": "A group to be updated.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the group.\nIt must match a group name of an existing fleet member. ",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "UpdateGroupStatus": {
+      "type": "object",
+      "description": "The status of a UpdateGroup.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status of the UpdateGroup.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the UpdateGroup.",
+          "readOnly": true
+        },
+        "members": {
+          "type": "array",
+          "description": "The list of member this UpdateGroup updates.",
+          "items": {
+            "$ref": "#/definitions/MemberUpdateStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "UpdateRun": {
+      "type": "object",
+      "description": "A multi-stage process to perform update operations across members of a Fleet.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateRunProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpdateRunListResult": {
+      "type": "object",
+      "description": "The response of a UpdateRun list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateRun items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateRunProperties": {
+      "type": "object",
+      "description": "The properties of the UpdateRun.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/UpdateRunProvisioningState",
+          "description": "The provisioning state of the UpdateRun resource.",
+          "readOnly": true
+        },
+        "updateStrategyId": {
+          "$ref": "#/definitions/FleetUpdateStrategyResourceId",
+          "description": "The resource id of the FleetUpdateStrategy resource to reference.\n\nWhen creating a new run, there are three ways to define a strategy for the run:\n1. Define a new strategy in place: Set the \"strategy\" field.\n2. Use an existing strategy: Set the \"updateStrategyId\" field. (since 2023-08-15-preview)\n3. Use the default strategy to update all the members one by one: Leave both \"updateStrategyId\" and \"strategy\" unset. (since 2023-08-15-preview)\n\nSetting both \"updateStrategyId\" and \"strategy\" is invalid.\n\nUpdateRuns created by \"updateStrategyId\" snapshot the referenced UpdateStrategy at the time of creation and store it in the \"strategy\" field. \nSubsequent changes to the referenced FleetUpdateStrategy resource do not propagate. \nUpdateRunStrategy changes can be made directly on the \"strategy\" field before launching the UpdateRun."
+        },
+        "strategy": {
+          "$ref": "#/definitions/UpdateRunStrategy",
+          "description": "The strategy defines the order in which the clusters will be updated. \nIf not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.\nThe strategy of the UpdateRun can be modified until the run is started."
+        },
+        "managedClusterUpdate": {
+          "$ref": "#/definitions/ManagedClusterUpdate",
+          "description": "The update to be applied to all clusters in the UpdateRun. The managedClusterUpdate can be modified until the run is started."
+        },
+        "status": {
+          "$ref": "#/definitions/UpdateRunStatus",
+          "description": "The status of the UpdateRun.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "managedClusterUpdate"
+      ]
+    },
+    "UpdateRunProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the UpdateRun resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateRunProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "UpdateRunStatus": {
+      "type": "object",
+      "description": "The status of a UpdateRun.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status of the UpdateRun.",
+          "readOnly": true
+        },
+        "stages": {
+          "type": "array",
+          "description": "The stages composing an update run. Stages are run sequentially withing an UpdateRun.",
+          "items": {
+            "$ref": "#/definitions/UpdateStageStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nodeImageSelection": {
+          "$ref": "#/definitions/NodeImageSelectionStatus",
+          "description": "The node image upgrade specs for the update run. It is only set in update run when `NodeImageSelection.type` is `Consistent`.",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateRunStrategy": {
+      "type": "object",
+      "description": "Defines the update sequence of the clusters via stages and groups.\n\nStages within a run are executed sequentially one after another.\nGroups within a stage are executed in parallel.\nMember clusters within a group are updated sequentially one after another.\n\nA valid strategy contains no duplicate groups within or across stages.",
+      "properties": {
+        "stages": {
+          "type": "array",
+          "description": "The list of stages that compose this update run. Min size: 1.",
+          "items": {
+            "$ref": "#/definitions/UpdateStage"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "stages"
+      ]
+    },
+    "UpdateStage": {
+      "type": "object",
+      "description": "Defines a stage which contains the groups to update and the steps to take (e.g., wait for a time period) before starting the next stage.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the stage. Must be unique within the UpdateRun.",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "groups": {
+          "type": "array",
+          "description": "Defines the groups to be executed in parallel in this stage. Duplicate groups are not allowed. Min size: 1.",
+          "items": {
+            "$ref": "#/definitions/UpdateGroup"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "afterStageWaitInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in seconds to wait at the end of this stage before starting the next one. Defaults to 0 seconds if unspecified."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "UpdateStageStatus": {
+      "type": "object",
+      "description": "The status of a UpdateStage.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status of the UpdateStage.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the UpdateStage.",
+          "readOnly": true
+        },
+        "groups": {
+          "type": "array",
+          "description": "The list of groups to be updated as part of this UpdateStage.",
+          "items": {
+            "$ref": "#/definitions/UpdateGroupStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "afterStageWaitStatus": {
+          "$ref": "#/definitions/WaitStatus",
+          "description": "The status of the wait period configured on the UpdateStage.",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateState": {
+      "type": "string",
+      "description": "The state of the UpdateRun, UpdateStage, UpdateGroup, or MemberUpdate.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Stopping",
+        "Stopped",
+        "Skipped",
+        "Failed",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has not been started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is running."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is being stopped."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has stopped."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has been skipped."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has failed."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed."
+          }
+        ]
+      }
+    },
+    "UpdateStatus": {
+      "type": "object",
+      "description": "The status for an operation or group of operations.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the operation or group was started.",
+          "readOnly": true
+        },
+        "completedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the operation or group was completed.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/UpdateState",
+          "description": "The State of the operation or group.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "The error details when a failure is encountered.",
+          "readOnly": true
+        }
+      }
+    },
+    "WaitStatus": {
+      "type": "object",
+      "description": "The status of the wait duration.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status of the wait duration.",
+          "readOnly": true
+        },
+        "waitDurationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The wait duration configured in seconds.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

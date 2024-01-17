@@ -1,0 +1,350 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-06-01-preview",
+    "title": "PurviewPolicyClient",
+    "description": "Creates a Microsoft.Purview management client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.Purview/policies": {
+      "get": {
+        "tags": [
+          "PolicyListing"
+        ],
+        "summary": "API to list the purview RBAC policies based on a scope",
+        "description": "The API lists the Azure purview RBAC policies affecting the scope. The scope can be any valid ARM resource id",
+        "operationId": "PurviewPolicies_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeParameter"
+          },
+          {
+            "$ref": "#/parameters/skipToken"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supported filters : $filter=policyType eq SelfService, $filter=policyType eq SqlDevops. Returns only the policies of the specified type. If not specified, all policies are returned.",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListPolicies": {
+            "$ref": "./examples/PolicyList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/providers/Microsoft.Purview/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "summary": "Lists the available operations",
+        "description": "List of available operations",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PolicyList": {
+      "required": [
+        "value"
+      ],
+      "description": "A paginated list of purview RBAC policies",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of purview RBAC policies",
+          "items": {
+            "$ref": "#/definitions/Policy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Pagination link"
+        }
+      }
+    },
+    "AttributePredicate": {
+      "type": "object",
+      "description": "Attribute predicate for a policy permission",
+      "properties": {
+        "attributeName": {
+          "type": "string",
+          "description": "AttributeName of a policy permission"
+        },
+        "attributeValueIncludedIn": {
+          "type": "array",
+          "description": "values for a policy permission",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PolicyDecisionRule": {
+      "type": "object",
+      "description": "Purview RBAC policy decision rule",
+      "required": [
+        "effect"
+      ],
+      "properties": {
+        "effect": {
+          "description": "The effect for rule",
+          "enum": [
+            "Permit",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Decision",
+            "modelAsString": true
+          }
+        },
+        "permission": {
+          "type": "array",
+          "description": "Array of attribute predicates",
+          "items": {
+            "$ref": "#/definitions/AttributePredicate"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Policy": {
+      "required": [
+        "id",
+        "source",
+        "decisionRules",
+        "members",
+        "etag",
+        "scopes"
+      ],
+      "type": "object",
+      "description": "Purview RBAC policy",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The policy kind"
+        },
+        "source": {
+          "type": "string",
+          "description": "The policy source"
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag version of a policy"
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Array of scopes where the policy is published",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "members": {
+          "type": "object",
+          "description": "Members of the policy",
+          "$ref": "#/definitions/PolicyMembers"
+        },
+        "decisionRules": {
+          "type": "array",
+          "description": "Array of decision rules for the policy",
+          "items": {
+            "$ref": "#/definitions/PolicyDecisionRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "expiryTime": {
+          "format": "date-time",
+          "description": "The timestamp of the expiry time of the policy (UTC).",
+          "type": "string"
+        },
+        "requestor": {
+          "type": "string",
+          "description": "The AAD member who requested the policy"
+        }
+      }
+    },
+    "PolicyMembers": {
+      "type": "object",
+      "description": "Policy member",
+      "properties": {
+        "fabricItemMembers": {
+          "type": "array",
+          "description": "Array of azure active directory members",
+          "items": {
+            "$ref": "#/definitions/FabricItemMember"
+          },
+          "x-ms-identifiers": []
+        },
+        "aadMembers": {
+          "type": "array",
+          "description": "Array of azure active directory members",
+          "items": {
+            "$ref": "#/definitions/AADMember"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AADMember": {
+      "type": "object",
+      "description": "Azure active directory member",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId of the member"
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The objectId of the member"
+        },
+        "objectType": {
+          "type": "string",
+          "description": "The objectType of the member.",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "objectType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "FabricItemMember": {
+      "type": "object",
+      "description": "Microsoft fabric item member",
+      "properties": {
+        "sourcePath": {
+          "type": "string",
+          "description": "Source path of the member"
+        },
+        "itemAccess": {
+          "type": "array",
+          "description": "Array of access items for the member",
+          "items": {
+            "type": "string",
+            "description": "access item"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "scopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "skipToken": {
+      "name": "skipToken",
+      "in": "query",
+      "description": "Paging key to paginate to next page.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": []
+}

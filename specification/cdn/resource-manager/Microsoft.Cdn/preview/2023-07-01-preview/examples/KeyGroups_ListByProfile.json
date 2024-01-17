@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keyGroups/kg1",
+            "name": "kg1",
+            "type": "Microsoft.Cdn/profiles/keygroups",
+            "properties": {
+              "keyReferences": [
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret2"
+                },
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret3"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "deploymentStatus": "NotStarted"
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keyGroups/kg2",
+            "name": "kg2",
+            "type": "Microsoft.Cdn/profiles/keygroups",
+            "properties": {
+              "keyReferences": [
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret2"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "deploymentStatus": "NotStarted"
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keyGroups/kg-at-max-capacity",
+            "name": "kg-at-max-capacity",
+            "type": "Microsoft.Cdn/profiles/keygroups",
+            "properties": {
+              "keyReferences": [
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret2"
+                },
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret3"
+                },
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret4"
+                },
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/secret5"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "deploymentStatus": "NotStarted"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
