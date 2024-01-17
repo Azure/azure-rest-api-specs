@@ -196,7 +196,7 @@ interface StoragePools {
 
   @doc("Enable VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
-  @action("enableVSpherePlugin")
+  @action("enableVspherePlugin")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -205,12 +205,12 @@ interface StoragePools {
     }
   )
   @post
-  enableVSpherePlugin(
+  enableVspherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
 
     @doc("VSphere plugin properties")
     @body
-    properties: StoragePoolEnableVSpherePlugin,
+    properties: StoragePoolEnableVspherePlugin,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
     ArmCombinedLroHeaders
@@ -218,7 +218,7 @@ interface StoragePools {
 
   @doc("Disable VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
-  @action("disableVSpherePlugin")
+  @action("disableVspherePlugin")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -227,7 +227,7 @@ interface StoragePools {
     }
   )
   @post
-  disableVSpherePlugin(
+  disableVspherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
@@ -236,7 +236,7 @@ interface StoragePools {
 
   @doc("Upgrade VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
-  @action("upgradeVSpherePlugin")
+  @action("upgradeVspherePlugin")
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -245,7 +245,7 @@ interface StoragePools {
     }
   )
   @post
-  upgradeVSpherePlugin(
+  upgradeVspherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
@@ -431,7 +431,7 @@ model StoragePoolEnableAvs {
 }
 
 @doc("Storage Pool enable VSphere plugins")
-model StoragePoolEnableVSpherePlugin {
+model StoragePoolEnableVspherePlugin {
   @doc("Storage Pool Vsphere id")
   vSphereIp: string;
 
