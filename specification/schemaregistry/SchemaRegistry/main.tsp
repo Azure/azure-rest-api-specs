@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 @useAuth(AzureAuth)
 @service({
@@ -60,7 +62,10 @@ model AzureAuth
 
 // ROUTES
 alias resourceOperations = Azure.Core.StandardResourceOperations;
-
+@client({
+  name: "SchemaRegistryClient",
+  service: Azure.SchemaRegistry,
+})
 interface SchemaOperations {
   //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
   @summary("Get list of schema groups.")
@@ -131,24 +136,27 @@ interface SchemaOperations {
 alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
 union SchemaContentTypeValues {
+  @added(ServiceApiVersions.V2022_10)
+  customBinary: "application/octet-stream",
+  @added(ServiceApiVersions.V2022_10)
+  custom: "text/plain; charset=utf-8",
   avro: "application/json; serialization=Avro",
   @added(ServiceApiVersions.V2022_10)
   json: "application/json; serialization=json",
-  @added(ServiceApiVersions.V2022_10)
-  custom: "text/plain; charset=utf-8",
   @added(ServiceApiVersions.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
 }
 
 @doc("The content type for the schema.")
 enum ContentTypeEnum {
-  @doc("The custom schema content type.")
-  custom: "application/octet-stream",
   @doc("The Avro schema content type.")
   avro: "application/json; serialization=Avro",
   @doc("The JSON schema content type.")
   @added(ServiceApiVersions.V2022_10)
   json: "application/json; serialization=json",
+  @doc("The custom schema content type.")
+  @added(ServiceApiVersions.V2022_10)
+  custom: "text/plain; charset=utf-8",
   @doc("The protobuf schema content type.")
   @added(ServiceApiVersions.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
