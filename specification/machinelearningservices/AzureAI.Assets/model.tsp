@@ -10,15 +10,17 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+namespace Microsoft.MachineLearningServices;
 
 // todo do we still need to nest under workspaces? If so just route that here? 
 @doc("IndexVersion Definition")
 @parentResource(IndexContainer)
 @resource("versions")
 model IndexVersion {
-  @key("indexVersion")
+  @key("version")
   @doc("Version of the index.")
-  indexVersion: string;
+  @visibility("external")
+  version: string;
 
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
   storageUri: string;
@@ -30,9 +32,10 @@ model IndexVersion {
 @doc("Index properties")
 @resource("indexes")
 model IndexContainer {
-  @key("indexName")
+  @key("name")
   @doc("Name of the index.")
-  indexName: string;
+  @visibility("external")
+  name: string;
 
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
   indexVersion: string;

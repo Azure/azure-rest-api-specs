@@ -11,6 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+namespace Microsoft.MachineLearningServices;
 
 alias ServiceTraits = SupportsRepeatableRequests &
   SupportsConditionalRequests &
@@ -19,7 +20,9 @@ alias ServiceTraits = SupportsRepeatableRequests &
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 alias ListQueryParamsIndex = ListQueryParametersTrait<{
+  @doc("View type for including/excluding (for example) archived entities.")
   @query listViewType: string = "ActiveOnly";
+  @doc("Label query parameter, for example, latest.")
   @query label: string;
 }>;
 

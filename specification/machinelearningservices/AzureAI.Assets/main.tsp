@@ -25,12 +25,11 @@ using Azure.Core.Traits;
   title: "Azure Machine Learning Services",
 })
 @server(
-  "{endpoint}/managementfrontend",
+  "{endpoint}/assets",
   "Machinelearning Services APIs",
   {
     @doc("""
-Supported Machine Learning Services endpoints (protocol and hostname, for example:
-https://westus.api.managementfrontend.com).
+Supported Azure-AI asset endpoints.
 """)
     endpoint: string,
   }
