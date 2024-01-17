@@ -45,7 +45,7 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Create a Volume Snapshot.")
   @operationId("VolumeSnapshots_Create")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is Template.ArmResourceCreateOrUpdateAsync<
     Snapshot,
     BaseParameters<Snapshot>,
     ArmLroLocationHeader
@@ -75,9 +75,4 @@ interface Snapshots {
   >;
 }
 
-@@projectedName(Snapshots.create::parameters.resource, "json", "parameters");
-@@extension(Snapshots.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(Snapshots.create::parameters.resource, "Snapshot object.");
+@@doc(Snapshots.create::parameters.parameters, "Snapshot object.");

@@ -10,6 +10,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
 import "./Snapshot.tsp";
 import "./routes.tsp";
+import "./templates.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

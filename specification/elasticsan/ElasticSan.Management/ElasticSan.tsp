@@ -39,7 +39,7 @@ interface ElasticSans {
   get is ArmResourceRead<ElasticSan>;
 
   @doc("Create ElasticSan.")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is Template.ArmResourceCreateOrUpdateAsync<
     ElasticSan,
     BaseParameters<ElasticSan>,
     ArmLroLocationHeader
@@ -67,12 +67,7 @@ interface ElasticSans {
   listBySubscription is ArmListBySubscription<ElasticSan>;
 }
 
-@@projectedName(ElasticSans.create::parameters.resource, "json", "parameters");
-@@extension(ElasticSans.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(ElasticSans.create::parameters.resource, "Elastic San object.");
+@@doc(ElasticSans.create::parameters.parameters, "Elastic San object.");
 @@projectedName(ElasticSans.update::parameters.properties,
   "json",
   "parameters"

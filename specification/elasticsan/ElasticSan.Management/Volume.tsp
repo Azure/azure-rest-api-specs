@@ -41,7 +41,7 @@ interface Volumes {
   get is ArmResourceRead<Volume>;
 
   @doc("Create a Volume.")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is Template.ArmResourceCreateOrUpdateAsync<
     Volume,
     BaseParameters<Volume>,
     ArmLroLocationHeader
@@ -76,12 +76,7 @@ interface Volumes {
   listByVolumeGroup is ArmResourceListByParent<Volume>;
 }
 
-@@projectedName(Volumes.create::parameters.resource, "json", "parameters");
-@@extension(Volumes.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(Volumes.create::parameters.resource, "Volume object.");
+@@doc(Volumes.create::parameters.parameters, "Volume object.");
 @@projectedName(Volumes.update::parameters.properties, "json", "parameters");
 @@extension(Volumes.update::parameters.properties,
   "x-ms-client-name",

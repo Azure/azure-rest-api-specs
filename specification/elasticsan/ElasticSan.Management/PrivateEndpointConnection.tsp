@@ -38,7 +38,7 @@ interface PrivateEndpointConnections {
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   @doc("Update the state of specified private endpoint connection associated with the Elastic San")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is Template.ArmResourceCreateOrUpdateAsync<
     PrivateEndpointConnection,
     BaseParameters<PrivateEndpointConnection>,
     ArmLroLocationHeader
@@ -57,14 +57,6 @@ interface PrivateEndpointConnections {
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
-@@projectedName(PrivateEndpointConnections.create::parameters.resource,
-  "json",
-  "parameters"
-);
-@@extension(PrivateEndpointConnections.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(PrivateEndpointConnections.create::parameters.resource,
+@@doc(PrivateEndpointConnections.create::parameters.parameters,
   "Private Endpoint Connection Approval object."
 );

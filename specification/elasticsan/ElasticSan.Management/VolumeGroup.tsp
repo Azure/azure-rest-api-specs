@@ -44,7 +44,7 @@ interface VolumeGroups {
   get is ArmResourceRead<VolumeGroup>;
 
   @doc("Create a Volume Group.")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is Template.ArmResourceCreateOrUpdateAsync<
     VolumeGroup,
     BaseParameters<VolumeGroup>,
     ArmLroLocationHeader
@@ -70,12 +70,7 @@ interface VolumeGroups {
   listByElasticSan is ArmResourceListByParent<VolumeGroup>;
 }
 
-@@projectedName(VolumeGroups.create::parameters.resource, "json", "parameters");
-@@extension(VolumeGroups.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(VolumeGroups.create::parameters.resource, "Volume Group object.");
+@@doc(VolumeGroups.create::parameters.parameters, "Volume Group object.");
 @@projectedName(VolumeGroups.update::parameters.properties,
   "json",
   "parameters"
