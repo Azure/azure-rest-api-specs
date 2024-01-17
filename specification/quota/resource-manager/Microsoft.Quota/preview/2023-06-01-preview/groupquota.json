@@ -1357,13 +1357,28 @@
       "type": "object",
       "description": "The provisioning state for the operation.",
       "properties": {
-        "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
+        },
+        "error": {
           "type": "object",
           "x-ms-client-flatten": true,
           "properties": {
-            "provisioningState": {
-              "$ref": "#/definitions/RequestState",
-              "readOnly": true
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
             }
           }
         }
@@ -1547,6 +1562,10 @@
               "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
               "type": "string",
               "format": "date-time"
+            },
+            "provisioningState": {
+              "$ref": "#/definitions/RequestState",
+              "description": "Status of this subscriptionId being associated with the GroupQuotasEntity."
             }
           }
         }
