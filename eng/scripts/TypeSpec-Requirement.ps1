@@ -35,15 +35,21 @@ else {
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
-    $jsonContent = Get-Content (Join-Path $repoPath $file) | ConvertFrom-Json -AsHashtable
+    try {
+      $jsonContent = Get-Content (Join-Path $repoPath $file) | ConvertFrom-Json -AsHashtable
 
-    if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
-      LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
-      # Skip further checks, since spec is already using TypeSpec
-      continue
+      if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
+        LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
+        # Skip further checks, since spec is already using TypeSpec
+        continue
+      }
+      else {
+        LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
+      }
     }
-    else {
-      LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
+    catch {
+      LogWarning "  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec"
+      LogWarning "    $_"
     }
 
     # Extract path between "specification/" and "/(preview|stable)"
