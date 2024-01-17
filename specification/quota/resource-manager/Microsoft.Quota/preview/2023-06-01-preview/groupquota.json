@@ -1527,12 +1527,28 @@
       "type": "object",
       "description": "The new quota limit request status.",
       "properties": {
-        "subscriptionId": {
-          "$ref": "#/definitions/GroupQuotaSubscriptionId"
+        "id": {
+          "type": "string"
         },
-        "requestProperties": {
-          "description": "Request properties.",
-          "$ref": "#/definitions/RequestProperties"
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "subscriptionId": {
+              "type": "string",
+              "description": "The subscription Id"
+            },
+            "requestSubmitTime": {
+              "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
+              "type": "string",
+              "format": "date-time"
+            }
+          }
         }
       }
     },
@@ -1557,7 +1573,7 @@
     },
     "GroupQuotaSubscriptionId": {
       "type": "object",
-      "description": "This represents a Azure subscriptionId that is associated with a GroupQuotaSEntity.",
+      "description": "This represents a Azure subscriptionId that is associated with a GroupQuotasEntity.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
