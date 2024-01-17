@@ -20,6 +20,18 @@ batch:
   - tag: package-migrateengine-2022-05
 ```
 
+
+### Tag: package-migrate-2023-04
+
+These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-migrate-2023-04'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
+```
 ### Tag: package-2023-06
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
