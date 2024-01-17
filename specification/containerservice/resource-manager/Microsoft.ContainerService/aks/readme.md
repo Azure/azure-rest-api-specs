@@ -547,7 +547,6 @@ These settings apply only when `--tag=package-2020-09` is specified on the comma
 ``` yaml $(tag) == 'package-2020-09'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2020-09-01/managedClusters.json
 ```
@@ -559,7 +558,6 @@ These settings apply only when `--tag=package-2020-07` is specified on the comma
 ``` yaml $(tag) == 'package-2020-07'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2020-07-01/managedClusters.json
 ```
@@ -571,7 +569,6 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 ``` yaml $(tag) == 'package-2020-06'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2020-06-01/managedClusters.json
 ```
@@ -583,7 +580,6 @@ These settings apply only when `--tag=package-2020-04` is specified on the comma
 ``` yaml $(tag) == 'package-2020-04'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2020-04-01/managedClusters.json
 ```
@@ -595,7 +591,6 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 ``` yaml $(tag) == 'package-2020-03'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2020-03-01/managedClusters.json
 ```
@@ -607,7 +602,6 @@ These settings apply only when `--tag=package-2020-02` is specified on the comma
 ``` yaml $(tag) == 'package-2020-02'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2020-02-01/managedClusters.json
 ```
@@ -619,7 +613,6 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2020-01-01/managedClusters.json
 ```
@@ -631,7 +624,6 @@ These settings apply only when `--tag=package-2019-11` is specified on the comma
 ``` yaml $(tag) == 'package-2019-11'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2019-11-01/managedClusters.json
 ```
@@ -643,7 +635,6 @@ These settings apply only when `--tag=package-2019-10-27-preview` is specified o
 ``` yaml $(tag) == 'package-2019-10-27-preview'
 input-file:
   - preview/2019-10-27-preview/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2020-01-01/managedClusters.json
 ```
@@ -655,7 +646,6 @@ These settings apply only when `--tag=package-2019-09-30-preview` is specified o
 ``` yaml $(tag) == 'package-2019-09-30-preview'
 input-file:
   - preview/2019-09-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/managedClusters.json
   - stable/2019-08-01/location.json
 ```
@@ -667,7 +657,6 @@ These settings apply only when `--tag=package-2019-10` is specified on the comma
 ``` yaml $(tag) == 'package-2019-10'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2019-10-01/managedClusters.json
 ```
@@ -679,7 +668,6 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-08-01/location.json
   - stable/2019-08-01/managedClusters.json
 ```
@@ -691,7 +679,6 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 ``` yaml $(tag) == 'package-2019-06'
 input-file:
   - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
   - stable/2019-06-01/location.json
   - stable/2019-06-01/managedClusters.json
 ```
@@ -703,7 +690,6 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 ``` yaml $(tag) == 'package-2019-04'
 input-file:
 - stable/2019-04-30/openShiftManagedClusters.json
-- stable/2017-07-01/containerService.json
 - stable/2019-04-01/managedClusters.json
 - stable/2019-04-01/location.json
 ```
@@ -715,7 +701,6 @@ These settings apply only when `--tag=package-2019-02` is specified on the comma
 ``` yaml $(tag) == 'package-2019-02'
 input-file:
 - preview/2018-09-30-preview/openShiftManagedClusters.json
-- stable/2017-07-01/containerService.json
 - stable/2019-02-01/managedClusters.json
 - stable/2017-09-30/location.json
 ```
@@ -727,7 +712,6 @@ These settings apply only when `--tag=package-2018-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
 - preview/2018-09-30-preview/openShiftManagedClusters.json
-- stable/2017-07-01/containerService.json
 - preview/2018-08-01-preview/managedClusters.json
 - stable/2017-09-30/location.json
 ```
@@ -739,7 +723,6 @@ These settings apply only when `--tag=package-2018-09-30-preview` is specified o
 ``` yaml $(tag) == 'package-2018-09-30-preview'
 input-file:
 - preview/2018-09-30-preview/openShiftManagedClusters.json
-- stable/2017-07-01/containerService.json
 - stable/2018-03-31/managedClusters.json
 - stable/2017-09-30/location.json
 ```
@@ -750,7 +733,6 @@ These settings apply only when `--tag=package-2018-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-03'
 input-file:
-- stable/2017-07-01/containerService.json
 - stable/2018-03-31/managedClusters.json
 - stable/2017-09-30/location.json
 ```
@@ -761,7 +743,6 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
-- stable/2017-07-01/containerService.json
 - stable/2017-08-31/managedClusters.json
 - stable/2017-09-30/location.json
 ```
@@ -772,18 +753,7 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
-- stable/2017-07-01/containerService.json
 - stable/2017-08-31/managedClusters.json
-```
-
-### Tag: package-2017-07
-
-These settings apply only when `--tag=package-2017-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-07'
-input-file:
-- stable/2017-07-01/containerService.json
-
 ```
 
 ### Tag: package-2019-09-preview-only
@@ -807,7 +777,6 @@ v2017_07_01 namespace of python SDK, DO NOT MODIFY THIS TAG.
 
 ``` yaml $(tag) == 'package-2017-07-only-extended'
 input-file:
-- stable/2017-07-01/containerService.json
 - stable/2019-04-01/location.json
 ```
 
@@ -992,33 +961,6 @@ input-file:
 - stable/2017-08-31/managedClusters.json
 ```
 
-### Tag: package-2017-01-only
-
-These settings apply only when `--tag=package-2017-01-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-01-only'
-input-file:
-- stable/2017-01-31/containerService.json
-```
-
-### Tag: package-2016-09-only
-
-These settings apply only when `--tag=package-2016-09-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-09-only'
-input-file:
-- stable/2016-09-30/containerService.json
-```
-
-### Tag: package-2016-03-only
-
-These settings apply only when `--tag=package-2016-03-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-03-only'
-input-file:
-- stable/2016-03-30/containerService.json
-```
-
 ### Tag: profile-hybrid-2020-09-01
 
 These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
@@ -1028,7 +970,6 @@ Creating this tag to pick proper resources from the hybrid profile.
 input-file:
 - stable/2020-11-01/managedClusters.json
 - stable/2019-04-01/location.json
-- stable/2017-07-01/containerService.json
 ```
 
 ---
