@@ -441,6 +441,7 @@
       "description": "Rules for the InternetGateways",
       "required": [
         "action",
+        "addressList",
         "destinationAddressList",
         "sourceAddressList"
       ],
@@ -458,6 +459,17 @@
             "name": "action"
           },
           "example": "Deny"
+        },
+        "addressList": {
+          "type": "array",
+          "description": "List of Addresses to be allowed or denied.",
+          "minItems": 1,
+          "items": {
+            "description": "Addresses to be allowed or denied.",
+            "type": "string",
+            "minLength": 1,
+            "example": "10.10.10.10:22 | www.foo.com"
+          }
         },
         "destinationAddressList": {
           "type": "array",
