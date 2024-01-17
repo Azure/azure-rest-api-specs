@@ -164,8 +164,7 @@ model AwsCloudProfile {
 @added(Versions.v2023_04_01)
 @removed(Versions.v2023_12_01)
 @doc("Solution Configuration")
-model SolutionConfiguration
-  is ProxyResource<SolutionConfigurationProperties> {
+model SolutionConfiguration is ProxyResource<SolutionConfigurationProperties> {
   @doc("Represent Solution Configuration Resource.")
   @key("solutionConfiguration")
   @path
