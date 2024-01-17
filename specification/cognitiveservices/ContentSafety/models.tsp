@@ -236,3 +236,26 @@ model JailbreakAnalysisResult {
   @doc("Analysis result for jailbreak.")
   detected: boolean;
 }
+
+@added(ContentSafety.Versions.v2024_01_15_Preview)
+@doc("The text cross-prompt injection attacks analysis request.")
+model AnalyzeTextXPIAOptions {
+  @doc("The text needs to be analyzed if it attempt to do cross-prompt injection attacks.")
+  text: string;
+}
+
+@added(ContentSafety.Versions.v2024_01_15_Preview)
+@doc("The text cross-prompt injection attacks analysis response.")
+model AnalyzeTextXPIAResult {
+  @doc("Analysis result for cross-prompt injection attacks.")
+  xpiaAnalysisResult: XPIAAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2024_01_15_Preview)
+@doc("The text cross-prompt injection attacks analysis response.")
+model XPIAAnalysisResult {
+  @doc("Analysis result for cross-prompt injection attacks.")
+  detected: boolean;
+  @doc("Confident score of the analysis result.")
+  confidentScore: float;
+}
