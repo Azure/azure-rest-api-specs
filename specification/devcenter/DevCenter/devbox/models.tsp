@@ -386,6 +386,7 @@ Virtual Network it is attached to.
   createdTime?: utcDateTime;
 
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
+  @visibility("read", "create")
   @projectedName("csharp", "LocalAdministratorStatus")
   @projectedName("java", "LocalAdministratorStatus")
   localAdministrator?: LocalAdminStatus;
