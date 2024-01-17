@@ -12,6 +12,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ElasticSan;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "No Resource operation"
 interface Template {
   @autoRoute
   @doc("Create a {name}", TResource)

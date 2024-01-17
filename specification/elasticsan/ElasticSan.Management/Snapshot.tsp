@@ -68,6 +68,7 @@ interface Snapshots {
     {
       ...BaseParameters<Snapshot>;
 
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @doc("Specify $filter='volumeName eq <volume name>' to filter on volume.")
       @query("$filter")
       $filter?: string;

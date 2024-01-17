@@ -159,6 +159,7 @@ model SkuLocationInfo {
   zones?: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @doc("The capability information in the specified SKU.")
 model SKUCapability {
   @doc("The name of capability.")
@@ -202,6 +203,7 @@ model ElasticSanProperties {
   @visibility("read")
   totalIops?: int64;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @doc("Total Provisioned MBps Elastic San appliance.")
   @visibility("read")
   totalMBps?: int64;
@@ -500,6 +502,7 @@ model VolumeUpdateProperties {
   managedBy?: ManagedByInfo;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No common resource"
 @doc("Properties of a private link resource.")
 model PrivateLinkResourceProperties {
   @doc("The private link resource group id.")

@@ -61,10 +61,12 @@ interface Volumes {
     {
       ...BaseParameters<Volume>;
 
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @doc("Optional, used to delete snapshots under volume. Allowed value are only true or false. Default value is false.")
       @header
       `x-ms-delete-snapshots`?: XMsDeleteSnapshots;
 
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @doc("Optional, used to delete volume if active sessions present. Allowed value are only true or false. Default value is false.")
       @header
       `x-ms-force-delete`?: XMsForceDelete;
