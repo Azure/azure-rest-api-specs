@@ -50,58 +50,126 @@ enum ActionReferenceType {
   url,
 }
 
+@doc("The types of dashboard tile parameters.")
 enum DashboardParameterType {
+  @doc("The parameter type for location.")
   location,
+
+  @doc("The parameter type for resourceGroup.")
   resourceGroup,
+
+  @doc("The parameter type for resourceType.")
   resourceType,
+
+  @doc("The parameter type for subscription.")
   subscription,
+
+  @doc("The parameter type for timeGranularity.")
   timeGranularity,
+
+  @doc("The parameter type for timeRange.")
   timeRange,
 }
 
+@doc("The types of created by.")
 enum CreatedByType {
+  @doc("The created by type for user.")
   User,
+
+  @doc("The created by type for application.")
   Application,
+
+  @doc("The created by type for managedIdentity.")
   ManagedIdentity,
+
+  @doc("The created by type for key.")
   Key,
 }
 
+@doc("The types of modified by.")
 enum ArcSnapshotTileDataKind {
+  @doc("The data kind arg for Arc Snapshot tile.")
   arg,
 }
 
+@doc("The types of Dashboard Visualizations.")
 enum VisualizationType {
+  @doc("The visualization type for area.")
   area,
+
+  @doc("The visualization type for bar.")
   bar,
+
+  @doc("The visualization type for card.")
   card,
+
+  @doc("The visualization type for column.")
   column,
+
+  @doc("The visualization type for donut.")
   donut,
+
+  @doc("The visualization type for line.")
   line,
+
+  @doc("The visualization type for multistat.")
   multistat,
+
+  @doc("The visualization type for pie.")
   pie,
+
+  @doc("The visualization type for scatter.")
   scatter,
+
+  @doc("The visualization type for table.")
   table,
+
+  @doc("The visualization type for timechart.")
   timechart,
 }
 
+@doc("The types of Dashboard Markdown tile sources.")
 enum Source {
+  @doc("The source type for inline.")
   inline,
+
+  @doc("The source type for uri.")
   uri,
 }
 
+@doc("The types of Dashboard Query tile kinds.")
 enum Kind {
+  @doc("The kind type for arg.")
   arg,
+
+  @doc("The kind type for app-insights.")
   `app-insights`,
+
+  @doc("The kind type for policy.")
   policy,
 }
 
+@doc("The types of Dashboard Query tile aggregation types.")
 enum AggregationType {
+  @doc("The aggregation type for avg.")
   avg,
+
+  @doc("The aggregation type for count.")
   count,
+
+  @doc("The aggregation type for max.")
   max,
+
+  @doc("The aggregation type for min.")
   min,
+
+  @doc("The aggregation type for percentile.")
   percentile,
+
+  @doc("The aggregation type for sum.")
   sum,
+
+  @doc("The aggregation type for total.")
   unique,
 }
 
