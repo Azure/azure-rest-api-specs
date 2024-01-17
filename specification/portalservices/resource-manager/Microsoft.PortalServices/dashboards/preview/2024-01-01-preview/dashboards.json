@@ -1,18 +1,23 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-01-01-preview",
     "title": "portal",
-    "description": "Allows creation and deletion of Azure Shared Dashboards."
+    "version": "2024-01-01-preview",
+    "description": "Allows creation and deletion of Azure Shared Dashboards.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,397 +30,327 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
-  "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/dashboards/{dashboardName}": {
-      "put": {
-        "tags": [
-          "Dashboard"
-        ],
-        "operationId": "Dashboards_CreateOrUpdate",
-        "x-ms-examples": {
-          "Create an empty dashboard": {
-            "$ref": "examples/dashboards/createEmptyDashboard.json"
-          },
-          "Create a dashboard with Markdown tiles": {
-            "$ref": "examples/dashboards/createDashboardWithMarkdownTiles.json"
-          },
-          "Create a dashboard with Resource tiles": {
-            "$ref": "examples/dashboards/createDashboardWithResourceTile.json"
-          },
-          "Create a dashboard with Query tiles": {
-            "$ref": "examples/dashboards/createDashboardWithQueryTile.json"
-          },
-          "Create a dashboard with parameters": {
-            "$ref": "examples/dashboards/createDashboardWithParameters.json"
-          },
-          "Create a dashboard with visible, highlight, and actions": {
-            "$ref": "examples/dashboards/createDashboardWithVisibleHighlightAction.json"
-          }
-        },
-        "description": "Creates or updates a Dashboard.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DashboardNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "dashboard",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Dashboard"
-            },
-            "description": "The parameters required to create or update a dashboard."
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created response definition. Resource has been created",
-            "schema": {
-              "$ref": "#/definitions/Dashboard"
-            }
-          },
-          "200": {
-            "description": "Resource already exists and has been updated.",
-            "schema": {
-              "$ref": "#/definitions/Dashboard"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Dashboard"
-        ],
-        "operationId": "Dashboards_Delete",
-        "x-ms-examples": {
-          "Delete a Dashboard": {
-            "$ref": "examples/dashboards/deleteDashboard.json"
-          }
-        },
-        "description": "Deletes the Dashboard.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DashboardNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition."
-          },
-          "204": {
-            "description": "OK resource was not found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "Dashboard"
-        ],
-        "operationId": "Dashboards_Get",
-        "x-ms-examples": {
-          "Get a Dashboard": {
-            "$ref": "examples/dashboards/getDashboard.json"
-          }
-        },
-        "description": "Gets the Dashboard.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DashboardNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/Dashboard"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "patch": {
-        "tags": [
-          "Dashboard"
-        ],
-        "operationId": "Dashboards_Update",
-        "x-ms-examples": {
-          "Update a dashboard with Markdown tiles": {
-            "$ref": "examples/dashboards/updateDashboardWithMarkdownTiles.json"
-          },
-          "Update a dashboard with Resource tiles": {
-            "$ref": "examples/dashboards/updateDashboardWithResourceTile.json"
-          },
-          "Update a dashboard with Query tiles": {
-            "$ref": "examples/dashboards/updateDashboardWithQueryTile.json"
-          },
-          "Update a dashboard with parameters": {
-            "$ref": "examples/dashboards/updateDashboardWithParameters.json"
-          }
-        },
-        "description": "Updates an existing Dashboard.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DashboardNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "dashboard",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PatchableDashboard"
-            },
-            "description": "The updatable fields of a Dashboard."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/Dashboard"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
+  "tags": [
+    {
+      "name": "Operations"
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/dashboards": {
+    {
+      "name": "Dashboards"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.PortalServices/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
-          "Dashboard"
+          "Operations"
         ],
-        "operationId": "Dashboards_ListByResourceGroup",
-        "x-ms-examples": {
-          "List all custom resource providers on the resourceGroup": {
-            "$ref": "examples/dashboards/listDashboardsByResourceGroup.json"
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "description": "Gets all the Dashboards within a resource group.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array of Dashboards.",
-            "schema": {
-              "$ref": "#/definitions/DashboardListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.PortalServices/dashboards": {
       "get": {
-        "tags": [
-          "Dashboard"
-        ],
         "operationId": "Dashboards_ListBySubscription",
-        "x-ms-examples": {
-          "List all custom resource providers on the subscription": {
-            "$ref": "examples/dashboards/listDashboardsBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
+        "tags": [
+          "Dashboards"
+        ],
         "description": "Gets all the dashboards within a subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of dashboards.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DashboardListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "produces": [
-          "application/json"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/dashboards": {
+      "get": {
+        "operationId": "Dashboards_ListByResourceGroup",
+        "tags": [
+          "Dashboards"
         ],
-        "consumes": [
-          "application/json"
-        ]
+        "description": "Gets all the Dashboards within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DashboardListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/dashboards/{dashboardName}": {
+      "get": {
+        "operationId": "Dashboards_Get",
+        "tags": [
+          "Dashboards"
+        ],
+        "description": "Gets the Dashboard.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the dashboard.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Dashboards_CreateOrUpdate",
+        "tags": [
+          "Dashboards"
+        ],
+        "description": "Creates or updates a Dashboard.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the dashboard.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Dashboard' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            }
+          },
+          "201": {
+            "description": "Resource 'Dashboard' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Dashboards_Update",
+        "tags": [
+          "Dashboards"
+        ],
+        "description": "Updates an existing Dashboard.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the dashboard.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchableDashboard"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Dashboards_Delete",
+        "tags": [
+          "Dashboards"
+        ],
+        "description": "Deletes the Dashboard.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the dashboard.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     }
   },
   "definitions": {
-    "Actions": {
-      "type": "object",
-      "description": "Actions available on the tile.",
-      "properties": {
-        "onClick": {
-          "$ref": "#/definitions/ActionsOnClick"
-        },
-        "footer": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActionReference"
-          }
-        },
-        "contextMenu": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActionReference"
-          },
-          "maxItems": 2
-        }
-      },
-      "additionalProperties": false
-    },
-    "ActionsOnClick": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ActionsOnClickType"
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "discriminator": "type"
-    },
-    "ActionsOnClickType": {
-      "description": "Types of action on click.",
-      "enum": [
-        "openBlade",
-        "updateParameters"
-      ],
-      "x-ms-enum": {
-        "name": "ActionsOnClickType",
-        "modelAsString": true
-      },
-      "type": "string"
-    },
     "ActionOpenBlade": {
-      "x-ms-discriminator-value": "openBlade",
       "type": "object",
       "properties": {
         "blade": {
-          "$ref": "#/definitions/BladeReferenceWithContextPane"
+          "$ref": "#/definitions/BladeReferenceWithContextPane",
+          "description": "open a blade in context pane"
         }
       },
       "required": [
@@ -426,28 +361,33 @@
           "$ref": "#/definitions/ActionsOnClick"
         }
       ],
-      "additionalProperties": false
+      "x-ms-discriminator-value": "openBlade"
     },
     "ActionParameters": {
-      "x-ms-discriminator-value": "updateParameters",
       "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "description": "The array of dashboard parameter values.",
+          "items": {
+            "$ref": "#/definitions/DashboardParameterValues"
+          },
+          "x-ms-identifiers": []
+        }
+      },
       "allOf": [
-        {
-          "$ref": "#/definitions/DashboardParameterValuesList"
-        },
         {
           "$ref": "#/definitions/ActionsOnClick"
         }
       ],
-      "required": [
-        "parameters"
-      ]
+      "x-ms-discriminator-value": "updateParameters"
     },
     "ActionReference": {
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ActionReferenceType"
+          "type": "string",
+          "description": "Discriminator property for ActionReference."
         }
       },
       "discriminator": "type",
@@ -455,8 +395,31 @@
         "type"
       ]
     },
+    "ActionReferenceBlade": {
+      "type": "object",
+      "properties": {
+        "blade": {
+          "$ref": "#/definitions/BladeReferenceWithContextPane",
+          "description": "open a blade in context pane"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the link"
+        }
+      },
+      "required": [
+        "blade",
+        "displayName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionReference"
+        }
+      ],
+      "x-ms-discriminator-value": "blade"
+    },
     "ActionReferenceType": {
-      "description": "Types of action references.",
+      "type": "string",
       "enum": [
         "blade",
         "url"
@@ -464,11 +427,9 @@
       "x-ms-enum": {
         "name": "ActionReferenceType",
         "modelAsString": true
-      },
-      "type": "string"
+      }
     },
     "ActionReferenceUrl": {
-      "x-ms-discriminator-value": "url",
       "type": "object",
       "properties": {
         "url": {
@@ -480,39 +441,248 @@
           "description": "The display name of the link"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ActionReference"
-        }
-      ],
       "required": [
         "url",
         "displayName"
       ],
-      "additionalProperties": false
-    },
-    "ActionReferenceBlade": {
-      "x-ms-discriminator-value": "blade",
-      "type": "object",
-      "properties": {
-        "blade": {
-          "$ref": "#/definitions/BladeReferenceWithContextPane"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the link"
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/ActionReference"
         }
       ],
+      "x-ms-discriminator-value": "url"
+    },
+    "Actions": {
+      "type": "object",
+      "description": "Actions available on the tile.",
+      "properties": {
+        "onClick": {
+          "$ref": "#/definitions/ActionsOnClick"
+        },
+        "footer": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionReference"
+          },
+          "x-ms-identifiers": []
+        },
+        "contextMenu": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionReference"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ActionsOnClick": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Discriminator property for ActionsOnClick."
+        }
+      },
+      "discriminator": "type",
       "required": [
-        "blade",
-        "displayName"
+        "type"
+      ]
+    },
+    "ActionsOnClickType": {
+      "type": "string",
+      "enum": [
+        "openBlade",
+        "updateParameters"
       ],
-      "additionalProperties": false
+      "x-ms-enum": {
+        "name": "ActionsOnClickType",
+        "modelAsString": true
+      }
+    },
+    "AggregationType": {
+      "type": "string",
+      "enum": [
+        "avg",
+        "count",
+        "max",
+        "min",
+        "percentile",
+        "sum",
+        "unique"
+      ],
+      "x-ms-enum": {
+        "name": "AggregationType",
+        "modelAsString": true
+      }
+    },
+    "AppInsightsDataDefinition": {
+      "type": "object",
+      "description": "The data definition of App Insights Query Tile.",
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "description": "Array of metrics object for an app insights query tile data.",
+          "items": {
+            "$ref": "#/definitions/QueryTileMetricsItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "metrics"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueryTileData"
+        }
+      ],
+      "x-ms-discriminator-value": "app-insights"
+    },
+    "ArcSnapshotTile": {
+      "type": "object",
+      "description": "Display information of your Arc enabled resources with the arc snapshot tile.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/ArcSnapshotTileData",
+          "description": "The definition of data for the arc snapshot tile."
+        },
+        "visualization": {
+          "$ref": "#/definitions/QueryTileVisualization",
+          "description": "Query tile visualizations."
+        }
+      },
+      "required": [
+        "data",
+        "visualization"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DashboardTile"
+        }
+      ],
+      "x-ms-discriminator-value": "ArcSnapshotTile"
+    },
+    "ArcSnapshotTileData": {
+      "type": "object",
+      "description": "Data definition for a arc snapshot tile.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ArcSnapshotTileDataKind",
+          "description": "The ARG data source of the query tile. Enum permitting the value: \"arg\""
+        },
+        "query": {
+          "type": "string",
+          "description": "A valid ARG query used to fetch the data."
+        },
+        "columns": {
+          "$ref": "#/definitions/ArcSnapshotTileDataColumn",
+          "description": "The column names to get from the query result."
+        },
+        "allResourcesConfiguredText": {
+          "type": "string",
+          "description": "The text to be shown when all the resources are configured with the servce."
+        },
+        "usedParameters": {
+          "type": "array",
+          "description": "Parameter names that are applied to the tile. It can be used within the query.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "noResources": {
+          "$ref": "#/definitions/ArcSnapshotTileDataNoResources",
+          "description": "Used when the resource count returned from the count is zero."
+        },
+        "actions": {
+          "$ref": "#/definitions/ArcSnapshotTileDataActions",
+          "description": "Actions that can be taken on the arc snapshot tile."
+        }
+      },
+      "required": [
+        "kind",
+        "query",
+        "columns"
+      ]
+    },
+    "ArcSnapshotTileDataActions": {
+      "type": "object",
+      "description": "Actions that can be taken on the arc snapshot tile.",
+      "properties": {
+        "configureService": {
+          "$ref": "#/definitions/ActionReference"
+        },
+        "viewConfiguredService": {
+          "$ref": "#/definitions/ActionReference"
+        },
+        "viewNotConfiguredResources": {
+          "$ref": "#/definitions/ActionReference"
+        }
+      }
+    },
+    "ArcSnapshotTileDataColumn": {
+      "type": "object",
+      "description": "The column names to get from the query result.",
+      "properties": {
+        "notConfiguredResourcesCount": {
+          "type": "string",
+          "description": "The column name that will return the count of resources that are not configured."
+        },
+        "totalCount": {
+          "type": "string",
+          "description": "The column name that will return the total count of resources."
+        }
+      },
+      "required": [
+        "notConfiguredResourcesCount",
+        "totalCount"
+      ]
+    },
+    "ArcSnapshotTileDataKind": {
+      "type": "string",
+      "enum": [
+        "arg"
+      ],
+      "x-ms-enum": {
+        "name": "ArcSnapshotTileDataKind",
+        "modelAsString": true
+      }
+    },
+    "ArcSnapshotTileDataNoResources": {
+      "type": "object",
+      "description": "Used when the resource count returned from the count is zero.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to be shown when there are no resources to be configured with the service."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon to be shown when there are no resources to be configured with."
+        }
+      },
+      "required": [
+        "text",
+        "icon"
+      ]
+    },
+    "ArgDataDefinition": {
+      "type": "object",
+      "description": "The data definition of ARG Query Tile.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The ARG query."
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueryTileData"
+        }
+      ],
+      "x-ms-discriminator-value": "arg"
     },
     "BladeReferenceWithContextPane": {
       "type": "object",
@@ -528,7 +698,8 @@
         },
         "parameters": {
           "type": "object",
-          "description": "The parameters to pass to the blade."
+          "description": "The parameters to pass to the blade.",
+          "additionalProperties": {}
         },
         "inContextPane": {
           "type": "boolean",
@@ -541,30 +712,220 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "CreatedByType": {
+      "type": "string",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
       ],
-      "additionalProperties": false
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true
+      }
+    },
+    "Dashboard": {
+      "type": "object",
+      "description": "The shared dashboard resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DashboardProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the dashboard.",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-z][a-z0-9]*$",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "DashboardListResult": {
       "type": "object",
+      "description": "The response of a Dashboard list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The Dashboard items on this page",
           "items": {
             "$ref": "#/definitions/Dashboard"
-          },
-          "description": "The array of custom resource provider manifests."
+          }
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to use for getting the next set of results."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
-      "description": "List of dashboards."
+      "required": [
+        "value"
+      ]
+    },
+    "DashboardPage": {
+      "type": "object",
+      "description": "A dashboard page.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of dashboard page."
+        },
+        "tiles": {
+          "type": "array",
+          "description": "The dashboard tiles.",
+          "items": {
+            "$ref": "#/definitions/DashboardTile"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DashboardParameter": {
+      "type": "object",
+      "description": "A dashboard parameter.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of dashboard filter."
+        },
+        "kind": {
+          "$ref": "#/definitions/DashboardParameterType",
+          "description": "Types of dashboard parameters."
+        },
+        "parameterNames": {
+          "type": "array",
+          "description": "The unique names to serve as placeholders for the parameter values.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultValues": {
+          "type": "array",
+          "description": "The parameter value(s) that will be selected by default when the parameter is displayed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "showOnPages": {
+          "type": "array",
+          "description": "A list of integers that represent indexes of the pages that this parameter applies to.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "kind",
+        "parameterNames",
+        "defaultValues",
+        "showOnPages"
+      ]
+    },
+    "DashboardParameterType": {
+      "type": "string",
+      "enum": [
+        "location",
+        "resourceGroup",
+        "resourceType",
+        "subscription",
+        "timeGranularity",
+        "timeRange"
+      ],
+      "x-ms-enum": {
+        "name": "DashboardParameterType",
+        "modelAsString": true
+      }
+    },
+    "DashboardParameterValues": {
+      "type": "object",
+      "description": "The dashboard parameter values.",
+      "properties": {
+        "parameterNames": {
+          "type": "array",
+          "description": "The unique names to serve as placeholders for the parameter values.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "The parameter value(s) that will be selected by default when the parameter is displayed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "parameterNames",
+        "values"
+      ]
+    },
+    "DashboardParameterValuesList": {
+      "type": "object",
+      "description": "The dashboard parameter list.",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "description": "The array of dashboard parameter values.",
+          "items": {
+            "$ref": "#/definitions/DashboardParameterValues"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DashboardProperties": {
+      "type": "object",
+      "description": "The shared dashboard properties.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of dashboard."
+        },
+        "pages": {
+          "type": "array",
+          "description": "The dashboard pages.",
+          "items": {
+            "$ref": "#/definitions/DashboardPage"
+          },
+          "x-ms-identifiers": []
+        },
+        "parameters": {
+          "type": "array",
+          "description": "The dashboard parameters.",
+          "items": {
+            "$ref": "#/definitions/DashboardParameter"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "DashboardTile": {
       "type": "object",
       "description": "A dashboard tile.",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "Discriminator property for DashboardTile."
+        },
         "title": {
           "type": "string",
           "description": "The title of dashboard title."
@@ -573,26 +934,27 @@
           "type": "string",
           "description": "The title of dashboard subtitle."
         },
-        "type": {
-          "$ref": "#/definitions/DashboardTileType"
-        },
         "layout": {
-          "$ref": "#/definitions/DashboardTileLayout"
+          "$ref": "#/definitions/DashboardTileLayout",
+          "description": "The dashboard tile's layout."
         },
         "visible": {
-          "$ref": "#/definitions/DashboardParameterValuesList"
+          "$ref": "#/definitions/DashboardParameterValuesList",
+          "description": "The dashboard parameter list."
         },
         "highlight": {
-          "$ref": "#/definitions/DashboardParameterValuesList"
+          "$ref": "#/definitions/DashboardParameterValuesList",
+          "description": "The dashboard parameter list."
         },
         "actions": {
-          "$ref": "#/definitions/Actions"
+          "$ref": "#/definitions/Actions",
+          "description": "Actions available on the tile."
         }
       },
       "discriminator": "type",
       "required": [
-        "title",
         "type",
+        "title",
         "layout"
       ]
     },
@@ -628,186 +990,19 @@
         "height"
       ]
     },
-    "DashboardTileType": {
-      "description": "Dashboard tile type.",
-      "enum": [
-        "ArcSnapshotTile",
-        "MarkdownTile",
-        "NavigationTile",
-        "PolicyTile",
-        "QueryTile",
-        "ResourceTile"
-      ],
+    "Kind": {
       "type": "string",
-      "x-ms-enum": {
-        "name": "type",
-        "modelAsString": true
-      }
-    },
-    "ArcSnapshotTile": {
-      "x-ms-discriminator-value": "ArcSnapshotTile",
-      "description": "Display information of your Arc enabled resources with the arc snapshot tile.",
-      "type": "object",
-      "properties": {
-        "data": {
-          "description": "The definition of data for the arc snapshot tile.",
-          "$ref": "#/definitions/ArcSnapshotTileData"
-        },
-        "visualization": {
-          "$ref": "#/definitions/QueryTileVisualization"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DashboardTile"
-        }
-      ],
-      "required": [
-        "data",
-        "visualization"
-      ]
-    },
-    "ArcSnapshotTileData": {
-      "type": "object",
-      "description": "Data definition for a arc snapshot tile.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The ARG data source of the query tile. Enum permitting the value: \"arg\"",
-          "enum": [
-            "arg"
-          ]
-        },
-        "query": {
-          "type": "string",
-          "description": "A valid ARG query used to fetch the data."
-        },
-        "columns": {
-          "$ref": "#/definitions/ArcSnapshotTileDataColumn"
-        },
-        "allResourcesConfiguredText": {
-          "type": "string",
-          "description": "The text to be shown when all the resources are configured with the servce."
-        },
-        "usedParameters": {
-          "type": "array",
-          "description": "Parameter names that are applied to the tile. It can be used within the query.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
-        },
-        "noResources": {
-          "$ref": "#/definitions/ArcSnapshotTileDataNoResources"
-        },
-        "actions": {
-          "$ref": "#/definitions/ArcSnapshotTileDataActions"
-        }
-      },
-      "required": [
-        "kind",
-        "query",
-        "columns"
-      ],
-      "additionalProperties": false
-    },
-    "ArcSnapshotTileDataActions": {
-      "type": "object",
-      "description": "Actions that can be taken on the arc snapshot tile.",
-      "properties": {
-        "configureService": {
-          "$ref": "#/definitions/ActionReference"
-        },
-        "viewConfiguredService": {
-          "$ref": "#/definitions/ActionReference"
-        },
-        "viewNotConfiguredResources": {
-          "$ref": "#/definitions/ActionReference"
-        }
-      }
-    },
-    "ArcSnapshotTileDataNoResources": {
-      "type": "object",
-      "description": "Used when the resource count returned from the count is zero.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Text to be shown when there are no resources to be configured with the service."
-        },
-        "icon": {
-          "type": "string",
-          "description": "Icon to be shown when there are no resources to be configured with."
-        }
-      },
-      "required": [
-        "text",
-        "icon"
-      ],
-      "additionalProperties": false
-    },
-    "ArcSnapshotTileDataColumn": {
-      "type": "object",
-      "description": "The column names to get from the query result.",
-      "properties": {
-        "notConfiguredResourcesCount": {
-          "type": "string",
-          "description": "The column name that will return the count of resources that are not configured."
-        },
-        "totalCount": {
-          "type": "string",
-          "description": "The column name that will return the total count of resources."
-        }
-      },
-      "required": [
-        "notConfiguredResourcesCount",
-        "totalCount"
-      ],
-      "additionalProperties": false
-    },
-    "MarkdownTile": {
-      "x-ms-discriminator-value": "MarkdownTile",
-      "description": "A markdown tile.",
-      "type": "object",
-      "properties": {
-        "data": {
-          "description": "The definition of data for the markdown tile.",
-          "type": "object",
-          "$ref": "#/definitions/MarkdownTileData"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DashboardTile"
-        }
-      ]
-    },
-    "MarkdownTileData": {
-      "type": "object",
-      "description": "Data definition for a markdown tile.",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/MarkdownTileDataSource"
-        }
-      },
-      "discriminator": "source",
-      "required": [
-        "source"
-      ]
-    },
-    "MarkdownTileDataSource": {
-      "description": "Dashboard Markdown Tile source.",
       "enum": [
-        "inline",
-        "uri"
+        "arg",
+        "app-insights",
+        "policy"
       ],
       "x-ms-enum": {
-        "name": "source",
+        "name": "Kind",
         "modelAsString": true
-      },
-      "type": "string"
+      }
     },
     "MarkdownInlineData": {
-      "x-ms-discriminator-value": "inline",
       "type": "object",
       "description": "The data definition of Markdown with inline content",
       "properties": {
@@ -815,41 +1010,23 @@
           "type": "string"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MarkdownTileData"
-        }
-      ],
       "required": [
         "content"
-      ]
-    },
-    "MarkdownUriData": {
-      "x-ms-discriminator-value": "uri",
-      "type": "object",
-      "description": "The data definition of Markdown with uri content",
-      "properties": {
-        "uri": {
-          "type": "string"
-        }
-      },
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/MarkdownTileData"
         }
       ],
-      "required": [
-        "uri"
-      ]
+      "x-ms-discriminator-value": "inline"
     },
-    "NavigationTile": {
-      "x-ms-discriminator-value": "NavigationTile",
+    "MarkdownTile": {
       "type": "object",
-      "description": "Navigate with a click to assets or blades within Azure Portal with the navigation tile.",
+      "description": "A markdown tile.",
       "properties": {
         "data": {
-          "description": "The definition of data for the navigation tile.",
-          "$ref": "#/definitions/NavigationTileData"
+          "$ref": "#/definitions/MarkdownTileData",
+          "description": "The definition of data for the markdown tile."
         }
       },
       "allOf": [
@@ -857,10 +1034,58 @@
           "$ref": "#/definitions/DashboardTile"
         }
       ],
+      "x-ms-discriminator-value": "MarkdownTile"
+    },
+    "MarkdownTileData": {
+      "type": "object",
+      "description": "Data definition for a markdown tile.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Discriminator property for MarkdownTileData."
+        }
+      },
+      "discriminator": "source",
+      "required": [
+        "source"
+      ]
+    },
+    "MarkdownUriData": {
+      "type": "object",
+      "description": "The data definition of Markdown with uri content",
+      "properties": {
+        "uri": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MarkdownTileData"
+        }
+      ],
+      "x-ms-discriminator-value": "uri"
+    },
+    "NavigationTile": {
+      "type": "object",
+      "description": "Navigate with a click to assets or blades within Azure Portal with the navigation tile.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/NavigationTileData",
+          "description": "The definition of data for the navigation tile."
+        }
+      },
       "required": [
         "data"
       ],
-      "additionalProperties": false
+      "allOf": [
+        {
+          "$ref": "#/definitions/DashboardTile"
+        }
+      ],
+      "x-ms-discriminator-value": "NavigationTile"
     },
     "NavigationTileData": {
       "type": "object",
@@ -877,164 +1102,98 @@
       },
       "required": [
         "icon"
-      ],
-      "additionalProperties": false
+      ]
+    },
+    "PatchableDashboard": {
+      "type": "object",
+      "description": "The shared dashboard resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DashboardProperties",
+          "description": "The shared dashboard properties."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "PolicyTile": {
-      "x-ms-discriminator-value": "PolicyTile",
       "type": "object",
       "description": "Display information of your resources that are compliant with configured Azure policies with the policy tile.",
       "properties": {
         "data": {
-          "description": "The definition of data for the policy tile.",
-          "$ref": "#/definitions/QueryTileData"
+          "$ref": "#/definitions/QueryTileData",
+          "description": "The definition of data for the policy tile."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DashboardTile"
-        }
-      ],
       "required": [
         "data"
       ],
-      "additionalProperties": false
+      "allOf": [
+        {
+          "$ref": "#/definitions/DashboardTile"
+        }
+      ],
+      "x-ms-discriminator-value": "PolicyTile"
+    },
+    "PolicyTileDataDefinition": {
+      "type": "object",
+      "description": "The data that determines the content of the policy tile.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueryTileData"
+        }
+      ],
+      "x-ms-discriminator-value": "policy"
     },
     "QueryTile": {
-      "x-ms-discriminator-value": "QueryTile",
-      "description": "A query tile.",
       "type": "object",
+      "description": "A query tile.",
       "properties": {
         "visualization": {
-          "$ref": "#/definitions/QueryTileVisualization"
+          "$ref": "#/definitions/QueryTileVisualization",
+          "description": "Query tile visualizations."
         },
         "data": {
-          "description": "The definition of data source object within the Query tile.",
-          "type": "object",
-          "$ref": "#/definitions/QueryTileData"
+          "$ref": "#/definitions/QueryTileData",
+          "description": "The definition of data source object within the Query tile."
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/DashboardTile"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "QueryTile"
     },
     "QueryTileData": {
       "type": "object",
       "description": "A dashboard query tile.",
-      "additionalProperties": true,
       "properties": {
         "kind": {
-          "$ref": "#/definitions/QueryTileKind"
+          "type": "string",
+          "description": "Discriminator property for QueryTileData."
         },
         "usedParameters": {
           "type": "array",
           "description": "The dashboard parameter names used in the tiles.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "discriminator": "kind",
       "required": [
         "kind"
-      ]
-    },
-    "QueryTileKind": {
-      "description": "Dashboard Query tile kind.",
-      "enum": [
-        "arg",
-        "app-insights",
-        "policy"
       ],
-      "x-ms-enum": {
-        "name": "kind",
-        "modelAsString": true
-      },
-      "type": "string"
-    },
-    "QueryTileVisualization": {
-      "description": "Query tile visualizations.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Enumeration of supported visualization types.",
-          "enum": [
-            "area",
-            "bar",
-            "card",
-            "column",
-            "donut",
-            "line",
-            "multistat",
-            "pie",
-            "scatter",
-            "table",
-            "timechart"
-          ],
-          "x-ms-enum": {
-            "name": "VisualizationType",
-            "modelAsString": true
-          }
-        },
-        "options": {
+      "allOf": [
+        {
           "type": "object",
-          "description": "Options for Query Tile visualizations."
-        }
-      }
-    },
-    "ArgDataDefinition": {
-      "x-ms-discriminator-value": "arg",
-      "type": "object",
-      "description": "The data definition of ARG Query Tile.",
-      "properties": {
-        "query": {
-          "type": "string",
-          "description": "The ARG query."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/QueryTileData"
-        }
-      ],
-      "required": [
-        "query"
-      ]
-    },
-    "AppInsightsDataDefinition": {
-      "x-ms-discriminator-value": "app-insights",
-      "type": "object",
-      "description": "The data definition of App Insights Query Tile.",
-      "properties": {
-        "metrics": {
-          "type": "array",
-          "description": "Array of metrics object for an app insights query tile data.",
-          "items": {
-            "$ref": "#/definitions/QueryTileMetricsItem"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/QueryTileData"
-        }
-      ],
-      "required": [
-        "metrics"
-      ]
-    },
-    "PolicyTileDataDefinition": {
-      "x-ms-discriminator-value": "policy",
-      "type": "object",
-      "description": "The data that determines the content of the policy tile.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/QueryTileData"
+          "additionalProperties": {}
         }
       ]
     },
@@ -1043,21 +1202,8 @@
       "description": "The metrics object for an app insights query tile data.",
       "properties": {
         "aggregationType": {
-          "type": "string",
-          "description": "The aggregation type to use for this metric item.",
-          "enum": [
-            "avg",
-            "count",
-            "max",
-            "min",
-            "percentile",
-            "sum",
-            "unique"
-          ],
-          "x-ms-enum": {
-            "name": "aggregationType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/AggregationType",
+          "description": "The aggregation type to use for this metric item."
         },
         "name": {
           "type": "string",
@@ -1068,46 +1214,89 @@
           "description": "The custom namespace to use."
         },
         "resourceMetadata": {
-          "type": "object",
-          "description": "The information that identifies the resource to which the metric belongs.",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The ARM resource id of the resource."
-            }
-          },
-          "required": [
-            "id"
-          ],
-          "additionalProperties": false
+          "$ref": "#/definitions/QueryTileMetricsItemResourceMetadata",
+          "description": "The information that identifies the resource to which the metric belongs."
         }
       },
       "required": [
         "aggregationType",
         "name",
         "resourceMetadata"
-      ],
-      "additionalProperties": false
+      ]
+    },
+    "QueryTileMetricsItemResourceMetadata": {
+      "type": "object",
+      "description": "The information that identifies the resource to which the metric belongs.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM resource id of the resource."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "QueryTileVisualization": {
+      "type": "object",
+      "description": "Query tile visualizations.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VisualizationType",
+          "description": "Enumeration of supported visualization types."
+        },
+        "options": {
+          "type": "object",
+          "description": "Options for Query Tile visualizations.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      }
     },
     "ResourceTile": {
-      "x-ms-discriminator-value": "ResourceTile",
-      "description": "A resource tile.",
       "type": "object",
+      "description": "A resource tile.",
       "properties": {
         "data": {
-          "$ref": "#/definitions/ResourceTileData"
+          "$ref": "#/definitions/ResourceTileData",
+          "description": "Data definition for a resource tile."
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/DashboardTile"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ResourceTile"
     },
     "ResourceTileData": {
       "type": "object",
       "description": "Data definition for a resource tile.",
-      "additionalProperties": true,
       "properties": {
         "resourceId": {
           "type": "string",
@@ -1130,277 +1319,77 @@
       },
       "required": [
         "resourceId"
-      ]
-    },
-    "DashboardPage": {
-      "type": "object",
-      "description": "A dashboard page.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "The title of dashboard page."
-        },
-        "tiles": {
-          "type": "array",
-          "description": "The dashboard tiles.",
-          "items": {
-            "$ref": "#/definitions/DashboardTile"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "DashboardProperties": {
-      "type": "object",
-      "description": "The shared dashboard properties.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "The title of dashboard."
-        },
-        "pages": {
-          "type": "array",
-          "description": "The dashboard pages.",
-          "items": {
-            "$ref": "#/definitions/DashboardPage"
-          },
-          "x-ms-identifiers": []
-        },
-        "parameters": {
-          "type": "array",
-          "description": "The dashboard parameters.",
-          "items": {
-            "$ref": "#/definitions/DashboardParameter"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "DashboardParameter": {
-      "type": "object",
-      "description": "A dashboard parameter.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "The title of dashboard filter."
-        },
-        "kind": {
-          "type": "string",
-          "$ref": "#/definitions/DashboardParameterType"
-        },
-        "parameterNames": {
-          "type": "array",
-          "description": "The unique names to serve as placeholders for the parameter values.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "defaultValues": {
-          "type": "array",
-          "description": "The parameter value(s) that will be selected by default when the parameter is displayed.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "showOnPages": {
-          "type": "array",
-          "description": "A list of integers that represent indexes of the pages that this parameter applies to.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "title",
-        "kind",
-        "parameterNames",
-        "defaultValues",
-        "showOnPages"
       ],
-      "additionalProperties": false
-    },
-    "DashboardParameterValues": {
-      "type": "object",
-      "description": "The dashboard parameter values.",
-      "properties": {
-        "parameterNames": {
-          "type": "array",
-          "description": "The unique names to serve as placeholders for the parameter values.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "values": {
-          "type": "array",
-          "description": "The parameter value(s) that will be selected by default when the parameter is displayed.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "parameterNames",
-        "values"
-      ],
-      "additionalProperties": false
-    },
-    "DashboardParameterValuesList": {
-      "type": "object",
-      "description": "The dashboard parameter list.",
-      "properties": {
-        "parameters": {
-          "type": "array",
-          "description": "The array of dashboard parameter values.",
-          "items": {
-            "$ref": "#/definitions/DashboardParameterValues"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "DashboardParameterType": {
-      "description": "Types of dashboard parameters.",
-      "enum": [
-        "location",
-        "resourceGroup",
-        "resourceType",
-        "subscription",
-        "timeGranularity",
-        "timeRange"
-      ],
-      "x-ms-enum": {
-        "name": "DashboardParameterType",
-        "modelAsString": true
-      },
-      "type": "string"
-    },
-    "Dashboard": {
-      "type": "object",
-      "description": "The shared dashboard resource definition.",
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true,
-      "properties": {
-        "properties": {
-          "description": "The shared dashboard properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DashboardProperties"
-        }
-      },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "type": "object",
+          "additionalProperties": {}
         }
       ]
     },
-    "PatchableDashboard": {
-      "type": "object",
-      "description": "The shared dashboard resource definition.",
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true,
-      "properties": {
-        "properties": {
-          "description": "The shared dashboard properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DashboardProperties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
+    "Source": {
+      "type": "string",
+      "enum": [
+        "inline",
+        "uri"
+      ],
+      "x-ms-enum": {
+        "name": "Source",
+        "modelAsString": true
       }
     },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
+    "Type": {
+      "type": "string",
+      "enum": [
+        "ArcSnapshotTile",
+        "MarkdownTile",
+        "NavigationTile",
+        "PolicyTile",
+        "QueryTile",
+        "ResourceTile"
+      ],
+      "x-ms-enum": {
+        "name": "Type",
+        "modelAsString": true
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-01-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_01_01_preview",
+            "value": "2024-01-01-preview"
           }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
-        }
+        ]
+      }
+    },
+    "VisualizationType": {
+      "type": "string",
+      "enum": [
+        "area",
+        "bar",
+        "card",
+        "column",
+        "donut",
+        "line",
+        "multistat",
+        "pie",
+        "scatter",
+        "table",
+        "timechart"
+      ],
+      "x-ms-enum": {
+        "name": "VisualizationType",
+        "modelAsString": true
       }
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "DashboardNameParameter": {
-      "name": "dashboardName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the dashboard.",
-      "minLength": 3,
-      "maxLength": 64,
-      "pattern": "^[a-z][a-z0-9]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
