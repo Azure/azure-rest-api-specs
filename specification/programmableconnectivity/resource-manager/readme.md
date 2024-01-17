@@ -27,7 +27,22 @@ These are the global settings for Azure Programmable Connectivity.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01-01-preview
+tag: package-2024-01-15-preview
+```
+
+### Tag: package-2024-01-15-preview
+
+These settings apply only when `--tag=package-2024-01-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-15-preview'
+input-file:
+  - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/Gateways.json
+  - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/OpenApiGatewayOfferings.json
+  - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/OpenApiGateways.json
+  - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/OperatorConnections.json
+  - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/OperatorOfferings.json
+  - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/Operations.json
+  - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/common.json
 ```
 
 ### Tag: package-2024-01-01-preview
