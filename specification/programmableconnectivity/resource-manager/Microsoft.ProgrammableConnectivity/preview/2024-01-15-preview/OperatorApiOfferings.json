@@ -44,13 +44,13 @@
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiOfferings/{operatorOfferingName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiOfferings/{operatorApiOfferingName}": {
       "get": {
         "operationId": "OperatorApiOfferings_Get",
         "tags": [
           "OperatorApiOfferings"
         ],
-        "description": "Get an OperatorOffering resource by name.",
+        "description": "Get an OperatorApiOffering resource by name.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -59,18 +59,18 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/OperatorOfferingNameParamter"
+            "$ref": "#/parameters/OperatorApiOfferingNameParamter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OperatorOffering' get by name operation succeeded.",
+            "description": "Resource 'OperatorApiOffering' get by name operation succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperatorOffering"
+              "$ref": "#/definitions/OperatorApiOffering"
             }
           },
           "default": {
-            "description": "Operator Offering error response.",
+            "description": "Operator API Offering error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -89,7 +89,7 @@
         "tags": [
           "OperatorApiOfferings"
         ],
-        "description": "List OperatorOffering resources by subscription ID",
+        "description": "List OperatorApiOffering resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -109,13 +109,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OperatorOffering' list operation on subscription ID succeeded.",
+            "description": "Resource 'OperatorApiOffering' list operation on subscription ID succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperatorOfferingListResult"
+              "$ref": "#/definitions/OperatorApiOfferingListResult"
             }
           },
           "default": {
-            "description": "Operator Offering error response.",
+            "description": "Operator API Offering error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -133,13 +133,13 @@
     }
   },
   "definitions": {
-    "OperatorOffering": {
+    "OperatorApiOffering": {
       "type": "object",
-      "description": "A Programmable Connectivity Operator Offerings resource. This is a readonly resource that helps get the available Operator Offerings.",
+      "description": "A Programmable Connectivity Operator API Offerings resource. This is a readonly resource that helps get the available Operator API Offerings.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OperatorOfferingProperties",
-          "description": "Operator Offering resource properties.",
+          "$ref": "#/definitions/OperatorApiOfferingProperties",
+          "description": "Operator API Offering resource properties.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read"
@@ -152,15 +152,15 @@
         }
       ]
     },
-    "OperatorOfferingListResult": {
+    "OperatorApiOfferingListResult": {
       "type": "object",
-      "description": "The response of a OperatorOffering list operation.",
+      "description": "The response of a OperatorApiOffering list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The OperatorOffering items on this page",
+          "description": "The OperatorApiOffering items on this page",
           "items": {
-            "$ref": "#/definitions/OperatorOffering"
+            "$ref": "#/definitions/OperatorApiOffering"
           }
         },
         "nextLink": {
@@ -173,48 +173,46 @@
         "value"
       ]
     },
-    "OperatorOfferingApi": {
+    "OperatorApiOfferingProperties": {
       "type": "object",
-      "description": "Operator Offering API properties",
+      "description": "Operator API Offering properties",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Open Gateway Offering API Display Name"
-        },
-        "version": {
-          "type": "string",
-          "description": "Open Gateway Offering API Version"
-        }
-      }
-    },
-    "OperatorOfferingProperties": {
-      "type": "object",
-      "description": "Operator Offering properties",
-      "properties": {
-        "offerName": {
-          "type": "string",
-          "description": "Open Gateway Offering Display Name"
-        },
         "operatorName": {
           "type": "string",
           "description": "Name of the Operator this offering belongs to."
         },
-        "region": {
+        "camaraApiName": {
           "type": "string",
-          "description": "Name of the country/region where this offering is being supported on Azure."
+          "description": "Standardized Network API name defined by CAMARA specifications."
         },
-        "operatorRegion": {
-          "type": "string",
-          "description": "Name of the country/region where this offering is being supported by the Operator."
-        },
-        "supportedApis": {
+        "supportedLocations": {
           "type": "array",
-          "description": "List of Network APIs supported in this offering. The APIs are specific to a country/region.",
+          "description": "List of country/region names where this offering is being supported on Azure.",
           "x-ms-identifiers": [
-            "displayName"
+            "supportedLocations"
           ],
           "items": {
-            "$ref": "#/definitions/OperatorOfferingApi"
+            "type": "string"
+          }
+        },
+        "operatorRegions": {
+          "type": "array",
+          "description": "List of country/region names where this offering is being supported by the Operator.",
+          "x-ms-identifiers": [
+            "operatorRegions"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "markets": {
+          "type": "array",
+          "description": "List of country/region names where this offering is being supported by Azure Marketplace.",
+          "x-ms-identifiers": [
+            "Azuremarkets"
+          ],
+          "items": {
+            "type": "string"
           }
         },
         "limits": {
@@ -294,8 +292,8 @@
     }
   },
   "parameters": {
-    "OperatorOfferingNameParamter": {
-      "name": "operatorOfferingName",
+    "OperatorApiOfferingNameParamter": {
+      "name": "operatorApiOfferingName",
       "in": "path",
       "description": "APC Gateway Offering Name",
       "required": true,

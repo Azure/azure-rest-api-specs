@@ -50,7 +50,7 @@
         "tags": [
           "OperatorApiConnections"
         ],
-        "description": "List OperatorConnection resources by subscription ID",
+        "description": "List OperatorApiConnection resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -61,9 +61,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OperatorConnection' list operation on subscription ID completed.",
+            "description": "Resource 'OperatorApiConnection' list operation on subscription ID completed.",
             "schema": {
-              "$ref": "#/definitions/OperatorConnectionListResult"
+              "$ref": "#/definitions/OperatorApiConnectionListResult"
             }
           },
           "default": {
@@ -89,7 +89,7 @@
         "tags": [
           "OperatorApiConnections"
         ],
-        "description": "List OperatorConnection resources by resource group.",
+        "description": "List OperatorApiConnection resources by resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -103,9 +103,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OperatorConnection' list operation on resource group completed.",
+            "description": "Resource 'OperatorApiConnection' list operation on resource group completed.",
             "schema": {
-              "$ref": "#/definitions/OperatorConnectionListResult"
+              "$ref": "#/definitions/OperatorApiConnectionListResult"
             }
           },
           "default": {
@@ -125,7 +125,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections/{operatorConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections/{operatorApiConnectionName}": {
       "get": {
         "operationId": "OperatorApiConnections_Get",
         "tags": [
@@ -143,14 +143,14 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/OperatorConnectionName"
+            "$ref": "#/parameters/OperatorApiConnectionName"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OperatorConnection' get by name operation completed.",
+            "description": "Resource 'OperatorApiConnection' get by name operation completed.",
             "schema": {
-              "$ref": "#/definitions/OperatorConnection"
+              "$ref": "#/definitions/OperatorApiConnection"
             }
           },
           "default": {
@@ -183,7 +183,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/OperatorConnectionName"
+            "$ref": "#/parameters/OperatorApiConnectionName"
           },
           {
             "name": "body",
@@ -191,21 +191,21 @@
             "description": "Operator Connection resource create or update request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OperatorConnection"
+              "$ref": "#/definitions/OperatorApiConnection"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OperatorConnection' update operation succeeded",
+            "description": "Resource 'OperatorApiConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/OperatorConnection"
+              "$ref": "#/definitions/OperatorApiConnection"
             }
           },
           "201": {
-            "description": "Resource 'OperatorConnection' create operation succeeded. Although the resource may be created but there could be other operations in progress on the resource. The current status can be queried via an HTTP GET operation on the URL returned in the HTTP header 'azure-async-operation' of the response.",
+            "description": "Resource 'OperatorApiConnection' create operation succeeded. Although the resource may be created but there could be other operations in progress on the resource. The current status can be queried via an HTTP GET operation on the URL returned in the HTTP header 'azure-async-operation' of the response.",
             "schema": {
-              "$ref": "#/definitions/OperatorConnection"
+              "$ref": "#/definitions/OperatorApiConnection"
             },
             "headers": {
               "Retry-After": {
@@ -249,7 +249,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/OperatorConnectionName"
+            "$ref": "#/parameters/OperatorApiConnectionName"
           },
           {
             "name": "body",
@@ -257,19 +257,19 @@
             "description": "Operator Connection properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OperatorConnectionUpdate"
+              "$ref": "#/definitions/OperatorApiConnectionUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OperatorConnection' update operation completed.",
+            "description": "Resource 'OperatorApiConnection' update operation completed.",
             "schema": {
-              "$ref": "#/definitions/OperatorConnection"
+              "$ref": "#/definitions/OperatorApiConnection"
             }
           },
           "202": {
-            "description": "Resource 'OperatorConnection' update request accepted.",
+            "description": "Resource 'OperatorApiConnection' update request accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -316,7 +316,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/OperatorConnectionName"
+            "$ref": "#/parameters/OperatorApiConnectionName"
           }
         ],
         "responses": {
@@ -415,10 +415,18 @@
         "legalName": {
           "type": "string",
           "description": "Legal name of the organization owning the application."
+        },
+        "taxNumber": {
+          "type": "string",
+          "description": "Unique Tax Number for the user's organization in the country/region the APC Gateway is being purchased."
+        },
+        "privacyContactEmailAddress": {
+          "type": "string",
+          "description": "Email address of the Privacy contact or Data Protection officer of the organization."
         }
       }
     },
-    "OperatorConnection": {
+    "OperatorApiConnection": {
       "type": "object",
       "description": "A Programmable Connectivity Operator Connection resource",
       "properties": {
@@ -430,7 +438,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/OperatorConnectionProperties",
+          "$ref": "#/definitions/OperatorApiConnectionProperties",
           "description": "Operator Connection resource properties.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -445,15 +453,15 @@
         }
       ]
     },
-    "OperatorConnectionListResult": {
+    "OperatorApiConnectionListResult": {
       "type": "object",
       "description": "The response of an Operator Connection list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The OperatorConnection items on this page",
+          "description": "The OperatorApiConnection items on this page",
           "items": {
-            "$ref": "#/definitions/OperatorConnection"
+            "$ref": "#/definitions/OperatorApiConnection"
           }
         },
         "nextLink": {
@@ -466,7 +474,7 @@
         "value"
       ]
     },
-    "OperatorConnectionProperties": {
+    "OperatorApiConnectionProperties": {
       "type": "object",
       "description": "Operator Connection resource properties",
       "allOf": [
@@ -483,12 +491,9 @@
           "$ref": "./common.json#/definitions/OperatorApiOfferingResourceId",
           "description": "Reference to the Operator API Offering Resource ID"
         },
-        "selectedApis": {
-          "type": "array",
-          "description": "List of selected Network APIs the user has selected for the current operator in the country/region provided in the Offering.",
-          "items": {
-            "type": "string"
-          }
+        "camaraApiName": {
+          "type": "string",
+          "description": "Name of the CAMARA defined Network API user has selected for the current operator in the country/region provided in the linked Operator API Offering."
         },
         "accountType": {
           "$ref": "#/definitions/AccountType",
@@ -507,13 +512,13 @@
       "required": [
         "gatewayId",
         "operatorApiOfferingId",
-        "selectedApis",
+        "camaraApiName",
         "accountType"
       ]
     },
-    "OperatorConnectionUpdate": {
+    "OperatorApiConnectionUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the OperatorConnection.",
+      "description": "The type used for update operations of the OperatorApiConnection.",
       "properties": {
         "tags": {
           "type": "object",
@@ -523,26 +528,23 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/OperatorConnectionUpdateProperties",
+          "$ref": "#/definitions/OperatorApiConnectionUpdateProperties",
           "x-ms-client-flatten": true
         }
       }
     },
-    "OperatorConnectionUpdateProperties": {
+    "OperatorApiConnectionUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the OperatorConnection.",
+      "description": "The updatable properties of the OperatorApiConnection.",
       "allOf": [
         {
           "$ref": "#/definitions/AppCredentials"
         }
       ],
       "properties": {
-        "selectedApis": {
-          "type": "array",
-          "description": "List of selected Network APIs the user has selected for the current operator in the country/region provided in the Offering.",
-          "items": {
-            "type": "string"
-          }
+        "camaraApiName": {
+          "type": "string",
+          "description": "Name of the CAMARA defined Network API user has selected for the current operator in the country/region provided in the linked Operator API Offering."
         },
         "accountType": {
           "$ref": "#/definitions/AccountType",
@@ -552,8 +554,8 @@
     }
   },
   "parameters": {
-    "OperatorConnectionName": {
-      "name": "operatorConnectionName",
+    "OperatorApiConnectionName": {
+      "name": "operatorApiConnectionName",
       "in": "path",
       "description": "Azure Programmable Connectivity (APC) Operator Connection Name",
       "required": true,
