@@ -31,7 +31,7 @@ If the automation determines you have breaking changes, i.e. Step 1 from the dia
 
 ### ARM API changes review (Diagram Step 2)
 
-- For help with step 2 / "ARM review", see https://aka.ms/azsdk/pr-arm-review.
+- For help with Step 2 / "ARM review", see https://aka.ms/azsdk/pr-arm-review.
 
 </details>
 
