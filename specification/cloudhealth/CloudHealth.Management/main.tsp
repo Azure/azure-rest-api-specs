@@ -615,9 +615,9 @@ model DiscoveryRuleProperties {
   @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
   discoverRelationships?: boolean = true;
 
-// Will be added later
-//  @doc("Whether to add all suggested signals to the discovered entities.")
-//  addAllSuggestedSignals?: boolean;
+  // Will be added later
+  //  @doc("Whether to add all suggested signals to the discovered entities.")
+  //  addAllSuggestedSignals?: boolean;
 }
 
 alias TimestampQueryParam = {
