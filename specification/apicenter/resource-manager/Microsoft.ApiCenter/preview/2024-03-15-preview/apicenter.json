@@ -385,6 +385,10 @@
         }
       ],
       "post": {
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "tags": [
           "MetadataSchema"
         ],
@@ -422,6 +426,64 @@
         "x-ms-examples": {
           "Services_ExportMetadataSchema": {
             "$ref": "./examples/Services_ExportMetadataSchema.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/importFromApim": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ServiceNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "tags": [
+          "ApiVersion"
+        ],
+        "summary": "Import from APIM",
+        "operationId": "ImportFromAPIM",
+        "description": "Imports from APIM instance.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportFromApimRequest"
+            },
+            "description": "The APIM import request entity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The import from APIM was successfull."
+          },
+          "202": {
+            "description": "Request to import from APIM instance was accepted. The 'Location' response header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportFromAPIM": {
+            "$ref": "./examples/ImportFromApim.json"
           }
         }
       }
@@ -1530,6 +1592,10 @@
         }
       ],
       "post": {
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "tags": [
           "ApiVersion"
         ],
@@ -1596,6 +1662,10 @@
         }
       ],
       "post": {
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "tags": [
           "ApiVersion"
         ],
@@ -2661,6 +2731,20 @@
           "format": "uri",
           "description": "The link to the next page of items",
           "readOnly": true
+        }
+      }
+    },
+    "ImportFromApimRequest": {
+      "type": "object",
+      "description": "The API specification source entity properties.",
+      "properties": {
+        "sourceResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "title": "Resource Id",
+            "description": "Resource Id of the resrource to import from APIM instance."
+          }
         }
       }
     },
