@@ -388,6 +388,9 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/ProviderTypeParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1577,12 +1580,6 @@
     },
     "AlertInstanceProperties": {
       "type": "object",
-      "required": [
-        "templateId",
-        "providerType",
-        "providerNames",
-        "alertProperties"
-      ],
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -1643,20 +1640,6 @@
     },
     "AlertProperties": {
       "type": "object",
-      "required": [
-        "isEnabled",
-        "severity",
-        "actionGroups",
-        "threshold",
-        "thresholdOperator",
-        "windowSize",
-        "evaluationFrequency",
-        "failingPeriodsToAlert",
-        "failingPeriodsOperator",
-        "muteActionsDuration",
-        "dimension",
-        "alertQueryParameter"
-      ],
       "properties": {
         "isEnabled": {
           "type": "boolean",
@@ -1756,10 +1739,6 @@
             "type": "string"
           },
           "description": "Provider Instances used in alert query parameters"
-        },
-        "aggregate": {
-          "type": "string",
-          "description": "Aggregate name in query parameters in alert"
         }
       },
       "additionalProperties": {
@@ -1802,12 +1781,6 @@
     },
     "AlertTemplateInstanceProperties": {
       "type": "object",
-      "required": [
-        "templateId",
-        "providerType",
-        "description",
-        "alertTemplateProperties"
-      ],
       "properties": {
         "templateId": {
           "type": "string",
@@ -1831,19 +1804,6 @@
     },
     "AlertTemplateProperties": {
       "type": "object",
-      "required": [
-        "severity",
-        "query",
-        "thresholdOperator",
-        "defaultThreshold",
-        "minThresholdValue",
-        "maxThresholdValue",
-        "isThresholdInputRequired",
-        "alertUnit",
-        "metricMeasurement",
-        "queryInputParameters",
-        "laParameters"
-      ],
       "properties": {
         "severity": {
           "type": "integer",
@@ -1920,14 +1880,6 @@
     },
     "AlertTemplateMetricMeasurement": {
       "type": "object",
-      "required": [
-        "thresholdOperator",
-        "threshold",
-        "metricTriggerType",
-        "metricColumn",
-        "frequencyInMinutes",
-        "timeWindowInMinutes"
-      ],
       "properties": {
         "thresholdOperator": {
           "type": "string",
@@ -2006,11 +1958,6 @@
     },
     "AlertTemplateLAParameter": {
       "type": "object",
-      "required": [
-        "queryParameterName",
-        "parameterName",
-        "selectionMode"
-      ],
       "properties": {
         "queryParameterName": {
           "type": "string",
@@ -2654,6 +2601,13 @@
       "pattern": "^[a-zA-Z0-9-_]+$",
       "description": "Name of the SAP monitor resource.",
       "x-ms-parameter-location": "method"
+    },
+    "ProviderTypeParameter": {
+      "name": "providerType",
+      "in": "query",
+      "type": "string",
+      "description": "The provider type for filtering alert templates.",
+      "minLength": 1
     },
     "AlertNameParameter": {
       "name": "alertName",
