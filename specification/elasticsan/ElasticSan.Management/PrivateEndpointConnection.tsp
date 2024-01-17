@@ -42,7 +42,9 @@ interface PrivateEndpointConnections {
     ArmLroLocationHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List all Private Endpoint Connections associated with the Elastic San.")
+  @operationId("PrivateEndpointConnections_List")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
