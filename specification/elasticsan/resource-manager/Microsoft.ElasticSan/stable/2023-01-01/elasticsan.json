@@ -167,7 +167,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PagedSkuInformation"
+              "$ref": "#/definitions/SkuInformationList"
             }
           },
           "default": {
@@ -2388,28 +2388,6 @@
         "modelAsString": true
       }
     },
-    "PagedSkuInformation": {
-      "type": "object",
-      "description": "List of SKU Information objects",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SkuInformation items on this page",
-          "items": {
-            "$ref": "#/definitions/SkuInformation"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "PrivateEndpoint": {
       "type": "object",
       "description": "Response for PrivateEndpoint",
@@ -2696,6 +2674,26 @@
       "required": [
         "name"
       ]
+    },
+    "SkuInformationList": {
+      "type": "object",
+      "description": "List of SKU Information objects",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of ResourceType Sku",
+          "items": {
+            "$ref": "#/definitions/SkuInformation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to fetch the next section of the paginated response.",
+          "readOnly": true
+        }
+      }
     },
     "SkuLocationInfo": {
       "type": "object",

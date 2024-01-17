@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.ElasticSan;
 
@@ -109,7 +110,18 @@ enum XMsForceDelete {
 }
 
 @doc("List of SKU Information objects")
-model SkuInformationList is Azure.Core.Page<SkuInformation>;
+@pagedResult
+model SkuInformationList {
+  @doc("List of ResourceType Sku")
+  @items
+  @visibility("read")
+  value?: SkuInformation[];
+
+  @doc("URI to fetch the next section of the paginated response.")
+  @nextLink
+  @visibility("read")
+  nextLink?: string;
+}
 
 @doc("ElasticSAN SKU and its properties")
 model SkuInformation {
