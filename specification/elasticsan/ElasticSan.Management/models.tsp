@@ -253,6 +253,7 @@ model PrivateLinkServiceConnectionState {
 @doc("Response for ElasticSan update request.")
 model ElasticSanUpdate {
   @doc("Properties of ElasticSan.")
+  @extension("x-ms-client-flatten", true)
   properties?: ElasticSanUpdateProperties;
 
   @doc("Update tags")
@@ -474,6 +475,7 @@ model ManagedByInfo {
 @doc("Response for Volume request.")
 model VolumeUpdate {
   @doc("Properties of Volume.")
+  @extension("x-ms-client-flatten", true)
   properties?: VolumeUpdateProperties;
 }
 
