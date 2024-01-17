@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Machine Learning Services",
-    "version": "2021-10-01-dataplanepreview",
+    "version": "2024-03-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Supported Machine Learning Services endpoints.",
+        "description": "Supported Azure-AI asset endpoints.",
         "required": true,
         "type": "string"
       }
@@ -60,26 +60,20 @@
   "paths": {
     "/indexes": {
       "get": {
-        "operationId": "IndexContainers_List",
-        "description": "List the latest index resources.",
+        "operationId": "Indexes_List",
+        "description": "List the latest version of each index.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "listViewType",
-            "in": "query",
-            "description": "View type for including/excluding (for example) archived entities.",
-            "required": true,
-            "type": "string",
-            "default": "ActiveOnly"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "label",
-            "in": "query",
-            "description": "Label query parameter, for example, latest.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -89,7 +83,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedIndexContainer"
+              "$ref": "#/definitions/PagedIndex"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -119,7 +113,7 @@
     },
     "/indexes/{name}/versions": {
       "get": {
-        "operationId": "IndexVerions_List",
+        "operationId": "IndexVersions_ListIndexVersions",
         "description": "List IndexVersion resources.",
         "parameters": [
           {
@@ -146,6 +140,15 @@
             "description": "Label query parameter, for example, latest.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -185,7 +188,7 @@
     },
     "/indexes/{name}/versions/{version}": {
       "get": {
-        "operationId": "IndexVerions_GetIndexVersion",
+        "operationId": "IndexVersions_GetIndexVersion",
         "description": "Fetch a IndexVersion by name.",
         "parameters": [
           {
@@ -254,7 +257,7 @@
         }
       },
       "patch": {
-        "operationId": "IndexVerions_CreateIndex",
+        "operationId": "IndexVersions_CreateIndexVersion",
         "description": "Creates or updates a IndexVersion.",
         "consumes": [
           "application/merge-patch+json"
@@ -469,7 +472,7 @@
         }
       }
     },
-    "IndexContainer": {
+    "Index": {
       "type": "object",
       "description": "Index properties",
       "properties": {
@@ -525,15 +528,15 @@
         }
       }
     },
-    "PagedIndexContainer": {
+    "PagedIndex": {
       "type": "object",
-      "description": "Paged collection of IndexContainer items",
+      "description": "Paged collection of Index items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The IndexContainer items on this page",
+          "description": "The Index items on this page",
           "items": {
-            "$ref": "#/definitions/IndexContainer"
+            "$ref": "#/definitions/Index"
           },
           "x-ms-identifiers": []
         },
@@ -647,6 +650,15 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
     "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
       "name": "Repeatability-First-Sent",
       "in": "header",
@@ -665,6 +677,25 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "repeatabilityRequestId"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }

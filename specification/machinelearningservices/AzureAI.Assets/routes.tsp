@@ -24,27 +24,27 @@ alias ListQueryParamsIndex = ListQueryParametersTrait<{
   @query listViewType: string = "ActiveOnly";
   @doc("Label query parameter, for example, latest.")
   @query label: string;
-}>;
+} & StandardListQueryParameters>;
 
-interface IndexVerions {
+interface IndexVersions {
   @doc("Fetch a IndexVersion by name.")
   getIndexVersion is Operations.ResourceRead<IndexVersion>;
 
   @doc("Creates or updates a IndexVersion.")
-  createIndex is Operations.ResourceCreateOrUpdate<IndexVersion>;
+  createIndexVersion is Operations.ResourceCreateOrUpdate<IndexVersion>;
 
   @doc("List IndexVersion resources.")
-  list is Operations.ResourceList<
+  listIndexVersions is Operations.ResourceList<
     IndexVersion,
-    StandardListQueryParameters & ListQueryParamsIndex
+    ListQueryParamsIndex
     >;
 }
 
-interface IndexContainers {
-  @doc("List the latest index resources.")
+interface Indexes {
+  @doc("List the latest version of each index.")
   list is Operations.ResourceList<
-    IndexContainer,
-    StandardListQueryParameters & ListQueryParamsIndex
+    Index,
+    ListQueryParametersTrait<StandardListQueryParameters>
     >;
 }
 

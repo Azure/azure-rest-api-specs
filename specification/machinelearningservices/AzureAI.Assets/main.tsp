@@ -39,7 +39,7 @@ namespace Microsoft.MachineLearningServices;
 
 @doc("Azure Machine Learning Services api versions.")
 enum Versions {
-  @doc("Azure Machine Learning Services api version 2021-10-01-dataplanepreview.")
+  @doc("Azure Machine Learning Services api version 2024-03-01-preview.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2021-10-01-dataplanepreview`,
+  `2024-03-01-preview`,
 }

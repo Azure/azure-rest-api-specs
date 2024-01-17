@@ -12,9 +12,26 @@ using Azure.Core.Traits;
 
 namespace Microsoft.MachineLearningServices;
 
+
+@doc("Index properties")
+@resource("indexes")
+model Index {
+  @key("name")
+  @doc("Name of the index.")
+  @visibility("external")
+  name: string;
+
+  @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
+  indexVersion: string;
+
+  @doc("Placeholder for extras.")
+  indexVersionDefinition: IndexVersion
+}
+
+
 // todo do we still need to nest under workspaces? If so just route that here? 
 @doc("IndexVersion Definition")
-@parentResource(IndexContainer)
+@parentResource(Index)
 @resource("versions")
 model IndexVersion {
   @key("version")
@@ -27,19 +44,4 @@ model IndexVersion {
 
   @doc("Placeholder for extras.")
   indexConfigurations: Record<string>
-}
-
-@doc("Index properties")
-@resource("indexes")
-model IndexContainer {
-  @key("name")
-  @doc("Name of the index.")
-  @visibility("external")
-  name: string;
-
-  @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
-  indexVersion: string;
-
-  @doc("Placeholder for extras.")
-  indexVersionDefinition: IndexVersion
 }
