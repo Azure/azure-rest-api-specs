@@ -2026,14 +2026,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ElasticSanProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Properties of ElasticSan.",
+          "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -2433,14 +2432,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Private Endpoint Connection Properties.",
+          "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -2517,12 +2515,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2775,14 +2769,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SnapshotProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Properties of Volume Snapshot.",
+          "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -2937,14 +2930,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VolumeProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Properties of Volume.",
+          "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -2970,18 +2962,14 @@
       "type": "object",
       "description": "Response for Volume Group request.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/VolumeGroupProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/VolumeGroupProperties",
+          "description": "Properties of VolumeGroup.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

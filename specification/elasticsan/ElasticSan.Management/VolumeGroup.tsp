@@ -8,13 +8,19 @@ import "./ElasticSan.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ResourceManager.Private;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ElasticSan;
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("Response for Volume Group request.")
 @parentResource(ElasticSan)
-model VolumeGroup is ProxyResource<VolumeGroupProperties> {
+@armResourceInternal(VolumeGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model VolumeGroup extends ProxyResourceBase {
   @doc("The name of the VolumeGroup.")
   @maxLength(63)
   @minLength(3)
@@ -26,6 +32,10 @@ model VolumeGroup is ProxyResource<VolumeGroupProperties> {
 
   @doc("The identity of the resource.")
   identity?: Identity;
+
+  @doc("Properties of VolumeGroup.")
+  @extension("x-ms-client-flatten", true)
+  properties?: VolumeGroupProperties;
 }
 
 @armResourceOperations

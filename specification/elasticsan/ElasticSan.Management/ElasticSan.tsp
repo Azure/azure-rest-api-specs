@@ -7,12 +7,18 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ResourceManager.Private;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ElasticSan;
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("Response for ElasticSan request.")
-model ElasticSan is TrackedResource<ElasticSanProperties> {
+@armResourceInternal(ElasticSanProperties)
+@includeInapplicableMetadataInPayload(false)
+model ElasticSan extends TrackedResourceBase {
   @doc("The name of the ElasticSan.")
   @maxLength(24)
   @minLength(3)
@@ -21,6 +27,10 @@ model ElasticSan is TrackedResource<ElasticSanProperties> {
   @key("elasticSanName")
   @segment("elasticSans")
   name: string;
+
+  @doc("Properties of ElasticSan.")
+  @extension("x-ms-client-flatten", true)
+  properties: ElasticSanProperties;
 }
 
 @armResourceOperations

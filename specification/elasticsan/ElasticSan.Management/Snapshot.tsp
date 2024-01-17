@@ -8,13 +8,19 @@ import "./VolumeGroup.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ResourceManager.Private;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ElasticSan;
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("Response for Volume Snapshot request.")
 @parentResource(VolumeGroup)
-model Snapshot is ProxyResource<SnapshotProperties> {
+@armResourceInternal(SnapshotProperties)
+@includeInapplicableMetadataInPayload(false)
+model Snapshot extends ProxyResourceBase {
   @doc("The name of the volume snapshot within the given volume group.")
   @maxLength(80)
   @minLength(1)
@@ -23,6 +29,10 @@ model Snapshot is ProxyResource<SnapshotProperties> {
   @key("snapshotName")
   @segment("snapshots")
   name: string;
+
+  @doc("Properties of Volume Snapshot.")
+  @extension("x-ms-client-flatten", true)
+  properties: SnapshotProperties;
 }
 
 @armResourceOperations
