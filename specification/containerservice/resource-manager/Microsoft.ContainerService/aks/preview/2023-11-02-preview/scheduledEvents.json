@@ -33,117 +33,8 @@
       }
     }
   },
-  "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/scheduledEvents/{scheduledEventName}": {
-      "get": {
-        "tags": [
-          "ScheduledEvents"
-        ],
-        "operationId": "ScheduledEvents_Get",
-        "summary": "Access to this resource type is not currently available via GET. To consume please use System Topics or Azure Resource Graph.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./managedClusters.json#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScheduledEventNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ScheduledEvent"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./managedClusters.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Scheduled Event": {
-            "$ref": "./examples/ScheduledEventsGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/scheduledEvents": {
-      "get": {
-        "tags": [
-          "ScheduledEvents"
-        ],
-        "operationId": "ScheduledEvents_List",
-        "summary": "Access to this resource type is not currently available via GET. To consume please use System Topics or Azure Resource Graph.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./managedClusters.json#/parameters/ResourceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ScheduledEventList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./managedClusters.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get Scheduled Event": {
-            "$ref": "./examples/ScheduledEventsList.json"
-          }
-        }
-      }
-    }
-  },
+  "paths": {},
   "definitions": {
-    "ScheduledEventList": {
-      "type": "object",
-      "description": "List of scheduled events",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScheduledEvent"
-          },
-          "description": "Scheduled events list"
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "ScheduledEvent": {
       "type": "object",
       "allOf": [
@@ -237,18 +128,6 @@
         }
       },
       "description": "Properties for a scheduled event."
-    }
-  },
-  "parameters": {
-    "ScheduledEventNameParameter": {
-      "name": "scheduledEventName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 63,
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "description": "The name of the scheduled event."
     }
   }
 }
