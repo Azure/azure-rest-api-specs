@@ -165,7 +165,7 @@ model AwsCloudProfile {
 @removed(Versions.v2023_12_01)
 @doc("Solution Configuration")
 model SolutionConfiguration
-  is TrackedResource<SolutionConfigurationProperties> {
+  is ProxyResource<SolutionConfigurationProperties> {
   @doc("Represent Solution Configuration Resource.")
   @key("solutionConfiguration")
   @path
