@@ -943,6 +943,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default": {
       "put": {
         "description": "Create or update a draft Firewall Policy.",
+        "operationId": "FirewallPolicyDrafts_CreateOrUpdate",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -955,6 +956,7 @@
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
             "type": "string",
             "description": "The name of the Firewall Policy."
           },
@@ -976,15 +978,28 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyDraft"
+            }
           },
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyDraft"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
           }
         }
       },
       "delete": {
         "description": "Delete a draft policy.",
+        "operationId": "FirewallPolicyDrafts_Delete",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -997,6 +1012,7 @@
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
             "type": "string",
             "description": "The name of the Firewall Policy."
           },
@@ -1010,13 +1026,15 @@
         "responses": {
           "200": {
             "description": "Successfully deleted Firewall Draft Policy"
+          },
+          "204": {
+            "description": "Firewall Policy Draft not found"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy": {
-      "post": {
-        "description": "Deploy a draft policy to become the parent firewall policy.",
+      },
+      "get": {
+        "description": "Get a draft Firewall Policy.",
+        "operationId": "FirewallPolicyDrafts_Get",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1029,6 +1047,51 @@
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a Firewall Policy resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyDraft"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy": {
+      "post": {
+        "description": "Deploy a draft policy to become the parent firewall policy.",
+        "operationId": "FirewallPolicyDeployments_Deploy",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
             "type": "string",
             "description": "The name of the Firewall Policy."
           },
@@ -1062,6 +1125,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}/ruleCollectionGroupDrafts/default": {
       "delete": {
         "description": "Delete Rule Collection Group Draft.",
+        "operationId": "FirewallPolicyRuleCollectionGroupDrafts_Delete",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1074,6 +1138,7 @@
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
             "type": "string",
             "description": "The name of the Firewall Policy."
           },
@@ -1081,6 +1146,7 @@
             "name": "ruleCollectionGroupName",
             "in": "path",
             "required": true,
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
             "type": "string",
             "description": "The name of the FirewallPolicyRuleCollectionGroup."
           },
@@ -1094,11 +1160,15 @@
         "responses": {
           "200": {
             "description": "Successfully deleted Rule Collection Group Draft"
+          },
+          "204": {
+            "description": "Firewall Policy Rule Collection Group Draft not found"
           }
         }
       },
       "put": {
         "description": "Create or Update Rule Collection Group Draft.",
+        "operationId": "FirewallPolicyRuleCollectionGroupDrafts_CreateOrUpdate",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1112,6 +1182,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
             "description": "The name of the Firewall Policy."
           },
           {
@@ -1119,6 +1190,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
             "description": "The name of the FirewallPolicyRuleCollectionGroup."
           },
           {
@@ -1139,10 +1211,70 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Request successful. The operation returns a Firewall Policy Rule Collection Group Draft resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroupDraft"
+            }
           },
           "201": {
-            "description": "Created"
+            "description": "Request successful. The operation returns a Firewall Policy Rule Collection Group Draft resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroupDraft"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "required": true,
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "type": "string",
+            "description": "The name of the Firewall Policy."
+          },
+          {
+            "name": "ruleCollectionGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$\\z",
+            "description": "The name of the FirewallPolicyRuleCollectionGroup."
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a Firewall Policy Rule Collection Group Draft resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroupDraft"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
           }
         }
       }
