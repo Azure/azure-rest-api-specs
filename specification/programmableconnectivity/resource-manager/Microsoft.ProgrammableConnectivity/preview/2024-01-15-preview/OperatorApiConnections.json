@@ -67,7 +67,7 @@
             }
           },
           "default": {
-            "description": "Operator Connection error response.",
+            "description": "Operator API Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -109,7 +109,7 @@
             }
           },
           "default": {
-            "description": "Operator Connection error response.",
+            "description": "Operator API Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -131,7 +131,7 @@
         "tags": [
           "OperatorApiConnections"
         ],
-        "description": "Get an Operator Connection.",
+        "description": "Get an Operator API Connection.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -154,7 +154,7 @@
             }
           },
           "default": {
-            "description": "Operator Connection error response.",
+            "description": "Operator API Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -171,7 +171,7 @@
         "tags": [
           "OperatorApiConnections"
         ],
-        "description": "Create an Operator Connection.",
+        "description": "Create an Operator API Connection.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -188,7 +188,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Operator Connection resource create or update request.",
+            "description": "Operator API Connection resource create or update request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/OperatorApiConnection"
@@ -216,7 +216,7 @@
             }
           },
           "default": {
-            "description": "Operator Connection error response.",
+            "description": "Operator API Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -237,7 +237,7 @@
         "tags": [
           "OperatorApiConnections"
         ],
-        "description": "Update an Operator Connection",
+        "description": "Update an Operator API Connection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -254,7 +254,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Operator Connection properties to be updated.",
+            "description": "Operator API Connection properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/OperatorApiConnectionUpdate"
@@ -283,7 +283,7 @@
             }
           },
           "default": {
-            "description": "Operator Connection error response.",
+            "description": "Operator API Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -304,7 +304,7 @@
         "tags": [
           "OperatorApiConnections"
         ],
-        "description": "Delete an Operator Connection",
+        "description": "Delete an Operator API Connection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -338,7 +338,7 @@
             "description": "Resource doesn't exist."
           },
           "default": {
-            "description": "Operator Connection error response.",
+            "description": "Operator API Connection error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -362,7 +362,7 @@
   "definitions": {
     "AccountType": {
       "type": "string",
-      "description": "The Account Type of the Operator Connections",
+      "description": "The Account Type of the Operator API Connections",
       "enum": [
         "AzureManaged",
         "UserManaged"
@@ -428,7 +428,7 @@
     },
     "OperatorApiConnection": {
       "type": "object",
-      "description": "A Programmable Connectivity Operator Connection resource",
+      "description": "A Programmable Connectivity Operator API Connection resource",
       "properties": {
         "tags": {
           "type": "object",
@@ -439,7 +439,7 @@
         },
         "properties": {
           "$ref": "#/definitions/OperatorApiConnectionProperties",
-          "description": "Operator Connection resource properties.",
+          "description": "Operator API Connection resource properties.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read",
@@ -455,7 +455,7 @@
     },
     "OperatorApiConnectionListResult": {
       "type": "object",
-      "description": "The response of an Operator Connection list operation.",
+      "description": "The response of an Operator API Connection list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -476,7 +476,7 @@
     },
     "OperatorApiConnectionProperties": {
       "type": "object",
-      "description": "Operator Connection resource properties",
+      "description": "Operator API Connection resource properties",
       "allOf": [
         {
           "$ref": "#/definitions/AppCredentials"
@@ -557,7 +557,7 @@
     "OperatorApiConnectionName": {
       "name": "operatorApiConnectionName",
       "in": "path",
-      "description": "Azure Programmable Connectivity (APC) Operator Connection Name",
+      "description": "Azure Programmable Connectivity (APC) Operator API Connection Name",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9-]{3,64}$"
