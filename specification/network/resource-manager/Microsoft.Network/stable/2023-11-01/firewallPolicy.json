@@ -1029,6 +1029,12 @@
           },
           "204": {
             "description": "Firewall Policy Draft not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
           }
         }
       },
@@ -1116,8 +1122,11 @@
               }
             }
           },
-          "204": {
-            "description": "No Content"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
           }
         }
       }
@@ -1163,6 +1172,12 @@
           },
           "204": {
             "description": "Firewall Policy Rule Collection Group Draft not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
           }
         }
       },
@@ -1231,7 +1246,8 @@
         }
       },
       "get": {
-        "description": "",
+        "description": "Get Rule Collection Group Draft.",
+        "operationId": "FirewallPolicyRuleCollectionGroupDrafts_Get",
         "parameters": [
           {
             "name": "resourceGroupName",
