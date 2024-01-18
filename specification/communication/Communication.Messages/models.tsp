@@ -75,6 +75,14 @@ enum MessageTemplateValueKind {
   quickAction,
 }
 
+
+@doc("The type of the communication msesages channel.")
+enum CommunicationMessagesChannel {
+  @doc("The WhatsApp communication msesages channel type.")
+  whatsApp,
+}
+
+
 @doc("The type of the message template.")
 enum MessageTemplateBindingsType {
   @doc("The WhatsApp template type.")
@@ -298,7 +306,7 @@ API.
   content?: unknown;
 
   @doc("Message template response type is whatsApp.")
-  kind: "whatsApp";
+  kind: CommunicationMessagesChannel.whatsApp;
 }
 
 @resource("messages/notifications")
@@ -350,6 +358,9 @@ model MessageTemplateItem {
 
   @doc("The aggregated template status.")
   status: MessageTemplateStatus;
+
+  @doc("The type discriminator describing a template type.")
+  kind: CommunicationMessagesChannel;
 }
 
 @doc("Azure Communication Messages Versions")
