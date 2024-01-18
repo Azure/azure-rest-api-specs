@@ -1420,7 +1420,7 @@
               "type": "object",
               "x-ms-client-flatten": true,
               "readOnly": true,
-              "description": "Name of the resource provided by the resource Provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+              "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
               "properties": {
                 "value": {
                   "description": "Resource name.",
@@ -1504,7 +1504,7 @@
           "type": "object",
           "x-ms-client-flatten": true,
           "readOnly": true,
-          "description": "Name of the resource provided by the resource Provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+          "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
           "properties": {
             "value": {
               "description": "Resource name.",
@@ -1723,7 +1723,7 @@
           "type": "object",
           "x-ms-client-flatten": true,
           "readOnly": true,
-          "description": "Name of the resource provided by the resource Provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+          "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
           "properties": {
             "value": {
               "description": "Resource name.",
@@ -1791,48 +1791,6 @@
           "type": "string",
           "readOnly": true,
           "format": "date-time"
-        }
-      }
-    },
-    "SubmittedResourceRequestStatus": {
-      "type": "object",
-      "description": "Status of a single GroupQuota request.",
-      "properties": {
-        "requestedResource": {
-          "description": "Requested Resource.",
-          "$ref": "#/definitions/QuotaAllocationRequestBase"
-        },
-        "requestProperties": {
-          "description": "Request properties.",
-          "$ref": "#/definitions/RequestProperties"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
-        },
-        "faultCode": {
-          "type": "string",
-          "description": "Details of the failure.",
-          "readOnly": true
-        }
-      }
-    },
-    "SubmittedResourceRequestStatusList": {
-      "type": "object",
-      "description": "Share Quota Entity list.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Subscription groupQuotaRequests list.",
-          "items": {
-            "$ref": "#/definitions/SubmittedResourceRequestStatus"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "The URL to use for getting the next set of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
