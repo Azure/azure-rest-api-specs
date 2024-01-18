@@ -14,7 +14,7 @@ namespace Microsoft.NexusIdentity;
 model IdentityController is TrackedResource<IdentityControllerProperties> {
   /** Name of IdentityController */
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("identityControllerName")
+  @key
   @path
   @segment("identityControllers")
   name: string;
