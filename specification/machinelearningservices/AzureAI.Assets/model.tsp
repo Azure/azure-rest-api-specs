@@ -33,7 +33,6 @@ model Index {
 }
 
 
-// todo do we still need to nest under workspaces? If so just route that here? 
 @doc("IndexVersion Definition")
 @parentResource(Index)
 @resource("versions")

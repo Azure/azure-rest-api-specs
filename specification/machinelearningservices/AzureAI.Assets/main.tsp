@@ -10,14 +10,13 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-//todo clean up
 
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.contoso.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://widget.contoso.com/.default"],
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      scopes: ["https://ml.azure.com/"],
     }
   ]>
 )
@@ -26,7 +25,7 @@ using Azure.Core.Traits;
 })
 @server(
   "{endpoint}/assets",
-  "Machinelearning Services APIs",
+  "Machinelearning Services Asset APIs",
   {
     @doc("""
 Supported Azure-AI asset endpoints.

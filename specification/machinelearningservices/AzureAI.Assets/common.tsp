@@ -47,7 +47,6 @@ model AssetBase is ResourceBase {
 }
 
 @doc("Resource Base class.")
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "property bag is a required attribute for all our resources"
 model ResourceBase {
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
   tags: Record<string>;
