@@ -12,7 +12,7 @@ interface DevCenterOperations {
   @doc("Lists all projects.")
   @route("/projects")
   @get
-  ListProjects is Azure.Core.Foundations.Operation<
+  listProjects is Azure.Core.Foundations.Operation<
     {
       @doc("An OData filter clause to apply to the operation.")
       @query
@@ -28,7 +28,7 @@ interface DevCenterOperations {
   @doc("Gets a project.")
   @route("/projects/{projectName}")
   @get
-  GetProject is Azure.Core.Foundations.Operation<
+  getProject is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path

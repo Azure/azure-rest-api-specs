@@ -14,7 +14,7 @@ interface EnvironmentsOperations {
   @doc("Lists the environments for a project.")
   @route("/projects/{projectName}/environments")
   @get
-  ListAllEnvironments is Azure.Core.Foundations.Operation<
+  listAllEnvironments is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -30,7 +30,7 @@ interface EnvironmentsOperations {
   @doc("Lists the environments for a project and user.")
   @route("/projects/{projectName}/users/{userId}/environments")
   @get
-  ListEnvironments is Azure.Core.Foundations.Operation<
+  listEnvironments is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -50,7 +50,7 @@ interface EnvironmentsOperations {
   @doc("Gets an environment")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @get
-  GetEnvironment is Azure.Core.Foundations.Operation<
+  getEnvironment is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -68,11 +68,11 @@ interface EnvironmentsOperations {
   >;
 
   @doc("Creates or updates an environment.")
-  @finalOperation(EnvironmentsOperations.GetEnvironment)
-  @pollingOperation(SharedOperations.GetProjectOperationStatus)
+  @finalOperation(EnvironmentsOperations.getEnvironment)
+  @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @put
-  CreateOrUpdateEnvironment is Azure.Core.Foundations.Operation<
+  createOrUpdateEnvironment is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -104,10 +104,10 @@ interface EnvironmentsOperations {
 
 // FIXME
   @doc("Deletes an environment and all its associated resources")
-  @pollingOperation(SharedOperations.GetProjectOperationStatus)
+  @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @delete
-  DeleteEnvironment(
+  deleteEnvironment(
     ...Foundations.ApiVersionParameter;
 
     @doc("The DevCenter Project upon which to execute operations.")
@@ -142,7 +142,7 @@ interface EnvironmentsOperations {
   @doc("Lists all of the catalogs available for a project.")
   @route("/projects/{projectName}/catalogs")
   @get
-  ListCatalogs is Azure.Core.Foundations.Operation<
+  listCatalogs is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -158,7 +158,7 @@ interface EnvironmentsOperations {
   @doc("Gets the specified catalog within the project")
   @route("/projects/{projectName}/catalogs/{catalogName}")
   @get
-  GetCatalog is Azure.Core.Foundations.Operation<
+  getCatalog is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -174,7 +174,7 @@ interface EnvironmentsOperations {
   @doc("Lists all environment definitions available for a project.")
   @route("/projects/{projectName}/environmentDefinitions")
   @get
-  ListEnvironmentDefinitions is Azure.Core.Foundations.Operation<
+  listEnvironmentDefinitions is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -190,7 +190,7 @@ interface EnvironmentsOperations {
   @doc("Lists all environment definitions available within a catalog.")
   @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions")
   @get
-  ListEnvironmentDefinitionsByCatalog is Azure.Core.Foundations.Operation<
+  listEnvironmentDefinitionsByCatalog is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -211,7 +211,7 @@ interface EnvironmentsOperations {
   @doc("Get an environment definition from a catalog.")
   @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{definitionName}")
   @get
-  GetEnvironmentDefinition is Azure.Core.Foundations.Operation<
+  getEnvironmentDefinition is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -231,7 +231,7 @@ interface EnvironmentsOperations {
   @doc("Lists all environment types configured for a project.")
   @route("/projects/{projectName}/environmentTypes")
   @get
-  ListEnvironmentTypes is Azure.Core.Foundations.Operation<
+  listEnvironmentTypes is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
