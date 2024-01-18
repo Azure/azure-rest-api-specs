@@ -3,6 +3,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
+import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -13,7 +14,10 @@ using Azure.Core.Traits;
 namespace Microsoft.MachineLearningServices;
 
 
+
 @doc("Index properties")
+@parentResource(Registry)
+@parentResource(Workspace)
 @resource("indexes")
 model Index {
   @key("name")

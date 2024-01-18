@@ -58,13 +58,21 @@
   },
   "tags": [],
   "paths": {
-    "/indexes": {
+    "/registries/{registryName}/indexes": {
       "get": {
         "operationId": "Indexes_List",
         "description": "List the latest version of each index.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "Name of the workspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -111,13 +119,21 @@
         }
       }
     },
-    "/indexes/{name}/versions": {
+    "/registries/{registryName}/indexes/{name}/versions": {
       "get": {
         "operationId": "IndexVersions_ListIndexVersions",
         "description": "List IndexVersion resources.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "Name of the workspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "name",
@@ -186,13 +202,21 @@
         }
       }
     },
-    "/indexes/{name}/versions/{version}": {
+    "/registries/{registryName}/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "IndexVersions_GetIndexVersion",
         "description": "Fetch a IndexVersion by name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "Name of the workspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "name",
@@ -265,6 +289,14 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "Name of the workspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "name": "name",
@@ -411,6 +443,40 @@
     }
   },
   "definitions": {
+    "AssetBase": {
+      "type": "object",
+      "description": "Asset based class.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "The asset property dictionary.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isArchived": {
+          "type": "boolean",
+          "description": "Is the asset archived? For types where Stage is defined, when Stage is provided it will be used to populate IsArchived."
+        },
+        "isAnonymous": {
+          "type": "boolean",
+          "description": "If the name version are system generated (anonymous registration). For types where Stage is defined, when Stage is provided it will be used to populate IsAnonymous."
+        }
+      },
+      "required": [
+        "tags",
+        "properties",
+        "isArchived",
+        "isAnonymous"
+      ]
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -572,20 +638,44 @@
         "value"
       ]
     },
+    "ResourceBase": {
+      "type": "object",
+      "description": "Resource Base class.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "The asset property dictionary.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "tags",
+        "properties"
+      ]
+    },
     "Versions": {
       "type": "string",
       "description": "Azure Machine Learning Services api versions.",
       "enum": [
-        "2021-10-01-dataplanepreview"
+        "2024-03-01-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
         "modelAsString": true,
         "values": [
           {
-            "name": "2021-10-01-dataplanepreview",
-            "value": "2021-10-01-dataplanepreview",
-            "description": "Azure Machine Learning Services api version 2021-10-01-dataplanepreview."
+            "name": "2024-03-01-preview",
+            "value": "2024-03-01-preview",
+            "description": "Azure Machine Learning Services api version 2024-03-01-preview."
           }
         ]
       }
