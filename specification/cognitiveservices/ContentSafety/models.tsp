@@ -240,7 +240,7 @@ model JailbreakAnalysisResult {
 @added(ContentSafety.Versions.v2024_01_15_Preview)
 @doc("The text cross-prompt injection attacks analysis request.")
 model AnalyzeTextXPIAOptions {
-  @doc("The text needs to be analyzed if it attempt to do cross-prompt injection attacks.")
+  @doc("The text needs to be analyzed if it attempts to do cross-prompt injection attacks.")
   text: string;
 }
 
@@ -256,6 +256,6 @@ model AnalyzeTextXPIAResult {
 model XPIAAnalysisResult {
   @doc("Analysis result for cross-prompt injection attacks.")
   detected: boolean;
-  @doc("Confident score of the analysis result.")
-  confidentScore: float;
+  @doc("Confidence score of the analysis result.")
+  confidenceScore: float;
 }
