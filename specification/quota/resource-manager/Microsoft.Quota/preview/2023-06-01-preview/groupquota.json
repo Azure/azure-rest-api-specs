@@ -1368,19 +1368,12 @@
         "type": {
           "type": "string"
         },
-        "status": {
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
-        },
-        "error": {
+        "properties": {
           "type": "object",
-          "x-ms-client-flatten": true,
           "properties": {
-            "code": {
-              "type": "string"
-            },
-            "message": {
-              "type": "string"
+            "provisioningState": {
+              "$ref": "#/definitions/RequestState",
+              "readOnly": true
             }
           }
         }
