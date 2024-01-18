@@ -50,9 +50,6 @@ model OnboardedApp {
 enum ProvisioningState {
   ...ResourceProvisioningState,
 
-  /** The resource is being provisioned. */
-  Provisioning,
-
   /** The resource is being updated. */
   Updating,
 

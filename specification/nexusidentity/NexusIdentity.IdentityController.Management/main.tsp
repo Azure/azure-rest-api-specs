@@ -12,18 +12,21 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 /** Microsoft.NexusIdentity Resource Provider management API. */
-@armProviderNamespace
+@doc("Microsoft.NexusIdentity Resource Provider management API.")
+@armProviderNamespace("Microsoft.NexusIdentity")
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @service({
   title: "Microsoft.NexusIdentity management service",
 })
 @versioned(Versions)
 namespace Microsoft.NexusIdentity;
 
-/** The available API versions. */
+
+@doc("API Versions")
 enum Versions {
-  /** 2021-10-01-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2023-06-15")
   v2023_06_15: "2023-06-15",
 }
