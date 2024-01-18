@@ -86,6 +86,16 @@ input-file:
   - Microsoft.HybridConnectivity/stable/2023-03-15/hybridconnectivity.json
 ```
 
+### Tag: package-2024-08-01-preview
+
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-08-01-preview
+input-file:
+  - Microsoft.HybridConnectivity/preview/2024-08-01-preview/publicCloud.json
+  - Microsoft.HybridConnectivity/stable/2023-03-15/hybridconnectivity.json
+```
+
 ---
 
 # Code Generation
