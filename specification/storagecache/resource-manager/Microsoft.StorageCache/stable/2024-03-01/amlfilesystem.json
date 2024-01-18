@@ -462,6 +462,98 @@
         "operationId": "amlFilesystems_CancelArchive"
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/import": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "name": "ImportInfo",
+            "in": "body",
+            "description": "Information about the import operation",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemImportInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AML file system has started the import operation. Poll the AML file system's hsm.importStatus field to monitor the progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_Import": {
+            "$ref": "./examples/amlFilesystems_Import.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Import data from the AML file system. This operation cannot start when an archive operation is in progress.",
+        "operationId": "amlFilesystems_Import"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/cancelImport": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AML file system has started the cancellation of the import operation. Poll the AML file system's hsm.importStatus field to monitor the progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "amlFilesystems_CancelImport": {
+            "$ref": "./examples/amlFilesystems_CancelImport.json"
+          }
+        },
+        "tags": [
+          "amlFilesystems"
+        ],
+        "description": "Cancel importing data to the AML file system.",
+        "operationId": "amlFilesystems_CancelImport"
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/checkAmlFSSubnets": {
       "post": {
         "produces": [
@@ -730,6 +822,17 @@
                   "x-ms-identifiers": [
                     "filesystemPath"
                   ]
+                },
+                "importStatus": {
+                  "type": "array",
+                  "readOnly": true,
+                  "description": "Import status",
+                  "items": {
+                    "$ref": "#/definitions/AmlFilesystemImport"
+                  },
+                  "x-ms-identifiers": [
+                    "filesystemPath"
+                  ]
                 }
               }
             },
@@ -885,7 +988,7 @@
           "$ref": "storagecache.json#/definitions/URLString"
         },
         "importPrefix": {
-          "description": "Only blobs in the non-logging container that start with this path/prefix get hydrated into the cluster namespace.",
+          "description": "Only blobs in the non-logging container that start with this path/prefix get imported into the cluster namespace. This is only used during initial creation of the AML file system.",
           "type": "string",
           "default": "/"
         }
@@ -1053,6 +1156,116 @@
               "readOnly": true,
               "description": "Server-defined error message for the archive operation",
               "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "AmlFilesystemImportInfo": {
+      "type": "object",
+      "description": "Information required to execute the import operation",
+      "properties": {
+        "filesystemPath": {
+          "type": "string",
+          "description": "Lustre file system path to import into relative to the file system root. Specify '/' to import all data.",
+          "default": "/"
+        },
+        "conflictResolutionMode": {
+          "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
+          "type": "string",
+          "enum": [
+            "Fail",
+            "Skip",
+            "OverwriteIfDirty",
+            "OverwriteAlways"
+          ],
+          "x-ms-enum": {
+            "name": "ConflictResolutionMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AmlFilesystemImport": {
+      "description": "Information about the AML file system import",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "filesystemPath": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Lustre file system path to import into relative to the file system root. Specify '/' to import all data."
+        },
+        "conflictResolutionMode": {
+          "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
+          "type": "string",
+          "enum": [
+            "Fail",
+            "Skip",
+            "OverwriteIfDirty",
+            "OverwriteAlways"
+          ],
+          "x-ms-enum": {
+            "name": "ConflictResolutionMode",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "The status of the import",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "state": {
+              "readOnly": true,
+              "description": "The state of the import operation. InProgress indicates the import is still running. Canceled indicates it has been canceled by the user. Completed indicates import finished, successfully importing all discovered blobs into the Lustre namespace. CompletedPartial indicates the import finished but some blobs either were found to be conflicting and could not be imported or other errors were encountered. Failed means the import was unable to complete due to a fatal error.",
+              "type": "string",
+              "enum": [
+                "InProgress",
+                "Canceled",
+                "Completed",
+                "CompletedPartial",
+                "Failed"
+              ],
+              "x-ms-enum": {
+                "name": "ImportStatusType",
+                "modelAsString": true
+              }
+            },
+            "totalBlobsWalked": {
+              "readOnly": true,
+              "description": "The total blob objects walked.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "blobsWalkedPerSecond": {
+              "readOnly": true,
+              "description": "A recent and frequently updated rate of blobs walked per second.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "totalBlobsImported": {
+              "readOnly": true,
+              "description": "The total blobs that have been imported since import began.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "blobsImportedPerSecond": {
+              "readOnly": true,
+              "description": "A recent and frequently updated rate of total files, directories, and symlinks imported per second.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "totalErrors": {
+              "readOnly": true,
+              "description": "Number of errors in the import job.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "totalConflicts": {
+              "readOnly": true,
+              "description": "Number of conflicts in the import job.",
+              "type": "integer",
+              "format": "int32"
             }
           }
         }
