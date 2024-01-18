@@ -2260,7 +2260,7 @@
     "ResourceProviderName": {
       "name": "resourceProviderName",
       "in": "path",
-      "pattern": "^[a-z][a-z0-9]*.[a-z][a-z0-9]$",
+      "pattern": "^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$",
       "required": true,
       "type": "string",
       "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
