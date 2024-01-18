@@ -293,6 +293,44 @@ model MemberUpdateStatus {
   message?: string;
 }
 
+@doc("The target type of a skip request.")
+@added(Versions.v2024_02_02_preview)
+enum TargetType {
+  @doc("Skip the update of a member.")
+  Member,
+
+  @doc("Skip the update of a group.")
+  Group,
+
+  @doc("Skip the update of an entire stage including the after stage wait.")
+  Stage,
+
+  @doc("Skip the update of the after stage wait of a certain stage.")
+  AfterStageWait,
+}
+
+@doc("The definition of a single skip request.")
+@added(Versions.v2024_02_02_preview)
+model SkipRequest {
+  @doc("The skip target type.")
+  type: TargetType;
+
+  @doc("""
+  The skip target. 
+  To skip a member/group/stage, use the member/group/stage's name;
+  Tp skip an after stage wait, use the parent stage's name.
+  """)
+  target: string;
+}
+
+@doc("The properties of a skip operation containing multiple skip requests.")
+@added(Versions.v2024_02_02_preview)
+model SkipProperties {
+  @doc("The targets to skip.")
+  @extension("x-ms-identifiers", ["target"])
+  targets: SkipRequest[];
+}
+
 @added(Versions.v2023_03_15_preview)
 @armResourceOperations
 interface UpdateRuns {
@@ -328,6 +366,15 @@ interface UpdateRuns {
   @doc("Stops an UpdateRun.")
   stop is ArmResourceNoRequestBodyActionAsync<
     UpdateRun,
+    UpdateRun,
+    BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
+  >;
+
+  @doc("Skips one or a combination of member/group/stage/afterStageWait(s) of an update run.")
+  @added(Versions.v2024_02_02_preview)
+  skip is ArmResourceActionSync<
+    UpdateRun,
+    SkipProperties,
     UpdateRun,
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
   >;
