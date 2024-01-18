@@ -130,10 +130,6 @@ directive:
     suppress:
       - RequiredReadOnlyProperties
   - where:
-      -  $.definitions.SearchError.properties.message
-    suppress:
-      - RequiredReadOnlyProperties
-  - where:
       -  $.definitions.SearchIndexerError.properties.errorMessage
     suppress:
       - RequiredReadOnlyProperties
@@ -179,17 +175,6 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 input-file:
 - preview/2024-03-01-Preview/searchservice.json
 - preview/2024-03-01-Preview/searchindex.json
-```
-
-#### Rename one of SearchError definitions
-
-SearchError is duplicated between two swaggers, rename one of them
-
-``` yaml $(tag) == 'package-2024-03-01-preview'
-directive:
-- from: preview/2024-03-01-Preview/searchservice.json
-  where: $.definitions.SearchError
-  transform: $["x-ms-client-name"] = "SearchServiceError"
 ```
 
 ### Tag: package-2023-10-searchservice-preview
