@@ -293,7 +293,7 @@
           "GroupQuotasSubscriptions"
         ],
         "summary": "Adds subscription to the GroupQuotas.",
-        "description": "Adds a subscription to GroupQuotas. The subscriptions will be validated if additionalAttributes are defined in the GroupQuota. The request's TenantId is validated against the subscription's TenantId.",
+        "description": "Adds a subscription to GroupQuotas. The subscriptions will be validated based on the additionalAttributes defined in the GroupQuota. The additionalAttributes works as filter for the subscriptions, which can be included in the GroupQuotas. The request's TenantId is validated against the subscription's TenantId.",
         "operationId": "GroupQuotaSubscriptions_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Put_Subscriptions": {
@@ -410,7 +410,7 @@
             }
           },
           "default": {
-            "description": "Bad Request",
+            "description": "Error response",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1845,7 +1845,7 @@
           "type": "string"
         },
         "additionalAttributes": {
-          "description": "Additional attributes to allow subscription, which can be added to the subscriptionIds.",
+          "description": "Additional attributes to filter/restrict the subscriptions, which can be added to the subscriptionIds.",
           "$ref": "#/definitions/AdditionalAttributes"
         },
         "provisioningState": {
