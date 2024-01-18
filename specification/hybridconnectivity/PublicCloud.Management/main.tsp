@@ -12,7 +12,6 @@ using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "This is defined in other swagger file - hybridconnectivity.json"
-@armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
 @versioned(Versions)
 @service({
@@ -23,12 +22,12 @@ namespace Microsoft.HybridConnectivity;
 
 @doc("Hybrid Connectivity Management service version.")
 enum Versions {
-  @doc("Version 2023-04-01")
+  @doc("Version 2024-08-01-preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_04_01: "2023-04-01-preview",
+  v2024_08_01: "2024-08-01-preview",
 
-  @doc("Version 2023-12-01")
+  @doc("Version 2023-12-01-preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_12_01: "2023-12-01-preview",
@@ -108,7 +107,7 @@ enum Status {
 
 //------------------- Public Cloud Connector -------------------
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @doc("Public Cloud Connector")
 model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
@@ -119,7 +118,7 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   name: string;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @doc("Properties of public cloud connectors.")
 model PublicCloudConnectorProperties {
@@ -135,7 +134,7 @@ model PublicCloudConnectorProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @doc("Enum of host cloud the public cloud connector is referencing.")
 enum HostType {
@@ -143,7 +142,7 @@ enum HostType {
   AWS,
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @doc("cloud profile for AWS.")
 model AwsCloudProfile {
@@ -161,7 +160,7 @@ model AwsCloudProfile {
 
 //------------------- Solution Configuration -------------------
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @doc("Solution Configuration")
 model SolutionConfiguration
@@ -173,7 +172,7 @@ model SolutionConfiguration
   name: string;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @doc("Solution configuration resource.")
 model SolutionConfigurationProperties {
@@ -197,7 +196,7 @@ model SolutionConfigurationProperties {
   lastExecutionTime?: string;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @doc("Solution Configuration Status.")
 enum SolutionConfigurationStatus {
@@ -216,7 +215,7 @@ enum SolutionConfigurationStatus {
 
 //------------------- Solution Type -------------------
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 model SolutionTypeResource is ProxyResource<SolutionTypeProperties> {
   @doc("Solution Type resource")
@@ -226,7 +225,7 @@ model SolutionTypeResource is ProxyResource<SolutionTypeProperties> {
   name: string;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @doc("Represent Solution type resource.")
 model SolutionTypeProperties {
@@ -252,7 +251,7 @@ model SolutionTypeProperties {
 
 //------------------- Inventory -------------------
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @parentResource(SolutionConfiguration)
 model InventoryResource is ProxyResource<InventoryProperties> {
@@ -264,7 +263,7 @@ model InventoryResource is ProxyResource<InventoryProperties> {
   name: string;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @doc("Definition of inventory.")
 model InventoryProperties {
@@ -288,7 +287,7 @@ model InventoryProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @doc("Cloud Native Type enum.")
 enum CloudNativeType {
@@ -342,7 +341,7 @@ interface TestPermissions {
   ): Azure.ResourceManager.ArmAcceptedLroResponse<"Asynchronous operation in progress."> | TestPermissionResponse | Azure.ResourceManager.ErrorResponse;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @armResourceOperations
 interface PublicCloudConnectors {
@@ -357,7 +356,7 @@ interface PublicCloudConnectors {
   listBySubscription is ArmListBySubscription<PublicCloudConnector>;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @armResourceOperations
 interface SolutionConfigurations {
@@ -370,7 +369,7 @@ interface SolutionConfigurations {
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @armResourceOperations
 interface Inventory {
@@ -378,7 +377,7 @@ interface Inventory {
   listByWidget is ArmResourceListByParent<InventoryResource>;
 }
 
-@added(Versions.v2023_04_01)
+@added(Versions.v2024_08_01)
 @removed(Versions.v2023_12_01)
 @armResourceOperations
 interface SolutionTypes {
