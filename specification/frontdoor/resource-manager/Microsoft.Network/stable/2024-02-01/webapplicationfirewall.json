@@ -525,6 +525,7 @@
         "javascriptChallengeExpirationInMinutes": {
           "description": "Defines the JavaScript challenge cookie validity lifetime in minutes. Value must be an integer between 5 and 1440 with the default value being 30.",
           "type": "integer",
+          "format": "int32",
           "minimum": 5,
           "maximum": 1440,
           "default": 30
@@ -532,6 +533,7 @@
         "logScrubbing": {
           "description": "Defines rules to scrub sensitive fields in Web Application Firewall logs",
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "state": {
               "type": "string",
@@ -627,7 +629,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/GroupByVariable"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "matchConditions": {
           "description": "List of match conditions.",
@@ -647,6 +650,7 @@
       "required": [
         "groupByDimension"
       ],
+      "type": "object",
       "properties": {
         "groupByDimension": {
           "description": "Describes the supported dimensions for group by",
