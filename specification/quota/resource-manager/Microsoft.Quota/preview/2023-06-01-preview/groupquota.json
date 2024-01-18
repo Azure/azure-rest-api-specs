@@ -1332,7 +1332,7 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/LocationParameter"
+            "$ref": "#/parameters/LocationParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1398,7 +1398,7 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/LocationParameter"
+            "$ref": "#/parameters/LocationParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1460,7 +1460,7 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/LocationParameter"
+            "$ref": "#/parameters/LocationParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2263,6 +2263,15 @@
       "required": true,
       "type": "string",
       "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure region.",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "FilterInQuery": {
