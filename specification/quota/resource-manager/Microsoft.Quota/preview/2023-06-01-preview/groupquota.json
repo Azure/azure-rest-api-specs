@@ -1653,7 +1653,7 @@
     },
     "SubscriptionQuotaAllocationRequestList": {
       "type": "object",
-      "description": "Losat of Allocated Group Quota to the subscriptions.",
+      "description": "List of Allocated Group Quota to the subscriptions.",
       "properties": {
         "value": {
           "type": "array",
@@ -1740,6 +1740,18 @@
         "provisioningState": {
           "$ref": "#/definitions/RequestState",
           "readOnly": true
+        }
+      }
+    },
+    "RequestProperties": {
+      "type": "object",
+      "description": "Request properties.",
+      "properties": {
+        "requestSubmitTime": {
+          "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
         }
       }
     },
