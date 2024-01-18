@@ -183,6 +183,10 @@ model DashboardProperties {
 
   @doc("The dashboard parameters.")
   parameters?: DashboardParameter[];
+
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ResourceProvisioningState;
 }
 
 @doc("A dashboard page.")
@@ -259,9 +263,11 @@ model Actions {
 }
 
 @discriminator("type")
+@doc("Model for Actions on click.")
 model ActionsOnClick {}
 
 @discriminator("type")
+@doc("Model for Action reference.")
 model ActionReference {}
 
 @doc("A dashboard parameter.")
@@ -310,6 +316,7 @@ model PatchableDashboard {
   tags?: Record<string>;
 }
 
+@doc("Model for Actions on click open blade")
 model ActionOpenBlade extends ActionsOnClick {
   @doc("open a blade in context pane")
   blade: BladeReferenceWithContextPane;
@@ -327,7 +334,7 @@ model BladeReferenceWithContextPane {
   extension?: string;
 
   @doc("The parameters to pass to the blade.")
-  parameters?: Record<unknown>;
+  parameters?: Record<string>;
 
   @doc("Whether the blade should be opened in the context pane.")
   inContextPane?: boolean;
@@ -336,6 +343,7 @@ model BladeReferenceWithContextPane {
   doesProvisioning?: boolean;
 }
 
+@doc("Model for actions on click update parameters")
 model ActionParameters extends ActionsOnClick {
   ...DashboardParameterValuesList;
 
@@ -343,6 +351,7 @@ model ActionParameters extends ActionsOnClick {
   type: "updateParameters";
 }
 
+@doc("Model for action reference to a url.")
 model ActionReferenceUrl extends ActionReference {
   @doc("The URI that will be opened")
   url: string;
@@ -354,6 +363,7 @@ model ActionReferenceUrl extends ActionReference {
   type: "url";
 }
 
+@doc("Model for action reference to a blade.")
 model ActionReferenceBlade extends ActionReference {
   @doc("open a blade in context pane")
   blade: BladeReferenceWithContextPane;
@@ -421,8 +431,13 @@ model ArcSnapshotTileDataNoResources {
 
 @doc("Actions that can be taken on the arc snapshot tile.")
 model ArcSnapshotTileDataActions {
+  @doc("Action on configure service.")
   configureService?: ActionReference;
+
+  @doc("Action on view configure resources.")
   viewConfiguredService?: ActionReference;
+
+  @doc("Action on view not configure resources.")
   viewNotConfiguredResources?: ActionReference;
 }
 
@@ -432,7 +447,7 @@ model QueryTileVisualization {
   type?: VisualizationType;
 
   @doc("Options for Query Tile visualizations.")
-  options?: Record<unknown>;
+  options?: Record<string>;
 }
 
 @doc("A markdown tile.")
@@ -450,6 +465,7 @@ model MarkdownTileData {}
 
 @doc("The data definition of Markdown with inline content")
 model MarkdownInlineData extends MarkdownTileData {
+  @doc("Dashboard Markdown Tile content.")
   content: string;
 
   @doc("Dashboard Markdown Tile source.")
@@ -458,6 +474,7 @@ model MarkdownInlineData extends MarkdownTileData {
 
 @doc("The data definition of Markdown with uri content")
 model MarkdownUriData extends MarkdownTileData {
+  @doc("Dashboard Markdown Tile uri.")
   uri: string;
 
   @doc("Dashboard Markdown Tile source.")
@@ -493,7 +510,7 @@ model PolicyTile extends DashboardTile {
 
 @doc("A dashboard query tile.")
 @discriminator("kind")
-model QueryTileData extends Record<unknown> {
+model QueryTileData {
   @doc("The dashboard parameter names used in the tiles.")
   usedParameters?: string[];
 }
@@ -565,7 +582,7 @@ model ResourceTile extends DashboardTile {
 }
 
 @doc("Data definition for a resource tile.")
-model ResourceTileData extends Record<unknown> {
+model ResourceTileData {
   @doc("The ARM Id of a resource.")
   resourceId: string;
 
