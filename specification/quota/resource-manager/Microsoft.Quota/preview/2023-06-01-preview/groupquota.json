@@ -1563,16 +1563,12 @@
     "GroupQuotaSubscriptionRequestStatus": {
       "type": "object",
       "description": "The new quota limit request status.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
         "properties": {
           "type": "object",
           "properties": {
