@@ -442,6 +442,7 @@
       "required": [
         "action",
         "addressList",
+        "condition",
         "destinationAddressList",
         "sourceAddressList"
       ],
@@ -459,6 +460,20 @@
             "name": "action"
           },
           "example": "Deny"
+        },
+        "condition": {
+          "type": "string",
+          "description": "Specify condition.",
+          "minLength": 1,
+          "enum": [
+            "and",
+            "or"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "condition"
+          },
+          "example": "or"
         },
         "addressList": {
           "type": "array",
