@@ -130,9 +130,9 @@ model PublicCloudConnectorProperties {
   @visibility("create")
   hostType?: HostType;
 
-  @visibility("read")
   @doc("The resource provisioning state.")
-  provisioningState?: ProvisioningState;
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
 }
 
 @added(Versions.v2023_04_01)
@@ -164,7 +164,8 @@ model AwsCloudProfile {
 @added(Versions.v2023_04_01)
 @removed(Versions.v2023_12_01)
 @doc("Solution Configuration")
-model SolutionConfiguration is ProxyResource<SolutionConfigurationProperties> {
+model SolutionConfiguration
+  is ExtensionResource<SolutionConfigurationProperties> {
   @doc("Represent Solution Configuration Resource.")
   @key("solutionConfiguration")
   @path
@@ -178,7 +179,7 @@ model SolutionConfiguration is ProxyResource<SolutionConfigurationProperties> {
 model SolutionConfigurationProperties {
   @doc("The resource provisioning state.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ResourceProvisioningState;
 
   @doc("The type of the solution")
   solutionType: string;
@@ -246,7 +247,7 @@ model SolutionTypeProperties {
 
   @doc("The resource provisioning state.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ResourceProvisioningState;
 }
 
 //------------------- Inventory -------------------
@@ -284,7 +285,7 @@ model InventoryProperties {
 
   @doc("The resource provisioning state.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ResourceProvisioningState;
 }
 
 @added(Versions.v2023_04_01)
@@ -296,20 +297,6 @@ enum CloudNativeType {
 }
 
 //------------------- Shared -------------------
-
-@added(Versions.v2023_04_01)
-@removed(Versions.v2023_12_01)
-@doc("Provisioning State.")
-enum ProvisioningState {
-  @doc("Succeeded state")
-  Succeeded,
-
-  @doc("Failed state")
-  Failed,
-
-  @doc("Canceled state")
-  Canceled,
-}
 
 @doc("Solution settings")
 model SolutionSettings is Record<string>;
@@ -381,7 +368,6 @@ interface SolutionConfigurations {
     SolutionConfigurationProperties
   >;
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
-  listBySubscription is ArmListBySubscription<SolutionConfiguration>;
 }
 
 @added(Versions.v2023_04_01)
@@ -398,4 +384,5 @@ interface Inventory {
 interface SolutionTypes {
   get is ArmResourceRead<SolutionTypeResource>;
   listByWidget is ArmResourceListAtScope<SolutionTypeResource>;
+  listBySubscription is ArmListBySubscription<SolutionTypeResource>;
 }
