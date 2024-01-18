@@ -2178,6 +2178,24 @@
         }
       }
     },
+    "GroupQuotasEnforcementListResponse": {
+      "type": "object",
+      "description": "List of Azure regions, where the group quotas is enabled for enforcement.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Azure Regions.",
+          "items": {
+            "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "GroupQuotasEnforcementResponse": {
       "type": "object",
       "description": "The GroupQuota Enforcement status for a Azure Location/Region.",
