@@ -52,6 +52,7 @@ input-file:
   - Microsoft.MobileNetwork/stable/2024-02-01/site.json
   - Microsoft.MobileNetwork/stable/2024-02-01/slice.json
   - Microsoft.MobileNetwork/stable/2024-02-01/ts29571.json
+  - Microsoft.MobileNetwork/stable/2024-02-01/ueInfo.json
 ```
 ### Tag: package-preview-2023-10
 

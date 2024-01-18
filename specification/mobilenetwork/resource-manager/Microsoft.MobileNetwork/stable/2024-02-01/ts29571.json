@@ -335,6 +335,99 @@
       "required": [
         "sst"
       ]
+},
+    "Dnn": {
+      "description": "Data network name",
+      "type": "string"
+    },
+    "Pei": {
+      "description": "Permanent Equipment Identifier",
+      "type": "string",
+      "pattern": "^(imei-[0-9]{15}|imeisv-[0-9]{16}|.+)$"
+    },
+    "Supi": {
+      "description": "Subscription Permanent Identifier",
+      "type": "string",
+      "pattern": "^(imsi-[0-9]{5,15}|nai-.+|.+)$"
+    },
+    "PduSessionId": {
+      "description": "PDU session identifier",
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "maximum": 255
+    },
+    "Qfi": {
+      "description": "Qos Flow Identifier",
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "maximum": 63
+    },
+    "GNbId": {
+      "description": "gNodeB identifier",
+      "type": "object",
+      "properties": {
+        "bitLength": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 22,
+          "maximum": 32
+        },
+        "gNBValue": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{6,8}$"
+        }
+      }
+    },
+    "GlobalRanNodeId": {
+      "description": "Global RAN Node ID",
+      "type": "object",
+      "properties": {
+        "plmnId": {
+          "x-ms-client-flatten": true,
+          "description": "PLMN Identifier",
+          "$ref": "#/definitions/PlmnId"
+        },
+        "gNbId": {
+          "x-ms-client-flatten": true,
+          "description": "gNodeB identifier",
+          "$ref": "#/definitions/GNbId"
+        },
+        "ngeNbId": {
+          "type": "string",
+          "pattern": "^(MacroNGeNB-[A-Fa-f0-9]{5}|LMacroNGeNB-[A-Fa-f0-9]{6}|SMacroNGeNB-[A-Fa-f0-9]{5})$",
+          "description": "NG-eNodeB identifier"
+        },
+        "eNbId": {
+          "type": "string",
+          "pattern": "^(MacroeNB-[A-Fa-f0-9]{5}|LMacroeNB-[A-Fa-f0-9]{6}|SMacroeNB-[A-Fa-f0-9]{5}|HomeeNB-[A-Fa-f0-9]{7})$",
+          "description": "eNodeB identifier"
+        },
+        "n3IwfId": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]+$",
+          "description": "N3 IWF identifier"
+        },
+        "wagfId": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]+$",
+          "description": "W-AGF identifier"
+        },
+        "tngfId": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]+$",
+          "description": "TNGF identifier"
+        },
+        "nid": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{11}$",
+          "description": "Network identifier"
+        }
+      },
+      "required": [
+        "plmnId"
+      ]
     }
   }
 }
