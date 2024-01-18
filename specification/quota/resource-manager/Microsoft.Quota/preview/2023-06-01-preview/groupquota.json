@@ -154,9 +154,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -398,9 +395,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -753,9 +747,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -1136,9 +1127,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -1316,21 +1304,35 @@
       "type": "object",
       "description": "The new quota limit request status.",
       "properties": {
-        "requestedResource": {
-          "$ref": "#/definitions/QuotaAllocationRequestBase"
+        "id": {
+          "type": "string"
         },
-        "requestProperties": {
-          "description": "Request properties.",
-          "$ref": "#/definitions/RequestProperties"
+        "name": {
+          "type": "string"
         },
-        "provisioningState": {
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
+        "type": {
+          "type": "string"
         },
-        "faultCode": {
-          "type": "string",
-          "description": "Details of the failure.",
-          "readOnly": true
+        "properties": {
+          "type": "object",
+          "properties": {
+            "requestedResource": {
+              "$ref": "#/definitions/QuotaAllocationRequestBase"
+            },
+            "requestProperties": {
+              "description": "Request properties.",
+              "$ref": "#/definitions/RequestProperties"
+            },
+            "provisioningState": {
+              "$ref": "#/definitions/RequestState",
+              "readOnly": true
+            },
+            "faultCode": {
+              "type": "string",
+              "description": "Details of the failure.",
+              "readOnly": true
+            }
+          }
         }
       }
     },
