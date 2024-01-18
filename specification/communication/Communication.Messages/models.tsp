@@ -53,6 +53,42 @@ enum MessageTemplateStatus {
   paused,
 }
 
+@doc("The type of the template parameter.")
+enum MessageTemplateValueKind {
+
+  @doc("The text template parameter type.")
+  text,
+
+  @doc("The image template parameter type.")
+  image,
+
+  @doc("The document template parameter type.")
+  document,
+
+  @doc("The video template parameter type.")
+  video,
+
+  @doc("The location template parameter type.")
+  location,
+
+  @doc("The quick action template parameter type.")
+  quickAction,
+}
+
+
+@doc("The type of the communication msesages channel.")
+enum CommunicationMessagesChannel {
+  @doc("The WhatsApp communication msesages channel type.")
+  whatsApp,
+}
+
+
+@doc("The type of the message template.")
+enum MessageTemplateBindingsType {
+  @doc("The WhatsApp template type.")
+  whatsApp,
+}
+
 @discriminator("kind")
 @doc("Details of the message to send.")
 model NotificationContent {
@@ -61,12 +97,15 @@ model NotificationContent {
 
   @doc("The native external platform user identifiers of the recipient.")
   to: string[];
+
+  @doc("The type discriminator describing a notification type.")
+  kind: CommunicationMessageType;
 }
 
 @doc("A request to send a text notification.")
 model TextNotificationContent extends NotificationContent {
   @doc("Message notification type is text.")
-  kind: "text";
+  kind: CommunicationMessageType.text;
 
   @doc("Message content.")
   content: string;
@@ -75,22 +114,22 @@ model TextNotificationContent extends NotificationContent {
 @doc("A request to send a media notification.")
 model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
-  kind: "image";
+  kind: CommunicationMessageType.image;
 
   @doc("Optional text content.")
   content?: string;
 
   @doc("""
-A media url for the file. Required if the type is one of the supported media
-types, e.g. image
-""")
+  A media url for the file. Required if the type is one of the supported media
+  types, e.g. image
+  """)
   mediaUri: url;
 }
 
 @doc("A request to send a template notification.")
 model TemplateNotificationContent extends NotificationContent {
   @doc("Message notification type is template.")
-  kind: "template";
+  kind: CommunicationMessageType.template;
 
   @doc("The template object used to create templates.")
   template: MessageTemplate;
@@ -116,12 +155,15 @@ model MessageTemplate {
 model MessageTemplateValue {
   @doc("Name of the Template value")
   name: string;
+  
+  @doc("The type discriminator describing a template parameter type.")
+  kind: MessageTemplateValueKind
 }
 
 @doc("The message template's text value information.")
 model MessageTemplateText extends MessageTemplateValue {
   @doc("Message parameter type is text.")
-  kind: "text";
+  kind: MessageTemplateValueKind.text;
 
   @doc("The text value.")
   text: string;
@@ -147,7 +189,7 @@ model MessageTemplateMedia {
 
 model MessageTemplateImage extends MessageTemplateValue {
   @doc("Message parameter type is image.")
-  kind: "image",
+  kind: MessageTemplateValueKind.image,
   ...MessageTemplateMedia
 }
 
@@ -155,7 +197,7 @@ model MessageTemplateImage extends MessageTemplateValue {
 
 model MessageTemplateDocument extends MessageTemplateValue {
   @doc("Message parameter type is document.")
-  kind: "document",
+  kind: MessageTemplateValueKind.document,
   ...MessageTemplateMedia
 }
 
@@ -163,14 +205,14 @@ model MessageTemplateDocument extends MessageTemplateValue {
 
 model MessageTemplateVideo extends MessageTemplateValue {
   @doc("Message parameter type is video.")
-  kind: "video",
+  kind: MessageTemplateValueKind.video,
   ...MessageTemplateMedia
 }
 
 @doc("The message template's location value information.")
 model MessageTemplateLocation extends MessageTemplateValue {
   @doc("Message parameter type is location.")
-  kind: "location";
+  kind: MessageTemplateValueKind.location;
 
   @doc("The [Optional] name of the location.")
   locationName?: string;
@@ -179,16 +221,16 @@ model MessageTemplateLocation extends MessageTemplateValue {
   address?: string;
 
   @doc("The latitude of the location.")
-  latitude?: float64;
+  latitude: float64;
 
   @doc("The longitude of the location.")
-  longitude?: float64;
+  longitude: float64;
 }
 
 @doc("The message template's quick action value information.")
 model MessageTemplateQuickAction extends MessageTemplateValue {
   @doc("Message parameter type is quick action.")
-  kind: "quickAction";
+  kind: MessageTemplateValueKind.quickAction;
 
   @doc("The [Optional] quick action text")
   text?: string;
@@ -200,12 +242,15 @@ model MessageTemplateQuickAction extends MessageTemplateValue {
 @discriminator("kind")
 @doc("The binding object to link values to the template specific locations")
 model MessageTemplateBindings {
+
+  @doc("The type discriminator describing a template bindings type.")
+  kind: MessageTemplateBindingsType;
 }
 
 @doc("The template bindings for WhatsApp")
 model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   @doc("MessageTemplateBindings is whatsApp")
-  kind: "whatsApp";
+  kind: MessageTemplateBindingsType.whatsApp;
 
   @doc("The header template bindings")
   header?: WhatsAppMessageTemplateBindingsComponent[];
@@ -252,6 +297,7 @@ model MessageReceipt {
 
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateItem extends MessageTemplateItem{
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Payload being returned from WhatsApp with no guaranteed object type."
   @doc("""
 WhatsApp platform's template content
 This is the payload returned from WhatsApp
@@ -260,7 +306,7 @@ API.
   content?: unknown;
 
   @doc("Message template response type is whatsApp.")
-  kind: "whatsApp";
+  kind: CommunicationMessagesChannel.whatsApp;
 }
 
 @resource("messages/notifications")
@@ -312,6 +358,9 @@ model MessageTemplateItem {
 
   @doc("The aggregated template status.")
   status: MessageTemplateStatus;
+
+  @doc("The type discriminator describing a template type.")
+  kind: CommunicationMessagesChannel;
 }
 
 @doc("Azure Communication Messages Versions")
