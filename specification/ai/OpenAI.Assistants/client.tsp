@@ -10,42 +10,26 @@ namespace Azure.AI.OpenAI.Assistants;
 
 // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
 // operation that exposes the underlying data directly.
-@@access(AssistantDeletionStatus, Access.internal);
 @@projectedName(AssistantDeletionStatus,
   "csharp",
   "InternalAssistantDeletionStatus"
 );
-@@access(deleteAssistant, Access.internal);
 @@projectedName(deleteAssistant, "csharp", "InternalDeleteAssistant");
-@@access(AssistantFileDeletionStatus, Access.internal);
 @@projectedName(AssistantFileDeletionStatus,
   "csharp",
   "InternalAssistantFileDeletionStatus"
 );
-@@access(deleteAssistantFile, Access.internal);
 @@projectedName(deleteAssistantFile, "csharp", "InternalUnlinkAssistantFile");
-@@access(ThreadDeletionStatus, Access.internal);
-@@access(deleteThread, Access.internal);
 @@projectedName(deleteThread, "csharp", "InternalDeleteThread");
-@@access(listAssistants, Access.internal);
 @@projectedName(listAssistants, "csharp", "InternalGetAssistants");
-@@access(listAssistantFiles, Access.internal);
 @@projectedName(listAssistantFiles, "csharp", "InternalGetAssistantFiles");
-@@access(listMessageFiles, Access.internal);
 @@projectedName(listMessageFiles, "csharp", "InternalGetMessageFiles");
-@@access(listRunSteps, Access.internal);
 @@projectedName(listRunSteps, "csharp", "InternalGetRunSteps");
-@@access(listMessages, Access.internal);
 @@projectedName(listMessages, "csharp", "InternalGetMessages");
-@@access(listRuns, Access.internal);
 @@projectedName(listRuns, "csharp", "InternalGetRuns");
-@@access(FileListResponse, Access.internal);
 @@projectedName(FileListResponse, "csharp", "InternalFileListResponse");
-@@access(listFiles, Access.internal);
 @@projectedName(listFiles, "csharp", "InternalListFiles");
-@@access(FileDeletionStatus, Access.internal);
 @@projectedName(FileDeletionStatus, "csharp", "InternalFileDeletionStatus");
-@@access(deleteFile, Access.internal);
 @@projectedName(deleteFile, "csharp", "InternalDeleteFile");
 
 // In addition to top-level response value containers, trivial intermediate structure -- levels of single-use model
