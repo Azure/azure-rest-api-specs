@@ -1343,9 +1343,11 @@
             "requestedResource": {
               "$ref": "#/definitions/QuotaAllocationRequestBase"
             },
-            "requestProperties": {
-              "description": "Request properties.",
-              "$ref": "#/definitions/RequestProperties"
+            "requestSubmitTime": {
+              "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
+              "type": "string",
+              "readOnly": true,
+              "format": "date-time"
             },
             "provisioningState": {
               "$ref": "#/definitions/RequestState",
@@ -1780,18 +1782,6 @@
           "type": "string",
           "readOnly": true,
           "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond. Based on - https://armwiki.azurewebsites.net/api_contracts/UsagesAPIContract.html?q=usages . Different RPs may have different units, Count, type as int64 should work for most of the integer values."
-        }
-      }
-    },
-    "RequestProperties": {
-      "type": "object",
-      "description": "Request properties.",
-      "properties": {
-        "requestSubmitTime": {
-          "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
         }
       }
     },
