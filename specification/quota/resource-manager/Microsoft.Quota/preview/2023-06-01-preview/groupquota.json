@@ -2260,6 +2260,7 @@
     "ResourceProviderName": {
       "name": "resourceProviderName",
       "in": "path",
+      "pattern": "^[a-z][a-z0-9]*.[a-z][a-z0-9]$",
       "required": true,
       "type": "string",
       "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
@@ -2268,7 +2269,6 @@
     "FilterInQuery": {
       "name": "$filter",
       "in": "query",
-      "pattern": "^[a-z][a-z0-9]*.[a-z][a-z0-9]$",
       "required": true,
       "type": "string",
       "description": "| Field                    | Supported operators  \r\n|---------------------|------------------------\n\r\n|provider  eq {resourceProvider}  and location eq {location}\n Example: $filter= provider eq Microsoft.Compute and location eq eastus",
