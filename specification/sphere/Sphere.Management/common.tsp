@@ -18,6 +18,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 // Common models
 /** Provisioning state of the resource. */
+@doc("Provisioning state of resource.")
 @lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
@@ -103,8 +104,11 @@ alias StandardListQueryParametersWithCorrectNames = {
   ...CustomMaxPageSizeQueryParameter;
 };
 
-@doc("Response to the action call for count devices in a catalog.")
+@doc("Response to the action call for count devices in a catalog (preview API).")
 model CountDeviceResponse extends CountElementsResponse {}
+
+@doc("Response to the action call for count devices in a catalog.")
+model CountDevicesResponse extends CountElementsResponse {}
 
 @doc("Response of the count for elements.")
 model CountElementsResponse {

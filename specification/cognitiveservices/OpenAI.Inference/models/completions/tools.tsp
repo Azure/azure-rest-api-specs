@@ -41,7 +41,7 @@ model ChatCompletionsNamedFunctionToolSelection
   type: "function";
 
   @doc("The name of the function that should be called.")
-  name: "string";
+  name: string;
 }
 
 // tool definitions: provided in the request options

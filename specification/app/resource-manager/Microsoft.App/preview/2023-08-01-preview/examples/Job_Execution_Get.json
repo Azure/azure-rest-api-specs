@@ -11,37 +11,39 @@
       "headers": {},
       "body": {
         "name": "jobExecution1",
-        "status": "Running",
-        "startTime": "2023-02-13T20:37:30+00:00",
-        "endTime": "2023-02-13T20:47:30+00:00",
-        "template": {
-          "containers": [
-            {
-              "image": "repo/testcontainerappsjob0:v4",
-              "name": "testcontainerappsjob0",
-              "resources": {
-                "cpu": 0.5,
-                "memory": "1Gi"
+        "properties": {
+          "status": "Running",
+          "startTime": "2023-02-13T20:37:30+00:00",
+          "endTime": "2023-02-13T20:47:30+00:00",
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerappsjob0:v4",
+                "name": "testcontainerappsjob0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                }
               }
-            }
-          ],
-          "initContainers": [
-            {
-              "image": "repo/testcontainerappsjob0:v4",
-              "name": "testinitcontainerAppsJob0",
-              "resources": {
-                "cpu": 0.5,
-                "memory": "1Gi"
-              },
-              "command": [
-                "/bin/sh"
-              ],
-              "args": [
-                "-c",
-                "while true; do echo hello; sleep 10;done"
-              ]
-            }
-          ]
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerappsjob0:v4",
+                "name": "testinitcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ]
+          }
         }
       }
     }
