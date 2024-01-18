@@ -4653,33 +4653,6 @@
       },
       "description": "Deployment filter."
     },
-    "ProvisioningState": {
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Denotes the state of provisioning.",
-          "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Ready",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStates",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "GenericResourceFilter": {
       "properties": {
         "resourceType": {
@@ -6885,10 +6858,27 @@
           }
         },
         "provisioningState": {
-          "readOnly": true,
           "type": "string",
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Denotes the state of provisioning."
+          "readOnly": true,
+          "description": "Denotes the state of provisioning.",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Ready",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     }
