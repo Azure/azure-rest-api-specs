@@ -39,6 +39,9 @@
       "AadOauth2Auth": [
         "https://communication.azure.com/.default"
       ]
+    },
+    {
+      "ApiKeyAuth": []
     }
   ],
   "securityDefinitions": {
@@ -51,6 +54,11 @@
         "https://communication.azure.com/.default": ""
       },
       "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   },
   "tags": [
@@ -114,14 +122,19 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets a list of templates": {
+            "$ref": "./examples/Template_GetTemplates.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/messages/notifications:sendMessage": {
+    "/messages/notifications:send": {
       "post": {
-        "operationId": "NotificationMessagesOperations_SendMessage",
+        "operationId": "NotificationMessagesOperations_Send",
         "tags": [
           "Notifications"
         ],
@@ -182,12 +195,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Sends a notification message": {
+            "$ref": "./examples/NotificationMessages_Send.json"
+          }
         }
       }
     },
     "/messages/streams/{id}": {
       "get": {
-        "operationId": "StreamOperations_GetStream",
+        "operationId": "StreamOperations_DownloadMedia",
         "tags": [
           "Stream"
         ],
@@ -240,7 +258,7 @@
         },
         "x-ms-examples": {
           "Download a media": {
-            "$ref": "./examples/Stream_GetStream.json"
+            "$ref": "./examples/Stream_DownloadMedia.json"
           }
         }
       }
@@ -343,6 +361,24 @@
         ]
       }
     },
+    "CommunicationMessagesChannel": {
+      "type": "string",
+      "description": "The type of the communication msesages channel.",
+      "enum": [
+        "whatsApp"
+      ],
+      "x-ms-enum": {
+        "name": "CommunicationMessagesChannel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "whatsApp",
+            "value": "whatsApp",
+            "description": "The WhatsApp communication msesages channel type."
+          }
+        ]
+      }
+    },
     "MediaNotificationContent": {
       "type": "object",
       "description": "A request to send a media notification.",
@@ -420,7 +456,7 @@
       "description": "The binding object to link values to the template specific locations",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/MessageTemplateType",
+          "$ref": "#/definitions/MessageTemplateBindingsType",
           "description": "The type discriminator describing a template bindings type."
         }
       },
@@ -428,6 +464,24 @@
       "required": [
         "kind"
       ]
+    },
+    "MessageTemplateBindingsType": {
+      "type": "string",
+      "description": "The type of the message template.",
+      "enum": [
+        "whatsApp"
+      ],
+      "x-ms-enum": {
+        "name": "MessageTemplateBindingsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "whatsApp",
+            "value": "whatsApp",
+            "description": "The WhatsApp template type."
+          }
+        ]
+      }
     },
     "MessageTemplateDocument": {
       "type": "object",
@@ -489,10 +543,6 @@
       "type": "object",
       "description": "The message template as returned from the service.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for MessageTemplateItem."
-        },
         "name": {
           "type": "string",
           "description": "The template's name.",
@@ -505,14 +555,18 @@
         "status": {
           "$ref": "#/definitions/MessageTemplateStatus",
           "description": "The aggregated template status."
+        },
+        "kind": {
+          "$ref": "#/definitions/CommunicationMessagesChannel",
+          "description": "The type discriminator describing a template type."
         }
       },
       "discriminator": "kind",
       "required": [
-        "kind",
         "name",
         "language",
-        "status"
+        "status",
+        "kind"
       ]
     },
     "MessageTemplateLocation": {
@@ -538,6 +592,10 @@
           "description": "The longitude of the location."
         }
       },
+      "required": [
+        "latitude",
+        "longitude"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/MessageTemplateValue"
@@ -620,24 +678,6 @@
       ],
       "x-ms-discriminator-value": "text"
     },
-    "MessageTemplateType": {
-      "type": "string",
-      "description": "The type of the message template.",
-      "enum": [
-        "whatsApp"
-      ],
-      "x-ms-enum": {
-        "name": "MessageTemplateType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "whatsApp",
-            "value": "whatsApp",
-            "description": "The WhatsApp template type."
-          }
-        ]
-      }
-    },
     "MessageTemplateValue": {
       "type": "object",
       "description": "The class describes a parameter of a template.",
@@ -647,7 +687,7 @@
           "description": "Name of the Template value"
         },
         "kind": {
-          "$ref": "#/definitions/TemplateParameterType",
+          "$ref": "#/definitions/MessageTemplateValueKind",
           "description": "The type discriminator describing a template parameter type."
         }
       },
@@ -656,6 +696,54 @@
         "name",
         "kind"
       ]
+    },
+    "MessageTemplateValueKind": {
+      "type": "string",
+      "description": "The type of the template parameter.",
+      "enum": [
+        "text",
+        "image",
+        "document",
+        "video",
+        "location",
+        "quickAction"
+      ],
+      "x-ms-enum": {
+        "name": "MessageTemplateValueKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "The text template parameter type."
+          },
+          {
+            "name": "image",
+            "value": "image",
+            "description": "The image template parameter type."
+          },
+          {
+            "name": "document",
+            "value": "document",
+            "description": "The document template parameter type."
+          },
+          {
+            "name": "video",
+            "value": "video",
+            "description": "The video template parameter type."
+          },
+          {
+            "name": "location",
+            "value": "location",
+            "description": "The location template parameter type."
+          },
+          {
+            "name": "quickAction",
+            "value": "quickAction",
+            "description": "The quick action template parameter type."
+          }
+        ]
+      }
     },
     "MessageTemplateVideo": {
       "type": "object",
@@ -769,54 +857,6 @@
         }
       ],
       "x-ms-discriminator-value": "template"
-    },
-    "TemplateParameterType": {
-      "type": "string",
-      "description": "The type of the template parameter.",
-      "enum": [
-        "text",
-        "image",
-        "document",
-        "video",
-        "location",
-        "quickAction"
-      ],
-      "x-ms-enum": {
-        "name": "TemplateParameterType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "text",
-            "value": "text",
-            "description": "The text template parameter type."
-          },
-          {
-            "name": "image",
-            "value": "image",
-            "description": "The image template parameter type."
-          },
-          {
-            "name": "document",
-            "value": "document",
-            "description": "The document template parameter type."
-          },
-          {
-            "name": "video",
-            "value": "video",
-            "description": "The video template parameter type."
-          },
-          {
-            "name": "location",
-            "value": "location",
-            "description": "The location template parameter type."
-          },
-          {
-            "name": "quickAction",
-            "value": "quickAction",
-            "description": "The quick action template parameter type."
-          }
-        ]
-      }
     },
     "TextNotificationContent": {
       "type": "object",

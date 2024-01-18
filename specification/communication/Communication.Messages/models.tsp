@@ -54,7 +54,7 @@ enum MessageTemplateStatus {
 }
 
 @doc("The type of the template parameter.")
-enum TemplateParameterType {
+enum MessageTemplateValueKind {
 
   @doc("The text template parameter type.")
   text,
@@ -75,8 +75,16 @@ enum TemplateParameterType {
   quickAction,
 }
 
+
+@doc("The type of the communication msesages channel.")
+enum CommunicationMessagesChannel {
+  @doc("The WhatsApp communication msesages channel type.")
+  whatsApp,
+}
+
+
 @doc("The type of the message template.")
-enum MessageTemplateType {
+enum MessageTemplateBindingsType {
   @doc("The WhatsApp template type.")
   whatsApp,
 }
@@ -149,13 +157,13 @@ model MessageTemplateValue {
   name: string;
   
   @doc("The type discriminator describing a template parameter type.")
-  kind: TemplateParameterType
+  kind: MessageTemplateValueKind
 }
 
 @doc("The message template's text value information.")
 model MessageTemplateText extends MessageTemplateValue {
   @doc("Message parameter type is text.")
-  kind: TemplateParameterType.text;
+  kind: MessageTemplateValueKind.text;
 
   @doc("The text value.")
   text: string;
@@ -181,7 +189,7 @@ model MessageTemplateMedia {
 
 model MessageTemplateImage extends MessageTemplateValue {
   @doc("Message parameter type is image.")
-  kind: TemplateParameterType.image,
+  kind: MessageTemplateValueKind.image,
   ...MessageTemplateMedia
 }
 
@@ -189,7 +197,7 @@ model MessageTemplateImage extends MessageTemplateValue {
 
 model MessageTemplateDocument extends MessageTemplateValue {
   @doc("Message parameter type is document.")
-  kind: TemplateParameterType.document,
+  kind: MessageTemplateValueKind.document,
   ...MessageTemplateMedia
 }
 
@@ -197,14 +205,14 @@ model MessageTemplateDocument extends MessageTemplateValue {
 
 model MessageTemplateVideo extends MessageTemplateValue {
   @doc("Message parameter type is video.")
-  kind: TemplateParameterType.video,
+  kind: MessageTemplateValueKind.video,
   ...MessageTemplateMedia
 }
 
 @doc("The message template's location value information.")
 model MessageTemplateLocation extends MessageTemplateValue {
   @doc("Message parameter type is location.")
-  kind: TemplateParameterType.location;
+  kind: MessageTemplateValueKind.location;
 
   @doc("The [Optional] name of the location.")
   locationName?: string;
@@ -213,16 +221,16 @@ model MessageTemplateLocation extends MessageTemplateValue {
   address?: string;
 
   @doc("The latitude of the location.")
-  latitude?: float64;
+  latitude: float64;
 
   @doc("The longitude of the location.")
-  longitude?: float64;
+  longitude: float64;
 }
 
 @doc("The message template's quick action value information.")
 model MessageTemplateQuickAction extends MessageTemplateValue {
   @doc("Message parameter type is quick action.")
-  kind: TemplateParameterType.quickAction;
+  kind: MessageTemplateValueKind.quickAction;
 
   @doc("The [Optional] quick action text")
   text?: string;
@@ -236,13 +244,13 @@ model MessageTemplateQuickAction extends MessageTemplateValue {
 model MessageTemplateBindings {
 
   @doc("The type discriminator describing a template bindings type.")
-  kind: MessageTemplateType;
+  kind: MessageTemplateBindingsType;
 }
 
 @doc("The template bindings for WhatsApp")
 model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   @doc("MessageTemplateBindings is whatsApp")
-  kind: MessageTemplateType.whatsApp;
+  kind: MessageTemplateBindingsType.whatsApp;
 
   @doc("The header template bindings")
   header?: WhatsAppMessageTemplateBindingsComponent[];
@@ -289,6 +297,7 @@ model MessageReceipt {
 
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateItem extends MessageTemplateItem{
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Payload being returned from WhatsApp with no guaranteed object type."
   @doc("""
 WhatsApp platform's template content
 This is the payload returned from WhatsApp
@@ -297,7 +306,7 @@ API.
   content?: unknown;
 
   @doc("Message template response type is whatsApp.")
-  kind: "whatsApp";
+  kind: CommunicationMessagesChannel.whatsApp;
 }
 
 @resource("messages/notifications")
@@ -349,6 +358,9 @@ model MessageTemplateItem {
 
   @doc("The aggregated template status.")
   status: MessageTemplateStatus;
+
+  @doc("The type discriminator describing a template type.")
+  kind: CommunicationMessagesChannel;
 }
 
 @doc("Azure Communication Messages Versions")
