@@ -304,24 +304,24 @@ enum TargetType {
 
 @doc("The definition of a single skip request.")
 @added(Versions.v2024_02_02_preview)
-model SkipRequest {
+model SkipTarget {
   @doc("The skip target type.")
   type: TargetType;
 
   @doc("""
-  The skip target. 
+  The skip target's name. 
   To skip a member/group/stage, use the member/group/stage's name;
   Tp skip an after stage wait, use the parent stage's name.
   """)
-  target: string;
+  name: string;
 }
 
 @doc("The properties of a skip operation containing multiple skip requests.")
 @added(Versions.v2024_02_02_preview)
 model SkipProperties {
   @doc("The targets to skip.")
-  @extension("x-ms-identifiers", ["target"])
-  targets: SkipRequest[];
+  @extension("x-ms-identifiers", ["name"])
+  targets: SkipTarget[];
 }
 
 @added(Versions.v2023_03_15_preview)

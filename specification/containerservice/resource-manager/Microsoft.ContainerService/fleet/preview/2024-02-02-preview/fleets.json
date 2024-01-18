@@ -2443,10 +2443,10 @@
           "type": "array",
           "description": "The targets to skip.",
           "items": {
-            "$ref": "#/definitions/SkipRequest"
+            "$ref": "#/definitions/SkipTarget"
           },
           "x-ms-identifiers": [
-            "target"
+            "name"
           ]
         }
       },
@@ -2454,7 +2454,7 @@
         "targets"
       ]
     },
-    "SkipRequest": {
+    "SkipTarget": {
       "type": "object",
       "description": "The definition of a single skip request.",
       "properties": {
@@ -2462,14 +2462,14 @@
           "$ref": "#/definitions/TargetType",
           "description": "The skip target type."
         },
-        "target": {
+        "name": {
           "type": "string",
-          "description": "The skip target. \nTo skip a member/group/stage, use the member/group/stage's name;\nTp skip an after stage wait, use the parent stage's name."
+          "description": "The skip target's name. \nTo skip a member/group/stage, use the member/group/stage's name;\nTp skip an after stage wait, use the parent stage's name."
         }
       },
       "required": [
         "type",
-        "target"
+        "name"
       ]
     },
     "SubnetResourceId": {
