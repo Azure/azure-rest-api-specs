@@ -21,7 +21,6 @@ using Azure.ResourceManager;
 @versioned(Versions)
 namespace Microsoft.NexusIdentity;
 
-
 @doc("API Versions")
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
