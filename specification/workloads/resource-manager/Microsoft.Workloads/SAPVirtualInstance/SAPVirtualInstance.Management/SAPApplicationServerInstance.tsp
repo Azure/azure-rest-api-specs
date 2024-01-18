@@ -84,3 +84,32 @@ interface SAPApplicationServerInstances {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(SAPApplicationServerInstances.create::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(SAPApplicationServerInstances.create::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(SAPApplicationServerInstances.create::parameters.resource,
+  "The SAP Application Server Instance resource request body."
+);
+@@projectedName(SAPApplicationServerInstances.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(SAPApplicationServerInstances.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(SAPApplicationServerInstances.update::parameters.properties,
+  "The SAP Application Server Instance resource request body."
+);
+@@doc(SAPApplicationServerInstances.startInstance::parameters.body,
+  "SAP Application server instance start request body."
+);
+@@doc(SAPApplicationServerInstances.stopInstance::parameters.body,
+  "SAP Application server instance stop request body."
+);

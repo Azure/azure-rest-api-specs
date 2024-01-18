@@ -83,3 +83,32 @@ interface SAPCentralServerInstances {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(SAPCentralServerInstances.create::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(SAPCentralServerInstances.create::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(SAPCentralServerInstances.create::parameters.resource,
+  "The SAP Central Services Instance request body."
+);
+@@projectedName(SAPCentralServerInstances.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(SAPCentralServerInstances.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(SAPCentralServerInstances.update::parameters.properties,
+  "The SAP Central Services Instance resource request body."
+);
+@@doc(SAPCentralServerInstances.startInstance::parameters.body,
+  "SAP Central Services instance start request body."
+);
+@@doc(SAPCentralServerInstances.stopInstance::parameters.body,
+  "SAP Central Services instance stop request body."
+);

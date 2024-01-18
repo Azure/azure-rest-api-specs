@@ -90,3 +90,32 @@ interface SAPVirtualInstances {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(SAPVirtualInstances.create::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(SAPVirtualInstances.create::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(SAPVirtualInstances.create::parameters.resource,
+  "Virtual Instance for SAP solutions resource request body."
+);
+@@projectedName(SAPVirtualInstances.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(SAPVirtualInstances.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(SAPVirtualInstances.update::parameters.properties,
+  "Request body to update a Virtual Instance for SAP solutions resource."
+);
+@@doc(SAPVirtualInstances.start::parameters.body,
+  "The Virtual Instance for SAP solutions resource start request body."
+);
+@@doc(SAPVirtualInstances.stop::parameters.body,
+  "The Virtual Instance for SAP solutions resource stop request body."
+);

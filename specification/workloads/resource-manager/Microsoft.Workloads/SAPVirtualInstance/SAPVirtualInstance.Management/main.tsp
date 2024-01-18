@@ -20,7 +20,7 @@ using TypeSpec.Versioning;
   title: "Workloads Client",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @doc("Workloads client provides access to various workload operations.")
 namespace Microsoft.Workloads;
 
@@ -28,5 +28,6 @@ namespace Microsoft.Workloads;
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @doc("The 2023-10-01-preview API version.")
   v2023_10_01_preview: "2023-10-01-preview",
 }

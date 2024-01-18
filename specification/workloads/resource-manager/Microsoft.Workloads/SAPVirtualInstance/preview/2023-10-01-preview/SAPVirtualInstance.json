@@ -65,20 +65,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -89,7 +89,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getAvailabilityZoneDetails": {
       "post": {
-        "operationId": "SAPAvailabilityZoneDetails",
+        "operationId": "SApAvailabilityZoneDetails",
         "description": "Get the recommended SAP Availability Zone Pair Details for your region.",
         "parameters": [
           {
@@ -145,7 +145,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getDiskConfigurations": {
       "post": {
-        "operationId": "SAPDiskConfigurations",
+        "operationId": "SApDiskConfigurations",
         "description": "Get the SAP Disk Configuration Layout prod/non-prod SAP System.",
         "parameters": [
           {
@@ -201,7 +201,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getSapSupportedSku": {
       "post": {
-        "operationId": "SAPSupportedSku",
+        "operationId": "SApSupportedSku",
         "description": "Get a list of SAP supported SKUs for ASCS, Application and Database tier.",
         "parameters": [
           {
@@ -257,7 +257,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getSizingRecommendations": {
       "post": {
-        "operationId": "SAPSizingRecommendations",
+        "operationId": "SApSizingRecommendations",
         "description": "Get SAP sizing recommendations by providing input SAPS for application tier and memory required for database tier",
         "parameters": [
           {
@@ -320,10 +320,10 @@
         "description": "Gets all Virtual Instances for SAP solutions resources in a Subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -336,7 +336,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -359,13 +359,13 @@
         "description": "Gets all Virtual Instances for SAP solutions resources in a Resource Group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -378,7 +378,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -401,13 +401,13 @@
         "description": "Gets a Virtual Instance for SAP solutions resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -428,16 +428,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "SAPVirtualInstances Get With ACSS Installation Blocked": {
-            "$ref": "./examples/SAPVirtualInstances_Get_SapVirtualInstancesGetWithAcssInstallationBlocked.json"
+            "$ref": "./examples/SAPVirtualInstances_Get_Sap_Virtual_Instances_Get_With_Acss_Installation_Blocked.json"
           },
           "SAPVirtualInstances_Get": {
-            "$ref": "./examples/SAPVirtualInstances_Get_SapVirtualInstancesGet.json"
+            "$ref": "./examples/SAPVirtualInstances_Get.json"
           }
         }
       },
@@ -449,13 +449,13 @@
         "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -466,13 +466,14 @@
             "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "Virtual Instance for SAP solutions resource request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SAPVirtualInstance"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -502,100 +503,100 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Create Infrastructure (with OS configuration) with Azure Compute Gallery Image": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithOsConfigurationWithAzureComputeGalleryImage.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Os_Configuration_With_Azure_Compute_Gallery_Image.json"
           },
           "Create Infrastructure (with OS configuration) with custom resource names for Distributed System": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithOsConfigurationWithCustomResourceNamesForDistributedSystem.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Os_Configuration_With_Custom_Resource_Names_For_Distributed_System.json"
           },
           "Create Infrastructure (with OS configuration) with custom resource names for HA System with Availability Set": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithOsConfigurationWithCustomResourceNamesForHaSystemWithAvailabilitySet.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Os_Configuration_With_Custom_Resource_Names_For_Ha_System_With_Availability_Set.json"
           },
           "Create Infrastructure (with OS configuration) with custom resource names for HA system with Availability Zone": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithOsConfigurationWithCustomResourceNamesForHaSystemWithAvailabilityZone.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Os_Configuration_With_Custom_Resource_Names_For_Ha_System_With_Availability_Zone.json"
           },
           "Create Infrastructure (with OS configuration) with custom resource names for Single Server System": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithOsConfigurationWithCustomResourceNamesForSingleServerSystem.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Os_Configuration_With_Custom_Resource_Names_For_Single_Server_System.json"
           },
           "Create Infrastructure (with OS configuration) with trusted access enabled": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithOsConfigurationWithTrustedAccessEnabled.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Os_Configuration_With_Trusted_Access_Enabled.json"
           },
           "Create Infrastructure only for Distributed System": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureOnlyForDistributedSystem.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_Only_For_Distributed_System.json"
           },
           "Create Infrastructure only for HA System with Availability Set": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureOnlyForHaSystemWithAvailabilitySet.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_Only_For_Ha_System_With_Availability_Set.json"
           },
           "Create Infrastructure only for HA System with Availability Zone": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureOnlyForHaSystemWithAvailabilityZone.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_Only_For_Ha_System_With_Availability_Zone.json"
           },
           "Create Infrastructure only for Single Server System": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureOnlyForSingleServerSystem.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_Only_For_Single_Server_System.json"
           },
           "Create Infrastructure with Disk and OS configuration for Distributed System (Recommended)": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithDiskAndOsConfigurationForDistributedSystemRecommended.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Disk_And_Os_Configuration_For_Distributed_System_Recommended.json"
           },
           "Create Infrastructure with Disk and OS configuration for HA System with Availability Set (Recommended)": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithDiskAndOsConfigurationForHaSystemWithAvailabilitySetRecommended.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Disk_And_Os_Configuration_For_Ha_System_With_Availability_Set_Recommended.json"
           },
           "Create Infrastructure with Disk and OS configuration for HA System with Availability Zone (Recommended)": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithDiskAndOsConfigurationForHaSystemWithAvailabilityZoneRecommended.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Disk_And_Os_Configuration_For_Ha_System_With_Availability_Zone_Recommended.json"
           },
           "Create Infrastructure with Disk and OS configurations for Single Server System (Recommended)": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithDiskAndOsConfigurationsForSingleServerSystemRecommended.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Disk_And_Os_Configurations_For_Single_Server_System_Recommended.json"
           },
           "Create Infrastructure with OS configuration for Distributed System (Recommended)": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithOsConfigurationForDistributedSystemRecommended.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Os_Configuration_For_Distributed_System_Recommended.json"
           },
           "Create Infrastructure with OS configuration for HA System with Availability Set (Recommended)": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithOsConfigurationForHaSystemWithAvailabilitySetRecommended.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Os_Configuration_For_Ha_System_With_Availability_Set_Recommended.json"
           },
           "Create Infrastructure with OS configuration for HA System with Availability Zone (Recommended)": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithOsConfigurationForHaSystemWithAvailabilityZoneRecommended.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Os_Configuration_For_Ha_System_With_Availability_Zone_Recommended.json"
           },
           "Create Infrastructure with OS configuration for Single Server System (Recommended)": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithOsConfigurationForSingleServerSystemRecommended.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_Os_Configuration_For_Single_Server_System_Recommended.json"
           },
           "Create Infrastructure with a new SAP Transport Directory Fileshare": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithANewSapTransportDirectoryFileshare.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_A_New_Sap_Transport_Directory_Fileshare.json"
           },
           "Create Infrastructure with an existing SAP Transport Directory Fileshare": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithAnExistingSapTransportDirectoryFileshare.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_With_An_Existing_Sap_Transport_Directory_Fileshare.json"
           },
           "Create Infrastructure without a SAP Transport Directory Fileshare": {
-            "$ref": "./examples/SAPVirtualInstances_Create_CreateInfrastructureWithoutASapTransportDirectoryFileshare.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Create_Infrastructure_Without_A_Sap_Transport_Directory_Fileshare.json"
           },
           "Detect SAP Software Installation on a Distributed System": {
-            "$ref": "./examples/SAPVirtualInstances_Create_DetectSapSoftwareInstallationOnADistributedSystem.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Detect_Sap_Software_Installation_On_A_Distributed_System.json"
           },
           "Detect SAP Software Installation on a Single Server System": {
-            "$ref": "./examples/SAPVirtualInstances_Create_DetectSapSoftwareInstallationOnASingleServerSystem.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Detect_Sap_Software_Installation_On_A_Single_Server_System.json"
           },
           "Detect SAP Software Installation on an HA System with Availability Set": {
-            "$ref": "./examples/SAPVirtualInstances_Create_DetectSapSoftwareInstallationOnAnHaSystemWithAvailabilitySet.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Detect_Sap_Software_Installation_On_An_Ha_System_With_Availability_Set.json"
           },
           "Detect SAP Software Installation on an HA System with Availability Zone": {
-            "$ref": "./examples/SAPVirtualInstances_Create_DetectSapSoftwareInstallationOnAnHaSystemWithAvailabilityZone.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Detect_Sap_Software_Installation_On_An_Ha_System_With_Availability_Zone.json"
           },
           "Install SAP Software on Distributed System": {
-            "$ref": "./examples/SAPVirtualInstances_Create_InstallSapSoftwareOnDistributedSystem.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Install_Sap_Software_On_Distributed_System.json"
           },
           "Install SAP Software on Single Server System": {
-            "$ref": "./examples/SAPVirtualInstances_Create_InstallSapSoftwareOnSingleServerSystem.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Install_Sap_Software_On_Single_Server_System.json"
           },
           "Register existing SAP system as Virtual Instance for SAP solutions with optional customizations.": {
-            "$ref": "./examples/SAPVirtualInstances_Create_RegisterExistingSapSystemAsVirtualInstanceForSapSolutionsWithOptionalCustomizations.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Register_Existing_Sap_System_As_Virtual_Instance_For_Sap_Solutions_With_Optional_Customizations.json"
           },
           "Register existing SAP system as Virtual Instance for SAP solutions.": {
-            "$ref": "./examples/SAPVirtualInstances_Create_RegisterExistingSapSystemAsVirtualInstanceForSapSolutions.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Register_Existing_Sap_System_As_Virtual_Instance_For_Sap_Solutions.json"
           },
           "Register with trusted access enabled": {
-            "$ref": "./examples/SAPVirtualInstances_Create_RegisterWithTrustedAccessEnabled.json"
+            "$ref": "./examples/SAPVirtualInstances_Create_Register_With_Trusted_Access_Enabled.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -611,13 +612,13 @@
         "description": "Updates a Virtual Instance for SAP solutions resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -628,13 +629,14 @@
             "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Request body to update a Virtual Instance for SAP solutions resource.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateSAPVirtualInstanceRequest"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -661,16 +663,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "SAPVirtualInstances_TrustedAccessEnable_Update": {
-            "$ref": "./examples/SAPVirtualInstances_Update_SapVirtualInstancesTrustedAccessEnableUpdate.json"
+            "$ref": "./examples/SAPVirtualInstances_Update_Sap_Virtual_Instances_Trusted_Access_Enable_Update.json"
           },
           "SAPVirtualInstances_Update": {
-            "$ref": "./examples/SAPVirtualInstances_Update_SapVirtualInstancesUpdate.json"
+            "$ref": "./examples/SAPVirtualInstances_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -686,13 +688,13 @@
         "description": "Deletes a Virtual Instance for SAP solutions resource and its child resources, that is the associated Central Services Instance, Application Server Instances and Database Instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -724,7 +726,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -748,13 +750,13 @@
         "description": "Lists the SAP Application Server Instance resources for a given Virtual Instance for SAP solutions resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -775,7 +777,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -798,13 +800,13 @@
         "description": "Gets the SAP Application Server Instance corresponding to the Virtual Instance for SAP solutions resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -833,7 +835,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -851,13 +853,13 @@
         "description": "Puts the SAP Application Server Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT by end user will return a Bad Request error.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -876,13 +878,14 @@
             "pattern": "^.*"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The SAP Application Server Instance resource request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SAPApplicationServerInstance"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -912,16 +915,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Create SAP Application Server Instances for HA System with Availability Set": {
-            "$ref": "./examples/SAPApplicationServerInstances_Create_CreateSapApplicationServerInstancesForHaSystemWithAvailabilitySet.json"
+            "$ref": "./examples/SAPApplicationServerInstances_Create_Create_Sap_Application_Server_Instances_For_Ha_System_With_Availability_Set.json"
           },
           "SAPApplicationServerInstances_Create": {
-            "$ref": "./examples/SAPApplicationServerInstances_Create_SapApplicationServerInstancesCreate.json"
+            "$ref": "./examples/SAPApplicationServerInstances_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -937,13 +940,13 @@
         "description": "Updates the SAP Application server instance resource. This can be used to update tags on the resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -962,13 +965,14 @@
             "pattern": "^.*"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "The SAP Application Server Instance resource request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateSAPApplicationInstanceRequest"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -981,7 +985,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -999,13 +1003,13 @@
         "description": "Deletes the SAP Application Server Instance resource. &lt;br&gt;&lt;br&gt;This operation will be used by service only. Delete by end user will return a Bad Request error.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1045,7 +1049,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1069,13 +1073,13 @@
         "description": "Starts the SAP Application Server Instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1096,7 +1100,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "SAP Application server instance start request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StartRequest"
@@ -1107,7 +1111,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -1127,16 +1131,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Start Virtual Machine and the SAP Application Server Instance on it.": {
-            "$ref": "./examples/SAPApplicationServerInstances_StartInstance_StartVirtualMachineAndTheSapApplicationServerInstanceOnIt.json"
+            "$ref": "./examples/SAPApplicationServerInstances_StartInstance_Start_Virtual_Machine_And_The_Sap_Application_Server_Instance_On_It.json"
           },
           "Start the SAP Application Server Instance.": {
-            "$ref": "./examples/SAPApplicationServerInstances_StartInstance_StartTheSapApplicationServerInstance.json"
+            "$ref": "./examples/SAPApplicationServerInstances_StartInstance_Start_The_Sap_Application_Server_Instance.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1154,13 +1158,13 @@
         "description": "Stops the SAP Application Server Instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1181,7 +1185,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "SAP Application server instance stop request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StopRequest"
@@ -1192,7 +1196,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -1212,16 +1216,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Stop the SAP Application Server Instance": {
-            "$ref": "./examples/SAPApplicationServerInstances_StopInstance_StopTheSapApplicationServerInstance.json"
+            "$ref": "./examples/SAPApplicationServerInstances_StopInstance_Stop_The_Sap_Application_Server_Instance.json"
           },
           "Stop the SAP Application Server Instance and the Virtual machine": {
-            "$ref": "./examples/SAPApplicationServerInstances_StopInstance_StopTheSapApplicationServerInstanceAndTheVirtualMachine.json"
+            "$ref": "./examples/SAPApplicationServerInstances_StopInstance_Stop_The_Sap_Application_Server_Instance_And_The_Virtual_Machine.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1239,13 +1243,13 @@
         "description": "Lists the SAP Central Services Instance resource for the given Virtual Instance for SAP solutions resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1266,7 +1270,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1289,13 +1293,13 @@
         "description": "Gets the SAP Central Services Instance resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1324,7 +1328,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1342,13 +1346,13 @@
         "description": "Creates the SAP Central Services Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1367,13 +1371,14 @@
             "pattern": "^.*"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The SAP Central Services Instance request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SAPCentralServerInstance"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -1403,16 +1408,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Create SAP Central Instances for HA System with Availability Set": {
-            "$ref": "./examples/SAPCentralInstances_Create_CreateSapCentralInstancesForHaSystemWithAvailabilitySet.json"
+            "$ref": "./examples/SAPCentralInstances_Create_Create_Sap_Central_Instances_For_Ha_System_With_Availability_Set.json"
           },
           "SAPCentralInstances_Create": {
-            "$ref": "./examples/SAPCentralInstances_Create_SapCentralInstancesCreate.json"
+            "$ref": "./examples/SAPCentralInstances_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1428,13 +1433,13 @@
         "description": "Updates the SAP Central Services Instance resource. &lt;br&gt;&lt;br&gt;This can be used to update tags on the resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1453,13 +1458,14 @@
             "pattern": "^.*"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "The SAP Central Services Instance resource request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateSAPCentralInstanceRequest"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -1472,7 +1478,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1490,13 +1496,13 @@
         "description": "Deletes the SAP Central Services Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the Virtual Instance for SAP solutions resource, using the delete operation on it.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1536,7 +1542,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1560,13 +1566,13 @@
         "description": "Starts the SAP Central Services Instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1587,7 +1593,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "SAP Central Services instance start request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StartRequest"
@@ -1598,7 +1604,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -1618,16 +1624,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Start the SAP Central Services Instance": {
-            "$ref": "./examples/SAPCentralInstances_StartInstance_StartTheSapCentralServicesInstance.json"
+            "$ref": "./examples/SAPCentralInstances_StartInstance_Start_The_Sap_Central_Services_Instance.json"
           },
           "Start the virtual machine(s) and the SAP central services instance on it.": {
-            "$ref": "./examples/SAPCentralInstances_StartInstance_StartTheVirtualMachineSAndTheSapCentralServicesInstanceOnIt.json"
+            "$ref": "./examples/SAPCentralInstances_StartInstance_Start_The_Virtual_Machine_S_And_The_Sap_Central_Services_Instance_On_It.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1645,13 +1651,13 @@
         "description": "Stops the SAP Central Services Instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1672,7 +1678,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "SAP Central Services instance stop request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StopRequest"
@@ -1683,7 +1689,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -1703,16 +1709,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Stop the SAP Central Services Instance and its underlying Virtual Machine(s)": {
-            "$ref": "./examples/SAPCentralInstances_StopInstance_StopTheSapCentralServicesInstanceAndItsUnderlyingVirtualMachineS.json"
+            "$ref": "./examples/SAPCentralInstances_StopInstance_Stop_The_Sap_Central_Services_Instance_And_Its_Underlying_Virtual_Machine_S.json"
           },
           "Stop the SAP Central Services Instance.": {
-            "$ref": "./examples/SAPCentralInstances_StopInstance_StopTheSapCentralServicesInstance.json"
+            "$ref": "./examples/SAPCentralInstances_StopInstance_Stop_The_Sap_Central_Services_Instance.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1730,13 +1736,13 @@
         "description": "Lists the Database resources associated with a Virtual Instance for SAP solutions resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1757,7 +1763,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1780,13 +1786,13 @@
         "description": "Gets the SAP Database Instance resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1815,7 +1821,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1833,13 +1839,13 @@
         "description": "Creates the Database resource corresponding to the Virtual Instance for SAP solutions resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT by end user will return a Bad Request error.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1858,13 +1864,14 @@
             "pattern": "^.*"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "Request body of Database resource of a SAP system.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SAPDatabaseInstance"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -1894,16 +1901,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Create SAP Database Instances for HA System with Availability Set": {
-            "$ref": "./examples/SAPDatabaseInstances_Create_CreateSapDatabaseInstancesForHaSystemWithAvailabilitySet.json"
+            "$ref": "./examples/SAPDatabaseInstances_Create_Create_Sap_Database_Instances_For_Ha_System_With_Availability_Set.json"
           },
           "SAPDatabaseInstances_Create": {
-            "$ref": "./examples/SAPDatabaseInstances_Create_SapDatabaseInstancesCreate.json"
+            "$ref": "./examples/SAPDatabaseInstances_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1919,13 +1926,13 @@
         "description": "Updates the Database instance resource. This can be used to update tags on the resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -1944,13 +1951,14 @@
             "pattern": "^.*"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Database resource update request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateSAPDatabaseInstanceRequest"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -1963,7 +1971,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1981,13 +1989,13 @@
         "description": "Deletes the Database resource corresponding to a Virtual Instance for SAP solutions resource. &lt;br&gt;&lt;br&gt;This will be used by service only. Delete by end user will return a Bad Request error.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -2027,7 +2035,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2051,13 +2059,13 @@
         "description": "Starts the database instance of the SAP system.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -2078,7 +2086,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "SAP Database server instance start request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StartRequest"
@@ -2089,7 +2097,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -2109,16 +2117,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Start Virtual Machine and the database instance of the SAP system on it.": {
-            "$ref": "./examples/SAPDatabaseInstances_StartInstance_StartVirtualMachineAndTheDatabaseInstanceOfTheSapSystemOnIt.json"
+            "$ref": "./examples/SAPDatabaseInstances_StartInstance_Start_Virtual_Machine_And_The_Database_Instance_Of_The_Sap_System_On_It.json"
           },
           "Start the database instance of the SAP system.": {
-            "$ref": "./examples/SAPDatabaseInstances_StartInstance_StartTheDatabaseInstanceOfTheSapSystem.json"
+            "$ref": "./examples/SAPDatabaseInstances_StartInstance_Start_The_Database_Instance_Of_The_Sap_System.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2136,13 +2144,13 @@
         "description": "Stops the database instance of the SAP system.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -2163,7 +2171,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "Stop request for the database instance of the SAP system.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StopRequest"
@@ -2174,7 +2182,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -2194,16 +2202,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Stop the database instance of the SAP system and the underlying Virtual Machine(s).": {
-            "$ref": "./examples/SAPDatabaseInstances_StopInstance_StopTheDatabaseInstanceOfTheSapSystemAndTheUnderlyingVirtualMachineS.json"
+            "$ref": "./examples/SAPDatabaseInstances_StopInstance_Stop_The_Database_Instance_Of_The_Sap_System_And_The_Underlying_Virtual_Machine_S.json"
           },
           "Stop the database instance of the SAP system.": {
-            "$ref": "./examples/SAPDatabaseInstances_StopInstance_StopTheDatabaseInstanceOfTheSapSystem.json"
+            "$ref": "./examples/SAPDatabaseInstances_StopInstance_Stop_The_Database_Instance_Of_The_Sap_System.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2221,13 +2229,13 @@
         "description": "Starts the SAP application, that is the Central Services instance and Application server instances.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -2240,7 +2248,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The Virtual Instance for SAP solutions resource start request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StartRequest"
@@ -2251,7 +2259,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -2271,16 +2279,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Start the SAP system": {
-            "$ref": "./examples/SAPVirtualInstances_Start_StartTheSapSystem.json"
+            "$ref": "./examples/SAPVirtualInstances_Start_Start_The_Sap_System.json"
           },
           "Start the virtual machines and the SAP system": {
-            "$ref": "./examples/SAPVirtualInstances_Start_StartTheVirtualMachinesAndTheSapSystem.json"
+            "$ref": "./examples/SAPVirtualInstances_Start_Start_The_Virtual_Machines_And_The_Sap_System.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2298,13 +2306,13 @@
         "description": "Stops the SAP Application, that is the Application server instances and Central Services instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "sapVirtualInstanceName",
@@ -2317,7 +2325,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The Virtual Instance for SAP solutions resource stop request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StopRequest"
@@ -2328,7 +2336,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -2348,16 +2356,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "SAPVirtualInstances_Stop": {
-            "$ref": "./examples/SAPVirtualInstances_Stop_SapVirtualInstancesStop.json"
+            "$ref": "./examples/SAPVirtualInstances_Stop.json"
           },
           "Stop the virtual machine(s) and the SAP system on it.": {
-            "$ref": "./examples/SAPVirtualInstances_Stop_StopTheVirtualMachineSAndTheSapSystemOnIt.json"
+            "$ref": "./examples/SAPVirtualInstances_Stop_Stop_The_Virtual_Machine_S_And_The_Sap_System_On_It.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2368,16 +2376,6 @@
     }
   },
   "definitions": {
-    "ActionType": {
-      "type": "string",
-      "enum": [
-        "Internal"
-      ],
-      "x-ms-enum": {
-        "name": "ActionType",
-        "modelAsString": true
-      }
-    },
     "ApplicationServerConfiguration": {
       "type": "object",
       "description": "Gets or sets the application server configuration.",
@@ -2422,6 +2420,7 @@
     },
     "ApplicationServerVirtualMachineType": {
       "type": "string",
+      "description": "Defines the type of application server VM.",
       "enum": [
         "Active",
         "Standby",
@@ -2516,72 +2515,6 @@
         }
       }
     },
-    "Azure.ResourceManager.Foundations.ManagedIdentityProperties": {
-      "type": "object",
-      "description": "The properties of the managed service identities assigned to this resource.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The Active Directory tenant id of the principal.",
-          "readOnly": true
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier of this principal.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
-      "type": "string",
-      "description": "The kind of managed identity assigned to this resource.",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned, UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned managed identity."
-          },
-          {
-            "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned, UserAssigned",
-            "description": "System and user assigned managed identity."
-          }
-        ]
-      }
-    },
     "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
       "type": "object",
       "description": "A managed identity assigned by the user.",
@@ -2644,6 +2577,7 @@
     },
     "CentralServerVirtualMachineType": {
       "type": "string",
+      "description": "Defines the type of central server VM.",
       "enum": [
         "Primary",
         "Secondary",
@@ -2683,6 +2617,7 @@
     },
     "ConfigurationType": {
       "type": "string",
+      "description": "The type of file share config.",
       "enum": [
         "Skip",
         "CreateAndMount",
@@ -2712,19 +2647,6 @@
         }
       ],
       "x-ms-discriminator-value": "CreateAndMount"
-    },
-    "CreatedByType": {
-      "type": "string",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "CreatedByType",
-        "modelAsString": true
-      }
     },
     "DatabaseConfiguration": {
       "type": "object",
@@ -2960,6 +2882,7 @@
     },
     "DiskSkuName": {
       "type": "string",
+      "description": "Defines the disk sku name.",
       "enum": [
         "Standard_LRS",
         "Premium_LRS",
@@ -3037,6 +2960,7 @@
     },
     "EnqueueReplicationServerType": {
       "type": "string",
+      "description": "Defines the type of Enqueue Replication Server.",
       "enum": [
         "EnqueueReplicator1",
         "EnqueueReplicator2"
@@ -3302,6 +3226,7 @@
     },
     "ManagedResourcesNetworkAccessType": {
       "type": "string",
+      "description": "Defines the network access type for managed resources.",
       "enum": [
         "Public",
         "Private"
@@ -3313,6 +3238,7 @@
     },
     "ManagedServiceIdentityType": {
       "type": "string",
+      "description": "Type of managed service identity (only None, UserAssigned types are allowed).",
       "enum": [
         "None",
         "UserAssigned"
@@ -3393,6 +3319,7 @@
     },
     "NamingPatternType": {
       "type": "string",
+      "description": "The pattern type to be used for resource naming.",
       "enum": [
         "FullResourceName"
       ],
@@ -3455,24 +3382,13 @@
     },
     "OSType": {
       "type": "string",
+      "description": "The OS Type",
       "enum": [
         "Linux",
         "Windows"
       ],
       "x-ms-enum": {
         "name": "OSType",
-        "modelAsString": true
-      }
-    },
-    "Origin": {
-      "type": "string",
-      "enum": [
-        "user",
-        "system",
-        "user,system"
-      ],
-      "x-ms-enum": {
-        "name": "Origin",
         "modelAsString": true
       }
     },
@@ -3510,7 +3426,7 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         }
@@ -3532,7 +3448,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -3719,7 +3635,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -3836,6 +3752,7 @@
     },
     "SAPConfigurationType": {
       "type": "string",
+      "description": "The configuration Type.",
       "enum": [
         "Deployment",
         "Discovery",
@@ -3862,7 +3779,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -3944,6 +3861,7 @@
     },
     "SAPDatabaseScaleMethod": {
       "type": "string",
+      "description": "The database scale method.",
       "enum": [
         "ScaleUp"
       ],
@@ -3954,6 +3872,7 @@
     },
     "SAPDatabaseType": {
       "type": "string",
+      "description": "Defines the supported SAP Database types.",
       "enum": [
         "HANA",
         "DB2"
@@ -3965,6 +3884,7 @@
     },
     "SAPDeploymentType": {
       "type": "string",
+      "description": "The type of SAP deployment, single server or Three tier.",
       "enum": [
         "SingleServer",
         "ThreeTier"
@@ -4045,6 +3965,7 @@
     },
     "SAPEnvironmentType": {
       "type": "string",
+      "description": "Defines the environment type - Production/Non Production.",
       "enum": [
         "NonProd",
         "Prod"
@@ -4056,6 +3977,7 @@
     },
     "SAPHealthState": {
       "type": "string",
+      "description": "Defines the health of SAP Instances.",
       "enum": [
         "Unknown",
         "Healthy",
@@ -4069,6 +3991,7 @@
     },
     "SAPHighAvailabilityType": {
       "type": "string",
+      "description": "The high availability type (AvailabilitySet or AvailabilityZone).",
       "enum": [
         "AvailabilitySet",
         "AvailabilityZone"
@@ -4113,6 +4036,7 @@
     },
     "SAPProductType": {
       "type": "string",
+      "description": "Defines the SAP Product type.",
       "enum": [
         "ECC",
         "S4HANA",
@@ -4192,6 +4116,7 @@
     },
     "SAPSoftwareInstallationType": {
       "type": "string",
+      "description": "The SAP software installation Type.",
       "enum": [
         "ServiceInitiated",
         "SAPInstallWithoutOSConfig",
@@ -4285,13 +4210,13 @@
           ]
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityProperties",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4392,6 +4317,7 @@
     },
     "SAPVirtualInstanceState": {
       "type": "string",
+      "description": "Defines the Virtual Instance for SAP state.",
       "enum": [
         "InfrastructureDeploymentPending",
         "InfrastructureDeploymentInProgress",
@@ -4414,6 +4340,7 @@
     },
     "SAPVirtualInstanceStatus": {
       "type": "string",
+      "description": "Defines the SAP Instance status.",
       "enum": [
         "Starting",
         "Running",
@@ -4430,6 +4357,7 @@
     },
     "SapVirtualInstanceProvisioningState": {
       "type": "string",
+      "description": "Defines the provisioning states.",
       "enum": [
         "Succeeded",
         "Updating",
@@ -4918,7 +4846,8 @@
         "values": [
           {
             "name": "v2023_10_01_preview",
-            "value": "2023-10-01-preview"
+            "value": "2023-10-01-preview",
+            "description": "The 2023-10-01-preview API version."
           }
         ]
       }

@@ -83,3 +83,32 @@ interface SAPDatabaseInstances {
     ArmLroLocationHeader
   >;
 }
+
+@@projectedName(SAPDatabaseInstances.create::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(SAPDatabaseInstances.create::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(SAPDatabaseInstances.create::parameters.resource,
+  "Request body of Database resource of a SAP system."
+);
+@@projectedName(SAPDatabaseInstances.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(SAPDatabaseInstances.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(SAPDatabaseInstances.update::parameters.properties,
+  "Database resource update request body."
+);
+@@doc(SAPDatabaseInstances.startInstance::parameters.body,
+  "SAP Database server instance start request body."
+);
+@@doc(SAPDatabaseInstances.stopInstance::parameters.body,
+  "Stop request for the database instance of the SAP system."
+);

@@ -11,36 +11,43 @@ namespace Microsoft.Workloads;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("Defines the environment type - Production/Non Production.")
 enum SAPEnvironmentType {
   NonProd,
   Prod,
 }
 
+@doc("Defines the SAP Product type.")
 enum SAPProductType {
   ECC,
   S4HANA,
   Other,
 }
 
+@doc("The type of SAP deployment, single server or Three tier.")
 enum SAPDeploymentType {
   SingleServer,
   ThreeTier,
 }
 
+@doc("Defines the supported SAP Database types.")
 enum SAPDatabaseType {
   HANA,
   DB2,
 }
 
+@doc("The database scale method.")
 enum SAPDatabaseScaleMethod {
   ScaleUp,
 }
 
+@doc("The high availability type (AvailabilitySet or AvailabilityZone).")
 enum SAPHighAvailabilityType {
   AvailabilitySet,
   AvailabilityZone,
 }
 
+@doc("Defines the disk sku name.")
 enum DiskSkuName {
   Standard_LRS,
   Premium_LRS,
@@ -51,22 +58,26 @@ enum DiskSkuName {
   PremiumV2_LRS,
 }
 
+@doc("Type of managed service identity (only None, UserAssigned types are allowed).")
 enum ManagedServiceIdentityType {
   None,
   UserAssigned,
 }
 
+@doc("Defines the network access type for managed resources.")
 enum ManagedResourcesNetworkAccessType {
   Public,
   Private,
 }
 
+@doc("The configuration Type.")
 enum SAPConfigurationType {
   Deployment,
   Discovery,
   DeploymentWithOSConfig,
 }
 
+@doc("Defines the SAP Instance status.")
 enum SAPVirtualInstanceStatus {
   Starting,
   Running,
@@ -77,6 +88,7 @@ enum SAPVirtualInstanceStatus {
   SoftShutdown,
 }
 
+@doc("Defines the health of SAP Instances.")
 enum SAPHealthState {
   Unknown,
   Healthy,
@@ -84,6 +96,7 @@ enum SAPHealthState {
   Degraded,
 }
 
+@doc("Defines the Virtual Instance for SAP state.")
 enum SAPVirtualInstanceState {
   InfrastructureDeploymentPending,
   InfrastructureDeploymentInProgress,
@@ -100,6 +113,7 @@ enum SAPVirtualInstanceState {
   ACSSInstallationBlocked,
 }
 
+@doc("Defines the provisioning states.")
 enum SapVirtualInstanceProvisioningState {
   Succeeded,
   Updating,
@@ -109,18 +123,13 @@ enum SapVirtualInstanceProvisioningState {
   Canceled,
 }
 
-enum CreatedByType {
-  User,
-  Application,
-  ManagedIdentity,
-  Key,
-}
-
+@doc("Defines the type of Enqueue Replication Server.")
 enum EnqueueReplicationServerType {
   EnqueueReplicator1,
   EnqueueReplicator2,
 }
 
+@doc("Defines the type of central server VM.")
 enum CentralServerVirtualMachineType {
   Primary,
   Secondary,
@@ -131,37 +140,32 @@ enum CentralServerVirtualMachineType {
   Standby,
 }
 
+@doc("Defines the type of application server VM.")
 enum ApplicationServerVirtualMachineType {
   Active,
   Standby,
   Unknown,
 }
 
-enum Origin {
-  user,
-  system,
-  `user,system`,
-}
-
-enum ActionType {
-  Internal,
-}
-
+@doc("The OS Type")
 enum OSType {
   Linux,
   Windows,
 }
 
+@doc("The pattern type to be used for resource naming.")
 enum NamingPatternType {
   FullResourceName,
 }
 
+@doc("The type of file share config.")
 enum ConfigurationType {
   Skip,
   CreateAndMount,
   Mount,
 }
 
+@doc("The SAP software installation Type.")
 enum SAPSoftwareInstallationType {
   ServiceInitiated,
   SAPInstallWithoutOSConfig,
