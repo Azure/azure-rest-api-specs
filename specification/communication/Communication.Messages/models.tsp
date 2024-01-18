@@ -213,10 +213,10 @@ model MessageTemplateLocation extends MessageTemplateValue {
   address?: string;
 
   @doc("The latitude of the location.")
-  latitude?: float64;
+  latitude: float64;
 
   @doc("The longitude of the location.")
-  longitude?: float64;
+  longitude: float64;
 }
 
 @doc("The message template's quick action value information.")
