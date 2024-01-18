@@ -78,7 +78,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NexusIdentity/IdentityControllers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NexusIdentity/identityControllers": {
       "get": {
         "operationId": "IdentityControllers_ListBySubscription",
         "tags": [
@@ -120,7 +120,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NexusIdentity/IdentityControllers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NexusIdentity/identityControllers": {
       "get": {
         "operationId": "IdentityControllers_ListByResourceGroup",
         "tags": [
@@ -165,7 +165,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NexusIdentity/IdentityControllers/{IdentityControllerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NexusIdentity/identityControllers/{identityControllerName}": {
       "get": {
         "operationId": "IdentityControllers_Get",
         "tags": [
@@ -183,7 +183,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "IdentityControllerName",
+            "name": "identityControllerName",
             "in": "path",
             "description": "Name of IdentityController",
             "required": true,
@@ -231,7 +231,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "IdentityControllerName",
+            "name": "identityControllerName",
             "in": "path",
             "description": "Name of IdentityController",
             "required": true,
@@ -305,7 +305,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "IdentityControllerName",
+            "name": "identityControllerName",
             "in": "path",
             "description": "Name of IdentityController",
             "required": true,
@@ -362,7 +362,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "IdentityControllerName",
+            "name": "identityControllerName",
             "in": "path",
             "description": "Name of IdentityController",
             "required": true,
@@ -461,7 +461,7 @@
       "properties": {
         "onboardedApps": {
           "type": "array",
-          "description": "Age of IdentityController",
+          "description": "List of onboarded apps for Nexus Identity",
           "items": {
             "$ref": "#/definitions/OnboardedApp"
           },
@@ -500,7 +500,7 @@
       "properties": {
         "onboardedApps": {
           "type": "array",
-          "description": "Age of IdentityController",
+          "description": "List of onboarded apps for Nexus Identity",
           "items": {
             "$ref": "#/definitions/OnboardedApp"
           },
@@ -510,18 +510,23 @@
     },
     "OnboardedApp": {
       "type": "object",
+      "description": "Onboarded app properties for Nexus Identity",
       "properties": {
         "tenantId": {
-          "type": "string"
+          "type": "string",
+          "description": "Tenant Id in which roles are to be watched"
         },
         "appId": {
-          "type": "string"
+          "type": "string",
+          "description": "App Id which will create identity sets"
         },
         "appName": {
-          "type": "string"
+          "type": "string",
+          "description": "App Name which will create identity sets"
         },
         "roles": {
           "type": "array",
+          "description": "Roles to be watched for identity sets",
           "items": {
             "type": "string"
           }
