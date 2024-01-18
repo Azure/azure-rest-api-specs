@@ -1550,7 +1550,7 @@ model AtlasBaseTypeDef {
 }
 
 @doc("The date format.")
-@projectedName("csharp", "DateFormat")
+@projectedName("csharp", "AtlasDateFormat")
 model DateFormat {
   @doc("An array of available locales.")
   availableLocales?: string[];
