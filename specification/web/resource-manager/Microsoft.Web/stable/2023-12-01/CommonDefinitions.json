@@ -702,7 +702,8 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret" : true
         },
         "configureLoadBalancing": {
           "description": "<code>true</code> to configure load balancing for source and destination app.",
@@ -3205,7 +3206,8 @@
           },
           "x-ms-identifiers": [
             "name"
-          ]
+          ],
+          "x-ms-secret" : true
         },
         "metadata": {
           "description": "Application metadata. This property cannot be retrieved, since it may contain secrets.",
@@ -3219,7 +3221,8 @@
           "x-ms-mutability": [
             "create",
             "update"
-          ]
+          ],
+          "x-ms-secret" : true
         },
         "connectionStrings": {
           "description": "Connection strings.",
@@ -3229,7 +3232,8 @@
           },
           "x-ms-identifiers": [
             "name"
-          ]
+          ],
+          "x-ms-secret" : true
         },
         "machineKey": {
           "$ref": "#/definitions/SiteMachineKey",
