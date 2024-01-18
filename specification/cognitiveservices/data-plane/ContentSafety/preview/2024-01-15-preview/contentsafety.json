@@ -594,7 +594,7 @@
     "/text:detectXPIA": {
       "post": {
         "operationId": "TextOperations_DetectTextXpia",
-        "summary": "Analyze Text cross-prompt injection attacks",
+        "summary": "Analyze text cross-prompt injection attacks",
         "description": "A synchronous API for the analysis of text cross-prompt injection attacks.",
         "parameters": [
           {
@@ -870,11 +870,11 @@
     },
     "AnalyzeTextXPIAOptions": {
       "type": "object",
-      "description": "The text jailbreak analysis request.",
+      "description": "The text cross-prompt injection attacks analysis request.",
       "properties": {
         "text": {
           "type": "string",
-          "description": "The text needs to be analyzed if it attempt to do cross-prompt injection attacks."
+          "description": "The text needs to be analyzed if it attempts to do cross-prompt injection attacks."
         }
       },
       "required": [
@@ -883,7 +883,7 @@
     },
     "AnalyzeTextXPIAResult": {
       "type": "object",
-      "description": "The text cross-prompt injection attacks analysis request.",
+      "description": "The text cross-prompt injection attacks analysis response.",
       "properties": {
         "xpiaAnalysisResult": {
           "$ref": "#/definitions/XPIAAnalysisResult",
@@ -1226,14 +1226,14 @@
           "type": "boolean",
           "description": "Analysis result for cross-prompt injection attacks."
         },
-        "confidentScore": {
+        "confidenceScore": {
           "type": "number",
-          "description": "Confident score of the analysis result."
+          "description": "Confidence score of the analysis result."
         }
       },
       "required": [
         "detected",
-        "confidentScore"
+        "confidenceScore"
       ]
     }
   },
