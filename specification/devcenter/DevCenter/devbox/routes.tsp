@@ -101,7 +101,7 @@ interface DevBoxesOperations {
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
-      userId: string = "me";
+      userId: string;
 
       @doc("An OData filter clause to apply to the operation.")
       @query
