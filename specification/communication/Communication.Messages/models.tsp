@@ -76,7 +76,7 @@ enum MessageTemplateValueKind {
 }
 
 @doc("The type of the message template.")
-enum MessageTemplateType {
+enum MessageTemplateBindingsType {
   @doc("The WhatsApp template type.")
   whatsApp,
 }
@@ -236,13 +236,13 @@ model MessageTemplateQuickAction extends MessageTemplateValue {
 model MessageTemplateBindings {
 
   @doc("The type discriminator describing a template bindings type.")
-  kind: MessageTemplateType;
+  kind: MessageTemplateBindingsType;
 }
 
 @doc("The template bindings for WhatsApp")
 model WhatsAppMessageTemplateBindings extends MessageTemplateBindings {
   @doc("MessageTemplateBindings is whatsApp")
-  kind: MessageTemplateType.whatsApp;
+  kind: MessageTemplateBindingsType.whatsApp;
 
   @doc("The header template bindings")
   header?: WhatsAppMessageTemplateBindingsComponent[];
