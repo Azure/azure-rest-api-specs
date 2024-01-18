@@ -256,6 +256,4 @@ model AnalyzeTextXPIAResult {
 model XPIAAnalysisResult {
   @doc("Analysis result for cross-prompt injection attacks.")
   detected: boolean;
-  @doc("Confidence score of the analysis result.")
-  confidenceScore: float;
 }
