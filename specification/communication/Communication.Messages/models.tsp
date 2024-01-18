@@ -54,7 +54,7 @@ enum MessageTemplateStatus {
 }
 
 @doc("The type of the template parameter.")
-enum TemplateParameterType {
+enum MessageTemplateValueKind {
 
   @doc("The text template parameter type.")
   text,
@@ -149,13 +149,13 @@ model MessageTemplateValue {
   name: string;
   
   @doc("The type discriminator describing a template parameter type.")
-  kind: TemplateParameterType
+  kind: MessageTemplateValueKind
 }
 
 @doc("The message template's text value information.")
 model MessageTemplateText extends MessageTemplateValue {
   @doc("Message parameter type is text.")
-  kind: TemplateParameterType.text;
+  kind: MessageTemplateValueKind.text;
 
   @doc("The text value.")
   text: string;
@@ -181,7 +181,7 @@ model MessageTemplateMedia {
 
 model MessageTemplateImage extends MessageTemplateValue {
   @doc("Message parameter type is image.")
-  kind: TemplateParameterType.image,
+  kind: MessageTemplateValueKind.image,
   ...MessageTemplateMedia
 }
 
@@ -189,7 +189,7 @@ model MessageTemplateImage extends MessageTemplateValue {
 
 model MessageTemplateDocument extends MessageTemplateValue {
   @doc("Message parameter type is document.")
-  kind: TemplateParameterType.document,
+  kind: MessageTemplateValueKind.document,
   ...MessageTemplateMedia
 }
 
@@ -197,14 +197,14 @@ model MessageTemplateDocument extends MessageTemplateValue {
 
 model MessageTemplateVideo extends MessageTemplateValue {
   @doc("Message parameter type is video.")
-  kind: TemplateParameterType.video,
+  kind: MessageTemplateValueKind.video,
   ...MessageTemplateMedia
 }
 
 @doc("The message template's location value information.")
 model MessageTemplateLocation extends MessageTemplateValue {
   @doc("Message parameter type is location.")
-  kind: TemplateParameterType.location;
+  kind: MessageTemplateValueKind.location;
 
   @doc("The [Optional] name of the location.")
   locationName?: string;
@@ -222,7 +222,7 @@ model MessageTemplateLocation extends MessageTemplateValue {
 @doc("The message template's quick action value information.")
 model MessageTemplateQuickAction extends MessageTemplateValue {
   @doc("Message parameter type is quick action.")
-  kind: TemplateParameterType.quickAction;
+  kind: MessageTemplateValueKind.quickAction;
 
   @doc("The [Optional] quick action text")
   text?: string;
