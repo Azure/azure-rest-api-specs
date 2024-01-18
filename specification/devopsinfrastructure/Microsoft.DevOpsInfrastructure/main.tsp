@@ -12,14 +12,14 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Managed DevOps Infrastructure",
-  version: "2023-10-30-preview",
+  version: "2023-12-13-preview",
 })
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.DevOpsInfrastructure;
 
 model Pool is TrackedResource<PoolProperties> {
   @key("poolName")
-  @pattern("^[a-z][a-z0-9]*$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-.]*$")
   @path
   @segment("pools")
   @doc("Name of the pool. It needs to be globally unique.")
@@ -55,6 +55,23 @@ model PoolProperties {
 @discriminator("kind")
 model OrganizationProfile {}
 
+@doc("GitHub organization profile")
+model GitHubOrganizationProfile extends OrganizationProfile {
+  @doc("GitHub organization profile")
+  kind: "GitHub";
+
+  @doc("The list of GitHub organizations/repositories the pool should be present in.")
+  organizations: GitHubOrganization[];
+}
+@doc("Defines a GitHub organization")
+model GitHubOrganization {
+  @doc("The GitHub organization URL in which the pool should be created.")
+  url: string;
+
+  @doc("Optional list of repositories in which the pool should be created.")
+  repositories?: string[];
+}
+
 @doc("Azure DevOps organization profile")
 model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   @doc("Azure DevOps organization profile")
@@ -62,6 +79,9 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
 
   @doc("The list of Azure DevOps organizations the pool should be present in.")
   organizations: Organization[];
+
+  @doc("The type of permission which determines which accounts are admins on the Azure DevOps pool.")
+  permissionProfile?: AzureDevOpsPermissionProfile;
 }
 @doc("Defines an Azure DevOps organization.")
 model Organization {
@@ -73,6 +93,28 @@ model Organization {
 
   @doc("How many machines can be created at maximum in this organization out of the maximumConcurrency of the pool.")
   parallelism?: int32;
+}
+@doc("Defines the type of Azure DevOps pool permission.")
+model AzureDevOpsPermissionProfile {
+  @doc("Determines who has admin permissions to the Azure DevOps pool.")
+  kind: AzureDevOpsPermissionType;
+
+  @doc("User email addresses")
+  users?: string[];
+
+  @doc("Group email addresses")
+  groups?: string[];
+}
+@doc("Determines who has admin permissions to the Azure DevOps pool.")
+enum AzureDevOpsPermissionType {
+  @doc("Pool will inherit permissions from the project or organization.")
+  Inherit,
+
+  @doc("Only the pool creator will be an admin of the pool.")
+  CreatorOnly,
+
+  @doc("Only the specified accounts will be admins of the pool.")
+  SpecificAccounts,
 }
 
 @doc("Defines the type of fabric the agent will run on.")
@@ -92,6 +134,9 @@ model VmssFabricProfile extends FabricProfile {
   @doc("The OS profile of the machines in the pool.")
   osProfile?: OsProfile;
 
+  @doc("The storage profile of the machines in the pool.")
+  storageProfile?: StorageProfile;
+
   @doc("The network profile of the machines in the pool.")
   networkProfile?: NetworkProfile;
 }
@@ -100,10 +145,26 @@ model VmssFabricProfile extends FabricProfile {
 model DevOpsAzureSku {
   @doc("The Azure SKU name of the machines in the pool.")
   name: string;
-
-  @doc("The Azure SKU tier of the machines in the pool.")
-  tier?: string = "Standard";
 }
+
+@doc("The storage profile of the VMSS.")
+model StorageProfile {
+  @doc("The Azure SKU name of the machines in the pool.")
+  osDiskStorageAccountType?: OsDiskStorageAccountType;
+}
+
+@doc("The storage account type of the OS disk.")
+enum OsDiskStorageAccountType {
+  @doc("Standard OS disk type.")
+  Standard,
+
+  @doc("Premium OS disk type.")
+  Premium,
+
+  @doc("Standard SSD OS disk type.")
+  StandardSSD,
+}
+
 @doc("The VM image of the machines in the pool.")
 model PoolImage {
   @doc("The resource id of the image.")
@@ -118,7 +179,10 @@ model PoolImage {
 @doc("The OS profile of the machines in the pool.")
 model OsProfile {
   @doc("The secret management settings of the machines in the pool.")
-  secretsManagementSettings: SecretsManagementSettings;
+  secretsManagementSettings?: SecretsManagementSettings;
+
+  @doc("Determines how the service should be run. By default, this will be set to Service.")
+  logonType?: LogonType;
 }
 @doc("The secret management settings of the machines in the pool.")
 model SecretsManagementSettings {
@@ -131,6 +195,15 @@ model SecretsManagementSettings {
   @doc("Defines if the key of the certificates should be exportable.")
   keyExportable: boolean;
 }
+@doc("Determines how the service should be run.")
+enum LogonType {
+  @doc("Run as a service.")
+  Service,
+
+  @doc("Run in interactive mode.")
+  Interactive,
+}
+
 @doc("The network profile of the machines in the pool.")
 model NetworkProfile {
   @doc("The subnet id on which to put all machines created in the pool.")

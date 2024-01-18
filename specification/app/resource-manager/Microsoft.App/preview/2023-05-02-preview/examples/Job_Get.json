@@ -2,15 +2,15 @@
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
-    "jobName": "testcontainerAppsJob0",
+    "jobName": "testcontainerappsob0",
     "api-version": "2023-05-02-preview"
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0",
-        "name": "testcontainerAppsJob0",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerappsob0",
+        "name": "testcontainerappsob0",
         "type": "Microsoft.App/jobs",
         "location": "East US",
         "properties": {
@@ -28,21 +28,21 @@
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerAppsJob0:v4",
-                "name": "testcontainerAppsJob0",
+                "image": "repo/testcontainerappsob0:v4",
+                "name": "testcontainerappsob0",
                 "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
+                  "cpu": 0.5,
+                  "memory": "1Gi"
                 }
               }
             ],
             "initContainers": [
               {
-                "image": "repo/testcontainerAppsJob0:v4",
+                "image": "repo/testcontainerappsob0:v4",
                 "name": "testinitcontainerAppsJob0",
                 "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
+                  "cpu": 0.5,
+                  "memory": "1Gi"
                 }
               }
             ]

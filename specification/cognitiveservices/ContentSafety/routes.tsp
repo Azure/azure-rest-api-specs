@@ -20,9 +20,46 @@ interface TextOperations {
     {
       @body
       @doc("The text analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeTextOptions;
     },
     AnalyzeTextResult
+  >;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Text Jailbreak")
+  @doc("A synchronous API for the analysis of text jailbreak.")
+  @route("/text:detectJailbreak")
+  @post
+  detectTextJailbreak is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text jailbreak analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: AnalyzeTextJailbreakOptions;
+    },
+    AnalyzeTextJailbreakResult
+  >;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Protected Material")
+  @doc("A synchronous API for the analysis of protected material.")
+  @route("/text:detectProtectedMaterial")
+  @post
+  detectTextProtectedMaterial is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text protected material analysis request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: AnalyzeTextProtectedMaterialOptions;
+    },
+    AnalyzeTextProtectedMaterialResult
   >;
 }
 
@@ -35,6 +72,9 @@ interface ImageOperations {
     {
       @doc("The image analysis request.")
       @body
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeImageOptions;
     },
     AnalyzeImageResult
@@ -45,6 +85,11 @@ interface BlockOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
       NoClientRequestId> {}
+
+@@projectedName(Azure.Core.Foundations.ResourceBody.resource,
+  "client",
+  "options"
+);
 
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
@@ -67,7 +112,14 @@ interface TextBlocklists {
   @doc("Add or update blocklistItems to a text blocklist. You can add or update at most 100 blocklistItems in one request.")
   addOrUpdateBlocklistItems is BlockOps.ResourceAction<
     TextBlocklist,
-    AddOrUpdateTextBlocklistItemsOptions,
+    {
+      @doc("Options for adding or updating blocklist items.")
+      @body
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: AddOrUpdateTextBlocklistItemsOptions;
+    },
     AddOrUpdateTextBlocklistItemsResult
   >;
 
@@ -75,7 +127,14 @@ interface TextBlocklists {
   @doc("Remove blocklistItems from a text blocklist. You can remove at most 100 BlocklistItems in one request.")
   removeBlocklistItems is BlockOps.ResourceAction<
     TextBlocklist,
-    RemoveTextBlocklistItemsOptions,
+    {
+      @doc("Options for removing blocklist items.")
+      @body
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: RemoveTextBlocklistItemsOptions;
+    },
     NoContentResponse
   >;
 

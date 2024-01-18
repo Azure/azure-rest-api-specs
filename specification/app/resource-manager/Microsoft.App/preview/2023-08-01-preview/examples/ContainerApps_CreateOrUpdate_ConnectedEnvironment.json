@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
-    "containerAppName": "testcontainerApp0",
+    "containerAppName": "testcontainerapp0",
     "api-version": "2023-08-01-preview",
     "containerAppEnvelope": {
       "location": "East US",
@@ -31,7 +31,7 @@
             "traffic": [
               {
                 "weight": 100,
-                "revisionName": "testcontainerApp0-ab1234",
+                "revisionName": "testcontainerapp0-ab1234",
                 "label": "production"
               }
             ],
@@ -99,8 +99,8 @@
         "template": {
           "containers": [
             {
-              "image": "repo/testcontainerApp0:v1",
-              "name": "testcontainerApp0",
+              "image": "repo/testcontainerapp0:v1",
+              "name": "testcontainerapp0",
               "probes": [
                 {
                   "type": "Liveness",
@@ -122,11 +122,11 @@
           ],
           "initContainers": [
             {
-              "image": "repo/testcontainerApp0:v4",
+              "image": "repo/testcontainerapp0:v4",
               "name": "testinitcontainerApp0",
               "resources": {
-                "cpu": 0.2,
-                "memory": "100Mi"
+                "cpu": 0.5,
+                "memory": "1Gi"
               },
               "command": [
                 "/bin/sh"
@@ -160,8 +160,8 @@
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
-        "name": "testcontainerApp0",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerapp0",
+        "name": "testcontainerapp0",
         "type": "Microsoft.App/containerApps",
         "location": "East US",
         "extendedLocation": {
@@ -171,11 +171,11 @@
         "properties": {
           "provisioningState": "Succeeded",
           "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube",
-          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
-          "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
+          "latestRevisionFqdn": "testcontainerapp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestReadyRevisionName": "testcontainerapp0-pjxhsye",
           "configuration": {
             "ingress": {
-              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "fqdn": "testcontainerapp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
               "external": true,
               "targetPort": 3000,
               "transport": "auto",
@@ -194,11 +194,11 @@
               "traffic": [
                 {
                   "weight": 80,
-                  "revisionName": "testcontainerApp0-ab1234"
+                  "revisionName": "testcontainerapp0-ab1234"
                 },
                 {
                   "weight": 20,
-                  "revisionName": "testcontainerApp0-ab4321",
+                  "revisionName": "testcontainerapp0-ab4321",
                   "label": "staging"
                 }
               ],
@@ -230,11 +230,11 @@
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerApp0:v4",
-                "name": "testcontainerApp0",
+                "image": "repo/testcontainerapp0:v4",
+                "name": "testcontainerapp0",
                 "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
+                  "cpu": 0.5,
+                  "memory": "1Gi"
                 },
                 "probes": [
                   {
@@ -257,11 +257,11 @@
             ],
             "initContainers": [
               {
-                "image": "repo/testcontainerApp0:v4",
+                "image": "repo/testcontainerapp0:v4",
                 "name": "testinitcontainerApp0",
                 "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
+                  "cpu": 0.5,
+                  "memory": "1Gi"
                 },
                 "command": [
                   "/bin/sh"
@@ -294,8 +294,8 @@
     "201": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
-        "name": "testcontainerApp0",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerapp0",
+        "name": "testcontainerapp0",
         "type": "Microsoft.App/containerApps",
         "location": "East US",
         "extendedLocation": {
@@ -305,21 +305,21 @@
         "properties": {
           "provisioningState": "InProgress",
           "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube",
-          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestRevisionFqdn": "testcontainerapp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
           "configuration": {
             "ingress": {
-              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "fqdn": "testcontainerapp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
               "external": true,
               "targetPort": 3000,
               "transport": "auto",
               "traffic": [
                 {
                   "weight": 80,
-                  "revisionName": "testcontainerApp0-ab1234"
+                  "revisionName": "testcontainerapp0-ab1234"
                 },
                 {
                   "weight": 20,
-                  "revisionName": "testcontainerApp0-ab4321",
+                  "revisionName": "testcontainerapp0-ab4321",
                   "label": "staging"
                 }
               ]
@@ -334,11 +334,11 @@
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerApp0:v4",
-                "name": "testcontainerApp0",
+                "image": "repo/testcontainerapp0:v4",
+                "name": "testcontainerapp0",
                 "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
+                  "cpu": 0.5,
+                  "memory": "1Gi"
                 },
                 "probes": [
                   {
@@ -361,11 +361,11 @@
             ],
             "initContainers": [
               {
-                "image": "repo/testcontainerApp0:v4",
+                "image": "repo/testcontainerapp0:v4",
                 "name": "testinitcontainerApp0",
                 "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
+                  "cpu": 0.5,
+                  "memory": "1Gi"
                 },
                 "command": [
                   "/bin/sh"

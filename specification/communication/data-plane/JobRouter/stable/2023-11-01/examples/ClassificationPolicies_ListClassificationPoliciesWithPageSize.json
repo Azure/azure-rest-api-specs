@@ -16,16 +16,16 @@
             "fallbackQueueId": "MainQueue",
             "queueSelectorAttachments": [
               {
-                "kind": "rule-engine",
+                "kind": "ruleEngine",
                 "rule": {
-                  "kind": "expression-rule",
+                  "kind": "expression",
                   "language": "powerFx",
                   "expression": "If(job.Escalated = true, \"SecondaryQueue\", \"MainQueue\")"
                 }
               }
             ],
             "prioritizationRule": {
-              "kind": "static-rule",
+              "kind": "static",
               "value": "2"
             },
             "workerSelectorAttachments": [],
@@ -37,16 +37,16 @@
             "fallbackQueueId": "MainQueue",
             "queueSelectorAttachments": [
               {
-                "kind": "rule-engine",
+                "kind": "ruleEngine",
                 "rule": {
-                  "kind": "expression-rule",
+                  "kind": "expression",
                   "language": "powerFx",
                   "expression": "If(job.VIP = true, \"VIPQueue\", \"MainQueue\")"
                 }
               }
             ],
             "prioritizationRule": {
-              "kind": "static-rule",
+              "kind": "static",
               "value": "1"
             },
             "workerSelectorAttachments": [],
