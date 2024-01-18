@@ -289,6 +289,7 @@ model MessageReceipt {
 
 @doc("The WhatsApp-specific template response contract")
 model WhatsAppMessageTemplateItem extends MessageTemplateItem{
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Payload being returned from WhatsApp with no guaranteed object type."
   @doc("""
 WhatsApp platform's template content
 This is the payload returned from WhatsApp
