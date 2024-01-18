@@ -2719,13 +2719,24 @@
           "$ref": "#/definitions/EndpointDeploymentModel"
         },
         "raiPolicyName": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of RAI policy."
         },
         "sku": {
           "$ref": "#/definitions/CognitiveServicesSku"
         },
         "versionUpgradeOption": {
-          "type": "string"
+          "description": "Deployment model version upgrade option.",
+          "type": "string",
+          "enum": [
+            "OnceNewDefaultVersionAvailable",
+            "OnceCurrentVersionExpired",
+            "NoAutoUpgrade"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentModelVersionUpgradeOption",
+            "modelAsString": true
+          }
         }
       }
     },
