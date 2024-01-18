@@ -64,7 +64,7 @@ clear-output-folder: false
 These settings apply only when `--tag=package-2023-11 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2023-011'
+``` yaml $(tag) == 'package-2023-11'
 namespace: azure.mgmt.network.v2023_11_01
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2023_11_01
 ```
