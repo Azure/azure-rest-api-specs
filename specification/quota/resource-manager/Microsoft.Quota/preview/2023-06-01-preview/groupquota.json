@@ -1332,7 +1332,7 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "#/parameters/LocationName"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/LocationParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1398,7 +1398,7 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "#/parameters/LocationName"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/LocationParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1460,7 +1460,7 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "#/parameters/LocationName"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/LocationParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1959,18 +1959,6 @@
         }
       }
     },
-    "RequestProperties": {
-      "type": "object",
-      "description": "Request properties.",
-      "properties": {
-        "requestSubmitTime": {
-          "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        }
-      }
-    },
     "SubmittedResourceRequestStatus": {
       "type": "object",
       "description": "Status of a single GroupQuota request.",
@@ -1979,9 +1967,11 @@
           "description": "Requested Resource.",
           "$ref": "#/definitions/QuotaAllocationRequestBase"
         },
-        "requestProperties": {
-          "description": "Request properties.",
-          "$ref": "#/definitions/RequestProperties"
+        "requestSubmitTime": {
+          "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
         },
         "provisioningState": {
           "$ref": "#/definitions/RequestState",
@@ -2202,7 +2192,7 @@
           "properties": {
             "location": {
               "type": "string",
-              "description": "The Azure location/region."
+              "description": "The name of the Azure region."
             },
             "provisioningState": {
               "$ref": "#/definitions/RequestState",
@@ -2273,14 +2263,6 @@
       "required": true,
       "type": "string",
       "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
-      "x-ms-parameter-location": "method"
-    },
-    "LocationName": {
-      "name": "location",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure region/location name.",
       "x-ms-parameter-location": "method"
     },
     "FilterInQuery": {
