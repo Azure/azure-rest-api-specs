@@ -3,7 +3,7 @@
   "info": {
     "title": "portal",
     "version": "2024-01-01-preview",
-    "description": "Allows creation and deletion of Azure Shared Dashboards.",
+    "description": "Azure Portal Services API Reference",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -107,6 +107,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all custom resource providers on the subscription": {
+            "$ref": "./examples/listDashboardsBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -142,6 +147,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all custom resource providers on the resourceGroup": {
+            "$ref": "./examples/listDashboardsByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -189,6 +199,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a dashboard": {
+            "$ref": "./examples/getDashboard.json"
           }
         }
       },
@@ -247,6 +262,26 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create a dashboard with Markdown tiles": {
+            "$ref": "./examples/createDashboardWithMarkdownTiles.json"
+          },
+          "Create a dashboard with Query tiles": {
+            "$ref": "./examples/createDashboardWithQueryTile.json"
+          },
+          "Create a dashboard with Resource tiles": {
+            "$ref": "./examples/createDashboardWithResourceTile.json"
+          },
+          "Create a dashboard with parameters": {
+            "$ref": "./examples/createDashboardWithParameters.json"
+          },
+          "Create an empty dashboard": {
+            "$ref": "./examples/createEmptyDashboard.json"
+          },
+          "Create dashboard with tiles including visible, highlight, and actions properties": {
+            "$ref": "./examples/createDashboardWithVisibleHighlightAction.json"
+          }
         }
       },
       "patch": {
@@ -298,6 +333,20 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update a dashboard with Markdown tiles": {
+            "$ref": "./examples/updateDashboardWithMarkdownTiles.json"
+          },
+          "Update a dashboard with Query tiles": {
+            "$ref": "./examples/updateDashboardWithQueryTile.json"
+          },
+          "Update a dashboard with Resource tiles": {
+            "$ref": "./examples/updateDashboardWithResourceTile.json"
+          },
+          "Update a dashboard with parameters": {
+            "$ref": "./examples/updateDashboardWithParameters.json"
+          }
         }
       },
       "delete": {
@@ -340,6 +389,11 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete a dashboard": {
+            "$ref": "./examples/deleteDashboard.json"
+          }
         }
       }
     }
@@ -347,6 +401,7 @@
   "definitions": {
     "ActionOpenBlade": {
       "type": "object",
+      "description": "Model for Actions on click open blade",
       "properties": {
         "blade": {
           "$ref": "#/definitions/BladeReferenceWithContextPane",
@@ -365,6 +420,7 @@
     },
     "ActionParameters": {
       "type": "object",
+      "description": "Model for actions on click update parameters",
       "properties": {
         "parameters": {
           "type": "array",
@@ -384,6 +440,7 @@
     },
     "ActionReference": {
       "type": "object",
+      "description": "Model for Action reference.",
       "properties": {
         "type": {
           "type": "string",
@@ -397,6 +454,7 @@
     },
     "ActionReferenceBlade": {
       "type": "object",
+      "description": "Model for action reference to a blade.",
       "properties": {
         "blade": {
           "$ref": "#/definitions/BladeReferenceWithContextPane",
@@ -420,17 +478,31 @@
     },
     "ActionReferenceType": {
       "type": "string",
+      "description": "The types of dashboard tile action references.",
       "enum": [
         "blade",
         "url"
       ],
       "x-ms-enum": {
         "name": "ActionReferenceType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "blade",
+            "value": "blade",
+            "description": "The action reference type for blade."
+          },
+          {
+            "name": "url",
+            "value": "url",
+            "description": "The action reference type for url."
+          }
+        ]
       }
     },
     "ActionReferenceUrl": {
       "type": "object",
+      "description": "Model for action reference to a url.",
       "properties": {
         "url": {
           "type": "string",
@@ -457,10 +529,12 @@
       "description": "Actions available on the tile.",
       "properties": {
         "onClick": {
-          "$ref": "#/definitions/ActionsOnClick"
+          "$ref": "#/definitions/ActionsOnClick",
+          "description": "Actions available on the tile on click."
         },
         "footer": {
           "type": "array",
+          "description": "Actions available on the tile on footer.",
           "items": {
             "$ref": "#/definitions/ActionReference"
           },
@@ -468,6 +542,7 @@
         },
         "contextMenu": {
           "type": "array",
+          "description": "Actions available on the tile on context menu.",
           "items": {
             "$ref": "#/definitions/ActionReference"
           },
@@ -477,6 +552,7 @@
     },
     "ActionsOnClick": {
       "type": "object",
+      "description": "Model for Actions on click.",
       "properties": {
         "type": {
           "type": "string",
@@ -490,17 +566,31 @@
     },
     "ActionsOnClickType": {
       "type": "string",
+      "description": "The types of dashboard tile on click actions.",
       "enum": [
         "openBlade",
         "updateParameters"
       ],
       "x-ms-enum": {
         "name": "ActionsOnClickType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "openBlade",
+            "value": "openBlade",
+            "description": "The on click action type for openBlade."
+          },
+          {
+            "name": "updateParameters",
+            "value": "updateParameters",
+            "description": "The on click action type for updateParameters."
+          }
+        ]
       }
     },
     "AggregationType": {
       "type": "string",
+      "description": "The types of Dashboard Query tile aggregation types.",
       "enum": [
         "avg",
         "count",
@@ -512,7 +602,44 @@
       ],
       "x-ms-enum": {
         "name": "AggregationType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "avg",
+            "value": "avg",
+            "description": "The aggregation type for avg."
+          },
+          {
+            "name": "count",
+            "value": "count",
+            "description": "The aggregation type for count."
+          },
+          {
+            "name": "max",
+            "value": "max",
+            "description": "The aggregation type for max."
+          },
+          {
+            "name": "min",
+            "value": "min",
+            "description": "The aggregation type for min."
+          },
+          {
+            "name": "percentile",
+            "value": "percentile",
+            "description": "The aggregation type for percentile."
+          },
+          {
+            "name": "sum",
+            "value": "sum",
+            "description": "The aggregation type for sum."
+          },
+          {
+            "name": "unique",
+            "value": "unique",
+            "description": "The aggregation type for total."
+          }
+        ]
       }
     },
     "AppInsightsDataDefinition": {
@@ -609,13 +736,16 @@
       "description": "Actions that can be taken on the arc snapshot tile.",
       "properties": {
         "configureService": {
-          "$ref": "#/definitions/ActionReference"
+          "$ref": "#/definitions/ActionReference",
+          "description": "Action on configure service."
         },
         "viewConfiguredService": {
-          "$ref": "#/definitions/ActionReference"
+          "$ref": "#/definitions/ActionReference",
+          "description": "Action on view configure resources."
         },
         "viewNotConfiguredResources": {
-          "$ref": "#/definitions/ActionReference"
+          "$ref": "#/definitions/ActionReference",
+          "description": "Action on view not configure resources."
         }
       }
     },
@@ -639,12 +769,20 @@
     },
     "ArcSnapshotTileDataKind": {
       "type": "string",
+      "description": "The types of modified by.",
       "enum": [
         "arg"
       ],
       "x-ms-enum": {
         "name": "ArcSnapshotTileDataKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "arg",
+            "value": "arg",
+            "description": "The data kind arg for Arc Snapshot tile."
+          }
+        ]
       }
     },
     "ArcSnapshotTileDataNoResources": {
@@ -684,6 +822,36 @@
       ],
       "x-ms-discriminator-value": "arg"
     },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
     "BladeReferenceWithContextPane": {
       "type": "object",
       "description": "open a blade in context pane",
@@ -699,7 +867,9 @@
         "parameters": {
           "type": "object",
           "description": "The parameters to pass to the blade.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "inContextPane": {
           "type": "boolean",
@@ -716,6 +886,7 @@
     },
     "CreatedByType": {
       "type": "string",
+      "description": "The types of created by.",
       "enum": [
         "User",
         "Application",
@@ -724,7 +895,29 @@
       ],
       "x-ms-enum": {
         "name": "CreatedByType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "The created by type for user."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "The created by type for application."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "The created by type for managedIdentity."
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "The created by type for key."
+          }
+        ]
       }
     },
     "Dashboard": {
@@ -739,19 +932,8 @@
             "read",
             "create"
           ]
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the dashboard.",
-          "minLength": 3,
-          "maxLength": 64,
-          "pattern": "^[a-z][a-z0-9]*$",
-          "readOnly": true
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -841,6 +1023,7 @@
     },
     "DashboardParameterType": {
       "type": "string",
+      "description": "The types of dashboard tile parameters.",
       "enum": [
         "location",
         "resourceGroup",
@@ -851,7 +1034,39 @@
       ],
       "x-ms-enum": {
         "name": "DashboardParameterType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "location",
+            "value": "location",
+            "description": "The parameter type for location."
+          },
+          {
+            "name": "resourceGroup",
+            "value": "resourceGroup",
+            "description": "The parameter type for resourceGroup."
+          },
+          {
+            "name": "resourceType",
+            "value": "resourceType",
+            "description": "The parameter type for resourceType."
+          },
+          {
+            "name": "subscription",
+            "value": "subscription",
+            "description": "The parameter type for subscription."
+          },
+          {
+            "name": "timeGranularity",
+            "value": "timeGranularity",
+            "description": "The parameter type for timeGranularity."
+          },
+          {
+            "name": "timeRange",
+            "value": "timeRange",
+            "description": "The parameter type for timeRange."
+          }
+        ]
       }
     },
     "DashboardParameterValues": {
@@ -915,6 +1130,11 @@
             "$ref": "#/definitions/DashboardParameter"
           },
           "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       }
     },
@@ -992,6 +1212,7 @@
     },
     "Kind": {
       "type": "string",
+      "description": "The types of Dashboard Query tile kinds.",
       "enum": [
         "arg",
         "app-insights",
@@ -999,7 +1220,24 @@
       ],
       "x-ms-enum": {
         "name": "Kind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "arg",
+            "value": "arg",
+            "description": "The kind type for arg."
+          },
+          {
+            "name": "app-insights",
+            "value": "app-insights",
+            "description": "The kind type for app-insights."
+          },
+          {
+            "name": "policy",
+            "value": "policy",
+            "description": "The kind type for policy."
+          }
+        ]
       }
     },
     "MarkdownInlineData": {
@@ -1007,7 +1245,8 @@
       "description": "The data definition of Markdown with inline content",
       "properties": {
         "content": {
-          "type": "string"
+          "type": "string",
+          "description": "Dashboard Markdown Tile content."
         }
       },
       "required": [
@@ -1055,7 +1294,8 @@
       "description": "The data definition of Markdown with uri content",
       "properties": {
         "uri": {
-          "type": "string"
+          "type": "string",
+          "description": "Dashboard Markdown Tile uri."
         }
       },
       "required": [
@@ -1189,12 +1429,6 @@
       "discriminator": "kind",
       "required": [
         "kind"
-      ],
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": {}
-        }
       ]
     },
     "QueryTileMetricsItem": {
@@ -1248,7 +1482,9 @@
         "options": {
           "type": "object",
           "description": "Options for Query Tile visualizations.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1319,27 +1555,35 @@
       },
       "required": [
         "resourceId"
-      ],
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": {}
-        }
       ]
     },
     "Source": {
       "type": "string",
+      "description": "The types of Dashboard Markdown tile sources.",
       "enum": [
         "inline",
         "uri"
       ],
       "x-ms-enum": {
         "name": "Source",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inline",
+            "value": "inline",
+            "description": "The source type for inline."
+          },
+          {
+            "name": "uri",
+            "value": "uri",
+            "description": "The source type for uri."
+          }
+        ]
       }
     },
     "Type": {
       "type": "string",
+      "description": "The types of dashboard tiles.",
       "enum": [
         "ArcSnapshotTile",
         "MarkdownTile",
@@ -1350,12 +1594,44 @@
       ],
       "x-ms-enum": {
         "name": "Type",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ArcSnapshotTile",
+            "value": "ArcSnapshotTile",
+            "description": "The tile type for Arc Snapshot tile."
+          },
+          {
+            "name": "MarkdownTile",
+            "value": "MarkdownTile",
+            "description": "The tile type for Markdown tile."
+          },
+          {
+            "name": "NavigationTile",
+            "value": "NavigationTile",
+            "description": "The tile type for Navigation tile."
+          },
+          {
+            "name": "PolicyTile",
+            "value": "PolicyTile",
+            "description": "The tile type for Policy tile."
+          },
+          {
+            "name": "QueryTile",
+            "value": "QueryTile",
+            "description": "The tile type for Query tile."
+          },
+          {
+            "name": "ResourceTile",
+            "value": "ResourceTile",
+            "description": "The tile type for Resource tile."
+          }
+        ]
       }
     },
     "Versions": {
       "type": "string",
-      "description": "The available API versions.",
+      "description": "Azure Portal Services Dashboards Management API versions.",
       "enum": [
         "2024-01-01-preview"
       ],
@@ -1365,13 +1641,15 @@
         "values": [
           {
             "name": "v2024_01_01_preview",
-            "value": "2024-01-01-preview"
+            "value": "2024-01-01-preview",
+            "description": "Azure Portal Services Dashboards Management API version 2024-01-01-preview."
           }
         ]
       }
     },
     "VisualizationType": {
       "type": "string",
+      "description": "The types of Dashboard Visualizations.",
       "enum": [
         "area",
         "bar",
@@ -1387,7 +1665,64 @@
       ],
       "x-ms-enum": {
         "name": "VisualizationType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "area",
+            "value": "area",
+            "description": "The visualization type for area."
+          },
+          {
+            "name": "bar",
+            "value": "bar",
+            "description": "The visualization type for bar."
+          },
+          {
+            "name": "card",
+            "value": "card",
+            "description": "The visualization type for card."
+          },
+          {
+            "name": "column",
+            "value": "column",
+            "description": "The visualization type for column."
+          },
+          {
+            "name": "donut",
+            "value": "donut",
+            "description": "The visualization type for donut."
+          },
+          {
+            "name": "line",
+            "value": "line",
+            "description": "The visualization type for line."
+          },
+          {
+            "name": "multistat",
+            "value": "multistat",
+            "description": "The visualization type for multistat."
+          },
+          {
+            "name": "pie",
+            "value": "pie",
+            "description": "The visualization type for pie."
+          },
+          {
+            "name": "scatter",
+            "value": "scatter",
+            "description": "The visualization type for scatter."
+          },
+          {
+            "name": "table",
+            "value": "table",
+            "description": "The visualization type for table."
+          },
+          {
+            "name": "timechart",
+            "value": "timechart",
+            "description": "The visualization type for timechart."
+          }
+        ]
       }
     }
   },
