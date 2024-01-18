@@ -73,13 +73,13 @@ title:
   Azure Communication Services
 ```
 
-### Tag: package-sms-2024-02-05
+### Tag: package-sms-2024-02-05-preview
 
-These settings apply only when `--tag=package-sms-2024-02-05` is specified on the command line.
+These settings apply only when `--tag=package-sms-2024-02-05-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-sms-2024-02-05'
+```yaml $(tag) == 'package-sms-2024-02-05-preview'
 input-file:
-  - stable/2024-02-05/communicationservicessms.json
+  - preview/2024-02-05-preview/communicationservicessms.json
 title:
   Azure Communication Services
 ```
