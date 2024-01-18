@@ -58,7 +58,6 @@ model SolutionTypeSettings {
 
 //------------------- Test Permissions -------------------
 
-@added(Versions.v2023_12_01)
 @doc("Public connector permissions.")
 model TestPermissionResponse {
   @doc("The name of public cloud connector")
@@ -68,7 +67,6 @@ model TestPermissionResponse {
   solutionTypes: Array<SolutionTypePermissions>;
 }
 
-@added(Versions.v2023_12_01)
 @doc("Solution type permissions.")
 model SolutionTypePermissions {
   @doc("The name of solution Type")
@@ -81,7 +79,6 @@ model SolutionTypePermissions {
   statusDetails: string;
 }
 
-@added(Versions.v2023_12_01)
 @doc("Solution types.")
 enum SolutionTypeEnum {
   @doc("Asset Management solution type")
@@ -94,7 +91,6 @@ enum SolutionTypeEnum {
   `Microsoft.HybridNetwork.VWan.Provision`,
 }
 
-@added(Versions.v2023_12_01)
 @doc("Connection status.")
 enum Status {
   @doc("Connected status")
@@ -321,7 +317,6 @@ interface GenerateAwsTemplate {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
-@added(Versions.v2023_12_01)
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnectorId}")
 interface TestPermissions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
