@@ -588,9 +588,6 @@
         ],
         "operationId": "Alerts_Get",
         "summary": "Gets properties of a alert.",
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "description": "Gets properties of an alert for the specified subscription, resource group, SAP monitor name, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor Alert": {
@@ -1763,6 +1760,7 @@
         },
         "severity": {
           "type": "integer",
+          "format": "int32",
           "enum": [
             0,
             1,
@@ -1785,6 +1783,7 @@
         },
         "threshold": {
           "type": "integer",
+          "format": "int32",
           "description": "the criteria threshold value that activates the alert"
         },
         "thresholdOperator": {
@@ -1805,14 +1804,17 @@
         },
         "windowSize": {
           "type": "integer",
+          "format": "int32",
           "description": "The period of time on which the Alert query will be executed"
         },
         "evaluationFrequency": {
           "type": "integer",
+          "format": "int32",
           "description": "How often the scheduled query rule is evaluated."
         },
         "failingPeriodsToAlert": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of violations to trigger an alert."
         },
         "failingPeriodsOperator": {
@@ -1833,6 +1835,7 @@
         },
         "muteActionsDuration": {
           "type": "integer",
+          "format": "int32",
           "description": "Mute actions for the chosen period of time after the alert is fired"
         },
         "dimension": {
@@ -1923,6 +1926,7 @@
       "properties": {
         "severity": {
           "type": "integer",
+          "format": "int32",
           "enum": [
             0,
             1,
@@ -1958,14 +1962,17 @@
         },
         "defaultThreshold": {
           "type": "integer",
+          "format": "int32",
           "description": "Default Threshold Value Associated with the Alert Template"
         },
         "minThresholdValue": {
           "type": "integer",
+          "format": "int32",
           "description": "Minimum possible Default Threshold Value Associated with the Alert Template"
         },
         "maxThresholdValue": {
           "type": "integer",
+          "format": "int32",
           "description": "Maximum possible Default Threshold Value Associated with the Alert Template"
         },
         "isThresholdInputRequired": {
@@ -2015,6 +2022,7 @@
         },
         "threshold": {
           "type": "integer",
+          "format": "int32",
           "description": "The Threshold Value Associated with the Alert Template for Metric Measurement"
         },
         "metricTriggerType": {
@@ -2036,10 +2044,12 @@
         },
         "frequencyInMinutes": {
           "type": "integer",
+          "format": "int32",
           "description": "Frequency (mins) value Associated with the Alert Template for Metric Measurement"
         },
         "timeWindowInMinutes": {
           "type": "integer",
+          "format": "int32",
           "description": "Time Window (mins) Value Associated with the Alert Template for Metric Measurement"
         }
       },
@@ -2057,6 +2067,7 @@
         },
         "alertThreshold": {
           "type": "integer",
+          "format": "int32",
           "description": "The Alert Threshold Value Associated with the Alert Template for Query Input Parameters"
         },
         "haClusters": {
