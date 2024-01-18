@@ -76,6 +76,8 @@ suppressions:
     reason: This API is a Management Group level API.
   - code: TopLevelResourcesListBySubscription
     reason: This API is a Management Group level API.
+  - code:  AllProxyResourcesShouldHaveDelete
+    reason: Quota cannot be deleted or reduced. It is not supported by any resource provider.
 ```
 
 ---
