@@ -13,6 +13,7 @@ using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "This is defined in other swagger file - hybridconnectivity.json"
 @armProviderNamespace
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 @versioned(Versions)
 @service({
   title: "Hybrid Connectivity Management API",
@@ -37,7 +38,6 @@ enum Versions {
 
 //------------------- Generate Aws Template -------------------
 
-@added(Versions.v2023_12_01)
 @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
 model GenerateAwsTemplateRequest {
   @doc("The name of public cloud connector")
@@ -47,7 +47,6 @@ model GenerateAwsTemplateRequest {
   solutionTypes?: Array<SolutionTypeSettings>;
 }
 
-@added(Versions.v2023_12_01)
 @doc("The properties of Solution Type")
 model SolutionTypeSettings {
   @doc("The type of the solution")
@@ -303,7 +302,6 @@ model SolutionSettings is Record<string>;
 //---------------------------------------------- Operations ----------------------------------------------
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
-@added(Versions.v2023_12_01)
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/")
 interface GenerateAwsTemplate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
