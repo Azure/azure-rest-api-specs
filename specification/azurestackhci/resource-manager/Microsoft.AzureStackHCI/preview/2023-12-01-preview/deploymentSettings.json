@@ -402,7 +402,12 @@
         },
         "secretsLocation": {
           "type": "string",
-          "description": "The URI to the keyvault / secret store."
+          "format": "uri",
+          "description": "The URI to the keyvault store."
+        },
+        "secrets": {
+          "$ref": "#/definitions/EceDeploymentSecrets",
+          "description": "secrets used for cloud deployment."
         },
         "optionalServices": {
           "$ref": "#/definitions/OptionalServices",
@@ -532,6 +537,39 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
+      }
+    },
+    "EceDeploymentSecrets": {
+      "type": "object",
+      "description": "secrets used for SBE partner extensibility.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "secret name stored in keyvault."
+        },
+        "eceSecretName": {
+          "$ref": "#/definitions/EceSecrets",
+          "description": "secret name expected for ECE deployment."
+        },
+        "secretLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "secret URI stored in keyvault."
+        }
+      }
+    },
+    "EceSecrets": {
+      "type": "string",
+      "description": "Secret names expected for ECE deployment.",
+      "enum": [
+        "AzureStackLCMUserCredential",
+        "DefaultARBApplicaton",
+        "LocalAdminCredential",
+        "WitnessStorageKey"
+      ],
+      "x-ms-enum": {
+        "name": "EceSecrets",
+        "modelAsString": true
       }
     },
     "HostNetwork": {
@@ -845,7 +883,7 @@
           "type": "array",
           "description": "SBE credentials list for AzureStackHCI cluster deployment.",
           "items": {
-            "$ref": "#/definitions/CredentialList"
+            "$ref": "#/definitions/SbeCredentials"
           },
           "x-ms-identifiers": [
             "secretsLocation"
@@ -894,22 +932,22 @@
         }
       }
     },
-    "CredentialList": {
+    "SbeCredentials": {
       "type": "object",
-      "description": "SBE partner properties object, used to populate SBE $PartnerProperties.",
+      "description": "secrets used for SBE partner extensibility.",
       "properties": {
-        "secretsLocation": {
+        "secretName": {
+          "type": "string",
+          "description": "secret name."
+        },
+        "eceSecretName": {
+          "type": "string",
+          "description": "secret name expected for ece."
+        },
+        "secretLocation": {
           "type": "string",
           "format": "uri",
-          "description": "keyvault URI."
-        },
-        "secretNames": {
-          "type": "array",
-          "description": "SBE partner list of secret names stored in keyvault, used to populate SBE $CredentialList.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
+          "description": "secret URI stored in keyvault."
         }
       }
     },
