@@ -175,7 +175,7 @@
           "GroupQuotas"
         ],
         "summary": "Gets GroupQuotas for the name passed.",
-        "description": "Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on groupQuota can be access from the groupQuota APIs.",
+        "description": "Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on group quota can be access from the group quota APIs.",
         "operationId": "GroupQuotas_Get",
         "x-ms-examples": {
           "GroupQuotas_Get_Request_ForCompute": {
@@ -256,7 +256,7 @@
           "GroupQuotas"
         ],
         "summary": "Lists GroupQuotas for the scope passed.",
-        "description": "Lists GroupQuotas for the scope passed. It will return the GroupQuotas QuotaEntity properties only.The details on groupQuota can be access from the groupQuota APIs.",
+        "description": "Lists GroupQuotas for the scope passed. It will return the GroupQuotas QuotaEntity properties only.The details on group quota can be access from the group quota APIs.",
         "operationId": "GroupQuotas_List",
         "x-ms-examples": {
           "GroupQuotas_List_Request_ForCompute": {
@@ -780,7 +780,7 @@
           "GroupQuotaLimits"
         ],
         "summary": "Gets the resource groupQuotaLimits for the MGId for a resource.",
-        "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The $filter is a required parameter to filter out the specific resource based on the ResourceProvider/Location. It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the groupQuota.",
+        "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The $filter is a required parameter to filter out the specific resource based on the ResourceProvider/Location. It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the group quota.",
         "operationId": "GroupQuotaLimits_Get",
         "x-ms-examples": {
           "GroupQuotaLimits_Get_Request_ForCompute": {
@@ -829,7 +829,7 @@
           "GroupQuotaLimits"
         ],
         "summary": "Gets the List of resources groupQuotaLimits for the MGId, based on the scope.",
-        "description": "Gets the List of resources groupQuotaLimits for the MGId, based on the filter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The list elements will be same as the Get API - It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the groupQuota.",
+        "description": "Gets the List of resources groupQuotaLimits for the MGId, based on the filter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The list elements will be same as the Get API - It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the group quota.",
         "operationId": "GroupQuotaLimits_List",
         "x-ms-examples": {
           "GroupQuotaLimits_List_Request_ForCompute": {
@@ -898,7 +898,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success, with the details of the groupQuota request.",
+            "description": "Success, with the details of the group quota request.",
             "schema": {
               "$ref": "#/definitions/SubmittedResourceRequestStatusList"
             }
@@ -944,7 +944,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success, with the details of the groupQuota request.",
+            "description": "Success, with the details of the group quota request.",
             "schema": {
               "$ref": "#/definitions/SubmittedResourceRequestStatus"
             }
@@ -1013,7 +1013,7 @@
           "SubscriptionQuotaAllocation"
         ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern to check the status using Async polling as standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations.",
-        "description": "Request to assign a specific resource quota from group quota to a specific Subscription. The subscriptions can also reduce the quota allocated to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota allocated to subscription, which means the maximum unused quota allocated back to MG groupQuota will be the groupQuota allocated to the subscriptions. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously allocated from MG groupQuota to subscription.",
+        "description": "Request to assign a specific resource quota from group quota to a specific Subscription. The subscriptions can also reduce the quota allocated to subscription to give back the group back to MG. The quota assignment back to MG group quota is limited by the GroupQuota allocated to subscription, which means the maximum unused quota allocated back to MG group quota will be the group quota allocated to the subscriptions. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously allocated from MG group quota to subscription.",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_CreateOrUpdate",
         "x-ms-examples": {
           "SubscriptionQuotaAllocation_Put_Request_ForCompute": {
@@ -1091,7 +1091,7 @@
           "SubscriptionQuotaAllocation"
         ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern with 202 response and status polling API.",
-        "description": "Request to assign quota from group quota to a specific Subscription. The subscriptions and reduce the quota allocated to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota allocated to subscription, using this API. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously allocated from MG groupQuota to subscription(s).",
+        "description": "Request to assign quota from group quota to a specific Subscription. The subscriptions and reduce the quota allocated to subscription to give back the group back to MG. The quota assignment back to MG group quota is limited by the GroupQuota allocated to subscription, using this API. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously allocated from MG group quota to subscription(s).",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_Update",
         "x-ms-examples": {
           "SubscriptionQuotaAllocation_Patch_Request_ForCompute": {
@@ -1414,7 +1414,7 @@
             "limit": {
               "type": "integer",
               "format": "int64",
-              "description": "The new quota limit for the subscription. The incremental quota will be allocated from pre-approved groupQuota."
+              "description": "The new quota limit for the subscription. The incremental quota will be allocated from pre-approved group quota."
             },
             "name": {
               "type": "object",
@@ -1672,11 +1672,11 @@
     },
     "SubscriptionGroupQuotaAssignment": {
       "type": "object",
-      "description": "MGId the source of groupQuota.",
+      "description": "MGId the source of group quota.",
       "properties": {
         "groupQuotaId": {
           "type": "string",
-          "description": "The groupQuota id of the quota source."
+          "description": "The group quota id of the quota source."
         },
         "quotaAllocated": {
           "type": "integer",
