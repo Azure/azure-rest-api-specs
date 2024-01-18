@@ -320,7 +320,7 @@ model SkipTarget {
 @added(Versions.v2024_02_02_preview)
 model SkipProperties {
   @doc("The targets to skip.")
-  @extension("x-ms-identifiers", ["type","name"])
+  @extension("x-ms-identifiers", ["type", "name"])
   targets: SkipTarget[];
 }
 
