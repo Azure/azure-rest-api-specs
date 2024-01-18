@@ -14,10 +14,10 @@ using Azure.Core.Traits;
 namespace Microsoft.MachineLearningServices;
 
 
-
-@doc("Index properties")
-@parentResource(Registry)
+@doc("Index asset definition.")
 @parentResource(Workspace)
+// TODO Registries isn't working...
+@parentResource(Registry)
 @resource("indexes")
 model Index {
   @key("name")

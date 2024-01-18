@@ -58,7 +58,7 @@
   },
   "tags": [],
   "paths": {
-    "/registries/{registryName}/indexes": {
+    "/workspaces/{workspaceName}/indexes": {
       "get": {
         "operationId": "Indexes_List",
         "description": "List the latest version of each index.",
@@ -67,12 +67,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "registryName",
-            "in": "path",
-            "description": "Name of the workspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -119,7 +114,7 @@
         }
       }
     },
-    "/registries/{registryName}/indexes/{name}/versions": {
+    "/workspaces/{workspaceName}/indexes/{name}/versions": {
       "get": {
         "operationId": "IndexVersions_ListIndexVersions",
         "description": "List IndexVersion resources.",
@@ -128,12 +123,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "registryName",
-            "in": "path",
-            "description": "Name of the workspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "name": "name",
@@ -202,7 +192,7 @@
         }
       }
     },
-    "/registries/{registryName}/indexes/{name}/versions/{version}": {
+    "/workspaces/{workspaceName}/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "IndexVersions_GetIndexVersion",
         "description": "Fetch a IndexVersion by name.",
@@ -211,12 +201,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "registryName",
-            "in": "path",
-            "description": "Name of the workspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "name": "name",
@@ -291,12 +276,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "registryName",
-            "in": "path",
-            "description": "Name of the workspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "name": "name",
@@ -540,7 +520,7 @@
     },
     "Index": {
       "type": "object",
-      "description": "Index properties",
+      "description": "Index asset definition.",
       "properties": {
         "indexVersion": {
           "type": "string",
