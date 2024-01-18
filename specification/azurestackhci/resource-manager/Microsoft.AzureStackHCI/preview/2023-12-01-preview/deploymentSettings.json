@@ -406,8 +406,14 @@
           "description": "The URI to the keyvault store."
         },
         "secrets": {
-          "$ref": "#/definitions/EceDeploymentSecrets",
-          "description": "secrets used for cloud deployment."
+          "type": "array",
+          "description": "secrets used for cloud deployment.",
+          "items": {
+            "$ref": "#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
         },
         "optionalServices": {
           "$ref": "#/definitions/OptionalServices",
@@ -865,7 +871,7 @@
     },
     "SbePartnerInfo": {
       "type": "object",
-      "description": "The SBE partner deployment info for cluster.",
+      "description": "The Solution builder extension (SBE) partner deployment info for cluster.",
       "properties": {
         "sbeDeploymentInfo": {
           "$ref": "#/definitions/SbeDeploymentInfo",
@@ -886,7 +892,7 @@
             "$ref": "#/definitions/SbeCredentials"
           },
           "x-ms-identifiers": [
-            "secretsLocation"
+            "secretName"
           ]
         }
       }

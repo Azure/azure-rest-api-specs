@@ -329,11 +329,11 @@
   "definitions": {
     "DeviceConfiguration": {
       "type": "object",
-      "description": "The device Configuration of a device.",
+      "description": "The device configuration of a device.",
       "properties": {
         "nicDetails": {
           "type": "array",
-          "description": "NIC Details of device",
+          "description": "NIC details of device",
           "items": {
             "$ref": "#/definitions/NicDetail"
           },
@@ -341,7 +341,7 @@
         },
         "switchDetails": {
           "type": "array",
-          "description": "Switch Details of device.",
+          "description": "List of switch details for device.",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/SwitchDetail"
@@ -350,12 +350,12 @@
         },
         "systemInfo": {
           "$ref": "#/definitions/SystemInfo",
-          "description": "Specifies the System Info obtained from the device.",
+          "description": "Specifies the system info obtained from the device.",
           "readOnly": true
         },
         "sbeDeploymentPackageInfo": {
           "$ref": "#/definitions/SbeDeploymentPackageInfo",
-          "description": "SBE deployment package information.",
+          "description": "Solution builder extension (SBE) deployment package information.",
           "readOnly": true
         },
         "deviceMetadata": {
@@ -582,14 +582,14 @@
       "properties": {
         "bootType": {
           "type": "string",
-          "description": "The boot type of the device.",
+          "description": "The boot type of the device. e.g. UEFI, Legacy etc",
           "readOnly": true
         }
       }
     },
     "SwitchDetail": {
       "type": "object",
-      "description": "Switch Details Obtained from the device",
+      "description": "Switch details obtained from the device",
       "properties": {
         "switchName": {
           "type": "string",
@@ -598,7 +598,7 @@
         },
         "switchType": {
           "type": "string",
-          "description": "The type of the switch.",
+          "description": "The type of the switch. e.g. external, internal",
           "readOnly": true
         }
       }
@@ -616,7 +616,7 @@
         },
         "additionalInfo": {
           "type": "string",
-          "description": "additional Info required for validation"
+          "description": "additional info required for validation"
         }
       },
       "required": [
