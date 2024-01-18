@@ -11,11 +11,11 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+/** Microsoft.NexusIdentity Resource Provider management API. */
 @armProviderNamespace
 @service({
   title: "Microsoft.NexusIdentity management service",
 })
-/** Microsoft.NexusIdentity Resource Provider management API. */
 @versioned(Versions)
 namespace Microsoft.NexusIdentity;
 

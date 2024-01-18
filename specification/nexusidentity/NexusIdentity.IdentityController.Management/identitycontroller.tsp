@@ -14,15 +14,15 @@ namespace Microsoft.NexusIdentity;
 model IdentityController is TrackedResource<IdentityControllerProperties> {
   /** Name of IdentityController */
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("IdentityControllerName")
+  @key("identityControllerName")
   @path
-  @segment("IdentityControllers")
+  @segment("identityControllers")
   name: string;
 }
 
 /** IdentityController properties */
 model IdentityControllerProperties {
-  /** Age of IdentityController */
+  @doc("List of onboarded apps for Nexus Identity")
   onboardedApps: Array<OnboardedApp>;
 
   /** The status of the last operation. */
@@ -30,23 +30,35 @@ model IdentityControllerProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("Onboarded app properties for Nexus Identity")
 model OnboardedApp {
+  @doc("Tenant Id in which roles are to be watched")
   tenantId: string;
+
+  @doc("App Id which will create identity sets")
   appId: string;
+
+  @doc("App Name which will create identity sets")
   appName: string;
+
+  @doc("Roles to be watched for identity sets")
   roles: Array<string>;
 }
 
-@lroStatus
 /** The resource provisioning state. */
+@lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
+
   /** The resource is being provisioned. */
   Provisioning,
+
   /** The resource is being updated. */
   Updating,
+
   /** The resource is being deleted. */
   Deleting,
+
   /** The resource provisioning request has been accepted. */
   Accepted,
 }
@@ -57,7 +69,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface IdentityControllers {
   get is ArmResourceRead<IdentityController>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<IdentityController>;
-  update is ArmResourcePatchSync<IdentityController, IdentityControllerProperties>;
+  update is ArmResourcePatchSync<
+    IdentityController,
+    IdentityControllerProperties
+  >;
   delete is ArmResourceDeleteAsync<IdentityController>;
   listByResourceGroup is ArmResourceListByParent<IdentityController>;
   listBySubscription is ArmListBySubscription<IdentityController>;
