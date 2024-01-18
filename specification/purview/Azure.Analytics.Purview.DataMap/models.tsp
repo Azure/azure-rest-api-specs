@@ -52,6 +52,7 @@ enum AtlasTermAssignmentStatus {
 }
 
 @doc("Type for sorting")
+@projectedName("csharp", "AtlasSortType")
 enum SortType {
   @doc("No sorting order")
   None: "NONE",
@@ -1549,6 +1550,7 @@ model AtlasBaseTypeDef {
 }
 
 @doc("The date format.")
+@projectedName("csharp", "DateFormat")
 model DateFormat {
   @doc("An array of available locales.")
   availableLocales?: string[];
@@ -1579,6 +1581,7 @@ model DateFormat {
 }
 
 @doc("The number format.")
+@projectedName("csharp", "AtlasNumberFormat")
 model NumberFormat {
   @doc("The number format.")
   availableLocales?: string[];
@@ -1624,6 +1627,7 @@ model NumberFormat {
 }
 
 @doc("The timezone information.")
+@projectedName("csharp", "AtlasTimeZone")
 model TimeZone {
   @doc("The value of the daylight saving time.")
   dstSavings?: int32;
