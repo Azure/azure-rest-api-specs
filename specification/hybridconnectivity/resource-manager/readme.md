@@ -27,7 +27,7 @@ These are the global settings for the hybridconnectivity.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-04-01-preview
+tag: package-2024-08-01-preview
 ```
 
 ### Tag: package-2023-03
@@ -73,7 +73,6 @@ These settings apply only when `--tag=package-2023-04-01-preview` is specified o
 ``` yaml $(tag) == 'package-2023-04-01-preview'
 input-file:
   - Microsoft.HybridConnectivity/preview/2023-04-01-preview/hybridconnectivity.json
-  - Microsoft.HybridConnectivity/preview/2023-04-01-preview/publicCloud.json
 ```
 
 ### Tag: package-2023-12-01-preview
