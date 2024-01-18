@@ -780,6 +780,7 @@ model RouterWorker {
   availableForOffers?: boolean;
   
   @doc("If this is set, the worker will only receive up to this many new offers at a time.")
+  @added(Versions.c2024_01_18_Preview)
   maxConcurrentOffers?: int32;
 }
 
@@ -1360,4 +1361,8 @@ enum Versions {
   @doc("JobRouter 2023-11-01 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2023_11_01: "2023-11-01",
+
+  @doc("JobRouter 2024-01-18-preview api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_01_18_Preview: "2024-01-18-preview"
 }
