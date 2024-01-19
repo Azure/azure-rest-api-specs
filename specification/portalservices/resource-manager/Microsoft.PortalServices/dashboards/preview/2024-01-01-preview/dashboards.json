@@ -822,36 +822,6 @@
       ],
       "x-ms-discriminator-value": "arg"
     },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      }
-    },
     "BladeReferenceWithContextPane": {
       "type": "object",
       "description": "open a blade in context pane",
@@ -1132,10 +1102,40 @@
           "x-ms-identifiers": []
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/DashboardProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         }
+      }
+    },
+    "DashboardProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the last accepted operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "DashboardProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
       }
     },
     "DashboardTile": {

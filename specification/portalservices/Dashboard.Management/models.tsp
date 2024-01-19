@@ -186,7 +186,12 @@ model DashboardProperties {
 
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: DashboardProvisioningState;
+}
+
+@doc("The provisioning state of the last accepted operation.")
+enum DashboardProvisioningState {
+  ...ResourceProvisioningState,
 }
 
 @doc("A dashboard page.")
