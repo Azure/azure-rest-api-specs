@@ -598,7 +598,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsFormat"
+              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPoints"
             },
             "description": "Parameters supplied to the create or update application group operation."
           },
@@ -659,7 +659,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsFormat"
+              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPoints"
             },
             "description": "Parameters supplied to the create or update application group operation."
           },
@@ -726,7 +726,7 @@
           "200": {
             "description": "Request is successful. The operations returns the credential for publishing artifacts.",
             "schema": {
-              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsListFormat"
+              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsList"
             }
           },
           "202": {
@@ -1437,20 +1437,8 @@
           }
         },
         "backingResourcePublicNetworkAccess": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The artifact store backing resource network access type.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "backingResourcePublicNetworkAccess",
-            "modelAsString": true
-          }
+          "$ref": "./common.json#/definitions/backingResourcePublicNetworkAccess",
+          "description": "The artifact store backing resource network access type"
         },
         "replicationStrategy": {
           "type": "string",
@@ -1513,7 +1501,7 @@
       },
       "description": "A list of artifact stores."
     },
-    "ArtifactStoreNetworkFabricControllerEndPointsFormat": {
+    "ArtifactStoreNetworkFabricControllerEndPoints": {
       "type": "object",
       "properties": {
         "networkFabricControllerIds": {
@@ -1529,20 +1517,21 @@
       },
       "description": "List of network fabric controller ids."
     },
-    "ArtifactStoreNetworkFabricControllerEndPointsListFormat": {
+    "ArtifactStoreNetworkFabricControllerEndPointsList": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsFormat"
+            "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPoints"
           },
           "description": "A list of network fabric controllers."
         },
         "nextLink": {
           "readOnly": true,
           "type": "string",
-          "description": "The URI to get the next set of results."
+          "description": "The URI to get the next set of results.",
+          "format": "uri"
         }
       },
       "description": "List of manual private endpoints."
