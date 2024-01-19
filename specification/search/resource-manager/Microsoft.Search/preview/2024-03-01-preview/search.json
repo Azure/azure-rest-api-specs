@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SearchManagementClient",
-    "description": "Client that can be used to manage Azure Cognitive Search services and API keys.",
+    "description": "Client that can be used to manage Azure AI Search services and API keys.",
     "version": "2024-03-01-preview"
   },
   "host": "management.azure.com",
@@ -81,7 +81,7 @@
             "$ref": "./examples/SearchGetAdminKeys.json"
           }
         },
-        "description": "Gets the primary and secondary admin API keys for the specified Azure Cognitive Search service.",
+        "description": "Gets the primary and secondary admin API keys for the specified Azure AI Search service.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -104,7 +104,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The admin keys were successfully retrieved and are in the response. You can use either the primary or secondary key as the value of the 'api-key' parameter in the Azure Cognitive Search Service REST API or SDK to perform any operations on your search service, including privileged operations. Privileged operations include managing resources like indexes and data sources as well as uploading, modifying, or deleting data in your indexes.",
+            "description": "The admin keys were successfully retrieved and are in the response. You can use either the primary or secondary key as the value of the 'api-key' parameter in the Azure AI Search Service REST API or SDK to perform any operations on your search service, including privileged operations. Privileged operations include managing resources like indexes and data sources as well as uploading, modifying, or deleting data in your indexes.",
             "schema": {
               "$ref": "#/definitions/AdminKeyResult"
             }
@@ -234,7 +234,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The query key was successfully created and is in the response. You can use the query key as the value of the 'api-key' parameter in the Azure Cognitive Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
+            "description": "The query key was successfully created and is in the response. You can use the query key as the value of the 'api-key' parameter in the Azure AI Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/QueryKey"
             }
@@ -262,7 +262,7 @@
             "$ref": "./examples/SearchListQueryKeysBySearchService.json"
           }
         },
-        "description": "Returns the list of query API keys for the given Azure Cognitive Search service.",
+        "description": "Returns the list of query API keys for the given Azure AI Search service.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -285,7 +285,7 @@
         ],
         "responses": {
           "200": {
-            "description": "All query keys for the given search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure Cognitive Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
+            "description": "All query keys for the given search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure AI Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/ListQueryKeysResult"
             }
@@ -408,7 +408,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure Cognitive Search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
+            "description": "The name of the Azure AI Search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
           },
           {
             "name": "service",
@@ -501,7 +501,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure Cognitive Search service to update."
+            "description": "The name of the Azure AI Search service to update."
           },
           {
             "name": "service",
@@ -1353,7 +1353,7 @@
           "description": "The secondary admin API key of the search service."
         }
       },
-      "description": "Response containing the primary and secondary admin API keys for a given Azure Cognitive Search service."
+      "description": "Response containing the primary and secondary admin API keys for a given Azure AI Search service."
     },
     "QueryKey": {
       "properties": {
@@ -1368,7 +1368,7 @@
           "description": "The value of the query API key."
         }
       },
-      "description": "Describes an API key for a given Azure Cognitive Search service that has permissions for query operations only."
+      "description": "Describes an API key for a given Azure AI Search service that has permissions for query operations only."
     },
     "ListQueryKeysResult": {
       "properties": {
@@ -1378,7 +1378,7 @@
           "items": {
             "$ref": "#/definitions/QueryKey"
           },
-          "description": "The query keys for the Azure Cognitive Search service."
+          "description": "The query keys for the Azure AI Search service."
         },
         "nextLink": {
           "readOnly": true,
@@ -1386,7 +1386,7 @@
           "description": "Request URL that can be used to query next page of query keys. Returned when the total number of requested query keys exceed maximum page size."
         }
       },
-      "description": "Response containing the query API keys for a given Azure Cognitive Search service.",
+      "description": "Response containing the query API keys for a given Azure AI Search service.",
       "x-ms-external": true
     },
     "Sku": {
@@ -1410,17 +1410,17 @@
               {
                 "value": "free",
                 "name": "Free",
-                "description": "Free tier, with no SLA guarantees and a subset of features offered to paid tiers."
+                "description": "Free tier, with no SLA guarantees and a subset of the features offered on billable tiers."
               },
               {
                 "value": "basic",
                 "name": "Basic",
-                "description": "Paid tier dedicated service with up to 3 replicas."
+                "description": "Billable tier for a dedicated service having up to 3 replicas."
               },
               {
                 "value": "standard",
                 "name": "Standard",
-                "description": "Paid tier dedicated service with up to 12 partitions and 12 replicas."
+                "description": "Billable tier for a dedicated service having up to 12 partitions and 12 replicas."
               },
               {
                 "value": "standard2",
@@ -1435,41 +1435,43 @@
               {
                 "value": "storage_optimized_l1",
                 "name": "StorageOptimizedL1",
-                "description": "Paid tier dedicated service that supports 1TB per partition, up to 12 partitions."
+                "description": "Billable tier for a dedicated service that supports 1TB per partition, up to 12 partitions."
               },
               {
                 "value": "storage_optimized_l2",
                 "name": "StorageOptimizedL2",
-                "description": "Paid tier dedicated service that supports 2TB per partition, up to 12 partitions."
+                "description": "Billable tier for a dedicated service that supports 2TB per partition, up to 12 partitions."
               }
             ]
           }
         }
       },
-      "description": "Defines the SKU of an Azure Cognitive Search Service, which determines price tier and capacity limits.",
+      "description": "Defines the SKU of a search service, which determines billing rate and capacity limits.",
       "externalDocs": {
         "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
       }
     },
     "DataPlaneAuthOptions": {
+      "type": "object",
       "properties": {
         "apiKeyOnly": {
           "type": "object",
           "properties": {},
-          "description": "Indicates that only the API key needs to be used for authentication."
+          "description": "Indicates that only the API key can be used for authentication."
         },
         "aadOrApiKey": {
           "$ref": "#/definitions/DataPlaneAadOrApiKeyAuthOption",
-          "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication."
+          "description": "Indicates that either the API key or an access token from a Microsoft Entra ID tenant can be used for authentication."
         }
       },
-      "description": "Defines the options for how the data plane API of a Search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true."
+      "description": "Defines the options for how the search service authenticates a data plane request. This cannot be set if 'disableLocalAuth' is set to true."
     },
     "DataPlaneAadOrApiKeyAuthOption": {
+      "type": "object",
       "properties": {
         "aadAuthFailureMode": {
           "type": "string",
-          "description": "Describes what response the data plane API of a Search service would send for requests that failed authentication.",
+          "description": "Describes what response the data plane API of a search service would send for requests that failed authentication.",
           "enum": [
             "http403",
             "http401WithBearerChallenge"
@@ -1492,7 +1494,7 @@
           }
         }
       },
-      "description": "Indicates that either the API key or an access token from Azure Active Directory can be used for authentication."
+      "description": "Indicates that either the API key or an access token from a Microsoft Entra ID tenant can be used for authentication."
     },
     "DisabledDataExfiltrationOption": {
       "type": "string",
@@ -1577,7 +1579,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service."
+          "description": "Describes the properties of an existing Private Endpoint connection to the Azure AI Search service."
         }
       },
       "allOf": [
@@ -1585,7 +1587,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "Describes an existing Private Endpoint connection to the Azure Cognitive Search service."
+      "description": "Describes an existing Private Endpoint connection to the Azure AI Search service."
     },
     "NetworkRuleSet": {
       "properties": {
@@ -1621,7 +1623,7 @@
           "description": "Possible origins of inbound traffic that can bypass the rules defined in the 'ipRules' section."
         }
       },
-      "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
+      "description": "Network specific rules that determine how the Azure AI Search service may be reached."
     },
     "IpRule": {
       "properties": {
@@ -1630,7 +1632,7 @@
           "description": "Value corresponding to a single IPv4 address (eg., 123.1.2.3) or an IP range in CIDR format (eg., 123.1.2.3/24) to be allowed."
         }
       },
-      "description": "The IP restriction rule of the Azure Cognitive Search service."
+      "description": "The IP restriction rule of the Azure AI Search service."
     },
     "PrivateEndpointConnectionProperties": {
       "properties": {
@@ -1648,7 +1650,7 @@
           "properties": {
             "status": {
               "type": "string",
-              "description": "Status of the the private link service connection. Can be Pending, Approved, Rejected, or Disconnected.",
+              "description": "Status of the the private link service connection. Valid values are Pending, Approved, Rejected, or Disconnected.",
               "enum": [
                 "Pending",
                 "Approved",
@@ -1693,9 +1695,61 @@
             }
           },
           "description": "Describes the current state of an existing Private Link Service connection to the Azure Private Endpoint."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The group id from the provider of resource the private link service connection is for."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the private link service connection. Valid values are Updating, Deleting, Failed, Succeeded, or Incomplete",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Succeeded",
+            "Incomplete",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Updating",
+                "name": "Updating",
+                "description": "The private link service connection is in the process of being created along with other resources for it to be fully functional."
+              },
+              {
+                "value": "Deleting",
+                "name": "Deleting",
+                "description": "The private link service connection is in the process of being deleted."
+              },
+              {
+                "value": "Failed",
+                "name": "Failed",
+                "description": "The private link service connection has failed to be provisioned or deleted."
+              },
+              {
+                "value": "Succeeded",
+                "name": "Succeeded",
+                "description": "The private link service connection has finished provisioning and is ready for approval."
+              },
+              {
+                "value": "Incomplete",
+                "name": "Incomplete",
+                "description": "Provisioning request for the private link service connection resource has been accepted but the process of creation has not commenced yet."
+              },
+              {
+                "value": "Canceled",
+                "name": "Canceled",
+                "description": "Provisioning request for the private link service connection resource has been canceled"
+              }
+            ]
+          }
         }
       },
-      "description": "Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service."
+      "description": "Describes the properties of an existing Private Endpoint connection to the search service."
     },
     "PrivateEndpointConnectionListResult": {
       "properties": {
@@ -1744,13 +1798,13 @@
           }
         ]
       },
-      "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure Cognitive Search SKUs in certain locations."
+      "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations."
     },
     "SharedPrivateLinkResource": {
       "properties": {
         "properties": {
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
-          "description": "Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service."
+          "description": "Describes the properties of a Shared Private Link Resource managed by the Azure AI Search service."
         }
       },
       "allOf": [
@@ -1758,7 +1812,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "Describes a Shared Private Link Resource managed by the Azure Cognitive Search service."
+      "description": "Describes a Shared Private Link Resource managed by the Azure AI Search service."
     },
     "SharedPrivateLinkResourceProperties": {
       "properties": {
@@ -1784,7 +1838,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Status of the shared private link resource. Can be Pending, Approved, Rejected, Disconnected or other yet to be documented value.",
+          "description": "Status of the shared private link resource. Valid values are Pending, Approved, Rejected or Disconnected.",
           "enum": [
             "Pending",
             "Approved",
@@ -1820,7 +1874,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state of the shared private link resource. Can be Updating, Deleting, Failed, Succeeded, Incomplete or other yet to be documented value.",
+          "description": "The provisioning state of the shared private link resource. Valid values are Updating, Deleting, Failed, Succeeded or Incomplete.",
           "enum": [
             "Updating",
             "Deleting",
@@ -1861,7 +1915,7 @@
           }
         }
       },
-      "description": "Describes the properties of an existing Shared Private Link Resource managed by the Azure Cognitive Search service."
+      "description": "Describes the properties of an existing Shared Private Link Resource managed by the Azure AI Search service."
     },
     "SharedPrivateLinkResourceListResult": {
       "properties": {
@@ -1900,7 +1954,7 @@
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "readOnly": true,
-          "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service."
+          "description": "Describes the properties of a supported private link resource for the Azure AI Search service."
         }
       },
       "allOf": [
@@ -1908,7 +1962,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "Describes a supported private link resource for the Azure Cognitive Search service."
+      "description": "Describes a supported private link resource for the Azure AI Search service."
     },
     "PrivateLinkResourceProperties": {
       "properties": {
@@ -1939,45 +1993,45 @@
           "items": {
             "$ref": "#/definitions/ShareablePrivateLinkResourceType"
           },
-          "description": "The list of resources that are onboarded to private link service, that are supported by Azure Cognitive Search."
+          "description": "The list of resources that are onboarded to private link service, that are supported by Azure AI Search."
         }
       },
-      "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service. For a given API version, this represents the 'supported' groupIds when creating a shared private link resource."
+      "description": "Describes the properties of a supported private link resource for the Azure AI Search service. For a given API version, this represents the 'supported' groupIds when creating a shared private link resource."
     },
     "ShareablePrivateLinkResourceType": {
       "properties": {
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
+          "description": "The name of the resource type that has been onboarded to private link service, supported by Azure AI Search."
         },
         "properties": {
           "$ref": "#/definitions/ShareablePrivateLinkResourceProperties",
           "readOnly": true,
-          "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
+          "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure AI Search."
         }
       },
-      "description": "Describes an resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
+      "description": "Describes an resource type that has been onboarded to private link service, supported by Azure AI Search."
     },
     "ShareablePrivateLinkResourceProperties": {
       "properties": {
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource provider type for the resource that has been onboarded to private link service, supported by Azure Cognitive Search."
+          "description": "The resource provider type for the resource that has been onboarded to private link service, supported by Azure AI Search."
         },
         "groupId": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource provider group id for the resource that has been onboarded to private link service, supported by Azure Cognitive Search."
+          "description": "The resource provider group id for the resource that has been onboarded to private link service, supported by Azure AI Search."
         },
         "description": {
           "readOnly": true,
           "type": "string",
-          "description": "The description of the resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
+          "description": "The description of the resource type that has been onboarded to private link service, supported by Azure AI Search."
         }
       },
-      "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
+      "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure AI Search."
     },
     "SearchService": {
       "properties": {
@@ -2003,7 +2057,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "Describes an Azure Cognitive Search service and its current state."
+      "description": "Describes an Azure AI Search service and its current state."
     },
     "SearchServiceUpdate": {
       "properties": {
@@ -2047,7 +2101,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "The parameters used to update an Azure Cognitive Search service."
+      "description": "The parameters used to update an Azure AI Search service."
     },
     "SearchServiceProperties": {
       "properties": {
@@ -2120,7 +2174,7 @@
         "status": {
           "readOnly": true,
           "type": "string",
-          "description": "The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. 'stopped': The search service is in a subscription that's disabled. If your service is in the degraded, disabled, or error states, it means the Azure Cognitive Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
+          "description": "The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. 'stopped': The search service is in a subscription that's disabled. If your service is in the degraded, disabled, or error states, it means the Azure AI Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
           "enum": [
             "running",
             "provisioning",
@@ -2163,7 +2217,7 @@
                 "value": "error",
                 "name": "Error",
                 "description": "The search service is in error state, indicating either a failure to provision or to be deleted."
-              },
+},
               {
                 "value": "stopped",
                 "name": "Stopped",
@@ -2210,7 +2264,7 @@
         },
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
-          "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
+          "description": "Network specific rules that determine how the Azure AI Search service may be reached."
         },
         "disabledDataExfiltrationOptions": {
           "type": "array",
@@ -2235,7 +2289,7 @@
         "semanticSearch": {
           "$ref": "#/definitions/SemanticSearch",
           "x-nullable": true,
-          "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure Cognitive Search SKUs in certain locations."
+          "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations."
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -2243,7 +2297,7 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
-          "description": "The list of private endpoint connections to the Azure Cognitive Search service."
+          "description": "The list of private endpoint connections to the Azure AI Search service."
         },
         "sharedPrivateLinkResources": {
           "readOnly": true,
@@ -2251,7 +2305,7 @@
           "items": {
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
-          "description": "The list of shared private link resources managed by the Azure Cognitive Search service."
+          "description": "The list of shared private link resources managed by the Azure AI Search service."
         },
         "eTag": {
           "readOnly": true,
@@ -2277,7 +2331,7 @@
           "description": "Request URL that can be used to query next page of search services. Returned when the total number of requested search services exceed maximum page size."
         }
       },
-      "description": "Response containing a list of Azure Cognitive Search services.",
+      "description": "Response containing a list of Azure AI Search services.",
       "x-ms-external": true
     },
     "AsyncOperationResult": {
@@ -2533,7 +2587,7 @@
             "$ref": "#/definitions/Operation"
           },
           "readOnly": true,
-          "description": "The list of operations by Azure Cognitive Search, some supported by the resource provider and others by data plane APIs."
+          "description": "The list of operations by Azure AI Search, some supported by the resource provider and others by data plane APIs."
         },
         "nextLink": {
           "type": "string",
@@ -2638,7 +2692,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+      "description": "The name of the Azure AI Search service associated with the specified resource group.",
       "x-ms-parameter-location": "method"
     },
     "PrivateEndpointConnectionNameParameter": {
@@ -2646,7 +2700,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.",
+      "description": "The name of the private endpoint connection to the Azure AI Search service with the specified resource group.",
       "x-ms-parameter-location": "method"
     },
     "SharedPrivateLinkResourceNameParameter": {
@@ -2654,7 +2708,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.",
+      "description": "The name of the shared private link resource managed by the Azure AI Search service within the specified resource group.",
       "x-ms-parameter-location": "method"
     },
     "OperationNameParameter": {
@@ -2692,6 +2746,22 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for each request."
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique location name for a Microsoft Azure geographic region.",
+      "x-ms-parameter-location": "method"
+    },
+    "SkuNameParameter": {
+      "name": "skuName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique SKU name that identifies a billable tier.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
