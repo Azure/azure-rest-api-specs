@@ -70,7 +70,7 @@ interface IdentityControllers {
     IdentityController,
     IdentityControllerProperties
   >;
-  delete is ArmResourceDeleteAsync<IdentityController>;
+  delete is ArmResourceDeleteWithoutOkAsync<IdentityController>;
   listByResourceGroup is ArmResourceListByParent<IdentityController>;
   listBySubscription is ArmListBySubscription<IdentityController>;
 }
