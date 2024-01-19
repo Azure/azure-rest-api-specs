@@ -339,7 +339,7 @@ model BladeReferenceWithContextPane {
   extension?: string;
 
   @doc("The parameters to pass to the blade.")
-  parameters?: Record<string>;
+  parameters?: {};
 
   @doc("Whether the blade should be opened in the context pane.")
   inContextPane?: boolean;
