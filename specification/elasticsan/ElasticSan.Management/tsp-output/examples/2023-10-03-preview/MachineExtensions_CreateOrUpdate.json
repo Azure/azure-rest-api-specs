@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2023-10-03-preview",
+    "extensionName": "CustomScriptExtension",
+    "extensionParameters": {
+      "location": "eastus2euap",
+      "properties": {
+        "type": "CustomScriptExtension",
+        "publisher": "Microsoft.Compute",
+        "settings": {
+          "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\""
+        },
+        "typeHandlerVersion": "1.10"
+      }
+    },
+    "machineName": "myMachine",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "CustomScriptExtension",
+        "type": "Microsoft.HybridCompute/machines/extensions",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/CustomScriptExtension",
+        "location": "eastus2euap",
+        "properties": {
+          "type": "string",
+          "autoUpgradeMinorVersion": false,
+          "instanceView": {
+            "name": "CustomScriptExtension",
+            "type": "CustomScriptExtension",
+            "status": {
+              "code": "success",
+              "level": "Information",
+              "message": "Finished executing command, StdOut: , StdErr:",
+              "time": "2020-08-08T20:42:10.999Z"
+            },
+            "typeHandlerVersion": "1.10.3"
+          },
+          "protectedSettings": {},
+          "provisioningState": "Succeeded",
+          "publisher": "Microsoft.Compute",
+          "settings": {
+            "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\""
+          },
+          "typeHandlerVersion": "1.10.3"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "MachineExtensions_CreateOrUpdate",
+  "title": "Create or Update a Machine Extension"
+}

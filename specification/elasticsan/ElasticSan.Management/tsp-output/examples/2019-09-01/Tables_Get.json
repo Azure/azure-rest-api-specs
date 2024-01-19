@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "api-version": "2022-10-01",
+    "resourceGroupName": "oiautorest6685",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "tableName": "table1_SRCH",
+    "workspaceName": "oiautorest6685"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "table1_SRCH",
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/oiautorest6685/providers/Microsoft.OperationalInsights/workspaces/oiautorest6685/tables/table1_SRCH",
+        "properties": {
+          "schema": {
+            "name": "table1_SRCH",
+            "description": null,
+            "categories": null,
+            "columns": [],
+            "displayName": null,
+            "labels": null,
+            "solutions": [
+              "LogManagement"
+            ],
+            "source": null,
+            "standardColumns": [
+              {
+                "name": "TenantId",
+                "type": "guid",
+                "description": null,
+                "dataTypeHint": null,
+                "displayName": null,
+                "isDefaultDisplay": false,
+                "isHidden": false
+              },
+              {
+                "name": "SourceSystem",
+                "type": "string",
+                "description": null,
+                "dataTypeHint": null,
+                "displayName": null,
+                "isDefaultDisplay": false,
+                "isHidden": false
+              },
+              {
+                "name": "MG",
+                "type": "guid",
+                "description": null,
+                "dataTypeHint": null,
+                "displayName": null,
+                "isDefaultDisplay": false,
+                "isHidden": false
+              },
+              {
+                "name": "ManagementGroupName",
+                "type": "string",
+                "description": null,
+                "dataTypeHint": null,
+                "displayName": null,
+                "isDefaultDisplay": false,
+                "isHidden": false
+              },
+              {
+                "name": "TimeGenerated",
+                "type": "dateTime",
+                "description": null,
+                "dataTypeHint": null,
+                "displayName": null,
+                "isDefaultDisplay": false,
+                "isHidden": false
+              },
+              {
+                "name": "Computer",
+                "type": "string",
+                "description": null,
+                "dataTypeHint": null,
+                "displayName": null,
+                "isDefaultDisplay": false,
+                "isHidden": false
+              },
+              {
+                "name": "RawData",
+                "type": "string",
+                "description": null,
+                "dataTypeHint": null,
+                "displayName": null,
+                "isDefaultDisplay": false,
+                "isHidden": false
+              }
+            ],
+            "tableSubType": "DataCollectionRuleBased",
+            "tableType": "SearchResults"
+          },
+          "archiveRetentionInDays": 0,
+          "plan": "Analytics",
+          "provisioningState": "InProgress",
+          "resultStatistics": {
+            "ingestedRecords": 5,
+            "progress": 75,
+            "scannedGb": 23.5
+          },
+          "retentionInDays": 50,
+          "retentionInDaysAsDefault": false,
+          "searchResults": {
+            "description": "This table was created using a Search Job with the following query: 'Heartbeat | where SourceSystem != '' | project SourceSystem'.",
+            "endSearchTime": "2020-02-02T04:05:06Z",
+            "limit": 1000,
+            "query": "Heartbeat | where SourceSystem != '' | project SourceSystem",
+            "sourceTable": "Heartbeat",
+            "startSearchTime": "2020-02-03T04:05:06Z"
+          },
+          "totalRetentionInDays": 50,
+          "totalRetentionInDaysAsDefault": true
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T04:05:06Z",
+          "createdBy": "00000000-0000-0000-0000-00000000000"
+        }
+      }
+    }
+  },
+  "operationId": "Tables_Get",
+  "title": "TablesGet"
+}

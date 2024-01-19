@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01",
+    "resourceGroupName": "rgname",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://host/subscriptions/subid/resourceGroups/rgname/providers/Microsoft.HealthcareApis/services?api-version=2018-08-20-preview&%24skipToken=e30%3d",
+        "value": [
+          {
+            "name": "service1",
+            "type": "Microsoft.HealthcareApis/services",
+            "etag": "etagvalue",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/dddb8dcb-effb-4290-bb47-ce1e8440c729",
+            "kind": "fhir-R4",
+            "location": "westus",
+            "properties": {
+              "accessPolicies": [
+                {
+                  "objectId": "c487e7d1-3210-41a3-8ccc-e9372b78da47"
+                },
+                {
+                  "objectId": "5b307da8-43d4-492b-8b66-b0294ade872f"
+                }
+              ],
+              "authenticationConfiguration": {
+                "audience": "https://azurehealthcareapis.com",
+                "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+                "smartProxyEnabled": true
+              },
+              "corsConfiguration": {
+                "allowCredentials": false,
+                "headers": [
+                  "*"
+                ],
+                "maxAge": 1440,
+                "methods": [
+                  "DELETE",
+                  "GET",
+                  "OPTIONS",
+                  "PATCH",
+                  "POST",
+                  "PUT"
+                ],
+                "origins": [
+                  "*"
+                ]
+              },
+              "cosmosDbConfiguration": {
+                "keyVaultKeyUri": "https://my-vault.vault.azure.net/keys/my-key",
+                "offerThroughput": 1000
+              },
+              "privateEndpointConnections": [],
+              "provisioningState": "Creating",
+              "publicNetworkAccess": "Disabled"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Services_ListByResourceGroup",
+  "title": "List all services in resource group"
+}

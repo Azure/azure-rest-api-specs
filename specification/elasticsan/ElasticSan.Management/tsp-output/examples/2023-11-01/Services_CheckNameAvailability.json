@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01",
+    "checkNameAvailabilityInputs": {
+      "name": "serviceName",
+      "type": "Microsoft.HealthcareApis/services"
+    },
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "message": "Service name is not available.",
+        "nameAvailable": false,
+        "reason": "AlreadyExists"
+      }
+    }
+  },
+  "operationId": "Services_CheckNameAvailability",
+  "title": "Check name availability"
+}

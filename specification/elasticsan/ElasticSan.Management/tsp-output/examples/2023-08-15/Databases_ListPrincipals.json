@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2023-08-15",
+    "clusterName": "kustoCluster",
+    "databaseName": "KustoDatabase8",
+    "resourceGroupName": "kustorptest",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Some User",
+            "type": "User",
+            "appId": "",
+            "email": "user@microsoft.com",
+            "fqn": "aaduser=some_guid",
+            "role": "Admin"
+          },
+          {
+            "name": "Kusto",
+            "type": "Group",
+            "appId": "",
+            "email": "kusto@microsoft.com",
+            "fqn": "aadgroup=some_guid",
+            "role": "Viewer"
+          },
+          {
+            "name": "SomeApp",
+            "type": "App",
+            "appId": "some_guid_app_id",
+            "email": "",
+            "fqn": "aadapp=some_guid_app_id",
+            "role": "Admin"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Databases_ListPrincipals",
+  "title": "KustoDatabaseListPrincipals"
+}

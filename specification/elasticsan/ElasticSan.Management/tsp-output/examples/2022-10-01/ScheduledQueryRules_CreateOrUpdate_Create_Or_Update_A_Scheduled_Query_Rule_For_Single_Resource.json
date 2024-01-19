@@ -1,0 +1,202 @@
+{
+  "parameters": {
+    "api-version": "2022-06-15",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "description": "Performance rule",
+        "actions": {
+          "actionGroups": [
+            "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
+          ],
+          "customProperties": {
+            "key11": "value11",
+            "key12": "value12"
+          }
+        },
+        "autoMitigate": true,
+        "checkWorkspaceAlertsStorageConfigured": true,
+        "criteria": {
+          "allOf": [
+            {
+              "dimensions": [
+                {
+                  "name": "ComputerIp",
+                  "operator": "Exclude",
+                  "values": [
+                    "192.168.1.1"
+                  ]
+                },
+                {
+                  "name": "OSType",
+                  "operator": "Include",
+                  "values": [
+                    "*"
+                  ]
+                }
+              ],
+              "failingPeriods": {
+                "minFailingPeriodsToAlert": 1,
+                "numberOfEvaluationPeriods": 1
+              },
+              "metricMeasureColumn": "% Processor Time",
+              "operator": "GreaterThan",
+              "query": "Perf | where ObjectName == \"Processor\"",
+              "resourceIdColumn": "resourceId",
+              "threshold": 70,
+              "timeAggregation": "Average"
+            }
+          ]
+        },
+        "enabled": true,
+        "evaluationFrequency": "PT5M",
+        "muteActionsDuration": "PT30M",
+        "scopes": [
+          "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+        ],
+        "severity": 4,
+        "skipQueryValidation": true,
+        "windowSize": "PT10M"
+      }
+    },
+    "resourceGroupName": "QueryResourceGroupName",
+    "ruleName": "perf",
+    "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "perf",
+        "type": "microsoft.insights/scheduledqueryrules",
+        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
+        "location": "eastus",
+        "properties": {
+          "description": "Performance rule",
+          "actions": {
+            "actionGroups": [
+              "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
+            ],
+            "customProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          },
+          "autoMitigate": true,
+          "checkWorkspaceAlertsStorageConfigured": true,
+          "criteria": {
+            "allOf": [
+              {
+                "dimensions": [
+                  {
+                    "name": "ComputerIp",
+                    "operator": "Exclude",
+                    "values": [
+                      "192.168.1.1"
+                    ]
+                  },
+                  {
+                    "name": "OSType",
+                    "operator": "Include",
+                    "values": [
+                      "*"
+                    ]
+                  }
+                ],
+                "failingPeriods": {
+                  "minFailingPeriodsToAlert": 1,
+                  "numberOfEvaluationPeriods": 1
+                },
+                "metricMeasureColumn": "% Processor Time",
+                "operator": "GreaterThan",
+                "query": "Perf | where ObjectName == \"Processor\"",
+                "resourceIdColumn": "resourceId",
+                "threshold": 70,
+                "timeAggregation": "Average"
+              }
+            ]
+          },
+          "enabled": true,
+          "evaluationFrequency": "PT5M",
+          "isWorkspaceAlertsStorageConfigured": true,
+          "muteActionsDuration": "PT30M",
+          "scopes": [
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+          ],
+          "severity": 4,
+          "skipQueryValidation": true,
+          "windowSize": "PT10M"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "perf",
+        "type": "microsoft.insights/scheduledqueryrules",
+        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
+        "location": "eastus",
+        "properties": {
+          "description": "Performance rule",
+          "actions": {
+            "actionGroups": [
+              "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
+            ],
+            "customProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          },
+          "autoMitigate": true,
+          "checkWorkspaceAlertsStorageConfigured": true,
+          "criteria": {
+            "allOf": [
+              {
+                "dimensions": [
+                  {
+                    "name": "ComputerIp",
+                    "operator": "Exclude",
+                    "values": [
+                      "192.168.1.1"
+                    ]
+                  },
+                  {
+                    "name": "OSType",
+                    "operator": "Include",
+                    "values": [
+                      "*"
+                    ]
+                  }
+                ],
+                "failingPeriods": {
+                  "minFailingPeriodsToAlert": 1,
+                  "numberOfEvaluationPeriods": 1
+                },
+                "metricMeasureColumn": "% Processor Time",
+                "operator": "GreaterThan",
+                "query": "Perf | where ObjectName == \"Processor\"",
+                "resourceIdColumn": "resourceId",
+                "threshold": 70,
+                "timeAggregation": "Average"
+              }
+            ]
+          },
+          "enabled": true,
+          "evaluationFrequency": "PT5M",
+          "isWorkspaceAlertsStorageConfigured": true,
+          "muteActionsDuration": "PT30M",
+          "scopes": [
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+          ],
+          "severity": 4,
+          "skipQueryValidation": true,
+          "windowSize": "PT10M"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ScheduledQueryRules_CreateOrUpdate",
+  "title": "Create or update a scheduled query rule for Single Resource"
+}

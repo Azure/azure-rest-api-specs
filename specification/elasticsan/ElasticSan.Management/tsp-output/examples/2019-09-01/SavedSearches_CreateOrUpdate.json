@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "parameters": {
+      "properties": {
+        "category": "Saved Search Test Category",
+        "displayName": "Create or Update Saved Search Test",
+        "functionAlias": "heartbeat_func",
+        "functionParameters": "a:int=1",
+        "query": "Heartbeat | summarize Count() by Computer | take a",
+        "tags": [
+          {
+            "name": "Group",
+            "value": "Computer"
+          }
+        ],
+        "version": 2
+      }
+    },
+    "resourceGroupName": "TestRG",
+    "savedSearchId": "00000000-0000-0000-0000-00000000000",
+    "savedSearchName": "SavedSearchName",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "workspaceName": "TestWS"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "etag": "W/\"datetime'2017-10-02T23%3A15%3A41.0709875Z'\"",
+        "id": "subscriptions/00000000-0000-0000-0000-000000000005/resourceGroups/mms-eus/providers/Microsoft.OperationalInsights/workspaces/AtlantisDemo/savedSearches/test-new-saved-search-id-2015",
+        "properties": {
+          "category": "Saved Search Test Category",
+          "displayName": "Create or Update Saved Search Test",
+          "functionAlias": "heartbeat_func",
+          "functionParameters": "a:int=1",
+          "query": "Heartbeat | summarize Count() by Computer | take a",
+          "version": 2
+        }
+      }
+    }
+  },
+  "operationId": "SavedSearches_CreateOrUpdate",
+  "title": "SavedSearchCreateOrUpdate"
+}

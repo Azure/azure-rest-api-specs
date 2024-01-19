@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2021-08-15",
+    "parameters": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "clusterExtensionIds": [
+          "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01/Microsoft.KubernetesConfiguration/clusterExtensions/fooExtension",
+          "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01/Microsoft.KubernetesConfiguration/clusterExtensions/barExtension"
+        ]
+      },
+      "tags": {
+        "archv3": "",
+        "tier": "testing"
+      }
+    },
+    "resourceGroupName": "testresourcegroup",
+    "resourceName": "customLocation01",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "customLocation01",
+        "type": "Microsoft.ExtendedLocation/customLocations",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/customLocations/customLocation01",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "111111-1111-1111-1111-111111111111"
+        },
+        "location": "West US",
+        "properties": {
+          "authentication": {
+            "type": "KubeConfig"
+          },
+          "clusterExtensionIds": [
+            "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01/Microsoft.KubernetesConfiguration/clusterExtensions/fooExtension",
+            "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01/Microsoft.KubernetesConfiguration/clusterExtensions/barExtension"
+          ],
+          "displayName": "customLocationLocation01",
+          "hostResourceId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ContainerService/managedClusters/cluster01",
+          "namespace": "namespace01",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-08-24T18:53:29.0928001Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-08-24T18:53:29.0928001Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "archv3": "",
+          "tier": "testing"
+        }
+      }
+    }
+  },
+  "operationId": "CustomLocations_Update",
+  "title": "Update Custom Location"
+}

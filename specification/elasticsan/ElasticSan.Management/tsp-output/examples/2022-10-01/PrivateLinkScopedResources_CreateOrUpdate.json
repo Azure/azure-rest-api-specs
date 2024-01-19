@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "name": "scoped-resource-name",
+    "api-version": "2021-07-01-preview",
+    "parameters": {
+      "properties": {
+        "linkedResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/components/my-component"
+      }
+    },
+    "resourceGroupName": "MyResourceGroup",
+    "scopeName": "MyPrivateLinkScope",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "scoped-resource-name",
+        "type": "Microsoft.Insights/privateLinkScopes/scopedResources",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/scopedResources/scoped-resource-name",
+        "properties": {
+          "linkedResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/components/my-component",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-06-16T12:59:57.051056Z",
+          "createdBy": "bobby@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-06-16T12:59:57.051056Z",
+          "lastModifiedBy": "bobby@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "scoped-resource-name",
+        "type": "Microsoft.Insights/privateLinkScopes/scopedResources",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/scopedResources/scoped-resource-name",
+        "properties": {
+          "linkedResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/components/my-component",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-06-16T12:59:57.051056Z",
+          "createdBy": "bobby@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-06-16T12:59:57.051056Z",
+          "lastModifiedBy": "bobby@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "PrivateLinkScopedResources_CreateOrUpdate",
+  "title": "Update a scoped resource in a private link scope."
+}

@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "activityLogAlertName": "SampleActivityLogAlertRuleWithAnyOfCondition",
+    "activityLogAlertRule": {
+      "location": "Global",
+      "properties": {
+        "description": "Description of sample Activity Log Alert rule with 'anyOf' condition.",
+        "actions": {
+          "actionGroups": [
+            {
+              "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
+              "webhookProperties": {
+                "sampleWebhookProperty": "SamplePropertyValue"
+              }
+            }
+          ]
+        },
+        "condition": {
+          "allOf": [
+            {
+              "equals": "ServiceHealth",
+              "field": "category"
+            },
+            {
+              "anyOf": [
+                {
+                  "equals": "Incident",
+                  "field": "properties.incidentType"
+                },
+                {
+                  "equals": "Maintenance",
+                  "field": "properties.incidentType"
+                }
+              ]
+            }
+          ]
+        },
+        "enabled": true,
+        "scopes": [
+          "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+        ]
+      },
+      "tags": {}
+    },
+    "api-version": "2020-10-01",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "SampleActivityLogAlertRuleWithAnyOfCondition",
+        "type": "Microsoft.Insights/ActivityLogAlerts",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithAnyOfCondition",
+        "location": "Global",
+        "properties": {
+          "description": "Description of sample Activity Log Alert rule with 'anyOf' condition.",
+          "actions": {
+            "actionGroups": [
+              {
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
+                "webhookProperties": {
+                  "sampleWebhookProperty": "SamplePropertyValue"
+                }
+              }
+            ]
+          },
+          "condition": {
+            "allOf": [
+              {
+                "equals": "ServiceHealth",
+                "field": "category"
+              },
+              {
+                "anyOf": [
+                  {
+                    "equals": "Incident",
+                    "field": "properties.incidentType"
+                  },
+                  {
+                    "equals": "Maintenance",
+                    "field": "properties.incidentType"
+                  }
+                ]
+              }
+            ]
+          },
+          "enabled": true,
+          "scopes": [
+            "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+          ]
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "SampleActivityLogAlertRuleWithAnyOfCondition",
+        "type": "Microsoft.Insights/ActivityLogAlerts",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithAnyOfCondition",
+        "location": "Global",
+        "properties": {
+          "description": "Description of sample Activity Log Alert rule with 'anyOf' condition.",
+          "actions": {
+            "actionGroups": [
+              {
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
+                "webhookProperties": {
+                  "sampleWebhookProperty": "SamplePropertyValue"
+                }
+              }
+            ]
+          },
+          "condition": {
+            "allOf": [
+              {
+                "equals": "ServiceHealth",
+                "field": "category"
+              },
+              {
+                "anyOf": [
+                  {
+                    "equals": "Incident",
+                    "field": "properties.incidentType"
+                  },
+                  {
+                    "equals": "Maintenance",
+                    "field": "properties.incidentType"
+                  }
+                ]
+              }
+            ]
+          },
+          "enabled": true,
+          "scopes": [
+            "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+          ]
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ActivityLogAlerts_CreateOrUpdate",
+  "title": "Create or update an Activity Log Alert rule with 'anyOf' condition"
+}

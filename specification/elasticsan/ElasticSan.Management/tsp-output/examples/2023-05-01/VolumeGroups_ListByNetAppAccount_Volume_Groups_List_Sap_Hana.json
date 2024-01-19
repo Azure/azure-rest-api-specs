@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2023-05-01",
+    "resourceGroupName": "myRG",
+    "subscriptionId": "D633CC2E-722B-4AE1-B636-BBD9E4C60ED9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "group1",
+            "type": "Microsoft.NetApp/netAppAccounts/volumeGroups",
+            "id": "/subscriptions/d633cc2e-722b-4ae1-b636-bbd9e4c60ed9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/volumeGroups/group1",
+            "location": "eastus",
+            "properties": {
+              "groupMetaData": {
+                "applicationIdentifier": "SH9",
+                "applicationType": "SAP-HANA",
+                "groupDescription": "Volume group",
+                "volumesCount": 5
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VolumeGroups_ListByNetAppAccount",
+  "title": "VolumeGroups_List_SapHana"
+}

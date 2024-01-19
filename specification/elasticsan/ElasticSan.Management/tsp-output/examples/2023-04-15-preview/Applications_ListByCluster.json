@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "api-version": "2023-04-15-preview",
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "app",
+            "type": "Microsoft.HDInsight/clusters/applications",
+            "etag": "CF938302-6B4D-44A0-A6D2-C0D67E847AEC",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/app",
+            "properties": {
+              "applicationState": "Running",
+              "applicationType": "CustomApplication",
+              "computeProfile": {
+                "roles": [
+                  {
+                    "name": "edgenode",
+                    "hardwareProfile": {
+                      "vmSize": "Standard_D12_v2"
+                    },
+                    "targetInstanceCount": 1
+                  }
+                ]
+              },
+              "createdDate": "2017-03-22T21:34:39.293",
+              "httpsEndpoints": [
+                {
+                  "accessModes": [
+                    "WebPage"
+                  ],
+                  "destinationPort": 20000,
+                  "location": "https://cluster1-app.apps.azurehdinsight.net:443",
+                  "publicPort": 443
+                }
+              ],
+              "installScriptActions": [
+                {
+                  "name": "app-install-app",
+                  "roles": [
+                    "edgenode"
+                  ],
+                  "uri": "http://testurl.com/public/hdi-app/20170301/hdinsight-app-install.sh"
+                }
+              ],
+              "marketplaceIdentifier": "app-on-hdiapp-on-hdi.1.0.3",
+              "provisioningState": "Succeeded",
+              "sshEndpoints": [
+                {
+                  "destinationPort": 22,
+                  "location": "app.cluster1-ssh.azurehdinsight.net:22",
+                  "publicPort": 22
+                }
+              ],
+              "uninstallScriptActions": []
+            },
+            "tags": {
+              "key1": "val1"
+            }
+          },
+          {
+            "name": "app2",
+            "type": "Microsoft.HDInsight/clusters/applications",
+            "etag": "2C128F8E-BB26-4637-99E4-18EBC39FD51F",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/app2",
+            "properties": {
+              "applicationState": "AzureVMConfiguration",
+              "applicationType": "CustomApplication",
+              "computeProfile": {
+                "roles": [
+                  {
+                    "name": "edgenode",
+                    "hardwareProfile": {
+                      "vmSize": "Standard_D3"
+                    },
+                    "targetInstanceCount": 1
+                  }
+                ]
+              },
+              "createdDate": "2017-03-28T02:01:25.107",
+              "httpsEndpoints": [
+                {
+                  "accessModes": [
+                    "WebPage"
+                  ],
+                  "destinationPort": 18630,
+                  "location": "location",
+                  "publicPort": 443
+                }
+              ],
+              "installScriptActions": [
+                {
+                  "name": "app2-Install",
+                  "roles": [
+                    "edgenode"
+                  ],
+                  "uri": "https://app2url.com/azure/2.4.0.0/app2_install.sh"
+                }
+              ],
+              "marketplaceIdentifier": "app2-hdinsightsmall.1.0.8",
+              "provisioningState": "InProgress",
+              "sshEndpoints": [],
+              "uninstallScriptActions": []
+            },
+            "tags": {
+              "key1": "val1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Applications_ListByCluster",
+  "title": "Get All Applications for an HDInsight cluster"
+}

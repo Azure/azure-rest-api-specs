@@ -1,0 +1,134 @@
+{
+  "parameters": {
+    "api-version": "2023-10-03-preview",
+    "kind": null,
+    "location": "eastus2euap",
+    "machineName": "myMachine",
+    "parameters": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "locationData": {
+          "name": "Redmond"
+        },
+        "osProfile": {
+          "linuxConfiguration": {
+            "patchSettings": {
+              "assessmentMode": "ImageDefault",
+              "patchMode": "Manual"
+            }
+          },
+          "windowsConfiguration": {
+            "patchSettings": {
+              "assessmentMode": "ImageDefault",
+              "patchMode": "Manual"
+            }
+          }
+        },
+        "parentClusterResourceId": "{AzureStackHCIResourceId}",
+        "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myMachine",
+        "type": "Microsoft.HybridCompute/machines",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "string",
+          "tenantId": "string"
+        },
+        "kind": null,
+        "location": "eastus2euap",
+        "properties": {
+          "adFqdn": null,
+          "agentVersion": null,
+          "clientPublicKey": "string",
+          "detectedProperties": null,
+          "displayName": null,
+          "dnsFqdn": null,
+          "domainName": null,
+          "errorDetails": null,
+          "lastStatusChange": null,
+          "licenseProfile": {
+            "esuProfile": {
+              "esuEligibility": "Ineligible",
+              "esuKeyState": "Inactive",
+              "esuKeys": [
+                {
+                  "licenseStatus": "licenseStatus1",
+                  "sku": "skuNumber1"
+                },
+                {
+                  "licenseStatus": "licenseStatus2",
+                  "sku": "skuNumber2"
+                }
+              ],
+              "licenseAssignmentState": "Assigned",
+              "serverType": "Standard"
+            },
+            "licenseChannel": "PSG",
+            "licenseStatus": "Licensed",
+            "productProfile": {
+              "billingStartDate": "2023-10-05T20:36:49.745Z",
+              "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+              "enrollmentDate": "2023-10-05T20:36:49.745Z",
+              "productFeatures": [
+                {
+                  "name": "HotPatching",
+                  "billingStartDate": "2023-10-05T20:36:49.745Z",
+                  "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+                  "enrollmentDate": "2023-10-05T20:36:49.745Z",
+                  "subscriptionStatus": "Enabled"
+                }
+              ],
+              "productType": "WindowsServer",
+              "subscriptionStatus": "Enabled"
+            },
+            "softwareAssurance": {
+              "softwareAssuranceCustomer": true
+            }
+          },
+          "locationData": {
+            "name": "Redmond"
+          },
+          "machineFqdn": null,
+          "osEdition": "Standard",
+          "osProfile": {
+            "computerName": null,
+            "linuxConfiguration": {
+              "patchSettings": {
+                "assessmentMode": "ImageDefault",
+                "patchMode": "Manual"
+              }
+            },
+            "windowsConfiguration": {
+              "patchSettings": {
+                "assessmentMode": "ImageDefault",
+                "patchMode": "Manual"
+              }
+            }
+          },
+          "osSku": null,
+          "osType": null,
+          "osVersion": null,
+          "parentClusterResourceId": "{AzureStackHCIResourceId}",
+          "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName",
+          "provisioningState": "Succeeded",
+          "status": null,
+          "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
+          "vmUuid": null
+        },
+        "tags": null
+      }
+    }
+  },
+  "operationId": "Machines_Update",
+  "title": "Update a Machine"
+}

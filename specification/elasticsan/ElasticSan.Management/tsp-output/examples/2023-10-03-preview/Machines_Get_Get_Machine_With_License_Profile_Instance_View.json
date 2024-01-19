@@ -1,0 +1,188 @@
+{
+  "parameters": {
+    "$expand": "instanceView",
+    "api-version": "2023-10-03-preview",
+    "machineName": "myMachine",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myMachine",
+        "type": "Microsoft.HybridCompute/machines",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "string",
+          "tenantId": "string"
+        },
+        "kind": null,
+        "location": "eastus2euap",
+        "properties": {
+          "adFqdn": null,
+          "agentConfiguration": {
+            "configMode": "full",
+            "extensionsAllowList": null,
+            "extensionsBlockList": null,
+            "extensionsEnabled": "true",
+            "guestConfigurationEnabled": "true",
+            "incomingConnectionsPorts": [
+              "22",
+              "23"
+            ],
+            "proxyBypass": [
+              "proxy1",
+              "proxy2"
+            ],
+            "proxyUrl": "https://test.test"
+          },
+          "agentVersion": null,
+          "clientPublicKey": "string",
+          "detectedProperties": {
+            "cloudprovider": "N/A",
+            "manufacturer": "Microsoft Corporation",
+            "model": "Virtual Machine"
+          },
+          "displayName": null,
+          "dnsFqdn": null,
+          "domainName": null,
+          "errorDetails": null,
+          "lastStatusChange": null,
+          "licenseProfile": {
+            "esuProfile": {
+              "assignedLicense": {
+                "name": "{licenseName}",
+                "type": "Microsoft.HybridCompute/licenses",
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Licenses/{licenseName}",
+                "location": "eastus2euap",
+                "properties": {
+                  "licenseDetails": {
+                    "type": "pCore",
+                    "assignedLicenses": 8,
+                    "edition": "Datacenter",
+                    "immutableId": "<generated Guid>",
+                    "processors": 6,
+                    "state": "Activated",
+                    "target": "Windows Server 2012"
+                  },
+                  "licenseType": "ESU",
+                  "tenantId": "{tenandId}"
+                },
+                "tags": null
+              },
+              "esuEligibility": "Ineligible",
+              "esuKeyState": "Inactive",
+              "esuKeys": [
+                {
+                  "licenseStatus": "licenseStatus1",
+                  "sku": "skuNumber1"
+                },
+                {
+                  "licenseStatus": "licenseStatus2",
+                  "sku": "skuNumber2"
+                }
+              ],
+              "licenseAssignmentState": "Assigned",
+              "serverType": "Standard"
+            },
+            "licenseChannel": "PSG",
+            "licenseStatus": "Licensed",
+            "productProfile": {
+              "billingStartDate": "2023-10-05T20:36:49.745Z",
+              "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+              "enrollmentDate": "2023-10-05T20:36:49.745Z",
+              "productFeatures": [
+                {
+                  "name": "HotPatching",
+                  "billingStartDate": "2023-10-05T20:36:49.745Z",
+                  "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+                  "enrollmentDate": "2023-10-05T20:36:49.745Z",
+                  "subscriptionStatus": "Enabled"
+                }
+              ],
+              "productType": "WindowsServer",
+              "subscriptionStatus": "Enabled"
+            },
+            "softwareAssurance": {
+              "softwareAssuranceCustomer": true
+            }
+          },
+          "locationData": {
+            "name": "Redmond",
+            "city": "redmond",
+            "countryOrRegion": "usa",
+            "district": null
+          },
+          "machineFqdn": null,
+          "mssqlDiscovered": "false",
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "ipAddresses": [
+                  {
+                    "address": "192.168.12.345",
+                    "ipAddressVersion": "IPv4",
+                    "subnet": {
+                      "addressPrefix": "192.168.12.0/24"
+                    }
+                  }
+                ]
+              },
+              {
+                "ipAddresses": [
+                  {
+                    "address": "1001:0:34aa:5000:1234:aaaa:bbbb:cccc",
+                    "ipAddressVersion": "IPv6",
+                    "subnet": {
+                      "addressPrefix": "1001:0:34aa:5000::/64"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "osEdition": "Standard",
+          "osProfile": {
+            "computerName": null,
+            "linuxConfiguration": {
+              "patchSettings": {
+                "assessmentMode": null,
+                "patchMode": null
+              }
+            },
+            "windowsConfiguration": {
+              "patchSettings": {
+                "assessmentMode": null,
+                "patchMode": null
+              }
+            }
+          },
+          "osSku": null,
+          "osType": null,
+          "osVersion": null,
+          "parentClusterResourceId": "{AzureStackHCIResourceId}",
+          "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName",
+          "provisioningState": "Succeeded",
+          "serviceStatuses": {
+            "extensionService": {
+              "startupType": "Automatic",
+              "status": "Running"
+            },
+            "guestConfigurationService": {
+              "startupType": "Automatic",
+              "status": "Running"
+            }
+          },
+          "status": null,
+          "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
+          "vmUuid": null
+        },
+        "resources": [],
+        "tags": null
+      }
+    }
+  },
+  "operationId": "Machines_Get",
+  "title": "Get Machine with License Profile Instance View"
+}

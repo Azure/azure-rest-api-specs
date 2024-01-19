@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "clusterPoolName": "clusterpool1",
+    "resourceGroupName": "hiloResourcegroup",
+    "subscriptionId": "10e32bab-26da-4cc4-a441-52b318f824e6"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "cluster1",
+            "type": "Microsoft.HDInsight/clusterPools/clusters",
+            "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1/clusters/cluster1",
+            "location": "West US 2",
+            "properties": {
+              "clusterProfile": {
+                "authorizationProfile": {
+                  "userIds": [
+                    "testuser1",
+                    "testuser2"
+                  ]
+                },
+                "clusterVersion": "1.0.1",
+                "components": [
+                  {
+                    "name": "Hive",
+                    "version": "2.4.1"
+                  }
+                ],
+                "connectivityProfile": {
+                  "ssh": [
+                    {
+                      "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
+                    },
+                    {
+                      "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
+                    }
+                  ],
+                  "web": {
+                    "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
+                  }
+                },
+                "identityProfile": {
+                  "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+                  "msiObjectId": "40491351-c240-4042-91e0-f644a1d2b441",
+                  "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi"
+                },
+                "kafkaProfile": {},
+                "ossVersion": "2.4.1",
+                "sshProfile": {
+                  "count": 2,
+                  "podPrefix": "sshnode"
+                }
+              },
+              "clusterType": "kafka",
+              "computeProfile": {
+                "nodes": [
+                  {
+                    "type": "worker",
+                    "count": 4,
+                    "vmSize": "Standard_D3_v2"
+                  }
+                ]
+              },
+              "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "company": "Contoso",
+              "department": "MightyMight"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Clusters_ListByClusterPoolName",
+  "title": "HDInsightClustersListByClusterPoolName"
+}

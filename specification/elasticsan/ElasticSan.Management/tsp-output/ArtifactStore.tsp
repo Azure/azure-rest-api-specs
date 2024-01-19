@@ -1,0 +1,148 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Publisher.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.HybridNetwork;
+@doc("Artifact store properties.")
+@parentResource(Publisher)
+model ArtifactStore is TrackedResource<ArtifactStorePropertiesFormat> {
+  @doc("The name of the artifact store.")
+  @maxLength(64)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
+  @path
+  @key("artifactStoreName")
+  @segment("artifactStores")
+  name: string;
+}
+
+@armResourceOperations
+interface ArtifactStores {
+  @doc("Gets information about the specified artifact store.")
+  get is ArmResourceRead<ArtifactStore>;
+
+  @doc("Creates or updates a artifact store.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    ArtifactStore,
+    BaseParameters<ArtifactStore>,
+    ArmAsyncOperationHeader
+  >;
+
+  @doc("Update artifact store resource.")
+  update is ArmCustomPatchSync<ArtifactStore, TagsObject>;
+
+  @doc("Deletes the specified artifact store.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ArtifactStore,
+    BaseParameters<ArtifactStore>,
+    ArmLroLocationHeader
+  >;
+
+  @doc("Gets information of the ArtifactStores under publisher.")
+  listByPublisher is ArmResourceListByParent<ArtifactStore>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ProxyArtifact_List")
+  @doc("Lists all the available artifacts in the parent Artifact Store.")
+  // FIXME: ProxyArtifact_List could not be converted to a resource operation
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifacts")
+  @get
+  list is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the publisher.")
+      @maxLength(64)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
+      @path
+      publisherName: string;
+
+      @doc("The name of the artifact store.")
+      @maxLength(64)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
+      @path
+      artifactStoreName: string;
+
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+    },
+    ProxyArtifactOverviewListResult
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ProxyArtifact_Get")
+  @doc("Get a Artifact overview information.")
+  // FIXME: ProxyArtifact_Get could not be converted to a resource operation
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactVersions")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the publisher.")
+      @maxLength(64)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
+      @path
+      publisherName: string;
+
+      @doc("The name of the artifact store.")
+      @maxLength(64)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
+      @path
+      artifactStoreName: string;
+
+      @doc("The name of the artifact.")
+      @maxLength(64)
+      @pattern("^[^\\s]*[^\\s]+[^\\s]*$")
+      @query("artifactName")
+      artifactName: string;
+
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+    },
+    ProxyArtifactVersionsOverviewListResult
+  >;
+}
+
+@@projectedName(ArtifactStores.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(ArtifactStores.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ArtifactStores.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update application group operation."
+);
+@@projectedName(ArtifactStores.update::parameters.properties,
+  "json",
+  "parameters"
+);
+@@extension(ArtifactStores.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(ArtifactStores.update::parameters.properties,
+  "Parameters supplied to the create or update application group operation."
+);
