@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2022-09-02-preview",
+    "fleetMemberName": "member-1",
+    "fleetName": "fleet-1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "member-1",
+        "type": "Microsoft.ContainerService/fleets/members",
+        "etag": "kd30rkdfo49=",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/members/member-1",
+        "properties": {
+          "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "ETag": "kd30rkdfo49="
+      }
+    }
+  },
+  "operationId": "FleetMembers_Get",
+  "title": "Gets a fleet member resource."
+}

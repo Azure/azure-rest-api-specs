@@ -1,0 +1,165 @@
+{
+  "parameters": {
+    "api-version": "2017-08-01-preview",
+    "clusterName": "myCluster",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "description": "My Operationalization Cluster",
+        "clusterType": "ACS",
+        "containerService": {
+          "orchestratorProperties": {
+            "servicePrincipal": {
+              "clientId": "abcdefghijklmnopqrt",
+              "secret": "<secret>"
+            }
+          },
+          "orchestratorType": "Kubernetes"
+        },
+        "globalServiceConfiguration": {
+          "ssl": {
+            "cert": "afjdklq2131casfakld=",
+            "cname": "foo.bar.com",
+            "key": "flksdafkldsajf=",
+            "status": "Enabled"
+          }
+        }
+      },
+      "tags": {
+        "key1": "alpha",
+        "key2": "beta"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MyCluster",
+        "type": "Microsoft.MachineLearningCompute/operationalizationClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.MachineLearningCompute/operationalizationClusters/MyCluster",
+        "location": "West US",
+        "properties": {
+          "description": "My Operationalization Cluster",
+          "appInsights": {
+            "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Insights/components/mlcrpai3d5859117108"
+          },
+          "clusterType": "ACS",
+          "containerRegistry": {
+            "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myregistry123456"
+          },
+          "containerService": {
+            "agentCount": 2,
+            "agentVmSize": "Standard_D2_v2",
+            "clusterFqdn": "myclusterabcxyz.westus.cloudapp.azure.com",
+            "masterCount": 3,
+            "orchestratorProperties": {
+              "servicePrincipal": {
+                "clientId": "abcdefghijklmnopqrt",
+                "secret": ""
+              }
+            },
+            "orchestratorType": "Kubernetes",
+            "systemServices": [
+              {
+                "publicIpAddress": "13.92.143.67",
+                "systemServiceType": "ScoringFrontEnd",
+                "version": "prod/20170803.1.5a451c98af3972f7c966b439d471c1ed280314ea"
+              }
+            ]
+          },
+          "createdOn": "2017-05-04T07:12:28.191Z",
+          "globalServiceConfiguration": {
+            "autoScale": {
+              "maxReplicas": 100,
+              "minReplicas": 1,
+              "status": "Enabled"
+            },
+            "ssl": {
+              "cert": "afjdklq2131casfakld=",
+              "cname": "foo.bar.com",
+              "key": "flksdafkldsajf=",
+              "status": "Enabled"
+            }
+          },
+          "modifiedOn": "2017-05-04T07:12:28.191Z",
+          "provisioningState": "Succeeded",
+          "storageAccount": {
+            "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mycluster123456"
+          }
+        },
+        "tags": {
+          "key1": "alpha",
+          "key2": "beta"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "MyCluster",
+        "type": "Microsoft.MachineLearningCompute/operationalizationClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.MachineLearningCompute/operationalizationClusters/MyCluster",
+        "location": "West US",
+        "properties": {
+          "description": "My Operationalization Cluster",
+          "appInsights": {
+            "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Insights/components/mlcrpai3d5859117108"
+          },
+          "clusterType": "ACS",
+          "containerRegistry": {
+            "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myregistry123456"
+          },
+          "containerService": {
+            "agentCount": 2,
+            "agentVmSize": "Standard_D2_v2",
+            "clusterFqdn": "myclusterabcxyz.westus.cloudapp.azure.com",
+            "masterCount": 3,
+            "orchestratorProperties": {
+              "servicePrincipal": {
+                "clientId": "abcdefghijklmnopqrt",
+                "secret": ""
+              }
+            },
+            "orchestratorType": "Kubernetes",
+            "systemServices": [
+              {
+                "publicIpAddress": "13.92.143.67",
+                "systemServiceType": "ScoringFrontEnd",
+                "version": "prod/20170803.1.5a451c98af3972f7c966b439d471c1ed280314ea"
+              }
+            ]
+          },
+          "createdOn": "2017-05-04T07:12:28.191Z",
+          "globalServiceConfiguration": {
+            "autoScale": {
+              "maxReplicas": 100,
+              "minReplicas": 1,
+              "status": "Enabled"
+            },
+            "ssl": {
+              "cert": "afjdklq2131casfakld=",
+              "cname": "foo.bar.com",
+              "key": "flksdafkldsajf",
+              "status": "Enabled"
+            }
+          },
+          "modifiedOn": "2017-05-04T07:12:28.191Z",
+          "provisioningState": "Creating",
+          "storageAccount": {
+            "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mycluster123456"
+          }
+        },
+        "tags": {
+          "key1": "alpha",
+          "key2": "beta"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "http://azure.async.operation/status"
+      }
+    }
+  },
+  "operationId": "OperationalizationClusters_CreateOrUpdate",
+  "title": "PUT Operationalization Cluster"
+}

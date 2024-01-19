@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "accountName": "Account1",
+    "api-version": "2020-09-01",
+    "filter": "properties/targetEmail eq 'johnsmith@microsoft.com'",
+    "orderBy": "properties/sentAt",
+    "resourceGroupName": "SampleResourceGroup",
+    "shareName": "Share1",
+    "subscriptionId": "433a8dfd-e5d5-4e77-ad86-90acdc75eb1a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ancd",
+            "type": "Microsoft.DataShare/Invitation",
+            "id": "/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/testrg/providers/Microsoft.DataShare/accounts/account1/shares/share1/invitations/ancd",
+            "properties": {
+              "expirationDate": "2020-08-26T22:33:24.5785265Z",
+              "invitationStatus": "Accepted",
+              "sentAt": "2018-11-26T22:33:24.5785265Z",
+              "targetEmail": "johnsmith@microsoft.com",
+              "userEmail": "johnsmith@microsoft.com",
+              "userName": "John Smith"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 17:33:55 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "5d862c55-4de9-4a46-969d-cf1ed3e235ed",
+        "x-ms-ratelimit-remaining-subscription-reads": "14993",
+        "x-ms-request-id": "8e58266a-de42-40d5-b3c4-c6a7e159cfba"
+      }
+    }
+  },
+  "operationId": "Invitations_ListByShare",
+  "title": "Invitations_ListByShare"
+}

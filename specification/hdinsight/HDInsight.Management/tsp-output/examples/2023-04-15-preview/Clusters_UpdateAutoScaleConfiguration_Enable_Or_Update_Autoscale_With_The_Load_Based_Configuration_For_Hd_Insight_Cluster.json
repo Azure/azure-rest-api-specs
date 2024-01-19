@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2023-04-15-preview",
+    "clusterName": "cluster1",
+    "parameters": {
+      "autoscale": {
+        "capacity": {
+          "maxInstanceCount": 5,
+          "minInstanceCount": 3
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "roleName": "workernode",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/operationresults/operationid?api-version=2023-04-15-preview"
+      }
+    }
+  },
+  "operationId": "Clusters_UpdateAutoScaleConfiguration",
+  "title": "Enable or Update Autoscale with the load based configuration for HDInsight cluster"
+}

@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "blueprint": {
+      "properties": {
+        "description": "blueprint contains all artifact kinds {'template', 'rbac', 'policy'}",
+        "parameters": {
+          "costCenter": {
+            "type": "string",
+            "metadata": {
+              "displayName": "force cost center tag for all resources under given subscription."
+            }
+          },
+          "owners": {
+            "type": "array",
+            "metadata": {
+              "displayName": "assign owners to subscription along with blueprint assignment."
+            }
+          },
+          "storageAccountType": {
+            "type": "string",
+            "metadata": {
+              "displayName": "storage account type."
+            }
+          }
+        },
+        "resourceGroups": {
+          "storageRG": {
+            "metadata": {
+              "description": "Contains storageAccounts that collect all shoebox logs.",
+              "displayName": "storage resource group"
+            }
+          }
+        },
+        "targetScope": "subscription"
+      }
+    },
+    "blueprintName": "simpleBlueprint",
+    "resourceScope": "providers/Microsoft.Management/managementGroups/ContosoOnlineGroup"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "simpleBlueprint",
+        "type": "Microsoft.Blueprint/blueprints",
+        "id": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint",
+        "properties": {
+          "description": "blueprint contains all artifact kinds {'template', 'rbac', 'policy'}",
+          "parameters": {
+            "costCenter": {
+              "type": "string",
+              "metadata": {
+                "description": null,
+                "displayName": "force cost center tag for all resources under given subscription."
+              }
+            },
+            "owners": {
+              "type": "array",
+              "metadata": {
+                "description": null,
+                "displayName": "assign owners to subscription along with blueprint assignment."
+              }
+            },
+            "storageAccountType": {
+              "type": "string",
+              "metadata": {
+                "description": null,
+                "displayName": "storage account type."
+              }
+            }
+          },
+          "resourceGroups": {
+            "storageRG": {
+              "metadata": {
+                "description": "Contains storageAccounts that collect all shoebox logs.",
+                "displayName": "storage resource group"
+              }
+            }
+          },
+          "targetScope": "subscription"
+        }
+      }
+    }
+  },
+  "operationId": "Blueprints_CreateOrUpdate",
+  "title": "ManagementGroupBlueprint"
+}

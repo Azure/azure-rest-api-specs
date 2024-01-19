@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2022-01-30-preview",
+    "resourceGroupName": "testrg",
+    "sqlMigrationServiceName": "service1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "targetdb",
+            "type": "Microsoft.DataMigration/dataMigrations",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname/providers/Microsoft.DataMigration/databaseMigrations/targetdb",
+            "properties": {
+              "endedOn": "0001-01-01T08:00:00Z",
+              "kind": "SqlMi",
+              "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd",
+              "migrationStatus": "InProgress",
+              "migrationStatusDetails": {
+                "activeBackupSets": [],
+                "isFullBackupRestored": false,
+                "migrationState": "WaitForFullBackupUploadOperation"
+              },
+              "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname",
+              "sourceDatabaseName": "sourcename",
+              "startedOn": "0001-01-01T08:00:00Z"
+            }
+          },
+          {
+            "name": "targetdb",
+            "type": "Microsoft.DataMigration/dataMigrations",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname/providers/Microsoft.DataMigration/databaseMigrations/targetdb",
+            "properties": {
+              "endedOn": "0001-01-01T08:00:00Z",
+              "kind": "SqlMi",
+              "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd",
+              "migrationStatus": "InProgress",
+              "migrationStatusDetails": {
+                "activeBackupSets": [],
+                "isFullBackupRestored": false,
+                "migrationState": "WaitForFullBackupUploadOperation"
+              },
+              "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname",
+              "sourceDatabaseName": "sourcename",
+              "startedOn": "0001-01-01T08:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SqlMigrationServices_listMigrations",
+  "title": "List database migrations attached to the service."
+}

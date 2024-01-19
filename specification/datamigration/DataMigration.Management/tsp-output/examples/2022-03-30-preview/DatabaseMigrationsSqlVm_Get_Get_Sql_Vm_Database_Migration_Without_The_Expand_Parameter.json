@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2022-03-30-preview",
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineName": "testvm",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "targetDbName": "db1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "db1",
+        "type": "Microsoft.DataMigration/databaseMigrations",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm/providers/Microsoft.DataMigration/databaseMigrations/db1",
+        "properties": {
+          "backupConfiguration": {
+            "sourceLocation": {
+              "fileStorageType": "FileShare"
+            }
+          },
+          "endedOn": "0001-01-01T08:00:00Z",
+          "kind": "SqlVm",
+          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd",
+          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+          "migrationStatus": "InProgress",
+          "provisioningState": "Succeeded",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+          "sourceDatabaseName": "sourcename",
+          "sourceServerName": "sourceserver",
+          "startedOn": "0001-01-01T08:00:00Z"
+        }
+      }
+    }
+  },
+  "operationId": "DatabaseMigrationsSqlVm_Get",
+  "title": "Get Sql VM database Migration without the expand parameter."
+}

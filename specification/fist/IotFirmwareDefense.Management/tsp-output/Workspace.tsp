@@ -1,0 +1,78 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.IoTFirmwareDefense;
+@doc("Firmware analysis workspace.")
+model Workspace is TrackedResource<WorkspaceProperties> {
+  @doc("The name of the firmware analysis workspace.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  @path
+  @key("workspaceName")
+  @segment("workspaces")
+  name: string;
+}
+
+@armResourceOperations
+interface Workspaces {
+  @doc("Get firmware analysis workspace.")
+  get is ArmResourceRead<Workspace>;
+
+  @doc("The operation to create or update a firmware analysis workspace.")
+  create is ArmResourceCreateOrReplaceSync<Workspace>;
+
+  @doc("The operation to update a firmware analysis workspaces.")
+  update is ArmCustomPatchSync<Workspace, WorkspaceUpdateDefinition>;
+
+  @doc("The operation to delete a firmware analysis workspace.")
+  delete is ArmResourceDeleteSync<Workspace>;
+
+  @doc("Lists all of the firmware analysis workspaces in the specified resource group.")
+  listByResourceGroup is ArmResourceListByParent<Workspace>;
+
+  @doc("Lists all of the firmware analysis workspaces in the specified subscription.")
+  listBySubscription is ArmListBySubscription<Workspace>;
+
+  @doc("The operation to get a url for file upload.")
+  generateUploadUrl is ArmResourceActionSync<
+    Workspace,
+    GenerateUploadUrlRequest,
+    UrlToken
+  >;
+}
+
+@@projectedName(Workspaces.create::parameters.resource, "json", "workspace");
+@@extension(Workspaces.create::parameters.resource,
+  "x-ms-client-name",
+  "workspace"
+);
+@@doc(Workspaces.create::parameters.resource,
+  "Parameters when creating a firmware analysis workspace."
+);
+@@projectedName(Workspaces.update::parameters.properties, "json", "workspace");
+@@extension(Workspaces.update::parameters.properties,
+  "x-ms-client-name",
+  "workspace"
+);
+@@doc(Workspaces.update::parameters.properties,
+  "Parameters when updating a firmware analysis workspace."
+);
+@@projectedName(Workspaces.generateUploadUrl::parameters.body,
+  "json",
+  "generateUploadUrl"
+);
+@@extension(Workspaces.generateUploadUrl::parameters.body,
+  "x-ms-client-name",
+  "generateUploadUrl"
+);
+@@doc(Workspaces.generateUploadUrl::parameters.body,
+  "Parameters when requesting a URL to upload firmware."
+);

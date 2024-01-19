@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01",
+    "privateCloudName": "{privateCloudName}",
+    "resourceGroupName": "group1",
+    "scriptCmdletName": "New-ExternalSsoDomain",
+    "scriptPackageName": "{scriptPackageName}",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "New-ExternalSsoDomain",
+        "type": "Microsoft.AVS/privateClouds/scriptPackages/scriptCmdlets",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/{privateCloudName}/scriptPackages/{scriptPackageName}/scriptCmdlets/New-ExternalSsoDomain",
+        "properties": {
+          "description": "Add an external Sso domain to their vCenter",
+          "parameters": [
+            {
+              "name": "DomainName",
+              "type": "String",
+              "description": "Domain name of the Server",
+              "optional": "Required",
+              "visibility": "Visible"
+            },
+            {
+              "name": "BaseUserDN",
+              "type": "String",
+              "description": "Base User DN of the Server",
+              "optional": "Required",
+              "visibility": "Visible"
+            },
+            {
+              "name": "Password",
+              "type": "SecureString",
+              "description": "Password for authenticating to the server",
+              "optional": "Required",
+              "visibility": "Hidden"
+            }
+          ],
+          "timeout": "P0Y0M0DT0H60M0S"
+        }
+      }
+    }
+  },
+  "operationId": "ScriptCmdlets_Get",
+  "title": "ScriptCmdlets_Get"
+}

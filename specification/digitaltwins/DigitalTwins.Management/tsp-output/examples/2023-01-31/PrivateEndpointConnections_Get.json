@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2023-01-31",
+    "privateEndpointConnectionName": "myPrivateConnection",
+    "resourceGroupName": "resRg",
+    "resourceName": "myDigitalTwinsService",
+    "subscriptionId": "50016170-c839-41ba-a724-51e9df440b9e"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/privateEndpointConnections/myPrivateConnection",
+        "properties": {
+          "groupIds": [
+            "digitalTwinsInstance"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourceGroups/resRg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Please approve my request, thanks.",
+            "actionsRequired": "None",
+            "status": "Pending"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_Get",
+  "title": "Get private endpoint connection properties for the given private endpoint"
+}

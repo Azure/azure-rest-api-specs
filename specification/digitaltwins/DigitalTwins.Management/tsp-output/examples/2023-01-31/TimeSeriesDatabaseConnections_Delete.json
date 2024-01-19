@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2023-01-31",
+    "deleteConnectionArtifacts": "true",
+    "resourceGroupName": "resRg",
+    "resourceName": "myDigitalTwinsService",
+    "subscriptionId": "50016170-c839-41ba-a724-51e9df440b9e",
+    "timeSeriesDatabaseConnectionName": "myConnection"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myConnection",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/timeSeriesDatabaseConnections",
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/timeSeriesDatabaseConnections/myConnection",
+        "properties": {
+          "adxDatabaseName": "myDatabase",
+          "adxEndpointUri": "https://mycluster.kusto.windows.net",
+          "adxResourceId": "/subscriptions/c493073e-2460-45ba-a403-f3e0df1e9feg/resourceGroups/testrg/providers/Microsoft.Kusto/clusters/mycluster",
+          "connectionType": "AzureDataExplorer",
+          "eventHubConsumerGroup": "$Default",
+          "eventHubEndpointUri": "sb://myeh.servicebus.windows.net/",
+          "eventHubEntityPath": "myeh",
+          "eventHubNamespaceResourceId": "/subscriptions/c493073e-2460-45ba-a403-f3e0df1e9feg/resourceGroups/testrg/providers/Microsoft.EventHub/namespaces/myeh",
+          "provisioningState": "Failed"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myConnection",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/timeSeriesDatabaseConnections",
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/timeSeriesDatabaseConnections/myConnection",
+        "properties": {
+          "adxDatabaseName": "myDatabase",
+          "adxEndpointUri": "https://mycluster.kusto.windows.net",
+          "adxResourceId": "/subscriptions/c493073e-2460-45ba-a403-f3e0df1e9feg/resourceGroups/testrg/providers/Microsoft.Kusto/clusters/mycluster",
+          "adxTableName": "myTable",
+          "connectionType": "AzureDataExplorer",
+          "eventHubConsumerGroup": "$Default",
+          "eventHubEndpointUri": "sb://myeh.servicebus.windows.net/",
+          "eventHubEntityPath": "myeh",
+          "eventHubNamespaceResourceId": "/subscriptions/c493073e-2460-45ba-a403-f3e0df1e9feg/resourceGroups/testrg/providers/Microsoft.EventHub/namespaces/myeh",
+          "provisioningState": "Deleting"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/providers/Microsoft.DigitalTwins/locations/westus2/operationStatuses/12345678-1234-1234-123456789012",
+        "location": "https://management.azure.com/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/providers/Microsoft.DigitalTwins/locations/westus2/operationResults/12345678-1234-1234-123456789012",
+        "retry-after": "10"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "TimeSeriesDatabaseConnections_Delete",
+  "title": "Delete a time series database connection for a DigitalTwins instance."
+}

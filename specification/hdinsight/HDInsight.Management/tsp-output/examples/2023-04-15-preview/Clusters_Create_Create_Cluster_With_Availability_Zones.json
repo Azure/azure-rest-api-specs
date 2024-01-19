@@ -1,0 +1,197 @@
+{
+  "parameters": {
+    "api-version": "2023-04-15-preview",
+    "clusterName": "cluster1",
+    "parameters": {
+      "properties": {
+        "clusterDefinition": {
+          "configurations": {
+            "ambari-conf": {
+              "database-name": "{ambari database name}",
+              "database-server": "{sql server name}.database.windows.net",
+              "database-user-name": "**********",
+              "database-user-password": "**********"
+            },
+            "gateway": {
+              "restAuthCredential.isEnabled": true,
+              "restAuthCredential.password": "**********",
+              "restAuthCredential.username": "admin"
+            },
+            "hive-env": {
+              "hive_database": "Existing MSSQL Server database with SQL authentication",
+              "hive_database_name": "{hive metastore name}",
+              "hive_database_type": "mssql",
+              "hive_existing_mssql_server_database": "{hive metastore name}",
+              "hive_existing_mssql_server_host": "{sql server name}.database.windows.net",
+              "hive_hostname": "{sql server name}.database.windows.net"
+            },
+            "hive-site": {
+              "javax.jdo.option.ConnectionDriverName": "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+              "javax.jdo.option.ConnectionPassword": "**********!",
+              "javax.jdo.option.ConnectionURL": "jdbc:sqlserver://{sql server name}.database.windows.net;database={hive metastore name};encrypt=true;trustServerCertificate=true;create=false;loginTimeout=300;sendStringParametersAsUnicode=true;prepareSQL=0",
+              "javax.jdo.option.ConnectionUserName": "**********"
+            },
+            "oozie-env": {
+              "oozie_database": "Existing MSSQL Server database with SQL authentication",
+              "oozie_database_name": "{oozie metastore name}",
+              "oozie_database_type": "mssql",
+              "oozie_existing_mssql_server_database": "{oozie metastore name}",
+              "oozie_existing_mssql_server_host": "{sql server name}.database.windows.net",
+              "oozie_hostname": "{sql server name}.database.windows.net"
+            },
+            "oozie-site": {
+              "oozie.db.schema.name": "oozie",
+              "oozie.service.JPAService.jdbc.driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+              "oozie.service.JPAService.jdbc.password": "**********",
+              "oozie.service.JPAService.jdbc.url": "jdbc:sqlserver://{sql server name}.database.windows.net;database={oozie metastore name};encrypt=true;trustServerCertificate=true;create=false;loginTimeout=300;sendStringParametersAsUnicode=true;prepareSQL=0",
+              "oozie.service.JPAService.jdbc.username": "**********"
+            }
+          },
+          "kind": "hadoop"
+        },
+        "clusterVersion": "3.6",
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "headnode",
+              "hardwareProfile": {
+                "vmSize": "standard_d3"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  },
+                  "username": "sshuser"
+                }
+              },
+              "targetInstanceCount": 2,
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+              }
+            },
+            {
+              "name": "workernode",
+              "hardwareProfile": {
+                "vmSize": "standard_d3"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "password": "**********",
+                  "sshProfile": {
+                    "publicKeys": [
+                      {
+                        "certificateData": "**********"
+                      }
+                    ]
+                  },
+                  "username": "sshuser"
+                }
+              },
+              "targetInstanceCount": 2,
+              "virtualNetworkProfile": {
+                "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+              }
+            }
+          ]
+        },
+        "osType": "Linux",
+        "storageProfile": {
+          "storageaccounts": [
+            {
+              "name": "mystorage",
+              "container": "containername",
+              "enableSecureChannel": true,
+              "isDefault": true,
+              "key": "storage account key"
+            }
+          ]
+        }
+      },
+      "zones": [
+        "1"
+      ]
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusters",
+        "etag": "fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
+        "location": "South Central US",
+        "properties": {
+          "clusterDefinition": {
+            "blueprint": "https://blueprints.azurehdinsight.net/hadoop-3.6.1000.67.2005040905.json",
+            "kind": "hadoop"
+          },
+          "clusterId": "8186508b6234470e9d16c9e8e13bd821",
+          "clusterState": "Running",
+          "clusterVersion": "3.6.1000.67",
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "headnode",
+                "hardwareProfile": {
+                  "vmSize": "standard_d3"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                },
+                "targetInstanceCount": 2,
+                "virtualNetworkProfile": {
+                  "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                  "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+                }
+              },
+              {
+                "name": "workernode",
+                "hardwareProfile": {
+                  "vmSize": "standard_d3"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                },
+                "targetInstanceCount": 2,
+                "virtualNetworkProfile": {
+                  "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname",
+                  "subnet": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/vnetsubnet"
+                }
+              }
+            ]
+          },
+          "createdDate": "2020-06-09T12:25:43.48",
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "quotaInfo": {
+            "coresUsed": 16
+          },
+          "tier": "Standard"
+        },
+        "tags": null,
+        "zones": [
+          "1"
+        ]
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/azureasyncoperations/create?api-version=2023-04-15-preview"
+      }
+    }
+  },
+  "operationId": "Clusters_Create",
+  "title": "Create cluster with availability zones"
+}

@@ -1,6 +1,6 @@
 ##output folder is C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management
-##Generating metadata with csharp codegen in C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\elasticsan\ElasticSan.Management with https://aka.ms/azsdk/openapi-to-typespec-csharp
-autorest --csharp --max-memory-size=8192 --use="https://aka.ms/azsdk/openapi-to-typespec-csharp" --output-folder=C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\elasticsan\ElasticSan.Management --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management\TspReadme.md
+##Generating metadata with csharp codegen in C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management with https://aka.ms/azsdk/openapi-to-typespec-csharp
+autorest --csharp --max-memory-size=8192 --use="https://aka.ms/azsdk/openapi-to-typespec-csharp" --output-folder=C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management\TspReadme.md
 AutoRest code generation utility [cli version: 3.6.3; node: v20.9.0]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
@@ -391,17 +391,17 @@ warning | PreCheck/CheckDuplicateSchemas | Checking for duplicate schemas, this 
 warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ErrorResponse' (4 differences):
   - properties.code: {"$ref":"#/components/schemas/schemas:33","description":"Error code."} => <none>
   - properties.message: {"$ref":"#/components/schemas/schemas:34","description":"Error message indicating why the operation failed."} => <none>
-  - properties.error: <none> => {"description":"The error object.","$ref":"#/components/schemas/schemas:1488"}
+  - properties.error: <none> => {"description":"The error object.","$ref":"#/components/schemas/schemas:1407"}
   - title: <none> => "Error response"
 warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ProvisioningState' (2 differences):
   - enum: <none> => ["Succeeded","Failed","Canceled","InProgress","Updating","Dropping"]
   - x-ms-enum: <none> => {"name":"ProvisioningState","modelAsString":true}
 warning | PreCheck/DuplicateSchema | Duplicate Schema named 'Resource' (3 differences):
-  - properties.id.$ref: "#/components/schemas/schemas:1184" => "#/components/schemas/schemas:1455"
-  - properties.id.description: "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}" => "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
-  - properties.systemData: <none> => {"readOnly":true,"type":"object","description":"Azure Resource Manager metadata containing createdBy and modifiedBy information.","$ref":"#/components/schemas/schemas:1249"}
+  - properties.id.$ref: "#/components/schemas/schemas:1374" => "#/components/schemas/schemas:1472"
+  - properties.id.description: "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"" => "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+  - properties.systemData: {"readOnly":true,"type":"object","description":"Azure Resource Manager metadata containing createdBy and modifiedBy information.","$ref":"#/components/schemas/schemas:1443"} => <none>
 warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ProxyResource' (1 differences):
-  - allOf.0.$ref: "#/components/schemas/schemas:1183" => "#/components/schemas/schemas:1454"
+  - allOf.0.$ref: "#/components/schemas/schemas:1373" => "#/components/schemas/schemas:1471"
 warning | PreCheck/PropertyRedeclarationWarning | Schema 'DatabaseAccountCreateUpdateParameters' has a property 'identity' that is already declared the parent schema 'ARMResourceProperties' but isn't significantly different. The property has been removed from DatabaseAccountCreateUpdateParameters
 warning | PreCheck/PropertyRedeclarationWarning | Schema 'RestoreParameters' has a property 'restoreSource' that is already declared the parent schema 'RestoreParametersBase' but isn't significantly different. The property has been removed from RestoreParameters
 warning | PreCheck/PropertyRedeclarationWarning | Schema 'RestoreParameters' has a property 'restoreTimestampInUtc' that is already declared the parent schema 'RestoreParametersBase' but isn't significantly different. The property has been removed from RestoreParameters
@@ -410,9 +410,9 @@ warning | SecurityDefinedSpecAndConfig | OpenAPI spec has a security definition 
 warning | PreNamer/DeduplicateName | Deduplicating schema name: 'ProxyResource' -> 'ProxyResourceAutoGenerated'
 warning | PreNamer/DeduplicateName | Deduplicating schema name: 'Resource' -> 'ResourceAutoGenerated'
 warning | PreNamer/DeduplicateName | Deduplicating schema name: 'ErrorResponse' -> 'ErrorResponseAutoGenerated'
-info    | Autorest completed in 114.35s. 1 files generated.
-##Converting from swagger to tsp with in C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\elasticsan\ElasticSan.Management with https://chenjieshistorage.blob.core.windows.net/package-store/autorest-openapi-to-typespec-0.7.0-ci.58f8fedc0.tgz
-autorest --openapi-to-typespec --isArm --use="https://chenjieshistorage.blob.core.windows.net/package-store/autorest-openapi-to-typespec-0.7.0-ci.58f8fedc0.tgz" --output-folder=C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\elasticsan\ElasticSan.Management --src-path=tsp-output C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management\TspReadme.md
+info    | Autorest completed in 108.35s. 1 files generated.
+##Converting from swagger to tsp with in C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management with https://chenjieshistorage.blob.core.windows.net/package-store/autorest-openapi-to-typespec-0.7.0-ci.58f8fedc0.tgz
+autorest --openapi-to-typespec --isArm --use="https://chenjieshistorage.blob.core.windows.net/package-store/autorest-openapi-to-typespec-0.7.0-ci.58f8fedc0.tgz" --output-folder=C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management --src-path=tsp-output C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management\TspReadme.md
 AutoRest code generation utility [cli version: 3.6.3; node: v20.9.0]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
@@ -802,17 +802,17 @@ warning | PreCheck/CheckDuplicateSchemas | Checking for duplicate schemas, this 
 warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ErrorResponse' (4 differences):
   - properties.code: {"$ref":"#/components/schemas/schemas:33","description":"Error code."} => <none>
   - properties.message: {"$ref":"#/components/schemas/schemas:34","description":"Error message indicating why the operation failed."} => <none>
-  - properties.error: <none> => {"description":"The error object.","$ref":"#/components/schemas/schemas:1488"}
+  - properties.error: <none> => {"description":"The error object.","$ref":"#/components/schemas/schemas:1390"}
   - title: <none> => "Error response"
 warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ProvisioningState' (2 differences):
   - enum: <none> => ["Succeeded","Failed","Canceled","InProgress","Updating","Dropping"]
   - x-ms-enum: <none> => {"name":"ProvisioningState","modelAsString":true}
 warning | PreCheck/DuplicateSchema | Duplicate Schema named 'Resource' (3 differences):
-  - properties.id.$ref: "#/components/schemas/schemas:1184" => "#/components/schemas/schemas:1455"
+  - properties.id.$ref: "#/components/schemas/schemas:1276" => "#/components/schemas/schemas:1357"
   - properties.id.description: "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}" => "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
-  - properties.systemData: <none> => {"readOnly":true,"type":"object","description":"Azure Resource Manager metadata containing createdBy and modifiedBy information.","$ref":"#/components/schemas/schemas:1249"}
+  - properties.systemData: <none> => {"readOnly":true,"type":"object","description":"Azure Resource Manager metadata containing createdBy and modifiedBy information.","$ref":"#/components/schemas/schemas:1341"}
 warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ProxyResource' (1 differences):
-  - allOf.0.$ref: "#/components/schemas/schemas:1183" => "#/components/schemas/schemas:1454"
+  - allOf.0.$ref: "#/components/schemas/schemas:1275" => "#/components/schemas/schemas:1356"
 warning | PreCheck/PropertyRedeclarationWarning | Schema 'DatabaseAccountCreateUpdateParameters' has a property 'identity' that is already declared the parent schema 'ARMResourceProperties' but isn't significantly different. The property has been removed from DatabaseAccountCreateUpdateParameters
 warning | PreCheck/PropertyRedeclarationWarning | Schema 'RestoreParameters' has a property 'restoreSource' that is already declared the parent schema 'RestoreParametersBase' but isn't significantly different. The property has been removed from RestoreParameters
 warning | PreCheck/PropertyRedeclarationWarning | Schema 'RestoreParameters' has a property 'restoreTimestampInUtc' that is already declared the parent schema 'RestoreParametersBase' but isn't significantly different. The property has been removed from RestoreParameters

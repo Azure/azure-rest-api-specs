@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "name": "myMachineName",
+    "api-version": "2023-10-03-preview",
+    "installPatchesInput": {
+      "maximumDuration": "PT4H",
+      "rebootSetting": "IfRequired",
+      "windowsParameters": {
+        "classificationsToInclude": [
+          "Critical",
+          "Security"
+        ],
+        "maxPatchPublishDate": "2021-08-19T02:36:43.0539904+00:00"
+      }
+    },
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "errorDetails": null,
+        "excludedPatchCount": 0,
+        "failedPatchCount": 0,
+        "installationActivityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+        "installedPatchCount": 3,
+        "lastModifiedDateTime": "2021-08-22T02:16:06.9740000Z",
+        "maintenanceWindowExceeded": false,
+        "notSelectedPatchCount": 0,
+        "osType": "Windows",
+        "pendingPatchCount": 2,
+        "rebootStatus": "Completed",
+        "startDateTime": "2021-08-22T02:15:06.9740000Z",
+        "startedBy": "User",
+        "status": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "eastus2euap"
+      }
+    }
+  },
+  "operationId": "Machines_InstallPatches",
+  "title": "Install patch state of a machine."
+}

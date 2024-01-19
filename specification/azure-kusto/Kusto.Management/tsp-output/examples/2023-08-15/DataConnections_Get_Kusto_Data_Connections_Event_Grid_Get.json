@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2023-08-15",
+    "clusterName": "kustoCluster",
+    "dataConnectionName": "dataConnectionTest",
+    "databaseName": "KustoDatabase8",
+    "resourceGroupName": "kustorptest",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "kustoCluster/KustoDatabase8/dataConnectionTest",
+        "type": "Microsoft.Kusto/Clusters/Databases/DataConnections",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8/DataConnections/KustoDataConnection9",
+        "kind": "EventGrid",
+        "location": "westus",
+        "properties": {
+          "blobStorageEventType": "Microsoft.Storage.BlobCreated",
+          "consumerGroup": "$Default",
+          "dataFormat": "JSON",
+          "databaseRouting": "Single",
+          "eventGridResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Storage/storageAccounts/teststorageaccount/providers/Microsoft.EventGrid/eventSubscriptions/eventSubscriptionTest",
+          "eventHubResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest2",
+          "ignoreFirstRecord": false,
+          "managedIdentityObjectId": "87654321-1234-1234-1234-123456789123",
+          "managedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/managedidentityTest1",
+          "mappingRuleName": "TestMapping",
+          "provisioningState": "Succeeded",
+          "storageAccountResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Storage/storageAccounts/teststorageaccount",
+          "tableName": "TestTable"
+        }
+      }
+    }
+  },
+  "operationId": "DataConnections_Get",
+  "title": "KustoDataConnectionsEventGridGet"
+}

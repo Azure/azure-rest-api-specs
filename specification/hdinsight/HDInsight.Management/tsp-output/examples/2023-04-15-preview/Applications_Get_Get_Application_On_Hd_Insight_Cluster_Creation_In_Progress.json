@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2023-04-15-preview",
+    "applicationName": "app",
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "app",
+        "type": "Microsoft.HDInsight/clusters/applications",
+        "etag": "2C128F8E-BB26-4637-99E4-18EBC39FD51F",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/app",
+        "properties": {
+          "applicationState": "AzureVMConfiguration",
+          "applicationType": "CustomApplication",
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "edgenode",
+                "hardwareProfile": {
+                  "vmSize": "Standard_D3"
+                },
+                "targetInstanceCount": 1
+              }
+            ]
+          },
+          "createdDate": "2017-03-28T02:01:25.107",
+          "httpsEndpoints": [
+            {
+              "accessModes": [
+                "WebPage"
+              ],
+              "destinationPort": 18630,
+              "location": "location",
+              "publicPort": 443
+            }
+          ],
+          "installScriptActions": [
+            {
+              "name": "app-Install",
+              "roles": [
+                "edgenode"
+              ],
+              "uri": "https://app.com/azure/app_install.sh"
+            }
+          ],
+          "marketplaceIdentifier": "id",
+          "provisioningState": "InProgress",
+          "sshEndpoints": [],
+          "uninstallScriptActions": []
+        },
+        "tags": {
+          "key1": "val1"
+        }
+      }
+    }
+  },
+  "operationId": "Applications_Get",
+  "title": "Get application on HDInsight cluster creation in progress"
+}

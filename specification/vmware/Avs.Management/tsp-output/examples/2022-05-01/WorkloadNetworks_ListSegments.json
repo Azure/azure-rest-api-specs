@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01",
+    "privateCloudName": "cloud1",
+    "resourceGroupName": "group1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "segment1",
+            "type": "Microsoft.AVS/privateClouds/workloadNetworks/segments",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/workloadNetworks/default/segments/segment1",
+            "properties": {
+              "connectedGateway": "/infra/tier-1s/gateway",
+              "displayName": "segment1",
+              "portVif": [
+                {
+                  "portName": "vm1"
+                }
+              ],
+              "revision": 1,
+              "status": "SUCCESS",
+              "subnet": {
+                "dhcpRanges": [
+                  "40.20.0.0-40.20.0.1"
+                ],
+                "gatewayAddress": "40.20.20.20/16"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WorkloadNetworks_ListSegments",
+  "title": "WorkloadNetworks_ListSegments"
+}

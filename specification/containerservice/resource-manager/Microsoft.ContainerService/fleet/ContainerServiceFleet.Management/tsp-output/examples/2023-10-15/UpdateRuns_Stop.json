@@ -1,0 +1,99 @@
+{
+  "operationId": "UpdateRuns_Stop",
+  "parameters": {
+    "api-version": "2023-10-15",
+    "fleetName": "fleet1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "updateRunName": "run1"
+  },
+  "title": "Stops an UpdateRun.",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "run1",
+        "type": "Microsoft.ContainerService/fleets/updateRuns",
+        "eTag": "\"EtagValue\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/fleets/myFleet/updateRuns/run1",
+        "properties": {
+          "managedClusterUpdate": {
+            "nodeImageSelection": {
+              "type": "Latest"
+            },
+            "upgrade": {
+              "type": "Full",
+              "kubernetesVersion": "1.26.1"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": {
+            "stages": [
+              {
+                "name": "stage1",
+                "afterStageWaitStatus": {
+                  "status": {
+                    "state": "NotStarted"
+                  },
+                  "waitDurationInSeconds": 3600
+                },
+                "groups": [
+                  {
+                    "name": "group-a",
+                    "members": [
+                      {
+                        "name": "member-one",
+                        "clusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myClusters/providers/Microsoft.ContainerService/managedClusters/myCluster",
+                        "status": {
+                          "state": "Stopping"
+                        }
+                      }
+                    ],
+                    "status": {
+                      "startTime": "2023-03-01T01:10:08.395Z",
+                      "state": "Stopping"
+                    }
+                  }
+                ],
+                "status": {
+                  "startTime": "2023-03-01T01:10:08.395Z",
+                  "state": "Stopping"
+                }
+              }
+            ],
+            "status": {
+              "startTime": "2023-03-01T01:10:08.395Z",
+              "state": "Stopping"
+            }
+          },
+          "strategy": {
+            "stages": [
+              {
+                "name": "stage1",
+                "afterStageWaitInSeconds": 3600,
+                "groups": [
+                  {
+                    "name": "group-a"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdAt": "2023-03-01T01:09:08.395Z",
+          "createdBy": "@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-03-01T01:10:08.395Z",
+          "lastModifiedBy": "@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-02-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-02-01"
+      }
+    }
+  }
+}

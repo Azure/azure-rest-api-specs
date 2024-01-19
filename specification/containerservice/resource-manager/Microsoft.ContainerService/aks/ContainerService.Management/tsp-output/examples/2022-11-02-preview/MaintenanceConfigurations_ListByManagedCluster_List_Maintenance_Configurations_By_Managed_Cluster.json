@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2022-11-02-preview",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "subid1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/default",
+            "properties": {
+              "notAllowedTime": [
+                {
+                  "end": "2020-11-30T12:00:00Z",
+                  "start": "2020-11-26T03:00:00Z"
+                }
+              ],
+              "timeInWeek": [
+                {
+                  "day": "Monday",
+                  "hourSlots": [
+                    1,
+                    2
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "MaintenanceConfigurations_ListByManagedCluster",
+  "title": "List maintenance configurations by Managed Cluster"
+}

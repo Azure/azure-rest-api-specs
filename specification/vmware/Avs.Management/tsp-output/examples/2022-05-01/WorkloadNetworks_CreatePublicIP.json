@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2022-05-01",
+    "privateCloudName": "cloud1",
+    "publicIPId": "publicIP1",
+    "resourceGroupName": "group1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workloadNetworkPublicIP": {
+      "properties": {
+        "displayName": "publicIP1",
+        "numberOfPublicIPs": 32
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "publicIP1",
+        "type": "Microsoft.AVS/privateClouds/workloadNetworks/publicIPs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/workloadNetworks/default/publicIPs/publicIP1",
+        "properties": {
+          "displayName": "publicIP1",
+          "publicIPBlock": "20.20.40.50/32"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "publicIP1",
+        "type": "Microsoft.AVS/privateClouds/workloadNetworks/publicIPs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/workloadNetworks/default/publicIPs/publicIP1",
+        "properties": {
+          "displayName": "publicIP1",
+          "publicIPBlock": "20.20.40.50/32"
+        }
+      }
+    }
+  },
+  "operationId": "WorkloadNetworks_CreatePublicIP",
+  "title": "WorkloadNetworks_CreatePublicIP"
+}

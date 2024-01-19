@@ -1,0 +1,126 @@
+{
+  "parameters": {
+    "$skipToken": "1",
+    "$top": "100",
+    "api-version": "2022-11-16-preview",
+    "offerGuid": "00000000-0000-0000-0000-000000000000",
+    "reportCreatorTenantId": "00000000-0000-0000-0000-000000000000",
+    "reportName": "testReportName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/reports/testReportName/snapshots?api-version=2022-11-16-preview&skipToken=1&top=100",
+        "value": [
+          {
+            "name": "testSnapshot",
+            "type": "Microsfot.AppComplianceAutomation/reports/snapshots",
+            "id": "/provider/Microsfot.AppComplianceAutomation/reports/testReportName/snapshots/testSnapshot",
+            "properties": {
+              "complianceResults": [
+                {
+                  "categories": [
+                    {
+                      "categoryName": "Operational Security",
+                      "categoryStatus": "Healthy",
+                      "categoryType": "PartiallyAutomated",
+                      "controlFamilies": [
+                        {
+                          "controls": [
+                            {
+                              "assessments": [
+                                {
+                                  "name": "AssessmentName",
+                                  "description": "Assessment Description",
+                                  "isPass": "True",
+                                  "policyId": "00000000-0000-0000-0000-000000000000",
+                                  "remediation": "Remediation",
+                                  "resourceList": [
+                                    {
+                                      "reason": "N/A",
+                                      "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+                                      "resourceStatus": "Healthy",
+                                      "statusChangeDate": "2022-03-04"
+                                    }
+                                  ],
+                                  "severity": "High"
+                                }
+                              ],
+                              "controlDescription": "Provide demonstrable evidence that all member of the incident response team have completed annual training or a table top exercise",
+                              "controlDescriptionHyperLink": "https://doc.microsoft.com",
+                              "controlFullName": "Provide demonstrable evidence that all member of the incident response team have completed annual training or a table top exercise",
+                              "controlId": "Operational Security#75",
+                              "controlShortName": "Provide demonstrable evidence that all member of the incident response team have completed annual training or a table top exercise",
+                              "controlStatus": "Passed",
+                              "controlType": "Manual"
+                            }
+                          ],
+                          "familyName": "Incident Response",
+                          "familyStatus": "Healthy",
+                          "familyType": "PartiallyAutomated"
+                        }
+                      ]
+                    }
+                  ],
+                  "complianceName": "M365"
+                }
+              ],
+              "createdAt": "2022-03-04T15:33:59.160Z",
+              "id": "00000000-0000-0000-0000-000000000000",
+              "provisioningState": "Succeeded",
+              "reportProperties": {
+                "complianceStatus": {
+                  "m365": {
+                    "failedCount": 0,
+                    "manualCount": 0,
+                    "passedCount": 0
+                  }
+                },
+                "id": "00000000-0000-0000-0000-000000000000",
+                "lastTriggerTime": "2022-03-04T15:33:59.160Z",
+                "nextTriggerTime": "2022-03-04T15:33:59.160Z",
+                "offerGuid": "00000000-0000-0000-0000-000000000000",
+                "provisioningState": "Succeeded",
+                "reportName": "testReportName",
+                "resources": [
+                  {
+                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+                    "tags": {
+                      "key1": "value1"
+                    }
+                  }
+                ],
+                "status": "Active",
+                "subscriptions": [
+                  "00000000-0000-0000-0000-000000000000"
+                ],
+                "tenantId": "00000000-0000-0000-0000-000000000000",
+                "timeZone": "GMT Standard Time",
+                "triggerTime": "2022-03-04T15:33:59.160Z"
+              },
+              "reportSystemData": {
+                "createdAt": "2021-05-14T22:34:55.4499903Z",
+                "createdBy": "00000000-0000-0000-0000-000000000000",
+                "createdByType": "User",
+                "lastModifiedAt": "2021-05-14T22:34:55.4499903Z",
+                "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
+                "lastModifiedByType": "User"
+              },
+              "snapshotName": "testSnapshot"
+            },
+            "systemData": {
+              "createdAt": "2021-05-14T22:34:55.4499903Z",
+              "createdBy": "00000000-0000-0000-0000-000000000000",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-05-14T22:34:55.4499903Z",
+              "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Snapshots_List",
+  "title": "Snapshots_List"
+}

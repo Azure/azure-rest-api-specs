@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2016-01-01",
+    "connectorName": "testConnector8858",
+    "hubName": "sdkTestHub",
+    "resourceGroupName": "TestHubRG",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sdkTestHub/testConnector8858/testMapping12491",
+            "type": "Microsoft.CustomerInsights/hubs/connectors/mappings",
+            "id": "/subscriptions/c909e979-ef71-4def-a970-bc7c154db8c5/resourceGroups/TestHubRG/providers/Microsoft.CustomerInsights/hubs/sdkTestHub/connectors/testConnector8858/mappings/testMapping12491",
+            "properties": {
+              "description": "Test mapping",
+              "connectorMappingName": "testMapping12491",
+              "connectorName": "testConnector8858",
+              "connectorType": "AzureBlob",
+              "dataFormatId": "4619d4e7e8a64c1e9bc34907f9f46505",
+              "displayName": "testMapping12491",
+              "entityType": "Interaction",
+              "entityTypeName": "TestInteractionType2967",
+              "mappingProperties": {
+                "format": {
+                  "acceptLanguage": "",
+                  "arraySeparator": ";",
+                  "columnDelimiter": "|",
+                  "formatType": "TextFormat",
+                  "quoteCharacter": "\\\"",
+                  "quoteEscapeCharacter": "\\\""
+                },
+                "availability": {
+                  "frequency": "Hour",
+                  "interval": 5
+                },
+                "completeOperation": {
+                  "completionOperationType": "DeleteFile",
+                  "destinationFolder": "fakePath"
+                },
+                "errorManagement": {
+                  "errorLimit": 10,
+                  "errorManagementType": "StopImport"
+                },
+                "fileFilter": "unknown",
+                "folderPath": "http://sample.dne/file",
+                "hasHeader": false,
+                "structure": [
+                  {
+                    "columnName": "unknown1",
+                    "isEncrypted": false,
+                    "propertyName": "unknwon1"
+                  },
+                  {
+                    "columnName": "unknown2",
+                    "isEncrypted": true,
+                    "propertyName": "unknwon2"
+                  }
+                ]
+              },
+              "state": "Created",
+              "tenantId": "sdktesthub"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ConnectorMappings_ListByConnector",
+  "title": "ConnectorMappings_ListByConnector"
+}

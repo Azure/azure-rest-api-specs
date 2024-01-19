@@ -1,0 +1,226 @@
+{
+  "parameters": {
+    "api-version": "2023-04-15-preview",
+    "clusterName": "cluster1",
+    "parameters": {
+      "properties": {
+        "clusterDefinition": {
+          "componentVersion": {
+            "Kafka": "2.1"
+          },
+          "configurations": {
+            "gateway": {
+              "restAuthCredential.isEnabled": true,
+              "restAuthCredential.password": "**********",
+              "restAuthCredential.username": "admin"
+            }
+          },
+          "kind": "kafka"
+        },
+        "clusterVersion": "4.0",
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "headnode",
+              "hardwareProfile": {
+                "vmSize": "Large"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "password": "**********",
+                  "username": "sshuser"
+                }
+              },
+              "targetInstanceCount": 2
+            },
+            {
+              "name": "workernode",
+              "dataDisksGroups": [
+                {
+                  "disksPerNode": 8
+                }
+              ],
+              "hardwareProfile": {
+                "vmSize": "Large"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "password": "**********",
+                  "username": "sshuser"
+                }
+              },
+              "targetInstanceCount": 3
+            },
+            {
+              "name": "zookeepernode",
+              "hardwareProfile": {
+                "vmSize": "Small"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "password": "**********",
+                  "username": "sshuser"
+                }
+              },
+              "targetInstanceCount": 3
+            },
+            {
+              "name": "kafkamanagementnode",
+              "hardwareProfile": {
+                "vmSize": "Standard_D4_v2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "password": "**********",
+                  "username": "kafkauser"
+                }
+              },
+              "targetInstanceCount": 2
+            }
+          ]
+        },
+        "kafkaRestProperties": {
+          "clientGroupInfo": {
+            "groupId": "00000000-0000-0000-0000-111111111111",
+            "groupName": "Kafka security group name"
+          }
+        },
+        "osType": "Linux",
+        "storageProfile": {
+          "storageaccounts": [
+            {
+              "name": "mystorage.blob.core.windows.net",
+              "container": "containername",
+              "enableSecureChannel": true,
+              "isDefault": true,
+              "key": "storagekey"
+            }
+          ]
+        },
+        "tier": "Standard"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusters",
+        "etag": "e1266b83-9bda-4797-a906-1bf82c8eb09a",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
+        "location": "South Central US",
+        "properties": {
+          "clusterDefinition": {
+            "blueprint": "https://blueprints.azurehdinsight.net/kafka-4.0.1000.1.1911212244.json",
+            "componentVersion": {
+              "Kafka": "2.1"
+            },
+            "kind": "KAFKA"
+          },
+          "clusterState": "Running",
+          "clusterVersion": "4.0.1000.1",
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "headnode",
+                "hardwareProfile": {
+                  "vmSize": "standard_d3_v2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                },
+                "targetInstanceCount": 2
+              },
+              {
+                "name": "workernode",
+                "dataDisksGroups": [
+                  {
+                    "diskSizeGB": 1023,
+                    "disksPerNode": 2,
+                    "storageAccountType": "Standard_LRS"
+                  }
+                ],
+                "hardwareProfile": {
+                  "vmSize": "standard_d3_v2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                },
+                "targetInstanceCount": 4
+              },
+              {
+                "name": "kafkamanagementnode",
+                "hardwareProfile": {
+                  "vmSize": "standard_d4_v2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                },
+                "targetInstanceCount": 2
+              },
+              {
+                "name": "zookeepernode",
+                "hardwareProfile": {
+                  "vmSize": "standard_a4_v2"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser"
+                  }
+                },
+                "targetInstanceCount": 3
+              }
+            ]
+          },
+          "connectivityEndpoints": [
+            {
+              "name": "SSH",
+              "location": "cluster1-ssh.azurehdinsight.net",
+              "port": 22,
+              "protocol": "TCP"
+            },
+            {
+              "name": "HTTPS",
+              "location": "cluster1.azurehdinsight.net",
+              "port": 443,
+              "protocol": "TCP"
+            },
+            {
+              "name": "KafkaRestProxyPublicEndpoint",
+              "location": "cluster1-kafkarest.azurehdinsight.net",
+              "port": 443,
+              "protocol": "TCP"
+            }
+          ],
+          "createdDate": "2019-11-25T03:43:23.663",
+          "kafkaRestProperties": {
+            "clientGroupInfo": {
+              "groupId": "00000000-0000-0000-0000-000000000000",
+              "groupName": "security group name"
+            }
+          },
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "quotaInfo": {
+            "coresUsed": 52
+          },
+          "tier": "Standard"
+        },
+        "tags": null
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/azureasyncoperations/create?api-version=2023-04-15-preview"
+      }
+    }
+  },
+  "operationId": "Clusters_Create",
+  "title": "Create Kafka cluster with Kafka Rest Proxy"
+}

@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "assignmentName": "assignSimpleBlueprint",
+    "resourceScope": "subscriptions/00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "assignSimpleBlueprint",
+        "type": "Microsoft.Blueprint/Assignment",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "location": "eastus",
+        "properties": {
+          "description": "enforce pre-defined simpleBlueprint to this XXXXXXXX subscription.",
+          "blueprintId": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint",
+          "parameters": {
+            "costCenter": {
+              "value": "Contoso/Online/Shopping/Production"
+            },
+            "owners": {
+              "value": [
+                "johnDoe@contoso.com",
+                "johnsteam@contoso.com"
+              ]
+            },
+            "storageAccountType": {
+              "value": "Standard_LRS"
+            }
+          },
+          "provisioningState": "succeed",
+          "resourceGroups": {
+            "storageRG": {
+              "name": "defaultRG",
+              "location": "eastus"
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Assignments_Get",
+  "title": "Assignment at subscription scope"
+}

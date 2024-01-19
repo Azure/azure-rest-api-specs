@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./VolumeGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -10,64 +11,70 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.NetworkCloud;
-@doc("Volume represents storage made available for use by resources running on the cluster.")
-model Volume is TrackedResource<VolumeProperties> {
-  @doc("The name of the volume.")
-  @pattern("^([a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])$")
+namespace Microsoft.ElasticSan;
+@doc("Response for Volume request.")
+@parentResource(VolumeGroup)
+model Volume is ProxyResource<VolumeProperties> {
+  @doc("The name of the Volume.")
+  @maxLength(63)
+  @minLength(3)
+  @pattern("^[a-z0-9]+(-[a-z0-9A-Z]+)*$")
   @path
   @key("volumeName")
   @segment("volumes")
   name: string;
-
-  @doc("The extended location of the cluster associated with the resource.")
-  extendedLocation: ExtendedLocation;
 }
 
 @armResourceOperations
 interface Volumes {
-  @doc("Get properties of the provided volume.")
+  @doc("Get an Volume.")
   get is ArmResourceRead<Volume>;
 
-  @doc("Create a new volume or update the properties of the existing one.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    Volume,
-    BaseParameters<Volume>,
-    ArmAsyncOperationHeader
-  >;
-
-  @doc("Update tags associated with the provided volume.")
-  update is ArmCustomPatchSync<Volume, VolumePatchParameters>;
-
-  @doc("Delete the provided volume.")
-  delete is ArmResourceDeleteAsync<
+  @doc("Create a Volume.")
+  create is ArmResourceCreateOrUpdateAsync<
     Volume,
     BaseParameters<Volume>,
     ArmLroLocationHeader
   >;
 
-  @doc("Get a list of volumes in the provided resource group.")
-  listByResourceGroup is ArmResourceListByParent<Volume>;
+  @doc("Update an Volume.")
+  update is ArmCustomPatchAsync<
+    Volume,
+    VolumeUpdate,
+    BaseParameters<Volume>,
+    ArmLroLocationHeader
+  >;
 
-  @doc("Get a list of volumes in the provided subscription.")
-  listBySubscription is ArmListBySubscription<Volume>;
+  @doc("Delete an Volume.")
+  delete is ArmResourceDeleteAsync<
+    Volume,
+    {
+      ...BaseParameters<Volume>;
+
+      @doc("Optional, used to delete snapshots under volume. Allowed value are only true or false. Default value is false.")
+      @header
+      `x-ms-delete-snapshots`?: XMsDeleteSnapshots;
+
+      @doc("Optional, used to delete volume if active sessions present. Allowed value are only true or false. Default value is false.")
+      @header
+      `x-ms-force-delete`?: XMsForceDelete;
+    },
+    ArmLroLocationHeader
+  >;
+
+  @doc("List Volumes in a VolumeGroup.")
+  listByVolumeGroup is ArmResourceListByParent<Volume>;
 }
 
-@@projectedName(Volumes.createOrUpdate::parameters.resource,
-  "json",
-  "volumeParameters"
-);
-@@extension(Volumes.createOrUpdate::parameters.resource,
+@@projectedName(Volumes.create::parameters.resource, "json", "parameters");
+@@extension(Volumes.create::parameters.resource,
   "x-ms-client-name",
-  "volumeParameters"
+  "parameters"
 );
-@@doc(Volumes.createOrUpdate::parameters.resource, "The request body.");
-@@projectedName(Volumes.update::parameters.properties,
-  "json",
-  "volumeUpdateParameters"
-);
+@@doc(Volumes.create::parameters.resource, "Volume object.");
+@@projectedName(Volumes.update::parameters.properties, "json", "parameters");
 @@extension(Volumes.update::parameters.properties,
   "x-ms-client-name",
-  "volumeUpdateParameters"
+  "parameters"
 );
-@@doc(Volumes.update::parameters.properties, "The request body.");
+@@doc(Volumes.update::parameters.properties, "Volume object.");

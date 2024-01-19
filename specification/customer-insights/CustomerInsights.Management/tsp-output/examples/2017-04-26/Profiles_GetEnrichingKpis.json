@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2017-01-01",
+    "hubName": "sdkTestHub",
+    "profileName": "TestProfileType396",
+    "resourceGroupName": "TestHubRG",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "description": {
+            "en-us": "MonthlyDeposits"
+          },
+          "calculationWindow": "Month",
+          "calculationWindowFieldName": "",
+          "entityType": "Interaction",
+          "entityTypeName": "Deposit",
+          "expression": "Amount",
+          "filter": "",
+          "function": "Sum",
+          "groupBy": [
+            "AccountType",
+            "BranchId",
+            "ContactId",
+            "Location",
+            "Type"
+          ],
+          "groupByMetadata": [
+            {
+              "displayName": {
+                "en-us": "AccountType"
+              },
+              "fieldName": "AccountType",
+              "fieldType": "Edm.String"
+            },
+            {
+              "displayName": {
+                "en-us": "BranchId"
+              },
+              "fieldName": "BranchId",
+              "fieldType": "Edm.Int32"
+            },
+            {
+              "displayName": {
+                "en-us": "ContactId"
+              },
+              "fieldName": "ContactId",
+              "fieldType": "Edm.Int32"
+            },
+            {
+              "displayName": {
+                "en-us": "Location"
+              },
+              "fieldName": "Location",
+              "fieldType": "Edm.String"
+            },
+            {
+              "displayName": {
+                "en-us": "Type"
+              },
+              "fieldName": "Type",
+              "fieldType": "Edm.String"
+            }
+          ],
+          "kpiName": "MonthlyDeposits",
+          "participantProfilesMetadata": [],
+          "provisioningState": "Succeeded",
+          "tenantId": "sdkTestHub",
+          "thresHolds": {
+            "increasingKpi": true,
+            "lowerLimit": 0,
+            "upperLimit": 0
+          },
+          "unit": ""
+        }
+      ]
+    }
+  },
+  "operationId": "Profiles_GetEnrichingKpis",
+  "title": "Profiles_GetEnrichingKpis"
+}

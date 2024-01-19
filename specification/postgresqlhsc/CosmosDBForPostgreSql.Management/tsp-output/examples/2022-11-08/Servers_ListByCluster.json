@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "api-version": "2022-11-08",
+    "clusterName": "testcluster1",
+    "resourceGroupName": "TestGroup",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testcluster1-c",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/servers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster1/servers/testcluster1-c",
+            "properties": {
+              "administratorLogin": "citus",
+              "availabilityZone": "1",
+              "citusVersion": "9.5",
+              "enableHa": true,
+              "enablePublicIpAccess": true,
+              "fullyQualifiedDomainName": "testcluster1-c.postgres.database.azure.com",
+              "haState": "Healthy",
+              "isReadOnly": false,
+              "postgresqlVersion": "12",
+              "role": "Coordinator",
+              "serverEdition": "MemoryOptimized",
+              "state": "Ready",
+              "storageQuotaInMb": 10000,
+              "vCores": 4
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "testcluster1-w0",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/servers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster1/servers/testcluster1-w0",
+            "properties": {
+              "administratorLogin": "citus",
+              "availabilityZone": "1",
+              "citusVersion": "9.5",
+              "enableHa": false,
+              "enablePublicIpAccess": false,
+              "fullyQualifiedDomainName": "testcluster1-w0.postgres.database.azure.com",
+              "haState": "NotEnabled",
+              "isReadOnly": false,
+              "postgresqlVersion": "12",
+              "role": "Worker",
+              "serverEdition": "MemoryOptimized",
+              "state": "Ready",
+              "storageQuotaInMb": 10000,
+              "vCores": 4
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "testcluster1-w1",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/servers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster1/servers/testcluster1-w1",
+            "properties": {
+              "administratorLogin": "citus",
+              "availabilityZone": "1",
+              "citusVersion": "9.5",
+              "enableHa": false,
+              "enablePublicIpAccess": false,
+              "fullyQualifiedDomainName": "testcluster1-w1.postgres.database.azure.com",
+              "haState": "NotEnabled",
+              "isReadOnly": false,
+              "postgresqlVersion": "12",
+              "role": "Worker",
+              "serverEdition": "MemoryOptimized",
+              "state": "Ready",
+              "storageQuotaInMb": 10000,
+              "vCores": 4
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Servers_ListByCluster",
+  "title": "List servers of the cluster"
+}

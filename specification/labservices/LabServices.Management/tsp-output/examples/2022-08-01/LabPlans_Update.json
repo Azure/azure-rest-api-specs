@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01",
+    "body": {
+      "properties": {
+        "defaultConnectionProfile": {
+          "clientRdpAccess": "Public",
+          "clientSshAccess": "Public",
+          "webRdpAccess": "None",
+          "webSshAccess": "None"
+        }
+      }
+    },
+    "labPlanName": "testlabplan",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testlabplan",
+        "type": "Microsoft.LabServices/LabPlan",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.LabServices/labPlans/testlabplan",
+        "location": "westus",
+        "properties": {
+          "defaultAutoShutdownProfile": {
+            "disconnectDelay": "PT5M",
+            "idleDelay": "PT5M",
+            "noConnectDelay": "PT5M",
+            "shutdownOnDisconnect": "Enabled",
+            "shutdownOnIdle": "UserAbsence",
+            "shutdownWhenNotConnected": "Enabled"
+          },
+          "defaultConnectionProfile": {
+            "clientRdpAccess": "Public",
+            "clientSshAccess": "Public",
+            "webRdpAccess": "None",
+            "webSshAccess": "None"
+          },
+          "defaultNetworkProfile": {
+            "subnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default"
+          },
+          "provisioningState": "Succeeded",
+          "sharedGalleryId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Compute/galleries/testsig",
+          "supportInfo": {
+            "email": "help@contoso.com",
+            "instructions": "Contact support for help.",
+            "phone": "+1-202-555-0123",
+            "url": "help.contoso.com"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-05-01T10:00:00Z",
+          "createdBy": "identity123",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-06-01T09:12:28Z",
+          "lastModifiedBy": "identity123",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "testlabplan",
+        "type": "Microsoft.LabServices/LabPlan",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.LabServices/labPlans/testlabplan",
+        "location": "westus",
+        "properties": {
+          "defaultAutoShutdownProfile": {
+            "disconnectDelay": "PT5M",
+            "idleDelay": "PT5M",
+            "noConnectDelay": "PT5M",
+            "shutdownOnDisconnect": "Enabled",
+            "shutdownOnIdle": "UserAbsence",
+            "shutdownWhenNotConnected": "Enabled"
+          },
+          "defaultConnectionProfile": {
+            "clientRdpAccess": "Public",
+            "clientSshAccess": "Public",
+            "webRdpAccess": "None",
+            "webSshAccess": "None"
+          },
+          "defaultNetworkProfile": {
+            "subnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default"
+          },
+          "provisioningState": "Updating",
+          "sharedGalleryId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Compute/galleries/testsig",
+          "supportInfo": {
+            "email": "help@contoso.com",
+            "instructions": "Contact support for help.",
+            "phone": "+1-202-555-0123",
+            "url": "help.contoso.com"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-05-01T10:00:00Z",
+          "createdBy": "identity123",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-06-01T09:12:28Z",
+          "lastModifiedBy": "identity123",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.LabServices/operationresults/a64149d8-84cb-4566-ab8e-b4ee1a074174"
+      }
+    }
+  },
+  "operationId": "LabPlans_Update",
+  "title": "patchLabPlan"
+}

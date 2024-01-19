@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "accountName": "contosoadla",
+    "api-version": "2016-11-01",
+    "resourceGroupName": "contosorg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeStore/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>",
+        "value": [
+          {
+            "name": "test_trusted_id_provider_name",
+            "type": "test_type",
+            "id": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+            "properties": {
+              "idProvider": "https://sts.windows.net/ea9ec534-a3e3-4e45-ad36-3afc5bb291c1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "TrustedIdProviders_ListByAccount",
+  "title": "Lists the Data Lake Store trusted identity providers within the specified Data Lake Store account"
+}

@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "accountName": "contosomedia",
+    "api-version": "2023-01-01",
+    "assetName": "ClimbingMountRainer",
+    "filterName": "assetFilterWithTimeWindowAndTrack",
+    "resourceGroupName": "contosorg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "assetFilterWithTimeWindowAndTrack",
+        "type": "Microsoft.Media/mediaservices/assets/assetFilters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/assets/ClimbingMountRainer/assetFilters/assetFilterWithTimeWindowAndTrack",
+        "properties": {
+          "firstQuality": {
+            "bitrate": 128000
+          },
+          "presentationTimeRange": {
+            "endTimestamp": 170000000,
+            "forceEndTimestamp": false,
+            "liveBackoffDuration": 0,
+            "presentationWindowDuration": 9223372036854775000,
+            "startTimestamp": 0,
+            "timescale": 10000000
+          },
+          "tracks": [
+            {
+              "trackSelections": [
+                {
+                  "operation": "Equal",
+                  "property": "Type",
+                  "value": "Audio"
+                },
+                {
+                  "operation": "NotEqual",
+                  "property": "Language",
+                  "value": "en"
+                },
+                {
+                  "operation": "NotEqual",
+                  "property": "FourCC",
+                  "value": "EC-3"
+                }
+              ]
+            },
+            {
+              "trackSelections": [
+                {
+                  "operation": "Equal",
+                  "property": "Type",
+                  "value": "Video"
+                },
+                {
+                  "operation": "Equal",
+                  "property": "Bitrate",
+                  "value": "3000000-5000000"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "AssetFilters_Get",
+  "title": "Get an Asset Filter by name"
+}

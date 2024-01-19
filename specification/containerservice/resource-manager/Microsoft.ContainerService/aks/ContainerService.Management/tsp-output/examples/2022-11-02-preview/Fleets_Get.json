@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2022-09-02-preview",
+    "fleetName": "fleet-1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fleet-1",
+        "type": "Microsoft.ContainerService/fleets",
+        "etag": "23ujdflewrj3=",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1",
+        "location": "East US",
+        "properties": {
+          "hubProfile": {
+            "dnsPrefix": "dnsprefix1",
+            "fqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io",
+            "kubernetesVersion": "1.22.4"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        }
+      },
+      "headers": {
+        "ETag": "23ujdflewrj3="
+      }
+    }
+  },
+  "operationId": "Fleets_Get",
+  "title": "Gets a fleet resource."
+}

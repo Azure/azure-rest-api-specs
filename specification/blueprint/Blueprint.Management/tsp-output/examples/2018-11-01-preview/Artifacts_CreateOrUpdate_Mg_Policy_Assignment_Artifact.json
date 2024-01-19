@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "artifact": {
+      "kind": "policyAssignment",
+      "properties": {
+        "displayName": "force costCenter tag on all resources",
+        "parameters": {
+          "tagName": {
+            "value": "costCenter"
+          },
+          "tagValue": {
+            "value": "[parameter('costCenter')]"
+          }
+        },
+        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62"
+      }
+    },
+    "artifactName": "costCenterPolicy",
+    "blueprintName": "simpleBlueprint",
+    "resourceScope": "providers/Microsoft.Management/managementGroups/ContosoOnlineGroup"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "costCenterPolicy",
+        "type": "Microsoft.Blueprint/blueprints/artifacts",
+        "id": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/artifacts/costCenterPolicy",
+        "kind": "policyAssignment",
+        "properties": {
+          "displayName": "force costCenter tag on all resources",
+          "parameters": {
+            "tagName": {
+              "value": "costCenter"
+            },
+            "tagValue": {
+              "value": "[parameter('costCenter')]"
+            }
+          },
+          "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62"
+        }
+      }
+    }
+  },
+  "operationId": "Artifacts_CreateOrUpdate",
+  "title": "MG-PolicyAssignmentArtifact"
+}

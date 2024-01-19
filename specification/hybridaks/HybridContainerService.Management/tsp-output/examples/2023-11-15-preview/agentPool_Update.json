@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "agentPool": {
+      "tags": {
+        "additionalProperties": "sample"
+      }
+    },
+    "agentPoolName": "test-hybridaksnodepool",
+    "api-version": "2023-11-15-preview",
+    "connectedClusterResourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-hybridaksnodepool",
+        "type": "Microsoft.HybridContainerService/provisionedClusterInstances/agentpools",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/test-hybridaksnodepool",
+        "location": "westus",
+        "properties": {
+          "count": 3,
+          "osType": "Linux",
+          "provisioningState": "Accepted",
+          "vmSize": "Standard_A4_v2"
+        },
+        "tags": {
+          "additionalProperties": "sample"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "test-hybridaksnodepool",
+        "type": "Microsoft.HybridContainerService/provisionedClusterInstances/agentpools",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/test-hybridaksnodepool",
+        "location": "westus",
+        "properties": {
+          "count": 3,
+          "osType": "Linux",
+          "provisioningState": "Accepted",
+          "vmSize": "Standard_A4_v2"
+        },
+        "tags": {
+          "additionalProperties": "sample"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.HybridContainerService/locations/westus/operationStatuses/b36529b7-9451-4125-8b71-397bafd1ffb0*3A3D3C747?api-version=2023-11-15-preview"
+      }
+    }
+  },
+  "operationId": "agentPool_Update",
+  "title": "UpdateAgentPool"
+}

@@ -1,0 +1,66 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./ServiceResource.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.AppPlatform;
+@doc("Monitoring Setting resource")
+@singleton("default")
+@parentResource(ServiceResource)
+model MonitoringSettingResource is ProxyResource<MonitoringSettingProperties> {
+  @key("monitoringSetting")
+  @segment("monitoringSettings")
+  name: string;
+}
+
+@armResourceOperations
+interface MonitoringSettingResources {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Get the Monitoring Setting and its properties.")
+  @operationId("MonitoringSettings_Get")
+  get is ArmResourceRead<MonitoringSettingResource>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Update the Monitoring Setting.")
+  @operationId("MonitoringSettings_UpdatePut")
+  updatePut is ArmResourceCreateOrUpdateAsync<MonitoringSettingResource>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Update the Monitoring Setting.")
+  @operationId("MonitoringSettings_UpdatePatch")
+  updatePatch is ArmCustomPatchAsync<
+    MonitoringSettingResource,
+    MonitoringSettingResource
+  >;
+}
+
+@@projectedName(MonitoringSettingResources.updatePut::parameters.resource,
+  "json",
+  "monitoringSettingResource"
+);
+@@extension(MonitoringSettingResources.updatePut::parameters.resource,
+  "x-ms-client-name",
+  "monitoringSettingResource"
+);
+@@doc(MonitoringSettingResources.updatePut::parameters.resource,
+  "Parameters for the update operation"
+);
+@@projectedName(MonitoringSettingResources.updatePatch::parameters.properties,
+  "json",
+  "monitoringSettingResource"
+);
+@@extension(MonitoringSettingResources.updatePatch::parameters.properties,
+  "x-ms-client-name",
+  "monitoringSettingResource"
+);
+@@doc(MonitoringSettingResources.updatePatch::parameters.properties,
+  "Parameters for the update operation"
+);

@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./Volume.tsp";
+import "./VolumeGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,11 +11,14 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.NetApp;
-@doc("Snapshot of a Volume")
-@parentResource(Volume)
+namespace Microsoft.ElasticSan;
+@doc("Response for Volume Snapshot request.")
+@parentResource(VolumeGroup)
 model Snapshot is ProxyResource<SnapshotProperties> {
-  @doc("The name of the snapshot")
+  @doc("The name of the volume snapshot within the given volume group.")
+  @maxLength(80)
+  @minLength(1)
+  @pattern("^[a-z0-9]+(?:[._-][a-z0-9]+)*$")
   @path
   @key("snapshotName")
   @segment("snapshots")
@@ -24,41 +27,47 @@ model Snapshot is ProxyResource<SnapshotProperties> {
 
 @armResourceOperations
 interface Snapshots {
-  @doc("Get details of the specified snapshot")
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Get a Volume Snapshot.")
+  @operationId("VolumeSnapshots_Get")
   get is ArmResourceRead<Snapshot>;
 
-  @doc("Create the specified snapshot within the given volume")
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Create a Volume Snapshot.")
+  @operationId("VolumeSnapshots_Create")
   create is ArmResourceCreateOrUpdateAsync<
     Snapshot,
     BaseParameters<Snapshot>,
     ArmLroLocationHeader
   >;
 
-  @doc("Delete snapshot")
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Delete a Volume Snapshot.")
+  @operationId("VolumeSnapshots_Delete")
   delete is ArmResourceDeleteAsync<
     Snapshot,
     BaseParameters<Snapshot>,
     ArmLroLocationHeader
   >;
 
-  @doc("List all snapshots associated with the volume")
-  list is ArmResourceListByParent<Snapshot>;
-
-  @doc("Restore the specified files from the specified snapshot to the active filesystem")
-  restoreFiles is ArmResourceActionAsync<
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("List Snapshots in a VolumeGroup or List Snapshots by Volume (name) in a VolumeGroup using filter")
+  @operationId("VolumeSnapshots_ListByVolumeGroup")
+  listByVolumeGroup is ArmResourceListByParent<
     Snapshot,
-    SnapshotRestoreFiles,
-    void,
-    BaseParameters<Snapshot>,
-    ArmLroLocationHeader
+    {
+      ...BaseParameters<Snapshot>;
+
+      @doc("Specify $filter='volumeName eq <volume name>' to filter on volume.")
+      @query("$filter")
+      $filter?: string;
+    }
   >;
 }
 
-@@projectedName(Snapshots.create::parameters.resource, "json", "body");
-@@extension(Snapshots.create::parameters.resource, "x-ms-client-name", "body");
-@@doc(Snapshots.create::parameters.resource,
-  "Snapshot object supplied in the body of the operation."
+@@projectedName(Snapshots.create::parameters.resource, "json", "parameters");
+@@extension(Snapshots.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
 );
-@@doc(Snapshots.restoreFiles::parameters.body,
-  "Restore payload supplied in the body of the operation."
-);
+@@doc(Snapshots.create::parameters.resource, "Snapshot object.");

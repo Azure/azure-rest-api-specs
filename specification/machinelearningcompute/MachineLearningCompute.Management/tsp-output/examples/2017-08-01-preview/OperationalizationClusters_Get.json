@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2017-08-01-preview",
+    "clusterName": "myCluster",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myCluster",
+        "type": "Microsoft.MachineLearningCompute/operationalizationClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.MachineLearningCompute/operationalizationClusters/myCluster",
+        "location": "West US",
+        "properties": {
+          "description": "My Operationalization Cluster",
+          "appInsights": {
+            "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Insights/components/mlcrpai3d5859117108"
+          },
+          "clusterType": "ACS",
+          "containerRegistry": {
+            "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myregistry123456"
+          },
+          "containerService": {
+            "agentCount": 2,
+            "agentVmSize": "Standard_D2_v2",
+            "clusterFqdn": "myclusterabcxyz.westus.cloudapp.azure.com",
+            "masterCount": 3,
+            "orchestratorProperties": {
+              "servicePrincipal": {
+                "clientId": "abcdefghijklmnopqrt",
+                "secret": ""
+              }
+            },
+            "orchestratorType": "Kubernetes",
+            "systemServices": [
+              {
+                "publicIpAddress": "13.92.143.67",
+                "systemServiceType": "ScoringFrontEnd",
+                "version": "prod/20170803.1.5a451c98af3972f7c966b439d471c1ed280314ea"
+              }
+            ]
+          },
+          "createdOn": "2017-05-04T07:12:28.191Z",
+          "globalServiceConfiguration": {
+            "autoScale": {
+              "maxReplicas": 100,
+              "minReplicas": 1,
+              "status": "Enabled"
+            },
+            "ssl": {
+              "cert": "afjdklq2131casfakld=",
+              "cname": "foo.bar.com",
+              "key": "flksdafkldsajf",
+              "status": "Enabled"
+            }
+          },
+          "modifiedOn": "2017-05-04T07:12:28.191Z",
+          "provisioningErrors": [
+            {
+              "code": "Timeout",
+              "message": "Timeout waiting for deployment to start.",
+              "statusCode": "408"
+            }
+          ],
+          "provisioningState": "Failed",
+          "storageAccount": {
+            "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mycluster123456"
+          }
+        },
+        "tags": {
+          "key1": "alpha",
+          "key2": "beta"
+        }
+      }
+    }
+  },
+  "operationId": "OperationalizationClusters_Get",
+  "title": "GET Operationalization Cluster"
+}
