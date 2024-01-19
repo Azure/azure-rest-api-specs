@@ -64,9 +64,9 @@ op getAssistant(@path assistantId: string): Assistant;
 @post
 @route("/assistants/{assistantId}")
 @added(ServiceApiVersions.v2023_02_15_preview)
-op modifyAssistant(
+op updateAssistant(
   @path assistantId: string,
-  @body modificationOptions: AssistantModificationOptions,
+  @body updateAssistantOptions: UpdateAssistantOptions,
 ): Assistant;
 
 /**

@@ -84,7 +84,7 @@ op getMessage(@path threadId: string, @path messageId: string): ThreadMessage;
 @post
 @route("/threads/{threadId}/messages/{messageId}")
 @added(ServiceApiVersions.v2023_02_15_preview)
-op modifyMessage(
+op updateMessage(
   @path threadId: string,
   @path messageId: string,
   ...OptionalNullableMetadata,

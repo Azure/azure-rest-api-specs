@@ -51,7 +51,7 @@ op getThread(@path threadId: string): AssistantThread;
 @post
 @route("/threads/{threadId}")
 @added(ServiceApiVersions.v2023_02_15_preview)
-op modifyThread(
+op updateThread(
   @path threadId: string,
   ...OptionalNullableMetadata,
 ): AssistantThread;

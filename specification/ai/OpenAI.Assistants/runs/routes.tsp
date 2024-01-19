@@ -84,7 +84,7 @@ op getRun(@path threadId: string, @path runId: string): ThreadRun;
 @post
 @route("/threads/{threadId}/runs/{runId}")
 @added(ServiceApiVersions.v2023_02_15_preview)
-op modifyRun(
+op updateRun(
   @path threadId: string,
   @path runId: string,
   ...OptionalNullableMetadata,
