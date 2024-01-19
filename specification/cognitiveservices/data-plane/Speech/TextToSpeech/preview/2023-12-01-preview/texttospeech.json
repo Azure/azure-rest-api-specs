@@ -1405,7 +1405,7 @@
         "tags": [
           "PersonalVoice"
         ],
-        "description": "Creates a new personal voice.",
+        "description": "Creates a new personal voice with audio files in Azure Blob Storage.",
         "operationId": "PersonalVoices_Create",
         "consumes": [
           "application/json"
@@ -1469,7 +1469,7 @@
         "tags": [
           "PersonalVoice"
         ],
-        "description": "Creates a new personal voice.",
+        "description": "Creates a new personal voice with audio files in the client.",
         "operationId": "PersonalVoices_Post",
         "consumes": [
           "multipart/form-data"
@@ -2565,7 +2565,7 @@
     "QueryFilter": {
       "name": "filter",
       "in": "query",
-      "description": "Filter condition.\r\n            <ul><li><b>Supported properties:</b>projectId, createdDateTime, locale, kind\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for created.\r\n              </li><li><b>Example:</b>\r\n                - ```filter=projectId eq 'Jessica'``` (filter by project ID)\r\n                - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\r\n                - ```filter=locale eq 'en-US'``` (filter training set and model by locale)\r\n                - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)</li></ul>",
+      "description": "Filter condition.\r\n  - **Supported properties:** projectId, createdDateTime, locale, kind\r\n  - **Operators:**\r\n    - eq, ne are supported for all properties.\r\n    - gt, ge, lt, le are supported for createdDateTime.\r\n  - **Example:**\r\n    - ```filter=projectId eq 'Jessica'``` (filter by project ID)\r\n    - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\r\n    - ```filter=locale eq 'en-US'``` (filter training set and model by locale)\r\n    - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)</li></ul>",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
