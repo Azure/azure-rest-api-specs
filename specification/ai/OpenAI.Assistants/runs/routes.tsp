@@ -27,7 +27,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @post
 @route("/threads/{threadId}/runs")
 @doc("Creates a new run for an assistant thread.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op createRun(
   @path threadId: string,
   @projectedName("json", "assistant_id") assistantId: string,
@@ -49,7 +49,7 @@ op createRun(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/threads/{threadId}/runs")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op listRuns(
   @path threadId: string,
   ...OpenAIListRequestOptions,
@@ -68,7 +68,7 @@ op listRuns(
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/threads/{threadId}/runs/{runId}")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op getRun(@path threadId: string, @path runId: string): ThreadRun;
 
 /**
@@ -83,7 +83,7 @@ op getRun(@path threadId: string, @path runId: string): ThreadRun;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/runs/{runId}")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op updateRun(
   @path threadId: string,
   @path runId: string,
@@ -103,7 +103,7 @@ op updateRun(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/runs/{runId}/submit_tool_outputs")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op submitToolOutputsToRun(
   @path threadId: string,
   @path runId: string,
@@ -122,7 +122,7 @@ op submitToolOutputsToRun(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/runs/{runId}/cancel")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op cancelRun(@path threadId: string, @path runId: string): ThreadRun;
 
 /**
@@ -136,5 +136,5 @@ op cancelRun(@path threadId: string, @path runId: string): ThreadRun;
 @post
 @route("/threads/runs")
 @doc("Creates a new assistant thread and immediately starts a run using that new thread.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op createThreadAndRun(...CreateAndRunThreadOptions): ThreadRun;

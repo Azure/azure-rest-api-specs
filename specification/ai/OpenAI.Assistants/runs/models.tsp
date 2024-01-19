@@ -8,7 +8,7 @@ namespace Azure.AI.OpenAI.Assistants;
 using TypeSpec.Versioning;
 
 @doc("Data representing a single evaluation run of an assistant thread.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model ThreadRun {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -97,7 +97,7 @@ model ThreadRun {
 }
 
 @doc("The details of an error as encountered by an assistant thread run.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model RunError {
   @doc("The status for the error.")
   code: string;
@@ -107,7 +107,7 @@ model RunError {
 }
 
 @doc("Possible values for the status of an assistant thread run.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 enum RunStatus {
   @doc("Represents a run that is queued to start.")
   queued: "queued",
@@ -136,14 +136,14 @@ enum RunStatus {
 
 @discriminator("type")
 @doc("An abstract representation of a required action for an assistant thread run to continue.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model RequiredAction {
   @doc("The object type.")
   type: string;
 }
 
 @doc("The details for required tool calls that must be submitted for an assistant thread run to continue.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model SubmitToolOutputsAction extends RequiredAction {
   @doc("The object type, which is always 'submit_tool_outputs'.")
   type: "submit_tool_outputs";
@@ -154,7 +154,7 @@ model SubmitToolOutputsAction extends RequiredAction {
 }
 
 @doc("The details describing tools that should be called to submit tool outputs.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model SubmitToolOutputsDetails {
   @projectedName("json", "tool_calls")
   @doc("The list of tool calls that must be resolved for the assistant thread run to continue.")
@@ -162,7 +162,7 @@ model SubmitToolOutputsDetails {
 }
 
 @doc("The details used when creating and immediately running a new assistant thread.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model CreateAndRunThreadOptions {
   @projectedName("json", "assistant_id")
   @doc("The ID of the assistant for which the thread should be created.")

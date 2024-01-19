@@ -28,7 +28,7 @@ namespace Azure.AI.OpenAI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/messages")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op createMessage(
   @path threadId: string,
   role: MessageRole,
@@ -49,7 +49,7 @@ op createMessage(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/threads/{threadId}/messages")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op listMessages(
   @path threadId: string,
   ...OpenAIListRequestOptions,
@@ -68,7 +68,7 @@ op listMessages(
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/threads/{threadId}/messages/{messageId}")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op getMessage(@path threadId: string, @path messageId: string): ThreadMessage;
 
 /**
@@ -83,7 +83,7 @@ op getMessage(@path threadId: string, @path messageId: string): ThreadMessage;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/messages/{messageId}")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op updateMessage(
   @path threadId: string,
   @path messageId: string,
@@ -103,7 +103,7 @@ op updateMessage(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/threads/{threadId}/messages/{messageId}/files")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op listMessageFiles(
   @path threadId: string,
   @path messageId: string,
@@ -124,7 +124,7 @@ op listMessageFiles(
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/threads/{threadId}/messages/{messageId}/files/{fileId}")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op getMessageFile(
   @path threadId: string,
   @path messageId: string,

@@ -20,7 +20,7 @@ namespace Azure.AI.OpenAI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 @route("/files")
 op listFiles(@query purpose?: FilePurpose): FileListResponse;
 
@@ -38,7 +38,7 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
 @post
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 @route("/files")
 op uploadFile(
   @header contentType: "multipart/form-data",

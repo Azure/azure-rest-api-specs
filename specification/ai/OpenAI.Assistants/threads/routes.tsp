@@ -18,7 +18,7 @@ namespace Azure.AI.OpenAI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 @route("/threads")
 op createThread(...AssistantThreadCreationOptions): AssistantThread;
 
@@ -36,7 +36,7 @@ op createThread(...AssistantThreadCreationOptions): AssistantThread;
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/threads/{threadId}")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op getThread(@path threadId: string): AssistantThread;
 
 /**
@@ -50,7 +50,7 @@ op getThread(@path threadId: string): AssistantThread;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op updateThread(
   @path threadId: string,
   ...OptionalNullableMetadata,
@@ -67,5 +67,5 @@ op updateThread(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
 @route("/threads/{threadId}")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op deleteThread(@path threadId: string): ThreadDeletionStatus;
