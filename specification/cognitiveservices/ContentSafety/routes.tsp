@@ -64,7 +64,7 @@ interface TextOperations {
     AnalyzeTextProtectedMaterialResult
   >;
 
-  @added(ContentSafety.Versions.v2024_01_15_Preview)
+  @added(ContentSafety.Versions.v2024_02_15_Preview)
   @summary("Analyze text cross-prompt injection attacks")
   @doc("A synchronous API for the analysis of text cross-prompt injection attacks.")
   @route("/text:detectXPIA")
