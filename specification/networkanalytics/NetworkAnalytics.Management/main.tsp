@@ -16,6 +16,7 @@ using OpenAPI;
   title: "Microsoft.NetworkAnalytics",
 })
 @versioned(Microsoft.NetworkAnalytics.Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.NetworkAnalytics;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -1293,7 +1294,7 @@ interface DataTypes {
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
 
   @doc("Delete data for data type.")
-  deleteData is ArmResourceActionNoContentAsync<DataType, {}>;
+  deleteData is ArmResourceActionNoResponseContentAsync<DataType, {}>;
 
   @doc("Generate sas token for storage container.")
   generateStorageContainerSasToken is ArmResourceActionSync<
