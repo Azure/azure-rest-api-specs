@@ -403,7 +403,7 @@ model ArcSnapshotTileData {
   @doc("The column names to get from the query result.")
   columns: ArcSnapshotTileDataColumn;
 
-  @doc("The text to be shown when all the resources are configured with the servce.")
+  @doc("The text to be shown when all the resources are configured with the service.")
   allResourcesConfiguredText?: string;
 
   @doc("Parameter names that are applied to the tile. It can be used within the query.")
