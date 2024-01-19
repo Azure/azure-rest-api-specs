@@ -6,13 +6,11 @@
     "api-version": "2023-12-01",
     "siteEnvelope": {
       "location": "East US",
-      "kind": "functionapp",
+      "kind": "functionapp,linux",
       "properties": {
         "enabled": true,
-        "sku": "FlexConsumption",
         "reserved": true,
         "isXenon": false,
-        "isLinux": true,
         "hyperV": false,
         "vnetRouteAllEnabled": false,
         "vnetImagePullEnabled": false,
@@ -31,37 +29,30 @@
             {
               "name": "AzureWebJobsStorage",
               "value": "DefaultEndpointsProtocol=https;AccountName=StorageAccountName;AccountKey=Sanitized;EndpointSuffix=core.windows.net",
-              "slotSetting": false
             },
             {
               "name": "FUNCTIONS_EXTENSION_VERSION",
-              "value": "~4",
-              "slotSetting": false
+              "value": "~4"
             },
             {
               "name": "FUNCTIONS_WORKER_RUNTIME",
-              "value": "python",
-              "slotSetting": false
+              "value": "python"
             },
             {
               "name": "SCALE_UP_THROTTLING_ENABLED",
-              "value": "0",
-              "slotSetting": false
+              "value": "0"
             },
             {
               "name": "WEBSITE_RUN_FROM_PACKAGE",
-              "value": "https://StrogeAccountName.blob.core.windows.net/pathToFunctionApp.zip",
-              "slotSetting": false
+              "value": "https://StrogeAccountName.blob.core.windows.net/pathToFunctionApp.zip"
             },
             {
               "name": "WEBSITE_CONTENTSHARE",
-              "value": "limelight-sample9e14",
-              "slotSetting": false
+              "value": "limelight-sample9e14"
             },
             {
               "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-              "value": "DefaultEndpointsProtocol=https;AccountName=StorageAccountName;AccountKey=Sanitized;EndpointSuffix=core.windows.net",
-              "slotSetting": false
+              "value": "DefaultEndpointsProtocol=https;AccountName=StorageAccountName;AccountKey=Sanitized;EndpointSuffix=core.windows.net"
             }
           ],
           "netFrameworkVersion": "v6.0",
@@ -81,7 +72,7 @@
               "value": "https://storageAccountName.blob.core.windows.net/containername",
               "authentication": {
                 "type": "StorageAccountAccesskey",
-                "value": "SomeAppSettingName"
+                "storageAccountAccessKeyName": "SomeAppSettingName"
               }
             }
           },
@@ -99,7 +90,6 @@
         "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141",
         "name": "sitef6141",
         "type": "Microsoft.Web/sites",
-        "kind": "functionapp,linux",
         "location": "East US",
         "properties": {
           "name": "sitef6141",
@@ -110,21 +100,10 @@
           "repositorySiteName": "sitef6141",
           "usageState": "Normal",
           "enabled": true,
-          "adminEnabled": true,
-          "afdEnabled": false,
           "enabledHostNames": [
             "sitef6141.azurewebsites.net",
             "sitef6141.scm.azurewebsites.net"
           ],
-          "siteProperties": {
-            "properties": [
-              {
-                "name": "LinuxFxVersion",
-                "value": "python|3.10"
-              }
-            ],
-            "appSettings": null
-          },
           "availabilityState": "Normal",
           "hostNameSslStates": [
             {
@@ -143,20 +122,9 @@
           "isXenon": false,
           "hyperV": false,
           "lastModifiedTimeUtc": "2024-01-09T00:24:54.8",
-          "storageRecoveryDefaultState": "Running",
-          "contentAvailabilityState": "Normal",
-          "runtimeAvailabilityState": "Normal",
-          "dnsConfiguration": {},
           "vnetRouteAllEnabled": false,
           "vnetImagePullEnabled": false,
           "vnetContentShareEnabled": false,
-          "outboundVnetRouting": {
-            "allTraffic": false,
-            "applicationTraffic": false,
-            "contentShareTraffic": false,
-            "imagePullTraffic": false,
-            "backupRestoreTraffic": false
-          },
           "siteConfig": {
             "numberOfWorkers": 1,
             "netFrameworkVersion": "",
@@ -169,7 +137,6 @@
             "remoteDebuggingEnabled": false,
             "httpLoggingEnabled": false,
             "acrUseManagedIdentityCreds": false,
-            "acrUserManagedIdentityID": false,
             "logsDirectorySizeLimit": 35,
             "detailedErrorLoggingEnabled": false,
             "use32BitWorkerProcess": false,
@@ -215,8 +182,7 @@
             "functionAppScaleLimit": 0,
             "functionsRuntimeScaleMonitoringEnabled": false,
             "minimumElasticInstanceCount": 0,
-            "azureStorageAccounts": {},
-            "clusteringEnabled": false
+            "azureStorageAccounts": {}
           },
           "functionAppConfig": {
             "deployment": {
@@ -225,7 +191,7 @@
                 "value": "https://storageAccountName.blob.core.windows.net/containername",
                 "authentication": {
                   "type": "StorageAccountAccesskey",
-                  "value": "SomeAppSettingName"
+                  "storageAccountAccessKeyName": "SomeAppSettingName"
                 }
               }
             },
@@ -236,31 +202,21 @@
               "triggers": null
             }
           },
-          "deploymentId": "sitef6141",
-          "sku": "FlexConsumption",
           "scmSiteAlsoStopped": false,
           "clientAffinityEnabled": false,
-          "reverseProxyIntegrationEnabled": false,
           "clientCertEnabled": false,
-          "ipMode": "IPv4",
           "vnetBackupRestoreEnabled": false,
-          "kind": "functionapp,linux",
           "resourceConfig": {
             "cpu": 1.0,
             "memory": "2.0Gi"
           },
-          "inboundIpAddress": "172.201.216.100",
-          "possibleInboundIpAddresses": "172.201.216.100",
           "outboundIpAddresses": "70.37.102.201,20.225.43.144",
           "possibleOutboundIpAddresses": "70.37.102.201,20.225.43.144,20.225.184.122,20.225.184.188",
           "containerSize": 2048,
           "dailyMemoryTimeQuota": 0,
-          "siteDisabledReason": 0,
           "resourceGroup": "testrg123",
           "defaultHostName": "sitef6141.azurewebsites.net",
           "httpsOnly": true,
-          "endToEndEncryptionEnabled": false,
-          "functionsRuntimeAdminIsolationEnabled": false,
           "redundancyMode": "None",
           "publicNetworkAccess": "Enabled",
           "storageAccountRequired": false
@@ -275,7 +231,6 @@
         "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141",
         "name": "sitef6141",
         "type": "Microsoft.Web/sites",
-        "kind": "functionapp,linux",
         "location": "East US",
         "properties": {
           "name": "sitef6141",
@@ -286,21 +241,10 @@
           "repositorySiteName": "sitef6141",
           "usageState": "Normal",
           "enabled": true,
-          "adminEnabled": true,
-          "afdEnabled": false,
           "enabledHostNames": [
             "sitef6141.azurewebsites.net",
             "sitef6141.scm.azurewebsites.net"
           ],
-          "siteProperties": {
-            "properties": [
-              {
-                "name": "LinuxFxVersion",
-                "value": "python|3.10"
-              }
-            ],
-            "appSettings": null
-          },
           "availabilityState": "Normal",
           "hostNameSslStates": [
             {
@@ -319,20 +263,9 @@
           "isXenon": false,
           "hyperV": false,
           "lastModifiedTimeUtc": "2024-01-09T00:24:54.8",
-          "storageRecoveryDefaultState": "Running",
-          "contentAvailabilityState": "Normal",
-          "runtimeAvailabilityState": "Normal",
-          "dnsConfiguration": {},
           "vnetRouteAllEnabled": false,
           "vnetImagePullEnabled": false,
           "vnetContentShareEnabled": false,
-          "outboundVnetRouting": {
-            "allTraffic": false,
-            "applicationTraffic": false,
-            "contentShareTraffic": false,
-            "imagePullTraffic": false,
-            "backupRestoreTraffic": false
-          },
           "siteConfig": {
             "numberOfWorkers": 1,
             "netFrameworkVersion": "",
@@ -345,7 +278,6 @@
             "remoteDebuggingEnabled": false,
             "httpLoggingEnabled": false,
             "acrUseManagedIdentityCreds": false,
-            "acrUserManagedIdentityID": false,
             "logsDirectorySizeLimit": 35,
             "detailedErrorLoggingEnabled": false,
             "use32BitWorkerProcess": false,
@@ -391,8 +323,7 @@
             "functionAppScaleLimit": 0,
             "functionsRuntimeScaleMonitoringEnabled": false,
             "minimumElasticInstanceCount": 0,
-            "azureStorageAccounts": {},
-            "clusteringEnabled": false
+            "azureStorageAccounts": {}
           },
           "functionAppConfig": {
             "deployment": {
@@ -401,7 +332,7 @@
                 "value": "https://storageAccountName.blob.core.windows.net/containername",
                 "authentication": {
                   "type": "StorageAccountAccesskey",
-                  "value": "SomeAppSettingName"
+                  "storageAccountAccessKeyName": "SomeAppSettingName"
                 }
               }
             },
@@ -412,31 +343,21 @@
               "triggers": null
             }
           },
-          "deploymentId": "sitef6141",
-          "sku": "FlexConsumption",
           "scmSiteAlsoStopped": false,
           "clientAffinityEnabled": false,
-          "reverseProxyIntegrationEnabled": false,
           "clientCertEnabled": false,
-          "ipMode": "IPv4",
           "vnetBackupRestoreEnabled": false,
-          "kind": "functionapp,linux",
           "resourceConfig": {
             "cpu": 1.0,
             "memory": "2.0Gi"
           },
-          "inboundIpAddress": "172.201.216.100",
-          "possibleInboundIpAddresses": "172.201.216.100",
           "outboundIpAddresses": "70.37.102.201,20.225.43.144",
           "possibleOutboundIpAddresses": "70.37.102.201,20.225.43.144,20.225.184.122,20.225.184.188",
           "containerSize": 2048,
           "dailyMemoryTimeQuota": 0,
-          "siteDisabledReason": 0,
           "resourceGroup": "testrg123",
           "defaultHostName": "sitef6141.azurewebsites.net",
           "httpsOnly": true,
-          "endToEndEncryptionEnabled": false,
-          "functionsRuntimeAdminIsolationEnabled": false,
           "redundancyMode": "None",
           "publicNetworkAccess": "Enabled",
           "storageAccountRequired": false
