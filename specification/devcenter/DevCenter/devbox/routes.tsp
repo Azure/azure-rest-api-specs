@@ -190,7 +190,7 @@ interface DevBoxesOperations {
       @path
       devBoxName: string;
     },
-    { 
+    {
       @statusCode statusCode: 202;
 
       @header("Location")
@@ -201,7 +201,9 @@ interface DevBoxesOperations {
       operationLocation: string;
 
       @body body: OperationStatus;
-    } | { @statusCode statusCode: 204 }
+    } | {
+      @statusCode statusCode: 204;
+    }
   >;
 
   @doc("Starts a Dev Box")
@@ -225,8 +227,9 @@ interface DevBoxesOperations {
     {
       @statusCode
       statusCode: 202;
+
       @body
-      body: OperationStatus
+      body: OperationStatus;
     }
   >;
 
@@ -255,8 +258,9 @@ interface DevBoxesOperations {
     {
       @statusCode
       statusCode: 202;
+
       @body
-      body: OperationStatus
+      body: OperationStatus;
     }
   >;
 
@@ -281,8 +285,9 @@ interface DevBoxesOperations {
     {
       @statusCode
       statusCode: 202;
+
       @body
-      body: OperationStatus
+      body: OperationStatus;
     }
   >;
 
@@ -396,7 +401,7 @@ interface DevBoxesOperations {
       actionName: string;
 
       @doc("The time to delay the Dev Box action or actions until.")
-      @query("until") 
+      @query("until")
       delayUntil: utcDateTime;
     },
     DevBoxAction
@@ -420,7 +425,7 @@ interface DevBoxesOperations {
       devBoxName: string;
 
       @doc("The time to delay the Dev Box action or actions until.")
-      @query("until") 
+      @query("until")
       delayUntil: utcDateTime;
     },
     DevBoxActionsDelayMultipleResult

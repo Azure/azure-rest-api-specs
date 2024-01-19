@@ -32,19 +32,44 @@ enum EnvironmentTypeEnableStatus {
 
 @doc("The provisioning state of the environment.")
 enum EnvironmentProvisioningState {
-  @doc("The environment was successfully provisioned.") Succeeded,
-  @doc("The environment failed to provision.") Failed,
-  @doc("The environment provisioning was canceled.") Canceled,
-  @doc("The environment is creating.") Creating,
-  @doc("The environment was accepted.") Accepted,
-  @doc("The environment is deleting.") Deleting,
-  @doc("The environment is updating.") Updating,
-  @doc("The environment is preparing.") Preparing,
-  @doc("The environment is running.") Running,
-  @doc("The environment is Syncing.") Syncing,
-  @doc("The environment is moving resources.") MovingResources,
-  @doc("The environment has a transient failure.") TransientFailure,
-  @doc("The environment storage provisioning failed.") StorageProvisioningFailed,
+  @doc("The environment was successfully provisioned.")
+  Succeeded,
+
+  @doc("The environment failed to provision.")
+  Failed,
+
+  @doc("The environment provisioning was canceled.")
+  Canceled,
+
+  @doc("The environment is creating.")
+  Creating,
+
+  @doc("The environment was accepted.")
+  Accepted,
+
+  @doc("The environment is deleting.")
+  Deleting,
+
+  @doc("The environment is updating.")
+  Updating,
+
+  @doc("The environment is preparing.")
+  Preparing,
+
+  @doc("The environment is running.")
+  Running,
+
+  @doc("The environment is Syncing.")
+  Syncing,
+
+  @doc("The environment is moving resources.")
+  MovingResources,
+
+  @doc("The environment has a transient failure.")
+  TransientFailure,
+
+  @doc("The environment storage provisioning failed.")
+  StorageProvisioningFailed,
 }
 
 @doc("Results of the environment list operation.")
@@ -78,7 +103,7 @@ model Environment {
 
   @doc("The identifier of the resource group containing the environment's resources.")
   @visibility("read")
-  resourceGroupId?: string ;
+  resourceGroupId?: string;
 
   @doc("Name of the catalog.")
   @visibility("read", "create")

@@ -9,7 +9,6 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-
 @doc("Indicates whether operation status is running, completed, canceled or failed.")
 @lroStatus
 @projectedName("csharp", "DevCenterOperationStatus")

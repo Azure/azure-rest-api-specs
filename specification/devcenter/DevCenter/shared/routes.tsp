@@ -8,19 +8,19 @@ namespace DevCenterService;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface SharedOperations {
-    @doc("Get the status of an operation.")
-    @route("/projects/{projectName}/operationstatuses/{operationId}")
-    @get
-    getProjectOperationStatus is Azure.Core.Foundations.Operation<
-      {
-        @doc("The DevCenter Project upon which to execute operations.")
-        @path
-        projectName: string;
+  @doc("Get the status of an operation.")
+  @route("/projects/{projectName}/operationstatuses/{operationId}")
+  @get
+  getProjectOperationStatus is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
 
-        @doc("Operation Id")
-        @path
-        operationId: string;
-      },
-      OperationStatus
-    >;
+      @doc("Operation Id")
+      @path
+      operationId: string;
+    },
+    OperationStatus
+  >;
 }

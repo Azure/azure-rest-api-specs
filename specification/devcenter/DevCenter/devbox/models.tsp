@@ -30,6 +30,7 @@ enum HibernateSupport {
 enum LocalAdminStatus {
   @doc("Owners of Dev Boxes in the pool are local administrators on the Dev Boxes.")
   Enabled,
+
   @doc("Owners of Dev Boxes in the pool are not local administrators on the Dev Boxes.")
   Disabled,
 }
@@ -47,33 +48,76 @@ enum DevBoxProvisioningState {
   @doc("Dev Box is provisioning") Provisioning,
   @doc("Dev Box was provisioned with warning") ProvisionedWithWarning,
   @doc("Dev Box is in grace period") InGracePeriod,
-  @doc("Dev Box is not provisioned") NotProvisioned	
+  @doc("Dev Box is not provisioned") NotProvisioned,
 }
 
 @doc("Indicates the Dev Box compute.")
 enum SkuName {
-  @doc("Intel, 8 vCPU, 32 GB RAM, 256 GB Storage") "general_i_8c32gb256ssd_v2",
-  @doc("Intel, 8 vCPU, 32 GB RAM, 512 GB Storage") "general_i_8c32gb512ssd_v2",
-  @doc("Intel, 8 vCPU, 32 GB RAM, 1024 GB Storage") "general_i_8c32gb1024ssd_v2",
-  @doc("Intel, 8 vCPU, 32 GB RAM, 2048 GB Storage") "general_i_8c32gb2048ssd_v2",
-  @doc("Intel, 16 vCPU, 64 GB RAM, 256 GB Storage") "general_i_16c64gb256ssd_v2",
-  @doc("Intel, 16 vCPU, 64 GB RAM, 512 GB Storage") "general_i_16c64gb512ssd_v2",
-  @doc("Intel, 16 vCPU, 64 GB RAM, 1024 GB Storage") "general_i_16c64gb1024ssd_v2",
-  @doc("Intel, 16 vCPU, 64 GB RAM, 2048 GB Storage") "general_i_16c64gb2048ssd_v2",
-  @doc("Intel, 32 vCPU, 128 GB RAM, 512 GB Storage") "general_i_32c128gb512ssd_v2",
-  @doc("Intel, 32 vCPU, 128 GB RAM, 1024 GB Storage") "general_i_32c128gb1024ssd_v2",
-  @doc("Intel, 32 vCPU, 128 GB RAM, 2048 GB Storage") "general_i_32c128gb2048ssd_v2",
-  @doc("AMD, 8 vCPU, 32 GB RAM, 256 GB Storage") "general_a_8c32gb256ssd_v2",
-  @doc("AMD, 8 vCPU, 32 GB RAM, 512 GB Storage") "general_a_8c32gb512ssd_v2",
-  @doc("AMD, 8 vCPU, 32 GB RAM, 1024 GB Storage") "general_a_8c32gb1024ssd_v2",
-  @doc("AMD, 8 vCPU, 32 GB RAM, 2048 GB Storage") "general_a_8c32gb2048ssd_v2",
-  @doc("AMD, 16 vCPU, 64 GB RAM, 256 GB Storage") "general_a_16c64gb256ssd_v2",
-  @doc("AMD, 16 vCPU, 64 GB RAM, 512 GB Storage") "general_a_16c64gb512ssd_v2",
-  @doc("AMD, 16 vCPU, 64 GB RAM, 1024 GB Storage") "general_a_16c64gb1024ssd_v2",
-  @doc("AMD, 16 vCPU, 64 GB RAM, 2048 GB Storage") "general_a_16c64gb2048ssd_v2",
-  @doc("AMD, 32 vCPU, 128 GB RAM, 512 GB Storage") "general_a_32c128gb512ssd_v2",
-  @doc("AMD, 32 vCPU, 128 GB RAM, 1024 GB Storage") "general_a_32c128gb1024ssd_v2",
-  @doc("AMD, 32 vCPU, 128 GB RAM, 2048 GB Storage") "general_a_32c128gb2048ssd_v2"
+  @doc("Intel, 8 vCPU, 32 GB RAM, 256 GB Storage")
+  general_i_8c32gb256ssd_v2,
+
+  @doc("Intel, 8 vCPU, 32 GB RAM, 512 GB Storage")
+  general_i_8c32gb512ssd_v2,
+
+  @doc("Intel, 8 vCPU, 32 GB RAM, 1024 GB Storage")
+  general_i_8c32gb1024ssd_v2,
+
+  @doc("Intel, 8 vCPU, 32 GB RAM, 2048 GB Storage")
+  general_i_8c32gb2048ssd_v2,
+
+  @doc("Intel, 16 vCPU, 64 GB RAM, 256 GB Storage")
+  general_i_16c64gb256ssd_v2,
+
+  @doc("Intel, 16 vCPU, 64 GB RAM, 512 GB Storage")
+  general_i_16c64gb512ssd_v2,
+
+  @doc("Intel, 16 vCPU, 64 GB RAM, 1024 GB Storage")
+  general_i_16c64gb1024ssd_v2,
+
+  @doc("Intel, 16 vCPU, 64 GB RAM, 2048 GB Storage")
+  general_i_16c64gb2048ssd_v2,
+
+  @doc("Intel, 32 vCPU, 128 GB RAM, 512 GB Storage")
+  general_i_32c128gb512ssd_v2,
+
+  @doc("Intel, 32 vCPU, 128 GB RAM, 1024 GB Storage")
+  general_i_32c128gb1024ssd_v2,
+
+  @doc("Intel, 32 vCPU, 128 GB RAM, 2048 GB Storage")
+  general_i_32c128gb2048ssd_v2,
+
+  @doc("AMD, 8 vCPU, 32 GB RAM, 256 GB Storage")
+  general_a_8c32gb256ssd_v2,
+
+  @doc("AMD, 8 vCPU, 32 GB RAM, 512 GB Storage")
+  general_a_8c32gb512ssd_v2,
+
+  @doc("AMD, 8 vCPU, 32 GB RAM, 1024 GB Storage")
+  general_a_8c32gb1024ssd_v2,
+
+  @doc("AMD, 8 vCPU, 32 GB RAM, 2048 GB Storage")
+  general_a_8c32gb2048ssd_v2,
+
+  @doc("AMD, 16 vCPU, 64 GB RAM, 256 GB Storage")
+  general_a_16c64gb256ssd_v2,
+
+  @doc("AMD, 16 vCPU, 64 GB RAM, 512 GB Storage")
+  general_a_16c64gb512ssd_v2,
+
+  @doc("AMD, 16 vCPU, 64 GB RAM, 1024 GB Storage")
+  general_a_16c64gb1024ssd_v2,
+
+  @doc("AMD, 16 vCPU, 64 GB RAM, 2048 GB Storage")
+  general_a_16c64gb2048ssd_v2,
+
+  @doc("AMD, 32 vCPU, 128 GB RAM, 512 GB Storage")
+  general_a_32c128gb512ssd_v2,
+
+  @doc("AMD, 32 vCPU, 128 GB RAM, 1024 GB Storage")
+  general_a_32c128gb1024ssd_v2,
+
+  @doc("AMD, 32 vCPU, 128 GB RAM, 2048 GB Storage")
+  general_a_32c128gb2048ssd_v2,
 }
 
 @doc("Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.")
@@ -338,7 +382,7 @@ action performed by user.
 
   @doc("The current power state of the Dev Box.")
   @visibility("read")
-  powerState: PowerState = PowerState.Unknown ;
+  powerState: PowerState = PowerState.Unknown;
 
   @doc("""
 A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.

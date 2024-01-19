@@ -103,42 +103,41 @@ interface EnvironmentsOperations {
     }
   >;
 
-// FIXME
+  // FIXME
   @doc("Deletes an environment and all its associated resources")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @delete
   deleteEnvironment(
-    ...Foundations.ApiVersionParameter;
+    ...Foundations.ApiVersionParameter,
 
     @doc("The DevCenter Project upon which to execute operations.")
     @path
-    projectName: string;
+    projectName: string,
 
     @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
     @path
-    userId: string;
+    userId: string,
 
     @doc("The name of the environment.")
     @path
-    environmentName: string;
-  ):
-    {
-      @statusCode
-      statusCode: 202;
+    environmentName: string,
+  ): {
+    @statusCode
+    statusCode: 202;
 
-      @body body: OperationStatus;
+    @body body: OperationStatus;
 
-      @header("Location")
-      location: string;
+    @header("Location")
+    location: string;
 
-      @pollingLocation
-      @header("Operation-Location")
-      operationLocation: string;
-    } | {
-      @statusCode
-      statusCode: 204;
-    } | Azure.Core.Foundations.ErrorResponse;
+    @pollingLocation
+    @header("Operation-Location")
+    operationLocation: string;
+  } | {
+    @statusCode
+    statusCode: 204;
+  } | Azure.Core.Foundations.ErrorResponse;
 
   @doc("Lists all of the catalogs available for a project.")
   @route("/projects/{projectName}/catalogs")
@@ -204,7 +203,6 @@ interface EnvironmentsOperations {
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
       top?: int32;
-
     },
     EnvironmentDefinitionListResult
   >;
