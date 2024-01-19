@@ -59,7 +59,7 @@ model OperationStatus {
   percentComplete?: float32;
 
   @doc("Custom operation properties, populated only for a successful operation.")
-  properties?: unknown;
+  properties?: bytes;
 
   @doc("Operation Error message")
   error?: Azure.Core.Foundations.Error;

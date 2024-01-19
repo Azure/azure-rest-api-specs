@@ -99,7 +99,7 @@ resource has been created.
 """)
 model EnvironmentUpdateProperties {
   @doc("Parameters object for the environment.")
-  parameters?: unknown;
+  parameters?: bytes;
 }
 
 @doc("Results of the catalog list operation.")
@@ -133,7 +133,7 @@ model EnvironmentDefinition {
   parameters?: EnvironmentDefinitionParameter[];
 
   @doc("JSON schema defining the parameters object passed to an environment.")
-  parametersSchema?: unknown;
+  parametersSchema?: bytes;
 
   @doc("Path to the Environment Definition entrypoint file.")
   templatePath?: string;
@@ -153,7 +153,7 @@ model EnvironmentDefinitionParameter {
   @doc("Default value of the parameter")
   @projectedName("csharp", "defaultValue")
   @projectedName("java", "defaultValue")
-  default?: unknown;
+  default?: bytes;
 
   @doc("""
 A string of one of the basic JSON types (number, integer, array, object,
