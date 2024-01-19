@@ -154,7 +154,6 @@ namespace Azure.AI.OpenAI.Assistants;
   "OverrideInstructions"
 );
 @@projectedName(CreateAndRunThreadOptions.tools, "csharp", "OverrideTools");
-@@projectedName(createFile, "csharp", "UploadFile");
 // From https://platform.openai.com/docs/assistants/how-it-works
 // "Note that deleting an AssistantFile doesn’t delete the original File object, it simply deletes the association
 // between that File and the Assistant."

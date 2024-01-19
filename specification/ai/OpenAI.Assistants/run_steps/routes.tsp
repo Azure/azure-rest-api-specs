@@ -23,7 +23,7 @@ namespace Azure.AI.OpenAI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/threads/{threadId}/runs/{runId}/steps/{stepId}")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op getRunStep(
   @path threadId: string,
   @path runId: string,
@@ -43,7 +43,7 @@ op getRunStep(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/threads/{threadId}/runs/{runId}/steps")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op listRunSteps(
   @path threadId: string,
   @path runId: string,

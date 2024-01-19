@@ -7,7 +7,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.OpenAI.Assistants;
 
 @doc("The possible values for roles attributed to messages in a thread.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 enum MessageRole {
   @doc("The role representing the end-user.")
   user: "user",

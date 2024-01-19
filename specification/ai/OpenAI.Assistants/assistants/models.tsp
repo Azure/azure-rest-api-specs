@@ -7,7 +7,7 @@ namespace Azure.AI.OpenAI.Assistants;
 using TypeSpec.Versioning;
 
 @doc("Represents an assistant that can call the model and use tools.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model Assistant {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -46,7 +46,7 @@ model Assistant {
 }
 
 @doc("The request details to use when creating a new assistant.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model AssistantCreationOptions {
   @doc("The ID of the model to use.")
   `model`: string;
@@ -75,8 +75,8 @@ model AssistantCreationOptions {
 }
 
 @doc("The request details to use when modifying an existing assistant.")
-@added(ServiceApiVersions.v2023_02_15_preview)
-model AssistantModificationOptions {
+@added(ServiceApiVersions.v2024_02_15_preview)
+model UpdateAssistantOptions {
   @doc("The ID of the model to use.")
   `model`?: string;
 
@@ -104,7 +104,7 @@ model AssistantModificationOptions {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"
 @doc("The status of an assistant deletion operation.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model AssistantDeletionStatus {
   ...DeletionStatus;
 
@@ -113,7 +113,7 @@ model AssistantDeletionStatus {
 }
 
 @doc("Information about a file attached to an assistant, as used by tools that can read files.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model AssistantFile {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -133,7 +133,7 @@ model AssistantFile {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "https://github.com/Azure/autorest.csharp/issues/4041"
 @doc("The status of an assistant file deletion operation.")
-@added(ServiceApiVersions.v2023_02_15_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model AssistantFileDeletionStatus {
   ...DeletionStatus;
 
