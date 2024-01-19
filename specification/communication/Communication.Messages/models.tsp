@@ -175,6 +175,7 @@ Could be an image, document or
 video.
 """)
 model MessageTemplateMedia {
+  @projectedName("csharp", "uri")
   @doc("The (public) URL of the media.")
   url: url;
 
