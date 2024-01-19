@@ -441,10 +441,7 @@
       "description": "Rules for the InternetGateways",
       "required": [
         "action",
-        "addressList",
-        "condition",
-        "destinationAddressList",
-        "sourceAddressList"
+        "addressList"
       ],
       "properties": {
         "action": {
@@ -461,20 +458,6 @@
           },
           "example": "Deny"
         },
-        "condition": {
-          "type": "string",
-          "description": "Specify condition.",
-          "minLength": 1,
-          "enum": [
-            "and",
-            "or"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "condition"
-          },
-          "example": "or"
-        },
         "addressList": {
           "type": "array",
           "description": "List of Addresses to be allowed or denied.",
@@ -484,28 +467,6 @@
             "type": "string",
             "minLength": 1,
             "example": "10.10.10.10:22 | www.foo.com"
-          }
-        },
-        "destinationAddressList": {
-          "type": "array",
-          "description": "List of destination Addresses to be allowed or denied.",
-          "minItems": 1,
-          "items": {
-            "description": "DestinationAddresses to be allowed or denied.",
-            "type": "string",
-            "minLength": 1,
-            "example": "10.10.10.10:22 | www.foo.com"
-          }
-        },
-        "sourceAddressList": {
-          "type": "array",
-          "description": "List of source remote ip to be allowed or denied.",
-          "minItems": 1,
-          "items": {
-            "description": "Source remote ip to be allowed or denied.",
-            "type": "string",
-            "minLength": 1,
-            "example": "10.10.10.10"
           }
         }
       }
