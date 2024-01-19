@@ -15,45 +15,45 @@ using Azure.ClientGenerator.Core;
     name: "DevCenterClient",
     service: DevCenterService,
 })
-namespace SDKCustomizations;
+namespace SdkCustomizations;
 
 interface DevCenterClientOperations {
     
     //DevCenters
-    ListProjects is DevCenterService.DevCenterOperations.ListProjects;
-    GetProject is DevCenterService.DevCenterOperations.GetProject;
+    listProjects is DevCenterService.DevCenterOperations.listProjects;
+    getProject is DevCenterService.DevCenterOperations.getProject;
  
     //DevBoxes 
-    ListPools is DevCenterService.DevBoxesOperations.ListPools;
-    GetPool is DevCenterService.DevBoxesOperations.GetPool;
-    ListSchedules is DevCenterService.DevBoxesOperations.ListSchedules;
-    GetSchedule is DevCenterService.DevBoxesOperations.GetSchedule;
-    ListAllDevBoxes is DevCenterService.DevBoxesDevCenterOperations.ListAllDevBoxes;
-    ListAllDevBoxesByUser is DevCenterService.DevBoxesDevCenterOperations.ListAllDevBoxesByUser;
-    ListDevBoxes is DevCenterService.DevBoxesOperations.ListDevBoxes;
-    GetDevBox is DevCenterService.DevBoxesOperations.GetDevBox;
-    CreateDevBox is DevCenterService.DevBoxesOperations.CreateDevBox;
-    DeleteDevBox is DevCenterService.DevBoxesOperations.DeleteDevBox;
-    StartDevBox is DevCenterService.DevBoxesOperations.StartDevBox;
-    StopDevBox is DevCenterService.DevBoxesOperations.StopDevBox;
-    RestartDevBox is DevCenterService.DevBoxesOperations.RestartDevBox;
-    GetRemoteConnection is DevCenterService.DevBoxesOperations.GetRemoteConnection;
-    ListDevBoxActions is DevCenterService.DevBoxesOperations.ListDevBoxActions;
-    GetDevBoxAction is DevCenterService.DevBoxesOperations.GetDevBoxAction;
-    SkipDevBoxAction is DevCenterService.DevBoxesOperations.SkipAction;
-    DelayDevBoxAction is DevCenterService.DevBoxesOperations.DelayAction;
-    DelayAllDevBoxActions is DevCenterService.DevBoxesOperations.DelayAllActions;
+    listPools is DevCenterService.DevBoxesOperations.listPools;
+    getPool is DevCenterService.DevBoxesOperations.getPool;
+    listSchedules is DevCenterService.DevBoxesOperations.listSchedules;
+    getSchedule is DevCenterService.DevBoxesOperations.getSchedule;
+    listAllDevBoxes is DevCenterService.DevBoxesDevCenterOperations.listAllDevBoxes;
+    listAllDevBoxesByUser is DevCenterService.DevBoxesDevCenterOperations.listAllDevBoxesByUser;
+    listDevBoxes is DevCenterService.DevBoxesOperations.listDevBoxes;
+    getDevBox is DevCenterService.DevBoxesOperations.getDevBox;
+    createDevBox is DevCenterService.DevBoxesOperations.createDevBox;
+    deleteDevBox is DevCenterService.DevBoxesOperations.deleteDevBox;
+    startDevBox is DevCenterService.DevBoxesOperations.startDevBox;
+    stopDevBox is DevCenterService.DevBoxesOperations.stopDevBox;
+    restartDevBox is DevCenterService.DevBoxesOperations.restartDevBox;
+    getRemoteConnection is DevCenterService.DevBoxesOperations.getRemoteConnection;
+    listDevBoxActions is DevCenterService.DevBoxesOperations.listDevBoxActions;
+    getDevBoxAction is DevCenterService.DevBoxesOperations.getDevBoxAction;
+    skipAction is DevCenterService.DevBoxesOperations.skipAction;
+    delayAction is DevCenterService.DevBoxesOperations.delayAction;
+    delayAllActions is DevCenterService.DevBoxesOperations.delayAllActions;
 
     //Environments
-    ListAllEnvironments is DevCenterService.EnvironmentsOperations.ListAllEnvironments;
-    ListEnvironments is DevCenterService.EnvironmentsOperations.ListEnvironments;
-    GetEnvironment is DevCenterService.EnvironmentsOperations.GetEnvironment;
-    CreateOrUpdateEnvironment is DevCenterService.EnvironmentsOperations.CreateOrUpdateEnvironment;
-    DeleteEnvironment is DevCenterService.EnvironmentsOperations.DeleteEnvironment;
-    ListCatalogs is DevCenterService.EnvironmentsOperations.ListCatalogs;
-    GetCatalog is DevCenterService.EnvironmentsOperations.GetCatalog;
-    ListEnvironmentDefinitions is DevCenterService.EnvironmentsOperations.ListEnvironmentDefinitions;
-    ListEnvironmentDefinitionsByCatalog is DevCenterService.EnvironmentsOperations.ListEnvironmentDefinitionsByCatalog;
-    GetEnvironmentDefinition is DevCenterService.EnvironmentsOperations.GetEnvironmentDefinition;
-    ListEnvironmentTypes is DevCenterService.EnvironmentsOperations.ListEnvironmentTypes;
+    listAllEnvironments is DevCenterService.EnvironmentsOperations.listAllEnvironments;
+    listEnvironments is DevCenterService.EnvironmentsOperations.listEnvironments;
+    getEnvironment is DevCenterService.EnvironmentsOperations.getEnvironment;
+    createOrUpdateEnvironment is DevCenterService.EnvironmentsOperations.createOrUpdateEnvironment;
+    deleteEnvironment is DevCenterService.EnvironmentsOperations.deleteEnvironment;
+    listCatalogs is DevCenterService.EnvironmentsOperations.listCatalogs;
+    getCatalog is DevCenterService.EnvironmentsOperations.getCatalog;
+    listEnvironmentDefinitions is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitions;
+    listEnvironmentDefinitionsByCatalog is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitionsByCatalog;
+    getEnvironmentDefinition is DevCenterService.EnvironmentsOperations.getEnvironmentDefinition;
+    listEnvironmentTypes is DevCenterService.EnvironmentsOperations.listEnvironmentTypes;
 }
