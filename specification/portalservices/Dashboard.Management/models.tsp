@@ -452,7 +452,7 @@ model QueryTileVisualization {
   type?: VisualizationType;
 
   @doc("Options for Query Tile visualizations.")
-  options?: Record<string>;
+  options?: {};
 }
 
 @doc("A markdown tile.")
