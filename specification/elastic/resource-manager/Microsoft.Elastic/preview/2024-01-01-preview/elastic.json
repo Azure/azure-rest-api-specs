@@ -865,6 +865,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/openAIIntegration/{integrationName}/getStatus": {
+      "post": {
+        "tags": [
+          "OpenAIIntegration"
+        ],
+        "summary": "Get OpenAI integration status for a given integration.",
+        "operationId": "OpenAI_GetStatus",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "monitorName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "integrationName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OpenAIIntegrationStatusResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenAI_GetStatus": {
+            "$ref": "./examples/OpenAI_GetStatus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/tagRules": {
       "get": {
         "tags": [
@@ -2593,6 +2652,15 @@
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "OpenAIIntegrationStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the OpenAI Integration",
           "type": "string"
         }
       }
