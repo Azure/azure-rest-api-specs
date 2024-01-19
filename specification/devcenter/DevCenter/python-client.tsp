@@ -9,6 +9,7 @@ using TypeSpec.Versioning;
 using DevCenterService;
 using Azure.ClientGenerator.Core;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @useDependency(APIVersions.v2023_04_01)
 @client({
     name: "DevCenterClient",
