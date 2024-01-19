@@ -10,6 +10,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface EnvironmentsOperations {
   @doc("Lists the environments for a project.")
   @route("/projects/{projectName}/environments")

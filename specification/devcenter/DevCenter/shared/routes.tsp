@@ -6,6 +6,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface SharedOperations {
     @doc("Get the status of an operation.")
     @route("/projects/{projectName}/operationstatuses/{operationId}")

@@ -9,6 +9,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface DevBoxesOperations {
   @doc("Lists available pools")
   @route("/projects/{projectName}/pools")
@@ -426,6 +427,7 @@ interface DevBoxesOperations {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface DevBoxesDevCenterOperations {
   @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
   @route("/devboxes")
