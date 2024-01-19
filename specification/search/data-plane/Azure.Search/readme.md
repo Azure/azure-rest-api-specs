@@ -177,20 +177,20 @@ input-file:
 - preview/2024-03-01-Preview/searchindex.json
 ```
 
-### Tag: package-2023-10-searchservice-preview
+### Tag: package-2024-03-searchservice-preview
 
-These settings apply only when `--tag=package-2023-10-searchservice-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-03-searchservice-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-10-searchservice-preview'
+``` yaml $(tag) == 'package-2024-03-searchservice-preview'
 input-file:
 - preview/2024-03-01-Preview/searchservice.json
 ```
 
-### Tag: package-2023-10-searchindex-preview
+### Tag: package-2024-03-searchindex-preview
 
-These settings apply only when `--tag=package-2023-10-searchindex-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-03-searchindex-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-10-searchindex-preview'
+``` yaml $(tag) == 'package-2024-03-searchindex-preview'
 input-file:
 - preview/2024-03-01-Preview/searchindex.json
 ```
