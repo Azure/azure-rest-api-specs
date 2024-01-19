@@ -1497,7 +1497,7 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "operationId": "NetworkSecurityPerimeterConfigurations_ListByConfigurationStore",
-        "description": "Lists all Network Security Perimeter configurations for a configuration store.",
+        "description": "Lists all network security perimeter configurations for a configuration store.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1542,7 +1542,7 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "operationId": "NetworkSecurityPerimeterConfigurations_Get",
-        "description": "Gets the specified Network Security Perimeter configuration associated with the configuration store.",
+        "description": "Gets the specified network security perimeter configuration associated with the configuration store.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1587,7 +1587,7 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
-        "description": "Forces a refresh of the specified Network Security Perimeter configuration.",
+        "description": "Forces a refresh of the specified network security perimeter configuration.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1726,7 +1726,7 @@
           }
         },
         "publicNetworkAccess": {
-          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "description": "Property to specify whether the data plane will accept traffic from the public internet.",
           "enum": [
             "Enabled",
             "Disabled",
@@ -2977,7 +2977,7 @@
       }
     },
     "NetworkSecurityPerimeterConfigurationListResult": {
-      "description": "A list of Network Security Perimeter configurations",
+      "description": "A list of network security perimeter configurations",
       "type": "object",
       "properties": {
         "value": {
@@ -2990,12 +2990,13 @@
         },
         "nextLink": {
           "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       }
     },
     "NetworkSecurityPerimeterConfiguration": {
-      "description": "A Network Security Perimeter configuration",
+      "description": "A network security perimeter configuration",
       "type": "object",
       "properties": {
         "id": {
@@ -3020,11 +3021,11 @@
       }
     },
     "NetworkSecurityPerimeterConfigurationProperties": {
-      "description": "The properties of a Network Security Perimeter configuration.",
+      "description": "The properties of a network security perimeter configuration.",
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "The provisioning status of the Network Security Perimeter configuration.",
+          "description": "The provisioning status of the network security perimeter configuration.",
           "enum": [
             "Succeeded",
             "Failed",
@@ -3042,7 +3043,7 @@
           }
         },
         "provisioningIssues": {
-          "description": "List of warnings and errors related to Network Security Perimeter provisioning.",
+          "description": "List of warnings and errors related to network security perimeter provisioning.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NSPProvisioningIssue"
@@ -3062,7 +3063,7 @@
       }
     },
     "NSPProvisioningIssue": {
-      "description": "A Network Security Perimeter provisioning issue",
+      "description": "A network security perimeter provisioning issue",
       "type": "object",
       "properties": {
         "name": {
@@ -3077,22 +3078,22 @@
       }
     },
     "NSPProperties": {
-      "description": "Properties of the Network Security Perimeter",
+      "description": "Properties of the network security perimeter",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Resource ID of the Network Security Perimeter",
+          "description": "Azure resource ID of the network security perimeter",
           "type": "string",
           "format": "arm-id",
           "readOnly": true
         },
         "perimeterGuid": {
-          "description": "The Network Security Perimeter GUID",
+          "description": "The network security perimeter GUID",
           "type": "string",
           "readOnly": true
         },
         "location": {
-          "description": "The geo-location of the Network Security Perimeter",
+          "description": "The geo-location of the network security perimeter",
           "type": "string",
           "readOnly": true
         }
@@ -3162,7 +3163,7 @@
       }
     },
     "NSPProvisioningIssueProperties": {
-      "description": "Properties of a Network Security Perimeter provisioning issue",
+      "description": "Properties of a network security perimeter provisioning issue",
       "type": "object",
       "properties": {
         "issueType": {
@@ -3252,7 +3253,7 @@
           "readOnly": true
         },
         "addressPrefixes": {
-          "description": "List of address prefixes granted access",
+          "description": "List of IPv4 or IPv6 address prefixes granted access",
           "type": "array",
           "items": {
             "type": "string"
@@ -3344,7 +3345,7 @@
     "NSPConfigurationNameParameter": {
       "name": "nspConfigurationName",
       "in": "path",
-      "description": "The name of the Network Security Perimeter configuration. Takes the format {perimeterGuid}.{associationName}.",
+      "description": "The name of the network security perimeter configuration. Takes the format {perimeterGuid}.{associationName}.",
       "required": true,
       "type": "string",
       "pattern": "^.*$"
