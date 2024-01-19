@@ -11,7 +11,7 @@ using TypeSpec.Http;
 namespace Microsoft.PortalServices;
 @doc("The shared dashboard resource definition.")
 @resource("dashboards")
-model Dashboard is TrackedResource<DashboardProperties> {
+model Dashboard is TrackedResource<DashboardPropertiesWithProvisioningState> {
   @doc("The name of the dashboard.")
   @maxLength(64)
   @minLength(3)

@@ -892,7 +892,7 @@
       "description": "The shared dashboard resource definition.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DashboardProperties",
+          "$ref": "#/definitions/DashboardPropertiesWithProvisioningState",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -1077,6 +1077,32 @@
     "DashboardProperties": {
       "type": "object",
       "description": "The shared dashboard properties.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of dashboard."
+        },
+        "pages": {
+          "type": "array",
+          "description": "The dashboard pages.",
+          "items": {
+            "$ref": "#/definitions/DashboardPage"
+          },
+          "x-ms-identifiers": []
+        },
+        "parameters": {
+          "type": "array",
+          "description": "The dashboard parameters.",
+          "items": {
+            "$ref": "#/definitions/DashboardParameter"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DashboardPropertiesWithProvisioningState": {
+      "type": "object",
+      "description": "Dashboard Properties with Provisioning state",
       "properties": {
         "title": {
           "type": "string",

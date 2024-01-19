@@ -183,6 +183,11 @@ model DashboardProperties {
 
   @doc("The dashboard parameters.")
   parameters?: DashboardParameter[];
+}
+
+@doc("Dashboard Properties with Provisioning state")
+model DashboardPropertiesWithProvisioningState {
+  ...DashboardProperties;
 
   @visibility("read")
   @doc("The status of the last operation.")
