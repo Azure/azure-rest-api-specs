@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "alertType": "IpAnomaly",
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "dismissIpAnomalyAlerts",
+            "type": "Microsoft.Security/alertsSuppressionRules",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/alertsSuppressionRules/dismissIpAnomalyAlerts",
+            "properties": {
+              "alertType": "IpAnomaly",
+              "comment": "Test VM",
+              "expirationDateUtc": "2019-12-01T19:50:47.083633Z",
+              "lastModifiedUtc": "2019-07-31T19:50:47.083633Z",
+              "reason": "FalsePositive",
+              "state": "Enabled",
+              "suppressionAlertsScope": {
+                "allOf": [
+                  {
+                    "field": "entities.ip.address",
+                    "in": [
+                      "104.215.95.187",
+                      "52.164.206.56"
+                    ]
+                  },
+                  {
+                    "contains": "POWERSHELL.EXE",
+                    "field": "entities.process.commandline"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AlertsSuppressionRules_List",
+  "title": "Get suppression alert rule for subscription, filtered by AlertType"
+}

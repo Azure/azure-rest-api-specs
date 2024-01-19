@@ -3,8 +3,13 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./DataProduct.tsp";
-import "./DataProductsCatalog.tsp";
+import "./Catalog.tsp";
+import "./Certificate.tsp";
+import "./Image.tsp";
+import "./Product.tsp";
+import "./DeviceGroup.tsp";
+import "./Deployment.tsp";
+import "./Device.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -14,17 +19,17 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
-  title: "Microsoft.NetworkAnalytics",
+  title: "AzureSphereManagementClient",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-@doc("// FIXME: (miissing-service-description) Add service description")
-namespace Microsoft.NetworkAnalytics;
+@doc("Azure Sphere resource management API.")
+namespace Microsoft.AzureSphere;
 
 @doc("The available API versions.")
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2023-11-15 API version.")
-  v2023_11_15: "2023-11-15",
+  @doc("The 2022-09-01-preview API version.")
+  v2022_09_01_preview: "2022-09-01-preview",
 }

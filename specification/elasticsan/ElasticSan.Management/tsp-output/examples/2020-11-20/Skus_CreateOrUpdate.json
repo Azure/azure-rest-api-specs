@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2020-11-20",
+    "properties": {
+      "properties": {
+        "skuSettings": [
+          {
+            "name": "freeSku",
+            "kind": "Standard",
+            "tier": "Tier1"
+          },
+          {
+            "name": "premiumSku",
+            "costs": [
+              {
+                "meterId": "xxx"
+              }
+            ],
+            "kind": "Premium",
+            "tier": "Tier2"
+          }
+        ]
+      }
+    },
+    "providerNamespace": "Microsoft.Contoso",
+    "resourceType": "testResourceType",
+    "sku": "testSku",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
+  },
+  "responses": {
+    "200": {
+      "description": "",
+      "body": {
+        "name": "Microsoft.Contoso/",
+        "type": "Microsoft.ProviderHub/providerRegistrations/",
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/"
+      }
+    }
+  },
+  "operationId": "Skus_CreateOrUpdate",
+  "title": "Skus_CreateOrUpdate"
+}

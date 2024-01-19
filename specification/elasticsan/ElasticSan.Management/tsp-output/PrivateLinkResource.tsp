@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./AzureMonitorPrivateLinkScope.tsp";
+import "./RelayNamespace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,22 +11,22 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Insights;
-@doc("A private link resource")
-@parentResource(AzureMonitorPrivateLinkScope)
+namespace Microsoft.Relay;
+@doc("Information of the private link resource.")
+@parentResource(RelayNamespace)
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
-  @doc("The name of the private link resource.")
+  @doc("The PrivateLinkResource name")
   @path
-  @key("groupName")
+  @key("privateLinkResourceName")
   @segment("privateLinkResources")
   name: string;
 }
 
 @armResourceOperations
 interface PrivateLinkResources {
-  @doc("Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.")
+  @doc("Gets a description for the specified Private Endpoint Connection name.")
   get is ArmResourceRead<PrivateLinkResource>;
 
-  @doc("Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.")
-  listByPrivateLinkScope is ArmResourceListByParent<PrivateLinkResource>;
+  @doc("Gets lists of resources that supports Privatelinks.")
+  list is ArmResourceListByParent<PrivateLinkResource>;
 }

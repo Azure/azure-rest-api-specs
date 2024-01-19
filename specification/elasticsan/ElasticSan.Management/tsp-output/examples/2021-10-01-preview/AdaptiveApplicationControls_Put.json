@@ -1,0 +1,231 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "ascLocation": "centralus",
+    "body": {
+      "properties": {
+        "enforcementMode": "Audit",
+        "pathRecommendations": [
+          {
+            "type": "PublisherSignature",
+            "path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
+            "action": "Recommended",
+            "common": true,
+            "configurationStatus": "Configured",
+            "fileType": "Exe",
+            "publisherInfo": {
+              "binaryName": "*",
+              "productName": "*",
+              "publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
+              "version": "0.0.0.0"
+            },
+            "userSids": [
+              "S-1-1-0"
+            ],
+            "usernames": [
+              {
+                "recommendationAction": "Recommended",
+                "username": "Everyone"
+              }
+            ]
+          },
+          {
+            "type": "ProductSignature",
+            "path": "%OSDRIVE%\\WINDOWSAZURE\\SECAGENT\\WASECAGENTPROV.EXE",
+            "action": "Recommended",
+            "common": true,
+            "configurationStatus": "Configured",
+            "fileType": "Exe",
+            "publisherInfo": {
+              "binaryName": "*",
+              "productName": "MICROSOFT® COREXT",
+              "publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
+              "version": "0.0.0.0"
+            },
+            "userSids": [
+              "S-1-1-0"
+            ],
+            "usernames": [
+              {
+                "recommendationAction": "Recommended",
+                "username": "NT AUTHORITY\\SYSTEM"
+              }
+            ]
+          },
+          {
+            "type": "PublisherSignature",
+            "path": "%OSDRIVE%\\WINDOWSAZURE\\PACKAGES_201973_7415\\COLLECTGUESTLOGS.EXE",
+            "action": "Recommended",
+            "common": true,
+            "configurationStatus": "Configured",
+            "fileType": "Exe",
+            "publisherInfo": {
+              "binaryName": "*",
+              "productName": "*",
+              "publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
+              "version": "0.0.0.0"
+            },
+            "userSids": [
+              "S-1-1-0"
+            ],
+            "usernames": [
+              {
+                "recommendationAction": "Recommended",
+                "username": "NT AUTHORITY\\SYSTEM"
+              }
+            ]
+          },
+          {
+            "type": "File",
+            "path": "C:\\directory\\file.exe",
+            "action": "Add",
+            "common": true
+          }
+        ],
+        "protectionMode": {
+          "exe": "Audit",
+          "msi": "None",
+          "script": "None"
+        },
+        "vmRecommendations": [
+          {
+            "configurationStatus": "Configured",
+            "enforcementSupport": "Supported",
+            "recommendationAction": "Recommended",
+            "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/erelh-stable/providers/microsoft.compute/virtualmachines/erelh-16090"
+          },
+          {
+            "configurationStatus": "Configured",
+            "enforcementSupport": "Supported",
+            "recommendationAction": "Recommended",
+            "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/matanvs/providers/microsoft.compute/virtualmachines/matanvs19"
+          }
+        ]
+      }
+    },
+    "groupName": "ERELGROUP1",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ERELGROUP1",
+        "type": "Microsoft.Security/applicationWhitelistings",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/centralus/applicationWhitelistings/ERELGROUP1",
+        "location": "centralus",
+        "properties": {
+          "configurationStatus": "InProgress",
+          "enforcementMode": "Audit",
+          "issues": [],
+          "pathRecommendations": [
+            {
+              "type": "PublisherSignature",
+              "path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
+              "action": "Recommended",
+              "common": true,
+              "configurationStatus": "Configured",
+              "fileType": "Exe",
+              "publisherInfo": {
+                "binaryName": "*",
+                "productName": "*",
+                "publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
+                "version": "0.0.0.0"
+              },
+              "userSids": [
+                "S-1-1-0"
+              ],
+              "usernames": [
+                {
+                  "recommendationAction": "Recommended",
+                  "username": "Everyone"
+                }
+              ]
+            },
+            {
+              "type": "ProductSignature",
+              "path": "%OSDRIVE%\\WINDOWSAZURE\\SECAGENT\\WASECAGENTPROV.EXE",
+              "action": "Recommended",
+              "common": true,
+              "configurationStatus": "Configured",
+              "fileType": "Exe",
+              "publisherInfo": {
+                "binaryName": "*",
+                "productName": "MICROSOFT® COREXT",
+                "publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
+                "version": "0.0.0.0"
+              },
+              "userSids": [
+                "S-1-1-0"
+              ],
+              "usernames": [
+                {
+                  "recommendationAction": "Recommended",
+                  "username": "NT AUTHORITY\\SYSTEM"
+                }
+              ]
+            },
+            {
+              "type": "PublisherSignature",
+              "path": "%OSDRIVE%\\WINDOWSAZURE\\PACKAGES_201973_7415\\COLLECTGUESTLOGS.EXE",
+              "action": "Recommended",
+              "common": true,
+              "configurationStatus": "Configured",
+              "fileType": "Exe",
+              "publisherInfo": {
+                "binaryName": "*",
+                "productName": "*",
+                "publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
+                "version": "0.0.0.0"
+              },
+              "userSids": [
+                "S-1-1-0"
+              ],
+              "usernames": [
+                {
+                  "recommendationAction": "Recommended",
+                  "username": "NT AUTHORITY\\SYSTEM"
+                }
+              ]
+            },
+            {
+              "type": "File",
+              "path": "C:\\directory\\file.exe",
+              "action": "Add",
+              "common": true,
+              "configurationStatus": "NotConfigured",
+              "fileType": "Exe",
+              "userSids": [
+                "S-1-1-0"
+              ],
+              "usernames": [
+                {
+                  "recommendationAction": "Recommended",
+                  "username": "Everyone"
+                }
+              ]
+            }
+          ],
+          "protectionMode": {
+            "exe": "Audit",
+            "msi": "None",
+            "script": "None"
+          },
+          "recommendationStatus": "Recommended",
+          "sourceSystem": "Azure_AppLocker",
+          "vmRecommendations": [
+            {
+              "recommendationAction": "Recommended",
+              "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/erelh-stable/providers/microsoft.compute/virtualmachines/erelh-16090"
+            },
+            {
+              "recommendationAction": "Recommended",
+              "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/matanvs/providers/microsoft.compute/virtualmachines/matanvs19"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "AdaptiveApplicationControls_Put",
+  "title": "Update an application control machine group by adding a new application"
+}

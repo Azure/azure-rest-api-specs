@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "ascLocation": "westcentralus",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "microsoft.ApplicationGateway-ARM",
+            "type": "Microsoft.Security/locations/securitySolutionsReferenceData",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/westcentralus/securitySolutionsReferenceData/microsoft.ApplicationGateway-ARM",
+            "properties": {
+              "alertVendorName": "Microsoft",
+              "packageInfoUrl": "www.azure.com",
+              "productName": "Web Application Firewall",
+              "publisher": "microsoft",
+              "publisherDisplayName": "Microsoft Inc.",
+              "securityFamily": "SaasWaf",
+              "template": "microsoft/ApplicationGateway-ARM"
+            }
+          },
+          {
+            "name": "qualys.qualysAgent",
+            "type": "Microsoft.Security/locations/SecuritySolutions",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/westcentralus/securitySolutionsReferenceData/qualys.qualysAgent",
+            "properties": {
+              "alertVendorName": "Qualys VA",
+              "packageInfoUrl": "http://www.qualys.com/",
+              "productName": "Vulnerability Assessment",
+              "publisher": "qualys",
+              "publisherDisplayName": "Qualys, Inc.",
+              "securityFamily": "Va",
+              "template": "qualys/qualysAgent"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SecuritySolutionsReferenceData_ListByHomeRegion",
+  "title": "Get security solutions from a security data location"
+}

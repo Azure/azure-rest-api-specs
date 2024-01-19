@@ -1,0 +1,138 @@
+{
+  "parameters": {
+    "$filter": "properties.iotHubs/any(i eq \"/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub\")",
+    "api-version": "2019-08-01",
+    "resourceGroupName": "MyRg",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.Security/IoTSecuritySolutions",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyRg/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default",
+            "location": "East Us",
+            "properties": {
+              "autoDiscoveredResources": [
+                "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735",
+                "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub"
+              ],
+              "disabledDataSources": [],
+              "displayName": "Solution Default",
+              "export": [
+                "RawEvents"
+              ],
+              "iotHubs": [
+                "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub"
+              ],
+              "recommendationsConfiguration": [
+                {
+                  "name": "Service Principal Not Used with ACR",
+                  "recommendationType": "IoT_ACRAuthentication",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "Agent sending underutilized messages",
+                  "recommendationType": "IoT_AgentSendsUnutilizedMessages",
+                  "status": "TurnedOn"
+                },
+                {
+                  "name": "Operating system (OS) baseline validation failure",
+                  "recommendationType": "IoT_Baseline",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "Edge Hub memory can be optimized",
+                  "recommendationType": "IoT_EdgeHubMemOptimize",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "No Logging Configured for Edge Module",
+                  "recommendationType": "IoT_EdgeLoggingOptions",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "Module Settings Inconsistent in SecurityGroup",
+                  "recommendationType": "IoT_InconsistentModuleSettings",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "Install the Azure Security of Things Agent",
+                  "recommendationType": "IoT_InstallAgent",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "Default IP Filter Policy should be Deny",
+                  "recommendationType": "IoT_IPFilter_DenyAll",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "IP Filter rule includes large IP range",
+                  "recommendationType": "IoT_IPFilter_PermissiveRule",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "Open Ports On Device",
+                  "recommendationType": "IoT_OpenPorts",
+                  "status": "Disabled"
+                },
+                {
+                  "name": "Permissive firewall policy in one of the chains was found",
+                  "recommendationType": "IoT_PermissiveFirewallPolicy",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "Permissive firewall rule in the input chain was found",
+                  "recommendationType": "IoT_PermissiveInputFirewallRules",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "Permissive firewall rule in the output chain was found",
+                  "recommendationType": "IoT_PermissiveOutputFirewallRules",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "High level permissions configured in Edge model twin for Edge module",
+                  "recommendationType": "IoT_PrivilegedDockerOptions",
+                  "status": "Enabled"
+                },
+                {
+                  "name": "Same Authentication Credentials used by multiple devices",
+                  "recommendationType": "IoT_SharedCredentials",
+                  "status": "Disabled"
+                },
+                {
+                  "name": "TLS cipher suite upgrade",
+                  "recommendationType": "IoT_VulnerableTLSCipherSuite",
+                  "status": "Enabled"
+                }
+              ],
+              "status": "Enabled",
+              "unmaskedIpLoggingStatus": "Enabled",
+              "userDefinedResources": {
+                "query": "where type != \"microsoft.devices/iothubs\" | where name contains \"iot\"",
+                "querySubscriptions": [
+                  "075423e9-7d33-4166-8bdf-3920b04e3735"
+                ]
+              },
+              "workspace": "/subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1"
+            },
+            "systemData": {
+              "createdAt": "2020-04-27T21:53:29.0928001Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-04-27T21:53:29.0928001Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "IotSecuritySolution_ListByResourceGroup",
+  "title": "List IoT Security solutions by resource group and IoT Hub"
+}

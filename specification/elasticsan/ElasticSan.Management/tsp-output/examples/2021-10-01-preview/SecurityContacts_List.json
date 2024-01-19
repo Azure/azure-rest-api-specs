@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.Security/securityContact",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityContact/default",
+            "properties": {
+              "alertNotifications": {
+                "minimalSeverity": "Low",
+                "state": "On"
+              },
+              "emails": "john@contoso.com;Jane@contoso.com",
+              "notificationsByRole": {
+                "roles": [
+                  "Owner",
+                  "Admin"
+                ],
+                "state": "On"
+              },
+              "phone": "(214)275-4038"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SecurityContacts_List",
+  "title": "List security contact data"
+}

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2022-07-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+            "type": "Microsoft.Security/applications",
+            "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/applications/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+            "properties": {
+              "description": "An application on critical recommendations",
+              "conditionSets": [
+                {
+                  "conditions": [
+                    {
+                      "operator": "contains",
+                      "property": "$.Id",
+                      "value": "-bil-"
+                    }
+                  ]
+                }
+              ],
+              "displayName": "Admin's application",
+              "sourceResourceType": "Assessments"
+            }
+          },
+          {
+            "name": "4106f43c-6d82-4fc8-a92c-dcfe50799d1d",
+            "type": "Microsoft.Security/applications",
+            "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/applications/4106f43c-6d82-4fc8-a92c-dcfe50799d1d",
+            "properties": {
+              "description": "An application on critical recommendations",
+              "conditionSets": [
+                {
+                  "conditions": [
+                    {
+                      "operator": "contains",
+                      "property": "$.Id",
+                      "value": "-prod-"
+                    }
+                  ]
+                }
+              ],
+              "displayName": "Admin's application",
+              "sourceResourceType": "Assessments"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Applications_List",
+  "title": "List applications security by subscription level scope"
+}

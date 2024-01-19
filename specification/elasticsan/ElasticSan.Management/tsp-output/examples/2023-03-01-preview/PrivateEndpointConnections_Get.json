@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01-preview",
+    "clusterName": "cache1",
+    "privateEndpointConnectionName": "pectest01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pectest01",
+        "type": "Microsoft.Cache/redisEnterprise/privateEndpointConnections",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/privateEndpointConnections/pectest01",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/petest01"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Auto-Approved",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_Get",
+  "title": "RedisEnterpriseGetPrivateEndpointConnection"
+}

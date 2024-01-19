@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2020-11-20",
+    "providerNamespace": "Microsoft.Contoso",
+    "resourceType": "testResourceType",
+    "sku": "testSku",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSku",
+        "properties": {
+          "skuSettings": [
+            {
+              "name": "freeSku",
+              "kind": "Standard",
+              "tier": "Tier1"
+            },
+            {
+              "name": "premiumSku",
+              "costs": [
+                {
+                  "meterId": "xxx"
+                }
+              ],
+              "kind": "Premium",
+              "tier": "Tier2"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "Skus_Get",
+  "title": "Skus_Get"
+}

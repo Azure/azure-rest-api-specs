@@ -1,0 +1,1030 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "includePathRecommendations": true,
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "summary": false
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "AMIT-VA",
+            "type": "Microsoft.Security/applicationWhitelistings",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/centralus/applicationWhitelistings/AMIT-VA",
+            "location": "centralus",
+            "properties": {
+              "configurationStatus": "Configured",
+              "enforcementMode": "Audit",
+              "issues": [],
+              "pathRecommendations": [
+                {
+                  "type": "File",
+                  "path": "C:\\Windows\\SoftwareDistribution\\Download\\Install\\Windows-KB890830-x64-V5.53-delta.exe",
+                  "action": "Remove",
+                  "common": true,
+                  "configurationStatus": "NoStatus",
+                  "fileType": "Exe",
+                  "userSids": [
+                    "S-1-5-18"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "LOCAL SYSTEM"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "C:\\WindowsAzure\\GuestAgent_2.7.1198.822\\CollectGuestLogs.exe",
+                  "action": "Remove",
+                  "common": true,
+                  "configurationStatus": "NoStatus",
+                  "fileType": "Exe",
+                  "userSids": [
+                    "S-1-5-18"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "LOCAL SYSTEM"
+                    }
+                  ]
+                },
+                {
+                  "type": "PublisherSignature",
+                  "path": "C:\\Windows\\System32\\wbem\\WmiPrvSE.exe",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Exe",
+                  "publisherInfo": {
+                    "binaryName": "*",
+                    "productName": "*",
+                    "publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
+                    "version": "0.0.0.0"
+                  },
+                  "userSids": [
+                    "S-1-5-18",
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "Everyone"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "%OSDRIVE%\\WINDOWSAZURE\\SECAGENT\\WASECAGENTPROV.EXE",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Exe",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "Everyone"
+                    }
+                  ]
+                }
+              ],
+              "protectionMode": {
+                "exe": "Audit",
+                "msi": "Audit",
+                "script": "None"
+              },
+              "recommendationStatus": "Recommended",
+              "sourceSystem": "Azure_AppLocker",
+              "vmRecommendations": [
+                {
+                  "configurationStatus": "Configured",
+                  "enforcementSupport": "Supported",
+                  "recommendationAction": "Recommended",
+                  "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/erelh-dsc/providers/microsoft.compute/virtualmachines/erelh-14011"
+                },
+                {
+                  "configurationStatus": "Configured",
+                  "enforcementSupport": "Supported",
+                  "recommendationAction": "Recommended",
+                  "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/amit-va/providers/microsoft.compute/virtualmachines/ream-test"
+                },
+                {
+                  "configurationStatus": "Configured",
+                  "enforcementSupport": "Supported",
+                  "recommendationAction": "Recommended",
+                  "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/v-arrikl-scheduledapps/providers/microsoft.compute/virtualmachines/v-arrikl-14060"
+                }
+              ]
+            }
+          },
+          {
+            "name": "ERELGROUP1",
+            "type": "Microsoft.Security/applicationWhitelistings",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/centralus/applicationWhitelistings/ERELGROUP1",
+            "location": "centralus",
+            "properties": {
+              "configurationStatus": "Configured",
+              "enforcementMode": "Audit",
+              "issues": [],
+              "pathRecommendations": [
+                {
+                  "type": "PublisherSignature",
+                  "path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Exe",
+                  "publisherInfo": {
+                    "binaryName": "*",
+                    "productName": "*",
+                    "publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
+                    "version": "0.0.0.0"
+                  },
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "Everyone"
+                    }
+                  ]
+                }
+              ],
+              "protectionMode": {
+                "exe": "Audit",
+                "msi": "None",
+                "script": "None"
+              },
+              "recommendationStatus": "Recommended",
+              "sourceSystem": "Azure_AppLocker",
+              "vmRecommendations": [
+                {
+                  "configurationStatus": "Configured",
+                  "enforcementSupport": "NotSupported",
+                  "recommendationAction": "Recommended",
+                  "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/erelh-stable/providers/microsoft.compute/virtualmachines/erelh-16090"
+                }
+              ]
+            }
+          },
+          {
+            "name": "GROUP1",
+            "type": "Microsoft.Security/applicationWhitelistings",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/centralus/applicationWhitelistings/GROUP1",
+            "location": "centralus",
+            "properties": {
+              "configurationStatus": "Configured",
+              "enforcementMode": "Audit",
+              "issues": [],
+              "pathRecommendations": [
+                {
+                  "type": "PublisherSignature",
+                  "path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Exe",
+                  "publisherInfo": {
+                    "binaryName": "*",
+                    "productName": "*",
+                    "publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
+                    "version": "0.0.0.0"
+                  },
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "Everyone"
+                    }
+                  ]
+                },
+                {
+                  "type": "ProductSignature",
+                  "path": "%OSDRIVE%\\WINDOWSAZURE\\SECAGENT\\WASECAGENTPROV.EXE",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Exe",
+                  "publisherInfo": {
+                    "binaryName": "*",
+                    "productName": "MICROSOFT® COREXT",
+                    "publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
+                    "version": "0.0.0.0"
+                  },
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "NT AUTHORITY\\SYSTEM"
+                    }
+                  ]
+                },
+                {
+                  "type": "PublisherSignature",
+                  "path": "%PROGRAMFILES%\\RAPID7\\INSIGHT AGENT\\COMPONENTS\\INSIGHT_AGENT\\2.6.7.9\\GET_PROXY.EXE",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Exe",
+                  "publisherInfo": {
+                    "binaryName": "*",
+                    "productName": "*",
+                    "publisherName": "O=RAPID7 LLC, L=BOSTON, S=MASSACHUSETTS, C=US",
+                    "version": "0.0.0.0"
+                  },
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "NT AUTHORITY\\SYSTEM"
+                    }
+                  ]
+                },
+                {
+                  "type": "ProductSignature",
+                  "path": "%PROGRAMFILES%\\GOOGLE\\CHROME\\APPLICATION\\CHROME.EXE",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Exe",
+                  "publisherInfo": {
+                    "binaryName": "*",
+                    "productName": "GOOGLE CHROME",
+                    "publisherName": "O=GOOGLE LLC, L=MOUNTAIN VIEW, S=CA, C=US",
+                    "version": "0.0.0.0"
+                  },
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "NT AUTHORITY\\SYSTEM"
+                    }
+                  ]
+                },
+                {
+                  "type": "ProductSignature",
+                  "path": "O=GOOGLE INC, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US\\GOOGLE UPDATE\\*\\0.0.0.0",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Exe",
+                  "publisherInfo": {
+                    "binaryName": "*",
+                    "productName": "GOOGLE UPDATE",
+                    "publisherName": "O=GOOGLE INC, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US",
+                    "version": "0.0.0.0"
+                  },
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "NT AUTHORITY\\SYSTEM"
+                    }
+                  ]
+                }
+              ],
+              "protectionMode": {
+                "exe": "Audit",
+                "msi": "None",
+                "script": "None"
+              },
+              "recommendationStatus": "Recommended",
+              "sourceSystem": "Azure_AppLocker",
+              "vmRecommendations": [
+                {
+                  "configurationStatus": "Configured",
+                  "enforcementSupport": "Supported",
+                  "recommendationAction": "Recommended",
+                  "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/talk-va/providers/microsoft.compute/virtualmachines/tal-win-vm"
+                },
+                {
+                  "configurationStatus": "Configured",
+                  "enforcementSupport": "Supported",
+                  "recommendationAction": "Recommended",
+                  "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/talk-va/providers/microsoft.compute/virtualmachines/tal-win-vm-jit"
+                },
+                {
+                  "configurationStatus": "Configured",
+                  "enforcementSupport": "Supported",
+                  "recommendationAction": "Recommended",
+                  "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/myresourcegroup/providers/microsoft.compute/virtualmachines/myvmweb"
+                },
+                {
+                  "configurationStatus": "Configured",
+                  "enforcementSupport": "Supported",
+                  "recommendationAction": "Recommended",
+                  "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/v-arrikl-scheduledapps/providers/microsoft.compute/virtualmachines/v-arrikl-14061"
+                }
+              ]
+            }
+          },
+          {
+            "name": "GROUP1",
+            "type": "Microsoft.Security/applicationWhitelistings",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/westeurope/applicationWhitelistings/GROUP1",
+            "location": "westeurope",
+            "properties": {
+              "configurationStatus": "Configured",
+              "enforcementMode": "Audit",
+              "issues": [
+                {
+                  "issue": "ExecutableViolationsAudited",
+                  "numberOfVms": 1
+                }
+              ],
+              "pathRecommendations": [
+                {
+                  "type": "File",
+                  "path": "/sbin/init",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/sbin/upstart-udev-bridge",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/lib/systemd/systemd-udevd",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/sbin/upstart-socket-bridge",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/sbin/dhclient",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/bin/python3.4",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/sbin/upstart-file-bridge",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/bin/dbus-daemon",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "messagebus"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/lib/systemd/systemd-logind",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/sbin/getty",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/sbin/atd",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/sbin/cron",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/sbin/acpid",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/sbin/sshd",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/lib/linux-lts-xenial-tools-4.4.0-103/hv_vss_daemon",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/lib/linux-lts-xenial-tools-4.4.0-103/hv_kvp_daemon",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/sbin/nscd",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "unscd"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/sbin/ntpd",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "ntp"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/opt/microsoft/auoms/bin/auomscollect",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/opt/omi/bin/omiserver",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/opt/omi/bin/omiengine",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "omi"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/opt/omi/bin/omiagent",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/sbin/rsyslogd",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "syslog"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/bin/python2.7",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    },
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "omsagent"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/opt/microsoft/omsagent/ruby/bin/ruby",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "omsagent"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/opt/microsoft/auoms/bin/auoms",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/local/qualys/cloud-agent/bin/qualys-cloud-agent",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/bin/dash",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "omsagent"
+                    },
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/bin/sleep",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "omsagent"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/opt/dsc/bin/dsc_host",
+                  "action": "Recommended",
+                  "common": false,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "omsagent"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/bin/sudo",
+                  "action": "Recommended",
+                  "common": false,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/bin/bash",
+                  "action": "Recommended",
+                  "common": false,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/bin/apt-get",
+                  "action": "Recommended",
+                  "common": false,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/lib/apt/methods/http",
+                  "action": "Recommended",
+                  "common": false,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/lib/apt/methods/gpgv",
+                  "action": "Recommended",
+                  "common": false,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/lib/apt/methods/copy",
+                  "action": "Recommended",
+                  "common": false,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "root"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/usr/bin/pgrep",
+                  "action": "Recommended",
+                  "common": true,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "omsagent"
+                    }
+                  ]
+                },
+                {
+                  "type": "File",
+                  "path": "/opt/microsoft/omsconfig/bin/omsconsistencyinvoker",
+                  "action": "Recommended",
+                  "common": false,
+                  "configurationStatus": "Configured",
+                  "fileType": "Executable",
+                  "userSids": [
+                    "S-1-1-0"
+                  ],
+                  "usernames": [
+                    {
+                      "recommendationAction": "Recommended",
+                      "username": "omsagent"
+                    }
+                  ]
+                }
+              ],
+              "protectionMode": {
+                "executable": "Audit"
+              },
+              "recommendationStatus": "Recommended",
+              "sourceSystem": "Azure_AuditD",
+              "vmRecommendations": [
+                {
+                  "configurationStatus": "Configured",
+                  "enforcementSupport": "Unknown",
+                  "recommendationAction": "Recommended",
+                  "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/nic-no-pip/providers/microsoft.compute/virtualmachines/nic-no-pip-vm"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AdaptiveApplicationControls_List",
+  "title": "Gets a list of application control groups of machines for the subscription"
+}

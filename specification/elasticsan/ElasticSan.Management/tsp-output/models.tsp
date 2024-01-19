@@ -8,242 +8,92 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.NetworkAnalytics;
+namespace Microsoft.AzureSphere;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The status of the current operation.")
+@doc("Provisioning state of the resource.")
 enum ProvisioningState {
-  @doc("Represents a succeeded operation.") Succeeded,
-  @doc("Represents a failed operation.") Failed,
-  @doc("Represents a canceled operation.") Canceled,
-  @doc("Represents a pending operation.") Provisioning,
-  @doc("Represents a pending operation.") Updating,
-  @doc("Represents an operation under deletion.") Deleting,
-  @doc("Represents an accepted operation.") Accepted,
+  @doc("Resource has been created.") Succeeded,
+  @doc("Resource creation failed.") Failed,
+  @doc("Resource creation was canceled.") Canceled,
+  @doc("The resource is being provisioned") Provisioning,
+  @doc("The resource is being updated") Updating,
+  @doc("The resource is being deleted") Deleting,
+  @doc("The resource create request has been accepted") Accepted,
 }
 
-@doc("The data type state")
-enum ControlState {
-  @doc("Field to enable a setting.") Enabled,
-  @doc("Field to disable a setting.") Disabled,
+@doc("Certificate status values.")
+enum CertificateStatus {
+  @doc("Certificate is active") Active,
+  @doc("Certificate is inactive") Inactive,
+  @doc("Certificate has expired") Expired,
+  @doc("Certificate has been revoked") Revoked,
 }
 
-@doc("Specifies the default action of allow or deny when no other rules match.")
-enum DefaultAction {
-  @doc("Represents allow action.") Allow,
-  @doc("Represents deny action.") Deny,
+@doc("Regional data boundary values.")
+enum RegionalDataBoundary {
+  @doc("No data boundary") None,
+  @doc("EU data boundary") EU,
 }
 
-@doc("Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).")
-enum ManagedServiceIdentityType {
-  None,
-  SystemAssigned,
-  UserAssigned,
-  `SystemAssigned, UserAssigned`,
+@doc("Image type values.")
+enum ImageType {
+  @doc("Invalid image.") InvalidImageType,
+  @doc("One Bl image type") OneBl,
+  @doc("Pluton image type") PlutonRuntime,
+  @doc("Wifi firmware image type") WifiFirmware,
+  @doc("Security monitor image type") SecurityMonitor,
+  @doc("Normal world loader image type") NormalWorldLoader,
+  @doc("Normal world dtb image type") NormalWorldDtb,
+  @doc("Normal world kernel image type") NormalWorldKernel,
+  @doc("Root FS image type") RootFs,
+  @doc("Services image type") Services,
+  @doc("Applications image type") Applications,
+  @doc("FW config image type") FwConfig,
+  @doc("Boot manifest image type") BootManifest,
+  @doc("Nwfs image type") Nwfs,
+  @doc("Trusted key store image type") TrustedKeystore,
+  @doc("Policy image type") Policy,
+  @doc("Customer board config image type") CustomerBoardConfig,
+  @doc("Update certificate store image type") UpdateCertStore,
+  @doc("Base system update manifest image type") BaseSystemUpdateManifest,
+  @doc("Firmware update manifest image type") FirmwareUpdateManifest,
+  @doc("Customer update manifest image type") CustomerUpdateManifest,
+  @doc("Recovery manifest image type") RecoveryManifest,
+  @doc("manifest set image type") ManifestSet,
+  @doc("Other image type") Other,
 }
 
-@doc("The data type state")
-enum DataProductUserRole {
-  @doc("Field to specify user of type Reader.") Reader,
-  @doc("""
-Field to specify user of type SensitiveReader.
-This user has privileged access to read sensitive data of a data product.
-""")
-  SensitiveReader,
+@doc("OS feed type values.")
+enum OSFeedType {
+  @doc("Retail OS feed type.") Retail,
+  @doc("Retail evaluation OS feed type.") RetailEval,
 }
 
-@doc("The data type state")
-enum DataTypeState {
-  @doc("Field to specify stopped state.") Stopped,
-  @doc("Field to specify running state.") Running,
+@doc("Update policy values.")
+enum UpdatePolicy {
+  @doc("Update all policy.") UpdateAll,
+  @doc("No update for 3rd party app policy.") No3rdPartyAppUpdates,
 }
 
-@doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.")
-enum Bypass {
-  @doc("Represents no bypassing of traffic.") None,
-  @doc("Represents bypassing logging traffic.") Logging,
-  @doc("Represents bypassing metrics traffic.") Metrics,
-  @doc("Represents bypassing azure services traffic.") AzureServices,
+@doc("Allow crash dumps values.")
+enum AllowCrashDumpCollection {
+  @doc("Crash dump collection enabled") Enabled,
+  @doc("Crash dump collection disabled") Disabled,
 }
 
-@doc("The data product properties.")
-model DataProductProperties {
-  @doc("The resource GUID property of the data product resource.")
-  @visibility("read")
-  resourceGuid?: string;
+@doc("Capability image type")
+enum CapabilityType {
+  @doc("Application development capability") ApplicationDevelopment,
+  @doc("Field servicing capability") FieldServicing,
+}
 
-  @doc("Latest provisioning state  of data product.")
+@doc("Catalog properties")
+model CatalogProperties {
+  @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
-
-  @doc("Data product publisher name.")
-  @visibility("read", "create")
-  publisher: string;
-
-  @doc("Product name of data product.")
-  @visibility("read", "create")
-  product: string;
-
-  @doc("Major version of data product.")
-  @visibility("read", "create")
-  majorVersion: string;
-
-  @doc("List of name or email associated with data product resource deployment.")
-  @visibility("read", "create", "update")
-  owners?: string[];
-
-  @doc("Flag to enable or disable redundancy for data product.")
-  @visibility("read", "create")
-  redundancy?: ControlState;
-
-  @doc("Purview account url for data product to connect to.")
-  @visibility("read", "create", "update")
-  purviewAccount?: string;
-
-  @doc("Purview collection url for data product to connect to.")
-  @visibility("read", "create", "update")
-  purviewCollection?: string;
-
-  @doc("Flag to enable or disable private link for data product resource.")
-  @visibility("read", "create", "update")
-  privateLinksEnabled?: ControlState;
-
-  @doc("Flag to enable or disable public access of data product resource.")
-  @visibility("read", "create")
-  publicNetworkAccess?: ControlState;
-
-  @doc("Flag to enable customer managed key encryption for data product.")
-  @visibility("read", "create")
-  customerManagedKeyEncryptionEnabled?: ControlState;
-
-  @doc("Customer managed encryption key details for data product.")
-  @visibility("read", "create")
-  customerEncryptionKey?: EncryptionKeyDetails;
-
-  @doc("Network rule set for data product.")
-  @visibility("read", "create")
-  networkacls?: DataProductNetworkAcls;
-
-  @doc("Managed resource group configuration.")
-  @visibility("create")
-  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
-
-  @doc("List of available minor versions of the data product resource.")
-  @visibility("read")
-  availableMinorVersions?: string[];
-
-  @doc("Current configured minor version of the data product resource.")
-  @visibility("read", "update")
-  currentMinorVersion?: string;
-
-  @doc("Documentation link for the data product based on definition file.")
-  @visibility("read")
-  documentation?: string;
-
-  @doc("Resource links which exposed to the customer to query the data.")
-  @visibility("read")
-  consumptionEndpoints?: ConsumptionEndpointsProperties;
-
-  @doc("Key vault url.")
-  @visibility("read")
-  keyVaultUrl?: string;
-}
-
-@doc("Encryption key details.")
-model EncryptionKeyDetails {
-  @doc("The Uri of the key vault.")
-  keyVaultUri: string;
-
-  @doc("The name of the key vault key.")
-  keyName: string;
-
-  @doc("The version of the key vault key.")
-  keyVersion: string;
-}
-
-@doc("Data Product Network rule set")
-model DataProductNetworkAcls {
-  @doc("Virtual Network Rule")
-  virtualNetworkRule: VirtualNetworkRule[];
-
-  @doc("IP rule with specific IP or IP range in CIDR format.")
-  ipRules: IPRules[];
-
-  @doc("The list of query ips in the format of CIDR allowed to connect to query/visualization endpoint.")
-  allowedQueryIpRangeList: string[];
-
-  @doc("Default Action")
-  defaultAction: DefaultAction;
-}
-
-@doc("Virtual Network Rule")
-model VirtualNetworkRule {
-  @doc("Resource ID of a subnet")
-  id: string;
-
-  @doc("The action of virtual network rule.")
-  action?: string;
-
-  @doc("Gets the state of virtual network rule.")
-  state?: string;
-}
-
-@doc("IP rule with specific IP or IP range in CIDR format.")
-model IPRules {
-  @doc("IP Rules Value")
-  value?: string;
-
-  @doc("The action of virtual network rule.")
-  action: string;
-}
-
-@doc("ManagedResourceGroup related properties")
-model ManagedResourceGroupConfiguration {
-  @doc("Name of managed resource group")
-  name: string;
-
-  @doc("Managed Resource Group location")
-  location: string;
-}
-
-@doc("Details of Consumption Properties")
-model ConsumptionEndpointsProperties {
-  @doc("Ingestion url to upload the data.")
-  @visibility("read")
-  ingestionUrl?: string;
-
-  @doc("Resource Id of ingestion endpoint.")
-  @visibility("read")
-  ingestionResourceId?: ResourceIdentifier<[
-    {
-      type: "Microsoft.Storage/storageAccounts";
-    }
-  ]>;
-
-  @doc("Url to consume file type.")
-  @visibility("read")
-  fileAccessUrl?: string;
-
-  @doc("Resource Id of file access endpoint.")
-  @visibility("read")
-  fileAccessResourceId?: ResourceIdentifier<[
-    {
-      type: "Microsoft.Storage/storageAccounts";
-    }
-  ]>;
-
-  @doc("Url to consume the processed data.")
-  @visibility("read")
-  queryUrl?: string;
-
-  @doc("Resource Id of query endpoint.")
-  @visibility("read")
-  queryResourceId?: ResourceIdentifier<[
-    {
-      type: "Microsoft.Kusto/clusters";
-    }
-  ]>;
 }
 
 @doc("Common fields that are returned in the response for all Azure Resource Manager resources")
@@ -265,251 +115,311 @@ model Resource {
   systemData?: SystemData;
 }
 
-@doc("Details for data catalog properties.")
-model DataProductsCatalogProperties {
-  @doc("The data catalog provisioning state.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-
-  @doc("The data product publisher information.")
-  publishers: PublisherInformation[];
-}
-
-@doc("Details for Publisher Information.")
-model PublisherInformation {
-  @doc("Name of the publisher.")
-  publisherName: string;
-
-  @doc("Data product information.")
-  dataProducts: DataProductInformation[];
-}
-
-@doc("Data Product Information")
-model DataProductInformation {
-  @doc("Name of data product.")
-  dataProductName: string;
-
-  @doc("Description about data product.")
-  description: string;
-
-  @doc("Version information of data product.")
-  dataProductVersions: DataProductVersion[];
-}
-
-@doc("Data Product Version.")
-model DataProductVersion {
-  @doc("Version of data product")
-  version: string;
-}
-
-@doc("The type used for update operations of the DataProduct.")
-model DataProductUpdate {
-  @doc("The managed service identities assigned to this resource.")
-  identity?: ManagedServiceIdentity;
-
+@doc("The type used for update operations of the Catalog.")
+model CatalogUpdate {
   @doc("Resource tags.")
   tags?: Record<string>;
-
-  @doc("The updatable properties of the DataProduct.")
-  properties?: DataProductUpdateProperties;
 }
 
-@doc("The updatable properties of the DataProduct.")
-model DataProductUpdateProperties {
-  @doc("List of name or email associated with data product resource deployment.")
-  @visibility("read", "create", "update")
-  owners?: string[];
+@doc("The properties of certificate")
+model CertificateProperties {
+  @doc("The certificate as a UTF-8 encoded base 64 string.")
+  @visibility("read")
+  certificate?: string;
 
-  @doc("Purview account url for data product to connect to.")
-  @visibility("read", "create", "update")
-  purviewAccount?: string;
+  @doc("The certificate status.")
+  @visibility("read")
+  status?: CertificateStatus;
 
-  @doc("Purview collection url for data product to connect to.")
-  @visibility("read", "create", "update")
-  purviewCollection?: string;
+  @doc("The certificate subject.")
+  @visibility("read")
+  subject?: string;
 
-  @doc("Flag to enable or disable private link for data product resource.")
-  @visibility("read", "create", "update")
-  privateLinksEnabled?: ControlState;
+  @doc("The certificate thumbprint.")
+  @visibility("read")
+  thumbprint?: string;
 
-  @doc("Current configured minor version of the data product resource.")
-  @visibility("read", "update")
-  currentMinorVersion?: string;
-}
+  @doc("The certificate expiry date.")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expiryUtc?: utcDateTime;
 
-@doc("The details for role assignment common properties.")
-model RoleAssignmentCommonProperties {
-  @doc("Role Id of the Built-In Role")
-  roleId: string;
+  @doc("The certificate not before date.")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  notBeforeUtc?: utcDateTime;
 
-  @doc("Object ID of the AAD principal or security-group.")
-  principalId: string;
-
-  @doc("User name.")
-  userName: string;
-
-  @doc("Data Type Scope at which the role assignment is created.")
-  dataTypeScope: string[];
-
-  @doc("Type of the principal Id: User, Group or ServicePrincipal")
-  principalType: string;
-
-  @doc("Data Product role to be assigned to a user.")
-  role: DataProductUserRole;
-}
-
-@doc("The details for role assignment response.")
-model RoleAssignmentDetail {
-  @doc("Role Id of the Built-In Role")
-  roleId: string;
-
-  @doc("Object ID of the AAD principal or security-group.")
-  principalId: string;
-
-  @doc("User name.")
-  userName: string;
-
-  @doc("Data Type Scope at which the role assignment is created.")
-  dataTypeScope: string[];
-
-  @doc("Type of the principal Id: User, Group or ServicePrincipal")
-  principalType: string;
-
-  @doc("Data Product role to be assigned to a user.")
-  role: DataProductUserRole;
-
-  @doc("Id of role assignment request")
-  roleAssignmentId: string;
-}
-
-@doc("The response of a DataType list operation.")
-model DataTypeListResult is Azure.Core.Page<DataType>;
-
-@doc("The data type resource.")
-model DataType extends ProxyResource {
-  @doc("The resource-specific properties for this resource.")
-  @visibility("read", "create")
-  properties?: DataTypeProperties;
-}
-
-@doc("The data type properties")
-model DataTypeProperties {
-  @doc("Latest provisioning state  of data product.")
+  @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+}
 
-  @doc("State of data type.")
-  @visibility("read", "create", "update")
-  state?: DataTypeState;
-
-  @doc("Reason for the state of data type.")
+@doc("The certificate chain response.")
+model CertificateChainResponse {
+  @doc("The certificate chain.")
   @visibility("read")
-  stateReason?: string;
+  certificateChain?: string;
+}
 
-  @doc("Field for storage output retention in days.")
-  @visibility("read", "create", "update")
-  storageOutputRetention?: int32;
+@doc("Request for the proof of possession nonce")
+model ProofOfPossessionNonceRequest {
+  @doc("The proof of possession nonce")
+  proofOfPossessionNonce: string;
+}
 
-  @doc("Field for database cache retention in days.")
-  @visibility("read", "create", "update")
-  databaseCacheRetention?: int32;
+@doc("Result of the action to generate a proof of possession nonce")
+model ProofOfPossessionNonceResponse extends CertificateProperties {}
 
-  @doc("Field for database data retention in days.")
-  @visibility("read", "create", "update")
-  databaseRetention?: int32;
+@doc("Response to the action call for count devices in a catalog.")
+model CountDeviceResponse extends CountElementsResponse {}
 
-  @doc("Url for data visualization.")
+@doc("Response of the count for elements.")
+model CountElementsResponse {
+  @doc("Number of children resources in parent resource.")
+  value: int32;
+}
+
+@doc("The properties of image")
+model ImageProperties {
+  @doc("Image as a UTF-8 encoded base 64 string on image create. This field contains the image URI on image reads.")
+  @visibility("read", "create")
+  image?: string;
+
+  @doc("Image ID")
+  @visibility("read", "create")
+  imageId?: string;
+
+  @doc("Image name")
   @visibility("read")
-  visualizationUrl?: string;
+  imageName?: string;
+
+  @doc("Regional data boundary for an image")
+  @visibility("read", "create")
+  regionalDataBoundary?: RegionalDataBoundary;
+
+  @doc("Location the image")
+  @visibility("read")
+  uri?: string;
+
+  @doc("The image description.")
+  @visibility("read")
+  description?: string;
+
+  @doc("The image component id.")
+  @visibility("read")
+  componentId?: string;
+
+  @doc("The image type.")
+  @visibility("read")
+  imageType?: ImageType;
+
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
-@doc("The details for storage account sas creation.")
-model AccountSas {
-  @doc("Sas token start timestamp.")
+@doc("The properties of deployment")
+model DeploymentProperties {
+  @doc("Deployment ID")
+  @visibility("read", "create")
+  deploymentId?: string;
+
+  @doc("Images deployed")
+  @visibility("read", "create")
+  deployedImages?: Image[];
+
+  @doc("Deployment date UTC")
+  @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTimeStamp: utcDateTime;
+  deploymentDateUtc?: utcDateTime;
 
-  @doc("Sas token expiry timestamp.")
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Request of the action to list device groups for a catalog.")
+model ListDeviceGroupsRequest {
+  @doc("Device Group name.")
+  deviceGroupName?: string;
+}
+
+@doc("The properties of deviceGroup")
+model DeviceGroupProperties {
+  @doc("Description of the device group.")
+  description?: string;
+
+  @doc("Operating system feed type of the device group.")
+  osFeedType?: OSFeedType;
+
+  @doc("Update policy of the device group.")
+  updatePolicy?: UpdatePolicy;
+
+  @doc("Flag to define if the user allows for crash dump collection.")
+  allowCrashDumpsCollection?: AllowCrashDumpCollection;
+
+  @doc("Regional data boundary for the device group.")
+  regionalDataBoundary?: RegionalDataBoundary;
+
+  @doc("Deployment status for the device group.")
+  @visibility("read")
+  hasDeployment?: boolean;
+
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Paged collection of DeviceInsight items")
+model PagedDeviceInsight is Azure.Core.Page<DeviceInsight>;
+
+@doc("Device insight report.")
+model DeviceInsight {
+  @doc("Device ID")
+  deviceId: string;
+
+  @doc("Event description")
+  description: string;
+
+  @doc("Event start timestamp")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expiryTimeStamp: utcDateTime;
+  startTimestampUtc: utcDateTime;
 
-  @doc("Ip Address")
-  ipAddress: string;
-}
-
-@doc("Details of storage account sas token .")
-model AccountSasToken {
-  @doc("Field to specify storage account sas token.")
-  @secret
-  storageAccountSasToken: string;
-}
-
-@doc("list role assignments.")
-model ListRoleAssignments {
-  @doc("Count of role assignments.")
-  count: int32;
-
-  @doc("list of role assignments")
-  roleAssignmentResponse: RoleAssignmentDetail[];
-}
-
-@doc("Details for KeyVault.")
-model KeyVaultInfo {
-  @doc("key vault url.")
-  keyVaultUrl: string;
-}
-
-@doc("The details for container sas creation.")
-model ContainerSaS {
-  @doc("Sas token start timestamp.")
+  @doc("Event end timestamp")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTimeStamp: utcDateTime;
+  endTimestampUtc: utcDateTime;
 
-  @doc("Sas token expiry timestamp.")
+  @doc("Event category")
+  eventCategory: string;
+
+  @doc("Event class")
+  eventClass: string;
+
+  @doc("Event type")
+  eventType: string;
+
+  @doc("Event count")
+  eventCount: int32;
+}
+
+@doc("The properties of device")
+model DeviceProperties {
+  @doc("Device ID")
+  @visibility("read", "create")
+  deviceId?: string;
+
+  @doc("SKU of the chip")
+  @visibility("read")
+  chipSku?: string;
+
+  @doc("OS version available for installation when update requested")
+  @visibility("read")
+  lastAvailableOsVersion?: string;
+
+  @doc("OS version running on device when update requested")
+  @visibility("read")
+  lastInstalledOsVersion?: string;
+
+  @doc("Time when update requested and new OS version available")
+  @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expiryTimeStamp: utcDateTime;
+  lastOsUpdateUtc?: utcDateTime;
 
-  @doc("Ip Address")
-  ipAddress: string;
+  @doc("Time when update was last requested")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdateRequestUtc?: utcDateTime;
+
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
-@doc("Details of storage container account sas token .")
-model ContainerSasToken {
-  @doc("Field to specify storage container sas token.")
-  @secret
-  storageContainerSasToken: string;
+@doc("The properties of product")
+model ProductProperties {
+  @doc("Description of the product")
+  description: string;
+
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
-@doc("The type used for update operations of the DataType.")
-model DataTypeUpdate {
-  @doc("The updatable properties of the DataType.")
-  properties?: DataTypeUpdateProperties;
+@doc("The type used for update operations of the Product.")
+model ProductUpdate {
+  @doc("The updatable properties of the Product.")
+  properties?: ProductUpdateProperties;
 }
 
-@doc("The updatable properties of the DataType.")
-model DataTypeUpdateProperties {
-  @doc("State of data type.")
-  @visibility("read", "create", "update")
-  state?: DataTypeState;
-
-  @doc("Field for storage output retention in days.")
-  @visibility("read", "create", "update")
-  storageOutputRetention?: int32;
-
-  @doc("Field for database cache retention in days.")
-  @visibility("read", "create", "update")
-  databaseCacheRetention?: int32;
-
-  @doc("Field for database data retention in days.")
-  @visibility("read", "create", "update")
-  databaseRetention?: int32;
+@doc("The updatable properties of the Product.")
+model ProductUpdateProperties {
+  @doc("Description of the product")
+  description?: string;
 }
 
-@doc("Resource Access Rules.")
-model ResourceAccessRules {
-  @doc("The tenant ID of resource.")
-  tenantId: string;
+@doc("The type used for update operations of the DeviceGroup.")
+model DeviceGroupUpdate {
+  @doc("The updatable properties of the DeviceGroup.")
+  properties?: DeviceGroupUpdateProperties;
+}
 
-  @doc("Resource ID")
-  resourceId: string;
+@doc("The updatable properties of the DeviceGroup.")
+model DeviceGroupUpdateProperties {
+  @doc("Description of the device group.")
+  description?: string;
+
+  @doc("Operating system feed type of the device group.")
+  osFeedType?: OSFeedType;
+
+  @doc("Update policy of the device group.")
+  updatePolicy?: UpdatePolicy;
+
+  @doc("Flag to define if the user allows for crash dump collection.")
+  allowCrashDumpsCollection?: AllowCrashDumpCollection;
+
+  @doc("Regional data boundary for the device group.")
+  regionalDataBoundary?: RegionalDataBoundary;
+}
+
+@doc("Request to the action call to bulk claim devices.")
+model ClaimDevicesRequest {
+  @doc("Device identifiers of the devices to be claimed.")
+  deviceIdentifiers: string[];
+}
+
+@doc("The type used for update operations of the Device.")
+model DeviceUpdate {
+  @doc("The updatable properties of the Device.")
+  properties?: DeviceUpdateProperties;
+}
+
+@doc("The updatable properties of the Device.")
+model DeviceUpdateProperties {
+  @doc("Device group id")
+  deviceGroupId?: string;
+}
+
+@doc("Request of the action to create a signed device capability image")
+model GenerateCapabilityImageRequest {
+  @doc("List of capabilities to create")
+  capabilities: CapabilityType[];
+}
+
+@doc("Signed device capability image response")
+model SignedCapabilityImageResponse {
+  @doc("The signed device capability image as a UTF-8 encoded base 64 string.")
+  @visibility("read")
+  image?: string;
+}
+
+@doc("The properties of device patch")
+model DevicePatchProperties {
+  @doc("Device group id")
+  deviceGroupId: string;
+}
+
+@doc("Image upload request body.")
+model ImageUploadRequestBody {
+  @doc(".")
+  images: string;
 }

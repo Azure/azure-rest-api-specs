@@ -1,0 +1,113 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "aws_dev1",
+            "type": "Microsoft.Security/connectors",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/aws_dev1",
+            "properties": {
+              "authenticationDetails": {
+                "accountId": "922315681122",
+                "authenticationProvisioningState": "Valid",
+                "authenticationType": "awsCreds",
+                "awsAccessKeyId": "",
+                "awsSecretAccessKey": "",
+                "grantedPermissions": [
+                  "AWS::AWSSecurityHubReadOnlyAccess",
+                  "AWS::SecurityAudit",
+                  "AWS::AmazonSSMAutomationRole"
+                ]
+              },
+              "hybridComputeSettings": {
+                "autoProvision": "On",
+                "hybridComputeProvisioningState": "Valid",
+                "proxyServer": {
+                  "ip": "287.221.107.152",
+                  "port": "34"
+                },
+                "region": "West US 2",
+                "resourceGroupName": "AwsConnectorRG",
+                "servicePrincipal": {
+                  "applicationId": "ad9bcd79-be9c-45ab-abd8-80ca1654a7d1"
+                }
+              }
+            }
+          },
+          {
+            "name": "aws_dev2",
+            "type": "Microsoft.Security/connectors",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/aws_dev2",
+            "properties": {
+              "authenticationDetails": {
+                "accountId": "81231569658",
+                "authenticationProvisioningState": "Valid",
+                "authenticationType": "awsAssumeRole",
+                "awsAssumeRoleArn": "arn:aws:iam::81231569658:role/AscConnector",
+                "awsExternalId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+                "grantedPermissions": [
+                  "AWS::AWSSecurityHubReadOnlyAccess",
+                  "AWS::SecurityAudit",
+                  "AWS::AmazonSSMAutomationRole"
+                ]
+              },
+              "hybridComputeSettings": {
+                "autoProvision": "On",
+                "hybridComputeProvisioningState": "Valid",
+                "proxyServer": {
+                  "ip": "167.210.187.160",
+                  "port": "34"
+                },
+                "region": "West US 2",
+                "resourceGroupName": "AwsConnectorRG",
+                "servicePrincipal": {
+                  "applicationId": "ad9bcd79-be9c-45ab-abd8-80ca1654a7d1"
+                }
+              }
+            }
+          },
+          {
+            "name": "gcp_dev",
+            "type": "Microsoft.Security/connectors",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/gcp_dev",
+            "properties": {
+              "authenticationDetails": {
+                "type": "",
+                "authProviderX509CertUrl": "",
+                "authUri": "",
+                "authenticationProvisioningState": "Valid",
+                "authenticationType": "gcpCredentials",
+                "clientEmail": "",
+                "clientId": "",
+                "clientX509CertUrl": "",
+                "grantedPermissions": [
+                  "GCP::Security Center Admin Viewer"
+                ],
+                "organizationId": "AscDemoOrg",
+                "privateKey": "",
+                "privateKeyId": "",
+                "projectId": "",
+                "tokenUri": ""
+              },
+              "hybridComputeSettings": {
+                "autoProvision": "Off",
+                "hybridComputeProvisioningState": "Invalid",
+                "proxyServer": null,
+                "region": "",
+                "resourceGroupName": "",
+                "servicePrincipal": null
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Connectors_List",
+  "title": "Get all cloud accounts connectors of a subscription"
+}

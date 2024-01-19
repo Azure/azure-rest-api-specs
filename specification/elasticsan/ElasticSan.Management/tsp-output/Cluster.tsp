@@ -10,38 +10,45 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.OperationalInsights;
-@doc("The top level Log Analytics cluster resource container.")
+namespace Microsoft.ServiceFabric;
+@doc("""
+The cluster resource
+
+""")
 model Cluster is TrackedResource<ClusterProperties> {
-  @doc("Name of the Log Analytics Cluster.")
+  @doc("The name of the cluster resource.")
   @path
   @key("clusterName")
   @segment("clusters")
   name: string;
-
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations
 interface Clusters {
-  @doc("Gets a Log Analytics cluster instance.")
+  @doc("Get a Service Fabric cluster resource created or in the process of being created in the specified resource group.")
   get is ArmResourceRead<Cluster>;
 
-  @doc("Create or update a Log Analytics cluster.")
+  @doc("Create or update a Service Fabric cluster resource with the specified name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Cluster>;
 
-  @doc("Updates a Log Analytics cluster.")
-  update is ArmCustomPatchAsync<Cluster, ClusterPatch>;
+  @doc("Update the configuration of a Service Fabric cluster resource with the specified name.")
+  update is ArmCustomPatchAsync<Cluster, ClusterUpdateParameters>;
 
-  @doc("Deletes a cluster instance.")
-  delete is ArmResourceDeleteAsync<Cluster>;
+  @doc("Delete a Service Fabric cluster resource with the specified name.")
+  delete is ArmResourceDeleteSync<Cluster>;
 
-  @doc("Gets Log Analytics clusters in a resource group.")
+  @doc("Gets all Service Fabric cluster resources created or in the process of being created in the resource group.")
   listByResourceGroup is ArmResourceListByParent<Cluster>;
 
-  @doc("Gets the Log Analytics clusters in a subscription.")
+  @doc("Gets all Service Fabric cluster resources created or in the process of being created in the subscription.")
   list is ArmListBySubscription<Cluster>;
+
+  @doc("If a target is not provided, it will get the minimum and maximum versions available from the current cluster version. If a target is given, it will provide the required path to get from the current cluster version to the target version.")
+  listUpgradableVersions is ArmResourceActionSync<
+    Cluster,
+    UpgradableVersionsDescription,
+    UpgradableVersionPathResult
+  >;
 }
 
 @@projectedName(Clusters.createOrUpdate::parameters.resource,
@@ -52,14 +59,23 @@ interface Clusters {
   "x-ms-client-name",
   "parameters"
 );
-@@doc(Clusters.createOrUpdate::parameters.resource,
-  "The parameters required to create or update a Log Analytics cluster."
-);
+@@doc(Clusters.createOrUpdate::parameters.resource, "The cluster resource.");
 @@projectedName(Clusters.update::parameters.properties, "json", "parameters");
 @@extension(Clusters.update::parameters.properties,
   "x-ms-client-name",
   "parameters"
 );
 @@doc(Clusters.update::parameters.properties,
-  "The parameters required to patch a Log Analytics cluster."
+  "The parameters which contains the property value and property name which used to update the cluster configuration."
+);
+@@projectedName(Clusters.listUpgradableVersions::parameters.body,
+  "json",
+  "versionsDescription"
+);
+@@extension(Clusters.listUpgradableVersions::parameters.body,
+  "x-ms-client-name",
+  "versionsDescription"
+);
+@@doc(Clusters.listUpgradableVersions::parameters.body,
+  "The upgrade path description with target version."
 );

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "connectorName": "aws_dev1",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "aws_dev1",
+        "type": "Microsoft.Security/connectors",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/aws_dev1",
+        "properties": {
+          "authenticationDetails": {
+            "accountId": "922315681122",
+            "authenticationProvisioningState": "Valid",
+            "authenticationType": "awsCreds",
+            "awsAccessKeyId": "",
+            "awsSecretAccessKey": "",
+            "grantedPermissions": [
+              "AWS::AWSSecurityHubReadOnlyAccess",
+              "AWS::SecurityAudit",
+              "AWS::AmazonSSMAutomationRole"
+            ]
+          },
+          "hybridComputeSettings": {
+            "autoProvision": "On",
+            "hybridComputeProvisioningState": "Valid",
+            "proxyServer": {
+              "ip": "287.221.107.152",
+              "port": "34"
+            },
+            "region": "West US 2",
+            "resourceGroupName": "AwsConnectorRG",
+            "servicePrincipal": {
+              "applicationId": "ad9bcd79-be9c-45ab-abd8-80ca1654a7d1"
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Connectors_Get",
+  "title": "Details of a specific cloud account connector"
+}

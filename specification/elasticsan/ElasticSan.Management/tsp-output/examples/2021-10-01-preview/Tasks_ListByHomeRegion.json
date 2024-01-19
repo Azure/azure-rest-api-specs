@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2015-06-01-preview",
+    "ascLocation": "westeurope",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "62609ee7-d0a5-8616-9fe4-1df5cca7758d",
+            "type": "Microsoft.Security/locations/tasks",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/locations/westeurope/tasks/62609ee7-d0a5-8616-9fe4-1df5cca7758d",
+            "properties": {
+              "creationTimeUtc": "2018-03-05T10:42:03.9935508Z",
+              "lastStateChangeTimeUtc": "2018-03-05T10:42:03.9935508Z",
+              "securityTaskParameters": {
+                "name": "NetworkSecurityGroupMissingOnSubnet",
+                "location": "uksouth",
+                "resourceGroup": "myRg",
+                "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/default",
+                "resourceName": "default",
+                "resourceParent": "vnet1",
+                "resourceType": "Subnet",
+                "uniqueKey": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/default"
+              },
+              "state": "Active",
+              "subState": "NA"
+            }
+          },
+          {
+            "name": "d55b4dc0-779c-c66c-33e5-d7bce24c4222",
+            "type": "Microsoft.Security/locations/tasks",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Security/locations/westeurope/tasks/d55b4dc0-779c-c66c-33e5-d7bce24c4222",
+            "properties": {
+              "creationTimeUtc": "2018-04-02T11:41:27.0541014Z",
+              "lastStateChangeTimeUtc": "2018-04-02T11:41:27.0541014Z",
+              "securityTaskParameters": {
+                "name": "EncryptionOnVm",
+                "isDataDiskEncrypted": false,
+                "isOsDiskEncrypted": false,
+                "resourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1",
+                "severity": "High",
+                "uniqueKey": "EncryptionOnVmTaskParameters_/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1",
+                "vmId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1",
+                "vmName": "vm1"
+              },
+              "state": "Active",
+              "subState": "NA"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Tasks_ListByHomeRegion",
+  "title": "Get security recommendations tasks from security data location"
+}

@@ -10,90 +10,102 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.KeyVault;
-@doc("Resource information with extended details.")
+namespace Microsoft.RecoveryServices;
+@doc("Resource information, as returned by the resource provider.")
 model Vault is TrackedResource<VaultProperties> {
-  @doc("The name of the vault.")
+  @doc("The name of the recovery services vault.")
   @path
   @key("vaultName")
   @segment("vaults")
   name: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ResourceSku;
 }
 
 @armResourceOperations
 interface Vaults {
-  @doc("Gets the specified Azure key vault.")
+  @doc("Get the Vault details.")
   get is ArmResourceRead<Vault>;
 
-  @doc("Create or update a key vault in the specified subscription.")
+  @doc("Creates or updates a Recovery Services vault.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Vault>;
 
-  @doc("Update a key vault in the specified subscription.")
-  update is ArmCustomPatchSync<Vault, VaultPatchParameters>;
+  @doc("Updates the vault.")
+  update is ArmCustomPatchAsync<Vault, PatchVault>;
 
-  @doc("Deletes the specified Azure key vault.")
+  @doc("Deletes a vault.")
   delete is ArmResourceDeleteSync<Vault>;
 
-  @doc("The List operation gets information about the vaults associated with the subscription and within the specified resource group.")
-  listByResourceGroup is ArmResourceListByParent<
-    Vault,
-    {
-      ...BaseParameters<Vault>;
+  @doc("Retrieve a list of Vaults.")
+  listByResourceGroup is ArmResourceListByParent<Vault>;
 
-      @doc("Maximum number of results to return.")
-      @query("$top")
-      $top?: int32;
-    }
-  >;
-
-  @doc("The List operation gets information about the vaults associated with the subscription.")
-  listBySubscription is ArmListBySubscription<Vault>;
-
-  @doc("Checks that the vault name is valid and is not already in use.")
-  checkNameAvailability is checkGlobalNameAvailability<
-    VaultCheckNameAvailabilityParameters,
-    CheckNameAvailabilityResult
-  >;
+  @doc("Fetches all the resources of the specified type in the subscription.")
+  listBySubscriptionId is ArmListBySubscription<Vault>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("PrivateLinkResources_ListByVault")
-  @doc("Gets the private link resources supported for the key vault.")
-  // FIXME: PrivateLinkResources_ListByVault could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateLinkResources")
+  @operationId("ReplicationUsages_List")
+  @doc("Fetches the replication usages of the vault.")
+  // FIXME: ReplicationUsages_List could not be converted to a resource operation
+  @route("/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/replicationUsages")
   @get
-  listByVault is Azure.Core.Foundations.Operation<
+  list is Azure.Core.Foundations.Operation<
     {
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      @doc("The ID of the target subscription.")
+      @minLength(1)
       @path
       subscriptionId: string;
 
-      @doc("Name of the resource group that contains the key vault.")
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
       @path
       resourceGroupName: string;
 
-      @doc("The name of the key vault.")
-      @pattern("^[a-zA-Z0-9-]{3,24}$")
+      @doc("The name of the recovery services vault.")
       @path
       vaultName: string;
     },
-    PrivateLinkResourceListResult
+    ReplicationUsageList
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Usages_ListByVaults")
+  @doc("Fetches the usages of the vault.")
+  // FIXME: Usages_ListByVaults could not be converted to a resource operation
+  @route("/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/usages")
+  @get
+  listByVaults is Azure.Core.Foundations.Operation<
+    {
+      @doc("The ID of the target subscription.")
+      @minLength(1)
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The name of the recovery services vault.")
+      @path
+      vaultName: string;
+    },
+    VaultUsageList
   >;
 }
 
-@@projectedName(Vaults.createOrUpdate::parameters.resource,
-  "json",
-  "parameters"
-);
+@@projectedName(Vaults.createOrUpdate::parameters.resource, "json", "vault");
 @@extension(Vaults.createOrUpdate::parameters.resource,
   "x-ms-client-name",
-  "parameters"
+  "vault"
 );
 @@doc(Vaults.createOrUpdate::parameters.resource,
-  "Parameters to create or update the vault"
+  "Recovery Services Vault to be created."
 );
-@@projectedName(Vaults.update::parameters.properties, "json", "parameters");
-@@extension(Vaults.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
+@@projectedName(Vaults.update::parameters.properties, "json", "vault");
+@@extension(Vaults.update::parameters.properties, "x-ms-client-name", "vault");
+@@doc(Vaults.update::parameters.properties,
+  "Recovery Services Vault to be created."
 );
-@@doc(Vaults.update::parameters.properties, "Parameters to patch the vault");

@@ -1,0 +1,104 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01",
+    "resourceGroupName": "rg1",
+    "searchServiceName": "mysearchservice",
+    "service": {
+      "location": "westus",
+      "properties": {
+        "hostingMode": "default",
+        "networkRuleSet": {
+          "ipRules": [
+            {
+              "value": "123.4.5.6"
+            },
+            {
+              "value": "123.4.6.0/18"
+            }
+          ]
+        },
+        "partitionCount": 1,
+        "replicaCount": 1
+      },
+      "sku": {
+        "name": "standard"
+      },
+      "tags": {
+        "app-name": "My e-commerce app"
+      }
+    },
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysearchservice",
+        "type": "Microsoft.Search/searchServices",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "location": "westus",
+        "properties": {
+          "hostingMode": "default",
+          "networkRuleSet": {
+            "ipRules": [
+              {
+                "value": "123.4.5.6"
+              },
+              {
+                "value": "123.4.6.0/18"
+              }
+            ]
+          },
+          "partitionCount": 1,
+          "privateEndpointConnections": [],
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
+          "replicaCount": 1,
+          "status": "provisioning",
+          "statusDetails": ""
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "tags": {
+          "app-name": "My e-commerce app"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "mysearchservice",
+        "type": "Microsoft.Search/searchServices",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "location": "westus",
+        "properties": {
+          "hostingMode": "default",
+          "networkRuleSet": {
+            "ipRules": [
+              {
+                "value": "123.4.5.6"
+              },
+              {
+                "value": "123.4.6.0/18"
+              }
+            ]
+          },
+          "partitionCount": 1,
+          "privateEndpointConnections": [],
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
+          "replicaCount": 1,
+          "status": "provisioning",
+          "statusDetails": ""
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "tags": {
+          "app-name": "My e-commerce app"
+        }
+      }
+    }
+  },
+  "operationId": "Services_CreateOrUpdate",
+  "title": "SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPs"
+}

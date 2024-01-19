@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01",
+    "regulatoryComplianceStandardName": "PCI-DSS-3.2",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "1.1",
+            "type": "Microsoft.Security/regulatoryComplianceControl",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/1.1",
+            "properties": {
+              "description": "Common Criteria Related to Organization and Management.",
+              "failedAssessments": 4,
+              "passedAssessments": 7,
+              "skippedAssessments": 0,
+              "state": "Failed"
+            }
+          },
+          {
+            "name": "2",
+            "type": "Microsoft.Security/regulatoryComplianceControl",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/2",
+            "properties": {
+              "description": "Confidential information is protected during the system design, development, testing, implementation, and change processes in accordance with confidentiality commitments and requirements.",
+              "failedAssessments": 0,
+              "passedAssessments": 0,
+              "skippedAssessments": 10,
+              "state": "Skipped"
+            }
+          },
+          {
+            "name": "2.1",
+            "type": "Microsoft.Security/regulatoryComplianceControl",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/regulatoryComplianceStandards/PCI-DSS-3.2/regulatoryComplianceControls/2.1",
+            "properties": {
+              "description": "Changes to confidentiality commitments and requirements are communicated to internal and external users, vendors, and other third parties whose products and services are included in the system.",
+              "failedAssessments": 0,
+              "passedAssessments": 0,
+              "skippedAssessments": 0,
+              "state": "Unsupported"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RegulatoryComplianceControls_List",
+  "title": "Get all regulatory compliance controls details and state for selected standard"
+}

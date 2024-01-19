@@ -7,38 +7,22 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
-namespace Microsoft.OperationalInsights;
+namespace Microsoft.SignalRService;
 
-interface DeletedWorkspacesOperations {
-  @doc("Gets recently deleted workspaces in a subscription, available for recovery.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/deletedWorkspaces")
+interface UsagesOperations {
+  @doc("List resource usage quotas by location.")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/usages")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("The ID of the target subscription.")
-      @minLength(1)
+      @doc("the location like \"eastus\"")
+      @path
+      location: string;
+
+      @doc("Gets subscription Id which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
       @path
       subscriptionId: string;
     },
-    ResourceListResult<Workspace>
-  >;
-
-  @doc("Gets recently deleted workspaces in a resource group, available for recovery.")
-  @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/deletedWorkspaces")
-  @get
-  listByResourceGroup is Azure.Core.Foundations.Operation<
-    {
-      @doc("The name of the resource group. The name is case insensitive.")
-      @maxLength(90)
-      @minLength(1)
-      @path
-      resourceGroupName: string;
-
-      @doc("The ID of the target subscription.")
-      @minLength(1)
-      @path
-      subscriptionId: string;
-    },
-    ResourceListResult<Workspace>
+    SignalRUsageList
   >;
 }

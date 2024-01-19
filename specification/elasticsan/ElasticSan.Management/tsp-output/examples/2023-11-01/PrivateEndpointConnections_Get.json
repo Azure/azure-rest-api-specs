@@ -1,23 +1,23 @@
 {
   "parameters": {
     "api-version": "2023-11-01",
-    "privateEndpointConnectionName": "myConnection",
-    "resourceGroupName": "rgname",
-    "resourceName": "service1",
+    "privateEndpointConnectionName": "testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546",
+    "resourceGroupName": "rg1",
+    "searchServiceName": "mysearchservice",
     "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myConnection",
-        "type": "Microsoft.HealthcareApis/services/privateEndpointConnections",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/service1/privateEndpointConnections/myConnection",
+        "name": "testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546",
+        "type": "Microsoft.Search/searchServices/privateEndpointConnections",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/privateEndpointConnections/testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546",
         "properties": {
           "privateEndpoint": {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/peexample01"
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testEndpoint"
           },
           "privateLinkServiceConnectionState": {
-            "description": "Auto-Approved",
+            "description": "",
             "actionsRequired": "None",
             "status": "Approved"
           }
@@ -26,5 +26,5 @@
     }
   },
   "operationId": "PrivateEndpointConnections_Get",
-  "title": "PrivateEndpointConnection_GetConnection"
+  "title": "PrivateEndpointConnectionGet"
 }

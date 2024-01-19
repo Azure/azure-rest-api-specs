@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./LabPlan.tsp";
+import "./Catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,14 +11,11 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.LabServices;
-@doc("Lab services virtual machine image")
-@parentResource(LabPlan)
+namespace Microsoft.AzureSphere;
+@doc("An image resource belonging to a catalog resource.")
+@parentResource(Catalog)
 model Image is ProxyResource<ImageProperties> {
-  @doc("The image name.")
-  @maxLength(100)
-  @minLength(1)
-  @pattern("^[-\\w\\\\._\\\\(\\\\)]+$")
+  @doc("Image name. Use .default for image creation.")
   @path
   @key("imageName")
   @segment("images")
@@ -27,34 +24,44 @@ model Image is ProxyResource<ImageProperties> {
 
 @armResourceOperations
 interface Images {
-  @doc("Gets an image resource.")
+  @doc("Get a Image")
   get is ArmResourceRead<Image>;
 
-  @doc("Updates an image resource via PUT. Creating new resources via PUT will not function.")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Image>;
+  @doc("Create a Image")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Image,
+    BaseParameters<Image>,
+    ArmAsyncOperationHeader
+  >;
 
-  @doc("Updates an image resource.")
-  update is ArmCustomPatchSync<Image, ImageUpdate>;
+  @doc("Delete a Image")
+  delete is ArmResourceDeleteAsync<
+    Image,
+    BaseParameters<Image>,
+    ArmLroLocationHeader
+  >;
 
-  @doc("Gets all images from galleries attached to a lab plan.")
-  listByLabPlan is ArmResourceListByParent<
+  @doc("List Image resources by Catalog")
+  listByCatalog is ArmResourceListByParent<
     Image,
     {
       ...BaseParameters<Image>;
 
-      @doc("The filter to apply to the operation.")
+      @doc("Filter the result list using the given expression")
       @query("$filter")
-      $filter?: string;
+      filter?: string;
+
+      @doc("The number of result items to return.")
+      @query("$top")
+      top?: int32;
+
+      @doc("The number of result items to skip.")
+      @query("$skip")
+      skip?: int32;
+
+      @doc("The maximum number of result items per page.")
+      @query("$maxpagesize")
+      maxpagesize?: int32;
     }
   >;
 }
-
-@@projectedName(Images.createOrUpdate::parameters.resource, "json", "body");
-@@extension(Images.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
-@@doc(Images.createOrUpdate::parameters.resource, "The request body.");
-@@projectedName(Images.update::parameters.properties, "json", "body");
-@@extension(Images.update::parameters.properties, "x-ms-client-name", "body");
-@@doc(Images.update::parameters.properties, "The request body.");

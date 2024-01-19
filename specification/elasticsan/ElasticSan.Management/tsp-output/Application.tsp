@@ -3,7 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./Cluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,77 +10,46 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.HDInsight;
-@doc("The HDInsight cluster application")
-@parentResource(Cluster)
+namespace Microsoft.Security;
+@doc("Security Application over a given scope")
+@subscriptionResource
 model Application is ProxyResource<ApplicationProperties> {
-  @doc("The constant value for the application name.")
+  @doc("The security Application key - unique key for the standard application")
   @path
-  @key("applicationName")
+  @key("applicationId")
   @segment("applications")
   name: string;
-
-  @doc("The ETag for the application")
-  etag?: string;
 }
 
 @armResourceOperations
 interface Applications {
-  @doc("Gets properties of the specified application.")
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Get a specific application for the requested scope by applicationId")
+  @operationId("Application_Get")
   get is ArmResourceRead<Application>;
 
-  @doc("Creates applications for the HDInsight cluster.")
-  create is ArmResourceCreateOrUpdateAsync<
-    Application,
-    BaseParameters<Application>,
-    ArmLroLocationHeader
-  >;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Creates or update a security application on the given subscription.")
+  @operationId("Application_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Application>;
 
-  @doc("Deletes the specified application on the HDInsight cluster.")
-  delete is ArmResourceDeleteAsync<
-    Application,
-    BaseParameters<Application>,
-    ArmLroLocationHeader
-  >;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Delete an Application over a given scope")
+  @operationId("Application_Delete")
+  delete is ArmResourceDeleteSync<Application>;
 
-  @doc("Lists all of the applications for the HDInsight cluster.")
-  listByCluster is ArmResourceListByParent<Application>;
-
-  @doc("Gets the async operation status.")
-  // FIXME: Applications_GetAzureAsyncOperationStatus could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/applications/{applicationName}/azureasyncoperations/{operationId}")
-  @get
-  getAzureAsyncOperationStatus is Azure.Core.Foundations.Operation<
-    {
-      @doc("The subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
-      @path
-      subscriptionId: string;
-
-      @doc("The name of the resource group.")
-      @path
-      resourceGroupName: string;
-
-      @doc("The name of the cluster.")
-      @path
-      clusterName: string;
-
-      @doc("The constant value for the application name.")
-      @path
-      applicationName: string;
-
-      @doc("The long running operation id.")
-      @path
-      operationId: string;
-    },
-    AsyncOperationResult
-  >;
+  @doc("Get a list of all relevant applications over a subscription level scope")
+  list is ArmResourceListByParent<Application>;
 }
 
-@@projectedName(Applications.create::parameters.resource, "json", "parameters");
-@@extension(Applications.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
+@@projectedName(Applications.createOrUpdate::parameters.resource,
+  "json",
+  "application"
 );
-@@doc(Applications.create::parameters.resource,
-  "The application create request."
+@@extension(Applications.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "application"
+);
+@@doc(Applications.createOrUpdate::parameters.resource,
+  "Application over a subscription scope"
 );

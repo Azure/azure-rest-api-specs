@@ -1,0 +1,117 @@
+{
+  "parameters": {
+    "api-version": "2023-08-01",
+    "moveCollectionName": "movecollection1",
+    "moveResourceName": "moveresourcename1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "moveresourcename1",
+            "type": "Microsoft.Migrate/MoveCollections/MoveResources",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource1",
+            "properties": {
+              "dependsOn": [
+                {
+                  "automaticResolution": {
+                    "moveResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource2"
+                  },
+                  "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastus/providers/Microsoft.Network/networkInterfaces/eastusvm140",
+                  "resolutionStatus": "Resolved",
+                  "resolutionType": "Automatic"
+                },
+                {
+                  "automaticResolution": {
+                    "moveResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource3"
+                  },
+                  "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/EASTUS/providers/Microsoft.Compute/disks/eastusvm1_OsDisk_1_a88a2f0e8cf44fb3af24aa0f27101f83",
+                  "resolutionStatus": "Resolved",
+                  "resolutionType": "Automatic"
+                }
+              ],
+              "resourceSettings": {
+                "resourceType": "Microsoft.Compute/virtualMachines",
+                "targetAvailabilitySetId": null,
+                "targetAvailabilityZone": null,
+                "targetResourceGroupName": "rg2",
+                "targetResourceName": "eastusvm1",
+                "targetVmSize": null,
+                "userManagedIdentities": [
+                  "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/umi1"
+                ]
+              },
+              "sourceId": "/subscriptions/subid/resourceGroups/eastus/providers/Microsoft.Compute/virtualMachines/eastusvm1",
+              "sourceResourceSettings": {
+                "resourceType": "Microsoft.Compute/virtualMachines",
+                "targetAvailabilitySetId": null,
+                "targetAvailabilityZone": "2",
+                "targetResourceGroupName": "rg1",
+                "targetResourceName": "eastusvm1",
+                "targetVmSize": "Standard_B2s",
+                "userManagedIdentities": [
+                  "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/umi1"
+                ]
+              }
+            },
+            "systemData": {
+              "createdAt": "2021-08-01T15:06:54.2757906Z",
+              "createdBy": "user@microsoft.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-27T17:16:24.3644126Z",
+              "lastModifiedBy": "user@microsoft.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "moveresourcename2",
+            "type": "Microsoft.Migrate/MoveCollections/MoveResources",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource2",
+            "properties": {
+              "dependsOn": [
+                {
+                  "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastus/providers/Microsoft.Network/virtualNetworks/eastus-vnet",
+                  "manualResolution": {
+                    "targetId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/westus/providers/Microsoft.Network/virtualNetworks/westus-vnet"
+                  },
+                  "resolutionStatus": "Resolved",
+                  "resolutionType": "Manual"
+                }
+              ],
+              "sourceId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastus/providers/Microsoft.Network/networkInterfaces/eastusvm140"
+            },
+            "systemData": {
+              "createdAt": "2021-08-02T15:10:54.2757906Z",
+              "createdBy": "user@microsoft.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-02T17:16:24.3644126Z",
+              "lastModifiedBy": "user@microsoft.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "moveresourcename3",
+            "type": "Microsoft.Migrate/MoveCollections/MoveResources",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource3",
+            "properties": {
+              "sourceId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/EASTUS/providers/Microsoft.Compute/disks/eastusvm1_OsDisk_1_a88a2f0e8cf44fb3af24aa0f27101f83"
+            },
+            "systemData": {
+              "createdAt": "2021-08-02T18:05:54.2757906Z",
+              "createdBy": "user@microsoft.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-02T20:16:24.3644126Z",
+              "lastModifiedBy": "user@microsoft.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "MoveResources_List",
+  "title": "MoveResources_List"
+}
