@@ -82,7 +82,7 @@ interface ImageOperations {
 }
 
 interface ImageBatchOperations {
-  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
   @summary("Start Batch Analyze Images")
   @doc("An asynchronous API for the batch analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.")
   @route("/image:batchAnalyze")
@@ -95,7 +95,7 @@ interface ImageBatchOperations {
     ImageBatchTaskDetail
   >;
 
-  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
   @summary("Get Batch Analyze Status")
   @doc("Check the status of a batch image analysis task.")
   getBatchTaskStatus is Azure.Core.ResourceRead<ImageBatchTaskDetail>;
@@ -326,7 +326,7 @@ interface TextCategoryCustomization {
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
-  @added(Versions.v2024_01_30_Preview)
+  @added(Versions.v2023_10_30_Preview)
   @action("trainModel")
   trainModel is CategoryOps.ResourceAction<
     TextCustomizedCategory,
@@ -334,7 +334,7 @@ interface TextCategoryCustomization {
     SubmitModelTrainingResponse
   >;
 
-  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
   @route("/text/categories/{categoryName}:generatePrompt")
   @post
   @summary("Trigger prompt generation")
@@ -348,7 +348,7 @@ interface TextCategoryCustomization {
     GeneratePromptTaskDetail
   >;
 
-  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
   @summary("Get Generate Prompt Task Status")
   @doc("Check the status of a generate prompt task.")
   getGeneratePromptTaskStatus is Azure.Core.ResourceRead<GeneratePromptTaskDetail>;
@@ -359,7 +359,7 @@ interface TextCustomizedMdoelOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@added(Versions.v2024_01_30_Preview)
+@added(Versions.v2023_10_30_Preview)
 interface TextCustomizedModelOperations {
   @summary("List all existing models")
   @doc("List existing models.")

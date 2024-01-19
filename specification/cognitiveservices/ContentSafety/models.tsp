@@ -40,7 +40,7 @@ enum AnalyzeImageOutputType {
   FourSeverityLevels,
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("The type of batch results storage mode.")
 enum BatchResultsStorageMode {
   @doc("Merge each result into one file.")
@@ -50,7 +50,7 @@ enum BatchResultsStorageMode {
   IndividualResultFiles,
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("The type of batch analysis task status.")
 enum BatchTaskStatus {
   @doc("The task has not started yet.")
@@ -66,7 +66,7 @@ enum BatchTaskStatus {
   Succeeded,
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 enum ModelStatus {
   Created,
   Training,
@@ -74,7 +74,7 @@ enum ModelStatus {
   Failed,
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 enum GeneratePromptStatus {
   Running,
   Ready,
@@ -103,12 +103,12 @@ model AnalyzeTextOptions {
   @doc("The incidents to detect.")
   incidents?: IncidentOptions;
 
-  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("The customized categories will be analyzed. If they are not assigned, the analysis results for all available customized categories will be returned.")
   customizedCategories?: CustomizedCategory[];
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("Customized category for inference.")
 model CustomizedCategory {
   @doc("Category name")
@@ -140,16 +140,16 @@ model AnalyzeTextResult {
   @doc("The incident match details.")
   incidentMatches?: IncidentMatch[];
 
-  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("Chunks in the original text detected as harmful content. Analysis result and scores are caused by these.")
   citation?: string[];
 
-  @added(ContentSafety.Versions.v2024_01_30_Preview)
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("Analysis result for customized categories.")
   customizedCategoriesAnalysis: TextCustomizedCategoryAnalysis[];
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("Text customized category analysis result.")
 model TextCustomizedCategoryAnalysis {
   @doc("Customized category name")
@@ -159,12 +159,12 @@ model TextCustomizedCategoryAnalysis {
   customizedCategoriesAnalysis: TextCustomizedCategoryClassResult[];
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("customized category analysis result")
 model TextCustomizedCategoryClassResult {
   id: int32;
 
-  @renamedFrom(Versions.v2024_01_30_Preview, "name")
+  @renamedFrom(Versions.v2023_10_30_Preview, "name")
   className: string;
 }
 
@@ -247,7 +247,7 @@ model ImageCategoriesAnalysis {
   severity?: int32;
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("The image batch analysis request.")
 model BatchAnalyzeImagesOptions {
   @doc("The URL of the Azure Storage Blob containing all the images to be analyzed in the batch task.")
@@ -269,7 +269,7 @@ model BatchAnalyzeImagesOptions {
   incidents?: IncidentOptions;
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("Image batch analyze task.")
 @resource("image/batchAnalyzeTasks")
 model ImageBatchTaskDetail {
@@ -579,11 +579,11 @@ model PreDefinedConcept {
 
 @added(Versions.v2023_10_30_Preview)
 @doc("Label definition.")
-@renamedFrom(Versions.v2024_01_30_Preview, "SubCategory")
+@renamedFrom(Versions.v2023_10_30_Preview, "SubCategory")
 model Class {
   id: int32;
 
-  @renamedFrom(Versions.v2024_01_30_Preview, "name")
+  @renamedFrom(Versions.v2023_10_30_Preview, "name")
   className: string;
 
   statements: string[];
@@ -602,22 +602,22 @@ model TextCustomizedCategory {
 
   @doc("A predefined concept with its definition can be used directly in the subcategories.")
   @added(Versions.v2023_10_30_Preview)
-  @removed(Versions.v2024_01_30_Preview)
+  @removed(Versions.v2023_10_30_Preview)
   preDefinedConcepts?: PreDefinedConcept[];
 
   @doc("Subcategories are detailed classes of the category. It is required there is a class 'safe' with id=0.")
-  @renamedFrom(Versions.v2024_01_30_Preview, "subCategories")
+  @renamedFrom(Versions.v2023_10_30_Preview, "subCategories")
   classes: Class[];
 
   @added(Versions.v2023_10_30_Preview)
-  @removed(Versions.v2024_01_30_Preview)
+  @removed(Versions.v2023_10_30_Preview)
   emphases?: string[];
 
   @doc("Blob that stores the examples.")
   exampleBlobUrl?: url;
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("The response for async training triggering.")
 model SubmitModelTrainingResponse {
   ...AcceptedResponse;
@@ -627,13 +627,13 @@ model SubmitModelTrainingResponse {
   modelUrl: string;
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 model AsyncJobWarning {
   code: string;
   messgae: string;
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @resource("text/generatePromptTasks")
 model GeneratePromptTaskDetail {
   @doc("The id of image batch analysis task.")
@@ -659,7 +659,7 @@ enum ImageWithTextCategory {
   Violence,
 }
 
-@added(ContentSafety.Versions.v2024_01_30_Preview)
+@added(ContentSafety.Versions.v2023_10_30_Preview)
 @parentResource(TextCustomizedCategory)
 @resource("models")
 model TextTrainedModel {

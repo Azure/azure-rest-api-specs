@@ -59,6 +59,46 @@
   },
   "tags": [],
   "paths": {
+    "/image/batchAnalyzeTasks/{taskId}": {
+      "get": {
+        "operationId": "ImageBatchOperations_GetBatchTaskStatus",
+        "summary": "Get Batch Analyze Status",
+        "description": "Check the status of a batch image analysis task.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "The id of image batch analysis task.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageBatchTaskDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/image/incidents": {
       "get": {
         "operationId": "ImageIncidents_ListIncidents",
@@ -476,6 +516,47 @@
         "x-ms-examples": {
           "Analyze Image": {
             "$ref": "./examples/AnalyzeImage.json"
+          }
+        }
+      }
+    },
+    "/image:batchAnalyze": {
+      "post": {
+        "operationId": "ImageBatchOperations_BatchAnalyzeImage",
+        "summary": "Start Batch Analyze Images",
+        "description": "An asynchronous API for the batch analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The image batch analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchAnalyzeImagesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ImageBatchTaskDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -1084,6 +1165,268 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/categories/{categoryName}:trainModel": {
+      "post": {
+        "operationId": "TextCategoryCustomization_TrainModel",
+        "description": "Resource action operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Text customizedCategories name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^Customized_[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "operation-location": {
+                "type": "string",
+                "description": "The location of the status API for monitoring the triggered model."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/categories/{categoryName}:generatePrompt": {
+      "post": {
+        "operationId": "TextCategoryCustomization_GenerateCustomizedCategoryPrompt",
+        "summary": "Trigger prompt generation",
+        "description": "An asynchronous API to generate prompt from customized category.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "The customized category name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/GeneratePromptTaskDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/categories/{categoryName}/models": {
+      "get": {
+        "operationId": "TextCustomizedModelOperations_ListTextCustomizedModels",
+        "summary": "List all existing models",
+        "description": "List existing models.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Text customizedCategories name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^Customized_[0-9A-Za-z._~-]+$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextTrainedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/categories/{categoryName}/models/{modelId}": {
+      "get": {
+        "operationId": "TextCustomizedModelOperations_GetTextCustomizedModels",
+        "description": "Get a model that is not deleted.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Text customizedCategories name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^Customized_[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextTrainedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TextCustomizedModelOperations_DeleteCustomizedModel",
+        "description": "If the model is training, the training process will be cancelled and the model will also be deleted.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Text customizedCategories name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^Customized_[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "modelId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/generatePromptTasks/{taskId}": {
+      "get": {
+        "operationId": "TextCategoryCustomization_GetGeneratePromptTaskStatus",
+        "summary": "Get Generate Prompt Task Status",
+        "description": "Check the status of a generate prompt task.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "The id of image batch analysis task.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GeneratePromptTaskDetail"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1970,6 +2313,14 @@
         "incidents": {
           "$ref": "#/definitions/IncidentOptions",
           "description": "The incidents to detect."
+        },
+        "customizedCategories": {
+          "type": "array",
+          "description": "The customized categories will be analyzed. If they are not assigned, the analysis results for all available customized categories will be returned.",
+          "items": {
+            "$ref": "#/definitions/CustomizedCategory"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -2054,10 +2405,26 @@
             "$ref": "#/definitions/IncidentMatch"
           },
           "x-ms-identifiers": []
+        },
+        "citation": {
+          "type": "array",
+          "description": "Chunks in the original text detected as harmful content. Analysis result and scores are caused by these.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customizedCategoriesAnalysis": {
+          "type": "array",
+          "description": "Analysis result for customized categories.",
+          "items": {
+            "$ref": "#/definitions/TextCustomizedCategoryAnalysis"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "categoriesAnalysis"
+        "categoriesAnalysis",
+        "customizedCategoriesAnalysis"
       ]
     },
     "AnnotateTextOptions": {
@@ -2100,6 +2467,21 @@
       "required": [
         "id",
         "name"
+      ]
+    },
+    "AsyncJobWarning": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "messgae": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "messgae"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -2162,6 +2544,149 @@
           "description": "Inner error."
         }
       }
+    },
+    "BatchAnalyzeImagesOptions": {
+      "type": "object",
+      "description": "The image batch analysis request.",
+      "properties": {
+        "imagesBlobFolderUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the Azure Storage Blob containing all the images to be analyzed in the batch task."
+        },
+        "analysisResultsBlobFolderUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the Azure Storage Blob where the batch task results will be written."
+        },
+        "resultsStorageMode": {
+          "$ref": "#/definitions/BatchResultsStorageMode",
+          "description": "The storage mode for the batch task results, either 'CollectiveResultFile' or 'IndividualResultFiles'.",
+          "default": "CollectiveResultFile"
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.",
+          "items": {
+            "$ref": "#/definitions/ImageCategory"
+          }
+        },
+        "outputType": {
+          "$ref": "#/definitions/AnalyzeImageOutputType",
+          "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
+          "default": "FourSeverityLevels"
+        },
+        "incidents": {
+          "$ref": "#/definitions/IncidentOptions",
+          "description": "The incidents to detect."
+        }
+      },
+      "required": [
+        "imagesBlobFolderUrl",
+        "analysisResultsBlobFolderUrl"
+      ]
+    },
+    "BatchResultsStorageMode": {
+      "type": "string",
+      "description": "The type of batch results storage mode.",
+      "enum": [
+        "CollectiveResultFile",
+        "IndividualResultFiles"
+      ],
+      "x-ms-enum": {
+        "name": "BatchResultsStorageMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CollectiveResultFile",
+            "value": "CollectiveResultFile",
+            "description": "Merge each result into one file."
+          },
+          {
+            "name": "IndividualResultFiles",
+            "value": "IndividualResultFiles",
+            "description": "Store each result in a single file."
+          }
+        ]
+      }
+    },
+    "BatchTaskStatus": {
+      "type": "string",
+      "description": "The type of batch analysis task status.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "BatchTaskStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The task has not started yet."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The task is in progress."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The task has failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The task has been succeeded."
+          }
+        ]
+      }
+    },
+    "Class": {
+      "type": "object",
+      "description": "Label definition.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "className": {
+          "type": "string"
+        },
+        "statements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "className",
+        "statements"
+      ]
+    },
+    "CustomizedCategory": {
+      "type": "object",
+      "description": "Customized category for inference.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "Category name"
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Model ID for the category. If not provided, the latest available model will be used."
+        }
+      },
+      "required": [
+        "categoryName",
+        "modelId"
+      ]
     },
     "DetectUngroundednessOptions": {
       "type": "object",
@@ -2250,6 +2775,41 @@
         "modelAsString": true
       }
     },
+    "GeneratePromptStatus": {
+      "type": "string",
+      "enum": [
+        "Running",
+        "Ready",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "GeneratePromptStatus",
+        "modelAsString": true
+      }
+    },
+    "GeneratePromptTaskDetail": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "description": "The id of image batch analysis task.",
+          "maxLength": 64,
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/GeneratePromptStatus",
+          "description": "The status of the batch image analysis task."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Return error detail when the task failed."
+        }
+      },
+      "required": [
+        "taskId",
+        "status"
+      ]
+    },
     "GptResource": {
       "type": "object",
       "description": "Connection details for the GPT resource.",
@@ -2266,6 +2826,42 @@
       "required": [
         "azureOpenAIEndpoint",
         "deploymentName"
+      ]
+    },
+    "ImageBatchTaskDetail": {
+      "type": "object",
+      "description": "Image batch analyze task.",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "description": "The id of image batch analysis task.",
+          "maxLength": 64,
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/BatchTaskStatus",
+          "description": "The status of the batch image analysis task."
+        },
+        "progressPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress of the batch image analysis task, represented as a percentage (0-100)."
+        },
+        "taskCreatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of when batch image analysis task was created."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Return error detail when the task failed."
+        }
+      },
+      "required": [
+        "taskId",
+        "status",
+        "progressPercentage",
+        "taskCreatedTime"
       ]
     },
     "ImageCategoriesAnalysis": {
@@ -2519,6 +3115,19 @@
         "incidentSampleId"
       ]
     },
+    "ModelStatus": {
+      "type": "string",
+      "enum": [
+        "Created",
+        "Training",
+        "Ready",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ModelStatus",
+        "modelAsString": true
+      }
+    },
     "PagedImageIncident": {
       "type": "object",
       "description": "Paged collection of ImageIncident items",
@@ -2673,20 +3282,26 @@
         "value"
       ]
     },
-    "PreDefinedConcept": {
+    "PagedTextTrainedModel": {
       "type": "object",
-      "description": "Pre-defined concept.",
+      "description": "Paged collection of TextTrainedModel items",
       "properties": {
-        "concept": {
-          "type": "string"
+        "value": {
+          "type": "array",
+          "description": "The TextTrainedModel items on this page",
+          "items": {
+            "$ref": "#/definitions/TextTrainedModel"
+          },
+          "x-ms-identifiers": []
         },
-        "description": {
-          "type": "string"
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "concept",
-        "description"
+        "value"
       ]
     },
     "ProtectedMaterialAnalysisResult": {
@@ -2748,30 +3363,6 @@
       },
       "required": [
         "incidentSampleIds"
-      ]
-    },
-    "SubCategory": {
-      "type": "object",
-      "description": "Label definition.",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "name": {
-          "type": "string"
-        },
-        "statements": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "statements"
       ]
     },
     "Task": {
@@ -2929,25 +3520,11 @@
             "create"
           ]
         },
-        "preDefinedConcepts": {
-          "type": "array",
-          "description": "A predefined concept with its definition can be used directly in the subcategories.",
-          "items": {
-            "$ref": "#/definitions/PreDefinedConcept"
-          },
-          "x-ms-identifiers": []
-        },
-        "subCategories": {
+        "classes": {
           "type": "array",
           "description": "Subcategories are detailed classes of the category. It is required there is a class 'safe' with id=0.",
           "items": {
-            "$ref": "#/definitions/SubCategory"
-          }
-        },
-        "emphases": {
-          "type": "array",
-          "items": {
-            "type": "string"
+            "$ref": "#/definitions/Class"
           }
         },
         "exampleBlobUrl": {
@@ -2958,7 +3535,45 @@
       },
       "required": [
         "categoryName",
-        "subCategories"
+        "classes"
+      ]
+    },
+    "TextCustomizedCategoryAnalysis": {
+      "type": "object",
+      "description": "Text customized category analysis result.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "Customized category name"
+        },
+        "customizedCategoriesAnalysis": {
+          "type": "array",
+          "description": "customized category analysis",
+          "items": {
+            "$ref": "#/definitions/TextCustomizedCategoryClassResult"
+          }
+        }
+      },
+      "required": [
+        "categoryName",
+        "customizedCategoriesAnalysis"
+      ]
+    },
+    "TextCustomizedCategoryClassResult": {
+      "type": "object",
+      "description": "customized category analysis result",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "className": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "className"
       ]
     },
     "TextIncident": {
@@ -3042,6 +3657,44 @@
       },
       "required": [
         "incidentSampleId"
+      ]
+    },
+    "TextTrainedModel": {
+      "type": "object",
+      "properties": {
+        "modelId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/ModelStatus"
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AsyncJobWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "modelId",
+        "status",
+        "createdTime",
+        "lastUpdateTime"
       ]
     },
     "UngroundedDetails": {
