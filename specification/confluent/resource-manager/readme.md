@@ -145,3 +145,13 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+### AutoRest v3 Suppressions
+
+``` yaml
+suppressions:
+    
+  - code: ResourceNameRestriction
+    reason: We don't want the the organization name values to be restricted by the regular expressions and we have few more specific logic for validation in the backend code that involves replacing some of the chars and passing the check instead of failing at the ARM level. So the "pattern" property is not defined.
+
+```
