@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "resourceGroupName": "sqlcrudtest-7398",
+    "serverName": "sqlcrudtest-4645",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "someVault_someKey_01234567890123456789012345678901",
+            "type": "Microsoft.Sql/servers/keys",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/keys/someVault_someKey_01234567890123456789012345678901",
+            "kind": "azurekeyvault",
+            "location": "Japan East",
+            "properties": {
+              "autoRotationEnabled": false,
+              "creationDate": "2020-11-15T00:00:00Z",
+              "thumbprint": "00112233445566778899AABBCCDDEEFFAABBCCDD"
+            }
+          },
+          {
+            "name": "myVault_myKey_11111111111111111111111111111111",
+            "type": "Microsoft.Sql/servers/keys",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/keys/myVault_myKey_11111111111111111111111111111111",
+            "kind": "azurekeyvault",
+            "location": "Japan East",
+            "properties": {
+              "autoRotationEnabled": false,
+              "creationDate": "2020-11-15T00:00:00Z",
+              "thumbprint": "AAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBB"
+            }
+          },
+          {
+            "name": "ServiceManaged",
+            "type": "Microsoft.Sql/servers/keys",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/keys/ServiceManaged",
+            "kind": "servicemanaged",
+            "location": "Japan East",
+            "properties": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServerKeys_ListByServer",
+  "title": "List the server keys by server"
+}

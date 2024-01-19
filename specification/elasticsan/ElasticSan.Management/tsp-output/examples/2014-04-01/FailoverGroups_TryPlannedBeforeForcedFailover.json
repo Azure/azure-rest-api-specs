@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2023-02-01-preview",
+    "failoverGroupName": "failovergrouptest3",
+    "resourceGroupName": "Default",
+    "serverName": "failovergroupsecondaryserver",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "failovergrouptest3",
+        "type": "Microsoft.Sql/servers/failoverGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupsecondaryserver/failoverGroups/failovergrouptest3",
+        "location": "Japan West",
+        "properties": {
+          "databases": [
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupsecondaryserver/databases/testdb1",
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupsecondaryserver/databases/testdb2"
+          ],
+          "partnerServers": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver",
+              "location": "Japan East",
+              "replicationRole": "Secondary"
+            }
+          ],
+          "readOnlyEndpoint": {
+            "failoverPolicy": "Disabled",
+            "targetServer": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver"
+          },
+          "readWriteEndpoint": {
+            "failoverPolicy": "Automatic",
+            "failoverWithDataLossGracePeriodMinutes": 120
+          },
+          "replicationRole": "Primary",
+          "replicationState": "CATCH_UP"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/japanwest/failoverGroupOperationResults/11111111-1111-1111-1111-111111111111"
+      }
+    }
+  },
+  "operationId": "FailoverGroups_TryPlannedBeforeForcedFailover",
+  "title": "Try planned before forced failover of a failover group"
+}

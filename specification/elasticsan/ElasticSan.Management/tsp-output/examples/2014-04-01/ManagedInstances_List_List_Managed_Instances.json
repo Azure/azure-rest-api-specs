@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "subscriptionId": "20D7082A-0FC7-4468-82BD-542694D5042B"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testinstance1",
+            "type": "Microsoft.Sql/managedInstances",
+            "id": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/Test1/providers/Microsoft.Sql/managedInstances/testinstance1",
+            "location": "japaneast",
+            "properties": {
+              "administratorLogin": "dummylogin",
+              "collation": "SQL_Latin1_General_CP1_CI_AS",
+              "currentBackupStorageRedundancy": "Geo",
+              "dnsZone": "1b4e2caff2530",
+              "fullyQualifiedDomainName": "testinstance1.1b4e2caff2530.database.windows.net",
+              "licenseType": "LicenseIncluded",
+              "maintenanceConfigurationId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_JapanEast_MI_1",
+              "minimalTlsVersion": "1.2",
+              "provisioningState": "Succeeded",
+              "proxyOverride": "Default",
+              "publicDataEndpointEnabled": false,
+              "requestedBackupStorageRedundancy": "Geo",
+              "state": "Ready",
+              "storageSizeInGB": 1024,
+              "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+              "vCores": 8
+            },
+            "sku": {
+              "name": "GP_Gen4",
+              "capacity": 8,
+              "family": "Gen4",
+              "tier": "GeneralPurpose"
+            }
+          },
+          {
+            "name": "testinstance2",
+            "type": "Microsoft.Sql/managedInstances",
+            "id": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/Test1/providers/Microsoft.Sql/managedInstances/testinstance2",
+            "location": "japaneast",
+            "properties": {
+              "administratorLogin": "dummylogin",
+              "collation": "SQL_Latin1_General_CP1_CI_AS",
+              "currentBackupStorageRedundancy": "Geo",
+              "dnsZone": "2c3d1bdae3412",
+              "fullyQualifiedDomainName": "testinstance2.2c3d1bdae3412.database.windows.net",
+              "licenseType": "Full",
+              "maintenanceConfigurationId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_JapanEast_MI_1",
+              "minimalTlsVersion": "1.2",
+              "provisioningState": "Succeeded",
+              "proxyOverride": "Default",
+              "publicDataEndpointEnabled": false,
+              "requestedBackupStorageRedundancy": "Geo",
+              "state": "Ready",
+              "storageSizeInGB": 1024,
+              "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/subnet2",
+              "vCores": 16
+            },
+            "sku": {
+              "name": "BC_Gen5",
+              "capacity": 16,
+              "family": "Gen4",
+              "tier": "BusinessCritical"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedInstances_List",
+  "title": "List managed instances"
+}

@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "distributedAvailabilityGroupName": "dag",
+    "managedInstanceName": "testcl",
+    "parameters": {
+      "properties": {
+        "primaryAvailabilityGroupName": "BoxLocalAg1",
+        "secondaryAvailabilityGroupName": "testcl",
+        "sourceEndpoint": "TCP://SERVER:7022",
+        "targetDatabase": "testdb"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "dag",
+        "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups",
+        "id": "/subscriptions/f2669dff-5f08-45dd-b857-b2a60b72cdc9/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
+        "properties": {
+          "primaryAvailabilityGroupName": "BoxLocalAg1",
+          "secondaryAvailabilityGroupName": "testcl",
+          "sourceEndpoint": "TCP://SERVER:7022",
+          "targetDatabase": "testdb"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "dag",
+        "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups",
+        "id": "/subscriptions/f2669dff-5f08-45dd-b857-b2a60b72cdc9/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
+        "properties": {
+          "primaryAvailabilityGroupName": "BoxLocalAg1",
+          "secondaryAvailabilityGroupName": "testcl",
+          "sourceEndpoint": "TCP://SERVER:7022",
+          "targetDatabase": "testdb"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "DistributedAvailabilityGroups_CreateOrUpdate",
+  "title": "Create a distributed availability group."
+}

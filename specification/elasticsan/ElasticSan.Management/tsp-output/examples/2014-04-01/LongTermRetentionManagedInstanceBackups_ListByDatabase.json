@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2021-05-01-preview",
+    "databaseName": "testDatabase",
+    "locationName": "japaneast",
+    "managedInstanceName": "testInstance",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "2018-06-01T08:00:00.000Z;55555555-6666-7777-8888-999999999999;2018-08-23T08:00:00.000Z",
+            "type": "Microsoft.Sql/locations/longTermRetentionManagedInstances/longTermRetentionDatabases/longTermRetentionManagedInstanceBackups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/Locations/japaneast/longTermRetentionManagedInstances/testInstance/longTermRetentionDatabases/testDatabase/longTermRetentionManagedInstanceBackups/2018-06-01T08:00:00.000Z;55555555-6666-7777-8888-999999999999;2018-08-23T08:00:00.000Z",
+            "properties": {
+              "backupStorageRedundancy": "Geo",
+              "backupTime": "2018-08-23T08:00:00Z",
+              "databaseDeletionTime": null,
+              "databaseName": "testDatabase",
+              "managedInstanceCreateTime": "2017-03-10T08:00:00Z",
+              "managedInstanceName": "testInstance"
+            }
+          },
+          {
+            "name": "2018-06-01T08:00:00.000Z;55555555-6666-7777-8888-999999999999;2018-08-30T08:00:00.000Z",
+            "type": "Microsoft.Sql/locations/longTermRetentionManagedInstances/longTermRetentionDatabases/longTermRetentionManagedInstanceBackups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/Locations/japaneast/longTermRetentionManagedInstances/testInstance/longTermRetentionDatabases/testDatabase/longTermRetentionManagedInstanceBackups/2018-06-01T08:00:00.000Z;55555555-6666-7777-8888-999999999999;2018-08-30T08:00:00.000Z",
+            "properties": {
+              "backupStorageRedundancy": "Geo",
+              "backupTime": "2018-08-30T08:00:00Z",
+              "databaseDeletionTime": null,
+              "databaseName": "testDatabase",
+              "managedInstanceCreateTime": "2017-03-10T08:00:00Z",
+              "managedInstanceName": "testInstance"
+            }
+          },
+          {
+            "name": "2018-06-01T08:00:00.000Z;55555555-6666-7777-8888-999999999999;2018-09-06T08:00:00.000Z",
+            "type": "Microsoft.Sql/locations/longTermRetentionManagedInstances/longTermRetentionDatabases/longTermRetentionManagedInstanceBackups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/Locations/japaneast/longTermRetentionManagedInstances/testInstance/longTermRetentionDatabases/testDatabase/longTermRetentionManagedInstanceBackups/2018-06-01T08:00:00.000Z;55555555-6666-7777-8888-999999999999;2018-09-06T08:00:00.000Z",
+            "properties": {
+              "backupStorageRedundancy": "Geo",
+              "backupTime": "2018-09-06T08:00:00Z",
+              "databaseDeletionTime": "2018-09-07T08:00:00Z",
+              "databaseName": "testDatabase",
+              "managedInstanceCreateTime": "2017-03-10T08:00:00Z",
+              "managedInstanceName": "testInstance"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LongTermRetentionManagedInstanceBackups_ListByDatabase",
+  "title": "Get all long term retention backups under the database."
+}

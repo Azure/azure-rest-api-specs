@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./RelayNamespace.tsp";
+import "./Server.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,22 +11,22 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Relay;
-@doc("Information of the private link resource.")
-@parentResource(RelayNamespace)
+namespace Microsoft.Sql;
+@doc("A private link resource")
+@parentResource(Server)
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
-  @doc("The PrivateLinkResource name")
+  @doc("The name of the private link resource.")
   @path
-  @key("privateLinkResourceName")
+  @key("groupName")
   @segment("privateLinkResources")
   name: string;
 }
 
 @armResourceOperations
 interface PrivateLinkResources {
-  @doc("Gets a description for the specified Private Endpoint Connection name.")
+  @doc("Gets a private link resource for SQL server.")
   get is ArmResourceRead<PrivateLinkResource>;
 
-  @doc("Gets lists of resources that supports Privatelinks.")
-  list is ArmResourceListByParent<PrivateLinkResource>;
+  @doc("Gets the private link resources for SQL server.")
+  listByServer is ArmResourceListByParent<PrivateLinkResource>;
 }

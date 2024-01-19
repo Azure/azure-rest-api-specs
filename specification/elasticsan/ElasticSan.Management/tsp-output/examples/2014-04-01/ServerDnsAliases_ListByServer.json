@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "parameters": {},
+    "resourceGroupName": "Default",
+    "serverName": "dns-alias-server",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "server-dns-alias-1",
+            "type": "Microsoft.Sql/servers/dnsAliases",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-server/dnsAliases/dns-alias-1",
+            "properties": {
+              "azureDnsRecord": "dns-alias-1.database.windows.net"
+            }
+          },
+          {
+            "name": "server-dns-alias-2",
+            "type": "Microsoft.Sql/servers/dnsAliases",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/dns-alias-server/dnsAliases/dns-alias-2",
+            "properties": {
+              "azureDnsRecord": "dns-alias-2.database.windows.net"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServerDnsAliases_ListByServer",
+  "title": "List server DNS aliases"
+}

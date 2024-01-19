@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./Workspace.tsp";
+import "./TableServiceProperties.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,11 +11,14 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.OperationalInsights;
-@doc("Workspace data table definition.")
-@parentResource(Workspace)
+namespace Microsoft.Storage;
+@doc("Properties of the table, including Id, resource name, resource type.")
+@parentResource(TableServiceProperties)
 model Table is ProxyResource<TableProperties> {
-  @doc("The name of the table.")
+  @doc("A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.")
+  @maxLength(63)
+  @minLength(3)
+  @pattern("^[A-Za-z][A-Za-z0-9]{2,62}$")
   @path
   @key("tableName")
   @segment("tables")
@@ -24,51 +27,39 @@ model Table is ProxyResource<TableProperties> {
 
 @armResourceOperations
 interface Tables {
-  @doc("Gets a Log Analytics workspace table.")
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Gets the table with the specified table name, under the specified account if it exists.")
+  @operationId("Table_Get")
   get is ArmResourceRead<Table>;
 
-  @doc("Update or Create a Log Analytics workspace table.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    Table,
-    BaseParameters<Table>,
-    ArmAsyncOperationHeader
-  >;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Creates a new table with the specified table name, under the specified account.")
+  @operationId("Table_Create")
+  create is ArmResourceCreateOrReplaceSync<Table>;
 
-  @doc("Update a Log Analytics workspace table.")
-  update is ArmCustomPatchAsync<
-    Table,
-    Table,
-    BaseParameters<Table>,
-    ArmAsyncOperationHeader
-  >;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Creates a new table with the specified table name, under the specified account.")
+  @operationId("Table_Update")
+  update is ArmCustomPatchSync<Table, Table>;
 
-  @doc("Delete a Log Analytics workspace table.")
-  delete is ArmResourceDeleteAsync<
-    Table,
-    BaseParameters<Table>,
-    ArmAsyncOperationHeader
-  >;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Deletes the table with the specified table name, under the specified account if it exists.")
+  @operationId("Table_Delete")
+  delete is ArmResourceDeleteSync<Table>;
 
-  @doc("Gets all the tables for the specified Log Analytics workspace.")
-  listByWorkspace is ArmResourceListByParent<Table>;
-
-  @doc("Migrate a Log Analytics table from support of the Data Collector API and Custom Fields features to support of Data Collection Rule-based Custom Logs.")
-  migrate is ArmResourceActionSync<Table, void, void>;
-
-  @doc("Cancel a log analytics workspace search results table query run.")
-  cancelSearch is ArmResourceActionSync<Table, void, void>;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Gets a list of all the tables under the specified storage account")
+  @operationId("Table_List")
+  list is ArmResourceListByParent<Table>;
 }
 
-@@projectedName(Tables.createOrUpdate::parameters.resource,
-  "json",
-  "parameters"
-);
-@@extension(Tables.createOrUpdate::parameters.resource,
+@@projectedName(Tables.create::parameters.resource, "json", "parameters");
+@@extension(Tables.create::parameters.resource,
   "x-ms-client-name",
   "parameters"
 );
-@@doc(Tables.createOrUpdate::parameters.resource,
-  "The parameters required to update table properties."
+@@doc(Tables.create::parameters.resource,
+  "The parameters to provide to create a table."
 );
 @@projectedName(Tables.update::parameters.properties, "json", "parameters");
 @@extension(Tables.update::parameters.properties,
@@ -76,5 +67,5 @@ interface Tables {
   "parameters"
 );
 @@doc(Tables.update::parameters.properties,
-  "The parameters required to update table properties."
+  "The parameters to provide to create a table."
 );

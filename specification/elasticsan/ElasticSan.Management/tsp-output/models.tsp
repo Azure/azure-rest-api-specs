@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -8,92 +7,462 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.AzureSphere;
+namespace Microsoft.Workloads;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("Provisioning state of the resource.")
-enum ProvisioningState {
-  @doc("Resource has been created.") Succeeded,
-  @doc("Resource creation failed.") Failed,
-  @doc("Resource creation was canceled.") Canceled,
-  @doc("The resource is being provisioned") Provisioning,
-  @doc("The resource is being updated") Updating,
-  @doc("The resource is being deleted") Deleting,
-  @doc("The resource create request has been accepted") Accepted,
+@doc("Defines the environment type - Production/Non Production.")
+enum SAPEnvironmentType {
+  NonProd,
+  Prod,
 }
 
-@doc("Certificate status values.")
-enum CertificateStatus {
-  @doc("Certificate is active") Active,
-  @doc("Certificate is inactive") Inactive,
-  @doc("Certificate has expired") Expired,
-  @doc("Certificate has been revoked") Revoked,
+@doc("Defines the SAP Product type.")
+enum SAPProductType {
+  ECC,
+  S4HANA,
+  Other,
 }
 
-@doc("Regional data boundary values.")
-enum RegionalDataBoundary {
-  @doc("No data boundary") None,
-  @doc("EU data boundary") EU,
+@doc("The type of SAP deployment, single server or Three tier.")
+enum SAPDeploymentType {
+  SingleServer,
+  ThreeTier,
 }
 
-@doc("Image type values.")
-enum ImageType {
-  @doc("Invalid image.") InvalidImageType,
-  @doc("One Bl image type") OneBl,
-  @doc("Pluton image type") PlutonRuntime,
-  @doc("Wifi firmware image type") WifiFirmware,
-  @doc("Security monitor image type") SecurityMonitor,
-  @doc("Normal world loader image type") NormalWorldLoader,
-  @doc("Normal world dtb image type") NormalWorldDtb,
-  @doc("Normal world kernel image type") NormalWorldKernel,
-  @doc("Root FS image type") RootFs,
-  @doc("Services image type") Services,
-  @doc("Applications image type") Applications,
-  @doc("FW config image type") FwConfig,
-  @doc("Boot manifest image type") BootManifest,
-  @doc("Nwfs image type") Nwfs,
-  @doc("Trusted key store image type") TrustedKeystore,
-  @doc("Policy image type") Policy,
-  @doc("Customer board config image type") CustomerBoardConfig,
-  @doc("Update certificate store image type") UpdateCertStore,
-  @doc("Base system update manifest image type") BaseSystemUpdateManifest,
-  @doc("Firmware update manifest image type") FirmwareUpdateManifest,
-  @doc("Customer update manifest image type") CustomerUpdateManifest,
-  @doc("Recovery manifest image type") RecoveryManifest,
-  @doc("manifest set image type") ManifestSet,
-  @doc("Other image type") Other,
+@doc("Defines the supported SAP Database types.")
+enum SAPDatabaseType {
+  HANA,
+  DB2,
 }
 
-@doc("OS feed type values.")
-enum OSFeedType {
-  @doc("Retail OS feed type.") Retail,
-  @doc("Retail evaluation OS feed type.") RetailEval,
+@doc("The database scale method.")
+enum SAPDatabaseScaleMethod {
+  ScaleUp,
 }
 
-@doc("Update policy values.")
-enum UpdatePolicy {
-  @doc("Update all policy.") UpdateAll,
-  @doc("No update for 3rd party app policy.") No3rdPartyAppUpdates,
+@doc("The high availability type (AvailabilitySet or AvailabilityZone).")
+enum SAPHighAvailabilityType {
+  AvailabilitySet,
+  AvailabilityZone,
 }
 
-@doc("Allow crash dumps values.")
-enum AllowCrashDumpCollection {
-  @doc("Crash dump collection enabled") Enabled,
-  @doc("Crash dump collection disabled") Disabled,
+@doc("Defines the disk sku name.")
+enum DiskSkuName {
+  Standard_LRS,
+  Premium_LRS,
+  StandardSSD_LRS,
+  UltraSSD_LRS,
+  Premium_ZRS,
+  StandardSSD_ZRS,
+  PremiumV2_LRS,
 }
 
-@doc("Capability image type")
-enum CapabilityType {
-  @doc("Application development capability") ApplicationDevelopment,
-  @doc("Field servicing capability") FieldServicing,
+@doc("Type of managed service identity (only None, UserAssigned types are allowed).")
+enum ManagedServiceIdentityType {
+  None,
+  UserAssigned,
 }
 
-@doc("Catalog properties")
-model CatalogProperties {
-  @doc("The status of the last operation.")
+@doc("The configuration Type.")
+enum SAPConfigurationType {
+  Deployment,
+  Discovery,
+  DeploymentWithOSConfig,
+}
+
+@doc("Defines the SAP Instance status.")
+enum SAPVirtualInstanceStatus {
+  Starting,
+  Running,
+  Stopping,
+  Offline,
+  PartiallyRunning,
+  Unavailable,
+  SoftShutdown,
+}
+
+@doc("Defines the health of SAP Instances.")
+enum SAPHealthState {
+  Unknown,
+  Healthy,
+  Unhealthy,
+  Degraded,
+}
+
+@doc("Defines the Virtual Instance for SAP state.")
+enum SAPVirtualInstanceState {
+  InfrastructureDeploymentPending,
+  InfrastructureDeploymentInProgress,
+  InfrastructureDeploymentFailed,
+  SoftwareInstallationPending,
+  SoftwareInstallationInProgress,
+  SoftwareInstallationFailed,
+  SoftwareDetectionInProgress,
+  SoftwareDetectionFailed,
+  DiscoveryPending,
+  DiscoveryInProgress,
+  DiscoveryFailed,
+  RegistrationComplete,
+}
+
+@doc("Defines the provisioning states.")
+enum SapVirtualInstanceProvisioningState {
+  Succeeded,
+  Updating,
+  Creating,
+  Failed,
+  Deleting,
+}
+
+@doc("Defines the type of Enqueue Replication Server.")
+enum EnqueueReplicationServerType {
+  EnqueueReplicator1,
+  EnqueueReplicator2,
+}
+
+@doc("Defines the type of central server VM.")
+enum CentralServerVirtualMachineType {
+  Primary,
+  Secondary,
+  Unknown,
+  ASCS,
+  ERSInactive,
+  ERS,
+  Standby,
+}
+
+@doc("Defines the type of application server VM.")
+enum ApplicationServerVirtualMachineType {
+  Active,
+  Standby,
+  Unknown,
+}
+
+@doc("State of provisioning of the SAP monitor.")
+enum WorkloadMonitorProvisioningState {
+  Accepted,
+  Creating,
+  Updating,
+  Failed,
+  Succeeded,
+  Deleting,
+  Migrating,
+}
+
+@doc("Sets the routing preference of the SAP monitor. By default only RFC1918 traffic is routed to the customer VNET.")
+enum RoutingPreference {
+  Default,
+  RouteAll,
+}
+
+@doc("State of provisioning of the SAP monitor.")
+enum SapLandscapeMonitorProvisioningState {
+  Accepted,
+  Created,
+  Failed,
+  Succeeded,
+  Canceled,
+}
+
+@doc("The OS Type")
+enum OSType {
+  Linux,
+  Windows,
+}
+
+@doc("The pattern type to be used for resource naming.")
+enum NamingPatternType {
+  FullResourceName,
+}
+
+@doc("The type of file share config.")
+enum ConfigurationType {
+  Skip,
+  CreateAndMount,
+  Mount,
+}
+
+@doc("The SAP software installation Type.")
+enum SAPSoftwareInstallationType {
+  ServiceInitiated,
+  SAPInstallWithoutOSConfig,
+  External,
+}
+
+@doc("Defines the workload operation origin.")
+enum OperationProperties {
+  NotSpecified,
+  User,
+  System,
+}
+
+@doc("Defines the action type of workload operation.")
+enum WorkloadMonitorActionType {
+  NotSpecified,
+  Internal,
+}
+
+@doc("Gets or sets certificate preference if secure communication is enabled.")
+enum SslPreference {
+  Disabled,
+  RootCertificate,
+  ServerCertificate,
+}
+
+@doc("The SAP Sizing Recommendation request.")
+model SAPSizingRecommendationRequest {
+  @doc("The geo-location where the resource is to be created.")
+  appLocation: string;
+
+  @doc("Defines the environment type - Production/Non Production.")
+  environment: SAPEnvironmentType;
+
+  @doc("Defines the SAP Product type.")
+  sapProduct: SAPProductType;
+
+  @doc("The deployment type. Eg: SingleServer/ThreeTier")
+  deploymentType: SAPDeploymentType;
+
+  @doc("The SAP Application Performance Standard measurement.")
+  saps: int32;
+
+  @doc("The database memory configuration.")
+  dbMemory: int32;
+
+  @doc("The database type.")
+  databaseType: SAPDatabaseType;
+
+  @doc("The DB scale method.")
+  dbScaleMethod?: SAPDatabaseScaleMethod;
+
+  @doc("The high availability type.")
+  highAvailabilityType?: SAPHighAvailabilityType;
+}
+
+@doc("The SAP sizing recommendation result.")
+@discriminator("deploymentType")
+model SAPSizingRecommendationResult {}
+
+@doc("The SAP request to get list of supported SKUs.")
+model SAPSupportedSkusRequest {
+  @doc("The geo-location where the resource is to be created.")
+  appLocation: string;
+
+  @doc("Defines the environment type - Production/Non Production.")
+  environment: SAPEnvironmentType;
+
+  @doc("Defines the SAP Product type.")
+  sapProduct: SAPProductType;
+
+  @doc("The deployment type. Eg: SingleServer/ThreeTier")
+  deploymentType: SAPDeploymentType;
+
+  @doc("The database type. Eg: HANA, DB2, etc")
+  databaseType: SAPDatabaseType;
+
+  @doc("The high availability type.")
+  highAvailabilityType?: SAPHighAvailabilityType;
+}
+
+@doc("The list of supported SKUs for different resources which are part of SAP deployment.")
+model SAPSupportedResourceSkusResult {
+  @doc("Gets the list of SAP supported SKUs.")
+  supportedSkus?: SAPSupportedSku[];
+}
+
+@doc("The SAP supported SKU.")
+model SAPSupportedSku {
+  @doc("The VM Sku.")
+  vmSku?: string;
+
+  @doc("True if the Sku is certified for App server in the SAP system.")
+  isAppServerCertified?: boolean;
+
+  @doc("True if the Sku is certified for Database server in the SAP system.")
+  isDatabaseCertified?: boolean;
+}
+
+@doc("The SAP request to get list of disk configurations.")
+model SAPDiskConfigurationsRequest {
+  @doc("The geo-location where the SAP resources will be created.")
+  appLocation: string;
+
+  @doc("Defines the environment type - Production/Non Production.")
+  environment: SAPEnvironmentType;
+
+  @doc("Defines the SAP Product type.")
+  sapProduct: SAPProductType;
+
+  @doc("The database type. Eg: HANA, DB2, etc")
+  databaseType: SAPDatabaseType;
+
+  @doc("The deployment type. Eg: SingleServer/ThreeTier")
+  deploymentType: SAPDeploymentType;
+
+  @doc("The VM SKU for database instance.")
+  dbVmSku: string;
+}
+
+@doc("The list of disk configuration for vmSku which are part of SAP deployment.")
+model SAPDiskConfigurationsResult {
+  @doc("The disk configuration for the db volume. For HANA, Required volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume : ['backup'].")
+  volumeConfigurations?: Record<SAPDiskConfiguration>;
+}
+
+@doc("The SAP Disk Configuration contains 'recommended disk' details and list of supported disks detail for a volume type.")
+model SAPDiskConfiguration {
+  @doc("The recommended disk details for a given VM Sku.")
+  recommendedConfiguration?: DiskVolumeConfiguration;
+
+  @doc("The list of supported disks for a given VM Sku.")
+  supportedConfigurations?: DiskDetails[];
+}
+
+@doc("The disk configuration required for the selected volume.")
+model DiskVolumeConfiguration {
+  @doc("The total number of disks required for the concerned volume.")
+  count?: int32;
+
+  @doc("The disk size in GB.")
+  sizeGB?: int32;
+
+  @doc("The disk SKU details.")
+  sku?: DiskSku;
+}
+
+@doc("The type of disk sku. For example, Standard_LRS, Standard_ZRS, Premium_LRS, Premium_ZRS.")
+model DiskSku {
+  @doc("Defines the disk sku name.")
+  name?: DiskSkuName;
+}
+
+@doc("The supported disk size details for a disk type.")
+model DiskDetails {
+  @doc("The type of disk sku. For example, Standard_LRS, Standard_ZRS, Premium_LRS, Premium_ZRS.")
+  sku?: DiskSku;
+
+  @doc("The disk size in GB.")
+  sizeGB?: int32;
+
+  @doc("The minimum supported disk count.")
+  minimumSupportedDiskCount?: int32;
+
+  @doc("The maximum supported disk count.")
+  maximumSupportedDiskCount?: int32;
+
+  @doc("The disk Iops.")
+  iopsReadWrite?: int32;
+
+  @doc("The disk provisioned throughput in MBps.")
+  mbpsReadWrite?: int32;
+
+  @doc("The disk tier, e.g. P10, E10.")
+  diskTier?: string;
+}
+
+@doc("The SAP request to get list of availability zones.")
+model SAPAvailabilityZoneDetailsRequest {
+  @doc("The geo-location where the SAP resources will be created.")
+  appLocation: string;
+
+  @doc("Defines the SAP Product type.")
+  sapProduct: SAPProductType;
+
+  @doc("The database type. Eg: HANA, DB2, etc")
+  databaseType: SAPDatabaseType;
+}
+
+@doc("The list of supported availability zone pairs which are part of SAP HA deployment.")
+model SAPAvailabilityZoneDetailsResult {
+  @doc("Gets the list of availability zone pairs.")
+  availabilityZonePairs?: SAPAvailabilityZonePair[];
+}
+
+@doc("The SAP Availability Zone Pair.")
+model SAPAvailabilityZonePair {
+  @doc("The zone A.")
+  zoneA?: int32;
+
+  @doc("The zone B.")
+  zoneB?: int32;
+}
+
+@doc("A pre-created user assigned identity with appropriate roles assigned. To learn more on identity and roles required, visit the ACSS how-to-guide.")
+model UserAssignedServiceIdentity {
+  @doc("Type of manage identity")
+  type: ManagedServiceIdentityType;
+
+  @doc("User assigned identities dictionary")
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+@doc("Defines the Virtual Instance for SAP solutions resource properties.")
+model SAPVirtualInstanceProperties {
+  @doc("Defines the environment type - Production/Non Production.")
+  @visibility("read", "create")
+  environment: SAPEnvironmentType;
+
+  @doc("Defines the SAP Product type.")
+  @visibility("read", "create")
+  sapProduct: SAPProductType;
+
+  @doc("Defines if the SAP system is being created using Azure Center for SAP solutions (ACSS) or if an existing SAP system is being registered with ACSS")
+  configuration: SAPConfiguration;
+
+  @doc("Managed resource group configuration")
+  managedResourceGroupConfiguration?: ManagedRGConfiguration;
+
+  @doc("Defines the SAP Instance status.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  status?: SAPVirtualInstanceStatus;
+
+  @doc("Defines the health of SAP Instances.")
+  @visibility("read")
+  health?: SAPHealthState;
+
+  @doc("Defines the Virtual Instance for SAP state.")
+  @visibility("read")
+  state?: SAPVirtualInstanceState;
+
+  @doc("Defines the provisioning states.")
+  @visibility("read")
+  provisioningState?: SapVirtualInstanceProvisioningState;
+
+  @doc("Indicates any errors on the Virtual Instance for SAP solutions resource.")
+  @visibility("read")
+  errors?: SAPVirtualInstanceError;
+}
+
+@doc("The SAP Configuration.")
+@discriminator("configurationType")
+model SAPConfiguration {}
+
+@doc("Managed resource group configuration")
+model ManagedRGConfiguration {
+  @doc("Managed resource group name")
+  name?: string;
+}
+
+@doc("An error response from the Virtual Instance for SAP Workload service.")
+model SAPVirtualInstanceError {
+  @doc("The Virtual Instance for SAP error body.")
+  properties?: ErrorDefinition;
+}
+
+@doc("Error definition.")
+model ErrorDefinition {
+  @doc("Service specific error code which serves as the substatus for the HTTP error code.")
+  @visibility("read")
+  code?: string;
+
+  @doc("Description of the error.")
+  @visibility("read")
+  message?: string;
+
+  @doc("Internal error details.")
+  @visibility("read")
+  details?: ErrorDefinition[];
 }
 
 @doc("Common fields that are returned in the response for all Azure Resource Manager resources")
@@ -115,311 +484,1255 @@ model Resource {
   systemData?: SystemData;
 }
 
-@doc("The type used for update operations of the Catalog.")
-model CatalogUpdate {
-  @doc("Resource tags.")
+@doc("Defines the request body for updating Virtual Instance for SAP.")
+model UpdateSAPVirtualInstanceRequest {
+  @doc("Gets or sets the Resource tags.")
+  tags?: Record<string>;
+
+  @doc("A pre-created user assigned identity with appropriate roles assigned. To learn more on identity and roles required, visit the ACSS how-to-guide.")
+  identity?: UserAssignedServiceIdentity;
+}
+
+@doc("Defines the SAP Central Services Instance properties.")
+model SAPCentralServerProperties {
+  @doc("The central services instance number.")
+  @visibility("read")
+  instanceNo?: string;
+
+  @doc("The central services instance subnet.")
+  @visibility("read")
+  @projectedName("json", "subnet")
+  subnetId?: string;
+
+  @doc("Defines the SAP Message Server properties.")
+  messageServerProperties?: MessageServerProperties;
+
+  @doc("Defines the SAP Enqueue Server properties.")
+  enqueueServerProperties?: EnqueueServerProperties;
+
+  @doc("Defines the SAP Gateway Server properties.")
+  gatewayServerProperties?: GatewayServerProperties;
+
+  @doc("Defines the SAP Enqueue Replication Server (ERS) properties.")
+  enqueueReplicationServerProperties?: EnqueueReplicationServerProperties;
+
+  @doc("The central services instance Kernel Version.")
+  @visibility("read")
+  kernelVersion?: string;
+
+  @doc("The central services instance Kernel Patch level.")
+  @visibility("read")
+  kernelPatch?: string;
+
+  @doc("The Load Balancer details such as LoadBalancer ID attached to ASCS Virtual Machines")
+  @visibility("read")
+  loadBalancerDetails?: LoadBalancerDetails;
+
+  @doc("The list of virtual machines corresponding to the Central Services instance.")
+  @visibility("read")
+  vmDetails?: CentralServerVmDetails[];
+
+  @doc("Defines the SAP Instance status.")
+  @visibility("read")
+  status?: SAPVirtualInstanceStatus;
+
+  @doc("Defines the health of SAP Instances.")
+  @visibility("read")
+  health?: SAPHealthState;
+
+  @doc("Defines the provisioning states.")
+  @visibility("read")
+  provisioningState?: SapVirtualInstanceProvisioningState;
+
+  @doc("Defines the errors related to SAP Central Services Instance resource.")
+  @visibility("read")
+  errors?: SAPVirtualInstanceError;
+}
+
+@doc("Defines the SAP Message Server properties.")
+model MessageServerProperties {
+  @doc("Message Server port.")
+  @visibility("read")
+  msPort?: int32;
+
+  @doc("Message Server internal MS port.")
+  @visibility("read")
+  internalMsPort?: int32;
+
+  @doc("Message Server HTTP Port.")
+  @visibility("read")
+  httpPort?: int32;
+
+  @doc("Message Server HTTPS Port.")
+  @visibility("read")
+  httpsPort?: int32;
+
+  @doc("Message Server SAP Hostname.")
+  @visibility("read")
+  hostname?: string;
+
+  @doc("Message server IP Address.")
+  @visibility("read")
+  ipAddress?: string;
+
+  @doc("Defines the health of SAP Instances.")
+  @visibility("read")
+  health?: SAPHealthState;
+}
+
+@doc("Defines the SAP Enqueue Server properties.")
+model EnqueueServerProperties {
+  @doc("Enqueue Server SAP Hostname.")
+  @visibility("read")
+  hostname?: string;
+
+  @doc("Enqueue Server SAP IP Address.")
+  @visibility("read")
+  ipAddress?: string;
+
+  @doc("Enqueue Server Port.")
+  @visibility("read")
+  port?: int32;
+
+  @doc("Defines the health of SAP Instances.")
+  @visibility("read")
+  health?: SAPHealthState;
+}
+
+@doc("Defines the SAP Gateway Server properties.")
+model GatewayServerProperties {
+  @doc("Gateway Port.")
+  @visibility("read")
+  port?: int32;
+
+  @doc("Defines the health of SAP Instances.")
+  @visibility("read")
+  health?: SAPHealthState;
+}
+
+@doc("Defines the SAP Enqueue Replication Server (ERS) properties.")
+model EnqueueReplicationServerProperties {
+  @doc("Defines the type of Enqueue Replication Server.")
+  @visibility("read")
+  ersVersion?: EnqueueReplicationServerType;
+
+  @doc("ERS Instance Number.")
+  @visibility("read")
+  instanceNo?: string;
+
+  @doc("ERS SAP Hostname.")
+  @visibility("read")
+  hostname?: string;
+
+  @doc("ERS SAP Kernel Version.")
+  @visibility("read")
+  kernelVersion?: string;
+
+  @doc("ERS SAP Kernel Patch level.")
+  @visibility("read")
+  kernelPatch?: string;
+
+  @doc("ERS SAP IP Address.")
+  @visibility("read")
+  ipAddress?: string;
+
+  @doc("Defines the health of SAP Instances.")
+  @visibility("read")
+  health?: SAPHealthState;
+}
+
+@doc("The Load Balancer details such as Load Balancer ID.")
+model LoadBalancerDetails {
+  @visibility("read")
+  id?: string;
+}
+
+@doc("The SAP Central Services Instance VM details.")
+model CentralServerVmDetails {
+  @doc("Defines the type of central server VM.")
+  @visibility("read")
+  type?: CentralServerVirtualMachineType;
+
+  @visibility("read")
+  virtualMachineId?: string;
+
+  @doc("Storage details of all the Storage Accounts attached to the ASCS Virtual Machine. For e.g. NFS on AFS Shared Storage.")
+  @visibility("read")
+  storageDetails?: StorageInformation[];
+}
+
+@doc("Storage details of all the Storage accounts attached to the VM. For e.g. NFS on AFS Shared Storage. ")
+model StorageInformation {
+  @visibility("read")
+  id?: string;
+}
+
+@doc("Defines the request body for updating SAP Central Instance.")
+model UpdateSAPCentralInstanceRequest {
+  @doc("Gets or sets the Resource tags.")
   tags?: Record<string>;
 }
 
-@doc("The properties of certificate")
-model CertificateProperties {
-  @doc("The certificate as a UTF-8 encoded base 64 string.")
+@doc("Defines the Database properties.")
+model SAPDatabaseProperties {
+  @doc("Database subnet.")
   @visibility("read")
-  certificate?: string;
+  @projectedName("json", "subnet")
+  subnetId?: string;
 
-  @doc("The certificate status.")
+  @doc("Database SID name.")
   @visibility("read")
-  status?: CertificateStatus;
+  databaseSid?: string;
 
-  @doc("The certificate subject.")
+  @doc("Database type, that is if the DB is HANA, DB2, Oracle, SAP ASE, Max DB or MS SQL Server.")
   @visibility("read")
-  subject?: string;
+  databaseType?: string;
 
-  @doc("The certificate thumbprint.")
+  @doc("Database IP Address.")
   @visibility("read")
-  thumbprint?: string;
+  ipAddress?: string;
 
-  @doc("The certificate expiry date.")
+  @doc("The Load Balancer details such as LoadBalancer ID attached to Database Virtual Machines")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expiryUtc?: utcDateTime;
+  loadBalancerDetails?: LoadBalancerDetails;
 
-  @doc("The certificate not before date.")
+  @doc("The list of virtual machines corresponding to the Database resource.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  notBeforeUtc?: utcDateTime;
+  vmDetails?: DatabaseVmDetails[];
 
-  @doc("The status of the last operation.")
+  @doc("Defines the SAP Instance status.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  status?: SAPVirtualInstanceStatus;
+
+  @doc("Defines the provisioning states.")
+  @visibility("read")
+  provisioningState?: SapVirtualInstanceProvisioningState;
+
+  @doc("Defines the errors related to Database resource.")
+  @visibility("read")
+  errors?: SAPVirtualInstanceError;
 }
 
-@doc("The certificate chain response.")
-model CertificateChainResponse {
-  @doc("The certificate chain.")
+@doc("Database VM details.")
+model DatabaseVmDetails {
   @visibility("read")
-  certificateChain?: string;
+  virtualMachineId?: string;
+
+  @doc("Defines the SAP Instance status.")
+  @visibility("read")
+  status?: SAPVirtualInstanceStatus;
+
+  @doc("Storage details of all the Storage Accounts attached to the Database Virtual Machine. For e.g. NFS on AFS Shared Storage.")
+  @visibility("read")
+  storageDetails?: StorageInformation[];
 }
 
-@doc("Request for the proof of possession nonce")
-model ProofOfPossessionNonceRequest {
-  @doc("The proof of possession nonce")
-  proofOfPossessionNonce: string;
+@doc("Defines the request body for updating SAP Database Instance.")
+model UpdateSAPDatabaseInstanceRequest {
+  @doc("Gets or sets the Resource tags.")
+  tags?: Record<string>;
 }
 
-@doc("Result of the action to generate a proof of possession nonce")
-model ProofOfPossessionNonceResponse extends CertificateProperties {}
+@doc("Defines the SAP Application Server instance properties.")
+model SAPApplicationServerProperties {
+  @doc("Application server Instance Number.")
+  @visibility("read")
+  instanceNo?: string;
 
-@doc("Response to the action call for count devices in a catalog.")
-model CountDeviceResponse extends CountElementsResponse {}
+  @doc("Application server Subnet.")
+  @visibility("read")
+  @projectedName("json", "subnet")
+  subnetId?: string;
 
-@doc("Response of the count for elements.")
-model CountElementsResponse {
-  @doc("Number of children resources in parent resource.")
-  value: int32;
+  @doc("Application server instance SAP hostname.")
+  @visibility("read")
+  hostname?: string;
+
+  @doc(" Application server instance SAP Kernel Version.")
+  @visibility("read")
+  kernelVersion?: string;
+
+  @doc("Application server instance SAP Kernel Patch level.")
+  @visibility("read")
+  kernelPatch?: string;
+
+  @doc(" Application server instance SAP IP Address.")
+  @visibility("read")
+  ipAddress?: string;
+
+  @doc("Application server instance gateway Port.")
+  @visibility("read")
+  gatewayPort?: int32;
+
+  @doc("Application server instance ICM HTTP Port.")
+  @visibility("read")
+  icmHttpPort?: int32;
+
+  @doc("Application server instance ICM HTTPS Port.")
+  @visibility("read")
+  icmHttpsPort?: int32;
+
+  @doc("The Load Balancer details such as LoadBalancer ID attached to Application Server Virtual Machines")
+  @visibility("read")
+  loadBalancerDetails?: LoadBalancerDetails;
+
+  @doc("The list of virtual machines.")
+  @visibility("read")
+  vmDetails?: ApplicationServerVmDetails[];
+
+  @doc("Defines the SAP Instance status.")
+  @visibility("read")
+  status?: SAPVirtualInstanceStatus;
+
+  @doc("Defines the health of SAP Instances.")
+  @visibility("read")
+  health?: SAPHealthState;
+
+  @doc("Defines the provisioning states.")
+  @visibility("read")
+  provisioningState?: SapVirtualInstanceProvisioningState;
+
+  @doc("Defines the Application Instance errors.")
+  @visibility("read")
+  errors?: SAPVirtualInstanceError;
 }
 
-@doc("The properties of image")
-model ImageProperties {
-  @doc("Image as a UTF-8 encoded base 64 string on image create. This field contains the image URI on image reads.")
-  @visibility("read", "create")
-  image?: string;
-
-  @doc("Image ID")
-  @visibility("read", "create")
-  imageId?: string;
-
-  @doc("Image name")
+@doc("The Application Server VM Details.")
+model ApplicationServerVmDetails {
+  @doc("Defines the type of application server VM.")
   @visibility("read")
-  imageName?: string;
+  type?: ApplicationServerVirtualMachineType;
 
-  @doc("Regional data boundary for an image")
-  @visibility("read", "create")
-  regionalDataBoundary?: RegionalDataBoundary;
-
-  @doc("Location the image")
   @visibility("read")
-  uri?: string;
+  virtualMachineId?: string;
 
-  @doc("The image description.")
+  @doc("Storage details of all the Storage Accounts attached to the App Virtual Machine. For e.g. NFS on AFS Shared Storage.")
   @visibility("read")
-  description?: string;
-
-  @doc("The image component id.")
-  @visibility("read")
-  componentId?: string;
-
-  @doc("The image type.")
-  @visibility("read")
-  imageType?: ImageType;
-
-  @doc("The status of the last operation.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
+  storageDetails?: StorageInformation[];
 }
 
-@doc("The properties of deployment")
-model DeploymentProperties {
-  @doc("Deployment ID")
-  @visibility("read", "create")
-  deploymentId?: string;
-
-  @doc("Images deployed")
-  @visibility("read", "create")
-  deployedImages?: Image[];
-
-  @doc("Deployment date UTC")
-  @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  deploymentDateUtc?: utcDateTime;
-
-  @doc("The status of the last operation.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
+@doc("Defines the request body for updating SAP Application Instance.")
+model UpdateSAPApplicationInstanceRequest {
+  @doc("Gets or sets the Resource tags.")
+  tags?: Record<string>;
 }
 
-@doc("Request of the action to list device groups for a catalog.")
-model ListDeviceGroupsRequest {
-  @doc("Device Group name.")
-  deviceGroupName?: string;
+@doc("Stop SAP instance(s) request body.")
+model StopRequest {
+  @doc("This parameter defines how long (in seconds) the soft shutdown waits until the RFC/HTTP clients no longer consider the server for calls with load balancing. Value 0 means that the kernel does not wait, but goes directly into the next shutdown state, i.e. hard stop.")
+  softStopTimeoutSeconds?: int32;
 }
 
-@doc("The properties of deviceGroup")
-model DeviceGroupProperties {
-  @doc("Description of the device group.")
-  description?: string;
-
-  @doc("Operating system feed type of the device group.")
-  osFeedType?: OSFeedType;
-
-  @doc("Update policy of the device group.")
-  updatePolicy?: UpdatePolicy;
-
-  @doc("Flag to define if the user allows for crash dump collection.")
-  allowCrashDumpsCollection?: AllowCrashDumpCollection;
-
-  @doc("Regional data boundary for the device group.")
-  regionalDataBoundary?: RegionalDataBoundary;
-
-  @doc("Deployment status for the device group.")
+@doc("Describes the properties of a SAP monitor.")
+model MonitorProperties {
+  @doc("State of provisioning of the SAP monitor.")
   @visibility("read")
-  hasDeployment?: boolean;
+  provisioningState?: WorkloadMonitorProvisioningState;
 
-  @doc("The status of the last operation.")
+  @doc("Defines the SAP monitor errors.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  errors?: MonitorPropertiesErrors;
+
+  @doc("The SAP monitor resources will be deployed in the SAP monitoring region. The subnet region should be same as the SAP monitoring region.")
+  appLocation?: string;
+
+  @doc("Sets the routing preference of the SAP monitor. By default only RFC1918 traffic is routed to the customer VNET.")
+  routingPreference?: RoutingPreference;
+
+  @doc("Sets the preference for zone redundancy on resources created for the SAP monitor. By default resources will be created which do not support zone redundancy.")
+  zoneRedundancyPreference?: string;
+
+  @doc("Managed resource group configuration")
+  managedResourceGroupConfiguration?: ManagedRGConfiguration;
+
+  @doc("The ARM ID of the Log Analytics Workspace that is used for SAP monitoring.")
+  logAnalyticsWorkspaceArmId?: string;
+
+  @doc("The subnet which the SAP monitor will be deployed in")
+  monitorSubnet?: string;
+
+  @doc("The ARM ID of the MSI used for SAP monitoring.")
+  @visibility("read")
+  msiArmId?: string;
+
+  @doc("The ARM ID of the Storage account used for SAP monitoring.")
+  @visibility("read")
+  storageAccountArmId?: string;
 }
 
-@doc("Paged collection of DeviceInsight items")
-model PagedDeviceInsight is Azure.Core.Page<DeviceInsight>;
+@doc("Defines the SAP monitor errors.")
+model MonitorPropertiesErrors extends Error {}
 
-@doc("Device insight report.")
-model DeviceInsight {
-  @doc("Device ID")
-  deviceId: string;
+@doc("Standard error object.")
+model Error {
+  @doc("Server-defined set of error codes.")
+  @visibility("read")
+  code?: string;
 
-  @doc("Event description")
+  @doc("Human-readable representation of the error.")
+  @visibility("read")
+  message?: string;
+
+  @doc("Target of the error.")
+  @visibility("read")
+  target?: string;
+
+  @doc("Array of details about specific errors that led to this reported error.")
+  @visibility("read")
+  details?: Error[];
+
+  @doc("Object containing more specific information than  the current object about the error.")
+  @visibility("read")
+  innerError?: ErrorInnerError;
+}
+
+@doc("Object containing more specific information than  the current object about the error.")
+model ErrorInnerError {
+  @doc("Standard error object.")
+  innerError?: Error;
+}
+
+@doc("Defines the request body for updating SAP monitor resource.")
+model UpdateMonitorRequest {
+  @doc("Gets or sets the Resource tags.")
+  tags?: Record<string>;
+
+  @doc("[currently not in use] Managed service identity(user assigned identities)")
+  identity?: UserAssignedServiceIdentity;
+}
+
+@doc("Describes the properties of a provider instance.")
+model ProviderInstanceProperties {
+  @doc("State of provisioning of the provider instance")
+  @visibility("read")
+  provisioningState?: WorkloadMonitorProvisioningState;
+
+  @doc("Defines the provider instance errors.")
+  @visibility("read")
+  errors?: ProviderInstancePropertiesErrors;
+
+  @doc("Defines the provider specific properties.")
+  providerSettings?: ProviderSpecificProperties;
+}
+
+@doc("Defines the provider instance errors.")
+model ProviderInstancePropertiesErrors extends Error {}
+
+@doc("Gets or sets the provider specific properties.")
+@discriminator("providerType")
+model ProviderSpecificProperties {}
+
+@doc("Gets or sets the properties for Sap Landscape Monitor Dashboard.")
+model SapLandscapeMonitorProperties {
+  @doc("State of provisioning of the SAP monitor.")
+  @visibility("read")
+  provisioningState?: SapLandscapeMonitorProvisioningState;
+
+  @doc("Gets or sets the SID groupings by landscape and Environment.")
+  grouping?: SapLandscapeMonitorPropertiesGrouping;
+
+  @doc("Gets or sets the list Top Metric Thresholds for SAP Landscape Monitor Dashboard")
+  topMetricsThresholds?: SapLandscapeMonitorMetricThresholds[];
+}
+
+@doc("Gets or sets the SID groupings by landscape and Environment.")
+model SapLandscapeMonitorPropertiesGrouping {
+  @doc("Gets or sets the list of landscape to SID mappings.")
+  landscape?: SapLandscapeMonitorSidMapping[];
+
+  @doc("Gets or sets the list of Sap Applications to SID mappings.")
+  sapApplication?: SapLandscapeMonitorSidMapping[];
+}
+
+@doc("Gets or sets the mapping for SID to Environment/Applications.")
+model SapLandscapeMonitorSidMapping {
+  @doc("Gets or sets the name of the grouping.")
+  name?: string;
+
+  @doc("Gets or sets the list of SID's.")
+  topSid?: string[];
+}
+
+@doc("Gets or sets the Threshold Values for Top Metrics Health.")
+model SapLandscapeMonitorMetricThresholds {
+  @doc("Gets or sets the name of the threshold.")
+  name?: string;
+
+  @doc("Gets or sets the threshold value for Green.")
+  green?: float32;
+
+  @doc("Gets or sets the threshold value for Yellow.")
+  yellow?: float32;
+
+  @doc("Gets or sets the threshold value for Red.")
+  red?: float32;
+}
+
+@doc("Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set.")
+model ImageReference {
+  @doc("The image publisher.")
+  publisher?: string;
+
+  @doc("Specifies the offer of the platform image or marketplace image used to create the virtual machine.")
+  offer?: string;
+
+  @doc("The image SKU.")
+  sku?: string;
+
+  @doc("Specifies the version of the platform image or marketplace image used to create the virtual machine. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor, and Build are decimal numbers. Specify 'latest' to use the latest version of an image available at deploy time. Even if you use 'latest', the VM image will not automatically update after deploy time even if a new version becomes available.")
+  version?: string;
+}
+
+@doc("Specifies Windows operating system settings on the virtual machine.")
+model WindowsConfiguration extends OSConfiguration {
+  @doc("The OS Type")
+  osType: "Windows";
+}
+
+@doc("Defines the OS configuration.")
+@discriminator("osType")
+model OSConfiguration {}
+
+@doc("Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.")
+model SshPublicKey {
+  @doc("SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).")
+  keyData?: string;
+}
+
+@doc("SSH configuration for Linux based VMs running on Azure")
+model SshConfiguration {
+  @doc("The list of SSH public keys used to authenticate with linux based VMs.")
+  publicKeys?: SshPublicKey[];
+}
+
+@doc("Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).")
+model LinuxConfiguration extends OSConfiguration {
+  @doc("Specifies whether password authentication should be disabled.")
+  disablePasswordAuthentication?: boolean;
+
+  @doc("Specifies the ssh key configuration for a Linux OS. (This property is deprecated, please use 'sshKeyPair' instead)")
+  ssh?: SshConfiguration;
+
+  @doc("The SSH Key-pair used to authenticate with the VM's.")
+  sshKeyPair?: SshKeyPair;
+
+  @doc("The OS Type")
+  osType: "Linux";
+}
+
+@doc("The SSH Key-pair used to authenticate with the VM. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).")
+model SshKeyPair {
+  @doc("SSH public key")
+  publicKey?: string;
+
+  @doc("SSH private key.")
+  privateKey?: string;
+}
+
+@doc("Specifies the operating system settings for the virtual machine. Some of the settings cannot be changed once VM is provisioned.")
+model OSProfile {
+  @doc("Specifies the name of the administrator account. <br><br> This property cannot be updated after the VM is created. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters.")
+  adminUsername?: string;
+
+  @doc("Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)")
+  adminPassword?: string;
+
+  @doc("Specifies Windows operating system settings on the virtual machine.")
+  osConfiguration?: OSConfiguration;
+}
+
+@doc("The recommended configuration for a single server SAP system.")
+model SingleServerRecommendationResult extends SAPSizingRecommendationResult {
+  @doc("The recommended VM SKU for single server.")
+  vmSku?: string;
+
+  @doc("The type of SAP deployment, single server or Three tier.")
+  deploymentType: "SingleServer";
+}
+
+@doc("The recommended configuration for a three tier SAP system.")
+model ThreeTierRecommendationResult extends SAPSizingRecommendationResult {
+  @doc("The database VM SKU.")
+  dbVmSku?: string;
+
+  @doc("The database server instance count.")
+  databaseInstanceCount?: int32;
+
+  @doc("The central server VM SKU.")
+  centralServerVmSku?: string;
+
+  @doc("The central server instance count.")
+  centralServerInstanceCount?: int32;
+
+  @doc("The application server VM SKU.")
+  applicationServerVmSku?: string;
+
+  @doc("The application server instance count.")
+  applicationServerInstanceCount?: int32;
+
+  @doc("The type of SAP deployment, single server or Three tier.")
+  deploymentType: "ThreeTier";
+}
+
+@doc("The Disk Configuration Details.")
+model DiskConfiguration {
+  @doc("The disk configuration for the db volume. For HANA, Required volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume : ['backup'].")
+  diskVolumeConfigurations?: Record<DiskVolumeConfiguration>;
+}
+
+@doc("Defines the virtual machine configuration.")
+model VirtualMachineConfiguration {
+  @doc("The virtual machine size.")
+  vmSize: string;
+
+  @doc("The image reference.")
+  imageReference: ImageReference;
+
+  @doc("The OS profile.")
+  osProfile: OSProfile;
+}
+
+@doc("Gets or sets the single server configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)")
+model SingleServerConfiguration extends InfrastructureConfiguration {
+  @doc("Network configuration for the server")
+  networkConfiguration?: NetworkConfiguration;
+
+  @doc("The database type.")
+  databaseType?: SAPDatabaseType;
+
+  @doc("The subnet id.")
+  subnetId: string;
+
+  @doc("Gets or sets the virtual machine configuration.")
+  virtualMachineConfiguration: VirtualMachineConfiguration;
+
+  @doc("Gets or sets the disk configuration.")
+  dbDiskConfiguration?: DiskConfiguration;
+
+  @doc("The set of custom names to be used for underlying azure resources that are part of the SAP system.")
+  customResourceNames?: SingleServerCustomResourceNames;
+
+  @doc("The type of SAP deployment, single server or Three tier.")
+  deploymentType: "SingleServer";
+}
+
+@doc("Defines the network configuration type for SAP system infrastructure that is being deployed ")
+model NetworkConfiguration {
+  @doc("Specifies whether a secondary IP address should be added to the network interface on all VMs of the SAP system being deployed")
+  isSecondaryIpEnabled?: boolean;
+}
+
+@doc("The resource-names input to specify custom names for underlying azure resources that are part of a single server SAP system.")
+@discriminator("namingPatternType")
+model SingleServerCustomResourceNames {}
+
+@doc("Deploy SAP Infrastructure Details.")
+@discriminator("deploymentType")
+model InfrastructureConfiguration {
+  @doc("The application resource group where SAP system resources will be deployed.")
+  appResourceGroup: string;
+}
+
+@doc("Gets or sets the central server configuration.")
+model CentralServerConfiguration {
+  @doc("The subnet id.")
+  subnetId: string;
+
+  @doc("Gets or sets the virtual machine configuration.")
+  virtualMachineConfiguration: VirtualMachineConfiguration;
+
+  @doc("The number of central server VMs.")
+  instanceCount: int32;
+}
+
+@doc("Gets or sets the database configuration.")
+model DatabaseConfiguration {
+  @doc("The database type.")
+  databaseType?: SAPDatabaseType;
+
+  @doc("The subnet id.")
+  subnetId: string;
+
+  @doc("Gets or sets the virtual machine configuration.")
+  virtualMachineConfiguration: VirtualMachineConfiguration;
+
+  @doc("The number of database VMs.")
+  instanceCount: int32;
+
+  @doc("Gets or sets the disk configuration.")
+  diskConfiguration?: DiskConfiguration;
+}
+
+@doc("Gets or sets the application server configuration.")
+model ApplicationServerConfiguration {
+  @doc("The subnet id.")
+  subnetId: string;
+
+  @doc("Gets or sets the virtual machine configuration.")
+  virtualMachineConfiguration: VirtualMachineConfiguration;
+
+  @doc("The number of app server instances.")
+  instanceCount: int32;
+}
+
+@doc("Gets or sets the high availability configuration.")
+model HighAvailabilityConfiguration {
+  @doc("The high availability type.")
+  highAvailabilityType: SAPHighAvailabilityType;
+}
+
+@doc("Gets or sets the file share configuration for scenarios where transport directory fileshare is not created or required.")
+model SkipFileShareConfiguration extends FileShareConfiguration {
+  @doc("The type of file share config.")
+  configurationType: "Skip";
+}
+
+@doc("File Share configuration details, populated with information on storage configuration mounted on the VIS. The createAndMount option is selected in case of missing input.")
+@discriminator("configurationType")
+model FileShareConfiguration {}
+
+@doc("Gets or sets the file share configuration where the transport directory fileshare is created and mounted as a part of the create infra flow. Please pre-create the resource group you intend to place the transport directory in. The storage account and fileshare will be auto-created by the ACSS and doesn’t need to pre-created.")
+model CreateAndMountFileShareConfiguration extends FileShareConfiguration {
+  @doc("The name of transport file share resource group. This should be pre created by the customer. The app rg is used in case of missing input.")
+  resourceGroup?: string;
+
+  @doc("The name of file share storage account name . A custom name is used in case of missing input.")
+  storageAccountName?: string;
+
+  @doc("The type of file share config.")
+  configurationType: "CreateAndMount";
+}
+
+@doc("Gets or sets the file share configuration where the transport directory fileshare already exists, and user wishes to mount the fileshare as a part of the create infra flow.")
+model MountFileShareConfiguration extends FileShareConfiguration {
+  @doc("The fileshare resource ID")
+  id: string;
+
+  @doc("The private endpoint resource ID")
+  privateEndpointId: string;
+
+  @doc("The type of file share config.")
+  configurationType: "Mount";
+}
+
+@doc("Gets or sets the storage configuration.")
+model StorageConfiguration {
+  @doc("The properties of the transport directory attached to the VIS. The default for transportFileShareConfiguration is the createAndMount flow if storage configuration is missing.")
+  transportFileShareConfiguration?: FileShareConfiguration;
+}
+
+@doc("Gets or sets the three tier SAP configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)")
+model ThreeTierConfiguration extends InfrastructureConfiguration {
+  @doc("Network configuration common to all servers")
+  networkConfiguration?: NetworkConfiguration;
+
+  @doc("The central server configuration.")
+  centralServer: CentralServerConfiguration;
+
+  @doc("The application server configuration.")
+  applicationServer: ApplicationServerConfiguration;
+
+  @doc("The database configuration.")
+  databaseServer: DatabaseConfiguration;
+
+  @doc("The high availability configuration.")
+  highAvailabilityConfig?: HighAvailabilityConfiguration;
+
+  @doc("The storage configuration.")
+  storageConfiguration?: StorageConfiguration;
+
+  @doc("The set of custom names to be used for underlying azure resources that are part of the SAP system.")
+  customResourceNames?: ThreeTierCustomResourceNames;
+
+  @doc("The type of SAP deployment, single server or Three tier.")
+  deploymentType: "ThreeTier";
+}
+
+@doc("The resource-names input to specify custom names for underlying azure resources that are part of a three tier SAP system.")
+@discriminator("namingPatternType")
+model ThreeTierCustomResourceNames {}
+
+@doc("The resource name object where the specified values will be full resource names of the corresponding resources in a single server SAP system.")
+model SingleServerFullResourceNames extends SingleServerCustomResourceNames {
+  @doc("The resource names object for virtual machine and related resources.")
+  virtualMachine?: VirtualMachineResourceNames;
+
+  @doc("The pattern type to be used for resource naming.")
+  namingPatternType: "FullResourceName";
+}
+
+@doc("The resource names object for virtual machine and related resources.")
+model VirtualMachineResourceNames {
+  @doc("The full name for virtual machine. The length of this field can be upto 64 characters. If name is not provided, service uses a default name based on the deployment type. For SingleServer, default name is {SID}vm. In case of HA-AvZone systems, default name will be {SID}{app/ascs/db}z{a/b}vm with an incrementor at the end in case of more than 1 vm per layer. For distributed and HA-AvSet systems, default name will be {SID}{app/ascs/db}vm with an incrementor at the end in case of more than 1 vm per layer.")
+  vmName?: string;
+
+  @doc("The full name for virtual-machine's host (computer name). Currently, ACSS only supports host names which are less than or equal to 13 characters long. If this value is not provided, vmName will be used as host name.")
+  hostName?: string;
+
+  @doc("The list of network interface name objects for the selected virtual machine. Currently, only one network interface is supported per virtual machine.")
+  networkInterfaces?: NetworkInterfaceResourceNames[];
+
+  @doc("The full name for OS disk attached to the VM. If this value is not provided, it will be named by ARM as per its default naming standards (prefixed with vm name). There is only one OS disk attached per Virtual Machine.")
+  osDiskName?: string;
+
+  @doc("The full resource names for virtual machine data disks. This is a dictionary containing list of names of data disks per volume. Currently supported volumes for database layer are ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os', 'backup']. For application and cs layers, only 'default' volume is supported")
+  dataDiskNames?: Record<string[]>;
+}
+
+@doc("The resource names object for network interface and related resources.")
+model NetworkInterfaceResourceNames {
+  @doc("The full name for network interface. If name is not provided, service uses a default name based on the deployment type. For SingleServer, default name is {SID}-Nic. In case of HA-AvZone systems, default name will be {SID}-{App/ASCS/DB}-Zone{A/B}-Nic with an incrementor at the end in case of more than 1 instance per layer. For distributed and HA-AvSet systems, default name will be {SID}-{App/ASCS/DB}-Nic with an incrementor at the end in case of more than 1 instance per layer.")
+  networkInterfaceName?: string;
+}
+
+@doc("The resource name object where the specified values will be full resource names of the corresponding resources in a three tier SAP system.")
+model ThreeTierFullResourceNames extends ThreeTierCustomResourceNames {
+  @doc("The full resource names object for central server layer resources.")
+  centralServer?: CentralServerFullResourceNames;
+
+  @doc("The full resource names object for application layer resources. The number of entries in this list should be equal to the number VMs to be created for application layer.")
+  applicationServer?: ApplicationServerFullResourceNames;
+
+  @doc("The full resource names object for database layer resources. The number of entries in this list should be equal to the number VMs to be created for database layer.")
+  databaseServer?: DatabaseServerFullResourceNames;
+
+  @doc("The resource names object for shared storage.")
+  sharedStorage?: SharedStorageResourceNames;
+
+  @doc("The pattern type to be used for resource naming.")
+  namingPatternType: "FullResourceName";
+}
+
+@doc("The full resource names object for central server layer resources.")
+model CentralServerFullResourceNames {
+  @doc("The list of names for all ASCS virtual machines to be deployed. The number of entries in this list should be equal to the number VMs to be created for ASCS layer. At maximum, there can be two virtual machines at this layer: ASCS and ERS.")
+  virtualMachines?: VirtualMachineResourceNames[];
+
+  @doc("The full name for availability set. In case name is not provided, it will be defaulted to {SID}-ASCS-AvSet.")
+  availabilitySetName?: string;
+
+  @doc("The resource names object for load balancer and related resources.")
+  loadBalancer?: LoadBalancerResourceNames;
+}
+
+@doc("The resource names object for load balancer and related resources.")
+model LoadBalancerResourceNames {
+  @doc("The full resource name for load balancer. If this value is not provided, load balancer will be name as {ASCS/DB}-loadBalancer.")
+  loadBalancerName?: string;
+
+  @doc("The list of frontend IP configuration names. If provided as input, size of this list should be 2 for cs layer and should be 1 for database layer.")
+  frontendIpConfigurationNames?: string[];
+
+  @doc("The list of backend pool names. Currently, ACSS deploys only one backend pool and hence, size of this list should be 1")
+  backendPoolNames?: string[];
+
+  @doc("The list of health probe names. If provided as input, size of this list should be 2 for cs layer and should be 1 for database layer.")
+  healthProbeNames?: string[];
+}
+
+@doc("The full resource names object for application layer resources. The number of entries in this list should be equal to the number VMs to be created for application layer.")
+model ApplicationServerFullResourceNames {
+  @doc("The list of virtual machine naming details.")
+  virtualMachines?: VirtualMachineResourceNames[];
+
+  @doc("The full name for availability set. In case name is not provided, it will be defaulted to {SID}-App-AvSet.")
+  availabilitySetName?: string;
+}
+
+@doc("The full resource names object for database layer resources. The number of entries in this list should be equal to the number VMs to be created for database layer.")
+model DatabaseServerFullResourceNames {
+  @doc("The list of virtual machine naming details.")
+  virtualMachines?: VirtualMachineResourceNames[];
+
+  @doc("The full name for availability set. In case name is not provided, it will be defaulted to {SID}-DB-AvSet.")
+  availabilitySetName?: string;
+
+  @doc("The resource names object for load balancer and related resources.")
+  loadBalancer?: LoadBalancerResourceNames;
+}
+
+@doc("The resource names object for shared storage.")
+model SharedStorageResourceNames {
+  @doc("The full name of the shared storage account. If it is not provided, it will be defaulted to {SID}nfs{guid of 15 chars}.")
+  sharedStorageAccountName?: string;
+
+  @doc("The full name of private end point for the shared storage account. If it is not provided, it will be defaulted to {storageAccountName}_pe")
+  sharedStorageAccountPrivateEndPointName?: string;
+}
+
+@doc("The SAP Software configuration Input.")
+@discriminator("softwareInstallationType")
+model SoftwareConfiguration {}
+
+@doc("The SAP Software configuration Input when the software is to be installed by service.")
+model ServiceInitiatedSoftwareConfiguration extends SoftwareConfiguration {
+  @doc("The URL to the SAP Build of Materials(BOM) file.")
+  bomUrl: string;
+
+  @doc("The software version to install.")
+  softwareVersion: string;
+
+  @doc("The SAP bits storage account id.")
+  sapBitsStorageAccountId: string;
+
+  @doc("The FQDN to set for the SAP system during install.")
+  sapFqdn: string;
+
+  @doc("The SSH private key.")
+  sshPrivateKey: string;
+
+  @doc("Gets or sets the HA software configuration.")
+  highAvailabilitySoftwareConfiguration?: HighAvailabilitySoftwareConfiguration;
+
+  @doc("The SAP software installation Type.")
+  softwareInstallationType: "ServiceInitiated";
+}
+
+@doc("Gets or sets the HA software configuration.")
+model HighAvailabilitySoftwareConfiguration {
+  @doc("The fencing client id.")
+  fencingClientId: string;
+
+  @doc("The fencing client id secret/password. The secret should never expire. This will be used pacemaker to start/stop the cluster VMs.")
+  fencingClientPassword: string;
+}
+
+@doc("The SAP Software configuration Input when the software is to be installed by service without OS Configurations")
+model SAPInstallWithoutOSConfigSoftwareConfiguration
+  extends SoftwareConfiguration {
+  @doc("The URL to the SAP Build of Materials(BOM) file.")
+  bomUrl: string;
+
+  @doc("The SAP bits storage account id.")
+  sapBitsStorageAccountId: string;
+
+  @doc("The software version to install.")
+  softwareVersion: string;
+
+  @doc("Gets or sets the HA software configuration.")
+  highAvailabilitySoftwareConfiguration?: HighAvailabilitySoftwareConfiguration;
+
+  @doc("The SAP software installation Type.")
+  softwareInstallationType: "SAPInstallWithoutOSConfig";
+}
+
+@doc("The SAP Software configuration Input when the software is installed externally outside the service.")
+model ExternalInstallationSoftwareConfiguration extends SoftwareConfiguration {
+  @doc("The resource ID of the virtual machine containing the central server instance.")
+  centralServerVmId?: string;
+
+  @doc("The SAP software installation Type.")
+  softwareInstallationType: "External";
+}
+
+@doc("Discovery Details.")
+model DiscoveryConfiguration extends SAPConfiguration {
+  @doc("The virtual machine ID of the Central Server.")
+  centralServerVmId?: string;
+
+  @doc("The custom storage account name for the storage account created by the service in the managed resource group created as part of VIS deployment.<br><br>Refer to the storage account naming rules [here](https://learn.microsoft.com/azure/azure-resource-manager/management/resource-name-rules#microsoftstorage).<br><br>If not provided, the service will create the storage account with a random name.")
+  @maxLength(24)
+  @minLength(3)
+  managedRgStorageAccountName?: string;
+
+  @doc("The geo-location where the SAP system exists.")
+  @visibility("read")
+  appLocation?: string;
+
+  @doc("The configuration Type.")
+  configurationType: "Discovery";
+}
+
+@doc("Deployment Configuration.")
+model DeploymentConfiguration extends SAPConfiguration {
+  @doc("The geo-location where the SAP system is to be created.")
+  appLocation?: string;
+
+  @doc("The infrastructure configuration.")
+  infrastructureConfiguration?: InfrastructureConfiguration;
+
+  @doc("The software configuration.")
+  softwareConfiguration?: SoftwareConfiguration;
+
+  @doc("The configuration Type.")
+  configurationType: "Deployment";
+}
+
+@doc("Deployment along with OS Configuration.")
+model DeploymentWithOSConfiguration extends SAPConfiguration {
+  @doc("The geo-location where the SAP system is to be created.")
+  appLocation?: string;
+
+  @doc("The infrastructure configuration.")
+  infrastructureConfiguration?: InfrastructureConfiguration;
+
+  @doc("The software configuration.")
+  softwareConfiguration?: SoftwareConfiguration;
+
+  @doc("The OS and SAP configuration.")
+  osSapConfiguration?: OsSapConfiguration;
+
+  @doc("The configuration Type.")
+  configurationType: "DeploymentWithOSConfig";
+}
+
+@doc("Defines the OS and SAP Configurations for Deployment")
+model OsSapConfiguration {
+  @doc("The url and storage account ID where deployer VM packages are uploaded")
+  deployerVmPackages?: DeployerVmPackages;
+
+  @doc("The FQDN to set for the SAP system")
+  sapFqdn?: string;
+}
+
+@doc("Defines the url and storage account ID where deployer VM packages are uploaded")
+model DeployerVmPackages {
+  @doc("The URL to the deployer VM packages file.")
+  url?: string;
+
+  @doc("The deployer VM packages storage account id")
+  storageAccountId?: string;
+}
+
+@doc("Defines the workload operation.")
+model OperationsDisplayDefinition {
+  @doc("Defines the workload provider.")
+  provider: string;
+
+  @doc("Defines the workload resource.")
+  resource: string;
+
+  @doc("Defines the workload operation.")
+  operation: string;
+
+  @doc("Describes the workload operation.")
   description: string;
-
-  @doc("Event start timestamp")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTimestampUtc: utcDateTime;
-
-  @doc("Event end timestamp")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTimestampUtc: utcDateTime;
-
-  @doc("Event category")
-  eventCategory: string;
-
-  @doc("Event class")
-  eventClass: string;
-
-  @doc("Event type")
-  eventType: string;
-
-  @doc("Event count")
-  eventCount: int32;
 }
 
-@doc("The properties of device")
-model DeviceProperties {
-  @doc("Device ID")
-  @visibility("read", "create")
-  deviceId?: string;
+@doc("Properties of an Operation.")
+model OperationsDefinition {
+  @doc("Name of the operation.")
+  name: string;
 
-  @doc("SKU of the chip")
-  @visibility("read")
-  chipSku?: string;
+  @doc("Indicates whether the operation applies to data-plane.")
+  isDataAction?: boolean;
 
-  @doc("OS version available for installation when update requested")
-  @visibility("read")
-  lastAvailableOsVersion?: string;
+  @doc("Defines the workload operation origin.")
+  origin?: OperationProperties;
 
-  @doc("OS version running on device when update requested")
-  @visibility("read")
-  lastInstalledOsVersion?: string;
+  @doc("Display information of the operation.")
+  display: OperationsDisplayDefinition;
 
-  @doc("Time when update requested and new OS version available")
-  @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastOsUpdateUtc?: utcDateTime;
+  @doc("Defines the action type of workload operation.")
+  actionType?: WorkloadMonitorActionType;
 
-  @doc("Time when update was last requested")
-  @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastUpdateRequestUtc?: utcDateTime;
-
-  @doc("The status of the last operation.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
+  @doc("Defines the workload operation properties.")
+  properties?: unknown;
 }
 
-@doc("The properties of product")
-model ProductProperties {
-  @doc("Description of the product")
-  description: string;
-
-  @doc("The status of the last operation.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
+@doc("Defines the workload operation content.")
+model OperationsContent extends Resource {
+  @doc("Operations content.")
+  properties?: OperationsDefinition;
 }
 
-@doc("The type used for update operations of the Product.")
-model ProductUpdate {
-  @doc("The updatable properties of the Product.")
-  properties?: ProductUpdateProperties;
+@doc("Defines the workload operation definition response.")
+model OperationsDefinitionArrayResponseWithContinuation {
+  @doc("Defines the workload operation definition response properties.")
+  value?: OperationsDefinition[];
+
+  @doc("The URL to get to the next set of results, if there are any.")
+  nextLink?: string;
 }
 
-@doc("The updatable properties of the Product.")
-model ProductUpdateProperties {
-  @doc("Description of the product")
-  description?: string;
+@doc("Tags field of the resource.")
+model Tags {
+  @doc("Tags field of the resource.")
+  tags?: Record<string>;
 }
 
-@doc("The type used for update operations of the DeviceGroup.")
-model DeviceGroupUpdate {
-  @doc("The updatable properties of the DeviceGroup.")
-  properties?: DeviceGroupUpdateProperties;
+@doc("Gets or sets the provider properties.")
+model HanaDbProviderInstanceProperties extends ProviderSpecificProperties {
+  @doc("Gets or sets the target virtual machine size.")
+  hostname?: string;
+
+  @doc("Gets or sets the hana database name.")
+  dbName?: string;
+
+  @doc("Gets or sets the database sql port.")
+  sqlPort?: string;
+
+  @doc("Gets or sets the database instance number.")
+  instanceNumber?: string;
+
+  @doc("Gets or sets the database user name.")
+  dbUsername?: string;
+
+  @doc("Gets or sets the database password.")
+  dbPassword?: string;
+
+  @doc("Gets or sets the key vault URI to secret with the database password.")
+  dbPasswordUri?: string;
+
+  @doc("Gets or sets the blob URI to SSL certificate for the DB.")
+  sslCertificateUri?: string;
+
+  @doc("Gets or sets the hostname(s) in the SSL certificate.")
+  sslHostNameInCertificate?: string;
+
+  @doc("Gets or sets certificate preference if secure communication is enabled.")
+  sslPreference?: SslPreference;
+
+  @doc("Gets or sets the SAP System Identifier.")
+  sapSid?: string;
+
+  @doc("The provider type. For example, the value can be SapHana.")
+  providerType: "SapHana";
 }
 
-@doc("The updatable properties of the DeviceGroup.")
-model DeviceGroupUpdateProperties {
-  @doc("Description of the device group.")
-  description?: string;
+@doc("Gets or sets the provider properties.")
+model SapNetWeaverProviderInstanceProperties
+  extends ProviderSpecificProperties {
+  @doc("Gets or sets the SAP System Identifier")
+  sapSid?: string;
 
-  @doc("Operating system feed type of the device group.")
-  osFeedType?: OSFeedType;
+  @doc("Gets or sets the target virtual machine IP Address/FQDN.")
+  sapHostname?: string;
 
-  @doc("Update policy of the device group.")
-  updatePolicy?: UpdatePolicy;
+  @doc("Gets or sets the instance number of SAP NetWeaver.")
+  sapInstanceNr?: string;
 
-  @doc("Flag to define if the user allows for crash dump collection.")
-  allowCrashDumpsCollection?: AllowCrashDumpCollection;
+  @doc("Gets or sets the list of HostFile Entries")
+  sapHostFileEntries?: string[];
 
-  @doc("Regional data boundary for the device group.")
-  regionalDataBoundary?: RegionalDataBoundary;
+  @doc("Gets or sets the SAP user name.")
+  sapUsername?: string;
+
+  @doc("Sets the SAP password.")
+  sapPassword?: string;
+
+  @doc("Gets or sets the key vault URI to secret with the SAP password.")
+  sapPasswordUri?: string;
+
+  @doc("Gets or sets the SAP Client ID.")
+  sapClientId?: string;
+
+  @doc("Gets or sets the SAP HTTP port number.")
+  sapPortNumber?: string;
+
+  @doc("Gets or sets the blob URI to SSL certificate for the SAP system.")
+  sslCertificateUri?: string;
+
+  @doc("Gets or sets certificate preference if secure communication is enabled.")
+  sslPreference?: SslPreference;
+
+  @doc("The provider type. For example, the value can be SapHana.")
+  providerType: "SapNetWeaver";
 }
 
-@doc("Request to the action call to bulk claim devices.")
-model ClaimDevicesRequest {
-  @doc("Device identifiers of the devices to be claimed.")
-  deviceIdentifiers: string[];
+@doc("Gets or sets the PrometheusOS provider properties.")
+model PrometheusOSProviderInstanceProperties
+  extends ProviderSpecificProperties {
+  @doc("URL of the Node Exporter endpoint")
+  prometheusUrl?: string;
+
+  @doc("Gets or sets certificate preference if secure communication is enabled.")
+  sslPreference?: SslPreference;
+
+  @doc("Gets or sets the blob URI to SSL certificate for the prometheus node exporter.")
+  sslCertificateUri?: string;
+
+  @doc("Gets or sets the SAP System Identifier")
+  sapSid?: string;
+
+  @doc("The provider type. For example, the value can be SapHana.")
+  providerType: "PrometheusOS";
 }
 
-@doc("The type used for update operations of the Device.")
-model DeviceUpdate {
-  @doc("The updatable properties of the Device.")
-  properties?: DeviceUpdateProperties;
+@doc("Gets or sets the DB2 provider properties.")
+model DB2ProviderInstanceProperties extends ProviderSpecificProperties {
+  @doc("Gets or sets the target virtual machine name.")
+  hostname?: string;
+
+  @doc("Gets or sets the db2 database name.")
+  dbName?: string;
+
+  @doc("Gets or sets the db2 database sql port.")
+  dbPort?: string;
+
+  @doc("Gets or sets the db2 database user name.")
+  dbUsername?: string;
+
+  @doc("Gets or sets the db2 database password.")
+  dbPassword?: string;
+
+  @doc("Gets or sets the key vault URI to secret with the database password.")
+  dbPasswordUri?: string;
+
+  @doc("Gets or sets the SAP System Identifier")
+  sapSid?: string;
+
+  @doc("Gets or sets certificate preference if secure communication is enabled.")
+  sslPreference?: SslPreference;
+
+  @doc("Gets or sets the blob URI to SSL certificate for the DB2 Database.")
+  sslCertificateUri?: string;
+
+  @doc("The provider type. For example, the value can be SapHana.")
+  providerType: "Db2";
 }
 
-@doc("The updatable properties of the Device.")
-model DeviceUpdateProperties {
-  @doc("Device group id")
-  deviceGroupId?: string;
+@doc("Gets or sets the PrometheusHaCluster provider properties.")
+model PrometheusHaClusterProviderInstanceProperties
+  extends ProviderSpecificProperties {
+  @doc("URL of the Node Exporter endpoint.")
+  prometheusUrl?: string;
+
+  @doc("Gets or sets the target machine name.")
+  hostname?: string;
+
+  @doc("Gets or sets the cluster sid.")
+  sid?: string;
+
+  @doc("Gets or sets the clusterName.")
+  clusterName?: string;
+
+  @doc("Gets or sets certificate preference if secure communication is enabled.")
+  sslPreference?: SslPreference;
+
+  @doc("Gets or sets the blob URI to SSL certificate for the HA cluster exporter.")
+  sslCertificateUri?: string;
+
+  @doc("The provider type. For example, the value can be SapHana.")
+  providerType: "PrometheusHaCluster";
 }
 
-@doc("Request of the action to create a signed device capability image")
-model GenerateCapabilityImageRequest {
-  @doc("List of capabilities to create")
-  capabilities: CapabilityType[];
-}
+@doc("Gets or sets the SQL server provider properties.")
+model MsSqlServerProviderInstanceProperties extends ProviderSpecificProperties {
+  @doc("Gets or sets the SQL server host name.")
+  hostname?: string;
 
-@doc("Signed device capability image response")
-model SignedCapabilityImageResponse {
-  @doc("The signed device capability image as a UTF-8 encoded base 64 string.")
-  @visibility("read")
-  image?: string;
-}
+  @doc("Gets or sets the database sql port.")
+  dbPort?: string;
 
-@doc("The properties of device patch")
-model DevicePatchProperties {
-  @doc("Device group id")
-  deviceGroupId: string;
-}
+  @doc("Gets or sets the database user name.")
+  dbUsername?: string;
 
-@doc("Image upload request body.")
-model ImageUploadRequestBody {
-  @doc(".")
-  images: string;
+  @doc("Gets or sets the database password.")
+  dbPassword?: string;
+
+  @doc("Gets or sets the key vault URI to secret with the database password.")
+  dbPasswordUri?: string;
+
+  @doc("Gets or sets the SAP System Identifier")
+  sapSid?: string;
+
+  @doc("Gets or sets certificate preference if secure communication is enabled.")
+  sslPreference?: SslPreference;
+
+  @doc("Gets or sets the blob URI to SSL certificate for the SQL Database.")
+  sslCertificateUri?: string;
+
+  @doc("The provider type. For example, the value can be SapHana.")
+  providerType: "MsSqlServer";
 }

@@ -3,7 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./Catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,69 +10,56 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.AzureSphere;
-@doc("An certificate resource belonging to a catalog resource.")
-@parentResource(Catalog)
-model Certificate is ProxyResource<CertificateProperties> {
-  @doc("Serial number of the certificate. Use '.default' to get current active certificate.")
+namespace Microsoft.CertificateRegistration;
+@doc("SSL certificate for an app.")
+model Certificate is TrackedResource<CertificateProperties> {
+  @doc("Name of the certificate.")
   @path
-  @key("serialNumber")
+  @key("name")
   @segment("certificates")
   name: string;
 }
 
 @armResourceOperations
 interface Certificates {
-  @doc("Get a Certificate")
+  @doc("Description for Get a certificate.")
   get is ArmResourceRead<Certificate>;
 
-  @doc("List Certificate resources by Catalog")
-  listByCatalog is ArmResourceListByParent<
-    Certificate,
-    {
-      ...BaseParameters<Certificate>;
+  @doc("Description for Create or update a certificate.")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Certificate>;
 
-      @doc("Filter the result list using the given expression")
-      @query("$filter")
-      filter?: string;
+  @doc("Description for Create or update a certificate.")
+  update is ArmCustomPatchSync<Certificate, CertificatePatchResource>;
 
-      @doc("The number of result items to return.")
-      @query("$top")
-      top?: int32;
+  @doc("Description for Delete a certificate.")
+  delete is ArmResourceDeleteSync<Certificate>;
 
-      @doc("The number of result items to skip.")
-      @query("$skip")
-      skip?: int32;
+  @doc("Description for Get all certificates in a resource group.")
+  listByResourceGroup is ArmResourceListByParent<Certificate>;
 
-      @doc("The maximum number of result items per page.")
-      @query("$maxpagesize")
-      maxpagesize?: int32;
-    }
-  >;
-
-  @doc("Retrieves cert chain.")
-  retrieveCertChain is ArmResourceActionSync<
-    Certificate,
-    void,
-    CertificateChainResponse
-  >;
-
-  @doc("Gets the proof of possession nonce.")
-  retrieveProofOfPossessionNonce is ArmResourceActionSync<
-    Certificate,
-    ProofOfPossessionNonceRequest,
-    ProofOfPossessionNonceResponse
-  >;
+  @doc("Description for Get all certificates for a subscription.")
+  list is ArmListBySubscription<Certificate>;
 }
 
-@@projectedName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+@@projectedName(Certificates.createOrUpdate::parameters.resource,
   "json",
-  "proofOfPossessionNonceRequest"
+  "certificateEnvelope"
 );
-@@extension(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+@@extension(Certificates.createOrUpdate::parameters.resource,
   "x-ms-client-name",
-  "proofOfPossessionNonceRequest"
+  "certificateEnvelope"
 );
-@@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
-  "Proof of possession nonce request body "
+@@doc(Certificates.createOrUpdate::parameters.resource,
+  "Details of certificate, if it exists already."
+);
+@@projectedName(Certificates.update::parameters.properties,
+  "json",
+  "certificateEnvelope"
+);
+@@extension(Certificates.update::parameters.properties,
+  "x-ms-client-name",
+  "certificateEnvelope"
+);
+@@doc(Certificates.update::parameters.properties,
+  "Details of certificate, if it exists already."
 );

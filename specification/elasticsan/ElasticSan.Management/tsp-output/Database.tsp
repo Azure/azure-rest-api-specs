@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./Cluster.tsp";
+import "./Server.tsp";
 
 
 using TypeSpec.Rest;
@@ -13,76 +13,362 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 
-namespace Microsoft.Cache;
-@doc("Describes a database on the RedisEnterprise cluster")
-@parentResource(Cluster)
-model Database is ProxyResource<DatabaseProperties> {
+namespace Microsoft.Sql;
+@doc("A database resource.")
+@parentResource(Server)
+model Database is TrackedResource<DatabaseProperties> {
 @doc("The name of the database.")
 @path
 @key("databaseName")
 @segment("databases")
 "name": string;
+
+...Azure.ResourceManager.ManagedServiceIdentity
+
+...Azure.ResourceManager.ResourceSku
+
+...Azure.ResourceManager.ResourceKind
+
+...Azure.ResourceManager.ManagedBy
 }
 
 
 
 @armResourceOperations
 interface Databases {
-@doc("Gets information about a database in a RedisEnterprise cluster.")
-get is ArmResourceRead<Database>
+@doc("Gets a database.")
+get is ArmResourceRead<Database,{
+    ...BaseParameters<Database>,
+    @doc("The child resources to include in the response.")
+@query("$expand")
+"$expand"?: string
+@doc("An OData filter expression that filters elements in the collection.")
+@query("$filter")
+"$filter"?: string
+    }>
 
-@doc("Creates a database")
-create is ArmResourceCreateOrUpdateAsync<Database>
+@doc("Creates a new database or updates an existing database.")
+createOrUpdate is ArmResourceCreateOrUpdateAsync<Database,BaseParameters<Database>,ArmAsyncOperationHeader>
 
-@doc("Updates a database")
-update is ArmCustomPatchAsync<Database,DatabaseUpdate,BaseParameters<Database>,ArmAsyncOperationHeader>
+@doc("Updates an existing database.")
+update is ArmCustomPatchAsync<Database,DatabaseUpdate,BaseParameters<Database>,ArmLroLocationHeader>
 
-@doc("Deletes a single database")
-delete is ArmResourceDeleteAsync<Database,BaseParameters<Database>,ArmAsyncOperationHeader>
+@doc("Deletes the database.")
+delete is ArmResourceDeleteAsync<Database,BaseParameters<Database>,ArmLroLocationHeader>
 
-@doc("Gets all databases in the specified RedisEnterprise cluster.")
-listByCluster is ArmResourceListByParent<Database>
+@doc("Gets a list of databases.")
+listByServer is ArmResourceListByParent<Database,{
+    ...BaseParameters<Database>,
+    
+@query("$skipToken")
+"$skipToken"?: string
+    }>
 
-@doc("Retrieves the access keys for the RedisEnterprise database.")
-listKeys is ArmResourceActionSync<Database,void,AccessKeys>
+@doc("Creates a restore point for a data warehouse.")
+@operationId("RestorePoints_Create")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+create is ArmResourceActionAsync<Database,CreateDatabaseRestorePointDefinition,RestorePoint>
 
-@doc("Regenerates the RedisEnterprise database's access keys.")
-regenerateKey is ArmResourceActionAsync<Database,RegenerateKeyParameters,AccessKeys,BaseParameters<Database>,ArmLroLocationHeader>
+@doc("Cancels the asynchronous operation on the database.")
+@operationId("DatabaseOperations_Cancel")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+cancel is ArmResourceActionSync<Database,void,void,{
+    ...BaseParameters<Database>,
+    @doc("The operation identifier.")
+@path
+"operationId": string
+    }>
 
-@doc("Imports database files to target database.")
-import is ArmResourceActionAsync<Database,ImportClusterParameters,void,BaseParameters<Database>,ArmAsyncOperationHeader>
+@doc("Revalidates an existing encryption protector for a particular database.")
+@operationId("DatabaseEncryptionProtectors_Revalidate")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+revalidate is ArmResourceActionAsync<Database,void,void,{
+    ...BaseParameters<Database>,
+    @doc("The name of the encryption protector to be updated.")
+@path
+"encryptionProtectorName": EncryptionProtectorName
+    },ArmLroLocationHeader>
 
-@doc("Exports a database file from target database.")
-export is ArmResourceActionAsync<Database,ExportClusterParameters,void,BaseParameters<Database>,ArmAsyncOperationHeader>
+@doc("Reverts an existing encryption protector for a particular database.")
+@operationId("DatabaseEncryptionProtectors_Revert")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+revert is ArmResourceActionAsync<Database,void,void,{
+    ...BaseParameters<Database>,
+    @doc("The name of the encryption protector to be updated.")
+@path
+"encryptionProtectorName": EncryptionProtectorName
+    },ArmLroLocationHeader>
 
-@doc("Forcibly removes the link to the specified database resource.")
-forceUnlink is ArmResourceActionAsync<Database,ForceUnlinkParameters,void,BaseParameters<Database>,ArmAsyncOperationHeader>
+@doc("Exports a database.")
+export is ArmResourceActionAsync<Database,ExportDatabaseDefinition,ImportExportOperationResult>
 
-@doc("Flushes all the keys in this database and also from its linked databases.")
-flush is ArmResourceActionAsync<Database,FlushParameters,void,BaseParameters<Database>,ArmLroLocationHeader>
+@doc("Failovers a database.")
+failover is ArmResourceActionAsync<Database,void,void,{
+    ...BaseParameters<Database>,
+    @doc("The type of replica to be failed over.")
+@query("replicaType")
+"replicaType"?: ReplicaType
+    }>
+
+@doc("Imports a bacpac into a new database.")
+import is ArmResourceActionAsync<Database,ImportExistingDatabaseDefinition,ImportExportOperationResult>
+
+@doc("Renames a database.")
+rename is ArmResourceActionSync<Database,ResourceMoveDefinition,void>
+
+@doc("Pauses a database.")
+pause is ArmResourceActionAsync<Database,void,Database>
+
+@doc("Resumes a database.")
+resume is ArmResourceActionAsync<Database,void,Database>
+
+@doc("Upgrades a data warehouse.")
+upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
+
+@operationId("Metrics_ListDatabase")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+@doc("Returns database metrics.")
+// FIXME: Metrics_ListDatabase could not be converted to a resource operation
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/metrics")
+@get op `listDatabase` is Azure.Core.Foundations.Operation<{@doc("The subscription ID that identifies an Azure subscription.")
+@path
+"subscriptionId": string
+@doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+@path
+"resourceGroupName": string
+@doc("The name of the server.")
+@path
+"serverName": string
+@doc("The name of the database.")
+@path
+"databaseName": string
+@doc("An OData filter expression that describes a subset of metrics to return.")
+@query("$filter")
+"$filter": string}, MetricListResult>;
+
+
+
+
+@operationId("MetricDefinitions_ListDatabase")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+@doc("Returns database metric definitions.")
+// FIXME: MetricDefinitions_ListDatabase could not be converted to a resource operation
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/metricDefinitions")
+@get op `listDatabase` is Azure.Core.Foundations.Operation<{@doc("The subscription ID that identifies an Azure subscription.")
+@path
+"subscriptionId": string
+@doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+@path
+"resourceGroupName": string
+@doc("The name of the server.")
+@path
+"serverName": string
+@doc("The name of the database.")
+@path
+"databaseName": string}, MetricDefinitionListResult>;
+
+
+
+
+@operationId("DatabaseColumns_ListByDatabase")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+@doc("List database columns")
+// FIXME: DatabaseColumns_ListByDatabase could not be converted to a resource operation
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/columns")
+@get op `listByDatabase` is Azure.Core.Foundations.Operation<{@doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+@path
+"resourceGroupName": string
+@doc("The name of the server.")
+@path
+"serverName": string
+@doc("The name of the database.")
+@path
+"databaseName": string
+
+@query({name: "schema", format: "multi"})
+"schema"?: string[]
+
+@query({name: "table", format: "multi"})
+"table"?: string[]
+
+@query({name: "column", format: "multi"})
+"column"?: string[]
+
+@query({name: "orderBy", format: "multi"})
+"orderBy"?: string[]
+@doc("An opaque token that identifies a starting point in the collection.")
+@query("$skiptoken")
+"$skiptoken"?: string
+@doc("The subscription ID that identifies an Azure subscription.")
+@path
+"subscriptionId": string}, ResourceListResult<DatabaseColumn>>;
+
+
+
+
+@operationId("DatabaseExtensions_ListByDatabase")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+@doc("List database extension. This will return an empty list as it is not supported.")
+// FIXME: DatabaseExtensions_ListByDatabase could not be converted to a resource operation
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions")
+@get op `listByDatabase` is Azure.Core.Foundations.Operation<{@doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+@path
+"resourceGroupName": string
+@doc("The name of the server.")
+@path
+"serverName": string
+@doc("The name of the database.")
+@path
+"databaseName": string
+@doc("The subscription ID that identifies an Azure subscription.")
+@path
+"subscriptionId": string}, ImportExportExtensionsOperationListResult>;
+
+
+
+
+@operationId("DatabaseOperations_ListByDatabase")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+@doc("Gets a list of operations performed on the database.")
+// FIXME: DatabaseOperations_ListByDatabase could not be converted to a resource operation
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/operations")
+@get op `listByDatabase` is Azure.Core.Foundations.Operation<{@doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+@path
+"resourceGroupName": string
+@doc("The name of the server.")
+@path
+"serverName": string
+@doc("The name of the database.")
+@path
+"databaseName": string
+@doc("The subscription ID that identifies an Azure subscription.")
+@path
+"subscriptionId": string}, DatabaseOperationListResult>;
+
+
+
+
+@operationId("DatabaseUsages_ListByDatabase")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+@doc("Gets database usages.")
+// FIXME: DatabaseUsages_ListByDatabase could not be converted to a resource operation
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages")
+@get op `listByDatabase` is Azure.Core.Foundations.Operation<{@doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+@path
+"resourceGroupName": string
+@doc("The name of the server.")
+@path
+"serverName": string
+@doc("The name of the database.")
+@path
+"databaseName": string
+@doc("The subscription ID that identifies an Azure subscription.")
+@path
+"subscriptionId": string}, DatabaseUsageListResult>;
+
+
+
+
+@operationId("SensitivityLabels_ListCurrentByDatabase")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+@doc("Gets the sensitivity labels of a given database")
+// FIXME: SensitivityLabels_ListCurrentByDatabase could not be converted to a resource operation
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/currentSensitivityLabels")
+@get op `listCurrentByDatabase` is Azure.Core.Foundations.Operation<{@doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+@path
+"resourceGroupName": string
+@doc("The name of the server.")
+@path
+"serverName": string
+@doc("The name of the database.")
+@path
+"databaseName": string
+
+@query("$skipToken")
+"$skipToken"?: string
+
+@query("$count")
+"$count"?: boolean
+@doc("An OData filter expression that filters elements in the collection.")
+@query("$filter")
+"$filter"?: string
+@doc("The subscription ID that identifies an Azure subscription.")
+@path
+"subscriptionId": string}, SensitivityLabelListResult>;
+
+
+
+
+@operationId("SensitivityLabels_ListRecommendedByDatabase")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+@doc("Gets the sensitivity labels of a given database")
+// FIXME: SensitivityLabels_ListRecommendedByDatabase could not be converted to a resource operation
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/recommendedSensitivityLabels")
+@get op `listRecommendedByDatabase` is Azure.Core.Foundations.Operation<{@doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+@path
+"resourceGroupName": string
+@doc("The name of the server.")
+@path
+"serverName": string
+@doc("The name of the database.")
+@path
+"databaseName": string
+
+@query("$skipToken")
+"$skipToken"?: string
+@doc("Specifies whether to include disabled recommendations or not.")
+@query("includeDisabledRecommendations")
+"includeDisabledRecommendations"?: boolean
+@doc("An OData filter expression that filters elements in the collection.")
+@query("$filter")
+"$filter"?: string
+@doc("The subscription ID that identifies an Azure subscription.")
+@path
+"subscriptionId": string}, SensitivityLabelListResult>;
+
+
+
+
+@operationId("SynapseLinkWorkspaces_ListByDatabase")
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+@doc("Gets all synapselink workspaces for a database.")
+// FIXME: SynapseLinkWorkspaces_ListByDatabase could not be converted to a resource operation
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/linkWorkspaces")
+@get op `listByDatabase` is Azure.Core.Foundations.Operation<{@doc("The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.")
+@path
+"resourceGroupName": string
+@doc("The name of the server.")
+@path
+"serverName": string
+@doc("The name of the database.")
+@path
+"databaseName": string
+@doc("The subscription ID that identifies an Azure subscription.")
+@path
+"subscriptionId": string}, SynapseLinkWorkspaceListResult>;
+
+
+
 
 }
 
 
 
-@@projectedName(Databases.create::parameters.resource, "json", "parameters");
-@@extension(Databases.create::parameters.resource, "x-ms-client-name", "parameters");
-@@doc(Databases.create::parameters.resource, "Parameters supplied to the create or update database operation.");
+@@projectedName(Databases.createOrUpdate::parameters.resource, "json", "parameters");
+@@extension(Databases.createOrUpdate::parameters.resource, "x-ms-client-name", "parameters");
+@@doc(Databases.createOrUpdate::parameters.resource, "The requested database resource state.");
 @@projectedName(Databases.update::parameters.properties, "json", "parameters");
 @@extension(Databases.update::parameters.properties, "x-ms-client-name", "parameters");
-@@doc(Databases.update::parameters.properties, "Parameters supplied to the create or update database operation.");
-@@projectedName(Databases.regenerateKey::parameters.body, "json", "parameters");
-@@extension(Databases.regenerateKey::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.regenerateKey::parameters.body, "Specifies which key to regenerate.");
-@@projectedName(Databases.import::parameters.body, "json", "parameters");
-@@extension(Databases.import::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.import::parameters.body, "Storage information for importing into the cluster");
+@@doc(Databases.update::parameters.properties, "The requested database resource state.");
+@@projectedName(Databases.create::parameters.body, "json", "parameters");
+@@extension(Databases.create::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.create::parameters.body, "The definition for creating the restore point of this database.");
 @@projectedName(Databases.export::parameters.body, "json", "parameters");
 @@extension(Databases.export::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.export::parameters.body, "Storage information for exporting into the cluster");
-@@projectedName(Databases.forceUnlink::parameters.body, "json", "parameters");
-@@extension(Databases.forceUnlink::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.forceUnlink::parameters.body, "Information identifying the database to be unlinked.");
-@@projectedName(Databases.flush::parameters.body, "json", "parameters");
-@@extension(Databases.flush::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.flush::parameters.body, "Information identifying the databases to be flushed");
+@@doc(Databases.export::parameters.body, "The database export request parameters.");
+@@projectedName(Databases.import::parameters.body, "json", "parameters");
+@@extension(Databases.import::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.import::parameters.body, "The database import request parameters.");
+@@projectedName(Databases.rename::parameters.body, "json", "parameters");
+@@extension(Databases.rename::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.rename::parameters.body, "The resource move definition for renaming this database.");

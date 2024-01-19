@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./SignalRResource.tsp";
+import "./WebPubSub.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.SignalRService;
 @doc("A private endpoint connection to an azure resource")
-@parentResource(SignalRResource)
+@parentResource(WebPubSub)
 model PrivateEndpointConnection
   is ProxyResource<PrivateEndpointConnectionProperties> {
   @doc("The name of the private endpoint connection")
@@ -27,22 +27,22 @@ model PrivateEndpointConnection
 interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get the specified private endpoint connection")
-  @operationId("SignalRPrivateEndpointConnections_Get")
+  @operationId("WebPubSubPrivateEndpointConnections_Get")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Update the state of specified private endpoint connection")
-  @operationId("SignalRPrivateEndpointConnections_Update")
+  @operationId("WebPubSubPrivateEndpointConnections_Update")
   update is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Delete the specified private endpoint connection")
-  @operationId("SignalRPrivateEndpointConnections_Delete")
+  @operationId("WebPubSubPrivateEndpointConnections_Delete")
   delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("List private endpoint connections")
-  @operationId("SignalRPrivateEndpointConnections_List")
+  @operationId("WebPubSubPrivateEndpointConnections_List")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 

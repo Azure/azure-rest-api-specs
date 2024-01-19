@@ -1,0 +1,37 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./ManagedInstance.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Sql;
+@doc("A private link resource")
+@parentResource(ManagedInstance)
+model ManagedInstancePrivateLink
+  is ProxyResource<ManagedInstancePrivateLinkProperties> {
+  @doc("The name of the private link resource.")
+  @path
+  @key("groupName")
+  @segment("privateLinkResources")
+  name: string;
+}
+
+@armResourceOperations
+interface ManagedInstancePrivateLinks {
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Gets a private link resource for SQL server.")
+  @operationId("ManagedInstancePrivateLinkResources_Get")
+  get is ArmResourceRead<ManagedInstancePrivateLink>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Gets the private link resources for SQL server.")
+  @operationId("ManagedInstancePrivateLinkResources_ListByManagedInstance")
+  listByManagedInstance is ArmResourceListByParent<ManagedInstancePrivateLink>;
+}

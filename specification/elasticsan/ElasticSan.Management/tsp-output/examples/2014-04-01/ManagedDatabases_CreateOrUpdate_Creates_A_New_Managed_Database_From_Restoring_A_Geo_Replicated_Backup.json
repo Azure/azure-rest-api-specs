@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "databaseName": "testdb_recovered",
+    "managedInstanceName": "server1",
+    "parameters": {
+      "location": "southeastasia",
+      "properties": {
+        "createMode": "Recovery",
+        "recoverableDatabaseId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/Default-SQL-WestEurope/providers/Microsoft.Sql/managedInstances/testsvr/recoverableDatabases/testdb"
+      }
+    },
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testdb_recovered",
+        "type": "Microsoft.Sql/managedInstances/databases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/server1/recoverableDatabases/testdb_recovered",
+        "location": "southeastasia",
+        "properties": {
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "creationDate": "2018-11-07T04:41:33.937Z",
+          "isLedgerOn": false,
+          "status": "Online"
+        },
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testdb_recovered",
+        "type": "Microsoft.Sql/managedInstances/databases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/testsvr/recoverableDatabases/testdb_recovered",
+        "location": "southeastasia",
+        "properties": {
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "creationDate": "2018-11-07T04:41:33.937Z",
+          "isLedgerOn": false,
+          "status": "Online"
+        },
+        "tags": {
+          "tagKey1": "TagValue1"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "ManagedDatabases_CreateOrUpdate",
+  "title": "Creates a new managed database from restoring a geo-replicated backup"
+}

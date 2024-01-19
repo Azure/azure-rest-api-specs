@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01-preview",
+    "resourceGroupName": "devAuditTestRG",
+    "serverName": "devOpsAuditTestSvr",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Default",
+            "type": "Microsoft.Sql/servers/devOpsAuditingSettings",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/devAuditTestRG/providers/Microsoft.Sql/servers/devOpsAuditTestSvr/devOpsAuditingSettings/default",
+            "properties": {
+              "isAzureMonitorTargetEnabled": false,
+              "isManagedIdentityInUse": false,
+              "state": "Disabled",
+              "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000",
+              "storageEndpoint": "https://mystorage.blob.core.windows.net"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServerDevOpsAuditSettings_ListByServer",
+  "title": "List DevOps audit settings of a server"
+}

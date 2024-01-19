@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "location": "japaneast",
+    "managedInstanceName": "testinstance",
+    "parameters": {
+      "properties": {
+        "maintenanceConfigurationId": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "subscriptionId": "20D7082A-0FC7-4468-82BD-542694D5042B"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testinstance",
+        "type": "Microsoft.Sql/managedInstances",
+        "id": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance",
+        "location": "japaneast",
+        "properties": {
+          "administratorLogin": "dummylogin",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "dnsZone": "1b4e2caff2530",
+          "fullyQualifiedDomainName": "testinstance.1b4e2caff2530.database.windows.net",
+          "instancePoolId": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/resourceGroups/testrg/providers/Microsoft.Sql/instancePools/instancePool1",
+          "licenseType": "LicenseIncluded",
+          "maintenanceConfigurationId": "/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default",
+          "proxyOverride": "Default",
+          "publicDataEndpointEnabled": false,
+          "state": "Ready",
+          "storageSizeInGB": 1024,
+          "subnetId": "/subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "vCores": 8
+        },
+        "sku": {
+          "name": "GP_Gen4",
+          "capacity": 8,
+          "family": "Gen4",
+          "tier": "GeneralPurpose"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/20d7082a-0fc7-4468-82bd-542694d5042b/providers/Microsoft.Sql/locations/japaneast/operationResults/20d7082a-0fc7-4468-82bd-542694d5042b?api-version=2022-08-01-preview"
+      }
+    }
+  },
+  "operationId": "ManagedInstances_Update",
+  "title": "Remove maintenance policy from managed instance (select default maintenance policy)"
+}

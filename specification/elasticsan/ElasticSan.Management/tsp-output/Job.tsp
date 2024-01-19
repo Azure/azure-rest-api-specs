@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./Transform.tsp";
+import "./JobAgent.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,11 +11,11 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Media;
-@doc("A Job resource type. The progress and state can be obtained by polling a Job or subscribing to events using EventGrid.")
-@parentResource(Transform)
+namespace Microsoft.Sql;
+@doc("A job.")
+@parentResource(JobAgent)
 model Job is ProxyResource<JobProperties> {
-  @doc("The Job name.")
+  @doc("The name of the job to get.")
   @path
   @key("jobName")
   @segment("jobs")
@@ -24,44 +24,27 @@ model Job is ProxyResource<JobProperties> {
 
 @armResourceOperations
 interface Jobs {
-  @doc("Gets a Job.")
+  @doc("Gets a job.")
   get is ArmResourceRead<Job>;
 
-  @doc("Creates a Job.")
-  create is ArmResourceCreateOrReplaceSync<Job>;
+  @doc("Creates or updates a job.")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Job>;
 
-  @doc("Update is only supported for description and priority. Updating Priority will take effect when the Job state is Queued or Scheduled and depending on the timing the priority update may be ignored.")
-  update is ArmCustomPatchSync<Job, Job>;
-
-  @doc("Deletes a Job.")
+  @doc("Deletes a job.")
   delete is ArmResourceDeleteSync<Job>;
 
-  @doc("Lists all of the Jobs for the Transform.")
-  list is ArmResourceListByParent<
-    Job,
-    {
-      ...BaseParameters<Job>;
+  @doc("Gets a list of jobs.")
+  listByAgent is ArmResourceListByParent<Job>;
 
-      @doc("Restricts the set of items returned.")
-      @query("$filter")
-      $filter?: string;
-
-      @doc("Specifies the key by which the result collection should be ordered.")
-      @query("$orderby")
-      $orderby?: string;
-    }
-  >;
-
-  @doc("Cancel a Job.")
-  cancelJob is ArmResourceActionSync<Job, void, void>;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Starts an elastic job execution.")
+  @operationId("JobExecutions_Create")
+  create is ArmResourceActionAsync<Job, void, JobExecution>;
 }
 
-@@projectedName(Jobs.create::parameters.resource, "json", "parameters");
-@@extension(Jobs.create::parameters.resource, "x-ms-client-name", "parameters");
-@@doc(Jobs.create::parameters.resource, "The request parameters");
-@@projectedName(Jobs.update::parameters.properties, "json", "parameters");
-@@extension(Jobs.update::parameters.properties,
+@@projectedName(Jobs.createOrUpdate::parameters.resource, "json", "parameters");
+@@extension(Jobs.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "parameters"
 );
-@@doc(Jobs.update::parameters.properties, "The request parameters");
+@@doc(Jobs.createOrUpdate::parameters.resource, "The requested job state.");
