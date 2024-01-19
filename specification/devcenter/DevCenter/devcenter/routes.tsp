@@ -12,10 +12,28 @@ interface DevCenterOperations {
   @doc("Lists all projects.")
   @route("/projects")
   @get
-  listProjects is StandardResourceOperations.ResourceList<Project>;
+  listProjects is Azure.Core.Foundations.Operation<
+    {
+      @doc("An OData filter clause to apply to the operation.")
+      @query
+      filter?: string;
+
+      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
+      @query
+      top?: int32;
+    },
+    ProjectListResult
+  >;
 
   @doc("Gets a project.")
   @route("/projects/{projectName}")
   @get
-  getProject is StandardResourceOperations.ResourceRead<Project>;
+  getProject is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
+    },
+    Project
+  >;
 }
