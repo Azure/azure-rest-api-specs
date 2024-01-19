@@ -150,7 +150,7 @@ interface StoragePools {
   enableAvs(
     ...ResourceInstanceParameters<StoragePool>,
 
-    @doc("Storage pool enable Avs properties.")
+    @doc("Storage pool enable Avs properties")
     @body
     properties: StoragePoolEnableAvs,
   ): ArmAcceptedLroResponse<
