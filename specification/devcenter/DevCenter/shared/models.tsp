@@ -16,10 +16,17 @@ namespace DevCenterService;
 @projectedName("java", "DevCenterOperationStatus")
 @projectedName("python", "OperationStatus")
 enum OperationStatusValue {
+  @doc("Operation is in progress")
   Running,
+
+  @doc("Operation is completed with success")
   @lroSucceeded
   Completed,
+
+  @doc("Operation was canceled")
   Canceled,
+
+  @doc("Operation failed")
   Failed,
 }
 
