@@ -4031,8 +4031,46 @@
             "$ref": "./examples/WebhookListEvents.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        "x-ms-paths": {
+          "{nextLink}?Next paging op for webhook list events": {
+            "post": {
+              "operationId": "WebhookListEvents_NextLink",
+              "description": "Subsequent post calls to the next link",
+              "parameters": [
+                {
+                  "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+                },
+                {
+                  "name": "$skipToken",
+                  "in": "query",
+                  "description": "$skipToken is supported on get list of webhook events, which provides the next page in the list of webhook events.",
+                  "required": false,
+                  "type": "string"
+                },
+                {
+                  "name": "nextLink",
+                  "in": "path",
+                  "required": true,
+                  "type": "string",
+                  "description": "Next link for webhook list operation.",
+                  "x-ms-skip-url-encoding": true
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "The request was successful; the request was well-formed and received properly.",
+                  "schema": {
+                    "$ref": "#/definitions/EventListResult"
+                  }
+                }
+              },
+              "x-ms-examples": {
+                "WebhookListEvents": {
+                  "$ref": "./examples/WebhookListEvents.json"
+                }
+              }
+            }
+          }
         }
       }
     },
