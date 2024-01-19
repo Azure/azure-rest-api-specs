@@ -138,7 +138,7 @@ model User {
   @key("userId")
   @visibility("read")
   @doc("The AAD object id of the user")
-  user: string;
+  userId: string;
 }
 
 @doc("A pool of Dev Boxes.")
