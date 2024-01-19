@@ -456,6 +456,10 @@ model AvsStorageContainerProperties {
   @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
+
+  @doc("Maximum amount of bytes that can be provisioned in this storage container. It must be a multiple of 512. Each time a volume is provisioned in this container, its provisionedSize will be counted against the provisionLimit and the provisioning will fail if it goes over (minimum: 1048576 (1Mi), maximum: 4503599627370496 (4Pi)). By default it is unrestricted.")
+  @visibility("create", "update")
+  provisionedLimit?: int64;
 }
 
 @armResourceOperations
@@ -463,6 +467,7 @@ interface AvsStorageContainers {
   create is ArmResourceCreateOrUpdateAsync<AvsStorageContainer>;
   get is ArmResourceRead<AvsStorageContainer>;
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainer>;
+  update is ArmResourcePatchAsync<AvsStorageContainer, AvsStorageContainerProperties>;
   listByParent is ArmResourceListByParent<AvsStorageContainer>;
 }
 
