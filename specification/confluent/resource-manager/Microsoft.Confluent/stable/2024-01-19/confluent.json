@@ -976,6 +976,171 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/createRoleBinding": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Create role binding for a user within in an environment or cluster",
+        "operationId": "Access_CreateRoleBinding",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Create role binding Request Model",
+            "schema": {
+              "$ref": "#/definitions/Access_CreateRoleBindingRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RoleBindingRecord"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_CreateRoleBinding": {
+            "$ref": "./examples/Access_CreateRoleBinding.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/deleteRoleBinding/{roleBindingId}": {
+      "delete": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "Delete the role binding of the user",
+        "operationId": "Access_DeleteRoleBinding",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleBindingIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_DeleteRoleBinding": {
+            "$ref": "./examples/Access_DeleteRoleBinding.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listRoleBindingNameList": {
+      "post": {
+        "tags": [
+          "accessandaccounts"
+        ],
+        "summary": "List of all the role bindings applicable to the user filtered by the environment and cluster",
+        "operationId": "Access_ListRoleBindingNameList",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "List Access Request Model",
+            "schema": {
+              "$ref": "#/definitions/ListAccessRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Access_RoleBindingNameList_SuccessResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Access_RoleBindingNameList": {
+            "$ref": "./examples/Access_RoleBindingNameList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1746,14 +1911,14 @@
       }
     },
     "EnvironmentsList": {
-      "description": "Data of the invitations list",
+      "description": "List of environment records",
       "type": "array",
       "items": {
         "$ref": "#/definitions/EnvironmentRecord"
       }
     },
     "Access_ListEnvironments_SuccessResponse": {
-      "description": "List environments success response",
+      "description": "Details of the environments returned on successful response",
       "type": "object",
       "properties": {
         "kind": {
@@ -1761,11 +1926,11 @@
           "type": "string"
         },
         "metadata": {
-          "description": "Metadata of the list",
+          "description": "Metadata of the  environment list",
           "$ref": "#/definitions/ConfluentListMetadata"
         },
         "data": {
-          "description": "Data of the environments list",
+          "description": "Environment list data",
           "$ref": "#/definitions/EnvironmentsList"
         }
       }
@@ -1912,15 +2077,15 @@
       }
     },
     "ClusterRecord": {
-      "description": "Record of the environment",
+      "description": "Details of cluster record",
       "type": "object",
       "properties": {
         "kind": {
-          "description": "Type of environment",
+          "description": "Type of cluster",
           "type": "string"
         },
         "id": {
-          "description": "Id of the environment",
+          "description": "Id of the cluster",
           "type": "string"
         },
         "metadata": {
@@ -1942,14 +2107,14 @@
       }
     },
     "ClusterList": {
-      "description": "Data of the invitations list",
+      "description": "List of Cluster Records",
       "type": "array",
       "items": {
         "$ref": "#/definitions/ClusterRecord"
       }
     },
     "Access_ListCluster_SuccessResponse": {
-      "description": "List cluster success response",
+      "description": "Details of the clusters returned on successful response",
       "type": "object",
       "properties": {
         "kind": {
@@ -1961,13 +2126,13 @@
           "$ref": "#/definitions/ConfluentListMetadata"
         },
         "data": {
-          "description": "Data of the environments list",
+          "description": "List of clusters",
           "$ref": "#/definitions/ClusterList"
         }
       }
     },
     "RoleBindingRecord": {
-      "description": "Record of the environment",
+      "description": "Details on principal, role name and crn pattern of a role binding",
       "type": "object",
       "properties": {
         "kind": {
@@ -1975,7 +2140,7 @@
           "type": "string"
         },
         "id": {
-          "description": "Id of the role",
+          "description": "Id of the role binding",
           "type": "string"
         },
         "metadata": {
@@ -1997,14 +2162,14 @@
       }
     },
     "RoleBindingList": {
-      "description": "Data of the invitations list",
+      "description": "List of Role Binding records",
       "type": "array",
       "items": {
         "$ref": "#/definitions/RoleBindingRecord"
       }
     },
     "Access_ListRoleBindings_SuccessResponse": {
-      "description": "List cluster success response",
+      "description": "Details of the role bindings returned on successful response",
       "type": "object",
       "properties": {
         "kind": {
@@ -2016,8 +2181,51 @@
           "$ref": "#/definitions/ConfluentListMetadata"
         },
         "data": {
-          "description": "Data of the environments list",
+          "description": "List of role binding",
           "$ref": "#/definitions/RoleBindingList"
+        }
+      }
+    },
+    "RoleBindingNameList": {
+      "description": "List of role binding names",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Access_CreateRoleBindingRequestModel": {
+      "description": "Create role binding request model",
+      "type": "object",
+      "properties": {
+        "principal": {
+          "description": "The principal User or Group to bind the role to",
+          "type": "string"
+        },
+        "role_name": {
+          "description": "The name of the role to bind to the principal",
+          "type": "string"
+        },
+        "crn_pattern": {
+          "description": "A CRN that specifies the scope and resource patterns necessary for the role to bind",
+          "type": "string"
+        }
+      }
+    },
+    "Access_RoleBindingNameList_SuccessResponse": {
+      "description": "Details of the role binding names returned on successful response",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Type of response",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the list",
+          "$ref": "#/definitions/ConfluentListMetadata"
+        },
+        "data": {
+          "description": "List of role binding names",
+          "$ref": "#/definitions/RoleBindingNameList"
         }
       }
     }
@@ -2052,6 +2260,13 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "RoleBindingIdParameter": {
+      "in": "path",
+      "name": "roleBindingId",
+      "description": "Confluent Role binding id",
+      "required": true,
+      "type": "string"
     }
   }
 }
