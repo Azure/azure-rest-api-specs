@@ -76,9 +76,9 @@ enum MessageTemplateValueType {
 }
 
 
-@doc("The type of the communication msesages channel.")
+@doc("The type of the communication messages channel.")
 enum CommunicationMessagesChannel {
-  @doc("The WhatsApp communication msesages channel type.")
+  @doc("The WhatsApp communication messages channel type.")
   whatsApp,
 }
 
