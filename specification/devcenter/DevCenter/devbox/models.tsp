@@ -202,12 +202,12 @@ model HardwareProfile {
   @projectedName("csharp", "VCpus")
   @projectedName("java", "vcpus")
   @projectedName("python", "vcpus")
-  vCPUs?: int32;
+  vCpus?: int32;
 
   @doc("The amount of memory available for the Dev Box.")
   @visibility("read")
   @projectedName("python", "memoryGb")
-  memoryGB?: int32;
+  memoryGb?: int32;
 }
 
 @doc("Storage settings for the Dev Box's disks")
@@ -216,16 +216,16 @@ model HardwareProfile {
 model StorageProfile {
   @doc("Settings for the operating system disk.")
   @projectedName("csharp", "OSDisk")
-  osDisk?: OSDisk;
+  osDisk?: OsDisk;
 }
 
 @doc("Settings for the operating system disk.")
 @projectedName("java", "OsDisk")
-model OSDisk {
+model OsDisk {
   @doc("The size of the OS Disk in gigabytes.")
   @visibility("read")
   @projectedName("python", "diskSizeGb")
-  diskSizeGB?: int32;
+  diskSizeGb?: int32;
 }
 
 @doc("Specifies information about the image used")
