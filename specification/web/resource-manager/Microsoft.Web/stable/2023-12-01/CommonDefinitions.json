@@ -3730,6 +3730,29 @@
         }
       }
     },
+    "FunctionsRuntime": {
+      "description": "Azure Function app runtime name and version.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Function app runtime name. Available options: dotnet-isolated, node, python, java, powershell, custom",
+          "type": "string",
+          "enum": [
+            "dotnet-isolated",
+            "node",
+            "java",
+            "powershell",
+            "python",
+            "custom"
+          ]
+        },
+        "version": {
+          "description": "Function app runtime version. Example: 3.10 (for Python)",
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
     "FunctionAppConfig": {
       "description": "Function App configuration.",
       "type": "object",
@@ -3737,6 +3760,10 @@
         "deployment": {
           "$ref": "#/definitions/FunctionsDeployment",
           "description": "Azure Functions deployment configuration."
+        },
+        "runtime": {
+          "$ref": "#/definitions/FunctionsRuntime",
+          "description": "Azure Function runtime settings."
         },
         "scaleAndConcurrency": {
           "$ref": "#/definitions/FunctionsScaleAndConcurrency",
