@@ -27,7 +27,11 @@ interface TemplateOperations {
 interface NotificationMessagesOperations {
   @tag("Notifications")
   @doc("Sends a notification message from Business to User.")
-  send is Operations.ResourceCollectionAction<Notifications, NotificationContent, AcceptedResponse & SendMessageResult>
+  send is Operations.ResourceCollectionAction<
+    Notifications,
+    NotificationContent,
+    AcceptedResponse & SendMessageResult
+  >;
 }
 
 interface StreamOperations {

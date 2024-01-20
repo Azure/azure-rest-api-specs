@@ -14,8 +14,8 @@ namespace ClientForAcsMessages;
   name: "NotificationMessagesClient",
   service: AzureCommunicationMessagesService,
 })
-interface NotificationMessagesClient extends AzureCommunicationMessagesService.NotificationMessagesOperations
-{
+interface NotificationMessagesClient
+  extends AzureCommunicationMessagesService.NotificationMessagesOperations {
   @access(Access.internal, "csharp")
   @projectedName("csharp", "downloadMediaInternal")
   downloadMedia is AzureCommunicationMessagesService.StreamOperations.downloadMedia;
@@ -25,5 +25,5 @@ interface NotificationMessagesClient extends AzureCommunicationMessagesService.N
   name: "MessageTemplateClient",
   service: AzureCommunicationMessagesService,
 })
-interface MessageTemplateClient extends AzureCommunicationMessagesService.TemplateOperations
-{}
+interface MessageTemplateClient
+  extends AzureCommunicationMessagesService.TemplateOperations {}

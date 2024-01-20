@@ -55,7 +55,6 @@ enum MessageTemplateStatus {
 
 @doc("The type of the template parameter.")
 enum MessageTemplateValueType {
-
   @doc("The text template parameter type.")
   text,
 
@@ -75,13 +74,11 @@ enum MessageTemplateValueType {
   quickAction,
 }
 
-
 @doc("The type of the communication messages channel.")
 enum CommunicationMessagesChannel {
   @doc("The WhatsApp communication messages channel type.")
   whatsApp,
 }
-
 
 @doc("The type of the message template.")
 enum MessageTemplateBindingsType {
@@ -155,9 +152,9 @@ model MessageTemplate {
 model MessageTemplateValue {
   @doc("Name of the Template value")
   name: string;
-  
+
   @doc("The type discriminator describing a template parameter type.")
-  kind: MessageTemplateValueType
+  kind: MessageTemplateValueType;
 }
 
 @doc("The message template's text value information.")
@@ -187,27 +184,27 @@ model MessageTemplateMedia {
 }
 
 @doc("The message template's image value information.")
-
 model MessageTemplateImage extends MessageTemplateValue {
   @doc("Message parameter type is image.")
-  kind: MessageTemplateValueType.image,
-  ...MessageTemplateMedia
+  kind: MessageTemplateValueType.image;
+
+  ...MessageTemplateMedia;
 }
 
 @doc("The message template's document value information.")
-
 model MessageTemplateDocument extends MessageTemplateValue {
   @doc("Message parameter type is document.")
-  kind: MessageTemplateValueType.document,
-  ...MessageTemplateMedia
+  kind: MessageTemplateValueType.document;
+
+  ...MessageTemplateMedia;
 }
 
 @doc("The message template's video value information.")
-
 model MessageTemplateVideo extends MessageTemplateValue {
   @doc("Message parameter type is video.")
-  kind: MessageTemplateValueType.video,
-  ...MessageTemplateMedia
+  kind: MessageTemplateValueType.video;
+
+  ...MessageTemplateMedia;
 }
 
 @doc("The message template's location value information.")
@@ -243,7 +240,6 @@ model MessageTemplateQuickAction extends MessageTemplateValue {
 @discriminator("kind")
 @doc("The binding object to link values to the template specific locations")
 model MessageTemplateBindings {
-
   @doc("The type discriminator describing a template bindings type.")
   kind: MessageTemplateBindingsType;
 }
@@ -297,7 +293,7 @@ model MessageReceipt {
 }
 
 @doc("The WhatsApp-specific template response contract")
-model WhatsAppMessageTemplateItem extends MessageTemplateItem{
+model WhatsAppMessageTemplateItem extends MessageTemplateItem {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Payload being returned from WhatsApp with no guaranteed object type."
   @doc("""
 WhatsApp platform's template content
@@ -336,10 +332,12 @@ model MessageDataStream {
   @visibility("read")
   @doc("The stream ID.")
   id: string;
+
   @body
   @doc("The stream body.")
   body: bytes;
-  @header 
+
+  @header
   @doc("The stream content type.")
   contentType: "application/octet-stream";
 }
