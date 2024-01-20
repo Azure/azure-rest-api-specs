@@ -53,7 +53,7 @@ What's the purpose of this PR? Check the specific option that applies. This is *
   - [ ] New resource provider.
   - [ ] New API version for an existing resource provider. (If API spec is not defined in TypeSpec, the PR should have been generated using [OpenAPI Hub](https://aka.ms/openapihub)).
   - [ ] Update existing version for a new feature. (This is applicable only when you are revising a private preview API version.)
-  - [ ] Update existing version to fix swagger quality issues in S360.
+  - [ ] Update existing version to fix OpenAPI spec quality issues in S360.
   - [ ] Other, please clarify:
     - _edit this with your clarification_
 
@@ -66,7 +66,7 @@ and followed the instructions by checking all the boxes:
 - [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
   [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
-  I understand this is required before I can proceed to the Diagram Step 2, "ARM API changes Review", for this PR.
+  I understand this is required before I can proceed to the diagram Step 2, "ARM API changes review", for this PR.
 
 ## Additional information
 
@@ -81,8 +81,7 @@ in the `Generated ApiView` comment added to this PR. You can use ApiView to show
 <summary>Suppressing failures</summary>
 
 If one or multiple validation error/warning suppression(s) is detected in your PR, please follow the 
-[Swagger-Suppression-Process](https://aka.ms/azsdk/pr-suppressions) 
-to get approval.
+[suppressions guide](https://aka.ms/azsdk/pr-suppressions) to get approval.
 
 </details>
 
