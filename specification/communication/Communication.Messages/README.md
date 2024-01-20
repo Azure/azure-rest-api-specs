@@ -45,7 +45,7 @@ The TypeSpec and generated API specification for the Azure Communication Message
    tsp install
    ```
 
-6. Compile TypeSpec to Swagger.  This will update the files in the directory `..\data-plane\Messages\<version-status>\<api-version>\CommunicationServicesMessages.json`:
+6. Compile TypeSpec to Swagger.  This will update the files in the directory `..\data-plane\Messages\<version-status>\<api-version>\communicationservicesmessages.json`:
 
    ```console
    npx tsp compile specification\communication\Communication.Messages
@@ -58,11 +58,11 @@ The TypeSpec and generated API specification for the Azure Communication Message
 
    ```console
    npm install -g oav@latest
-   oav generate-examples <path to CommunicationServicesMessages.json>
+   oav generate-examples <path to communicationservicesmessages.json>
    ```
 
 ## Testing and Viewing API as an Interface
 
 1. Visit the official [Swagger Editor](https://editor.swagger.io/).
 
-2. Copy the generated Swagger from `CommunicationServicesMessages.json` and paste it into the editor.
+2. Copy the generated Swagger from `communicationservicesmessages.json` and paste it into the editor.
