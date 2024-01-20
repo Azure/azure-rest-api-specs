@@ -4016,6 +4016,9 @@
           },
           {
             "$ref": "#/parameters/WebhookNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -4031,46 +4034,9 @@
             "$ref": "./examples/WebhookListEvents.json"
           }
         },
-        "x-ms-paths": {
-          "{nextLink}?Next paging op for webhook list events": {
-            "post": {
-              "operationId": "WebhookListEvents_NextLink",
-              "description": "Subsequent post calls to the next link",
-              "parameters": [
-                {
-                  "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-                },
-                {
-                  "name": "$skipToken",
-                  "in": "query",
-                  "description": "$skipToken is supported on get list of webhook events, which provides the next page in the list of webhook events.",
-                  "required": false,
-                  "type": "string"
-                },
-                {
-                  "name": "nextLink",
-                  "in": "path",
-                  "required": true,
-                  "type": "string",
-                  "description": "Next link for webhook list operation.",
-                  "x-ms-skip-url-encoding": true
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "The request was successful; the request was well-formed and received properly.",
-                  "schema": {
-                    "$ref": "#/definitions/EventListResult"
-                  }
-                }
-              },
-              "x-ms-examples": {
-                "WebhookListEvents": {
-                  "$ref": "./examples/WebhookListEvents.json"
-                }
-              }
-            }
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "operationName": "Webhooks_ListEventsNext"
         }
       }
     },
@@ -4109,6 +4075,46 @@
         "x-ms-examples": {
           "WebhookGetCallbackConfig": {
             "$ref": "./examples/WebhookGetCallbackConfig.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "{nextLink}?Webhooks_ListEventsNext": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "operationId": "Webhooks_ListEventsNext",
+        "description": "Subsequent post calls to the next link",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for webhook list operation.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EventListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebhookListEvents": {
+            "$ref": "./examples/WebhookListEvents.json"
           }
         }
       }
@@ -8005,6 +8011,15 @@
       "minLength": 5,
       "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
+    },
+    "SkipTokenParameter": {
+      "name": "$skiptoken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "SkipToken"
     }
   },
   "securityDefinitions": {
