@@ -283,6 +283,64 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
+      },
+      "restart":{
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "operationId": "NetworkVirtualAppliances_Restart",
+        "description": "Restarts one or more VMs belonging to the specified Network Virtual Appliance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of Network Virtual Appliance."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation restarts one or more Network Virtual Appliance VM resources.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceInstanceIDs"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart All NetworkVirtualAppliance VMs in VM Scale Set": {
+            "$ref": "./examples/NetworkVirtualApplianceRestartAll.json"
+          },
+          "Restart Specific NetworkVirtualappliance VMs in VM Scale Set": {
+            "$ref": "./examples/NetworkVirtualApplianceRestartSpecific.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances": {
@@ -1325,6 +1383,16 @@
         }
       },
       "description": "Properties of the partner managed resource."
-    }
+    },
+    "NetworkVirtualApplianceInstanceIDs": {
+      "properties": {
+        "instanceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Network Virtual Appliance instance ids. Omitting the network virtual appliance instance ids will result in the operation being performed on all virtual machines belonging to the network virtual appliance."
+        }
+      },
   }
 }
