@@ -3623,57 +3623,17 @@
                 "SystemAssignedIdentity": {
                   "description": "Use this property for SystemAssignedIdentity. Do not set a value for this property when using other authentication type.",
                   "type": "string",
-                  "nullable": true
+                  "x-nullable": true
                 },
                 "userAssignedIdentityResourceId": {
                   "description": "Use this property for UserAssignedIdentity. Set the resource ID of the identity. Do not set a value for this property when using other authentication type.",
-                  "type": "string",
-                  "nullable": true
+                  "type": "string"
                 },
                 "storageAccountAccessKeyName": {
                   "description": "Use this property for StorageAccountAccessKey. Set the name of the app setting that has the storage account access key. Do not set a value for this property when using other authentication type.",
-                  "type": "string",
-                  "nullable": true
+                  "type": "string"
                 }
-              },
-              "oneOf": [
-                {
-                  "required": [
-                    "systemAssignedIdentity"
-                  ],
-                  "properties": {
-                    "type": {
-                      "enum": [
-                        "SystemAssignedIdentity"
-                      ]
-                    }
-                  }
-                },
-                {
-                  "required": [
-                    "userAssignedIdentityResourceId"
-                  ],
-                  "properties": {
-                    "type": {
-                      "enum": [
-                        "UserAssignedIdentity"
-                      ]
-                    }
-                  }
-                },
-                {
-                  "required": [
-                    "storageAccountAccessKeyName"
-                  ],
-                  "properties": {
-                    "type": {
-                      "enum": [
-                        "StorageAccountAccessKey"
-                      ]
-                    }
-                  }
-                }
-              ]
+              }
             }
           }
         }
@@ -3749,7 +3709,7 @@
         "version": {
           "description": "Function app runtime version. Example: 3.10 (for Python)",
           "type": "string",
-          "nullable": true
+          "x-nullable": true
         }
       }
     },
