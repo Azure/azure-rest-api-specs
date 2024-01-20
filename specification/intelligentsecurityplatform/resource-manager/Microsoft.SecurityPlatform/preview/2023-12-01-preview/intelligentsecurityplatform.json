@@ -258,13 +258,6 @@
             "description": "Resource 'Capacity' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Capacity"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -278,11 +271,7 @@
           "Capacities_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Capacities_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "Capacities_Update",
