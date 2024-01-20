@@ -189,8 +189,8 @@ model DashboardProperties {
 model DashboardPropertiesWithProvisioningState {
   ...DashboardProperties;
 
-  @visibility("read")
   @doc("The status of the last operation.")
+  @visibility("read")
   provisioningState?: DashboardProvisioningState;
 }
 
