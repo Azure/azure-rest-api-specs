@@ -1690,13 +1690,7 @@
           "200": {
             "description": "OK. The bulk update is successful. 'failureOperations' in response will be an empty map.",
             "schema": {
-              "$ref": "#/definitions/AssetBulkUpdateResponse"
-            }
-          },
-          "207": {
-            "description": "The bulk update is partial successful. 'failureOperations' in response will contain operation, entity guid and error message.",
-            "schema": {
-              "$ref": "#/definitions/AssetBulkUpdateResponse"
+              "$ref": "#/definitions/EntityMutationResponse"
             }
           },
           "default": {
@@ -7442,19 +7436,6 @@
         "AddContact": {
           "type": "object",
           "description": "This operation adds a contact to an asset."
-        }
-      }
-    },
-    "AssetBulkUpdateResponse": {
-      "type": "object",
-      "properties": {
-        "successOperations": {
-          "type": "object",
-          "description": "Successful operations with update result returned."
-        },
-        "failureOperations": {
-          "type": "object",
-          "description": "Failed operations with error message returned."
         }
       }
     },
