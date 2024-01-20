@@ -3604,7 +3604,8 @@
             },
             "value": {
               "description": "Property to set the URL for the selected Azure Storage Type. Example: For blobContainer, value will be like https://<storageAccountName>.blob.core.windows.net/<containerName>.",
-              "type": "string"
+              "type": "string",
+              "format": "uri"
             },
             "authentication": {
               "description": "Authentication method to access the storage for deployment.",
@@ -3612,13 +3613,67 @@
               "properties": {
                 "type": {
                   "description": "Property to select Authentication Type to access the selected storage. Available options: SystemAssignedIdentity, UserAssignedIdentity, StorageAccountAccessKey.",
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "SystemAssignedIdentity",
+                    "UserAssignedIdentity",
+                    "StorageAccountAccessKey"
+                  ]
                 },
-                "value": {
-                  "description": "Property to set the value for the selected Authentication Type. Example: For SystemAssignedIdentity, do not set value. For UserAssignedIdentity, set resource ID of identity. For StorageAccountAccessKey, set name of the app setting that has the storage account access key.",
-                  "type": "string"
+                "SystemAssignedIdentity": {
+                  "description": "Use this property for SystemAssignedIdentity. Do not set a value for this property when using other authentication type.",
+                  "type": "string",
+                  "nullable": true
+                },
+                "userAssignedIdentityResourceId": {
+                  "description": "Use this property for UserAssignedIdentity. Set the resource ID of the identity. Do not set a value for this property when using other authentication type.",
+                  "type": "string",
+                  "nullable": true
+                },
+                "storageAccountAccessKeyName": {
+                  "description": "Use this property for StorageAccountAccessKey. Set the name of the app setting that has the storage account access key. Do not set a value for this property when using other authentication type.",
+                  "type": "string",
+                  "nullable": true
                 }
-              }
+              },
+              "oneOf": [
+                {
+                  "required": [
+                    "systemAssignedIdentity"
+                  ],
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "SystemAssignedIdentity"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "userAssignedIdentityResourceId"
+                  ],
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "UserAssignedIdentity"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "storageAccountAccessKeyName"
+                  ],
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "StorageAccountAccessKey"
+                      ]
+                    }
+                  }
+                }
+              ]
             }
           }
         }
@@ -3630,7 +3685,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Either an Azure Functions trigger or an Azure Function name."
+          "description": "Either an Azure Functions trigger or an Azure Function name is required. For example, use 'http' for a http trigger. For an Azure Function name, use 'function__functionName'."
         },
         "instanceCount": {
           "type": "number",
