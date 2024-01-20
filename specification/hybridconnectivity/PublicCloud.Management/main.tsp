@@ -27,11 +27,6 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_08_01: "2024-08-01-preview",
-
-  @doc("Version 2023-12-01-preview")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_12_01: "2023-12-01-preview",
 }
 
 //---------------------------------------------- Models ----------------------------------------------
@@ -102,8 +97,6 @@ enum Status {
 
 //------------------- Public Cloud Connector -------------------
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @doc("Public Cloud Connector")
 model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   @doc("Represent public cloud connectors resource.")
@@ -113,8 +106,6 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   name: string;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @doc("Properties of public cloud connectors.")
 model PublicCloudConnectorProperties {
   @doc("Cloud profile for AWS.")
@@ -129,16 +120,12 @@ model PublicCloudConnectorProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @doc("Enum of host cloud the public cloud connector is referencing.")
 enum HostType {
   @doc("AWS state")
   AWS,
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @doc("cloud profile for AWS.")
 model AwsCloudProfile {
   @doc("Account id for the AWS account.")
@@ -155,8 +142,6 @@ model AwsCloudProfile {
 
 //------------------- Solution Configuration -------------------
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @doc("Solution Configuration")
 model SolutionConfiguration
   is ExtensionResource<SolutionConfigurationProperties> {
@@ -167,8 +152,6 @@ model SolutionConfiguration
   name: string;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @doc("Solution configuration resource.")
 model SolutionConfigurationProperties {
   @doc("The resource provisioning state.")
@@ -191,8 +174,6 @@ model SolutionConfigurationProperties {
   lastExecutionTime?: string;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @doc("Solution Configuration Status.")
 enum SolutionConfigurationStatus {
   @doc("New status")
@@ -210,8 +191,6 @@ enum SolutionConfigurationStatus {
 
 //------------------- Solution Type -------------------
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 model SolutionTypeResource is ProxyResource<SolutionTypeProperties> {
   @doc("Solution Type resource")
   @segment("solutionTypes")
@@ -220,8 +199,6 @@ model SolutionTypeResource is ProxyResource<SolutionTypeProperties> {
   name: string;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @doc("Represent Solution type resource.")
 model SolutionTypeProperties {
   @doc("The name of the solution type.")
@@ -246,8 +223,6 @@ model SolutionTypeProperties {
 
 //------------------- Inventory -------------------
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @parentResource(SolutionConfiguration)
 model InventoryResource is ProxyResource<InventoryProperties> {
   @doc("Inventory resource")
@@ -258,8 +233,6 @@ model InventoryResource is ProxyResource<InventoryProperties> {
   name: string;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @doc("Definition of inventory.")
 model InventoryProperties {
   @doc("Gets or sets the cloud native resource type.")
@@ -282,8 +255,6 @@ model InventoryProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @doc("Cloud Native Type enum.")
 enum CloudNativeType {
   @doc("ec2 enum.")
@@ -334,8 +305,6 @@ interface TestPermissions {
   ): Azure.ResourceManager.ArmAcceptedLroResponse<"Asynchronous operation in progress."> | TestPermissionResponse | Azure.ResourceManager.ErrorResponse;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @armResourceOperations
 interface PublicCloudConnectors {
   get is ArmResourceRead<PublicCloudConnector>;
@@ -349,8 +318,6 @@ interface PublicCloudConnectors {
   listBySubscription is ArmListBySubscription<PublicCloudConnector>;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @armResourceOperations
 interface SolutionConfigurations {
   get is ArmResourceRead<SolutionConfiguration>;
@@ -362,16 +329,12 @@ interface SolutionConfigurations {
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @armResourceOperations
 interface Inventory {
   get is ArmResourceRead<InventoryResource>;
   listByWidget is ArmResourceListByParent<InventoryResource>;
 }
 
-@added(Versions.v2024_08_01)
-@removed(Versions.v2023_12_01)
 @armResourceOperations
 interface SolutionTypes {
   get is ArmResourceRead<SolutionTypeResource>;
