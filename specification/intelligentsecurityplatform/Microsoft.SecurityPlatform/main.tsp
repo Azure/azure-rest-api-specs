@@ -77,7 +77,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface Capacities {
   get is ArmResourceRead<Capacity>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<Capacity>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Capacity>;
   update is ArmResourcePatchSync<Capacity, CapacityProperties>;
   delete is ArmResourceDeleteSync<Capacity>;
   listByResourceGroup is ArmResourceListByParent<Capacity>;
