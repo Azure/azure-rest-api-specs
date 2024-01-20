@@ -109,11 +109,11 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
 @doc("Properties of public cloud connectors.")
 model PublicCloudConnectorProperties {
   @doc("Cloud profile for AWS.")
-  awsCloudProfile?: AwsCloudProfile;
+  awsCloudProfile: AwsCloudProfile;
 
   @doc("Host cloud the public cloud connector.")
   @visibility("create")
-  hostType?: HostType;
+  hostType: HostType;
 
   @doc("The resource provisioning state.")
   @visibility("read")
@@ -137,7 +137,7 @@ model AwsCloudProfile {
 
   @doc("Boolean value that indicates whether the account is organizational or not. True represents organization account, whereas false represents a single account.")
   @visibility("create")
-  isOrganizationalAccount?: boolean;
+  isOrganizationalAccount?: boolean = false;
 }
 
 //------------------- Solution Configuration -------------------
@@ -165,13 +165,24 @@ model SolutionConfigurationProperties {
   solutionSettings?: SolutionSettings;
 
   @doc("The status of solution configurations")
+  @visibility("read")
   status?: SolutionConfigurationStatus;
 
   @doc("The detailed message of status details")
+  @visibility("read", "query")
   statusDetails?: string;
 
   @doc("The last execution time of solution configuration")
-  lastExecutionTime?: string;
+  @visibility("read")
+  lastExecutionTime?: utcDateTime;
+
+  @doc("The last time resources were inventoried")
+  @visibility("read")
+  lastSyncTime?: utcDateTime;
+
+  @doc("The next time resources will be inventories")
+  @visibility("read")
+  nextSyncTime?: utcDateTime;
 }
 
 @doc("Solution Configuration Status.")
@@ -217,7 +228,6 @@ model SolutionTypeProperties {
   supportedAzureRegions?: string[];
 
   @doc("The resource provisioning state.")
-  @visibility("read")
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -251,7 +261,6 @@ model InventoryProperties {
   statusDetails?: string;
 
   @doc("The resource provisioning state.")
-  @visibility("read")
   provisioningState?: ResourceProvisioningState;
 }
 
