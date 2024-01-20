@@ -32,7 +32,6 @@ alias SharedAnalyzeQuery = {
   The desired language for result generation (a two-letter language code).
   If this option is not specified, the default value 'en' is used (English).
   See https://aka.ms/cv-languages for a list of supported languages.
-  At the moment, only tags can be generated in none-English languages.
   """)
   @minLength(2)
   language?: string = "en";
