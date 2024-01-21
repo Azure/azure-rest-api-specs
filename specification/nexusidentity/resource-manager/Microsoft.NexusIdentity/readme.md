@@ -37,7 +37,5 @@ These settings apply only when `--tag=package-2023-06-15` is specified on the co
 input-file:
   - stable/2023-06-15/identityset.json
   - stable/2023-06-15/identityController.json
-suppressions:
-  - code: ProvisioningStateMustBeReadOnly
   
 ```
