@@ -25,9 +25,6 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
             "type": "string",
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
@@ -69,9 +66,6 @@
           }
         },
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
           {
             "type": "string",
             "name": "key",
@@ -117,9 +111,6 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
             "type": "string",
             "name": "x-ms-client-tenant-id",
             "x-originalName": "tenantId",
@@ -139,15 +130,15 @@
               "$ref": "#/definitions/keyList"
             }
           },
-          "x-ms-pageable": {
-            "nextLinkName": "nextPageLink"
-          },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLink": "nextPageLink"
         }
       }
     },
@@ -178,7 +169,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextPageLink"
+          "nextLink": "nextPageLink"
         },
         "x-ms-examples": {
           "Operations_Get": {
@@ -193,7 +184,7 @@
       "SubscriptionId": {
         "name": "subscriptionId",
         "in": "path",
-        "description": "The subscription Id.",
+        "description": "The subscription Id",
         "required": true,
         "type": "string"
       }
