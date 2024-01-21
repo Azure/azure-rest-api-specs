@@ -138,7 +138,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextPageLink"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -169,7 +169,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextPageLink"
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Operations_Get": {
@@ -201,7 +201,11 @@
             "key"
           ]
         },
-        "nextPageLink": "linkToNextPage"
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
+        }
       }
     },
     "ErrorResponse": {
@@ -233,7 +237,8 @@
       "in": "path",
       "description": "The subscription Id",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     }
   },
   "securityDefinitions": {
