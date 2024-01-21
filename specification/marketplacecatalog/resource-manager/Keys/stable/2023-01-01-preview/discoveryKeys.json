@@ -25,11 +25,7 @@
         },
         "parameters": [
           {
-            "type": "string",
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "x-nullable": true
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "type": "string",
@@ -61,7 +57,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys/revoke/{key}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys/{key}/revoke": {
       "post": {
         "tags": [
           "RevokeApiKey"
@@ -74,11 +70,7 @@
         },
         "parameters": [
           {
-            "type": "string",
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "x-nullable": true
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "type": "string",
@@ -125,11 +117,7 @@
         },
         "parameters": [
           {
-            "type": "string",
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "x-nullable": true
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
             "type": "string",
@@ -150,6 +138,9 @@
             "schema": {
               "$ref": "#/definitions/keyList"
             }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextPageLink"
           },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
@@ -186,6 +177,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextPageLink"
+        },
         "x-ms-examples": {
           "Operations_Get": {
             "$ref": "./examples/Operations_Get.json"
@@ -195,6 +189,15 @@
     }
   },
   "definitions": {
+    "parameters": {
+      "SubscriptionId": {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "The subscription Id.",
+        "required": true,
+        "type": "string"
+      }
+    },
     "key": {
       "type": "object",
       "properties": {
