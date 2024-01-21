@@ -136,6 +136,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextPageLink"
         }
       }
     },
@@ -165,6 +168,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextPageLink"
+        },
         "x-ms-examples": {
           "Operations_Get": {
             "$ref": "./examples/Operations_Get.json"
@@ -174,15 +180,6 @@
     }
   },
   "definitions": {
-    "parameters": {
-      "SubscriptionId": {
-        "name": "subscriptionId",
-        "in": "path",
-        "description": "The subscription Id",
-        "required": true,
-        "type": "string"
-      }
-    },
     "key": {
       "type": "object",
       "properties": {
@@ -203,7 +200,8 @@
           "x-ms-identifiers": [
             "key"
           ]
-        }
+        },
+        "nextPageLink": "linkToNextPage"
       }
     },
     "ErrorResponse": {
@@ -227,6 +225,15 @@
           }
         }
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id",
+      "required": true,
+      "type": "string"
     }
   },
   "securityDefinitions": {
