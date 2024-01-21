@@ -1,0 +1,255 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Microsoft Marketplace Discovery API Keys Management",
+        "version": "2023-01-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys/create": {
+            "post": {
+                "tags": [
+                    "CreateApiKey"
+                ],
+                "operationId": "CreateApiKey_Post",
+                "x-ms-examples": {
+                    "Create_Key": {
+                        "$ref": "./examples/CreateKey.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "x-nullable": true
+                    },
+                    {
+                        "type": "string",
+                        "name": "x-ms-client-tenant-id",
+                        "x-originalName": "tenantId",
+                        "description": "The tenant that the subscription is in",
+                        "in": "header",
+                        "required": true,
+                        "x-nullable": true
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "x-nullable": false,
+                        "description": "Returns the newly created API key",
+                        "schema": {
+                            "$ref": "#/definitions/key"
+                        }
+                    },
+                    "default": {
+                        "description": "Microsoft.Marketplace error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys/revoke/{key}": {
+            "post": {
+                "tags": [
+                    "RevokeApiKey"
+                ],
+                "operationId": "RevokeApiKey_Post",
+                "x-ms-examples": {
+                    "Revoke_Key": {
+                        "$ref": "./examples/RevokeKey.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "x-nullable": true
+                    },
+                    {
+                        "type": "string",
+                        "name": "key",
+                        "in": "path",
+                        "required": true,
+                        "x-nullable": true
+                    },
+                    {
+                        "type": "string",
+                        "name": "x-ms-client-tenant-id",
+                        "x-originalName": "tenantId",
+                        "in": "header",
+                        "required": true,
+                        "x-nullable": true
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Indicates that the API key was successfully revoked"
+                    },
+                    "default": {
+                        "description": "Microsoft.Marketplace error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys": {
+            "get": {
+                "tags": [
+                    "GetApiKeys"
+                ],
+                "operationId": "GetApiKeys_Get",
+                "x-ms-examples": {
+                    "Get_Key": {
+                        "$ref": "./examples/GetKey.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "x-nullable": true
+                    },
+                    {
+                        "type": "string",
+                        "name": "x-ms-client-tenant-id",
+                        "x-originalName": "tenantId",
+                        "in": "header",
+                        "required": true,
+                        "x-nullable": true
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "x-nullable": false,
+                        "description": "List of active keys that belong to the subscription",
+                        "schema": {
+                            "$ref": "#/definitions/keyList"
+                        }
+                    },
+                    "default": {
+                        "description": "Microsoft.Marketplace error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Marketplace/operations": {
+            "get": {
+                "tags": [
+                    "Operations"
+                ],
+                "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+                "operationId": "Operations_List",
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Microsoft.Marketplace error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Operations_Get": {
+                        "$ref": "./examples/Operations_Get.json"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "key": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "description": "The API key",
+                    "type": "string"
+                }
+            }
+        },
+        "keyList": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/key"
+                    },
+                    "x-ms-identifiers": [
+                        "key"
+                    ]
+                }
+            }
+        },
+        "ErrorResponse": {
+            "description": "Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.",
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "The details of the error.",
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "description": "Error code.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "message": {
+                            "description": "Error message indicating why the operation failed.",
+                            "type": "string",
+                            "readOnly": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    }
+}
