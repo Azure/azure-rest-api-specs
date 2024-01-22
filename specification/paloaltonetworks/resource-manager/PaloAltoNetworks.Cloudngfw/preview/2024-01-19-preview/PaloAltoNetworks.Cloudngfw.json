@@ -2087,11 +2087,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "x-cadl-name": "string[]"
+              "$ref": "#/definitions/CloudManagerTenantsList"
             }
           },
           "default": {
@@ -4997,6 +4993,41 @@
       "description": "Changelog list",
       "required": [
         "changes"
+      ]
+    },
+    "CloudManagerTenant": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of Cloud Manager Tenant"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Cloud Manager Tenant ID"
+        }
+      },
+      "description": "Cloud Manager Tenant",
+      "required": [
+        "name"
+      ]
+    },
+    "CloudManagerTenantsList": {
+      "type": "object",
+      "properties": {
+        "strataCloudManagerTenants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudManagerTenant"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "CloudManagerTenant[]",
+          "description": "List of Cloud Manager Tenants"
+        }
+      },
+      "description": "List of Cloud Manager Tenants",
+      "required": [
+        "value"
       ]
     },
     "CountriesResponse": {
