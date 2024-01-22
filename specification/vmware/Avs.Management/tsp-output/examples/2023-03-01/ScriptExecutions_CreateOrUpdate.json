@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01",
+    "privateCloudName": "cloud1",
+    "resourceGroupName": "group1",
+    "scriptExecution": {
+      "properties": {
+        "hiddenParameters": [
+          {
+            "name": "Password",
+            "type": "SecureValue",
+            "secureValue": "PlaceholderPassword"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "DomainName",
+            "type": "Value",
+            "value": "placeholderDomain.local"
+          },
+          {
+            "name": "BaseUserDN",
+            "type": "Value",
+            "value": "DC=placeholder, DC=placeholder"
+          }
+        ],
+        "retention": "P0Y0M60DT0H60M60S",
+        "scriptCmdletId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/scriptPackages/AVS.PowerCommands@1.0.0/scriptCmdlets/New-SsoExternalIdentitySource",
+        "timeout": "P0Y0M0DT0H60M60S"
+      }
+    },
+    "scriptExecutionName": "addSsoServer",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "addSsoServer",
+        "type": "Microsoft.AVS/privateClouds/scriptExecutions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/scriptExecutions/addSsoServer",
+        "properties": {
+          "failureReason": "vCenter failed to connect to the external server",
+          "output": [
+            "IdentitySource: placeholder.dc",
+            "BaseDN='dc=placeholder, dc=local"
+          ],
+          "parameters": [
+            {
+              "name": "DomainName",
+              "type": "Value",
+              "value": "placeholderDomain.local"
+            },
+            {
+              "name": "BaseUserDN",
+              "type": "Value",
+              "value": "DC=placeholder, DC=placeholder"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "retention": "P0Y0M60DT0H60M60S",
+          "scriptCmdletId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/scriptPackages/AVS.PowerCommands@1.0.0/scriptCmdlets/New-SsoExternalIdentitySource",
+          "timeout": "P0Y0M0DT0H60M60S"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "addSsoServer",
+        "type": "Microsoft.AVS/privateClouds/scriptExecutions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/scriptExecutions/addSsoServer",
+        "properties": {
+          "parameters": [
+            {
+              "name": "DomainName",
+              "type": "Value",
+              "value": "placeholderDomain.local"
+            },
+            {
+              "name": "BaseUserDN",
+              "type": "Value",
+              "value": "DC=placeholder, DC=placeholder"
+            }
+          ],
+          "provisioningState": "Running",
+          "retention": "P0Y0M60DT0H60M60S",
+          "scriptCmdletId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/scriptPackages/AVS.PowerCommands@1.0.0/scriptCmdlets/New-SsoExternalIdentitySource",
+          "timeout": "P0Y0M0DT0H60M60S"
+        }
+      }
+    }
+  },
+  "operationId": "ScriptExecutions_CreateOrUpdate",
+  "title": "ScriptExecutions_CreateOrUpdate"
+}

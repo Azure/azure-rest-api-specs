@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "assignmentName": "assignSimpleBlueprint",
+    "assignmentOperationName": "fb5d4dcb-7ce2-4087-ba7a-459aa74e5e0f",
+    "resourceScope": "managementGroups/ContosoOnlineGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fb5d4dcb-7ce2-4087-ba7a-459aa74e5e0f",
+        "type": "microsoft.blueprint/blueprintAssignments/operations",
+        "id": "/managementGroups/ContosoOnlineGroup/providers/microsoft.blueprint/blueprintAssignments/assignSimpleBlueprint/assignmentOperations/fb5d4dcb-7ce2-4087-ba7a-459aa74e5e0f",
+        "properties": {
+          "assignmentState": "succeed",
+          "blueprintVersion": "v20181101",
+          "deployments": [
+            {
+              "action": "put",
+              "history": [
+                {
+                  "error": {
+                    "code": "dummy",
+                    "message": "dummy"
+                  }
+                }
+              ],
+              "jobState": "succeeded",
+              "kind": "azureResource",
+              "requestUri": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.deployments/deployments/48432786-2f1b-4925-8032-a5d57bcb5b6e",
+              "result": {
+                "resources": [
+                  {
+                    "name": "foobar",
+                    "type": "foo/bar",
+                    "id": "blabla"
+                  }
+                ]
+              }
+            }
+          ],
+          "timeCreated": "2018-11-13T15:19:45-08:00",
+          "timeFinished": "2018-11-13T15:26:02-08:00",
+          "timeStarted": "2018-11-13T15:21:49-08:00"
+        }
+      }
+    }
+  },
+  "operationId": "AssignmentOperations_Get",
+  "title": "Assignment at management group scope"
+}

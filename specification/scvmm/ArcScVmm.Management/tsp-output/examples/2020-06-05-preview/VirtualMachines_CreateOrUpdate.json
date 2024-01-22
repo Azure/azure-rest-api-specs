@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2020-06-05-preview",
+    "body": {
+      "extendedLocation": {
+        "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.Arc/customLocations/contoso",
+        "type": "customLocation"
+      },
+      "location": "East US",
+      "properties": {
+        "cloudId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/Clouds/HRCloud",
+        "hardwareProfile": {
+          "cpuCount": 4,
+          "memoryMB": 4096
+        },
+        "templateId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VirtualMachineTemplates/HRVirtualMachineTemplate",
+        "vmmServerId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VMMServers/ContosoVMMServer"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "virtualMachineName": "DemoVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "DemoVM",
+        "type": "Microsoft.SCVMM/VirtualMachines",
+        "extendedLocation": {
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.Arc/customLocations/contoso",
+          "type": "customLocation"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VirtualMachines/DemoVM",
+        "location": "East US",
+        "properties": {
+          "cloudId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/Clouds/HRCloud",
+          "hardwareProfile": {
+            "cpuCount": 4,
+            "memoryMB": 4096
+          },
+          "osProfile": {
+            "computerName": "DemoVM",
+            "osType": "Windows"
+          },
+          "provisioningState": "Succeeded",
+          "templateId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VirtualMachineTemplates/HRVirtualMachineTemplate",
+          "vmmServerId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VMMServers/ContosoVMMServer"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "DemoVM",
+        "type": "Microsoft.SCVMM/VirtualMachines",
+        "extendedLocation": {
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.Arc/customLocations/contoso",
+          "type": "customLocation"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VirtualMachines/DemoVM",
+        "location": "East US",
+        "properties": {
+          "cloudId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/Clouds/HRCloud",
+          "hardwareProfile": {
+            "cpuCount": 4,
+            "memoryMB": 4096
+          },
+          "osProfile": {
+            "computerName": "DemoVM",
+            "osType": "Windows"
+          },
+          "provisioningState": "Succeeded",
+          "templateId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VirtualMachineTemplates/HRVirtualMachineTemplate",
+          "vmmServerId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.SCVMM/VMMServers/ContosoVMMServer"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_CreateOrUpdate",
+  "title": "CreateVirtualMachine"
+}

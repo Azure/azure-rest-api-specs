@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "api-version": "2022-12-01",
+    "appName": "myapp",
+    "deploymentName": "mydeployment",
+    "deploymentResource": {
+      "properties": {
+        "instances": null,
+        "source": {
+          "type": "Container",
+          "customContainer": {
+            "args": [
+              "-c",
+              "while true; do echo hello; sleep 10;done"
+            ],
+            "command": [
+              "/bin/sh"
+            ],
+            "containerImage": "myNewContainerImage:v1",
+            "imageRegistryCredential": {
+              "password": "<myNewPassword>",
+              "username": "myNewUsername"
+            },
+            "server": "mynewacr.azurecr.io"
+          }
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mydeployment",
+        "type": "Microsoft.AppPlatform/Spring/apps/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
+        "properties": {
+          "active": false,
+          "deploymentSettings": {
+            "environmentVariables": {
+              "env": "test"
+            },
+            "resourceRequests": {
+              "cpu": "1000m",
+              "memory": "3Gi"
+            }
+          },
+          "instances": [
+            {
+              "name": "instance1",
+              "discoveryStatus": "N/A",
+              "startTime": "2020-08-26T01:55:02Z",
+              "status": "Running"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "source": {
+            "type": "Container",
+            "customContainer": {
+              "containerImage": "myNewContainerImage:v1",
+              "imageRegistryCredential": {
+                "password": "",
+                "username": "myNewUsername"
+              },
+              "server": "mynewacr.azurecr.io"
+            }
+          },
+          "status": "Running"
+        },
+        "sku": {
+          "name": "S0",
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "mydeployment",
+        "type": "Microsoft.AppPlatform/Spring/apps/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
+        "properties": {
+          "active": false,
+          "deploymentSettings": {
+            "environmentVariables": {
+              "env": "test"
+            },
+            "resourceRequests": {
+              "cpu": "1000m",
+              "memory": "3Gi"
+            }
+          },
+          "instances": [
+            {
+              "name": "instance1",
+              "discoveryStatus": "N/A",
+              "startTime": "2020-08-26T01:55:02Z",
+              "status": "Running"
+            }
+          ],
+          "provisioningState": "Updating",
+          "source": {
+            "type": "Container",
+            "customContainer": {
+              "containerImage": "myNewContainerImage:v1",
+              "imageRegistryCredential": {
+                "password": "",
+                "username": "myNewUsername"
+              },
+              "server": "mynewacr.azurecr.io"
+            }
+          },
+          "status": "Running"
+        },
+        "sku": {
+          "name": "S0",
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2022-12-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2022-12-01"
+      }
+    }
+  },
+  "operationId": "Deployments_Update",
+  "title": "Deployments_Update_CustomContainer"
+}

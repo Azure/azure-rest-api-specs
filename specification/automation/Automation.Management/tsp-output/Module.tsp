@@ -1,0 +1,91 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./AutomationAccount.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Automation;
+/**
+ * Definition of the module type.
+ */
+@parentResource(AutomationAccount)
+model Module is TrackedResource<ModuleProperties> {
+  /**
+   * The python package name.
+   */
+  @path
+  @key("packageName")
+  @segment("python2Packages")
+  name: string;
+
+  /**
+   * Gets or sets the etag of the resource.
+   */
+  etag?: string;
+}
+
+@armResourceOperations
+interface Modules {
+  /**
+   * Retrieve the python 2 package identified by package name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Python2Package_Get")
+  get is ArmResourceRead<Module>;
+
+  /**
+   * Create or Update the python 2 package identified by package name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Python2Package_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Module>;
+
+  /**
+   * Update the python 2 package identified by package name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @parameterVisibility("read")
+  @operationId("Python2Package_Update")
+  update is ArmCustomPatchSync<Module, PythonPackageUpdateParameters>;
+
+  /**
+   * Delete the python 2 package by name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Python2Package_Delete")
+  delete is ArmResourceDeleteSync<Module>;
+
+  /**
+   * Retrieve a list of python 2 packages.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Python2Package_ListByAutomationAccount")
+  listByAutomationAccount is ArmResourceListByParent<Module>;
+}
+
+@@projectedName(Modules.createOrUpdate::parameters.resource,
+  "json",
+  "parameters"
+);
+@@extension(Modules.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(Modules.createOrUpdate::parameters.resource,
+  "The create or update parameters for python package."
+);
+@@projectedName(Modules.update::parameters.properties, "json", "parameters");
+@@extension(Modules.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(Modules.update::parameters.properties,
+  "The update parameters for python package."
+);
