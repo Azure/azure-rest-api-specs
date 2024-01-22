@@ -3612,12 +3612,12 @@
               "type": "object",
               "properties": {
                 "type": {
-                  "description": "Property to select Authentication Type to access the selected storage. Available options: SystemAssignedIdentity, UserAssignedIdentity, StorageAccountAccessKey.",
+                  "description": "Property to select Authentication Type to access the selected storage. Available options: SystemAssignedIdentity, UserAssignedIdentity, StorageAccountConnectionString.",
                   "type": "string",
                   "enum": [
                     "SystemAssignedIdentity",
                     "UserAssignedIdentity",
-                    "StorageAccountAccessKey"
+                    "StorageAccountConnectionString"
                   ]
                 },
                 "systemAssignedIdentity": {
@@ -3629,8 +3629,8 @@
                   "description": "Use this property for UserAssignedIdentity. Set the resource ID of the identity. Do not set a value for this property when using other authentication type.",
                   "type": "string"
                 },
-                "storageAccountAccessKeyName": {
-                  "description": "Use this property for StorageAccountAccessKey. Set the name of the app setting that has the storage account access key. Do not set a value for this property when using other authentication type.",
+                "StorageAccountConnectionStringName": {
+                  "description": "Use this property for StorageAccountConnectionString. Set the name of the app setting that has the storage account connection string. Do not set a value for this property when using other authentication type.",
                   "type": "string"
                 }
               }
