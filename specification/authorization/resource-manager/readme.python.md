@@ -15,10 +15,11 @@ package-version: 1.0.0b1
 Generate all API versions currently shipped for this package
 
 ```yaml $(python)
-default-api-version: "2022-04-01"
+default-api-version: "2022-09-01"
 multiapi: true
 clear-output-folder: true
 batch:
+  - tag: package-2022-09-01-only
   - tag: package-2022-08-01-preview-only
   - tag: package-2022-05-01-preview-only
   - tag: package-2022-04-01-only
@@ -60,6 +61,15 @@ These settings apply only when `--tag=package-2022-05-01-preview-only --python` 
 ``` yaml $(tag) == 'package-2022-05-01-preview-only' && $(python)
 namespace: azure.mgmt.authorization.v2022_05_01_preview
 output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2022_05_01_preview
+```
+
+### Tag: package-2022-09-01-only and python
+
+These settings apply only when `--tag=package-2022-09-01-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09-01-only' && $(python)
+namespace: azure.mgmt.authorization.v2022_09_01
+output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2022_09_01
 ```
 
 ### Tag: package-2022-04-01-only and python

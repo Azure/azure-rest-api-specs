@@ -213,6 +213,19 @@ input-file:
 - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
+### Tag: package-2022-09-01-only
+
+These settings apply only when `--tag=package-2022-09-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09-01-only'
+input-file:
+- Microsoft.Authorization/stable/2022-09-01/authorization-DenyAssignmentCalls.json
+- Microsoft.Authorization/stable/2022-09-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2022-09-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2022-09-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2022-09-01/common-types.json
+```
+
 ### Tag: package-2022-04-01-only
 
 These settings apply only when `--tag=package-2022-04-01-only` is specified on the command line.
@@ -588,17 +601,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_authorization']
-  - repo: azure-resource-manager-schemas
-  - repo: azure-powershell
 ```
 
 ## Go
