@@ -828,7 +828,7 @@ model PrivateLinkResourceList is Azure.Core.Page<WebPubSubPrivateLink>;
 /**
  * Private link resource
  */
-model WebPubSubPrivateLink extends ProxyResource {
+model WebPubSubPrivateLink{
   /**
    * Private link resource properties
    */

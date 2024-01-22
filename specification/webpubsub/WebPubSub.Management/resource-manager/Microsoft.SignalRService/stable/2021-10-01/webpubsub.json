@@ -1,0 +1,2881 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebPubSubManagementClient",
+    "version": "2021-10-01",
+    "description": "REST API for Azure WebPubSub Service",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "WebPubSubs"
+    },
+    {
+      "name": "WebPubSubHubs"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "WebPubSubSharedPrivateLinks"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.SignalRService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/checkNameAvailability": {
+      "post": {
+        "operationId": "WebPubSub_CheckNameAvailability",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Checks that the resource name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebPubSubNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubNameAvailability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CheckNameAvailability": {
+            "$ref": "./examples/WebPubSub_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/usages": {
+      "get": {
+        "operationId": "UsagesOperations_List",
+        "description": "List resource usage quotas by location.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "the location like \"eastus\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Gets subscription Id which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedSignalRServiceUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/webPubSub": {
+      "get": {
+        "operationId": "WebPubSub_ListBySubscription",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Handles requests to list all resources in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_ListBySubscription": {
+            "$ref": "./examples/WebPubSub_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub": {
+      "get": {
+        "operationId": "WebPubSub_ListByResourceGroup",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Handles requests to list all resources in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_ListByResourceGroup": {
+            "$ref": "./examples/WebPubSub_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}": {
+      "get": {
+        "operationId": "WebPubSub_Get",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Get the resource and its properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebPubSub"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_Get": {
+            "$ref": "./examples/WebPubSub_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebPubSub_CreateOrUpdate",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Create or update a resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebPubSub"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WebPubSub' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebPubSub"
+            }
+          },
+          "201": {
+            "description": "Resource 'WebPubSub' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebPubSub"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CreateOrUpdate": {
+            "$ref": "./examples/WebPubSub_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WebPubSub_Delete",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Operation to delete a resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_Delete": {
+            "$ref": "./examples/WebPubSub_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs": {
+      "get": {
+        "operationId": "WebPubSubHubs_List",
+        "tags": [
+          "WebPubSubHubs"
+        ],
+        "description": "List hub settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubHubListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubHubs_List": {
+            "$ref": "./examples/WebPubSubHubs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs/{hubName}": {
+      "get": {
+        "operationId": "WebPubSubHubs_Get",
+        "tags": [
+          "WebPubSubHubs"
+        ],
+        "description": "Get a hub setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "description": "The hub name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubHub"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubHubs_Get": {
+            "$ref": "./examples/WebPubSubHubs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebPubSubHubs_CreateOrUpdate",
+        "tags": [
+          "WebPubSubHubs"
+        ],
+        "description": "Create or update a hub setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "description": "The hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The resource of WebPubSubHub and its properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebPubSubHub"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WebPubSubHub' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubHub"
+            }
+          },
+          "201": {
+            "description": "Resource 'WebPubSubHub' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubHub"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubHubs_CreateOrUpdate": {
+            "$ref": "./examples/WebPubSubHubs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WebPubSubHubs_Delete",
+        "tags": [
+          "WebPubSubHubs"
+        ],
+        "description": "Delete a hub setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "description": "The hub name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubHubs_Delete": {
+            "$ref": "./examples/WebPubSubHubs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/listKeys": {
+      "post": {
+        "operationId": "WebPubSub_ListKeys",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Get the access keys of the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_ListKeys": {
+            "$ref": "./examples/WebPubSub_ListKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "WebPubSubPrivateEndpointConnections_List",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List private endpoint connections",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubPrivateEndpointConnections_List": {
+            "$ref": "./examples/WebPubSubPrivateEndpointConnections_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "WebPubSubPrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get the specified private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubPrivateEndpointConnections_Get": {
+            "$ref": "./examples/WebPubSubPrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebPubSubPrivateEndpointConnections_Update",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Update the state of specified private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The resource of private endpoint and its properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubPrivateEndpointConnections_Update": {
+            "$ref": "./examples/WebPubSubPrivateEndpointConnections_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebPubSubPrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete the specified private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubPrivateEndpointConnections_Delete": {
+            "$ref": "./examples/WebPubSubPrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/privateLinkResources/{subscriptionId}/{resourceGroupName}/{resourceName}": {
+      "get": {
+        "operationId": "WebPubSubPrivateLinkResources_List",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Get the private link resources that need to be created for a resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Gets subscription Id which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedWebPubSubPrivateLink"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubPrivateLinkResources_List": {
+            "$ref": "./examples/WebPubSubPrivateLinkResources_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/regenerateKey": {
+      "post": {
+        "operationId": "WebPubSub_RegenerateKey",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameter that describes the Regenerate Key Operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyParameters"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RegenerateKey": {
+            "$ref": "./examples/WebPubSub_RegenerateKey.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/restart": {
+      "post": {
+        "operationId": "WebPubSub_Restart",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Operation to restart a resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_Restart": {
+            "$ref": "./examples/WebPubSub_Restart.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources": {
+      "get": {
+        "operationId": "WebPubSubSharedPrivateLinkResources_List",
+        "tags": [
+          "WebPubSubSharedPrivateLinks"
+        ],
+        "description": "List shared private link resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubSharedPrivateLinkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubSharedPrivateLinkResources_List": {
+            "$ref": "./examples/WebPubSubSharedPrivateLinkResources_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
+      "get": {
+        "operationId": "WebPubSubSharedPrivateLinkResources_Get",
+        "tags": [
+          "WebPubSubSharedPrivateLinks"
+        ],
+        "description": "Get the specified shared private link resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "description": "The name of the shared private link resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubSharedPrivateLink"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubSharedPrivateLinkResources_Get": {
+            "$ref": "./examples/WebPubSubSharedPrivateLinkResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebPubSubSharedPrivateLinkResources_CreateOrUpdate",
+        "tags": [
+          "WebPubSubSharedPrivateLinks"
+        ],
+        "description": "Create or update a shared private link resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "description": "The name of the shared private link resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The shared private link resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebPubSubSharedPrivateLink"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WebPubSubSharedPrivateLink' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubSharedPrivateLink"
+            }
+          },
+          "201": {
+            "description": "Resource 'WebPubSubSharedPrivateLink' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebPubSubSharedPrivateLink"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubSharedPrivateLinkResources_CreateOrUpdate": {
+            "$ref": "./examples/WebPubSubSharedPrivateLinkResources_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WebPubSubSharedPrivateLinkResources_Delete",
+        "tags": [
+          "WebPubSubSharedPrivateLinks"
+        ],
+        "description": "Delete the specified shared private link resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "description": "The name of the shared private link resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubSharedPrivateLinkResources_Delete": {
+            "$ref": "./examples/WebPubSubSharedPrivateLinkResources_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/skus/{subscriptionId}/{resourceGroupName}/{resourceName}": {
+      "get": {
+        "operationId": "WebPubSub_ListSkus",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "List all available skus of the resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Gets subscription Id which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SkuList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_ListSkus": {
+            "$ref": "./examples/WebPubSub_ListSkus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/webPubSub/{name}": {
+      "patch": {
+        "operationId": "WebPubSub_Update",
+        "tags": [
+          "WebPubSubs"
+        ],
+        "description": "Operation to update an exiting resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebPubSub"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebPubSub"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_Update": {
+            "$ref": "./examples/WebPubSub_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ACLAction": {
+      "type": "string",
+      "description": "Azure Networking ACL Action.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "ACLAction",
+        "modelAsString": true
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "System and user assigned managed identity."
+          }
+        ]
+      }
+    },
+    "BillingInfoSku": {
+      "type": "object",
+      "description": "The billing information of the resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Required.\n\nAllowed values: Standard_S1, Free_F1"
+        },
+        "tier": {
+          "$ref": "#/definitions/WebPubSubSkuTier",
+          "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \n\n`Basic` is deprecated, use `Standard` instead."
+        },
+        "size": {
+          "type": "string",
+          "description": "Not used. Retained for future use.",
+          "readOnly": true
+        },
+        "family": {
+          "type": "string",
+          "description": "Not used. Retained for future use.",
+          "readOnly": true
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional, integer. The unit count of the resource. 1 by default.\n\nIf present, following values are allowed:\n    Free: 1\n    Standard: 1,2,5,10,20,50,100"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Specifications of the Dimension of metrics.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The public facing name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Name of the dimension as it appears in MDM."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "A Boolean flag indicating whether this dimension should be included for the shoebox export scenario."
+        }
+      }
+    },
+    "LiveTraceCategory": {
+      "type": "object",
+      "description": "Live trace category configuration of a Microsoft.SignalRService resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the live trace category's name.\nAvailable values: ConnectivityLogs, MessagingLogs.\nCase insensitive."
+        },
+        "enabled": {
+          "type": "string",
+          "description": "Indicates whether or the live trace category is enabled.\nAvailable values: true, false.\nCase insensitive."
+        }
+      }
+    },
+    "LiveTraceConfiguration": {
+      "type": "object",
+      "description": "Live trace configuration of a Microsoft.SignalRService resource.",
+      "properties": {
+        "enabled": {
+          "type": "string",
+          "description": "Indicates whether or not enable live trace.\nWhen it's set to true, live trace client can connect to the service.\nOtherwise, live trace client can't connect to the service, so that you are unable to receive any log, no matter what you configure in \"categories\".\nAvailable values: true, false.\nCase insensitive.",
+          "default": "false"
+        },
+        "categories": {
+          "type": "array",
+          "description": "Gets or sets the list of category configurations.",
+          "items": {
+            "$ref": "#/definitions/LiveTraceCategory"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Specifications of the Logs for Azure Monitoring.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the log."
+        }
+      }
+    },
+    "ManagedIdentity": {
+      "type": "object",
+      "description": "A class represent managed identities used for request and response",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
+          "description": "Represents the identity type: systemAssigned, userAssigned, None"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "Get or set the user assigned identities",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityProperty"
+          }
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Get the principal id for the system assigned identity.\nOnly be used in response.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Get the tenant id for the system assigned identity.\nOnly be used in response",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentitySettings": {
+      "type": "object",
+      "description": "Managed identity settings for upstream.",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "The Resource indicating the App ID URI of the target resource.\nIt also appears in the aud (audience) claim of the issued token."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Specifications of the Metrics for Azure Monitoring.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Localized friendly description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit that makes sense for the metric."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count."
+        },
+        "fillGapWithZero": {
+          "type": "string",
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published. \nEx. a metric that returns the number of times a particular error code was emitted. The error code may not appear \noften, instead of the RP publishing 0, Shoebox can auto fill in 0s for time periods where nothing was emitted."
+        },
+        "category": {
+          "type": "string",
+          "description": "The name of the metric category that the metric belongs to. A metric can only belong to a single category."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "The dimensions of the metrics.",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Extra Operation properties.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "An object that describes a specification."
+        }
+      }
+    },
+    "PagedSignalRServiceUsage": {
+      "type": "object",
+      "description": "Object that includes an array of the resource usages and a possible link for next set.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SignalRServiceUsage items on this page",
+          "items": {
+            "$ref": "#/definitions/SignalRServiceUsage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedWebPubSubPrivateLink": {
+      "type": "object",
+      "description": "Contains a list of PrivateLinkResource and a possible link to query more results",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebPubSubPrivateLink items on this page",
+          "items": {
+            "$ref": "#/definitions/WebPubSubPrivateLink"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "Private endpoint",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full qualified Id of the private endpoint"
+        }
+      }
+    },
+    "PrivateEndpointACL": {
+      "type": "object",
+      "description": "ACL for a private endpoint",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the private endpoint connection"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PublicNetworkAcls"
+        }
+      ]
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "A private endpoint connection to an azure resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Private endpoint connection properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WebPubSubProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "Private endpoint"
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "Group IDs",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Connection state of the private endpoint connection"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Private link resource properties",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "Group Id of the private link resource"
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "Required members of the private link resource",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "Required private DNS zone names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "shareablePrivateLinkResourceTypes": {
+          "type": "array",
+          "description": "The list of resources that are onboarded to private link service",
+          "items": {
+            "$ref": "#/definitions/ShareablePrivateLinkType"
+          },
+          "x-ms-client-name": "shareablePrivateLinkTypes",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "Connection state of the private endpoint connection",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WebPubSubPrivateLinkServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      }
+    },
+    "PublicNetworkAcls": {
+      "type": "object",
+      "description": "Network ACL",
+      "properties": {
+        "allow": {
+          "type": "array",
+          "description": "Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+          "items": {
+            "$ref": "#/definitions/WebPubSubRequestType"
+          }
+        },
+        "deny": {
+          "type": "array",
+          "description": "Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+          "items": {
+            "$ref": "#/definitions/WebPubSubRequestType"
+          }
+        }
+      }
+    },
+    "RegenerateKeyParameters": {
+      "type": "object",
+      "description": "Parameters describes the request to regenerate access keys",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/WebPubSubKeyType",
+          "description": "The type of access key."
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "The core properties of ARM resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\"",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceLogCategory": {
+      "type": "object",
+      "description": "Resource log category configuration of a Microsoft.SignalRService resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the resource log category's name.\nAvailable values: ConnectivityLogs, MessagingLogs.\nCase insensitive."
+        },
+        "enabled": {
+          "type": "string",
+          "description": "Indicates whether or the resource log category is enabled.\nAvailable values: true, false.\nCase insensitive."
+        }
+      }
+    },
+    "ResourceLogConfiguration": {
+      "type": "object",
+      "description": "Resource log configuration of a Microsoft.SignalRService resource.",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "description": "Gets or sets the list of category configurations.",
+          "items": {
+            "$ref": "#/definitions/ResourceLogCategory"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "An object that describes a specification.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Metrics for Azure Monitoring.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Logs for Azure Monitoring.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ShareablePrivateLinkProperties": {
+      "type": "object",
+      "description": "Describes the properties of a resource type that has been onboarded to private link service",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the resource type that has been onboarded to private link service"
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The resource provider group id for the resource that has been onboarded to private link service"
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource provider type for the resource that has been onboarded to private link service"
+        }
+      }
+    },
+    "ShareablePrivateLinkType": {
+      "type": "object",
+      "description": "Describes a  resource type that has been onboarded to private link service",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource type that has been onboarded to private link service"
+        },
+        "properties": {
+          "$ref": "#/definitions/ShareablePrivateLinkProperties",
+          "description": "Describes the properties of a resource type that has been onboarded to private link service"
+        }
+      }
+    },
+    "SharedPrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Describes the properties of an existing Shared Private Link Resource",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The group id from the provider of resource the shared private link resource is for"
+        },
+        "privateLinkResourceId": {
+          "type": "string",
+          "description": "The resource id of the resource the shared private link resource is for"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/WebPubSubProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "The request message for requesting approval of the shared private link resource"
+        },
+        "status": {
+          "$ref": "#/definitions/WebPubSubSharedPrivateLinkStatus",
+          "description": "Status of the shared private link resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "groupId",
+        "privateLinkResourceId"
+      ]
+    },
+    "SignalRServiceUsage": {
+      "type": "object",
+      "description": "Object that describes a specific usage of the resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified ARM resource id"
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Current value for the usage quota."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum permitted value for the usage quota. If there is no limit, this value will be -1."
+        },
+        "name": {
+          "$ref": "#/definitions/SignalRServiceUsageName",
+          "description": "Localizable String object containing the name and a localized value."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond."
+        }
+      }
+    },
+    "SignalRServiceUsageName": {
+      "type": "object",
+      "description": "Localizable String object containing the name and a localized value.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The identifier of the usage."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Localized name of the usage."
+        }
+      }
+    },
+    "SkuList": {
+      "type": "object",
+      "description": "The list skus operation response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of skus available for the resource.",
+          "items": {
+            "$ref": "#/definitions/WebPubSubSku"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL the client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use.",
+          "readOnly": true
+        }
+      }
+    },
+    "UpstreamAuthSettings": {
+      "type": "object",
+      "description": "Upstream auth settings. If not set, no auth is used for upstream messages.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/UpstreamAuthType",
+          "description": "Upstream auth type enum."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/ManagedIdentitySettings",
+          "description": "Managed identity settings for upstream."
+        }
+      }
+    },
+    "UpstreamAuthType": {
+      "type": "string",
+      "description": "Upstream auth type enum.",
+      "enum": [
+        "None",
+        "ManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "UpstreamAuthType",
+        "modelAsString": true
+      }
+    },
+    "UserAssignedIdentityProperty": {
+      "type": "object",
+      "description": "Properties of user assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Get the principal id for the user assigned identity",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Get the client id for the user assigned identity",
+          "readOnly": true
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2021-10-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2021_10_01",
+            "value": "2021-10-01",
+            "description": "The 2021-10-01 API version."
+          }
+        ]
+      }
+    },
+    "WebPubSub": {
+      "type": "object",
+      "description": "A class represent a resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebPubSubProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WebPubSubEventHandler": {
+      "type": "object",
+      "description": "Properties of event handler.",
+      "properties": {
+        "urlTemplate": {
+          "type": "string",
+          "description": "Gets or sets the EventHandler URL template. You can use a predefined parameter {hub} and {event} inside the template, the value of the EventHandler URL is dynamically calculated when the client request comes in.\nFor example, UrlTemplate can be `http://example.com/api/{hub}/{event}`. The host part can't contains parameters."
+        },
+        "userEventPattern": {
+          "type": "string",
+          "description": "Gets or sets the matching pattern for event names.\nThere are 3 kind of patterns supported:\n    1. \"*\", it to matches any event name\n    2. Combine multiple events with \",\", for example \"event1,event2\", it matches event \"event1\" and \"event2\"\n    3. The single event name, for example, \"event1\", it matches \"event1\""
+        },
+        "systemEvents": {
+          "type": "array",
+          "description": "Gets ot sets the list of system events.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auth": {
+          "$ref": "#/definitions/UpstreamAuthSettings",
+          "description": "Upstream auth settings. If not set, no auth is used for upstream messages."
+        }
+      },
+      "required": [
+        "urlTemplate"
+      ]
+    },
+    "WebPubSubHub": {
+      "type": "object",
+      "description": "A hub setting",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebPubSubHubProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebPubSubHubListResult": {
+      "type": "object",
+      "description": "The response of a WebPubSubHub list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebPubSubHub items on this page",
+          "items": {
+            "$ref": "#/definitions/WebPubSubHub"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebPubSubHubProperties": {
+      "type": "object",
+      "description": "Properties of a hub.",
+      "properties": {
+        "eventHandlers": {
+          "type": "array",
+          "description": "Event handler of a hub.",
+          "items": {
+            "$ref": "#/definitions/WebPubSubEventHandler"
+          },
+          "x-ms-identifiers": []
+        },
+        "anonymousConnectPolicy": {
+          "type": "string",
+          "description": "The settings for configuring if anonymous connections are allowed for this hub: \"allow\" or \"deny\". Default to \"deny\".",
+          "default": "deny"
+        }
+      }
+    },
+    "WebPubSubKeyType": {
+      "type": "string",
+      "description": "The type of access key.",
+      "enum": [
+        "Primary",
+        "Secondary",
+        "Salt"
+      ],
+      "x-ms-enum": {
+        "name": "WebPubSubKeyType",
+        "modelAsString": true
+      }
+    },
+    "WebPubSubKeys": {
+      "type": "object",
+      "description": "A class represents the access keys of the resource.",
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "description": "The primary access key."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "The secondary access key."
+        },
+        "primaryConnectionString": {
+          "type": "string",
+          "description": "Connection string constructed via the primaryKey"
+        },
+        "secondaryConnectionString": {
+          "type": "string",
+          "description": "Connection string constructed via the secondaryKey"
+        }
+      }
+    },
+    "WebPubSubListResult": {
+      "type": "object",
+      "description": "The response of a WebPubSub list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebPubSub items on this page",
+          "items": {
+            "$ref": "#/definitions/WebPubSub"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebPubSubNameAvailability": {
+      "type": "object",
+      "description": "Result of the request to check name availability. It contains a flag and possible reason of failure.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the name is available or not."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason of the availability. Required if name is not available."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message of the operation."
+        }
+      }
+    },
+    "WebPubSubNameAvailabilityParameters": {
+      "type": "object",
+      "description": "Data POST-ed to the nameAvailability action",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The resource type. Can be \"Microsoft.SignalRService/SignalR\" or \"Microsoft.SignalRService/webPubSub\""
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name to validate. e.g.\"my-resource-name\""
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "WebPubSubNetworkACLs": {
+      "type": "object",
+      "description": "Network ACLs for the resource",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/ACLAction",
+          "description": "Azure Networking ACL Action."
+        },
+        "publicNetwork": {
+          "$ref": "#/definitions/PublicNetworkAcls",
+          "description": "Network ACL"
+        },
+        "privateEndpoints": {
+          "type": "array",
+          "description": "ACLs for requests from private endpoints",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointACL"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "WebPubSubPrivateLink": {
+      "type": "object",
+      "description": "Private link resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Private link resource properties"
+        }
+      }
+    },
+    "WebPubSubPrivateLinkServiceConnectionStatus": {
+      "type": "string",
+      "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "WebPubSubPrivateLinkServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "WebPubSubProperties": {
+      "type": "object",
+      "description": "A class that describes the properties of the resource",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WebPubSubProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "externalIP": {
+          "type": "string",
+          "description": "The publicly accessible IP of the resource.",
+          "readOnly": true
+        },
+        "hostName": {
+          "type": "string",
+          "description": "FQDN of the service instance.",
+          "readOnly": true
+        },
+        "publicPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The publicly accessible port of the resource which is designed for browser/client side usage.",
+          "readOnly": true
+        },
+        "serverPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The publicly accessible port of the resource which is designed for customer server side usage.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the resource. Probably you need the same or higher version of client SDKs.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "Private endpoint connections to the resource.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "sharedPrivateLinkResources": {
+          "type": "array",
+          "description": "The list of shared private link resources.",
+          "items": {
+            "$ref": "#/definitions/WebPubSubSharedPrivateLink"
+          },
+          "readOnly": true
+        },
+        "tls": {
+          "$ref": "#/definitions/WebPubSubTlsSettings",
+          "description": "TLS settings for the resource"
+        },
+        "hostNamePrefix": {
+          "type": "string",
+          "description": "Deprecated.",
+          "readOnly": true
+        },
+        "liveTraceConfiguration": {
+          "$ref": "#/definitions/LiveTraceConfiguration",
+          "description": "Live trace configuration of a Microsoft.SignalRService resource."
+        },
+        "resourceLogConfiguration": {
+          "$ref": "#/definitions/ResourceLogConfiguration",
+          "description": "Resource log configuration of a Microsoft.SignalRService resource."
+        },
+        "networkACLs": {
+          "$ref": "#/definitions/WebPubSubNetworkACLs",
+          "description": "Network ACLs for the resource"
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Enable or disable public network access. Default to \"Enabled\".\nWhen it's Enabled, network ACLs still apply.\nWhen it's Disabled, public network access is always disabled no matter what you set in network ACLs.",
+          "default": "Enabled"
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "DisableLocalAuth\nEnable or disable local auth with AccessKey\nWhen set as true, connection with AccessKey=xxx won't work.",
+          "x-ms-client-name": "isLocalAuthDisabled"
+        },
+        "disableAadAuth": {
+          "type": "boolean",
+          "description": "DisableLocalAuth\nEnable or disable aad auth\nWhen set as true, connection with AuthType=aad won't work.",
+          "x-ms-client-name": "isAadAuthDisabled"
+        }
+      }
+    },
+    "WebPubSubProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Running",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Moving"
+      ],
+      "x-ms-enum": {
+        "name": "WebPubSubProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "WebPubSubRequestType": {
+      "type": "string",
+      "description": "The incoming request type to the service",
+      "enum": [
+        "ClientConnection",
+        "ServerConnection",
+        "RESTAPI",
+        "Trace"
+      ],
+      "x-ms-enum": {
+        "name": "WebPubSubRequestType",
+        "modelAsString": true
+      }
+    },
+    "WebPubSubScaleType": {
+      "type": "string",
+      "description": "The scale type applicable to the sku.",
+      "enum": [
+        "None",
+        "Manual",
+        "Automatic"
+      ],
+      "x-ms-enum": {
+        "name": "WebPubSubScaleType",
+        "modelAsString": true
+      }
+    },
+    "WebPubSubSharedPrivateLink": {
+      "type": "object",
+      "description": "Describes a Shared Private Link Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebPubSubSharedPrivateLinkListResult": {
+      "type": "object",
+      "description": "The response of a WebPubSubSharedPrivateLink list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebPubSubSharedPrivateLink items on this page",
+          "items": {
+            "$ref": "#/definitions/WebPubSubSharedPrivateLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebPubSubSharedPrivateLinkStatus": {
+      "type": "string",
+      "description": "Status of the shared private link resource",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected",
+        "Timeout"
+      ],
+      "x-ms-enum": {
+        "name": "WebPubSubSharedPrivateLinkStatus",
+        "modelAsString": true
+      }
+    },
+    "WebPubSubSku": {
+      "type": "object",
+      "description": "Describes an available sku.\"",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type that this object applies to",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/BillingInfoSku",
+          "description": "The billing information of the resource.",
+          "readOnly": true
+        },
+        "capacity": {
+          "$ref": "#/definitions/WebPubSubSkuCapacity",
+          "description": "Describes scaling information of a sku.",
+          "readOnly": true
+        }
+      }
+    },
+    "WebPubSubSkuCapacity": {
+      "type": "object",
+      "description": "Describes scaling information of a sku.",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The lowest permitted capacity for this resource",
+          "readOnly": true
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The highest permitted capacity for this resource",
+          "readOnly": true
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default capacity.",
+          "readOnly": true
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Allows capacity value list.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readOnly": true
+        },
+        "scaleType": {
+          "$ref": "#/definitions/WebPubSubScaleType",
+          "description": "The scale type applicable to the sku.",
+          "readOnly": true
+        }
+      }
+    },
+    "WebPubSubSkuTier": {
+      "type": "string",
+      "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \n\n`Basic` is deprecated, use `Standard` instead.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "WebPubSubSkuTier",
+        "modelAsString": true
+      }
+    },
+    "WebPubSubTlsSettings": {
+      "type": "object",
+      "description": "TLS settings for the resource",
+      "properties": {
+        "clientCertEnabled": {
+          "type": "boolean",
+          "description": "Request client certificate during TLS handshake if enabled",
+          "default": true,
+          "x-ms-client-name": "isClientCertEnabled"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
