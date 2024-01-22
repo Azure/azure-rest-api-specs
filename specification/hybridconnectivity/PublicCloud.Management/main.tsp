@@ -166,10 +166,11 @@ model SolutionConfigurationProperties {
 
   @doc("The status of solution configurations")
   @visibility("read")
-  status?: SolutionConfigurationStatus;
+  @knownValues(SolutionConfigurationStatus)
+  status?: string;
 
   @doc("The detailed message of status details")
-  @visibility("read", "query")
+  @visibility("read")
   statusDetails?: string;
 
   @doc("The last execution time of solution configuration")
@@ -318,7 +319,7 @@ interface TestPermissions {
 interface PublicCloudConnectors {
   get is ArmResourceRead<PublicCloudConnector>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PublicCloudConnector>;
-  update is ArmResourcePatchSync<
+  patch is ArmResourcePatchSync<
     PublicCloudConnector,
     PublicCloudConnectorProperties
   >;
@@ -330,8 +331,8 @@ interface PublicCloudConnectors {
 @armResourceOperations
 interface SolutionConfigurations {
   get is ArmResourceRead<SolutionConfiguration>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SolutionConfiguration>;
-  update is ArmResourcePatchSync<
+  createOrUpdate is ArmResourceCreateOrUpdateSync<SolutionConfiguration>;
+  patch is ArmResourcePatchSync<
     SolutionConfiguration,
     SolutionConfigurationProperties
   >;
