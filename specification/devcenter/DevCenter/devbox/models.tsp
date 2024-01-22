@@ -244,7 +244,6 @@ model HardwareProfile {
 
   @doc("The number of vCPUs available for the Dev Box.")
   @visibility("read")
-  @projectedName("csharp", "VCpus")
   @projectedName("java", "vcpus")
   @projectedName("python", "vcpus")
   vCPUs?: int32;
