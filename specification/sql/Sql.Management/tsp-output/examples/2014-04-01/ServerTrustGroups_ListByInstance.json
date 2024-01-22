@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "managedInstanceName": "managedInstance-1",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "server-trust-group-test",
+            "type": "Microsoft.Sql/locations/serverTrustGroups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/Japan East/serverTrustGroups/server-trust-group-test",
+            "properties": {
+              "groupMembers": [
+                {
+                  "serverId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/managedInstance-1"
+                },
+                {
+                  "serverId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/managedInstance-2"
+                }
+              ],
+              "trustScopes": [
+                "GlobalTransactions",
+                "ServiceBroker"
+              ]
+            }
+          },
+          {
+            "name": "server-trust-group-test-2",
+            "type": "Microsoft.Sql/locations/serverTrustGroups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/Japan East/serverTrustGroups/server-trust-group-test-2",
+            "properties": {
+              "groupMembers": [
+                {
+                  "serverId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/managedInstance-1"
+                },
+                {
+                  "serverId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/managedInstance-3"
+                }
+              ],
+              "trustScopes": [
+                "GlobalTransactions",
+                "ServiceBroker"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServerTrustGroups_ListByInstance",
+  "title": "List server trust groups by managed instance"
+}

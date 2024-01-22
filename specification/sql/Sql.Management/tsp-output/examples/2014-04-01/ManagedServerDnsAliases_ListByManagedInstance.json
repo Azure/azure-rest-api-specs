@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "managedInstanceName": "dns-mi",
+    "parameters": {},
+    "resourceGroupName": "Default",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "dns-alias-mi",
+            "type": "Microsoft.Sql/managedInstances/dnsAliases",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/dns-mi/dnsAliases/dns-alias-mi",
+            "properties": {
+              "azureDnsRecord": "dns-alias-mi.abcd1234.database.windows.net",
+              "publicAzureDnsRecord": "dns-alias-mi.public.abcd1234.database.windows.net"
+            }
+          },
+          {
+            "name": "dns-alias-mi-2",
+            "type": "Microsoft.Sql/managedInstances/dnsAliases",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/dns-mi/dnsAliases/dns-alias-mi-2",
+            "properties": {
+              "azureDnsRecord": "dns-alias-mi-2.abcd1234.database.windows.net",
+              "publicAzureDnsRecord": "dns-alias-mi-2.public.abcd1234.database.windows.net"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedServerDnsAliases_ListByManagedInstance",
+  "title": "List managed server DNS aliases"
+}

@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2023-08-15",
+    "clusterName": "kustoCluster",
+    "databaseName": "kustoReadOnlyDatabase",
+    "parameters": {
+      "kind": "ReadOnlyFollowing",
+      "location": "westus",
+      "properties": {
+        "hotCachePeriod": "P1D"
+      }
+    },
+    "resourceGroupName": "kustorptest",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "kustoCluster/kustoReadOnlyDatabase",
+        "type": "Microsoft.Kusto/Clusters/Databases",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/kustoReadOnlyDatabase",
+        "kind": "ReadOnlyFollowing",
+        "location": "westus"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "kustoCluster/kustoReadOnlyDatabase",
+        "type": "Microsoft.Kusto/Clusters/Databases",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/kustoReadOnlyDatabase",
+        "kind": "ReadOnlyFollowing",
+        "location": "westus",
+        "properties": {
+          "hotCachePeriod": "P1D",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "kustoCluster/kustoReadOnlyDatabase",
+        "type": "Microsoft.Kusto/Clusters/Databases",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/kustoReadOnlyDatabase",
+        "kind": "ReadOnlyFollowing",
+        "location": "westus",
+        "properties": {
+          "hotCachePeriod": "P1D",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "Databases_CreateOrUpdate",
+  "title": "Kusto ReadOnly database update"
+}

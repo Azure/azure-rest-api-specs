@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "name": "myMachineName",
+    "api-version": "2023-10-03-preview",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "assessmentActivityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+        "availablePatchCountByClassification": {
+          "critical": 0,
+          "definition": 0,
+          "featurePack": 0,
+          "security": 0,
+          "servicePack": 0,
+          "tools": 0,
+          "updateRollup": 1,
+          "updates": 1
+        },
+        "errorDetails": null,
+        "lastModifiedDateTime": "2021-08-22T02:16:06.9740000Z",
+        "osType": "Windows",
+        "rebootPending": true,
+        "startDateTime": "2021-08-22T02:15:20.9340000Z",
+        "startedBy": "User",
+        "status": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "eastus2euap"
+      }
+    }
+  },
+  "operationId": "Machines_AssessPatches",
+  "title": "Assess patch state of a machine."
+}

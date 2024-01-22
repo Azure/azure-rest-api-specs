@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01",
+    "resourceGroupName": "rg1",
+    "searchServiceName": "mysearchservice",
+    "service": {
+      "identity": {
+        "type": "None"
+      },
+      "sku": {
+        "name": "standard"
+      }
+    },
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysearchservice",
+        "type": "Microsoft.Search/searchServices",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "identity": {
+          "type": "None"
+        },
+        "location": "westus",
+        "properties": {
+          "hostingMode": "default",
+          "networkRuleSet": {
+            "ipRules": []
+          },
+          "partitionCount": 1,
+          "privateEndpointConnections": [],
+          "provisioningState": "succeeded",
+          "publicNetworkAccess": "enabled",
+          "replicaCount": 3,
+          "status": "running",
+          "statusDetails": ""
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "Services_Update",
+  "title": "SearchUpdateServiceToRemoveIdentity"
+}

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "$filter": "monitorName eq 'root'",
+    "api-version": "2020-01-13-preview",
+    "providerName": "Microsoft.Compute",
+    "resourceCollectionName": "virtualMachines",
+    "resourceGroupName": "tugamidiAlerts",
+    "resourceName": "linuxEUS",
+    "subscriptionId": "bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "root",
+            "type": "Microsoft.WorkloadMonitor/monitors",
+            "id": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/root",
+            "properties": {
+              "currentMonitorState": "Critical",
+              "currentStateFirstObservedTimestamp": "2020-02-15T20:20:1.5765757Z",
+              "evaluationTimestamp": "2020-02-15T20:20:18.5765757Z",
+              "lastReportedTimestamp": "2020-02-15T20:20:18.5765757Z",
+              "monitorName": "root",
+              "monitorType": "root",
+              "monitoredObject": "",
+              "parentMonitorName": "",
+              "previousMonitorState": "Critical"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "HealthMonitors_List",
+  "title": "Get monitor list with filtered values"
+}

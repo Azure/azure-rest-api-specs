@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "integrationAccountName": "testIntegrationAccount",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "<IntegrationAccountCertificateName>",
+            "type": "Microsoft.Logic/integrationAccounts/certificates",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/testIntegrationAccount/certificates/<integrationAccountCertificateName>",
+            "properties": {
+              "changedTime": "2017-03-06T20:33:09.7032076Z",
+              "createdTime": "2017-03-06T20:33:09.7022471Z",
+              "key": {
+                "keyName": "<keyName>",
+                "keyVault": {
+                  "name": "AzureSdkTestKeyVault",
+                  "type": "Microsoft.KeyVault/vaults",
+                  "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testResourceGroup/providers/microsoft.keyvault/vaults/<keyVaultName>"
+                },
+                "keyVersion": "87d9764197604449b9b8eb7bd8710868"
+              },
+              "publicCertificate": "<publicCertificate>"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "IntegrationAccountCertificates_List",
+  "title": "Get certificates by integration account name"
+}

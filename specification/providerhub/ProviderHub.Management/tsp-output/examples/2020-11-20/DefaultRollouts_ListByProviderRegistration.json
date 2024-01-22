@@ -1,0 +1,150 @@
+{
+  "parameters": {
+    "api-version": "2020-11-20",
+    "providerNamespace": "Microsoft.Contoso",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
+  },
+  "responses": {
+    "200": {
+      "description": "List of default rollouts for given subscription id.",
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Contoso/2020week01",
+            "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week01",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "specification": {
+                "canary": {
+                  "regions": [
+                    "brazilus",
+                    "eastus2euap",
+                    "centraluseuap"
+                  ]
+                },
+                "highTraffic": {
+                  "regions": [
+                    "australiasoutheast",
+                    "otherhightraficregions"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "lowTraffic": {
+                  "regions": [
+                    "southeastasia"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "mediumTraffic": {
+                  "regions": [
+                    "uksouth",
+                    "indiawest"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "restOfTheWorldGroupOne": {
+                  "regions": [
+                    "koreacentral",
+                    "francecentral",
+                    "australiacentral",
+                    "westus",
+                    "allotherregions"
+                  ],
+                  "waitDuration": "PT4H"
+                },
+                "restOfTheWorldGroupTwo": {
+                  "regions": [
+                    "germanynorth",
+                    "norwayeast",
+                    "allotherregions"
+                  ],
+                  "waitDuration": "PT4H"
+                }
+              },
+              "status": {
+                "completedRegions": [
+                  "brazilus",
+                  "eastus2euap",
+                  "centraluseuap",
+                  "allcompletedregions"
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.Contoso/2020week10",
+            "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week10",
+            "properties": {
+              "provisioningState": "Cancelled",
+              "specification": {
+                "canary": {
+                  "regions": [
+                    "brazilus",
+                    "eastus2euap",
+                    "centraluseuap"
+                  ]
+                },
+                "highTraffic": {
+                  "regions": [
+                    "australiasoutheast",
+                    "otherhightraficregions"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "lowTraffic": {
+                  "regions": [
+                    "southeastasia"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "mediumTraffic": {
+                  "regions": [
+                    "uksouth",
+                    "indiawest"
+                  ],
+                  "waitDuration": "PT24H"
+                },
+                "restOfTheWorldGroupOne": {
+                  "regions": [
+                    "koreacentral",
+                    "francecentral",
+                    "australiacentral",
+                    "westus",
+                    "allotherregions"
+                  ],
+                  "waitDuration": "PT4H"
+                },
+                "restOfTheWorldGroupTwo": {
+                  "regions": [
+                    "germanynorth",
+                    "norwayeast",
+                    "allotherregions"
+                  ],
+                  "waitDuration": "PT4H"
+                }
+              },
+              "status": {
+                "completedRegions": [
+                  "brazilus",
+                  "eastus2euap",
+                  "centraluseuap",
+                  "allcompletedregions"
+                ],
+                "failedOrSkippedRegions": {
+                  "westus2": {
+                    "code": "RolloutStoppedByUser",
+                    "message": "Rollout was explicitly stopped by the user."
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DefaultRollouts_ListByProviderRegistration",
+  "title": "DefaultRollouts_ListByProviderRegistration"
+}

@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "$filter": "(name eq 'sampleEncode') or (name eq 'sampleEncodeAndVideoIndex')",
+    "$orderby": "name desc",
+    "accountName": "contosomedia",
+    "api-version": "2022-07-01",
+    "resourceGroupName": "contosoresources",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sampleEncodeAndVideoIndex",
+            "type": "Microsoft.Media/mediaservices/transforms",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncodeAndVideoIndex",
+            "properties": {
+              "description": "A sample Transform using the Standard Encoder with a built-in preset, as well as the Video Analyzer.",
+              "created": "2022-10-17T23:14:31.2387023Z",
+              "lastModified": "2022-10-17T23:14:31.2387023Z",
+              "outputs": [
+                {
+                  "onError": "StopProcessingJob",
+                  "preset": {
+                    "@odata.type": "#Microsoft.Media.BuiltInStandardEncoderPreset",
+                    "presetName": "AdaptiveStreaming"
+                  },
+                  "relativePriority": "Normal"
+                },
+                {
+                  "onError": "StopProcessingJob",
+                  "preset": {
+                    "@odata.type": "#Microsoft.Media.VideoAnalyzerPreset",
+                    "insightsToExtract": "AllInsights",
+                    "mode": "Standard"
+                  },
+                  "relativePriority": "Normal"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2022-10-17T23:14:31.2387023Z",
+              "createdBy": "contoso@microsoft.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2022-10-17T23:14:31.2387023Z",
+              "lastModifiedBy": "contoso@microsoft.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "sampleEncode",
+            "type": "Microsoft.Media/mediaservices/transforms",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncode",
+            "properties": {
+              "description": "A sample Transform using the Standard Encoder with a built in preset.",
+              "created": "2022-10-17T23:14:31.2387023Z",
+              "lastModified": "2022-10-17T23:14:31.2387023Z",
+              "outputs": [
+                {
+                  "onError": "StopProcessingJob",
+                  "preset": {
+                    "@odata.type": "#Microsoft.Media.BuiltInStandardEncoderPreset",
+                    "presetName": "AdaptiveStreaming"
+                  },
+                  "relativePriority": "Normal"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2022-10-17T23:14:31.2387023Z",
+              "createdBy": "contoso@microsoft.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2022-10-17T23:14:31.2387023Z",
+              "lastModifiedBy": "contoso@microsoft.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Transforms_List",
+  "title": "Lists the Transforms filter by name"
+}

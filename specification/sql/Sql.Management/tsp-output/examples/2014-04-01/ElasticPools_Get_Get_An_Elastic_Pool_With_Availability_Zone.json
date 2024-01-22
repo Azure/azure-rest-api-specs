@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "elasticPoolName": "sqlcrudtest-8102",
+    "resourceGroupName": "sqlcrudtest-2369",
+    "serverName": "sqlcrudtest-8069",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sqlcrudtest-8102",
+        "type": "Microsoft.Sql/servers/elasticPools",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102",
+        "kind": null,
+        "location": "Japan East",
+        "properties": {
+          "availabilityZone": "1",
+          "creationDate": "2017-10-10T01:25:25.033Z",
+          "licenseType": "LicenseIncluded",
+          "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_JapanEast_1",
+          "maxSizeBytes": 5242880000,
+          "perDatabaseSettings": {
+            "maxCapacity": 1,
+            "minCapacity": 0.25
+          },
+          "state": "Ready",
+          "zoneRedundant": true
+        },
+        "sku": {
+          "name": "GP_Gen5_2",
+          "capacity": 2,
+          "tier": "GeneralPurpose"
+        }
+      }
+    }
+  },
+  "operationId": "ElasticPools_Get",
+  "title": "Get an elastic pool with Availability Zone"
+}

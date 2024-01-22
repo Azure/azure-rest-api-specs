@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "$filter": "service eq 'Virtual Machines' or region eq 'West US'",
+    "api-version": "2023-10-01-preview",
+    "queryStartTime": "7/24/2020",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}",
+        "value": [
+          {
+            "name": "BC_1-FXZ",
+            "type": "/providers/Microsoft.ResourceHealth/events",
+            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ",
+            "properties": {
+              "argQuery": "{argQuery}",
+              "article": {
+                "articleContent": "<html>An outage alert is being investigated. More information will be provided as it is known</html>"
+              },
+              "enableChatWithUs": false,
+              "enableMicrosoftSupport": true,
+              "eventLevel": "Informational",
+              "eventSource": "ResourceHealth",
+              "eventType": "ServiceIssue",
+              "faqs": [
+                {
+                  "answer": "This is an answer",
+                  "localeCode": "en",
+                  "question": "This is a question"
+                }
+              ],
+              "header": "Your service might have been impacted by an Azure service issue",
+              "hirStage": "resolved",
+              "impact": [
+                {
+                  "impactedRegions": [
+                    {
+                      "impactedRegion": "West US",
+                      "impactedSubscriptions": [
+                        "{subscriptionId}"
+                      ],
+                      "impactedTenants": [],
+                      "lastUpdateTime": "2017-12-05T21:05:00Z",
+                      "status": "Active"
+                    }
+                  ],
+                  "impactedService": "Virtual Machines"
+                }
+              ],
+              "impactMitigationTime": "2018-11-08T00:00:00Z",
+              "impactStartTime": "2018-11-07T00:00:00Z",
+              "isHIR": false,
+              "lastUpdateTime": "2018-11-08T00:00:00Z",
+              "level": "Warning",
+              "links": [
+                {
+                  "type": "Hyperlink",
+                  "bladeName": "RequestRCABlade",
+                  "displayText": {
+                    "localizedValue": "Request RCA",
+                    "value": "Request RCA"
+                  },
+                  "extensionName": "Microsoft_Azure_Health",
+                  "parameters": {
+                    "rcaRequested": "False",
+                    "trackingId": "BC_1-FXZ"
+                  }
+                },
+                {
+                  "type": "Button",
+                  "bladeName": "AzureHealthBrowseBlade",
+                  "displayText": {
+                    "localizedValue": "Sign up for updates",
+                    "value": "Sign up for updates"
+                  },
+                  "extensionName": "Microsoft_Azure_Health",
+                  "parameters": {
+                    "trackingId": "BC_1-FXZ"
+                  }
+                }
+              ],
+              "maintenanceId": "{maintenanceId}",
+              "maintenanceType": "{maintenanceType}",
+              "priority": 2,
+              "recommendedActions": {
+                "actions": [
+                  {
+                    "actionText": "action 1",
+                    "groupId": 23243
+                  },
+                  {
+                    "actionText": "action 2",
+                    "groupId": 23432
+                  }
+                ],
+                "localeCode": "en",
+                "message": "Recommended actions title"
+              },
+              "status": "Active",
+              "summary": "An outage alert is being investigated. More information will be provided as it is known.",
+              "title": "ACTIVE: Virtual machines in West US"
+            }
+          },
+          {
+            "name": "ABH3-RET",
+            "type": "Microsoft.ResourceHealth/events",
+            "id": "Microsoft.ResourceHealth/events/ABH3-RET",
+            "properties": {
+              "description": "retirement test",
+              "eventLevel": "Warning",
+              "eventSource": "ServiceHealth",
+              "eventSubType": "Retirement",
+              "eventType": "HealthAdvisory",
+              "header": "retirement test",
+              "impact": [
+                {
+                  "impactedRegions": [
+                    {
+                      "impactedRegion": "West US",
+                      "impactedSubscriptions": [
+                        "{subscriptionId}"
+                      ],
+                      "impactedTenants": [],
+                      "lastUpdateTime": "2023-08-14T20:10:00Z",
+                      "status": "Active"
+                    }
+                  ],
+                  "impactedService": "Virtual Machines"
+                }
+              ],
+              "impactMitigationTime": "2023-08-14T20:10:00Z",
+              "impactStartTime": "2023-08-14T19:10:00Z",
+              "isHIR": false,
+              "lastUpdateTime": "2023-08-14T20:10:00Z",
+              "level": "Warning",
+              "platformInitiated": true,
+              "priority": 22,
+              "recommendedActions": {},
+              "status": "Active",
+              "summary": "retirement test",
+              "title": "retirement test"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Events_ListBySubscriptionId",
+  "title": "ListEventsBySubscriptionId"
+}

@@ -1,0 +1,135 @@
+{
+  "parameters": {
+    "api-version": "2022-06-01",
+    "dataCollectionRuleName": "myCollectionRule",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myCollectionRule",
+        "type": "Microsoft.Insights/dataCollectionRules",
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000",
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
+        "location": "eastus",
+        "properties": {
+          "dataFlows": [
+            {
+              "destinations": [
+                "centralWorkspace"
+              ],
+              "streams": [
+                "Microsoft-Perf",
+                "Microsoft-Syslog",
+                "Microsoft-WindowsEvent"
+              ]
+            }
+          ],
+          "dataSources": {
+            "performanceCounters": [
+              {
+                "name": "cloudTeamCoreCounters",
+                "counterSpecifiers": [
+                  "\\Processor(_Total)\\% Processor Time",
+                  "\\Memory\\Committed Bytes",
+                  "\\LogicalDisk(_Total)\\Free Megabytes",
+                  "\\PhysicalDisk(_Total)\\Avg. Disk Queue Length"
+                ],
+                "samplingFrequencyInSeconds": 15,
+                "streams": [
+                  "Microsoft-Perf"
+                ]
+              },
+              {
+                "name": "appTeamExtraCounters",
+                "counterSpecifiers": [
+                  "\\Process(_Total)\\Thread Count"
+                ],
+                "samplingFrequencyInSeconds": 30,
+                "streams": [
+                  "Microsoft-Perf"
+                ]
+              }
+            ],
+            "syslog": [
+              {
+                "name": "cronSyslog",
+                "facilityNames": [
+                  "cron"
+                ],
+                "logLevels": [
+                  "Debug",
+                  "Critical",
+                  "Emergency"
+                ],
+                "streams": [
+                  "Microsoft-Syslog"
+                ]
+              },
+              {
+                "name": "syslogBase",
+                "facilityNames": [
+                  "syslog"
+                ],
+                "logLevels": [
+                  "Alert",
+                  "Critical",
+                  "Emergency"
+                ],
+                "streams": [
+                  "Microsoft-Syslog"
+                ]
+              }
+            ],
+            "windowsEventLogs": [
+              {
+                "name": "cloudSecurityTeamEvents",
+                "streams": [
+                  "Microsoft-WindowsEvent"
+                ],
+                "xPathQueries": [
+                  "Security!"
+                ]
+              },
+              {
+                "name": "appTeam1AppEvents",
+                "streams": [
+                  "Microsoft-WindowsEvent"
+                ],
+                "xPathQueries": [
+                  "System![System[(Level = 1 or Level = 2 or Level = 3)]]",
+                  "Application!*[System[(Level = 1 or Level = 2 or Level = 3)]]"
+                ]
+              }
+            ]
+          },
+          "destinations": {
+            "logAnalytics": [
+              {
+                "name": "centralWorkspace",
+                "workspaceId": "9ba8bc53-bd36-4156-8667-e983e7ae0e4f",
+                "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace"
+              }
+            ]
+          },
+          "immutableId": "dcr-b74e0d383fc9415abaa584ec41adece3"
+        },
+        "systemData": {
+          "createdAt": "2021-04-01T12:34:56.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-04-02T12:34:56.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "tag1": "A",
+          "tag2": "B"
+        }
+      }
+    }
+  },
+  "operationId": "DataCollectionRules_Get",
+  "title": "Get data collection rule"
+}

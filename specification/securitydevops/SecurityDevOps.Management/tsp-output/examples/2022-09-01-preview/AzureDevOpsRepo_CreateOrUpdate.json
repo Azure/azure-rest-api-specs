@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "azureDevOpsConnectorName": "testconnector",
+    "azureDevOpsOrgName": "myOrg",
+    "azureDevOpsProjectName": "myProject",
+    "azureDevOpsRepo": {
+      "properties": {
+        "actionableRemediation": {
+          "branchConfiguration": {
+            "names": [
+              "main"
+            ]
+          },
+          "categories": [
+            "Secrets"
+          ],
+          "severityLevels": [
+            "High"
+          ],
+          "state": "Enabled"
+        },
+        "repoId": "00000000-0000-0000-0000-000000000000",
+        "repoUrl": "https://dev.azure.com/myOrg/myProject/_git/myRepo"
+      }
+    },
+    "azureDevOpsRepoName": "myRepo",
+    "resourceGroupName": "westusrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myRepo",
+        "type": "Microsoft.SecurityDevOps/azureDevOpsConnectos/orgs/projects/repos",
+        "id": "/subscriptions/e7032cc6-7422-4ddd-9022-bfbf23b05332/resourceGroups/westusrg/providers/Microsoft.SecurityDevOps/azureDevOpsConnectors/testconnector/orgs/myOrg/projects/myProject/repos/myRepo",
+        "properties": {
+          "actionableRemediation": {
+            "branchConfiguration": {
+              "names": [
+                "main"
+              ]
+            },
+            "categories": [
+              "Secrets"
+            ],
+            "severityLevels": [
+              "High"
+            ],
+            "state": "Enabled"
+          },
+          "provisioningState": "Succeeded",
+          "repoId": "00000000-0000-0000-0000-000000000000",
+          "repoUrl": "https://dev.azure.com/myOrg/myProject/_git/myRepo"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "myRepo",
+        "type": "Microsoft.SecurityDevOps/azureDevOpsConnectos/orgs/projects/repos",
+        "id": "/subscriptions/e7032cc6-7422-4ddd-9022-bfbf23b05332/resourceGroups/westusrg/providers/Microsoft.SecurityDevOps/azureDevOpsConnectors/testconnector/orgs/myOrg/projects/myProject/repos/myRepo",
+        "properties": {
+          "actionableRemediation": {
+            "branchConfiguration": {
+              "names": [
+                "main"
+              ]
+            },
+            "categories": [
+              "Secrets"
+            ],
+            "severityLevels": [
+              "High"
+            ],
+            "state": "Enabled"
+          },
+          "provisioningState": "Created",
+          "repoId": "00000000-0000-0000-0000-000000000000",
+          "repoUrl": "https://dev.azure.com/myOrg/myProject/_git/myRepo"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://api-prod.resources.windows-int.net/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.SecurityDevOps/locations/WESTUS/operationStatuses/7e430d08-0ed2-4566-bcdc-3508e79f51cd*0000000000000000000000000000000000000000000000000000000000000000?api-version=2022-09-01-preview"
+      }
+    }
+  },
+  "operationId": "AzureDevOpsRepo_CreateOrUpdate",
+  "title": "AzureDevOpsRepo_CreateOrUpdate"
+}

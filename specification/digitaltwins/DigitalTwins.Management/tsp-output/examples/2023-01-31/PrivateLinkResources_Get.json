@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2023-01-31",
+    "resourceGroupName": "resRg",
+    "resourceId": "subResource",
+    "resourceName": "myDigitalTwinsService",
+    "subscriptionId": "50016170-c839-41ba-a724-51e9df440b9e"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDigitalTwinsService",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/privateLinkResources",
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/privateLinkResources/myDigitalTwinsService",
+        "properties": {
+          "groupId": "digitalTwinsInstance",
+          "requiredMembers": [
+            "myDigitalTwinsService"
+          ],
+          "requiredZoneNames": [
+            "privatelink.api.wus2.digitaltwins.azure.net"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_Get",
+  "title": "Get the specified private link resource for the given Digital Twin"
+}

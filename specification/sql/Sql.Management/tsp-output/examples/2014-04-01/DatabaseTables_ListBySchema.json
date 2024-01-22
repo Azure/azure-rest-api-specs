@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "databaseName": "myDatabase",
+    "resourceGroupName": "myRG",
+    "schemaName": "dbo",
+    "serverName": "serverName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "table1",
+            "type": "Microsoft.Sql/servers/databases/schemas/tables",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/dbo/tables/table1"
+          },
+          {
+            "name": "table2",
+            "type": "Microsoft.Sql/servers/databases/schemas/tables",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/dbo/tables/table2"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DatabaseTables_ListBySchema",
+  "title": "List  database tables"
+}

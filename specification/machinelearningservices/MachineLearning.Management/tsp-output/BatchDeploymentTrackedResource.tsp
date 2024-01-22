@@ -1,0 +1,121 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./BatchEndpointTrackedResource.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.MachineLearningServices;
+
+@parentResource(BatchEndpointTrackedResource)
+model BatchDeploymentTrackedResource is TrackedResource<BatchDeployment> {
+  /**
+   * The identifier for the Batch deployments.
+   */
+  @path
+  @key("deploymentName")
+  @segment("deployments")
+  name: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ResourceSku;
+  ...Azure.ResourceManager.ResourceKind;
+}
+
+@armResourceOperations
+interface BatchDeploymentTrackedResources {
+  /**
+   * Gets a batch inference deployment by id.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BatchDeployments_Get")
+  get is ArmResourceRead<BatchDeploymentTrackedResource>;
+
+  /**
+   * Creates/updates a batch inference deployment (asynchronous).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BatchDeployments_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<BatchDeploymentTrackedResource>;
+
+  /**
+   * Update a batch inference deployment (asynchronous).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @parameterVisibility("read")
+  @operationId("BatchDeployments_Update")
+  update is ArmCustomPatchAsync<
+    BatchDeploymentTrackedResource,
+    PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties
+  >;
+
+  /**
+   * Delete Batch Inference deployment (asynchronous).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BatchDeployments_Delete")
+  delete is ArmResourceDeleteAsync<
+    BatchDeploymentTrackedResource,
+    BaseParameters<BatchDeploymentTrackedResource>,
+    ArmLroLocationHeader
+  >;
+
+  /**
+   * Lists Batch inference deployments in the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("BatchDeployments_List")
+  list is ArmResourceListByParent<
+    BatchDeploymentTrackedResource,
+    {
+      ...BaseParameters<BatchDeploymentTrackedResource>;
+
+      /**
+       * Ordering of list.
+       */
+      @query("$orderBy")
+      $orderBy?: string;
+
+      /**
+       * Top of list.
+       */
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * Continuation token for pagination.
+       */
+      @query("$skip")
+      $skip?: string;
+    }
+  >;
+}
+
+@@projectedName(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "json",
+  "body"
+);
+@@extension(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(BatchDeploymentTrackedResources.createOrUpdate::parameters.resource,
+  "Batch inference deployment definition object."
+);
+@@projectedName(BatchDeploymentTrackedResources.update::parameters.properties,
+  "json",
+  "body"
+);
+@@extension(BatchDeploymentTrackedResources.update::parameters.properties,
+  "x-ms-client-name",
+  "body"
+);
+@@doc(BatchDeploymentTrackedResources.update::parameters.properties,
+  "Batch inference deployment definition object."
+);

@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01",
+    "fhirServiceName": "fhirservices1",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "subid",
+    "workspaceName": "workspace1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fhirservices1",
+        "type": "Microsoft.HealthcareApis/workspaces/fhirservices",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/fhirservices/fhirservices1",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "2f1f372f-edcf-43f5-aedb-173da3cc5c1e",
+          "tenantId": "abfde7b2-df0f-47e6-aabf-2462b07508dc"
+        },
+        "properties": {
+          "authenticationConfiguration": {
+            "audience": "https://azurehealthcareapis.com",
+            "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+            "smartProxyEnabled": true
+          },
+          "corsConfiguration": {
+            "allowCredentials": false,
+            "headers": [
+              "*"
+            ],
+            "maxAge": 1440,
+            "methods": [
+              "DELETE",
+              "GET",
+              "OPTIONS",
+              "PATCH",
+              "POST",
+              "PUT"
+            ],
+            "origins": [
+              "*"
+            ]
+          },
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
+            }
+          },
+          "exportConfiguration": {
+            "storageAccountName": "existingStorageAccount"
+          },
+          "implementationGuidesConfiguration": {
+            "usCoreMissingData": false
+          },
+          "importConfiguration": {
+            "enabled": false,
+            "initialImportMode": false,
+            "integrationDataStore": "existingStorageAccount"
+          },
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  },
+  "operationId": "FhirServices_Get",
+  "title": "Get a Fhir Service"
+}

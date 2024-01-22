@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "managedInstanceName": "sqlcrudtest-4645",
+    "resourceGroupName": "sqlcrudtest-7398",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "current",
+            "type": "Microsoft.Sql/managedInstances/encryptionProtector",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/managedInstances/sqlcrudtest-4645/encryptionProtector/current",
+            "kind": "azurekeyvault",
+            "properties": {
+              "serverKeyName": "someVault_someKey_01234567890123456789012345678901",
+              "serverKeyType": "AzureKeyVault",
+              "uri": "https://someVault.vault.azure.net/keys/someKey/01234567890123456789012345678901"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedInstanceEncryptionProtectors_ListByInstance",
+  "title": "List encryption protectors by managed instance"
+}

@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "blobAuditingPolicyName": "default",
+    "databaseName": "testdb",
+    "parameters": {
+      "properties": {
+        "auditActionsAndGroups": [
+          "DATABASE_LOGOUT_GROUP",
+          "DATABASE_ROLE_MEMBER_CHANGE_GROUP",
+          "UPDATE on database::TestDatabaseName by public"
+        ],
+        "isAzureMonitorTargetEnabled": true,
+        "isStorageSecondaryKeyInUse": false,
+        "predicateExpression": "statement = 'select 1'",
+        "queueDelayMs": 4000,
+        "retentionDays": 6,
+        "state": "Enabled",
+        "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
+        "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
+        "storageEndpoint": "https://mystorage.blob.core.windows.net"
+      }
+    },
+    "resourceGroupName": "blobauditingtest-4799",
+    "serverName": "blobauditingtest-6440",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Sql/servers/databases/extendedAuditingSettings",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-4799/providers/Microsoft.Sql/servers/blobauditingtest-6440/databases/testdb",
+        "properties": {
+          "auditActionsAndGroups": [
+            "DATABASE_LOGOUT_GROUP",
+            "DATABASE_ROLE_MEMBER_CHANGE_GROUP",
+            "UPDATE on database::TestDatabaseName by public"
+          ],
+          "isAzureMonitorTargetEnabled": true,
+          "isStorageSecondaryKeyInUse": false,
+          "predicateExpression": "statement = 'select 1'",
+          "queueDelayMs": 4000,
+          "retentionDays": 0,
+          "state": "Enabled",
+          "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Sql/servers/databases/extendedAuditingSettings",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/blobauditingtest-4799/providers/Microsoft.Sql/servers/blobauditingtest-6440/databases/testdb",
+        "properties": {
+          "auditActionsAndGroups": [
+            "DATABASE_LOGOUT_GROUP",
+            "DATABASE_ROLE_MEMBER_CHANGE_GROUP",
+            "UPDATE on database::TestDatabaseName by public"
+          ],
+          "isAzureMonitorTargetEnabled": true,
+          "isStorageSecondaryKeyInUse": false,
+          "predicateExpression": "statement = 'select 1'",
+          "queueDelayMs": 4000,
+          "retentionDays": 0,
+          "state": "Enabled",
+          "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net"
+        }
+      }
+    }
+  },
+  "operationId": "ExtendedDatabaseBlobAuditingPolicies_CreateOrUpdate",
+  "title": "Create or update an extended database's blob auditing policy with all parameters"
+}

@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "managedInstanceName": "testcl",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "38e0dc56-907f-45ba-a97c-74233baad471"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "customerCertificate1",
+            "type": "Microsoft.Sql/managedInstances/serverTrustCertificates",
+            "id": "/subscriptions/38e0dc56-907f-45ba-a97c-74233baad471/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/serverTrustCertificates/customerCertificate1",
+            "properties": {
+              "certificateName": "customerCertificate1",
+              "thumbprint": "33702D20EC861199852837AE6BD1A71544B681E2"
+            }
+          },
+          {
+            "name": "customerCertificate2",
+            "type": "Microsoft.Sql/managedInstances/serverTrustCertificates",
+            "id": "/subscriptions/38e0dc56-907f-45ba-a97c-74233baad471/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/serverTrustCertificates/customerCertificate2",
+            "properties": {
+              "certificateName": "customerCertificate2",
+              "thumbprint": "57CFA9CF16F2FB2775AF059A95C6D5B897DA2C05"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServerTrustCertificates_ListByInstance",
+  "title": "Gets a list of server trust certificates on a given server."
+}

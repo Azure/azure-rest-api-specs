@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2023-10-03-preview",
+    "machineName": "myMachine",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "CustomScriptExtension",
+            "type": "Microsoft.HybridCompute/machines/extensions",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/CustomScriptExtension",
+            "location": "eastus2euap",
+            "properties": {
+              "type": "CustomScriptExtension",
+              "autoUpgradeMinorVersion": false,
+              "instanceView": {
+                "name": "CustomScriptExtension",
+                "type": "CustomScriptExtension",
+                "status": {
+                  "code": "success",
+                  "displayStatus": "Provisioning succeeded",
+                  "level": "Information",
+                  "message": "formattedMessage: Finished executing command, StdOut: , StdErr: ",
+                  "time": "2020-08-13T17:18:57.405Z"
+                },
+                "typeHandlerVersion": "1.10.3"
+              },
+              "provisioningState": "Succeeded",
+              "publisher": "Microsoft.Compute",
+              "settings": {
+                "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\""
+              },
+              "typeHandlerVersion": "1.10.3"
+            }
+          },
+          {
+            "name": "winosupdateextension",
+            "type": "Microsoft.HybridCompute/machines/extensions",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/winosupdateextension",
+            "location": "eastus2euap",
+            "properties": {
+              "type": "windowsosupdateextension",
+              "autoUpgradeMinorVersion": false,
+              "instanceView": {
+                "name": "winosupdateextension",
+                "type": "windowsosupdateextension",
+                "status": {},
+                "typeHandlerVersion": "1.0.0.0"
+              },
+              "provisioningState": "Creating",
+              "publisher": "microsoft.softwareupdatemanagement.test",
+              "settings": {},
+              "typeHandlerVersion": "1.0.0.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "MachineExtensions_List",
+  "title": "GET all Machine Extensions - List"
+}

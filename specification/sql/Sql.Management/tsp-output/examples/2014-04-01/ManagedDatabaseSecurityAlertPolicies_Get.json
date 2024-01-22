@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "databaseName": "testdb",
+    "managedInstanceName": "securityalert-2080",
+    "resourceGroupName": "securityalert-6852",
+    "securityAlertPolicyName": "Default",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Default",
+        "type": "Microsoft.Sql/managedInstances/databases/securityAlertPolicies",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-6852/providers/Microsoft.Sql/managedInstances/securityalert-2080/databases/testdb",
+        "properties": {
+          "disabledAlerts": [
+            "Usage_Anomaly"
+          ],
+          "emailAccountAdmins": true,
+          "emailAddresses": [
+            "test@contoso.com",
+            "user@contoso.com"
+          ],
+          "retentionDays": 0,
+          "state": "Enabled",
+          "storageAccountAccessKey": "",
+          "storageEndpoint": ""
+        }
+      }
+    }
+  },
+  "operationId": "ManagedDatabaseSecurityAlertPolicies_Get",
+  "title": "Get a database's threat detection policy"
+}

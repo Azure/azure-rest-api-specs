@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "resourceGroupName": "RgTest1",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "workspaceName": "DeWnTest1234"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "export1",
+            "type": "Microsoft.OperationalInsights/workspaces/export",
+            "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/RgTest1/providers/microsoft.operationalinsights/workspaces/DeWnTest1234/export/export1",
+            "properties": {
+              "createdDate": "Sun, 12 Jan 2020 12:51:10 GMT",
+              "dataExportId": "d5233afc-7829-4b89-c594-08d7975e19a5",
+              "destination": {
+                "type": "EventHub",
+                "resourceId": "/subscriptions/192b9f85-a39a-4276-b96d-d5cd351703f9/resourceGroups/OIAutoRest1234/providers/Microsoft.EventHub/namespaces/test"
+              },
+              "enable": true,
+              "lastModifiedDate": "Sun, 12 Jan 2020 12:51:10 GMT",
+              "tableNames": [
+                "Heartbeat"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DataExports_ListByWorkspace",
+  "title": "DataExportGet"
+}

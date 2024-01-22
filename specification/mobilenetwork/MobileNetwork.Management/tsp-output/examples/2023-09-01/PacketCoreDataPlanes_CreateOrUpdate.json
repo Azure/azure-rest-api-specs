@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01",
+    "packetCoreControlPlaneName": "testPacketCoreCP",
+    "packetCoreDataPlaneName": "testPacketCoreDP",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "userPlaneAccessInterface": {
+          "name": "N3"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestPacketCoreDP",
+        "type": "Microsoft.MobileNetwork/packetCoreDataPlane",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "userPlaneAccessInterface": {
+            "name": "N3"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestPacketCoreDP",
+        "type": "Microsoft.MobileNetwork/packetCoreDataPlane",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Created",
+          "userPlaneAccessInterface": {
+            "name": "N3"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2023-09-01"
+      }
+    }
+  },
+  "operationId": "PacketCoreDataPlanes_CreateOrUpdate",
+  "title": "Create packet core data plane"
+}

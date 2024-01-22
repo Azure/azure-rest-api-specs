@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "databaseName": "testdb",
+    "managedInstanceName": "testsvr",
+    "parameters": {
+      "properties": {
+        "retentionDays": 14
+      }
+    },
+    "policyName": "default",
+    "resourceGroupName": "resourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Sql/managedInstances/databases/backupShortTermRetentionPolicies",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup/providers/Microsoft.Sql/managedInstances/testsvr/databases/testdb/backupShortTermRetentionPolicies/default",
+        "properties": {
+          "retentionDays": 14
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "ManagedBackupShortTermRetentionPolicies_CreateOrUpdate",
+  "title": "Update the short term retention policy for the database."
+}

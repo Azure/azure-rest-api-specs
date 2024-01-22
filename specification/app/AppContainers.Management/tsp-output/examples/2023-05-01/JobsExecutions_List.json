@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2023-05-01",
+    "jobName": "testcontainerAppsJob0",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "testcontainerAppJob-27944454",
+            "endTime": "2023-02-13T20:47:30+00:00",
+            "startTime": "2023-02-13T20:37:30+00:00",
+            "status": "Running",
+            "template": {
+              "containers": [
+                {
+                  "name": "testcontainerAppsJob0",
+                  "image": "repo/testcontainerAppsJob0:v4",
+                  "resources": {
+                    "cpu": 0.2,
+                    "memory": "100Mi"
+                  }
+                }
+              ],
+              "initContainers": [
+                {
+                  "name": "testinitcontainerAppsJob0",
+                  "args": [
+                    "-c",
+                    "while true; do echo hello; sleep 10;done"
+                  ],
+                  "command": [
+                    "/bin/sh"
+                  ],
+                  "image": "repo/testcontainerAppsJob0:v4",
+                  "resources": {
+                    "cpu": 0.2,
+                    "memory": "100Mi"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "JobsExecutions_List",
+  "title": "Get a Container Apps Job Executions"
+}

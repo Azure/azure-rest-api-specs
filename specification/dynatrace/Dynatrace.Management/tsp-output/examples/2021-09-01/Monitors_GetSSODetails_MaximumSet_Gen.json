@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "request": {
+      "userPrincipal": "alice@microsoft.com"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "aadDomains": [
+          "mpliftrdt20210811outlook.onmicrosoft.com"
+        ],
+        "adminUsers": [
+          "alice@microsoft.com"
+        ],
+        "isSsoEnabled": "Enabled",
+        "metadataUrl": "https://someuri",
+        "singleSignOnUrl": "https://www.dynatrace.io/IAmSomeHash"
+      }
+    },
+    "401": {}
+  },
+  "operationId": "Monitors_GetSSODetails",
+  "title": "Monitors_GetSSODetails_MaximumSet_Gen"
+}

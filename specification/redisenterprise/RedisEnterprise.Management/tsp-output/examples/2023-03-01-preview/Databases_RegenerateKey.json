@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01-preview",
+    "clusterName": "cache1",
+    "databaseName": "default",
+    "parameters": {
+      "keyType": "Primary"
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "primaryKey": "<primaryKey>",
+        "secondaryKey": "<secondaryKey>"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    }
+  },
+  "operationId": "Databases_RegenerateKey",
+  "title": "RedisEnterpriseDatabasesRegenerateKey"
+}

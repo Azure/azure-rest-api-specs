@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "$filter": "ShowServerRecords eq true",
+    "$skip": "0",
+    "$skiptoken": "eyJCbG9iTmFtZURhdGVUaW1lIjoiXC9EYXRlKDE1MTIyODg4MTIwMTArMDIwMClcLyIsIkJsb2JOYW1lUm9sbG92ZXJJbmRleCI6IjAiLCJFbmREYXRlIjoiXC9EYXRlKDE1MTI0NjYyMDA1MjkpXC8iLCJJc1NraXBUb2tlblNldCI6ZmFsc2UsIklzVjJCbG9iVGltZUZvcm1hdCI6dHJ1ZSwiU2hvd1NlcnZlclJlY29yZHMiOmZhbHNlLCJTa2lwVmFsdWUiOjAsIlRha2VWYWx1ZSI6MTB9",
+    "$top": "1",
+    "api-version": "2020-11-01-preview",
+    "databaseName": "database1",
+    "managedInstanceName": "testcl",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/databases/database1/securityEvents?$skipToken=C9EYXRlKDE1MTIyODg4MTIwMTArMDIwMClcLyIsIkJsb2JOYW1lUm9sbC9EYXRlKDE1MTIyODg4MTIwMTArMDIwMClcLyIsIkJsb2JOYW1lUm9sbC9EYXRlKDE1MTIyODg4MTIwMTArMDIwMClcLyIsIkJsb2JOYW1lUm9sbC9EYXRlKDE1MTIyODg4MTIwMTArMDIwMClcLyIsIkJsb2JOYW1lUm9sb&api-version=2017-10-01-preview",
+        "value": [
+          {
+            "name": "06364798761800000000000000001",
+            "type": "Microsoft.Sql/servers/databases/securityEvents",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/databases/database1/securityEvents/06364798761800000000000000001",
+            "properties": {
+              "applicationName": "myApp",
+              "clientIp": "10.166.113.220",
+              "database": "database1",
+              "eventTime": "2017-12-24T10:13:24.729Z",
+              "principalName": "maliciousUser",
+              "securityEventSqlInjectionAdditionalProperties": {
+                "errorCode": 0,
+                "errorMessage": "",
+                "errorSeverity": 0,
+                "statement": "select * from sys.databases where database_id like '' or 1 = 1 --' and family = 'test11'",
+                "statementHighlightLength": 13,
+                "statementHighlightOffset": 52,
+                "threatId": "1"
+              },
+              "securityEventType": "SqlInjectionExploit",
+              "server": "testcl",
+              "subscription": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedDatabaseSecurityEvents_ListByDatabase",
+  "title": "Get the managed database's security events with maximal parameters"
+}

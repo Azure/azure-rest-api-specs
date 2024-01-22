@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "locationName": "WestUS",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ServerQuota",
+            "type": "Microsoft.Sql/locations/usages",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/Onebox/usages/ServerQuota",
+            "properties": {
+              "currentValue": 1,
+              "displayName": "Regional Server Quota for West US",
+              "limit": 20,
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "SubscriptionFreeDatabaseCount",
+            "type": "Microsoft.Sql/locations/usages",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/Onebox/usages/SubscriptionFreeDatabaseCount",
+            "properties": {
+              "currentValue": 0,
+              "displayName": "Free Database Count per Subscription for West US",
+              "limit": 1,
+              "unit": "Count"
+            }
+          },
+          {
+            "name": "SubscriptionFreeDatabaseDaysLeft",
+            "type": "Microsoft.Sql/locations/usages",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/Onebox/usages/SubscriptionFreeDatabaseDaysLeft",
+            "properties": {
+              "currentValue": 365,
+              "displayName": "Free to Basic Database Upgrade count-down in West US",
+              "limit": 365,
+              "unit": "Count"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SubscriptionUsages_ListByLocation",
+  "title": "List subscription usages in the given location."
+}

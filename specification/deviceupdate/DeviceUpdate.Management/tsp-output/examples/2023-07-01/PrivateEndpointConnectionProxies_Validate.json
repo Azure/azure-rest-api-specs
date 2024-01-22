@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "accountName": "contoso",
+    "api-version": "2023-07-01",
+    "privateEndpointConnectionProxy": {
+      "remotePrivateEndpoint": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{privateEndpointConnectionProxyId}",
+        "immutableResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{peName}",
+        "immutableSubscriptionId": "00000000-0000-0000-0000-000000000000",
+        "location": "westus2",
+        "manualPrivateLinkServiceConnections": [
+          {
+            "name": "{privateEndpointConnectionProxyId}",
+            "groupIds": [
+              "DeviceUpdate"
+            ],
+            "requestMessage": "Please approve my connection, thanks."
+          }
+        ],
+        "privateLinkServiceProxies": [
+          {
+            "groupConnectivityInformation": [],
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Network/privateEndpoints/{privateEndpointConnectionProxyId}/privateLinkServiceProxies/{privateEndpointConnectionProxyId}"
+          }
+        ]
+      }
+    },
+    "privateEndpointConnectionProxyId": "peexample01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "PrivateEndpointConnectionProxies_Validate",
+  "title": "PrivateEndpointConnectionProxyValidate"
+}

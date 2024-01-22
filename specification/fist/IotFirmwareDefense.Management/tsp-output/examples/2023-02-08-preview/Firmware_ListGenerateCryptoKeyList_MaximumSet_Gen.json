@@ -1,0 +1,104 @@
+{
+  "operationId": "Firmware_ListGenerateCryptoKeyList",
+  "parameters": {
+    "api-version": "2023-02-08-preview",
+    "firmwareId": "DECAFBAD-0000-0000-0000-BADBADBADBAD",
+    "resourceGroupName": "FirmwareAnalysisRG",
+    "subscriptionId": "C589E84A-5C11-4A25-9CF9-4E9C2F1EBFCA",
+    "workspaceName": "default"
+  },
+  "title": "Firmware_ListGenerateCryptoKeyList_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://nextlink",
+        "value": [
+          {
+            "cryptoKeyId": "09c97cb7-0963-41ad-b9e2-0be7b10ac1bf",
+            "filePaths": [
+              "this/is/a/file/path",
+              "this/is/another/file/path"
+            ],
+            "isShortKeySize": "False",
+            "keyAlgorithm": "ECDSA",
+            "keySize": 256,
+            "keyType": "Public",
+            "pairedKey": {
+              "type": "Certificate",
+              "additionalProperties": {
+                "displayName": "VeriSign Class 2"
+              },
+              "id": "09c97cb7-0963-41ad-b9e2-0be7b10ac1bf"
+            },
+            "usage": []
+          },
+          {
+            "cryptoKeyId": "98ff3d6c-bb76-4037-b73e-89b3b47efd71",
+            "filePaths": [
+              "this/is/a/file/path_pub.pem"
+            ],
+            "isShortKeySize": "False",
+            "keyAlgorithm": "RSA",
+            "keySize": 2048,
+            "keyType": "Public",
+            "pairedKey": {
+              "type": "Private Key",
+              "additionalProperties": null,
+              "id": "adfe0c4c-7d23-4f4f-a8bb-e65b8f455287"
+            },
+            "usage": [
+              "SSH"
+            ]
+          },
+          {
+            "cryptoKeyId": "1beb6fac-1cfe-431c-9437-ea8cfa9e6aaa",
+            "filePaths": [],
+            "isShortKeySize": "True",
+            "keyAlgorithm": "ECDSA",
+            "keySize": 128,
+            "keyType": "Public",
+            "usage": []
+          },
+          {
+            "cryptoKeyId": "adfe0c4c-7d23-4f4f-a8bb-e65b8f455287",
+            "filePaths": [
+              "this/is/a/file/path.pem"
+            ],
+            "isShortKeySize": "False",
+            "keyAlgorithm": "RSA",
+            "keySize": 2048,
+            "keyType": "Private",
+            "pairedKey": {
+              "type": "Public Key",
+              "id": "98ff3d6c-bb76-4037-b73e-89b3b47efd71"
+            },
+            "usage": [
+              "SSH"
+            ]
+          },
+          {
+            "cryptoKeyId": "8c8d1003-efb2-4c54-83d6-16dc6a5bbfd5",
+            "filePaths": [],
+            "isShortKeySize": "True",
+            "keyAlgorithm": "RSA",
+            "keySize": 1024,
+            "keyType": "Private",
+            "usage": []
+          },
+          {
+            "cryptoKeyId": "0b04fc4c-bfbd-491b-b4c8-e93b0b0b28e9",
+            "filePaths": [
+              "this/is/a/file/path",
+              "this/is/another/file/path"
+            ],
+            "isShortKeySize": "False",
+            "keyAlgorithm": "MD5",
+            "keySize": 256,
+            "keyType": "Private",
+            "usage": []
+          }
+        ]
+      }
+    }
+  }
+}

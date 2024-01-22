@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "databaseName": "syncgroupcrud-4328",
+    "resourceGroupName": "syncgroupcrud-65440",
+    "serverName": "syncgroupcrud-8475",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "syncGroupName": "syncgroupcrud-3187",
+    "syncMemberName": "syncgroupcrud-4879"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "lastUpdateTime": "2017-05-30T07:16:08.21Z",
+            "tables": [
+              {
+                "name": "dbo.myTable",
+                "columns": [
+                  {
+                    "name": "intField",
+                    "dataSize": "4",
+                    "dataType": "int",
+                    "hasError": false,
+                    "isPrimaryKey": false,
+                    "quotedName": "[intField]"
+                  },
+                  {
+                    "name": "charField",
+                    "dataSize": "100",
+                    "dataType": "nvarchar",
+                    "hasError": false,
+                    "isPrimaryKey": false,
+                    "quotedName": "[charField]"
+                  }
+                ],
+                "errorId": "Schema_TableHasNoPrimaryKey",
+                "hasError": true,
+                "quotedName": "[dbo].[myTable]"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SyncMembers_ListMemberSchemas",
+  "title": "Get a sync member schema"
+}

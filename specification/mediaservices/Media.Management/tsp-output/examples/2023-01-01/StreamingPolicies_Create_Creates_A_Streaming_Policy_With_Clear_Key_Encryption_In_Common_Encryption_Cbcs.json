@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "accountName": "contosomedia",
+    "api-version": "2023-01-01",
+    "parameters": {
+      "properties": {
+        "commonEncryptionCbcs": {
+          "clearKeyEncryptionConfiguration": {
+            "customKeysAcquisitionUrlTemplate": "https://contoso.com/{AlternativeMediaId}/clearkey/"
+          },
+          "contentKeys": {
+            "defaultKey": {
+              "label": "cbcsDefaultKey"
+            }
+          },
+          "enabledProtocols": {
+            "dash": false,
+            "download": false,
+            "hls": true,
+            "smoothStreaming": false
+          }
+        },
+        "defaultContentKeyPolicyName": "PolicyWithMultipleOptions"
+      }
+    },
+    "resourceGroupName": "contosorg",
+    "streamingPolicyName": "UserCreatedSecureStreamingPolicyWithCommonEncryptionCbcsOnly",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "UserCreatedSecureStreamingPolicyWithCommonEncryptionCbcsOnly",
+        "type": "Microsoft.Media/mediaservices/streamingPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/streamingPolicies/UserCreatedSecureStreamingPolicyWithCommonEncryptionCbcsOnly",
+        "properties": {
+          "commonEncryptionCbcs": {
+            "clearKeyEncryptionConfiguration": {
+              "customKeysAcquisitionUrlTemplate": "https://contoso.com/{AlternativeMediaId}/clearkey/"
+            },
+            "clearTracks": [],
+            "contentKeys": {
+              "defaultKey": {
+                "label": "cbcsDefaultKey"
+              },
+              "keyToTrackMappings": []
+            },
+            "enabledProtocols": {
+              "dash": false,
+              "download": false,
+              "hls": true,
+              "smoothStreaming": false
+            }
+          },
+          "created": "2018-08-08T18:29:31.6197199Z",
+          "defaultContentKeyPolicyName": "PolicyWithMultipleOptions"
+        }
+      }
+    }
+  },
+  "operationId": "StreamingPolicies_Create",
+  "title": "Creates a Streaming Policy with ClearKey encryption in commonEncryptionCbcs."
+}

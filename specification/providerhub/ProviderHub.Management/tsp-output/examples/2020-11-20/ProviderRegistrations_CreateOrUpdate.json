@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2020-11-20",
+    "properties": {
+      "properties": {
+        "capabilities": [
+          {
+            "effect": "Allow",
+            "quotaId": "CSP_2015-05-01"
+          },
+          {
+            "effect": "Allow",
+            "quotaId": "CSP_MG_2017-12-01"
+          }
+        ],
+        "management": {
+          "incidentContactEmail": "helpme@contoso.com",
+          "incidentRoutingService": "Contoso Resource Provider",
+          "incidentRoutingTeam": "Contoso Triage"
+        },
+        "providerType": "Internal",
+        "providerVersion": "2.0"
+      }
+    },
+    "providerNamespace": "Microsoft.Contoso",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
+  },
+  "responses": {
+    "200": {
+      "description": "",
+      "body": {
+        "properties": {
+          "capabilities": [
+            {
+              "effect": "Allow",
+              "quotaId": "CSP_2015-05-01"
+            },
+            {
+              "effect": "Allow",
+              "quotaId": "CSP_MG_2017-12-01"
+            }
+          ],
+          "management": {
+            "incidentContactEmail": "helpme@contoso.com",
+            "incidentRoutingService": "",
+            "incidentRoutingTeam": "",
+            "manifestOwners": [
+              "manifestOwners-group"
+            ],
+            "resourceAccessPolicy": "NotSpecified"
+          },
+          "metadata": {
+            "onboardedVia": "ProviderHub"
+          },
+          "namespace": "Microsoft.Contoso",
+          "providerAuthorizations": [
+            {
+              "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+              "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+            }
+          ],
+          "providerType": "Internal, Hidden",
+          "providerVersion": "2.0",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "description": "Successfully created the provider registration."
+    }
+  },
+  "operationId": "ProviderRegistrations_CreateOrUpdate",
+  "title": "ProviderRegistrations_CreateOrUpdate"
+}

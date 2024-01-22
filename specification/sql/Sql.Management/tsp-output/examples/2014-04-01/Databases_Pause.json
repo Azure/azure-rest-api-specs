@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2023-02-01-preview",
+    "databaseName": "testdwdb",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "serverName": "testsvr",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testdwdb",
+        "type": "Microsoft.Sql/servers/databases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdwdb",
+        "kind": "v12.0,user,datawarehouse",
+        "location": "southeastasia",
+        "properties": {
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "creationDate": "2017-07-13T02:04:26.187Z",
+          "currentServiceObjectiveName": "D1",
+          "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
+          "defaultSecondaryLocation": "North Europe",
+          "maxSizeBytes": 10995116277760,
+          "status": "Paused"
+        },
+        "sku": {
+          "name": "DataWarehouse"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/locations/japaneast/databaseOperationResults/00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  "operationId": "Databases_Pause",
+  "title": "Pauses a database."
+}

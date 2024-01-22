@@ -1,0 +1,48 @@
+{
+  "operationId": "FleetMembers_Update",
+  "parameters": {
+    "api-version": "2023-10-15",
+    "fleetMemberName": "member-1",
+    "fleetName": "fleet1",
+    "properties": {
+      "properties": {
+        "group": "staging"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid1"
+  },
+  "title": "Updates a FleetMember resource synchronously.",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "member-1",
+        "type": "Microsoft.ContainerService/fleets/members",
+        "eTag": "23ujdflewrj3=",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/members/member-1",
+        "properties": {
+          "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
+          "group": "staging",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "ETag": "23ujdflewrj3="
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2022-02-01",
+        "Retry-After": "20"
+      }
+    }
+  }
+}

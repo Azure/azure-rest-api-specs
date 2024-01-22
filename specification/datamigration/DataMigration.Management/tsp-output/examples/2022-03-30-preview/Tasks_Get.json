@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2022-03-30-preview",
+    "groupName": "DmsSdkRg",
+    "projectName": "DmsSdkProject",
+    "serviceName": "DmsSdkService",
+    "subscriptionId": "fc04246f-04c5-437e-ac5e-206a19e7193f",
+    "taskName": "DmsSdkTask"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "DmsSdkTask",
+        "type": "Microsoft.DataMigration/services/projects/tasks",
+        "etag": "0vPYxzfnDaDH9yhOJAnqTyTRpa09Kb7pm+LEukDBbw8=",
+        "id": "/subscriptions/fc04246f-04c5-437e-ac5e-206a19e7193f/resourceGroups/DmsSdkRg/providers/Microsoft.DataMigration/services/DmsSdkService/projects/DmsSdkProject/tasks/DmsSdkTask",
+        "properties": {
+          "input": {
+            "targetConnectionInfo": {
+              "type": "SqlConnectionInfo",
+              "authentication": "SqlAuthentication",
+              "dataSource": "ssma-test-server.database.windows.net",
+              "encryptConnection": true,
+              "trustServerCertificate": true,
+              "userName": "testuser"
+            }
+          },
+          "state": "Queued",
+          "taskType": "ConnectToTarget.SqlDb"
+        }
+      }
+    }
+  },
+  "operationId": "Tasks_Get",
+  "title": "Tasks_Get"
+}

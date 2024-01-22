@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2016-01-01",
+    "hubName": "sdkTestHub",
+    "linkName": "linkTest4806",
+    "resourceGroupName": "TestHubRG",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "azSdkTestHub/linkTest4806",
+        "type": "Microsoft.CustomerInsights/hubs/links",
+        "id": "/subscriptions/c909e979-ef71-4def-a970-bc7c154db8c5/resourceGroups/TestHubRG/providers/Microsoft.CustomerInsights/hubs/azSdkTestHub/links/linkTest4806",
+        "properties": {
+          "description": {
+            "en-us": "Link Description"
+          },
+          "displayName": {
+            "en-us": "Link DisplayName"
+          },
+          "linkName": "linkTest4806",
+          "mappings": [
+            {
+              "linkType": "UpdateAlways",
+              "sourcePropertyName": "testInteraction1949",
+              "targetPropertyName": "testProfile1446"
+            }
+          ],
+          "participantPropertyReferences": [
+            {
+              "sourcePropertyName": "testInteraction1949",
+              "targetPropertyName": "ProfileId"
+            }
+          ],
+          "provisioningState": "Provisioning",
+          "referenceOnly": false,
+          "sourceEntityType": "Interaction",
+          "sourceEntityTypeName": "testInteraction1949",
+          "targetEntityType": "Profile",
+          "targetEntityTypeName": "testProfile1446",
+          "tenantId": "azsdktesthub"
+        }
+      }
+    }
+  },
+  "operationId": "Links_Get",
+  "title": "Links_Get"
+}

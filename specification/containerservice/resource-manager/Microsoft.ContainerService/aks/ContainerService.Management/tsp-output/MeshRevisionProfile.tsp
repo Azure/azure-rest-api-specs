@@ -1,0 +1,46 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ContainerService;
+/**
+ * Mesh revision profile for a mesh.
+ */
+@locationResource
+model MeshRevisionProfile is ProxyResource<MeshRevisionProfileProperties> {
+  /**
+   * The mode of the mesh.
+   */
+  @maxLength(24)
+  @minLength(1)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$")
+  @path
+  @key("mode")
+  @segment("meshRevisionProfiles")
+  name: string;
+}
+
+@armResourceOperations
+interface MeshRevisionProfiles {
+  /**
+   * Contains extra metadata on the revision, including supported revisions, cluster compatibility and available upgrades
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ManagedClusters_GetMeshRevisionProfile")
+  getMeshRevisionProfile is ArmResourceRead<MeshRevisionProfile>;
+
+  /**
+   * Contains extra metadata on each revision, including supported revisions, cluster compatibility and available upgrades
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ManagedClusters_ListMeshRevisionProfiles")
+  listMeshRevisionProfiles is ArmResourceListByParent<MeshRevisionProfile>;
+}

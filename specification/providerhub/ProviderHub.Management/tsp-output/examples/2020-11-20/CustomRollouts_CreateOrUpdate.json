@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2020-11-20",
+    "properties": {
+      "properties": {
+        "specification": {
+          "canary": {
+            "regions": [
+              "brazilus"
+            ]
+          }
+        }
+      }
+    },
+    "providerNamespace": "Microsoft.Contoso",
+    "rolloutName": "brazilUsShoeBoxTesting",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
+  },
+  "responses": {
+    "200": {
+      "description": "Custom rollout completed successfully.",
+      "body": {
+        "name": "Microsoft.Contoso/brazilUsShoeBoxTesting",
+        "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/brazilUsShoeBoxTesting",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "specification": {
+            "canary": {
+              "regions": [
+                "brazilus",
+                "eastus2euap",
+                "centraluseuap"
+              ]
+            }
+          },
+          "status": {
+            "completedRegions": [
+              "brazilus",
+              "eastus2euap",
+              "centraluseuap"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "CustomRollouts_CreateOrUpdate",
+  "title": "CustomRollouts_CreateOrUpdate"
+}

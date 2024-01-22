@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "$expand": "MigrationStatusDetails",
+    "api-version": "2022-03-30-preview",
+    "resourceGroupName": "testrg",
+    "sqlDbInstanceName": "sqldbinstance",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "targetDbName": "db1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "db1",
+        "type": "Microsoft.DataMigration/databaseMigrations",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance/providers/Microsoft.DataMigration/databaseMigrations/db1",
+        "properties": {
+          "endedOn": "0001-01-01T08:00:00Z",
+          "kind": "SqlDb",
+          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd",
+          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+          "migrationStatus": "Succeeded",
+          "migrationStatusDetails": {
+            "listOfCopyProgressDetails": [
+              {
+                "copyDuration": 90,
+                "copyStart": "2022-01-19T00:00:00.000Z",
+                "copyThroughput": 100,
+                "dataRead": 100,
+                "dataWritten": 100,
+                "parallelCopyType": "None",
+                "rowsCopied": 10,
+                "rowsRead": 10,
+                "status": "Succeeded",
+                "tableName": "Table.Name",
+                "usedParallelCopies": 1
+              },
+              {
+                "copyDuration": 0,
+                "copyStart": "2022-01-19T04:08:00.000Z",
+                "copyThroughput": 0,
+                "dataRead": 100,
+                "dataWritten": 0,
+                "parallelCopyType": "DynamicRange",
+                "rowsCopied": 0,
+                "rowsRead": 10,
+                "status": "InProgress",
+                "tableName": "Table2.Name",
+                "usedParallelCopies": 4
+              }
+            ],
+            "migrationState": "MonitorMigration",
+            "sqlDataCopyErrors": [
+              ""
+            ]
+          },
+          "offlineConfiguration": {
+            "offline": true
+          },
+          "provisioningState": "Succeeded",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance",
+          "sourceDatabaseName": "sourcename",
+          "sourceServerName": "sourceserver",
+          "startedOn": "0001-01-01T08:00:00Z"
+        }
+      }
+    }
+  },
+  "operationId": "DatabaseMigrationsSqlDb_Get",
+  "title": "Get Sql DB database Migration with the expand parameter."
+}

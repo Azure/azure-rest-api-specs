@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "$expand": "keys",
+    "api-version": "2022-08-01-preview",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "restorableDroppedDatabaseId": "testdb,131403269876900000",
+    "serverName": "testsvr",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testdb,131403269876900000",
+        "type": "Microsoft.Sql/servers/restorableDroppedDatabases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/restorableDroppedDatabases/testdb",
+        "location": "southeastasia",
+        "properties": {
+          "backupStorageRedundancy": "Geo",
+          "creationDate": "2017-05-07T04:41:33.937Z",
+          "databaseName": "testdb",
+          "deletionDate": "2017-05-27T02:49:47.69Z",
+          "keys": {
+            "https://your-key-vault-name.vault.azure.net/yourKey/yourKeyVersion": {},
+            "https://your-key-vault-name.vault.azure.net/yourKey2/yourKey2Version": {}
+          },
+          "maxSizeBytes": 268435456000
+        },
+        "sku": {
+          "name": "BC_Gen4_2",
+          "tier": "BusinessCritical"
+        }
+      }
+    }
+  },
+  "operationId": "RestorableDroppedDatabases_Get",
+  "title": "Gets a restorable dropped database with expand equals keys."
+}

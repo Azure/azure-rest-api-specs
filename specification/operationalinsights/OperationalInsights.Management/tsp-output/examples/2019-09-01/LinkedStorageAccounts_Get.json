@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "dataSourceType": "CustomLogs",
+    "resourceGroupName": "mms-eus",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "workspaceName": "testLinkStorageAccountsWS"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "CustomLogs",
+        "type": "Microsoft.OperationalInsights/workspaces/linkedStorageAccounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000005/resourcegroups/mms-eus/providers/microsoft.operationalinsights/workspaces/testLinkStorageAccountsWS/linkedStorageAccounts/CustomLogs",
+        "properties": {
+          "dataSourceType": "CustomLogs",
+          "storageAccountIds": [
+            "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.Storage/storageAccounts/testStorageA",
+            "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.Storage/storageAccounts/testStorageB"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "LinkedStorageAccounts_Get",
+  "title": "LinkedStorageAccountsGet"
+}

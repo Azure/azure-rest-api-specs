@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "api-version": "2018-03-01",
+    "parameters": {
+      "location": "global",
+      "properties": {
+        "description": "This is the description of the rule1",
+        "actions": [
+          {
+            "actionGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
+            "webHookProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          }
+        ],
+        "autoMitigate": true,
+        "criteria": {
+          "allOf": [
+            {
+              "name": "High_CPU_80",
+              "alertSensitivity": "Medium",
+              "criterionType": "DynamicThresholdCriterion",
+              "dimensions": [],
+              "failingPeriods": {
+                "minFailingPeriodsToAlert": 4,
+                "numberOfEvaluationPeriods": 4
+              },
+              "ignoreDataBefore": "2019-04-04T21:00:00.000Z",
+              "metricName": "Percentage CPU",
+              "metricNamespace": "microsoft.compute/virtualmachines",
+              "operator": "GreaterOrLessThan",
+              "timeAggregation": "Average"
+            }
+          ],
+          "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+        },
+        "enabled": true,
+        "evaluationFrequency": "PT1M",
+        "scopes": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
+        ],
+        "severity": 3,
+        "windowSize": "PT15M"
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "gigtest",
+    "ruleName": "chiricutin",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Insights/metricAlerts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/chiricutin",
+        "location": "global",
+        "properties": {
+          "description": "This is the description of the rule1",
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
+              "webHookProperties": {
+                "key11": "value11",
+                "key12": "value12"
+              }
+            }
+          ],
+          "autoMitigate": true,
+          "criteria": {
+            "allOf": [
+              {
+                "name": "High_CPU_80",
+                "alertSensitivity": "Medium",
+                "criterionType": "DynamicThresholdCriterion",
+                "dimensions": [],
+                "failingPeriods": {
+                  "minFailingPeriodsToAlert": 4,
+                  "numberOfEvaluationPeriods": 4
+                },
+                "ignoreDataBefore": "2019-04-04T21:00:00.000Z",
+                "metricName": "Percentage CPU",
+                "metricNamespace": "microsoft.compute/virtualmachines",
+                "operator": "GreaterOrLessThan",
+                "timeAggregation": "Average"
+              }
+            ],
+            "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+          },
+          "enabled": true,
+          "evaluationFrequency": "PT1M",
+          "scopes": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
+          ],
+          "severity": 3,
+          "targetResourceRegion": "southcentralus",
+          "targetResourceType": "Microsoft.Compute/virtualMachines",
+          "windowSize": "PT15M"
+        },
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "MetricAlerts_CreateOrUpdate",
+  "title": "Create or update a dynamic alert rule for Single Resource"
+}

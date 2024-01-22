@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "clusterName": "oiautorest6685",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/oiautorest6685/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {}
+        }
+      },
+      "properties": {
+        "keyVaultProperties": {
+          "keyName": "aztest2170cert",
+          "keyRsaSize": 1024,
+          "keyVaultUri": "https://aztest2170.vault.azure.net",
+          "keyVersion": "654ft6c4e63845cbb50fd6fg51540429"
+        }
+      },
+      "sku": {
+        "name": "CapacityReservation",
+        "capacity": 1000
+      },
+      "tags": {
+        "tag1": "val1"
+      }
+    },
+    "resourceGroupName": "oiautorest6685",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "72f999bf-acf1-41af-91ab-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/oiautorest6685/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
+              "clientId": "eb3a943d-6b12-48a6-b585-ac2316e15ab2",
+              "principalId": "b31776d4-ee80-4860-9433-ec0101be1891"
+            }
+          }
+        },
+        "location": "australiasoutheast",
+        "properties": {
+          "associatedWorkspaces": [
+            {
+              "associateDate": "Tue, 07 Jul 2020 07:35:51 GMT",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/testRG/providers/microsoft.operationalinsights/workspaces/testWs1",
+              "workspaceId": "942bdefd-e6c9-411c-ac69-70ffad564363",
+              "workspaceName": "testWs1"
+            },
+            {
+              "associateDate": "Mon, 13 Jan 2020 16:03:39 GMT",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/testRG/providers/microsoft.operationalinsights/workspaces/testWs2",
+              "workspaceId": "c7edb8f8-67f7-41f2-bddb-aecf22507e3f",
+              "workspaceName": "testWs2"
+            }
+          ],
+          "billingType": "Cluster",
+          "capacityReservationProperties": {
+            "lastSkuUpdate": "Thu, 01 Jan 1970 00:00:00 GMT",
+            "minCapacity": 500
+          },
+          "clusterId": "1c3f2afc-9ec1-4e74-bfe8-022b83bcd7b1",
+          "createdDate": "Mon, 13 Jan 2020 14:40:33 GMT",
+          "keyVaultProperties": {
+            "keyName": "aztest2170cert",
+            "keyVaultUri": "https://aztest2170.vault.azure.net",
+            "keyVersion": "654ft6c4e63845cbb50fd6fg51540429"
+          },
+          "lastModifiedDate": "Sun, 04 Jan 2020 17:10:56 GMT",
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "CapacityReservation",
+          "capacity": 1000
+        },
+        "tags": {
+          "tag1": "val1"
+        }
+      }
+    }
+  },
+  "operationId": "Clusters_Update",
+  "title": "ClustersPatch"
+}

@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "api-version": "2018-03-01",
+    "parameters": {
+      "location": "global",
+      "properties": {
+        "description": "This is the description of the rule1",
+        "actions": [
+          {
+            "actionGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
+            "webHookProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          }
+        ],
+        "autoMitigate": true,
+        "criteria": {
+          "allOf": [
+            {
+              "name": "Metric1",
+              "criterionType": "StaticThresholdCriterion",
+              "dimensions": [
+                {
+                  "name": "ActivityName",
+                  "operator": "Include",
+                  "values": [
+                    "*"
+                  ]
+                },
+                {
+                  "name": "StatusCode",
+                  "operator": "Include",
+                  "values": [
+                    "200"
+                  ]
+                }
+              ],
+              "metricName": "Availability",
+              "metricNamespace": "Microsoft.KeyVault/vaults",
+              "operator": "GreaterThan",
+              "threshold": 55,
+              "timeAggregation": "Average"
+            }
+          ],
+          "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+        },
+        "enabled": true,
+        "evaluationFrequency": "PT1H",
+        "scopes": [
+          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.KeyVault/vaults/keyVaultResource"
+        ],
+        "severity": 3,
+        "windowSize": "P1D"
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "gigtest",
+    "ruleName": "MetricAlertOnMultipleDimensions",
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Insights/metricAlerts",
+        "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/providers/microsoft.insights/metricalerts/MetricAlertWithDimensions",
+        "location": "global",
+        "properties": {
+          "description": "This is the description of the rule1",
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
+              "webHookProperties": {
+                "key11": "value11",
+                "key12": "value12"
+              }
+            }
+          ],
+          "autoMitigate": true,
+          "criteria": {
+            "allOf": [
+              {
+                "name": "Metric1",
+                "criterionType": "StaticThresholdCriterion",
+                "dimensions": [
+                  {
+                    "name": "ActivityName",
+                    "operator": "Include",
+                    "values": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "name": "StatusCode",
+                    "operator": "Include",
+                    "values": [
+                      "200"
+                    ]
+                  }
+                ],
+                "metricName": "Availability",
+                "metricNamespace": "Microsoft.KeyVault/vaults",
+                "operator": "GreaterThan",
+                "threshold": 55,
+                "timeAggregation": "Average"
+              }
+            ],
+            "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+          },
+          "enabled": true,
+          "evaluationFrequency": "PT1H",
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.KeyVault/vaults/keyVaultResource"
+          ],
+          "severity": 3,
+          "targetResourceRegion": "southcentralus",
+          "targetResourceType": "Microsoft.KeyVault/vaults",
+          "windowSize": "P1D"
+        },
+        "tags": {
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "MetricAlerts_CreateOrUpdate",
+  "title": "Create or update an alert rules with dimensions"
+}

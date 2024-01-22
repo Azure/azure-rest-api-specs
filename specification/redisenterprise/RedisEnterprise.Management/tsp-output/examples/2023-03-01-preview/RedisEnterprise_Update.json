@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01-preview",
+    "clusterName": "cache1",
+    "parameters": {
+      "properties": {
+        "minimumTlsVersion": "1.2"
+      },
+      "sku": {
+        "name": "EnterpriseFlash_F300",
+        "capacity": 9
+      },
+      "tags": {
+        "tag1": "value1"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "identity": {
+          "type": "None"
+        },
+        "location": "West US",
+        "properties": {
+          "encryption": {},
+          "hostName": "cache1.westus.something.azure.com",
+          "minimumTlsVersion": "1.2",
+          "provisioningState": "Updating",
+          "redisVersion": "5",
+          "resourceState": "Updating"
+        },
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 9
+        },
+        "tags": {
+          "tag1": "value1"
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    }
+  },
+  "operationId": "RedisEnterprise_Update",
+  "title": "RedisEnterpriseUpdate"
+}

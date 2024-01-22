@@ -1,0 +1,132 @@
+{
+  "parameters": {
+    "activityLogAlertName": "SampleActivityLogAlertRuleWithContainsAny",
+    "activityLogAlertRule": {
+      "location": "Global",
+      "properties": {
+        "description": "Description of sample Activity Log Alert rule with 'containsAny'.",
+        "actions": {
+          "actionGroups": [
+            {
+              "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
+              "webhookProperties": {
+                "sampleWebhookProperty": "SamplePropertyValue"
+              }
+            }
+          ]
+        },
+        "condition": {
+          "allOf": [
+            {
+              "equals": "ServiceHealth",
+              "field": "category"
+            },
+            {
+              "containsAny": [
+                "North Europe",
+                "West Europe"
+              ],
+              "field": "properties.impactedServices[*].ImpactedRegions[*].RegionName"
+            }
+          ]
+        },
+        "enabled": true,
+        "scopes": [
+          "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+        ]
+      },
+      "tags": {}
+    },
+    "api-version": "2020-10-01",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "SampleActivityLogAlertRuleWithContainsAny",
+        "type": "Microsoft.Insights/ActivityLogAlerts",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithContainsAny",
+        "location": "Global",
+        "properties": {
+          "description": "Description of sample Activity Log Alert rule with 'containsAny'.",
+          "actions": {
+            "actionGroups": [
+              {
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
+                "webhookProperties": {
+                  "sampleWebhookProperty": "SamplePropertyValue"
+                }
+              }
+            ]
+          },
+          "condition": {
+            "allOf": [
+              {
+                "equals": "ServiceHealth",
+                "field": "category"
+              },
+              {
+                "containsAny": [
+                  "North Europe",
+                  "West Europe"
+                ],
+                "field": "properties.impactedServices[*].ImpactedRegions[*].RegionName"
+              }
+            ]
+          },
+          "enabled": true,
+          "scopes": [
+            "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+          ]
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "SampleActivityLogAlertRuleWithContainsAny",
+        "type": "Microsoft.Insights/ActivityLogAlerts",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/microsoft.insights/activityLogAlerts/SampleActivityLogAlertRuleWithContainsAny",
+        "location": "Global",
+        "properties": {
+          "description": "Description of sample Activity Log Alert rule with 'containsAny'.",
+          "actions": {
+            "actionGroups": [
+              {
+                "actionGroupId": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/actionGroups/SampleActionGroup",
+                "webhookProperties": {
+                  "sampleWebhookProperty": "SamplePropertyValue"
+                }
+              }
+            ]
+          },
+          "condition": {
+            "allOf": [
+              {
+                "equals": "ServiceHealth",
+                "field": "category"
+              },
+              {
+                "containsAny": [
+                  "North Europe",
+                  "West Europe"
+                ],
+                "field": "properties.impactedServices[*].ImpactedRegions[*].RegionName"
+              }
+            ]
+          },
+          "enabled": true,
+          "scopes": [
+            "subscriptions/187f412d-1758-44d9-b052-169e2564721d"
+          ]
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ActivityLogAlerts_CreateOrUpdate",
+  "title": "Create or update an Activity Log Alert rule with 'containsAny'"
+}

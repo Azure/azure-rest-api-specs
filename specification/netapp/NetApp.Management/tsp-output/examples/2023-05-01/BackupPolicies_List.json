@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2023-05-01",
+    "resourceGroupName": "myRG",
+    "subscriptionId": "D633CC2E-722B-4AE1-B636-BBD9E4C60ED9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "account1/backupPolicy1",
+            "type": "Microsoft.NetApp/netAppAccounts/backupPolicies",
+            "id": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupPolocies/backupPolicy1",
+            "location": "eastus",
+            "properties": {
+              "dailyBackupsToKeep": 10,
+              "enabled": true,
+              "monthlyBackupsToKeep": 10,
+              "volumesAssigned": 0,
+              "weeklyBackupsToKeep": 10
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BackupPolicies_List",
+  "title": "Backups_List"
+}

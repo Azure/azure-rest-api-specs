@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "jobName": "sj5095",
+    "output": {
+      "properties": {
+        "datasource": {
+          "type": "Microsoft.ServiceBus/Queue",
+          "properties": {
+            "queueName": "differentQueueName"
+          }
+        },
+        "serialization": {
+          "type": "Json",
+          "properties": {
+            "format": "LineSeparated",
+            "encoding": "UTF8"
+          }
+        }
+      }
+    },
+    "outputName": "output3456",
+    "resourceGroupName": "sjrg3410",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "output3456",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg3410/providers/Microsoft.StreamAnalytics/streamingjobs/sj5095/outputs/output3456",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.ServiceBus/Queue",
+            "properties": {
+              "propertyColumns": [
+                "column1",
+                "column2"
+              ],
+              "queueName": "differentQueueName",
+              "serviceBusNamespace": "sdktest",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey"
+            }
+          },
+          "serialization": {
+            "type": "Json",
+            "properties": {
+              "format": "LineSeparated",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      },
+      "headers": {
+        "ETag": "429adaec-a777-4750-8a39-8d0c931d801c"
+      }
+    }
+  },
+  "operationId": "Outputs_Update",
+  "title": "Update a Service Bus Queue output with Avro serialization"
+}

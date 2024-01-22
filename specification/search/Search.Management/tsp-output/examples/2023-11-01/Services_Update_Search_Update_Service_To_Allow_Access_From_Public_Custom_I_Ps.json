@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01",
+    "resourceGroupName": "rg1",
+    "searchServiceName": "mysearchservice",
+    "service": {
+      "properties": {
+        "networkRuleSet": {
+          "ipRules": [
+            {
+              "value": "123.4.5.6"
+            },
+            {
+              "value": "123.4.6.0/18"
+            }
+          ]
+        },
+        "partitionCount": 1,
+        "publicNetworkAccess": "enabled",
+        "replicaCount": 3
+      }
+    },
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysearchservice",
+        "type": "Microsoft.Search/searchServices",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "location": "westus",
+        "properties": {
+          "hostingMode": "default",
+          "networkRuleSet": {
+            "ipRules": [
+              {
+                "value": "10.2.3.4"
+              }
+            ]
+          },
+          "partitionCount": 1,
+          "privateEndpointConnections": [],
+          "provisioningState": "succeeded",
+          "publicNetworkAccess": "enabled",
+          "replicaCount": 3,
+          "status": "running",
+          "statusDetails": ""
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "tags": {
+          "app-name": "My e-commerce app",
+          "new-tag": "Adding a new tag"
+        }
+      }
+    }
+  },
+  "operationId": "Services_Update",
+  "title": "SearchUpdateServiceToAllowAccessFromPublicCustomIPs"
+}

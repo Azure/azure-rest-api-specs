@@ -1,0 +1,130 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01",
+    "billingAccountId": "123456",
+    "exportName": "TestExport",
+    "parameters": {
+      "properties": {
+        "format": "Csv",
+        "definition": {
+          "type": "ActualCost",
+          "dataSet": {
+            "configuration": {
+              "columns": [
+                "Date",
+                "MeterId",
+                "ResourceId",
+                "ResourceLocation",
+                "Quantity"
+              ]
+            },
+            "granularity": "Daily"
+          },
+          "timeframe": "MonthToDate"
+        },
+        "deliveryInfo": {
+          "destination": {
+            "container": "exports",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+            "rootFolderPath": "ad-hoc"
+          }
+        },
+        "schedule": {
+          "recurrence": "Weekly",
+          "recurrencePeriod": {
+            "from": "2020-06-01T00:00:00Z",
+            "to": "2020-10-31T00:00:00Z"
+          },
+          "status": "Active"
+        }
+      }
+    },
+    "scope": "providers/Microsoft.Billing/billingAccounts/123456"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
+        "properties": {
+          "format": "Csv",
+          "definition": {
+            "type": "ActualCost",
+            "dataSet": {
+              "configuration": {
+                "columns": [
+                  "Date",
+                  "MeterId",
+                  "ResourceId",
+                  "ResourceLocation",
+                  "Quantity"
+                ]
+              },
+              "granularity": "Daily"
+            },
+            "timeframe": "MonthToDate"
+          },
+          "deliveryInfo": {
+            "destination": {
+              "container": "exports",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "schedule": {
+            "recurrence": "Weekly",
+            "recurrencePeriod": {
+              "from": "2020-06-01T00:00:00Z",
+              "to": "2020-10-31T00:00:00Z"
+            },
+            "status": "Active"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestExport",
+        "type": "Microsoft.CostManagement/exports",
+        "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
+        "properties": {
+          "format": "Csv",
+          "definition": {
+            "type": "ActualCost",
+            "dataSet": {
+              "configuration": {
+                "columns": [
+                  "Date",
+                  "MeterId",
+                  "ResourceId",
+                  "ResourceLocation",
+                  "Quantity"
+                ]
+              },
+              "granularity": "Daily"
+            },
+            "timeframe": "MonthToDate"
+          },
+          "deliveryInfo": {
+            "destination": {
+              "container": "exports",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
+              "rootFolderPath": "ad-hoc"
+            }
+          },
+          "schedule": {
+            "recurrence": "Weekly",
+            "recurrencePeriod": {
+              "from": "2020-06-01T00:00:00Z",
+              "to": "2020-10-31T00:00:00Z"
+            },
+            "status": "Active"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Exports_CreateOrUpdate",
+  "title": "ExportCreateOrUpdateByBillingAccount"
+}

@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "databaseName": "myDatabase",
+    "managedInstanceName": "myManagedInstanceName",
+    "resourceGroupName": "myRG",
+    "sensitivityLabelSource": "recommended",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "recommended",
+            "type": "Microsoft.Sql/managedInstances/databases/schemas/tables/columns/sensitivityLabels",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/managedInstances/myManagedInstanceName/databases/myDatabase/schemas/dbo/tables/myTable/columns/myColumn2/sensitivityLabels/recommended",
+            "properties": {
+              "columnName": "myColumn2",
+              "informationType": "Financial",
+              "informationTypeId": "d22fa6e9-5ee4-3bde-4c2b-a409604c4646",
+              "labelId": "05e6eaa1-075a-4fb4-a732-a92215a2444a",
+              "labelName": "Sensitive",
+              "schemaName": "dbo",
+              "tableName": "myTable"
+            }
+          },
+          {
+            "name": "recommended",
+            "type": "Microsoft.Sql/managedInstances/databases/schemas/tables/columns/sensitivityLabels",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/managedInstances/myManagedInstanceName/databases/myDatabase/schemas/dbo/tables/myTable/columns/myColumn4/sensitivityLabels/recommended",
+            "properties": {
+              "columnName": "myColumn4",
+              "informationType": "Email",
+              "informationTypeId": "d22fa6e9-5ee4-3bde-4c2b-a409604c4646",
+              "labelId": "bf91e08c-f4f0-478a-b016-25164b2a65ff",
+              "labelName": "PII",
+              "schemaName": "dbo",
+              "tableName": "myTable"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedDatabaseSensitivityLabels_ListRecommended",
+  "title": "Gets the recommended sensitivity labels of a given database in a managed database"
+}

@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview",
+    "columnName": "column1",
+    "databaseName": "myDatabase",
+    "resourceGroupName": "myRG",
+    "schemaName": "dbo",
+    "serverName": "serverName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tableName": "table1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "column1",
+        "type": "Microsoft.Sql/servers/databases/schemas/tables/columns",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/servers/serverName/databases/myDatabase/schemas/dbo/tables/table1/columns/column1",
+        "properties": {
+          "columnType": "bit",
+          "isComputed": false,
+          "memoryOptimized": false,
+          "temporalType": "SystemVersionedTemporalTable"
+        }
+      }
+    }
+  },
+  "operationId": "DatabaseColumns_Get",
+  "title": "Get database column"
+}
