@@ -1,11 +1,37 @@
 {
-    "parameters": {
-      "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-      "resourceGroupName": "rg",
-      "appSpaceName": "testappSpace0",
-      "spaceResourceName": "testappSpaceResource0",
-      "api-version": "2023-11-02-preview",
-      "spaceResourceEnvelope": {
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "appSpaceName": "testappSpace0",
+    "spaceResourceName": "testappSpaceResource0",
+    "api-version": "2023-11-02-preview",
+    "spaceResourceEnvelope": {
+      "location": "East US",
+      "properties": {
+        "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testAppSpaceWebApp",
+        "friendlyName": "Test Resource 0 - Web App",
+        "resourceLocation": "West US",
+        "repo": {
+          "url": "github.com/myrepo",
+          "branch": "master"
+        },
+        "deployment": {
+          "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Resources/deployments/testAppSpaceWebAppDeployment",
+          "provisioningState": "Succeeded"
+        },
+        "isFavorite": true,
+        "metadata": {},
+        "dependencies": []
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/appSpaces/testappSpace0/spaceResources/testresource0",
+        "name": "testresource0",
+        "type": "Microsoft.App/appSpaces/spaceResources",
         "location": "East US",
         "properties": {
           "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testAppSpaceWebApp",
@@ -24,32 +50,6 @@
           "dependencies": []
         }
       }
-    },
-    "responses": {
-      "200": {
-        "headers": {},
-        "body": {
-          "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/appSpaces/testappSpace0/spaceResources/testresource0",
-          "name": "testresource0",
-          "type": "Microsoft.App/appSpaces/spaceResources",
-          "location": "East US",
-          "properties": {
-            "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testAppSpaceWebApp",
-            "friendlyName": "Test Resource 0 - Web App",
-            "resourceLocation": "West US",
-            "repo": {
-              "url": "github.com/myrepo",
-              "branch": "master"
-            },
-            "deployment": {
-              "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Resources/deployments/testAppSpaceWebAppDeployment",
-              "provisioningState": "Succeeded"
-            },
-            "isFavorite": true,
-            "metadata": {},
-            "dependencies": []
-          }
-        }
-      }
     }
   }
+}
