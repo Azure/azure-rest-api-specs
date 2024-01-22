@@ -1775,7 +1775,7 @@
               "type": "array",
               "description": "List of supported Kubernetes versions",
               "items": {
-                "$ref": "#/definitions/KubernetesVersionProfileProperties"
+                "$ref": "#/definitions/KubernetesVersionProperties"
               },
               "x-ms-identifiers": []
             }
@@ -1783,7 +1783,7 @@
         }
       }
     },
-    "KubernetesVersionProfileProperties": {
+    "KubernetesVersionProperties": {
       "type": "object",
       "description": "Kubernetes version profile for given major.minor release",
       "properties": {
@@ -1866,19 +1866,7 @@
           }
         },
         "osSku": {
-          "type": "string",
-          "description": "The particular KubernetesVersion's Image's OS SKU (CBLMariner, Windows, Windows2022)",
-          "readOnly": true,
-          "enum": [
-            "CBLMariner",
-            "Windows2019",
-            "Windows2022"
-          ],
-          "default": "CBLMariner",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "osSku"
-          }
+          "$ref": "#/definitions/OSSKU"
         },
         "ready": {
           "type": "boolean",
@@ -1948,7 +1936,7 @@
               "type": "array",
               "description": "Array of HybridAKS Support VM Skus",
               "items": {
-                "$ref": "#/definitions/VmSkuProfileProperties"
+                "$ref": "#/definitions/VmSkuProperties"
               },
               "x-ms-identifiers": []
             }
@@ -1956,7 +1944,7 @@
         }
       }
     },
-    "VmSkuProfileProperties": {
+    "VmSkuProperties": {
       "type": "object",
       "description": "The profile for supported VM skus",
       "readOnly": true,
