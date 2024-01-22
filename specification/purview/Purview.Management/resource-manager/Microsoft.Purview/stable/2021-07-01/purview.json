@@ -1,0 +1,1966 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PurviewManagementClient",
+    "version": "2021-07-01",
+    "description": "Creates a Microsoft.Purview management client.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Accounts"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "PrivateLinkResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Purview/getDefaultAccount": {
+      "get": {
+        "operationId": "DefaultAccountsOperations_Get",
+        "summary": "Gets the default account information set for the scope.",
+        "description": "Get the default account for the scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scopeTenantId",
+            "in": "query",
+            "description": "The tenant ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scopeType",
+            "in": "query",
+            "description": "The scope for the default account.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Tenant",
+              "Subscription"
+            ],
+            "x-ms-enum": {
+              "name": "ScopeType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The Id of the scope object, for example if the scope is \"Subscription\" then it is the ID of that subscription.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DefaultAccountPayload"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Purview/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Purview/removeDefaultAccount": {
+      "post": {
+        "operationId": "DefaultAccountsOperations_Remove",
+        "summary": "Removes the default account from the scope.",
+        "description": "Removes the default account from the scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scopeTenantId",
+            "in": "query",
+            "description": "The tenant ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scopeType",
+            "in": "query",
+            "description": "The scope for the default account.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Tenant",
+              "Subscription"
+            ],
+            "x-ms-enum": {
+              "name": "ScopeType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "The Id of the scope object, for example if the scope is \"Subscription\" then it is the ID of that subscription.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Purview/setDefaultAccount": {
+      "post": {
+        "operationId": "DefaultAccountsOperations_Set",
+        "summary": "Sets the default account for the scope.",
+        "description": "Sets the default account for the scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DefaultAccountPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DefaultAccountPayload"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Purview/accounts": {
+      "get": {
+        "operationId": "Accounts_ListBySubscription",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "List accounts in Subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_ListBySubscription": {
+            "$ref": "./examples/Accounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Purview/checkNameAvailability": {
+      "post": {
+        "operationId": "Accounts_CheckNameAvailability",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Checks if account name is available.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_CheckNameAvailability": {
+            "$ref": "./examples/Accounts_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts": {
+      "get": {
+        "operationId": "Accounts_ListByResourceGroup",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "List accounts in ResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The skip token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_ListByResourceGroup": {
+            "$ref": "./examples/Accounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}": {
+      "get": {
+        "operationId": "Accounts_Get",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get an account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "./examples/Accounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Accounts_CreateOrUpdate",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Creates or updates an account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "description": "The account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            },
+            "x-ms-client-name": "account"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Account' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "201": {
+            "description": "Resource 'Account' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_CreateOrUpdate": {
+            "$ref": "./examples/Accounts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Accounts_Update",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Updates an account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountUpdateParameters",
+            "in": "body",
+            "description": "The account update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountUpdateParameters"
+            },
+            "x-ms-client-name": "accountUpdateParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Update": {
+            "$ref": "./examples/Accounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Accounts_Delete",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Deletes an account resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Delete": {
+            "$ref": "./examples/Accounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/addRootCollectionAdmin": {
+      "post": {
+        "operationId": "Accounts_AddRootCollectionAdmin",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Add the administrator for root collection associated with this account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionAdminUpdate",
+            "in": "body",
+            "description": "The collection admin update payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectionAdminUpdate"
+            },
+            "x-ms-client-name": "collectionAdminUpdate"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_AddRootCollectionAdmin": {
+            "$ref": "./examples/Accounts_AddRootCollectionAdmin.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/listKeys": {
+      "post": {
+        "operationId": "Accounts_ListKeys",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "List the authorization keys associated with this account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_ListKeys": {
+            "$ref": "./examples/Accounts_ListKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_ListByAccount",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get private endpoint connections for account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The skip token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByAccount": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get a private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Create or update a private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "x-ms-client-name": "request"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_CreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpointConnections_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete a private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListByAccount",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets a list of privately linkable resources for an account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByAccount": {
+            "$ref": "./examples/PrivateLinkResources_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateLinkResources/{groupId}": {
+      "get": {
+        "operationId": "PrivateLinkResources_GetByGroupId",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets a privately linkable resources for an account with given group identifier",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "The group identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_GetByGroupId": {
+            "$ref": "./examples/PrivateLinkResources_GetByGroupId.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessKeys": {
+      "type": "object",
+      "description": "The Account access keys.",
+      "properties": {
+        "atlasKafkaPrimaryEndpoint": {
+          "type": "string",
+          "description": "Gets or sets the primary connection string."
+        },
+        "atlasKafkaSecondaryEndpoint": {
+          "type": "string",
+          "description": "Gets or sets the secondary connection string."
+        }
+      }
+    },
+    "Account": {
+      "type": "object",
+      "description": "Account resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AccountEndpoints": {
+      "type": "object",
+      "description": "The account endpoints",
+      "properties": {
+        "catalog": {
+          "type": "string",
+          "description": "Gets the catalog endpoint.",
+          "readOnly": true
+        },
+        "guardian": {
+          "type": "string",
+          "description": "Gets the guardian endpoint.",
+          "readOnly": true
+        },
+        "scan": {
+          "type": "string",
+          "description": "Gets the scan endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "AccountListResult": {
+      "type": "object",
+      "description": "The response of a Account list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Account items on this page",
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AccountProperties": {
+      "type": "object",
+      "description": "The account properties",
+      "properties": {
+        "cloudConnectors": {
+          "$ref": "#/definitions/CloudConnectors",
+          "description": "Cloud connectors.\nExternal cloud identifier used as part of scanning configuration."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the time at which the entity was created.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Gets the creator of the entity.",
+          "readOnly": true
+        },
+        "createdByObjectId": {
+          "type": "string",
+          "description": "Gets the creators of the entity's object id.",
+          "readOnly": true
+        },
+        "endpoints": {
+          "$ref": "#/definitions/AccountEndpoints",
+          "description": "The URIs that are the public endpoints of the account.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Gets or sets the friendly name.",
+          "readOnly": true
+        },
+        "managedResourceGroupName": {
+          "type": "string",
+          "description": "Gets or sets the managed resource group name",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "managedResources": {
+          "$ref": "#/definitions/ManagedResources",
+          "description": "Gets the resource identifiers of the managed resources.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "Gets the private endpoint connections information.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets or sets the state of the provisioning.",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Gets or sets the public network access.",
+          "default": "Enabled"
+        }
+      }
+    },
+    "AccountUpdateParameters": {
+      "type": "object",
+      "description": "The account update properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity related info to add/remove userAssignedIdentities."
+        },
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "The account properties."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags on the azure resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
+      "type": "object",
+      "description": "A managed identity assigned by the user.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The active directory client identifier for this principal."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier for this principal."
+        }
+      }
+    },
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "The request payload for CheckNameAvailability API",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name to verify for availability"
+        },
+        "type": {
+          "type": "string",
+          "description": "Fully qualified resource type which includes provider namespace"
+        }
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "type": "object",
+      "description": "The response payload for CheckNameAvailability API",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates if name is valid and available."
+        },
+        "reason": {
+          "$ref": "#/definitions/Reason",
+          "description": "The reason the name is not available."
+        }
+      }
+    },
+    "CloudConnectors": {
+      "type": "object",
+      "description": "External Cloud Service connectors",
+      "properties": {
+        "awsExternalId": {
+          "type": "string",
+          "description": "AWS external identifier.\nConfigured in AWS to allow use of the role arn used for scanning",
+          "readOnly": true
+        }
+      }
+    },
+    "CollectionAdminUpdate": {
+      "type": "object",
+      "description": "Collection administrator update.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "Gets or sets the object identifier of the admin."
+        }
+      }
+    },
+    "DefaultAccountPayload": {
+      "type": "object",
+      "description": "Payload to get and set the default account in the given scope",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the account that is set as the default."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The resource group name of the account that is set as the default."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The scope object ID. For example, sub ID or tenant ID."
+        },
+        "scopeTenantId": {
+          "type": "string",
+          "description": "The scope tenant in which the default account is set."
+        },
+        "scopeType": {
+          "$ref": "#/definitions/ScopeType",
+          "description": "The scope where the default account is set."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID of the account that is set as the default."
+        }
+      }
+    },
+    "DimensionProperties": {
+      "type": "object",
+      "description": "properties for dimension",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "localized display name of the dimension to customer"
+        },
+        "name": {
+          "type": "string",
+          "description": "dimension name"
+        },
+        "toBeExportedForCustomer": {
+          "type": "boolean",
+          "description": "flag indicating whether this dimension should be included to the customer in Azure Monitor logs (aka Shoebox)"
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "description": "Default error model",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Gets or sets the code.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Gets or sets the details.",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets or sets the messages.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets or sets the target.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "type": "object",
+      "description": "Default error response model",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseModelError",
+          "description": "Gets or sets the error.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponseModelError": {
+      "type": "object",
+      "description": "Gets or sets the error.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      ]
+    },
+    "Identity": {
+      "type": "object",
+      "description": "The Managed Identity of the resource",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Service principal object Id",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "Identity Type"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "User Assigned Identities",
+          "additionalProperties": {
+            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "IdentityType": {
+      "type": "string",
+      "description": "Identity Type",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
+    },
+    "LastModifiedByType": {
+      "type": "string",
+      "description": "The type of identity that last modified the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "LastModifiedByType",
+        "modelAsString": true
+      }
+    },
+    "ManagedResources": {
+      "type": "object",
+      "description": "The managed resources in customer subscription.",
+      "properties": {
+        "eventHubNamespace": {
+          "type": "string",
+          "description": "Gets the managed event hub namespace resource identifier.",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Gets the managed resource group resource identifier. This resource group will host resource dependencies for the account.",
+          "readOnly": true
+        },
+        "storageAccount": {
+          "type": "string",
+          "description": "Gets the managed storage account resource identifier.",
+          "readOnly": true
+        }
+      }
+    },
+    "Name": {
+      "type": "string",
+      "description": "Gets or sets the sku name.",
+      "enum": [
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "Name",
+        "modelAsString": true
+      }
+    },
+    "OperationMetaLogSpecification": {
+      "type": "object",
+      "description": "log specifications for operation api",
+      "properties": {
+        "blobDuration": {
+          "type": "string",
+          "description": "blob duration of the log"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "localized name of the log category"
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the log category"
+        }
+      }
+    },
+    "OperationMetaMetricSpecification": {
+      "type": "object",
+      "description": "metric specifications for the operation",
+      "properties": {
+        "aggregationType": {
+          "type": "string",
+          "description": "aggregation type of metric"
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "properties for dimension",
+          "items": {
+            "$ref": "#/definitions/DimensionProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "description of the metric"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "localized name of the metric"
+        },
+        "enableRegionalMdmAccount": {
+          "type": "string",
+          "description": "enable regional mdm account"
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "internal metric name"
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the metric"
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "dimension name use to replace resource id if specified"
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "Metric namespace.\nOnly set the namespace if different from the default value, \nleaving it empty makes it use the value from the ARM manifest."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "supported aggregation types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "supported time grain types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unit": {
+          "type": "string",
+          "description": "units for the metric"
+        }
+      }
+    },
+    "OperationMetaServiceSpecification": {
+      "type": "object",
+      "description": "The operation meta service specification",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "description": "log specifications for the operation",
+          "items": {
+            "$ref": "#/definitions/OperationMetaLogSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "description": "metric specifications for the operation",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricSpecification"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "properties on meta info",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationMetaServiceSpecification",
+          "description": "meta service specification"
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "A private endpoint class.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The private endpoint identifier."
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "A private endpoint connection class.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "A private endpoint connection properties class.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The private endpoint information."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "The private link service connection state."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A privately linkable resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "A privately linkable resource properties.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The private link resource group identifier.",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "This translates to how many Private IPs should be created for each privately linkable resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The required zone names for private link resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "The private link service connection state.",
+      "properties": {
+        "actionsRequired": {
+          "type": "string",
+          "description": "The required actions."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Gets or sets the state of the provisioning.",
+      "enum": [
+        "Unknown",
+        "Creating",
+        "Moving",
+        "Deleting",
+        "SoftDeleting",
+        "SoftDeleted",
+        "Failed",
+        "Succeeded",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Gets or sets the public network access.",
+      "enum": [
+        "NotSpecified",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
+      }
+    },
+    "PurviewAccountSku": {
+      "type": "object",
+      "description": "The Sku",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the sku capacity."
+        },
+        "name": {
+          "$ref": "#/definitions/Name",
+          "description": "Gets or sets the sku name."
+        }
+      }
+    },
+    "Reason": {
+      "type": "string",
+      "description": "The reason the name is not available.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "Reason",
+        "modelAsString": true
+      }
+    },
+    "ScopeType": {
+      "type": "string",
+      "description": "The scope where the default account is set.",
+      "enum": [
+        "Tenant",
+        "Subscription"
+      ],
+      "x-ms-enum": {
+        "name": "ScopeType",
+        "modelAsString": true
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
+    },
+    "TrackedResourceSystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2021-07-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2021_07_01",
+            "value": "2021-07-01",
+            "description": "The 2021-07-01 API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

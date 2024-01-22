@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "$count": false,
+    "$filter": "test_filter",
+    "$orderby": "test_orderby",
+    "$select": "test_select",
+    "$skip": 1,
+    "$top": 1,
+    "accountName": "contosoadla",
+    "api-version": "2016-11-01",
+    "resourceGroupName": "contosorg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>",
+        "value": [
+          {
+            "name": "test_storage",
+            "type": "test_type",
+            "id": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+            "properties": {
+              "suffix": "test_suffix"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "StorageAccounts_ListByAccount",
+  "title": "Gets the first page of Azure Storage accounts linked to the specified Data Lake Analytics account"
+}

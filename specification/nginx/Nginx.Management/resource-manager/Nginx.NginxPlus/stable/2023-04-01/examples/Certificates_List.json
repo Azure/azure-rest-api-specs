@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01",
+    "deploymentName": "myDeployment",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "cert1",
+            "type": "nginx.nginxplus/nginxdeployments/certificates",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/NGINX.NGINXPLUS/nginxDeployments/myDeployment/certificates/cert1",
+            "properties": {
+              "certificateVirtualPath": "/src/cert/somePath.cert",
+              "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID",
+              "keyVirtualPath": "/src/cert/somekey.key",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "cert2",
+            "type": "nginx.nginxplus/nginxdeployments/certificates",
+            "id": "/subscritions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/NGINX.NGINXPLUS/nginxDeployments/myDeployment/certificates/cert2",
+            "properties": {
+              "certificateVirtualPath": "/src/cert/somePath2.cert",
+              "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID2",
+              "keyVirtualPath": "/src/cert/somekey2.key",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Certificates_List",
+  "title": "Certificates_List"
+}

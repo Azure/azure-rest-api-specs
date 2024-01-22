@@ -1,0 +1,189 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01",
+    "fhirDestinationName": "dest1",
+    "iotConnectorName": "blue",
+    "iotFhirDestination": {
+      "location": "westus",
+      "properties": {
+        "fhirMapping": {
+          "content": {
+            "template": [
+              {
+                "template": {
+                  "codes": [
+                    {
+                      "code": "8867-4",
+                      "display": "Heart rate",
+                      "system": "http://loinc.org"
+                    }
+                  ],
+                  "periodInterval": 60,
+                  "typeName": "heartrate",
+                  "value": {
+                    "defaultPeriod": 5000,
+                    "unit": "count/min",
+                    "valueName": "hr",
+                    "valueType": "SampledData"
+                  }
+                },
+                "templateType": "CodeValueFhir"
+              }
+            ],
+            "templateType": "CollectionFhirTemplate"
+          }
+        },
+        "fhirServiceResourceId": "subscriptions/11111111-2222-3333-4444-555566667777/resourceGroups/myrg/providers/Microsoft.HealthcareApis/workspaces/myworkspace/fhirservices/myfhirservice",
+        "resourceIdentityResolutionType": "Create"
+      }
+    },
+    "resourceGroupName": "testRG",
+    "subscriptionId": "subid",
+    "workspaceName": "workspace1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "dest1",
+        "type": "Microsoft.HealthcareApis/workspaces/iotconnectors/fhirdestinations",
+        "etag": "00000000-0000-0000-f5ac-912ca49e01d6",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/blue/fhirdestinations/dest1",
+        "location": "West US 2",
+        "properties": {
+          "fhirMapping": {
+            "content": {
+              "template": [
+                {
+                  "template": {
+                    "codes": [
+                      {
+                        "code": "8867-4",
+                        "display": "Heart rate",
+                        "system": "http://loinc.org"
+                      }
+                    ],
+                    "periodInterval": 60,
+                    "typeName": "heartrate",
+                    "value": {
+                      "defaultPeriod": 5000,
+                      "unit": "count/min",
+                      "valueName": "hr",
+                      "valueType": "SampledData"
+                    }
+                  },
+                  "templateType": "CodeValueFhir"
+                }
+              ],
+              "templateType": "CollectionFhirTemplate"
+            }
+          },
+          "fhirServiceResourceId": "subscriptions/11111111-2222-3333-4444-555566667777/resourceGroups/myrg/providers/Microsoft.HealthcareApis/workspaces/myworkspace/fhirservices/myfhirservice",
+          "provisioningState": "Succeeded",
+          "resourceIdentityResolutionType": "Create"
+        },
+        "systemData": {
+          "createdAt": "2021-01-28T19:26:24.072Z",
+          "createdBy": "string",
+          "lastModifiedAt": "2021-01-28T19:26:24.072Z",
+          "lastModifiedBy": "string"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "dest1",
+        "type": "Microsoft.HealthcareApis/workspaces/iotconnectors/fhirdestinations",
+        "etag": "00000000-0000-0000-f5ac-912ca49e01d6",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/blue/fhirdestinations/dest1",
+        "location": "West US 2",
+        "properties": {
+          "fhirMapping": {
+            "content": {
+              "template": [
+                {
+                  "template": {
+                    "codes": [
+                      {
+                        "code": "8867-4",
+                        "display": "Heart rate",
+                        "system": "http://loinc.org"
+                      }
+                    ],
+                    "periodInterval": 60,
+                    "typeName": "heartrate",
+                    "value": {
+                      "defaultPeriod": 5000,
+                      "unit": "count/min",
+                      "valueName": "hr",
+                      "valueType": "SampledData"
+                    }
+                  },
+                  "templateType": "CodeValueFhir"
+                }
+              ],
+              "templateType": "CollectionFhirTemplate"
+            }
+          },
+          "fhirServiceResourceId": "subscriptions/11111111-2222-3333-4444-555566667777/resourceGroups/myrg/providers/Microsoft.HealthcareApis/workspaces/myworkspace/fhirservices/myfhirservice",
+          "provisioningState": "Creating",
+          "resourceIdentityResolutionType": "Create"
+        },
+        "systemData": {
+          "createdAt": "2021-01-28T19:26:24.072Z",
+          "createdBy": "string",
+          "lastModifiedAt": "2021-01-28T19:26:24.072Z",
+          "lastModifiedBy": "string"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "dest1",
+        "type": "Microsoft.HealthcareApis/workspaces/iotconnectors/fhirdestinations",
+        "etag": "00000000-0000-0000-f5ac-912ca49e01d6",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotconnectors/blue/fhirdestinations/dest1",
+        "location": "West US 2",
+        "properties": {
+          "fhirMapping": {
+            "content": {
+              "template": [
+                {
+                  "template": {
+                    "codes": [
+                      {
+                        "code": "8867-4",
+                        "display": "Heart rate",
+                        "system": "http://loinc.org"
+                      }
+                    ],
+                    "periodInterval": 60,
+                    "typeName": "heartrate",
+                    "value": {
+                      "defaultPeriod": 5000,
+                      "unit": "count/min",
+                      "valueName": "hr",
+                      "valueType": "SampledData"
+                    }
+                  },
+                  "templateType": "CodeValueFhir"
+                }
+              ],
+              "templateType": "CollectionFhirTemplate"
+            }
+          },
+          "fhirServiceResourceId": "subscriptions/11111111-2222-3333-4444-555566667777/resourceGroups/myrg/providers/Microsoft.HealthcareApis/workspaces/myworkspace/fhirservices/myfhirservice",
+          "provisioningState": "Accepted",
+          "resourceIdentityResolutionType": "Create"
+        },
+        "systemData": {
+          "createdAt": "2021-01-28T19:26:24.072Z",
+          "createdBy": "string",
+          "lastModifiedAt": "2021-01-28T19:26:24.072Z",
+          "lastModifiedBy": "string"
+        }
+      }
+    }
+  },
+  "operationId": "IotConnectorFhirDestination_CreateOrUpdate",
+  "title": "Create or update an Iot Connector FHIR destination"
+}

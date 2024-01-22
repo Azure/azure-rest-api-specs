@@ -1,0 +1,4742 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LabServicesClient",
+    "version": "2022-08-01",
+    "description": "REST API for managing Azure Lab Services images.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Images"
+    },
+    {
+      "name": "LabPlans"
+    },
+    {
+      "name": "Labs"
+    },
+    {
+      "name": "Schedules"
+    },
+    {
+      "name": "Users"
+    },
+    {
+      "name": "VirtualMachines"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.LabServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/labPlans": {
+      "get": {
+        "operationId": "LabPlans_ListBySubscription",
+        "tags": [
+          "LabPlans"
+        ],
+        "description": "Returns a list of all lab plans within a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "listLabPlans": {
+            "$ref": "./examples/LabPlans_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/labs": {
+      "get": {
+        "operationId": "Labs_ListBySubscription",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Returns a list of all labs for a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "listLabs": {
+            "$ref": "./examples/Labs_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/locations/{location}/usages": {
+      "get": {
+        "operationId": "UsagesOperations_ListByLocation",
+        "summary": "Gets the list of usages.",
+        "description": "Returns list of usage per SKU family for the specified subscription in the specified region.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/skus": {
+      "get": {
+        "operationId": "SkusOperations_List",
+        "summary": "Gets the Azure Lab Services resource SKUs.",
+        "description": "Returns a list of Azure Lab Services resource SKUs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAvailableLabServicesSku"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labPlans": {
+      "get": {
+        "operationId": "LabPlans_ListByResourceGroup",
+        "tags": [
+          "LabPlans"
+        ],
+        "description": "Returns a list of all lab plans for a subscription and resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "listResourceGroupLabPlans": {
+            "$ref": "./examples/LabPlans_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labPlans/{labPlanName}": {
+      "get": {
+        "operationId": "LabPlans_Get",
+        "tags": [
+          "LabPlans"
+        ],
+        "description": "Retrieves the properties of a Lab Plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labPlanName",
+            "in": "path",
+            "description": "The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getLabPlan": {
+            "$ref": "./examples/LabPlans_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LabPlans_CreateOrUpdate",
+        "tags": [
+          "LabPlans"
+        ],
+        "description": "Operation to create or update a Lab Plan resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labPlanName",
+            "in": "path",
+            "description": "The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LabPlan' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            }
+          },
+          "201": {
+            "description": "Resource 'LabPlan' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "putLabPlan": {
+            "$ref": "./examples/LabPlans_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LabPlans_Update",
+        "tags": [
+          "LabPlans"
+        ],
+        "description": "Operation to update a Lab Plan resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labPlanName",
+            "in": "path",
+            "description": "The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabPlanUpdate"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabPlan"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "patchLabPlan": {
+            "$ref": "./examples/LabPlans_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LabPlans_Delete",
+        "tags": [
+          "LabPlans"
+        ],
+        "description": "Operation to delete a Lab Plan resource. Deleting a lab plan does not delete labs associated with a lab plan, nor does it delete shared images added to a gallery via the lab plan permission container.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labPlanName",
+            "in": "path",
+            "description": "The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "deleteLabPlan": {
+            "$ref": "./examples/LabPlans_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labPlans/{labPlanName}/images": {
+      "get": {
+        "operationId": "Images_ListByLabPlan",
+        "tags": [
+          "Images"
+        ],
+        "description": "Gets all images from galleries attached to a lab plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "labPlanName",
+            "in": "path",
+            "description": "The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "listImages": {
+            "$ref": "./examples/Images_ListByLabPlan.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labPlans/{labPlanName}/images/{imageName}": {
+      "get": {
+        "operationId": "Images_Get",
+        "tags": [
+          "Images"
+        ],
+        "description": "Gets an image resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labPlanName",
+            "in": "path",
+            "description": "The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The image name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getImage": {
+            "$ref": "./examples/Images_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Images_CreateOrUpdate",
+        "tags": [
+          "Images"
+        ],
+        "description": "Updates an image resource via PUT. Creating new resources via PUT will not function.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labPlanName",
+            "in": "path",
+            "description": "The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The image name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Image"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Image' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "201": {
+            "description": "Resource 'Image' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "putImage": {
+            "$ref": "./examples/Images_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Images_Update",
+        "tags": [
+          "Images"
+        ],
+        "description": "Updates an image resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labPlanName",
+            "in": "path",
+            "description": "The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The image name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUpdate"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "patchImage": {
+            "$ref": "./examples/Images_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labPlans/{labPlanName}/saveImage": {
+      "post": {
+        "operationId": "LabPlans_SaveImage",
+        "tags": [
+          "LabPlans"
+        ],
+        "description": "Saves an image from a lab VM to the attached shared image gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labPlanName",
+            "in": "path",
+            "description": "The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaveImageBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "saveImageVirtualMachine": {
+            "$ref": "./examples/LabPlans_SaveImage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs": {
+      "get": {
+        "operationId": "Labs_ListByResourceGroup",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Returns a list of all labs in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "listResourceGroupLabs": {
+            "$ref": "./examples/Labs_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}": {
+      "get": {
+        "operationId": "Labs_Get",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Returns the properties of a lab resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getLab": {
+            "$ref": "./examples/Labs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Labs_CreateOrUpdate",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Operation to create or update a lab resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Lab' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "201": {
+            "description": "Resource 'Lab' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "putLab": {
+            "$ref": "./examples/Labs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Labs_Update",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Operation to update a lab resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabUpdate"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "patchLab": {
+            "$ref": "./examples/Labs_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Labs_Delete",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Operation to delete a lab resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "deleteLab": {
+            "$ref": "./examples/Labs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/publish": {
+      "post": {
+        "operationId": "Labs_Publish",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Publish or re-publish a lab. This will create or update all lab resources, such as virtual machines.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "publishLab": {
+            "$ref": "./examples/Labs_Publish.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/schedules": {
+      "get": {
+        "operationId": "Schedules_ListByLab",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Returns a list of all schedules for a lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getListSchedule": {
+            "$ref": "./examples/Schedules_ListByLab.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/schedules/{scheduleName}": {
+      "get": {
+        "operationId": "Schedules_Get",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Returns the properties of a lab Schedule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "description": "The name of the schedule that uniquely identifies it within containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getSchedule": {
+            "$ref": "./examples/Schedules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Schedules_CreateOrUpdate",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Operation to create or update a lab schedule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "description": "The name of the schedule that uniquely identifies it within containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Schedule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "201": {
+            "description": "Resource 'Schedule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "putSchedule": {
+            "$ref": "./examples/Schedules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Schedules_Update",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Operation to update a lab schedule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "description": "The name of the schedule that uniquely identifies it within containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleUpdate"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "patchSchedule": {
+            "$ref": "./examples/Schedules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Schedules_Delete",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Operation to delete a schedule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "scheduleName",
+            "in": "path",
+            "description": "The name of the schedule that uniquely identifies it within containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "deleteSchedule": {
+            "$ref": "./examples/Schedules_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/syncGroup": {
+      "post": {
+        "operationId": "Labs_SyncGroup",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Action used to manually kick off an AAD group sync job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "syncLab": {
+            "$ref": "./examples/Labs_SyncGroup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/users": {
+      "get": {
+        "operationId": "Users_ListByLab",
+        "tags": [
+          "Users"
+        ],
+        "description": "Returns a list of all users for a lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "listUser": {
+            "$ref": "./examples/Users_ListByLab.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/users/{userName}": {
+      "get": {
+        "operationId": "Users_Get",
+        "tags": [
+          "Users"
+        ],
+        "description": "Returns the properties of a lab user.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "The name of the user that uniquely identifies it within containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getUser": {
+            "$ref": "./examples/Users_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Users_CreateOrUpdate",
+        "tags": [
+          "Users"
+        ],
+        "description": "Operation to create or update a lab user.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "The name of the user that uniquely identifies it within containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'User' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "201": {
+            "description": "Resource 'User' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "putUser": {
+            "$ref": "./examples/Users_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Users_Update",
+        "tags": [
+          "Users"
+        ],
+        "description": "Operation to update a lab user.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "The name of the user that uniquely identifies it within containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserUpdate"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "patchUser": {
+            "$ref": "./examples/Users_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Users_Delete",
+        "tags": [
+          "Users"
+        ],
+        "description": "Operation to delete a user resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "The name of the user that uniquely identifies it within containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "deleteUser": {
+            "$ref": "./examples/Users_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/users/{userName}/invite": {
+      "post": {
+        "operationId": "Users_Invite",
+        "tags": [
+          "Users"
+        ],
+        "description": "Operation to invite a user to a lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "The name of the user that uniquely identifies it within containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InviteBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "inviteUser": {
+            "$ref": "./examples/Users_Invite.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines": {
+      "get": {
+        "operationId": "VirtualMachines_ListByLab",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Returns a list of all virtual machines for a lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "listVirtualMachine": {
+            "$ref": "./examples/VirtualMachines_ListByLab.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}": {
+      "get": {
+        "operationId": "VirtualMachines_Get",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Returns the properties for a lab virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "The ID of the virtual machine that uniquely identifies it within the containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getVirtualMachine": {
+            "$ref": "./examples/VirtualMachines_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}/redeploy": {
+      "post": {
+        "operationId": "VirtualMachines_Redeploy",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Action to redeploy a lab virtual machine to a different compute node. For troubleshooting connectivity.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "The ID of the virtual machine that uniquely identifies it within the containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "redeployVirtualMachine": {
+            "$ref": "./examples/VirtualMachines_Redeploy.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}/reimage": {
+      "post": {
+        "operationId": "VirtualMachines_Reimage",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Re-image a lab virtual machine. The virtual machine will be deleted and recreated using the latest published snapshot of the reference environment of the lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "The ID of the virtual machine that uniquely identifies it within the containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "reimageVirtualMachine": {
+            "$ref": "./examples/VirtualMachines_Reimage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}/resetPassword": {
+      "post": {
+        "operationId": "VirtualMachines_ResetPassword",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Resets a lab virtual machine password.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "The ID of the virtual machine that uniquely identifies it within the containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "resetPasswordVirtualMachine": {
+            "$ref": "./examples/VirtualMachines_ResetPassword.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}/start": {
+      "post": {
+        "operationId": "VirtualMachines_Start",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Action to start a lab virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "The ID of the virtual machine that uniquely identifies it within the containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "startVirtualMachine": {
+            "$ref": "./examples/VirtualMachines_Start.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labs/{labName}/virtualMachines/{virtualMachineName}/stop": {
+      "post": {
+        "operationId": "VirtualMachines_Stop",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Action to stop a lab virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "The ID of the virtual machine that uniquely identifies it within the containing lab. Used in resource URIs.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[-\\w\\\\._\\\\(\\\\)]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "stopVirtualMachine": {
+            "$ref": "./examples/VirtualMachines_Stop.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AutoShutdownProfile": {
+      "type": "object",
+      "description": "Profile for how to handle shutting down virtual machines.",
+      "properties": {
+        "shutdownOnDisconnect": {
+          "$ref": "#/definitions/EnableState",
+          "description": "Whether shutdown on disconnect is enabled"
+        },
+        "shutdownWhenNotConnected": {
+          "$ref": "#/definitions/EnableState",
+          "description": "Whether a VM will get shutdown when it hasn't been connected to after a period of time."
+        },
+        "shutdownOnIdle": {
+          "$ref": "#/definitions/ShutdownOnIdleMode",
+          "description": "Whether a VM will get shutdown when it has idled for a period of time."
+        },
+        "disconnectDelay": {
+          "type": "string",
+          "format": "duration",
+          "description": "The amount of time a VM will stay running after a user disconnects if this behavior is enabled."
+        },
+        "noConnectDelay": {
+          "type": "string",
+          "format": "duration",
+          "description": "The amount of time a VM will stay running before it is shutdown if no connection is made and this behavior is enabled."
+        },
+        "idleDelay": {
+          "type": "string",
+          "format": "duration",
+          "description": "The amount of time a VM will idle before it is shutdown if this behavior is enabled."
+        }
+      }
+    },
+    "AvailableLabServicesSku": {
+      "type": "object",
+      "description": "Azure Lab Services resource SKUs",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The lab services resource type.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU.",
+          "readOnly": true
+        },
+        "tier": {
+          "$ref": "#/definitions/AvailableLabServicesSkuTier",
+          "description": "The tier of the SKU.",
+          "readOnly": true
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size.",
+          "readOnly": true
+        },
+        "family": {
+          "type": "string",
+          "description": "The family of the SKU.",
+          "readOnly": true
+        },
+        "capacity": {
+          "$ref": "#/definitions/LabServicesSkuCapacity",
+          "description": "The scale out/in options of the SKU."
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "The capabilities of the SKU.",
+          "items": {
+            "$ref": "#/definitions/LabServicesSkuCapabilities"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of locations that are available for a size.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "costs": {
+          "type": "array",
+          "description": "Metadata for retrieving price info of a lab services SKUs.",
+          "items": {
+            "$ref": "#/definitions/LabServicesSkuCost"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "restrictions": {
+          "type": "array",
+          "description": "Restrictions of a lab services SKUs.",
+          "items": {
+            "$ref": "#/definitions/LabServicesSkuRestrictions"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AvailableLabServicesSkuTier": {
+      "type": "string",
+      "description": "The tier of the SKU.",
+      "enum": [
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "AvailableLabServicesSkuTier",
+        "modelAsString": true
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.SkuTier": {
+      "type": "string",
+      "description": "Available service tiers for the SKU.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "The Free service tier."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "The Basic service tier."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard service tier."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium service tier."
+          }
+        ]
+      }
+    },
+    "ConnectionProfile": {
+      "type": "object",
+      "description": "Connection profile for how users connect to lab virtual machines.",
+      "properties": {
+        "webSshAccess": {
+          "$ref": "#/definitions/ConnectionType",
+          "description": "The enabled access level for Web Access over SSH."
+        },
+        "webRdpAccess": {
+          "$ref": "#/definitions/ConnectionType",
+          "description": "The enabled access level for Web Access over RDP."
+        },
+        "clientSshAccess": {
+          "$ref": "#/definitions/ConnectionType",
+          "description": "The enabled access level for Client Access over SSH."
+        },
+        "clientRdpAccess": {
+          "$ref": "#/definitions/ConnectionType",
+          "description": "The enabled access level for Client Access over RDP."
+        }
+      }
+    },
+    "ConnectionType": {
+      "type": "string",
+      "description": "A connection type for access labs and VMs (Public, Private or None).",
+      "enum": [
+        "Public",
+        "Private",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionType",
+        "modelAsString": false
+      }
+    },
+    "CreateOption": {
+      "type": "string",
+      "description": "Indicates what lab virtual machines are created from.",
+      "enum": [
+        "Image",
+        "TemplateVM"
+      ],
+      "x-ms-enum": {
+        "name": "CreateOption",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Image",
+            "value": "Image",
+            "description": "An image is used to create all lab user virtual machines. When this option is set, no template VM will be created."
+          },
+          {
+            "name": "TemplateVM",
+            "value": "TemplateVM",
+            "description": "A template VM will be used to create all lab user virtual machines."
+          }
+        ]
+      }
+    },
+    "Credentials": {
+      "type": "object",
+      "description": "Credentials for a user on a lab VM.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The username to use when signing in to lab VMs.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "password": {
+          "type": "string",
+          "description": "The password for the user. This is required for the TemplateVM createOption.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "username"
+      ]
+    },
+    "EnableState": {
+      "type": "string",
+      "description": "Property enabled state.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EnableState",
+        "modelAsString": false
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "description": "Lab services virtual machine image",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImageProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ImageListResult": {
+      "type": "object",
+      "description": "The response of a Image list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Image items on this page",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ImageProperties": {
+      "type": "object",
+      "description": "Properties of an image resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Current provisioning state of the image.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The image display name.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the image.",
+          "readOnly": true
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "URL of the image icon.",
+          "readOnly": true
+        },
+        "author": {
+          "type": "string",
+          "description": "The image author.",
+          "readOnly": true
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "The OS Type of the image.",
+          "readOnly": true
+        },
+        "plan": {
+          "type": "string",
+          "description": "The ID of marketplace plan associated with the image (optional).",
+          "readOnly": true
+        },
+        "termsStatus": {
+          "$ref": "#/definitions/EnableState",
+          "description": "The status of image terms of use (enabled = accepted, disabled = not accepted).",
+          "readOnly": true
+        },
+        "offer": {
+          "type": "string",
+          "description": "The ID of an offer associated with the image.",
+          "readOnly": true
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The ID of the publisher of the image.",
+          "readOnly": true
+        },
+        "sku": {
+          "type": "string",
+          "description": "The image SKU.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The image version.",
+          "readOnly": true
+        },
+        "sharedGalleryId": {
+          "type": "string",
+          "description": "The ID for the image in the shared gallery.",
+          "readOnly": true
+        },
+        "availableRegions": {
+          "type": "array",
+          "description": "The available regions of the image in the shared gallery.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "osState": {
+          "$ref": "#/definitions/OsState",
+          "description": "The OS State of the image.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageUpdateProperties"
+        }
+      ]
+    },
+    "ImageReference": {
+      "type": "object",
+      "description": "Image reference information. Used in the virtual machine profile.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Image resource ID"
+        },
+        "offer": {
+          "type": "string",
+          "description": "The image offer if applicable."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The image publisher"
+        },
+        "sku": {
+          "type": "string",
+          "description": "The image SKU"
+        },
+        "version": {
+          "type": "string",
+          "description": "The image version specified on creation."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "The actual version of the image after use.",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageUpdate": {
+      "type": "object",
+      "description": "Lab services virtual machine image for updates.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImageUpdateProperties",
+          "description": "Image resource properties"
+        }
+      }
+    },
+    "ImageUpdateProperties": {
+      "type": "object",
+      "description": "Properties of an image resource update",
+      "properties": {
+        "enabledState": {
+          "$ref": "#/definitions/EnableState",
+          "description": "Is the image enabled"
+        }
+      }
+    },
+    "InvitationState": {
+      "type": "string",
+      "description": "The lab user invitation state.",
+      "enum": [
+        "NotSent",
+        "Sending",
+        "Sent",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "InvitationState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "NotSent",
+            "value": "NotSent",
+            "description": "The invitation has not been sent."
+          },
+          {
+            "name": "Sending",
+            "value": "Sending",
+            "description": "Currently sending the invitation."
+          },
+          {
+            "name": "Sent",
+            "value": "Sent",
+            "description": "The invitation has been successfully sent."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "There was an error while sending the invitation."
+          }
+        ]
+      }
+    },
+    "InviteBody": {
+      "type": "object",
+      "description": "Body for a user invite request",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Custom text for the invite email."
+        }
+      }
+    },
+    "Lab": {
+      "type": "object",
+      "description": "The lab resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LabListResult": {
+      "type": "object",
+      "description": "The response of a Lab list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Lab items on this page",
+          "items": {
+            "$ref": "#/definitions/Lab"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LabNetworkProfile": {
+      "type": "object",
+      "description": "Profile for how to handle networking for Labs.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The external subnet resource id"
+        },
+        "loadBalancerId": {
+          "type": "string",
+          "description": "The external load balancer resource id"
+        },
+        "publicIpId": {
+          "type": "string",
+          "description": "The external public IP resource id"
+        }
+      }
+    },
+    "LabPlan": {
+      "type": "object",
+      "description": "Lab Plans act as a permission container for creating labs via labs.azure.com. Additionally, they can provide a set of default configurations that will apply at the time of creating a lab, but these defaults can still be overwritten.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabPlanProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LabPlanListResult": {
+      "type": "object",
+      "description": "The response of a LabPlan list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LabPlan items on this page",
+          "items": {
+            "$ref": "#/definitions/LabPlan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LabPlanNetworkProfile": {
+      "type": "object",
+      "description": "Profile for how to handle networking for Lab Plans.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The external subnet resource id"
+        }
+      }
+    },
+    "LabPlanProperties": {
+      "type": "object",
+      "description": "Lab plan resource properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Current provisioning state of the lab plan.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LabPlanUpdateProperties"
+        }
+      ]
+    },
+    "LabPlanUpdate": {
+      "type": "object",
+      "description": "Contains lab configuration and default settings. This variant is used for PATCH.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabPlanUpdateProperties",
+          "description": "Lab plan resource update properties"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Managed Identity Information"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResourceUpdate"
+        }
+      ]
+    },
+    "LabPlanUpdateProperties": {
+      "type": "object",
+      "description": "Lab plan resource properties for updates",
+      "properties": {
+        "defaultConnectionProfile": {
+          "$ref": "#/definitions/ConnectionProfile",
+          "description": "The default lab connection profile. This can be changed on a lab resource and only provides a default profile."
+        },
+        "defaultAutoShutdownProfile": {
+          "$ref": "#/definitions/AutoShutdownProfile",
+          "description": "The default lab shutdown profile. This can be changed on a lab resource and only provides a default profile."
+        },
+        "defaultNetworkProfile": {
+          "$ref": "#/definitions/LabPlanNetworkProfile",
+          "description": "The lab plan network profile. To enforce lab network policies they must be defined here and cannot be changed when there are existing labs associated with this lab plan."
+        },
+        "allowedRegions": {
+          "type": "array",
+          "description": "The allowed regions for the lab creator to use when creating labs using this lab plan.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sharedGalleryId": {
+          "type": "string",
+          "description": "Resource ID of the Shared Image Gallery attached to this lab plan. When saving a lab template virtual machine image it will be persisted in this gallery. Shared images from the gallery can be made available to use when creating new labs."
+        },
+        "supportInfo": {
+          "$ref": "#/definitions/SupportInfo",
+          "description": "Support contact information and instructions for users of the lab plan. This information is displayed to lab owners and virtual machine users for all labs in the lab plan."
+        },
+        "linkedLmsInstance": {
+          "type": "string",
+          "format": "uri",
+          "description": "Base Url of the lms instance this lab plan can link lab rosters against."
+        }
+      }
+    },
+    "LabProperties": {
+      "type": "object",
+      "description": "Properties of a lab resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Current provisioning state of the lab.",
+          "readOnly": true
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/LabNetworkProfile",
+          "description": "The network profile for the lab, typically applied via a lab plan. This profile cannot be modified once a lab has been created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/LabState",
+          "description": "The lab state.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LabUpdateProperties"
+        }
+      ]
+    },
+    "LabServicesSkuCapabilities": {
+      "type": "object",
+      "description": "The array of capabilities of a lab services SKU.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the capability for a SKU.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the capability for a SKU.",
+          "readOnly": true
+        }
+      }
+    },
+    "LabServicesSkuCapacity": {
+      "type": "object",
+      "description": "The scale out/in options of the SKU.",
+      "properties": {
+        "default": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The default capacity for this resource.",
+          "readOnly": true
+        },
+        "minimum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The lowest permitted capacity for this resource.",
+          "readOnly": true
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The highest permitted capacity for this resource.",
+          "readOnly": true
+        },
+        "scaleType": {
+          "$ref": "#/definitions/ScaleType",
+          "description": "The localized name of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "LabServicesSkuCost": {
+      "type": "object",
+      "description": "The array of costs of a lab services SKU.",
+      "properties": {
+        "meterId": {
+          "type": "string",
+          "description": "The meter id.",
+          "readOnly": true
+        },
+        "quantity": {
+          "type": "number",
+          "format": "float",
+          "description": "The quantity of units charged.",
+          "readOnly": true
+        },
+        "extendedUnit": {
+          "type": "string",
+          "description": "The extended unit.",
+          "readOnly": true
+        }
+      }
+    },
+    "LabServicesSkuRestrictions": {
+      "type": "object",
+      "description": "The restriction details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RestrictionType",
+          "description": "The type of restriction.",
+          "readOnly": true
+        },
+        "values": {
+          "type": "array",
+          "description": "The values of the restriction.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "reasonCode": {
+          "$ref": "#/definitions/RestrictionReasonCode",
+          "description": "The reason for the restriction.",
+          "readOnly": true
+        }
+      }
+    },
+    "LabState": {
+      "type": "string",
+      "description": "The state of a virtual machine.",
+      "enum": [
+        "Draft",
+        "Publishing",
+        "Scaling",
+        "Syncing",
+        "Published"
+      ],
+      "x-ms-enum": {
+        "name": "LabState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Draft",
+            "value": "Draft",
+            "description": "The lab is currently in draft (has not been published)."
+          },
+          {
+            "name": "Publishing",
+            "value": "Publishing",
+            "description": "The lab is publishing."
+          },
+          {
+            "name": "Scaling",
+            "value": "Scaling",
+            "description": "The lab is scaling."
+          },
+          {
+            "name": "Syncing",
+            "value": "Syncing",
+            "description": "The lab is syncing users."
+          },
+          {
+            "name": "Published",
+            "value": "Published",
+            "description": "The lab has been published."
+          }
+        ]
+      }
+    },
+    "LabUpdate": {
+      "type": "object",
+      "description": "The lab resource for updates.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabUpdateProperties",
+          "description": "Lab resource properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResourceUpdate"
+        }
+      ]
+    },
+    "LabUpdateProperties": {
+      "type": "object",
+      "description": "Properties of a lab resource used for updates.",
+      "properties": {
+        "autoShutdownProfile": {
+          "$ref": "#/definitions/AutoShutdownProfile",
+          "description": "The resource auto shutdown configuration for the lab. This controls whether actions are taken on resources that are sitting idle."
+        },
+        "connectionProfile": {
+          "$ref": "#/definitions/ConnectionProfile",
+          "description": "The connection profile for the lab. This controls settings such as web access to lab resources or whether RDP or SSH ports are open."
+        },
+        "virtualMachineProfile": {
+          "$ref": "#/definitions/VirtualMachineProfile",
+          "description": "The profile used for creating lab virtual machines."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "The lab security profile."
+        },
+        "rosterProfile": {
+          "$ref": "#/definitions/RosterProfile",
+          "description": "The lab user list management profile."
+        },
+        "labPlanId": {
+          "type": "string",
+          "description": "The ID of the lab plan. Used during resource creation to provide defaults and acts as a permission container when creating a lab via labs.azure.com. Setting a labPlanId on an existing lab provides organization.."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the lab.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the lab."
+        }
+      }
+    },
+    "OperationResult": {
+      "type": "object",
+      "description": "A long running operation result",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "The operation status"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time"
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "float",
+          "description": "Percent completion"
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "The error for a failure if the operation failed."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "The operation status",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has been accepted but hasn't started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Not supported yet"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "OsState": {
+      "type": "string",
+      "description": "The operating system state.",
+      "enum": [
+        "Generalized",
+        "Specialized"
+      ],
+      "x-ms-enum": {
+        "name": "OsState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Generalized",
+            "value": "Generalized",
+            "description": "Image does not contain any machine and user specific information."
+          },
+          {
+            "name": "Specialized",
+            "value": "Specialized",
+            "description": "Image contains machine and user specific information."
+          }
+        ]
+      }
+    },
+    "OsType": {
+      "type": "string",
+      "description": "The operating system type.",
+      "enum": [
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "OsType",
+        "modelAsString": false
+      }
+    },
+    "PagedAvailableLabServicesSku": {
+      "type": "object",
+      "description": "Paged list of lab services skus.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AvailableLabServicesSku items on this page",
+          "items": {
+            "$ref": "#/definitions/AvailableLabServicesSku"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedUsage": {
+      "type": "object",
+      "description": "List of Core Usages.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Usage items on this page",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Resource provisioning state.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Locked"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is in the process of being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "New property values are being applied to the resource."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is in the process of being deleted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource is in healthy state after creation or update operation."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Previous operation on the resource has failed leaving resource in unhealthy state."
+          },
+          {
+            "name": "Locked",
+            "value": "Locked",
+            "description": "The resource is locked and changes are currently blocked. This could be due to maintenance or a scheduled operation. The state will go back to succeeded once the locking operation has finished."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RecurrenceFrequency": {
+      "type": "string",
+      "description": "Schedule recurrence frequencies.",
+      "enum": [
+        "Daily",
+        "Weekly"
+      ],
+      "x-ms-enum": {
+        "name": "RecurrenceFrequency",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Daily",
+            "value": "Daily",
+            "description": "Schedule will run every days."
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly",
+            "description": "Schedule will run every week on days specified in weekDays."
+          }
+        ]
+      }
+    },
+    "RecurrencePattern": {
+      "type": "object",
+      "description": "Recurrence pattern of a lab schedule.",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/RecurrenceFrequency",
+          "description": "The frequency of the recurrence."
+        },
+        "weekDays": {
+          "type": "array",
+          "description": "The week days the schedule runs. Used for when the Frequency is set to Weekly.",
+          "items": {
+            "$ref": "#/definitions/WeekDay"
+          }
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval to invoke the schedule on. For example, interval = 2 and RecurrenceFrequency.Daily will run every 2 days. When no interval is supplied, an interval of 1 is used.",
+          "minimum": 1,
+          "maximum": 365
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the recurrence will expire. This date is inclusive."
+        }
+      },
+      "required": [
+        "frequency",
+        "expirationDate"
+      ]
+    },
+    "RegistrationState": {
+      "type": "string",
+      "description": "The user lab registration state.",
+      "enum": [
+        "Registered",
+        "NotRegistered"
+      ],
+      "x-ms-enum": {
+        "name": "RegistrationState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Registered",
+            "value": "Registered",
+            "description": "User has not yet registered with the lab."
+          },
+          {
+            "name": "NotRegistered",
+            "value": "NotRegistered",
+            "description": "User has registered with the lab."
+          }
+        ]
+      }
+    },
+    "ResetPasswordBody": {
+      "type": "object",
+      "description": "Body of a reset password request.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The user whose password is being reset",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "password": {
+          "type": "string",
+          "description": "The password",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        }
+      }
+    },
+    "RestrictionReasonCode": {
+      "type": "string",
+      "description": "The reason for the restriction.",
+      "enum": [
+        "QuotaId",
+        "NotAvailableForSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "RestrictionReasonCode",
+        "modelAsString": true
+      }
+    },
+    "RestrictionType": {
+      "type": "string",
+      "description": "The type of restriction.",
+      "enum": [
+        "Location"
+      ],
+      "x-ms-enum": {
+        "name": "RestrictionType",
+        "modelAsString": true
+      }
+    },
+    "RosterProfile": {
+      "type": "object",
+      "description": "The lab user list management profile.",
+      "properties": {
+        "activeDirectoryGroupId": {
+          "type": "string",
+          "description": "The AAD group ID which this lab roster is populated from. Having this set enables AAD sync mode."
+        },
+        "ltiContextId": {
+          "type": "string",
+          "description": "The unique context identifier for the lab in the lms."
+        },
+        "lmsInstance": {
+          "type": "string",
+          "description": "The base URI identifying the lms instance."
+        },
+        "ltiClientId": {
+          "type": "string",
+          "description": "The unique id of the azure lab services tool in the lms."
+        },
+        "ltiRosterEndpoint": {
+          "type": "string",
+          "description": "The uri of the names and roles service endpoint on the lms for the class attached to this lab."
+        }
+      }
+    },
+    "SaveImageBody": {
+      "type": "object",
+      "description": "Body for the save image POST",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for the image we create."
+        },
+        "labVirtualMachineId": {
+          "type": "string",
+          "description": "The ID of the lab virtual machine you want to save an image from."
+        }
+      }
+    },
+    "ScaleType": {
+      "type": "string",
+      "description": "The localized name of the resource.",
+      "enum": [
+        "None",
+        "Manual",
+        "Automatic"
+      ],
+      "x-ms-enum": {
+        "name": "ScaleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The capacity is not adjustable in any way."
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "The user must manually scale this SKU in and out."
+          },
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "The user is permitted to scale this SKU in and out."
+          }
+        ]
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "Schedule for automatically turning virtual machines in a lab on and off at specified times.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduleProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ScheduleListResult": {
+      "type": "object",
+      "description": "The response of a Schedule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Schedule items on this page",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ScheduleProperties": {
+      "type": "object",
+      "description": "Schedule resource properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Current provisioning state of the schedule.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleUpdateProperties"
+        }
+      ]
+    },
+    "ScheduleUpdate": {
+      "type": "object",
+      "description": "Schedule for automatically turning virtual machines in a lab on and off at specified times. Used for updates.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduleUpdateProperties",
+          "description": "Schedule resource properties"
+        }
+      }
+    },
+    "ScheduleUpdateProperties": {
+      "type": "object",
+      "description": "Schedule resource properties used for updates.",
+      "properties": {
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When lab user virtual machines will be started. Timestamp offsets will be ignored and timeZoneId is used instead."
+        },
+        "stopAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When lab user virtual machines will be stopped. Timestamp offsets will be ignored and timeZoneId is used instead."
+        },
+        "recurrencePattern": {
+          "$ref": "#/definitions/RecurrencePattern",
+          "description": "The recurrence pattern of the scheduled actions."
+        },
+        "timeZoneId": {
+          "type": "string",
+          "description": "The IANA timezone id for the schedule.",
+          "maxLength": 50
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes for this schedule.",
+          "maxLength": 1000
+        }
+      }
+    },
+    "SecurityProfile": {
+      "type": "object",
+      "description": "The lab security profile.",
+      "properties": {
+        "registrationCode": {
+          "type": "string",
+          "description": "The registration code for the lab.",
+          "readOnly": true
+        },
+        "openAccess": {
+          "$ref": "#/definitions/EnableState",
+          "description": "Whether any user or only specified users can register to a lab."
+        }
+      }
+    },
+    "ShutdownOnIdleMode": {
+      "type": "string",
+      "description": "Defines whether to shut down VM on idle and the criteria for idle detection.",
+      "enum": [
+        "None",
+        "UserAbsence",
+        "LowUsage"
+      ],
+      "x-ms-enum": {
+        "name": "ShutdownOnIdleMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The VM won't be shut down when it is idle."
+          },
+          {
+            "name": "UserAbsence",
+            "value": "UserAbsence",
+            "description": "The VM will be considered as idle when there is no keyboard or mouse input."
+          },
+          {
+            "name": "LowUsage",
+            "value": "LowUsage",
+            "description": "The VM will be considered as idle when user is absent and the resource (CPU and disk) consumption is low."
+          }
+        ]
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SupportInfo": {
+      "type": "object",
+      "description": "Support contact information and instructions.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Support web address."
+        },
+        "email": {
+          "type": "string",
+          "description": "Support contact email address.",
+          "minLength": 6,
+          "maxLength": 254
+        },
+        "phone": {
+          "type": "string",
+          "description": "Support contact phone number.",
+          "minLength": 1,
+          "maxLength": 31
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Support instructions."
+        }
+      }
+    },
+    "TrackedResourceUpdate": {
+      "type": "object",
+      "description": "Base tracked resource type for all PATCH updates.",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "description": "Resource tags.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Usage": {
+      "type": "object",
+      "description": "The core usage details.",
+      "properties": {
+        "currentValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current usage."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The limit integer."
+        },
+        "unit": {
+          "$ref": "#/definitions/UsageUnit",
+          "description": "The unit details."
+        },
+        "name": {
+          "$ref": "#/definitions/UsageName",
+          "description": "The name."
+        },
+        "id": {
+          "type": "string",
+          "description": "The fully qualified arm resource id."
+        }
+      }
+    },
+    "UsageName": {
+      "type": "object",
+      "description": "The Usage Names.",
+      "properties": {
+        "localizedValue": {
+          "type": "string",
+          "description": "The localized name of the resource."
+        },
+        "skuInstances": {
+          "type": "array",
+          "description": "The instances of the resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "The name of the resource."
+        }
+      }
+    },
+    "UsageUnit": {
+      "type": "string",
+      "description": "The unit details.",
+      "enum": [
+        "Count"
+      ],
+      "x-ms-enum": {
+        "name": "UsageUnit",
+        "modelAsString": true
+      }
+    },
+    "User": {
+      "type": "object",
+      "description": "User of a lab that can register for and use virtual machines within the lab.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UserListResult": {
+      "type": "object",
+      "description": "The response of a User list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The User items on this page",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UserProperties": {
+      "type": "object",
+      "description": "User resource properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Current provisioning state of the user resource.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the user, for example user's full name.",
+          "readOnly": true
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user.",
+          "minLength": 6,
+          "maxLength": 254,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "registrationState": {
+          "$ref": "#/definitions/RegistrationState",
+          "description": "State of the user's registration within the lab.",
+          "readOnly": true
+        },
+        "invitationState": {
+          "$ref": "#/definitions/InvitationState",
+          "description": "State of the invitation message for the user.",
+          "readOnly": true
+        },
+        "invitationSent": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the invitation message was sent to the user.",
+          "readOnly": true
+        },
+        "totalUsage": {
+          "type": "string",
+          "format": "duration",
+          "description": "How long the user has used their virtual machines in this lab.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "email"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserUpdateProperties"
+        }
+      ]
+    },
+    "UserUpdate": {
+      "type": "object",
+      "description": "User of a lab that can register for and use virtual machines within the lab. Used for updates.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserUpdateProperties",
+          "description": "User resource properties"
+        }
+      }
+    },
+    "UserUpdateProperties": {
+      "type": "object",
+      "description": "User resource properties used for updates.",
+      "properties": {
+        "additionalUsageQuota": {
+          "type": "string",
+          "format": "duration",
+          "description": "The amount of usage quota time the user gets in addition to the lab usage quota."
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2022-08-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_08_01",
+            "value": "2022-08-01",
+            "description": "The 2022-08-01 API version."
+          }
+        ]
+      }
+    },
+    "VirtualMachine": {
+      "type": "object",
+      "description": "A lab virtual machine resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VirtualMachineAdditionalCapabilities": {
+      "type": "object",
+      "description": "The additional capabilities for a lab VM.",
+      "properties": {
+        "installGpuDrivers": {
+          "$ref": "#/definitions/EnableState",
+          "description": "Flag to pre-install dedicated GPU drivers."
+        }
+      }
+    },
+    "VirtualMachineConnectionProfile": {
+      "type": "object",
+      "description": "The connection information for the virtual machine",
+      "properties": {
+        "privateIpAddress": {
+          "type": "string",
+          "description": "The private IP address of the virtual machine.",
+          "readOnly": true
+        },
+        "sshAuthority": {
+          "type": "string",
+          "description": "Port and host name separated by semicolon for connecting via SSH protocol to the virtual machine.",
+          "readOnly": true
+        },
+        "sshInBrowserUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL for connecting via SSH protocol to the virtual machine in browser.",
+          "readOnly": true
+        },
+        "rdpAuthority": {
+          "type": "string",
+          "description": "Port and host name separated by semicolon for connecting via RDP protocol to the virtual machine.",
+          "readOnly": true
+        },
+        "rdpInBrowserUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL for connecting via RDP protocol to the virtual machine in browser.",
+          "readOnly": true
+        },
+        "adminUsername": {
+          "type": "string",
+          "description": "The username used to log on to the virtual machine as admin.",
+          "readOnly": true
+        },
+        "nonAdminUsername": {
+          "type": "string",
+          "description": "The username used to log on to the virtual machine as non-admin, if one exists.",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineListResult": {
+      "type": "object",
+      "description": "The response of a VirtualMachine list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualMachine items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualMachine"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualMachineProfile": {
+      "type": "object",
+      "description": "The base virtual machine configuration for a lab.",
+      "properties": {
+        "createOption": {
+          "$ref": "#/definitions/CreateOption",
+          "description": "Indicates what lab virtual machines are created from.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "The image configuration for lab virtual machines.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "The OS type of the image",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU for the lab. Defines the type of virtual machines used in the lab.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "additionalCapabilities": {
+          "$ref": "#/definitions/VirtualMachineAdditionalCapabilities",
+          "description": "Additional VM capabilities.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "usageQuota": {
+          "type": "string",
+          "format": "duration",
+          "description": "The initial quota alloted to each lab user. Must be a time span between 0 and 9999 hours."
+        },
+        "useSharedPassword": {
+          "$ref": "#/definitions/EnableState",
+          "description": "Enabling this option will use the same password for all user VMs.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "adminUser": {
+          "$ref": "#/definitions/Credentials",
+          "description": "Credentials for the admin user on the VM."
+        },
+        "nonAdminUser": {
+          "$ref": "#/definitions/Credentials",
+          "description": "Credentials for the non-admin user on the VM, if one exists."
+        }
+      },
+      "required": [
+        "createOption",
+        "imageReference",
+        "sku",
+        "usageQuota",
+        "adminUser"
+      ]
+    },
+    "VirtualMachineProperties": {
+      "type": "object",
+      "description": "Virtual machine resource properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Current provisioning state of the virtual machine.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/VirtualMachineState",
+          "description": "The current state of the virtual machine",
+          "readOnly": true
+        },
+        "connectionProfile": {
+          "$ref": "#/definitions/VirtualMachineConnectionProfile",
+          "description": "Profile for information about connecting to the virtual machine.",
+          "readOnly": true
+        },
+        "claimedByUserId": {
+          "type": "string",
+          "description": "The lab user ID (not the PUID!) of who claimed the virtual machine.",
+          "readOnly": true
+        },
+        "vmType": {
+          "$ref": "#/definitions/VirtualMachineType",
+          "description": "The type of this VM resource",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineState": {
+      "type": "string",
+      "description": "The state of a virtual machine.",
+      "enum": [
+        "Stopped",
+        "Starting",
+        "Running",
+        "Stopping",
+        "ResettingPassword",
+        "Reimaging",
+        "Redeploying"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "The VM is currently stopped."
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "The VM is starting."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The VM is running."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "The VM is stopping."
+          },
+          {
+            "name": "ResettingPassword",
+            "value": "ResettingPassword",
+            "description": "The VM password is being reset."
+          },
+          {
+            "name": "Reimaging",
+            "value": "Reimaging",
+            "description": "The VM is being reimaged."
+          },
+          {
+            "name": "Redeploying",
+            "value": "Redeploying",
+            "description": "The VM is being redeployed."
+          }
+        ]
+      }
+    },
+    "VirtualMachineType": {
+      "type": "string",
+      "description": "The type of the lab virtual machine.",
+      "enum": [
+        "User",
+        "Template"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A user VM"
+          },
+          {
+            "name": "Template",
+            "value": "Template",
+            "description": "A template VM"
+          }
+        ]
+      }
+    },
+    "WeekDay": {
+      "type": "string",
+      "description": "Days of the week.",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "WeekDay",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Sunday",
+            "value": "Sunday",
+            "description": "Schedule will run on Sunday"
+          },
+          {
+            "name": "Monday",
+            "value": "Monday",
+            "description": "Schedule will run on Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday",
+            "description": "Schedule will run on Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday",
+            "description": "Schedule will run on Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday",
+            "description": "Schedule will run on Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday",
+            "description": "Schedule will run on Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday",
+            "description": "Schedule will run on Saturday"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

@@ -1,0 +1,598 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hybrid Connectivity Management API",
+    "version": "2021-10-06-preview",
+    "description": "REST API for Hybrid Connectivity",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "EndpointResources"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/{scope}/providers/Microsoft.HybridConnectivity/endpoints": {
+      "get": {
+        "operationId": "Endpoints_List",
+        "tags": [
+          "EndpointResources"
+        ],
+        "description": "List of endpoints to the target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EndpointResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsGet": {
+            "$ref": "./examples/Endpoints_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/{scope}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}": {
+      "get": {
+        "operationId": "Endpoints_Get",
+        "tags": [
+          "EndpointResources"
+        ],
+        "description": "Gets the endpoint to the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The endpoint name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsGetCustom": {
+            "$ref": "./examples/Endpoints_Get_Hybrid_Connectivity_Endpoints_Get_Custom.json"
+          },
+          "HybridConnectivityEndpointsGetDefault": {
+            "$ref": "./examples/Endpoints_Get_Hybrid_Connectivity_Endpoints_Get_Default.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Endpoints_CreateOrUpdate",
+        "tags": [
+          "EndpointResources"
+        ],
+        "description": "Create or update the endpoint to the target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "EndpointResource",
+            "in": "body",
+            "description": "Endpoint details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            },
+            "x-ms-client-name": "EndpointResource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EndpointResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'EndpointResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPutCustom": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_Hybrid_Connectivity_Endpoints_Put_Custom.json"
+          },
+          "HybridConnectivityEndpointsPutDefault": {
+            "$ref": "./examples/Endpoints_CreateOrUpdate_Hybrid_Connectivity_Endpoints_Put_Default.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Endpoints_Delete",
+        "tags": [
+          "EndpointResources"
+        ],
+        "description": "Deletes the endpoint access to the target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The endpoint name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsDeleteDefault": {
+            "$ref": "./examples/Endpoints_Delete.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/{scope}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/endpoints/{name}": {
+      "patch": {
+        "operationId": "Endpoints_Update",
+        "tags": [
+          "EndpointResources"
+        ],
+        "description": "Update the endpoint to the target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "EndpointResource",
+            "in": "body",
+            "description": "Endpoint details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            },
+            "x-ms-client-name": "EndpointResource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EndpointResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPatchDefault": {
+            "$ref": "./examples/Endpoints_Update.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/{scope}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/listCredentials": {
+      "post": {
+        "operationId": "Endpoints_ListCredentials",
+        "tags": [
+          "EndpointResources"
+        ],
+        "description": "Gets the endpoint access credentials to the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expiresin",
+            "in": "query",
+            "description": "The is how long the endpoint access token is valid (in seconds).",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 10800,
+            "minimum": 600,
+            "maximum": 10800
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The endpoint name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TargetResourceEndpointAccess"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HybridConnectivityEndpointsPostListCredentials": {
+            "$ref": "./examples/Endpoints_ListCredentials.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.HybridConnectivity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EndpointProperties": {
+      "type": "object",
+      "description": "Endpoint details",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EndpointType",
+          "description": "The type of endpoint.",
+          "x-ms-client-name": "endpointType"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The resource Id of the connectivity endpoint (optional)."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "EndpointResource": {
+      "type": "object",
+      "description": "The endpoint for the target resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EndpointResourceListResult": {
+      "type": "object",
+      "description": "The response of a EndpointResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EndpointResource items on this page",
+          "items": {
+            "$ref": "#/definitions/EndpointResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EndpointType": {
+      "type": "string",
+      "description": "The type of endpoint.",
+      "enum": [
+        "default",
+        "custom"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointType",
+        "modelAsString": true
+      }
+    },
+    "RelayNamespaceAccessProperties": {
+      "type": "object",
+      "description": "Azure relay hybrid connection access properties",
+      "properties": {
+        "namespaceName": {
+          "type": "string",
+          "description": "The namespace name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "namespaceNameSuffix": {
+          "type": "string",
+          "description": "The suffix domain name of relay namespace.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "hybridConnectionName": {
+          "type": "string",
+          "description": "Azure Relay hybrid connection name for the resource."
+        },
+        "accessKey": {
+          "type": "string",
+          "description": "Access key for hybrid connection.",
+          "readOnly": true
+        },
+        "expiresOn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The expiration of access key in unix time."
+        }
+      },
+      "required": [
+        "namespaceName",
+        "namespaceNameSuffix",
+        "hybridConnectionName"
+      ]
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        }
+      }
+    },
+    "TargetResourceEndpointAccess": {
+      "type": "object",
+      "description": "The endpoint access for the target resource.",
+      "properties": {
+        "relay": {
+          "$ref": "#/definitions/RelayNamespaceAccessProperties",
+          "description": "Azure relay hybrid connection access properties"
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2021-10-06-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2021_10_06_preview",
+            "value": "2021-10-06-preview",
+            "description": "The 2021-10-06-preview API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

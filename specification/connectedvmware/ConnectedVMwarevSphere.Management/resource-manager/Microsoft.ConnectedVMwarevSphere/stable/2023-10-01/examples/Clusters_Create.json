@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "body": {
+      "extendedLocation": {
+        "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso",
+        "type": "customLocation"
+      },
+      "location": "East US",
+      "properties": {
+        "moRefId": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+        "vCenterId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter"
+      }
+    },
+    "clusterName": "HRCluster",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "HRCluster",
+        "type": "Microsoft.ConnectedVMwarevSphere/Clusters",
+        "extendedLocation": {
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso",
+          "type": "customLocation"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/Clusters/HRCluster",
+        "location": "East US",
+        "properties": {
+          "moRefId": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+          "provisioningState": "Succeeded",
+          "vCenterId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "ContosoAgent",
+        "type": "Microsoft.ConnectedVMwarevSphere/Clusters",
+        "extendedLocation": {
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso",
+          "type": "customLocation"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/Clusters/ContosoAgent",
+        "location": "East US",
+        "properties": {
+          "moRefId": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+          "provisioningState": "Created",
+          "vCenterId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter"
+        }
+      }
+    }
+  },
+  "operationId": "Clusters_Create",
+  "title": "CreateCluster"
+}

@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2022-12-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myservice",
+            "type": "Microsoft.AppPlatform/Spring",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice",
+            "location": "eastus",
+            "properties": {
+              "networkProfile": {
+                "ingressConfig": {
+                  "readTimeoutInSeconds": 300
+                },
+                "outboundIPs": {
+                  "publicIPs": [
+                    "20.39.3.173",
+                    "40.64.67.13"
+                  ]
+                },
+                "requiredTraffics": [
+                  {
+                    "direction": "Outbound",
+                    "ips": [
+                      "20.62.211.25",
+                      "52.188.47.226"
+                    ],
+                    "port": 443,
+                    "protocol": "TCP"
+                  },
+                  {
+                    "direction": "Outbound",
+                    "ips": [
+                      "20.62.211.25",
+                      "52.188.47.226"
+                    ],
+                    "port": 1194,
+                    "protocol": "UDP"
+                  },
+                  {
+                    "direction": "Outbound",
+                    "ips": [
+                      "20.62.211.25",
+                      "52.188.47.226"
+                    ],
+                    "port": 9000,
+                    "protocol": "TCP"
+                  }
+                ]
+              },
+              "provisioningState": "Succeeded",
+              "serviceId": "12345678abcd1234abcd12345678abcd"
+            },
+            "sku": {
+              "name": "S0",
+              "tier": "Standard"
+            },
+            "systemData": {
+              "createdAt": "2021-08-11T03:16:03.944Z",
+              "createdBy": "sample-user",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-11T03:17:03.944Z",
+              "lastModifiedBy": "sample-user",
+              "lastModifiedByType": "User"
+            },
+            "tags": {
+              "key1": "value1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Services_ListBySubscription",
+  "title": "Services_ListBySubscription"
+}

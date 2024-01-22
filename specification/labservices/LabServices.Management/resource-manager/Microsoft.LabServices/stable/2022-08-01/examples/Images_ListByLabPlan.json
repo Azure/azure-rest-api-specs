@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01",
+    "labPlanName": "testlabplan",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "image1",
+            "type": "Microsoft.LabServices/Image",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.LabServices/labPlans/testlabplan/images/image1",
+            "properties": {
+              "description": "A description of the image",
+              "displayName": "Windows Server 2019 Datacenter",
+              "enabledState": "Enabled",
+              "offer": "WindowsServer",
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "publisher": "Microsoft",
+              "sharedGalleryId": null,
+              "sku": "2019-Datacenter",
+              "version": "2019.0.20190410"
+            },
+            "systemData": {
+              "createdAt": "2020-05-01T10:00:00Z",
+              "createdBy": "identity123",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-06-01T09:12:28Z",
+              "lastModifiedBy": "identity123",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "image2",
+            "type": "Microsoft.LabServices/Image",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.LabServices/labPlans/testlabplan/images/image2",
+            "properties": {
+              "description": "An example custom image response",
+              "displayName": "A custom image",
+              "enabledState": "Enabled",
+              "offer": null,
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "publisher": null,
+              "sharedGalleryId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Compute/galleries/sig/images/test-1",
+              "sku": null,
+              "version": null
+            },
+            "systemData": {
+              "createdAt": "2020-05-01T10:00:00Z",
+              "createdBy": "identity123",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-06-01T09:12:28Z",
+              "lastModifiedBy": "identity123",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Images_ListByLabPlan",
+  "title": "listImages"
+}

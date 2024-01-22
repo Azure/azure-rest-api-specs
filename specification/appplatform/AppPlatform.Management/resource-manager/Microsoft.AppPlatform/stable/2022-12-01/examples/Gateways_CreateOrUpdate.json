@@ -1,0 +1,139 @@
+{
+  "parameters": {
+    "api-version": "2022-12-01",
+    "gatewayName": "default",
+    "gatewayResource": {
+      "properties": {
+        "public": true,
+        "resourceRequests": {
+          "cpu": "1",
+          "memory": "1G"
+        }
+      },
+      "sku": {
+        "name": "E0",
+        "capacity": 2,
+        "tier": "Enterprise"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.AppPlatform/Spring/gateways",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/gateways/default",
+        "properties": {
+          "instances": [
+            {
+              "name": "instance1",
+              "status": "Running"
+            },
+            {
+              "name": "instance2",
+              "status": "Running"
+            }
+          ],
+          "operatorProperties": {
+            "instances": [
+              {
+                "name": "instance1",
+                "status": "Running"
+              },
+              {
+                "name": "instance2",
+                "status": "Running"
+              }
+            ],
+            "resourceRequests": {
+              "cpu": "1",
+              "instanceCount": 2,
+              "memory": "1G"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "public": true,
+          "resourceRequests": {
+            "cpu": "1",
+            "memory": "1G"
+          },
+          "url": "test-url"
+        },
+        "sku": {
+          "name": "E0",
+          "capacity": 2,
+          "tier": "Enterprise"
+        },
+        "systemData": {
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.AppPlatform/Spring/gateways",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/gateways/default",
+        "properties": {
+          "instances": [
+            {
+              "name": "instance1",
+              "status": "Running"
+            },
+            {
+              "name": "instance2",
+              "status": "Running"
+            }
+          ],
+          "operatorProperties": {
+            "instances": [
+              {
+                "name": "instance1",
+                "status": "Running"
+              },
+              {
+                "name": "instance2",
+                "status": "Running"
+              }
+            ],
+            "resourceRequests": {
+              "cpu": "1",
+              "instanceCount": 2,
+              "memory": "1G"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "public": true,
+          "resourceRequests": {
+            "cpu": "1",
+            "memory": "1G"
+          },
+          "url": "test-url"
+        },
+        "sku": {
+          "name": "E0",
+          "capacity": 2,
+          "tier": "Enterprise"
+        },
+        "systemData": {
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "Gateways_CreateOrUpdate",
+  "title": "Gateways_CreateOrUpdate"
+}

@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "accountName": "slitestmedia10",
+    "api-version": "2022-08-01",
+    "liveEventName": "myLiveEvent1",
+    "liveOutputName": "myLiveOutput1",
+    "parameters": {
+      "properties": {
+        "description": "test live output 1",
+        "archiveWindowLength": "PT5M",
+        "assetName": "6f3264f5-a189-48b4-a29a-a40f22575212",
+        "hls": {
+          "fragmentsPerTsSegment": 5
+        },
+        "manifestName": "testmanifest",
+        "rewindWindowLength": "PT4M"
+      }
+    },
+    "resourceGroupName": "mediaresources",
+    "subscriptionId": "0a6ec948-5a62-437d-b9df-934dc7c1b722"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myLiveOutput1",
+        "type": "Microsoft.Media/mediaservices/liveevents/liveoutputs",
+        "id": "/subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveevents/myLiveEvent1/liveoutputs/myLiveOutput1",
+        "properties": {
+          "description": "test live output 1",
+          "archiveWindowLength": "PT5M",
+          "assetName": "6f3264f5-a189-48b4-a29a-a40f22575212",
+          "created": "2018-03-03T02:25:09.9431835Z",
+          "hls": {
+            "fragmentsPerTsSegment": 5
+          },
+          "lastModified": "2018-03-03T02:25:09.9431835Z",
+          "manifestName": "testmanifest",
+          "outputSnapTime": 0,
+          "provisioningState": "Succeeded",
+          "resourceState": "Stopped",
+          "rewindWindowLength": "PT4M"
+        },
+        "systemData": {
+          "createdAt": "2018-03-03T02:25:09.9431835Z",
+          "createdBy": "example@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-03-03T02:25:09.9431835Z",
+          "lastModifiedBy": "example@microsoft.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myLiveOutput1",
+        "type": "Microsoft.Media/mediaservices/liveevents/liveoutputs",
+        "id": "/subscriptions/0a6ec948-5a62-437d-b9df-934dc7c1b722/resourceGroups/mediaresources/providers/Microsoft.Media/mediaservices/slitestmedia10/liveevents/myLiveEvent1/liveoutputs/myLiveOutput1",
+        "properties": {
+          "description": "test live output 1",
+          "archiveWindowLength": "PT5M",
+          "assetName": "6f3264f5-a189-48b4-a29a-a40f22575212",
+          "created": "2018-03-03T02:25:09.9431835Z",
+          "hls": {
+            "fragmentsPerTsSegment": 5
+          },
+          "lastModified": "2018-03-03T02:25:09.9431835Z",
+          "manifestName": "testmanifest",
+          "outputSnapTime": 0,
+          "provisioningState": "InProgress",
+          "resourceState": "Creating",
+          "rewindWindowLength": "PT4M"
+        },
+        "systemData": {
+          "createdAt": "2018-03-03T02:25:09.9431835Z",
+          "createdBy": "example@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2018-03-03T02:25:09.9431835Z",
+          "lastModifiedBy": "example@microsoft.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "LiveOutputs_Create",
+  "title": "Create a LiveOutput"
+}
