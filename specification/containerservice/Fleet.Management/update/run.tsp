@@ -121,6 +121,7 @@ model ManagedClusterUpgradeSpec {
 The upgrade type.
 Full requires the KubernetesVersion property to be set.
 NodeImageOnly requires the KubernetesVersion property not to be set.
+ControlPlaneOnly requires the AgentPool KubernetesVersion property not to be set.
 """)
   type: ManagedClusterUpgradeType;
 
@@ -135,6 +136,9 @@ enum ManagedClusterUpgradeType {
 
   @doc("NodeImageOnly upgrades only the node images of the target ManagedClusters.")
   NodeImageOnly,
+
+  @doc("ControlPlaneOnly upgrades only the control plane of the target ManagedClusters.")
+  ControlPlaneOnly,
 }
 
 @doc("The state of the UpdateRun, UpdateStage, UpdateGroup, or MemberUpdate.")

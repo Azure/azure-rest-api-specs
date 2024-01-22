@@ -2120,7 +2120,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/ManagedClusterUpgradeType",
-          "description": "The upgrade type.\nFull requires the KubernetesVersion property to be set.\nNodeImageOnly requires the KubernetesVersion property not to be set."
+          "description": "The upgrade type.\nFull requires the KubernetesVersion property to be set.\nNodeImageOnly requires the KubernetesVersion property not to be set.\nControlPlaneOnly requires the AgentPool KubernetesVersion property not to be set."
         },
         "kubernetesVersion": {
           "$ref": "#/definitions/KubernetesVersion",
@@ -2136,7 +2136,8 @@
       "description": "The type of upgrade to perform when targeting ManagedClusters.",
       "enum": [
         "Full",
-        "NodeImageOnly"
+        "NodeImageOnly",
+        "ControlPlaneOnly"
       ],
       "x-ms-enum": {
         "name": "ManagedClusterUpgradeType",
@@ -2151,6 +2152,11 @@
             "name": "NodeImageOnly",
             "value": "NodeImageOnly",
             "description": "NodeImageOnly upgrades only the node images of the target ManagedClusters."
+          },
+          {
+            "name": "ControlPlaneOnly",
+            "value": "ControlPlaneOnly",
+            "description": "ControlPlaneOnly upgrades only the control plane of the target ManagedClusters."
           }
         ]
       }
