@@ -95,6 +95,15 @@ input-file:
   - Microsoft.HybridConnectivity/stable/2023-03-15/hybridconnectivity.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: Property solutionSettings for Solution Configurations settings
+    from: publicCloud.json
+```
+
 ---
 
 # Code Generation
