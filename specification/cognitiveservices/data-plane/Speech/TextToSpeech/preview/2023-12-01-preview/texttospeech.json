@@ -1714,6 +1714,9 @@
         "projectId": {
           "$ref": "#/definitions/ResourceId"
         },
+        "properties": {
+          "$ref": "#/definitions/ConsentProperties"
+        },
         "status": {
           "$ref": "#/definitions/Status"
         },
@@ -1728,6 +1731,28 @@
           "format": "date-time",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ConsentFailureReason": {
+      "description": "Consent creation failure reason",
+      "enum": [
+        "None",
+        "AudioAndScriptNotMatch",
+        "Internal"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ConsentFailureReason",
+        "modelAsString": true
+      }
+    },
+    "ConsentProperties": {
+      "description": "Consent properties",
+      "type": "object",
+      "properties": {
+        "failureReason": {
+          "$ref": "#/definitions/ConsentFailureReason"
         }
       }
     },
