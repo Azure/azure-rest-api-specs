@@ -2081,19 +2081,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
@@ -5032,7 +5019,7 @@
     "CloudManagerTenantsList": {
       "type": "object",
       "properties": {
-        "strataCloudManagerTenants": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudManagerTenant"
@@ -5040,11 +5027,15 @@
           "x-ms-identifiers": [],
           "x-cadl-name": "CloudManagerTenant[]",
           "description": "List of Cloud Manager Tenants"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "next link"
         }
       },
       "description": "List of Cloud Manager Tenants",
       "required": [
-        "strataCloudManagerTenants"
+        "value"
       ]
     },
     "CountriesResponse": {
