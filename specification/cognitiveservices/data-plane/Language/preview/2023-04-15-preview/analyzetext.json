@@ -436,10 +436,6 @@
           "description": "String index type"
         }
       },
-      "required": [
-        "sentenceCount",
-        "stringIndexType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
@@ -459,11 +455,7 @@
           "$ref": "#/definitions/StringIndexType",
           "description": "String index type"
         }
-      },
-      "required": [
-        "sentenceCount",
-        "stringIndexType"
-      ]
+      }
     },
     "AbstractiveSummary": {
       "type": "object",
@@ -491,8 +483,12 @@
       "description": "An object representing the pre-build summarization results of each document.",
       "properties": {
         "summaries": {
-          "$ref": "#/definitions/AbstractiveSummary",
-          "description": "A list of abstractive summaries."
+          "type": "array",
+          "description": "A list of abstractive summaries.",
+          "items": {
+            "$ref": "#/definitions/AbstractiveSummary"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -513,9 +509,6 @@
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
-      "required": [
-        "detectedLanguage"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
@@ -680,7 +673,7 @@
           "description": "job ID",
           "readOnly": true
         },
-        "lastUpdateDateTime": {
+        "lastUpdatedDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "last updated date and time"
@@ -701,28 +694,8 @@
           "type": "string",
           "description": "next link"
         },
-        "completed": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "failed": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "inProgress": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "total": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AnalyzeTextLROResult"
-          },
-          "x-ms-identifiers": []
+        "tasks": {
+          "$ref": "#/definitions/Tasks"
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics"
@@ -731,13 +704,9 @@
       "required": [
         "createdDateTime",
         "jobId",
-        "lastUpdateDateTime",
+        "lastUpdatedDateTime",
         "status",
-        "completed",
-        "failed",
-        "inProgress",
-        "total",
-        "statistics"
+        "tasks"
       ]
     },
     "AnalyzeTextJobStatistics": {
@@ -746,10 +715,7 @@
         "statistics": {
           "$ref": "#/definitions/RequestStatistics"
         }
-      },
-      "required": [
-        "statistics"
-      ]
+      }
     },
     "AnalyzeTextJobsInput": {
       "type": "object",
@@ -889,12 +855,6 @@
     "AnalyzeTextLanguageDetectionInput": {
       "type": "object",
       "properties": {
-        "kind": {
-          "type": "string",
-          "enum": [
-            "LanguageDetection"
-          ]
-        },
         "analysisInput": {
           "$ref": "#/definitions/LanguageDetectionAnalysisInput"
         },
@@ -902,9 +862,12 @@
           "$ref": "#/definitions/LanguageDetectionTaskParameters"
         }
       },
-      "required": [
-        "kind"
-      ]
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTask"
+        }
+      ],
+      "x-ms-discriminator-value": "LanguageDetection"
     },
     "AnalyzeTextPIIEntitiesRecognitionInput": {
       "type": "object",
@@ -1486,7 +1449,6 @@
         }
       },
       "required": [
-        "loggingOptOut",
         "projectName",
         "deploymentName"
       ],
@@ -1544,7 +1506,6 @@
         }
       },
       "required": [
-        "detectedLanguage",
         "documents"
       ],
       "allOf": [
@@ -1622,9 +1583,6 @@
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
-      "required": [
-        "detectedLanguage"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/CustomHealthcareEntitiesDocumentResult"
@@ -1643,9 +1601,6 @@
           "x-ms-identifiers": []
         }
       },
-      "required": [
-        "entityComponentInformation"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/HealthcareEntity"
@@ -1707,9 +1662,6 @@
           "$ref": "#/definitions/StringIndexType"
         }
       },
-      "required": [
-        "stringIndexType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/CustomTaskParameters"
@@ -1744,9 +1696,6 @@
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
-      "required": [
-        "detectedLanguage"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/CustomLabelClassificationResult"
@@ -1824,6 +1773,40 @@
         "deploymentName"
       ]
     },
+    "CustomSentenceSentiment": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The sentence text."
+        },
+        "sentiment": {
+          "$ref": "#/definitions/SentimentValue",
+          "description": "The predicted Sentiment for the sentence."
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores",
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target offset from the start of the sentence."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the target."
+        }
+      },
+      "required": [
+        "text",
+        "sentiment",
+        "confidenceScores",
+        "offset",
+        "length"
+      ]
+    },
     "CustomSentimentAnalysisLROResult": {
       "type": "object",
       "properties": {
@@ -1883,9 +1866,6 @@
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
-      "required": [
-        "detectedLanguage"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/CustomSentimentDocumentResult"
@@ -1917,22 +1897,18 @@
           "$ref": "#/definitions/SentimentConfidenceScores",
           "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
         },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The sentence offset from the start of the document."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the sentence."
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomSentenceSentiment"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
         "sentiment",
         "confidenceScores",
-        "offset",
-        "length"
+        "sentences"
       ],
       "allOf": [
         {
@@ -2000,7 +1976,6 @@
         }
       },
       "required": [
-        "loggingOptOut",
         "projectName",
         "deploymentName"
       ]
@@ -2055,7 +2030,7 @@
       "properties": {
         "timex": {
           "type": "string",
-          "format": "date-time"
+          "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "value": {
           "type": "string",
@@ -2104,10 +2079,7 @@
           "type": "string",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
-      },
-      "required": [
-        "detectedLanguage"
-      ]
+      }
     },
     "DocumentError": {
       "type": "object",
@@ -2229,7 +2201,7 @@
     "DynamicClassificationDocumentResult": {
       "type": "object",
       "properties": {
-        "classification": {
+        "classifications": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClassificationResult"
@@ -2238,7 +2210,7 @@
         }
       },
       "required": [
-        "classification"
+        "classifications"
       ],
       "allOf": [
         {
@@ -2293,6 +2265,23 @@
         }
       ]
     },
+    "DynamicClassificationTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/DynamicClassificationResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "DynamicClassificationResults"
+    },
     "DynamicClassificationType": {
       "type": "string",
       "description": "Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.",
@@ -2312,8 +2301,9 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/EntitiesDocumentResult"
-          }
+            "$ref": "#/definitions/Entity"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -2354,9 +2344,6 @@
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
-      "required": [
-        "detectedLanguage"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/EntitiesDocumentResultWithMetadata"
@@ -2424,9 +2411,6 @@
           "description": "(Optional) describes the type of overlap policy to apply to the ner output."
         }
       },
-      "required": [
-        "stringIndexType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
@@ -2437,11 +2421,7 @@
       "type": "object",
       "properties": {
         "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntitiesResult"
-          },
-          "x-ms-identifiers": []
+          "$ref": "#/definitions/EntitiesResult"
         }
       },
       "required": [
@@ -2771,7 +2751,7 @@
           {
             "name": "Person",
             "value": "Person",
-            "description": "First, last, and middle names, names of fictional characters, and aliases. Titles, such as “Mr.” or “President”, are not considered part of the named entity."
+            "description": "First, last, and middle names, names of fictional characters, and aliases. Titles, such as \u201cMr.\u201d or \u201cPresident\u201d, are not considered part of the named entity."
           },
           {
             "name": "PersonType",
@@ -2900,9 +2880,6 @@
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
-      "required": [
-        "detectedLanguage"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/LinkedEntitiesDocumentResult"
@@ -2917,9 +2894,6 @@
           "$ref": "#/definitions/StringIndexType"
         }
       },
-      "required": [
-        "stringIndexType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
@@ -2930,11 +2904,7 @@
       "type": "object",
       "properties": {
         "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntityLinkingResult"
-          },
-          "x-ms-identifiers": []
+          "$ref": "#/definitions/EntityLinkingResult"
         }
       },
       "required": [
@@ -3153,9 +3123,6 @@
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
-      "required": [
-        "detectedLanguage"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ExtractedSummaryDocumentResult"
@@ -3372,8 +3339,12 @@
           "x-ms-identifiers": []
         },
         "relations": {
-          "$ref": "#/definitions/HealthcareRelation",
-          "description": "Healthcare entity relations."
+          "type": "array",
+          "description": "Healthcare entity relations.",
+          "items": {
+            "$ref": "#/definitions/HealthcareRelation"
+          },
+          "x-ms-identifiers": []
         },
         "fhirBundle": {
           "type": "object",
@@ -3399,9 +3370,6 @@
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
-      "required": [
-        "detectedLanguage"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
@@ -3415,7 +3383,7 @@
           "type": "string",
           "description": "Entity text as appears in the request."
         },
-        "healthcareEntityCategory": {
+        "category": {
           "$ref": "#/definitions/HealthcareEntityCategory",
           "description": "Healthcare Entity Category."
         },
@@ -3446,13 +3414,16 @@
           "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'."
         },
         "links": {
-          "$ref": "#/definitions/HealthcareEntityLink",
-          "description": "Entity references in known data sources."
+          "type": "array",
+          "description": "Entity references in known data sources.",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntityLink"
+          }
         }
       },
       "required": [
         "text",
-        "healthcareEntityCategory",
+        "category",
         "offset",
         "length",
         "confidenceScore"
@@ -3631,10 +3602,6 @@
           "description": "Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter."
         }
       },
-      "required": [
-        "fhirVersion",
-        "documentType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/PreBuiltTaskParameters"
@@ -3813,7 +3780,7 @@
           "description": "job ID",
           "readOnly": true
         },
-        "lastUpdateDateTime": {
+        "lastUpdatedDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "last updated date and time"
@@ -3838,7 +3805,7 @@
       "required": [
         "createdDateTime",
         "jobId",
-        "lastUpdateDateTime",
+        "lastUpdatedDateTime",
         "status"
       ]
     },
@@ -3949,9 +3916,6 @@
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
-      "required": [
-        "detectedLanguage"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/KeyPhrasesDocumentResult"
@@ -4294,8 +4258,7 @@
         "language",
         "id",
         "url",
-        "dataSource",
-        "bingId"
+        "dataSource"
       ]
     },
     "ListComponent": {
@@ -4619,6 +4582,11 @@
       "required": [
         "redactedText",
         "entities"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
       ]
     },
     "PIIEntityRecognitionLROResult": {
@@ -4660,8 +4628,7 @@
           "description": "Response by document",
           "items": {
             "$ref": "#/definitions/PIIResultWithDetectedLanguage"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -4681,9 +4648,6 @@
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
-      "required": [
-        "detectedLanguage"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/PIIEntitiesDocumentResult"
@@ -5174,9 +5138,6 @@
           "default": "latest"
         }
       },
-      "required": [
-        "modelVersion"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TaskParameters"
@@ -5412,7 +5373,7 @@
           "$ref": "#/definitions/SentimentValue"
         },
         "confidenceScores": {
-          "$ref": "#/definitions/SentimentConfidenceScores"
+          "$ref": "#/definitions/TargetConfidenceScoreLabel"
         },
         "offset": {
           "type": "integer",
@@ -5456,12 +5417,40 @@
         "confidenceScores": {
           "$ref": "#/definitions/SentimentConfidenceScores",
           "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target offset from the start of the sentence."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the target."
+        },
+        "targets": {
+          "type": "array",
+          "description": "The array of sentence targets for the sentence.",
+          "items": {
+            "$ref": "#/definitions/SentenceTarget"
+          },
+          "x-ms-identifiers": []
+        },
+        "assessments": {
+          "type": "array",
+          "description": "The array of assessments for the sentence.",
+          "items": {
+            "$ref": "#/definitions/SentenceAssessment"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
         "text",
         "sentiment",
-        "confidenceScores"
+        "confidenceScores",
+        "offset",
+        "length"
       ]
     },
     "SentenceTarget": {
@@ -5471,7 +5460,7 @@
           "$ref": "#/definitions/SentimentValue"
         },
         "confidenceScores": {
-          "$ref": "#/definitions/SentimentConfidenceScores"
+          "$ref": "#/definitions/TargetConfidenceScoreLabel"
         },
         "offset": {
           "type": "integer",
@@ -5694,7 +5683,6 @@
         }
       },
       "required": [
-        "detectedLanguage",
         "documents"
       ],
       "allOf": [
@@ -5955,10 +5943,7 @@
           "description": "logging opt out",
           "default": false
         }
-      },
-      "required": [
-        "loggingOptOut"
-      ]
+      }
     },
     "TaskState": {
       "type": "object",
@@ -5979,7 +5964,7 @@
         "status"
       ]
     },
-    "TasksState": {
+    "Tasks": {
       "type": "object",
       "properties": {
         "completed": {
@@ -6011,6 +5996,17 @@
         "failed",
         "inProgress",
         "total"
+      ]
+    },
+    "TasksState": {
+      "type": "object",
+      "properties": {
+        "tasks": {
+          "$ref": "#/definitions/Tasks"
+        }
+      },
+      "required": [
+        "tasks"
       ]
     },
     "TemperatureMetadata": {

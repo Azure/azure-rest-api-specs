@@ -91,13 +91,13 @@ model TaskIdentifier {
 @doc("Base parameters object for a text analysis task.")
 model TaskParameters {
     @doc("logging opt out")
-    loggingOptOut: boolean = false;
+    loggingOptOut?: boolean = false;
 }
 
 @doc("Parameters object for a text analysis task using pre-built models.")
 model PreBuiltTaskParameters extends TaskParameters {
     @doc("model version")
-    modelVersion: string = "latest";
+    modelVersion?: string = "latest";
 }
 
 alias ShowStatsQueryParameter = QueryParametersTrait<{
@@ -133,7 +133,7 @@ model JobState {
     jobId: string;
 
     @doc("last updated date and time")
-    lastUpdateDateTime: utcDateTime;
+    lastUpdatedDateTime: utcDateTime;
 
     @doc("status")
     status: State;
@@ -514,10 +514,10 @@ enum SummaryLengthBucket {
 @doc("Supported parameters for an Abstractive Summarization task.")
 model AbstractiveSummarizationTaskParametersBase {
     @doc("Controls the approximate number of sentences in the output summaries.")
-    sentenceCount: int32;
+    sentenceCount?: int32;
 
     @doc("String index type")
-    stringIndexType: StringIndexType;
+    stringIndexType?: StringIndexType;
 
     @added(Versions.v2023_11_15_preview)
     @doc("(NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries.")

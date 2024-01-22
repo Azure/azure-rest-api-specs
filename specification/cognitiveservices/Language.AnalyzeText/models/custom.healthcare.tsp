@@ -9,7 +9,7 @@ namespace Language.AnalyzeText;
 @doc("Supported parameters for a custom Healthcare task.")
 model CustomHealthcareTaskParameters extends CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType: StringIndexType
+  stringIndexType?: StringIndexType
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -50,7 +50,7 @@ model CustomHealthcareEntitiesDocumentResult extends DocumentResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model CustomHealthcareEntity extends HealthcareEntity {
   @doc("(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.")
-  entityComponentInformation: Array<EntityComponentInformation>;
+  entityComponentInformation?: Array<EntityComponentInformation>;
 }
 
 @added(Versions.v2023_04_15_preview)

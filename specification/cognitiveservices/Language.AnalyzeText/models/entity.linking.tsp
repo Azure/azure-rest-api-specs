@@ -19,7 +19,7 @@ model AnalyzeTextEntityLinkingInput extends AnalyzeTextTask {
 @doc("Supported parameters for an Entity Linking task.")
 model EntityLinkingTaskParameters extends PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType: StringIndexType;
+  stringIndexType?: StringIndexType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -36,7 +36,7 @@ model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
   kind: AnalyzeTextTaskResultsKind.EntityLinkingResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  results: Array<EntityLinkingResult>;
+  results: EntityLinkingResult;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -79,7 +79,7 @@ model LinkedEntity {
   dataSource: string;
 
   @doc("Bing Entity Search API unique identifier of the recognized entity.")
-  bingId: string;
+  bingId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"

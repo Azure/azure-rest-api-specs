@@ -78,7 +78,7 @@ enum PiiDomain {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model PIIEntitiesDocumentResult {
+model PIIEntitiesDocumentResult extends DocumentResult {
   @doc("Returns redacted text.")
   redactedText: string;
 

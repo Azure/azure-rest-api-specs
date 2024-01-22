@@ -11,11 +11,11 @@ model HealthcareTaskParameters extends PreBuiltTaskParameters {
 
   @added(Versions.v2023_04_15_preview)
   @doc("The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.")
-  fhirVersion: fhirVersion;
+  fhirVersion?: fhirVersion;
 
   @added(Versions.v2023_04_15_preview)
   @doc("Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter.")
-  documentType: healthcareDocumentType
+  documentType?: healthcareDocumentType
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -72,7 +72,7 @@ model HealthcareEntitiesDocumentResult extends DocumentResult {
   entities: Array<HealthcareEntity>;
 
   @doc("Healthcare entity relations.")
-  relations: HealthcareRelation;
+  relations: Array<HealthcareRelation>;
 
   @added(Versions.v2023_04_15_preview)
   @doc("JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.")
@@ -85,7 +85,7 @@ model HealthcareEntity {
   text: string;
 
   @doc("Healthcare Entity Category.")
-  healthcareEntityCategory: HealthcareEntityCategory;
+  category: HealthcareEntityCategory;
 
   @doc("(Optional) Entity sub type.")
   subcategory?: string;
@@ -106,7 +106,7 @@ model HealthcareEntity {
   name?: string;
 
   @doc("Entity references in known data sources.")
-  links?: HealthcareEntityLink;
+  links?: Array<HealthcareEntityLink>;
 }
 
 @doc("Healthcare Entity Category.")

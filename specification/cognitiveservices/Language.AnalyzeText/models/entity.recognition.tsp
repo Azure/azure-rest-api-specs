@@ -19,7 +19,7 @@ model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
 @doc("Supported parameters for an Entity Recognition task.")
 model EntitiesTaskParameters extends PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType: StringIndexType;
+  stringIndexType?: StringIndexType;
 
   @added(Versions.v2023_04_15_preview)
   @doc("(Optional) request parameter that limits the output to the requested entity types included in this list. We will apply inclusionList before exclusionList")
@@ -54,7 +54,7 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
   kind: AnalyzeTextTaskResultsKind.EntityRecognitionResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  results: Array<EntitiesResult>;
+  results: EntitiesResult;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -67,7 +67,7 @@ model EntitiesResult extends AnalyzeTextPreBuiltResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model EntitiesDocumentResult extends DocumentResult {
   @doc("Recognized entities in the document.")
-  entities: Array<EntitiesDocumentResult>;
+  entities: Array<Entity>;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -879,8 +879,8 @@ model CurrencyMetadata  extends BaseMetadata {
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the date value.")
 model DateValue {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  timex: utcDateTime;
+  @doc("An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
+  timex: string;
 
   @doc("The actual time that the extracted text denote.")
   value: string;

@@ -249,10 +249,16 @@ model AnalyzeTextJobErrors {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AnalyzeTextJobStatistics {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  statistics: RequestStatistics;
+  statistics?: RequestStatistics;
 }
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+
 model TasksState {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  tasks: Tasks;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model Tasks {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   completed: int32;
 
@@ -374,7 +380,7 @@ model MultiLanguageInput {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model DocumentDetectedLanguage {
   @doc("If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document.")
-  detectedLanguage: string;
+  detectedLanguage?: string;
 }
 
 @added(Versions.v2023_04_15_preview)

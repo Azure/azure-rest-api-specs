@@ -11,7 +11,7 @@ model LanguageDetectionAnalysisInput {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model AnalyzeTextLanguageDetectionInput {
+model AnalyzeTextLanguageDetectionInput extends AnalyzeTextTask{
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskKind.LanguageDetection;
 

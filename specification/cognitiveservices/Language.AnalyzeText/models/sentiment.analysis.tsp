@@ -90,7 +90,19 @@ model SentimentDocumentResult extends DocumentResult {
   sentiment: SentimentValue;
 
   @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.",)
-  confidenceScores: SentimentConfidenceScores
+  confidenceScores: SentimentConfidenceScores;
+
+  @doc("The target offset from the start of the sentence.")
+  offset: int32;
+
+  @doc("The length of the target.")
+  length: int32;
+
+  @doc("The array of sentence targets for the sentence.")
+  targets?: Array<SentenceTarget>;
+
+  @doc("The array of assessments for the sentence.")
+  assessments?: Array<SentenceAssessment>;
  }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -99,7 +111,7 @@ model SentenceTarget {
   sentiment: SentimentValue;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  confidenceScores: SentimentConfidenceScores;
+  confidenceScores: TargetConfidenceScoreLabel;
 
   @doc("The target offset from the start of the sentence.")
   offset: int32;
@@ -120,7 +132,7 @@ model SentenceAssessment {
   sentiment: SentimentValue;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  confidenceScores: SentimentConfidenceScores;
+  confidenceScores: TargetConfidenceScoreLabel;
 
   @doc("The target offset from the start of the sentence.")
   offset: int32;
@@ -175,6 +187,25 @@ model SentimentLROResult extends AnalyzeTextLROResult {
 
 @added(Versions.v2023_04_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+model CustomSentenceSentiment {
+  @doc("The sentence text.")
+  text: string;
+
+  @doc("The predicted Sentiment for the sentence.")
+  sentiment: SentimentValue;
+
+  @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.",)
+  confidenceScores: SentimentConfidenceScores;
+
+  @doc("The target offset from the start of the sentence.")
+  offset: int32;
+
+  @doc( "The length of the target.")
+  length: int32;
+}
+
+@added(Versions.v2023_04_15_preview)
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 model CustomSentimentDocumentResult extends DocumentResult {
   @doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
   sentiment: Sentiment;
@@ -182,11 +213,7 @@ model CustomSentimentDocumentResult extends DocumentResult {
   @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.",)
   confidenceScores: SentimentConfidenceScores;
 
-  @doc("The sentence offset from the start of the document.")
-  offset: int32;
-
-  @doc("The length of the sentence.")
-  length: int32;
+  sentences: Array<CustomSentenceSentiment>;
 }
 
 @added(Versions.v2023_04_15_preview)

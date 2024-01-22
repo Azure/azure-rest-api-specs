@@ -138,7 +138,7 @@ model AbstractiveSummarizationResult extends PreBuiltResult {
 @doc("An object representing the pre-build summarization results of each document.")
 model AbstractiveSummaryDocumentResult extends DocumentResult {
   @doc("A list of abstractive summaries.",)
-  summaries: AbstractiveSummary;
+  summaries: Array<AbstractiveSummary>;
 }
 
 @added(Versions.v2023_04_15_preview)

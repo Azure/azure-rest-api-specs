@@ -145,7 +145,7 @@ model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model DynamicClassificationDocumentResult extends DocumentResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  classification: Array<ClassificationResult>;
+  classifications: Array<ClassificationResult>;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -221,4 +221,11 @@ enum DynamicClassificationType {
 model DynamicClassificationResult extends PreBuiltResult {
   @doc("Response by document")
   documents: Array<DynamicClassificationDocumentResult>
+}
+
+@added(Versions.v2023_04_15_preview)
+model DynamicClassificationTaskResult extends AnalyzeTextTaskResult {
+  kind: AnalyzeTextTaskResultsKind.DynamicClassificationResults;
+
+  results: DynamicClassificationResult;
 }
