@@ -12,7 +12,7 @@ namespace Microsoft.PortalServices;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The types of dashboard tiles.")
-enum Type {
+enum DashboardTileType {
   @doc("The tile type for Arc Snapshot tile.")
   ArcSnapshotTile,
 
@@ -214,6 +214,9 @@ model DashboardTile {
   @doc("The title of dashboard title.")
   title: string;
 
+  @doc("Dashboard tile type.")
+  type: DashboardTileType;
+
   @doc("The title of dashboard subtitle.")
   subtitle?: string;
 
@@ -274,7 +277,10 @@ model Actions {
 
 @discriminator("type")
 @doc("Model for Actions on click.")
-model ActionsOnClick {}
+model ActionsOnClick {
+  @doc("Types of actions on click.")
+  type: ActionsOnClickType;
+}
 
 @discriminator("type")
 @doc("Model for Action reference.")
@@ -452,7 +458,10 @@ model MarkdownTile extends DashboardTile {
 
 @doc("Data definition for a markdown tile.")
 @discriminator("source")
-model MarkdownTileData {}
+model MarkdownTileData {
+  @doc("Dashboard Markdown Tile sources.")
+  source: Source;
+}
 
 @doc("The data definition of Markdown with inline content")
 model MarkdownInlineData extends MarkdownTileData {
