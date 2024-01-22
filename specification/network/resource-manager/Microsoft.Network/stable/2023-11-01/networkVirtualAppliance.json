@@ -317,21 +317,14 @@
             "name": "NetworkVirtualApplianceInstanceIds",
             "in": "body",
             "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceInstanceIds"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "Request successful. The operation restarts one or more Network Virtual Appliance VM resources.",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/NetworkVirtualApplianceInstanceIds"
             }
@@ -1395,6 +1388,7 @@
       "description": "Properties of the partner managed resource."
     },
     "NetworkVirtualApplianceInstanceIds": {
+      "type": "object",
       "properties": {
         "instanceIds": {
           "type": "array",
