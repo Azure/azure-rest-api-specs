@@ -317,8 +317,9 @@
             "name": "NetworkVirtualApplianceInstanceIds",
             "in": "body",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/NetworkVirtualApplianceInstanceIds"
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
         ],
@@ -329,10 +330,10 @@
               "Location": {
                 "description": "The URL of the resource used to check the status of the asynchronous operation.",
                 "type": "string"
-              },
-              "schema": {
-                "$ref": "#/definitions/NetworkVirtualApplianceInstanceIds"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceInstanceIds"
             }
           },
           "default": {
