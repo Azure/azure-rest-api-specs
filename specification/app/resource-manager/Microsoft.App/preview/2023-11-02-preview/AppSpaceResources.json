@@ -1,0 +1,433 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "2023-08-01-preview",
+      "title": "ContainerApps API Client"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/appSpaces/{appSpaceName}/spaceResources": {
+        "get": {
+          "tags": [
+            "AppSpaceResources"
+          ],
+          "summary": "Get all of the App Space Resources in a given App Space. Returns a collection of App Space Resources.",
+          "operationId": "AppSpaces_ListByResourceGroup",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "name": "appSpaceName",
+              "in": "path",
+              "description": "Name of the App Space.",
+              "required": true,
+              "type": "string",
+              "pattern": "^[-\\w\\._\\(\\)]+$"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/AppSpaceResourcesCollection"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "List App Spaces by resource group": {
+              "$ref": "./examples/AppSpaceResources_ListByAppSpace.json"
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/appSpaces/{appSpaceName}/spaceResources/{spaceResourceName}": {
+        "get": {
+          "tags": [
+            "AppSpaceResources"
+          ],
+          "summary": "Get an App Space Resource in an App Space.",
+          "operationId": "AppSpaceResources_Get",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "name": "appSpaceName",
+              "in": "path",
+              "description": "Name of the App Space.",
+              "required": true,
+              "type": "string",
+              "pattern": "^[-\\w\\._\\(\\)]+$"
+            },
+            {
+              "name": "spaceResourceName",
+              "in": "path",
+              "description": "Name of the App Space Resource.",
+              "required": true,
+              "type": "string",
+              "pattern": "^[-\\w\\._\\(\\)]+$"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK.",
+              "schema": {
+                "$ref": "#/definitions/AppSpaceResource"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Get App Space Resource": {
+              "$ref": "./examples/AppSpaceResources_Get.json"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "AppSpaceResources"
+          ],
+          "summary": "Create or update an App Space Resource.",
+          "description": "Create or update an App Space Resource used to track an ARM resource the customer would like to track in an App Space.",
+          "operationId": "AppSpaceResources_CreateOrUpdate",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "name": "appSpaceName",
+              "in": "path",
+              "description": "Name of the App Space.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "spaceResourceName",
+              "in": "path",
+              "description": "Name of the App Space Resource.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "spaceResourceEnvelope",
+              "in": "body",
+              "description": "Properties used to create an app space resource",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/AppSpaceResource"
+              }
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Created.",
+              "schema": {
+                "$ref": "#/definitions/AppSpaceResource"
+              }
+            },
+            "201": {
+              "description": "App Space Resource create or update has been completed successfully.",
+              "schema": {
+                "$ref": "#/definitions/AppSpaceResource"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Create or Update App Space Resource": {
+              "$ref": "./examples/AppSpaceResources_CreateOrUpdate.json"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "AppSpaceResources"
+          ],
+          "summary": "Delete an App Space Resource.",
+          "description": "Delete an App Space Resource.",
+          "operationId": "AppSpaceResources_Delete",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "name": "appSpaceName",
+              "in": "path",
+              "description": "Name of the App Space.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "spaceResourceName",
+              "in": "path",
+              "description": "Name of the App Space Resource.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "App Space Resource deleted successfully."
+            },
+            "204": {
+              "description": "App Space Resource does not exist."
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Delete App Space Resource": {
+              "$ref": "./examples/AppSpaceResources_Delete.json"
+            }
+          }
+        },
+        "patch": {
+          "tags": [
+            "AppSpaceResources"
+          ],
+          "summary": "Update properties of an App Space Resource",
+          "description": "Patches an App Space Resource using JSON Merge Patch",
+          "operationId": "AppSpaceResources_Update",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "name": "appSpaceName",
+              "in": "path",
+              "description": "Name of the App Space.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "spaceResourceName",
+              "in": "path",
+              "description": "Name of the App Space Resource.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "spaceResourceEnvelope",
+              "in": "body",
+              "required": true,
+              "description": "Properties of an App Space Resource that need to be updated",
+              "schema": {
+                "$ref": "#/definitions/AppSpaceResource"
+              }
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Ok",
+              "schema": {
+                "$ref": "#/definitions/AppSpaceResource"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Patch Container App": {
+              "$ref": "./examples/AppSpaceResources_Patch.json"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "DeploymentInformation": {
+        "description": "App Space Resource Deployment Information - used to track the deployment information for an App Space Resource's tracked ARM resource",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "ARM Id of the deployment",
+            "type": "string"
+          },
+          "provisioningState": {
+            "description": "Provisioning State for the deployment",
+            "type": "string"
+          }
+        }
+      },
+      "RepositoryInformation": {
+        "description": "App Space Resource Repository Information - used to track the github repository for an App Space Resource's tracked ARM resource",
+        "type": "object",
+        "properties": {
+          "url": {
+            "description": "url for the repository",
+            "type": "string"
+          },
+          "branch": {
+            "description": "branch in the repository",
+            "type": "string"
+          }
+        }
+      },
+      "Object": {
+        "type": "object",
+        "properties": {}
+      },
+      "AppSpaceResource": {
+        "description": "App Space Resource.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          }
+        ],
+        "properties": {
+          "extendedLocation": {
+            "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
+          },
+          "properties": {
+            "description": "AppSpaceResource resource specific properties",
+            "type": "object",
+            "properties": {
+              "resourceId": {
+                "description": "ARM resource Id of the tracked resource.",
+                "type": "string"
+              },
+              "friendlyName": {
+                "description": "Friendly name of the App Space Resource.",
+                "type": "string"
+              },
+              "resourceLocation": {
+                "description": "Location of the tracked ARM resource. Can be different from the location of the app space resource.",
+                "type": "string"
+              },
+              "repo": {
+                "$ref": "#/definitions/RepositoryInformation",
+                "description": "Optional App Space Resource Repository Information"
+              },
+              "deployment": {
+                "$ref": "#/definitions/DeploymentInformation",
+                "description": "Optional App Space Resource Deployment Information"
+              },
+              "isFavorite": {
+                "description": "Boolean marking this App Space Resource as a favorite",
+                "type": "boolean"
+              },
+              "metadata": {
+                "$ref": "#/definitions/Object",
+                "description": "Property bag to add properties used by Portal."
+              },
+              "dependencies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of ARM App Space Resource Ids on which this App Space Resource is dependent."
+              }
+            },
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "AppSpaceResourcesCollection": {
+        "description": "App Space Resource collection ARM resource.",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "Collection of resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AppSpaceResource"
+            }
+          },
+          "nextLink": {
+            "description": "Link to next page of resources.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ]
+  }
