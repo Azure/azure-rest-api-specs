@@ -2081,6 +2081,19 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -2096,6 +2109,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "operationName": "PaloAltoNetworksCloudngfw_listCloudManagerTenants"
         },
         "x-ms-examples": {
           "PaloAltoNetworksCloudngfw_listCloudManagerTenants_MaximumSet_Gen": {
@@ -5027,7 +5044,7 @@
       },
       "description": "List of Cloud Manager Tenants",
       "required": [
-        "value"
+        "strataCloudManagerTenants"
       ]
     },
     "CountriesResponse": {
