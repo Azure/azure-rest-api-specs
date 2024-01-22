@@ -233,6 +233,7 @@ available to create Dev Boxes.
   healthStatus: PoolHealthStatus;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @doc("Hardware specifications for the Dev Box.")
 @projectedName("csharp", "DevBoxHardwareProfile")
 @projectedName("java", "DevBoxHardwareProfile")
@@ -260,12 +261,15 @@ model HardwareProfile {
 model StorageProfile {
   @doc("Settings for the operating system disk.")
   @projectedName("csharp", "OSDisk")
-  osDisk?: OSDisk;
+  osDisk?: OsDisk;
 }
 
 @doc("Settings for the operating system disk.")
-@projectedName("java", "OsDisk")
-model OSDisk {
+@projectedName("csharp", "OSDisk")
+@projectedName("python", "OSDisk")
+@projectedName("javascript", "OSDisk")
+model OsDisk {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The size of the OS Disk in gigabytes.")
   @visibility("read")
   @projectedName("python", "diskSizeGb")
