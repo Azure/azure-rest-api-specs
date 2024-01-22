@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-05-01",
+    "version": "2024-02-01",
     "title": "WebApplicationFirewallManagement",
     "description": "APIs to manage web application firewall rules."
   },
@@ -521,6 +521,41 @@
             "name": "PolicyRequestBodyCheck",
             "modelAsString": true
           }
+        },
+        "javascriptChallengeExpirationInMinutes": {
+          "description": "Defines the JavaScript challenge cookie validity lifetime in minutes. Value must be an integer between 5 and 1440 with the default value being 30.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5,
+          "maximum": 1440,
+          "default": 30
+        },
+        "logScrubbing": {
+          "description": "Defines rules to scrub sensitive fields in Web Application Firewall logs",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "state": {
+              "type": "string",
+              "description": "State of the log scrub config. Default value is Enabled.",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "x-ms-enum": {
+                "name": "WebApplicationFirewallScrubbingState",
+                "modelAsString": true
+              }
+            },
+            "scrubbingRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WebApplicationFirewallScrubbingRules"
+              },
+              "x-ms-identifiers": [],
+              "description": "List of log scrub rules applied to Web Application Firewall logs."
+            }
+          }
         }
       }
     },
@@ -589,6 +624,14 @@
           "type": "integer",
           "minimum": 0
         },
+        "groupBy": {
+          "description": "Describes the list of variables to group the rate limit requests",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupByVariable"
+          },
+          "x-ms-identifiers": []
+        },
         "matchConditions": {
           "description": "List of match conditions.",
           "type": "array",
@@ -599,6 +642,28 @@
         "action": {
           "description": "Describes what action to be applied when rule matches.",
           "$ref": "#/definitions/ActionType"
+        }
+      }
+    },
+    "GroupByVariable": {
+      "description": "Describes the variables available to group the rate limit requests",
+      "required": [
+        "groupByDimension"
+      ],
+      "type": "object",
+      "properties": {
+        "groupByDimension": {
+          "description": "Describes the supported dimensions for group by",
+          "type": "string",
+          "enum": [
+            "SocketAddr",
+            "GeoLocation",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "GroupByDimension",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -958,11 +1023,67 @@
         "Block",
         "Log",
         "Redirect",
-        "AnomalyScoring"
+        "AnomalyScoring",
+        "JSChallenge"
       ],
       "x-ms-enum": {
         "name": "ActionType",
         "modelAsString": true
+      }
+    },
+    "WebApplicationFirewallScrubbingRules": {
+      "description": "Defines contents of a log scrub rules.",
+      "type": "object",
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator"
+      ],
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestIPAddress",
+            "RequestUri",
+            "QueryStringArgNames",
+            "RequestHeaderNames",
+            "RequestCookieNames",
+            "RequestBodyPostArgNames",
+            "RequestBodyJsonArgNames"
+          ],
+          "description": "The variable to be scrubbed from the logs.",
+          "x-ms-enum": {
+            "name": "scrubbingRuleEntryMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "EqualsAny",
+            "Equals"
+          ],
+          "description": "Comparison type to use for matching with the variable value in log.",
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string",
+          "description": "Match against a specific key from the QueryString, PostArgs, RequestHeader or Cookies variables in the log. Default value is null."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Defines the state of log scrubbing rule. Default value is Enabled.",
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryState",
+            "modelAsString": true
+          }
+        }
       }
     },
     "ManagedRuleSetActionType": {
