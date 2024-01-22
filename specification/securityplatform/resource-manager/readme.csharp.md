@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.SecurityPlatform
-  output-folder: $(csharp-sdks-folder)/intelligentsecurityplatform/management/Microsoft.SecurityPlatform/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/securityplatform/management/Microsoft.SecurityPlatform/GeneratedProtocol
 ```

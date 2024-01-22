@@ -1,8 +1,8 @@
-# intelligentsecurityplatform
+# securityplatform
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for intelligentsecurityplatform.
+This is the AutoRest configuration file for securityplatform.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the intelligentsecurityplatform.
+These are the global settings for the securityplatform.
 
 ```yaml
 openapi-type: arm
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2023-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-12-01-preview'
 input-file:
-  - Microsoft.SecurityPlatform/preview/2023-12-01-preview/intelligentsecurityplatform.json
+  - Microsoft.SecurityPlatform/preview/2023-12-01-preview/securityplatform.json
 ```
 
 ---

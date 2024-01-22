@@ -6,15 +6,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-intelligentsecurityplatform
-namespace: azure.mgmt.intelligentsecurityplatform
+package-name: azure-mgmt-securityplatform
+namespace: azure.mgmt.securityplatform
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/intelligentsecurityplatform/azure-mgmt-intelligentsecurityplatform/azure/mgmt/intelligentsecurityplatform
+output-folder: $(python-sdks-folder)/securityplatform/azure-mgmt-securityplatform/azure/mgmt/securityplatform
 ```
 
 ``` yaml $(python)
