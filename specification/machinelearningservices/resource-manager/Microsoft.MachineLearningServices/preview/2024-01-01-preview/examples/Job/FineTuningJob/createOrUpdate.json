@@ -9,20 +9,20 @@
       "properties": {
         "jobType": "FineTuning",
         "experimentName": "llm-finetuning",
-        "FineTuningDetails": {
-          "TaskType": "TextCompletion",
-          "FineTuningType": "CustomModel",
-          "Model": {
+        "fineTuningDetails": {
+          "taskType": "TextCompletion",
+          "fineTuningType": "CustomModel",
+          "model": {
             "JobInputType": "mlflow_model",
-            "Uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11",
-            "Mode": "ReadOnlyMount",
-            "Description": null
+            "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11",
+            "mode": "ReadOnlyMount",
+            "description": null
           },
           "trainingData": {
-            "JobInputType": "uri_file",
-            "Uri": "azureml://datastores/workspaceblobstore/paths/UI/2023-06-06_175927_UTC/small_train.jsonl",
-            "Mode": "ReadOnlyMount",
-            "Description": null
+            "jobInputType": "uri_file",
+            "uri": "azureml://datastores/workspaceblobstore/paths/UI/2023-06-06_175927_UTC/small_train.jsonl",
+            "mode": "ReadOnlyMount",
+            "description": null
           }
         },
         "Outputs": {
