@@ -41,7 +41,7 @@ model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model KeyPhraseResult extends AnalyzeTextPreBuiltResult {
   @doc("Response by document")
-  @typeChangedFrom(Versions.v2023_04_15_preview, KeyPhrasesDocumentResult)
+  @typeChangedFrom(Versions.v2023_04_15_preview, Array<KeyPhrasesDocumentResult>)
   documents: Array<KeyPhrasesDocumentResultWithDetectedLanguage>
 }
 

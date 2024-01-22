@@ -908,7 +908,7 @@ model ConversationSentimentItemResult {
 }
 
 @added(Versions.v2023_04_15_preview)
-@doc("Text that has been catorgerized into pre-defined classes or types such as: person, location, event, product, and organization.")
+@doc("Text that has been categorized into pre-defined classes or types such as: person, location, event, product, and organization.")
 model Entity {
   @doc("Entity text as appears in the request.")
   text: string,

@@ -1590,8 +1590,11 @@
       "type": "object",
       "properties": {
         "documents": {
-          "$ref": "#/definitions/LinkedEntitiesDocumentResult",
-          "description": "Response by document"
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/LinkedEntitiesDocumentResult"
+          }
         }
       },
       "required": [
@@ -2386,8 +2389,11 @@
       "type": "object",
       "properties": {
         "documents": {
-          "$ref": "#/definitions/KeyPhrasesDocumentResult",
-          "description": "Response by document"
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/KeyPhrasesDocumentResult"
+          }
         }
       },
       "required": [
@@ -2922,8 +2928,11 @@
       "type": "object",
       "properties": {
         "documents": {
-          "$ref": "#/definitions/PIIEntitiesDocumentResult",
-          "description": "Response by document"
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/PIIEntitiesDocumentResult"
+          }
         }
       },
       "required": [
@@ -3316,7 +3325,7 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "explationPoint",
+            "name": "exclamationPoint",
             "value": "!"
           },
           {

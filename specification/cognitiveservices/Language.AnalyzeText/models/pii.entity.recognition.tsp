@@ -63,7 +63,7 @@ model PIITaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PIIResult extends AnalyzeTextPreBuiltResult {
   @doc("Response by document")
-  @typeChangedFrom(Versions.v2023_04_15_preview, PIIEntitiesDocumentResult)
+  @typeChangedFrom(Versions.v2023_04_15_preview, Array<PIIEntitiesDocumentResult>)
   documents: Array<PIIResultWithDetectedLanguage>;
 }
 

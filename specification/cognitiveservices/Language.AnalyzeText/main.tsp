@@ -88,7 +88,7 @@ interface Language {
   @example("./SuccessfulLanguageDetectionRequest.json", "SuccessfulLanguageDetectionRequest")
   @example("./SuccessfulPiiEntityRecognitionRequest.json", "SuccessfulPiiEntityRecognitionRequest")
   @example("./SuccessfulSentimentAnalysisRequest.json", "SuccessfulSentimentAnalysisRequest")
-  @example("./SuccessfuDynamicClassificationRequest.json", "SuccessfuDynamicClassificationRequest")
+  @example("./SuccessfulDynamicClassificationRequest.json", "SuccessfulDynamicClassificationRequest")
   @example("./SuccessfulEntityRecognitionExclusionRequest.json", "SuccessfulEntityRecognitionExclusionRequest")
   @example("./SuccessfulEntityRecognitionInclusionRequest.json", "SuccessfulEntityRecognitionInclusionRequest")
   @example("./SuccessfulEntityRecognitionOverlapPolicy.json", "SuccessfulEntityRecognitionOverlapPolicy")

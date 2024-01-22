@@ -76,7 +76,7 @@ enum ScriptKind {
   @doc("Script name for the Armenian script.")
   Armenian,
   @added(Versions.v2023_11_15_preview)
-  @doc("Script name for the Bengali script.")
+  @doc("Script name for the Bangla script.")
   Bangla,
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the UnifiedCanadianAboriginalSyllabics script.")
@@ -109,7 +109,7 @@ enum ScriptKind {
   @doc("Script name for the HanSimplified script.")
   HanSimplified,
   @added(Versions.v2023_11_15_preview)
-  @doc("Script name for the HanTranditional script.")
+  @doc("Script name for the HanTraditional script.")
   HanTraditional,
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Hebrew script.")
@@ -201,7 +201,7 @@ enum ScriptCode {
   @doc("Script code for the HanSimplified script.")
   Hans,
   @added(Versions.v2023_11_15_preview)
-  @doc("Script code for the HanTranditional script.")
+  @doc("Script code for the HanTraditional script.")
   Hant,
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Hebrew script.")
