@@ -31,14 +31,13 @@ interface LoadTests {
 
 @armResourceOperations
 interface Quotas {
-  @doc("Get quota by name.")
+  @doc("Get the available quota for a quota bucket per region per subscription.")
   get is ArmResourceRead<QuotaResource>;
 
   @doc("List quotas for a given subscription Id.")
   listBySubscription is ArmListBySubscription<QuotaResource>;
 
   @doc("Check Quota Availability on quota bucket per region per subscription.")
-  @segment("checkAvailability")
   checkAvailability is ArmResourceActionSync<QuotaResource, QuotaBucketRequest, CheckQuotaAvailabilityResponse>;
 
   // @TypeSpec.Rest.autoRoute

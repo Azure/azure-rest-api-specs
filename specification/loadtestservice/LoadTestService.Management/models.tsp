@@ -16,33 +16,28 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.LoadTestService.Draft;
 
-@doc("A ContosoProviderHub resource")
+@doc("LoadTest details.")
 model LoadTestResource is TrackedResource<LoadTestProperties> {
   @doc("Load Test name")
   @key("loadTestName")
   @path
   @segment("loadTests")
   name: string;
+
+  @doc("The type of identity used for the resource.")
+  identity?: ManagedIdentityType;
 }
 
 @doc("Resources provisioning states.")
 enum ResourceState{
-  @doc("Succeeded state.")
-  Succeeded: "Succeeded",
-
-  @doc("Failed state.")
-  Failed: "Failed",
-  
-  @doc("Canceled state.")
-  Canceled: "Canceled",
-  
   @doc("Deleted state.")
-  Deleted: "Deleted"
+  Deleted: "Deleted",
+
+  ...ResourceProvisioningState
 }
 
-//need to update this
 @doc("Managed identity type to use for accessing encryption key Url.")
-enum Type{
+enum EncryptionIdentityType{
   @doc("System assigned identity.")
   SystemAssigned: "SystemAssigned",
 
@@ -60,20 +55,24 @@ model EndpointDetail {
 @doc("A domain name and connection details used to access a dependency.")
 model EndpointDependency {
   @doc("The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard.")
+  @visibility("read")
   domainName: string;
 
   @doc("Human-readable supplemental information about the dependency and when it is applicable.")
+  @visibility("read")
   description: string;
 
   @doc("The list of connection details for this endpoint.")
+  @visibility("read")
   endpointDetails: EndpointDetail;
 
 }
 
 @parentResource(LoadTestResource)
+@resourceGroupResource
 @resource("outboundNetworkDependenciesEndpoints")
 @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
-model OutboundEnvironmentEndpoint extends ArmResource{
+model OutboundEnvironmentEndpoint{
   @key
   @doc("The type of service that Azure Load Testing connects to.")
   @visibility("read")
@@ -86,18 +85,19 @@ model OutboundEnvironmentEndpoint extends ArmResource{
 
 
 @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
-model Identity{
+model EncryptionIdentity{
   @doc("Managed identity type to use for accessing encryption key Url.")
-  type?: Type;
+  type?: EncryptionIdentityType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "We need resourceId to be nullable."
   @doc("User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.")
-  resourceId?: string;
+  resourceId?: string | null;
 }
 
 @doc("Key and identity details for Customer Managed Key encryption of load test resource.")
 model EncryptionProperties{
   @doc("All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.")
-  identity?: Identity;
+  identity?: EncryptionIdentity;
 
   @doc("key encryption key Url, versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek.")
   keyUrl?: string;
@@ -118,28 +118,6 @@ model QuotaResourceProperties {
   provisioningState: ResourceState;
 }
 
-// enum CreatedByType {
-//   User: "User",
-//   Application: "Application",
-//   ManagedIdentity: "ManagedIdentity ",
-//   Key: "Key"
-// }
-
-// model SystemData {
-//   createdBy: string;
-//   createdByType: CreatedByType;
-//   createdAt: string;
-//   lastModifiedBy: string;
-//   lastModifiedType: CreatedByType;
-//   lastModifiedAt: utcDateTime;
-// }
-
-// model Resource {
-//   id: string;
-//   type: string;
-//   systemData: SystemData;
-// }
-
 @doc("The location of quota resource")
 @subscriptionResource
 model Location {
@@ -151,7 +129,7 @@ model Location {
   name: string;
 }
 
-@doc("A quota resource")
+@doc("Quota bucket details object.")
 @parentResource(Location)
 model QuotaResource is ProxyResource<QuotaResourceProperties> {
   @doc("The quota name.")
@@ -182,7 +160,7 @@ model LoadTestProperties{
 }
 
 @doc("Check quota availability response object.")
-model CheckQuotaAvailabilityResponse extends ArmResource {
+model CheckQuotaAvailabilityResponse is ArmResource {
   @doc("Check quota availability response properties.")
   properties?: CheckQuotaAvailabilityResponseProperties;
 }
@@ -197,9 +175,13 @@ model CheckQuotaAvailabilityResponseProperties {
 }
 
 @doc("Request object of new quota for a quota bucket.")
-model QuotaBucketRequest extends ArmResource{
+model QuotaBucketRequest is ArmResource{
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
+
+  @doc("The name of the resource.")
+  @visibility("read")
+  name?: string;
 }
 
 @doc("New quota request request properties.")

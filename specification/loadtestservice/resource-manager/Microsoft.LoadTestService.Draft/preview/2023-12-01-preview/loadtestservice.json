@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "LoadTestingService",
+    "title": "LoadTest Client",
     "version": "2023-12-01-preview",
     "description": "LoadTest client provides access to LoadTest Resource and it's status operations.",
     "x-typespec-generated": [
@@ -162,7 +162,7 @@
         "tags": [
           "Quotas"
         ],
-        "description": "Get quota by name.",
+        "description": "Get the available quota for a quota bucket per region per subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -201,7 +201,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService.Draft/locations/{location}/quotas/{quotaBucketName}/checkAvailability/checkAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService.Draft/locations/{location}/quotas/{quotaBucketName}/checkAvailability": {
       "post": {
         "operationId": "Quotas_CheckAvailability",
         "tags": [
@@ -567,9 +567,45 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Foundations.ArmResource": {
+    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "System and user assigned managed identity."
+          }
+        ]
+      }
+    },
+    "CheckQuotaAvailabilityResponse": {
       "type": "object",
-      "description": "Common properties for all ARM resources.",
+      "description": "Check quota availability response object.",
       "properties": {
         "id": {
           "type": "string",
@@ -585,26 +621,15 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
-    },
-    "CheckQuotaAvailabilityResponse": {
-      "type": "object",
-      "description": "Check quota availability response object.",
-      "properties": {
+        },
         "properties": {
           "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
           "description": "Check quota availability response properties."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResource"
-        }
+      "required": [
+        "id",
+        "type"
       ]
     },
     "CheckQuotaAvailabilityResponseProperties": {
@@ -637,12 +662,51 @@
         }
       }
     },
+    "EncryptionIdentity": {
+      "type": "object",
+      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EncryptionIdentityType",
+          "description": "Managed identity type to use for accessing encryption key Url."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.",
+          "x-nullable": true
+        }
+      }
+    },
+    "EncryptionIdentityType": {
+      "type": "string",
+      "description": "Managed identity type to use for accessing encryption key Url.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned identity."
+          }
+        ]
+      }
+    },
     "EncryptionProperties": {
       "type": "object",
       "description": "Key and identity details for Customer Managed Key encryption of load test resource.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "#/definitions/EncryptionIdentity",
           "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
         },
         "keyUrl": {
@@ -657,15 +721,18 @@
       "properties": {
         "domainName": {
           "type": "string",
-          "description": "The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard."
+          "description": "The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard.",
+          "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "Human-readable supplemental information about the dependency and when it is applicable."
+          "description": "Human-readable supplemental information about the dependency and when it is applicable.",
+          "readOnly": true
         },
         "endpointDetails": {
           "$ref": "#/definitions/EndpointDetail",
-          "description": "The list of connection details for this endpoint."
+          "description": "The list of connection details for this endpoint.",
+          "readOnly": true
         }
       },
       "required": [
@@ -688,20 +755,6 @@
       "required": [
         "port"
       ]
-    },
-    "Identity": {
-      "type": "object",
-      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/Type",
-          "description": "Managed identity type to use for accessing encryption key Url."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId."
-        }
-      }
     },
     "LoadTestProperties": {
       "type": "object",
@@ -731,7 +784,7 @@
     },
     "LoadTestResource": {
       "type": "object",
-      "description": "A ContosoProviderHub resource",
+      "description": "LoadTest details.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/LoadTestProperties",
@@ -741,6 +794,10 @@
             "read",
             "create"
           ]
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
+          "description": "The type of identity used for the resource."
         }
       },
       "allOf": [
@@ -774,6 +831,10 @@
       "type": "object",
       "description": "The type used for update operations of the LoadTestResource.",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
+          "description": "The type of identity used for the resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -806,6 +867,21 @@
       "type": "object",
       "description": "A collection of related endpoints from the same service for which the Batch service requires outbound access.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
         "category": {
           "type": "string",
           "description": "The type of service that Azure Load Testing connects to.",
@@ -818,12 +894,9 @@
         }
       },
       "required": [
+        "id",
+        "type",
         "category"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResource"
-        }
       ]
     },
     "OutboundEnvironmentEndpointListResult": {
@@ -851,15 +924,34 @@
       "type": "object",
       "description": "Request object of new quota for a quota bucket.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/QuotaBucketRequestProperties",
           "description": "Request object of new quota for a quota bucket."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ArmResource"
-        }
+      "required": [
+        "id",
+        "type"
       ]
     },
     "QuotaBucketRequestProperties": {
@@ -892,7 +984,7 @@
     },
     "QuotaResource": {
       "type": "object",
-      "description": "A quota resource",
+      "description": "Quota bucket details object.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/QuotaResourceProperties",
@@ -963,58 +1055,34 @@
       "type": "string",
       "description": "Resources provisioning states.",
       "enum": [
+        "Deleted",
         "Succeeded",
         "Failed",
-        "Canceled",
-        "Deleted"
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ResourceState",
         "modelAsString": true,
         "values": [
           {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted state."
+          },
+          {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded state."
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed state."
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Canceled state."
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Deleted state."
-          }
-        ]
-      }
-    },
-    "Type": {
-      "type": "string",
-      "description": "Managed identity type to use for accessing encryption key Url.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "Type",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned identity."
+            "description": "Resource creation was canceled."
           }
         ]
       }
