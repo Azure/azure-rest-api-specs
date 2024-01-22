@@ -69,10 +69,9 @@ model EndpointDependency {
 }
 
 @parentResource(LoadTestResource)
-@resourceGroupResource
 @resource("outboundNetworkDependenciesEndpoints")
 @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
-model OutboundEnvironmentEndpoint{
+model OutboundEnvironmentEndpoint extends ArmResource{
   @key
   @doc("The type of service that Azure Load Testing connects to.")
   @visibility("read")
