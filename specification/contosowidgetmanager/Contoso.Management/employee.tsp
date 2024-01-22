@@ -37,16 +37,20 @@ model EmployeeProperties {
   provisioningState?: ProvisioningState;
 }
 
-@lroStatus
 /** The resource provisioning state. */
+@lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
+
   /** The resource is being provisioned. */
   Provisioning,
+
   /** The resource is being updated. */
   Updating,
+
   /** The resource is being deleted. */
   Deleting,
+
   /** The resource provisioning request has been accepted. */
   Accepted,
 }

@@ -11,11 +11,11 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+/** Microsoft.Contoso Resource Provider management API. */
 @armProviderNamespace
 @service({
   title: "Microsoft.Contoso management service",
 })
-/** Microsoft.Contoso Resource Provider management API. */
 @versioned(Microsoft.Contoso.Versions)
 namespace Microsoft.Contoso;
 
