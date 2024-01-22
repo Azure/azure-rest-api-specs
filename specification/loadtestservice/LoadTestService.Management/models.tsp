@@ -17,6 +17,7 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.LoadTestService.Draft;
 
 @doc("LoadTest details.")
+@doc("LoadTest details.")
 model LoadTestResource is TrackedResource<LoadTestProperties> {
   @doc("Load Test name")
   @key("loadTestName")
@@ -71,7 +72,7 @@ model EndpointDependency {
 @parentResource(LoadTestResource)
 @resource("outboundNetworkDependenciesEndpoints")
 @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
-model OutboundEnvironmentEndpoint extends ArmResource{
+model OutboundEnvironmentEndpoint is ArmResource{
   @key
   @doc("The type of service that Azure Load Testing connects to.")
   @visibility("read")
@@ -129,6 +130,7 @@ model Location {
 }
 
 @doc("Quota bucket details object.")
+@doc("Quota bucket details object.")
 @parentResource(Location)
 model QuotaResource is ProxyResource<QuotaResourceProperties> {
   @doc("The quota name.")
@@ -160,6 +162,7 @@ model LoadTestProperties{
 
 @doc("Check quota availability response object.")
 model CheckQuotaAvailabilityResponse is ArmResource {
+model CheckQuotaAvailabilityResponse is ArmResource {
   @doc("Check quota availability response properties.")
   properties?: CheckQuotaAvailabilityResponseProperties;
 }
@@ -174,7 +177,8 @@ model CheckQuotaAvailabilityResponseProperties {
 }
 
 @doc("Request object of new quota for a quota bucket.")
-model QuotaBucketRequest is ArmResource{
+model QuotaBucketRequest{
+  @extension("x-ms-client-flatten", true)
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
 
@@ -198,11 +202,11 @@ model QuotaBucketRequestProperties {
   newQuota?: int32;
 
   @doc("Dimensions for new quota request.")
-  dimensions?: Dimensions;
+  dimensions?: QuotaDimensions;
 }
 
 @doc("Dimensions for new quota request.")
-model Dimensions {
+model QuotaDimensions {
   @doc("Subscription Id dimension for new quota request of the quota bucket.")
   @minLength(1)
   subscriptionId?: string;

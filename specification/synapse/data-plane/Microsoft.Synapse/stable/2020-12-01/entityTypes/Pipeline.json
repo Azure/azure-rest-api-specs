@@ -7278,21 +7278,12 @@
           "type": "object",
           "properties": {
             "computeType": {
-              "description": "Compute type of the cluster which will execute data flow job.",
-              "type": "string",
-              "enum": [
-                "General",
-                "MemoryOptimized",
-                "ComputeOptimized"
-              ],
-              "x-ms-enum": {
-                "name": "DataFlowComputeType",
-                "modelAsString": true
-              }
+              "description": "Compute type of the cluster which will execute data flow job. Possible values include: 'General', 'MemoryOptimized', 'ComputeOptimized'. Type: string (or Expression with resultType string)",
+              "type": "object"
             },
             "coreCount": {
-              "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.",
-              "type": "integer"
+              "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272. Type: integer (or Expression with resultType integer)",
+              "type": "object"
             }
           }
         },
@@ -7316,6 +7307,19 @@
       "required": [
         "dataflow"
       ]
+    },
+    "DataFlowComputeType": {
+      "description": "All available DataFlowComputeType values.",
+      "type": "string",
+      "enum": [
+        "General",
+        "MemoryOptimized",
+        "ComputeOptimized"
+      ],
+      "x-ms-enum": {
+        "name": "DataFlowComputeType",
+        "modelAsString": true
+      }
     },
     "ScriptActivity": {
       "description": "Script activity type.",
@@ -7658,7 +7662,6 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
-            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         }
@@ -7871,13 +7874,11 @@
       "properties": {
         "SOQLQuery": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
           "description": "The read behavior for the operation. Default is query. Allowed values: query/queryAll. Type: string (or Expression with resultType string).",
-          "type": "object",
-          "x-ms-format": "dfe-string"
+          "type": "object"
         }
       }
     },
@@ -7892,13 +7893,11 @@
       "properties": {
         "SOQLQuery": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
           "description": "The read behavior for the operation. Default is query. Allowed values: query/queryAll. Type: string (or Expression with resultType string).",
-          "type": "object",
-          "x-ms-format": "dfe-string"
+          "type": "object"
         },
         "additionalColumns": {
           "type": "object",
@@ -7941,12 +7940,10 @@
         },
         "externalIdFieldName": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
         },
         "ignoreNullValues": {
           "type": "object",
-          "x-ms-format": "dfe-bool",
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -7974,12 +7971,10 @@
         },
         "externalIdFieldName": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
         },
         "ignoreNullValues": {
           "type": "object",
-          "x-ms-format": "dfe-bool",
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
         }
       }

@@ -2,6 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "LoadTest Client",
+    "title": "LoadTest Client",
     "version": "2023-12-01-preview",
     "description": "LoadTest client provides access to LoadTest Resource and it's status operations.",
     "x-typespec-generated": [
@@ -230,7 +231,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "QuotaBucketRequest",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
@@ -356,7 +357,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -941,7 +942,8 @@
         },
         "properties": {
           "$ref": "#/definitions/QuotaBucketRequestProperties",
-          "description": "Request object of new quota for a quota bucket."
+          "description": "New quota request request properties.",
+          "x-ms-client-flatten": true
         },
         "name": {
           "type": "string",
@@ -977,13 +979,30 @@
           "minimum": 0
         },
         "dimensions": {
-          "$ref": "#/definitions/Dimensions",
+          "$ref": "#/definitions/QuotaDimensions",
           "description": "Dimensions for new quota request."
+        }
+      }
+    },
+    "QuotaDimensions": {
+      "type": "object",
+      "description": "Dimensions for new quota request.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id dimension for new quota request of the quota bucket.",
+          "minLength": 1
+        },
+        "location": {
+          "type": "string",
+          "description": "Location dimension for new quota request of the quota bucket.",
+          "minLength": 1
         }
       }
     },
     "QuotaResource": {
       "type": "object",
+      "description": "Quota bucket details object.",
       "description": "Quota bucket details object.",
       "properties": {
         "properties": {
@@ -1073,10 +1092,12 @@
             "name": "Succeeded",
             "value": "Succeeded",
             "description": "Resource has been created."
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
             "value": "Failed",
+            "description": "Resource creation failed."
             "description": "Resource creation failed."
           },
           {
