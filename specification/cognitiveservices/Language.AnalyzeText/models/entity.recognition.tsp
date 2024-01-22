@@ -239,7 +239,7 @@ enum EntityCategory {
   @doc("Sports-related organizations.")
   OrganizationSports,
   
-  @doc("First, last, and middle names, names of fictional characters, and aliases. Titles, such as “Mr.” or “President”, are not considered part of the named entity.")
+  @doc("First, last, and middle names, names of fictional characters, and aliases. Titles, such as 'Mr.' or 'President', are not considered part of the named entity.")
   Person,
   
   @doc("Human roles classified by a group membership.")
