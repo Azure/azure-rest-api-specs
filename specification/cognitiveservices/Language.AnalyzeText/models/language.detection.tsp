@@ -60,6 +60,10 @@ model DetectedLanguage {
   @added(Versions.v2023_04_15_preview)
   @doc("Identifies the script of the input document.")
   script?: ScriptKind;
+
+  @added(Versions.v2023_11_15_preview)
+  @doc("Identifies the script of the input document.")
+  scriptCode?: ScriptCode;
 }
 
 @added(Versions.v2023_04_15_preview)
