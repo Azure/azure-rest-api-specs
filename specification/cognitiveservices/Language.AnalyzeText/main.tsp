@@ -95,6 +95,7 @@ interface Language {
   @example("./SuccessfulPiiEntityRecognitionExclusionRequest.json", "SuccessfulPiiEntityRecognitionExclusionRequest")
   @example("./SuccessfulPiiEntityRecognitionRedactionRequest.json", "SuccessfulPiiEntityRecognitionRedactionRequest")
   @example("./SuccessfulEntityRecognitionInferenceOptionsRequest.json", "SuccessfulEntityRecognitionInferenceOptionsRequest")
+  @example("./SuccessfuDynamicClassificationRequest.json", "SuccessfuDynamicClassificationRequest")
   analyzeText(
     @doc("Collection of documents to analyze and a single task to execute.")
     @body body: AnalyzeTextTask,
