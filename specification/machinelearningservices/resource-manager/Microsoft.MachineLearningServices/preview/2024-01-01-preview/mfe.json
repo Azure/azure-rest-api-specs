@@ -15180,7 +15180,8 @@
                 }
             ],
             "properties": {
-                "hyperparameters": {
+                "hyperParameters": {
+                    "description": "Hyperparameters for fine tuning Azure Open AI model.",
                     "$ref": "#/definitions/AzureOpenAiHyperParameters",
                     "x-nullable": true
                 }
@@ -15189,18 +15190,22 @@
             "additionalProperties": false
         },
         "AzureOpenAiHyperParameters": {
+            "description": "Azure Open AI hyperparameters for fine tuning.",
             "type": "object",
             "properties": {
                 "batchSize": {
                     "format": "int32",
+                    "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.",
                     "type": "integer"
                 },
                 "learningRateMultiplier": {
                     "format": "double",
+                    "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.",
                     "type": "number"
                 },
                 "nEpochs": {
                     "format": "int32",
+                    "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.",
                     "type": "integer"
                 }
             },
@@ -17133,6 +17138,7 @@
             ],
             "properties": {
                 "hyperParameters": {
+                    "description": "Hyperparameters for fine tuning custom model.",
                     "type": "object",
                     "additionalProperties": {
                         "x-nullable": true
@@ -19702,6 +19708,7 @@
             "additionalProperties": false
         },
         "FineTuningJob": {
+            "description": "FineTuning Job definition.",
             "required": [
                 "fineTuningDetails",
                 "jobType",
@@ -19719,7 +19726,7 @@
                     "$ref": "#/definitions/FineTuningVertical"
                 },
                 "outputs": {
-                    "description": "[Required] There will be RegisterdModel in the output of type MLFlowModelJobOutput",
+                    "description": "[Required] ",
                     "type": "object",
                     "additionalProperties": {
                         "description": "Job output definition container information on where to find job output/logs.",
@@ -19792,6 +19799,7 @@
             "additionalProperties": false
         },
         "FineTuningType": {
+            "description": "Enum to determine the type of fine tuning.",
             "enum": [
                 "AzureOpenAiModel",
                 "CustomModel"
@@ -19802,10 +19810,12 @@
                 "modelAsString": true,
                 "values": [
                     {
-                        "value": "AzureOpenAiModel"
+                        "value": "AzureOpenAiModel",
+                        "description": "Fine tuning using Azure Open AI model."
                     },
                     {
-                        "value": "CustomModel"
+                        "value": "CustomModel",
+                        "description": "Fine tuning using custom model."
                     }
                 ]
             },
@@ -19821,7 +19831,7 @@
             "type": "object",
             "properties": {
                 "fineTuningType": {
-                    "description": "[Required] ",
+                    "description": "[Required] Enum to determine the type of fine tuning.",
                     "$ref": "#/definitions/FineTuningType",
                     "x-ms-mutability": [
                         "create",
@@ -19829,11 +19839,11 @@
                     ]
                 },
                 "model": {
-                    "description": "[Required] ",
+                    "description": "[Required] Input model for fine tuning.",
                     "$ref": "#/definitions/MLFlowModelJobInput"
                 },
                 "taskType": {
-                    "description": "[Required] ",
+                    "description": "[Required] Fine tuning task type.",
                     "$ref": "#/definitions/FineTuningTaskType",
                     "x-ms-mutability": [
                         "create",
@@ -19841,11 +19851,11 @@
                     ]
                 },
                 "trainingData": {
-                    "description": "[Required] Can be UriFileJobInput or MlTableJobInput",
+                    "description": "[Required] Training data for fine tuning.",
                     "$ref": "#/definitions/JobInput"
                 },
                 "validationData": {
-                    "description": "Can be UriFileJobInput or MlTableJobInput",
+                    "description": "Validation data for fine tuning.",
                     "$ref": "#/definitions/JobInput",
                     "x-nullable": true
                 }
