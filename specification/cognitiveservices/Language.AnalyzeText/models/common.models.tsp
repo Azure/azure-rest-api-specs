@@ -177,12 +177,9 @@ model MultiLanguageAnalysisInput {
   documents?: Array<MultiLanguageInput>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@resource("language")
 @discriminator("kind")
+@doc("Collection of documents to analyze and a single task to execute.")
 model AnalyzeTextTask {
-  @key
-  @visibility("read", "create", "query" )
   @doc("The kind of task to perform.")
   kind: AnalyzeTextTaskKind;
 }
@@ -190,7 +187,7 @@ model AnalyzeTextTask {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("kind")
-model AnalyzeTextLROTask extends TaskIdentifier {
+model AnalyzeTextLROTask extends TaskIdentifier{
   @doc("The kind of task to perform.")
   kind: AnalyzeTextLROTaskKind;
 }
@@ -230,7 +227,7 @@ model AnalyzeTextPreBuiltResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@resource("language/analyze-text/jobs")
+@resource("analyze-text/jobs")
 model AnalyzeTextJobState {
   ...JobState;
   ...TasksState;
@@ -296,7 +293,7 @@ enum Status {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("kind")
-model AnalyzeTextLROResult extends TaskState {
+model AnalyzeTextLROResult is TaskState {
   ...TaskIdentifier;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

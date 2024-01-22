@@ -522,10 +522,6 @@ model AbstractiveSummarizationTaskParametersBase {
     @added(Versions.v2023_11_15_preview)
     @doc("(NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries.")
     summaryLength?: SummaryLengthBucket;
-
-    @added(Versions.v2023_11_15_preview)
-    @doc("(Optional) If provided, the query will be used to extract most relevant sentences from the document.")
-    query?: string;
 }
 
 @doc("The context of the summary.")
