@@ -82,26 +82,26 @@ namespace Azure.AI.OpenAI.Assistants;
 @@projectedName(MessageTextDetails, "csharp", "InternalMessageTextDetails");
 @@projectedName(MessageTextContent.text, "csharp", "InternalDetails");
 
-// MessageFileCitationTextAnnotation: file_id/quote don't need another type
+// MessageTextFileCitationAnnotation: file_id/quote don't need another type
 
 @@access(MessageTextFileCitationDetails, Access.internal);
 @@projectedName(MessageTextFileCitationDetails,
   "csharp",
   "InternalMessageTextFileCitationDetails"
 );
-@@projectedName(MessageFileCitationTextAnnotation.fileCitation,
+@@projectedName(MessageTextFileCitationAnnotation.fileCitation,
   "csharp",
   "InternalDetails"
 );
 
-// MessageFilePathTextAnnotation: file_id doesn't need a separate details client type
+// MessageTextFilePathAnnotation: file_id doesn't need a separate details client type
 
-@@access(MessageFilePathDetails, Access.internal);
-@@projectedName(MessageFilePathDetails,
+@@access(MessageTextFilePathDetails, Access.internal);
+@@projectedName(MessageTextFilePathDetails,
   "csharp",
-  "InternalMessageFilePathDetails"
+  "InternalMessageTextFilePathDetails"
 );
-@@projectedName(MessageFilePathTextAnnotation.filePath,
+@@projectedName(MessageTextFilePathAnnotation.filePath,
   "csharp",
   "InternalDetails"
 );
@@ -128,13 +128,13 @@ namespace Azure.AI.OpenAI.Assistants;
 @@usage(MessageTextContent, Usage.output);
 @@usage(MessageImageFileContent, Usage.output);
 @@usage(MessageTextContent, Usage.output);
-@@usage(MessageFileCitationTextAnnotation, Usage.output);
-@@usage(MessageFilePathTextAnnotation, Usage.output);
+@@usage(MessageTextFileCitationAnnotation, Usage.output);
+@@usage(MessageTextFilePathAnnotation, Usage.output);
 
 // Ensure some shared types remain public despite interaction with previously internalized details
 
-@@access(MessageFilePathTextAnnotation, Access.public);
-@@access(MessageFileCitationTextAnnotation, Access.public);
+@@access(MessageTextFilePathAnnotation, Access.public);
+@@access(MessageTextFileCitationAnnotation, Access.public);
 @@usage(FilePurpose, Usage.input | Usage.output);
 @@usage(ListSortOrder, Usage.input | Usage.output);
 

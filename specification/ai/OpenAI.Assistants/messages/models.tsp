@@ -133,7 +133,7 @@ model MessageTextAnnotation {
 
 @doc("A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model MessageFileCitationTextAnnotation extends MessageTextAnnotation {
+model MessageTextFileCitationAnnotation extends MessageTextAnnotation {
   @doc("The object type, which is always 'file_citation'.")
   type: "file_citation";
 
@@ -160,18 +160,18 @@ model MessageTextFileCitationDetails {
 
 @doc("A citation within the message that points to a file located at a specific path.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model MessageFilePathTextAnnotation extends MessageTextAnnotation {
+model MessageTextFilePathAnnotation extends MessageTextAnnotation {
   @doc("The object type, which is always 'file_path'.")
   type: "file_path";
 
   @projectedName("json", "file_path")
   @doc("A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.")
-  filePath: MessageFilePathDetails;
+  filePath: MessageTextFilePathDetails;
 }
 
 @doc("An encapsulation of an image file ID, as used by message image content.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model MessageFilePathDetails {
+model MessageTextFilePathDetails {
   @doc("The ID of the specific file that the citation is from.")
   @projectedName("json", "file_id")
   fileId: string;

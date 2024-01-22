@@ -107,7 +107,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assistant'
     post:
-      operationId: modifyAssistant
+      operationId: updateAssistant
       description: Modifies an existing assistant.
       parameters:
         - name: assistantId
@@ -129,7 +129,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AssistantModificationOptions'
+              $ref: '#/components/schemas/UpdateAssistantOptions'
     delete:
       operationId: deleteAssistant
       description: Deletes an assistant.
@@ -316,7 +316,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FileListResponse'
     post:
-      operationId: createFile
+      operationId: uploadFile
       description: Uploads a file for use by other operations.
       parameters: []
       responses:
@@ -365,7 +365,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FileDeletionStatus'
     get:
-      operationId: retrieveFile
+      operationId: getFile
       description: Returns information about a specific file. Does not retrieve file content.
       parameters:
         - name: fileId
@@ -436,7 +436,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssistantThread'
     post:
-      operationId: modifyThread
+      operationId: updateThread
       description: Modifies an existing thread.
       parameters:
         - name: threadId
@@ -624,7 +624,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadMessage'
     post:
-      operationId: modifyMessage
+      operationId: updateMessage
       description: Modifies an existing message on an existing thread.
       parameters:
         - name: threadId
@@ -910,7 +910,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadRun'
     post:
-      operationId: modifyRun
+      operationId: updateRun
       description: Modifies an existing thread run.
       parameters:
         - name: threadId
@@ -1282,43 +1282,6 @@ components:
             - assistant.file.deleted
           description: The object type, which is always 'assistant.file.deleted'.
       description: The status of an assistant file deletion operation.
-    AssistantModificationOptions:
-      type: object
-      properties:
-        model:
-          type: string
-          description: The ID of the model to use.
-        name:
-          type: string
-          nullable: true
-          description: The modified name for the assistant to use.
-        description:
-          type: string
-          nullable: true
-          description: The modified description for the assistant to use.
-        instructions:
-          type: string
-          nullable: true
-          description: The modified system instructions for the new assistant to use.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/ToolDefinition'
-          description: The modified collection of tools to enable for the assistant.
-          default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: The modified list of previously uploaded fileIDs to attach to the assistant.
-          default: []
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-      description: The request details to use when modifying an existing assistant.
     AssistantThread:
       type: object
       required:
@@ -1656,53 +1619,6 @@ components:
           type: string
           description: The ID of the message that this file is attached to.
       description: Information about a file attached to an assistant thread message.
-    MessageFileCitationTextAnnotation:
-      type: object
-      required:
-        - type
-        - file_citation
-      properties:
-        type:
-          type: string
-          enum:
-            - file_citation
-          description: The object type, which is always 'file_citation'.
-        file_citation:
-          allOf:
-            - $ref: '#/components/schemas/MessageTextFileCitationDetails'
-          description: |-
-            A citation within the message that points to a specific quote from a specific file.
-            Generated when the assistant uses the "retrieval" tool to search files.
-      allOf:
-        - $ref: '#/components/schemas/MessageTextAnnotation'
-      description: A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.
-    MessageFilePathDetails:
-      type: object
-      required:
-        - file_id
-      properties:
-        file_id:
-          type: string
-          description: The ID of the specific file that the citation is from.
-      description: An encapsulation of an image file ID, as used by message image content.
-    MessageFilePathTextAnnotation:
-      type: object
-      required:
-        - type
-        - file_path
-      properties:
-        type:
-          type: string
-          enum:
-            - file_path
-          description: The object type, which is always 'file_path'.
-        file_path:
-          allOf:
-            - $ref: '#/components/schemas/MessageFilePathDetails'
-          description: A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.
-      allOf:
-        - $ref: '#/components/schemas/MessageTextAnnotation'
-      description: A citation within the message that points to a file located at a specific path.
     MessageImageFileContent:
       type: object
       required:
@@ -1771,8 +1687,8 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          file_citation: '#/components/schemas/MessageFileCitationTextAnnotation'
-          file_path: '#/components/schemas/MessageFilePathTextAnnotation'
+          file_citation: '#/components/schemas/MessageTextFileCitationAnnotation'
+          file_path: '#/components/schemas/MessageTextFilePathAnnotation'
       description: An abstract representation of an annotation to text thread message content.
     MessageTextContent:
       type: object
@@ -1807,6 +1723,26 @@ components:
             $ref: '#/components/schemas/MessageTextAnnotation'
           description: A list of annotations associated with this text.
       description: The text and associated annotations for a single item of assistant thread message content.
+    MessageTextFileCitationAnnotation:
+      type: object
+      required:
+        - type
+        - file_citation
+      properties:
+        type:
+          type: string
+          enum:
+            - file_citation
+          description: The object type, which is always 'file_citation'.
+        file_citation:
+          allOf:
+            - $ref: '#/components/schemas/MessageTextFileCitationDetails'
+          description: |-
+            A citation within the message that points to a specific quote from a specific file.
+            Generated when the assistant uses the "retrieval" tool to search files.
+      allOf:
+        - $ref: '#/components/schemas/MessageTextAnnotation'
+      description: A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.
     MessageTextFileCitationDetails:
       type: object
       required:
@@ -1820,6 +1756,33 @@ components:
           type: string
           description: The specific quote cited in the associated file.
       description: A representation of a file-based text citation, as used in a file-based annotation of text thread message content.
+    MessageTextFilePathAnnotation:
+      type: object
+      required:
+        - type
+        - file_path
+      properties:
+        type:
+          type: string
+          enum:
+            - file_path
+          description: The object type, which is always 'file_path'.
+        file_path:
+          allOf:
+            - $ref: '#/components/schemas/MessageTextFilePathDetails'
+          description: A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.
+      allOf:
+        - $ref: '#/components/schemas/MessageTextAnnotation'
+      description: A citation within the message that points to a file located at a specific path.
+    MessageTextFilePathDetails:
+      type: object
+      required:
+        - file_id
+      properties:
+        file_id:
+          type: string
+          description: The ID of the specific file that the citation is from.
+      description: An encapsulation of an image file ID, as used by message image content.
     OpenAIFile:
       type: object
       required:
@@ -2395,6 +2358,43 @@ components:
           type: string
           description: The output from the tool to be submitted.
       description: The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.
+    UpdateAssistantOptions:
+      type: object
+      properties:
+        model:
+          type: string
+          description: The ID of the model to use.
+        name:
+          type: string
+          nullable: true
+          description: The modified name for the assistant to use.
+        description:
+          type: string
+          nullable: true
+          description: The modified description for the assistant to use.
+        instructions:
+          type: string
+          nullable: true
+          description: The modified system instructions for the new assistant to use.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolDefinition'
+          description: The modified collection of tools to enable for the assistant.
+          default: []
+        file_ids:
+          type: array
+          items:
+            type: string
+          description: The modified list of previously uploaded fileIDs to attach to the assistant.
+          default: []
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: The request details to use when modifying an existing assistant.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
