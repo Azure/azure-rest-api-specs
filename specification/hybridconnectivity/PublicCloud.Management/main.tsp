@@ -319,7 +319,7 @@ interface TestPermissions {
 interface PublicCloudConnectors {
   get is ArmResourceRead<PublicCloudConnector>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PublicCloudConnector>;
-  patch is ArmResourcePatchSync<
+  update is ArmResourcePatchSync<
     PublicCloudConnector,
     PublicCloudConnectorProperties
   >;
@@ -331,8 +331,8 @@ interface PublicCloudConnectors {
 @armResourceOperations
 interface SolutionConfigurations {
   get is ArmResourceRead<SolutionConfiguration>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<SolutionConfiguration>;
-  patch is ArmResourcePatchSync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SolutionConfiguration>;
+  update is ArmResourcePatchSync<
     SolutionConfiguration,
     SolutionConfigurationProperties
   >;

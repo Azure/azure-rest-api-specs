@@ -133,7 +133,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'SolutionConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'SolutionConfiguration' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/SolutionConfiguration"
             }
@@ -152,7 +158,7 @@
         }
       },
       "patch": {
-        "operationId": "SolutionConfigurations_Patch",
+        "operationId": "SolutionConfigurations_Update",
         "tags": [
           "SolutionConfigurations"
         ],
@@ -196,8 +202,8 @@
           }
         },
         "x-ms-examples": {
-          "SolutionConfigurations_Patch": {
-            "$ref": "./examples/SolutionConfigurations_Patch.json"
+          "SolutionConfigurations_Update": {
+            "$ref": "./examples/SolutionConfigurations_Update.json"
           }
         }
       },
@@ -678,7 +684,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "PublicCloudConnectors_Patch",
+        "operationId": "PublicCloudConnectors_Update",
         "tags": [
           "PublicCloudConnectors"
         ],
@@ -722,11 +728,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PublicCloudConnectors_Patch": {
-            "$ref": "./examples/PublicCloudConnectors_Patch.json"
           }
         }
       },
