@@ -1,0 +1,4540 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2020-10-01",
+    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role definitions and role assignments. A role definition describes the set of actions that can be performed on resources. A role assignment grants access to Azure Active Directory users.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "DenyAssignments"
+    },
+    {
+      "name": "ProviderOperationsMetadataOperationGroup"
+    },
+    {
+      "name": "RoleAssignments"
+    },
+    {
+      "name": "RoleDefinitions"
+    },
+    {
+      "name": "RoleAssignmentSchedules"
+    },
+    {
+      "name": "RoleAssignmentScheduleInstances"
+    },
+    {
+      "name": "RoleAssignmentScheduleRequests"
+    },
+    {
+      "name": "RoleEligibilitySchedules"
+    },
+    {
+      "name": "RoleEligibilityScheduleInstances"
+    },
+    {
+      "name": "RoleEligibilityScheduleRequests"
+    },
+    {
+      "name": "RoleManagementPolicies"
+    },
+    {
+      "name": "RoleManagementPolicyAssignments"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/{subscriptionId}/{resourceGroupName}/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/denyAssignments": {
+      "get": {
+        "operationId": "DenyAssignments_ListForResource",
+        "tags": [
+          "DenyAssignments"
+        ],
+        "description": "Gets deny assignments for a resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "description": "The namespace of the resource provider.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "description": "The parent resource identity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource to get deny assignments for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all deny assignments at or above the scope. Use $filter=denyAssignmentName eq '{name}' to search deny assignments by name at specified scope. Use $filter=principalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny assignments that contain the specified principal is the Principals list but also those deny assignments that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny assignment name and description properties are returned.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DenyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/denyAssignments/{denyAssignmentId}": {
+      "get": {
+        "operationId": "DenyAssignments_Get",
+        "tags": [
+          "DenyAssignments"
+        ],
+        "description": "Get the specified deny assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "denyAssignmentId",
+            "in": "path",
+            "description": "The ID of the deny assignment to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DenyAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/eligibleChildResources": {
+      "get": {
+        "operationId": "EligibleChildResourcesOperations_Get",
+        "description": "Get the child resources of a resource on which user has eligible access",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the role management policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=resourceType+eq+'Subscription' to filter on only resource of type = 'Subscription'. Use $filter=resourceType+eq+'subscription'+or+resourceType+eq+'resourcegroup' to filter on resource of type = 'Subscription' or 'ResourceGroup'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEligibleChildResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleAssignmentScheduleInstances": {
+      "get": {
+        "operationId": "RoleAssignmentScheduleInstances_ListForScope",
+        "tags": [
+          "RoleAssignmentScheduleInstances"
+        ],
+        "description": "Gets role assignment schedule instances of a role assignment schedule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal.  Use $filter=assignedTo('{userId}') to return all role assignment schedule instances for the user. Use $filter=asTarget() to return all role assignment schedule instances created for the current user.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleAssignmentScheduleInstances/{roleAssignmentScheduleInstanceName}": {
+      "get": {
+        "operationId": "RoleAssignmentScheduleInstances_Get",
+        "tags": [
+          "RoleAssignmentScheduleInstances"
+        ],
+        "description": "Gets the specified role assignment schedule instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleAssignmentScheduleInstanceName",
+            "in": "path",
+            "description": "The name (hash of schedule name + time) of the role assignment schedule to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests": {
+      "get": {
+        "operationId": "RoleAssignmentScheduleRequests_ListForScope",
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "description": "Gets role assignment schedule requests for a scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role assignment schedule requests requested by the current user. Use $filter=asTarget() to return all role assignment schedule requests created for the current user. Use $filter=asApprover() to return all role assignment schedule requests where the current user is an approver.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequestListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}": {
+      "get": {
+        "operationId": "RoleAssignmentScheduleRequests_Get",
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "description": "Get the specified role assignment schedule request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleAssignmentScheduleRequestName",
+            "in": "path",
+            "description": "The name (guid) of the role assignment schedule request to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleAssignmentScheduleRequests_Create",
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "description": "Creates a role assignment schedule request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleAssignmentScheduleRequestName",
+            "in": "path",
+            "description": "The name (guid) of the role assignment schedule request to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the role assignment schedule request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RoleAssignmentScheduleRequest' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            }
+          },
+          "201": {
+            "description": "Resource 'RoleAssignmentScheduleRequest' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/cancel": {
+      "post": {
+        "operationId": "RoleAssignmentScheduleRequests_Cancel",
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "description": "Cancels a pending role assignment schedule request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleAssignmentScheduleRequestName",
+            "in": "path",
+            "description": "The name (guid) of the role assignment schedule request to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/validate": {
+      "post": {
+        "operationId": "RoleAssignmentScheduleRequests_Validate",
+        "tags": [
+          "RoleAssignmentScheduleRequests"
+        ],
+        "description": "Validates a new role assignment schedule request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleAssignmentScheduleRequestName",
+            "in": "path",
+            "description": "The name (guid) of the role assignment schedule request to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the role assignment schedule request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleAssignmentSchedules": {
+      "get": {
+        "operationId": "RoleAssignmentSchedules_ListForScope",
+        "tags": [
+          "RoleAssignmentSchedules"
+        ],
+        "description": "Gets role assignment schedules for a resource scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role assignment schedules for the current user. Use $filter=asTarget() to return all role assignment schedules created for the current user.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentScheduleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleAssignmentSchedules/{roleAssignmentScheduleName}": {
+      "get": {
+        "operationId": "RoleAssignmentSchedules_Get",
+        "tags": [
+          "RoleAssignmentSchedules"
+        ],
+        "description": "Get the specified role assignment schedule for a resource scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleAssignmentScheduleName",
+            "in": "path",
+            "description": "The name (guid) of the role assignment schedule to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentSchedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "operationId": "RoleAssignments_ListForScope",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "List all role assignments that apply to a scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "description": "Tenant ID for cross-tenant request",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The skipToken to apply on the operation. Use $skipToken={skiptoken} to return paged role assignments following the skipToken passed. Only supported on provider level calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
+      "get": {
+        "operationId": "RoleAssignments_Get",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Get a role assignment by scope and name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "description": "Tenant ID for cross-tenant request",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "description": "The name of the role assignment. It can be any valid GUID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleAssignments_Create",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Create or update a role assignment by scope and name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "description": "The name of the role assignment. It can be any valid GUID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the role assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RoleAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'RoleAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RoleAssignments_Delete",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Delete a role assignment by scope and name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "description": "Tenant ID for cross-tenant request",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "description": "The name of the role assignment. It can be any valid GUID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleDefinitions": {
+      "get": {
+        "operationId": "RoleDefinitions_List",
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "description": "Get all role definitions that are applicable at scope and above.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}": {
+      "get": {
+        "operationId": "RoleDefinitions_Get",
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "description": "Get role definition by name (GUID).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The ID of the role definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleDefinitions_CreateOrUpdate",
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "description": "Creates or updates a role definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The ID of the role definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleDefinition",
+            "in": "body",
+            "description": "The values for the role definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            },
+            "x-ms-client-name": "roleDefinition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RoleDefinition' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "201": {
+            "description": "Resource 'RoleDefinition' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RoleDefinitions_Delete",
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "description": "Deletes a role definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleDefinitionId",
+            "in": "path",
+            "description": "The ID of the role definition.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleEligibilityScheduleInstances": {
+      "get": {
+        "operationId": "RoleEligibilityScheduleInstances_ListForScope",
+        "tags": [
+          "RoleEligibilityScheduleInstances"
+        ],
+        "description": "Gets role eligibility schedule instances of a role eligibility schedule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignment schedules at or above the scope. Use $filter=principalId eq {id} to return all role assignment schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleEligibilityScheduleInstances/{roleEligibilityScheduleInstanceName}": {
+      "get": {
+        "operationId": "RoleEligibilityScheduleInstances_Get",
+        "tags": [
+          "RoleEligibilityScheduleInstances"
+        ],
+        "description": "Gets the specified role eligibility schedule instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleEligibilityScheduleInstanceName",
+            "in": "path",
+            "description": "The name (hash of schedule name + time) of the role eligibility schedule to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests": {
+      "get": {
+        "operationId": "RoleEligibilityScheduleRequests_ListForScope",
+        "tags": [
+          "RoleEligibilityScheduleRequests"
+        ],
+        "description": "Gets role eligibility schedule requests for a scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedule requests at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedule requests at, above or below the scope for the specified principal. Use $filter=asRequestor() to return all role eligibility schedule requests requested by the current user. Use $filter=asTarget() to return all role eligibility schedule requests created for the current user. Use $filter=asApprover() to return all role eligibility schedule requests where the current user is an approver.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequestListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}": {
+      "get": {
+        "operationId": "RoleEligibilityScheduleRequests_Get",
+        "tags": [
+          "RoleEligibilityScheduleRequests"
+        ],
+        "description": "Get the specified role eligibility schedule request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleEligibilityScheduleRequestName",
+            "in": "path",
+            "description": "The name (guid) of the role eligibility schedule request to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleEligibilityScheduleRequests_Create",
+        "tags": [
+          "RoleEligibilityScheduleRequests"
+        ],
+        "description": "Creates a role eligibility schedule request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleEligibilityScheduleRequestName",
+            "in": "path",
+            "description": "The name (guid) of the role eligibility schedule request to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the role eligibility schedule request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RoleEligibilityScheduleRequest' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+            }
+          },
+          "201": {
+            "description": "Resource 'RoleEligibilityScheduleRequest' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/cancel": {
+      "post": {
+        "operationId": "RoleEligibilityScheduleRequests_Cancel",
+        "tags": [
+          "RoleEligibilityScheduleRequests"
+        ],
+        "description": "Cancels a pending role eligibility schedule request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleEligibilityScheduleRequestName",
+            "in": "path",
+            "description": "The name (guid) of the role eligibility schedule request to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "ARM operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/validate": {
+      "post": {
+        "operationId": "RoleEligibilityScheduleRequests_Validate",
+        "tags": [
+          "RoleEligibilityScheduleRequests"
+        ],
+        "description": "Validates a new role eligibility schedule request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleEligibilityScheduleRequestName",
+            "in": "path",
+            "description": "The name (guid) of the role eligibility schedule request to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the role eligibility schedule request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleEligibilitySchedules": {
+      "get": {
+        "operationId": "RoleEligibilitySchedules_ListForScope",
+        "tags": [
+          "RoleEligibilitySchedules"
+        ],
+        "description": "Gets role eligibility schedules for a resource scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role eligibility schedules at or above the scope. Use $filter=principalId eq {id} to return all role eligibility schedules at, above or below the scope for the specified principal. Use $filter=assignedTo('{userId}') to return all role eligibility schedules for the user. Use $filter=asTarget() to return all role eligibility schedules created for the current user.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilityScheduleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleEligibilitySchedules/{roleEligibilityScheduleName}": {
+      "get": {
+        "operationId": "RoleEligibilitySchedules_Get",
+        "tags": [
+          "RoleEligibilitySchedules"
+        ],
+        "description": "Get the specified role eligibility schedule for a resource scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleEligibilityScheduleName",
+            "in": "path",
+            "description": "The name (guid) of the role eligibility schedule to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleEligibilitySchedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleManagementPolicies": {
+      "get": {
+        "operationId": "RoleManagementPolicies_ListForScope",
+        "tags": [
+          "RoleManagementPolicies"
+        ],
+        "description": "Gets role management policies for a resource scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleManagementPolicies/{roleManagementPolicyName}": {
+      "get": {
+        "operationId": "RoleManagementPolicies_Get",
+        "tags": [
+          "RoleManagementPolicies"
+        ],
+        "description": "Get the specified role management policy for a resource scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleManagementPolicyName",
+            "in": "path",
+            "description": "The name (guid) of the role management policy to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleManagementPolicies/{roleManagementPolicyName}/roleManagementPolicies/{name}": {
+      "patch": {
+        "operationId": "RoleManagementPolicies_Update",
+        "tags": [
+          "RoleManagementPolicies"
+        ],
+        "description": "Update a role management policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleManagementPolicyName",
+            "in": "path",
+            "description": "The name (guid) of the role management policy to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name (guid) of the role management policy to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the role management policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicy"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleManagementPolicyAssignments": {
+      "get": {
+        "operationId": "RoleManagementPolicyAssignments_ListForScope",
+        "tags": [
+          "RoleManagementPolicyAssignments"
+        ],
+        "description": "Gets role management assignment policies for a resource scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Authorization/roleManagementPolicyAssignments/{roleManagementPolicyAssignmentName}": {
+      "get": {
+        "operationId": "RoleManagementPolicyAssignments_Get",
+        "tags": [
+          "RoleManagementPolicyAssignments"
+        ],
+        "description": "Get the specified role management policy assignment for a resource scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleManagementPolicyAssignmentName",
+            "in": "path",
+            "description": "The name of format {guid_guid} the role management policy assignment to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleManagementPolicyAssignments_Create",
+        "tags": [
+          "RoleManagementPolicyAssignments"
+        ],
+        "description": "Create a role management policy assignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "roleManagementPolicyAssignmentName",
+            "in": "path",
+            "description": "The name of format {guid_guid} the role management policy assignment to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the role management policy assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicyAssignment"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RoleManagementPolicyAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicyAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'RoleManagementPolicyAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/elevateAccess": {
+      "post": {
+        "operationId": "GlobalAdministratorOperations_ElevateAccess",
+        "description": "Elevates access for a Global Administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/providerOperations": {
+      "get": {
+        "operationId": "ProviderOperationsMetadata_List",
+        "tags": [
+          "ProviderOperationsMetadataOperationGroup"
+        ],
+        "description": "Gets provider operations metadata for all resource providers.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specifies whether to expand the values.",
+            "required": false,
+            "type": "string",
+            "default": "resourceTypes"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProviderOperationsMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}": {
+      "get": {
+        "operationId": "ProviderOperationsMetadata_Get",
+        "tags": [
+          "ProviderOperationsMetadataOperationGroup"
+        ],
+        "description": "Gets provider operations metadata for the specified resource provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specifies whether to expand the values.",
+            "required": false,
+            "type": "string",
+            "default": "resourceTypes"
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "description": "The namespace of the resource provider.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProviderOperationsMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/classicAdministrators": {
+      "get": {
+        "operationId": "ClassicAdministratorsOperations_List",
+        "description": "Gets service administrator, account administrator, and co-administrators for the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedClassicAdministrator"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/permissions": {
+      "get": {
+        "operationId": "AzurePermissionsForResourceOperations_List",
+        "description": "Gets all permissions the caller has for a resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "description": "The namespace of the resource provider.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "description": "The parent resource identity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource to get the permissions for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedPermission"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Authorization/permissions": {
+      "get": {
+        "operationId": "AzurePermissionsForResourceGroupOperations_List",
+        "description": "Gets all permissions the caller has for a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedPermission"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApprovalMode": {
+      "type": "string",
+      "description": "The type of rule",
+      "enum": [
+        "SingleStage",
+        "Serial",
+        "Parallel",
+        "NoApproval"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalMode",
+        "modelAsString": true
+      }
+    },
+    "ApprovalSettings": {
+      "type": "object",
+      "description": "The approval settings.",
+      "properties": {
+        "isApprovalRequired": {
+          "type": "boolean",
+          "description": "Determines whether approval is required or not."
+        },
+        "isApprovalRequiredForExtension": {
+          "type": "boolean",
+          "description": "Determines whether approval is required for assignment extension."
+        },
+        "isRequestorJustificationRequired": {
+          "type": "boolean",
+          "description": "Determine whether requestor justification is required."
+        },
+        "approvalMode": {
+          "$ref": "#/definitions/ApprovalMode",
+          "description": "The type of rule"
+        },
+        "approvalStages": {
+          "type": "array",
+          "description": "The approval stages of the request.",
+          "items": {
+            "$ref": "#/definitions/ApprovalStage"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ApprovalStage": {
+      "type": "object",
+      "description": "The approval stage.",
+      "properties": {
+        "approvalStageTimeOutInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in days when approval request would be timed out"
+        },
+        "isApproverJustificationRequired": {
+          "type": "boolean",
+          "description": "Determines whether approver need to provide justification for his decision."
+        },
+        "escalationTimeInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time in minutes when the approval request would be escalated if the primary approver does not approve"
+        },
+        "primaryApprovers": {
+          "type": "array",
+          "description": "The primary approver of the request.",
+          "items": {
+            "$ref": "#/definitions/UserSet"
+          }
+        },
+        "isEscalationEnabled": {
+          "type": "boolean",
+          "description": "The value determine whether escalation feature is enabled."
+        },
+        "escalationApprovers": {
+          "type": "array",
+          "description": "The escalation approver of the request.",
+          "items": {
+            "$ref": "#/definitions/UserSet"
+          }
+        }
+      }
+    },
+    "AssignmentType": {
+      "type": "string",
+      "description": "Assignment type of the role assignment schedule",
+      "enum": [
+        "Activated",
+        "Assigned"
+      ],
+      "x-ms-enum": {
+        "name": "AssignmentType",
+        "modelAsString": true
+      }
+    },
+    "AuthorizationProviderResourceType": {
+      "type": "object",
+      "description": "Resource Type",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource type name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The resource type display name."
+        },
+        "operations": {
+          "type": "array",
+          "description": "The resource type operations.",
+          "items": {
+            "$ref": "#/definitions/ProviderOperation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "ClassicAdministrator": {
+      "type": "object",
+      "description": "Classic Administrators",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the administrator."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the administrator."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the administrator."
+        },
+        "properties": {
+          "$ref": "#/definitions/ClassicAdministratorProperties",
+          "description": "Properties for the classic administrator."
+        }
+      }
+    },
+    "ClassicAdministratorProperties": {
+      "type": "object",
+      "description": "Classic Administrator properties.",
+      "properties": {
+        "emailAddress": {
+          "type": "string",
+          "description": "The email address of the administrator."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the administrator."
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from the service."
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      }
+    },
+    "DenyAssignment": {
+      "type": "object",
+      "description": "Deny Assignment",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DenyAssignmentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DenyAssignmentFilter": {
+      "type": "object",
+      "description": "Deny Assignments filter",
+      "properties": {
+        "denyAssignmentName": {
+          "type": "string",
+          "description": "Return deny assignment with specified name."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Return all deny assignments where the specified principal is listed in the principals list of deny assignments."
+        },
+        "gdprExportPrincipalId": {
+          "type": "string",
+          "description": "Return all deny assignments where the specified principal is listed either in the principals list or exclude principals list of deny assignments."
+        }
+      }
+    },
+    "DenyAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a DenyAssignment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DenyAssignment items on this page",
+          "items": {
+            "$ref": "#/definitions/DenyAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DenyAssignmentPermission": {
+      "type": "object",
+      "description": "Deny assignment permissions.",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "Actions to which the deny assignment does not grant access.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notActions": {
+          "type": "array",
+          "description": "Actions to exclude from that the deny assignment does not grant access.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataActions": {
+          "type": "array",
+          "description": "Data actions to which the deny assignment does not grant access.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notDataActions": {
+          "type": "array",
+          "description": "Data actions to exclude from that the deny assignment does not grant access.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the Deny assignment permission. This limits the resources it applies to."
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition."
+        }
+      }
+    },
+    "DenyAssignmentProperties": {
+      "type": "object",
+      "description": "Deny assignment properties.",
+      "properties": {
+        "denyAssignmentName": {
+          "type": "string",
+          "description": "The display name of the deny assignment."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the deny assignment."
+        },
+        "permissions": {
+          "type": "array",
+          "description": "An array of permissions that are denied by the deny assignment.",
+          "items": {
+            "$ref": "#/definitions/DenyAssignmentPermission"
+          },
+          "x-ms-identifiers": []
+        },
+        "scope": {
+          "type": "string",
+          "description": "The deny assignment scope."
+        },
+        "doNotApplyToChildScopes": {
+          "type": "boolean",
+          "description": "Determines if the deny assignment applies to child scopes. Default value is false."
+        },
+        "principals": {
+          "type": "array",
+          "description": "Array of principals to which the deny assignment applies.",
+          "items": {
+            "$ref": "#/definitions/Principal"
+          }
+        },
+        "excludePrincipals": {
+          "type": "array",
+          "description": "Array of principals to which the deny assignment does not apply.",
+          "items": {
+            "$ref": "#/definitions/Principal"
+          }
+        },
+        "isSystemProtected": {
+          "type": "boolean",
+          "description": "Specifies whether this deny assignment was created by Azure and cannot be edited or deleted."
+        }
+      }
+    },
+    "EligibleChildResource": {
+      "type": "object",
+      "description": "Eligible child resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource scope Id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        }
+      }
+    },
+    "EnablementRules": {
+      "type": "string",
+      "description": "The type of enablement rule",
+      "enum": [
+        "MultiFactorAuthentication",
+        "Justification",
+        "Ticketing"
+      ],
+      "x-ms-enum": {
+        "name": "EnablementRules",
+        "modelAsString": true
+      }
+    },
+    "ExpandedProperties": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/ExpandedPropertiesScope",
+          "description": "Details of the resource scope"
+        },
+        "roleDefinition": {
+          "$ref": "#/definitions/ExpandedPropertiesRoleDefinition",
+          "description": "Details of role definition"
+        },
+        "principal": {
+          "$ref": "#/definitions/ExpandedPropertiesPrincipal",
+          "description": "Details of the principal"
+        }
+      }
+    },
+    "ExpandedPropertiesPrincipal": {
+      "type": "object",
+      "description": "Details of the principal",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the principal",
+          "x-ms-client-name": "principalId"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the principal",
+          "x-ms-client-name": "principalDisplayName"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email id of the principal"
+        },
+        "type": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "Type of the principal.",
+          "x-ms-client-name": "principalType"
+        }
+      }
+    },
+    "ExpandedPropertiesRoleDefinition": {
+      "type": "object",
+      "description": "Details of role definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the role definition",
+          "x-ms-client-name": "roleDefinitionId"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the role definition",
+          "x-ms-client-name": "roleDefinitionDisplayName"
+        },
+        "type": {
+          "$ref": "#/definitions/RoleType",
+          "description": "The role type.",
+          "x-ms-client-name": "roleType"
+        }
+      }
+    },
+    "ExpandedPropertiesScope": {
+      "type": "object",
+      "description": "Details of the resource scope",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Scope id of the resource",
+          "x-ms-client-name": "scopeId"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the resource",
+          "x-ms-client-name": "scopeDisplayName"
+        },
+        "type": {
+          "$ref": "#/definitions/ScopeType",
+          "description": "Type of the scope.",
+          "x-ms-client-name": "scopeType"
+        }
+      }
+    },
+    "NotificationDeliveryMechanism": {
+      "type": "string",
+      "description": "The type of notification.",
+      "enum": [
+        "Email"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationDeliveryMechanism",
+        "modelAsString": true
+      }
+    },
+    "NotificationLevel": {
+      "type": "string",
+      "description": "The notification level.",
+      "enum": [
+        "None",
+        "Critical",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationLevel",
+        "modelAsString": true
+      }
+    },
+    "PagedClassicAdministrator": {
+      "type": "object",
+      "description": "ClassicAdministrator list result information.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClassicAdministrator items on this page",
+          "items": {
+            "$ref": "#/definitions/ClassicAdministrator"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEligibleChildResource": {
+      "type": "object",
+      "description": "Eligible child resources list operation result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EligibleChildResource items on this page",
+          "items": {
+            "$ref": "#/definitions/EligibleChildResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedPermission": {
+      "type": "object",
+      "description": "Permissions information.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Permission items on this page",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Permission": {
+      "type": "object",
+      "description": "Role definition permissions.",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "Allowed actions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notActions": {
+          "type": "array",
+          "description": "Denied actions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataActions": {
+          "type": "array",
+          "description": "Allowed Data actions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notDataActions": {
+          "type": "array",
+          "description": "Denied Data actions.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PolicyAssignmentProperties": {
+      "type": "object",
+      "description": "Expanded info of resource scope, role definition and policy",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/PolicyAssignmentPropertiesScope",
+          "description": "Details of the resource scope"
+        },
+        "roleDefinition": {
+          "$ref": "#/definitions/PolicyAssignmentPropertiesRoleDefinition",
+          "description": "Details of role definition"
+        },
+        "policy": {
+          "$ref": "#/definitions/PolicyAssignmentPropertiesPolicy",
+          "description": "Details of the policy"
+        }
+      }
+    },
+    "PolicyAssignmentPropertiesPolicy": {
+      "type": "object",
+      "description": "Details of the policy",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the policy",
+          "x-ms-client-name": "policyId"
+        },
+        "lastModifiedBy": {
+          "$ref": "#/definitions/Principal",
+          "description": "The name of the entity last modified it",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modified date time."
+        }
+      }
+    },
+    "PolicyAssignmentPropertiesRoleDefinition": {
+      "type": "object",
+      "description": "Details of role definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the role definition",
+          "x-ms-client-name": "roleDefinitionId"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the role definition",
+          "x-ms-client-name": "roleDefinitionDisplayName"
+        },
+        "type": {
+          "$ref": "#/definitions/RoleType",
+          "description": "The role type.",
+          "x-ms-client-name": "roleType"
+        }
+      }
+    },
+    "PolicyAssignmentPropertiesScope": {
+      "type": "object",
+      "description": "Details of the resource scope",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Scope id of the resource",
+          "x-ms-client-name": "scopeId"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the resource",
+          "x-ms-client-name": "scopeDisplayName"
+        },
+        "type": {
+          "$ref": "#/definitions/ScopeType",
+          "description": "Type of the scope.",
+          "x-ms-client-name": "scopeType"
+        }
+      }
+    },
+    "PolicyProperties": {
+      "type": "object",
+      "description": "Expanded info of resource scope",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/PolicyPropertiesScope",
+          "description": "Details of the resource scope",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyPropertiesScope": {
+      "type": "object",
+      "description": "Details of the resource scope",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Scope id of the resource",
+          "x-ms-client-name": "scopeId"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the resource",
+          "x-ms-client-name": "scopeDisplayName"
+        },
+        "type": {
+          "$ref": "#/definitions/ScopeType",
+          "description": "Type of the scope.",
+          "x-ms-client-name": "scopeType"
+        }
+      }
+    },
+    "Principal": {
+      "type": "object",
+      "description": "The name of the entity last modified it",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the principal made changes"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the principal made changes"
+        },
+        "type": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "Type of the principal.",
+          "x-ms-client-name": "principalType"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of principal"
+        }
+      }
+    },
+    "PrincipalType": {
+      "type": "string",
+      "description": "The principal type of the assigned principal ID.",
+      "enum": [
+        "User",
+        "Group",
+        "ServicePrincipal",
+        "ForeignGroup",
+        "Device"
+      ],
+      "x-ms-enum": {
+        "name": "PrincipalType",
+        "modelAsString": true
+      }
+    },
+    "ProviderOperation": {
+      "type": "object",
+      "description": "Operation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The operation display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The operation description."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The operation origin."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The operation properties.",
+          "additionalProperties": {}
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "The dataAction flag to specify the operation type."
+        }
+      }
+    },
+    "ProviderOperationsMetadata": {
+      "type": "object",
+      "description": "Provider Operations metadata",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The provider display name."
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "The provider resource types",
+          "items": {
+            "$ref": "#/definitions/AuthorizationProviderResourceType"
+          },
+          "x-ms-identifiers": []
+        },
+        "operations": {
+          "type": "array",
+          "description": "The provider operations.",
+          "items": {
+            "$ref": "#/definitions/ProviderOperation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProviderOperationsMetadataListResult": {
+      "type": "object",
+      "description": "The response of a ProviderOperationsMetadata list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProviderOperationsMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/ProviderOperationsMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RecipientType": {
+      "type": "string",
+      "description": "The recipient type.",
+      "enum": [
+        "Requestor",
+        "Approver",
+        "Admin"
+      ],
+      "x-ms-enum": {
+        "name": "RecipientType",
+        "modelAsString": true
+      }
+    },
+    "RoleAssignment": {
+      "type": "object",
+      "description": "Role Assignments",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RoleAssignmentCreateParameters": {
+      "type": "object",
+      "description": "Role assignment create parameters.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentProperties",
+          "description": "Role assignment properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "RoleAssignmentFilter": {
+      "type": "object",
+      "description": "Role Assignments filter",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role assignment of the specific principal."
+        }
+      }
+    },
+    "RoleAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a RoleAssignment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoleAssignment items on this page",
+          "items": {
+            "$ref": "#/definitions/RoleAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoleAssignmentProperties": {
+      "type": "object",
+      "description": "Role assignment properties.",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The role assignment scope.",
+          "readOnly": true
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "The principal type of the assigned principal ID."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of role assignment"
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the role assignment. This limits the resources it can be assigned to. e.g.:"
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition. Currently the only accepted value is '2.0'"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time it was created",
+          "readOnly": true
+        },
+        "updatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time it was updated",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Id of the user who created the assignment",
+          "readOnly": true
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Id of the user who updated the assignment",
+          "readOnly": true
+        },
+        "delegatedManagedIdentityResourceId": {
+          "type": "string",
+          "description": "Id of the delegated managed identity resource"
+        }
+      },
+      "required": [
+        "roleDefinitionId",
+        "principalId"
+      ]
+    },
+    "RoleAssignmentSchedule": {
+      "type": "object",
+      "description": "Role Assignment schedule",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentScheduleProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RoleAssignmentScheduleFilter": {
+      "type": "object",
+      "description": "Role assignment schedule filter",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role assignment schedule of the specific principal."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Returns role assignment schedule of the specific role definition."
+        },
+        "status": {
+          "type": "string",
+          "description": "Returns role assignment schedule instances of the specific status."
+        }
+      }
+    },
+    "RoleAssignmentScheduleInstance": {
+      "type": "object",
+      "description": "Information about current or upcoming role assignment schedule instance",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentScheduleInstanceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RoleAssignmentScheduleInstanceFilter": {
+      "type": "object",
+      "description": "Role assignment schedule instance filter",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role assignment schedule instances of the specific principal."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Returns role assignment schedule instances of the specific role definition."
+        },
+        "status": {
+          "type": "string",
+          "description": "Returns role assignment schedule instances of the specific status."
+        },
+        "roleAssignmentScheduleId": {
+          "type": "string",
+          "description": "Returns role assignment schedule instances belonging to a specific role assignment schedule."
+        }
+      }
+    },
+    "RoleAssignmentScheduleInstanceListResult": {
+      "type": "object",
+      "description": "The response of a RoleAssignmentScheduleInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoleAssignmentScheduleInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentScheduleInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoleAssignmentScheduleInstanceProperties": {
+      "type": "object",
+      "description": "Role assignment schedule properties with scope.",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The role assignment schedule scope."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "The principal type of the assigned principal ID."
+        },
+        "roleAssignmentScheduleId": {
+          "type": "string",
+          "description": "Id of the master role assignment schedule"
+        },
+        "originRoleAssignmentId": {
+          "type": "string",
+          "description": "Role Assignment Id in external system"
+        },
+        "status": {
+          "$ref": "#/definitions/RoleManagementScheduleStatus",
+          "description": "The status of the role assignment schedule instance."
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The startDateTime of the role assignment schedule instance"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The endDateTime of the role assignment schedule instance"
+        },
+        "linkedRoleEligibilityScheduleId": {
+          "type": "string",
+          "description": "roleEligibilityScheduleId used to activate"
+        },
+        "linkedRoleEligibilityScheduleInstanceId": {
+          "type": "string",
+          "description": "roleEligibilityScheduleInstanceId linked to this roleAssignmentScheduleInstance"
+        },
+        "assignmentType": {
+          "$ref": "#/definitions/AssignmentType",
+          "description": "Assignment type of the role assignment schedule"
+        },
+        "memberType": {
+          "$ref": "#/definitions/RoleManagementScheduleMemberType",
+          "description": "Membership type of the role assignment schedule"
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the role assignment. This limits the resources it can be assigned to. e.g.:"
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition. Currently accepted value is '2.0'"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime when role assignment schedule was created"
+        },
+        "expandedProperties": {
+          "$ref": "#/definitions/ExpandedProperties",
+          "description": "Additional properties of principal, scope and role definition"
+        }
+      }
+    },
+    "RoleAssignmentScheduleListResult": {
+      "type": "object",
+      "description": "The response of a RoleAssignmentSchedule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoleAssignmentSchedule items on this page",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentSchedule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoleAssignmentScheduleProperties": {
+      "type": "object",
+      "description": "Role assignment schedule properties with scope.",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The role assignment schedule scope."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "The principal type of the assigned principal ID."
+        },
+        "roleAssignmentScheduleRequestId": {
+          "type": "string",
+          "description": "The id of roleAssignmentScheduleRequest used to create this roleAssignmentSchedule"
+        },
+        "linkedRoleEligibilityScheduleId": {
+          "type": "string",
+          "description": "The id of roleEligibilitySchedule used to activated this roleAssignmentSchedule"
+        },
+        "assignmentType": {
+          "$ref": "#/definitions/AssignmentType",
+          "description": "Assignment type of the role assignment schedule"
+        },
+        "memberType": {
+          "$ref": "#/definitions/RoleManagementScheduleMemberType",
+          "description": "Membership type of the role assignment schedule"
+        },
+        "status": {
+          "$ref": "#/definitions/RoleManagementScheduleStatus",
+          "description": "The status of the role assignment schedule."
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start DateTime when role assignment schedule"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End DateTime when role assignment schedule"
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the role assignment. This limits the resources it can be assigned to. e.g.:"
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition. Currently accepted value is '2.0'"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime when role assignment schedule was created"
+        },
+        "updatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime when role assignment schedule was modified"
+        },
+        "expandedProperties": {
+          "$ref": "#/definitions/ExpandedProperties",
+          "description": "Additional properties of principal, scope and role definition"
+        }
+      }
+    },
+    "RoleAssignmentScheduleRequest": {
+      "type": "object",
+      "description": "Role Assignment schedule request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentScheduleRequestProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RoleAssignmentScheduleRequestFilter": {
+      "type": "object",
+      "description": "Role assignment schedule request filter",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role assignment requests of the specific principal."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Returns role assignment requests of the specific role definition."
+        },
+        "requestorId": {
+          "type": "string",
+          "description": "Returns role assignment requests created by specific principal."
+        },
+        "status": {
+          "type": "string",
+          "description": "Returns role assignment requests of specific status."
+        }
+      }
+    },
+    "RoleAssignmentScheduleRequestListResult": {
+      "type": "object",
+      "description": "The response of a RoleAssignmentScheduleRequest list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoleAssignmentScheduleRequest items on this page",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentScheduleRequest"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoleAssignmentScheduleRequestProperties": {
+      "type": "object",
+      "description": "Role assignment schedule request properties with scope.",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The role assignment schedule request scope.",
+          "readOnly": true
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "The principal type of the assigned principal ID.",
+          "readOnly": true
+        },
+        "requestType": {
+          "$ref": "#/definitions/RoleManagementScheduleRequestType",
+          "description": "The type of the role assignment schedule request. Eg: SelfActivate, AdminAssign etc"
+        },
+        "status": {
+          "$ref": "#/definitions/RoleManagementScheduleStatus",
+          "description": "The status of the role assignment schedule request.",
+          "readOnly": true
+        },
+        "approvalId": {
+          "type": "string",
+          "description": "The approvalId of the role assignment schedule request.",
+          "readOnly": true
+        },
+        "targetRoleAssignmentScheduleId": {
+          "type": "string",
+          "description": "The resultant role assignment schedule id or the role assignment schedule id being updated"
+        },
+        "targetRoleAssignmentScheduleInstanceId": {
+          "type": "string",
+          "description": "The role assignment schedule instance id being updated"
+        },
+        "scheduleInfo": {
+          "$ref": "#/definitions/RoleAssignmentScheduleRequestPropertiesScheduleInfo",
+          "description": "Schedule info of the role assignment schedule"
+        },
+        "linkedRoleEligibilityScheduleId": {
+          "type": "string",
+          "description": "The linked role eligibility schedule id - to activate an eligibility."
+        },
+        "justification": {
+          "type": "string",
+          "description": "Justification for the role assignment"
+        },
+        "ticketInfo": {
+          "$ref": "#/definitions/RoleAssignmentScheduleRequestPropertiesTicketInfo",
+          "description": "Ticket Info of the role assignment"
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the role assignment. This limits the resources it can be assigned to. e.g.:"
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition. Currently accepted value is '2.0'"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime when role assignment schedule request was created",
+          "readOnly": true
+        },
+        "requestorId": {
+          "type": "string",
+          "description": "Id of the user who created this request",
+          "readOnly": true
+        },
+        "expandedProperties": {
+          "$ref": "#/definitions/ExpandedProperties",
+          "description": "Additional properties of principal, scope and role definition",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "roleDefinitionId",
+        "principalId",
+        "requestType"
+      ]
+    },
+    "RoleAssignmentScheduleRequestPropertiesScheduleInfo": {
+      "type": "object",
+      "description": "Schedule info of the role assignment schedule",
+      "properties": {
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start DateTime of the role assignment schedule."
+        },
+        "expiration": {
+          "$ref": "#/definitions/RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration",
+          "description": "Expiration of the role assignment schedule"
+        }
+      }
+    },
+    "RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration": {
+      "type": "object",
+      "description": "Expiration of the role assignment schedule",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RoleManagementScheduleExpirationType",
+          "description": "Type of the role assignment schedule expiration",
+          "x-ms-client-name": "expirationType"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End DateTime of the role assignment schedule."
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Duration of the role assignment schedule in TimeSpan."
+        }
+      }
+    },
+    "RoleAssignmentScheduleRequestPropertiesTicketInfo": {
+      "type": "object",
+      "description": "Ticket Info of the role assignment",
+      "properties": {
+        "ticketNumber": {
+          "type": "string",
+          "description": "Ticket number for the role assignment"
+        },
+        "ticketSystem": {
+          "type": "string",
+          "description": "Ticket system name for the role assignment"
+        }
+      }
+    },
+    "RoleDefinition": {
+      "type": "object",
+      "description": "Role definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleDefinitionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RoleDefinitionFilter": {
+      "type": "object",
+      "description": "Role Definitions filter",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "Returns role definition with the specific name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Returns role definition with the specific type."
+        }
+      }
+    },
+    "RoleDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a RoleDefinition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoleDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/RoleDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoleDefinitionProperties": {
+      "type": "object",
+      "description": "Role definition properties.",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The role name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The role definition description."
+        },
+        "type": {
+          "$ref": "#/definitions/RoleType",
+          "description": "The role type.",
+          "x-ms-client-name": "roleType"
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Role definition permissions.",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          },
+          "x-ms-identifiers": []
+        },
+        "assignableScopes": {
+          "type": "array",
+          "description": "Role definition assignable scopes.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RoleEligibilitySchedule": {
+      "type": "object",
+      "description": "Role eligibility schedule",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleEligibilityScheduleProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RoleEligibilityScheduleFilter": {
+      "type": "object",
+      "description": "Role eligibility schedule filter",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role eligibility schedule of the specific principal."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Returns role eligibility schedule of the specific role definition."
+        },
+        "status": {
+          "type": "string",
+          "description": "Returns role eligibility schedule of the specific status."
+        }
+      }
+    },
+    "RoleEligibilityScheduleInstance": {
+      "type": "object",
+      "description": "Information about current or upcoming role eligibility schedule instance",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleEligibilityScheduleInstanceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RoleEligibilityScheduleInstanceFilter": {
+      "type": "object",
+      "description": "Role eligibility schedule instance filter",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role eligibility schedule instances of the specific principal."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Returns role eligibility schedule instances of the specific role definition."
+        },
+        "status": {
+          "type": "string",
+          "description": "Returns role eligibility schedule instances of the specific status."
+        },
+        "roleEligibilityScheduleId": {
+          "type": "string",
+          "description": "Returns role eligibility schedule instances belonging to a specific role eligibility schedule."
+        }
+      }
+    },
+    "RoleEligibilityScheduleInstanceListResult": {
+      "type": "object",
+      "description": "The response of a RoleEligibilityScheduleInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoleEligibilityScheduleInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/RoleEligibilityScheduleInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoleEligibilityScheduleInstanceProperties": {
+      "type": "object",
+      "description": "Role eligibility schedule properties with scope.",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The role eligibility schedule scope."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "The principal type of the assigned principal ID."
+        },
+        "roleEligibilityScheduleId": {
+          "type": "string",
+          "description": "Id of the master role eligibility schedule"
+        },
+        "status": {
+          "$ref": "#/definitions/RoleManagementScheduleStatus",
+          "description": "The status of the role eligibility schedule instance"
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The startDateTime of the role eligibility schedule instance"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The endDateTime of the role eligibility schedule instance"
+        },
+        "memberType": {
+          "$ref": "#/definitions/RoleManagementScheduleMemberType",
+          "description": "Membership type of the role eligibility schedule"
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the role assignment. This limits the resources it can be assigned to. e.g.:"
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition. Currently accepted value is '2.0'"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime when role eligibility schedule was created"
+        },
+        "expandedProperties": {
+          "$ref": "#/definitions/ExpandedProperties",
+          "description": "Additional properties of principal, scope and role definition"
+        }
+      }
+    },
+    "RoleEligibilityScheduleListResult": {
+      "type": "object",
+      "description": "The response of a RoleEligibilitySchedule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoleEligibilitySchedule items on this page",
+          "items": {
+            "$ref": "#/definitions/RoleEligibilitySchedule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoleEligibilityScheduleProperties": {
+      "type": "object",
+      "description": "Role eligibility schedule properties with scope.",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The role eligibility schedule scope."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "The principal type of the assigned principal ID."
+        },
+        "roleEligibilityScheduleRequestId": {
+          "type": "string",
+          "description": "The id of roleEligibilityScheduleRequest used to create this roleAssignmentSchedule"
+        },
+        "memberType": {
+          "$ref": "#/definitions/RoleManagementScheduleMemberType",
+          "description": "Membership type of the role eligibility schedule"
+        },
+        "status": {
+          "$ref": "#/definitions/RoleManagementScheduleStatus",
+          "description": "The status of the role eligibility schedule."
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start DateTime when role eligibility schedule"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End DateTime when role eligibility schedule"
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the role assignment. This limits the resources it can be assigned to. e.g.:"
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition. Currently accepted value is '2.0'"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime when role eligibility schedule was created"
+        },
+        "updatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime when role eligibility schedule was modified"
+        },
+        "expandedProperties": {
+          "$ref": "#/definitions/ExpandedProperties",
+          "description": "Additional properties of principal, scope and role definition"
+        }
+      }
+    },
+    "RoleEligibilityScheduleRequest": {
+      "type": "object",
+      "description": "Role Eligibility schedule request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleEligibilityScheduleRequestProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RoleEligibilityScheduleRequestFilter": {
+      "type": "object",
+      "description": "Role eligibility schedule request filter",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role eligibility requests of the specific principal."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "Returns role eligibility requests of the specific role definition."
+        },
+        "requestorId": {
+          "type": "string",
+          "description": "Returns role eligibility requests created by specific principal."
+        },
+        "status": {
+          "type": "string",
+          "description": "Returns role eligibility requests of specific status."
+        }
+      }
+    },
+    "RoleEligibilityScheduleRequestListResult": {
+      "type": "object",
+      "description": "The response of a RoleEligibilityScheduleRequest list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoleEligibilityScheduleRequest items on this page",
+          "items": {
+            "$ref": "#/definitions/RoleEligibilityScheduleRequest"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoleEligibilityScheduleRequestProperties": {
+      "type": "object",
+      "description": "Role eligibility schedule request properties with scope.",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The role eligibility schedule request scope.",
+          "readOnly": true
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "The principal type of the assigned principal ID.",
+          "readOnly": true
+        },
+        "requestType": {
+          "$ref": "#/definitions/RoleManagementScheduleRequestType",
+          "description": "The type of the role assignment schedule request. Eg: SelfActivate, AdminAssign etc"
+        },
+        "status": {
+          "$ref": "#/definitions/RoleManagementScheduleStatus",
+          "description": "The status of the role eligibility schedule request.",
+          "readOnly": true
+        },
+        "approvalId": {
+          "type": "string",
+          "description": "The approvalId of the role eligibility schedule request.",
+          "readOnly": true
+        },
+        "scheduleInfo": {
+          "$ref": "#/definitions/RoleEligibilityScheduleRequestPropertiesScheduleInfo",
+          "description": "Schedule info of the role eligibility schedule"
+        },
+        "targetRoleEligibilityScheduleId": {
+          "type": "string",
+          "description": "The resultant role eligibility schedule id or the role eligibility schedule id being updated"
+        },
+        "targetRoleEligibilityScheduleInstanceId": {
+          "type": "string",
+          "description": "The role eligibility schedule instance id being updated"
+        },
+        "justification": {
+          "type": "string",
+          "description": "Justification for the role eligibility"
+        },
+        "ticketInfo": {
+          "$ref": "#/definitions/RoleEligibilityScheduleRequestPropertiesTicketInfo",
+          "description": "Ticket Info of the role eligibility"
+        },
+        "condition": {
+          "type": "string",
+          "description": "The conditions on the role assignment. This limits the resources it can be assigned to. e.g.:"
+        },
+        "conditionVersion": {
+          "type": "string",
+          "description": "Version of the condition. Currently accepted value is '2.0'"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime when role eligibility schedule request was created",
+          "readOnly": true
+        },
+        "requestorId": {
+          "type": "string",
+          "description": "Id of the user who created this request",
+          "readOnly": true
+        },
+        "expandedProperties": {
+          "$ref": "#/definitions/ExpandedProperties",
+          "description": "Additional properties of principal, scope and role definition",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "roleDefinitionId",
+        "principalId",
+        "requestType"
+      ]
+    },
+    "RoleEligibilityScheduleRequestPropertiesScheduleInfo": {
+      "type": "object",
+      "description": "Schedule info of the role eligibility schedule",
+      "properties": {
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start DateTime of the role eligibility schedule."
+        },
+        "expiration": {
+          "$ref": "#/definitions/RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration",
+          "description": "Expiration of the role eligibility schedule"
+        }
+      }
+    },
+    "RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration": {
+      "type": "object",
+      "description": "Expiration of the role eligibility schedule",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RoleManagementScheduleExpirationType",
+          "description": "Type of the role eligibility schedule expiration",
+          "x-ms-client-name": "expirationType"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End DateTime of the role eligibility schedule."
+        },
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Duration of the role eligibility schedule in TimeSpan."
+        }
+      }
+    },
+    "RoleEligibilityScheduleRequestPropertiesTicketInfo": {
+      "type": "object",
+      "description": "Ticket Info of the role eligibility",
+      "properties": {
+        "ticketNumber": {
+          "type": "string",
+          "description": "Ticket number for the role eligibility"
+        },
+        "ticketSystem": {
+          "type": "string",
+          "description": "Ticket system name for the role eligibility"
+        }
+      }
+    },
+    "RoleManagementAssignmentLevel": {
+      "type": "string",
+      "description": "The assignment level to which rule is applied.",
+      "enum": [
+        "Assignment",
+        "Eligibility"
+      ],
+      "x-ms-enum": {
+        "name": "RoleManagementAssignmentLevel",
+        "modelAsString": true
+      }
+    },
+    "RoleManagementPolicy": {
+      "type": "object",
+      "description": "Role management policy",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleManagementPolicyProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RoleManagementPolicyApprovalRule": {
+      "type": "object",
+      "description": "The role management policy approval rule.",
+      "properties": {
+        "setting": {
+          "$ref": "#/definitions/ApprovalSettings",
+          "description": "The approval setting"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "x-ms-discriminator-value": "RoleManagementPolicyApprovalRule"
+    },
+    "RoleManagementPolicyAssignment": {
+      "type": "object",
+      "description": "Role management policy",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleManagementPolicyAssignmentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RoleManagementPolicyAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a RoleManagementPolicyAssignment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoleManagementPolicyAssignment items on this page",
+          "items": {
+            "$ref": "#/definitions/RoleManagementPolicyAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoleManagementPolicyAssignmentProperties": {
+      "type": "object",
+      "description": "Role management policy assignment properties with scope.",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The role management policy scope."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition of management policy assignment."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "The policy id role management policy assignment."
+        },
+        "effectiveRules": {
+          "type": "array",
+          "description": "The readonly computed rule applied to the policy.",
+          "items": {
+            "$ref": "#/definitions/RoleManagementPolicyRule"
+          },
+          "readOnly": true
+        },
+        "policyAssignmentProperties": {
+          "$ref": "#/definitions/PolicyAssignmentProperties",
+          "description": "Additional properties of scope, role definition and policy",
+          "readOnly": true
+        }
+      }
+    },
+    "RoleManagementPolicyAuthenticationContextRule": {
+      "type": "object",
+      "description": "The role management policy authentication context rule.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "The value indicating if rule is enabled."
+        },
+        "claimValue": {
+          "type": "string",
+          "description": "The claim value."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "x-ms-discriminator-value": "RoleManagementPolicyAuthenticationContextRule"
+    },
+    "RoleManagementPolicyEnablementRule": {
+      "type": "object",
+      "description": "The role management policy enablement rule.",
+      "properties": {
+        "enabledRules": {
+          "type": "array",
+          "description": "The list of enabled rules.",
+          "items": {
+            "$ref": "#/definitions/EnablementRules"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "x-ms-discriminator-value": "RoleManagementPolicyEnablementRule"
+    },
+    "RoleManagementPolicyExpirationRule": {
+      "type": "object",
+      "description": "The role management policy expiration rule.",
+      "properties": {
+        "isExpirationRequired": {
+          "type": "boolean",
+          "description": "The value indicating whether expiration is required."
+        },
+        "maximumDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The maximum duration of expiration in timespan."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "x-ms-discriminator-value": "RoleManagementPolicyExpirationRule"
+    },
+    "RoleManagementPolicyListResult": {
+      "type": "object",
+      "description": "The response of a RoleManagementPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoleManagementPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/RoleManagementPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoleManagementPolicyNotificationRule": {
+      "type": "object",
+      "description": "The role management policy notification rule.",
+      "properties": {
+        "notificationType": {
+          "$ref": "#/definitions/NotificationDeliveryMechanism",
+          "description": "The type of notification."
+        },
+        "notificationLevel": {
+          "$ref": "#/definitions/NotificationLevel",
+          "description": "The notification level."
+        },
+        "recipientType": {
+          "$ref": "#/definitions/RecipientType",
+          "description": "The recipient type."
+        },
+        "notificationRecipients": {
+          "type": "array",
+          "description": "The list of notification recipients.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isDefaultRecipientsEnabled": {
+          "type": "boolean",
+          "description": "Determines if the notification will be sent to the recipient type specified in the policy rule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "x-ms-discriminator-value": "RoleManagementPolicyNotificationRule"
+    },
+    "RoleManagementPolicyProperties": {
+      "type": "object",
+      "description": "Role management policy properties with scope.",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The role management policy scope."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The role management policy display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The role management policy description."
+        },
+        "isOrganizationDefault": {
+          "type": "boolean",
+          "description": "The role management policy is default policy."
+        },
+        "lastModifiedBy": {
+          "$ref": "#/definitions/Principal",
+          "description": "The name of the entity last modified it",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modified date time.",
+          "readOnly": true
+        },
+        "rules": {
+          "type": "array",
+          "description": "The rule applied to the policy.",
+          "items": {
+            "$ref": "#/definitions/RoleManagementPolicyRule"
+          }
+        },
+        "effectiveRules": {
+          "type": "array",
+          "description": "The readonly computed rule applied to the policy.",
+          "items": {
+            "$ref": "#/definitions/RoleManagementPolicyRule"
+          },
+          "readOnly": true
+        },
+        "policyProperties": {
+          "$ref": "#/definitions/PolicyProperties",
+          "description": "Additional properties of scope",
+          "readOnly": true
+        }
+      }
+    },
+    "RoleManagementPolicyRule": {
+      "type": "object",
+      "description": "The role management policy rule.",
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "description": "Discriminator property for RoleManagementPolicyRule."
+        },
+        "id": {
+          "type": "string",
+          "description": "The id of the rule."
+        },
+        "target": {
+          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
+          "description": "The target of the current rule."
+        }
+      },
+      "discriminator": "ruleType",
+      "required": [
+        "ruleType"
+      ]
+    },
+    "RoleManagementPolicyRuleTarget": {
+      "type": "object",
+      "description": "The role management policy rule target.",
+      "properties": {
+        "caller": {
+          "type": "string",
+          "description": "The caller of the setting."
+        },
+        "operations": {
+          "type": "array",
+          "description": "The type of operation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "level": {
+          "$ref": "#/definitions/RoleManagementAssignmentLevel",
+          "description": "The assignment level to which rule is applied."
+        },
+        "targetObjects": {
+          "type": "array",
+          "description": "The list of target objects.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inheritableSettings": {
+          "type": "array",
+          "description": "The list of inheritable settings.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enforcedSettings": {
+          "type": "array",
+          "description": "The list of enforced settings.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RoleManagementPolicyRuleType": {
+      "type": "string",
+      "description": "The type of rule",
+      "enum": [
+        "RoleManagementPolicyApprovalRule",
+        "RoleManagementPolicyAuthenticationContextRule",
+        "RoleManagementPolicyEnablementRule",
+        "RoleManagementPolicyExpirationRule",
+        "RoleManagementPolicyNotificationRule"
+      ],
+      "x-ms-enum": {
+        "name": "RoleManagementPolicyRuleType",
+        "modelAsString": true
+      }
+    },
+    "RoleManagementScheduleExpirationType": {
+      "type": "string",
+      "description": "Type of the role assignment schedule expiration",
+      "enum": [
+        "AfterDuration",
+        "AfterDateTime",
+        "NoExpiration"
+      ],
+      "x-ms-enum": {
+        "name": "RoleManagementScheduleExpirationType",
+        "modelAsString": true
+      }
+    },
+    "RoleManagementScheduleMemberType": {
+      "type": "string",
+      "description": "Membership type of the role assignment schedule",
+      "enum": [
+        "Inherited",
+        "Direct",
+        "Group"
+      ],
+      "x-ms-enum": {
+        "name": "RoleManagementScheduleMemberType",
+        "modelAsString": true
+      }
+    },
+    "RoleManagementScheduleRequestType": {
+      "type": "string",
+      "description": "The type of the role assignment schedule request. Eg: SelfActivate, AdminAssign etc",
+      "enum": [
+        "AdminAssign",
+        "AdminRemove",
+        "AdminUpdate",
+        "AdminExtend",
+        "AdminRenew",
+        "SelfActivate",
+        "SelfDeactivate",
+        "SelfExtend",
+        "SelfRenew"
+      ],
+      "x-ms-enum": {
+        "name": "RoleManagementScheduleRequestType",
+        "modelAsString": true
+      }
+    },
+    "RoleManagementScheduleStatus": {
+      "type": "string",
+      "description": "The status of the role assignment schedule.",
+      "enum": [
+        "Accepted",
+        "PendingEvaluation",
+        "Granted",
+        "Denied",
+        "PendingProvisioning",
+        "Provisioned",
+        "PendingRevocation",
+        "Revoked",
+        "Canceled",
+        "Failed",
+        "PendingApprovalProvisioning",
+        "PendingApproval",
+        "FailedAsResourceIsLocked",
+        "PendingAdminDecision",
+        "AdminApproved",
+        "AdminDenied",
+        "TimedOut",
+        "ProvisioningStarted",
+        "Invalid",
+        "PendingScheduleCreation",
+        "ScheduleCreated",
+        "PendingExternalProvisioning"
+      ],
+      "x-ms-enum": {
+        "name": "RoleManagementScheduleStatus",
+        "modelAsString": true
+      }
+    },
+    "RoleType": {
+      "type": "string",
+      "description": "The role type.",
+      "enum": [
+        "BuiltInRole",
+        "CustomRole"
+      ],
+      "x-ms-enum": {
+        "name": "RoleType",
+        "modelAsString": true
+      }
+    },
+    "ScopeType": {
+      "type": "string",
+      "description": "Type of the scope.",
+      "enum": [
+        "subscription",
+        "managementgroup",
+        "resourcegroup"
+      ],
+      "x-ms-enum": {
+        "name": "ScopeType",
+        "modelAsString": true
+      }
+    },
+    "UserSet": {
+      "type": "object",
+      "description": "The detail of a user.",
+      "properties": {
+        "userType": {
+          "$ref": "#/definitions/UserType",
+          "description": "The type of user."
+        },
+        "isBackup": {
+          "type": "boolean",
+          "description": "The value indicating whether the user is a backup fallback approver"
+        },
+        "id": {
+          "type": "string",
+          "description": "The object id of the user."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the user."
+        }
+      }
+    },
+    "UserType": {
+      "type": "string",
+      "description": "The type of user.",
+      "enum": [
+        "User",
+        "Group"
+      ],
+      "x-ms-enum": {
+        "name": "UserType",
+        "modelAsString": true
+      }
+    },
+    "ValidationResponse": {
+      "type": "object",
+      "description": "Validation response",
+      "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "Whether or not validation succeeded",
+          "readOnly": true
+        },
+        "errorInfo": {
+          "$ref": "#/definitions/ValidationResponseErrorInfo",
+          "description": "Failed validation result details"
+        }
+      }
+    },
+    "ValidationResponseErrorInfo": {
+      "type": "object",
+      "description": "Failed validation result details",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code indicating why validation failed",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Message indicating why validation failed",
+          "readOnly": true
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2015-07-01",
+        "2022-04-01",
+        "2020-10-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2015_07_01",
+            "value": "2015-07-01",
+            "description": "The 2015-07-01 API version."
+          },
+          {
+            "name": "v2022_04_01",
+            "value": "2022-04-01",
+            "description": "The 2022-04-01 API version."
+          },
+          {
+            "name": "v2020_10_01",
+            "value": "2020-10-01",
+            "description": "The 2020-10-01 API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}
