@@ -11334,7 +11334,7 @@
       "description": "Base data model of Assessment Settings.",
       "properties": {
         "azureLocation": {
-          "$ref": "#/definitions/POSAzureLocation",
+          "type": "string",
           "description": "Gets or sets azure location."
         },
         "environmentType": {
@@ -13512,9 +13512,8 @@
       "description": "Azure settings for a business case.",
       "properties": {
         "targetLocation": {
-          "$ref": "#/definitions/Location",
-          "description": "Gets or sets azure location.",
-          "default": "WestUs2"
+          "type": "string",
+          "description": "Gets or sets azure location."
         },
         "discountPercentage": {
           "type": "number",
@@ -17182,7 +17181,7 @@
           "readOnly": true
         },
         "region": {
-          "$ref": "#/definitions/POSAzureLocation",
+          "type": "string",
           "description": "Gets region.",
           "readOnly": true
         },
@@ -18932,276 +18931,6 @@
         ]
       }
     },
-    "Location": {
-      "type": "string",
-      "description": "Location for Azure.",
-      "enum": [
-        "Unknown",
-        "EastAsia",
-        "SoutheastAsia",
-        "AustraliaEast",
-        "AustraliaSoutheast",
-        "BrazilSouth",
-        "CanadaCentral",
-        "CanadaEast",
-        "WestEurope",
-        "NorthEurope",
-        "CentralIndia",
-        "SouthIndia",
-        "JapanEast",
-        "JapanWest",
-        "KoreaCentral",
-        "KoreaSouth",
-        "UkWest",
-        "UkSouth",
-        "NorthCentralUs",
-        "EastUs",
-        "WestUs2",
-        "SouthCentralUs",
-        "CentralUs",
-        "EastUs2",
-        "WestUs",
-        "WestCentralUs",
-        "GermanyCentral",
-        "FranceCentral",
-        "AustraliaCentral",
-        "SouthAfricaNorth",
-        "FranceSouth",
-        "AustraliaCentral2",
-        "SouthAfricaWest",
-        "GermanyNorth",
-        "GermanyWestCentral",
-        "NorwayEast",
-        "NorwayWest",
-        "SwitzerlandNorth",
-        "SwitzerlandWest",
-        "UAENorth",
-        "UAECentral",
-        "SwedenCentral",
-        "QatarCentral"
-      ],
-      "x-ms-enum": {
-        "name": "Location",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Location Unknown."
-          },
-          {
-            "name": "EastAsia",
-            "value": "EastAsia",
-            "description": "Location EastAsia."
-          },
-          {
-            "name": "SoutheastAsia",
-            "value": "SoutheastAsia",
-            "description": "Location SoutheastAsia."
-          },
-          {
-            "name": "AustraliaEast",
-            "value": "AustraliaEast",
-            "description": "Location AustraliaEast."
-          },
-          {
-            "name": "AustraliaSoutheast",
-            "value": "AustraliaSoutheast",
-            "description": "Location AustraliaSoutheast."
-          },
-          {
-            "name": "BrazilSouth",
-            "value": "BrazilSouth",
-            "description": "Location BrazilSouth."
-          },
-          {
-            "name": "CanadaCentral",
-            "value": "CanadaCentral",
-            "description": "Location CanadaCentral."
-          },
-          {
-            "name": "CanadaEast",
-            "value": "CanadaEast",
-            "description": "Location CanadaEast."
-          },
-          {
-            "name": "WestEurope",
-            "value": "WestEurope",
-            "description": "Location WestEurope."
-          },
-          {
-            "name": "NorthEurope",
-            "value": "NorthEurope",
-            "description": "Location NorthEurope."
-          },
-          {
-            "name": "CentralIndia",
-            "value": "CentralIndia",
-            "description": "Location CentralIndia."
-          },
-          {
-            "name": "SouthIndia",
-            "value": "SouthIndia",
-            "description": "Location SouthIndia."
-          },
-          {
-            "name": "JapanEast",
-            "value": "JapanEast",
-            "description": "Location JapanEast."
-          },
-          {
-            "name": "JapanWest",
-            "value": "JapanWest",
-            "description": "Location JapanWest."
-          },
-          {
-            "name": "KoreaCentral",
-            "value": "KoreaCentral",
-            "description": "Location KoreaCentral."
-          },
-          {
-            "name": "KoreaSouth",
-            "value": "KoreaSouth",
-            "description": "Location KoreaSouth."
-          },
-          {
-            "name": "UkWest",
-            "value": "UkWest",
-            "description": "Location UkWest."
-          },
-          {
-            "name": "UkSouth",
-            "value": "UkSouth",
-            "description": "Location UkSouth."
-          },
-          {
-            "name": "NorthCentralUs",
-            "value": "NorthCentralUs",
-            "description": "Location NorthCentralUs."
-          },
-          {
-            "name": "EastUs",
-            "value": "EastUs",
-            "description": "Location EastUs."
-          },
-          {
-            "name": "WestUs2",
-            "value": "WestUs2",
-            "description": "Location WestUs2."
-          },
-          {
-            "name": "SouthCentralUs",
-            "value": "SouthCentralUs",
-            "description": "Location SouthCentralUs."
-          },
-          {
-            "name": "CentralUs",
-            "value": "CentralUs",
-            "description": "Location CentralUs."
-          },
-          {
-            "name": "EastUs2",
-            "value": "EastUs2",
-            "description": "Location EastUs2."
-          },
-          {
-            "name": "WestUs",
-            "value": "WestUs",
-            "description": "Location WestUs."
-          },
-          {
-            "name": "WestCentralUs",
-            "value": "WestCentralUs",
-            "description": "Location WestCentralUs."
-          },
-          {
-            "name": "GermanyCentral",
-            "value": "GermanyCentral",
-            "description": "Location GermanyCentral."
-          },
-          {
-            "name": "FranceCentral",
-            "value": "FranceCentral",
-            "description": "Location FranceCentral."
-          },
-          {
-            "name": "AustraliaCentral",
-            "value": "AustraliaCentral",
-            "description": "Location AustraliaCentral."
-          },
-          {
-            "name": "SouthAfricaNorth",
-            "value": "SouthAfricaNorth",
-            "description": "Location SouthAfricaNorth."
-          },
-          {
-            "name": "FranceSouth",
-            "value": "FranceSouth",
-            "description": "Location FranceSouth."
-          },
-          {
-            "name": "AustraliaCentral2",
-            "value": "AustraliaCentral2",
-            "description": "Location AustraliaCentral2."
-          },
-          {
-            "name": "SouthAfricaWest",
-            "value": "SouthAfricaWest",
-            "description": "Location SouthAfricaWest."
-          },
-          {
-            "name": "GermanyNorth",
-            "value": "GermanyNorth",
-            "description": "Location GermanyNorth."
-          },
-          {
-            "name": "GermanyWestCentral",
-            "value": "GermanyWestCentral",
-            "description": "Location GermanyWestCentral."
-          },
-          {
-            "name": "NorwayEast",
-            "value": "NorwayEast",
-            "description": "Location NorwayEast."
-          },
-          {
-            "name": "NorwayWest",
-            "value": "NorwayWest",
-            "description": "Location NorwayWest."
-          },
-          {
-            "name": "SwitzerlandNorth",
-            "value": "SwitzerlandNorth",
-            "description": "Location SwitzerlandNorth."
-          },
-          {
-            "name": "SwitzerlandWest",
-            "value": "SwitzerlandWest",
-            "description": "Location SwitzerlandWest."
-          },
-          {
-            "name": "UAENorth",
-            "value": "UAENorth",
-            "description": "Location UAENorth."
-          },
-          {
-            "name": "UAECentral",
-            "value": "UAECentral",
-            "description": "Location UAECentral."
-          },
-          {
-            "name": "SwedenCentral",
-            "value": "SwedenCentral",
-            "description": "Location SwedenCentral."
-          },
-          {
-            "name": "QatarCentral",
-            "value": "QatarCentral",
-            "description": "Location QatarCentral."
-          }
-        ]
-      }
-    },
     "Machine": {
       "type": "object",
       "description": "Machine resource.",
@@ -20602,78 +20331,6 @@
           "description": "Shows the distribution of platforms.",
           "readOnly": true
         }
-      }
-    },
-    "POSAzureLocation": {
-      "type": "string",
-      "description": "Location for Azure in Partner Operator Service.",
-      "enum": [
-        "Unknown",
-        "EastAsia",
-        "SoutheastAsia",
-        "AustraliaEast",
-        "AustraliaSoutheast",
-        "BrazilSouth",
-        "CanadaCentral",
-        "CanadaEast",
-        "WestEurope",
-        "NorthEurope",
-        "CentralIndia",
-        "SouthIndia",
-        "WestIndia",
-        "JapanEast",
-        "JapanWest",
-        "KoreaCentral",
-        "KoreaSouth",
-        "UkWest",
-        "UkSouth",
-        "NorthCentralUs",
-        "EastUs",
-        "WestUs2",
-        "SouthCentralUs",
-        "CentralUs",
-        "EastUs2",
-        "WestUs",
-        "WestCentralUs",
-        "GermanyCentral",
-        "GermanyNortheast",
-        "ChinaNorth",
-        "ChinaEast",
-        "USGovArizona",
-        "USGovTexas",
-        "USGovIowa",
-        "USGovVirginia",
-        "USDoDCentral",
-        "USDoDEast",
-        "FranceCentral",
-        "AustraliaCentral",
-        "SouthAfricaNorth",
-        "FranceSouth",
-        "AustraliaCentral2",
-        "SouthAfricaWest",
-        "GermanyNorth",
-        "GermanyWestCentral",
-        "NorwayEast",
-        "NorwayWest",
-        "ChinaEast2",
-        "ChinaNorth2",
-        "SwitzerlandNorth",
-        "SwitzerlandWest",
-        "UAENorth",
-        "UAECentral",
-        "UsNatEast",
-        "UsNatWest",
-        "UsSecEast",
-        "UsSecCentral",
-        "UsSecWest",
-        "SwedenCentral",
-        "QatarCentral",
-        "EastUS2EUAP",
-        "CentralUSEUAP"
-      ],
-      "x-ms-enum": {
-        "name": "POSAzureLocation",
-        "modelAsString": true
       }
     },
     "POSAzurePricingTier": {
