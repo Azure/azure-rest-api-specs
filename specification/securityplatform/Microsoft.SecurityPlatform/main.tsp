@@ -59,8 +59,20 @@ enum IsAllowed {
 enum ProvisioningState {
   ...ResourceProvisioningState,
 
-  @doc("The resource is being provisioned")
-  Provisioning,
+  @doc("The resource is in an unknown state")
+  Unknown,
+
+  @doc("The resource is creating")
+  Creating,
+
+  @doc("The resource is moving")
+  Moving,
+
+  @doc("The resource is soft deleting")
+  SoftDeleting,
+
+  @doc("The resource is soft deleted")
+  SoftDeleted,
 
   @doc("The resource is updating")
   Updating,
