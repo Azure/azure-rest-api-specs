@@ -2645,7 +2645,7 @@
         "headerValueMatcher": {
           "type": "object",
           "$ref": "#/definitions/HeaderValueMatcher",
-          "description": "An optional field under \"Rewrite action\". It lets you capture the value of a specific header when multiple headers with the same name exist. Currently supported for Set-Cookie header only. For more details, visit https://aka.ms/appgwheadercrud"
+          "description": "An optional field under \"ApplicationGatewayHeaderConfiguration\". It lets you capture and modify the value(s) of a specific header when multiple headers with the same name exist. Currently supported for Set-Cookie Response header only. For more details, visit https://aka.ms/appgwheadercrud"
         },
         "headerValue": {
           "type": "string",
@@ -2656,13 +2656,9 @@
     },
     "HeaderValueMatcher": {
       "properties": {
-        "variable": {
-          "type": "string",
-          "description": "The headerValueMatcher parameter of the ApplicationGatewayHeaderConfiguration."
-        },
         "pattern": {
           "type": "string",
-          "description": "The pattern, either fixed string or regular expression, that evaluates the truthfulness of the condition."
+          "description": "The pattern, either fixed string or regular expression, that evaluates if a header value should be selected for rewrite."
         },
         "ignoreCase": {
           "type": "boolean",
@@ -2670,10 +2666,10 @@
         },
         "negate": {
           "type": "boolean",
-          "description": "Setting this value as truth will force to check the negation of the condition given by the user."
+          "description": "Setting this value as truth will force to check the negation of the condition given by the user in the pattern field."
         }
       },
-      "description": "An optional field under \"Rewrite action\". It lets you capture the value of a specific header when multiple headers with the same name exist. Currently supported for Set-Cookie header only. For more details, visit https://aka.ms/appgwheadercrud"
+      "description": "An optional field under \"ApplicationGatewayHeaderConfiguration\". It lets you capture and modify the value(s) of a specific header when multiple headers with the same name exist. Currently supported for Set-Cookie Response header only. For more details, visit https://aka.ms/appgwheadercrud"
     },
     "ApplicationGatewayUrlConfiguration": {
       "properties": {
