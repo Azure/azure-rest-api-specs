@@ -1703,7 +1703,7 @@
       }
     },
     "/icon": {
-      "post": {
+      "put": {
         "tags": [
           "icon"
         ],
@@ -1714,12 +1714,24 @@
             "$ref": "./examples/Icon_Upload.json"
           }
         },
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "iconInputStream",
-            "in": "formData",
-            "type": "file",
-            "description": "InputStream of icon"
+            "name": "icon",
+            "in": "body",
+            "description": "Icon file to upload",
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          },
+          {
+            "$ref": "#/parameters/iconName"
           },
           {
             "$ref": "#/parameters/atlasAPIVersion"
@@ -1751,6 +1763,9 @@
             "$ref": "./examples/Icon_Download.json"
           }
         },
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/iconUrl"
@@ -7973,9 +7988,17 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "iconName": {
+      "name": "name",
+      "description": "User specified icon name. Can only contain letters, numbers and underscores.",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "iconUrl": {
       "name": "iconUrl",
-      "description": "A user friendly identifier to access icon.",
+      "description": "An unique identifier to access icon.",
       "in": "query",
       "required": true,
       "type": "string",
