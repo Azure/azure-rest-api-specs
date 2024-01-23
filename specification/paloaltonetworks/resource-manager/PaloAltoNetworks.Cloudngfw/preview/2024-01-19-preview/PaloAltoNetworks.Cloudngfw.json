@@ -2072,93 +2072,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/listCloudManagerTenants": {
-      "post": {
-        "operationId": "PaloAltoNetworksCloudngfw_listCloudManagerTenants",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CloudManagerTenantsList"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "operationName": "PaloAltoNetworksCloudngfw_listCloudManagerTenants"
-        },
-        "x-ms-examples": {
-          "PaloAltoNetworksCloudngfw_listCloudManagerTenants_MaximumSet_Gen": {
-            "$ref": "./examples/PaloAltoNetworksCloudngfw_listCloudManagerTenants_MaximumSet_Gen.json"
-          },
-          "PaloAltoNetworksCloudngfw_listCloudManagerTenants_MinimumSet_Gen": {
-            "$ref": "./examples/PaloAltoNetworksCloudngfw_listCloudManagerTenants_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/listSupportAccountStatus": {
-      "post": {
-        "operationId": "PaloAltoNetworksCloudngfw_listSupportAccountStatus",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ProductSerialNumberStatus"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PaloAltoNetworksCloudngfw_listSupportAccountStatus_MaximumSet_Gen": {
-            "$ref": "./examples/PaloAltoNetworksCloudngfw_listSupportAccountStatus_MaximumSet_Gen.json"
-          },
-          "PaloAltoNetworksCloudngfw_listSupportAccountStatus_MinimumSet_Gen": {
-            "$ref": "./examples/PaloAltoNetworksCloudngfw_listSupportAccountStatus_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/listSupportInfo": {
       "post": {
         "operationId": "PaloAltoNetworksCloudngfw_listSupportInfo",
@@ -5012,45 +4925,6 @@
         "changes"
       ]
     },
-    "CloudManagerTenant": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of Cloud Manager Tenant"
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Cloud Manager Tenant ID"
-        }
-      },
-      "description": "Cloud Manager Tenant",
-      "required": [
-        "name"
-      ]
-    },
-    "CloudManagerTenantsList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudManagerTenant"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "CloudManagerTenant[]",
-          "description": "List of Cloud Manager Tenants"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "next link"
-        }
-      },
-      "description": "List of Cloud Manager Tenants",
-      "required": [
-        "value"
-      ]
-    },
     "CountriesResponse": {
       "type": "object",
       "properties": {
@@ -6696,23 +6570,6 @@
         "prefixList"
       ]
     },
-    "ProductSerialNumberStatus": {
-      "type": "object",
-      "properties": {
-        "serialNumber": {
-          "type": "string",
-          "description": "product Serial associated with given resource"
-        },
-        "status": {
-          "$ref": "#/definitions/productSerialStatusValues",
-          "description": "allocation status of the product serial number"
-        }
-      },
-      "description": "Product serial and status for the service",
-      "required": [
-        "status"
-      ]
-    },
     "ProtocolType": {
       "type": "string",
       "description": "Protocol Enum",
@@ -7229,14 +7086,6 @@
           "type": "string",
           "description": "Support account associated with given resource"
         },
-        "userDomainSupport": {
-          "$ref": "#/definitions/SupportStatus",
-          "description": "user domain is supported in Customer Support Portal"
-        },
-        "userRegistrationStatus": {
-          "$ref": "#/definitions/RegistrationStatus",
-          "description": "user registered in Customer Support Portal"
-        },
         "freeTrial": {
           "$ref": "#/definitions/EnableStatus",
           "description": "Product usage is in free trial period"
@@ -7287,18 +7136,6 @@
         }
       },
       "description": "Support information for the service"
-    },
-    "SupportStatus": {
-      "type": "string",
-      "description": "Support status",
-      "enum": [
-        "Supported",
-        "Not Supported"
-      ],
-      "x-ms-enum": {
-        "name": "SupportStatus",
-        "modelAsString": true
-      }
     },
     "TagInfo": {
       "type": "object",
@@ -7424,18 +7261,6 @@
       "required": [
         "entry"
       ]
-    },
-    "productSerialStatusValues": {
-      "type": "string",
-      "description": "allocation status of the product serial number",
-      "enum": [
-        "Allocated",
-        "InProgress"
-      ],
-      "x-ms-enum": {
-        "name": "productSerialStatusValues",
-        "modelAsString": false
-      }
     },
     "securityServices": {
       "type": "object",
