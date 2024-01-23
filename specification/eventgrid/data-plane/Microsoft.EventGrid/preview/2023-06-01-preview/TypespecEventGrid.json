@@ -805,7 +805,9 @@
         "properties": {
           "type": "object",
           "description": "The thread properties",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "participants": {
           "type": "array",
@@ -833,7 +835,9 @@
         "properties": {
           "type": "object",
           "description": "The thread properties",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "participants": {
           "type": "array",
@@ -3704,7 +3708,7 @@
         },
         "sequenceNumber": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "A number that helps indicate order of MQTT client session connected or\ndisconnected events. Latest event will have a sequence number that is higher\nthan the previous event."
         }
       }
@@ -3731,7 +3735,7 @@
         },
         "sequenceNumber": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "A number that helps indicate order of MQTT client session connected or\ndisconnected events. Latest event will have a sequence number that is higher\nthan the previous event."
         },
         "disconnectionReason": {
