@@ -2300,7 +2300,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/ManagedClusterUpgradeType",
-          "description": "The upgrade type.\nFull requires the KubernetesVersion property to be set.\nNodeImageOnly requires the KubernetesVersion property not to be set.\nControlPlaneOnly requires the AgentPool KubernetesVersion property not to be set."
+          "description": "The upgrade type.\nFull requires the KubernetesVersion property to be set.\nNodeImageOnly requires the KubernetesVersion property not to be set.\nControlPlaneOnly will set the KubernetesVersion on only the ControlPlane and not the AgentPool."
         },
         "kubernetesVersion": {
           "$ref": "#/definitions/KubernetesVersion",
@@ -2336,7 +2336,7 @@
           {
             "name": "ControlPlaneOnly",
             "value": "ControlPlaneOnly",
-            "description": "ControlPlaneOnly upgrades only the control plane of the target ManagedClusters."
+            "description": "ControlPlaneOnly upgrades only targets the KubernetesVersion of the ManagedClusters."
           }
         ]
       }
