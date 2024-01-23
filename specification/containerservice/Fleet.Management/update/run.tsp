@@ -138,6 +138,7 @@ enum ManagedClusterUpgradeType {
   NodeImageOnly,
 
   @doc("ControlPlaneOnly upgrades only the control plane of the target ManagedClusters.")
+  @added(Versions.v2024_02_02_preview)
   ControlPlaneOnly,
 }
 
