@@ -21,7 +21,8 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 interface TemplateOperations {
   @tag("Template")
   @doc("List all templates for given ACS channel")
-  getTemplates is Operations.ResourceList<MessageTemplateItem>;
+  @projectedName("csharp", "getTemplates")
+  listTemplates is Operations.ResourceList<MessageTemplateItem>;
 }
 
 interface NotificationMessagesOperations {
