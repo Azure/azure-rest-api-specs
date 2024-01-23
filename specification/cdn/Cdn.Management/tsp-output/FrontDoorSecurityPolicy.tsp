@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("SecurityPolicy association for AzureFrontDoor profile")
+/**
+ * SecurityPolicy association for AzureFrontDoor profile
+ */
 @parentResource(Profile)
 model FrontDoorSecurityPolicy is ProxyResource<SecurityPolicyDetails> {
-  @doc("Name of the security policy under the profile.")
+  /**
+   * Name of the security policy under the profile.
+   */
   @path
   @key("securityPolicyName")
   @segment("securityPolicies")
@@ -24,17 +28,24 @@ model FrontDoorSecurityPolicy is ProxyResource<SecurityPolicyDetails> {
 
 @armResourceOperations
 interface FrontDoorSecurityPolicies {
-  @doc("Gets an existing security policy within a profile.")
+  /**
+   * Gets an existing security policy within a profile.
+   */
   get is ArmResourceRead<FrontDoorSecurityPolicy>;
 
-  @doc("Creates a new security policy within the specified profile.")
-  create is ArmResourceCreateOrUpdateAsync<
+  /**
+   * Creates a new security policy within the specified profile.
+   */
+  create is ArmResourceCreateOrReplaceAsync<
     FrontDoorSecurityPolicy,
     BaseParameters<FrontDoorSecurityPolicy>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Updates an existing security policy within a profile.")
+  /**
+   * Updates an existing security policy within a profile.
+   */
+  @parameterVisibility("read")
   patch is ArmCustomPatchAsync<
     FrontDoorSecurityPolicy,
     SecurityPolicyUpdateParameters,
@@ -42,14 +53,20 @@ interface FrontDoorSecurityPolicies {
     ArmAsyncOperationHeader
   >;
 
-  @doc("Deletes an existing security policy within profile.")
+  /**
+   * Deletes an existing security policy within profile.
+   */
   delete is ArmResourceDeleteAsync<
     FrontDoorSecurityPolicy,
     BaseParameters<FrontDoorSecurityPolicy>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Lists security policies associated with the profile")
+  /**
+   * Lists security policies associated with the profile
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("FrontDoorSecurityPolicies_ListByProfile")
   listByProfile is ArmResourceListByParent<FrontDoorSecurityPolicy>;
 }
 

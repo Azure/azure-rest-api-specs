@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.EventHub;
-@doc("Single item in List or Get Schema Group operation")
+/**
+ * Single item in List or Get Schema Group operation
+ */
 @parentResource(EventHubsNamespace)
 model EventHubsSchemaGroup is ProxyResource<SchemaGroupProperties> {
-  @doc("The Schema Group name ")
+  /**
+   * The Schema Group name
+   */
   @maxLength(256)
   @minLength(1)
   @path
@@ -38,20 +42,26 @@ interface EventHubsSchemaGroups {
   @operationId("SchemaRegistry_Delete")
   delete is ArmResourceDeleteSync<EventHubsSchemaGroup>;
 
+  /**
+   * Gets all the Schema Groups in a Namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets all the Schema Groups in a Namespace.")
   @operationId("SchemaRegistry_ListByNamespace")
   listByNamespace is ArmResourceListByParent<
     EventHubsSchemaGroup,
     {
       ...BaseParameters<EventHubsSchemaGroup>;
 
-      @doc("Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.")
+      /**
+       * Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.
+       */
       @maxValue(1000)
       @query("$skip")
       $skip?: int32;
 
-      @doc("May be used to limit the number of results to the most recent N usageDetails.")
+      /**
+       * May be used to limit the number of results to the most recent N usageDetails.
+       */
       @maxValue(1000)
       @minValue(1)
       @query("$top")

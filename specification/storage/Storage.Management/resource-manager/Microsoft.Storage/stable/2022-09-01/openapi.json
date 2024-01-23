@@ -194,7 +194,7 @@
             "description": "The CheckAvailability request",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "#/definitions/StorageAccountCheckNameAvailabilityParameters"
             }
           }
         ],
@@ -202,7 +202,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
           },
           "default": {
@@ -482,16 +482,16 @@
         },
         "x-ms-examples": {
           "StorageAccountGetAsyncSkuConversionStatus": {
-            "$ref": "./examples/StorageAccounts_GetProperties_StorageAccountGetAsyncSkuConversionStatus.json"
+            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Async_Sku_Conversion_Status.json"
           },
           "StorageAccountGetProperties": {
-            "$ref": "./examples/StorageAccounts_GetProperties_StorageAccountGetProperties.json"
+            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Properties.json"
           },
           "StorageAccountGetPropertiesCMKEnabled": {
-            "$ref": "./examples/StorageAccounts_GetProperties_StorageAccountGetPropertiesCmkEnabled.json"
+            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Properties_Cmk_Enabled.json"
           },
           "StorageAccountGetPropertiesCMKVersionExpirationTime": {
-            "$ref": "./examples/StorageAccounts_GetProperties_StorageAccountGetPropertiesCmkVersionExpirationTime.json"
+            "$ref": "./examples/StorageAccounts_GetProperties_Storage_Account_Get_Properties_Cmk_Version_Expiration_Time.json"
           }
         }
       },
@@ -521,13 +521,14 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The parameters to provide for the created account.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageAccount"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -559,40 +560,40 @@
         },
         "x-ms-examples": {
           "NfsV3AccountCreate": {
-            "$ref": "./examples/StorageAccounts_Create_NfsV3AccountCreate.json"
+            "$ref": "./examples/StorageAccounts_Create_Nfs_V3_Account_Create.json"
           },
           "StorageAccountCreate": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreate.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create.json"
           },
           "StorageAccountCreateAllowedCopyScopeToAAD": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreateAllowedCopyScopeToAad.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Allowed_Copy_Scope_To_Aad.json"
           },
           "StorageAccountCreateAllowedCopyScopeToPrivateLink": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreateAllowedCopyScopeToPrivateLink.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Allowed_Copy_Scope_To_Private_Link.json"
           },
           "StorageAccountCreateDisallowPublicNetworkAccess": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreateDisallowPublicNetworkAccess.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Disallow_Public_Network_Access.json"
           },
           "StorageAccountCreateDnsEndpointTypeToAzureDnsZone": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreateDnsEndpointTypeToAzureDnsZone.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Dns_Endpoint_Type_To_Azure_Dns_Zone.json"
           },
           "StorageAccountCreateDnsEndpointTypeToStandard": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreateDnsEndpointTypeToStandard.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Dns_Endpoint_Type_To_Standard.json"
           },
           "StorageAccountCreateEnablePublicNetworkAccess": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreateEnablePublicNetworkAccess.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Enable_Public_Network_Access.json"
           },
           "StorageAccountCreatePremiumBlockBlobStorage": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreatePremiumBlockBlobStorage.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_Premium_Block_Blob_Storage.json"
           },
           "StorageAccountCreateUserAssignedEncryptionIdentityWithCMK": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreateUserAssignedEncryptionIdentityWithCmk.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_User_Assigned_Encryption_Identity_With_Cmk.json"
           },
           "StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId.": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreateUserAssignedIdentityWithFederatedIdentityClientId.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_User_Assigned_Identity_With_Federated_Identity_Client_Id.json"
           },
           "StorageAccountCreateWithImmutabilityPolicy": {
-            "$ref": "./examples/StorageAccounts_Create_StorageAccountCreateWithImmutabilityPolicy.json"
+            "$ref": "./examples/StorageAccounts_Create_Storage_Account_Create_With_Immutability_Policy.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -626,13 +627,14 @@
             "maxLength": 24
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "The parameters to provide for the updated account.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageAccountUpdateParameters"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -651,28 +653,28 @@
         },
         "x-ms-examples": {
           "StorageAccountEnableAD": {
-            "$ref": "./examples/StorageAccounts_Update_StorageAccountEnableAd.json"
+            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Enable_Ad.json"
           },
           "StorageAccountEnableCMK": {
-            "$ref": "./examples/StorageAccounts_Update_StorageAccountEnableCmk.json"
+            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Enable_Cmk.json"
           },
           "StorageAccountUpdate": {
-            "$ref": "./examples/StorageAccounts_Update_StorageAccountUpdate.json"
+            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update.json"
           },
           "StorageAccountUpdateAllowedCopyScopeToAAD": {
-            "$ref": "./examples/StorageAccounts_Update_StorageAccountUpdateAllowedCopyScopeToAad.json"
+            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_Allowed_Copy_Scope_To_Aad.json"
           },
           "StorageAccountUpdateDisablePublicNetworkAccess": {
-            "$ref": "./examples/StorageAccounts_Update_StorageAccountUpdateDisablePublicNetworkAccess.json"
+            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_Disable_Public_Network_Access.json"
           },
           "StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK": {
-            "$ref": "./examples/StorageAccounts_Update_StorageAccountUpdateUserAssignedEncryptionIdentityWithCmk.json"
+            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_User_Assigned_Encryption_Identity_With_Cmk.json"
           },
           "StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId": {
-            "$ref": "./examples/StorageAccounts_Update_StorageAccountUpdateUserAssignedIdentityWithFederatedIdentityClientId.json"
+            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_User_Assigned_Identity_With_Federated_Identity_Client_Id.json"
           },
           "StorageAccountUpdateWithImmutabilityPolicy": {
-            "$ref": "./examples/StorageAccounts_Update_StorageAccountUpdateWithImmutabilityPolicy.json"
+            "$ref": "./examples/StorageAccounts_Update_Storage_Account_Update_With_Immutability_Policy.json"
           }
         }
       },
@@ -889,7 +891,7 @@
         "tags": [
           "BlobServicePropertiesOperationGroup"
         ],
-        "description": "Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ",
+        "description": "Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -910,13 +912,14 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BlobServiceProperties"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -941,20 +944,20 @@
         },
         "x-ms-examples": {
           "BlobServicesPutAllowPermanentDelete": {
-            "$ref": "./examples/BlobServices_SetServiceProperties_BlobServicesPutAllowPermanentDelete.json"
+            "$ref": "./examples/BlobServices_SetServiceProperties_Blob_Services_Put_Allow_Permanent_Delete.json"
           },
           "BlobServicesPutLastAccessTimeBasedTracking": {
-            "$ref": "./examples/BlobServices_SetServiceProperties_BlobServicesPutLastAccessTimeBasedTracking.json"
+            "$ref": "./examples/BlobServices_SetServiceProperties_Blob_Services_Put_Last_Access_Time_Based_Tracking.json"
           },
           "PutBlobServices": {
-            "$ref": "./examples/BlobServices_SetServiceProperties_PutBlobServices.json"
+            "$ref": "./examples/BlobServices_SetServiceProperties_Put_Blob_Services.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers": {
       "get": {
-        "operationId": "BlobContainers_ListByBlobServiceProperties",
+        "operationId": "BlobContainers_List",
         "tags": [
           "BlobContainers"
         ],
@@ -1021,6 +1024,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListContainers": {
+            "$ref": "./examples/BlobContainers_List_List_Containers.json"
+          },
+          "ListDeletedContainers": {
+            "$ref": "./examples/BlobContainers_List_List_Deleted_Containers.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1032,7 +1043,7 @@
         "tags": [
           "BlobContainers"
         ],
-        "description": "Gets properties of a specified container. ",
+        "description": "Gets properties of a specified container.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1078,10 +1089,10 @@
         },
         "x-ms-examples": {
           "GetBlobContainersGetWithAllowProtectedAppendWritesAll": {
-            "$ref": "./examples/BlobContainers_Get_GetBlobContainersGetWithAllowProtectedAppendWritesAll.json"
+            "$ref": "./examples/BlobContainers_Get_Get_Blob_Containers_Get_With_Allow_Protected_Append_Writes_All.json"
           },
           "GetContainers": {
-            "$ref": "./examples/BlobContainers_Get_GetContainers.json"
+            "$ref": "./examples/BlobContainers_Get_Get_Containers.json"
           }
         }
       },
@@ -1090,7 +1101,7 @@
         "tags": [
           "BlobContainers"
         ],
-        "description": "Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. ",
+        "description": "Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1120,13 +1131,14 @@
             "maxLength": 63
           },
           {
-            "name": "resource",
+            "name": "blobContainer",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "Properties of the blob container to create.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BlobContainer"
-            }
+            },
+            "x-ms-client-name": "blobContainer"
           }
         ],
         "responses": {
@@ -1151,77 +1163,13 @@
         },
         "x-ms-examples": {
           "PutContainerWithDefaultEncryptionScope": {
-            "$ref": "./examples/BlobContainers_Create_PutContainerWithDefaultEncryptionScope.json"
+            "$ref": "./examples/BlobContainers_Create_Put_Container_With_Default_Encryption_Scope.json"
           },
           "PutContainerWithObjectLevelWorm": {
-            "$ref": "./examples/BlobContainers_Create_PutContainerWithObjectLevelWorm.json"
+            "$ref": "./examples/BlobContainers_Create_Put_Container_With_Object_Level_Worm.json"
           },
           "PutContainers": {
-            "$ref": "./examples/BlobContainers_Create_PutContainers.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "BlobContainers_Update",
-        "tags": [
-          "BlobContainers"
-        ],
-        "description": "Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist. ",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24
-          },
-          {
-            "name": "containerName",
-            "in": "path",
-            "description": "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BlobContainerUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BlobContainer"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateContainers": {
-            "$ref": "./examples/BlobContainers_Update.json"
+            "$ref": "./examples/BlobContainers_Create_Put_Containers.json"
           }
         }
       },
@@ -1317,13 +1265,14 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "LegalHold",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The LegalHold property that will be clear from a blob container.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LegalHold"
-            }
+            },
+            "x-ms-client-name": "LegalHold"
           }
         ],
         "responses": {
@@ -1343,6 +1292,82 @@
         "x-ms-examples": {
           "ClearLegalHoldContainers": {
             "$ref": "./examples/BlobContainers_ClearLegalHold.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/containers/{name}": {
+      "patch": {
+        "operationId": "BlobContainers_Update",
+        "tags": [
+          "BlobContainers"
+        ],
+        "description": "Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "blobContainer",
+            "in": "body",
+            "description": "Properties to update for the blob container.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlobContainer"
+            },
+            "x-ms-client-name": "blobContainer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BlobContainer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateContainers": {
+            "$ref": "./examples/BlobContainers_Update.json"
           }
         }
       }
@@ -1454,13 +1479,14 @@
             "maxLength": 63
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The ImmutabilityPolicy Properties that will be created or updated to a blob container.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImmutabilityPolicy"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -1485,10 +1511,10 @@
         },
         "x-ms-examples": {
           "CreateOrUpdateImmutabilityPolicy": {
-            "$ref": "./examples/BlobContainers_CreateOrUpdateImmutabilityPolicy_CreateOrUpdateImmutabilityPolicy.json"
+            "$ref": "./examples/BlobContainers_CreateOrUpdateImmutabilityPolicy_Create_Or_Update_Immutability_Policy.json"
           },
           "CreateOrUpdateImmutabilityPolicyWithAllowProtectedAppendWritesAll": {
-            "$ref": "./examples/BlobContainers_CreateOrUpdateImmutabilityPolicy_CreateOrUpdateImmutabilityPolicyWithAllowProtectedAppendWritesAll.json"
+            "$ref": "./examples/BlobContainers_CreateOrUpdateImmutabilityPolicy_Create_Or_Update_Immutability_Policy_With_Allow_Protected_Append_Writes_All.json"
           }
         }
       },
@@ -1600,13 +1626,14 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The ImmutabilityPolicy Properties that will be extended for a blob container.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImmutabilityPolicy"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -1731,13 +1758,14 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "Lease Container request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LeaseContainerRequest"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -1756,10 +1784,10 @@
         },
         "x-ms-examples": {
           "Acquire a lease on a container": {
-            "$ref": "./examples/BlobContainers_Lease_AcquireALeaseOnAContainer.json"
+            "$ref": "./examples/BlobContainers_Lease_Acquire_A_Lease_On_A_Container.json"
           },
           "Break a lease on a container": {
-            "$ref": "./examples/BlobContainers_Lease_BreakALeaseOnAContainer.json"
+            "$ref": "./examples/BlobContainers_Lease_Break_A_Lease_On_A_Container.json"
           }
         }
       }
@@ -1872,13 +1900,14 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "LegalHold",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The LegalHold property that will be set to a blob container.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LegalHold"
-            }
+            },
+            "x-ms-client-name": "LegalHold"
           }
         ],
         "responses": {
@@ -1897,17 +1926,17 @@
         },
         "x-ms-examples": {
           "SetLegalHoldContainers": {
-            "$ref": "./examples/BlobContainers_SetLegalHold_SetLegalHoldContainers.json"
+            "$ref": "./examples/BlobContainers_SetLegalHold_Set_Legal_Hold_Containers.json"
           },
           "SetLegalHoldContainersWithAllowProtectedAppendWritesAll": {
-            "$ref": "./examples/BlobContainers_SetLegalHold_SetLegalHoldContainersWithAllowProtectedAppendWritesAll.json"
+            "$ref": "./examples/BlobContainers_SetLegalHold_Set_Legal_Hold_Containers_With_Allow_Protected_Append_Writes_All.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes": {
       "get": {
-        "operationId": "EncryptionScopes_ListByStorageAccount",
+        "operationId": "EncryptionScopes_List",
         "tags": [
           "EncryptionScopes"
         ],
@@ -1977,6 +2006,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountEncryptionScopeList": {
+            "$ref": "./examples/EncryptionScopes_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2075,13 +2109,14 @@
             "maxLength": 63
           },
           {
-            "name": "resource",
+            "name": "encryptionScope",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "Encryption scope properties to be used for the create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EncryptionScope"
-            }
+            },
+            "x-ms-client-name": "encryptionScope"
           }
         ],
         "responses": {
@@ -2106,13 +2141,15 @@
         },
         "x-ms-examples": {
           "StorageAccountPutEncryptionScope": {
-            "$ref": "./examples/EncryptionScopes_Put_StorageAccountPutEncryptionScope.json"
+            "$ref": "./examples/EncryptionScopes_Put_Storage_Account_Put_Encryption_Scope.json"
           },
           "StorageAccountPutEncryptionScopeWithInfrastructureEncryption": {
-            "$ref": "./examples/EncryptionScopes_Put_StorageAccountPutEncryptionScopeWithInfrastructureEncryption.json"
+            "$ref": "./examples/EncryptionScopes_Put_Storage_Account_Put_Encryption_Scope_With_Infrastructure_Encryption.json"
           }
         }
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}/encryptionScopes/{name}": {
       "patch": {
         "operationId": "EncryptionScopes_Patch",
         "tags": [
@@ -2148,13 +2185,23 @@
             "maxLength": 63
           },
           {
-            "name": "properties",
+            "name": "name",
+            "in": "path",
+            "description": "The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "encryptionScope",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Encryption scope properties to be used for the update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EncryptionScopeUpdate"
-            }
+              "$ref": "#/definitions/EncryptionScope"
+            },
+            "x-ms-client-name": "encryptionScope"
           }
         ],
         "responses": {
@@ -2245,10 +2292,10 @@
         },
         "x-ms-examples": {
           "StorageAccountFailover": {
-            "$ref": "./examples/StorageAccounts_Failover_StorageAccountFailover.json"
+            "$ref": "./examples/StorageAccounts_Failover_Storage_Account_Failover.json"
           },
           "StorageAccountFailoverPlanned": {
-            "$ref": "./examples/StorageAccounts_Failover_StorageAccountFailoverPlanned.json"
+            "$ref": "./examples/StorageAccounts_Failover_Storage_Account_Failover_Planned.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2360,7 +2407,7 @@
         "tags": [
           "FileServicePropertiesOperationGroup"
         ],
-        "description": "Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. ",
+        "description": "Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2381,13 +2428,14 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/FileServiceProperties"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -2412,20 +2460,20 @@
         },
         "x-ms-examples": {
           "PutFileServices": {
-            "$ref": "./examples/FileServices_SetServiceProperties_PutFileServices.json"
+            "$ref": "./examples/FileServices_SetServiceProperties_Put_File_Services.json"
           },
           "PutFileServices_EnableSMBMultichannel": {
-            "$ref": "./examples/FileServices_SetServiceProperties_PutFileServicesEnableSmbMultichannel.json"
+            "$ref": "./examples/FileServices_SetServiceProperties_Put_File_Services_Enable_Smb_Multichannel.json"
           },
           "PutFileServices_EnableSecureSmbFeatures": {
-            "$ref": "./examples/FileServices_SetServiceProperties_PutFileServicesEnableSecureSmbFeatures.json"
+            "$ref": "./examples/FileServices_SetServiceProperties_Put_File_Services_Enable_Secure_Smb_Features.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares": {
       "get": {
-        "operationId": "FileShares_ListByFileServiceProperties",
+        "operationId": "FileShares_List",
         "tags": [
           "FileShares"
         ],
@@ -2483,6 +2531,17 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListDeletedShares": {
+            "$ref": "./examples/FileShares_List_List_Deleted_Shares.json"
+          },
+          "ListShareSnapshots": {
+            "$ref": "./examples/FileShares_List_List_Share_Snapshots.json"
+          },
+          "ListShares": {
+            "$ref": "./examples/FileShares_List_List_Shares.json"
           }
         },
         "x-ms-pageable": {
@@ -2556,10 +2615,10 @@
         },
         "x-ms-examples": {
           "GetShareStats": {
-            "$ref": "./examples/FileShares_Get_GetShareStats.json"
+            "$ref": "./examples/FileShares_Get_Get_Share_Stats.json"
           },
           "GetShares": {
-            "$ref": "./examples/FileShares_Get_GetShares.json"
+            "$ref": "./examples/FileShares_Get_Get_Shares.json"
           }
         }
       },
@@ -2568,7 +2627,7 @@
         "tags": [
           "FileShares"
         ],
-        "description": "Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. ",
+        "description": "Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2605,13 +2664,14 @@
             "maxLength": 63
           },
           {
-            "name": "resource",
+            "name": "fileShare",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "Properties of the file share to create.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/FileShare"
-            }
+            },
+            "x-ms-client-name": "fileShare"
           }
         ],
         "responses": {
@@ -2636,80 +2696,13 @@
         },
         "x-ms-examples": {
           "Create NFS Shares": {
-            "$ref": "./examples/FileShares_Create_CreateNfsShares.json"
+            "$ref": "./examples/FileShares_Create_Create_Nfs_Shares.json"
           },
           "PutShares": {
-            "$ref": "./examples/FileShares_Create_PutShares.json"
+            "$ref": "./examples/FileShares_Create_Put_Shares.json"
           },
           "PutShares with Access Tier": {
-            "$ref": "./examples/FileShares_Create_PutSharesWithAccessTier.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "FileShares_Update",
-        "tags": [
-          "FileShares"
-        ],
-        "description": "Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. ",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24
-          },
-          {
-            "name": "shareName",
-            "in": "path",
-            "description": "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FileShareUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FileShare"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateShareAcls": {
-            "$ref": "./examples/FileShares_Update_UpdateShareAcls.json"
-          },
-          "UpdateShares": {
-            "$ref": "./examples/FileShares_Update_UpdateShares.json"
+            "$ref": "./examples/FileShares_Create_Put_Shares_With_Access_Tier.json"
           }
         }
       },
@@ -2826,13 +2819,14 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "Lease Share request body.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LeaseShareRequest"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -2851,10 +2845,10 @@
         },
         "x-ms-examples": {
           "Acquire a lease on a share": {
-            "$ref": "./examples/FileShares_Lease_AcquireALeaseOnAShare.json"
+            "$ref": "./examples/FileShares_Lease_Acquire_A_Lease_On_A_Share.json"
           },
           "Break a lease on a share": {
-            "$ref": "./examples/FileShares_Lease_BreakALeaseOnAShare.json"
+            "$ref": "./examples/FileShares_Lease_Break_A_Lease_On_A_Share.json"
           }
         }
       }
@@ -2895,13 +2889,14 @@
             "maxLength": 63
           },
           {
-            "name": "body",
+            "name": "deletedShare",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DeletedShare"
-            }
+            },
+            "x-ms-client-name": "deletedShare"
           }
         ],
         "responses": {
@@ -2918,6 +2913,85 @@
         "x-ms-examples": {
           "RestoreShares": {
             "$ref": "./examples/FileShares_Restore.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/shares/{name}": {
+      "patch": {
+        "operationId": "FileShares_Update",
+        "tags": [
+          "FileShares"
+        ],
+        "description": "Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "name": "fileShare",
+            "in": "body",
+            "description": "Properties to update for the file share.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            },
+            "x-ms-client-name": "fileShare"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateShareAcls": {
+            "$ref": "./examples/FileShares_Update_Update_Share_Acls.json"
+          },
+          "UpdateShares": {
+            "$ref": "./examples/FileShares_Update_Update_Shares.json"
           }
         }
       }
@@ -2994,7 +3068,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies": {
       "get": {
-        "operationId": "BlobInventoryPolicies_ListByStorageAccount",
+        "operationId": "BlobInventoryPolicies_List",
         "tags": [
           "BlobInventoryPolicies"
         ],
@@ -3031,6 +3105,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountGetBlobInventoryPolicy": {
+            "$ref": "./examples/BlobInventoryPolicies_List.json"
           }
         },
         "x-ms-pageable": {
@@ -3111,13 +3190,14 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The blob inventory policy set to a storage account.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BlobInventoryPolicy"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -3142,13 +3222,13 @@
         },
         "x-ms-examples": {
           "StorageAccountSetBlobInventoryPolicy": {
-            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_StorageAccountSetBlobInventoryPolicy.json"
+            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_Storage_Account_Set_Blob_Inventory_Policy.json"
           },
           "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount": {
-            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForHnsAccount.json"
+            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_Storage_Account_Set_Blob_Inventory_Policy_Include_Delete_And_New_Schema_For_Hns_Account.json"
           },
           "StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForNonHnsAccount": {
-            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_StorageAccountSetBlobInventoryPolicyIncludeDeleteAndNewSchemaForNonHnsAccount.json"
+            "$ref": "./examples/BlobInventoryPolicies_CreateOrUpdate_Storage_Account_Set_Blob_Inventory_Policy_Include_Delete_And_New_Schema_For_Non_Hns_Account.json"
           }
         }
       },
@@ -3226,13 +3306,14 @@
             "maxLength": 24
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameters to provide to list SAS credentials for the storage account.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccountSasParameters"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -3344,13 +3425,14 @@
             "maxLength": 24
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameters to provide to list service SAS credentials.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServiceSasParameters"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -3376,7 +3458,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/localUsers": {
       "get": {
-        "operationId": "LocalUsers_ListByStorageAccount",
+        "operationId": "LocalUsers_List",
         "tags": [
           "LocalUsers"
         ],
@@ -3413,6 +3495,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListLocalUsers": {
+            "$ref": "./examples/LocalUsers_List.json"
           }
         },
         "x-ms-pageable": {
@@ -3511,13 +3598,14 @@
             "maxLength": 64
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The local user associated with a storage account.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LocalUser"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -3542,10 +3630,10 @@
         },
         "x-ms-examples": {
           "CreateLocalUser": {
-            "$ref": "./examples/LocalUsers_CreateOrUpdate_CreateLocalUser.json"
+            "$ref": "./examples/LocalUsers_CreateOrUpdate_Create_Local_User.json"
           },
           "UpdateLocalUser": {
-            "$ref": "./examples/LocalUsers_CreateOrUpdate_UpdateLocalUser.json"
+            "$ref": "./examples/LocalUsers_CreateOrUpdate_Update_Local_User.json"
           }
         }
       },
@@ -3792,13 +3880,14 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The ManagementPolicy set to a storage account.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ManagementPolicy"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -3823,28 +3912,28 @@
         },
         "x-ms-examples": {
           "StorageAccountSetManagementPolicies": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_StorageAccountSetManagementPolicies.json"
+            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policies.json"
           },
           "StorageAccountSetManagementPolicyColdTierActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_StorageAccountSetManagementPolicyColdTierActions.json"
+            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Cold_Tier_Actions.json"
           },
           "StorageAccountSetManagementPolicyForBlockAndAppendBlobs": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_StorageAccountSetManagementPolicyForBlockAndAppendBlobs.json"
+            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_For_Block_And_Append_Blobs.json"
           },
           "StorageAccountSetManagementPolicyHotTierActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_StorageAccountSetManagementPolicyHotTierActions.json"
+            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Hot_Tier_Actions.json"
           },
           "StorageAccountSetManagementPolicyWithSnapshotAndVersion": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_StorageAccountSetManagementPolicyWithSnapshotAndVersion.json"
+            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_With_Snapshot_And_Version.json"
           },
           "StorageAccountSetManagementPolicy_BaseBlobDaysAfterCreationActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_StorageAccountSetManagementPolicyBaseBlobDaysAfterCreationActions.json"
+            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Base_Blob_Days_After_Creation_Actions.json"
           },
           "StorageAccountSetManagementPolicy_LastAccessTimeBasedBlobActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_StorageAccountSetManagementPolicyLastAccessTimeBasedBlobActions.json"
+            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Last_Access_Time_Based_Blob_Actions.json"
           },
           "StorageAccountSetManagementPolicy_LastTierChangeTimeActions": {
-            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_StorageAccountSetManagementPolicyLastTierChangeTimeActions.json"
+            "$ref": "./examples/ManagementPolicies_CreateOrUpdate_Storage_Account_Set_Management_Policy_Last_Tier_Change_Time_Actions.json"
           }
         }
       },
@@ -3897,7 +3986,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies": {
       "get": {
-        "operationId": "ObjectReplicationPolicies_ListByStorageAccount",
+        "operationId": "ObjectReplicationPolicies_List",
         "tags": [
           "ObjectReplicationPolicies"
         ],
@@ -3934,6 +4023,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountListObjectReplicationPolicies": {
+            "$ref": "./examples/ObjectReplicationPolicies_List.json"
           }
         },
         "x-ms-pageable": {
@@ -4030,13 +4124,14 @@
             "minLength": 1
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The object replication policy set to a storage account. A unique policy ID will be created if absent.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ObjectReplicationPolicy"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -4061,16 +4156,16 @@
         },
         "x-ms-examples": {
           "StorageAccountCreateObjectReplicationPolicyOnDestination": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_StorageAccountCreateObjectReplicationPolicyOnDestination.json"
+            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Create_Object_Replication_Policy_On_Destination.json"
           },
           "StorageAccountCreateObjectReplicationPolicyOnSource": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_StorageAccountCreateObjectReplicationPolicyOnSource.json"
+            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Create_Object_Replication_Policy_On_Source.json"
           },
           "StorageAccountUpdateObjectReplicationPolicyOnDestination": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_StorageAccountUpdateObjectReplicationPolicyOnDestination.json"
+            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Update_Object_Replication_Policy_On_Destination.json"
           },
           "StorageAccountUpdateObjectReplicationPolicyOnSource": {
-            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_StorageAccountUpdateObjectReplicationPolicyOnSource.json"
+            "$ref": "./examples/ObjectReplicationPolicies_CreateOrUpdate_Storage_Account_Update_Object_Replication_Policy_On_Source.json"
           }
         }
       },
@@ -4131,7 +4226,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections": {
       "get": {
-        "operationId": "PrivateEndpointConnections_ListByStorageAccount",
+        "operationId": "PrivateEndpointConnections_List",
         "tags": [
           "PrivateEndpointConnections"
         ],
@@ -4168,6 +4263,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountListPrivateEndpointConnections": {
+            "$ref": "./examples/PrivateEndpointConnections_List.json"
           }
         },
         "x-ms-pageable": {
@@ -4262,13 +4362,14 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The private endpoint connection properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -4520,7 +4621,7 @@
         "tags": [
           "QueueServicePropertiesOperationGroup"
         ],
-        "description": "Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ",
+        "description": "Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4541,13 +4642,14 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The properties of a storage account’s Queue service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QueueServiceProperties"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -4735,13 +4837,14 @@
             "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
           },
           {
-            "name": "resource",
+            "name": "queue",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "Queue properties and metadata to be created with",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageQueue"
-            }
+            },
+            "x-ms-client-name": "queue"
           }
         ],
         "responses": {
@@ -4766,75 +4869,10 @@
         },
         "x-ms-examples": {
           "QueueOperationPut": {
-            "$ref": "./examples/Queue_Create_QueueOperationPut.json"
+            "$ref": "./examples/Queue_Create_Queue_Operation_Put.json"
           },
           "QueueOperationPutWithMetadata": {
-            "$ref": "./examples/Queue_Create_QueueOperationPutWithMetadata.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Queue_Update",
-        "tags": [
-          "StorageQueues"
-        ],
-        "description": "Creates a new queue with the specified queue name, under the specified account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageQueueUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StorageQueue"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "QueueOperationPatch": {
-            "$ref": "./examples/Queue_Update.json"
+            "$ref": "./examples/Queue_Create_Queue_Operation_Put_With_Metadata.json"
           }
         }
       },
@@ -4895,6 +4933,84 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default/queues/{queueName}/queues/{name}": {
+      "patch": {
+        "operationId": "Queue_Update",
+        "tags": [
+          "StorageQueues"
+        ],
+        "description": "Creates a new queue with the specified queue name, under the specified account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "queueName",
+            "in": "path",
+            "description": "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
+          },
+          {
+            "name": "queue",
+            "in": "body",
+            "description": "Queue properties and metadata to be created with",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageQueue"
+            },
+            "x-ms-client-name": "queue"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageQueue"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueueOperationPatch": {
+            "$ref": "./examples/Queue_Update.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
       "post": {
         "operationId": "StorageAccounts_RegenerateKey",
@@ -4922,13 +5038,14 @@
             "maxLength": 24
           },
           {
-            "name": "body",
+            "name": "regenerateKey",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageAccountRegenerateKeyParameters"
-            }
+            },
+            "x-ms-client-name": "regenerateKey"
           }
         ],
         "responses": {
@@ -4947,10 +5064,10 @@
         },
         "x-ms-examples": {
           "StorageAccountRegenerateKerbKey": {
-            "$ref": "./examples/StorageAccounts_RegenerateKey_StorageAccountRegenerateKerbKey.json"
+            "$ref": "./examples/StorageAccounts_RegenerateKey_Storage_Account_Regenerate_Kerb_Key.json"
           },
           "StorageAccountRegenerateKey": {
-            "$ref": "./examples/StorageAccounts_RegenerateKey_StorageAccountRegenerateKey.json"
+            "$ref": "./examples/StorageAccounts_RegenerateKey_Storage_Account_Regenerate_Key.json"
           }
         }
       }
@@ -4982,13 +5099,14 @@
             "maxLength": 24
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameters to provide for restore blob ranges.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BlobRestoreParameters"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -5178,7 +5296,7 @@
         "tags": [
           "TableServicePropertiesOperationGroup"
         ],
-        "description": "Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ",
+        "description": "Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -5199,13 +5317,14 @@
             "maxLength": 24
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The properties of a storage account’s Table service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TableServiceProperties"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -5379,13 +5498,14 @@
             "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The parameters to provide to create a table.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Table"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -5410,78 +5530,10 @@
         },
         "x-ms-examples": {
           "TableOperationPut": {
-            "$ref": "./examples/Table_Create_TableOperationPut.json"
+            "$ref": "./examples/Table_Create_Table_Operation_Put.json"
           },
           "TableOperationPutOrPatchAcls": {
-            "$ref": "./examples/Table_Create_TableOperationPutOrPatchAcls.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Table_Update",
-        "tags": [
-          "Tables"
-        ],
-        "description": "Creates a new table with the specified table name, under the specified account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24
-          },
-          {
-            "name": "tableName",
-            "in": "path",
-            "description": "A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TableUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Table"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TableOperationPatch": {
-            "$ref": "./examples/Table_Update_TableOperationPatch.json"
-          },
-          "TableOperationPutOrPatchAcls": {
-            "$ref": "./examples/Table_Update_TableOperationPutOrPatchAcls.json"
+            "$ref": "./examples/Table_Create_Table_Operation_Put_Or_Patch_Acls.json"
           }
         }
       },
@@ -5538,6 +5590,87 @@
         "x-ms-examples": {
           "TableOperationDelete": {
             "$ref": "./examples/Table_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default/tables/{tableName}/tables/{name}": {
+      "patch": {
+        "operationId": "Table_Update",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Creates a new table with the specified table name, under the specified account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only alphanumeric characters and it cannot begin with a numeric character.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to provide to create a table.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            },
+            "x-ms-client-name": "parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TableOperationPatch": {
+            "$ref": "./examples/Table_Update_Table_Operation_Patch.json"
+          },
+          "TableOperationPutOrPatchAcls": {
+            "$ref": "./examples/Table_Update_Table_Operation_Put_Or_Patch_Acls.json"
           }
         }
       }
@@ -5729,44 +5862,6 @@
         "domainGuid"
       ]
     },
-    "ActiveDirectoryPropertiesUpdate": {
-      "type": "object",
-      "description": "Settings properties for Active Directory (AD).",
-      "properties": {
-        "domainName": {
-          "type": "string",
-          "description": "Specifies the primary domain that the AD DNS server is authoritative for."
-        },
-        "netBiosDomainName": {
-          "type": "string",
-          "description": "Specifies the NetBIOS domain name."
-        },
-        "forestName": {
-          "type": "string",
-          "description": "Specifies the Active Directory forest to get."
-        },
-        "domainGuid": {
-          "type": "string",
-          "description": "Specifies the domain GUID."
-        },
-        "domainSid": {
-          "type": "string",
-          "description": "Specifies the security identifier (SID)."
-        },
-        "azureStorageSid": {
-          "type": "string",
-          "description": "Specifies the security identifier (SID) for Azure Storage."
-        },
-        "samAccountName": {
-          "type": "string",
-          "description": "Specifies the Active Directory SAMAccountName for Azure Storage."
-        },
-        "accountType": {
-          "$ref": "#/definitions/AccountType",
-          "description": "Specifies the Active Directory account type for Azure Storage."
-        }
-      }
-    },
     "AllowedCopyScope": {
       "type": "string",
       "description": "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.",
@@ -5857,6 +5952,42 @@
         }
       }
     },
+    "Azure.ResourceManager.Foundations.SkuTier": {
+      "type": "string",
+      "description": "Available service tiers for the SKU.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "The Free service tier."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "The Basic service tier."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard service tier."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium service tier."
+          }
+        ]
+      }
+    },
     "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
       "type": "object",
       "description": "A managed identity assigned by the user.",
@@ -5908,24 +6039,6 @@
         "directoryServiceOptions"
       ]
     },
-    "AzureFilesIdentityBasedAuthenticationUpdate": {
-      "type": "object",
-      "description": "Settings for Azure Files identity based authentication.",
-      "properties": {
-        "directoryServiceOptions": {
-          "$ref": "#/definitions/DirectoryServiceOptions",
-          "description": "Indicates the directory service used. Note that this enum may be extended in the future."
-        },
-        "activeDirectoryProperties": {
-          "$ref": "#/definitions/ActiveDirectoryPropertiesUpdate",
-          "description": "Required if directoryServiceOptions are AD, optional if they are AADKERB."
-        },
-        "defaultSharePermission": {
-          "$ref": "#/definitions/DefaultSharePermission",
-          "description": "Default share permission for users using Kerberos authentication if RBAC role is not assigned."
-        }
-      }
-    },
     "BlobContainer": {
       "type": "object",
       "description": "Properties of the blob container, including Id, resource name, resource type, Etag.",
@@ -5965,15 +6078,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "BlobContainerUpdate": {
-      "type": "object",
-      "description": "Properties of the blob container, including Id, resource name, resource type, Etag.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "BlobInventoryPolicy": {
@@ -6598,30 +6702,16 @@
     },
     "CorsRules": {
       "type": "object",
-      "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request. ",
+      "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request.",
       "properties": {
         "corsRules": {
           "type": "array",
-          "description": "The List of CORS rules. You can include up to five CorsRule elements in the request. ",
+          "description": "The List of CORS rules. You can include up to five CorsRule elements in the request.",
           "items": {
             "$ref": "#/definitions/CorsRule"
           },
           "x-ms-identifiers": []
         }
-      }
-    },
-    "CreatedByType": {
-      "type": "string",
-      "description": "The type of identity that created the resource.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "CreatedByType",
-        "modelAsString": true
       }
     },
     "CustomDomain": {
@@ -6640,20 +6730,6 @@
       "required": [
         "name"
       ]
-    },
-    "CustomDomainUpdate": {
-      "type": "object",
-      "description": "The custom domain assigned to this storage account. This can be set via Update.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source."
-        },
-        "useSubDomainName": {
-          "type": "boolean",
-          "description": "Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates."
-        }
-      }
     },
     "DateAfterCreation": {
       "type": "object",
@@ -6901,7 +6977,8 @@
         },
         "keySource": {
           "$ref": "#/definitions/KeySource",
-          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault"
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault",
+          "default": "Microsoft.Storage"
         },
         "requireInfrastructureEncryption": {
           "type": "boolean",
@@ -7054,15 +7131,6 @@
         "name": "EncryptionScopeState",
         "modelAsString": true
       }
-    },
-    "EncryptionScopeUpdate": {
-      "type": "object",
-      "description": "The Encryption Scope resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "EncryptionService": {
       "type": "object",
@@ -7405,7 +7473,7 @@
         },
         "shareUsageBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files.",
           "readOnly": true
         },
@@ -7438,15 +7506,6 @@
           "readOnly": true
         }
       }
-    },
-    "FileShareUpdate": {
-      "type": "object",
-      "description": "Properties of the file share, including Id, resource name, resource type, Etag.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "Format": {
       "type": "string",
@@ -7573,23 +7632,6 @@
       "x-ms-enum": {
         "name": "IdentityType",
         "modelAsString": true
-      }
-    },
-    "IdentityUpdate": {
-      "type": "object",
-      "description": "Identity for the resource.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The identity type."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here.",
-          "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
-          }
-        }
       }
     },
     "ImmutabilityPolicy": {
@@ -7777,17 +7819,6 @@
       "required": [
         "keyExpirationPeriodInDays"
       ]
-    },
-    "KeyPolicyUpdate": {
-      "type": "object",
-      "description": "KeyPolicy assigned to the storage account.",
-      "properties": {
-        "keyExpirationPeriodInDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The key expiration period in days."
-        }
-      }
     },
     "KeySource": {
       "type": "string",
@@ -8408,7 +8439,7 @@
     },
     "ManagementPolicyFilter": {
       "type": "object",
-      "description": "Filters limit rule actions to a subset of blobs within the storage account. If multiple filters are defined, a logical AND is performed on all filters. ",
+      "description": "Filters limit rule actions to a subset of blobs within the storage account. If multiple filters are defined, a logical AND is performed on all filters.",
       "properties": {
         "prefixMatch": {
           "type": "array",
@@ -8660,7 +8691,8 @@
       "properties": {
         "bypass": {
           "$ref": "#/definitions/Bypass",
-          "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics."
+          "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics.",
+          "default": "AzureServices"
         },
         "resourceAccessRules": {
           "type": "array",
@@ -8688,50 +8720,13 @@
         },
         "defaultAction": {
           "$ref": "#/definitions/DefaultAction",
-          "description": "Specifies the default action of allow or deny when no other rules match."
+          "description": "Specifies the default action of allow or deny when no other rules match.",
+          "default": "Allow"
         }
       },
       "required": [
         "defaultAction"
       ]
-    },
-    "NetworkRuleSetUpdate": {
-      "type": "object",
-      "description": "Network rule set",
-      "properties": {
-        "bypass": {
-          "$ref": "#/definitions/Bypass",
-          "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, \"Logging, Metrics\"), or None to bypass none of those traffics."
-        },
-        "resourceAccessRules": {
-          "type": "array",
-          "description": "Sets the resource access rules",
-          "items": {
-            "$ref": "#/definitions/ResourceAccessRule"
-          },
-          "x-ms-identifiers": []
-        },
-        "virtualNetworkRules": {
-          "type": "array",
-          "description": "Sets the virtual network rules",
-          "items": {
-            "$ref": "#/definitions/VirtualNetworkRule"
-          },
-          "x-ms-identifiers": []
-        },
-        "ipRules": {
-          "type": "array",
-          "description": "Sets the IP ACL rules",
-          "items": {
-            "$ref": "#/definitions/IPRule"
-          },
-          "x-ms-identifiers": []
-        },
-        "defaultAction": {
-          "$ref": "#/definitions/DefaultAction",
-          "description": "Specifies the default action of allow or deny when no other rules match."
-        }
-      }
     },
     "ObjectReplicationPolicy": {
       "type": "object",
@@ -9002,7 +8997,8 @@
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -9423,27 +9419,14 @@
         },
         "expirationAction": {
           "$ref": "#/definitions/ExpirationAction",
-          "description": "The SAS expiration action. Can only be Log."
+          "description": "The SAS expiration action. Can only be Log.",
+          "default": "Log"
         }
       },
       "required": [
         "sasExpirationPeriod",
         "expirationAction"
       ]
-    },
-    "SasPolicyUpdate": {
-      "type": "object",
-      "description": "SasPolicy assigned to the storage account.",
-      "properties": {
-        "sasExpirationPeriod": {
-          "type": "string",
-          "description": "The SAS expiration period, DD.HH:MM:SS."
-        },
-        "expirationAction": {
-          "$ref": "#/definitions/ExpirationAction",
-          "description": "The SAS expiration action. Can only be Log."
-        }
-      }
     },
     "Schedule": {
       "type": "string",
@@ -9648,7 +9631,7 @@
           "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType."
         },
         "tier": {
-          "$ref": "#/definitions/SkuTier",
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SkuTier",
           "description": "The SKU tier. This is based on the SKU name.",
           "readOnly": true
         }
@@ -9668,7 +9651,8 @@
       "x-ms-enum": {
         "name": "SkuConversionStatus",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "SkuInformation": {
       "type": "object",
@@ -9679,7 +9663,7 @@
           "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType."
         },
         "tier": {
-          "$ref": "#/definitions/SkuTier",
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SkuTier",
           "description": "The SKU tier. This is based on the SKU name.",
           "readOnly": true
         },
@@ -9741,28 +9725,6 @@
         "modelAsString": true
       }
     },
-    "SkuTier": {
-      "type": "string",
-      "description": "The SKU tier. This is based on the SKU name.",
-      "enum": [
-        "Standard",
-        "Premium"
-      ],
-      "x-ms-enum": {
-        "name": "SkuTier",
-        "modelAsString": false
-      }
-    },
-    "SkuUpdate": {
-      "type": "object",
-      "description": "The SKU of the storage account.",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/SkuName",
-          "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType."
-        }
-      }
-    },
     "SmbSetting": {
       "type": "object",
       "description": "Setting for SMB protocol",
@@ -9815,7 +9777,8 @@
       "x-ms-enum": {
         "name": "State",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "StorageAccount": {
       "type": "object",
@@ -10358,7 +10321,7 @@
       "description": "The parameters used when updating a storage account.",
       "properties": {
         "customDomain": {
-          "$ref": "#/definitions/CustomDomainUpdate",
+          "$ref": "#/definitions/CustomDomain",
           "description": "Custom domain assigned to the storage account by the user. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property."
         },
         "encryption": {
@@ -10366,11 +10329,11 @@
           "description": "Not applicable. Azure Storage encryption at rest is enabled by default for all storage accounts and cannot be disabled."
         },
         "sasPolicy": {
-          "$ref": "#/definitions/SasPolicyUpdate",
+          "$ref": "#/definitions/SasPolicy",
           "description": "SasPolicy assigned to the storage account."
         },
         "keyPolicy": {
-          "$ref": "#/definitions/KeyPolicyUpdate",
+          "$ref": "#/definitions/KeyPolicy",
           "description": "KeyPolicy assigned to the storage account."
         },
         "accessTier": {
@@ -10378,7 +10341,7 @@
           "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type."
         },
         "azureFilesIdentityBasedAuthentication": {
-          "$ref": "#/definitions/AzureFilesIdentityBasedAuthenticationUpdate",
+          "$ref": "#/definitions/AzureFilesIdentityBasedAuthentication",
           "description": "Provides the identity based authentication settings for Azure Files."
         },
         "supportsHttpsTrafficOnly": {
@@ -10397,7 +10360,7 @@
           "x-ms-client-name": "IsLocalUserEnabled"
         },
         "networkAcls": {
-          "$ref": "#/definitions/NetworkRuleSetUpdate",
+          "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network rule set",
           "x-ms-client-name": "networkRuleSet"
         },
@@ -10492,7 +10455,7 @@
       "description": "The parameters that can be provided when updating the storage account properties.",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/SkuUpdate",
+          "$ref": "#/definitions/Sku",
           "description": "Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value."
         },
         "tags": {
@@ -10503,7 +10466,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/IdentityUpdate",
+          "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
         },
         "properties": {
@@ -10555,15 +10518,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "StorageQueueUpdate": {
-      "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "StorageSkuListResult": {
@@ -10735,15 +10689,6 @@
       },
       "required": [
         "id"
-      ]
-    },
-    "TableUpdate": {
-      "type": "object",
-      "description": "Properties of the table, including Id, resource name, resource type.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "TagFilter": {

@@ -12,32 +12,48 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
-@doc("Private endpoint connection resource.")
+/**
+ * Private endpoint connection resource.
+ */
 @parentResource(Vault)
 model PrivateEndpointConnection
   is ProxyResource<PrivateEndpointConnectionProperties> {
-  @doc("Name of the private endpoint connection associated with the key vault.")
+  /**
+   * Name of the private endpoint connection associated with the key vault.
+   */
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
 
-  @doc("Modified whenever there is a change in the state of private endpoint connection.")
+  /**
+   * Modified whenever there is a change in the state of private endpoint connection.
+   */
   etag?: string;
 }
 
 @armResourceOperations
 interface PrivateEndpointConnections {
-  @doc("Gets the specified private endpoint connection associated with the key vault.")
+  /**
+   * Gets the specified private endpoint connection associated with the key vault.
+   */
   get is ArmResourceRead<PrivateEndpointConnection>;
 
-  @doc("Updates the specified private endpoint connection associated with the key vault.")
+  /**
+   * Updates the specified private endpoint connection associated with the key vault.
+   */
   put is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
 
-  @doc("Deletes the specified private endpoint connection associated with the key vault.")
+  /**
+   * Deletes the specified private endpoint connection associated with the key vault.
+   */
   delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
 
-  @doc("The List operation gets information about the private endpoint connections associated with the vault.")
+  /**
+   * The List operation gets information about the private endpoint connections associated with the vault.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PrivateEndpointConnections_ListByResource")
   listByResource is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 

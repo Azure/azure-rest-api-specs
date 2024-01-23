@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
-@doc("An application type version resource for the specified application type name resource.")
+/**
+ * An application type version resource for the specified application type name resource.
+ */
 @parentResource(ApplicationTypeResource)
 model ApplicationTypeVersionResource
   is TrackedResource<ApplicationTypeVersionResourceProperties> {
-  @doc("The application type version.")
+  /**
+   * The application type version.
+   */
   @path
   @key("version")
   @segment("versions")
@@ -25,23 +29,31 @@ model ApplicationTypeVersionResource
 
 @armResourceOperations
 interface ApplicationTypeVersionResources {
+  /**
+   * Get a Service Fabric application type version resource created or in the process of being created in the Service Fabric application type name resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get a Service Fabric application type version resource created or in the process of being created in the Service Fabric application type name resource.")
   @operationId("ApplicationTypeVersions_Get")
   get is ArmResourceRead<ApplicationTypeVersionResource>;
 
+  /**
+   * Create or update a Service Fabric application type version resource with the specified name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update a Service Fabric application type version resource with the specified name.")
   @operationId("ApplicationTypeVersions_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ApplicationTypeVersionResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApplicationTypeVersionResource>;
 
+  /**
+   * Delete a Service Fabric application type version resource with the specified name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete a Service Fabric application type version resource with the specified name.")
   @operationId("ApplicationTypeVersions_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<ApplicationTypeVersionResource>;
 
+  /**
+   * Gets all application type version resources created or in the process of being created in the Service Fabric application type name resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets all application type version resources created or in the process of being created in the Service Fabric application type name resource.")
   @operationId("ApplicationTypeVersions_List")
   list is ArmResourceListByParent<ApplicationTypeVersionResource>;
 }

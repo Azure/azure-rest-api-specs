@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("Friendly Rules name mapping to the any Rules or secret related information.")
+/**
+ * Friendly Rules name mapping to the any Rules or secret related information.
+ */
 @parentResource(FrontDoorRuleSet)
 model FrontDoorRule is ProxyResource<RuleProperties> {
-  @doc("Name of the delivery rule which is unique within the endpoint.")
+  /**
+   * Name of the delivery rule which is unique within the endpoint.
+   */
   @path
   @key("ruleName")
   @segment("rules")
@@ -24,17 +28,24 @@ model FrontDoorRule is ProxyResource<RuleProperties> {
 
 @armResourceOperations
 interface FrontDoorRules {
-  @doc("Gets an existing delivery rule within a rule set.")
+  /**
+   * Gets an existing delivery rule within a rule set.
+   */
   get is ArmResourceRead<FrontDoorRule>;
 
-  @doc("Creates a new delivery rule within the specified rule set.")
-  create is ArmResourceCreateOrUpdateAsync<
+  /**
+   * Creates a new delivery rule within the specified rule set.
+   */
+  create is ArmResourceCreateOrReplaceAsync<
     FrontDoorRule,
     BaseParameters<FrontDoorRule>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Updates an existing delivery rule within a rule set.")
+  /**
+   * Updates an existing delivery rule within a rule set.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     FrontDoorRule,
     RuleUpdateParameters,
@@ -42,14 +53,20 @@ interface FrontDoorRules {
     ArmAsyncOperationHeader
   >;
 
-  @doc("Deletes an existing delivery rule within a rule set.")
+  /**
+   * Deletes an existing delivery rule within a rule set.
+   */
   delete is ArmResourceDeleteAsync<
     FrontDoorRule,
     BaseParameters<FrontDoorRule>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Lists all of the existing delivery rules within a rule set.")
+  /**
+   * Lists all of the existing delivery rules within a rule set.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("FrontDoorRules_ListByRuleSet")
   listByRuleSet is ArmResourceListByParent<FrontDoorRule>;
 }
 

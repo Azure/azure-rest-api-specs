@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
-@doc("Resource information with extended details.")
+/**
+ * Resource information with extended details.
+ */
 @parentResource(Vault)
 model Secret is ProxyResource<SecretProperties> {
-  @doc("The name of the secret.")
+  /**
+   * The name of the secret.
+   */
   @path
   @key("secretName")
   @segment("secrets")
@@ -24,22 +28,35 @@ model Secret is ProxyResource<SecretProperties> {
 
 @armResourceOperations
 interface Secrets {
-  @doc("Gets the specified secret.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.")
+  /**
+   * Gets the specified secret.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
+   */
   get is ArmResourceRead<Secret>;
 
-  @doc("Create or update a secret in a key vault in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.")
+  /**
+   * Create or update a secret in a key vault in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<Secret>;
 
-  @doc("Update a secret in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments.  Users should use the data-plane REST service for interaction with vault secrets.")
+  /**
+   * Update a secret in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments.  Users should use the data-plane REST service for interaction with vault secrets.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<Secret, SecretPatchParameters>;
 
-  @doc("The List operation gets information about the secrets in a vault.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.")
+  /**
+   * The List operation gets information about the secrets in a vault.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Secrets_List")
   list is ArmResourceListByParent<
     Secret,
     {
       ...BaseParameters<Secret>;
 
-      @doc("Maximum number of results to return.")
+      /**
+       * Maximum number of results to return.
+       */
       @query("$top")
       $top?: int32;
     }

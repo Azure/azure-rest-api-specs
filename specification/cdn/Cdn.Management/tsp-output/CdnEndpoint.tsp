@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The CDN endpoint uses the URL format <endpointname>.azureedge.net.")
+/**
+ * CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The CDN endpoint uses the URL format <endpointname>.azureedge.net.
+ */
 @parentResource(Profile)
 model CdnEndpoint is TrackedResource<EndpointProperties> {
-  @doc("Name of the endpoint under the profile which is unique globally.")
+  /**
+   * Name of the endpoint under the profile which is unique globally.
+   */
   @path
   @key("endpointName")
   @segment("endpoints")
@@ -24,41 +28,66 @@ model CdnEndpoint is TrackedResource<EndpointProperties> {
 
 @armResourceOperations
 interface CdnEndpoints {
-  @doc("Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.")
+  /**
+   * Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+   */
   get is ArmResourceRead<CdnEndpoint>;
 
-  @doc("Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.")
-  create is ArmResourceCreateOrUpdateAsync<CdnEndpoint>;
+  /**
+   * Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+   */
+  create is ArmResourceCreateOrReplaceAsync<CdnEndpoint>;
 
-  @doc("Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin group operation. To update custom domains, use the Update Custom Domain operation.")
+  /**
+   * Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin group operation. To update custom domains, use the Update Custom Domain operation.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<CdnEndpoint, EndpointUpdateParameters>;
 
-  @doc("Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.")
+  /**
+   * Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+   */
   delete is ArmResourceDeleteAsync<CdnEndpoint>;
 
-  @doc("Lists existing CDN endpoints.")
+  /**
+   * Lists existing CDN endpoints.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("CdnEndpoints_ListByProfile")
   listByProfile is ArmResourceListByParent<CdnEndpoint>;
 
-  @doc("Starts an existing CDN endpoint that is on a stopped state.")
+  /**
+   * Starts an existing CDN endpoint that is on a stopped state.
+   */
   start is ArmResourceActionAsync<CdnEndpoint, void, CdnEndpoint>;
 
-  @doc("Stops an existing running CDN endpoint.")
+  /**
+   * Stops an existing running CDN endpoint.
+   */
   stop is ArmResourceActionAsync<CdnEndpoint, void, CdnEndpoint>;
 
-  @doc("Removes a content from CDN.")
+  /**
+   * Removes a content from CDN.
+   */
   purgeContent is ArmResourceActionAsync<CdnEndpoint, PurgeParameters, void>;
 
-  @doc("Pre-loads a content to CDN. Available for Verizon Profiles.")
+  /**
+   * Pre-loads a content to CDN. Available for Verizon Profiles.
+   */
   loadContent is ArmResourceActionAsync<CdnEndpoint, LoadParameters, void>;
 
-  @doc("Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.")
+  /**
+   * Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.
+   */
   validateCustomDomain is ArmResourceActionSync<
     CdnEndpoint,
     ValidateCustomDomainContent,
     ValidateCustomDomainResult
   >;
 
-  @doc("Checks the quota and usage of geo filters and custom domains under the given endpoint.")
+  /**
+   * Checks the quota and usage of geo filters and custom domains under the given endpoint.
+   */
   listResourceUsage is ArmResourceActionSync<
     CdnEndpoint,
     void,

@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("A profile is a logical grouping of endpoints that share the same settings.")
+/**
+ * A profile is a logical grouping of endpoints that share the same settings.
+ */
 model Profile is TrackedResource<ProfileProperties> {
-  @doc("Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.")
+  /**
+   * Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.
+   */
   @path
   @key("profileName")
   @segment("profiles")
@@ -25,31 +29,50 @@ model Profile is TrackedResource<ProfileProperties> {
 
 @armResourceOperations
 interface Profiles {
-  @doc("Gets an Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.")
+  /**
+   * Gets an Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.
+   */
   get is ArmResourceRead<Profile>;
 
-  @doc("Creates a new Azure Front Door Standard or Azure Front Door Premium or CDN profile with a profile name under the specified subscription and resource group.")
-  create is ArmResourceCreateOrUpdateAsync<Profile>;
+  /**
+   * Creates a new Azure Front Door Standard or Azure Front Door Premium or CDN profile with a profile name under the specified subscription and resource group.
+   */
+  create is ArmResourceCreateOrReplaceAsync<Profile>;
 
-  @doc("Updates an existing Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.")
+  /**
+   * Updates an existing Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<Profile, ProfileUpdateParameters>;
 
-  @doc("Deletes an existing  Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.")
+  /**
+   * Deletes an existing  Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.
+   */
   delete is ArmResourceDeleteAsync<Profile>;
 
-  @doc("Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within a resource group.")
+  /**
+   * Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within a resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Profiles_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Profile>;
 
-  @doc("Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within an Azure subscription.")
+  /**
+   * Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within an Azure subscription.
+   */
   list is ArmListBySubscription<Profile>;
 
+  /**
+   * Checks the quota and actual usage of AzureFrontDoor endpoints under the given CDN profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Checks the quota and actual usage of AzureFrontDoor endpoints under the given CDN profile.")
   @operationId("FrontDoorProfiles_ListResourceUsage")
   listResourceUsage is ArmResourceActionSync<Profile, void, UsagesListResult>;
 
+  /**
+   * Check the name availability of a host name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Check the name availability of a host name.")
   @operationId("FrontDoorProfiles_CheckHostNameAvailability")
   checkHostNameAvailability is ArmResourceActionSync<
     Profile,
@@ -57,43 +80,57 @@ interface Profiles {
     CdnNameAvailabilityResult
   >;
 
-  @doc("Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemental portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.")
+  /**
+   * Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemental portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.
+   */
   generateSsoUri is ArmResourceActionSync<Profile, void, SsoUri>;
 
-  @doc("Gets the supported optimization types for the current profile. A user can create an endpoint with an optimization type from the listed values.")
+  /**
+   * Gets the supported optimization types for the current profile. A user can create an endpoint with an optimization type from the listed values.
+   */
   listSupportedOptimizationTypes is ArmResourceActionSync<
     Profile,
     void,
     SupportedOptimizationTypesListResult
   >;
 
-  // @doc("Checks the quota and actual usage of endpoints under the given Azure Front Door Standard or Azure Front Door Premium or CDN profile.")
+  // /**
+  //  * Checks the quota and actual usage of endpoints under the given Azure Front Door Standard or Azure Front Door Premium or CDN profile.
+  //  */
   // listResourceUsage is ArmResourceActionSync<
   //   Profile,
   //   void,
   //   ResourceUsageListResult
   // >;
 
+  /**
+   * Get log report for AFD profile
+   */
+  // FIXME: LogAnalytics_GetLogAnalyticsMetrics could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("LogAnalytics_GetLogAnalyticsMetrics")
-  @doc("Get log report for AFD profile")
-  // FIXME: LogAnalytics_GetLogAnalyticsMetrics could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsMetrics")
   @get
   getLogAnalyticsMetrics is Azure.Core.Foundations.Operation<
     {
-      @doc("Azure Subscription ID.")
+      /**
+       * Azure Subscription ID.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Name of the Resource group within the Azure subscription.")
+      /**
+       * Name of the Resource group within the Azure subscription.
+       */
       @maxLength(90)
       @minLength(1)
       @pattern("^[-\\w\\._\\(\\)]+$")
       @path
       resourceGroupName: string;
 
-      @doc("Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.")
+      /**
+       * Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.
+       */
       @path
       profileName: string;
 
@@ -145,26 +182,34 @@ interface Profiles {
     MetricsResponse
   >;
 
+  /**
+   * Get log analytics ranking report for AFD profile
+   */
+  // FIXME: LogAnalytics_GetLogAnalyticsRankings could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("LogAnalytics_GetLogAnalyticsRankings")
-  @doc("Get log analytics ranking report for AFD profile")
-  // FIXME: LogAnalytics_GetLogAnalyticsRankings could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsRankings")
   @get
   getLogAnalyticsRankings is Azure.Core.Foundations.Operation<
     {
-      @doc("Azure Subscription ID.")
+      /**
+       * Azure Subscription ID.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Name of the Resource group within the Azure subscription.")
+      /**
+       * Name of the Resource group within the Azure subscription.
+       */
       @maxLength(90)
       @minLength(1)
       @pattern("^[-\\w\\._\\(\\)]+$")
       @path
       resourceGroupName: string;
 
-      @doc("Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.")
+      /**
+       * Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.
+       */
       @path
       profileName: string;
 
@@ -198,78 +243,102 @@ interface Profiles {
     RankingsResponse
   >;
 
+  /**
+   * Get all available location names for AFD log analytics report.
+   */
+  // FIXME: LogAnalytics_GetLogAnalyticsLocations could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("LogAnalytics_GetLogAnalyticsLocations")
-  @doc("Get all available location names for AFD log analytics report.")
-  // FIXME: LogAnalytics_GetLogAnalyticsLocations could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsLocations")
   @get
   getLogAnalyticsLocations is Azure.Core.Foundations.Operation<
     {
-      @doc("Azure Subscription ID.")
+      /**
+       * Azure Subscription ID.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Name of the Resource group within the Azure subscription.")
+      /**
+       * Name of the Resource group within the Azure subscription.
+       */
       @maxLength(90)
       @minLength(1)
       @pattern("^[-\\w\\._\\(\\)]+$")
       @path
       resourceGroupName: string;
 
-      @doc("Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.")
+      /**
+       * Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.
+       */
       @path
       profileName: string;
     },
     ContinentsResponse
   >;
 
+  /**
+   * Get all endpoints and custom domains available for AFD log report
+   */
+  // FIXME: LogAnalytics_GetLogAnalyticsResources could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("LogAnalytics_GetLogAnalyticsResources")
-  @doc("Get all endpoints and custom domains available for AFD log report")
-  // FIXME: LogAnalytics_GetLogAnalyticsResources could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsResources")
   @get
   getLogAnalyticsResources is Azure.Core.Foundations.Operation<
     {
-      @doc("Azure Subscription ID.")
+      /**
+       * Azure Subscription ID.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Name of the Resource group within the Azure subscription.")
+      /**
+       * Name of the Resource group within the Azure subscription.
+       */
       @maxLength(90)
       @minLength(1)
       @pattern("^[-\\w\\._\\(\\)]+$")
       @path
       resourceGroupName: string;
 
-      @doc("Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.")
+      /**
+       * Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.
+       */
       @path
       profileName: string;
     },
     ResourcesResponse
   >;
 
+  /**
+   * Get Waf related log analytics report for AFD profile.
+   */
+  // FIXME: LogAnalytics_GetWafLogAnalyticsMetrics could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("LogAnalytics_GetWafLogAnalyticsMetrics")
-  @doc("Get Waf related log analytics report for AFD profile.")
-  // FIXME: LogAnalytics_GetWafLogAnalyticsMetrics could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getWafLogAnalyticsMetrics")
   @get
   getWafLogAnalyticsMetrics is Azure.Core.Foundations.Operation<
     {
-      @doc("Azure Subscription ID.")
+      /**
+       * Azure Subscription ID.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Name of the Resource group within the Azure subscription.")
+      /**
+       * Name of the Resource group within the Azure subscription.
+       */
       @maxLength(90)
       @minLength(1)
       @pattern("^[-\\w\\._\\(\\)]+$")
       @path
       resourceGroupName: string;
 
-      @doc("Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.")
+      /**
+       * Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.
+       */
       @path
       profileName: string;
 
@@ -309,26 +378,34 @@ interface Profiles {
     WafMetricsResponse
   >;
 
+  /**
+   * Get WAF log analytics charts for AFD profile
+   */
+  // FIXME: LogAnalytics_GetWafLogAnalyticsRankings could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("LogAnalytics_GetWafLogAnalyticsRankings")
-  @doc("Get WAF log analytics charts for AFD profile")
-  // FIXME: LogAnalytics_GetWafLogAnalyticsRankings could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getWafLogAnalyticsRankings")
   @get
   getWafLogAnalyticsRankings is Azure.Core.Foundations.Operation<
     {
-      @doc("Azure Subscription ID.")
+      /**
+       * Azure Subscription ID.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Name of the Resource group within the Azure subscription.")
+      /**
+       * Name of the Resource group within the Azure subscription.
+       */
       @maxLength(90)
       @minLength(1)
       @pattern("^[-\\w\\._\\(\\)]+$")
       @path
       resourceGroupName: string;
 
-      @doc("Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.")
+      /**
+       * Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group. which is unique within the resource group.
+       */
       @path
       profileName: string;
 

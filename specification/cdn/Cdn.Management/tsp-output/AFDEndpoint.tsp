@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The AzureFrontDoor endpoint uses the URL format <endpointname>.azureedge.net.")
+/**
+ * CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The AzureFrontDoor endpoint uses the URL format <endpointname>.azureedge.net.
+ */
 @parentResource(Profile)
 model AFDEndpoint is TrackedResource<AFDEndpointProperties> {
-  @doc("Name of the endpoint under the profile which is unique globally.")
+  /**
+   * Name of the endpoint under the profile which is unique globally.
+   */
   @path
   @key("endpointName")
   @segment("afdEndpoints")
@@ -24,22 +28,29 @@ model AFDEndpoint is TrackedResource<AFDEndpointProperties> {
 
 @armResourceOperations
 interface AFDEndpoints {
+  /**
+   * Gets an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.")
   @operationId("FrontDoorEndpoints_Get")
   get is ArmResourceRead<AFDEndpoint>;
 
+  /**
+   * Creates a new AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates a new AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.")
   @operationId("FrontDoorEndpoints_Create")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is ArmResourceCreateOrReplaceAsync<
     AFDEndpoint,
     BaseParameters<AFDEndpoint>,
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Updates an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin group operation. To update domains, use the Update Custom Domain operation.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin group operation. To update domains, use the Update Custom Domain operation.")
+  @parameterVisibility("read")
   @operationId("FrontDoorEndpoints_Update")
   update is ArmCustomPatchAsync<
     AFDEndpoint,
@@ -48,8 +59,10 @@ interface AFDEndpoints {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Deletes an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.")
   @operationId("FrontDoorEndpoints_Delete")
   delete is ArmResourceDeleteAsync<
     AFDEndpoint,
@@ -57,13 +70,17 @@ interface AFDEndpoints {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Lists existing AzureFrontDoor endpoints.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists existing AzureFrontDoor endpoints.")
   @operationId("FrontDoorEndpoints_ListByProfile")
   listByProfile is ArmResourceListByParent<AFDEndpoint>;
 
+  /**
+   * Removes a content from AzureFrontDoor.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Removes a content from AzureFrontDoor.")
   @operationId("FrontDoorEndpoints_PurgeContent")
   purgeContent is ArmResourceActionAsync<
     AFDEndpoint,
@@ -73,8 +90,10 @@ interface AFDEndpoints {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Checks the quota and actual usage of the given AzureFrontDoor endpoint under the given CDN profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Checks the quota and actual usage of the given AzureFrontDoor endpoint under the given CDN profile.")
   @operationId("FrontDoorEndpoints_ListResourceUsage")
   listResourceUsage is ArmResourceActionSync<
     AFDEndpoint,
@@ -82,8 +101,10 @@ interface AFDEndpoints {
     UsagesListResult
   >;
 
+  /**
+   * Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.This api isn't work for apex domain.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.This api isn't work for apex domain.")
   @operationId("FrontDoorEndpoints_ValidateCustomDomain")
   validateCustomDomain is ArmResourceActionSync<
     AFDEndpoint,

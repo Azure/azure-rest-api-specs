@@ -11,17 +11,23 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("Defines web application firewall policy for Azure CDN.")
+/**
+ * Defines web application firewall policy for Azure CDN.
+ */
 model CdnWebApplicationFirewallPolicy
   is TrackedResource<CdnWebApplicationFirewallPolicyProperties> {
-  @doc("The name of the CdnWebApplicationFirewallPolicy.")
+  /**
+   * The name of the CdnWebApplicationFirewallPolicy.
+   */
   @maxLength(128)
   @path
   @key("policyName")
   @segment("cdnWebApplicationFirewallPolicies")
   name: string;
 
-  @doc("Gets a unique read-only string that changes whenever the resource is updated.")
+  /**
+   * Gets a unique read-only string that changes whenever the resource is updated.
+   */
   etag?: string;
 
   ...Azure.ResourceManager.ResourceSku;
@@ -29,31 +35,42 @@ model CdnWebApplicationFirewallPolicy
 
 @armResourceOperations
 interface CdnWebApplicationFirewallPolicies {
+  /**
+   * Retrieve protection policy with specified name within a resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Retrieve protection policy with specified name within a resource group.")
   @operationId("Policies_Get")
   get is ArmResourceRead<CdnWebApplicationFirewallPolicy>;
 
+  /**
+   * Create or update policy with specified rule set name within a resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update policy with specified rule set name within a resource group.")
   @operationId("Policies_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<CdnWebApplicationFirewallPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<CdnWebApplicationFirewallPolicy>;
 
+  /**
+   * Update an existing CdnWebApplicationFirewallPolicy with the specified policy name under the specified subscription and resource group
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update an existing CdnWebApplicationFirewallPolicy with the specified policy name under the specified subscription and resource group")
+  @parameterVisibility("read")
   @operationId("Policies_Update")
   update is ArmCustomPatchAsync<
     CdnWebApplicationFirewallPolicy,
     CdnWebApplicationFirewallPolicyPatchParameters
   >;
 
+  /**
+   * Deletes Policy
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes Policy")
   @operationId("Policies_Delete")
   delete is ArmResourceDeleteSync<CdnWebApplicationFirewallPolicy>;
 
+  /**
+   * Lists all of the protection policies within a resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all of the protection policies within a resource group.")
   @operationId("Policies_List")
   list is ArmResourceListByParent<CdnWebApplicationFirewallPolicy>;
 }

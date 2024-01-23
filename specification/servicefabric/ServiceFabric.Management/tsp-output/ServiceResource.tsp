@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
-@doc("The service resource.")
+/**
+ * The service resource.
+ */
 @parentResource(ApplicationResource)
 model ServiceResource is TrackedResource<ServiceResourceProperties> {
-  @doc("The name of the service resource in the format of {applicationName}~{serviceName}.")
+  /**
+   * The name of the service resource in the format of {applicationName}~{serviceName}.
+   */
   @path
   @key("serviceName")
   @segment("services")
@@ -24,28 +28,39 @@ model ServiceResource is TrackedResource<ServiceResourceProperties> {
 
 @armResourceOperations
 interface ServiceResources {
+  /**
+   * Get a Service Fabric service resource created or in the process of being created in the Service Fabric application resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get a Service Fabric service resource created or in the process of being created in the Service Fabric application resource.")
   @operationId("Services_Get")
   get is ArmResourceRead<ServiceResource>;
 
+  /**
+   * Create or update a Service Fabric service resource with the specified name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create or update a Service Fabric service resource with the specified name.")
   @operationId("Services_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ServiceResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ServiceResource>;
 
+  /**
+   * Update a Service Fabric service resource with the specified name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update a Service Fabric service resource with the specified name.")
+  @parameterVisibility("read")
   @operationId("Services_Update")
   update is ArmCustomPatchAsync<ServiceResource, ServiceResourceUpdate>;
 
+  /**
+   * Delete a Service Fabric service resource with the specified name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete a Service Fabric service resource with the specified name.")
   @operationId("Services_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<ServiceResource>;
 
+  /**
+   * Gets all service resources created or in the process of being created in the Service Fabric application resource.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets all service resources created or in the process of being created in the Service Fabric application resource.")
   @operationId("Services_List")
   list is ArmResourceListByParent<ServiceResource>;
 }

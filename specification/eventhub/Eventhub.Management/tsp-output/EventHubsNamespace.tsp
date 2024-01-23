@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.EventHub;
-@doc("Single Namespace item in List or Get Operation")
+/**
+ * Single Namespace item in List or Get Operation
+ */
 model EventHubsNamespace is TrackedResource<EHNamespaceProperties> {
-  @doc("The Namespace name")
+  /**
+   * The Namespace name
+   */
   @maxLength(50)
   @minLength(6)
   @path
@@ -27,54 +31,73 @@ model EventHubsNamespace is TrackedResource<EHNamespaceProperties> {
 
 @armResourceOperations
 interface EventHubsNamespaces {
+  /**
+   * Gets the description of the specified namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the description of the specified namespace.")
   @operationId("Namespaces_Get")
   get is ArmResourceRead<EventHubsNamespace>;
 
+  /**
+   * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.")
   @operationId("Namespaces_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EventHubsNamespace>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EventHubsNamespace>;
 
+  /**
+   * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.")
+  @parameterVisibility("read")
   @operationId("Namespaces_Update")
   update is ArmCustomPatchSync<EventHubsNamespace, EventHubsNamespace>;
 
+  /**
+   * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes an existing namespace. This operation also removes all associated resources under the namespace.")
   @operationId("Namespaces_Delete")
   delete is ArmResourceDeleteAsync<EventHubsNamespace>;
 
+  /**
+   * Lists the available Namespaces within a resource group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists the available Namespaces within a resource group.")
   @operationId("Namespaces_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<EventHubsNamespace>;
 
+  /**
+   * Lists all the available Namespaces within a subscription, irrespective of the resource groups.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all the available Namespaces within a subscription, irrespective of the resource groups.")
   @operationId("Namespaces_List")
   list is ArmListBySubscription<EventHubsNamespace>;
 
-  // #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  // @doc("Refreshes any information about the association.")
-  // @operationId("NetworkSecurityPerimeterConfigurations_CreateOrUpdate")
-  // createOrUpdate is ArmResourceActionAsync<
-  //   EventHubsNamespace,
-  //   void,
-  //   void,
-  //   {
-  //     ...BaseParameters<EventHubsNamespace>;
-
-  //     @doc("The ResourceAssociation Name")
-  //     @path
-  //     resourceAssociationName: string;
-  //   }
-  // >;
-
+  /**
+   * Refreshes any information about the association.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Check the give Namespace name availability.")
+  @operationId("NetworkSecurityPerimeterConfigurations_CreateOrUpdate")
+  Refreshes is ArmResourceActionAsync<
+    EventHubsNamespace,
+    void,
+    void,
+    {
+      ...BaseParameters<EventHubsNamespace>;
+
+      /**
+       * The ResourceAssociation Name
+       */
+      @path
+      resourceAssociationName: string;
+    }
+  >;
+
+  /**
+   * Check the give Namespace name availability.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DisasterRecoveryConfigs_CheckNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
     EventHubsNamespace,
@@ -82,67 +105,85 @@ interface EventHubsNamespaces {
     EventHubsNameAvailabilityResult
   >;
 
-  // #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  // @doc("Check the give Namespace name availability.")
-  // @operationId("Namespaces_CheckNameAvailability")
-  // checkNameAvailability is checkGlobalNameAvailability<
-  //   EventHubsNameAvailabilityContent,
-  //   EventHubsNameAvailabilityResult
-  // >;
+  /**
+   * Check the give Namespace name availability.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Namespaces_CheckNameAvailability")
+  checkNameSpaceAvailability is checkGlobalNameAvailability<
+    EventHubsNameAvailabilityContent,
+    EventHubsNameAvailabilityResult
+  >;
 
-  // #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  // @operationId("PrivateLinkResources_Get")
-  // @doc("Gets lists of resources that supports Privatelinks.")
-  // // FIXME: PrivateLinkResources_Get could not be converted to a resource operation
-  // @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateLinkResources")
-  // @get
-  // get is Azure.Core.Foundations.Operation<
-  //   {
-  //     @doc("Name of the resource group within the azure subscription.")
-  //     @maxLength(90)
-  //     @minLength(1)
-  //     @path
-  //     resourceGroupName: string;
+  /**
+   * Gets lists of resources that supports Privatelinks.
+   */
+  // FIXME: PrivateLinkResources_Get could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PrivateLinkResources_Get")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateLinkResources")
+  @get
+  gets is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Name of the resource group within the azure subscription.
+       */
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
 
-  //     @doc("The Namespace name")
-  //     @maxLength(50)
-  //     @minLength(6)
-  //     @path
-  //     namespaceName: string;
+      /**
+       * The Namespace name
+       */
+      @maxLength(50)
+      @minLength(6)
+      @path
+      namespaceName: string;
 
-  //     @doc("Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
-  //     @path
-  //     subscriptionId: string;
-  //   },
-  //   PrivateLinkResourcesListResult
-  // >;
+      /**
+       * Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
+      @path
+      subscriptionId: string;
+    },
+    PrivateLinkResourcesListResult
+  >;
 
-  // #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  // @operationId("NetworkSecurityPerimeterConfiguration_List")
-  // @doc("Gets list of current NetworkSecurityPerimeterConfiguration for Namespace")
-  // // FIXME: NetworkSecurityPerimeterConfiguration_List could not be converted to a resource operation
-  // @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations")
-  // @get
-  // list is Azure.Core.Foundations.Operation<
-  //   {
-  //     @doc("Name of the resource group within the azure subscription.")
-  //     @maxLength(90)
-  //     @minLength(1)
-  //     @path
-  //     resourceGroupName: string;
+  /**
+   * Gets list of current NetworkSecurityPerimeterConfiguration for Namespace
+   */
+  // FIXME: NetworkSecurityPerimeterConfiguration_List could not be converted to a resource operation
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("NetworkSecurityPerimeterConfiguration_List")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations")
+  @get
+  listNamespaces is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Name of the resource group within the azure subscription.
+       */
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
 
-  //     @doc("The Namespace name")
-  //     @maxLength(50)
-  //     @minLength(6)
-  //     @path
-  //     namespaceName: string;
+      /**
+       * The Namespace name
+       */
+      @maxLength(50)
+      @minLength(6)
+      @path
+      namespaceName: string;
 
-  //     @doc("Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
-  //     @path
-  //     subscriptionId: string;
-  //   },
-  //   NetworkSecurityPerimeterConfigurationList
-  // >;
+      /**
+       * Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
+      @path
+      subscriptionId: string;
+    },
+    NetworkSecurityPerimeterConfigurationList
+  >;
 }
 
 @@projectedName(EventHubsNamespaces.createOrUpdate::parameters.resource,

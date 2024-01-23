@@ -10,84 +10,116 @@ using Azure.ResourceManager;
 namespace Microsoft.ServiceFabric;
 
 interface ClusterVersionsOperations {
+  /**
+   * Gets information about an available Service Fabric cluster code version.
+   */
   @summary("Gets information about a Service Fabric cluster code version available in the specified location.")
-  @doc("Gets information about an available Service Fabric cluster code version.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions/{clusterVersion}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      @doc("The location for the cluster code versions. This is different from cluster location.")
+      /**
+       * The location for the cluster code versions. This is different from cluster location.
+       */
       @path
       location: string;
 
-      @doc("The customer subscription identifier.")
+      /**
+       * The customer subscription identifier.
+       */
       @path
       subscriptionId: string;
 
-      @doc("The cluster code version.")
+      /**
+       * The cluster code version.
+       */
       @path
       clusterVersion: string;
     },
     ClusterCodeVersionsListResult
   >;
 
+  /**
+   * Gets information about an available Service Fabric cluster code version by environment.
+   */
   @summary("Gets information about a Service Fabric cluster code version available for the specified environment.")
-  @doc("Gets information about an available Service Fabric cluster code version by environment.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions/{clusterVersion}")
   @get
   getByEnvironment is Azure.Core.Foundations.Operation<
     {
-      @doc("The location for the cluster code versions. This is different from cluster location.")
+      /**
+       * The location for the cluster code versions. This is different from cluster location.
+       */
       @path
       location: string;
 
-      @doc("The operating system of the cluster. The default means all.")
+      /**
+       * The operating system of the cluster. The default means all.
+       */
       @path
       environment: ClusterVersionsEnvironment;
 
-      @doc("The customer subscription identifier.")
+      /**
+       * The customer subscription identifier.
+       */
       @path
       subscriptionId: string;
 
-      @doc("The cluster code version.")
+      /**
+       * The cluster code version.
+       */
       @path
       clusterVersion: string;
     },
     ClusterCodeVersionsListResult
   >;
 
+  /**
+   * Gets all available code versions for Service Fabric cluster resources by location.
+   */
   @summary("Gets the list of Service Fabric cluster code versions available for the specified location.")
-  @doc("Gets all available code versions for Service Fabric cluster resources by location.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions")
   @get
   list is Azure.Core.Foundations.Operation<
     {
-      @doc("The location for the cluster code versions. This is different from cluster location.")
+      /**
+       * The location for the cluster code versions. This is different from cluster location.
+       */
       @path
       location: string;
 
-      @doc("The customer subscription identifier.")
+      /**
+       * The customer subscription identifier.
+       */
       @path
       subscriptionId: string;
     },
     ClusterCodeVersionsListResult
   >;
 
+  /**
+   * Gets all available code versions for Service Fabric cluster resources by environment.
+   */
   @summary("Gets the list of Service Fabric cluster code versions available for the specified environment.")
-  @doc("Gets all available code versions for Service Fabric cluster resources by environment.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions")
   @get
   listByEnvironment is Azure.Core.Foundations.Operation<
     {
-      @doc("The location for the cluster code versions. This is different from cluster location.")
+      /**
+       * The location for the cluster code versions. This is different from cluster location.
+       */
       @path
       location: string;
 
-      @doc("The operating system of the cluster. The default means all.")
+      /**
+       * The operating system of the cluster. The default means all.
+       */
       @path
       environment: ClusterVersionsEnvironment;
 
-      @doc("The customer subscription identifier.")
+      /**
+       * The customer subscription identifier.
+       */
       @path
       subscriptionId: string;
     },

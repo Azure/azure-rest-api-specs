@@ -26,18 +26,24 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * Cdn Management Client
+ */
 @armProviderNamespace
 @service({
   title: "CdnManagementClient",
 })
 @versioned(Versions)
-@doc("Cdn Management Client")
 namespace Microsoft.Cdn;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2021-06-01 API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2021-06-01 API version.")
   v2021_06_01: "2021-06-01",
 }

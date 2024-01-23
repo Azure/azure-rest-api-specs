@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("Friendly Secret name mapping to the any Secret or secret related information.")
+/**
+ * Friendly Secret name mapping to the any Secret or secret related information.
+ */
 @parentResource(Profile)
 model FrontDoorSecret is ProxyResource<SecretDetails> {
-  @doc("Name of the Secret under the profile.")
+  /**
+   * Name of the Secret under the profile.
+   */
   @path
   @key("secretName")
   @segment("secrets")
@@ -24,24 +28,34 @@ model FrontDoorSecret is ProxyResource<SecretDetails> {
 
 @armResourceOperations
 interface FrontDoorSecrets {
-  @doc("Gets an existing Secret within a profile.")
+  /**
+   * Gets an existing Secret within a profile.
+   */
   get is ArmResourceRead<FrontDoorSecret>;
 
-  @doc("Creates a new Secret within the specified profile.")
-  create is ArmResourceCreateOrUpdateAsync<
+  /**
+   * Creates a new Secret within the specified profile.
+   */
+  create is ArmResourceCreateOrReplaceAsync<
     FrontDoorSecret,
     BaseParameters<FrontDoorSecret>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Deletes an existing Secret within profile.")
+  /**
+   * Deletes an existing Secret within profile.
+   */
   delete is ArmResourceDeleteAsync<
     FrontDoorSecret,
     BaseParameters<FrontDoorSecret>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Lists existing AzureFrontDoor secrets.")
+  /**
+   * Lists existing AzureFrontDoor secrets.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("FrontDoorSecrets_ListByProfile")
   listByProfile is ArmResourceListByParent<FrontDoorSecret>;
 }
 

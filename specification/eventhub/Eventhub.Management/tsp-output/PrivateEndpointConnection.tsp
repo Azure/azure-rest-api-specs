@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.EventHub;
-@doc("Properties of the PrivateEndpointConnection.")
+/**
+ * Properties of the PrivateEndpointConnection.
+ */
 @parentResource(EventHubsNamespace)
 model PrivateEndpointConnection
   is ProxyResource<PrivateEndpointConnectionProperties> {
-  @doc("The PrivateEndpointConnection name")
+  /**
+   * The PrivateEndpointConnection name
+   */
   @path
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
@@ -25,16 +29,26 @@ model PrivateEndpointConnection
 
 @armResourceOperations
 interface PrivateEndpointConnections {
-  @doc("Gets a description for the specified Private Endpoint Connection name.")
+  /**
+   * Gets a description for the specified Private Endpoint Connection name.
+   */
   get is ArmResourceRead<PrivateEndpointConnection>;
 
-  @doc("Creates or updates PrivateEndpointConnections of service namespace.")
+  /**
+   * Creates or updates PrivateEndpointConnections of service namespace.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<PrivateEndpointConnection>;
 
-  @doc("Deletes an existing namespace. This operation also removes all associated resources under the namespace.")
+  /**
+   * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
+   */
   delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
 
-  @doc("Gets the available PrivateEndpointConnections within a namespace.")
+  /**
+   * Gets the available PrivateEndpointConnections within a namespace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("PrivateEndpointConnections_List")
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 

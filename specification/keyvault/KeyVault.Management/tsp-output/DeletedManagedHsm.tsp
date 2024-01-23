@@ -14,7 +14,9 @@ namespace Microsoft.KeyVault;
 
 @locationResource
 model DeletedManagedHsm is ProxyResource<DeletedManagedHsmProperties> {
-  @doc("The name of the deleted managed HSM.")
+  /**
+   * The name of the deleted managed HSM.
+   */
   @path
   @key("name")
   @segment("deletedManagedHSMs")
@@ -23,13 +25,17 @@ model DeletedManagedHsm is ProxyResource<DeletedManagedHsmProperties> {
 
 @armResourceOperations
 interface DeletedManagedHsms {
+  /**
+   * Gets the specified deleted managed HSM.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the specified deleted managed HSM.")
   @operationId("ManagedHsms_GetDeleted")
   getDeleted is ArmResourceRead<DeletedManagedHsm>;
 
+  /**
+   * Permanently deletes the specified managed HSM.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Permanently deletes the specified managed HSM.")
   @operationId("ManagedHsms_PurgeDeleted")
   purgeDeleted is ArmResourceActionNoResponseContentAsync<
     DeletedManagedHsm,

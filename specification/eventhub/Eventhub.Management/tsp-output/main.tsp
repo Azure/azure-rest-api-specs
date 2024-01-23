@@ -23,18 +23,24 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.
+ */
 @armProviderNamespace
 @service({
   title: "EventHubManagementClient",
 })
 @versioned(Versions)
-@doc("Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.")
 namespace Microsoft.EventHub;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2022-10-01-preview API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2022-10-01-preview API version.")
   v2022_10_01_preview: "2022-10-01-preview",
 }

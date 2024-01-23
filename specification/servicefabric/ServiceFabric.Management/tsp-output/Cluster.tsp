@@ -11,12 +11,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
-@doc("""
-The cluster resource
+/**
+* The cluster resource
 
-""")
+*/
 model Cluster is TrackedResource<ClusterProperties> {
-  @doc("The name of the cluster resource.")
+  /**
+   * The name of the cluster resource.
+   */
   @path
   @key("clusterName")
   @segment("clusters")
@@ -25,25 +27,42 @@ model Cluster is TrackedResource<ClusterProperties> {
 
 @armResourceOperations
 interface Clusters {
-  @doc("Get a Service Fabric cluster resource created or in the process of being created in the specified resource group.")
+  /**
+   * Get a Service Fabric cluster resource created or in the process of being created in the specified resource group.
+   */
   get is ArmResourceRead<Cluster>;
 
-  @doc("Create or update a Service Fabric cluster resource with the specified name.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Cluster>;
+  /**
+   * Create or update a Service Fabric cluster resource with the specified name.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Cluster>;
 
-  @doc("Update the configuration of a Service Fabric cluster resource with the specified name.")
+  /**
+   * Update the configuration of a Service Fabric cluster resource with the specified name.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<Cluster, ClusterUpdateParameters>;
 
-  @doc("Delete a Service Fabric cluster resource with the specified name.")
+  /**
+   * Delete a Service Fabric cluster resource with the specified name.
+   */
   delete is ArmResourceDeleteSync<Cluster>;
 
-  @doc("Gets all Service Fabric cluster resources created or in the process of being created in the resource group.")
+  /**
+   * Gets all Service Fabric cluster resources created or in the process of being created in the resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Clusters_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Cluster>;
 
-  @doc("Gets all Service Fabric cluster resources created or in the process of being created in the subscription.")
+  /**
+   * Gets all Service Fabric cluster resources created or in the process of being created in the subscription.
+   */
   list is ArmListBySubscription<Cluster>;
 
-  @doc("If a target is not provided, it will get the minimum and maximum versions available from the current cluster version. If a target is given, it will provide the required path to get from the current cluster version to the target version.")
+  /**
+   * If a target is not provided, it will get the minimum and maximum versions available from the current cluster version. If a target is given, it will provide the required path to get from the current cluster version to the target version.
+   */
   listUpgradableVersions is ArmResourceActionSync<
     Cluster,
     UpgradableVersionsDescription,

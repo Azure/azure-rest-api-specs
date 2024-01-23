@@ -1505,7 +1505,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/routes": {
       "get": {
-        "operationId": "FrontDoorRoutes_ListByAfdEndpoint",
+        "operationId": "FrontDoorRoutes_ListByEndpoint",
         "tags": [
           "FrontDoorRoutes"
         ],
@@ -1547,6 +1547,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Routes_ListByEndpoint": {
+            "$ref": "./examples/FrontDoorRoutes_ListByEndpoint.json"
           }
         },
         "x-ms-pageable": {
@@ -2714,7 +2719,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains": {
       "get": {
-        "operationId": "CdnCustomDomains_ListByCdnEndpoint",
+        "operationId": "CdnCustomDomains_ListByEndpoint",
         "tags": [
           "CdnCustomDomains"
         ],
@@ -2756,6 +2761,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CustomDomains_ListByEndpoint": {
+            "$ref": "./examples/CdnCustomDomains_ListByEndpoint.json"
           }
         },
         "x-ms-pageable": {
@@ -3289,7 +3299,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/originGroups": {
       "get": {
-        "operationId": "CdnOriginGroups_ListByCdnEndpoint",
+        "operationId": "CdnOriginGroups_ListByEndpoint",
         "tags": [
           "CdnOriginGroups"
         ],
@@ -3331,6 +3341,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OriginsGroups_ListByEndpoint": {
+            "$ref": "./examples/CdnOriginGroups_ListByEndpoint.json"
           }
         },
         "x-ms-pageable": {
@@ -3647,7 +3662,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/origins": {
       "get": {
-        "operationId": "CdnOrigins_ListByCdnEndpoint",
+        "operationId": "CdnOrigins_ListByEndpoint",
         "tags": [
           "CdnOrigins"
         ],
@@ -3689,6 +3704,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Origins_ListByEndpoint": {
+            "$ref": "./examples/CdnOrigins_ListByEndpoint.json"
           }
         },
         "x-ms-pageable": {
@@ -6245,7 +6265,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}/rules": {
       "get": {
-        "operationId": "FrontDoorRules_ListByFrontDoorRuleSet",
+        "operationId": "FrontDoorRules_ListByRuleSet",
         "tags": [
           "FrontDoorRules"
         ],
@@ -6287,6 +6307,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Rules_ListByRuleSet": {
+            "$ref": "./examples/FrontDoorRules_ListByRuleSet.json"
           }
         },
         "x-ms-pageable": {
@@ -7243,24 +7268,6 @@
         }
       }
     },
-    "AFDDomainHttpsParametersUpdate": {
-      "type": "object",
-      "description": "The JSON object that contains the properties to secure a domain.",
-      "properties": {
-        "certificateType": {
-          "$ref": "#/definitions/FrontDoorCertificateType",
-          "description": "Defines the source of the SSL certificate."
-        },
-        "minimumTlsVersion": {
-          "$ref": "#/definitions/FrontDoorMinimumTlsVersion",
-          "description": "TLS protocol version that will be used for Https"
-        },
-        "secret": {
-          "$ref": "#/definitions/AFDDomainHttpsParametersSecret",
-          "description": "Resource reference to the secret. ie. subs/rg/profile/secret"
-        }
-      }
-    },
     "AFDDomainListResult": {
       "type": "object",
       "description": "The response of a AFDDomain list operation.",
@@ -7347,8 +7354,13 @@
       "type": "object",
       "description": "The JSON object that contains the properties of the domain to create.",
       "properties": {
+        "profileName": {
+          "type": "string",
+          "description": "The name of the profile which holds the domain.",
+          "readOnly": true
+        },
         "tlsSettings": {
-          "$ref": "#/definitions/AFDDomainHttpsParametersUpdate",
+          "$ref": "#/definitions/AFDDomainHttpsParameters",
           "description": "The configuration specifying how to enable HTTPS for the domain - using AzureFrontDoor managed certificate or user's own certificate. If not specified, enabling ssl uses AzureFrontDoor managed certificate by default."
         },
         "azureDnsZone": {
@@ -7700,7 +7712,8 @@
         },
         "enforceCertificateNameCheck": {
           "type": "boolean",
-          "description": "Whether to enable certificate name check at origin level"
+          "description": "Whether to enable certificate name check at origin level",
+          "default": true
         },
         "provisioningState": {
           "$ref": "#/definitions/FrontDoorProvisioningState",
@@ -7783,7 +7796,8 @@
         },
         "enforceCertificateNameCheck": {
           "type": "boolean",
-          "description": "Whether to enable certificate name check at origin level"
+          "description": "Whether to enable certificate name check at origin level",
+          "default": true
         }
       }
     },
@@ -8152,7 +8166,8 @@
       "x-ms-enum": {
         "name": "CdnEndpointProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "CdnEndpointReference": {
       "type": "object",
@@ -8670,11 +8685,11 @@
         },
         "value": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "percentage": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         }
       }
     },
@@ -9137,7 +9152,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Origin name which must be unique within the endpoint. "
+          "description": "Origin name which must be unique within the endpoint."
         },
         "properties": {
           "$ref": "#/definitions/DeepCreatedOriginProperties",
@@ -10049,33 +10064,6 @@
         }
       ]
     },
-    "EndpointPropertiesUpdate": {
-      "type": "object",
-      "description": "The JSON object that contains the properties required to create an endpoint.",
-      "properties": {
-        "origins": {
-          "type": "array",
-          "description": "The source of the content being delivered via CDN.",
-          "items": {
-            "$ref": "#/definitions/DeepCreatedOrigin"
-          },
-          "x-ms-identifiers": []
-        },
-        "originGroups": {
-          "type": "array",
-          "description": "The origin groups comprising of origins that are used for load balancing the traffic based on availability.",
-          "items": {
-            "$ref": "#/definitions/DeepCreatedOriginGroup"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EndpointPropertiesUpdateParametersUpdate"
-        }
-      ]
-    },
     "EndpointPropertiesUpdateParameters": {
       "type": "object",
       "description": "The JSON object containing endpoint update parameters.",
@@ -10180,97 +10168,6 @@
         "rules"
       ]
     },
-    "EndpointPropertiesUpdateParametersDeliveryPolicyUpdate": {
-      "type": "object",
-      "description": "A policy that specifies the delivery rules to be used for an endpoint.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "User-friendly description of the policy."
-        },
-        "rules": {
-          "type": "array",
-          "description": "A list of the delivery rules.",
-          "items": {
-            "$ref": "#/definitions/DeliveryRule"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "EndpointPropertiesUpdateParametersUpdate": {
-      "type": "object",
-      "description": "The JSON object containing endpoint update parameters.",
-      "properties": {
-        "originPath": {
-          "type": "string",
-          "description": "A directory path on the origin that CDN can use to retrieve content from, e.g. contoso.cloudapp.net/originpath."
-        },
-        "contentTypesToCompress": {
-          "type": "array",
-          "description": "List of content types on which compression applies. The value should be a valid MIME type.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "originHostHeader": {
-          "type": "string",
-          "description": "The host header value sent to the origin with each request. This property at Endpoint is only allowed when endpoint uses single origin and can be overridden by the same property specified at origin.If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default."
-        },
-        "isCompressionEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether content compression is enabled on CDN. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on CDN when requested content is smaller than 1 byte or larger than 1 MB."
-        },
-        "isHttpAllowed": {
-          "type": "boolean",
-          "description": "Indicates whether HTTP traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed."
-        },
-        "isHttpsAllowed": {
-          "type": "boolean",
-          "description": "Indicates whether HTTPS traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed."
-        },
-        "queryStringCachingBehavior": {
-          "$ref": "#/definitions/QueryStringCachingBehavior",
-          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL."
-        },
-        "optimizationType": {
-          "$ref": "#/definitions/OptimizationType",
-          "description": "Specifies what scenario the customer wants this CDN endpoint to optimize for, e.g. Download, Media services. With this information, CDN can apply scenario driven optimization."
-        },
-        "probePath": {
-          "type": "string",
-          "description": "Path to a file hosted on the origin which helps accelerate delivery of the dynamic content and calculate the most optimal routes for the CDN. This is relative to the origin path. This property is only relevant when using a single origin."
-        },
-        "geoFilters": {
-          "type": "array",
-          "description": "List of rules defining the user's geo access within a CDN endpoint. Each geo filter defines an access rule to a specified path or content, e.g. block APAC for path /pictures/",
-          "items": {
-            "$ref": "#/definitions/GeoFilter"
-          },
-          "x-ms-identifiers": []
-        },
-        "defaultOriginGroup": {
-          "$ref": "#/definitions/EndpointPropertiesUpdateParametersDefaultOriginGroup",
-          "description": "A reference to the origin group."
-        },
-        "urlSigningKeys": {
-          "type": "array",
-          "description": "List of keys used to validate the signed URL hashes.",
-          "items": {
-            "$ref": "#/definitions/UrlSigningKey"
-          },
-          "x-ms-identifiers": []
-        },
-        "deliveryPolicy": {
-          "$ref": "#/definitions/EndpointPropertiesUpdateParametersDeliveryPolicyUpdate",
-          "description": "A policy that specifies the delivery rules to be used for an endpoint."
-        },
-        "webApplicationFirewallPolicyLink": {
-          "$ref": "#/definitions/EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink",
-          "description": "Defines the Web Application Firewall policy for the endpoint (if applicable)"
-        }
-      }
-    },
     "EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink": {
       "type": "object",
       "description": "Defines the Web Application Firewall policy for the endpoint (if applicable)",
@@ -10309,7 +10206,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/EndpointPropertiesUpdateParametersUpdate",
+          "$ref": "#/definitions/EndpointPropertiesUpdateParameters",
           "description": "The JSON object containing endpoint update parameters."
         }
       }
@@ -10366,7 +10263,8 @@
       "x-ms-enum": {
         "name": "FrontDoorDeploymentStatus",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "FrontDoorEndpointProtocol": {
       "type": "string",
@@ -10405,7 +10303,8 @@
       "x-ms-enum": {
         "name": "FrontDoorProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "FrontDoorPurgeParameters": {
       "type": "object",
@@ -10682,12 +10581,12 @@
         },
         "currentValue": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The current value of the usage."
         },
         "limit": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The limit of usage."
         },
         "name": {
@@ -11966,7 +11865,8 @@
       "x-ms-enum": {
         "name": "OriginGroupProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "OriginGroupResourceState": {
       "type": "string",
@@ -12057,7 +11957,8 @@
       "x-ms-enum": {
         "name": "OriginProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "OriginResourceState": {
       "type": "string",
@@ -12548,7 +12449,8 @@
       "x-ms-enum": {
         "name": "ProfileProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "ProfileResourceState": {
       "type": "string",
@@ -12757,7 +12659,7 @@
         },
         "value": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "percentage": {
           "type": "number",
@@ -13117,7 +13019,7 @@
     },
     "RequestSchemeMatchCondition": {
       "type": "object",
-      "description": "Defines the parameters for RequestScheme match conditions ",
+      "description": "Defines the parameters for RequestScheme match conditions",
       "properties": {
         "typeName": {
           "$ref": "#/definitions/RequestSchemeMatchConditionType",
@@ -14072,7 +13974,7 @@
     },
     "Sku": {
       "type": "object",
-      "description": "Standard_Verizon = The SKU name for a Standard Verizon CDN profile.\nPremium_Verizon = The SKU name for a Premium Verizon CDN profile.\nCustom_Verizon = The SKU name for a Custom Verizon CDN profile.\nStandard_Akamai = The SKU name for an Akamai CDN profile.\nStandard_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using GB based billing model.\nStandard_Microsoft = The SKU name for a Standard Microsoft CDN profile.\nStandard_AzureFrontDoor =  The SKU name for an Azure Front Door Standard profile.\nPremium_AzureFrontDoor = The SKU name for an Azure Front Door Premium profile.\nStandard_955BandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using 95-5 peak bandwidth billing model.\nStandard_AvgBandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using monthly average peak bandwidth billing model.\nStandardPlus_ChinaCdn = The SKU name for a China CDN profile for live-streaming using GB based billing model.\nStandardPlus_955BandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using 95-5 peak bandwidth billing model.\nStandardPlus_AvgBandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using monthly average peak bandwidth billing model.\n",
+      "description": "Standard_Verizon = The SKU name for a Standard Verizon CDN profile.\nPremium_Verizon = The SKU name for a Premium Verizon CDN profile.\nCustom_Verizon = The SKU name for a Custom Verizon CDN profile.\nStandard_Akamai = The SKU name for an Akamai CDN profile.\nStandard_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using GB based billing model.\nStandard_Microsoft = The SKU name for a Standard Microsoft CDN profile.\nStandard_AzureFrontDoor =  The SKU name for an Azure Front Door Standard profile.\nPremium_AzureFrontDoor = The SKU name for an Azure Front Door Premium profile.\nStandard_955BandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using 95-5 peak bandwidth billing model.\nStandard_AvgBandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using monthly average peak bandwidth billing model.\nStandardPlus_ChinaCdn = The SKU name for a China CDN profile for live-streaming using GB based billing model.\nStandardPlus_955BandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using 95-5 peak bandwidth billing model.\nStandardPlus_AvgBandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using monthly average peak bandwidth billing model.",
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
@@ -14706,7 +14608,7 @@
         },
         "parameterNameOverride": {
           "type": "array",
-          "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
+          "description": "Defines which query string parameters in the url to be considered for expires, key id etc.",
           "items": {
             "$ref": "#/definitions/UrlSigningParamIdentifier"
           },
@@ -15237,7 +15139,8 @@
       "x-ms-enum": {
         "name": "WebApplicationFirewallPolicyProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     }
   },
   "parameters": {

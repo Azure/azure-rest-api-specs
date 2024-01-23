@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("Origin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.")
+/**
+ * Origin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.
+ */
 @parentResource(CdnEndpoint)
 model CdnOriginGroup is ProxyResource<OriginGroupProperties> {
-  @doc("Name of the origin group which is unique within the endpoint.")
+  /**
+   * Name of the origin group which is unique within the endpoint.
+   */
   @path
   @key("originGroupName")
   @segment("originGroups")
@@ -24,19 +28,32 @@ model CdnOriginGroup is ProxyResource<OriginGroupProperties> {
 
 @armResourceOperations
 interface CdnOriginGroups {
-  @doc("Gets an existing origin group within an endpoint.")
+  /**
+   * Gets an existing origin group within an endpoint.
+   */
   get is ArmResourceRead<CdnOriginGroup>;
 
-  @doc("Creates a new origin group within the specified endpoint.")
-  create is ArmResourceCreateOrUpdateAsync<CdnOriginGroup>;
+  /**
+   * Creates a new origin group within the specified endpoint.
+   */
+  create is ArmResourceCreateOrReplaceAsync<CdnOriginGroup>;
 
-  @doc("Updates an existing origin group within an endpoint.")
+  /**
+   * Updates an existing origin group within an endpoint.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<CdnOriginGroup, OriginGroupUpdateParameters>;
 
-  @doc("Deletes an existing origin group within an endpoint.")
+  /**
+   * Deletes an existing origin group within an endpoint.
+   */
   delete is ArmResourceDeleteAsync<CdnOriginGroup>;
 
-  @doc("Lists all of the existing origin groups within an endpoint.")
+  /**
+   * Lists all of the existing origin groups within an endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("CdnOriginGroups_ListByEndpoint")
   listByEndpoint is ArmResourceListByParent<CdnOriginGroup>;
 }
 

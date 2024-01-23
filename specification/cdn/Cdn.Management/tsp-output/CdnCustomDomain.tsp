@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.")
+/**
+ * Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.
+ */
 @parentResource(CdnEndpoint)
 model CdnCustomDomain is ProxyResource<CustomDomainProperties> {
-  @doc("Name of the custom domain within an endpoint.")
+  /**
+   * Name of the custom domain within an endpoint.
+   */
   @path
   @key("customDomainName")
   @segment("customDomains")
@@ -24,26 +28,40 @@ model CdnCustomDomain is ProxyResource<CustomDomainProperties> {
 
 @armResourceOperations
 interface CdnCustomDomains {
-  @doc("Gets an existing custom domain within an endpoint.")
+  /**
+   * Gets an existing custom domain within an endpoint.
+   */
   get is ArmResourceRead<CdnCustomDomain>;
 
-  @doc("Creates a new custom domain within an endpoint.")
-  create is ArmResourceCreateOrUpdateAsync<CdnCustomDomain>;
+  /**
+   * Creates a new custom domain within an endpoint.
+   */
+  create is ArmResourceCreateOrReplaceAsync<CdnCustomDomain>;
 
-  @doc("Deletes an existing custom domain within an endpoint.")
+  /**
+   * Deletes an existing custom domain within an endpoint.
+   */
   delete is ArmResourceDeleteAsync<CdnCustomDomain>;
 
-  @doc("Lists all of the existing custom domains within an endpoint.")
+  /**
+   * Lists all of the existing custom domains within an endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("CdnCustomDomains_ListByEndpoint")
   listByEndpoint is ArmResourceListByParent<CdnCustomDomain>;
 
-  @doc("Disable https delivery of the custom domain.")
+  /**
+   * Disable https delivery of the custom domain.
+   */
   disableCustomHttps is ArmResourceActionAsync<
     CdnCustomDomain,
     void,
     CdnCustomDomain
   >;
 
-  @doc("Enable https delivery of the custom domain.")
+  /**
+   * Enable https delivery of the custom domain.
+   */
   enableCustomHttps is ArmResourceActionAsync<
     CdnCustomDomain,
     CustomDomainHttpsParameters,

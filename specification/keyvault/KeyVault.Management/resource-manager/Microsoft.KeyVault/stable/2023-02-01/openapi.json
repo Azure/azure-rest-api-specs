@@ -707,7 +707,7 @@
             "description": "Parameters to patch the managed HSM Pool",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedHsmUpdate"
+              "$ref": "#/definitions/ManagedHsm"
             },
             "x-ms-client-name": "parameters"
           }
@@ -1444,7 +1444,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections": {
       "get": {
-        "operationId": "PrivateEndpointConnections_ListByVault",
+        "operationId": "PrivateEndpointConnections_ListByResource",
         "tags": [
           "PrivateEndpointConnections"
         ],
@@ -1479,6 +1479,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "KeyVaultListPrivateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByResource.json"
           }
         },
         "x-ms-pageable": {
@@ -1738,7 +1743,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets": {
       "get": {
-        "operationId": "Secrets_ListByVault",
+        "operationId": "Secrets_List",
         "tags": [
           "Secrets"
         ],
@@ -1781,6 +1786,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List secrets in the vault": {
+            "$ref": "./examples/Secrets_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1985,7 +1995,7 @@
         },
         "applicationId": {
           "type": "string",
-          "description": " Application ID of the client making request on behalf of a principal"
+          "description": "Application ID of the client making request on behalf of a principal"
         },
         "permissions": {
           "$ref": "#/definitions/Permissions",
@@ -2457,7 +2467,8 @@
       "x-ms-enum": {
         "name": "GeoReplicationRegionProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "IPRule": {
       "type": "object",
@@ -2699,7 +2710,8 @@
       "x-ms-enum": {
         "name": "ManagedHsmPrivateEndpointConnectionProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "ManagedHsmPrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -2737,16 +2749,19 @@
         },
         "enableSoftDelete": {
           "type": "boolean",
-          "description": "Property to specify whether the 'soft delete' functionality is enabled for this managed HSM pool. Soft delete is enabled by default for all managed HSMs and is immutable."
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this managed HSM pool. Soft delete is enabled by default for all managed HSMs and is immutable.",
+          "default": true
         },
         "softDeleteRetentionInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "Soft deleted data retention days. When you delete an HSM or a key, it will remain recoverable for the configured retention period or for a default period of 90 days. It accepts values between 7 and 90."
+          "description": "Soft deleted data retention days. When you delete an HSM or a key, it will remain recoverable for the configured retention period or for a default period of 90 days. It accepts values between 7 and 90.",
+          "default": 90
         },
         "enablePurgeProtection": {
           "type": "boolean",
-          "description": "Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service may initiate a hard, irrecoverable deletion. Enabling this functionality is irreversible."
+          "description": "Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service may initiate a hard, irrecoverable deletion. Enabling this functionality is irreversible.",
+          "default": true
         },
         "createMode": {
           "$ref": "#/definitions/CreateMode",
@@ -2788,7 +2803,8 @@
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Control permission to the managed HSM from public networks."
+          "description": "Control permission to the managed HSM from public networks.",
+          "default": "Enabled"
         },
         "scheduledPurgeDate": {
           "type": "string",
@@ -2861,7 +2877,8 @@
             "description": "The managed HSM pool is being restored from full HSM backup."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ManagedHsmResource": {
       "type": "object",
@@ -2949,15 +2966,6 @@
         "name": "ManagedHsmSkuName",
         "modelAsString": false
       }
-    },
-    "ManagedHsmUpdate": {
-      "type": "object",
-      "description": "Resource information with extended details.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
     },
     "MetricSpecification": {
       "type": "object",
@@ -3526,7 +3534,8 @@
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -3724,7 +3733,7 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "The tags that will be assigned to the secret. ",
+          "description": "The tags that will be assigned to the secret.",
           "additionalProperties": {
             "type": "string"
           }
@@ -3765,7 +3774,7 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "The tags that will be assigned to the secret. ",
+          "description": "The tags that will be assigned to the secret.",
           "additionalProperties": {
             "type": "string"
           }
@@ -3901,20 +3910,6 @@
       "x-ms-enum": {
         "name": "SkuName",
         "modelAsString": false
-      }
-    },
-    "SkuUpdate": {
-      "type": "object",
-      "description": "SKU details",
-      "properties": {
-        "family": {
-          "$ref": "#/definitions/SkuFamily",
-          "description": "SKU family name"
-        },
-        "name": {
-          "$ref": "#/definitions/SkuName",
-          "description": "SKU name to specify whether the key vault is a standard vault or a premium vault."
-        }
       }
     },
     "StoragePermissions": {
@@ -4087,7 +4082,7 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "The tags that will be assigned to the key vault. ",
+          "description": "The tags that will be assigned to the key vault.",
           "additionalProperties": {
             "type": "string"
           }
@@ -4107,7 +4102,7 @@
           "description": "The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault."
         },
         "sku": {
-          "$ref": "#/definitions/SkuUpdate",
+          "$ref": "#/definitions/Sku",
           "description": "SKU details"
         },
         "accessPolicies": {
@@ -4204,12 +4199,14 @@
         },
         "enableSoftDelete": {
           "type": "boolean",
-          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. If it's not set to any value(true or false) when creating new key vault, it will be set to true by default. Once set to true, it cannot be reverted to false."
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. If it's not set to any value(true or false) when creating new key vault, it will be set to true by default. Once set to true, it cannot be reverted to false.",
+          "default": true
         },
         "softDeleteRetentionInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "softDelete data retention days. It accepts >=7 and <=90."
+          "description": "softDelete data retention days. It accepts >=7 and <=90.",
+          "default": 90
         },
         "enableRbacAuthorization": {
           "type": "boolean",
@@ -4245,7 +4242,8 @@
         },
         "publicNetworkAccess": {
           "type": "string",
-          "description": "Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules."
+          "description": "Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules.",
+          "default": "enabled"
         }
       },
       "required": [

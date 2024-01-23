@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.")
+/**
+ * Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.
+ */
 @parentResource(Profile)
 model AFDDomain is ProxyResource<AFDDomainProperties> {
-  @doc("Name of the domain under the profile which is unique globally.")
+  /**
+   * Name of the domain under the profile which is unique globally.
+   */
   @path
   @key("customDomainName")
   @segment("customDomains")
@@ -24,22 +28,29 @@ model AFDDomain is ProxyResource<AFDDomainProperties> {
 
 @armResourceOperations
 interface AFDDomains {
+  /**
+   * Gets an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.")
   @operationId("FrontDoorCustomDomains_Get")
   get is ArmResourceRead<AFDDomain>;
 
+  /**
+   * Creates a new domain within the specified profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates a new domain within the specified profile.")
   @operationId("FrontDoorCustomDomains_Create")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is ArmResourceCreateOrReplaceAsync<
     AFDDomain,
     BaseParameters<AFDDomain>,
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Updates an existing domain within a profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates an existing domain within a profile.")
+  @parameterVisibility("read")
   @operationId("FrontDoorCustomDomains_Update")
   update is ArmCustomPatchAsync<
     AFDDomain,
@@ -48,8 +59,10 @@ interface AFDDomains {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Deletes an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.")
   @operationId("FrontDoorCustomDomains_Delete")
   delete is ArmResourceDeleteAsync<
     AFDDomain,
@@ -57,13 +70,17 @@ interface AFDDomains {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Lists existing AzureFrontDoor domains.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists existing AzureFrontDoor domains.")
   @operationId("FrontDoorCustomDomains_ListByProfile")
   listByProfile is ArmResourceListByParent<AFDDomain>;
 
+  /**
+   * Updates the domain validation token.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates the domain validation token.")
   @operationId("FrontDoorCustomDomains_RefreshValidationToken")
   refreshValidationToken is ArmResourceActionAsync<
     AFDDomain,

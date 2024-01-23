@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
-@doc("Resource information with extended details.")
+/**
+ * Resource information with extended details.
+ */
 model Vault is TrackedResource<VaultProperties> {
-  @doc("The name of the vault.")
+  /**
+   * The name of the vault.
+   */
   @path
   @key("vaultName")
   @segment("vaults")
@@ -22,56 +26,83 @@ model Vault is TrackedResource<VaultProperties> {
 
 @armResourceOperations
 interface Vaults {
-  @doc("Gets the specified Azure key vault.")
+  /**
+   * Gets the specified Azure key vault.
+   */
   get is ArmResourceRead<Vault>;
 
-  @doc("Create or update a key vault in the specified subscription.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Vault>;
+  /**
+   * Create or update a key vault in the specified subscription.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Vault>;
 
-  @doc("Update a key vault in the specified subscription.")
+  /**
+   * Update a key vault in the specified subscription.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchSync<Vault, VaultPatchParameters>;
 
-  @doc("Deletes the specified Azure key vault.")
+  /**
+   * Deletes the specified Azure key vault.
+   */
   delete is ArmResourceDeleteSync<Vault>;
 
-  @doc("The List operation gets information about the vaults associated with the subscription and within the specified resource group.")
+  /**
+   * The List operation gets information about the vaults associated with the subscription and within the specified resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Vaults_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Vault,
     {
       ...BaseParameters<Vault>;
 
-      @doc("Maximum number of results to return.")
+      /**
+       * Maximum number of results to return.
+       */
       @query("$top")
       $top?: int32;
     }
   >;
 
-  @doc("The List operation gets information about the vaults associated with the subscription.")
+  /**
+   * The List operation gets information about the vaults associated with the subscription.
+   */
   listBySubscription is ArmListBySubscription<Vault>;
 
-  @doc("Checks that the vault name is valid and is not already in use.")
+  /**
+   * Checks that the vault name is valid and is not already in use.
+   */
   checkNameAvailability is checkGlobalNameAvailability<
     VaultCheckNameAvailabilityParameters,
     CheckNameAvailabilityResult
   >;
 
+  /**
+   * Gets the private link resources supported for the key vault.
+   */
+  // FIXME: PrivateLinkResources_ListByVault could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("PrivateLinkResources_ListByVault")
-  @doc("Gets the private link resources supported for the key vault.")
-  // FIXME: PrivateLinkResources_ListByVault could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateLinkResources")
   @get
   listByVault is Azure.Core.Foundations.Operation<
     {
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Name of the resource group that contains the key vault.")
+      /**
+       * Name of the resource group that contains the key vault.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("The name of the key vault.")
+      /**
+       * The name of the key vault.
+       */
       @pattern("^[a-zA-Z0-9-]{3,24}$")
       @path
       vaultName: string;

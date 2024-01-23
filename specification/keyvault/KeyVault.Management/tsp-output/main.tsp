@@ -18,18 +18,24 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/**
+ * The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.
+ */
 @armProviderNamespace
 @service({
   title: "KeyVaultManagementClient",
 })
 @versioned(Versions)
-@doc("The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.")
 namespace Microsoft.KeyVault;
 
-@doc("The available API versions.")
+/**
+ * The available API versions.
+ */
 enum Versions {
+  /**
+   * The 2023-02-01 API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2023-02-01 API version.")
   v2023_02_01: "2023-02-01",
 }

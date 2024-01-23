@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.EventHub;
-@doc("Single item in a List or Get AuthorizationRule operation")
+/**
+ * Single item in a List or Get AuthorizationRule operation
+ */
 @parentResource(EventHubsNamespace)
 model EventHubsAuthorizationRule is ProxyResource<AuthorizationRuleProperties> {
-  @doc("The authorization rule name.")
+  /**
+   * The authorization rule name.
+   */
   @minLength(1)
   @path
   @key("authorizationRuleName")
@@ -25,28 +29,38 @@ model EventHubsAuthorizationRule is ProxyResource<AuthorizationRuleProperties> {
 
 @armResourceOperations
 interface EventHubsAuthorizationRules {
+  /**
+   * Gets an AuthorizationRule for a Namespace by rule name.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets an AuthorizationRule for a Namespace by rule name.")
   @operationId("Namespaces_GetAuthorizationRule")
   getAuthorizationRule is ArmResourceRead<EventHubsAuthorizationRule>;
 
+  /**
+   * Creates or updates an AuthorizationRule for a Namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates or updates an AuthorizationRule for a Namespace.")
   @operationId("Namespaces_CreateOrUpdateAuthorizationRule")
   createOrUpdateAuthorizationRule is ArmResourceCreateOrReplaceSync<EventHubsAuthorizationRule>;
 
+  /**
+   * Deletes an AuthorizationRule for a Namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes an AuthorizationRule for a Namespace.")
   @operationId("Namespaces_DeleteAuthorizationRule")
   deleteAuthorizationRule is ArmResourceDeleteSync<EventHubsAuthorizationRule>;
 
+  /**
+   * Gets a list of authorization rules for a Namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets a list of authorization rules for a Namespace.")
   @operationId("Namespaces_ListAuthorizationRules")
   listAuthorizationRules is ArmResourceListByParent<EventHubsAuthorizationRule>;
 
+  /**
+   * Gets the primary and secondary connection strings for the Namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the primary and secondary connection strings for the Namespace.")
   @operationId("Namespaces_ListKeys")
   listKeys is ArmResourceActionSync<
     EventHubsAuthorizationRule,
@@ -54,8 +68,10 @@ interface EventHubsAuthorizationRules {
     EventHubsAccessKeys
   >;
 
+  /**
+   * Regenerates the primary or secondary connection strings for the specified Namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Regenerates the primary or secondary connection strings for the specified Namespace.")
   @operationId("Namespaces_RegenerateKeys")
   regenerateKeys is ArmResourceActionSync<
     EventHubsAuthorizationRule,

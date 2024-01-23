@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("Friendly RuleSet name mapping to the any RuleSet or secret related information.")
+/**
+ * Friendly RuleSet name mapping to the any RuleSet or secret related information.
+ */
 @parentResource(Profile)
 model FrontDoorRuleSet is ProxyResource<RuleSetProperties> {
-  @doc("Name of the rule set under the profile which is unique globally.")
+  /**
+   * Name of the rule set under the profile which is unique globally.
+   */
   @path
   @key("ruleSetName")
   @segment("ruleSets")
@@ -24,23 +28,35 @@ model FrontDoorRuleSet is ProxyResource<RuleSetProperties> {
 
 @armResourceOperations
 interface FrontDoorRuleSets {
-  @doc("Gets an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.")
+  /**
+   * Gets an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.
+   */
   get is ArmResourceRead<FrontDoorRuleSet>;
 
-  @doc("Creates a new rule set within the specified profile.")
+  /**
+   * Creates a new rule set within the specified profile.
+   */
   create is ArmResourceCreateOrReplaceSync<FrontDoorRuleSet>;
 
-  @doc("Deletes an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.")
+  /**
+   * Deletes an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.
+   */
   delete is ArmResourceDeleteAsync<
     FrontDoorRuleSet,
     BaseParameters<FrontDoorRuleSet>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Lists existing AzureFrontDoor rule sets within a profile.")
+  /**
+   * Lists existing AzureFrontDoor rule sets within a profile.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("FrontDoorRuleSets_ListByProfile")
   listByProfile is ArmResourceListByParent<FrontDoorRuleSet>;
 
-  @doc("Checks the quota and actual usage of the given AzureFrontDoor rule set under the given CDN profile.")
+  /**
+   * Checks the quota and actual usage of the given AzureFrontDoor rule set under the given CDN profile.
+   */
   listResourceUsage is ArmResourceActionSync<
     FrontDoorRuleSet,
     void,

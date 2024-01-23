@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.")
+/**
+ * CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.
+ */
 @parentResource(CdnEndpoint)
 model CdnOrigin is ProxyResource<OriginProperties> {
-  @doc("Name of the origin which is unique within the endpoint.")
+  /**
+   * Name of the origin which is unique within the endpoint.
+   */
   @path
   @key("originName")
   @segment("origins")
@@ -24,19 +28,32 @@ model CdnOrigin is ProxyResource<OriginProperties> {
 
 @armResourceOperations
 interface CdnOrigins {
-  @doc("Gets an existing origin within an endpoint.")
+  /**
+   * Gets an existing origin within an endpoint.
+   */
   get is ArmResourceRead<CdnOrigin>;
 
-  @doc("Creates a new origin within the specified endpoint.")
-  create is ArmResourceCreateOrUpdateAsync<CdnOrigin>;
+  /**
+   * Creates a new origin within the specified endpoint.
+   */
+  create is ArmResourceCreateOrReplaceAsync<CdnOrigin>;
 
-  @doc("Updates an existing origin within an endpoint.")
+  /**
+   * Updates an existing origin within an endpoint.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<CdnOrigin, OriginUpdateParameters>;
 
-  @doc("Deletes an existing origin within an endpoint.")
+  /**
+   * Deletes an existing origin within an endpoint.
+   */
   delete is ArmResourceDeleteAsync<CdnOrigin>;
 
-  @doc("Lists all of the existing origins within an endpoint.")
+  /**
+   * Lists all of the existing origins within an endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("CdnOrigins_ListByEndpoint")
   listByEndpoint is ArmResourceListByParent<CdnOrigin>;
 }
 

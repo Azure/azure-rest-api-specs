@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.")
+/**
+ * CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.
+ */
 @parentResource(AFDOriginGroup)
 model AFDOrigin is ProxyResource<AFDOriginProperties> {
-  @doc("Name of the origin which is unique within the profile.")
+  /**
+   * Name of the origin which is unique within the profile.
+   */
   @path
   @key("originName")
   @segment("origins")
@@ -24,22 +28,29 @@ model AFDOrigin is ProxyResource<AFDOriginProperties> {
 
 @armResourceOperations
 interface AFDOrigins {
+  /**
+   * Gets an existing origin within an origin group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets an existing origin within an origin group.")
   @operationId("FrontDoorOrigins_Get")
   get is ArmResourceRead<AFDOrigin>;
 
+  /**
+   * Creates a new origin within the specified origin group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates a new origin within the specified origin group.")
   @operationId("FrontDoorOrigins_Create")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is ArmResourceCreateOrReplaceAsync<
     AFDOrigin,
     BaseParameters<AFDOrigin>,
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Updates an existing origin within an origin group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates an existing origin within an origin group.")
+  @parameterVisibility("read")
   @operationId("FrontDoorOrigins_Update")
   update is ArmCustomPatchAsync<
     AFDOrigin,
@@ -48,8 +59,10 @@ interface AFDOrigins {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Deletes an existing origin within an origin group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes an existing origin within an origin group.")
   @operationId("FrontDoorOrigins_Delete")
   delete is ArmResourceDeleteAsync<
     AFDOrigin,
@@ -57,8 +70,10 @@ interface AFDOrigins {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Lists all of the existing origins within an origin group.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all of the existing origins within an origin group.")
   @operationId("FrontDoorOrigins_ListByOriginGroup")
   listByOriginGroup is ArmResourceListByParent<AFDOrigin>;
 }

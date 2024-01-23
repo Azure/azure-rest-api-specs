@@ -11,9 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
-@doc("Resource information with extended details.")
+/**
+ * Resource information with extended details.
+ */
 model ManagedHsm is TrackedResource<ManagedHsmProperties> {
-  @doc("The name of the managed HSM Pool.")
+  /**
+   * The name of the managed HSM Pool.
+   */
   @path
   @key("name")
   @segment("managedHSMs")
@@ -22,73 +26,106 @@ model ManagedHsm is TrackedResource<ManagedHsmProperties> {
 
 @armResourceOperations
 interface ManagedHsms {
-  @doc("Gets the specified managed HSM Pool.")
+  /**
+   * Gets the specified managed HSM Pool.
+   */
   get is ArmResourceRead<ManagedHsm>;
 
-  @doc("Create or update a managed HSM Pool in the specified subscription.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ManagedHsm>;
+  /**
+   * Create or update a managed HSM Pool in the specified subscription.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedHsm>;
 
-  @doc("Update a managed HSM Pool in the specified subscription.")
+  /**
+   * Update a managed HSM Pool in the specified subscription.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<ManagedHsm, ManagedHsm>;
 
-  @doc("Deletes the specified managed HSM Pool.")
+  /**
+   * Deletes the specified managed HSM Pool.
+   */
   delete is ArmResourceDeleteAsync<ManagedHsm>;
 
-  @doc("The List operation gets information about the managed HSM Pools associated with the subscription and within the specified resource group.")
+  /**
+   * The List operation gets information about the managed HSM Pools associated with the subscription and within the specified resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("ManagedHsms_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ManagedHsm,
     {
       ...BaseParameters<ManagedHsm>;
 
-      @doc("Maximum number of results to return.")
+      /**
+       * Maximum number of results to return.
+       */
       @query("$top")
       $top?: int32;
     }
   >;
 
-  @doc("The List operation gets information about the managed HSM Pools associated with the subscription.")
+  /**
+   * The List operation gets information about the managed HSM Pools associated with the subscription.
+   */
   listBySubscription is ArmListBySubscription<ManagedHsm>;
 
+  /**
+   * Gets the private link resources supported for the managed hsm pool.
+   */
+  // FIXME: MHSMPrivateLinkResources_ListByMHSMResource could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("MHSMPrivateLinkResources_ListByMHSMResource")
-  @doc("Gets the private link resources supported for the managed hsm pool.")
-  // FIXME: MHSMPrivateLinkResources_ListByMHSMResource could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateLinkResources")
   @get
   listByMHSMResource is Azure.Core.Foundations.Operation<
     {
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Name of the resource group that contains the managed HSM pool.")
+      /**
+       * Name of the resource group that contains the managed HSM pool.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("Name of the managed HSM Pool")
+      /**
+       * Name of the managed HSM Pool
+       */
       @path
       name: string;
     },
     MhsmPrivateLinkResourceListResult
   >;
 
+  /**
+   * The List operation gets information about the regions associated with the managed HSM Pool.
+   */
+  // FIXME: MHSMRegions_ListByResource could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("MHSMRegions_ListByResource")
-  @doc("The List operation gets information about the regions associated with the managed HSM Pool.")
-  // FIXME: MHSMRegions_ListByResource could not be converted to a resource operation
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/regions")
   @get
   listByResource is Azure.Core.Foundations.Operation<
     {
-      @doc("Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.")
+      /**
+       * Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+       */
       @path
       subscriptionId: string;
 
-      @doc("Name of the resource group that contains the managed HSM pool.")
+      /**
+       * Name of the resource group that contains the managed HSM pool.
+       */
       @path
       resourceGroupName: string;
 
-      @doc("Name of the managed HSM Pool")
+      /**
+       * Name of the managed HSM Pool
+       */
       @path
       name: string;
     },

@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("AFDOrigin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.")
+/**
+ * AFDOrigin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.
+ */
 @parentResource(Profile)
 model AFDOriginGroup is ProxyResource<AFDOriginGroupProperties> {
-  @doc("Name of the origin group which is unique within the endpoint.")
+  /**
+   * Name of the origin group which is unique within the endpoint.
+   */
   @path
   @key("originGroupName")
   @segment("originGroups")
@@ -24,22 +28,29 @@ model AFDOriginGroup is ProxyResource<AFDOriginGroupProperties> {
 
 @armResourceOperations
 interface AFDOriginGroups {
+  /**
+   * Gets an existing origin group within a profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets an existing origin group within a profile.")
   @operationId("FrontDoorOriginGroups_Get")
   get is ArmResourceRead<AFDOriginGroup>;
 
+  /**
+   * Creates a new origin group within the specified profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates a new origin group within the specified profile.")
   @operationId("FrontDoorOriginGroups_Create")
-  create is ArmResourceCreateOrUpdateAsync<
+  create is ArmResourceCreateOrReplaceAsync<
     AFDOriginGroup,
     BaseParameters<AFDOriginGroup>,
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Updates an existing origin group within a profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Updates an existing origin group within a profile.")
+  @parameterVisibility("read")
   @operationId("FrontDoorOriginGroups_Update")
   update is ArmCustomPatchAsync<
     AFDOriginGroup,
@@ -48,8 +59,10 @@ interface AFDOriginGroups {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Deletes an existing origin group within a profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes an existing origin group within a profile.")
   @operationId("FrontDoorOriginGroups_Delete")
   delete is ArmResourceDeleteAsync<
     AFDOriginGroup,
@@ -57,13 +70,17 @@ interface AFDOriginGroups {
     ArmAsyncOperationHeader
   >;
 
+  /**
+   * Lists all of the existing origin groups within a profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Lists all of the existing origin groups within a profile.")
   @operationId("FrontDoorOriginGroups_ListByProfile")
   listByProfile is ArmResourceListByParent<AFDOriginGroup>;
 
+  /**
+   * Checks the quota and actual usage of the given AzureFrontDoor origin group under the given CDN profile.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Checks the quota and actual usage of the given AzureFrontDoor origin group under the given CDN profile.")
   @operationId("FrontDoorOriginGroups_ListResourceUsage")
   listResourceUsage is ArmResourceActionSync<
     AFDOriginGroup,

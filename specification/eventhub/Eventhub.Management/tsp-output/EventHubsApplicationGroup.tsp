@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.EventHub;
-@doc("The Application Group object")
+/**
+ * The Application Group object
+ */
 @parentResource(EventHubsNamespace)
 model EventHubsApplicationGroup is ProxyResource<ApplicationGroupProperties> {
-  @doc("The Application Group name ")
+  /**
+   * The Application Group name
+   */
   @maxLength(256)
   @minLength(1)
   @path
@@ -26,23 +30,31 @@ model EventHubsApplicationGroup is ProxyResource<ApplicationGroupProperties> {
 
 @armResourceOperations
 interface EventHubsApplicationGroups {
+  /**
+   * Gets an ApplicationGroup for a Namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets an ApplicationGroup for a Namespace.")
   @operationId("ApplicationGroup_Get")
   get is ArmResourceRead<EventHubsApplicationGroup>;
 
+  /**
+   * Creates or updates an ApplicationGroup for a Namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates or updates an ApplicationGroup for a Namespace.")
   @operationId("ApplicationGroup_CreateOrUpdateApplicationGroup")
   createOrUpdateApplicationGroup is ArmResourceCreateOrReplaceSync<EventHubsApplicationGroup>;
 
+  /**
+   * Deletes an ApplicationGroup for a Namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes an ApplicationGroup for a Namespace.")
   @operationId("ApplicationGroup_Delete")
   delete is ArmResourceDeleteSync<EventHubsApplicationGroup>;
 
+  /**
+   * Gets a list of application groups for a Namespace.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets a list of application groups for a Namespace.")
   @operationId("ApplicationGroup_ListByNamespace")
   listByNamespace is ArmResourceListByParent<EventHubsApplicationGroup>;
 }

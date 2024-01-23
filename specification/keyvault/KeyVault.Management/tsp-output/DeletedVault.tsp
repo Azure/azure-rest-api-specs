@@ -11,10 +11,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
-@doc("Deleted vault information with extended details.")
+/**
+ * Deleted vault information with extended details.
+ */
 @locationResource
 model DeletedVault is ProxyResource<DeletedVaultProperties> {
-  @doc("The name of the vault.")
+  /**
+   * The name of the vault.
+   */
   @path
   @key("vaultName")
   @segment("deletedVaults")
@@ -23,13 +27,17 @@ model DeletedVault is ProxyResource<DeletedVaultProperties> {
 
 @armResourceOperations
 interface DeletedVaults {
+  /**
+   * Gets the deleted Azure key vault.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets the deleted Azure key vault.")
   @operationId("Vaults_GetDeleted")
   getDeleted is ArmResourceRead<DeletedVault>;
 
+  /**
+   * Permanently deletes the specified vault. aka Purges the deleted Azure key vault.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Permanently deletes the specified vault. aka Purges the deleted Azure key vault.")
   @operationId("Vaults_PurgeDeleted")
   purgeDeleted is ArmResourceActionAsync<DeletedVault, void, void>;
 }

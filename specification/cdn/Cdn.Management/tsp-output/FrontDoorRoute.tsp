@@ -12,10 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
-@doc("Friendly Routes name mapping to the any Routes or secret related information.")
+/**
+ * Friendly Routes name mapping to the any Routes or secret related information.
+ */
 @parentResource(AFDEndpoint)
 model FrontDoorRoute is ProxyResource<RouteProperties> {
-  @doc("Name of the routing rule.")
+  /**
+   * Name of the routing rule.
+   */
   @path
   @key("routeName")
   @segment("routes")
@@ -24,17 +28,24 @@ model FrontDoorRoute is ProxyResource<RouteProperties> {
 
 @armResourceOperations
 interface FrontDoorRoutes {
-  @doc("Gets an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.")
+  /**
+   * Gets an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.
+   */
   get is ArmResourceRead<FrontDoorRoute>;
 
-  @doc("Creates a new route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.")
-  create is ArmResourceCreateOrUpdateAsync<
+  /**
+   * Creates a new route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.
+   */
+  create is ArmResourceCreateOrReplaceAsync<
     FrontDoorRoute,
     BaseParameters<FrontDoorRoute>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Updates an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.")
+  /**
+   * Updates an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.
+   */
+  @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     FrontDoorRoute,
     RouteUpdateParameters,
@@ -42,14 +53,20 @@ interface FrontDoorRoutes {
     ArmAsyncOperationHeader
   >;
 
-  @doc("Deletes an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.")
+  /**
+   * Deletes an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.
+   */
   delete is ArmResourceDeleteAsync<
     FrontDoorRoute,
     BaseParameters<FrontDoorRoute>,
     ArmAsyncOperationHeader
   >;
 
-  @doc("Lists all of the existing origins within a profile.")
+  /**
+   * Lists all of the existing origins within a profile.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("FrontDoorRoutes_ListByEndpoint")
   listByEndpoint is ArmResourceListByParent<FrontDoorRoute>;
 }
 

@@ -12,11 +12,15 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.EventHub;
-@doc("Single item in List or Get Alias(Disaster Recovery configuration) operation")
+/**
+ * Single item in List or Get Alias(Disaster Recovery configuration) operation
+ */
 @parentResource(EventHubsNamespace)
 model EventHubsDisasterRecovery
   is ProxyResource<ArmDisasterRecoveryProperties> {
-  @doc("The Disaster Recovery configuration name")
+  /**
+   * The Disaster Recovery configuration name
+   */
   @maxLength(50)
   @minLength(1)
   @path
@@ -27,33 +31,45 @@ model EventHubsDisasterRecovery
 
 @armResourceOperations
 interface EventHubsDisasterRecoveries {
+  /**
+   * Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace")
   @operationId("DisasterRecoveryConfigs_Get")
   get is ArmResourceRead<EventHubsDisasterRecovery>;
 
+  /**
+   * Creates or updates a new Alias(Disaster Recovery configuration)
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Creates or updates a new Alias(Disaster Recovery configuration)")
   @operationId("DisasterRecoveryConfigs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<EventHubsDisasterRecovery>;
 
+  /**
+   * Deletes an Alias(Disaster Recovery configuration)
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Deletes an Alias(Disaster Recovery configuration)")
   @operationId("DisasterRecoveryConfigs_Delete")
   delete is ArmResourceDeleteSync<EventHubsDisasterRecovery>;
 
+  /**
+   * Gets all Alias(Disaster Recovery configurations)
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Gets all Alias(Disaster Recovery configurations)")
   @operationId("DisasterRecoveryConfigs_List")
   list is ArmResourceListByParent<EventHubsDisasterRecovery>;
 
+  /**
+   * This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces")
   @operationId("DisasterRecoveryConfigs_BreakPairing")
   breakPairing is ArmResourceActionSync<EventHubsDisasterRecovery, void, void>;
 
+  /**
+   * Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace")
   @operationId("DisasterRecoveryConfigs_FailOver")
   failOver is ArmResourceActionSync<EventHubsDisasterRecovery, void, void>;
 }
