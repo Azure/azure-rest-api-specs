@@ -3599,8 +3599,15 @@
           "type": "object",
           "properties": {
             "type": {
-              "description": "Property to select Azure Storage Type. Available option: blobContainer.",
-              "type": "string"
+              "description": "Property to select Azure Storage Type. Available options: blobContainer.",
+              "type": "string",
+              "enum": [
+                "blobContainer"
+              ],
+              "x-ms-enum": {
+                "name": "type",
+                "modelAsString": true
+              }
             },
             "value": {
               "description": "Property to set the URL for the selected Azure Storage Type. Example: For blobContainer, value will be like https://<storageAccountName>.blob.core.windows.net/<containerName>.",
