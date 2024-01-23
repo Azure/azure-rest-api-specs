@@ -47,7 +47,7 @@ enum ActionReferenceType {
   blade,
 
   @doc("The action reference type for url.")
-  url,
+  uri,
 }
 
 @doc("The types of dashboard tile parameters.")
@@ -69,21 +69,6 @@ enum DashboardParameterType {
 
   @doc("The parameter type for timeRange.")
   timeRange,
-}
-
-@doc("The types of created by.")
-enum CreatedByType {
-  @doc("The created by type for user.")
-  User,
-
-  @doc("The created by type for application.")
-  Application,
-
-  @doc("The created by type for managedIdentity.")
-  ManagedIdentity,
-
-  @doc("The created by type for key.")
-  Key,
 }
 
 @doc("The types of modified by.")
@@ -138,7 +123,7 @@ enum MarkdownSource {
 }
 
 @doc("The types of Dashboard Query tile kinds.")
-enum Kind {
+enum QueryTileKind {
   @doc("The kind type for arg.")
   arg,
 
@@ -284,7 +269,10 @@ model ActionsOnClick {
 
 @discriminator("type")
 @doc("Model for Action reference.")
-model ActionReference {}
+model ActionReference {
+  @doc("Discriminator property for ActionReference.")
+  type: ActionReferenceType;
+}
 
 @doc("A dashboard parameter.")
 model DashboardParameter {
@@ -357,7 +345,7 @@ model ActionReferenceUrl extends ActionReference {
   displayName: string;
 
   @doc("Types of action references.")
-  type: "url";
+  type: ActionReferenceType.uri;
 }
 
 @doc("Model for action reference to a blade.")
@@ -369,7 +357,7 @@ model ActionReferenceBlade extends ActionReference {
   displayName: string;
 
   @doc("Types of action references.")
-  type: "blade";
+  type: ActionReferenceType.blade;
 }
 
 @doc("Display information of your Arc enabled resources with the arc snapshot tile.")
@@ -511,6 +499,9 @@ model PolicyTile extends DashboardTile {
 @doc("A dashboard query tile.")
 @discriminator("kind")
 model QueryTileData {
+  @doc("Discriminator property for QueryTileData.")
+  kind: QueryTileKind;
+
   @doc("The dashboard parameter names used in the tiles.")
   usedParameters?: string[];
 }
@@ -533,7 +524,7 @@ model ArgDataDefinition extends QueryTileData {
   query: string;
 
   @doc("Dashboard Query tile kind.")
-  kind: "arg";
+  kind: QueryTileKind.arg;
 }
 
 @doc("The data definition of App Insights Query Tile.")
@@ -542,7 +533,7 @@ model AppInsightsDataDefinition extends QueryTileData {
   metrics: QueryTileMetricsItem[];
 
   @doc("Dashboard Query tile kind.")
-  kind: "app-insights";
+  kind: QueryTileKind.`app-insights`;
 }
 
 @doc("The metrics object for an app insights query tile data.")
@@ -569,7 +560,7 @@ model QueryTileMetricsItemResourceMetadata {
 @doc("The data that determines the content of the policy tile.")
 model PolicyTileDataDefinition extends QueryTileData {
   @doc("Dashboard Query tile kind.")
-  kind: "policy";
+  kind: QueryTileKind.policy;
 }
 
 @doc("A resource tile.")

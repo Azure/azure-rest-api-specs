@@ -281,6 +281,9 @@
           "Create a dashboard with Resource tiles": {
             "$ref": "./examples/Dashboards_CreateOrUpdate_ResourceTile.json"
           },
+          "Create a dashboard with navigation and policy tiles.": {
+            "$ref": "./examples/Dashboards_CreateOrUpdate_NavigationTile_PolicyTile.json"
+          },
           "Create a dashboard with parameters": {
             "$ref": "./examples/Dashboards_CreateOrUpdate_Parameter.json"
           },
@@ -451,7 +454,7 @@
       "description": "Model for Action reference.",
       "properties": {
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/ActionReferenceType",
           "description": "Discriminator property for ActionReference."
         }
       },
@@ -489,7 +492,7 @@
       "description": "The types of dashboard tile action references.",
       "enum": [
         "blade",
-        "url"
+        "uri"
       ],
       "x-ms-enum": {
         "name": "ActionReferenceType",
@@ -501,8 +504,8 @@
             "description": "The action reference type for blade."
           },
           {
-            "name": "url",
-            "value": "url",
+            "name": "uri",
+            "value": "uri",
             "description": "The action reference type for url."
           }
         ]
@@ -530,7 +533,7 @@
           "$ref": "#/definitions/ActionReference"
         }
       ],
-      "x-ms-discriminator-value": "url"
+      "x-ms-discriminator-value": "uri"
     },
     "Actions": {
       "type": "object",
@@ -858,42 +861,6 @@
       "required": [
         "name"
       ]
-    },
-    "CreatedByType": {
-      "type": "string",
-      "description": "The types of created by.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "CreatedByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "The created by type for user."
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "The created by type for application."
-          },
-          {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity",
-            "description": "The created by type for managedIdentity."
-          },
-          {
-            "name": "Key",
-            "value": "Key",
-            "description": "The created by type for key."
-          }
-        ]
-      }
     },
     "Dashboard": {
       "type": "object",
@@ -1290,36 +1257,6 @@
         ]
       }
     },
-    "Kind": {
-      "type": "string",
-      "description": "The types of Dashboard Query tile kinds.",
-      "enum": [
-        "arg",
-        "app-insights",
-        "policy"
-      ],
-      "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "arg",
-            "value": "arg",
-            "description": "The kind type for arg."
-          },
-          {
-            "name": "app-insights",
-            "value": "app-insights",
-            "description": "The kind type for app-insights."
-          },
-          {
-            "name": "policy",
-            "value": "policy",
-            "description": "The kind type for policy."
-          }
-        ]
-      }
-    },
     "MarkdownInlineData": {
       "type": "object",
       "description": "The data definition of Markdown with inline content",
@@ -1519,7 +1456,7 @@
       "description": "A dashboard query tile.",
       "properties": {
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/QueryTileKind",
           "description": "Discriminator property for QueryTileData."
         },
         "usedParameters": {
@@ -1534,6 +1471,36 @@
       "required": [
         "kind"
       ]
+    },
+    "QueryTileKind": {
+      "type": "string",
+      "description": "The types of Dashboard Query tile kinds.",
+      "enum": [
+        "arg",
+        "app-insights",
+        "policy"
+      ],
+      "x-ms-enum": {
+        "name": "QueryTileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "arg",
+            "value": "arg",
+            "description": "The kind type for arg."
+          },
+          {
+            "name": "app-insights",
+            "value": "app-insights",
+            "description": "The kind type for app-insights."
+          },
+          {
+            "name": "policy",
+            "value": "policy",
+            "description": "The kind type for policy."
+          }
+        ]
+      }
     },
     "QueryTileMetricsItem": {
       "type": "object",

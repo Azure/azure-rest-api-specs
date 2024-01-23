@@ -1,6 +1,6 @@
 {
   "operationId": "Dashboards_CreateOrUpdate",
-  "title": "Create a dashboard with Arc Snapshot tile.",
+  "title": "Create a dashboard with navigation and policy tiles.",
   "parameters": {
     "dashboardName": "testdashboard",
     "resourceGroupName": "testRG",
@@ -17,7 +17,7 @@
               {
                 "title": "My Arc Snapshot Tile",
                 "subtitle": "My subtitle",
-                "type": "ArcSnapshotTile",
+                "type": "NavigationTile",
                 "layout": {
                   "x": 0,
                   "y": 0,
@@ -25,40 +25,22 @@
                   "height": 4
                 },
                 "data": {
-                  "kind": "arg",
-                  "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend TotalCount = ResourceCount| project ResourceCount, TotalCount | take 10",
-                  "columns": {
-                    "notConfiguredResourcesCount": "ResourceCount",
-                    "totalCount": "TotalCount"
-                  },
-                  "allResourcesConfiguredText": "All resources are configured",
-                  "usedParameters": [
-                    "sampleLocationParameter"
-                  ],
-                  "noResources": {
-                    "icon": "NoResourcesIcon",
-                    "text": "No resources found"
-                  },
-                  "actions": {
-                    "configureService": {
-                      "type": "uri",
-                      "uri": "https://www.bing.com",
-                      "displayName": "Service not configured"
-                    },
-                    "viewConfiguredService": {
-                      "type": "uri",
-                      "uri": "https://www.bing.com",
-                      "displayName": "View configured services"
-                    },
-                    "viewNotConfiguredResources": {
-                      "type": "blade",
-                      "blade": {
-                        "name": "ArgQueryBlade",
-                        "extension": "HubsExtension"
-                      },
-                      "displayName": "View not configured"
-                    }
-                  }
+                  "icon": "ResourceGroups",
+                  "description": "Go to resource groups"
+                }
+              },
+              {
+                "title": "ARG: Top 10 resource counts by type",
+                "type": "PolicyTile",
+                "layout": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 6,
+                  "height": 4
+                },
+                "data": {
+                  "kind": "policy",
+                  "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend ['Resource count']=ResourceCount, ['Resource type']=type | project ['Resource type'], ['Resource count'] | take 10"
                 },
                 "visualization": {
                   "type": "table",
@@ -107,7 +89,7 @@
                 {
                   "title": "My Arc Snapshot Tile",
                   "subtitle": "My subtitle",
-                  "type": "ArcSnapshotTile",
+                  "type": "NavigationTile",
                   "layout": {
                     "x": 0,
                     "y": 0,
@@ -115,40 +97,22 @@
                     "height": 4
                   },
                   "data": {
-                    "kind": "arg",
-                    "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend TotalCount = ResourceCount| project ResourceCount, TotalCount | take 10",
-                    "columns": {
-                      "notConfiguredResourcesCount": "ResourceCount",
-                      "totalCount": "TotalCount"
-                    },
-                    "allResourcesConfiguredText": "All resources are configured",
-                    "usedParameters": [
-                      "sampleLocationParameter"
-                    ],
-                    "noResources": {
-                      "icon": "NoResourcesIcon",
-                      "text": "No resources found"
-                    },
-                    "actions": {
-                      "configureService": {
-                        "type": "uri",
-                        "uri": "https://www.bing.com",
-                        "displayName": "Service not configured"
-                      },
-                      "viewConfiguredService": {
-                        "type": "uri",
-                        "uri": "https://www.bing.com",
-                        "displayName": "View configured services"
-                      },
-                      "viewNotConfiguredResources": {
-                        "type": "blade",
-                        "blade": {
-                          "name": "ArgQueryBlade",
-                          "extension": "HubsExtension"
-                        },
-                        "displayName": "View not configured"
-                      }
-                    }
+                    "icon": "ResourceGroups",
+                    "description": "Go to resource groups"
+                  }
+                },
+                {
+                  "title": "ARG: Top 10 resource counts by type",
+                  "type": "PolicyTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 6,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "policy",
+                    "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend ['Resource count']=ResourceCount, ['Resource type']=type | project ['Resource type'], ['Resource count'] | take 10"
                   },
                   "visualization": {
                     "type": "table",
@@ -200,7 +164,7 @@
                 {
                   "title": "My Arc Snapshot Tile",
                   "subtitle": "My subtitle",
-                  "type": "ArcSnapshotTile",
+                  "type": "NavigationTile",
                   "layout": {
                     "x": 0,
                     "y": 0,
@@ -208,40 +172,22 @@
                     "height": 4
                   },
                   "data": {
-                    "kind": "arg",
-                    "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend TotalCount = ResourceCount| project ResourceCount, TotalCount | take 10",
-                    "columns": {
-                      "notConfiguredResourcesCount": "ResourceCount",
-                      "totalCount": "TotalCount"
-                    },
-                    "allResourcesConfiguredText": "All resources are configured",
-                    "usedParameters": [
-                      "sampleLocationParameter"
-                    ],
-                    "noResources": {
-                      "icon": "NoResourcesIcon",
-                      "text": "No resources found"
-                    },
-                    "actions": {
-                      "configureService": {
-                        "type": "url",
-                        "url": "https://www.bing.com",
-                        "displayName": "Service not configured"
-                      },
-                      "viewConfiguredService": {
-                        "type": "url",
-                        "url": "https://www.bing.com",
-                        "displayName": "View configured services"
-                      },
-                      "viewNotConfiguredResources": {
-                        "type": "blade",
-                        "blade": {
-                          "name": "ArgQueryBlade",
-                          "extension": "HubsExtension"
-                        },
-                        "displayName": "View not configured"
-                      }
-                    }
+                    "icon": "ResourceGroups",
+                    "description": "Go to resource groups"
+                  }
+                },
+                {
+                  "title": "ARG: Top 10 resource counts by type",
+                  "type": "PolicyTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 6,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "policy",
+                    "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend ['Resource count']=ResourceCount, ['Resource type']=type | project ['Resource type'], ['Resource count'] | take 10"
                   },
                   "visualization": {
                     "type": "table",
