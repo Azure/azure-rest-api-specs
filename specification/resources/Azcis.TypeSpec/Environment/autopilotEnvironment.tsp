@@ -31,7 +31,7 @@ model EnvironmentResourceProperties {
 
   @doc("Provisioning state")
   @visibility("read")
-  provisioningState?:EnvironmentProvisioningState;
+  provisioningState?: EnvironmentProvisioningState;
 }
 
 @doc("Environment Resource")
