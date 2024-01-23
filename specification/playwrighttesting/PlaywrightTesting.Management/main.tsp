@@ -7,18 +7,24 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.ResourceManager;
 using Azure.Core;
+using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AzurePlaywrightService")
 @service({
   title: "Microsoft AzurePlaywrightService Management API",
-  version: "2024-02-01",
 })
 @doc("Microsoft.AzurePlaywrightService Resource Provider Management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+@versioned(Versions)
 namespace Microsoft.AzurePlaywrightService;
+
+@doc("Microsoft.AzurePlaywrightService Management API Versions.")
+enum Versions {
+  /** 2024-02-01 version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2024-02-01`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -64,7 +70,7 @@ enum EnablementStatus {
 }
 
 @doc("The status of the current operation.")
-@Azure.Core.lroStatus
+@lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
 
