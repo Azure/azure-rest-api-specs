@@ -10,6 +10,13 @@ namespace Microsoft.ScVmm;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+/** A reusable query option to force delete a resource. */
+model QueryForceDelete {
+  /** Forces the resource to be deleted. */
+  @query("force")
+  force?: boolean;
+}
+
 /** The provisioning state of the resource. */
 enum ProvisioningState {
   ...ResourceProvisioningState,

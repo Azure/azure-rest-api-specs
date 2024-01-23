@@ -39,10 +39,7 @@ interface VirtualMachineTemplates {
     VirtualMachineTemplate,
     {
       ...BaseParameters<VirtualMachineTemplate>;
-
-      /** Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too. */
-      @query("force")
-      force?: boolean;
+      ...QueryForceDelete;
     }
   >;
   /** List of VirtualMachineTemplates in a resource group. */

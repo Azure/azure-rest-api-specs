@@ -260,11 +260,7 @@
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "force",
-            "in": "query",
-            "description": "Whether force delete was specified.",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/QueryForceDelete"
           },
           {
             "name": "deleteFromHost",
@@ -1290,11 +1286,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "force",
-            "in": "query",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/QueryForceDelete"
           },
           {
             "name": "availabilitySetResourceName",
@@ -1604,11 +1596,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "force",
-            "in": "query",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/QueryForceDelete"
           },
           {
             "name": "cloudResourceName",
@@ -1894,11 +1882,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "force",
-            "in": "query",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/QueryForceDelete"
           },
           {
             "name": "virtualMachineTemplateName",
@@ -2189,11 +2173,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "force",
-            "in": "query",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/QueryForceDelete"
           },
           {
             "name": "virtualNetworkName",
@@ -2503,11 +2483,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "force",
-            "in": "query",
-            "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/QueryForceDelete"
           },
           {
             "name": "vmmServerName",
@@ -4703,6 +4679,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "QueryForceDelete": {
+      "name": "force",
+      "in": "query",
+      "description": "Forces the resource to be deleted.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
     }
   }
 }

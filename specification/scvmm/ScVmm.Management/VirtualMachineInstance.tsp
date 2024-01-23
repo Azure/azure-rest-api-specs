@@ -41,10 +41,7 @@ interface VirtualMachineInstances {
     VirtualMachineInstance,
     {
       ...BaseParameters<VirtualMachineInstance>;
-
-      /** Whether force delete was specified. */
-      @query("force")
-      force?: boolean;
+      ...QueryForceDelete;
 
       /** Whether to disable the VM from azure and also delete it from Vmm. */
       @query("deleteFromHost")
