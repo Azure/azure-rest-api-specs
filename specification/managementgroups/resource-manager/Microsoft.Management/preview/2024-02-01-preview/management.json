@@ -895,7 +895,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/applications/{applicationId}": {
+    "/providers/Microsoft.Management/applications/{applicationName}": {
       "get": {
         "tags": [
           "Applications"
@@ -904,7 +904,7 @@
         "description": "Get the details of the application.\n",
         "parameters": [
           {
-            "$ref": "#/parameters/ApplicationIdParameter"
+            "$ref": "#/parameters/ApplicationNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -938,7 +938,7 @@
         "description": "Create an Application.\n",
         "parameters": [
           {
-            "$ref": "#/parameters/ApplicationIdParameter"
+            "$ref": "#/parameters/ApplicationNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -949,18 +949,12 @@
             "description": "Application creation parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PutApplication"
+              "$ref": "#/definitions/Application"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Application"
-            }
-          },
-          "201": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Application"
@@ -2119,21 +2113,11 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unique resource identifier of the ARM resource application."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the ARM resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of Azure resource."
-        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          }
+        ],
         "properties": {
           "title": "properties",
           "$ref": "#/definitions/ApplicationProperties"
@@ -2174,7 +2158,7 @@
       "description": "The details of the parent management group or application.",
       "type": "object",
       "properties": {
-        "id": {
+        "resourceId": {
           "type": "string",
           "description": "The fully qualified ID of the parent management group or applications.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000 or /providers/Microsoft.Management/applications/TestApplication"
         }
@@ -2371,12 +2355,12 @@
       "x-ms-parameter-location": "method",
       "description": "The view parameter allows clients to filter the type of data that is returned by the getEntities call."
     },
-    "ApplicationIdParameter": {
-      "name": "applicationId",
+    "ApplicationNameParameter": {
+      "name": "applicationName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Application ID.",
+      "description": "Application Name.",
       "x-ms-parameter-location": "method"
     }
   }
