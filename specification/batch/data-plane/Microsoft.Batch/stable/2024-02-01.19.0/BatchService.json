@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchServiceClient",
-    "version": "2023-11-01.18.0",
+    "version": "2024-02-01.19.0",
     "description": "A client for issuing REST requests to the Azure Batch service."
   },
   "x-ms-parameterized-host": {
@@ -5795,6 +5795,9 @@
           "Add a pool with SecurityProfile": {
             "$ref": "./examples/PoolAdd_SecurityProfile.json"
           },
+          "Add a pool with UpgradePolicy": {
+            "$ref": "./examples/PoolAdd_UpgradePolicy.json"
+          },
           "Add a VirtualMachineConfiguration pool with ServiceArtifactReference": {
             "$ref": "./examples/PoolAdd_VirtualMachineConfigurationWithServiceArtifactReference.json"
           },
@@ -6351,6 +6354,9 @@
           },
           "Get a VirtualMachineConfiguration pool with SecurityProfile": {
             "$ref": "./examples/PoolGet_SecurityProfile.json"
+          },
+          "Get a VirtualMachineConfiguration pool with UpgradePolicy": {
+            "$ref": "./examples/PoolGet_UpgradePolicy.json"
           },
           "Get a VirtualMachineConfiguration pool with ServiceArtifactReference": {
             "$ref": "./examples/PoolGet_VirtualMachineConfigurationWithServiceArtifactReference.json"
@@ -12447,6 +12453,10 @@
           "description": "If omitted, the default value is Default.",
           "$ref": "#/definitions/NodeCommunicationMode"
         },
+        "upgradePolicy": {
+          "$ref": "#/definitions/UpgradePolicy",
+          "title": "The upgrade policy for the pool."
+        },
         "resourceTags": {
           "type": "object",
           "additionalProperties": {
@@ -14588,6 +14598,11 @@
           "x-nullable": true,
           "readOnly": true
         },
+        "upgradePolicy": {
+          "$ref": "#/definitions/UpgradePolicy",
+          "title": "The upgrade policy for the Pool.",
+          "description": "Describes an upgrade policy - automatic, manual, or rolling."
+        },
         "resourceTags": {
           "type": "object",
           "additionalProperties": {
@@ -14737,6 +14752,11 @@
           "title": "The desired node communication mode for the pool.",
           "description": "If omitted, the default value is Default.",
           "$ref": "#/definitions/NodeCommunicationMode"
+        },
+        "upgradePolicy": {
+          "$ref": "#/definitions/UpgradePolicy",
+          "title": "The upgrade policy for the Pool.",
+          "description": "Describes an upgrade policy - automatic, manual, or rolling."
         },
         "resourceTags": {
           "type": "object",
@@ -15662,7 +15682,8 @@
             "unknown",
             "leavingpool",
             "offline",
-            "preempted"
+            "preempted",
+            "upgradingos"
           ],
           "x-ms-enum": {
             "name": "ComputeNodeState",
@@ -15722,6 +15743,11 @@
               {
                 "value": "preempted",
                 "description": "The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available."
+              },
+              {
+                "value": "upgradingos",
+                "description": "The Compute Node is undergoing an OS upgrade operation.",
+                "name": "upgradingOS"
               }
             ]
           }
@@ -17291,6 +17317,11 @@
           "format": "int32",
           "title": "The number of Compute Nodes in the waitingForStartTask state."
         },
+        "upgradingOS": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of Compute Nodes in the upgradingOS state."
+        },
         "total": {
           "type": "integer",
           "format": "int32",
@@ -17311,6 +17342,7 @@
         "unknown",
         "unusable",
         "waitingForStartTask",
+        "upgradingOS",
         "total"
       ],
       "title": "The number of Compute Nodes in each Compute Node state."
@@ -17605,6 +17637,117 @@
         }
       },
       "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
+    },
+    "UpgradePolicy": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "title": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.",
+          "enum": [
+            "automatic",
+            "manual",
+            "rolling"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeMode",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "automatic",
+                "description": "All virtual machines in the scale set are automatically updated at the same time."
+              },
+              {
+                "value": "manual",
+                "description": "You control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action."
+              },
+              {
+                "value": "rolling",
+                "description": "The existing instances in a scale set are brought down in batches to be upgraded. Once the upgraded batch is complete, the instances will begin taking traffic again and the next batch will begin. This continues until all instances brought up-to-date."
+              }
+            ]
+          }
+        },
+        "automaticOSUpgradePolicy": {
+          "$ref": "#/definitions/AutomaticOSUpgradePolicy",
+          "title": "Configuration parameters used for performing automatic OS Upgrade.",
+          "description": "The configuration parameters used for performing automatic OS upgrade."
+        },
+        "rollingUpgradePolicy": {
+          "$ref": "#/definitions/RollingUpgradePolicy",
+          "title": "The configuration parameters used while performing a rolling upgrade.",
+          "description": "This property is only supported on Pools with the virtualMachineConfiguration property."
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "description": "Describes an upgrade policy - automatic, manual, or rolling."
+    },
+    "AutomaticOSUpgradePolicy": {
+      "type": "object",
+      "properties": {
+        "disableAutomaticRollback": {
+          "type": "boolean",
+          "description": "Whether OS image rollback feature should be disabled."
+        },
+        "enableAutomaticOSUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/en-us/rest/api/batchservice/pool/add?tabs=HTTP#windowsconfiguration) cannot be set to true."
+        },
+        "useRollingUpgradePolicy": {
+          "type": "boolean",
+          "description": "Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS."
+        },
+        "osRollingUpgradeDeferral": {
+          "type": "boolean",
+          "description": "Defer OS upgrades on the TVMs if they are running tasks."
+        }
+      },
+      "description": "The configuration parameters used for performing automatic OS upgrade."
+    },
+    "RollingUpgradePolicy": {
+      "type": "object",
+      "properties": {
+        "enableCrossZoneUpgrade": {
+          "type": "boolean",
+          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal."
+        },
+        "maxBatchInstancePercent": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5,
+          "maximum": 100,
+          "description": "The maximum percent of total virtual machine instances that will be upgraded simultaneously by the rolling upgrade in one batch. As this is a maximum, unhealthy instances in previous or future batches can cause the percentage of instances in a batch to decrease to ensure higher reliability. The value of this field should be between 5 and 100, inclusive. If both maxBatchInstancePercent and maxUnhealthyInstancePercent are assigned with value, the value of maxBatchInstancePercent should not be more than maxUnhealthyInstancePercent."
+        },
+        "maxUnhealthyInstancePercent": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5,
+          "maximum": 100,
+          "description": "The maximum percentage of the total virtual machine instances in the scale set that can be simultaneously unhealthy, either as a result of being upgraded, or by being found in an unhealthy state by the virtual machine health checks before the rolling upgrade aborts. This constraint will be checked prior to starting any batch. The value of this field should be between 5 and 100, inclusive. If both maxBatchInstancePercent and maxUnhealthyInstancePercent are assigned with value, the value of maxBatchInstancePercent should not be more than maxUnhealthyInstancePercent."
+        },
+        "maxUnhealthyUpgradedInstancePercent": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts. The value of this field should be between 0 and 100, inclusive."
+        },
+        "pauseTimeBetweenBatches": {
+          "type": "string",
+          "description": "The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format."
+        },
+        "prioritizeUnhealthyInstances": {
+          "type": "boolean",
+          "description": "Upgrade all unhealthy instances in a scale set before any healthy instances."
+        },
+        "rollbackFailedInstancesOnPolicyBreach": {
+          "type": "boolean",
+          "description": "Rollback failed instances to previous model if the Rolling Upgrade policy is violated."
+        }
+      },
+      "description": "The configuration parameters used while performing a rolling upgrade."
     }
   },
   "parameters": {

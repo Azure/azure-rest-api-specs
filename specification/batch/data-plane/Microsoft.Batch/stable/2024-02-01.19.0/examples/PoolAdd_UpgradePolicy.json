@@ -3,9 +3,9 @@
     "batchUrl": "account.region.batch.azure.com",
     "api-version": "2024-02-01.19.0",
     "client-request-id": "00000000-0000-0000-0000-000000000000",
-    "ocp-date": "Thu, 11 May 2023 08:03:01 GMT",
+    "ocp-date": "Thu, 11 May 2023 06:56:01 GMT",
     "pool": {
-      "id": "mypool002",
+      "id": "mypool001",
       "vmSize": "Standard_A1_v2",
       "virtualMachineConfiguration": {
         "imageReference": {
@@ -17,8 +17,8 @@
         "windowsConfiguration": {
           "enableAutomaticUpdates": false
         },
-        "serviceArtifactReference": {
-          "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/vmArtifactsProfile"
+        "nodePlacementConfiguration": {
+          "policy": "zonal"
         },
         "nodeAgentSKUId": "batch.node.windows amd64"
       },
@@ -26,7 +26,19 @@
       "upgradePolicy": {
         "mode": "automatic",
         "automaticOSUpgradePolicy": {
-          "enableAutomaticOSUpgrade": true
+          "disableAutomaticRollback": true,
+          "enableAutomaticOSUpgrade": true,
+          "useRollingUpgradePolicy": true,
+          "osRollingUpgradeDeferral": true
+        },
+        "rollingUpgradePolicy": {
+          "enableCrossZoneUpgrade": true,
+          "maxBatchInstancePercent": 20,
+          "maxUnhealthyInstancePercent": 20,
+          "maxUnhealthyUpgradedInstancePercent": 20,
+          "pauseTimeBetweenBatches": "PT0S",
+          "prioritizeUnhealthyInstances": false,
+          "rollbackFailedInstancesOnPolicyBreach": false
         }
       }
     }
