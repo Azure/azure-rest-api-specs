@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "experimentName": "exampleExperiment",
+    "executionId": "f24500ad-744e-4a26-864b-b76199eac333",
+    "api-version": "2024-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Chaos/experiments/executions/getExecutionDetails",
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/experiments/exampleExperiment/executions/f24500ad-744e-4a26-864b-b76199eac333/getExecutionDetails",
+        "name": "f24500ad-744e-4a26-864b-b76199eac333",
+        "properties": {
+          "lastActionAt": "2020-12-14T21:52:52.2552574Z",
+          "startedAt": "2020-12-14T21:52:52.2552574Z",
+          "stoppedAt": "2020-12-14T21:56:18.9281956Z",
+          "status": "failed",
+          "failureReason": "Dependency failure",
+          "runInformation": {
+            "steps": [
+              {
+                "stepName": "FirstStep",
+                "stepId": "FirstStep",
+                "status": "failed",
+                "branches": [
+                  {
+                    "branchName": "FirstBranch",
+                    "branchId": "FirstBranch",
+                    "status": "failed",
+                    "actions": [
+                      {
+                        "actionName": "urn:provider:agent-v2:Microsoft.Azure.Chaos.Fault.CPUPressureAllProcessors",
+                        "actionId": "59499d33-6751-4b6e-a1f6-58f4d56a040a",
+                        "status": "failed",
+                        "startTime": "2020-12-14T13:56:13.6270153-08:00",
+                        "endTime": "2020-12-14T13:56:13.6270153-08:00",
+                        "targets": [
+                          {
+                            "status": "succeeded",
+                            "target": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/VM1",
+                            "targetFailedTime": "2021-04-02T16:30:55+00:00",
+                            "targetCompletedTime": "2021-04-02T17:30:55+00:00"
+                          },
+                          {
+                            "status": "failed",
+                            "target": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/VM1",
+                            "targetFailedTime": "2021-04-02T16:30:55+00:00",
+                            "targetCompletedTime": "2021-04-02T17:30:55+00:00"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

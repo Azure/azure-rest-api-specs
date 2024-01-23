@@ -72,14 +72,6 @@
       - anuchandy
       - jhendrixMSFT
       - tjprescott
-
-- rule:
-    # resource management plane typespec PR's
-    paths:
-      - "specification/**/*Management/**"
-      - "specification/**/*Management.Shared/**"
-    reviewers:
-      - rkmanda
       
 - rule:
     paths:
@@ -89,28 +81,6 @@
         - anuchandy
         - jhendrixMSFT
         - tjprescott
-        
-- rule:
-    paths:
-      - "specification/network/**"
-    reviewers:
-      - rkmanda
-    branches:
-      - release-network-Microsoft.Network-official
-
-- rule:
-    paths: "specification/sql/**"
-    reviewers:
-      - rkmanda
-    branches:
-      - dev-sql-
-
-- rule:
-    paths: "specification/@(financialdataservices|standbypool)/**"
-    reviewers:
-      - rkmanda
-    branches:
-      - RPSaaSDev
 
 - rule:
     paths:
@@ -128,18 +98,3 @@
     reviewers:
       - weshaggard
       - konrad-jamrozik
-      
-- rule:
-    # resource management plane swagger PR's
-    paths:
-      - "specification/**/resource-manager/**"
-      - "specification/common-types/resource-management/**"
-    reviewers:
-      - rkmanda
-      
-- rule:
-    # temporary catchall
-    paths:
-      - "**"
-    reviewers:
-      - weshaggard
