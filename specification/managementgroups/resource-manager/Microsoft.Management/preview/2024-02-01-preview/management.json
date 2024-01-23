@@ -2112,12 +2112,12 @@
       "description": "The application details.",
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-          }
-        ],
         "properties": {
           "title": "properties",
           "$ref": "#/definitions/ApplicationProperties"
