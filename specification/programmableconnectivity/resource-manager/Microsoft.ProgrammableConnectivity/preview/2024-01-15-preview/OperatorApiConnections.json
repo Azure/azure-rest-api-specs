@@ -426,6 +426,20 @@
         }
       }
     },
+    "SaasProperties": {
+      "type": "object",
+      "description": "Details about the SaaS offering purchased from the marketplace.",
+      "properties": {
+        "saasSubscriptionId": {
+          "type": "string",
+          "description": "Subscription ID of the SaaS offering purchased from the marketplace."
+        },
+        "saasResourceId": {
+          "type": "string",
+          "description": "Resource ID of the SaaS offering purchased from the marketplace."
+        }
+      }
+    },
     "OperatorApiConnection": {
       "type": "object",
       "description": "A Programmable Connectivity Operator API Connection resource",
@@ -507,6 +521,10 @@
         "configuredApplication": {
           "description": "Details about the Application that would use the Operator's Network APIs.",
           "$ref": "#/definitions/ApplicationProperties"
+        },
+        "saasProperties": {
+          "description": "Details about the SaaS offering purchased from the marketplace.",
+          "$ref": "#/definitions/SaasProperties"
         }
       },
       "required": [
