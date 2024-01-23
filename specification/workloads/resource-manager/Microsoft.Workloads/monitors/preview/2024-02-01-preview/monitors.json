@@ -419,25 +419,22 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/startDenyAssignmentDeletion": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alertTemplates/{alertTemplateName}": {
+      "get": {
         "tags": [
-          "Monitors"
+          "AlertTemplates"
         ],
-        "operationId": "Monitors_StartDenyAssignmentDeletion",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+        "operationId": "AlertTemplates_Get",
+        "summary": "Gets properties of an alert template.",
+        "description": "Gets properties of an alert template for the specified subscription, resource group, SAP monitor name, and resource name.",
+        "x-ms-examples": {
+          "Get properties of a SAP monitor Alert Template": {
+            "$ref": "./examples/AlertTemplates/AlertTemplates_Get.json"
+          }
         },
         "produces": [
           "application/json"
         ],
-        "description": "Starts the process of deny assignment deletion in MRG for deleting the alert",
-        "x-ms-examples": {
-          "List all Alerts in a monitor": {
-            "$ref": "./examples/Monitors/monitors_StartDenyAssignmentDeletion.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -450,22 +447,16 @@
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AlertTemplateNameParameter"
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URI to fetch the updated Virtual Instance for SAP resource."
-              }
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+              "$ref": "#/definitions/AlertTemplate"
             }
           },
           "default": {
@@ -477,12 +468,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/stopDenyAssignmentDeletion": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/manageMrgAccess": {
       "post": {
         "tags": [
           "Monitors"
         ],
-        "operationId": "Monitors_StopDenyAssignmentDeletion",
+        "operationId": "Monitors_ManageMrgAccess",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -490,15 +481,18 @@
         "produces": [
           "application/json"
         ],
-        "description": "Stops the process of deny assignment deletion in MRG for deleting the alert",
+        "description": "Starts the process of deny assignment deletion or revival in MRG for deleting the alert",
         "x-ms-examples": {
-          "List all Alerts in a monitor": {
-            "$ref": "./examples/Monitors/monitors_StopDenyAssignmentDeletion.json"
+          "Start or Stop the Process of Deny Assignment Deletion": {
+            "$ref": "./examples/Monitors/monitors_ManageMrgAccess.json"
           }
         },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DenyAssignmentDeletionParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -2741,6 +2735,13 @@
       "description": "The provider type for filtering alert templates.",
       "minLength": 1
     },
+    "DenyAssignmentDeletionParameter": {
+      "name": "denyAssignmentDeletion",
+      "in": "query",
+      "type": "string",
+      "description": "The flag that indicates whether deny assignment deletion should be started or stopped.",
+      "minLength": 1
+    },
     "AlertNameParameter": {
       "name": "alertName",
       "in": "path",
@@ -2748,6 +2749,15 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9-_]+$",
       "description": "Name of the SAP monitor alert resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "AlertTemplateNameParameter": {
+      "name": "alertTemplateName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-_]+$",
+      "description": "Name of the SAP monitor alert template resource.",
       "x-ms-parameter-location": "method"
     },
     "ProviderInstanceNameParameter": {
