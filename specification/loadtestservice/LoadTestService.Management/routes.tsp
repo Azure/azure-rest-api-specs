@@ -86,7 +86,6 @@ interface LoadTests {
 @armResourceOperations
 interface Quotas {
   @doc("Get the available quota for a quota bucket per region per subscription.")
-  @doc("Get the available quota for a quota bucket per region per subscription.")
   get is ArmResourceRead<QuotaResource>;
 
   @doc("List quotas for a given subscription Id.")

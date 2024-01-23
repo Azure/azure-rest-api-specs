@@ -17,7 +17,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.LoadTestService.Draft;
 
 @doc("LoadTest details.")
-@doc("LoadTest details.")
 model LoadTestResource is TrackedResource<LoadTestProperties> {
   @doc("Load Test name")
   @key("loadTestName")
@@ -130,7 +129,6 @@ model Location {
 }
 
 @doc("Quota bucket details object.")
-@doc("Quota bucket details object.")
 @parentResource(Location)
 model QuotaResource is ProxyResource<QuotaResourceProperties> {
   @doc("The quota name.")
@@ -161,7 +159,6 @@ model LoadTestProperties{
 }
 
 @doc("Check quota availability response object.")
-model CheckQuotaAvailabilityResponse is ArmResource {
 model CheckQuotaAvailabilityResponse is ArmResource {
   @doc("Check quota availability response properties.")
   properties?: CheckQuotaAvailabilityResponseProperties;

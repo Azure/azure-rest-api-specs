@@ -2,7 +2,6 @@
   "swagger": "2.0",
   "info": {
     "title": "LoadTest Client",
-    "title": "LoadTest Client",
     "version": "2023-12-01-preview",
     "description": "LoadTest client provides access to LoadTest Resource and it's status operations.",
     "x-typespec-generated": [
@@ -647,22 +646,6 @@
         }
       }
     },
-    "Dimensions": {
-      "type": "object",
-      "description": "Dimensions for new quota request.",
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription Id dimension for new quota request of the quota bucket.",
-          "minLength": 1
-        },
-        "location": {
-          "type": "string",
-          "description": "Location dimension for new quota request of the quota bucket.",
-          "minLength": 1
-        }
-      }
-    },
     "EncryptionIdentity": {
       "type": "object",
       "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
@@ -925,24 +908,9 @@
       "type": "object",
       "description": "Request object of new quota for a quota bucket.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/QuotaBucketRequestProperties",
-          "description": "New quota request request properties.",
+          "description": "Request object of new quota for a quota bucket.",
           "x-ms-client-flatten": true
         },
         "name": {
@@ -950,11 +918,7 @@
           "description": "The name of the resource.",
           "readOnly": true
         }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
+      }
     },
     "QuotaBucketRequestProperties": {
       "type": "object",
@@ -1002,7 +966,6 @@
     },
     "QuotaResource": {
       "type": "object",
-      "description": "Quota bucket details object.",
       "description": "Quota bucket details object.",
       "properties": {
         "properties": {
@@ -1092,12 +1055,10 @@
             "name": "Succeeded",
             "value": "Succeeded",
             "description": "Resource has been created."
-            "description": "Resource has been created."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Resource creation failed."
             "description": "Resource creation failed."
           },
           {

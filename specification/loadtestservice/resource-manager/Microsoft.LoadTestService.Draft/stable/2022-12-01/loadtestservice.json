@@ -2,7 +2,6 @@
   "swagger": "2.0",
   "info": {
     "title": "LoadTest Client",
-    "title": "LoadTest Client",
     "version": "2022-12-01",
     "description": "LoadTest client provides access to LoadTest Resource and it's status operations.",
     "x-typespec-generated": [
@@ -164,7 +163,6 @@
           "Quotas"
         ],
         "description": "Get the available quota for a quota bucket per region per subscription.",
-        "description": "Get the available quota for a quota bucket per region per subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -203,7 +201,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService.Draft/locations/{location}/quotas/{quotaBucketName}/checkAvailability": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService.Draft/locations/{location}/quotas/{quotaBucketName}/checkAvailability": {
       "post": {
         "operationId": "Quotas_CheckAvailability",
@@ -609,7 +606,6 @@
     "CheckQuotaAvailabilityResponse": {
       "type": "object",
       "description": "Check quota availability response object.",
-      "description": "Check quota availability response object.",
       "properties": {
         "id": {
           "type": "string",
@@ -626,15 +622,11 @@
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
-        },
         "properties": {
           "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
           "description": "Check quota availability response properties."
         }
       },
-      "required": [
-        "id",
-        "type"
       "required": [
         "id",
         "type"
@@ -651,22 +643,6 @@
         "availabilityStatus": {
           "type": "string",
           "description": "Message indicating additional details to add to quota support request."
-        }
-      }
-    },
-    "Dimensions": {
-      "type": "object",
-      "description": "Dimensions for new quota request.",
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription Id dimension for new quota request of the quota bucket.",
-          "minLength": 1
-        },
-        "location": {
-          "type": "string",
-          "description": "Location dimension for new quota request of the quota bucket.",
-          "minLength": 1
         }
       }
     },
@@ -793,7 +769,6 @@
     "LoadTestResource": {
       "type": "object",
       "description": "LoadTest details.",
-      "description": "LoadTest details.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/LoadTestProperties",
@@ -891,21 +866,6 @@
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "category": {
           "type": "string",
           "description": "The type of service that Azure Load Testing connects to.",
@@ -918,8 +878,6 @@
         }
       },
       "required": [
-        "id",
-        "type",
         "id",
         "type",
         "category"
@@ -950,24 +908,9 @@
       "type": "object",
       "description": "Request object of new quota for a quota bucket.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/QuotaBucketRequestProperties",
-          "description": "New quota request request properties.",
+          "description": "Request object of new quota for a quota bucket.",
           "x-ms-client-flatten": true
         },
         "name": {
@@ -975,11 +918,7 @@
           "description": "The name of the resource.",
           "readOnly": true
         }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
+      }
     },
     "QuotaBucketRequestProperties": {
       "type": "object",
@@ -1027,7 +966,6 @@
     },
     "QuotaResource": {
       "type": "object",
-      "description": "Quota bucket details object.",
       "description": "Quota bucket details object.",
       "properties": {
         "properties": {
@@ -1117,12 +1055,10 @@
             "name": "Succeeded",
             "value": "Succeeded",
             "description": "Resource has been created."
-            "description": "Resource has been created."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Resource creation failed."
             "description": "Resource creation failed."
           },
           {
