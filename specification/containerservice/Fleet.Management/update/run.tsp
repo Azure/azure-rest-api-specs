@@ -121,7 +121,7 @@ model ManagedClusterUpgradeSpec {
 The upgrade type.
 Full requires the KubernetesVersion property to be set.
 NodeImageOnly requires the KubernetesVersion property not to be set.
-ControlPlaneOnly will set the KubernetesVersion on only the ControlPlane and not the AgentPool.
+ControlPlaneOnly requires the KubernetesVersion property to be set, and will be applied to only the ControlPlane and not the AgentPool.
 """)
   type: ManagedClusterUpgradeType;
 
