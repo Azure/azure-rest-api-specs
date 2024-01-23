@@ -3618,7 +3618,11 @@
                     "SystemAssignedIdentity",
                     "UserAssignedIdentity",
                     "StorageAccountConnectionString"
-                  ]
+                  ],
+                  "x-ms-enum": {
+                    "name": "type",
+                    "modelAsString": true
+                  }
                 },
                 "systemAssignedIdentity": {
                   "description": "Use this property for SystemAssignedIdentity. Do not set a value for this property when using other authentication type.",
@@ -3695,7 +3699,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Function app runtime name. Available options: dotnet-isolated, node, python, java, powershell, custom",
+          "description": "Function app runtime name. Available options: dotnet-isolated, node, java, powershell, python, custom",
           "type": "string",
           "enum": [
             "dotnet-isolated",
@@ -3704,7 +3708,11 @@
             "powershell",
             "python",
             "custom"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "name",
+            "modelAsString": true
+          }
         },
         "version": {
           "description": "Function app runtime version. Example: 3.10 (for Python)",
