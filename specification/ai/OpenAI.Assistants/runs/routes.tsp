@@ -15,10 +15,8 @@ namespace Azure.AI.OpenAI.Assistants;
  * Creates and starts a new run of the specified thread using the specified assistant.
  *
  * @param threadId The ID of the thread to run.
- * @param assistantId The ID of the assistant that should run the thread.
- * @param model The overridden model name that the assistant should use to run the thread.
- * @param instructions The overridden system instructions that the assistant should use to run the thread.
- * @param tools The overridden list of enabled tools that the assistant should use to run the thread.
+ * @param createRunOptions The details for the run to create.
+ *
  * @returns Information about the new thread run.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -30,11 +28,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @added(ServiceApiVersions.v2024_02_15_preview)
 op createRun(
   @path threadId: string,
-  @projectedName("json", "assistant_id") assistantId: string,
-  @projectedName("csharp", "overrideModelName") `model`?: string,
-  @projectedName("csharp", "overrideInstructions") instructions?: string,
-  @projectedName("csharp", "overrideTools") tools?: ToolDefinition[],
-  ...OptionalNullableMetadata,
+  @body createRunOptions: CreateRunOptions,
 ): ThreadRun;
 
 /**

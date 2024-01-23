@@ -145,6 +145,12 @@ namespace Azure.AI.OpenAI.Assistants;
 @@projectedName(FilePurpose, "csharp", "OpenAIFilePurpose");
 @@projectedName(ThreadMessage.content, "csharp", "ContentItems");
 @@projectedName(MessageTextDetails.value, "csharp", "Text");
+@@projectedName(CreateRunOptions.`model`, "csharp", "OverrideModelName");
+@@projectedName(CreateRunOptions.instructions,
+  "csharp",
+  "OverrideInstructions"
+);
+@@projectedName(CreateRunOptions.tools, "csharp", "OverrideTools");
 @@projectedName(CreateAndRunThreadOptions.`model`,
   "csharp",
   "OverrideModelName"

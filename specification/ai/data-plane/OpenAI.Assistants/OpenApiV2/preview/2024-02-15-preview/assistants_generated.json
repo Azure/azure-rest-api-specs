@@ -1291,45 +1291,12 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "createRunOptions",
             "in": "body",
+            "description": "The details for the run to create.",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "assistant_id": {
-                  "type": "string",
-                  "description": "The ID of the assistant that should run the thread.",
-                  "x-ms-client-name": "assistantId"
-                },
-                "model": {
-                  "type": "string",
-                  "description": "The overridden model name that the assistant should use to run the thread."
-                },
-                "instructions": {
-                  "type": "string",
-                  "description": "The overridden system instructions that the assistant should use to run the thread."
-                },
-                "tools": {
-                  "type": "array",
-                  "description": "The overridden list of enabled tools that the assistant should use to run the thread.",
-                  "items": {
-                    "$ref": "#/definitions/ToolDefinition"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "metadata": {
-                  "type": "object",
-                  "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-                  "x-nullable": true,
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                }
-              },
-              "required": [
-                "assistant_id"
-              ]
+              "$ref": "#/definitions/CreateRunOptions"
             }
           }
         ],
@@ -2139,6 +2106,54 @@
       },
       "required": [
         "assistant_id"
+      ]
+    },
+    "CreateRunOptions": {
+      "type": "object",
+      "description": "The details used when creating a new run of an assistant thread.",
+      "properties": {
+        "assistant_id": {
+          "type": "string",
+          "description": "The ID of the assistant that should run the thread.",
+          "x-ms-client-name": "assistantId"
+        },
+        "model": {
+          "type": "string",
+          "description": "The overridden model name that the assistant should use to run the thread.",
+          "x-nullable": true
+        },
+        "instructions": {
+          "type": "string",
+          "description": "The overridden system instructions that the assistant should use to run the thread.",
+          "x-nullable": true
+        },
+        "additional_instructions": {
+          "type": "string",
+          "description": "Additional instructions to append at the end of the instructions for the run. This is useful for modifying the behavior\non a per-run basis without overriding other instructions.",
+          "x-nullable": true,
+          "x-ms-client-name": "additionalInstructions"
+        },
+        "tools": {
+          "type": "array",
+          "description": "The overridden list of enabled tools that the assistant should use to run the thread.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ToolDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "assistant_id",
+        "additional_instructions"
       ]
     },
     "FileDeletionStatus": {
