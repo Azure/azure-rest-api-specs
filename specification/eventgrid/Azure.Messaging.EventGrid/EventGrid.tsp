@@ -180,7 +180,7 @@ A number that helps indicate order of MQTT client session connected or
 disconnected events. Latest event will have a sequence number that is higher
 than the previous event.
 """)
-  sequenceNumber?: int32;
+  sequenceNumber?: int64;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
@@ -199,7 +199,7 @@ A number that helps indicate order of MQTT client session connected or
 disconnected events. Latest event will have a sequence number that is higher
 than the previous event.
 """)
-  sequenceNumber?: int32;
+  sequenceNumber?: int64;
 
   @doc("""
 Reason for the disconnection of the MQTT client's session. The value could be
