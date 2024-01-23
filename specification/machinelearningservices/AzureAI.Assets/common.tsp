@@ -37,20 +37,42 @@ model Registry {
   name: string;
 }
 
-@doc("Asset based class.")
-model AssetBase is ResourceBase {
-  @doc("Is the asset archived? For types where Stage is defined, when Stage is provided it will be used to populate IsArchived.")
-  isArchived: boolean;
+@doc("Metadata pertaining to creation and last modification of the resource.")
+model SystemData {
+  @visibility("read")
+  @doc("The identity that created the resource.")
+  createdBy: string;
 
-  @doc("If the name version are system generated (anonymous registration). For types where Stage is defined, when Stage is provided it will be used to populate IsAnonymous.")
-  isAnonymous: boolean;
+  @visibility("read")
+  @doc("The type of identity that created the resource.")
+  createTime?: plainDate;
+
+  @visibility("read")
+  @doc("The timestamp of resource last modification (UTC)")
+  modifiedTime?: plainDate;
 }
 
-@doc("Resource Base class.")
-model ResourceBase {
-  @doc("Tag dictionary. Tags can be added, removed, and updated.")
-  tags: Record<string>;
+@doc("Lineage with other assets.")
+model Relationship {
 
-  @doc("The asset property dictionary.")
-  properties: Record<string>;
+  @doc("AssetId of the other asset.")
+  assetId: string;
+
+  @doc("AssetType of the other asset.")
+  assetType: string;
+
+  @doc("State of relationship.")
+  state: string;
+
+  @doc("Type of relationship.")
+  type: string;
+}
+
+// Todo get review from Micky
+@doc("Asset capability type definition.")
+enum AssetCapabilityType {
+  @doc("Uri denotes a folder.")
+  UriFolder,
+  @doc("Uri denotes a file.")
+  UriFile
 }

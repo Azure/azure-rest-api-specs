@@ -423,39 +423,47 @@
     }
   },
   "definitions": {
-    "AssetBase": {
-      "type": "object",
-      "description": "Asset based class.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "additionalProperties": {
-            "type": "string"
+    "AssetCapabilityType": {
+      "type": "string",
+      "description": "Asset capability type definition.",
+      "enum": [
+        "UriFolder",
+        "UriFile"
+      ],
+      "x-ms-enum": {
+        "name": "AssetCapabilityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UriFolder",
+            "value": "UriFolder",
+            "description": "Uri denotes a folder."
+          },
+          {
+            "name": "UriFile",
+            "value": "UriFile",
+            "description": "Uri denotes a file."
           }
-        },
-        "properties": {
-          "type": "object",
-          "description": "The asset property dictionary.",
-          "additionalProperties": {
-            "type": "string"
+        ]
+      }
+    },
+    "AssetType": {
+      "type": "string",
+      "description": "Asset type definition.",
+      "enum": [
+        "Index"
+      ],
+      "x-ms-enum": {
+        "name": "AssetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Index",
+            "value": "Index",
+            "description": "AssetVersion Definition"
           }
-        },
-        "isArchived": {
-          "type": "boolean",
-          "description": "Is the asset archived? For types where Stage is defined, when Stage is provided it will be used to populate IsArchived."
-        },
-        "isAnonymous": {
-          "type": "boolean",
-          "description": "If the name version are system generated (anonymous registration). For types where Stage is defined, when Stage is provided it will be used to populate IsAnonymous."
-        }
-      },
-      "required": [
-        "tags",
-        "properties",
-        "isArchived",
-        "isAnonymous"
-      ]
+        ]
+      }
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -528,7 +536,7 @@
         },
         "indexVersionDefinition": {
           "$ref": "#/definitions/IndexVersion",
-          "description": "Placeholder for extras."
+          "description": "Index version definition."
         }
       },
       "required": [
@@ -536,9 +544,9 @@
         "indexVersionDefinition"
       ]
     },
-    "IndexVersion": {
+    "IndexSpec": {
       "type": "object",
-      "description": "IndexVersion Definition",
+      "description": "IndexSpec Definition",
       "properties": {
         "storageUri": {
           "type": "string",
@@ -553,13 +561,12 @@
         }
       },
       "required": [
-        "storageUri",
-        "indexConfigurations"
+        "storageUri"
       ]
     },
-    "IndexVersionCreateOrUpdate": {
+    "IndexSpecCreateOrUpdate": {
       "type": "object",
-      "description": "IndexVersion Definition",
+      "description": "IndexSpec Definition",
       "properties": {
         "storageUri": {
           "type": "string",
@@ -571,6 +578,119 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "IndexVersion": {
+      "type": "object",
+      "description": "Index resource Definition",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name."
+        },
+        "stage": {
+          "type": "string",
+          "description": "Lifecycle stage of the asset. Stage populates IsArchived."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description information of the asset."
+        },
+        "capabilities": {
+          "type": "object",
+          "description": "Capability type of the asset.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AssetCapabilityType"
+          },
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Asset's tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Asset's properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "relationships": {
+          "type": "object",
+          "description": "Asset's relationship.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Relationship"
+          }
+        },
+        "assetSpec": {
+          "$ref": "#/definitions/IndexSpec",
+          "description": "AssetSpec definition."
+        },
+        "type": {
+          "$ref": "#/definitions/AssetType",
+          "description": "Index asset type.",
+          "default": "Index"
+        }
+      },
+      "required": [
+        "assetSpec",
+        "type"
+      ]
+    },
+    "IndexVersionCreateOrUpdate": {
+      "type": "object",
+      "description": "Index resource Definition",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name."
+        },
+        "stage": {
+          "type": "string",
+          "description": "Lifecycle stage of the asset. Stage populates IsArchived."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description information of the asset."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Asset's tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Asset's properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "relationships": {
+          "type": "object",
+          "description": "Asset's relationship.",
+          "additionalProperties": {
+            "$ref": "#/definitions/RelationshipCreateOrUpdate"
+          }
+        },
+        "assetSpec": {
+          "$ref": "#/definitions/IndexSpecCreateOrUpdate",
+          "description": "AssetSpec definition."
+        },
+        "type": {
+          "$ref": "#/definitions/AssetType",
+          "description": "Index asset type.",
+          "default": "Index"
         }
       }
     },
@@ -618,28 +738,80 @@
         "value"
       ]
     },
-    "ResourceBase": {
+    "Relationship": {
       "type": "object",
-      "description": "Resource Base class.",
+      "description": "Lineage with other assets.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "assetId": {
+          "type": "string",
+          "description": "AssetId of the other asset."
         },
-        "properties": {
-          "type": "object",
-          "description": "The asset property dictionary.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "assetType": {
+          "type": "string",
+          "description": "AssetType of the other asset."
+        },
+        "state": {
+          "type": "string",
+          "description": "State of relationship."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of relationship."
         }
       },
       "required": [
-        "tags",
-        "properties"
+        "assetId",
+        "assetType",
+        "state",
+        "type"
+      ]
+    },
+    "RelationshipCreateOrUpdate": {
+      "type": "object",
+      "description": "Lineage with other assets.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "AssetId of the other asset."
+        },
+        "assetType": {
+          "type": "string",
+          "description": "AssetType of the other asset."
+        },
+        "state": {
+          "type": "string",
+          "description": "State of relationship."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of relationship."
+        }
+      }
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource.",
+          "readOnly": true
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date",
+          "description": "The type of identity that created the resource.",
+          "readOnly": true
+        },
+        "modifiedTime": {
+          "type": "string",
+          "format": "date",
+          "description": "The timestamp of resource last modification (UTC)",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "createdBy"
       ]
     },
     "Versions": {

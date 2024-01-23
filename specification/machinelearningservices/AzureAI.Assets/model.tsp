@@ -16,8 +16,7 @@ namespace Microsoft.MachineLearningServices;
 
 @doc("Index asset definition.")
 @parentResource(Workspace)
-// TODO Registries isn't working...
-@parentResource(Registry)
+// todo modeling for container...
 @resource("indexes")
 model Index {
   @key("name")
@@ -28,23 +27,70 @@ model Index {
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
   indexVersion: string;
 
-  @doc("Placeholder for extras.")
+  @doc("Index version definition.")
   indexVersionDefinition: IndexVersion
 }
 
 
-@doc("IndexVersion Definition")
-@parentResource(Index)
-@resource("versions")
-model IndexVersion {
-  @key("version")
-  @doc("Version of the index.")
-  @visibility("external")
-  version: string;
+@doc("IndexSpec Definition")
+model IndexSpec {
 
   @doc("Default workspace blob storage Uri. Should work across storage types and auth scenarios.")
   storageUri: string;
 
   @doc("Placeholder for extras.")
-  indexConfigurations: Record<string>
+  indexConfigurations?: Record<string>
+}
+
+@doc("Asset type definition.")
+enum AssetType {
+  @doc("AssetVersion Definition")
+  Index: "Index"
+}
+
+// finish definition
+@doc("AssetVersion Definition")
+@parentResource(Index)
+@resource("versions")
+model AssetVersionDto<T> {
+  @key("version")
+  @doc("Version of the index.")
+  @visibility("external")
+  version: string;
+
+  @doc("Display name.")
+  displayName?: string;
+
+  @doc("Lifecycle stage of the asset. Stage populates IsArchived.")
+  stage?: string;
+
+  @doc("Description information of the asset.")
+  description?: string;
+
+  @doc("Capability type of the asset.")
+  @visibility("read")
+  capabilities?: Record<AssetCapabilityType>;
+
+  @doc("Metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
+
+  @doc("Asset's tags.")
+  tags?: Record<string>;
+
+  @doc("Asset's properties.")
+  properties?: Record<string>;
+
+  @doc("Asset's relationship.")
+  relationships?: Record<Relationship>;
+
+  @doc("AssetSpec definition.")
+  assetSpec: T;
+}
+
+@doc("Index resource Definition")
+model IndexVersion is AssetVersionDto<IndexSpec> {
+
+  @doc("Index asset type.")
+  type: AssetType = AssetType.Index;
 }
