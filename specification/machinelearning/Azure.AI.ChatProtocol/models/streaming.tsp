@@ -39,7 +39,7 @@ model ChoiceDelta {
 }
 
 @doc("A single response to a streaming completion request.")
-model ChatCompletionChunk {
+model ChatCompletionDelta {
   @doc("The collection of choice deltas received in this chunk.")
   choices: ChoiceDelta[];
 }

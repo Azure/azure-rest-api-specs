@@ -16,7 +16,7 @@ using TypeSpec.Http;
 op createStreaming(
   ...StreamingChatCompletionOptions,
   ...OperationRouteParam,
-): ChatCompletionChunk;
+): ChatCompletionDelta;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defining the operation in an Azure independent fashion"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "API version is not supported by the back end"
