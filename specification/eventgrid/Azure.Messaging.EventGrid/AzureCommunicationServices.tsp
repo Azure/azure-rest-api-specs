@@ -777,7 +777,7 @@ alias AcsChatThreadBaseEventData = {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
   @doc("The thread properties")
-  properties?: Record<unknown>;
+  properties?: Record<string>;
 
   @doc("The list of properties of participants who are part of the thread")
   participants?: AcsChatThreadParticipantProperties[];
