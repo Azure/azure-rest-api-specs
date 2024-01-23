@@ -173,10 +173,10 @@ If `EvenSegmentedPathForPutOperation` and/or `XmsPageableForListCalls` are faili
 
 ## `Swagger Avocado`
 
-[!IMPORTANT]
-`Swagger Avocado` check is not a blocking for merging your PR, even if it fails. 
-It is left to the discretion of the PR reviewer if the Avocado failure actually 
-needs to be addressed or suppressed.
+>[!IMPORTANT]
+> `Swagger Avocado` check is not a blocking for merging your PR, even if it fails. 
+> It is left to the discretion of the PR reviewer if the Avocado failure actually 
+> needs to be addressed or suppressed.
 
 ### Get help fixing Avocado validation failures
 
