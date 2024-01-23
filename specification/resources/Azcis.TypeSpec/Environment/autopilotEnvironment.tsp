@@ -71,4 +71,3 @@ enum EnvironmentMode {
   @doc("On the All mode all the files including customer files will be copied to the new environment.")
   All,
 }
-
