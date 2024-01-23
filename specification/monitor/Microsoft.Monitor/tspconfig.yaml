@@ -10,3 +10,18 @@ options:
     examples-directory: "examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azuremonitor.json"
     new-line: lf
+  "@azure-tools/typespec-python":
+    package-dir: "azure-monitor"
+    package-name: "{package-dir}"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Monitor"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-ts":
+    package-dir: "azuremonitor-rest"
+    packageDetails:
+      name: "@azure-rest/azure-monitor-rest"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-monitor"
+    namespace: com.azure.monitor
