@@ -2035,7 +2035,7 @@
     },
     "CodeInterpreterToolCall": {
       "type": "object",
-      "description": "A tool call to a code interpreter tool, issued by the model in evaluation of a configured code interpreter tool, that\nrepresents submitted output needed or already fulfilled by the tool for the model to continue.",
+      "description": "A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that\nrepresents inputs and outputs consumed and emitted by the code interpreter.",
       "properties": {
         "code_interpreter": {
           "$ref": "#/definitions/CodeInterpreterToolCallDetails",
@@ -2256,7 +2256,7 @@
     },
     "FunctionToolCall": {
       "type": "object",
-      "description": "A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents\ngiven function inputs and submitted function outputs needed or already fulfilled by the tool for the model to continue.",
+      "description": "A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs\nand output consumed and emitted by the specified function.",
       "properties": {
         "function": {
           "$ref": "#/definitions/FunctionToolCallDetails",
@@ -2647,9 +2647,47 @@
         "type"
       ]
     },
+    "RequiredFunctionToolCall": {
+      "type": "object",
+      "description": "A representation of a requested call to a function tool, needed by the model to continue evaluation of a run.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/FunctionDefinition",
+          "description": "Detailed information about the function to be executed by the tool that includes name and arguments."
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequiredToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "RequiredToolCall": {
+      "type": "object",
+      "description": "An abstract representation a a tool invocation needed by the model to continue a run.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type for the required tool call."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the tool call. This ID must be referenced when submitting tool outputs."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "id"
+      ]
+    },
     "RetrievalToolCall": {
       "type": "object",
-      "description": "A tool call to a retrieval tool, issued by the model in evaluation of a configured retrieval tool, that represents\nsubmitted output needed or already fulfilled by the tool for the model to continue.",
+      "description": "A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents\nexecuted retrieval actions.",
       "properties": {
         "retrieval": {
           "type": "object",
@@ -3013,7 +3051,7 @@
       "properties": {
         "tool_calls": {
           "type": "array",
-          "description": "A list tool call details for this run step.",
+          "description": "A list of tool call details for this run step.",
           "items": {
             "$ref": "#/definitions/ToolCall"
           },
@@ -3082,7 +3120,7 @@
           "type": "array",
           "description": "The list of tool calls that must be resolved for the assistant thread run to continue.",
           "items": {
-            "$ref": "#/definitions/ToolCall"
+            "$ref": "#/definitions/RequiredToolCall"
           },
           "x-ms-client-name": "toolCalls"
         }
@@ -3386,7 +3424,7 @@
     },
     "ToolCall": {
       "type": "object",
-      "description": "An abstract representation a tool call, issued by the model in evaluation of a configured tool definition, that must\nbe fulfilled and have its outputs submitted before the model can continue.",
+      "description": "An abstract representation of a detailed tool call as recorded within a run step for an existing run.",
       "properties": {
         "type": {
           "type": "string",

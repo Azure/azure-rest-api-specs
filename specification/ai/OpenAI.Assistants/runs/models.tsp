@@ -158,7 +158,7 @@ model SubmitToolOutputsAction extends RequiredAction {
 model SubmitToolOutputsDetails {
   @projectedName("json", "tool_calls")
   @doc("The list of tool calls that must be resolved for the assistant thread run to continue.")
-  toolCalls: ToolCall[];
+  toolCalls: RequiredToolCall[];
 }
 
 @doc("The details used when creating and immediately running a new assistant thread.")

@@ -1386,8 +1386,8 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolCall'
       description: |-
-        A tool call to a code interpreter tool, issued by the model in evaluation of a configured code interpreter tool, that
-        represents submitted output needed or already fulfilled by the tool for the model to continue.
+        A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
+        represents inputs and outputs consumed and emitted by the code interpreter.
     CodeInterpreterToolCallDetails:
       type: object
       required:
@@ -1537,8 +1537,8 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolCall'
       description: |-
-        A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents
-        given function inputs and submitted function outputs needed or already fulfilled by the tool for the model to continue.
+        A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
+        and output consumed and emitted by the specified function.
     FunctionToolCallDetails:
       type: object
       required:
@@ -1830,6 +1830,41 @@ components:
         mapping:
           submit_tool_outputs: '#/components/schemas/SubmitToolOutputsAction'
       description: An abstract representation of a required action for an assistant thread run to continue.
+    RequiredFunctionToolCall:
+      type: object
+      required:
+        - type
+        - function
+      properties:
+        type:
+          type: string
+          enum:
+            - function
+          description: The object type of the required tool call. Always 'function' for function tools.
+        function:
+          allOf:
+            - $ref: '#/components/schemas/FunctionDefinition'
+          description: Detailed information about the function to be executed by the tool that includes name and arguments.
+      allOf:
+        - $ref: '#/components/schemas/RequiredToolCall'
+      description: A representation of a requested call to a function tool, needed by the model to continue evaluation of a run.
+    RequiredToolCall:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+          description: The object type for the required tool call.
+        id:
+          type: string
+          description: The ID of the tool call. This ID must be referenced when submitting tool outputs.
+      discriminator:
+        propertyName: type
+        mapping:
+          function: '#/components/schemas/RequiredFunctionToolCall'
+      description: An abstract representation a a tool invocation needed by the model to continue a run.
     RetrievalToolCall:
       type: object
       required:
@@ -1849,8 +1884,8 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolCall'
       description: |-
-        A tool call to a retrieval tool, issued by the model in evaluation of a configured retrieval tool, that represents
-        submitted output needed or already fulfilled by the tool for the model to continue.
+        A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents
+        executed retrieval actions.
     RetrievalToolDefinition:
       type: object
       required:
@@ -2060,7 +2095,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ToolCall'
-          description: A list tool call details for this run step.
+          description: A list of tool call details for this run step.
       allOf:
         - $ref: '#/components/schemas/RunStepDetails'
       description: The detailed information associated with a run step calling tools.
@@ -2101,7 +2136,7 @@ components:
         tool_calls:
           type: array
           items:
-            $ref: '#/components/schemas/ToolCall'
+            $ref: '#/components/schemas/RequiredToolCall'
           description: The list of tool calls that must be resolved for the assistant thread run to continue.
       description: The details describing tools that should be called to submit tool outputs.
     ThreadDeletionStatus:
@@ -2330,9 +2365,7 @@ components:
           code_interpreter: '#/components/schemas/CodeInterpreterToolCall'
           retrieval: '#/components/schemas/RetrievalToolCall'
           function: '#/components/schemas/FunctionToolCall'
-      description: |-
-        An abstract representation a tool call, issued by the model in evaluation of a configured tool definition, that must
-        be fulfilled and have its outputs submitted before the model can continue.
+      description: An abstract representation of a detailed tool call as recorded within a run step for an existing run.
     ToolDefinition:
       type: object
       required:
