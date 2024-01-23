@@ -137,8 +137,8 @@ enum ManagedClusterUpgradeType {
   @doc("NodeImageOnly upgrades only the node images of the target ManagedClusters.")
   NodeImageOnly,
 
-  @added(Versions.v2024_02_02_preview)
   @doc("ControlPlaneOnly upgrades only targets the KubernetesVersion of the ManagedClusters.")
+  @added(Versions.v2024_02_02_preview)
   ControlPlaneOnly,
 }
 
