@@ -2604,9 +2604,14 @@
     },
     "RoleProperties": {
       "properties": {
-        "isAdmin": {
-          "type": "boolean",
-          "default": false
+        "roleType": {
+          "type": "string",
+          "enum":["user", "admin"],
+          "default": "user",
+          "x-ms-enum": {
+            "name": "RoleType",
+            "modelAsString": true
+          }
         },
         "password": {
           "type": "string",
@@ -2616,7 +2621,7 @@
             "create",
             "update"
           ],
-          "description": "The password of the cluster role."
+          "description": "The password of the cluster role. If an identity is used, password will not be required."
         },
         "externalIdentity": {
           "type": "object",
