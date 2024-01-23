@@ -10,10 +10,10 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ScVmm;
-@doc("Defines the inventory item.")
+/** Defines the inventory item. */
 @parentResource(VmmServer)
 model InventoryItem is ProxyResource<InventoryItemProperties> {
-  @doc("Name of the inventoryItem.")
+  /** Name of the inventoryItem. */
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   @path
   @key("inventoryItemResourceName")
@@ -25,12 +25,12 @@ model InventoryItem is ProxyResource<InventoryItemProperties> {
 
 @armResourceOperations
 interface InventoryItems {
-  @doc("Shows an inventory item.")
+  /** Shows an inventory item. */
   get is ArmResourceRead<InventoryItem>;
-  @doc("Create Or Update InventoryItem.")
+  /** Create Or Update InventoryItem. */
   create is ArmResourceCreateOrReplaceSync<InventoryItem>;
-  @doc("Deletes an inventoryItem.")
+  /** Deletes an inventoryItem. */
   delete is ArmResourceDeleteSync<InventoryItem>;
-  @doc("Returns the list of inventoryItems in the given VmmServer.")
+  /** Returns the list of inventoryItems in the given VmmServer. */
   listByVmmServer is ArmResourceListByParent<InventoryItem>;
 }

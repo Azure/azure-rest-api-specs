@@ -19,16 +19,17 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+/** The Microsoft.ScVmm Rest API spec. */
 @armProviderNamespace
 @service({
   title: "ScVmm",
 })
 @versioned(Versions)
-@doc("The Microsoft.ScVmm Rest API spec.")
 namespace Microsoft.ScVmm;
 
-@doc("The available API versions.")
+/** The available API versions. */
 enum Versions {
+  /** Service version 2023-10-07. */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_10_07: "2023-10-07",

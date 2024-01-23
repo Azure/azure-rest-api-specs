@@ -10,20 +10,24 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ScVmm;
-@doc("Defines the HybridIdentityMetadata.")
+/** Defines the HybridIdentityMetadata. */
 @parentResource(VirtualMachineInstance)
-@singleton("default")
+@singleton
 model VmInstanceHybridIdentityMetadata
   is ProxyResource<VmInstanceHybridIdentityMetadataProperties> {
+  // TODO/NOTE: key name is used as a workaround for name collision with singleton
+  /** Name of the VM Instance Hybrid Identity Metadata */
   @key("vmInstanceHybridIdentityMetadataName")
   @segment("hybridIdentityMetadata")
+  @path
+  @visibility("read")
   name: string;
 }
 
 @armResourceOperations
 interface VmInstanceHybridIdentityMetadatas {
-  @doc("Implements HybridIdentityMetadata GET method.")
+  /** Implements HybridIdentityMetadata GET method. */
   get is ArmResourceRead<VmInstanceHybridIdentityMetadata>;
-  @doc("Returns the list of HybridIdentityMetadata of the given vm.")
+  /** Returns the list of HybridIdentityMetadata of the given VM. */
   listByVirtualMachineInstance is ArmResourceListByParent<VmInstanceHybridIdentityMetadata>;
 }

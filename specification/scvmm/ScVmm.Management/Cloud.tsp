@@ -9,9 +9,9 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ScVmm;
-@doc("The Clouds resource definition.")
+/** The Clouds resource definition. */
 model Cloud is TrackedResource<CloudProperties> {
-  @doc("Name of the Cloud.")
+  /** Name of the Cloud. */
   @maxLength(54)
   @minLength(1)
   @pattern("[a-zA-Z0-9-_\\.]")
@@ -20,31 +20,32 @@ model Cloud is TrackedResource<CloudProperties> {
   @segment("clouds")
   name: string;
 
-  @doc("The extended location.")
+  /** The extended location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the linter"
   extendedLocation: ExtendedLocation;
 }
 
 @armResourceOperations
 interface Clouds {
-  @doc("Implements Cloud GET method.")
+  /** Implements Cloud GET method. */
   get is ArmResourceRead<Cloud>;
-  @doc("Onboards the ScVmm fabric cloud as an Azure cloud resource.")
+  /** Onboards the ScVmm fabric cloud as an Azure cloud resource. */
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Cloud>;
-  @doc("Updates the Clouds resource.")
+  /** Updates the Clouds resource. */
   update is ArmTagsPatchAsync<Cloud>;
-  @doc("Deregisters the ScVmm fabric cloud from Azure.")
+  /** Deregisters the ScVmm fabric cloud from Azure. */
   delete is ArmResourceDeleteWithoutOkAsync<
     Cloud,
     {
       ...BaseParameters<Cloud>;
 
-      @doc("Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.")
+      /** Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too. */
       @query("force")
-      force?: Force;
+      force?: boolean;
     }
   >;
-  @doc("List of Clouds in a resource group.")
+  /** List of Clouds in a resource group. */
   listByResourceGroup is ArmResourceListByParent<Cloud>;
-  @doc("List of Clouds in a subscription.")
+  /** List of Clouds in a subscription. */
   listBySubscription is ArmListBySubscription<Cloud>;
 }

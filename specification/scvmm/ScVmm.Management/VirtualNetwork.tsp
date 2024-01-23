@@ -9,9 +9,9 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ScVmm;
-@doc("The VirtualNetworks resource definition.")
+/** The VirtualNetworks resource definition. */
 model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
-  @doc("Name of the VirtualNetwork.")
+  /** Name of the VirtualNetwork. */
   @maxLength(54)
   @minLength(1)
   @pattern("[a-zA-Z0-9-_\\.]")
@@ -20,31 +20,32 @@ model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
   @segment("virtualNetworks")
   name: string;
 
-  @doc("The extended location.")
+  /** The extended location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the linter"
   extendedLocation: ExtendedLocation;
 }
 
 @armResourceOperations
 interface VirtualNetworks {
-  @doc("Implements VirtualNetwork GET method.")
+  /** Implements VirtualNetwork GET method. */
   get is ArmResourceRead<VirtualNetwork>;
-  @doc("Onboards the ScVmm virtual network as an Azure virtual network resource.")
+  /** Onboards the ScVmm virtual network as an Azure virtual network resource. */
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualNetwork>;
-  @doc("Updates the VirtualNetworks resource.")
+  /** Updates the VirtualNetworks resource. */
   update is ArmTagsPatchAsync<VirtualNetwork>;
-  @doc("Deregisters the ScVmm virtual network from Azure.")
+  /** Deregisters the ScVmm virtual network from Azure. */
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,
     {
       ...BaseParameters<VirtualNetwork>;
 
-      @doc("Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.")
+      /** Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too. */
       @query("force")
-      force?: Force;
+      force?: boolean;
     }
   >;
-  @doc("List of VirtualNetworks in a resource group.")
+  /** List of VirtualNetworks in a resource group. */
   listByResourceGroup is ArmResourceListByParent<VirtualNetwork>;
-  @doc("List of VirtualNetworks in a subscription.")
+  /** List of VirtualNetworks in a subscription. */
   listBySubscription is ArmListBySubscription<VirtualNetwork>;
 }

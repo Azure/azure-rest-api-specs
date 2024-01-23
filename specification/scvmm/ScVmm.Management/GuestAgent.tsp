@@ -10,23 +10,26 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ScVmm;
-@doc("Defines the GuestAgent.")
+/** Defines the GuestAgent. */
 @parentResource(VirtualMachineInstance)
-@singleton("default")
+@singleton
 model GuestAgent is ProxyResource<GuestAgentProperties> {
+  /** Name of the guest agent. */
   @key("guestAgentName")
   @segment("guestAgents")
+  @visibility("read")
+  @path
   name: string;
 }
 
 @armResourceOperations
 interface GuestAgents {
-  @doc("Implements GuestAgent GET method.")
+  /** Implements GuestAgent GET method. */
   get is ArmResourceRead<GuestAgent>;
-  @doc("Create Or Update GuestAgent.")
+  /** Create Or Update GuestAgent. */
   create is ArmResourceCreateOrUpdateAsync<GuestAgent>;
-  @doc("Implements GuestAgent DELETE method.")
+  /** Implements GuestAgent DELETE method. */
   delete is ArmResourceDeleteSync<GuestAgent>;
-  @doc("Returns the list of GuestAgent of the given vm.")
+  /** Returns the list of GuestAgent of the given vm. */
   listByVirtualMachineInstance is ArmResourceListByParent<GuestAgent>;
 }

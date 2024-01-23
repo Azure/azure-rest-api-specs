@@ -9,9 +9,9 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ScVmm;
-@doc("The AvailabilitySets resource definition.")
+/** The AvailabilitySets resource definition. */
 model AvailabilitySet is TrackedResource<AvailabilitySetProperties> {
-  @doc("Name of the AvailabilitySet.")
+  /** Name of the AvailabilitySet. */
   @maxLength(54)
   @minLength(1)
   @pattern("[a-zA-Z0-9-_\\.]")
@@ -20,31 +20,32 @@ model AvailabilitySet is TrackedResource<AvailabilitySetProperties> {
   @segment("availabilitySets")
   name: string;
 
-  @doc("The extended location.")
+  /** The extended location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the linter"
   extendedLocation: ExtendedLocation;
 }
 
 @armResourceOperations
 interface AvailabilitySets {
-  @doc("Implements AvailabilitySet GET method.")
+  /** Implements AvailabilitySet GET method. */
   get is ArmResourceRead<AvailabilitySet>;
-  @doc("Onboards the ScVmm availability set as an Azure resource.")
+  /** Onboards the ScVmm availability set as an Azure resource. */
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AvailabilitySet>;
-  @doc("Updates the AvailabilitySets resource.")
+  /** Updates the AvailabilitySets resource. */
   update is ArmTagsPatchAsync<AvailabilitySet>;
-  @doc("Deregisters the ScVmm availability set from Azure.")
+  /** Deregisters the ScVmm availability set from Azure. */
   delete is ArmResourceDeleteWithoutOkAsync<
     AvailabilitySet,
     {
       ...BaseParameters<AvailabilitySet>;
 
-      @doc("Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.")
+      /** Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too. */
       @query("force")
-      force?: Force;
+      force?: boolean;
     }
   >;
-  @doc("List of AvailabilitySets in a resource group.")
+  /** List of AvailabilitySets in a resource group. */
   listByResourceGroup is ArmResourceListByParent<AvailabilitySet>;
-  @doc("List of AvailabilitySets in a subscription.")
+  /** List of AvailabilitySets in a subscription. */
   listBySubscription is ArmListBySubscription<AvailabilitySet>;
 }
