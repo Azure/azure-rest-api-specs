@@ -16,6 +16,7 @@ using Azure.SchemaRegistry;
 // operations
 @@access(SchemaOperations.listSchemaGroups, Access.internal);
 @@access(SchemaOperations.getSchemaById, Access.internal);
+@@access(SchemaOperations.getSchemaByVersion, Access.internal);
 @@access(SchemaOperations.listSchemaVersions, Access.internal);
 @@access(SchemaOperations.getSchemaIdByContent, Access.internal);
 @@access(SchemaOperations.registerSchema, Access.internal);

@@ -117,7 +117,6 @@ interface SchemaOperations {
   >;
 
   //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}?api-version={apiVersion}
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Register operation does not use create/replace naming"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard createOrReplace operation does not allow passing in binary body to request."
   @summary("Register new schema")
   @doc("Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.")
@@ -142,7 +141,7 @@ union SchemaContentTypeValues {
   custom: "text/plain; charset=utf-8",
   avro: "application/json; serialization=Avro",
   @added(ServiceApiVersions.V2022_10)
-  json: "application/json; serialization=json",
+  json: "application/json; serialization=Json",
   @added(ServiceApiVersions.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
 }
@@ -153,7 +152,7 @@ enum ContentTypeEnum {
   avro: "application/json; serialization=Avro",
   @doc("The JSON schema content type.")
   @added(ServiceApiVersions.V2022_10)
-  json: "application/json; serialization=json",
+  json: "application/json; serialization=Json",
   @doc("The custom schema content type.")
   @added(ServiceApiVersions.V2022_10)
   custom: "text/plain; charset=utf-8",
@@ -273,9 +272,6 @@ model SchemaNameContent {
   @maxLength(50)
   @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
   name: string;
-
-  @doc("String representation (UTF-8) of the registered schema.")
-  schemaContent: bytes;
 }
 
 @doc("Schema versions resource.")
