@@ -284,6 +284,66 @@
     }
   },
   "definitions": {
+    "EnvironmentMode": {
+      "type": "string",
+      "description": "The EnvironmentMode indicates which files will be cloned to the new environment.",
+      "enum": [
+        "Basic",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "On the Basic mode only the environment basic files will be cloned to the new environment. The environment basic files are deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "On the All mode all the files including customer files will be copied to the new environment."
+          }
+        ]
+      }
+    },
+    "EnvironmentProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      }
+    },
     "EnvironmentResource": {
       "type": "object",
       "description": "Environment Resource",
@@ -331,19 +391,19 @@
       "properties": {
         "modelEnvironment": {
           "type": "string",
-          "description": "Source environment/Cluster model"
+          "description": "The source environment and the source cluster from which you want to clone the environment."
         },
         "environmentName": {
           "type": "string",
-          "description": "Environment name"
+          "description": "The name of the target environment to be created."
         },
         "clusterName": {
           "type": "string",
-          "description": "Cluster name"
+          "description": "The name of the target cluster where the new environment is supposed to be created."
         },
         "mode": {
-          "$ref": "#/definitions/environmentMode",
-          "description": "Basic or All Mode indicate clone customer config file or just basic file",
+          "$ref": "#/definitions/EnvironmentMode",
+          "description": "The mode property indicates which files will be cloned to the new environment. There are two options. All: Will clone all the files including customer files to the new environment. Basic: Will clone only the environment basic files which is deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt.",
           "readOnly": true
         },
         "enlistmentType": {
@@ -351,70 +411,10 @@
           "description": "Indicate APGold or PFGold."
         },
         "provisioningState": {
-          "$ref": "#/definitions/environmentProvisioningState",
+          "$ref": "#/definitions/EnvironmentProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
         }
-      }
-    },
-    "environmentMode": {
-      "type": "string",
-      "description": "Basic or All Mode indicate clone customer config file or just basic file",
-      "enum": [
-        "Basic",
-        "All"
-      ],
-      "x-ms-enum": {
-        "name": "environmentMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "Clone basic file"
-          },
-          {
-            "name": "All",
-            "value": "All",
-            "description": "Clone customer config file"
-          }
-        ]
-      }
-    },
-    "environmentProvisioningState": {
-      "type": "string",
-      "description": "Provisioning status of the resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "environmentProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Accepted State"
-          }
-        ]
       }
     }
   },

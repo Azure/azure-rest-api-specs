@@ -13,25 +13,25 @@ namespace Microsoft.AzureCIS;
 
 @doc("environment properties")
 model EnvironmentResourceProperties {
-  @doc("Source environment/Cluster model")
+  @doc("The source environment and the source cluster from which you want to clone the environment.")
   modelEnvironment?: string;
 
-  @doc("Environment name")
+  @doc("The name of the target environment to be created.")
   environmentName?: string;
 
-  @doc("Cluster name")
+  @doc("The name of the target cluster where the new environment is supposed to be created.")
   clusterName?: string;
 
-  @doc("Basic or All Mode indicate clone customer config file or just basic file")
+  @doc("The mode property indicates which files will be cloned to the new environment. There are two options. All: Will clone all the files including customer files to the new environment. Basic: Will clone only the environment basic files which is deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt.")
   @visibility("read")
-  mode?: environmentMode;
+  mode?: EnvironmentMode;
 
   @doc("Indicate APGold or PFGold.")
   enlistmentType?: string;
 
   @doc("Provisioning state")
   @visibility("read")
-  provisioningState?: environmentProvisioningState;
+  provisioningState?:EnvironmentProvisioningState;
 }
 
 @doc("Environment Resource")
@@ -56,19 +56,19 @@ interface Environment {
 }
 
 @doc("Provisioning status of the resource.")
-enum environmentProvisioningState {
+enum EnvironmentProvisioningState {
   ...ResourceProvisioningState,
 
-  @doc("Accepted State")
+  @doc("The resource create request has been accepted")
   Accepted,
 }
 
-@doc("Basic or All Mode indicate clone customer config file or just basic file")
-enum environmentMode {
-  @doc("Clone basic file")
+@doc("The EnvironmentMode indicates which files will be cloned to the new environment.")
+enum EnvironmentMode {
+  @doc("On the Basic mode only the environment basic files will be cloned to the new environment. The environment basic files are deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt.")
   Basic,
 
-  @doc("Clone customer config file")
+  @doc("On the All mode all the files including customer files will be copied to the new environment.")
   All,
 }
 
