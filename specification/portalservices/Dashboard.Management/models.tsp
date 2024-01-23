@@ -129,7 +129,7 @@ enum VisualizationType {
 }
 
 @doc("The types of Dashboard Markdown tile sources.")
-enum Source {
+enum MarkdownSource {
   @doc("The source type for inline.")
   inline,
 
@@ -211,11 +211,11 @@ model DashboardPage {
 @doc("A dashboard tile.")
 @discriminator("type")
 model DashboardTile {
+  @doc("Discriminator property for DashboardTile.")
+  type: DashboardTileType;
+
   @doc("The title of dashboard title.")
   title: string;
-
-  @doc("Dashboard tile type.")
-  type: DashboardTileType;
 
   @doc("The title of dashboard subtitle.")
   subtitle?: string;
@@ -278,7 +278,7 @@ model Actions {
 @discriminator("type")
 @doc("Model for Actions on click.")
 model ActionsOnClick {
-  @doc("Types of actions on click.")
+  @doc("Discriminator property for ActionsOnClick.")
   type: ActionsOnClickType;
 }
 
@@ -319,7 +319,7 @@ model ActionOpenBlade extends ActionsOnClick {
   blade: BladeReferenceWithContextPane;
 
   @doc("Types of action on click.")
-  type: "openBlade";
+  type: ActionsOnClickType.openBlade;
 }
 
 @doc("open a blade in context pane")
@@ -345,7 +345,7 @@ model ActionParameters extends ActionsOnClick {
   ...DashboardParameterValuesList;
 
   @doc("Types of action on click.")
-  type: "updateParameters";
+  type: ActionsOnClickType.updateParameters;
 }
 
 @doc("Model for action reference to a url.")
@@ -381,7 +381,7 @@ model ArcSnapshotTile extends DashboardTile {
   visualization: QueryTileVisualization;
 
   @doc("Dashboard tile type.")
-  type: "ArcSnapshotTile";
+  type: DashboardTileType.ArcSnapshotTile;
 }
 
 @doc("Data definition for a arc snapshot tile.")
@@ -453,14 +453,14 @@ model MarkdownTile extends DashboardTile {
   data?: MarkdownTileData;
 
   @doc("Dashboard tile type.")
-  type: "MarkdownTile";
+  type: DashboardTileType.MarkdownTile;
 }
 
 @doc("Data definition for a markdown tile.")
 @discriminator("source")
 model MarkdownTileData {
-  @doc("Dashboard Markdown Tile sources.")
-  source: Source;
+  @doc("Discriminator property for MarkdownTileData.")
+  source: MarkdownSource;
 }
 
 @doc("The data definition of Markdown with inline content")
@@ -469,7 +469,7 @@ model MarkdownInlineData extends MarkdownTileData {
   content: string;
 
   @doc("Dashboard Markdown Tile source.")
-  source: "inline";
+  source: MarkdownSource.inline;
 }
 
 @doc("The data definition of Markdown with uri content")
@@ -478,7 +478,7 @@ model MarkdownUriData extends MarkdownTileData {
   uri: string;
 
   @doc("Dashboard Markdown Tile source.")
-  source: "uri";
+  source: MarkdownSource.uri;
 }
 
 @doc("Navigate with a click to assets or blades within Azure Portal with the navigation tile.")
@@ -487,7 +487,7 @@ model NavigationTile extends DashboardTile {
   data: NavigationTileData;
 
   @doc("Dashboard tile type.")
-  type: "NavigationTile";
+  type: DashboardTileType.NavigationTile;
 }
 
 @doc("The data that determines the content of the navigation tile.")
@@ -505,7 +505,7 @@ model PolicyTile extends DashboardTile {
   data: QueryTileData;
 
   @doc("Dashboard tile type.")
-  type: "PolicyTile";
+  type: DashboardTileType.PolicyTile;
 }
 
 @doc("A dashboard query tile.")
@@ -524,7 +524,7 @@ model QueryTile extends DashboardTile {
   data?: QueryTileData;
 
   @doc("Dashboard tile type.")
-  type: "QueryTile";
+  type: DashboardTileType.QueryTile;
 }
 
 @doc("The data definition of ARG Query Tile.")
@@ -578,7 +578,7 @@ model ResourceTile extends DashboardTile {
   data?: ResourceTileData;
 
   @doc("Dashboard tile type.")
-  type: "ResourceTile";
+  type: DashboardTileType.ResourceTile;
 }
 
 @doc("Data definition for a resource tile.")

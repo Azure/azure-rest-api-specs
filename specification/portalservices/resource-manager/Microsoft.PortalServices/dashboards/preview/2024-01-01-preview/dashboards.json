@@ -269,6 +269,9 @@
           }
         },
         "x-ms-examples": {
+          "Create a dashboard with Arc Snapshot tile.": {
+            "$ref": "./examples/Dashboards_CreateOrUpdate_ArcSnapshotTile.json"
+          },
           "Create a dashboard with Markdown tiles": {
             "$ref": "./examples/Dashboards_CreateOrUpdate_MarkdownTile.json"
           },
@@ -560,7 +563,7 @@
       "description": "Model for Actions on click.",
       "properties": {
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/ActionsOnClickType",
           "description": "Discriminator property for ActionsOnClick."
         }
       },
@@ -1172,7 +1175,7 @@
       "description": "A dashboard tile.",
       "properties": {
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/DashboardTileType",
           "description": "Discriminator property for DashboardTile."
         },
         "title": {
@@ -1239,6 +1242,54 @@
         "height"
       ]
     },
+    "DashboardTileType": {
+      "type": "string",
+      "description": "The types of dashboard tiles.",
+      "enum": [
+        "ArcSnapshotTile",
+        "MarkdownTile",
+        "NavigationTile",
+        "PolicyTile",
+        "QueryTile",
+        "ResourceTile"
+      ],
+      "x-ms-enum": {
+        "name": "DashboardTileType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ArcSnapshotTile",
+            "value": "ArcSnapshotTile",
+            "description": "The tile type for Arc Snapshot tile."
+          },
+          {
+            "name": "MarkdownTile",
+            "value": "MarkdownTile",
+            "description": "The tile type for Markdown tile."
+          },
+          {
+            "name": "NavigationTile",
+            "value": "NavigationTile",
+            "description": "The tile type for Navigation tile."
+          },
+          {
+            "name": "PolicyTile",
+            "value": "PolicyTile",
+            "description": "The tile type for Policy tile."
+          },
+          {
+            "name": "QueryTile",
+            "value": "QueryTile",
+            "description": "The tile type for Query tile."
+          },
+          {
+            "name": "ResourceTile",
+            "value": "ResourceTile",
+            "description": "The tile type for Resource tile."
+          }
+        ]
+      }
+    },
     "Kind": {
       "type": "string",
       "description": "The types of Dashboard Query tile kinds.",
@@ -1288,6 +1339,30 @@
       ],
       "x-ms-discriminator-value": "inline"
     },
+    "MarkdownSource": {
+      "type": "string",
+      "description": "The types of Dashboard Markdown tile sources.",
+      "enum": [
+        "inline",
+        "uri"
+      ],
+      "x-ms-enum": {
+        "name": "MarkdownSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inline",
+            "value": "inline",
+            "description": "The source type for inline."
+          },
+          {
+            "name": "uri",
+            "value": "uri",
+            "description": "The source type for uri."
+          }
+        ]
+      }
+    },
     "MarkdownTile": {
       "type": "object",
       "description": "A markdown tile.",
@@ -1309,7 +1384,7 @@
       "description": "Data definition for a markdown tile.",
       "properties": {
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/MarkdownSource",
           "description": "Discriminator property for MarkdownTileData."
         }
       },
@@ -1556,78 +1631,6 @@
       "required": [
         "resourceId"
       ]
-    },
-    "Source": {
-      "type": "string",
-      "description": "The types of Dashboard Markdown tile sources.",
-      "enum": [
-        "inline",
-        "uri"
-      ],
-      "x-ms-enum": {
-        "name": "Source",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "inline",
-            "value": "inline",
-            "description": "The source type for inline."
-          },
-          {
-            "name": "uri",
-            "value": "uri",
-            "description": "The source type for uri."
-          }
-        ]
-      }
-    },
-    "Type": {
-      "type": "string",
-      "description": "The types of dashboard tiles.",
-      "enum": [
-        "ArcSnapshotTile",
-        "MarkdownTile",
-        "NavigationTile",
-        "PolicyTile",
-        "QueryTile",
-        "ResourceTile"
-      ],
-      "x-ms-enum": {
-        "name": "Type",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ArcSnapshotTile",
-            "value": "ArcSnapshotTile",
-            "description": "The tile type for Arc Snapshot tile."
-          },
-          {
-            "name": "MarkdownTile",
-            "value": "MarkdownTile",
-            "description": "The tile type for Markdown tile."
-          },
-          {
-            "name": "NavigationTile",
-            "value": "NavigationTile",
-            "description": "The tile type for Navigation tile."
-          },
-          {
-            "name": "PolicyTile",
-            "value": "PolicyTile",
-            "description": "The tile type for Policy tile."
-          },
-          {
-            "name": "QueryTile",
-            "value": "QueryTile",
-            "description": "The tile type for Query tile."
-          },
-          {
-            "name": "ResourceTile",
-            "value": "ResourceTile",
-            "description": "The tile type for Resource tile."
-          }
-        ]
-      }
     },
     "Versions": {
       "type": "string",
