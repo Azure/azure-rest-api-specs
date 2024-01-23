@@ -31,7 +31,7 @@ foreach ($file in $changedFiles) {
   if ($file -match 'specification(\/[^\/]+\/)+') {
     $path = "$repoPath/$($matches[0])"
     if (Test-Path $path) {
-      if (!$CheckAll) {
+      if ($changedFiles -ne $checkAllPath) {
         Write-Verbose "Checking for cadl files under $path"
         $cadlFile = Get-ChildItem -path $path cadl-project.* -Recurse
         if ($cadlFile) {
