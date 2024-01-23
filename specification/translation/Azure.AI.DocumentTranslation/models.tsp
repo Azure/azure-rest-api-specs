@@ -260,7 +260,7 @@ model TranslationsStatus {
   @doc("Url for the next page.  Null if no more pages available")
   @nextLink
   @projectedName("json", "@nextLink")
-  NextLink?: string;
+  nextLink?: string;
 }
 
 @doc("Translation job status response")
@@ -362,7 +362,7 @@ model DocumentsStatus {
   @doc("Url for the next page.  Null if no more pages available")
   @nextLink
   @projectedName("json", "@nextLink")
-  NextLink?: string;
+  nextLink?: string;
 }
 
 @doc("List of supported file formats")

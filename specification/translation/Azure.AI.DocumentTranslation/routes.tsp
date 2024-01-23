@@ -32,7 +32,7 @@ must be unique.
 """)
   @route("/batches")
   @post
-  StartTranslation is Azure.Core.Foundations.Operation<
+  startTranslation is Azure.Core.Foundations.Operation<
     StartTranslationDetails,
     void
   >;
@@ -94,7 +94,7 @@ making assumptions about the data returned.
 """)
   @route("/batches")
   @get
-  GetTranslationsStatus is Azure.Core.Foundations.Operation<
+  getTranslationsStatus is Azure.Core.Foundations.Operation<
     {
       @doc("""
 $top indicates the total number of records the user wants to be returned across
@@ -146,7 +146,7 @@ if the specified page size is smaller than the server's default page size.
       @maxValue(100)
       @minValue(1)
       @query("$maxpagesize")
-      $maxpagesize?: int32 = 50;
+      $maxPageSize?: int32 = 50;
 
       @doc("Ids to use in filtering")
       @query({
@@ -190,7 +190,7 @@ and document Id.
 """)
   @route("/batches/{id}/documents/{documentId}")
   @get
-  GetDocumentStatus is Azure.Core.Foundations.Operation<
+  getDocumentStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The batch id")
       @path
@@ -212,7 +212,7 @@ translated as part of that request.
 """)
   @route("/batches/{id}")
   @get
-  GetTranslationStatus is Azure.Core.Foundations.Operation<
+  getTranslationStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
       @path
@@ -234,7 +234,7 @@ possible.
 """)
   @route("/batches/{id}")
   @delete
-  CancelTranslation is Azure.Core.Foundations.Operation<
+  cancelTranslation is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation-id")
       @path
@@ -294,7 +294,7 @@ the data returned.
 """)
   @route("/batches/{id}/documents")
   @get
-  GetDocumentsStatus is Azure.Core.Foundations.Operation<
+  getDocumentsStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
       @path
@@ -396,7 +396,7 @@ content-type if using the upload API.
 """)
   @route("/documents/formats")
   @get
-  GetSupportedDocumentFormats is Azure.Core.Foundations.Operation<
+  getSupportedDocumentFormats is Azure.Core.Foundations.Operation<
     {},
     SupportedFileFormats
   >;
@@ -409,7 +409,7 @@ The list includes the common file extension used.
 """)
   @route("/glossaries/formats")
   @get
-  GetSupportedGlossaryFormats is Azure.Core.Foundations.Operation<
+  getSupportedGlossaryFormats is Azure.Core.Foundations.Operation<
     {},
     SupportedFileFormats
   >;
@@ -421,7 +421,7 @@ service.
 """)
   @route("/storagesources")
   @get
-  GetSupportedStorageSources is Azure.Core.Foundations.Operation<
+  getSupportedStorageSources is Azure.Core.Foundations.Operation<
     {},
     SupportedStorageSources
   >;
