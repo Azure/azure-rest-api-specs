@@ -36,24 +36,29 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
+      "OAuth2Auth": [
+        "https://eventgrid.azure.net/.default"
+      ]
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "SharedAccessKey",
-      "in": "header"
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://eventgrid.azure.net/.default": ""
+      }
     }
   },
   "tags": [],
   "paths": {
     "/topics/{topicName}:publish": {
       "post": {
-        "operationId": "PublishCloudEvents",
-        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "operationId": "PublishCloudEvent",
+        "description": "Publish Single Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
         "consumes": [
-          "application/cloudevents-batch+json; charset=utf-8"
+          "application/cloudevents+json; charset=utf-8"
         ],
         "parameters": [
           {
@@ -67,15 +72,12 @@
             "type": "string"
           },
           {
-            "name": "events",
+            "name": "event",
             "in": "body",
-            "description": "Array of Cloud Events being published.",
+            "description": "Single Cloud Event being published.",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CloudEvent"
-              }
+              "$ref": "#/definitions/CloudEvent"
             }
           }
         ],
@@ -97,11 +99,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Publish Cloud Event": {
-            "$ref": "./examples/publish.json"
           }
         }
       }
@@ -178,7 +175,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge": {
       "post": {
         "operationId": "AcknowledgeCloudEvents",
-        "description": "Acknowledge batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully acknowledged. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.",
+        "description": "Acknowledge batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -198,7 +195,7 @@
             "type": "string"
           },
           {
-            "name": "lockTokens",
+            "name": "acknowledgeOptions",
             "in": "body",
             "description": "AcknowledgeOptions.",
             "required": true,
@@ -237,7 +234,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release": {
       "post": {
         "operationId": "ReleaseCloudEvents",
-        "description": "Release batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.",
+        "description": "Release batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -257,7 +254,7 @@
             "type": "string"
           },
           {
-            "name": "lockTokens",
+            "name": "releaseOptions",
             "in": "body",
             "description": "ReleaseOptions",
             "required": true,
@@ -296,7 +293,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject": {
       "post": {
         "operationId": "RejectCloudEvents",
-        "description": "Reject batch of Cloud Events.",
+        "description": "Reject batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully rejected lockTokens, along with other failed lockTokens with their corresponding error information.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -316,7 +313,7 @@
             "type": "string"
           },
           {
-            "name": "lockTokens",
+            "name": "rejectOptions",
             "in": "body",
             "description": "RejectOptions",
             "required": true,
@@ -353,14 +350,74 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/topics/{topicName}:publish?_overload=publishCloudEvents": {
+      "post": {
+        "operationId": "PublishCloudEvents",
+        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "consumes": [
+          "application/cloudevents-batch+json; charset=utf-8"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "description": "Topic Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "events",
+            "in": "body",
+            "description": "Array of Cloud Events being published.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudEvent"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PublishResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Publish Cloud Event": {
+            "$ref": "./examples/publish.json"
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "AcknowledgeOptions": {
       "type": "object",
-      "description": "Array of lock token strings for the corresponding received Cloud Events to be acknowledged.",
+      "description": "Array of lock tokens for the corresponding received Cloud Events to be acknowledged.",
       "properties": {
         "lockTokens": {
           "type": "array",
-          "description": "String array of lock tokens.",
+          "description": "Array of lock tokens.",
           "items": {
             "type": "string"
           }
@@ -376,7 +433,7 @@
       "properties": {
         "failedLockTokens": {
           "type": "array",
-          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
+          "description": "Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).",
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
@@ -384,7 +441,7 @@
         },
         "succeededLockTokens": {
           "type": "array",
-          "description": "Array of lock tokens values for the successfully acknowledged cloud events.",
+          "description": "Array of lock tokens for the successfully acknowledged cloud events.",
           "items": {
             "type": "string"
           }
@@ -1202,6 +1259,915 @@
         }
       }
     },
+    "AcsRouterChannelConfiguration": {
+      "type": "object",
+      "description": "Router Channel Configuration",
+      "properties": {
+        "channelId": {
+          "type": "string",
+          "description": "Channel ID for Router Job"
+        },
+        "capacityCostPerJob": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capacity Cost Per Job for Router Job"
+        },
+        "maxNumberOfJobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max Number of Jobs for Router Job"
+        }
+      }
+    },
+    "AcsRouterCommunicationError": {
+      "type": "object",
+      "description": "Router Communication Error",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Router Communication Error Code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Router Communication Error Message"
+        },
+        "target": {
+          "type": "string",
+          "description": "Router Communication Error Target"
+        },
+        "innererror": {
+          "$ref": "#/definitions/AcsRouterCommunicationError",
+          "description": "Router Communication Inner Error"
+        },
+        "details": {
+          "type": "array",
+          "description": "List of Router Communication Errors",
+          "items": {
+            "$ref": "#/definitions/AcsRouterCommunicationError"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AcsRouterEventData": {
+      "type": "object",
+      "description": "Schema of common properties of all Router events",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "Router Event Job ID"
+        },
+        "channelReference": {
+          "type": "string",
+          "description": "Router Event Channel Reference"
+        },
+        "channelId": {
+          "type": "string",
+          "description": "Router Event Channel ID"
+        }
+      }
+    },
+    "AcsRouterJobCancelledEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobCancelled event",
+      "properties": {
+        "note": {
+          "type": "string",
+          "description": "Router Job Note"
+        },
+        "dispositionCode": {
+          "type": "string",
+          "description": "Router Job Disposition Code"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobClassificationFailedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobClassificationFailed event",
+      "properties": {
+        "classificationPolicyId": {
+          "type": "string",
+          "description": "Router Job Classification Policy Id"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Router Job Classification Failed Errors",
+          "items": {
+            "$ref": "#/definitions/AcsRouterCommunicationError"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobClassifiedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobClassified event",
+      "properties": {
+        "queueDetails": {
+          "$ref": "#/definitions/AcsRouterQueueDetails",
+          "description": "Router Job Queue Info"
+        },
+        "classificationPolicyId": {
+          "type": "string",
+          "description": "Router Job Classification Policy Id"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Router Job Priority"
+        },
+        "attachedWorkerSelectors": {
+          "type": "array",
+          "description": "Router Job Attached Worker Selector",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobClosedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobClosed event",
+      "properties": {
+        "assignmentId": {
+          "type": "string",
+          "description": "Router Job Closed Assignment Id"
+        },
+        "workerId": {
+          "type": "string",
+          "description": "Router Job Closed Worker Id"
+        },
+        "dispositionCode": {
+          "type": "string",
+          "description": "Router Job Closed Disposition Code"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobCompleted event",
+      "properties": {
+        "assignmentId": {
+          "type": "string",
+          "description": "Router Job Completed Assignment Id"
+        },
+        "workerId": {
+          "type": "string",
+          "description": "Router Job Completed Worker Id"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobDeletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobDeleted event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobEventData": {
+      "type": "object",
+      "description": "Schema of common properties of all Router Job events",
+      "properties": {
+        "queueId": {
+          "type": "string",
+          "description": "Router Job events Queue Id"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Router Job events Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Router Jobs events Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterEventData"
+        }
+      ]
+    },
+    "AcsRouterJobExceptionTriggeredEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobExceptionTriggered event",
+      "properties": {
+        "ruleKey": {
+          "type": "string",
+          "description": "Router Job Exception Triggered Rule Key"
+        },
+        "exceptionRuleId": {
+          "type": "string",
+          "description": "Router Job Exception Triggered Rule Id"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobQueuedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobQueued event",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Router Job Priority"
+        },
+        "attachedWorkerSelectors": {
+          "type": "array",
+          "description": "Router Job Queued Attached Worker Selector",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        },
+        "requestedWorkerSelectors": {
+          "type": "array",
+          "description": "Router Job Queued Requested Worker Selector",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobReceivedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobReceived event",
+      "properties": {
+        "jobStatus": {
+          "$ref": "#/definitions/AcsRouterJobStatus",
+          "description": "Router Job Received Job Status"
+        },
+        "classificationPolicyId": {
+          "type": "string",
+          "description": "Router Job Classification Policy Id"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Router Job Priority"
+        },
+        "requestedWorkerSelectors": {
+          "type": "array",
+          "description": "Router Job Received Requested Worker Selectors",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        },
+        "scheduledOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Router Job Received Scheduled Time in UTC"
+        },
+        "unavailableForMatching": {
+          "type": "boolean",
+          "description": "Unavailable For Matching for Router Job Received"
+        }
+      },
+      "required": [
+        "unavailableForMatching"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobSchedulingFailedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobSchedulingFailed event",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Router Job Priority"
+        },
+        "expiredAttachedWorkerSelectors": {
+          "type": "array",
+          "description": "Router Job Scheduling Failed Attached Worker Selector Expired",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        },
+        "expiredRequestedWorkerSelectors": {
+          "type": "array",
+          "description": "Router Job Scheduling Failed Requested Worker Selector Expired",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        },
+        "scheduledOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Router Job Scheduling Failed Scheduled Time in UTC"
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "Router Job Scheduling Failed Reason"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobStatus": {
+      "type": "string",
+      "description": "Acs Router Job Status",
+      "enum": [
+        "PendingClassification",
+        "Queued",
+        "Assigned",
+        "Completed",
+        "Closed",
+        "Cancelled",
+        "ClassificationFailed",
+        "Created",
+        "PendingSchedule",
+        "Scheduled",
+        "ScheduleFailed",
+        "WaitingForActivation"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRouterJobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingClassification",
+            "value": "PendingClassification",
+            "description": "Router Job Status Pending Classification"
+          },
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "Router Job Status Queued"
+          },
+          {
+            "name": "Assigned",
+            "value": "Assigned",
+            "description": "Router Job Status Assigned"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Router Job Status Completed"
+          },
+          {
+            "name": "Closed",
+            "value": "Closed",
+            "description": "Router Job Status Closed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Router Job Status Cancelled"
+          },
+          {
+            "name": "ClassificationFailed",
+            "value": "ClassificationFailed",
+            "description": "Router Job Status Classification Failed"
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "Router Job Status Created"
+          },
+          {
+            "name": "PendingSchedule",
+            "value": "PendingSchedule",
+            "description": "Router Job Status Pending Schedule"
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "Router Job Status Scheduled"
+          },
+          {
+            "name": "ScheduleFailed",
+            "value": "ScheduleFailed",
+            "description": "Router Job Status Schedule Failed"
+          },
+          {
+            "name": "WaitingForActivation",
+            "value": "WaitingForActivation",
+            "description": "Router Job Status Waiting For Activation"
+          }
+        ]
+      }
+    },
+    "AcsRouterJobUnassignedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobUnassigned event",
+      "properties": {
+        "assignmentId": {
+          "type": "string",
+          "description": "Router Job Unassigned Assignment Id"
+        },
+        "workerId": {
+          "type": "string",
+          "description": "Router Job Unassigned Worker Id"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobWaitingForActivationEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobWaitingForActivation event",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Router Job Waiting For Activation Priority"
+        },
+        "expiredAttachedWorkerSelectors": {
+          "type": "array",
+          "description": "Router Job Waiting For Activation Worker Selector Expired",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        },
+        "expiredRequestedWorkerSelectors": {
+          "type": "array",
+          "description": "Router Job Waiting For Activation Requested Worker Selector Expired",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        },
+        "scheduledOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Router Job Waiting For Activation Scheduled Time in UTC"
+        },
+        "unavailableForMatching": {
+          "type": "boolean",
+          "description": "Router Job Waiting For Activation Unavailable For Matching"
+        }
+      },
+      "required": [
+        "unavailableForMatching"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobWorkerSelectorsExpiredEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterJobWorkerSelectorsExpired event",
+      "properties": {
+        "expiredRequestedWorkerSelectors": {
+          "type": "array",
+          "description": "Router Job Worker Selectors Expired Requested Worker Selectors",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        },
+        "expiredAttachedWorkerSelectors": {
+          "type": "array",
+          "description": "Router Job Worker Selectors Expired Attached Worker Selectors",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterLabelOperator": {
+      "type": "string",
+      "description": "Router Job Worker Selector Label Operator",
+      "enum": [
+        "Equal",
+        "NotEqual",
+        "Greater",
+        "Less",
+        "GreaterThanorEqual",
+        "LessThanOrEqual"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRouterLabelOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equal",
+            "value": "Equal",
+            "description": "Router Label Operator Equal"
+          },
+          {
+            "name": "NotEqual",
+            "value": "NotEqual",
+            "description": "Router Label Operator Not Equal"
+          },
+          {
+            "name": "Greater",
+            "value": "Greater",
+            "description": "Router Label Operator Greater"
+          },
+          {
+            "name": "Less",
+            "value": "Less",
+            "description": "Router Label Operator Less"
+          },
+          {
+            "name": "GreaterThanorEqual",
+            "value": "GreaterThanorEqual",
+            "description": "Router Label Operator Greater than or equal"
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual",
+            "description": "Router Label Operator Less than or equal"
+          }
+        ]
+      }
+    },
+    "AcsRouterQueueDetails": {
+      "type": "object",
+      "description": "Router Queue Details",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Router Queue Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Router Queue Name"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Router Queue Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AcsRouterWorkerDeletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerDeleted event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ]
+    },
+    "AcsRouterWorkerDeregisteredEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerDeregistered event",
+      "properties": {
+        "workerId": {
+          "type": "string",
+          "description": "Router Worker Deregistered Worker Id"
+        }
+      }
+    },
+    "AcsRouterWorkerEventData": {
+      "type": "object",
+      "description": "Schema of common properties of all Router Worker events",
+      "properties": {
+        "workerId": {
+          "type": "string",
+          "description": "Router Worker events Worker Id"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterEventData"
+        }
+      ]
+    },
+    "AcsRouterWorkerOfferAcceptedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerOfferAccepted event",
+      "properties": {
+        "queueId": {
+          "type": "string",
+          "description": "Router Worker Offer Accepted Queue Id"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Router Worker Offer Accepted Offer Id"
+        },
+        "assignmentId": {
+          "type": "string",
+          "description": "Router Worker Offer Accepted Assignment Id"
+        },
+        "jobPriority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Router Worker Offer Accepted Job Priority"
+        },
+        "workerLabels": {
+          "type": "object",
+          "description": "Router Worker Offer Accepted Worker Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "workerTags": {
+          "type": "object",
+          "description": "Router Worker Offer Accepted Worker Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jobLabels": {
+          "type": "object",
+          "description": "Router Worker Offer Accepted Job Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jobTags": {
+          "type": "object",
+          "description": "Router Worker Offer Accepted Job Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ]
+    },
+    "AcsRouterWorkerOfferDeclinedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerOfferDeclined event",
+      "properties": {
+        "queueId": {
+          "type": "string",
+          "description": "Router Worker Offer Declined Queue Id"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Router Worker Offer Declined Offer Id"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ]
+    },
+    "AcsRouterWorkerOfferExpiredEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerOfferExpired event",
+      "properties": {
+        "queueId": {
+          "type": "string",
+          "description": "Router Worker Offer Expired Queue Id"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Router Worker Offer Expired Offer Id"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ]
+    },
+    "AcsRouterWorkerOfferIssuedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerOfferIssued event",
+      "properties": {
+        "queueId": {
+          "type": "string",
+          "description": "Router Worker Offer Issued Queue Id"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Router Worker Offer Issued Offer Id"
+        },
+        "jobPriority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Router Worker Offer Issued Job Priority"
+        },
+        "workerLabels": {
+          "type": "object",
+          "description": "Router Worker Offer Issued Worker Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "offeredOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Router Worker Offer Issued Time in UTC"
+        },
+        "expiresOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Router Worker Offer Issued Expiration Time in UTC"
+        },
+        "workerTags": {
+          "type": "object",
+          "description": "Router Worker Offer Issued Worker Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jobLabels": {
+          "type": "object",
+          "description": "Router Worker Offer Issued Job Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jobTags": {
+          "type": "object",
+          "description": "Router Worker Offer Issued Job Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ]
+    },
+    "AcsRouterWorkerOfferRevokedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerOfferRevoked event",
+      "properties": {
+        "queueId": {
+          "type": "string",
+          "description": "Router Worker Offer Revoked Queue Id"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Router Worker Offer Revoked Offer Id"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ]
+    },
+    "AcsRouterWorkerRegisteredEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Communication.RouterWorkerRegistered event",
+      "properties": {
+        "workerId": {
+          "type": "string",
+          "description": "Router Worker Registered Worker Id"
+        },
+        "queueAssignments": {
+          "type": "array",
+          "description": "Router Worker Registered Queue Info",
+          "items": {
+            "$ref": "#/definitions/AcsRouterQueueDetails"
+          }
+        },
+        "channelConfigurations": {
+          "type": "array",
+          "description": "Router Worker Registered Channel Configuration",
+          "items": {
+            "$ref": "#/definitions/AcsRouterChannelConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "totalCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Router Worker Register Total Capacity"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Router Worker Registered Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Router Worker Registered Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AcsRouterWorkerSelector": {
+      "type": "object",
+      "description": "Router Job Worker Selector",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Router Job Worker Selector Key"
+        },
+        "labelOperator": {
+          "$ref": "#/definitions/AcsRouterLabelOperator",
+          "description": "Router Job Worker Selector Label Operator"
+        },
+        "labelValue": {
+          "description": "Router Job Worker Selector Value"
+        },
+        "ttlSeconds": {
+          "type": "string",
+          "format": "duration",
+          "description": "Router Job Worker Selector Time to Live in Seconds"
+        },
+        "state": {
+          "$ref": "#/definitions/AcsRouterWorkerSelectorState",
+          "description": "Router Job Worker Selector State"
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Router Job Worker Selector Expiration Time"
+        }
+      }
+    },
+    "AcsRouterWorkerSelectorState": {
+      "type": "string",
+      "description": "Router Worker Selector State",
+      "enum": [
+        "Active",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRouterWorkerSelectorState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Router Worker Selector State Active"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Router Worker Selector State Expired"
+          }
+        ]
+      }
+    },
     "AcsSmsDeliveryAttemptProperties": {
       "type": "object",
       "description": "Schema for details of a delivery attempt",
@@ -1685,25 +2651,11 @@
     },
     "AppConfigurationSnapshotCreatedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the snapshot."
-        },
-        "etag": {
-          "type": "string",
-          "description": "The etag representing the new state of the snapshot."
-        },
-        "syncToken": {
-          "type": "string",
-          "description": "The sync token representing the server state after the event."
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.AppConfiguration.SnapshotCreated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AppConfigurationSnapshotEventData"
         }
-      },
-      "required": [
-        "name",
-        "etag",
-        "syncToken"
       ]
     },
     "AppConfigurationSnapshotEventData": {
@@ -1731,25 +2683,11 @@
     },
     "AppConfigurationSnapshotModifiedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotModified event.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the snapshot."
-        },
-        "etag": {
-          "type": "string",
-          "description": "The etag representing the new state of the snapshot."
-        },
-        "syncToken": {
-          "type": "string",
-          "description": "The sync token representing the server state after the event."
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.AppConfiguration.SnapshotModified event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AppConfigurationSnapshotEventData"
         }
-      },
-      "required": [
-        "name",
-        "etag",
-        "syncToken"
       ]
     },
     "AppEventTypeDetail": {
@@ -1895,7 +2833,7 @@
       "properties": {
         "lockToken": {
           "type": "string",
-          "description": "The token used to lock the event."
+          "description": "The token of the lock on the event."
         },
         "deliveryCount": {
           "type": "integer",
@@ -2894,21 +3832,16 @@
       "properties": {
         "lockToken": {
           "type": "string",
-          "description": "LockToken value"
+          "description": "The lock token of an entry in the request."
         },
-        "errorCode": {
-          "type": "string",
-          "description": "Error code related to the token. Example of such error codes are BadToken: which indicates the Token is not formatted correctly, TokenLost: which indicates that token is not found, and InternalServerError: For any internal server errors."
-        },
-        "errorDescription": {
-          "type": "string",
-          "description": "Description of the token error."
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error information of the failed operation result for the lock token in the request."
         }
       },
       "required": [
         "lockToken",
-        "errorCode",
-        "errorDescription"
+        "error"
       ]
     },
     "HealthcareDicomImageCreatedEventData": {
@@ -4119,32 +5052,37 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "The id of the object that triggered this event."
+          "description": "The id of the object that triggered this event.",
+          "x-ms-client-name": "id"
         },
         "VaultName": {
           "type": "string",
-          "description": "Key vault name of the object that triggered this event."
+          "description": "Key vault name of the object that triggered this event.",
+          "x-ms-client-name": "vaultName"
         },
         "ObjectType": {
           "type": "string",
-          "description": "The type of the object that triggered this event"
+          "description": "The type of the object that triggered this event",
+          "x-ms-client-name": "objectType"
         },
         "ObjectName": {
           "type": "string",
-          "description": "The name of the object that triggered this event"
+          "description": "The name of the object that triggered this event",
+          "x-ms-client-name": "objectName"
         },
         "Version": {
           "type": "string",
-          "description": "The version of the object that triggered this event"
+          "description": "The version of the object that triggered this event",
+          "x-ms-client-name": "version"
         },
         "NBF": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Not before date of the object that triggered this event"
         },
         "EXP": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
       }
@@ -4155,32 +5093,37 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "The id of the object that triggered this event."
+          "description": "The id of the object that triggered this event.",
+          "x-ms-client-name": "id"
         },
         "VaultName": {
           "type": "string",
-          "description": "Key vault name of the object that triggered this event."
+          "description": "Key vault name of the object that triggered this event.",
+          "x-ms-client-name": "vaultName"
         },
         "ObjectType": {
           "type": "string",
-          "description": "The type of the object that triggered this event"
+          "description": "The type of the object that triggered this event",
+          "x-ms-client-name": "objectType"
         },
         "ObjectName": {
           "type": "string",
-          "description": "The name of the object that triggered this event"
+          "description": "The name of the object that triggered this event",
+          "x-ms-client-name": "objectName"
         },
         "Version": {
           "type": "string",
-          "description": "The version of the object that triggered this event"
+          "description": "The version of the object that triggered this event",
+          "x-ms-client-name": "version"
         },
         "NBF": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Not before date of the object that triggered this event"
         },
         "EXP": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
       }
@@ -4191,32 +5134,37 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "The id of the object that triggered this event."
+          "description": "The id of the object that triggered this event.",
+          "x-ms-client-name": "id"
         },
         "VaultName": {
           "type": "string",
-          "description": "Key vault name of the object that triggered this event."
+          "description": "Key vault name of the object that triggered this event.",
+          "x-ms-client-name": "vaultName"
         },
         "ObjectType": {
           "type": "string",
-          "description": "The type of the object that triggered this event"
+          "description": "The type of the object that triggered this event",
+          "x-ms-client-name": "objectType"
         },
         "ObjectName": {
           "type": "string",
-          "description": "The name of the object that triggered this event"
+          "description": "The name of the object that triggered this event",
+          "x-ms-client-name": "objectName"
         },
         "Version": {
           "type": "string",
-          "description": "The version of the object that triggered this event"
+          "description": "The version of the object that triggered this event",
+          "x-ms-client-name": "version"
         },
         "NBF": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Not before date of the object that triggered this event"
         },
         "EXP": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
       }
@@ -4227,32 +5175,37 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "The id of the object that triggered this event."
+          "description": "The id of the object that triggered this event.",
+          "x-ms-client-name": "id"
         },
         "VaultName": {
           "type": "string",
-          "description": "Key vault name of the object that triggered this event."
+          "description": "Key vault name of the object that triggered this event.",
+          "x-ms-client-name": "vaultName"
         },
         "ObjectType": {
           "type": "string",
-          "description": "The type of the object that triggered this event"
+          "description": "The type of the object that triggered this event",
+          "x-ms-client-name": "objectType"
         },
         "ObjectName": {
           "type": "string",
-          "description": "The name of the object that triggered this event"
+          "description": "The name of the object that triggered this event",
+          "x-ms-client-name": "objectName"
         },
         "Version": {
           "type": "string",
-          "description": "The version of the object that triggered this event"
+          "description": "The version of the object that triggered this event",
+          "x-ms-client-name": "version"
         },
         "NBF": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Not before date of the object that triggered this event"
         },
         "EXP": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
       }
@@ -4263,32 +5216,37 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "The id of the object that triggered this event."
+          "description": "The id of the object that triggered this event.",
+          "x-ms-client-name": "id"
         },
         "VaultName": {
           "type": "string",
-          "description": "Key vault name of the object that triggered this event."
+          "description": "Key vault name of the object that triggered this event.",
+          "x-ms-client-name": "vaultName"
         },
         "ObjectType": {
           "type": "string",
-          "description": "The type of the object that triggered this event"
+          "description": "The type of the object that triggered this event",
+          "x-ms-client-name": "objectType"
         },
         "ObjectName": {
           "type": "string",
-          "description": "The name of the object that triggered this event"
+          "description": "The name of the object that triggered this event",
+          "x-ms-client-name": "objectName"
         },
         "Version": {
           "type": "string",
-          "description": "The version of the object that triggered this event"
+          "description": "The version of the object that triggered this event",
+          "x-ms-client-name": "version"
         },
         "NBF": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Not before date of the object that triggered this event"
         },
         "EXP": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
       }
@@ -4299,32 +5257,37 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "The id of the object that triggered this event."
+          "description": "The id of the object that triggered this event.",
+          "x-ms-client-name": "id"
         },
         "VaultName": {
           "type": "string",
-          "description": "Key vault name of the object that triggered this event."
+          "description": "Key vault name of the object that triggered this event.",
+          "x-ms-client-name": "vaultName"
         },
         "ObjectType": {
           "type": "string",
-          "description": "The type of the object that triggered this event"
+          "description": "The type of the object that triggered this event",
+          "x-ms-client-name": "objectType"
         },
         "ObjectName": {
           "type": "string",
-          "description": "The name of the object that triggered this event"
+          "description": "The name of the object that triggered this event",
+          "x-ms-client-name": "objectName"
         },
         "Version": {
           "type": "string",
-          "description": "The version of the object that triggered this event"
+          "description": "The version of the object that triggered this event",
+          "x-ms-client-name": "version"
         },
         "NBF": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Not before date of the object that triggered this event"
         },
         "EXP": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
       }
@@ -4335,32 +5298,37 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "The id of the object that triggered this event."
+          "description": "The id of the object that triggered this event.",
+          "x-ms-client-name": "id"
         },
         "VaultName": {
           "type": "string",
-          "description": "Key vault name of the object that triggered this event."
+          "description": "Key vault name of the object that triggered this event.",
+          "x-ms-client-name": "vaultName"
         },
         "ObjectType": {
           "type": "string",
-          "description": "The type of the object that triggered this event"
+          "description": "The type of the object that triggered this event",
+          "x-ms-client-name": "objectType"
         },
         "ObjectName": {
           "type": "string",
-          "description": "The name of the object that triggered this event"
+          "description": "The name of the object that triggered this event",
+          "x-ms-client-name": "objectName"
         },
         "Version": {
           "type": "string",
-          "description": "The version of the object that triggered this event"
+          "description": "The version of the object that triggered this event",
+          "x-ms-client-name": "version"
         },
         "NBF": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Not before date of the object that triggered this event"
         },
         "EXP": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
       }
@@ -4371,32 +5339,37 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "The id of the object that triggered this event."
+          "description": "The id of the object that triggered this event.",
+          "x-ms-client-name": "id"
         },
         "VaultName": {
           "type": "string",
-          "description": "Key vault name of the object that triggered this event."
+          "description": "Key vault name of the object that triggered this event.",
+          "x-ms-client-name": "vaultName"
         },
         "ObjectType": {
           "type": "string",
-          "description": "The type of the object that triggered this event"
+          "description": "The type of the object that triggered this event",
+          "x-ms-client-name": "objectType"
         },
         "ObjectName": {
           "type": "string",
-          "description": "The name of the object that triggered this event"
+          "description": "The name of the object that triggered this event",
+          "x-ms-client-name": "objectName"
         },
         "Version": {
           "type": "string",
-          "description": "The version of the object that triggered this event"
+          "description": "The version of the object that triggered this event",
+          "x-ms-client-name": "version"
         },
         "NBF": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Not before date of the object that triggered this event"
         },
         "EXP": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
       }
@@ -4407,32 +5380,37 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "The id of the object that triggered this event."
+          "description": "The id of the object that triggered this event.",
+          "x-ms-client-name": "id"
         },
         "VaultName": {
           "type": "string",
-          "description": "Key vault name of the object that triggered this event."
+          "description": "Key vault name of the object that triggered this event.",
+          "x-ms-client-name": "vaultName"
         },
         "ObjectType": {
           "type": "string",
-          "description": "The type of the object that triggered this event"
+          "description": "The type of the object that triggered this event",
+          "x-ms-client-name": "objectType"
         },
         "ObjectName": {
           "type": "string",
-          "description": "The name of the object that triggered this event"
+          "description": "The name of the object that triggered this event",
+          "x-ms-client-name": "objectName"
         },
         "Version": {
           "type": "string",
-          "description": "The version of the object that triggered this event"
+          "description": "The version of the object that triggered this event",
+          "x-ms-client-name": "version"
         },
         "NBF": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Not before date of the object that triggered this event"
         },
         "EXP": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
       }
@@ -4443,32 +5421,37 @@
       "properties": {
         "Id": {
           "type": "string",
-          "description": "The id of the object that triggered this event."
+          "description": "The id of the object that triggered this event.",
+          "x-ms-client-name": "id"
         },
         "VaultName": {
           "type": "string",
-          "description": "Key vault name of the object that triggered this event."
+          "description": "Key vault name of the object that triggered this event.",
+          "x-ms-client-name": "vaultName"
         },
         "ObjectType": {
           "type": "string",
-          "description": "The type of the object that triggered this event"
+          "description": "The type of the object that triggered this event",
+          "x-ms-client-name": "objectType"
         },
         "ObjectName": {
           "type": "string",
-          "description": "The name of the object that triggered this event"
+          "description": "The name of the object that triggered this event",
+          "x-ms-client-name": "objectName"
         },
         "Version": {
           "type": "string",
-          "description": "The version of the object that triggered this event"
+          "description": "The version of the object that triggered this event",
+          "x-ms-client-name": "version"
         },
         "NBF": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Not before date of the object that triggered this event"
         },
         "EXP": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
       }
@@ -4744,12 +5727,8 @@
     },
     "MediaJobCanceledEventData": {
       "type": "object",
-      "description": "Job canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceled event.",
+      "description": "Job canceled event data. Schema of the data property of an EventGridEvent for a\nMicrosoft.Media.JobCanceled event.",
       "properties": {
-        "#Microsoft.Media.JobCanceled": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobCanceledEventData."
-        },
         "outputs": {
           "type": "array",
           "description": "Gets the Job outputs.",
@@ -4759,10 +5738,6 @@
           "x-ms-identifiers": []
         }
       },
-      "discriminator": "#Microsoft.Media.JobCanceled",
-      "required": [
-        "#Microsoft.Media.JobCanceled"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -4771,17 +5746,7 @@
     },
     "MediaJobCancelingEventData": {
       "type": "object",
-      "description": "Job canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceling event.",
-      "properties": {
-        "#Microsoft.Media.JobCanceling": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobCancelingEventData."
-        }
-      },
-      "discriminator": "#Microsoft.Media.JobCanceling",
-      "required": [
-        "#Microsoft.Media.JobCanceling"
-      ],
+      "description": "Job canceling event data. Schema of the data property of an EventGridEvent for\na Microsoft.Media.JobCanceling event.",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -4961,12 +5926,8 @@
     },
     "MediaJobErroredEventData": {
       "type": "object",
-      "description": "Job error state event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobErrored event.",
+      "description": "Job error state event data. Schema of the data property of an EventGridEvent\nfor a Microsoft.Media.JobErrored event.",
       "properties": {
-        "#Microsoft.Media.JobErrored": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobErroredEventData."
-        },
         "outputs": {
           "type": "array",
           "description": "Gets the Job outputs.",
@@ -4976,10 +5937,6 @@
           "x-ms-identifiers": []
         }
       },
-      "discriminator": "#Microsoft.Media.JobErrored",
-      "required": [
-        "#Microsoft.Media.JobErrored"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -4988,12 +5945,8 @@
     },
     "MediaJobFinishedEventData": {
       "type": "object",
-      "description": "Job finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobFinished event.",
+      "description": "Job finished event data. Schema of the data property of an EventGridEvent for a\nMicrosoft.Media.JobFinished event.",
       "properties": {
-        "#Microsoft.Media.JobFinished": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobFinishedEventData."
-        },
         "outputs": {
           "type": "array",
           "description": "Gets the Job outputs.",
@@ -5003,10 +5956,6 @@
           "x-ms-identifiers": []
         }
       },
-      "discriminator": "#Microsoft.Media.JobFinished",
-      "required": [
-        "#Microsoft.Media.JobFinished"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -5017,10 +5966,9 @@
       "type": "object",
       "description": "The event data for a Job output.",
       "properties": {
-        "@odata.type": {
+        "oDataType": {
           "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "OdataType"
+          "description": "Discriminator property for MediaJobOutput."
         },
         "error": {
           "$ref": "#/definitions/MediaJobError",
@@ -5040,9 +5988,9 @@
           "description": "Gets the Job output state."
         }
       },
-      "discriminator": "@odata.type",
+      "discriminator": "oDataType",
       "required": [
-        "@odata.type",
+        "oDataType",
         "progress",
         "state"
       ]
@@ -5051,57 +5999,21 @@
       "type": "object",
       "description": "The event data for a Job output asset.",
       "properties": {
-        "#Microsoft.Media.JobOutputAsset": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobOutputAsset."
-        },
-        "@odata.type": {
-          "type": "string",
-          "description": "The discriminator for derived types.",
-          "x-ms-client-name": "OdataType"
-        },
-        "error": {
-          "$ref": "#/definitions/MediaJobError",
-          "description": "Gets the Job output error."
-        },
-        "label": {
-          "type": "string",
-          "description": "Gets the Job output label."
-        },
-        "progress": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the Job output progress."
-        },
-        "state": {
-          "$ref": "#/definitions/MediaJobState",
-          "description": "Gets the Job output state."
-        },
         "assetName": {
           "type": "string",
           "description": "Gets the Job output asset name."
         }
       },
-      "discriminator": "#Microsoft.Media.JobOutputAsset",
-      "required": [
-        "#Microsoft.Media.JobOutputAsset",
-        "progress",
-        "state"
-      ]
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaJobOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputAsset"
     },
     "MediaJobOutputCanceledEventData": {
       "type": "object",
-      "description": "Job output canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceled event.",
-      "properties": {
-        "#Microsoft.Media.JobOutputCanceled": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobOutputCanceledEventData."
-        }
-      },
-      "discriminator": "#Microsoft.Media.JobOutputCanceled",
-      "required": [
-        "#Microsoft.Media.JobOutputCanceled"
-      ],
+      "description": "Job output canceled event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputCanceled event.",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -5110,17 +6022,7 @@
     },
     "MediaJobOutputCancelingEventData": {
       "type": "object",
-      "description": "Job output canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceling event.",
-      "properties": {
-        "#Microsoft.Media.JobOutputCanceling": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobOutputCancelingEventData."
-        }
-      },
-      "discriminator": "#Microsoft.Media.JobOutputCanceling",
-      "required": [
-        "#Microsoft.Media.JobOutputCanceling"
-      ],
+      "description": "Job output canceling event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputCanceling event.",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -5129,17 +6031,7 @@
     },
     "MediaJobOutputErroredEventData": {
       "type": "object",
-      "description": "Job output error event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputErrored event.",
-      "properties": {
-        "#Microsoft.Media.JobOutputErrored": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobOutputErroredEventData."
-        }
-      },
-      "discriminator": "#Microsoft.Media.JobOutputErrored",
-      "required": [
-        "#Microsoft.Media.JobOutputErrored"
-      ],
+      "description": "Job output error event data. Schema of the data property of an EventGridEvent\nfor a Microsoft.Media.JobOutputErrored event.",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -5148,17 +6040,7 @@
     },
     "MediaJobOutputFinishedEventData": {
       "type": "object",
-      "description": "Job output finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputFinished event.",
-      "properties": {
-        "#Microsoft.Media.JobOutputFinished": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobOutputFinishedEventData."
-        }
-      },
-      "discriminator": "#Microsoft.Media.JobOutputFinished",
-      "required": [
-        "#Microsoft.Media.JobOutputFinished"
-      ],
+      "description": "Job output finished event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputFinished event.",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -5167,17 +6049,7 @@
     },
     "MediaJobOutputProcessingEventData": {
       "type": "object",
-      "description": "Job output processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputProcessing event.",
-      "properties": {
-        "#Microsoft.Media.JobOutputProcessing": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobOutputProcessingEventData."
-        }
-      },
-      "discriminator": "#Microsoft.Media.JobOutputProcessing",
-      "required": [
-        "#Microsoft.Media.JobOutputProcessing"
-      ],
+      "description": "Job output processing event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputProcessing event.",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -5186,19 +6058,15 @@
     },
     "MediaJobOutputProgressEventData": {
       "type": "object",
-      "description": "Job Output Progress Event Data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputProgress event.",
+      "description": "Job Output Progress Event Data. Schema of the Data property of an\nEventGridEvent for a Microsoft.Media.JobOutputProgress event.",
       "properties": {
-        "#Microsoft.Media.JobOutputProgress": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobOutputProgressEventData."
-        },
         "label": {
           "type": "string",
           "description": "Gets the Job output label."
         },
         "progress": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Gets the Job output progress."
         },
         "jobCorrelationData": {
@@ -5208,25 +6076,11 @@
             "type": "string"
           }
         }
-      },
-      "discriminator": "#Microsoft.Media.JobOutputProgress",
-      "required": [
-        "#Microsoft.Media.JobOutputProgress"
-      ]
+      }
     },
     "MediaJobOutputScheduledEventData": {
       "type": "object",
-      "description": "Job output scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputScheduled event.",
-      "properties": {
-        "#Microsoft.Media.JobOutputCanceled": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobOutputScheduledEventData."
-        }
-      },
-      "discriminator": "#Microsoft.Media.JobOutputCanceled",
-      "required": [
-        "#Microsoft.Media.JobOutputCanceled"
-      ],
+      "description": "Job output scheduled event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputScheduled event.",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -5235,11 +6089,12 @@
     },
     "MediaJobOutputStateChangeEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event.",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Media.JobOutputStateChange event.",
       "properties": {
         "previousState": {
           "$ref": "#/definitions/MediaJobState",
-          "description": "The previous state of the Job."
+          "description": "The previous state of the Job.",
+          "readOnly": true
         },
         "output": {
           "$ref": "#/definitions/MediaJobOutput",
@@ -5256,17 +6111,7 @@
     },
     "MediaJobProcessingEventData": {
       "type": "object",
-      "description": "Job processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobProcessing event.",
-      "properties": {
-        "#Microsoft.Media.JobProcessing": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobProcessingEventData."
-        }
-      },
-      "discriminator": "#Microsoft.Media.JobProcessing",
-      "required": [
-        "#Microsoft.Media.JobProcessing"
-      ],
+      "description": "Job processing event data. Schema of the data property of an EventGridEvent for\na Microsoft.Media.JobProcessing event.",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -5299,17 +6144,7 @@
     },
     "MediaJobScheduledEventData": {
       "type": "object",
-      "description": "Job scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobScheduled event.",
-      "properties": {
-        "#Microsoft.Media.JobScheduled": {
-          "type": "string",
-          "description": "Discriminator property for MediaJobScheduledEventData."
-        }
-      },
-      "discriminator": "#Microsoft.Media.JobScheduled",
-      "required": [
-        "#Microsoft.Media.JobScheduled"
-      ],
+      "description": "Job scheduled event data. Schema of the data property of an EventGridEvent for\na Microsoft.Media.JobScheduled event.",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -5372,15 +6207,17 @@
     },
     "MediaJobStateChangeEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobStateChange event.",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.Media.JobStateChange event.",
       "properties": {
         "previousState": {
           "$ref": "#/definitions/MediaJobState",
-          "description": "The previous state of the Job."
+          "description": "The previous state of the Job.",
+          "readOnly": true
         },
         "state": {
           "$ref": "#/definitions/MediaJobState",
-          "description": "The new state of the Job."
+          "description": "The new state of the Job.",
+          "readOnly": true
         },
         "correlationData": {
           "type": "object",
@@ -6041,11 +6878,11 @@
     },
     "RejectOptions": {
       "type": "object",
-      "description": "Array of lock token strings for the corresponding received Cloud Events to be rejected.",
+      "description": "Array of lock tokens for the corresponding received Cloud Events to be rejected.",
       "properties": {
         "lockTokens": {
           "type": "array",
-          "description": "String array of lock tokens.",
+          "description": "Array of lock tokens.",
           "items": {
             "type": "string"
           }
@@ -6061,7 +6898,7 @@
       "properties": {
         "failedLockTokens": {
           "type": "array",
-          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
+          "description": "Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).",
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
@@ -6069,7 +6906,7 @@
         },
         "succeededLockTokens": {
           "type": "array",
-          "description": "Array of lock tokens values for the successfully rejected cloud events.",
+          "description": "Array of lock tokens for the successfully rejected cloud events.",
           "items": {
             "type": "string"
           }
@@ -6080,13 +6917,55 @@
         "succeededLockTokens"
       ]
     },
+    "ReleaseDelay": {
+      "type": "number",
+      "description": "Supported delays for release operation.",
+      "enum": [
+        0,
+        10,
+        60,
+        600,
+        3600
+      ],
+      "x-ms-enum": {
+        "name": "ReleaseDelay",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "By0Seconds",
+            "value": 0,
+            "description": "Release the event after 0 seconds."
+          },
+          {
+            "name": "By10Seconds",
+            "value": 10,
+            "description": "Release the event after 10 seconds."
+          },
+          {
+            "name": "By60Seconds",
+            "value": 60,
+            "description": "Release the event after 60 seconds."
+          },
+          {
+            "name": "By600Seconds",
+            "value": 600,
+            "description": "Release the event after 600 seconds."
+          },
+          {
+            "name": "By3600Seconds",
+            "value": 3600,
+            "description": "Release the event after 3600 seconds."
+          }
+        ]
+      }
+    },
     "ReleaseOptions": {
       "type": "object",
-      "description": "Array of lock token strings for the corresponding received Cloud Events to be released.",
+      "description": "Array of lock tokens for the corresponding received Cloud Events to be released.",
       "properties": {
         "lockTokens": {
           "type": "array",
-          "description": "String array of lock tokens.",
+          "description": "Array of lock tokens.",
           "items": {
             "type": "string"
           }
@@ -6102,7 +6981,7 @@
       "properties": {
         "failedLockTokens": {
           "type": "array",
-          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
+          "description": "Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).",
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
@@ -6110,7 +6989,7 @@
         },
         "succeededLockTokens": {
           "type": "array",
-          "description": "Array of lock tokens values for the successfully released cloud events.",
+          "description": "Array of lock tokens for the successfully released cloud events.",
           "items": {
             "type": "string"
           }
@@ -6119,6 +6998,47 @@
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
+      ]
+    },
+    "RenewCloudEventLocksResult": {
+      "type": "object",
+      "description": "The result of the RenewLock operation.",
+      "properties": {
+        "failedLockTokens": {
+          "type": "array",
+          "description": "Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).",
+          "items": {
+            "$ref": "#/definitions/FailedLockToken"
+          },
+          "x-ms-identifiers": []
+        },
+        "succeededLockTokens": {
+          "type": "array",
+          "description": "Array of lock tokens for the successfully renewed locks.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "failedLockTokens",
+        "succeededLockTokens"
+      ]
+    },
+    "RenewLockOptions": {
+      "type": "object",
+      "description": "Array of lock tokens for the corresponding received Cloud Events to be renewed.",
+      "properties": {
+        "lockTokens": {
+          "type": "array",
+          "description": "Array of lock tokens.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "lockTokens"
       ]
     },
     "ResourceActionCancelData": {
@@ -6482,6 +7402,138 @@
         }
       }
     },
+    "ResourceNotificationsHealthResourcesAnnotatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.ResourceNotifications.HealthResources.ResourceAnnotated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNotificationsResourceUpdatedEventData"
+        }
+      ]
+    },
+    "ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged\nevent.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNotificationsResourceUpdatedEventData"
+        }
+      ]
+    },
+    "ResourceNotificationsOperationalDetails": {
+      "type": "object",
+      "description": "details of operational info",
+      "properties": {
+        "resourceEventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and Time when resource was updated"
+        }
+      }
+    },
+    "ResourceNotificationsResourceDeletedDetails": {
+      "type": "object",
+      "description": "Describes the schema of the properties under resource info which are common\nacross all ARN system topic delete events",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id of the resource for which the event is being emitted"
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the resource for which the event is being emitted"
+        },
+        "type": {
+          "type": "string",
+          "description": "the type of the resource for which the event is being emitted"
+        }
+      }
+    },
+    "ResourceNotificationsResourceDeletedEventData": {
+      "type": "object",
+      "description": "Describes the schema of the common properties across all ARN system topic\ndelete events",
+      "properties": {
+        "resourceInfo": {
+          "$ref": "#/definitions/ResourceNotificationsResourceDeletedDetails",
+          "description": "resourceInfo details for delete event",
+          "x-ms-client-name": "resourceDetails"
+        },
+        "operationalInfo": {
+          "$ref": "#/definitions/ResourceNotificationsOperationalDetails",
+          "description": "details about operational info",
+          "x-ms-client-name": "operationalDetails"
+        }
+      }
+    },
+    "ResourceNotificationsResourceManagementCreatedOrUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.ResourceNotifications.Resources.CreatedOrUpdated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNotificationsResourceUpdatedEventData"
+        }
+      ]
+    },
+    "ResourceNotificationsResourceManagementDeletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.ResourceNotifications.Resources.Deleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNotificationsResourceDeletedEventData"
+        }
+      ]
+    },
+    "ResourceNotificationsResourceUpdatedDetails": {
+      "type": "object",
+      "description": "Describes the schema of the properties under resource info which are common\nacross all ARN system topic events",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id of the resource for which the event is being emitted"
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the resource for which the event is being emitted"
+        },
+        "type": {
+          "type": "string",
+          "description": "the type of the resource for which the event is being emitted"
+        },
+        "location": {
+          "type": "string",
+          "description": "the location of the resource for which the event is being emitted"
+        },
+        "tags": {
+          "type": "string",
+          "description": "the tags on the resource for which the event is being emitted"
+        },
+        "properties": {
+          "type": "object",
+          "description": "properties in the payload of the resource for which the event is being emitted",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ResourceNotificationsResourceUpdatedEventData": {
+      "type": "object",
+      "description": "Describes the schema of the common properties across all ARN system topic events",
+      "properties": {
+        "resourceInfo": {
+          "$ref": "#/definitions/ResourceNotificationsResourceUpdatedDetails",
+          "description": "resourceInfo details for update event",
+          "x-ms-client-name": "resourceDetails"
+        },
+        "operationalInfo": {
+          "$ref": "#/definitions/ResourceNotificationsOperationalDetails",
+          "description": "details about operational info",
+          "x-ms-client-name": "operationalDetails"
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "api version of the resource properties bag"
+        }
+      }
+    },
     "ResourceWriteCancelData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteCancel event. This is raised when a resource create or update operation is canceled.",
@@ -6644,15 +7696,25 @@
     "ServiceApiVersions": {
       "type": "string",
       "enum": [
-        "2023-06-01-preview"
+        "2023-11-01",
+        "2023-06-01-preview",
+        "2023-10-01-preview"
       ],
       "x-ms-enum": {
         "name": "ServiceApiVersions",
         "modelAsString": true,
         "values": [
           {
+            "name": "v2023_11_01",
+            "value": "2023-11-01"
+          },
+          {
             "name": "v2023_06_01_preview",
             "value": "2023-06-01-preview"
+          },
+          {
+            "name": "v2023_10_01_preview",
+            "value": "2023-10-01-preview"
           }
         ]
       }
