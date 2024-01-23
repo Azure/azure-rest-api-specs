@@ -31,6 +31,16 @@ foreach ($file in $changedFiles) {
   if ($file -match 'specification(\/[^\/]+\/)+') {
     $path = "$repoPath/$($matches[0])"
     if (Test-Path $path) {
+      if (!CheckAll) {
+        Write-Verbose "Checking for cadl files under $path"
+        $cadlFile = Get-ChildItem -path $path cadl-project.* -Recurse
+        if ($cadlFile) {
+          LogError "Project $path uses deprecated cadl, please use TypeSpec instead."
+          LogJobFailure
+          exit 1
+        }
+      }
+
       Write-Verbose "Checking for tspconfig files under $path"
       $typespecFolder = Get-ChildItem -path $path tspconfig.* -Recurse
       if ($typespecFolder) {
