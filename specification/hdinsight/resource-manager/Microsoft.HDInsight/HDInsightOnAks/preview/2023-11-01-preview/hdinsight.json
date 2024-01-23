@@ -1365,7 +1365,7 @@
         },
         "enablePrivateApiServer": {
           "type": "boolean",
-          "description": "ClusterPool is based on AKS cluster. Aks cluster exposes the apiserver to public internet by default. If you set this property to true, a private aks cluster will be created, and it will use private apiserver, which is not exposed to public internet.",
+          "description": "ClusterPool is based on AKS cluster. AKS cluster exposes the API server to public internet by default. If you set this property to true, a private AKS cluster will be created, and it will use private apiserver, which is not exposed to public internet.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1866,7 +1866,7 @@
       "properties": {
         "enableInternalIngress": {
           "type": "boolean",
-          "description": "Whether to create cluster using private IP instead of public IP.",
+          "description": "Whether to create cluster using private IP instead of public IP. This property must be set at create time.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1883,7 +1883,7 @@
               }
             ]
           },
-          "description": "Private link service resource id. Only when enableInternalIngress is true, this property will be returned."
+          "description": "Private link service resource ID. Only when enableInternalIngress is true, this property will be returned."
         }
       }
     },
@@ -1921,7 +1921,7 @@
         },
         "privateSshEndpoint": {
           "type": "string",
-          "description": "Private ssh connectivity endpoint. This property will only be returned when enableInternalIngress is true.",
+          "description": "Private SSH connectivity endpoint. This property will only be returned when enableInternalIngress is true.",
           "example": "clusterName11223344-int.clusterPoolName55667788.eastus.hdinsightaks.net/ssh/host/podPrefix-0"
         }
       }
@@ -2788,7 +2788,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Enable ranger for cluster or not.",
+          "description": "Enable Ranger for cluster or not.",
           "default": false
         }
       }
@@ -2960,9 +2960,9 @@
           "$ref": "#/definitions/IdentityProfile",
           "readOnly": true
         },
-        "kafkaConnectivityProfile": {
-          "description": "Kafka bootstrap server and brokers related connectivity profile.",
-          "$ref": "#/definitions/KafkaConnectivityProfile",
+        "connectivityEndpoints": {
+          "description": "Kafka bootstrap server and brokers related connectivity endpoints.",
+          "$ref": "#/definitions/KafkaConnectivityEndpoints",
           "readOnly": true
         }
       }
@@ -2998,9 +2998,9 @@
         }
       }
     },
-    "KafkaConnectivityProfile": {
+    "KafkaConnectivityEndpoints": {
       "type": "object",
-      "description": "Kafka bootstrap server and broker related connectivity profile.",
+      "description": "Kafka bootstrap server and broker related connectivity endpoints.",
       "properties": {
         "bootstrapServerEndpoint": {
           "type": "string",
@@ -3158,10 +3158,6 @@
         },
         "location": {
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
           "description": "The geo-location where the resource lives"
         }
       }
@@ -3403,7 +3399,7 @@
         },
         "serviceStatuses": {
           "type": "array",
-          "description": "List of statuses of relevant services that make up the HDInsight on aks cluster to surface to the customer.",
+          "description": "List of statuses of relevant services that make up the HDInsight on AKS cluster to surface to the customer.",
           "items": {
             "$ref": "#/definitions/ServiceStatus"
           },
@@ -3434,7 +3430,7 @@
     },
     "ServiceStatus": {
       "type": "object",
-      "description": "Describes the status of a service of a HDInsight on aks cluster.",
+      "description": "Describes the status of a service of a HDInsight on AKS cluster.",
       "required": [
         "kind",
         "ready"
@@ -3803,14 +3799,14 @@
     },
     "ClusterPoolAvailableUpgradeList": {
       "type": "object",
-      "description": "Collection of Cluster pool available upgrade.",
+      "description": "collection of cluster pool available upgrade.",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
           "type": "array",
-          "description": "Collection of Cluster pool available upgrade.",
+          "description": "Collection of cluster pool available upgrade.",
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/ClusterPoolAvailableUpgrade"
@@ -3863,7 +3859,7 @@
     },
     "ClusterPoolAvailableUpgradeAksPatchUpgradeProperties": {
       "type": "object",
-      "description": "Cluster pool available aks patch version upgrade.",
+      "description": "Cluster pool available AKS patch version upgrade.",
       "allOf": [
         {
           "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
@@ -3895,7 +3891,7 @@
     },
     "ClusterPoolAvailableUpgradeNodeOsUpgradeProperties": {
       "type": "object",
-      "description": "Cluster pool available node os update.",
+      "description": "Cluster pool available node OS update.",
       "allOf": [
         {
           "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
@@ -3903,7 +3899,7 @@
       ],
       "properties": {
         "latestVersion": {
-          "description": "The latest node os version.",
+          "description": "The latest node OS version.",
           "type": "string"
         }
       },
@@ -3911,7 +3907,7 @@
     },
     "ClusterAvailableUpgradeList": {
       "type": "object",
-      "description": "Collection of Cluster available upgrade.",
+      "description": "Collection of cluster available upgrade.",
       "required": [
         "value"
       ],
@@ -3926,7 +3922,7 @@
           "x-ms-identifiers": []
         },
         "nextLink": {
-          "description": "The Url of next result page.",
+          "description": "The URL of next result page.",
           "type": "string"
         }
       }
@@ -3971,7 +3967,7 @@
     },
     "ClusterAvailableUpgradeAksPatchUpgradeProperties": {
       "type": "object",
-      "description": "Cluster available aks patch version upgrade.",
+      "description": "Cluster available AKS patch version upgrade.",
       "allOf": [
         {
           "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
@@ -3995,7 +3991,7 @@
           }
         },
         "latestVersion": {
-          "description": "Latest available version, which should be equal to aks control plane version if it's not deprecated.",
+          "description": "Latest available version, which should be equal to AKS control plane version if it's not deprecated.",
           "type": "string"
         }
       },
@@ -4103,7 +4099,7 @@
       ]
     },
     "ClusterPoolAKSPatchVersionUpgradeProperties": {
-      "description": "Properties of upgrading cluster pool's aks patch version.",
+      "description": "Properties of upgrading cluster pool's AKS patch version.",
       "type": "object",
       "allOf": [
         {
@@ -4122,14 +4118,14 @@
           "default": false
         },
         "targetAksVersion": {
-          "description": "Target aks version. When it's not set, latest version will be used. When upgradeClusterPool is true and upgradeAllClusterNodes is false, target version should be greater or equal to current version. When upgradeClusterPool is false and upgradeAllClusterNodes is true, target version should be equal to aks version of cluster pool.",
+          "description": "Target AKS version. When it's not set, latest version will be used. When upgradeClusterPool is true and upgradeAllClusterNodes is false, target version should be greater or equal to current version. When upgradeClusterPool is false and upgradeAllClusterNodes is true, target version should be equal to AKS version of cluster pool.",
           "type": "string"
         }
       },
       "x-ms-discriminator-value": "AKSPatchUpgrade"
     },
     "ClusterPoolNodeOsImageUpdateProperties": {
-      "description": "Properties of upgrading cluster pool's aks patch version.",
+      "description": "Properties of upgrading cluster pool's AKS patch version.",
       "type": "object",
       "allOf": [
         {
@@ -4174,7 +4170,7 @@
       ]
     },
     "ClusterAKSPatchVersionUpgradeProperties": {
-      "description": "Properties of upgrading cluster's aks patch version.",
+      "description": "Properties of upgrading cluster's AKS patch version.",
       "type": "object",
       "allOf": [
         {
@@ -4235,7 +4231,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the HDInsight on aks cluster type.",
+      "description": "The name of the HDInsight on AKS cluster type.",
       "x-ms-parameter-location": "method"
     }
   }
