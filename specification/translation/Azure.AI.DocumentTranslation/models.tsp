@@ -10,40 +10,59 @@ namespace BatchDocumentTranslationClient;
 
 @doc("Storage Source")
 enum StorageSource {
+  @doc("Azure Blob")
   AzureBlob,
 }
 
 @doc("List of possible additional output formats")
 enum AdditionalOutputFileFormat {
+  @doc("None")
   None,
+  @doc("Open Xml Word")
   OpenXmlWord,
 }
 
 @doc("Storage type of the input documents source string")
 enum StorageInputType {
+  @doc("Folder")
   Folder,
+  @doc("File")
   File,
 }
 
 @doc("Enums containing high level error codes.")
 enum TranslationErrorCode {
+  @doc("InvalidRequest")
   InvalidRequest,
+  @doc("InvalidArgument")
   InvalidArgument,
+  @doc("InternalServerError")
   InternalServerError,
+  @doc("ServiceUnavailable")
   ServiceUnavailable,
+  @doc("ResourceNotFound")
   ResourceNotFound,
+  @doc("Unauthorized")
   Unauthorized,
+  @doc("RequestRateTooHigh")
   RequestRateTooHigh,
 }
 
 @doc("List of possible statuses for job or document")
 enum Status {
+  @doc("NotStarted")
   NotStarted,
+  @doc("Running")
   Running,
+  @doc("Succeeded")
   Succeeded,
+  @doc("Failed")
   Failed,
+  @doc("Cancelled")
   Cancelled,
+  @doc("Cancelling")
   Cancelling,
+  @doc("ValidationFailed")
   ValidationFailed,
 }
 
@@ -70,6 +89,7 @@ model SourceInput {
   @doc("Location of the folder / container or single file with your documents")
   sourceUrl: string;
 
+  @doc("Document filter")
   filter?: DocumentFilter;
 
   @doc("""
@@ -82,6 +102,7 @@ If none is specified, we will perform auto detect on the document
   storageSource?: StorageSource;
 }
 
+@doc("Document filter")
 model DocumentFilter {
   @doc("""
 A case-sensitive prefix string to filter documents in the source path for
@@ -113,6 +134,7 @@ model TargetInput {
   @doc("List of Glossary")
   glossaries?: Glossary[];
 
+  @doc("Batch Request Options")
   options?: BatchRequestOptions;
 
   @doc("Storage Source")
@@ -141,6 +163,7 @@ language pair is not present in the glossary, it will not be applied
   storageSource?: StorageSource;
 }
 
+@doc("Batch Request Options")
 model BatchRequestOptions {
   @doc("List of possible additional output formats")
   pdfOutputAdditionalFormat?: AdditionalOutputFileFormat;
@@ -262,9 +285,11 @@ inner error with more descriptive details.
 """)
   error?: TranslationError;
 
+  @doc("Status Summary")
   summary: StatusSummary;
 }
 
+@doc("Status Summary")
 model StatusSummary {
   @doc("Total count")
   total: int32;
@@ -346,6 +371,7 @@ model SupportedFileFormats {
   value: FileFormat[];
 }
 
+@doc("File Format")
 model FileFormat {
   @doc("Name of the format")
   format: string;
