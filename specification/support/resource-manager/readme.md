@@ -38,6 +38,26 @@ These settings apply only when `--tag=package-preview-2023-06` is specified on t
 input-file:
   - Microsoft.Support/preview/2023-06-01-preview/support.json
 ```
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.Support/preview/2023-06-01-preview/support.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: Microsoft.Support/preview/2023-06-01-preview/support.json
+    where: $.definitions.ServiceProperties
+    reason: "This is metadata about the service, only visible for 1P clients and used by partner teams which changes dynamically for each partner"
+  - code: AvoidAdditionalProperties
+    from: Microsoft.Support/preview/2023-06-01-preview/support.json
+    where: $.definitions.ProblemClassificationProperties
+    reason: "This is metadata about the service, only visible for 1P clients and used by partner teams which changes dynamically for each partner"
+   
+```
+
 ### Tag: package-preview-2022-09
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
