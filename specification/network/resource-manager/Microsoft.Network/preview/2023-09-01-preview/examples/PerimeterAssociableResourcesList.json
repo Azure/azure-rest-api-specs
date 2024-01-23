@@ -18,6 +18,10 @@
               "displayName": "Microsoft.Sql/servers",
               "publicDnsZones": [
                 "database.windows.net"
+              ],
+              "features": [],
+              "availableControls": [
+                "granularAccessRules"
               ]
             }
           },
@@ -33,8 +37,37 @@
                 "table.core.windows.net",
                 "queue.core.windows.net",
                 "file.core.windows.net"
+              ],
+              "features": [],
+              "availableControls": [
+                "granularAccessRules"
               ]
             }
+          },
+          {
+              "type": "Microsoft.Network/PerimeterAssociableResourceTypes",
+              "name": "Microsoft.OperationalInsights.workspaces",
+              "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/PerimeterAssociableResourceTypes/Microsoft.OperationalInsights.workspaces",
+              "properties": {
+                  "providerNamespace": "Microsoft.OperationalInsights",
+                  "resourceType": "workspaces",
+                  "displayName": "Microsoft.OperationalInsights/workspaces",
+                  "apiVersion": "2021-10-01",
+                  "publicDnsZones": [
+                      "monitor.azure.com",
+                      "oms.opinsights.azure.com",
+                      "ods.opinsights.azure.com",
+                      "agentsvc.azure-automation.net",
+                      "blob.core.windows.net"
+                  ],
+                  "features": [
+                      "query",
+                      "ingestion"
+                  ],
+                  "availableControls": [
+                    "granularAccessRules"
+                  ]
+              }
           }
         ],
         "nextLink": "{baseurl}/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes?api-version=2023-07-01-preview&$skipToken=10"
