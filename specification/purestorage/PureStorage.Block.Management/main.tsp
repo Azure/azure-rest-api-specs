@@ -467,7 +467,10 @@ interface AvsStorageContainers {
   create is ArmResourceCreateOrUpdateAsync<AvsStorageContainer>;
   get is ArmResourceRead<AvsStorageContainer>;
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainer>;
-  update is ArmResourcePatchAsync<AvsStorageContainer, AvsStorageContainerProperties>;
+  update is ArmResourcePatchAsync<
+    AvsStorageContainer,
+    AvsStorageContainerProperties
+  >;
   listByParent is ArmResourceListByParent<AvsStorageContainer>;
 }
 
