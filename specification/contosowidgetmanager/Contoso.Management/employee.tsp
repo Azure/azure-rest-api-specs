@@ -62,7 +62,7 @@ interface Employees {
   get is ArmResourceRead<Employee>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Employee>;
   update is ArmResourcePatchSync<Employee, EmployeeProperties>;
-  delete is ArmResourceDeleteSync<Employee>;
+  delete is ArmResourceDeleteWithoutOkAsync<Employee>;
   listByResourceGroup is ArmResourceListByParent<Employee>;
   listBySubscription is ArmListBySubscription<Employee>;
 }
