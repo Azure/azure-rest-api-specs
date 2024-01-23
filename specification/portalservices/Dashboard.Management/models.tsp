@@ -336,10 +336,10 @@ model ActionParameters extends ActionsOnClick {
   type: ActionsOnClickType.updateParameters;
 }
 
-@doc("Model for action reference to a url.")
+@doc("Model for action reference to a uri.")
 model ActionReferenceUrl extends ActionReference {
   @doc("The URI that will be opened")
-  url: string;
+  uri: string;
 
   @doc("The display name of the link")
   displayName: string;
