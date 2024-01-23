@@ -1,5 +1,5 @@
 {
-  "title": "Create a PipelineGroup instance using a syslog receiver",
+  "title": "Create a PipelineGroup instance using a syslog receiver and cache.",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -61,6 +61,10 @@
               "concurrency": {
                 "workerCount": 4,
                 "batchQueueSize": 100
+              },
+              "cache": {
+                "maxStorageUsage": 100,
+                "retentionPeriod": 10
               }
             }
           }

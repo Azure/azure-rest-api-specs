@@ -13,6 +13,9 @@ model AzureMonitorWorkspaceLogsExporter {
 
   @doc("Concurrency configuration for the exporter.")
   concurrency?: ConcurrencyConfiguration;
+
+  @doc("Cache configurations.")
+  cache?: CacheConfig;
 }
 
 @doc("Azure Monitor Workspace Logs Api configurations.")
@@ -77,12 +80,18 @@ model ScopeMap {
 
 @doc("Concurrent publishing configuration.")
 model ConcurrencyConfiguration {
-  @doc("Fixed count of messages.")
-  fixedCount: int32 = 10;
+  @doc("Number of parallel workers processing the log queues.")
+  workerCount?: int32 = 4;
 
-  @doc("Payload queue size.")
-  payloadQueueSize: int32 = 100;
+  @doc("Size of the queue for log batches.")
+  batchQueueSize?: int32 = 100;
+}
 
-  @doc("Log queue size.")
-  logQueueSize: int32 = 100;
+@doc("Cache configurations.")
+model CacheConfig {
+  @doc("Max storage usage in megabytes.")
+  maxStorageUsage?: int32;
+
+  @doc("Retention period in minutes.")
+  retentionPeriod?: int32;
 }

@@ -152,6 +152,10 @@ model Service {
   @doc("Pipelines belonging to a given pipeline group.")
   @extension("x-ms-identifiers", [])
   pipelines: Pipeline[];
+
+  @doc("Persistence options to a all pipeline groups in the instance.")
+  @extension("x-ms-identifiers", [])
+  persistence?: PersistenceConfigurations;
 }
 
 @doc("Pipeline Info.")
@@ -202,6 +206,12 @@ model NetworkingRoute {
   @doc("Route subdomain.")
   @pattern("^[a-zA-Z0-9-\\.]+$")
   subdomain?: string;
+}
+
+@doc("Persistence options to a all pipeline groups in the instance.")
+model PersistenceConfigurations {
+  @doc("The name of the mounted persistent volume.")
+  persistentVolumeName: string;
 }
 
 @armResourceOperations

@@ -597,6 +597,9 @@
           "Create a PipelineGroup instance using a syslog receiver": {
             "$ref": "./examples/PipelineGroupCreateSyslogs.json"
           },
+          "Create a PipelineGroup instance using a syslog receiver and cache.": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithCache.json"
+          },
           "Create a PipelineGroup instance using a syslog receiver and networking configurations.": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithNetworking.json"
           }
@@ -842,6 +845,10 @@
         "concurrency": {
           "$ref": "#/definitions/ConcurrencyConfiguration",
           "description": "Concurrency configuration for the exporter."
+        },
+        "cache": {
+          "$ref": "#/definitions/CacheConfig",
+          "description": "Cache configurations."
         }
       },
       "required": [
@@ -935,34 +942,39 @@
         }
       }
     },
+    "CacheConfig": {
+      "type": "object",
+      "description": "Cache configurations.",
+      "properties": {
+        "maxStorageUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage usage in megabytes."
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period in minutes."
+        }
+      }
+    },
     "ConcurrencyConfiguration": {
       "type": "object",
       "description": "Concurrent publishing configuration.",
       "properties": {
-        "fixedCount": {
+        "workerCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Fixed count of messages.",
-          "default": 10
+          "description": "Number of parallel workers processing the log queues.",
+          "default": 4
         },
-        "payloadQueueSize": {
+        "batchQueueSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Payload queue size.",
-          "default": 100
-        },
-        "logQueueSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Log queue size.",
+          "description": "Size of the queue for log batches.",
           "default": 100
         }
-      },
-      "required": [
-        "fixedCount",
-        "payloadQueueSize",
-        "logQueueSize"
-      ]
+      }
     },
     "Exporter": {
       "type": "object",
@@ -1150,6 +1162,29 @@
       "required": [
         "endpoint"
       ]
+    },
+    "PersistenceConfigurations": {
+      "type": "object",
+      "description": "Persistence options to a all pipeline groups in the instance.",
+      "properties": {
+        "persistentVolumeName": {
+          "type": "string",
+          "description": "The name of the mounted persistent volume."
+        }
+      },
+      "required": [
+        "persistentVolumeName"
+      ]
+    },
+    "PersistenceConfigurationsUpdate": {
+      "type": "object",
+      "description": "Persistence options to a all pipeline groups in the instance.",
+      "properties": {
+        "persistentVolumeName": {
+          "type": "string",
+          "description": "The name of the mounted persistent volume."
+        }
+      }
     },
     "Pipeline": {
       "type": "object",
@@ -1642,6 +1677,11 @@
             "$ref": "#/definitions/Pipeline"
           },
           "x-ms-identifiers": []
+        },
+        "persistence": {
+          "$ref": "#/definitions/PersistenceConfigurations",
+          "description": "Persistence options to a all pipeline groups in the instance.",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1658,6 +1698,11 @@
           "items": {
             "$ref": "#/definitions/Pipeline"
           },
+          "x-ms-identifiers": []
+        },
+        "persistence": {
+          "$ref": "#/definitions/PersistenceConfigurationsUpdate",
+          "description": "Persistence options to a all pipeline groups in the instance.",
           "x-ms-identifiers": []
         }
       }
