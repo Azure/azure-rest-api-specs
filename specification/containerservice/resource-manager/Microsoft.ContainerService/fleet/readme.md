@@ -27,15 +27,15 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-02
+tag: package-2024-02-preview
 ```
 
 
-### Tag: package-preview-2024-02
+### Tag: ackage-2024-02-preview
 
-These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-02'
+```yaml $(tag) == 'package-2024-02-preview'
 input-file:
   - preview/2024-02-02-preview/fleets.json
 ```
