@@ -411,7 +411,16 @@ model ArcSnapshotTileDataNoResources {
   text: string;
 
   @doc("Icon to be shown when there are no resources to be configured with.")
-  icon: string;
+  icon: IconReference;
+}
+
+@doc("Model for Icon Reference.")
+model IconReference {
+  @doc("Framework icon type - enum number or zero for custom icon.")
+  type: int32;
+
+  @doc("Icon data string that is supplied by the extension author.")
+  data?: string;
 }
 
 @doc("Actions that can be taken on the arc snapshot tile.")
@@ -481,7 +490,7 @@ model NavigationTile extends DashboardTile {
 @doc("The data that determines the content of the navigation tile.")
 model NavigationTileData {
   @doc("Icon to be displayed on the navigation tile.")
-  icon: string;
+  icon: IconReference;
 
   @doc("The description displayed within the navigation tile.")
   description?: string;

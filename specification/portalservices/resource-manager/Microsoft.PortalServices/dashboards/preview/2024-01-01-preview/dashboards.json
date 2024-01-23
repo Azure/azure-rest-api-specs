@@ -805,7 +805,7 @@
           "description": "Text to be shown when there are no resources to be configured with the service."
         },
         "icon": {
-          "type": "string",
+          "$ref": "#/definitions/IconReference",
           "description": "Icon to be shown when there are no resources to be configured with."
         }
       },
@@ -1257,6 +1257,24 @@
         ]
       }
     },
+    "IconReference": {
+      "type": "object",
+      "description": "Model for Icon Reference.",
+      "properties": {
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Framework icon type - enum number or zero for custom icon."
+        },
+        "data": {
+          "type": "string",
+          "description": "Icon data string that is supplied by the extension author."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "MarkdownInlineData": {
       "type": "object",
       "description": "The data definition of Markdown with inline content",
@@ -1373,7 +1391,7 @@
       "description": "The data that determines the content of the navigation tile.",
       "properties": {
         "icon": {
-          "type": "string",
+          "$ref": "#/definitions/IconReference",
           "description": "Icon to be displayed on the navigation tile."
         },
         "description": {
