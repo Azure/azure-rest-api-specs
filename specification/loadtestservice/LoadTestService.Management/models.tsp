@@ -20,6 +20,7 @@ namespace Microsoft.LoadTestService.Draft;
 model LoadTestResource is TrackedResource<LoadTestProperties> {
   @doc("Load Test name")
   @key("loadTestName")
+  @extension("x-ms-parameter-location", "method")
   @path
   @segment("loadTests")
   name: string;
