@@ -13,7 +13,83 @@
           "pages": [
             {
               "title": "New 1",
-              "tiles": []
+              "tiles": [
+                {
+                  "title": "My Arc Snapshot Tile",
+                  "subtitle": "My subtitle",
+                  "type": "ArcSnapshotTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 4,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "arg",
+                    "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend TotalCount = ResourceCount| project ResourceCount, TotalCount | take 10",
+                    "columns":{
+                      "notConfiguredResourcesCount": "ResourceCount",
+                      "totalResourc,esCount": "TotalCount"
+                    },
+                    "allResourcesConfiguredText": "All resources are configured",
+                    "usedParameters": [
+                      "sampleLocationParameter"
+                    ],
+                    "noResources": {
+                      "icon": "NoResourcesIcon",
+                      "text": "No resources found"
+                    },
+                    "actions": {
+                      "configureService": {
+                        "type": "url",
+                        "url": "https://www.bing.com",
+                        "displayName": "Service not configured"
+                      },
+                      "viewConfiguredService": {
+                        "type": "url",
+                        "url": "https://www.bing.com",
+                        "displayName": "View configured services"
+                      },
+                      "viewNotConfiguredResources": {
+                        "type": "blade",
+                        "blade": {
+                          "name": "ArgQueryBlade",
+                          "extension": "HubsExtension"
+                        },
+                        "displayName": "View not configured"
+                      }
+                    }
+                  },
+                  "visualization": {
+                    "type": "table",
+                    "options": {
+                      "hideTileTitle": false,
+                      "table__enableRenderLinks": true,
+                      "table__renderLinksForColumns": [],
+                      "colorRules": [],
+                      "colorRulesDisabled": true,
+                      "colorStyle": "light",
+                      "crossFilter": [],
+                      "crossFilterDisabled": false,
+                      "drillthrough": [],
+                      "drillthroughDisabled": false
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "title": "Location",
+              "kind": "location",
+              "parameterNames": [
+                "sampleLocationParameter"
+              ],
+              "defaultValues": [
+                "eastus"
+              ],
+              "showOnPages": []
             }
           ]
         }
