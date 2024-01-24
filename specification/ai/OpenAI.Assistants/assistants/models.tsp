@@ -4,6 +4,7 @@ import "../tools/models.tsp";
 
 namespace Azure.AI.OpenAI.Assistants;
 
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @doc("Represents an assistant that can call the model and use tools.")
@@ -77,6 +78,10 @@ model AssistantCreationOptions {
 @doc("The request details to use when modifying an existing assistant.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model UpdateAssistantOptions {
+  @path
+  @doc("The ID of the assistant to modify.")
+  assistantId: string;
+
   @doc("The ID of the model to use.")
   `model`?: string;
 

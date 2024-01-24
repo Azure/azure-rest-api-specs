@@ -54,8 +54,7 @@ op getAssistant(@path assistantId: string): Assistant;
 /**
  * Modifies an existing assistant.
  *
- * @param assistantId The ID of the assistant to modify.
- * @param updateAssistantOptions The details of the modification to perform on the specified assistant.
+ * @param updateAssistantOptions The details of the modification to perform on a specified assistant.
  * @returns The updated assistant instance.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -64,10 +63,7 @@ op getAssistant(@path assistantId: string): Assistant;
 @post
 @route("/assistants/{assistantId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op updateAssistant(
-  @path assistantId: string,
-  @body updateAssistantOptions: UpdateAssistantOptions,
-): Assistant;
+op updateAssistant(...UpdateAssistantOptions): Assistant;
 
 /**
  * Deletes an assistant.

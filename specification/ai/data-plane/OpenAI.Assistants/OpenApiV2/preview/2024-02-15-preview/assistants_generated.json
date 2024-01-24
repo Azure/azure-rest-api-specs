@@ -217,16 +217,11 @@
         "description": "Modifies an existing assistant.",
         "parameters": [
           {
-            "name": "assistantId",
-            "in": "path",
-            "description": "The ID of the assistant to modify.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/UpdateAssistantOptions.assistantId"
           },
           {
-            "name": "updateAssistantOptions",
+            "name": "body",
             "in": "body",
-            "description": "The details of the modification to perform on the specified assistant.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateAssistantOptions"
@@ -3536,5 +3531,14 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "UpdateAssistantOptions.assistantId": {
+      "name": "assistantId",
+      "in": "path",
+      "description": "The ID of the assistant to modify.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
