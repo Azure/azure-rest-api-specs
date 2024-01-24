@@ -86,7 +86,7 @@ input-file:
 
 These settings apply only when `--tag=package-2024-01-15` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-02-01-preview'
+``` yaml $(tag) == 'package-2024-01-15'
 input-file:
   - Microsoft.ManagedNetworkFabric/stable/2024-01-15/InternetGatewayRules.json
   - Microsoft.ManagedNetworkFabric/stable/2024-01-15/common.json
