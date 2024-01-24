@@ -702,7 +702,7 @@
         "tags": [
           "Browse, reserve and purchase available phone numbers"
         ],
-        "summary": "Updates a reservation by its ID. This only supports adding or removing phone numbers from the reservation. Note that this does not support bulk operations.",
+        "summary": "Updates a reservation by its ID. This only supports adding or removing phone numbers from the reservation.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1967,7 +1967,8 @@
         "capabilities",
         "phoneNumberType",
         "assignmentType",
-        "cost"
+        "cost",
+        "status"
       ],
       "type": "object",
       "description": "Represents a phone number available in inventory",
@@ -2021,6 +2022,36 @@
               "$ref": "#/definitions/PhoneNumberCost"
             }
           ]
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "available",
+            "reserved",
+            "expired",
+            "error",
+            "purchased"
+          ],
+          "x-ms-enum": {
+            "name": "AvailablePhoneNumberStatus",
+            "modelAsString": true
+          }
+        },
+        "error": {
+          "readOnly": true,
+          "type": "object",
+          "description": "If status is error, this will contain the error details.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string"
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -2076,7 +2107,8 @@
             "active",
             "submitted",
             "completed",
-            "expired"
+            "expired",
+            "partiallyCompleted"
           ],
           "x-ms-enum": {
             "name": "ReservationStatus",
