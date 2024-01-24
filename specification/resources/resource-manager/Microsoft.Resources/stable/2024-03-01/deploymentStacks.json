@@ -735,6 +735,156 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}/validate": {
+      "post": {
+        "tags": [
+          "DeploymentStacks"
+        ],
+        "operationId": "DeploymentStacks_PreflightValidateStackAtResourceGroup",
+        "description": "Runs preflight validation on the deployment stack template to verify its acceptance to Azure Resource Manager.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DeploymentStacksValidate": {
+            "$ref": "./examples/DeploymentStackResourceGroupCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentStackNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "deploymentStack",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentStack"
+            },
+            "description": "Deployment Stack to validate."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - The validation request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentStacksError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}/validate": {
+      "post": {
+        "tags": [
+          "DeploymentStacks"
+        ],
+        "operationId": "DeploymentStacks_PreflightValidateStackAtSubscription",
+        "description": "Runs preflight validation on the deployment stack template to verify its acceptance to Azure Resource Manager.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DeploymentStacksValidate": {
+            "$ref": "./examples/DeploymentStackSubscriptionCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentStackNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "deploymentStack",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentStack"
+            },
+            "description": "Deployment Stack to validate."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - The validation request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentStacksError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}/validate": {
+      "post": {
+        "tags": [
+          "DeploymentStacks"
+        ],
+        "operationId": "DeploymentStacks_PreflightValidateStackAtManagementGroup",
+        "description": "Runs preflight validation on the deployment stack template to verify its acceptance to Azure Resource Manager.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DeploymentStacksValidate": {
+            "$ref": "./examples/DeploymentStackManagementGroupCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentStackNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "deploymentStack",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentStack"
+            },
+            "description": "Deployment Stack to validate."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - The validation request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentStacksError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
