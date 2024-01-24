@@ -60,8 +60,7 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
-      - common.json
-      - jobs.json
+
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
@@ -136,7 +135,6 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/jobs.json
-  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/common.json
 
 ### Tag: package-2024-01
 
