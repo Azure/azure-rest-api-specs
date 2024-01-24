@@ -8,6 +8,7 @@ using TypeSpec.Http;
 namespace BatchDocumentTranslationClient;
 
 interface DocumentTranslationOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Submit a document translation request to the Document Translation service")
   @doc("""
 Use this API to submit a bulk (batch) translation request to the Document
@@ -30,7 +31,6 @@ If a file with the same name already exists at the
 destination, it will be overwritten. The targetUrl for each target language
 must be unique.
 """)
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @route("/batches")
   @post
   startTranslation is Azure.Core.Foundations.Operation<
@@ -38,6 +38,7 @@ must be unique.
     void
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Returns a list of batch requests submitted and the status for each request")
   @doc("""
 Returns a list of batch requests submitted and the status for each
@@ -93,7 +94,6 @@ instead of just ignoring the query options.
 This reduces the risk of the client
 making assumptions about the data returned.
 """)
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @route("/batches")
   @get
   getTranslationsStatus is Azure.Core.Foundations.Operation<

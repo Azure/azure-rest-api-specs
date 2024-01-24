@@ -18,6 +18,7 @@ enum StorageSource {
 enum AdditionalOutputFileFormat {
   @doc("None")
   None,
+
   @doc("Open Xml Word")
   OpenXmlWord,
 }
@@ -26,6 +27,7 @@ enum AdditionalOutputFileFormat {
 enum StorageInputType {
   @doc("Folder")
   Folder,
+
   @doc("File")
   File,
 }
@@ -34,16 +36,22 @@ enum StorageInputType {
 enum TranslationErrorCode {
   @doc("InvalidRequest")
   InvalidRequest,
+
   @doc("InvalidArgument")
   InvalidArgument,
+
   @doc("InternalServerError")
   InternalServerError,
+
   @doc("ServiceUnavailable")
   ServiceUnavailable,
+
   @doc("ResourceNotFound")
   ResourceNotFound,
+
   @doc("Unauthorized")
   Unauthorized,
+
   @doc("RequestRateTooHigh")
   RequestRateTooHigh,
 }
@@ -52,16 +60,22 @@ enum TranslationErrorCode {
 enum Status {
   @doc("NotStarted")
   NotStarted,
+
   @doc("Running")
   Running,
+
   @doc("Succeeded")
   Succeeded,
+
   @doc("Failed")
   Failed,
+
   @doc("Cancelled")
   Cancelled,
+
   @doc("Cancelling")
   Cancelling,
+
   @doc("ValidationFailed")
   ValidationFailed,
 }
