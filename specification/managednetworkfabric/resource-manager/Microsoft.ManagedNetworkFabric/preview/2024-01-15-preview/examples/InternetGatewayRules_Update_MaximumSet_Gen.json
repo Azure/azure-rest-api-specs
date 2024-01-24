@@ -2,8 +2,13 @@
   "parameters": {
     "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
     "resourceGroupName": "example-rg",
-    "api-version": "2024-01-15",
-    "internetGatewayRuleName": "example-internetGatewayRule"
+    "api-version": "2024-01-15-preview",
+    "internetGatewayRuleName": "example-internetGatewayRule",
+    "body": {
+      "tags": {
+        "key3311": "1234"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -29,7 +34,7 @@
           "annotation": "annotationValue"
         },
         "tags": {
-          "keyID": "keyValue"
+          "key3311": "1234"
         },
         "location": "eastus",
         "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/example-InternetGatewayRule",
@@ -43,6 +48,11 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2023-05-24T18:22:51.443Z"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
       }
     }
   }
