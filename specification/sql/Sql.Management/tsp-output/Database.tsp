@@ -27,11 +27,11 @@ model Database is TrackedResource<DatabaseProperties> {
 @segment("databases")
 "name": string;
 
-...Azure.ResourceManager.ManagedServiceIdentity
+...Azure.ResourceManager.ManagedServiceIdentity;
 
-...Azure.ResourceManager.ResourceSku
+...Azure.ResourceManager.ResourceSku;
 
-...Azure.ResourceManager.ResourceKind
+...Azure.ResourceManager.ResourceKind;
 
 ...Azure.ResourceManager.ManagedBy
 }
@@ -49,29 +49,29 @@ get is ArmResourceRead<Database,{
 * The child resources to include in the response.
 */
 @query("$expand")
-"$expand"?: string
+"$expand"?: string;
 /**
 * An OData filter expression that filters elements in the collection.
 */
 @query("$filter")
 "$filter"?: string
-    }>
+    }>;
 
 /**
 * Creates a new database or updates an existing database.
 */
-createOrUpdate is ArmResourceCreateOrReplaceAsync<Database,BaseParameters<Database>,ArmAsyncOperationHeader>
+createOrUpdate is ArmResourceCreateOrReplaceAsync<Database,BaseParameters<Database>,ArmAsyncOperationHeader>;
 
 /**
 * Updates an existing database.
 */
 @parameterVisibility("read")
-update is ArmCustomPatchAsync<Database,DatabaseUpdate,BaseParameters<Database>,ArmLroLocationHeader>
+update is ArmCustomPatchAsync<Database,DatabaseUpdate,BaseParameters<Database>,ArmLroLocationHeader>;
 
 /**
 * Deletes the database.
 */
-delete is ArmResourceDeleteAsync<Database,BaseParameters<Database>,ArmLroLocationHeader>
+delete is ArmResourceDeleteAsync<Database,BaseParameters<Database>,ArmLroLocationHeader>;
 
 /**
 * Gets a list of databases.
@@ -83,14 +83,14 @@ listByServer is ArmResourceListByParent<Database,{
     
 @query("$skipToken")
 "$skipToken"?: string
-    }>
+    }>;
 
 /**
 * Creates a restore point for a data warehouse.
 */
 @operationId("RestorePoints_Create")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-create is ArmResourceActionAsync<Database,CreateDatabaseRestorePointDefinition,RestorePoint>
+create is ArmResourceActionAsync<Database,CreateDatabaseRestorePointDefinition,RestorePoint>;
 
 /**
 * Cancels the asynchronous operation on the database.
@@ -104,7 +104,7 @@ cancel is ArmResourceActionSync<Database,void,void,{
 */
 @path
 "operationId": string
-    }>
+    }>;
 
 /**
 * Revalidates an existing encryption protector for a particular database.
@@ -118,7 +118,7 @@ revalidate is ArmResourceActionAsync<Database,void,void,{
 */
 @path
 "encryptionProtectorName": EncryptionProtectorName
-    },ArmLroLocationHeader>
+    },ArmLroLocationHeader>;
 
 /**
 * Reverts an existing encryption protector for a particular database.
@@ -132,12 +132,12 @@ revert is ArmResourceActionAsync<Database,void,void,{
 */
 @path
 "encryptionProtectorName": EncryptionProtectorName
-    },ArmLroLocationHeader>
+    },ArmLroLocationHeader>;
 
 /**
 * Exports a database.
 */
-export is ArmResourceActionAsync<Database,ExportDatabaseDefinition,ImportExportOperationResult>
+export is ArmResourceActionAsync<Database,ExportDatabaseDefinition,ImportExportOperationResult>;
 
 /**
 * Failovers a database.
@@ -187,22 +187,22 @@ upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
 * The subscription ID that identifies an Azure subscription.
 */
 @path
-"subscriptionId": string
+"subscriptionId": string;
 /**
 * The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
 */
 @path
-"resourceGroupName": string
+"resourceGroupName": string;
 /**
 * The name of the server.
 */
 @path
-"serverName": string
+"serverName": string;
 /**
 * The name of the database.
 */
-@path
-"databaseName": string
+@path;
+"databaseName": string;
 /**
 * An OData filter expression that describes a subset of metrics to return.
 */
@@ -223,17 +223,17 @@ upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
 * The subscription ID that identifies an Azure subscription.
 */
 @path
-"subscriptionId": string
+"subscriptionId": string;
 /**
 * The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
 */
 @path
-"resourceGroupName": string
+"resourceGroupName": string;
 /**
 * The name of the server.
 */
 @path
-"serverName": string
+"serverName": string;
 /**
 * The name of the database.
 */
@@ -254,34 +254,34 @@ upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
 * The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
 */
 @path
-"resourceGroupName": string
+"resourceGroupName": string;
 /**
 * The name of the server.
 */
 @path
-"serverName": string
+"serverName": string;
 /**
 * The name of the database.
 */
 @path
-"databaseName": string
+"databaseName": string;
 
 @query({name: "schema", format: "multi"})
-"schema"?: string[]
+"schema"?: string[];
 
 @query({name: "table", format: "multi"})
-"table"?: string[]
+"table"?: string[];
 
 @query({name: "column", format: "multi"})
-"column"?: string[]
+"column"?: string[];
 
 @query({name: "orderBy", format: "multi"})
-"orderBy"?: string[]
+"orderBy"?: string[];
 /**
 * An opaque token that identifies a starting point in the collection.
 */
 @query("$skiptoken")
-"$skiptoken"?: string
+"$skiptoken"?: string;
 /**
 * The subscription ID that identifies an Azure subscription.
 */
@@ -302,17 +302,17 @@ upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
 * The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
 */
 @path
-"resourceGroupName": string
+"resourceGroupName": string;
 /**
 * The name of the server.
 */
 @path
-"serverName": string
+"serverName": string;
 /**
 * The name of the database.
 */
 @path
-"databaseName": string
+"databaseName": string;
 /**
 * The subscription ID that identifies an Azure subscription.
 */
@@ -333,12 +333,12 @@ upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
 * The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
 */
 @path
-"resourceGroupName": string
+"resourceGroupName": string;
 /**
 * The name of the server.
 */
 @path
-"serverName": string
+"serverName": string;
 /**
 * The name of the database.
 */
@@ -374,7 +374,7 @@ upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
 * The name of the database.
 */
 @path
-"databaseName": string
+"databaseName": string;
 /**
 * The subscription ID that identifies an Azure subscription.
 */
@@ -395,28 +395,28 @@ upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
 * The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
 */
 @path
-"resourceGroupName": string
+"resourceGroupName": string;
 /**
 * The name of the server.
 */
 @path
-"serverName": string
+"serverName": string;
 /**
 * The name of the database.
 */
 @path
-"databaseName": string
+"databaseName": string;
 
 @query("$skipToken")
-"$skipToken"?: string
+"$skipToken"?: string;
 
 @query("$count")
-"$count"?: boolean
+"$count"?: boolean;
 /**
 * An OData filter expression that filters elements in the collection.
 */
 @query("$filter")
-"$filter"?: string
+"$filter"?: string;
 /**
 * The subscription ID that identifies an Azure subscription.
 */
@@ -437,30 +437,30 @@ upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
 * The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
 */
 @path
-"resourceGroupName": string
+"resourceGroupName": string;
 /**
 * The name of the server.
 */
 @path
-"serverName": string
+"serverName": string;
 /**
 * The name of the database.
 */
 @path
-"databaseName": string
+"databaseName": string;
 
 @query("$skipToken")
-"$skipToken"?: string
+"$skipToken"?: string;
 /**
 * Specifies whether to include disabled recommendations or not.
 */
 @query("includeDisabledRecommendations")
-"includeDisabledRecommendations"?: boolean
+"includeDisabledRecommendations"?: boolean;
 /**
 * An OData filter expression that filters elements in the collection.
 */
 @query("$filter")
-"$filter"?: string
+"$filter"?: string;
 /**
 * The subscription ID that identifies an Azure subscription.
 */
@@ -481,17 +481,17 @@ upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
 * The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
 */
 @path
-"resourceGroupName": string
+"resourceGroupName": string;
 /**
 * The name of the server.
 */
 @path
-"serverName": string
+"serverName": string;
 /**
 * The name of the database.
 */
 @path
-"databaseName": string
+"databaseName": string;
 /**
 * The subscription ID that identifies an Azure subscription.
 */

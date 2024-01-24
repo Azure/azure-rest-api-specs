@@ -1082,7 +1082,7 @@ model Resource {
 /**
 * Represents a database data masking rule.
 */
-model DataMaskingRule extends ProxyResource {
+model DataMaskingRule{
 /**
 * The properties of the resource.
 */
@@ -1401,7 +1401,7 @@ model ElasticPoolActivityListResult {
 /**
 * Represents the activity on an elastic pool.
 */
-model ElasticPoolActivity extends ProxyResource {
+model ElasticPoolActivity {
 /**
 * The geo-location where the resource lives
 */
@@ -1536,7 +1536,7 @@ model ElasticPoolDatabaseActivityListResult {
 /**
 * Represents the activity on an elastic pool.
 */
-model ElasticPoolDatabaseActivity extends ProxyResource {
+model ElasticPoolDatabaseActivity{
 /**
 * The geo-location where the resource lives
 */
@@ -2217,7 +2217,7 @@ model VulnerabilityAssessmentScanError {
 /**
 * A database Vulnerability Assessment scan export resource.
 */
-model DatabaseVulnerabilityAssessmentScansExport extends ProxyResource {
+model DatabaseVulnerabilityAssessmentScansExport {
 /**
 * Resource properties.
 */
@@ -2282,7 +2282,7 @@ model ElasticPoolOperationListResult is Azure.Core.Page<ElasticPoolOperation> {
 /**
 * A elastic pool operation.
 */
-model ElasticPoolOperation extends ProxyResource {
+model ElasticPoolOperation{
 /**
 * Resource properties.
 */
@@ -3745,7 +3745,7 @@ model ManagedBackupShortTermRetentionPolicyProperties {
 /**
 * Database query.
 */
-model ManagedInstanceQuery extends ProxyResource {
+model ManagedInstanceQuery {
 /**
 * Resource properties.
 */
@@ -3769,7 +3769,7 @@ model ManagedInstanceQueryStatistics is Azure.Core.Page<QueryStatistics> {
 }
 
 
-model QueryStatistics extends ProxyResource {
+model QueryStatistics {
 /**
 * Resource properties.
 */
@@ -3932,7 +3932,7 @@ model SecurityEventCollection is Azure.Core.Page<SecurityEvent> {
 /**
 * A security event.
 */
-model SecurityEvent extends ProxyResource {
+model SecurityEvent {
 /**
 * Resource properties.
 */
@@ -4335,7 +4335,7 @@ model ManagedInstancePrivateLinkProperties {
 /**
 * A TDE certificate that can be uploaded into a server.
 */
-model TdeCertificate extends ProxyResource {
+model TdeCertificate {
 /**
 * Resource properties.
 */
@@ -4697,7 +4697,7 @@ model ServerOperationListResult is Azure.Core.Page<ServerOperation> {
 /**
 * A server operation.
 */
-model ServerOperation extends ProxyResource {
+model ServerOperation {
 /**
 * Resource properties.
 */
@@ -5387,7 +5387,7 @@ model BackupShortTermRetentionPolicyProperties {
 /**
 * An export managed database operation result resource.
 */
-model DatabaseExtensions extends ProxyResource {
+model DatabaseExtensions {
 /**
 * Resource properties.
 */
@@ -5423,7 +5423,7 @@ model DatabaseExtensionsProperties {
 /**
 * An Extension operation result resource.
 */
-model ImportExportExtensionsOperationResult extends ProxyResource {
+model ImportExportExtensionsOperationResult {
 /**
 * Resource properties.
 */
@@ -5486,7 +5486,7 @@ model DatabaseOperationListResult is Azure.Core.Page<DatabaseOperation> {
 /**
 * A database operation.
 */
-model DatabaseOperation extends ProxyResource {
+model DatabaseOperation {
 /**
 * Resource properties.
 */
@@ -5581,7 +5581,7 @@ model DatabaseUsageListResult is Azure.Core.Page<DatabaseUsage> {
 /**
 * Usage metric of a database.
 */
-model DatabaseUsage extends ProxyResource {
+model DatabaseUsage {
 /**
 * Resource properties.
 */
@@ -5750,7 +5750,7 @@ model CopyLongTermRetentionBackupParametersProperties {
 /**
 * A LongTermRetentionBackup operation result resource.
 */
-model LongTermRetentionBackupOperationResult extends ProxyResource {
+model LongTermRetentionBackupOperationResult {
 /**
 * Resource properties.
 */
@@ -6097,7 +6097,7 @@ model SensitivityLabelUpdateList {
 /**
 * A sensitivity label update operation.
 */
-model SensitivityLabelUpdate extends ProxyResource {
+model SensitivityLabelUpdate{
 /**
 * Resource properties.
 */
@@ -6891,7 +6891,7 @@ model SynapseLinkWorkspaceListResult is Azure.Core.Page<SynapseLinkWorkspace> {
 /**
 * Synapse link workspace resource
 */
-model SynapseLinkWorkspace extends ProxyResource {
+model SynapseLinkWorkspace {
 /**
 * Resource properties.
 */
@@ -6959,7 +6959,7 @@ model VirtualClusterUpdate {
 /**
 * A refresh DNS servers operation.
 */
-model UpdateVirtualClusterDnsServersOperation extends ProxyResource {
+model UpdateVirtualClusterDnsServersOperation {
 /**
 * Resource properties.
 */
@@ -7914,7 +7914,7 @@ model NetworkIsolationSettings {
 /**
 * An ImportExport operation result resource.
 */
-model ImportExportOperationResult extends ProxyResource {
+model ImportExportOperationResult {
 /**
 * Resource properties.
 */
@@ -8911,7 +8911,7 @@ model DatabaseSqlVulnerabilityAssessmentBaselineSetProperties {
 /**
 * A database sql vulnerability assessment rule baseline list input.
 */
-model DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput extends ProxyResource {
+model DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput {
 /**
 * SystemData of DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputResource.
 */
