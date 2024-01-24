@@ -1604,6 +1604,9 @@
           },
           "Create connection monitor V2": {
             "$ref": "./examples/NetworkWatcherConnectionMonitorV2Create.json"
+          },
+          "Create connection monitor with Arc Network": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorCreateWithArcNetwork.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -4277,11 +4280,11 @@
         },
         "locationDetails": {
           "$ref": "#/definitions/ConnectionMonitorEndpointLocationDetails",
-          "description": "Location details for connection monitor endpoint."
+          "description": "Location details is optional and only being used for 'AzureArcNetwork' type endpoints, which can contains availability zone along with region details."
         },
         "subscriptionId": {
           "type": "string",
-          "description": "Subscription ID for connection monitor endpoint."
+          "description": "Subscription ID for connection monitor endpoint. It's an optional parameter which is being used for 'AzureArcNetwork' type endpoint."
         }
       },
       "required": [
@@ -4795,7 +4798,7 @@
           "description": "Region for connection monitor endpoint."
         }
       },
-      "description": "Connection monitor endpoint location details."
+      "description": "Connection monitor endpoint location details only being used for 'AzureArcNetwork' type endpoints, which can contains availability zone along with region details."
     }
   }
 }
