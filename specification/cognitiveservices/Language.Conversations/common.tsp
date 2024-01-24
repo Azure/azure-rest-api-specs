@@ -95,14 +95,14 @@ model TaskIdentifier {
 @added(Versions.v2023_04_01)
 model TaskParameters {
     @doc("logging opt out")
-    loggingOptOut: boolean = false;
+    loggingOptOut?: boolean = false;
 }
 
 @doc("Parameters object for a text analysis task using pre-built models.")
 @added(Versions.v2023_04_01)
 model PreBuiltTaskParameters extends TaskParameters {
     @doc("model version")
-    modelVersion: string = "latest";
+    modelVersion?: string = "latest";
 }
 
 alias ShowStatsQueryParameter = QueryParametersTrait<{
@@ -128,7 +128,7 @@ model JobState {
     jobId: string;
 
     @doc("last updated date and time")
-    lastUpdateDateTime: utcDateTime;
+    lastUpdatedDateTime: utcDateTime;
 
     @doc("status")
     status: State;
@@ -137,7 +137,7 @@ model JobState {
     errors?: Array<ErrorResponse>;
 
     @doc("next link")
-    nextlink?: string;
+    nextLink?: string;
 }
 
 @doc("job errors")
@@ -498,10 +498,10 @@ model SentimentConfidenceScores {
 @added(Versions.v2023_04_01)
 model AbstractiveSummarizationTaskParametersBase {
     @doc("It controls the approximate number of sentences in the output summaries.")
-    sentenceCount: int32;
+    sentenceCount?: int32;
 
     @doc("String index type")
-    stringIndexType: StringIndexType;
+    stringIndexType?: StringIndexType;
 }
 
 @doc("The context of the summary.")

@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-autorest";
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -11,6 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
+using Autorest;
 
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<
@@ -46,6 +48,10 @@ enum Versions {
   @doc("Version 2023-04-15-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_15_preview: "2023-04-15-preview",
+
+  @doc("Version 2023-04-15-preview")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_11_15_preview: "2023-11-15-preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
@@ -122,6 +128,25 @@ model ConversationItemBase extends Record<unknown> {
 
   @doc("Enumeration of supported conversational modalities.")
   modality?: Modality;
+
+  @added(Versions.v2023_04_01)
+  @doc("Role of the participant.")
+  role?: Role;
+}
+
+@added(Versions.v2023_04_01)
+enum Role{
+  @added(Versions.v2023_04_01)
+  @doc("The participant is a customer.")
+  customer,
+
+  @added(Versions.v2023_04_01)
+  @doc("The participant is an agent.")
+  agent,
+
+  @added(Versions.v2023_04_01)
+  @doc("The is a generic participant.")
+  generic,
 }
 
 @doc("The text modality of an input conversation.")
@@ -766,6 +791,9 @@ model TranscriptConversationItem extends ConversationItemBase {
   @doc("Lexical form of the recognized text from the speech-to-text API, with the actual words recognized.")
   lexical: string;
 
+  @doc("List of word-level audio timing information.")
+  wordLevelTimings?: Array<WordLevelTiming>;
+
   @doc("Audio timing at the conversation item level. This still can help with AI quality if word-level audio timings are not available.")
   conversationItemLevelTiming?: ConversationItemLevelTiming;
 }
@@ -1076,7 +1104,7 @@ model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
   kind: AnalyzeConversationLROTaskKind.ConversationalSummarizationTask;
 
   @doc("parameters")
-  parameters?: ConversationSummarizationTaskParametersBase;
+  parameters?: ConversationSummarizationTaskParameters;
 }
 
 @doc("Supported parameters for a conversational summarization task.")
@@ -1113,6 +1141,14 @@ enum SummaryAspect {
 
   @doc("Generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length, and keeps the salient information.")
   narrative,
+
+  @added(Versions.v2023_11_15_preview)
+  @doc("A concise one-paragraph summary to provide a quick overview.")
+  recap,
+
+  @added(Versions.v2023_11_15_preview)
+  @doc("Action items and tasks that arose during a meeting. ")
+  `follow-up tasks`,
 }
 
 @doc("Result for the summarization task on the conversation.")
@@ -1689,50 +1725,57 @@ alias ServiceTraits = NoRepeatableRequests & NoConditionalRequests & NoClientReq
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-@doc("Analyzes the input conversation utterance.")
-@actionSeparator("/:")
-@action("analyze-conversations")
-// @operationId("AnalyzeConversation")
-//removed examples due to bug
-// @Autorest.example(
-//   "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversations.json",
-//   "Conversation project result"
-// )
-// @example(
-//   "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitration.json",
-//   "Orchestration result"
-// )
-// @example(
-//   "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json",
-//   "Orchestration direct target result"
-// )
-op analyzeConversation is Operations.ResourceCollectionAction<
-    AnalyzeConversationTask,
-    AnalyzeConversationTask,
-    AnalyzeConversationTaskResult
+@route("/language")
+interface Language {
+
+  @post
+  @route("/:analyze-conversations")
+  @example("./SuccessfulAnalyzeConversations.json", "SuccessfulAnalyzeConversations")
+  @example("./SuccessfulAnalyzeConversationsArbitration.json", "SuccessfulAnalyzeConversationsArbitration")
+  @example("./SuccessfulAnalyzeConversationsArbitrationDirectTarget.json", "SuccessfulAnalyzeConversationsArbitrationDirectTarget")
+  analyzeConversations(
+    @doc("Collection of conversations to analyze and a single task to execute.")
+    @body body: AnalyzeConversationTask,
+    ...Azure.Core.Foundations.ApiVersionParameter
+  ): AnalyzeConversationTaskResult | Azure.Core.Foundations.ErrorResponse;
+
+  @added(Versions.v2023_04_01)
+  @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
+  @summary("Get analysis status and results")
+  @example("./SuccessfulConversationPIIExclusionTaskStatusRequest.json", "SuccessfulConversationPIIExclusionTaskStatusRequest")
+  @example("./SuccessfulConversationPIIRedactionCharTaskStatusRequest.json", "SuccessfulConversationPIIRedactionCharTaskStatusRequest")
+  @example("./SuccessfulConversationPIITaskStatusRequest.json", "SuccessfulConversationPIITaskStatusRequest")
+  @example("./SuccessfulConversationSentimentTaskStatusRequest.json", "SuccessfulConversationSentimentTaskStatusRequest")
+  @example("./SuccessfulConversationSummarizationTaskStatusRequest.json", "SuccessfulConversationSummarizationTaskStatusRequest")
+  @example("./SuccessfulCustomConversationSummarizationTaskResult.json", "SuccessfulCustomConversationSummarizationTaskResult")
+  @example("./SuccessfulConversationSummarizationTaskResult.json", "SuccessfulConversationSummarizationTaskResult")
+  op jobStatus is Operations.ResourceRead<
+    AnalyzeConversationJobState, 
+    ShowStatsQueryParameter
   >;
 
-@added(Versions.v2023_04_01)
-@doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
-@summary("Get analysis status and results")
-op jobStatus is Operations.ResourceRead<
-  AnalyzeConversationJobState, 
-  ShowStatsQueryParameter
->;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_01)
+  @doc("Analyzes the input conversation utterance.")
+  @route("/language/analyze-conversations/jobs")
+  @pollingOperation(Language.jobStatus)
+  @example("./SuccessfulConversationPIIExclusionSubmit.json", "SuccessfulConversationPIIExclusionSubmit")
+  @example("./SuccessfulConversationPIIRedactionCharSubmit.json", "SuccessfulConversationPIIRedactionCharSubmit")
+  @example("./SuccessfulConversationPIISubmit.json", "SuccessfulConversationPIISubmit")
+  @example("./SuccessfulConversationSentimentSubmit.json", "SuccessfulConversationSentimentSubmit")
+  @example("./SuccessfulConversationSummarySubmit.json", "SuccessfulConversationSummarySubmit")
+  @example("./SuccessfulCustomConversationSummarizationTaskSubmit.json", "SuccessfulCustomConversationSummarizationTaskSubmit")
+  @example("./SuccessfulConversationSummarizationTaskSubmit.json", "SuccessfulConversationSummarizationTaskSubmit")
+  op submitJob is LanguageLongRunningOperation<AnalyzeConversationJobsInput, AnalyzeConversationJobState>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_01)
+  @doc("Cancel a long-running job for text analysis of conversations.")
+  @summary("Cancel a long-running Text Analysis conversations job")
+  @pollingOperation(Language.jobStatus)
+  @actionSeparator(":")
+  @action("cancel")
+  @example("./SuccessfulAnalyzeConversationsJobsCancelRequest.json", "SuccessfulAnalyzeConversationsJobsCancelRequest")
+  op cancel is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@added(Versions.v2023_04_01)
-@doc("Analyzes the input conversation utterance.")
-@route("/language/analyze-conversations/jobs")
-@pollingOperation(jobStatus)
-op submitJob is LanguageLongRunningOperation<AnalyzeConversationJobsInput, AnalyzeConversationJobState>;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@added(Versions.v2023_04_01)
-@doc("Cancel a long-running job for text analysis of conversations.")
-@summary("Cancel a long-running Text Analysis conversations job")
-@pollingOperation(jobStatus)
-@actionSeparator(":")
-@action("cancel")
-op cancel is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;
+}

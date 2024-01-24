@@ -142,7 +142,7 @@ model JobState {
     errors?: Array<ErrorResponse>;
 
     @doc("next link")
-    nextlink?: string;
+    nextLink?: string;
 }
 
 @doc("job errors")

@@ -69,16 +69,9 @@ alias ServiceTraits = NoRepeatableRequests & NoConditionalRequests & NoClientReq
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-@doc("Api Version Parameter")
-model ApiVersionParameter {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is the name of a query parameter."
-  @doc("Client Api Version.")
-  @query
-  `api-version`: string;
-}
-
 @route("/language")
 interface Language {
+  
   @post
   @route("/:analyze-text")
   @doc("Request text analysis over a collection of documents.")
@@ -95,7 +88,6 @@ interface Language {
   @example("./SuccessfulPiiEntityRecognitionExclusionRequest.json", "SuccessfulPiiEntityRecognitionExclusionRequest")
   @example("./SuccessfulPiiEntityRecognitionRedactionRequest.json", "SuccessfulPiiEntityRecognitionRedactionRequest")
   @example("./SuccessfulEntityRecognitionInferenceOptionsRequest.json", "SuccessfulEntityRecognitionInferenceOptionsRequest")
-  @example("./SuccessfuDynamicClassificationRequest.json", "SuccessfuDynamicClassificationRequest")
   analyzeText(
     @doc("Collection of documents to analyze and a single task to execute.")
     @body body: AnalyzeTextTask,

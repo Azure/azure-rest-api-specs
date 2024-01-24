@@ -48,8 +48,7 @@
   "paths": {
     "/language/:analyze-conversations": {
       "post": {
-        "operationId": "AnalyzeConversation",
-        "description": "Analyzes the input conversation utterance.",
+        "operationId": "Language_AnalyzeConversations",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -57,6 +56,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Collection of conversations to analyze and a single task to execute.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
@@ -82,12 +82,13 @@
               }
             }
           }
-        }
+        },
+        "x-ms-examples": {}
       }
     },
-    "/language/analyze-conversations/jobs": {
+    "/language/language/analyze-conversations/jobs": {
       "post": {
-        "operationId": "SubmitJob",
+        "operationId": "Language_SubmitJob",
         "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
@@ -126,12 +127,32 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulConversationPIIExclusionSubmit": {
+            "$ref": "./examples/SuccessfulConversationPIIExclusionSubmit.json"
+          },
+          "SuccessfulConversationPIIRedactionCharSubmit": {
+            "$ref": "./examples/SuccessfulConversationPIIRedactionCharSubmit.json"
+          },
+          "SuccessfulConversationPIISubmit": {
+            "$ref": "./examples/SuccessfulConversationPIISubmit.json"
+          },
+          "SuccessfulConversationSentimentSubmit": {
+            "$ref": "./examples/SuccessfulConversationSentimentSubmit.json"
+          },
+          "SuccessfulConversationSummarizationTaskSubmit": {
+            "$ref": "./examples/SuccessfulConversationSummarizationTaskSubmit.json"
+          },
+          "SuccessfulConversationSummarySubmit": {
+            "$ref": "./examples/SuccessfulConversationSummarySubmit.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
-    "/language/analyze-conversations/jobs/{jobId}": {
+    "/language/language/analyze-conversations/jobs/{jobId}": {
       "get": {
-        "operationId": "JobStatus",
+        "operationId": "Language_JobStatus",
         "summary": "Get analysis status and results",
         "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
         "parameters": [
@@ -172,12 +193,38 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulConversationPIIExclusionTaskStatusRequest": {
+            "$ref": "./examples/SuccessfulConversationPIIExclusionTaskStatusRequest.json"
+          },
+          "SuccessfulConversationPIIRedactionCharTaskStatusRequest": {
+            "$ref": "./examples/SuccessfulConversationPIIRedactionCharTaskStatusRequest.json"
+          },
+          "SuccessfulConversationPIITaskStatusRequest": {
+            "$ref": "./examples/SuccessfulConversationPIITaskStatusRequest.json"
+          },
+          "SuccessfulConversationSentimentTaskStatusRequest": {
+            "$ref": "./examples/SuccessfulConversationSentimentTaskStatusRequest.json"
+          },
+          "SuccessfulConversationSummarizationTaskResult": {
+            "$ref": "./examples/SuccessfulConversationSummarizationTaskResult.json"
+          },
+          "SuccessfulConversationSummarizationTaskStatusRequest": {
+            "$ref": "./examples/SuccessfulConversationSummarizationTaskStatusRequest.json"
+          },
+          "SuccessfulCustomConversationSummarizationTaskResult": {
+            "$ref": "./examples/SuccessfulCustomConversationSummarizationTaskResult.json"
+          },
+          "SuccessfulCustomConversationSummarizationTaskSubmit": {
+            "$ref": "./examples/SuccessfulCustomConversationSummarizationTaskSubmit.json"
+          }
         }
       }
     },
-    "/language/analyze-conversations/jobs/{jobId}:cancel": {
+    "/language/language/analyze-conversations/jobs/{jobId}:cancel": {
       "post": {
-        "operationId": "Cancel",
+        "operationId": "Language_Cancel",
         "summary": "Cancel a long-running Text Analysis conversations job",
         "description": "Cancel a long-running job for text analysis of conversations.",
         "parameters": [
@@ -214,6 +261,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulAnalyzeConversationsJobsCancelRequest": {
+            "$ref": "./examples/SuccessfulAnalyzeConversationsJobsCancelRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -256,11 +308,7 @@
           "$ref": "#/definitions/StringIndexType",
           "description": "String index type"
         }
-      },
-      "required": [
-        "sentenceCount",
-        "stringIndexType"
-      ]
+      }
     },
     "AgeResolution": {
       "type": "object",
@@ -385,7 +433,7 @@
           "description": "job ID",
           "readOnly": true
         },
-        "lastUpdateDateTime": {
+        "lastUpdatedDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "last updated date and time"
@@ -402,7 +450,7 @@
           },
           "x-ms-identifiers": []
         },
-        "nextlink": {
+        "nextLink": {
           "type": "string",
           "description": "next link"
         },
@@ -418,7 +466,7 @@
       "required": [
         "createdDateTime",
         "jobId",
-        "lastUpdateDateTime",
+        "lastUpdatedDateTime",
         "status",
         "tasks"
       ]
@@ -635,7 +683,7 @@
       "description": "Task definition for conversational summarization.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/ConversationSummarizationTaskParametersBase",
+          "$ref": "#/definitions/ConversationSummarizationTaskParameters",
           "description": "parameters"
         }
       },
@@ -1219,6 +1267,10 @@
         "modality": {
           "$ref": "#/definitions/Modality",
           "description": "Enumeration of supported conversational modalities."
+        },
+        "role": {
+          "$ref": "#/definitions/Role",
+          "description": "Role of the participant."
         }
       },
       "required": [
@@ -1640,9 +1692,7 @@
         }
       },
       "required": [
-        "summaryAspects",
-        "sentenceCount",
-        "stringIndexType"
+        "summaryAspects"
       ],
       "allOf": [
         {
@@ -1920,9 +1970,7 @@
         }
       },
       "required": [
-        "summaryAspects",
-        "sentenceCount",
-        "stringIndexType"
+        "summaryAspects"
       ],
       "allOf": [
         {
@@ -2017,7 +2065,6 @@
         }
       },
       "required": [
-        "loggingOptOut",
         "projectName",
         "deploymentName"
       ]
@@ -2091,7 +2138,7 @@
     },
     "Entity": {
       "type": "object",
-      "description": "Text that has been catorgerized into pre-defined classes or types such as: person, location, event, product, and organization.",
+      "description": "Text that has been categorized into pre-defined classes or types such as: person, location, event, product, and organization.",
       "properties": {
         "text": {
           "type": "string",
@@ -2381,7 +2428,7 @@
           "description": "job ID",
           "readOnly": true
         },
-        "lastUpdateDateTime": {
+        "lastUpdatedDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "last updated date and time"
@@ -2398,7 +2445,7 @@
           },
           "x-ms-identifiers": []
         },
-        "nextlink": {
+        "nextLink": {
           "type": "string",
           "description": "next link"
         }
@@ -2406,7 +2453,7 @@
       "required": [
         "createdDateTime",
         "jobId",
-        "lastUpdateDateTime",
+        "lastUpdatedDateTime",
         "status"
       ]
     },
@@ -2922,9 +2969,6 @@
           "default": "latest"
         }
       },
-      "required": [
-        "modelVersion"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/TaskParameters"
@@ -3216,6 +3260,35 @@
         "erroneousDocumentCount",
         "transactionsCount"
       ]
+    },
+    "Role": {
+      "type": "string",
+      "enum": [
+        "customer",
+        "agent",
+        "generic"
+      ],
+      "x-ms-enum": {
+        "name": "Role",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "customer",
+            "value": "customer",
+            "description": "The participant is a customer."
+          },
+          {
+            "name": "agent",
+            "value": "agent",
+            "description": "The participant is an agent."
+          },
+          {
+            "name": "generic",
+            "value": "generic",
+            "description": "The is a generic participant."
+          }
+        ]
+      }
     },
     "Sentiment": {
       "type": "string",
@@ -3588,10 +3661,7 @@
           "description": "logging opt out",
           "default": false
         }
-      },
-      "required": [
-        "loggingOptOut"
-      ]
+      }
     },
     "TaskState": {
       "type": "object",
@@ -3851,6 +3921,14 @@
           "type": "string",
           "description": "Lexical form of the recognized text from the speech-to-text API, with the actual words recognized."
         },
+        "wordLevelTimings": {
+          "type": "array",
+          "description": "List of word-level audio timing information.",
+          "items": {
+            "$ref": "#/definitions/WordLevelTiming"
+          },
+          "x-ms-identifiers": []
+        },
         "conversationItemLevelTiming": {
           "$ref": "#/definitions/ConversationItemLevelTiming",
           "description": "Audio timing at the conversation item level. This still can help with AI quality if word-level audio timings are not available."
@@ -3874,7 +3952,8 @@
       "enum": [
         "2022-05-01",
         "2023-04-01",
-        "2023-04-15-preview"
+        "2023-04-15-preview",
+        "2023-11-15-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -3893,6 +3972,11 @@
           {
             "name": "v2023_04_15_preview",
             "value": "2023-04-15-preview",
+            "description": "Version 2023-04-15-preview"
+          },
+          {
+            "name": "v2023_11_15_preview",
+            "value": "2023-11-15-preview",
             "description": "Version 2023-04-15-preview"
           }
         ]
