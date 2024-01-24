@@ -640,36 +640,27 @@
       }
     },
     "/availablePhoneNumbers/reservations/{reservationId}": {
-      "put": {
+      "patch": {
         "tags": [
           "Browse, reserve and purchase available phone numbers"
         ],
-        "summary": "Initializes a new reservation with a given ID. By default the new reservation is empty, but it can optionally be created with an initial list of phone numbers.",
+        "summary": "Creates or updates a reservation by its ID.",
         "consumes": [
-          "application/json"
+          "application/merge-patch+json"
         ],
         "produces": [
           "application/json"
         ],
-        "operationId": "PhoneNumbers_CreateReservation",
+        "operationId": "PhoneNumbers_CreateOrUpdateReservation",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
-            "name": "reservationId",
-            "description": "The id of the reservation.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ReservationIdParameter"
           },
           {
-            "in": "body",
-            "name": "reservation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/PhoneNumbersReservation"
-            }
+            "$ref": "#/parameters/ReservationParameter"
           }
         ],
         "responses": {
@@ -679,70 +670,12 @@
               "$ref": "#/definitions/PhoneNumbersReservation"
             }
           },
-          "409": {
-            "description": "Conflict while creating reservation. This can happen if a reservation with the same ID already exists and doesn't have 'active' status.",
-            "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create reservation": {
-            "$ref": "./examples/CreateReservation.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Browse, reserve and purchase available phone numbers"
-        ],
-        "summary": "Updates a reservation by its ID. This only supports adding or removing phone numbers from the reservation.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "PhoneNumbers_UpdateReservation",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "reservationId",
-            "description": "The id of the reservation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "reservation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/PhoneNumbersReservation"
-            }
-          }
-        ],
-        "responses": {
           "200": {
             "description": "Reservation successfully updated.",
             "schema": {
               "$ref": "#/definitions/PhoneNumbersReservation"
             }
           },
-          "409": {
-            "description": "Conflict while updating reservation. This can happen if multiple requests to update the reservation are processed at the same time.",
-            "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
-            }
-          },
           "default": {
             "description": "Failure",
             "schema": {
@@ -751,11 +684,8 @@
           }
         },
         "x-ms-examples": {
-          "Add to reservation": {
-            "$ref": "./examples/AddToReservation.json"
-          },
-          "Remove from reservation": {
-            "$ref": "./examples/RemoveFromReservation.json"
+          "Create or update reservation": {
+            "$ref": "./examples/CreateOrUpdateReservation.json"
           }
         }
       },
@@ -773,11 +703,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
-            "name": "reservationId",
-            "description": "The id of the reservation.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ReservationIdParameter"
           }
         ],
         "responses": {
@@ -814,11 +740,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
-            "name": "reservationId",
-            "description": "The id of the reservation.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ReservationIdParameter"
           }
         ],
         "responses": {
@@ -854,11 +776,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
-            "name": "reservationId",
-            "description": "The id of the reservation.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ReservationIdParameter"
           },
           {
             "in": "body",
@@ -2024,19 +1942,7 @@
           ]
         },
         "status": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "available",
-            "reserved",
-            "expired",
-            "error",
-            "purchased"
-          ],
-          "x-ms-enum": {
-            "name": "AvailablePhoneNumberStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/AvailablePhoneNumberStatus"
         },
         "error": {
           "readOnly": true,
@@ -2053,6 +1959,21 @@
             }
           }
         }
+      }
+    },
+    "AvailablePhoneNumberStatus": {
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "available",
+        "reserved",
+        "expired",
+        "error",
+        "purchased"
+      ],
+      "x-ms-enum": {
+        "name": "AvailablePhoneNumberStatus",
+        "modelAsString": true
       }
     },
     "PhoneNumbersReservations": {
@@ -2101,21 +2022,22 @@
           }
         },
         "status": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "active",
-            "submitted",
-            "completed",
-            "expired",
-            "partiallyCompleted",
-            "failed"
-          ],
-          "x-ms-enum": {
-            "name": "ReservationStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ReservationStatus"
         }
+      }
+    },
+    "ReservationStatus": {
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "active",
+        "submitted",
+        "completed",
+        "expired"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationStatus",
+        "modelAsString": true
       }
     },
     "PhoneNumbersReservationPurchaseRequest": {
@@ -2222,6 +2144,21 @@
       "format": "url",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "ReservationIdParameter": {
+      "in": "path",
+      "name": "reservationId",
+      "description": "The id of the reservation.",
+      "required": true,
+      "type": "string"
+    },
+    "ReservationParameter": {
+      "in": "body",
+      "name": "reservation",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/PhoneNumbersReservation"
+      }
     }
   },
   "securityDefinitions": {
