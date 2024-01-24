@@ -271,7 +271,7 @@ model WhatsAppMessageTemplateBindingsComponent {
 @doc("The template bindings component button for WhatsApp")
 model WhatsAppMessageTemplateBindingsButton {
   @doc("The WhatsApp button sub type")
-  subType?: WhatsAppMessageButtonSubType;
+  subType: WhatsAppMessageButtonSubType;
 
   @doc("The name of the referenced item in the template values.")
   refValue: string;
