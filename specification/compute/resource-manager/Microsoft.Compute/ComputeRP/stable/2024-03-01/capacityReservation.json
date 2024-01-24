@@ -333,41 +333,26 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityReservationGroups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityReservationGroups/CapacityReservationGroupResourceIdsOperation": {
       "get": {
         "tags": [
           "CapacityReservationGroups"
         ],
-        "operationId": "CapacityReservationGroups_ListBySubscription",
-        "description": "Lists all of the capacity reservation groups in the subscription. Use the nextLink property in the response to get the next page of capacity reservation groups.",
+        "operationId": "CapacityReservationGroups_GetCapacityReservationGroupResourceIds",
+        "description": "Lists all of the capacity reservation group resource Ids which are created in the subscription and shared to the subscription.",
         "parameters": [
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
-            "enum": [
-              "virtualMachineScaleSetVMs/$ref",
-              "virtualMachines/$ref"
-            ],
-            "x-ms-enum": {
-              "name": "ExpandTypesForGetCapacityReservationGroups",
-              "modelAsString": true
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CapacityReservationGroupListResult"
+              "$ref": "#/definitions/CapacityReservationGroupResourceIdListResult"
             }
           },
           "default": {
@@ -378,12 +363,9 @@
           }
         },
         "x-ms-examples": {
-          "List capacity reservation groups in subscription.": {
-            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_ListBySubscription.json"
+          "List capacity reservation group resource Ids in subscription.": {
+            "$ref": "./examples/capacityReservationExamples/CapacityReservationGroups_GetCapacityReservationGroupResourceIds.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -843,6 +825,22 @@
         "value"
       ],
       "description": "The List capacity reservation group with resource group response."
+    },
+    "CapacityReservationGroupResourceIdListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of capacity reservation group resource Ids"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List capacity reservation group resource Ids in the response"
     },
     "CapacityReservationInstanceView": {
       "type": "object",
