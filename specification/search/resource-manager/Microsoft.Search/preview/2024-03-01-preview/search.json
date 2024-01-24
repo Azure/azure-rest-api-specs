@@ -2544,6 +2544,7 @@
       }
     },
     "OperationProperties": {
+      "type": "object",
       "description": "Describes additional properties for this operation.",
       "properties": {
         "serviceSpecification": {
@@ -2554,6 +2555,7 @@
       }
     },
     "OperationServiceSpecification": {
+      "type": "object",
       "description": "Specifications of the service for this operation.",
       "properties": {
         "metricSpecifications": {
@@ -2575,6 +2577,7 @@
       }
     },
     "OperationMetricsSpecification": {
+      "type": "object",
       "description": "Specifications of one type of metric for this operation.",
       "readOnly": true,
       "properties": {
@@ -2622,6 +2625,7 @@
       }
     },
     "OperationMetricDimension": {
+      "type": "object",
       "description": "Describes a particular dimension for the metric specification.",
       "readOnly": true,
       "properties": {
@@ -2638,6 +2642,7 @@
       }
     },
     "OperationAvailability": {
+      "type": "object",
       "description": "Describes a particular availability for the metric specification.",
       "readOnly": true,
       "properties": {
@@ -2654,6 +2659,7 @@
       }
     },
     "OperationLogsSpecification": {
+      "type": "object",
       "description": "Specifications of one type of log for this operation.",
       "readOnly": true,
       "properties": {
@@ -2774,6 +2780,7 @@
       "description": "The details of the user assigned managed identity assigned to the search service."
     },
     "QuotaUsagesListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -2781,7 +2788,7 @@
           "items": {
             "$ref": "#/definitions/QuotaUsageResult"
           },
-          "description": "The quota usages for the SKUs supported by Azure Cognitive Search."
+          "description": "The quota usages for the SKUs supported by Azure AI Search."
         },
         "nextLink": {
           "readOnly": true,
@@ -2789,26 +2796,29 @@
           "description": "Request URL that can be used to query next page of quota usages. Returned when the total number of requested quota usages exceed maximum page size."
         }
       },
-      "description": "Response containing the quota usage information for all the supported skus of Azure Cognitive Search service.",
+      "description": "Response containing the quota usage information for all the supported SKUs of Azure AI Search.",
       "x-ms-external": true
     },
     "QuotaUsageResult": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The resource id of the quota usage sku endpoint for Microsoft.Search provider."
+          "description": "The resource ID of the quota usage SKU endpoint for Microsoft.Search provider."
         },
         "unit": {
           "type": "string",
-          "description": "The unit of measurement for the search sku."
+          "description": "The unit of measurement for the search SKU."
         },
         "currentValue": {
           "type": "integer",
-          "description": "The currently used up value for the particular search sku."
+          "format": "int32",
+          "description": "The currently used up value for the particular search SKU."
         },
         "limit": {
           "type": "integer",
-          "description": "The quota limit for the particular search sku."
+          "format": "int32",
+          "description": "The quota limit for the particular search SKU."
         },
         "name": {
           "readOnly": true,
@@ -2816,17 +2826,17 @@
           "properties": {
             "value": {
               "type": "string",
-              "description": "The sku name supported by Azure Cognitive Search."
+              "description": "The SKU name supported by Azure AI Search."
             },
             "localizedValue": {
               "type": "string",
-              "description": "The localized string value for the sku supported by Azure Cognitive Search."
+              "description": "The localized string value for the SKU name."
             }
           },
-          "description": "The name of the sku supported by Azure Cognitive Search."
+          "description": "The name of the SKU supported by Azure AI Search."
         }
       },
-      "description": "Describes the quota usage for a particular sku supported by Azure Cognitive Search."
+      "description": "Describes the quota usage for a particular SKU."
     }
   },
   "parameters": {
