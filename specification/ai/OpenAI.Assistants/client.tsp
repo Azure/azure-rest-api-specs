@@ -14,22 +14,36 @@ namespace Azure.AI.OpenAI.Assistants;
   "csharp",
   "InternalAssistantDeletionStatus"
 );
+@@access(deleteAssistant, Access.internal, "csharp");
 @@projectedName(deleteAssistant, "csharp", "InternalDeleteAssistant");
+@@access(AssistantFileDeletionStatus, Access.internal, "csharp");
 @@projectedName(AssistantFileDeletionStatus,
   "csharp",
   "InternalAssistantFileDeletionStatus"
 );
+@@access(deleteAssistantFile, Access.internal, "csharp");
 @@projectedName(deleteAssistantFile, "csharp", "InternalUnlinkAssistantFile");
+@@access(deleteThread, Access.internal, "csharp");
 @@projectedName(deleteThread, "csharp", "InternalDeleteThread");
+@@access(listAssistants, Access.internal, "csharp");
 @@projectedName(listAssistants, "csharp", "InternalGetAssistants");
+@@access(listAssistantFiles, Access.internal, "csharp");
 @@projectedName(listAssistantFiles, "csharp", "InternalGetAssistantFiles");
+@@access(listMessageFiles, Access.internal, "csharp");
 @@projectedName(listMessageFiles, "csharp", "InternalGetMessageFiles");
+@@access(listRunSteps, Access.internal, "csharp");
 @@projectedName(listRunSteps, "csharp", "InternalGetRunSteps");
+@@access(listMessages, Access.internal, "csharp");
 @@projectedName(listMessages, "csharp", "InternalGetMessages");
+@@access(listRuns, Access.internal, "csharp");
 @@projectedName(listRuns, "csharp", "InternalGetRuns");
+@@access(FileListResponse, Access.internal, "csharp");
 @@projectedName(FileListResponse, "csharp", "InternalFileListResponse");
+@@access(listFiles, Access.internal, "csharp");
 @@projectedName(listFiles, "csharp", "InternalListFiles");
+@@access(FileDeletionStatus, Access.internal, "csharp");
 @@projectedName(FileDeletionStatus, "csharp", "InternalFileDeletionStatus");
+@@access(deleteFile, Access.internal, "csharp");
 @@projectedName(deleteFile, "csharp", "InternalDeleteFile");
 
 // In addition to top-level response value containers, trivial intermediate structure -- levels of single-use model
@@ -55,12 +69,16 @@ namespace Azure.AI.OpenAI.Assistants;
   "InternalDetails"
 );
 
-// FunctionToolCall: include name/arguments directly
+// RequiredFunctionToolCall, FunctionToolCall: include name/arguments directly
 
 @@access(FunctionToolCallDetails, Access.internal);
 @@projectedName(FunctionToolCallDetails,
   "csharp",
   "InternalFunctionToolCallDetails"
+);
+@@projectedName(RequiredFunctionToolCall.function,
+  "csharp",
+  "InternalFunctionDefinition"
 );
 @@projectedName(FunctionToolCall.function, "csharp", "InternalDetails");
 
@@ -135,6 +153,8 @@ namespace Azure.AI.OpenAI.Assistants;
 
 @@access(MessageTextFilePathAnnotation, Access.public);
 @@access(MessageTextFileCitationAnnotation, Access.public);
+@@access(ListSortOrder, Access.public);
+@@access(RequiredToolCall, Access.public);
 @@usage(FilePurpose, Usage.input | Usage.output);
 @@usage(ListSortOrder, Usage.input | Usage.output);
 
