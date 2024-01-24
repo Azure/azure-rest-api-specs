@@ -272,8 +272,7 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ],
-      "x-ms-discriminator-value": "AddServer"
+      ]
     },
     "AddServerJobProperties": {
       "type": "object",
@@ -295,9 +294,11 @@
           "type": "array",
           "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
           "items": {
-            "$ref": "./common.json#/definitions/Secrets"
+            "$ref": "./common.json#/definitions/EceDeploymentSecrets"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "secretName"
+          ]
         },
         "validationStatus": {
           "$ref": "./common.json#/definitions/EceActionStatus",
@@ -317,7 +318,8 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AddServer"
     },
     "ClusterProperties": {
       "type": "object",
@@ -383,20 +385,8 @@
             "read",
             "create"
           ]
-        },
-        "kind": {
-          "$ref": "#/definitions/JobType",
-          "description": "Job Type to support polymorphic resource.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -470,6 +460,14 @@
       "type": "object",
       "description": "Job properties",
       "properties": {
+        "jobType": {
+          "$ref": "#/definitions/JobType",
+          "description": "Job Type to support polymorphic resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "Job provisioning state",
@@ -520,7 +518,11 @@
           "description": "Status of AzureStackHCI Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
           "readOnly": true
         }
-      }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
+      ]
     },
     "Parameters": {
       "type": "object",
@@ -550,8 +552,7 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ],
-      "x-ms-discriminator-value": "PauseServer"
+      ]
     },
     "PauseServerJobProperties": {
       "type": "object",
@@ -583,7 +584,8 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "PauseServer"
     },
     "RepairServerJob": {
       "type": "object",
@@ -599,8 +601,7 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ],
-      "x-ms-discriminator-value": "RepairServer"
+      ]
     },
     "RepairServerJobProperties": {
       "type": "object",
@@ -618,9 +619,11 @@
           "type": "array",
           "description": "List of protected parameters to pass to trigger job for Azure Stack HCI cluster.",
           "items": {
-            "$ref": "./common.json#/definitions/Secrets"
+            "$ref": "./common.json#/definitions/EceDeploymentSecrets"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "secretName"
+          ]
         },
         "validationStatus": {
           "$ref": "./common.json#/definitions/EceActionStatus",
@@ -640,7 +643,8 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "RepairServer"
     },
     "ResumeServerJob": {
       "type": "object",
@@ -656,8 +660,7 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ],
-      "x-ms-discriminator-value": "ResumeServer"
+      ]
     },
     "ResumeServerJobProperties": {
       "type": "object",
@@ -689,7 +692,8 @@
         {
           "$ref": "#/definitions/JobsProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ResumeServer"
     },
     "SetInformationJob": {
       "type": "object",
@@ -705,8 +709,7 @@
         {
           "$ref": "#/definitions/Job"
         }
-      ],
-      "x-ms-discriminator-value": "SetInformation"
+      ]
     },
     "SetInformationJobProperties": {
       "type": "object",

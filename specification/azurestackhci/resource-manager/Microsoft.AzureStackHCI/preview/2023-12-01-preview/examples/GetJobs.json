@@ -4,15 +4,7 @@
     "resourceGroupName": "test-rg",
     "clusterName": "myCluster",
     "jobsName": "addnode3",
-    "api-version": "2023-12-01-preview",
-    {
-      "properties": {
-        "arcNodeResourceIds": [
-          "string"
-        ]
-      },
-      "kind": "AddServer"
-    }
+    "api-version": "2023-12-01-preview"
   },
   "responses": {
     "200": {
@@ -35,7 +27,25 @@
           "endTimeUtc": "2023-12-26T12:01:15.762Z",
           "percentComplete": 0,
           "message": "job completed",
-          "status": "Completed"
+          "status": "Completed",
+          "serverName": "Node-3",
+          "deploymentMode": "deploy",
+          "hostIpv4Address": "192.168.10.10",
+          "jobType": "AddServer",
+          "secrets": [
+            {
+              "secretName": "cluster1-BmcAdminUser-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "BMCAdminUserCred",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-BmcAdminUser-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+            },
+            {
+              "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "AzureStackLCMUserCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+            }
+          ],
+          "validationStatus": {},
+          "deploymentStatus": {}
         }
       }
     }
