@@ -1942,7 +1942,19 @@
           ]
         },
         "status": {
-          "$ref": "#/definitions/AvailablePhoneNumberStatus"
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "available",
+            "reserved",
+            "expired",
+            "error",
+            "purchased"
+          ],
+          "x-ms-enum": {
+            "name": "AvailablePhoneNumberStatus",
+            "modelAsString": true
+          }
         },
         "error": {
           "readOnly": true,
@@ -1959,21 +1971,6 @@
             }
           }
         }
-      }
-    },
-    "AvailablePhoneNumberStatus": {
-      "readOnly": true,
-      "type": "string",
-      "enum": [
-        "available",
-        "reserved",
-        "expired",
-        "error",
-        "purchased"
-      ],
-      "x-ms-enum": {
-        "name": "AvailablePhoneNumberStatus",
-        "modelAsString": true
       }
     },
     "PhoneNumbersReservations": {
@@ -2022,22 +2019,19 @@
           }
         },
         "status": {
-          "$ref": "#/definitions/ReservationStatus"
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "active",
+            "submitted",
+            "completed",
+            "expired"
+          ],
+          "x-ms-enum": {
+            "name": "ReservationStatus",
+            "modelAsString": true
+          }
         }
-      }
-    },
-    "ReservationStatus": {
-      "type": "string",
-      "readOnly": true,
-      "enum": [
-        "active",
-        "submitted",
-        "completed",
-        "expired"
-      ],
-      "x-ms-enum": {
-        "name": "ReservationStatus",
-        "modelAsString": true
       }
     },
     "PhoneNumbersReservationPurchaseRequest": {
