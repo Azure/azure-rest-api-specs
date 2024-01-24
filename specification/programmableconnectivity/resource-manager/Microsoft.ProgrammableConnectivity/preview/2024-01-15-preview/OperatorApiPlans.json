@@ -40,17 +40,17 @@
   },
   "tags": [
     {
-      "name": "OperatorApiOfferings"
+      "name": "OperatorApiPlans"
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiOfferings/{operatorApiOfferingName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans/{operatorApiPlanName}": {
       "get": {
-        "operationId": "OperatorApiOfferings_Get",
+        "operationId": "OperatorApiPlans_Get",
         "tags": [
-          "OperatorApiOfferings"
+          "OperatorApiPlans"
         ],
-        "description": "Get an OperatorApiOffering resource by name.",
+        "description": "Get an OperatorApiPlan resource by name.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -59,37 +59,37 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/OperatorApiOfferingNameParamter"
+            "$ref": "#/parameters/OperatorApiPlanNameParamter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OperatorApiOffering' get by name operation succeeded.",
+            "description": "Resource 'OperatorApiPlan' get by name operation succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperatorApiOffering"
+              "$ref": "#/definitions/OperatorApiPlan"
             }
           },
           "default": {
-            "description": "Operator API Offering error response.",
+            "description": "Operator API Plan error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "OperatorApiOfferings_Get_MaximumSet_Gen": {
-            "$ref": "./examples/OperatorApiOfferings_Get_MaximumSet_Gen.json"
+          "OperatorApiPlans_Get_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorApiPlans_Get_MaximumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiOfferings": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans": {
       "get": {
-        "operationId": "OperatorApiOfferings_ListBySubscription",
+        "operationId": "OperatorApiPlans_ListBySubscription",
         "tags": [
-          "OperatorApiOfferings"
+          "OperatorApiPlans"
         ],
-        "description": "List OperatorApiOffering resources by subscription ID.",
+        "description": "List OperatorApiPlan resources by subscription ID.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -109,13 +109,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OperatorApiOffering' list operation on subscription ID succeeded.",
+            "description": "Resource 'OperatorApiPlan' list operation on subscription ID succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperatorApiOfferingListResult"
+              "$ref": "#/definitions/OperatorApiPlanListResult"
             }
           },
           "default": {
-            "description": "Operator API Offering error response.",
+            "description": "Operator API Plan error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -125,21 +125,21 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "OperatorApiOfferings_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/OperatorApiOfferings_ListBySubscription_MaximumSet_Gen.json"
+          "OperatorApiPlans_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/OperatorApiPlans_ListBySubscription_MaximumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "OperatorApiOffering": {
+    "OperatorApiPlan": {
       "type": "object",
-      "description": "A Programmable Connectivity Operator API Offerings resource. This is a readonly resource that indicates which Operator Network APIs are available in the user's subscription.",
+      "description": "A Programmable Connectivity Operator API Plans resource. This is a readonly resource that indicates which Operator Network APIs are available in the user's subscription.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OperatorApiOfferingProperties",
-          "description": "Operator API Offering resource properties.",
+          "$ref": "#/definitions/OperatorApiPlanProperties",
+          "description": "Operator API Plan resource properties.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read"
@@ -152,15 +152,15 @@
         }
       ]
     },
-    "OperatorApiOfferingListResult": {
+    "OperatorApiPlanListResult": {
       "type": "object",
-      "description": "The response of a OperatorApiOffering list operation.",
+      "description": "The response of a OperatorApiPlan list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The OperatorApiOffering items on this page.",
+          "description": "The OperatorApiPlan items on this page.",
           "items": {
-            "$ref": "#/definitions/OperatorApiOffering"
+            "$ref": "#/definitions/OperatorApiPlan"
           }
         },
         "nextLink": {
@@ -173,13 +173,13 @@
         "value"
       ]
     },
-    "OperatorApiOfferingProperties": {
+    "OperatorApiPlanProperties": {
       "type": "object",
-      "description": "Operator API Offering properties.",
+      "description": "Operator API Plan properties.",
       "properties": {
         "operatorName": {
           "type": "string",
-          "description": "Name of the Operator this offering belongs to."
+          "description": "Name of the Operator this plan belongs to."
         },
         "camaraApiName": {
           "type": "string",
@@ -197,7 +197,7 @@
         },
         "operatorRegions": {
           "type": "array",
-          "description": "List of country/region names where this offering is being supported by the Operator.",
+          "description": "List of country/region names where this plan is being supported by the Operator.",
           "x-ms-identifiers": [
             "operatorRegions"
           ],
@@ -207,7 +207,7 @@
         },
         "markets": {
           "type": "array",
-          "description": "List of country/region names where this offering is being supported by Azure Marketplace.",
+          "description": "List of country/region names where this plan is being supported by Azure Marketplace.",
           "x-ms-identifiers": [
             "markets"
           ],
@@ -221,7 +221,7 @@
         },
         "marketplaceProperties": {
           "$ref": "#/definitions/MarketplaceProperties",
-          "description": "Azure marketplace properties for this offering."
+          "description": "Azure marketplace properties for this plan."
         },
         "provisioningState": {
           "$ref": "./common.json#/definitions/ProvisioningState",
@@ -234,32 +234,32 @@
       "properties": {
         "offerId": {
           "type": "string",
-          "description": "Azure marketplace Offer ID for this offering."
+          "description": "Azure marketplace Offer ID for this plan."
         },
         "legacyOfferId": {
           "type": "string",
-          "description": "Azure marketplace Legacy Offer ID for this offering. This is used to fetch the details of the offering from the Azure marketplace."
+          "description": "Azure marketplace Legacy Offer ID for this plan. This is used to fetch the details of the plan from the Azure marketplace."
         },
         "publisherId": {
           "type": "string",
-          "description": "Azure marketplace Publisher ID for this offering."
+          "description": "Azure marketplace Publisher ID for this plan."
         },
         "planId": {
           "type": "string",
-          "description": "Azure marketplace Plan ID for this offering."
+          "description": "Azure marketplace Plan ID for this plan."
         },
         "termId": {
           "type": "string",
-          "description": "Azure marketplace Term ID for this offering."
+          "description": "Azure marketplace Term ID for this plan."
         }
       }
     }
   },
   "parameters": {
-    "OperatorApiOfferingNameParamter": {
-      "name": "operatorApiOfferingName",
+    "OperatorApiPlanNameParamter": {
+      "name": "operatorApiPlanName",
       "in": "path",
-      "description": "APC Gateway Offering Name.",
+      "description": "APC Gateway Plan Name.",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"

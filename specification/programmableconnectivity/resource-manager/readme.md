@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2024-01-15-preview` is specified o
 input-file:
   - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/Gateways.json
   - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/OperatorApiConnections.json
-  - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/OperatorApiOfferings.json
+  - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/OperatorApiPlans.json
   - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/Operations.json
   - Microsoft.ProgrammableConnectivity/preview/2024-01-15-preview/common.json
 ```

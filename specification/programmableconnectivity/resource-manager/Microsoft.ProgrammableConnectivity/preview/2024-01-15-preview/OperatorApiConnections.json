@@ -428,15 +428,15 @@
     },
     "SaasProperties": {
       "type": "object",
-      "description": "Details about the SaaS offering purchased from the marketplace.",
+      "description": "Details about the SaaS plan purchased from the marketplace.",
       "properties": {
         "saasSubscriptionId": {
           "type": "string",
-          "description": "Subscription ID of the SaaS offering purchased from the marketplace."
+          "description": "Subscription ID of the SaaS plan purchased from the marketplace."
         },
         "saasResourceId": {
           "type": "string",
-          "description": "Resource ID of the SaaS offering purchased from the marketplace."
+          "description": "Resource ID of the SaaS plan purchased from the marketplace."
         }
       }
     },
@@ -501,13 +501,13 @@
           "$ref": "./common.json#/definitions/GatewayResourceId",
           "description": "Reference to the APC Gateway resource ID."
         },
-        "operatorApiOfferingId": {
-          "$ref": "./common.json#/definitions/OperatorApiOfferingResourceId",
-          "description": "Reference to the Operator API Offering Resource ID."
+        "operatorApiPlanId": {
+          "$ref": "./common.json#/definitions/OperatorApiPlanResourceId",
+          "description": "Reference to the Operator API Plan Resource ID."
         },
         "camaraApiName": {
           "type": "string",
-          "description": "Network API user has selected for the current operator in the country/region provided in the linked Operator API Offering."
+          "description": "Network API user has selected for the current operator in the country/region provided in the linked Operator API Plan."
         },
         "accountType": {
           "$ref": "#/definitions/AccountType",
@@ -523,13 +523,13 @@
           "$ref": "#/definitions/ApplicationProperties"
         },
         "saasProperties": {
-          "description": "Details about the SaaS offering purchased from the marketplace.",
+          "description": "Details about the SaaS plan purchased from the marketplace.",
           "$ref": "#/definitions/SaasProperties"
         }
       },
       "required": [
         "gatewayId",
-        "operatorApiOfferingId",
+        "operatorApiPlanId",
         "camaraApiName",
         "accountType"
       ]
@@ -562,7 +562,7 @@
       "properties": {
         "camaraApiName": {
           "type": "string",
-          "description": "Name of the Network API user has selected for the current operator in the country/region provided in the linked Operator API Offering."
+          "description": "Name of the Network API user has selected for the current operator in the country/region provided in the linked Operator API Plan."
         },
         "accountType": {
           "$ref": "#/definitions/AccountType",
