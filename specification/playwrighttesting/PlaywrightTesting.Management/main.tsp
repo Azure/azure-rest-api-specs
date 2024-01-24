@@ -181,7 +181,7 @@ model AccountFreeTrialProperties {
   @visibility("read")
   @minValue(0)
   @maxValue(100)
-  percentageUsed: decimal;
+  percentageUsed: float32;
 }
 
 @doc("The free-trial state.")
