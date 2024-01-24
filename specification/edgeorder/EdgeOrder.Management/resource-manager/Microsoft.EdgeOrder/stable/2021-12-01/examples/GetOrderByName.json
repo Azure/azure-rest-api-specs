@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "Referer": [
+      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/locations/westus/orders/TestOrderItemName901?api-version=2021-12-01"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "api-version": "2021-12-01",
+    "location": "%7B%7B%7Blocation%7D%7D",
+    "orderName": "TestOrderItemName901",
+    "resourceGroupName": "TestRG",
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestOrderItemName901",
+        "type": "Microsoft.EdgeOrder/orders",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/locations/westus/orders/TestOrderItemName901",
+        "properties": {
+          "currentStage": {
+            "stageName": "InReview",
+            "stageStatus": "Succeeded",
+            "startTime": "2021-06-07T15:30:35.4512229+05:30"
+          },
+          "orderItemIds": [
+            "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName901"
+          ],
+          "orderStageHistory": [
+            {
+              "stageName": "Placed",
+              "stageStatus": "Succeeded",
+              "startTime": "2021-06-07T15:24:58.7140341+05:30"
+            },
+            {
+              "stageName": "InReview",
+              "stageStatus": "Succeeded",
+              "startTime": "2021-06-07T15:30:35.4512229+05:30"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "GetOrderByName",
+  "title": "GetOrderByName"
+}

@@ -1,0 +1,178 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01",
+    "clusterName": "clusterName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "clusterName",
+        "type": "Microsoft.NetworkCloud/clusters",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterManagerExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+        "location": "location",
+        "properties": {
+          "aggregatorOrSingleRackDefinition": {
+            "bareMetalMachineConfigurationData": [
+              {
+                "bmcConnectionString": "bmcConnectionString",
+                "bmcCredentials": {
+                  "username": "username"
+                },
+                "bmcMacAddress": "AA:BB:CC:DD:EE:FF",
+                "bootMacAddress": "00:BB:CC:DD:EE:FF",
+                "machineDetails": "extraDetails",
+                "machineName": "bmmName1",
+                "rackSlot": 1,
+                "serialNumber": "BM1219XXX"
+              },
+              {
+                "bmcConnectionString": "bmcConnectionString",
+                "bmcCredentials": {
+                  "username": "username"
+                },
+                "bmcMacAddress": "AA:BB:CC:DD:EE:00",
+                "bootMacAddress": "00:BB:CC:DD:EE:00",
+                "machineDetails": "extraDetails",
+                "machineName": "bmmName2",
+                "rackSlot": 2,
+                "serialNumber": "BM1219YYY"
+              }
+            ],
+            "networkRackId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkRacks/networkRackName",
+            "rackLocation": "Foo Datacenter, Floor 3, Aisle 9, Rack 2",
+            "rackSerialNumber": "AA1234",
+            "rackSkuId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/rackSkus/rackSkuName",
+            "storageApplianceConfigurationData": [
+              {
+                "adminCredentials": {
+                  "username": "username"
+                },
+                "rackSlot": 1,
+                "serialNumber": "BM1219XXX",
+                "storageApplianceName": "vmName"
+              }
+            ]
+          },
+          "analyticsWorkspaceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/microsoft.operationalInsights/workspaces/logAnalyticsWorkspaceName",
+          "availableUpgradeVersions": [
+            {
+              "controlImpact": "False",
+              "expectedDuration": "0:0:30",
+              "impactDescription": "can be done in place",
+              "supportExpiryDate": "2025-01-01",
+              "targetClusterVersion": "1.0.2",
+              "workloadImpact": "False"
+            }
+          ],
+          "clusterCapacity": {
+            "availableApplianceStorageGB": 3,
+            "availableCoreCount": 10,
+            "availableHostStorageGB": 20,
+            "availableMemoryGB": 20,
+            "totalApplianceStorageGB": 10,
+            "totalCoreCount": 10,
+            "totalHostStorageGB": 10,
+            "totalMemoryGB": 10
+          },
+          "clusterConnectionStatus": "Connected",
+          "clusterExtendedLocation": {
+            "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+            "type": "CustomLocation"
+          },
+          "clusterLocation": "Foo Street, 3rd Floor, row 9",
+          "clusterManagerConnectionStatus": "Connected",
+          "clusterManagerId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusterManagers/clusterManagerName",
+          "clusterServicePrincipal": {
+            "applicationId": "12345678-1234-1234-1234-123456789012",
+            "principalId": "00000008-0004-0004-0004-000000000012",
+            "tenantId": "80000000-4000-4000-4000-120000000000"
+          },
+          "clusterType": "SingleRack",
+          "clusterVersion": "1.0.0",
+          "computeDeploymentThreshold": {
+            "type": "PercentSuccess",
+            "grouping": "PerCluster",
+            "value": 90
+          },
+          "computeRackDefinitions": [
+            {
+              "bareMetalMachineConfigurationData": [
+                {
+                  "bmcConnectionString": "bmcConnectionString",
+                  "bmcCredentials": {
+                    "username": "username"
+                  },
+                  "bmcMacAddress": "AA:BB:CC:DD:EE:FF",
+                  "bootMacAddress": "00:BB:CC:DD:EE:FF",
+                  "machineDetails": "extraDetails",
+                  "machineName": "bmmName1",
+                  "rackSlot": 1,
+                  "serialNumber": "BM1219XXX"
+                },
+                {
+                  "bmcConnectionString": "bmcConnectionString",
+                  "bmcCredentials": {
+                    "username": "username"
+                  },
+                  "bmcMacAddress": "AA:BB:CC:DD:EE:00",
+                  "bootMacAddress": "00:BB:CC:DD:EE:00",
+                  "machineDetails": "extraDetails",
+                  "machineName": "bmmName2",
+                  "rackSlot": 2,
+                  "serialNumber": "BM1219YYY"
+                }
+              ],
+              "networkRackId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkRacks/networkRackName",
+              "rackLocation": "Foo Datacenter, Floor 3, Aisle 9, Rack 2",
+              "rackSerialNumber": "AA1234",
+              "rackSkuId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/rackSkus/rackSkuName",
+              "storageApplianceConfigurationData": [
+                {
+                  "adminCredentials": {
+                    "username": "username"
+                  },
+                  "rackSlot": 1,
+                  "serialNumber": "BM1219XXX",
+                  "storageApplianceName": "vmName"
+                }
+              ]
+            }
+          ],
+          "detailedStatus": "Running",
+          "detailedStatusMessage": "Cluster is running and healthy",
+          "managedResourceGroupConfiguration": {
+            "name": "my-managed-rg",
+            "location": "East US"
+          },
+          "manualActionCount": 0,
+          "networkFabricId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabrics/fabricName",
+          "provisioningState": "Succeeded",
+          "supportExpiryDate": "2023-04-29",
+          "workloadResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        }
+      }
+    }
+  },
+  "operationId": "Clusters_Get",
+  "title": "Get cluster"
+}

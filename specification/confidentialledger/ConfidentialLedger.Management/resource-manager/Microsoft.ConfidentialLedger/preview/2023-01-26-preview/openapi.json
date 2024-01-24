@@ -1,0 +1,1383 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ConfidentialLedger",
+    "version": "2023-01-26-preview",
+    "description": "Microsoft Azure Confidential Compute Ledger Control Plane REST API version 2020-12-01-preview.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ConfidentialLedgers"
+    },
+    {
+      "name": "ManagedCCFS"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ConfidentialLedger/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConfidentialLedger/checkNameAvailability": {
+      "post": {
+        "operationId": "CheckNameAvailability",
+        "description": "To check whether a resource name is available.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "description": "Name availability request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConfidentialLedger/ledgers": {
+      "get": {
+        "operationId": "Ledger_ListBySubscription",
+        "tags": [
+          "ConfidentialLedgers"
+        ],
+        "description": "Retrieves the properties of all Confidential Ledgers.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfidentialLedgerListBySub": {
+            "$ref": "./examples/Ledger_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConfidentialLedger/managedCCFs": {
+      "get": {
+        "operationId": "ManagedCCF_ListBySubscription",
+        "tags": [
+          "ManagedCCFS"
+        ],
+        "description": "Retrieves the properties of all Managed CCF.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedCCFListBySub": {
+            "$ref": "./examples/ManagedCCF_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/ledgers": {
+      "get": {
+        "operationId": "Ledger_ListByResourceGroup",
+        "tags": [
+          "ConfidentialLedgers"
+        ],
+        "description": "Retrieves the properties of all Confidential Ledgers.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfidentialLedgerList": {
+            "$ref": "./examples/Ledger_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/ledgers/{ledgerName}": {
+      "get": {
+        "operationId": "Ledger_Get",
+        "tags": [
+          "ConfidentialLedgers"
+        ],
+        "description": "Retrieves the properties of a Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ledgerName",
+            "in": "path",
+            "description": "Name of the Confidential Ledger",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedger"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfidentialLedgerGet": {
+            "$ref": "./examples/Ledger_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Ledger_Create",
+        "tags": [
+          "ConfidentialLedgers"
+        ],
+        "description": "Creates a  Confidential Ledger with the specified ledger parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ledgerName",
+            "in": "path",
+            "description": "Name of the Confidential Ledger",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "confidentialLedger",
+            "in": "body",
+            "description": "Confidential Ledger Create Request Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedger"
+            },
+            "x-ms-client-name": "confidentialLedger"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfidentialLedger' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedger"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfidentialLedger' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedger"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfidentialLedgerCreate": {
+            "$ref": "./examples/Ledger_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Ledger_Delete",
+        "tags": [
+          "ConfidentialLedgers"
+        ],
+        "description": "Deletes an existing Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ledgerName",
+            "in": "path",
+            "description": "Name of the Confidential Ledger",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfidentialLedgerDelete": {
+            "$ref": "./examples/Ledger_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/ledgers/{ledgerName}/ledgers/{name}": {
+      "patch": {
+        "operationId": "Ledger_Update",
+        "tags": [
+          "ConfidentialLedgers"
+        ],
+        "description": "Updates properties of Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "ledgerName",
+            "in": "path",
+            "description": "Name of the Confidential Ledger",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Confidential Ledger",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "confidentialLedger",
+            "in": "body",
+            "description": "Confidential Ledger request body for Updating Ledger",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedger"
+            },
+            "x-ms-client-name": "confidentialLedger"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedger"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfidentialLedgerUpdate": {
+            "$ref": "./examples/Ledger_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs": {
+      "get": {
+        "operationId": "ManagedCCF_ListByResourceGroup",
+        "tags": [
+          "ManagedCCFS"
+        ],
+        "description": "Retrieves the properties of all Managed CCF apps.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedCCFList": {
+            "$ref": "./examples/ManagedCCF_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs/{appName}": {
+      "get": {
+        "operationId": "ManagedCCF_Get",
+        "tags": [
+          "ManagedCCFS"
+        ],
+        "description": "Retrieves the properties of a Managed CCF app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appName",
+            "in": "path",
+            "description": "Name of the Managed CCF",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedCCFGet": {
+            "$ref": "./examples/ManagedCCF_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedCCF_Create",
+        "tags": [
+          "ManagedCCFS"
+        ],
+        "description": "Creates a Managed CCF with the specified Managed CCF parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appName",
+            "in": "path",
+            "description": "Name of the Managed CCF",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "ManagedCCF",
+            "in": "body",
+            "description": "Managed CCF Create Request Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            },
+            "x-ms-client-name": "ManagedCCF"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedCCF' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedCCF' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedCCFCreate": {
+            "$ref": "./examples/ManagedCCF_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedCCF_Delete",
+        "tags": [
+          "ManagedCCFS"
+        ],
+        "description": "Deletes an existing Managed CCF.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appName",
+            "in": "path",
+            "description": "Name of the Managed CCF",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfidentialLedgerDelete": {
+            "$ref": "./examples/ManagedCCF_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs/{appName}/managedCCFs/{name}": {
+      "patch": {
+        "operationId": "ManagedCCF_Update",
+        "tags": [
+          "ManagedCCFS"
+        ],
+        "description": "Updates properties of Managed CCF",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appName",
+            "in": "path",
+            "description": "Name of the Managed CCF",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the Managed CCF",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "ManagedCCF",
+            "in": "body",
+            "description": "Request body for Updating Managed CCF App",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            },
+            "x-ms-client-name": "ManagedCCF"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCF"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedCCFUpdate": {
+            "$ref": "./examples/ManagedCCF_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AADBasedSecurityPrincipal": {
+      "type": "object",
+      "description": "AAD based security principal with associated Ledger RoleName",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "UUID/GUID based Principal Id of the Security Principal"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "UUID/GUID based Tenant Id of the Security Principal"
+        },
+        "ledgerRoleName": {
+          "$ref": "#/definitions/LedgerRoleName",
+          "description": "LedgerRole associated with the Security Principal of Ledger"
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.ResourceManager.Foundations.CheckNameAvailabilityReason": {
+      "type": "string",
+      "description": "Possible reasons for a name not being available.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "CheckNameAvailabilityReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Name is invalid."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "Name already exists."
+          }
+        ]
+      }
+    },
+    "CertBasedSecurityPrincipal": {
+      "type": "object",
+      "description": "Cert based security principal with Ledger RoleName",
+      "properties": {
+        "cert": {
+          "type": "string",
+          "description": "Public key of the user cert (.pem or .cer)"
+        },
+        "ledgerRoleName": {
+          "$ref": "#/definitions/LedgerRoleName",
+          "description": "LedgerRole associated with the Security Principal of Ledger"
+        }
+      }
+    },
+    "CertificateTags": {
+      "type": "object",
+      "description": "Tags for Managed CCF Certificates",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Additional tags for Managed CCF Certificates",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "The check availability request body.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource for which availability needs to be checked."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "description": "The check availability result.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates if the resource name is available."
+        },
+        "reason": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.CheckNameAvailabilityReason",
+          "description": "The reason why the given name is not available."
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed reason why the given name is available."
+        }
+      }
+    },
+    "ConfidentialLedger": {
+      "type": "object",
+      "description": "Confidential Ledger. Contains the properties of Confidential Ledger Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LedgerProperties",
+          "description": "Properties of Confidential Ledger Resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ConfidentialLedgerListResult": {
+      "type": "object",
+      "description": "The response of a ConfidentialLedger list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConfidentialLedger items on this page",
+          "items": {
+            "$ref": "#/definitions/ConfidentialLedger"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentType": {
+      "type": "object",
+      "description": "Object representing DeploymentType for Managed CCF.",
+      "properties": {
+        "languageRuntime": {
+          "$ref": "#/definitions/LanguageRuntime",
+          "description": "Unique name for the Managed CCF."
+        },
+        "appSourceUri": {
+          "type": "string",
+          "description": "Source Uri containing ManagedCCF code"
+        }
+      }
+    },
+    "LanguageRuntime": {
+      "type": "string",
+      "description": "Object representing LanguageRuntime for Manged CCF.",
+      "enum": [
+        "CPP",
+        "JS"
+      ],
+      "x-ms-enum": {
+        "name": "LanguageRuntime",
+        "modelAsString": true
+      }
+    },
+    "LedgerProperties": {
+      "type": "object",
+      "description": "Additional Confidential Ledger properties.",
+      "properties": {
+        "ledgerName": {
+          "type": "string",
+          "description": "Unique name for the Confidential Ledger.",
+          "readOnly": true
+        },
+        "ledgerUri": {
+          "type": "string",
+          "description": "Endpoint for calling Ledger Service.",
+          "readOnly": true
+        },
+        "identityServiceUri": {
+          "type": "string",
+          "description": "Endpoint for accessing network identity.",
+          "readOnly": true
+        },
+        "ledgerInternalNamespace": {
+          "type": "string",
+          "description": "Internal namespace for the Ledger",
+          "readOnly": true
+        },
+        "runningState": {
+          "$ref": "#/definitions/RunningState",
+          "description": "Object representing RunningState for Ledger."
+        },
+        "ledgerType": {
+          "$ref": "#/definitions/LedgerType",
+          "description": "Type of Confidential Ledger"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of Ledger Resource",
+          "readOnly": true
+        },
+        "aadBasedSecurityPrincipals": {
+          "type": "array",
+          "description": "Array of all AAD based Security Principals.",
+          "items": {
+            "$ref": "#/definitions/AADBasedSecurityPrincipal"
+          },
+          "x-ms-identifiers": []
+        },
+        "certBasedSecurityPrincipals": {
+          "type": "array",
+          "description": "Array of all cert based Security Principals.",
+          "items": {
+            "$ref": "#/definitions/CertBasedSecurityPrincipal"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LedgerRoleName": {
+      "type": "string",
+      "description": "LedgerRole associated with the Security Principal of Ledger",
+      "enum": [
+        "Reader",
+        "Contributor",
+        "Administrator"
+      ],
+      "x-ms-enum": {
+        "name": "LedgerRoleName",
+        "modelAsString": true
+      }
+    },
+    "LedgerType": {
+      "type": "string",
+      "description": "Type of the ledger. Private means transaction data is encrypted.",
+      "enum": [
+        "Unknown",
+        "Public",
+        "Private"
+      ],
+      "x-ms-enum": {
+        "name": "LedgerType",
+        "modelAsString": true
+      }
+    },
+    "ManagedCCF": {
+      "type": "object",
+      "description": "Managed CCF. Contains the properties of Managed CCF Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedCCFProperties",
+          "description": "Properties of Managed CCF Resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ManagedCCFListResult": {
+      "type": "object",
+      "description": "The response of a ManagedCCF list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedCCF items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedCCF"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedCCFProperties": {
+      "type": "object",
+      "description": "Additional Managed CCF properties.",
+      "properties": {
+        "appName": {
+          "type": "string",
+          "description": "Unique name for the Managed CCF.",
+          "readOnly": true
+        },
+        "appUri": {
+          "type": "string",
+          "description": "Endpoint for calling Managed CCF Service.",
+          "readOnly": true
+        },
+        "identityServiceUri": {
+          "type": "string",
+          "description": "Endpoint for accessing network identity.",
+          "readOnly": true
+        },
+        "memberIdentityCertificates": {
+          "type": "array",
+          "description": "List of member identity certificates for  Managed CCF",
+          "items": {
+            "$ref": "#/definitions/MemberIdentityCertificate"
+          },
+          "x-ms-identifiers": []
+        },
+        "deploymentType": {
+          "$ref": "#/definitions/DeploymentType",
+          "description": "Deployment Type of Managed CCF"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of Ledger Resource",
+          "readOnly": true
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of CCF nodes in the Managed CCF.",
+          "default": 3
+        }
+      }
+    },
+    "MemberIdentityCertificate": {
+      "type": "object",
+      "description": "Object representing MemberIdentityCertificate for Managed CCF.",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "description": "Member Identity Certificate"
+        },
+        "encryptionkey": {
+          "type": "string",
+          "description": "Member Identity Certificate Encryption Key"
+        },
+        "tags": {
+          "description": "Anything"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Object representing ProvisioningState for Confidential Ledger.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationDefinition": {
+      "type": "object",
+      "description": "Describes the Resource Provider Operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource provider operation name."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is data action or not."
+        },
+        "display": {
+          "$ref": "#/definitions/ResourceProviderOperationDisplay",
+          "description": "Details about the operations"
+        }
+      }
+    },
+    "ResourceProviderOperationDisplay": {
+      "type": "object",
+      "description": "Describes the properties of the Operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Name of the resource provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Name of the resource type."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Name of the resource provider operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the resource provider operation."
+        }
+      }
+    },
+    "RunningState": {
+      "type": "string",
+      "description": "Object representing RunningState for Confidential Ledger.",
+      "enum": [
+        "Active",
+        "Paused",
+        "Unknown",
+        "Pausing",
+        "Resuming"
+      ],
+      "x-ms-enum": {
+        "name": "RunningState",
+        "modelAsString": true
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2023-01-26-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_01_26_preview",
+            "value": "2023-01-26-preview",
+            "description": "The 2023-01-26-preview API version."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
