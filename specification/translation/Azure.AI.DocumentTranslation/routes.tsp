@@ -30,6 +30,7 @@ If a file with the same name already exists at the
 destination, it will be overwritten. The targetUrl for each target language
 must be unique.
 """)
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @route("/batches")
   @post
   startTranslation is Azure.Core.Foundations.Operation<
@@ -92,6 +93,7 @@ instead of just ignoring the query options.
 This reduces the risk of the client
 making assumptions about the data returned.
 """)
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @route("/batches")
   @get
   getTranslationsStatus is Azure.Core.Foundations.Operation<
@@ -112,7 +114,7 @@ about it instead of just ignoring the query options.
 """)
       @maxValue(2147483647)
       @query("$top")
-      $top?: int32;
+      top?: int32;
 
       @doc("""
 $skip indicates the number of records to skip from the list of records held by
@@ -131,7 +133,7 @@ client informing about it instead of just ignoring the query options.
 """)
       @maxValue(2147483647)
       @query("$skip")
-      $skip?: int32;
+      skip?: int32;
 
       @doc("""
 $maxpagesize is the maximum items returned in a page.  If more items are
@@ -146,7 +148,7 @@ if the specified page size is smaller than the server's default page size.
       @maxValue(100)
       @minValue(1)
       @query("$maxpagesize")
-      $maxPageSize?: int32 = 50;
+      maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
       @query({
@@ -178,11 +180,12 @@ the sorting query for the collection (ex: 'CreatedDateTimeUtc asc',
         name: "$orderBy",
         format: "csv",
       })
-      $orderBy?: string[];
+      orderBy?: string[];
     },
     TranslationsStatus
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Returns the status for a specific document")
   @doc("""
 Returns the translation status for a specific document based on the request Id
@@ -203,6 +206,7 @@ and document Id.
     DocumentStatus
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Returns the status for a document translation request")
   @doc("""
 Returns the status for a document translation request.
@@ -221,6 +225,7 @@ translated as part of that request.
     TranslationStatus
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Cancel a currently processing or queued translation")
   @doc("""
 Cancel a currently processing or queued translation.
@@ -243,6 +248,7 @@ possible.
     TranslationStatus
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Returns the status for all documents in a batch document translation request")
   @doc("""
 Returns the status for all documents in a batch document translation request.
@@ -316,7 +322,7 @@ about it instead of just ignoring the query options.
 """)
       @maxValue(2147483647)
       @query("$top")
-      $top?: int32;
+      top?: int32;
 
       @doc("""
 $skip indicates the number of records to skip from the list of records held by
@@ -335,7 +341,7 @@ client informing about it instead of just ignoring the query options.
 """)
       @maxValue(2147483647)
       @query("$skip")
-      $skip?: int32;
+      skip?: int32;
 
       @doc("""
 $maxpagesize is the maximum items returned in a page.  If more items are
@@ -350,7 +356,7 @@ if the specified page size is smaller than the server's default page size.
       @maxValue(100)
       @minValue(1)
       @query("$maxpagesize")
-      $maxpagesize?: int32 = 50;
+      maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
       @query({
@@ -382,11 +388,12 @@ the sorting query for the collection (ex: 'CreatedDateTimeUtc asc',
         name: "$orderBy",
         format: "csv",
       })
-      $orderBy?: string[];
+      orderBy?: string[];
     },
     DocumentsStatus
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Returns a list of supported document formats")
   @doc("""
 The list of supported document formats supported by the Document Translation
@@ -401,6 +408,7 @@ content-type if using the upload API.
     SupportedFileFormats
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Returns the list of supported glossary formats")
   @doc("""
 The list of supported glossary formats supported by the Document Translation
@@ -414,6 +422,7 @@ The list includes the common file extension used.
     SupportedFileFormats
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Returns a list of supported storage sources")
   @doc("""
 Returns a list of storage sources/options supported by the Document Translation
