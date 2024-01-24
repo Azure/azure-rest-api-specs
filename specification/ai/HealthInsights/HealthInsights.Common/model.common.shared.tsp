@@ -183,7 +183,7 @@ model TimePeriod {
 }
 
 @doc("Procedure information")
-model OrderedProcedure extends FHIR.R4.Extendible {
+model OrderedProcedure is FHIR.R4.Extendible {
   @doc("Procedure code")
   code?: FHIR.R4.CodeableConcept;
 

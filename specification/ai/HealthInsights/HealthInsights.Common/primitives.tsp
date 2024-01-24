@@ -9,7 +9,7 @@ namespace AzureHealthInsights;
 op HealthInsightsLongRunningRpcOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model,
-  Traits extends object = {}
+  Traits extends TypeSpec.Reflection.Model = {}
 > is Azure.Core.RpcOperation<
   TParams & RepeatabilityRequestHeaders,
   Foundations.AcceptedResponse<HealthInsightsLongRunningStatusLocation<TResponse> &

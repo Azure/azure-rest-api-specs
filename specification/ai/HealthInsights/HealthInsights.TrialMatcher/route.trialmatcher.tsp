@@ -11,6 +11,7 @@ using TypeSpec.Http;
 namespace AzureHealthInsights;
 
 interface TrialMatcher {
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Service uses a jobId in the path"
   @summary("Get Trial Matcher job details")
   @tag("TrialMatcher")
   @doc("Gets the status and details of the Trial Matcher job.")

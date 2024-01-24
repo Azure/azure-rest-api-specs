@@ -254,7 +254,7 @@ model ObservationReferenceRange {
 Component results
 Based on [FHIR Observation.component](https://www.hl7.org/fhir/R4/observation.html)
 """)
-model ObservationComponent extends Element {
+model ObservationComponent is Element {
   @doc("Type of component observation (code / type)")
   code: CodeableConcept;
 

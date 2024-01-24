@@ -45,7 +45,7 @@ model PatientTimelinePatientResult {
 }
 
 @doc("An inference made by the Patient Timeline model regarding a patient.")
-model PatientTimelineInference extends FHIR.R4.Extendible {
+model PatientTimelineInference is FHIR.R4.Extendible {
   @doc("The type of the Patient Timeline inference.")
   type: PatientTimelineInferenceType;
 

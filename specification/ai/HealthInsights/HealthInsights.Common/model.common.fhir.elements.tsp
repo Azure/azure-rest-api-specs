@@ -58,7 +58,7 @@ alias value_x = {
 Base for all elements
 Based on [FHIR Element](https://www.hl7.org/fhir/datatypes.html#Element)
 """)
-model Extension extends Element {
+model Extension is Element {
   @doc("Source of the definition for the extension code - a logical name or a URL.")
   url: fhirUri;
 
@@ -87,7 +87,7 @@ model Element {
 A Coding is a representation of a defined concept using a symbol from a defined "code system".
 Based on [FHIR Coding](https://www.hl7.org/fhir/R4/datatypes.html#Coding)
 """)
-model Coding extends Element {
+model Coding is Element {
   @doc("Identity of the terminology system")
   system?: fhirUri;
 
@@ -105,7 +105,8 @@ model Coding extends Element {
 Concept - reference to a terminology or just text
 Based on [FHIR CodeableConcept](https://www.hl7.org/fhir/R4/datatypes.html#CodeableConcept)
 """)
-model CodeableConcept extends Element {
+model CodeableConcept is Element {
+
   @doc("Code defined by a terminology system")
   coding?: Array<Coding>;
 
@@ -144,7 +145,7 @@ alias xhtml = string;
 Any resource that is a [DomainResource](https://www.hl7.org/fhir/domainresource.html) may include a human-readable narrative that contains a summary of the resource and may be used to represent the content of the resource to a human.
 Based on [FHIR Narrative](https://www.hl7.org/fhir/R4/narrative.html#Narrative)
 """)
-model Narrative extends Element {
+model Narrative is Element {
   @doc("generated, extensions, additional, empty")
   status: string;
 
@@ -156,7 +157,7 @@ model Narrative extends Element {
 A reference from one resource to another
 Based on [FHIR Reference](https://www.hl7.org/fhir/R4/references.html)
 """)
-model Reference extends Element {
+model Reference is Element {
   @doc("Literal reference, Relative, internal or absolute URL")
   reference?: string;
 
@@ -174,7 +175,7 @@ model Reference extends Element {
 An identifier intended for computation
 Based on [FHIR Identifier](https://www.hl7.org/fhir/R4/identifier.html)
 """)
-model Identifier extends Element {
+model Identifier is  Element {
   @doc("usual | official | temp | secondary | old (If known)")
   use?: string;
 
@@ -198,7 +199,7 @@ model Identifier extends Element {
 A time period defined by a start and end date and optionally time
 Based on [FHIR Period](https://www.hl7.org/fhir/R4/datatypes.html#Period)
 """)
-model Period extends Element {
+model Period is Element {
   @doc("Starting time with inclusive boundary")
   start?: fhirDateTime;
 
@@ -210,7 +211,7 @@ model Period extends Element {
 A measured or measurable amount
 Based on [FHIR Quantity](https://www.hl7.org/fhir/R4/datatypes.html#Quantity)
 """)
-model Quantity extends Element {
+model Quantity is Element {
   @doc("Numerical value (with implicit precision)")
   value?: decimal;
 
@@ -231,7 +232,7 @@ model Quantity extends Element {
 A set of ordered Quantities defined by a low and high limit
 Based on [FHIR Range](https://www.hl7.org/fhir/R4/datatypes.html#Range)
 """)
-model Range extends Element {
+model Range is Element {
   @doc("Low limit")
   low?: Quantity;
 
@@ -243,7 +244,7 @@ model Range extends Element {
 A ratio of two Quantity values - a numerator and a denominator
 Based on [FHIR Ratio](https://www.hl7.org/fhir/R4/datatypes.html#Ratio)
 """)
-model Ratio extends Element {
+model Ratio is Element {
   @doc("Numerator value")
   numerator?: Quantity;
 
@@ -255,7 +256,7 @@ model Ratio extends Element {
 A text note which also  contains information about who made the statement and when
 Based on [FHIR Annotation](https://www.hl7.org/fhir/R4/datatypes.html#Annotation)
 """)
-model Annotation extends Element {
+model Annotation is Element {
   @doc("Individual responsible for the annotation")
   authorString?: string;
 
@@ -270,7 +271,7 @@ model Annotation extends Element {
 A series of measurements taken by a device
 Based on [FHIR SampledData](https://www.hl7.org/fhir/R4/datatypes.html#SampledData)
 """)
-model SampledData extends Element {
+model SampledData is Element {
   @doc("Zero value and units")
   origin: Quantity;
 
@@ -297,7 +298,7 @@ model SampledData extends Element {
 @doc("""
 Contact details (See: https://www.hl7.org/fhir/R4/metadatatypes.html#ContactDetail)
 """)
-model ContactDetail extends Element {
+model ContactDetail is Element {
   @doc("Name of an individual to contact")
   name?: string;
 
