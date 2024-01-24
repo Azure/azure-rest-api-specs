@@ -168,7 +168,7 @@ enum ScriptCode {
   @doc("Script code for the Armenian script.")
   Armn,
   @added(Versions.v2023_11_15_preview)
-  @doc("Script code for the Bengla script.")
+  @doc("Script code for the Bangla script.")
   Beng,
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the UnifiedCanadianAboriginalSyllabics script.")
