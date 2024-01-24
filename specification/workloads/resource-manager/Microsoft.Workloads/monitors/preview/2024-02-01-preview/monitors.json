@@ -468,67 +468,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/manageMrgAccess": {
-      "post": {
-        "tags": [
-          "Monitors"
-        ],
-        "operationId": "Monitors_ManageMrgAccess",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "description": "Starts the process of deny assignment deletion or revival in MRG for deleting the alert",
-        "x-ms-examples": {
-          "Start or Stop the Process of Deny Assignment Deletion": {
-            "$ref": "./examples/Monitors/monitors_ManageMrgAccess.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/DenyAssignmentDeletionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/monitorNameParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URI to fetch the updated Virtual Instance for SAP resource."
-              }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/alerts": {
       "get": {
         "tags": [
@@ -2733,13 +2672,6 @@
       "in": "query",
       "type": "string",
       "description": "The provider type for filtering alert templates.",
-      "minLength": 1
-    },
-    "DenyAssignmentDeletionParameter": {
-      "name": "denyAssignmentDeletion",
-      "in": "query",
-      "type": "string",
-      "description": "The flag that indicates whether deny assignment deletion should be started or stopped.",
       "minLength": 1
     },
     "AlertNameParameter": {
