@@ -15,7 +15,7 @@ model Dashboard is TrackedResource<DashboardPropertiesWithProvisioningState> {
   @doc("The name of the dashboard.")
   @maxLength(64)
   @minLength(3)
-  @pattern("^[a-z][a-zA-Z0-9-]*$")
+  @pattern("^[a-z][a-zA-Z0-9\\-]*$")
   @key("dashboardName")
   @segment("dashboards")
   @path
