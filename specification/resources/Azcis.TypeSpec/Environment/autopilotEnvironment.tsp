@@ -26,9 +26,6 @@ model EnvironmentResourceProperties {
   @visibility("read")
   mode?: EnvironmentMode;
 
-  @doc("Indicate APGold or PFGold.")
-  enlistmentType?: string;
-
   @doc("Provisioning state")
   @visibility("read")
   provisioningState?: EnvironmentProvisioningState;
