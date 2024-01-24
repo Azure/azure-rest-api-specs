@@ -1,4 +1,4 @@
-import { access } from "fs/promises";
+import { access, stat } from "fs/promises";
 import { exec } from "child_process";
 import defaultPath, { PlatformPath } from "path";
 
@@ -20,6 +20,10 @@ export async function checkFileExists(file: string) {
   return access(file)
     .then(() => true)
     .catch(() => false);
+}
+
+export async function isDirectory(path: string) {
+  return (await stat(path)).isDirectory();
 }
 
 export function normalizePath(folder: string, path: PlatformPath = defaultPath) {
