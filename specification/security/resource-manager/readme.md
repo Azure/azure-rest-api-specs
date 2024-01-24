@@ -85,7 +85,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-dotnet-sdk
+tag: package-composite-v3
 ```
 
 ### Composite packages
