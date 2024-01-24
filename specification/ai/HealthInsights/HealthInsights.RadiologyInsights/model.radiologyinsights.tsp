@@ -94,7 +94,7 @@ An inference made by the Radiology Insights model regarding a patient.
   - FollowupCommunication
 """)
 @discriminator("kind")
-model RadiologyInsightsInference is FHIR.R4.Extendible {}
+model RadiologyInsightsInference is Fhir.R4.Extendible {}
 
 @doc("A notification for age mismatch is displayed when the age mentioned in a document for a specific patient does not match the age specified in the patient information.")
 model AgeMismatchInference extends RadiologyInsightsInference {
@@ -108,7 +108,7 @@ model SexMismatchInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.SexMismatch;
 
   @doc("Sex indication : SNOMED CT code for gender finding.")
-  sexIndication: FHIR.R4.CodeableConcept;
+  sexIndication: Fhir.R4.CodeableConcept;
 }
 
 @doc("A laterality mismatch occurs when there is a discrepancy between the clinical documentation and the ordered procedure (orderLateralityMismatch), a contradiction within the clinical document (textLateralityContradiction), or when no laterality is mentioned (textLateralityMissing).")
@@ -117,7 +117,7 @@ model LateralityDiscrepancyInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.LateralityDiscrepancy;
 
   @doc("Laterality indication : SNOMED CT code for laterality qualifier value.")
-  lateralityIndication?: FHIR.R4.CodeableConcept;
+  lateralityIndication?: Fhir.R4.CodeableConcept;
 
   @doc("Mismatch type : orderLateralityMismatch, textLateralityContradiction, textLateralityMissing.")
   discrepancyType: LateralityDiscrepancyType;
@@ -129,13 +129,13 @@ model CompleteOrderDiscrepancyInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.CompleteOrderDiscrepancy;
 
   @doc("Order type : CPT ultrasound complete code for abdomen, retroperitoneal, pelvis or breast.")
-  orderType: FHIR.R4.CodeableConcept;
+  orderType: Fhir.R4.CodeableConcept;
 
   @doc("List of missing body parts required by a complete order : SNOMED CT codes.")
-  missingBodyParts?: Array<FHIR.R4.CodeableConcept>;
+  missingBodyParts?: Array<Fhir.R4.CodeableConcept>;
 
   @doc("List of missing body parts that require measurement by a complete order : SNOMED CT codes.")
-  missingBodyPartMeasurements?: Array<FHIR.R4.CodeableConcept>;
+  missingBodyPartMeasurements?: Array<Fhir.R4.CodeableConcept>;
 }
 
 @doc("A limited order discrepancy occurs when there is a limited order, but all body parts and measurements that are needed for a complete order are present in the document.")
@@ -144,13 +144,13 @@ model LimitedOrderDiscrepancyInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.LimitedOrderDiscrepancy;
 
   @doc("Order type : CPT ultrasound complete code for abdomen, retroperitoneal, pelvis or breast.")
-  orderType: FHIR.R4.CodeableConcept;
+  orderType: Fhir.R4.CodeableConcept;
 
   @doc("List of body parts found in the document : SNOMED CT codes.")
-  presentBodyParts?: Array<FHIR.R4.CodeableConcept>;
+  presentBodyParts?: Array<Fhir.R4.CodeableConcept>;
 
   @doc("List of body parts that are measured according to the document : SNOMED CT codes.")
-  presentBodyPartMeasurements?: Array<FHIR.R4.CodeableConcept>;
+  presentBodyPartMeasurements?: Array<Fhir.R4.CodeableConcept>;
 }
 
 @doc("Findings in a radiology report typically describe abnormalities, lesions, or other notable observations related to the anatomy or pathology of the imaged area.")
@@ -159,7 +159,7 @@ model FindingInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.Finding;
 
   @doc("Finding data : contains extensions, fields and components linked with the finding.")
-  finding: FHIR.R4.Observation;
+  finding: Fhir.R4.Observation;
 }
 
 @doc("Critical results refer to findings of utmost importance that may require timely attention due to their potential impact on patient care.")
@@ -177,7 +177,7 @@ model CriticalResult {
   description: string;
 
   @doc("Finding linked to the critical result.")
-  finding?: FHIR.R4.Observation;
+  finding?: Fhir.R4.Observation;
 }
 
 @doc("Radiology procedures are the specific imaging studies or examinations ordered for the patient, extracted from the document information and text.")
@@ -186,7 +186,7 @@ model RadiologyProcedureInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.RadiologyProcedure;
 
   @doc("LOINC codes for the procedure.")
-  procedureCodes?: Array<FHIR.R4.CodeableConcept>;
+  procedureCodes?: Array<Fhir.R4.CodeableConcept>;
 
   @minItems(1)
   @doc("Imaging procedures.")
@@ -202,10 +202,10 @@ model FollowupRecommendationInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.FollowupRecommendation;
 
   @doc("Date and time are displayed when the procedure is recommended to be done at a specific point in time.")
-  effectiveDateTime?: FHIR.R4.fhirDateTime;
+  effectiveDateTime?: Fhir.R4.fhirDateTime;
 
   @doc("The period is shown if a specific period is mentioned, with a start and end date-time.")
-  effectivePeriod?: FHIR.R4.Period;
+  effectivePeriod?: Fhir.R4.Period;
 
   @doc("Findings related to the recommendation.")
   @minItems(1)
@@ -237,7 +237,7 @@ model GenericProcedureRecommendation extends ProcedureRecommendation {
   kind: "genericProcedureRecommendation";
 
   @doc("Procedure modality : SNOMED CT code.")
-  code: FHIR.R4.CodeableConcept;
+  code: Fhir.R4.CodeableConcept;
 
   @doc("Procedure description : MANAGEMENT PROCEDURE (PROCEDURE) or CONSULTATION (PROCEDURE) based on SNOMED CT.")
   description?: string;
@@ -249,7 +249,7 @@ model ImagingProcedureRecommendation extends ProcedureRecommendation {
   kind: "imagingProcedureRecommendation";
 
   @doc("LOINC codes for the procedure.")
-  procedureCodes?: Array<FHIR.R4.CodeableConcept>;
+  procedureCodes?: Array<Fhir.R4.CodeableConcept>;
 
   @minItems(1)
   @doc("Imaging procedures.")
@@ -259,13 +259,13 @@ model ImagingProcedureRecommendation extends ProcedureRecommendation {
 @doc("Imaging procedure.")
 model ImagingProcedure {
   @doc("Modality : SNOMED CT code.")
-  modality: FHIR.R4.CodeableConcept;
+  modality: Fhir.R4.CodeableConcept;
 
   @doc("Anatomy : SNOMED CT code.")
-  anatomy: FHIR.R4.CodeableConcept;
+  anatomy: Fhir.R4.CodeableConcept;
 
   @doc("Laterality : SNOMED CT code.")
-  laterality?: FHIR.R4.CodeableConcept;
+  laterality?: Fhir.R4.CodeableConcept;
 
   @doc("Contrast : see RadiologyCodeWithTypes (below).")
   contrast?: RadiologyCodeWithTypes;
@@ -277,16 +277,16 @@ model ImagingProcedure {
 @doc("Radiology code with types : used in imaging procedure recommendation for contrast and view.")
 model RadiologyCodeWithTypes {
   @doc("The SNOMED CT code indicates whether imaging was conducted with or without contrast in the case of contrast, and in the case of views, it denotes the number of views.")
-  code: FHIR.R4.CodeableConcept;
+  code: Fhir.R4.CodeableConcept;
 
   @doc("The collection of types will indicate the contrast substance used in the case of contrast and, in the case of views, it will specify the types of views, such as lateral and frontal, etc.")
-  types: Array<FHIR.R4.CodeableConcept>;
+  types: Array<Fhir.R4.CodeableConcept>;
 }
 
 @doc("Finding reference for recommendation.")
-model RecommendationFinding is FHIR.R4.Extendible {
+model RecommendationFinding is Fhir.R4.Extendible {
   @doc("Finding linked to a recommendation.")
-  finding?: FHIR.R4.Observation;
+  finding?: Fhir.R4.Observation;
 
   @doc("Critical result linked to a recommendation.")
   criticalFinding?: CriticalResult;

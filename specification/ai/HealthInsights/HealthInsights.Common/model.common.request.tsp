@@ -48,7 +48,7 @@ model PatientInfo {
   birthDate?: plainDate;
 
   @doc("Known clinical information for the patient, structured.")
-  clinicalInfo?: Array<FHIR.R4.Resource>;
+  clinicalInfo?: Array<Fhir.R4.Resource>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"

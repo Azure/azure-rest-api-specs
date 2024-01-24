@@ -45,7 +45,7 @@ model PatientTimelinePatientResult {
 }
 
 @doc("An inference made by the Patient Timeline model regarding a patient.")
-model PatientTimelineInference is FHIR.R4.Extendible {
+model PatientTimelineInference is Fhir.R4.Extendible {
   @doc("The type of the Patient Timeline inference.")
   type: PatientTimelineInferenceType;
 
@@ -54,7 +54,7 @@ model PatientTimelineInference is FHIR.R4.Extendible {
   additional dependent resources maybe contained (e.g. MedicationStatement may contain Medication)
   -- In the SDK we will have custom mapping to map this type to JsonObject
   """)
-  resource?: FHIR.R4.DomainResource;
+  resource?: Fhir.R4.DomainResource;
 
   @doc("Time range relevant to this Timeline inference.")
   period?: TimePeriod;

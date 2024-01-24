@@ -2,7 +2,7 @@ import "./model.common.fhir.elements.tsp";
 
 using TypeSpec.Rest;
 
-namespace FHIR.R4;
+namespace Fhir.R4;
 @doc("""
 Resource is the ancestor of DomainResource from which most resources are derived. Bundle, Parameters, and Binary extend Resource directly.
 Based on [FHIR Resource](https://www.hl7.org/fhir/r4/resource.html

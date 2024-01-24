@@ -116,7 +116,7 @@ In case both are given, the resulting trial set is a union of the two sets.
 model ClinicalTrials {
   @doc("A list of clinical trials.")
   @minItems(1)
-  customTrials?: Array<FHIR.R4.ResearchStudy>;
+  customTrials?: Array<Fhir.R4.ResearchStudy>;
 
   @doc("""
   A list of filters, each one creating a selection of trials from a given

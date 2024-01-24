@@ -8,13 +8,13 @@ model ConditionStage {
   Simple summary (disease specific)
   see: https://www.hl7.org/fhir/valueset-condition-stage.html
 """)
-  summary: FHIR.R4.CodeableConcept;
+  summary: Fhir.R4.CodeableConcept;
 
   @doc("""
   Kind of staging
   see: https://www.hl7.org/fhir/valueset-condition-stage-kind.html
   """)
-  type?: FHIR.R4.CodeableConcept;
+  type?: Fhir.R4.CodeableConcept;
 }
 
 @doc("InterpretationType ")
@@ -183,9 +183,9 @@ model TimePeriod {
 }
 
 @doc("Procedure information")
-model OrderedProcedure is FHIR.R4.Extendible {
+model OrderedProcedure is Fhir.R4.Extendible {
   @doc("Procedure code")
-  code?: FHIR.R4.CodeableConcept;
+  code?: Fhir.R4.CodeableConcept;
 
   @doc("Procedure description")
   description?: string;

@@ -1396,7 +1396,7 @@
           "description": "A list of clinical trials.",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/FHIR.R4.ResearchStudy"
+            "$ref": "#/definitions/Fhir.R4.ResearchStudy"
           }
         },
         "registryFilters": {
@@ -1415,21 +1415,21 @@
       "description": "A complete order discrepancy is shown when one or more body parts and/or measurements that should be in the document (because there is a complete order) are not present.",
       "properties": {
         "orderType": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Order type : CPT ultrasound complete code for abdomen, retroperitoneal, pelvis or breast."
         },
         "missingBodyParts": {
           "type": "array",
           "description": "List of missing body parts required by a complete order : SNOMED CT codes.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "missingBodyPartMeasurements": {
           "type": "array",
           "description": "List of missing body parts that require measurement by a complete order : SNOMED CT codes.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         }
       },
@@ -1470,7 +1470,7 @@
           "description": "Description : medical problem."
         },
         "finding": {
-          "$ref": "#/definitions/FHIR.R4.Observation",
+          "$ref": "#/definitions/Fhir.R4.Observation",
           "description": "Finding linked to the critical result."
         }
       },
@@ -1707,7 +1707,7 @@
         "code"
       ]
     },
-    "FHIR.R4.Annotation": {
+    "Fhir.R4.Annotation": {
       "type": "object",
       "description": "A text note which also  contains information about who made the statement and when\nBased on [FHIR Annotation](https://www.hl7.org/fhir/R4/datatypes.html#Annotation)",
       "properties": {
@@ -1719,7 +1719,7 @@
           "type": "array",
           "description": "Additional Content defined by implementations",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         },
         "authorString": {
@@ -1727,7 +1727,7 @@
           "description": "Individual responsible for the annotation"
         },
         "time": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "When the annotation was made"
         },
         "text": {
@@ -1739,7 +1739,7 @@
         "text"
       ]
     },
-    "FHIR.R4.CodeableConcept": {
+    "Fhir.R4.CodeableConcept": {
       "type": "object",
       "description": "Concept - reference to a terminology or just text\nBased on [FHIR CodeableConcept](https://www.hl7.org/fhir/R4/datatypes.html#CodeableConcept)",
       "properties": {
@@ -1751,7 +1751,7 @@
           "type": "array",
           "description": "Code defined by a terminology system",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Coding"
+            "$ref": "#/definitions/Fhir.R4.Coding"
           }
         },
         "text": {
@@ -1760,7 +1760,7 @@
         }
       }
     },
-    "FHIR.R4.Coding": {
+    "Fhir.R4.Coding": {
       "type": "object",
       "description": "A Coding is a representation of a defined concept using a symbol from a defined \"code system\".\nBased on [FHIR Coding](https://www.hl7.org/fhir/R4/datatypes.html#Coding)",
       "properties": {
@@ -1772,11 +1772,11 @@
           "type": "array",
           "description": "Additional Content defined by implementations",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         },
         "system": {
-          "$ref": "#/definitions/FHIR.R4.fhirUri",
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
           "description": "Identity of the terminology system"
         },
         "version": {
@@ -1793,7 +1793,7 @@
         }
       }
     },
-    "FHIR.R4.Condition": {
+    "Fhir.R4.Condition": {
       "type": "object",
       "description": "Detailed information about conditions, problems or diagnoses\nBased on [FHIR Condition](https://www.hl7.org/fhir/R4/condition.html)",
       "properties": {
@@ -1801,57 +1801,57 @@
           "type": "array",
           "description": "External Ids for this condition",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Identifier"
+            "$ref": "#/definitions/Fhir.R4.Identifier"
           }
         },
         "clinicalStatus": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "active | recurrence | relapse | inactive | remission | resolved"
         },
         "verificationStatus": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "unconfirmed | provisional | differential | confirmed | refuted | entered-in-error"
         },
         "category": {
           "type": "array",
           "description": "problem-list-item | encounter-diagnosis",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "severity": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Subjective severity of condition"
         },
         "code": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Identification of the condition, problem or diagnosis"
         },
         "bodySite": {
           "type": "array",
           "description": "Anatomical location, if relevant",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "encounter": {
-          "$ref": "#/definitions/FHIR.R4.Reference",
+          "$ref": "#/definitions/Fhir.R4.Reference",
           "description": "Encounter created as part of"
         },
         "onsetDateTime": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "Estimated or actual date,  date-time, or age"
         },
         "onsetAge": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Estimated or actual date,  date-time, or age"
         },
         "onsetPeriod": {
-          "$ref": "#/definitions/FHIR.R4.Period",
+          "$ref": "#/definitions/Fhir.R4.Period",
           "description": "Estimated or actual date,  date-time, or age"
         },
         "onsetRange": {
-          "$ref": "#/definitions/FHIR.R4.Range",
+          "$ref": "#/definitions/Fhir.R4.Range",
           "description": "Estimated or actual date,  date-time, or age"
         },
         "onsetString": {
@@ -1859,19 +1859,19 @@
           "description": "Estimated or actual date,  date-time, or age"
         },
         "abatementDateTime": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "When in resolution/remission"
         },
         "abatementAge": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "When in resolution/remission"
         },
         "abatementPeriod": {
-          "$ref": "#/definitions/FHIR.R4.Period",
+          "$ref": "#/definitions/Fhir.R4.Period",
           "description": "When in resolution/remission"
         },
         "abatementRange": {
-          "$ref": "#/definitions/FHIR.R4.Range",
+          "$ref": "#/definitions/Fhir.R4.Range",
           "description": "When in resolution/remission"
         },
         "abatementString": {
@@ -1879,14 +1879,14 @@
           "description": "When in resolution/remission"
         },
         "recordedDate": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "Date record was first recorded"
         },
         "stage": {
           "type": "array",
           "description": "stge/grade, usually assessed formally",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.ConditionStage"
+            "$ref": "#/definitions/Fhir.R4.ConditionStage"
           },
           "x-ms-identifiers": []
         },
@@ -1894,32 +1894,32 @@
           "type": "array",
           "description": "Additional information about the Condition",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Annotation"
+            "$ref": "#/definitions/Fhir.R4.Annotation"
           }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/FHIR.R4.DomainResource"
+          "$ref": "#/definitions/Fhir.R4.DomainResource"
         }
       ],
       "x-ms-discriminator-value": "Condition"
     },
-    "FHIR.R4.ConditionStage": {
+    "Fhir.R4.ConditionStage": {
       "type": "object",
       "description": "Stage/grade, usually assessed formally\nBased on [FHIR Condition.Stage](https://www.hl7.org/fhir/R4/condition.html)",
       "properties": {
         "summary": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Simple summary (disease specific)"
         },
         "type": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Kind of staging"
         }
       }
     },
-    "FHIR.R4.ContactDetail": {
+    "Fhir.R4.ContactDetail": {
       "type": "object",
       "description": "Contact details (See: https://www.hl7.org/fhir/R4/metadatatypes.html#ContactDetail)",
       "properties": {
@@ -1931,7 +1931,7 @@
           "type": "array",
           "description": "Additional Content defined by implementations",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         },
         "name": {
@@ -1942,18 +1942,18 @@
           "type": "array",
           "description": "Contact details for individual or organization",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.ContactPoint"
+            "$ref": "#/definitions/Fhir.R4.ContactPoint"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "FHIR.R4.ContactPoint": {
+    "Fhir.R4.ContactPoint": {
       "type": "object",
       "description": "Details for all kinds of technology mediated contact points for a person or organization, including telephone, email, etc.\nSee https://www.hl7.org/fhir/R4/datatypes.html#ContactPoint",
       "properties": {
         "system": {
-          "$ref": "#/definitions/FHIR.R4.ContactPointSystem",
+          "$ref": "#/definitions/Fhir.R4.ContactPointSystem",
           "description": "phone | fax | email | pager | url | sms | other"
         },
         "value": {
@@ -1961,7 +1961,7 @@
           "description": "The actual contact point details"
         },
         "use": {
-          "$ref": "#/definitions/FHIR.R4.ContactPointUse",
+          "$ref": "#/definitions/Fhir.R4.ContactPointUse",
           "description": "home | work | temp | old | mobile - purpose of this contact point"
         },
         "rank": {
@@ -1970,12 +1970,12 @@
           "description": "Specify preferred order of use (1 = highest)"
         },
         "period": {
-          "$ref": "#/definitions/FHIR.R4.Period",
+          "$ref": "#/definitions/Fhir.R4.Period",
           "description": "Time period when the contact point was/is in use"
         }
       }
     },
-    "FHIR.R4.ContactPointSystem": {
+    "Fhir.R4.ContactPointSystem": {
       "type": "string",
       "description": "Contact Point System\nsee https://www.hl7.org/fhir/R4/valueset-contact-point-system.html",
       "enum": [
@@ -2029,7 +2029,7 @@
         ]
       }
     },
-    "FHIR.R4.ContactPointUse": {
+    "Fhir.R4.ContactPointUse": {
       "type": "string",
       "description": "Contact Point Use\nSee: \thttp://hl7.org/fhir/ValueSet/contact-point-use",
       "enum": [
@@ -2071,7 +2071,7 @@
         ]
       }
     },
-    "FHIR.R4.DomainResource": {
+    "Fhir.R4.DomainResource": {
       "type": "object",
       "description": "A resource with narrative, extensions, and contained resources\nBased on [FHIR DomainResource](https://www.hl7.org/fhir/domainresource.html)",
       "properties": {
@@ -2080,28 +2080,28 @@
           "description": "Discriminator property for DomainResource."
         },
         "text": {
-          "$ref": "#/definitions/FHIR.R4.Narrative",
+          "$ref": "#/definitions/Fhir.R4.Narrative",
           "description": "Text summary of the resource, for human interpretation"
         },
         "contained": {
           "type": "array",
           "description": "Contained, inline Resources",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Resource"
+            "$ref": "#/definitions/Fhir.R4.Resource"
           }
         },
         "extension": {
           "type": "array",
           "description": "Additional Content defined by implementations",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         },
         "modifierExtension": {
           "type": "array",
           "description": "Extensions that cannot be ignored",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         }
       },
@@ -2111,11 +2111,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FHIR.R4.Resource"
+          "$ref": "#/definitions/Fhir.R4.Resource"
         }
       ]
     },
-    "FHIR.R4.Extension": {
+    "Fhir.R4.Extension": {
       "type": "object",
       "description": "Base for all elements\nBased on [FHIR Element](https://www.hl7.org/fhir/datatypes.html#Element)",
       "properties": {
@@ -2124,15 +2124,15 @@
           "description": "Unique id for inter-element referencing"
         },
         "url": {
-          "$ref": "#/definitions/FHIR.R4.fhirUri",
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
           "description": "Source of the definition for the extension code - a logical name or a URL."
         },
         "valueQuantity": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Value as Quantity"
         },
         "valueCodeableConcept": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Value as CodeableConcept"
         },
         "valueString": {
@@ -2149,15 +2149,15 @@
           "description": "Value as integer"
         },
         "valueRange": {
-          "$ref": "#/definitions/FHIR.R4.Range",
+          "$ref": "#/definitions/Fhir.R4.Range",
           "description": "Value as Range."
         },
         "valueRatio": {
-          "$ref": "#/definitions/FHIR.R4.Ratio",
+          "$ref": "#/definitions/Fhir.R4.Ratio",
           "description": "Value as Ratio."
         },
         "valueSampledData": {
-          "$ref": "#/definitions/FHIR.R4.SampledData",
+          "$ref": "#/definitions/Fhir.R4.SampledData",
           "description": "Value as SampledData."
         },
         "valueTime": {
@@ -2166,15 +2166,15 @@
           "description": "Value as time (hh:mm:ss)"
         },
         "valueDateTime": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "Value as dateTime."
         },
         "valuePeriod": {
-          "$ref": "#/definitions/FHIR.R4.Period",
+          "$ref": "#/definitions/Fhir.R4.Period",
           "description": "Value as Period."
         },
         "valueReference": {
-          "$ref": "#/definitions/FHIR.R4.Reference",
+          "$ref": "#/definitions/Fhir.R4.Reference",
           "description": "Value as reference."
         }
       },
@@ -2182,7 +2182,7 @@
         "url"
       ]
     },
-    "FHIR.R4.Identifier": {
+    "Fhir.R4.Identifier": {
       "type": "object",
       "description": "An identifier intended for computation\nBased on [FHIR Identifier](https://www.hl7.org/fhir/R4/identifier.html)",
       "properties": {
@@ -2195,11 +2195,11 @@
           "description": "usual | official | temp | secondary | old (If known)"
         },
         "type": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Description of identifier"
         },
         "system": {
-          "$ref": "#/definitions/FHIR.R4.fhirUri",
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
           "description": "The namespace for the identifier value"
         },
         "value": {
@@ -2207,16 +2207,16 @@
           "description": "The value that is unique"
         },
         "period": {
-          "$ref": "#/definitions/FHIR.R4.Period",
+          "$ref": "#/definitions/Fhir.R4.Period",
           "description": "Time period when id is/was valid for use"
         },
         "assigner": {
-          "$ref": "#/definitions/FHIR.R4.Reference",
+          "$ref": "#/definitions/Fhir.R4.Reference",
           "description": "Organization that issued id (may be just text)"
         }
       }
     },
-    "FHIR.R4.Meta": {
+    "Fhir.R4.Meta": {
       "type": "object",
       "description": "Metadata about a resource\nBased on [FHIR Meta](https://www.hl7.org/fhir/R4/resource.html#Meta)",
       "properties": {
@@ -2225,37 +2225,37 @@
           "description": "The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted."
         },
         "lastUpdated": {
-          "$ref": "#/definitions/FHIR.R4.fhirInstant",
+          "$ref": "#/definitions/Fhir.R4.fhirInstant",
           "description": "When the resource last changed - e.g. when the version changed."
         },
         "source": {
-          "$ref": "#/definitions/FHIR.R4.fhirUri",
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
           "description": "A uri that identifies the source system of the resource. This provides a minimal amount of Provenance information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc."
         },
         "profile": {
           "type": "array",
           "description": "A list of profiles (references to [StructureDefinition](https://www.hl7.org/fhir/structuredefinition.html) resources) that this resource claims to conform to. The URL is a reference to [StructureDefinition.url](https://www.hl7.org/fhir/structuredefinition-definitions.html#StructureDefinition.url).",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.fhirUri"
+            "$ref": "#/definitions/Fhir.R4.fhirUri"
           }
         },
         "security": {
           "type": "array",
           "description": "Security labels applied to this resource. These tags connect specific resources to the overall security policy and infrastructure.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Coding"
+            "$ref": "#/definitions/Fhir.R4.Coding"
           }
         },
         "tag": {
           "type": "array",
           "description": "Tags applied to this resource. Tags are intended to be used to identify and relate resources to process and workflow, and applications are not required to consider the tags when interpreting the meaning of a resource.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Coding"
+            "$ref": "#/definitions/Fhir.R4.Coding"
           }
         }
       }
     },
-    "FHIR.R4.Narrative": {
+    "Fhir.R4.Narrative": {
       "type": "object",
       "description": "Any resource that is a [DomainResource](https://www.hl7.org/fhir/domainresource.html) may include a human-readable narrative that contains a summary of the resource and may be used to represent the content of the resource to a human.\nBased on [FHIR Narrative](https://www.hl7.org/fhir/R4/narrative.html#Narrative)",
       "properties": {
@@ -2267,7 +2267,7 @@
           "type": "array",
           "description": "Additional Content defined by implementations",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         },
         "status": {
@@ -2284,7 +2284,7 @@
         "div"
       ]
     },
-    "FHIR.R4.Observation": {
+    "Fhir.R4.Observation": {
       "type": "object",
       "description": "Detailed information about observations\nBased on [FHIR Observation](https://www.hl7.org/fhir/R4/observation.html)",
       "properties": {
@@ -2292,54 +2292,54 @@
           "type": "array",
           "description": "Business Identifier for observation",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Identifier"
+            "$ref": "#/definitions/Fhir.R4.Identifier"
           }
         },
         "status": {
-          "$ref": "#/definitions/FHIR.R4.ObservationStatusCodeType",
+          "$ref": "#/definitions/Fhir.R4.ObservationStatusCodeType",
           "description": "registered | preliminary | final | amended +"
         },
         "category": {
           "type": "array",
           "description": "Classification of  type of observation",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "code": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Type of observation (code / type)"
         },
         "subject": {
-          "$ref": "#/definitions/FHIR.R4.Reference",
+          "$ref": "#/definitions/Fhir.R4.Reference",
           "description": "Who and/or what the observation is about"
         },
         "encounter": {
-          "$ref": "#/definitions/FHIR.R4.Reference",
+          "$ref": "#/definitions/Fhir.R4.Reference",
           "description": "Healthcare event during which this observation is made"
         },
         "effectiveDateTime": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "Clinically relevant time/time-period for observation"
         },
         "effectivePeriod": {
-          "$ref": "#/definitions/FHIR.R4.Period",
+          "$ref": "#/definitions/Fhir.R4.Period",
           "description": "Clinically relevant time/time-period for observation"
         },
         "effectiveInstant": {
-          "$ref": "#/definitions/FHIR.R4.fhirInstant",
+          "$ref": "#/definitions/Fhir.R4.fhirInstant",
           "description": "Clinically relevant time/time-period for observation"
         },
         "issued": {
-          "$ref": "#/definitions/FHIR.R4.fhirInstant",
+          "$ref": "#/definitions/Fhir.R4.fhirInstant",
           "description": "Date/Time this version was made available"
         },
         "valueQuantity": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Actual result"
         },
         "valueCodeableConcept": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Actual result"
         },
         "valueString": {
@@ -2356,15 +2356,15 @@
           "description": "Actual result"
         },
         "valueRange": {
-          "$ref": "#/definitions/FHIR.R4.Range",
+          "$ref": "#/definitions/Fhir.R4.Range",
           "description": "Actual result"
         },
         "valueRatio": {
-          "$ref": "#/definitions/FHIR.R4.Ratio",
+          "$ref": "#/definitions/Fhir.R4.Ratio",
           "description": "Actual result"
         },
         "valueSampledData": {
-          "$ref": "#/definitions/FHIR.R4.SampledData",
+          "$ref": "#/definitions/Fhir.R4.SampledData",
           "description": "Actual result"
         },
         "valueTime": {
@@ -2373,44 +2373,44 @@
           "description": "Actual result"
         },
         "valueDateTime": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "Actual result"
         },
         "valuePeriod": {
-          "$ref": "#/definitions/FHIR.R4.Period",
+          "$ref": "#/definitions/Fhir.R4.Period",
           "description": "Actual result"
         },
         "dataAbsentReason": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Why the result is missing"
         },
         "interpretation": {
           "type": "array",
           "description": "High, low, normal, etc.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "note": {
           "type": "array",
           "description": "Comments about the observation",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Annotation"
+            "$ref": "#/definitions/Fhir.R4.Annotation"
           }
         },
         "bodySite": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Observed body part"
         },
         "method": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "How it was done"
         },
         "referenceRange": {
           "type": "array",
           "description": "Provides guide for interpretation",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.ObservationReferenceRange"
+            "$ref": "#/definitions/Fhir.R4.ObservationReferenceRange"
           },
           "x-ms-identifiers": []
         },
@@ -2418,21 +2418,21 @@
           "type": "array",
           "description": "Related resource that belongs to the Observation group",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Reference"
+            "$ref": "#/definitions/Fhir.R4.Reference"
           }
         },
         "derivedFrom": {
           "type": "array",
           "description": "Related measurements the observation is made from",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Reference"
+            "$ref": "#/definitions/Fhir.R4.Reference"
           }
         },
         "component": {
           "type": "array",
           "description": "Component results",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.ObservationComponent"
+            "$ref": "#/definitions/Fhir.R4.ObservationComponent"
           }
         }
       },
@@ -2442,12 +2442,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FHIR.R4.DomainResource"
+          "$ref": "#/definitions/Fhir.R4.DomainResource"
         }
       ],
       "x-ms-discriminator-value": "Observation"
     },
-    "FHIR.R4.ObservationComponent": {
+    "Fhir.R4.ObservationComponent": {
       "type": "object",
       "description": "Component results\nBased on [FHIR Observation.component](https://www.hl7.org/fhir/R4/observation.html)",
       "properties": {
@@ -2459,19 +2459,19 @@
           "type": "array",
           "description": "Additional Content defined by implementations",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         },
         "code": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Type of component observation (code / type)"
         },
         "valueQuantity": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Value as Quantity"
         },
         "valueCodeableConcept": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Value as CodeableConcept"
         },
         "valueString": {
@@ -2488,15 +2488,15 @@
           "description": "Value as integer"
         },
         "valueRange": {
-          "$ref": "#/definitions/FHIR.R4.Range",
+          "$ref": "#/definitions/Fhir.R4.Range",
           "description": "Value as Range."
         },
         "valueRatio": {
-          "$ref": "#/definitions/FHIR.R4.Ratio",
+          "$ref": "#/definitions/Fhir.R4.Ratio",
           "description": "Value as Ratio."
         },
         "valueSampledData": {
-          "$ref": "#/definitions/FHIR.R4.SampledData",
+          "$ref": "#/definitions/Fhir.R4.SampledData",
           "description": "Value as SampledData."
         },
         "valueTime": {
@@ -2505,33 +2505,33 @@
           "description": "Value as time (hh:mm:ss)"
         },
         "valueDateTime": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "Value as dateTime."
         },
         "valuePeriod": {
-          "$ref": "#/definitions/FHIR.R4.Period",
+          "$ref": "#/definitions/Fhir.R4.Period",
           "description": "Value as Period."
         },
         "valueReference": {
-          "$ref": "#/definitions/FHIR.R4.Reference",
+          "$ref": "#/definitions/Fhir.R4.Reference",
           "description": "Value as reference."
         },
         "dataAbsentReason": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Why the component result is missing"
         },
         "interpretation": {
           "type": "array",
           "description": "High, low, normal, etc.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "referenceRange": {
           "type": "array",
           "description": "Provides guide for interpretation of component result",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.ObservationReferenceRange"
+            "$ref": "#/definitions/Fhir.R4.ObservationReferenceRange"
           },
           "x-ms-identifiers": []
         }
@@ -2540,31 +2540,31 @@
         "code"
       ]
     },
-    "FHIR.R4.ObservationReferenceRange": {
+    "Fhir.R4.ObservationReferenceRange": {
       "type": "object",
       "description": "Provides guide for interpretation of component result\nBased on [FHIR Observation.referenceRange](https://www.hl7.org/fhir/R4/observation.html)",
       "properties": {
         "low": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Low Range, if relevant"
         },
         "high": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "High Range, if relevant"
         },
         "type": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Reference range qualifier"
         },
         "appliesTo": {
           "type": "array",
           "description": "Reference range population",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "age": {
-          "$ref": "#/definitions/FHIR.R4.Range",
+          "$ref": "#/definitions/Fhir.R4.Range",
           "description": "Applicable age range, if relevant"
         },
         "text": {
@@ -2573,7 +2573,7 @@
         }
       }
     },
-    "FHIR.R4.ObservationStatusCodeType": {
+    "Fhir.R4.ObservationStatusCodeType": {
       "type": "string",
       "description": "Observation Status\nBased on [FHIR ObservationStatus](https://www.hl7.org/fhir/R4/valueset-observation-status.html)",
       "enum": [
@@ -2633,7 +2633,7 @@
         ]
       }
     },
-    "FHIR.R4.Period": {
+    "Fhir.R4.Period": {
       "type": "object",
       "description": "A time period defined by a start and end date and optionally time\nBased on [FHIR Period](https://www.hl7.org/fhir/R4/datatypes.html#Period)",
       "properties": {
@@ -2642,16 +2642,16 @@
           "description": "Unique id for inter-element referencing"
         },
         "start": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "Starting time with inclusive boundary"
         },
         "end": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "End time with inclusive boundary, if not ongoing"
         }
       }
     },
-    "FHIR.R4.Quantity": {
+    "Fhir.R4.Quantity": {
       "type": "object",
       "description": "A measured or measurable amount\nBased on [FHIR Quantity](https://www.hl7.org/fhir/R4/datatypes.html#Quantity)",
       "properties": {
@@ -2673,7 +2673,7 @@
           "description": "Unit representation"
         },
         "system": {
-          "$ref": "#/definitions/FHIR.R4.fhirUri",
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
           "description": "System that defines coded unit form"
         },
         "code": {
@@ -2682,7 +2682,7 @@
         }
       }
     },
-    "FHIR.R4.Range": {
+    "Fhir.R4.Range": {
       "type": "object",
       "description": "A set of ordered Quantities defined by a low and high limit\nBased on [FHIR Range](https://www.hl7.org/fhir/R4/datatypes.html#Range)",
       "properties": {
@@ -2691,16 +2691,16 @@
           "description": "Unique id for inter-element referencing"
         },
         "low": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Low limit"
         },
         "high": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "High limit"
         }
       }
     },
-    "FHIR.R4.Ratio": {
+    "Fhir.R4.Ratio": {
       "type": "object",
       "description": "A ratio of two Quantity values - a numerator and a denominator\nBased on [FHIR Ratio](https://www.hl7.org/fhir/R4/datatypes.html#Ratio)",
       "properties": {
@@ -2709,16 +2709,16 @@
           "description": "Unique id for inter-element referencing"
         },
         "numerator": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Numerator value"
         },
         "denominator": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Denominator value"
         }
       }
     },
-    "FHIR.R4.Reference": {
+    "Fhir.R4.Reference": {
       "type": "object",
       "description": "A reference from one resource to another\nBased on [FHIR Reference](https://www.hl7.org/fhir/R4/references.html)",
       "properties": {
@@ -2731,11 +2731,11 @@
           "description": "Literal reference, Relative, internal or absolute URL"
         },
         "type": {
-          "$ref": "#/definitions/FHIR.R4.fhirUri",
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
           "description": "Type the reference refers to (e.g. \"Patient\")"
         },
         "identifier": {
-          "$ref": "#/definitions/FHIR.R4.Identifier",
+          "$ref": "#/definitions/Fhir.R4.Identifier",
           "description": "Logical reference, when literal reference is not known"
         },
         "display": {
@@ -2744,7 +2744,7 @@
         }
       }
     },
-    "FHIR.R4.ResearchStudy": {
+    "Fhir.R4.ResearchStudy": {
       "type": "object",
       "description": "Detailed information about Research Study \nBased on [FHIR ResearchStudy](https://www.hl7.org/fhir/R4/researchstudy.html)",
       "properties": {
@@ -2752,7 +2752,7 @@
           "type": "array",
           "description": "Business Identifier for study",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Identifier"
+            "$ref": "#/definitions/Fhir.R4.Identifier"
           }
         },
         "title": {
@@ -2763,68 +2763,68 @@
           "type": "array",
           "description": "Steps followed in executing study",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Reference"
+            "$ref": "#/definitions/Fhir.R4.Reference"
           }
         },
         "partOf": {
           "type": "array",
           "description": "Part of larger study",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Reference"
+            "$ref": "#/definitions/Fhir.R4.Reference"
           }
         },
         "status": {
-          "$ref": "#/definitions/FHIR.R4.ResearchStudyStatusCodeType",
+          "$ref": "#/definitions/Fhir.R4.ResearchStudyStatusCodeType",
           "description": "active | administratively-completed | approved | closed-to-accrual | closed-to-accrual-and-intervention | completed | disapproved | in-review | temporarily-closed-to-accrual | temporarily-closed-to-accrual-and-intervention | withdrawn"
         },
         "primaryPurposeType": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "treatment | prevention | diagnostic | supportive-care | screening | health-services-research | basic-science | device-feasibility"
         },
         "phase": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "n-a | early-phase-1 | phase-1 | phase-1-phase-2 | phase-2 | phase-2-phase-3 | phase-3 | phase-4"
         },
         "category": {
           "type": "array",
           "description": "Classifications for the study",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "focus": {
           "type": "array",
           "description": "Drugs, devices, etc. under study",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "condition": {
           "type": "array",
           "description": "Condition being studied",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "contact": {
           "type": "array",
           "description": "Contact details for the study",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.ContactDetail"
+            "$ref": "#/definitions/Fhir.R4.ContactDetail"
           }
         },
         "keyword": {
           "type": "array",
           "description": "Used to search for the study",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "location": {
           "type": "array",
           "description": "Geographic region(s) for study",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "description": {
@@ -2835,37 +2835,37 @@
           "type": "array",
           "description": "Inclusion & exclusion criteria",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Reference"
+            "$ref": "#/definitions/Fhir.R4.Reference"
           }
         },
         "period": {
-          "$ref": "#/definitions/FHIR.R4.Period",
+          "$ref": "#/definitions/Fhir.R4.Period",
           "description": "When the study began and ended"
         },
         "sponsor": {
-          "$ref": "#/definitions/FHIR.R4.Reference",
+          "$ref": "#/definitions/Fhir.R4.Reference",
           "description": "Organization that initiates and is legally responsible for the study"
         },
         "principalInvestigator": {
-          "$ref": "#/definitions/FHIR.R4.Reference",
+          "$ref": "#/definitions/Fhir.R4.Reference",
           "description": "Researcher who oversees multiple aspects of the study"
         },
         "site": {
           "type": "array",
           "description": "Facility where study activities are conducted",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Reference"
+            "$ref": "#/definitions/Fhir.R4.Reference"
           }
         },
         "reasonStopped": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "accrual-goal-met | closed-due-to-toxicity | closed-due-to-lack-of-study-progress | temporarily-closed-per-study-design"
         },
         "note": {
           "type": "array",
           "description": "Comments made about the study",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Annotation"
+            "$ref": "#/definitions/Fhir.R4.Annotation"
           }
         },
         "arm": {
@@ -2879,7 +2879,7 @@
                 "description": "Label for study arm"
               },
               "type": {
-                "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+                "$ref": "#/definitions/Fhir.R4.CodeableConcept",
                 "description": "Categorization of study arm"
               },
               "description": {
@@ -2904,7 +2904,7 @@
                 "description": "Label for the objective"
               },
               "type": {
-                "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+                "$ref": "#/definitions/Fhir.R4.CodeableConcept",
                 "description": "primary | secondary | exploratory"
               }
             },
@@ -2920,12 +2920,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FHIR.R4.DomainResource"
+          "$ref": "#/definitions/Fhir.R4.DomainResource"
         }
       ],
       "x-ms-discriminator-value": "ResearchStudy"
     },
-    "FHIR.R4.ResearchStudyStatusCodeType": {
+    "Fhir.R4.ResearchStudyStatusCodeType": {
       "type": "string",
       "description": "https://www.hl7.org/fhir/R4/codesystem-research-study-status.html",
       "enum": [
@@ -3003,7 +3003,7 @@
         ]
       }
     },
-    "FHIR.R4.Resource": {
+    "Fhir.R4.Resource": {
       "type": "object",
       "description": "Resource is the ancestor of DomainResource from which most resources are derived. Bundle, Parameters, and Binary extend Resource directly.\nBased on [FHIR Resource](https://www.hl7.org/fhir/r4/resource.html",
       "properties": {
@@ -3016,11 +3016,11 @@
           "description": "Resource Id"
         },
         "meta": {
-          "$ref": "#/definitions/FHIR.R4.Meta",
+          "$ref": "#/definitions/Fhir.R4.Meta",
           "description": "Metadata about the resource"
         },
         "implicitRules": {
-          "$ref": "#/definitions/FHIR.R4.fhirUri",
+          "$ref": "#/definitions/Fhir.R4.fhirUri",
           "description": "A set of rules under which this content was created"
         },
         "language": {
@@ -3033,7 +3033,7 @@
       ],
       "additionalProperties": {}
     },
-    "FHIR.R4.SampledData": {
+    "Fhir.R4.SampledData": {
       "type": "object",
       "description": "A series of measurements taken by a device\nBased on [FHIR SampledData](https://www.hl7.org/fhir/R4/datatypes.html#SampledData)",
       "properties": {
@@ -3042,7 +3042,7 @@
           "description": "Unique id for inter-element referencing"
         },
         "origin": {
-          "$ref": "#/definitions/FHIR.R4.Quantity",
+          "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "Zero value and units"
         },
         "period": {
@@ -3082,15 +3082,15 @@
         "dimensions"
       ]
     },
-    "FHIR.R4.fhirDateTime": {
+    "Fhir.R4.fhirDateTime": {
       "type": "string",
       "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]{1,9})?)?)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)?)?)?"
     },
-    "FHIR.R4.fhirInstant": {
+    "Fhir.R4.fhirInstant": {
       "type": "string",
       "pattern": "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]{1,9})?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))"
     },
-    "FHIR.R4.fhirUri": {
+    "Fhir.R4.fhirUri": {
       "type": "string"
     },
     "FindingInference": {
@@ -3098,7 +3098,7 @@
       "description": "Findings in a radiology report typically describe abnormalities, lesions, or other notable observations related to the anatomy or pathology of the imaged area.",
       "properties": {
         "finding": {
-          "$ref": "#/definitions/FHIR.R4.Observation",
+          "$ref": "#/definitions/Fhir.R4.Observation",
           "description": "Finding data : contains extensions, fields and components linked with the finding."
         }
       },
@@ -3161,11 +3161,11 @@
       "description": "Follow-up recommendations offer guidance to healthcare providers on managing and monitoring patients based on the findings of imaging studies.",
       "properties": {
         "effectiveDateTime": {
-          "$ref": "#/definitions/FHIR.R4.fhirDateTime",
+          "$ref": "#/definitions/Fhir.R4.fhirDateTime",
           "description": "Date and time are displayed when the procedure is recommended to be done at a specific point in time."
         },
         "effectivePeriod": {
-          "$ref": "#/definitions/FHIR.R4.Period",
+          "$ref": "#/definitions/Fhir.R4.Period",
           "description": "The period is shown if a specific period is mentioned, with a start and end date-time."
         },
         "findings": {
@@ -3235,7 +3235,7 @@
       "description": "Generic procedure information.",
       "properties": {
         "code": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Procedure modality : SNOMED CT code."
         },
         "description": {
@@ -3353,15 +3353,15 @@
       "description": "Imaging procedure.",
       "properties": {
         "modality": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Modality : SNOMED CT code."
         },
         "anatomy": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Anatomy : SNOMED CT code."
         },
         "laterality": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Laterality : SNOMED CT code."
         },
         "contrast": {
@@ -3386,7 +3386,7 @@
           "type": "array",
           "description": "LOINC codes for the procedure.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "imagingProcedures": {
@@ -3472,7 +3472,7 @@
       "description": "A laterality mismatch occurs when there is a discrepancy between the clinical documentation and the ordered procedure (orderLateralityMismatch), a contradiction within the clinical document (textLateralityContradiction), or when no laterality is mentioned (textLateralityMissing).",
       "properties": {
         "lateralityIndication": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Laterality indication : SNOMED CT code for laterality qualifier value."
         },
         "discrepancyType": {
@@ -3525,21 +3525,21 @@
       "description": "A limited order discrepancy occurs when there is a limited order, but all body parts and measurements that are needed for a complete order are present in the document.",
       "properties": {
         "orderType": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Order type : CPT ultrasound complete code for abdomen, retroperitoneal, pelvis or breast."
         },
         "presentBodyParts": {
           "type": "array",
           "description": "List of body parts found in the document : SNOMED CT codes.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "presentBodyPartMeasurements": {
           "type": "array",
           "description": "List of body parts that are measured according to the document : SNOMED CT codes.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         }
       },
@@ -3851,11 +3851,11 @@
           "type": "array",
           "description": "Additional Content defined by implementations",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         },
         "code": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Procedure code"
         },
         "description": {
@@ -3933,7 +3933,7 @@
           "type": "array",
           "description": "Known clinical information for the patient, structured.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Resource"
+            "$ref": "#/definitions/Fhir.R4.Resource"
           }
         }
       }
@@ -4025,7 +4025,7 @@
           "type": "array",
           "description": "Additional Content defined by implementations",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         },
         "type": {
@@ -4033,7 +4033,7 @@
           "description": "The type of the Patient Timeline inference."
         },
         "resource": {
-          "$ref": "#/definitions/FHIR.R4.DomainResource",
+          "$ref": "#/definitions/Fhir.R4.DomainResource",
           "description": "FHIR 4.0 representation of the piece of clinical info.\nadditional dependent resources maybe contained (e.g. MedicationStatement may contain Medication)\n-- In the SDK we will have custom mapping to map this type to JsonObject"
         },
         "period": {
@@ -4194,14 +4194,14 @@
       "description": "Radiology code with types : used in imaging procedure recommendation for contrast and view.",
       "properties": {
         "code": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "The SNOMED CT code indicates whether imaging was conducted with or without contrast in the case of contrast, and in the case of views, it denotes the number of views."
         },
         "types": {
           "type": "array",
           "description": "The collection of types will indicate the contrast substance used in the case of contrast and, in the case of views, it will specify the types of views, such as lateral and frontal, etc.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         }
       },
@@ -4242,7 +4242,7 @@
           "type": "array",
           "description": "Additional Content defined by implementations",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         }
       },
@@ -4466,7 +4466,7 @@
           "type": "array",
           "description": "LOINC codes for the procedure.",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.CodeableConcept"
+            "$ref": "#/definitions/Fhir.R4.CodeableConcept"
           }
         },
         "imagingProcedures": {
@@ -4502,11 +4502,11 @@
           "type": "array",
           "description": "Additional Content defined by implementations",
           "items": {
-            "$ref": "#/definitions/FHIR.R4.Extension"
+            "$ref": "#/definitions/Fhir.R4.Extension"
           }
         },
         "finding": {
-          "$ref": "#/definitions/FHIR.R4.Observation",
+          "$ref": "#/definitions/Fhir.R4.Observation",
           "description": "Finding linked to a recommendation."
         },
         "criticalFinding": {
@@ -4563,7 +4563,7 @@
       "description": "A notification for a sex mismatch is displayed when the gender, personal pronouns, gender-related body parts, or gender-related procedures mentioned in a patient's clinical document are either inconsistent or do not match the gender specified in the patient information.",
       "properties": {
         "sexIndication": {
-          "$ref": "#/definitions/FHIR.R4.CodeableConcept",
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "Sex indication : SNOMED CT code for gender finding."
         }
       },

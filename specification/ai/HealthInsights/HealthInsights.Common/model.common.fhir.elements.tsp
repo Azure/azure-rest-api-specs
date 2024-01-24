@@ -1,7 +1,7 @@
 
 using TypeSpec.Rest;
 
-namespace FHIR.R4;
+namespace Fhir.R4;
 
 alias markdown = string;
 
