@@ -90,6 +90,7 @@ These settings apply only when `--tag=package-2024-01-15` is specified on the co
 input-file:
   - Microsoft.ManagedNetworkFabric/stable/2024-01-15/InternetGatewayRules.json
   - Microsoft.ManagedNetworkFabric/stable/2024-01-15/common.json
+  - Microsoft.ManagedNetworkFabric/stable/2024-01-15/Operations.json
 ```
 
 ---
