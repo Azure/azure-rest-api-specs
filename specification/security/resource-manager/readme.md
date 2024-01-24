@@ -414,15 +414,6 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
-- Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
-- Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
-- Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
-- Microsoft.Security/stable/2017-08-01/complianceResults.json
-- Microsoft.Security/stable/2024-01-01/pricings.json
-- Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
-- Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
-- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
-- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -472,9 +463,9 @@ input-file:
 - Microsoft.Security/stable/2021-06-01/assessments.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
-- Microsoft.Security/stable/2023-01-01/pricings.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
+- Microsoft.Security/stable/2024-01-01/pricings.json
 
 # Autorest suppressions
 suppressions:
