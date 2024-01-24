@@ -14,7 +14,11 @@ namespace Microsoft.CertificateRegistration;
 /**
  * App Service Environment ARM resource.
  */
-model AppServiceEnvironmentResource is TrackedResource<AppServiceEnvironment> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AppServiceEnvironment)
+@includeInapplicableMetadataInPayload(false)
+model AppServiceEnvironmentResource extends Resource {
   /**
    * Name of the App Service Environment.
    */
@@ -22,6 +26,12 @@ model AppServiceEnvironmentResource is TrackedResource<AppServiceEnvironment> {
   @key("name")
   @segment("hostingEnvironments")
   name: string;
+
+  /**
+   * Core resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AppServiceEnvironment;
 }
 
 @armResourceOperations

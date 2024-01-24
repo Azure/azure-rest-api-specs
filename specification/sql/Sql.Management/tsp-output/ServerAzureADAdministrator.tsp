@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * Azure Active Directory administrator.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model ServerAzureADAdministrator is ProxyResource<AdministratorProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AdministratorProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServerAzureADAdministrator extends ProxyResource {
   /**
    * The name of server active directory administrator.
    */
@@ -24,6 +28,12 @@ model ServerAzureADAdministrator is ProxyResource<AdministratorProperties> {
   @key("administratorName")
   @segment("administrators")
   name: AdministratorName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AdministratorProperties;
 }
 
 @armResourceOperations

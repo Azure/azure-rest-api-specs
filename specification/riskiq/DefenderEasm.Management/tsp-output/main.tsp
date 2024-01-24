@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
  * REST APIs for Easm
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Microsoft.Easm",
 })

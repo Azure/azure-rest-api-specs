@@ -15,9 +15,14 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a ScalingPlanPersonalSchedule definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ScalingPlan)
-model ScalingPlanPersonalSchedule
-  is ProxyResource<ScalingPlanPersonalScheduleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ScalingPlanPersonalScheduleProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ScalingPlanPersonalSchedule extends ProxyResourceBase {
   /**
    * The name of the ScalingPlanSchedule
    */
@@ -27,6 +32,12 @@ model ScalingPlanPersonalSchedule
   @key("scalingPlanScheduleName")
   @segment("personalSchedules")
   name: string;
+
+  /**
+   * Detailed properties for ScalingPlanPersonalSchedule
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ScalingPlanPersonalScheduleProperties;
 }
 
 @armResourceOperations

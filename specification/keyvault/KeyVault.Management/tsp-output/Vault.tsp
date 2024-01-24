@@ -14,7 +14,11 @@ namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
-model Vault is TrackedResource<VaultProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(VaultProperties)
+@includeInapplicableMetadataInPayload(false)
+model Vault extends TrackedResourceBase {
   /**
    * The name of the vault.
    */
@@ -22,6 +26,12 @@ model Vault is TrackedResource<VaultProperties> {
   @key("vaultName")
   @segment("vaults")
   name: string;
+
+  /**
+   * Properties of the vault
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: VaultProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A job step.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(JobVersion)
-model JobStep is ProxyResource<JobStepProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobStepProperties)
+@includeInapplicableMetadataInPayload(false)
+model JobStep extends ProxyResource {
   /**
    * The name of the job step.
    */
@@ -24,6 +28,12 @@ model JobStep is ProxyResource<JobStepProperties> {
   @key("stepName")
   @segment("steps")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobStepProperties;
 }
 
 @armResourceOperations

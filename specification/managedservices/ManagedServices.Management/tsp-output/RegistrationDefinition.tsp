@@ -14,8 +14,13 @@ namespace Microsoft.ManagedServices;
 /**
  * The registration definition.
  */
-model RegistrationDefinition
-  is ExtensionResource<RegistrationDefinitionProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  RegistrationDefinitionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model RegistrationDefinition extends ExtensionResourceBase {
   /**
    * The GUID of the registration definition.
    */
@@ -23,6 +28,12 @@ model RegistrationDefinition
   @key("registrationDefinitionId")
   @segment("registrationDefinitions")
   name: string;
+
+  /**
+   * The properties of a registration definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RegistrationDefinitionProperties;
 
   ...Azure.ResourceManager.ResourcePlan;
 }

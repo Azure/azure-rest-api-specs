@@ -14,7 +14,11 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a Workspace definition.
  */
-model Workspace is TrackedResource<WorkspaceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WorkspaceProperties)
+@includeInapplicableMetadataInPayload(false)
+model Workspace extends TrackedResourceBase {
   /**
    * The name of the workspace
    */
@@ -24,6 +28,12 @@ model Workspace is TrackedResource<WorkspaceProperties> {
   @key("workspaceName")
   @segment("workspaces")
   name: string;
+
+  /**
+   * Detailed properties for Workspace
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkspaceProperties;
 }
 
 @armResourceOperations

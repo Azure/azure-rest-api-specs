@@ -16,8 +16,12 @@ namespace Microsoft.Sql;
 /**
  * A job version.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Job)
-model JobVersion is ProxyResource<{}> {
+@Azure.ResourceManager.Private.armResourceInternal({})
+@includeInapplicableMetadataInPayload(false)
+model JobVersion extends ProxyResource {
   /**
    * The version of the job to get.
    */
@@ -25,6 +29,10 @@ model JobVersion is ProxyResource<{}> {
   @key("jobVersion")
   @segment("versions")
   name: int32;
+
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties?: {};
 }
 
 @armResourceOperations

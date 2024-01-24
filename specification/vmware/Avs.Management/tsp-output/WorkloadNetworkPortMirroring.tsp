@@ -15,9 +15,14 @@ namespace Microsoft.AVS;
 /**
  * NSX Port Mirroring
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model WorkloadNetworkPortMirroring
-  is ProxyResource<WorkloadNetworkPortMirroringProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  WorkloadNetworkPortMirroringProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WorkloadNetworkPortMirroring extends ProxyResourceBase {
   /**
    * NSX Port Mirroring identifier. Generally the same as the Port Mirroring display name
    */
@@ -25,6 +30,12 @@ model WorkloadNetworkPortMirroring
   @key("portMirroringId")
   @segment("portMirroringProfiles")
   name: string;
+
+  /**
+   * Port Mirroring Properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkloadNetworkPortMirroringProperties;
 }
 
 @armResourceOperations

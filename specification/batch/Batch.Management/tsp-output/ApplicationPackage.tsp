@@ -15,8 +15,12 @@ namespace Microsoft.Batch;
 /**
  * An application package which represents a particular version of an application.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Application)
-model ApplicationPackage is ProxyResource<ApplicationPackageProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ApplicationPackageProperties)
+@includeInapplicableMetadataInPayload(false)
+model ApplicationPackage extends ProxyResource {
   /**
    * The version of the application.
    */
@@ -27,6 +31,12 @@ model ApplicationPackage is ProxyResource<ApplicationPackageProperties> {
   @key("versionName")
   @segment("versions")
   name: string;
+
+  /**
+   * The properties associated with the Application Package.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApplicationPackageProperties;
 }
 
 @armResourceOperations

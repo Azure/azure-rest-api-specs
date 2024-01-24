@@ -14,7 +14,11 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The IP Prefix resource definition.
  */
-model IpPrefix is TrackedResource<IpPrefixProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(IpPrefixProperties)
+@includeInapplicableMetadataInPayload(false)
+model IpPrefix extends TrackedResourceBase {
   /**
    * Name of the IP Prefix.
    */
@@ -22,6 +26,12 @@ model IpPrefix is TrackedResource<IpPrefixProperties> {
   @key("ipPrefixName")
   @segment("ipPrefixes")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: IpPrefixProperties;
 }
 
 @armResourceOperations

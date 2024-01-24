@@ -15,7 +15,11 @@ namespace Microsoft.ContainerInstance;
 /**
  * A container group.
  */
-model ContainerGroup is TrackedResource<{}> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal({})
+@includeInapplicableMetadataInPayload(false)
+model ContainerGroup extends Resource {
   /**
    * The name of the container group.
    */
@@ -23,6 +27,10 @@ model ContainerGroup is TrackedResource<{}> {
   @key("containerGroupName")
   @segment("containerGroups")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties?: {};
 }
 
 @armResourceOperations

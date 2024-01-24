@@ -25,6 +25,7 @@ using TypeSpec.Versioning;
  * A first party Azure service enabling the data replication.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure Site Recovery Management Service API",
 })

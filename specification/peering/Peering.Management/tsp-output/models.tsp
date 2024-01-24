@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -229,6 +231,7 @@ model CdnPeeringPrefix extends Resource {
   /**
    * The properties that define a cdn peering prefix.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CdnPeeringPrefixProperties;
 }
 
@@ -762,6 +765,7 @@ model PeeringLocation extends Resource {
   /**
    * The properties that define a peering location.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PeeringLocationProperties;
 }
 
@@ -1092,6 +1096,7 @@ model PeeringServiceLocation extends Resource {
   /**
    * The properties that define a peering service location.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PeeringServiceLocationProperties;
 }
 
@@ -1209,6 +1214,7 @@ model PeeringServiceProvider extends Resource {
   /**
    * The properties that define a peering service provider.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PeeringServiceProviderProperties;
 }
 

@@ -14,7 +14,11 @@ namespace Microsoft.App;
 /**
  * Container App.
  */
-model ContainerApp is TrackedResource<ContainerAppProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ContainerAppProperties)
+@includeInapplicableMetadataInPayload(false)
+model ContainerApp extends TrackedResourceBase {
   /**
    * Name of the Container App.
    */
@@ -28,8 +32,19 @@ model ContainerApp is TrackedResource<ContainerAppProperties> {
    */
   extendedLocation?: ExtendedLocation;
 
+  /**
+   * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
+   */
+  @visibility("read", "create", "update")
+  managedBy?: string;
+
+  /**
+   * ContainerApp resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ContainerAppProperties;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ManagedBy;
 }
 
 @armResourceOperations

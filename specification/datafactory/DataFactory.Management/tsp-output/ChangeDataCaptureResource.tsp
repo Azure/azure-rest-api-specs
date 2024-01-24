@@ -15,8 +15,12 @@ namespace Microsoft.DataFactory;
 /**
  * Change data capture resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-model ChangeDataCaptureResource is ProxyResource<ChangeDataCapture> {
+@Azure.ResourceManager.Private.armResourceInternal(ChangeDataCapture)
+@includeInapplicableMetadataInPayload(false)
+model ChangeDataCaptureResource extends SubResource {
   /**
    * The change data capture name.
    */
@@ -27,6 +31,12 @@ model ChangeDataCaptureResource is ProxyResource<ChangeDataCapture> {
   @key("changeDataCaptureName")
   @segment("adfcdcs")
   name: string;
+
+  /**
+   * Properties of the change data capture.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ChangeDataCapture;
 }
 
 @armResourceOperations

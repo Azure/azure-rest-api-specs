@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Class representing detector definition
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model DiagnosticCategory is ProxyResource<DiagnosticCategoryProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DiagnosticCategoryProperties)
+@includeInapplicableMetadataInPayload(false)
+model DiagnosticCategory extends ProxyOnlyResource {
   /**
    * Diagnostic Category
    */
@@ -24,6 +28,12 @@ model DiagnosticCategory is ProxyResource<DiagnosticCategoryProperties> {
   @key("diagnosticCategory")
   @segment("diagnostics")
   name: string;
+
+  /**
+   * DiagnosticCategory resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DiagnosticCategoryProperties;
 }
 
 @armResourceOperations

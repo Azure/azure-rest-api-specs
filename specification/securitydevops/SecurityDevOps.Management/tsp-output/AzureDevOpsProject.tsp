@@ -15,8 +15,12 @@ namespace Microsoft.SecurityDevOps;
 /**
  * Azure DevOps Project Proxy Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AzureDevOpsOrg)
-model AzureDevOpsProject is ProxyResource<AzureDevOpsProjectProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AzureDevOpsProjectProperties)
+@includeInapplicableMetadataInPayload(false)
+model AzureDevOpsProject extends ProxyResourceBase {
   /**
    * Name of the AzureDevOps Project.
    */
@@ -24,6 +28,12 @@ model AzureDevOpsProject is ProxyResource<AzureDevOpsProjectProperties> {
   @key("azureDevOpsProjectName")
   @segment("projects")
   name: string;
+
+  /**
+   * AzureDevOps Project properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AzureDevOpsProjectProperties;
 }
 
 @armResourceOperations

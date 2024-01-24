@@ -22,6 +22,7 @@ using TypeSpec.Versioning;
  * The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "KeyVaultManagementClient",
 })

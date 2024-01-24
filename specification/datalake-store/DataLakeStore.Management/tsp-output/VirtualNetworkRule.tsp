@@ -15,8 +15,12 @@ namespace Microsoft.DataLakeStore;
 /**
  * Data Lake Store virtual network rule information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataLakeStoreAccount)
-model VirtualNetworkRule is ProxyResource<VirtualNetworkRuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkRuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualNetworkRule extends SubResource {
   /**
    * The name of the virtual network rule to retrieve.
    */
@@ -24,6 +28,12 @@ model VirtualNetworkRule is ProxyResource<VirtualNetworkRuleProperties> {
   @key("virtualNetworkRuleName")
   @segment("virtualNetworkRules")
   name: string;
+
+  /**
+   * The virtual network rule properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualNetworkRuleProperties;
 }
 
 @armResourceOperations

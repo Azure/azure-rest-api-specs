@@ -15,8 +15,12 @@ namespace Microsoft.Cdn;
 /**
  * AFDOrigin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Profile)
-model AFDOriginGroup is ProxyResource<AFDOriginGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AFDOriginGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model AFDOriginGroup extends ProxyResource {
   /**
    * Name of the origin group which is unique within the endpoint.
    */
@@ -24,6 +28,12 @@ model AFDOriginGroup is ProxyResource<AFDOriginGroupProperties> {
   @key("originGroupName")
   @segment("originGroups")
   name: string;
+
+  /**
+   * The JSON object that contains the properties of the origin group.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AFDOriginGroupProperties;
 }
 
 @armResourceOperations

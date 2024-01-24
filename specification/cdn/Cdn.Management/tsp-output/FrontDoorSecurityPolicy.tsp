@@ -15,8 +15,12 @@ namespace Microsoft.Cdn;
 /**
  * SecurityPolicy association for AzureFrontDoor profile
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Profile)
-model FrontDoorSecurityPolicy is ProxyResource<SecurityPolicyDetails> {
+@Azure.ResourceManager.Private.armResourceInternal(SecurityPolicyDetails)
+@includeInapplicableMetadataInPayload(false)
+model FrontDoorSecurityPolicy extends ProxyResource {
   /**
    * Name of the security policy under the profile.
    */
@@ -24,6 +28,12 @@ model FrontDoorSecurityPolicy is ProxyResource<SecurityPolicyDetails> {
   @key("securityPolicyName")
   @segment("securityPolicies")
   name: string;
+
+  /**
+   * The json object that contains properties required to create a security policy
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SecurityPolicyDetails;
 }
 
 @armResourceOperations

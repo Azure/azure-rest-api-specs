@@ -1,9 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -44,20 +48,20 @@ enum StoreName {
 }
 
 /**
-* The current state of the cluster.
-
-  - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.
-  - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.
-  - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.
-  - UpdatingUserConfiguration - Indicates that the cluster is being upgraded with the user provided configuration.
-  - UpdatingUserCertificate - Indicates that the cluster is being upgraded with the user provided certificate.
-  - UpdatingInfrastructure - Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'.
-  - EnforcingClusterVersion - Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version.
-  - UpgradeServiceUnreachable - Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.
-  - AutoScale - Indicates that the ReliabilityLevel of the cluster is being adjusted.
-  - Ready - Indicates that the cluster is in a stable state.
-
-*/
+ * The current state of the cluster.
+ *
+ *   - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.
+ *   - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.
+ *   - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.
+ *   - UpdatingUserConfiguration - Indicates that the cluster is being upgraded with the user provided configuration.
+ *   - UpdatingUserCertificate - Indicates that the cluster is being upgraded with the user provided certificate.
+ *   - UpdatingInfrastructure - Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'.
+ *   - EnforcingClusterVersion - Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version.
+ *   - UpgradeServiceUnreachable - Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.
+ *   - AutoScale - Indicates that the ReliabilityLevel of the cluster is being adjusted.
+ *   - Ready - Indicates that the cluster is in a stable state.
+ *
+ */
 enum ClusterState {
   WaitingForNodes,
   Deploying,
@@ -72,13 +76,13 @@ enum ClusterState {
 }
 
 /**
-* The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
-
-  - Bronze - No privileges. This is the default.
-  - Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.
-  - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.
-
-*/
+ * The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
+ *
+ *   - Bronze - No privileges. This is the default.
+ *   - Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.
+ *   - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.
+ *
+ */
 enum DurabilityLevel {
   Bronze,
   Silver,
@@ -96,15 +100,15 @@ enum ProvisioningState {
 }
 
 /**
-* The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
-
-  - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.
-  - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.
-  - Silver - Run the System services with a target replica set count of 5.
-  - Gold - Run the System services with a target replica set count of 7.
-  - Platinum - Run the System services with a target replica set count of 9.
-
-*/
+ * The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
+ *
+ *   - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.
+ *   - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.
+ *   - Silver - Run the System services with a target replica set count of 5.
+ *   - Gold - Run the System services with a target replica set count of 7.
+ *   - Platinum - Run the System services with a target replica set count of 9.
+ *
+ */
 enum ReliabilityLevel {
   None,
   Bronze,
@@ -434,6 +438,32 @@ enum MoveCost {
 }
 
 /**
+ * The type of managed identity for the resource.
+ */
+@fixed
+enum ManagedIdentityType {
+  /**
+   * Indicates that system assigned identity is associated with the resource.
+   */
+  SystemAssigned,
+
+  /**
+   * Indicates that user assigned identity is associated with the resource.
+   */
+  UserAssigned,
+
+  /**
+   * Indicates that both system assigned and user assigned identity are associated with the resource.
+   */
+  `SystemAssigned, UserAssigned`,
+
+  /**
+   * Indicates that no identity is associated with the resource.
+   */
+  None,
+}
+
+/**
  * Describes the cluster resource properties.
  */
 model ClusterProperties {
@@ -491,20 +521,20 @@ model ClusterProperties {
   clusterId?: string;
 
   /**
-* The current state of the cluster.
-
-  - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.
-  - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.
-  - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.
-  - UpdatingUserConfiguration - Indicates that the cluster is being upgraded with the user provided configuration.
-  - UpdatingUserCertificate - Indicates that the cluster is being upgraded with the user provided certificate.
-  - UpdatingInfrastructure - Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'.
-  - EnforcingClusterVersion - Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version.
-  - UpgradeServiceUnreachable - Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.
-  - AutoScale - Indicates that the ReliabilityLevel of the cluster is being adjusted.
-  - Ready - Indicates that the cluster is in a stable state.
-
-*/
+   * The current state of the cluster.
+   *
+   *   - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.
+   *   - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.
+   *   - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.
+   *   - UpdatingUserConfiguration - Indicates that the cluster is being upgraded with the user provided configuration.
+   *   - UpdatingUserCertificate - Indicates that the cluster is being upgraded with the user provided certificate.
+   *   - UpdatingInfrastructure - Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'.
+   *   - EnforcingClusterVersion - Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version.
+   *   - UpgradeServiceUnreachable - Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.
+   *   - AutoScale - Indicates that the ReliabilityLevel of the cluster is being adjusted.
+   *   - Ready - Indicates that the cluster is in a stable state.
+   *
+   */
   @visibility("read")
   clusterState?: ClusterState;
 
@@ -540,15 +570,15 @@ model ClusterProperties {
   provisioningState?: ProvisioningState;
 
   /**
-* The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
-
-  - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.
-  - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.
-  - Silver - Run the System services with a target replica set count of 5.
-  - Gold - Run the System services with a target replica set count of 7.
-  - Platinum - Run the System services with a target replica set count of 9.
-
-*/
+   * The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
+   *
+   *   - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.
+   *   - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.
+   *   - Silver - Run the System services with a target replica set count of 5.
+   *   - Gold - Run the System services with a target replica set count of 7.
+   *   - Platinum - Run the System services with a target replica set count of 9.
+   *
+   */
   reliabilityLevel?: ReliabilityLevel;
 
   /**
@@ -845,13 +875,13 @@ model NodeTypeDescription {
   httpGatewayEndpointPort: int32;
 
   /**
-* The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
-
-  - Bronze - No privileges. This is the default.
-  - Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.
-  - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.
-
-*/
+   * The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
+   *
+   *   - Bronze - No privileges. This is the default.
+   *   - Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.
+   *   - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.
+   *
+   */
   durabilityLevel?: DurabilityLevel;
 
   /**
@@ -957,33 +987,33 @@ model ClusterUpgradePolicy {
 }
 
 /**
-* Defines a health policy used to evaluate the health of the cluster or of a cluster node.
-
-*/
+ * Defines a health policy used to evaluate the health of the cluster or of a cluster node.
+ *
+ */
 model ClusterHealthPolicy {
   /**
-* The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.
-
-The percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error.
-If the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning.
-The percentage is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster.
-The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
-
-In large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.
-
-*/
+   * The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.
+   *
+   * The percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error.
+   * If the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster.
+   * The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
+   *
+   * In large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.
+   *
+   */
   @maxValue(100)
   maxPercentUnhealthyNodes?: int32;
 
   /**
-* The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.
-
-The percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error.
-If the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning.
-This is calculated by dividing the number of unhealthy applications over the total number of application instances in the cluster, excluding applications of application types that are included in the ApplicationTypeHealthPolicyMap.
-The computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.
-
-*/
+   * The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.
+   *
+   * The percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error.
+   * If the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning.
+   * This is calculated by dividing the number of unhealthy applications over the total number of application instances in the cluster, excluding applications of application types that are included in the ApplicationTypeHealthPolicyMap.
+   * The computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.
+   *
+   */
   @maxValue(100)
   maxPercentUnhealthyApplications?: int32;
 
@@ -994,9 +1024,9 @@ The computation rounds up to tolerate one failure on small numbers of applicatio
 }
 
 /**
-* Defines a health policy used to evaluate the health of an application or one of its children entities.
-
-*/
+ * Defines a health policy used to evaluate the health of an application or one of its children entities.
+ *
+ */
 model ApplicationHealthPolicy {
   /**
    * The health policy used by default to evaluate the health of a service type.
@@ -1010,14 +1040,14 @@ model ApplicationHealthPolicy {
 }
 
 /**
-* Represents the health policy used to evaluate the health of services belonging to a service type.
-
-*/
+ * Represents the health policy used to evaluate the health of services belonging to a service type.
+ *
+ */
 model ServiceTypeHealthPolicy {
   /**
-* The maximum percentage of services allowed to be unhealthy before your application is considered in error.
-
-*/
+   * The maximum percentage of services allowed to be unhealthy before your application is considered in error.
+   *
+   */
   @maxValue(100)
   maxPercentUnhealthyServices?: int32;
 }
@@ -1027,29 +1057,29 @@ model ServiceTypeHealthPolicy {
  */
 model ClusterUpgradeDeltaHealthPolicy {
   /**
-* The maximum allowed percentage of nodes health degradation allowed during cluster upgrades.
-The delta is measured between the state of the nodes at the beginning of upgrade and the state of the nodes at the time of the health evaluation.
-The check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.
-
-*/
+   * The maximum allowed percentage of nodes health degradation allowed during cluster upgrades.
+   * The delta is measured between the state of the nodes at the beginning of upgrade and the state of the nodes at the time of the health evaluation.
+   * The check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.
+   *
+   */
   @maxValue(100)
   maxPercentDeltaUnhealthyNodes: int32;
 
   /**
-* The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.
-The delta is measured between the state of the upgrade domain nodes at the beginning of upgrade and the state of the upgrade domain nodes at the time of the health evaluation.
-The check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.
-
-*/
+   * The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.
+   * The delta is measured between the state of the upgrade domain nodes at the beginning of upgrade and the state of the upgrade domain nodes at the time of the health evaluation.
+   * The check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.
+   *
+   */
   @maxValue(100)
   maxPercentUpgradeDomainDeltaUnhealthyNodes: int32;
 
   /**
-* The maximum allowed percentage of applications health degradation allowed during cluster upgrades.
-The delta is measured between the state of the applications at the beginning of upgrade and the state of the applications at the time of the health evaluation.
-The check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.
-
-*/
+   * The maximum allowed percentage of applications health degradation allowed during cluster upgrades.
+   * The delta is measured between the state of the applications at the beginning of upgrade and the state of the applications at the time of the health evaluation.
+   * The check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.
+   *
+   */
   @maxValue(100)
   maxPercentDeltaUnhealthyApplications: int32;
 
@@ -1060,9 +1090,9 @@ The check is performed after every upgrade domain upgrade completion to make sur
 }
 
 /**
-* Defines a delta health policy used to evaluate the health of an application or one of its child entities when upgrading the cluster.
-
-*/
+ * Defines a delta health policy used to evaluate the health of an application or one of its child entities when upgrading the cluster.
+ *
+ */
 model ApplicationDeltaHealthPolicy {
   /**
    * The delta health policy used by default to evaluate the health of a service type when upgrading the cluster.
@@ -1076,16 +1106,16 @@ model ApplicationDeltaHealthPolicy {
 }
 
 /**
-* Represents the delta health policy used to evaluate the health of services belonging to a service type when upgrading the cluster.
-
-*/
+ * Represents the delta health policy used to evaluate the health of services belonging to a service type when upgrading the cluster.
+ *
+ */
 model ServiceTypeDeltaHealthPolicy {
   /**
-* The maximum allowed percentage of services health degradation allowed during cluster upgrades.
-The delta is measured between the state of the services at the beginning of upgrade and the state of the services at the time of the health evaluation.
-The check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.
-
-*/
+   * The maximum allowed percentage of services health degradation allowed during cluster upgrades.
+   * The delta is measured between the state of the services at the beginning of upgrade and the state of the services at the time of the health evaluation.
+   * The check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.
+   *
+   */
   @maxValue(100)
   maxPercentDeltaUnhealthyServices?: int32;
 }
@@ -1216,6 +1246,7 @@ model ClusterUpdateParameters {
   /**
    * Describes the cluster resource properties that can be updated during PATCH operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterPropertiesUpdateParameters;
 
   /**
@@ -1274,15 +1305,15 @@ model ClusterPropertiesUpdateParameters {
   nodeTypes?: NodeTypeDescription[];
 
   /**
-* The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
-
-  - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.
-  - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.
-  - Silver - Run the System services with a target replica set count of 5.
-  - Gold - Run the System services with a target replica set count of 7.
-  - Platinum - Run the System services with a target replica set count of 9.
-
-*/
+   * The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
+   *
+   *   - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.
+   *   - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.
+   *   - Silver - Run the System services with a target replica set count of 5.
+   *   - Gold - Run the System services with a target replica set count of 7.
+   *   - Platinum - Run the System services with a target replica set count of 9.
+   *
+   */
   reliabilityLevel?: ReliabilityLevel;
 
   /**
@@ -1382,6 +1413,7 @@ model ClusterCodeVersionsResult {
   /**
    * The detail of the Service Fabric runtime version result
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterVersionDetails;
 }
 
@@ -1509,11 +1541,25 @@ model ManagedIdentity {
   type?: ManagedIdentityType;
 
   /**
-* The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:
-'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-
-*/
+   * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:
+   * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   *
+   */
   userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+model UserAssignedIdentity {
+  /**
+   * The principal id of user assigned identity.
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * The client id of user assigned identity.
+   */
+  @visibility("read")
+  clientId?: string;
 }
 
 /**
@@ -1598,9 +1644,9 @@ model ApplicationUpgradePolicy {
   rollingUpgradeMonitoringPolicy?: ArmRollingUpgradeMonitoringPolicy;
 
   /**
-* Defines a health policy used to evaluate the health of an application or one of its children entities.
-
-*/
+   * Defines a health policy used to evaluate the health of an application or one of its children entities.
+   *
+   */
   applicationHealthPolicy?: ArmApplicationHealthPolicy;
 
   /**
@@ -1650,9 +1696,9 @@ model ArmRollingUpgradeMonitoringPolicy {
 }
 
 /**
-* Defines a health policy used to evaluate the health of an application or one of its children entities.
-
-*/
+ * Defines a health policy used to evaluate the health of an application or one of its children entities.
+ *
+ */
 model ArmApplicationHealthPolicy {
   /**
    * Indicates whether warnings are treated with the same severity as errors.
@@ -1660,12 +1706,12 @@ model ArmApplicationHealthPolicy {
   considerWarningAsError?: boolean;
 
   /**
-* The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.
-The percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.
-This is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.
-The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
-
-*/
+   * The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.
+   * The percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.
+   * This is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.
+   * The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
+   *
+   */
   maxPercentUnhealthyDeployedApplications?: int32;
 
   /**
@@ -1680,36 +1726,36 @@ The computation rounds up to tolerate one failure on small numbers of nodes. Def
 }
 
 /**
-* Represents the health policy used to evaluate the health of services belonging to a service type.
-
-*/
+ * Represents the health policy used to evaluate the health of services belonging to a service type.
+ *
+ */
 model ArmServiceTypeHealthPolicy {
   /**
-* The maximum percentage of services allowed to be unhealthy before your application is considered in error.
-
-*/
+   * The maximum percentage of services allowed to be unhealthy before your application is considered in error.
+   *
+   */
   @maxValue(100)
   maxPercentUnhealthyServices?: int32;
 
   /**
-* The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.
-
-*/
+   * The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.
+   *
+   */
   @maxValue(100)
   maxPercentUnhealthyPartitionsPerService?: int32;
 
   /**
-* The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.
-
-*/
+   * The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.
+   *
+   */
   @maxValue(100)
   maxPercentUnhealthyReplicasPerPartition?: int32;
 }
 
 /**
-* Describes capacity information for a custom resource balancing metric. This can be used to limit the total consumption of this metric by the services of this application.
-
-*/
+ * Describes capacity information for a custom resource balancing metric. This can be used to limit the total consumption of this metric by the services of this application.
+ *
+ */
 model ApplicationMetricDescription {
   /**
    * The name of the metric.
@@ -1717,31 +1763,31 @@ model ApplicationMetricDescription {
   name?: string;
 
   /**
-* The maximum node capacity for Service Fabric application.
-This is the maximum Load for an instance of this application on a single node. Even if the capacity of node is greater than this value, Service Fabric will limit the total load of services within the application on each node to this value.
-If set to zero, capacity for this metric is unlimited on each node.
-When creating a new application with application capacity defined, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.
-When updating existing application with application capacity, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.
-
-*/
+   * The maximum node capacity for Service Fabric application.
+   * This is the maximum Load for an instance of this application on a single node. Even if the capacity of node is greater than this value, Service Fabric will limit the total load of services within the application on each node to this value.
+   * If set to zero, capacity for this metric is unlimited on each node.
+   * When creating a new application with application capacity defined, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.
+   * When updating existing application with application capacity, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.
+   *
+   */
   maximumCapacity?: int64;
 
   /**
-* The node reservation capacity for Service Fabric application.
-This is the amount of load which is reserved on nodes which have instances of this application.
-If MinimumNodes is specified, then the product of these values will be the capacity reserved in the cluster for the application.
-If set to zero, no capacity is reserved for this metric.
-When setting application capacity or when updating application capacity; this value must be smaller than or equal to MaximumCapacity for each metric.
-
-*/
+   * The node reservation capacity for Service Fabric application.
+   * This is the amount of load which is reserved on nodes which have instances of this application.
+   * If MinimumNodes is specified, then the product of these values will be the capacity reserved in the cluster for the application.
+   * If set to zero, no capacity is reserved for this metric.
+   * When setting application capacity or when updating application capacity; this value must be smaller than or equal to MaximumCapacity for each metric.
+   *
+   */
   reservationCapacity?: int64;
 
   /**
-* The total metric capacity for Service Fabric application.
-This is the total metric capacity for this application in the cluster. Service Fabric will try to limit the sum of loads of services within the application to this value.
-When creating a new application with application capacity defined, the product of MaximumNodes and MaximumCapacity must always be smaller than or equal to this value.
-
-*/
+   * The total metric capacity for Service Fabric application.
+   * This is the total metric capacity for this application in the cluster. Service Fabric will try to limit the sum of loads of services within the application to this value.
+   * When creating a new application with application capacity defined, the product of MaximumNodes and MaximumCapacity must always be smaller than or equal to this value.
+   *
+   */
   totalApplicationCapacity?: int64;
 }
 
@@ -1764,6 +1810,7 @@ model ApplicationResourceUpdate extends ProxyResource {
   /**
    * The application resource properties for patch operations.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApplicationResourceUpdateProperties;
 }
 
@@ -1893,6 +1940,7 @@ model ServiceResourceUpdate extends ProxyResource {
   /**
    * The service resource properties for patch operations.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ServiceResourceUpdateProperties;
 }
 
@@ -2070,17 +2118,17 @@ model UniformInt64RangePartitionSchemeDescription
   count: int32;
 
   /**
-* String indicating the lower bound of the partition key range that
-should be split between the partition ‘count’
-
-*/
+   * String indicating the lower bound of the partition key range that
+   * should be split between the partition ‘count’
+   *
+   */
   lowKey: string;
 
   /**
-* String indicating the upper bound of the partition key range that
-should be split between the partition ‘count’
-
-*/
+   * String indicating the upper bound of the partition key range that
+   * should be split between the partition ‘count’
+   *
+   */
   highKey: string;
 
   /**

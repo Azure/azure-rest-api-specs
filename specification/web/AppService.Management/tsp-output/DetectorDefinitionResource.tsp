@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * ARM resource for a detector definition
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DiagnosticCategory)
-model DetectorDefinitionResource is ProxyResource<DetectorDefinition> {
+@Azure.ResourceManager.Private.armResourceInternal(DetectorDefinition)
+@includeInapplicableMetadataInPayload(false)
+model DetectorDefinitionResource extends ProxyOnlyResource {
   /**
    * Detector Name
    */
@@ -24,6 +28,12 @@ model DetectorDefinitionResource is ProxyResource<DetectorDefinition> {
   @key("detectorName")
   @segment("detectors")
   name: string;
+
+  /**
+   * Core resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DetectorDefinition;
 }
 
 @armResourceOperations

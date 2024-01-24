@@ -15,8 +15,12 @@ namespace Microsoft.HDInsight;
 /**
  * The HDInsight cluster application
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model Application is ProxyResource<ApplicationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ApplicationProperties)
+@includeInapplicableMetadataInPayload(false)
+model Application extends ProxyResourceBase {
   /**
    * The constant value for the application name.
    */
@@ -29,6 +33,12 @@ model Application is ProxyResource<ApplicationProperties> {
    * The ETag for the application
    */
   etag?: string;
+
+  /**
+   * The properties of the application.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApplicationProperties;
 }
 
 @armResourceOperations

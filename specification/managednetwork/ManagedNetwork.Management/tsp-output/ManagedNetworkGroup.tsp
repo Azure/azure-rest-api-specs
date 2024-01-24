@@ -15,8 +15,14 @@ namespace Microsoft.ManagedNetwork;
 /**
  * The Managed Network Group resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedNetwork)
-model ManagedNetworkGroup is ProxyResource<ManagedNetworkGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedNetworkGroupProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedNetworkGroup extends ProxyResource {
   /**
    * The name of the Managed Network Group.
    */
@@ -25,7 +31,16 @@ model ManagedNetworkGroup is ProxyResource<ManagedNetworkGroupProperties> {
   @segment("managedNetworkGroups")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Responsibility role under which this Managed Network Group will be created
+   */
+  kind?: Kind;
+
+  /**
+   * Gets or sets the properties of a network group
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedNetworkGroupProperties;
 }
 
 @armResourceOperations

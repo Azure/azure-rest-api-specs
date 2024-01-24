@@ -15,8 +15,12 @@ namespace Microsoft.App;
 /**
  * Configuration settings for the Azure ContainerApp Service Authentication / Authorization feature.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ContainerApp)
-model AuthConfig is ProxyResource<AuthConfigProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AuthConfigProperties)
+@includeInapplicableMetadataInPayload(false)
+model AuthConfig extends ProxyResourceBase {
   /**
    * Name of the Container App AuthConfig.
    */
@@ -24,6 +28,12 @@ model AuthConfig is ProxyResource<AuthConfigProperties> {
   @key("authConfigName")
   @segment("authConfigs")
   name: string;
+
+  /**
+   * AuthConfig resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AuthConfigProperties;
 }
 
 @armResourceOperations

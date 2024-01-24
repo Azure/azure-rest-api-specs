@@ -15,8 +15,12 @@ namespace Microsoft.Network;
 /**
  * A rules engine configuration containing a list of rules that will run to modify the runtime behavior of the request and response.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FrontDoor)
-model RulesEngine is ProxyResource<RulesEngineProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RulesEngineProperties)
+@includeInapplicableMetadataInPayload(false)
+model RulesEngine extends ProxyResourceBase {
   /**
    * Name of the Rules Engine which is unique within the Front Door.
    */
@@ -27,6 +31,12 @@ model RulesEngine is ProxyResource<RulesEngineProperties> {
   @key("rulesEngineName")
   @segment("rulesEngines")
   name: string;
+
+  /**
+   * Properties of the Rules Engine Configuration.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RulesEngineProperties;
 }
 
 @armResourceOperations

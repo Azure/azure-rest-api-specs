@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
  * Service Fabric Managed Clusters Management Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ServiceFabricManagedClustersManagementClient",
 })

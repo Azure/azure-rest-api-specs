@@ -15,9 +15,14 @@ namespace Microsoft.Kusto;
 /**
  * Class representing an attached database configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model AttachedDatabaseConfiguration
-  is ProxyResource<AttachedDatabaseConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  AttachedDatabaseConfigurationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AttachedDatabaseConfiguration extends ProxyResourceBase {
   /**
    * The name of the attached database configuration.
    */
@@ -26,6 +31,12 @@ model AttachedDatabaseConfiguration
   @key("attachedDatabaseConfigurationName")
   @segment("attachedDatabaseConfigurations")
   name: string;
+
+  /**
+   * The properties of the attached database configuration.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AttachedDatabaseConfigurationProperties;
 }
 
 @armResourceOperations

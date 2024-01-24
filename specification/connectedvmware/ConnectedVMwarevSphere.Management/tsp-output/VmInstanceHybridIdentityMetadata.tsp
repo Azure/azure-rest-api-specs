@@ -15,13 +15,24 @@ namespace Microsoft.ConnectedVMwarevSphere;
 /**
  * Defines the HybridIdentityMetadata.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(VirtualMachineInstance)
-model VmInstanceHybridIdentityMetadata
-  is ProxyResource<VmInstanceHybridIdentityMetadataProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  VmInstanceHybridIdentityMetadataProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model VmInstanceHybridIdentityMetadata extends ProxyResourceBase {
   @key("hybridIdentityMetadatum")
   @segment("hybridIdentityMetadata")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: VmInstanceHybridIdentityMetadataProperties;
 }
 
 @armResourceOperations

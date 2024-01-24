@@ -30,7 +30,10 @@ model DataSource is ProxyResource<AnyObject> {
    */
   etag?: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * The kind of the DataSource.
+   */
+  kind: DataSourceKind;
 }
 
 @armResourceOperations

@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1258,6 +1260,7 @@ model CloudError {
   /**
    * Error data
    */
+  @extension("x-ms-client-flatten", true)
   error: CloudErrorBody;
 }
 
@@ -1577,6 +1580,7 @@ model FactoryUpdateParameters {
   /**
    * Properties of update the factory.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: FactoryUpdateProperties;
 }
 
@@ -3400,6 +3404,7 @@ model ManagedIdentityCredential extends Credential {
   /**
    * Managed identity credential properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: ManagedIdentityTypeProperties;
 
   /**
@@ -3632,6 +3637,7 @@ model MapperTable {
   /**
    * Table properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MapperTableProperties;
 }
 
@@ -4133,6 +4139,7 @@ model MappingDataFlow extends DataFlow {
   /**
    * Mapping data flow type properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: MappingDataFlowTypeProperties;
 
   /**
@@ -4233,6 +4240,7 @@ model Flowlet extends DataFlow {
   /**
    * Flowlet type properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: FlowletTypeProperties;
 
   /**
@@ -4278,6 +4286,7 @@ model WranglingDataFlow extends DataFlow {
   /**
    * PowerQuery data flow type properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: PowerQueryTypeProperties;
 
   /**
@@ -4725,6 +4734,7 @@ model AmazonS3Dataset extends Dataset {
   /**
    * Amazon S3 dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AmazonS3DatasetTypeProperties;
 
   /**
@@ -4785,6 +4795,7 @@ model AvroDataset extends Dataset {
   /**
    * Avro dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AvroDatasetTypeProperties;
 
   /**
@@ -4819,6 +4830,7 @@ model ExcelDataset extends Dataset {
   /**
    * Excel dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: ExcelDatasetTypeProperties;
 
   /**
@@ -4874,6 +4886,7 @@ model ParquetDataset extends Dataset {
   /**
    * Parquet dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: ParquetDatasetTypeProperties;
 
   /**
@@ -4904,6 +4917,7 @@ model DelimitedTextDataset extends Dataset {
   /**
    * Delimited text dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: DelimitedTextDatasetTypeProperties;
 
   /**
@@ -4974,6 +4988,7 @@ model JsonDataset extends Dataset {
   /**
    * Json dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: JsonDatasetTypeProperties;
 
   /**
@@ -5009,6 +5024,7 @@ model XmlDataset extends Dataset {
   /**
    * Xml dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: XmlDatasetTypeProperties;
 
   /**
@@ -5049,6 +5065,7 @@ model OrcDataset extends Dataset {
   /**
    * ORC dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: OrcDatasetTypeProperties;
 
   /**
@@ -5079,6 +5096,7 @@ model BinaryDataset extends Dataset {
   /**
    * Binary dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: BinaryDatasetTypeProperties;
 
   /**
@@ -5109,6 +5127,7 @@ model AzureBlobDataset extends Dataset {
   /**
    * Azure Blob dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AzureBlobDatasetTypeProperties;
 
   /**
@@ -5164,6 +5183,7 @@ model AzureTableDataset extends Dataset {
   /**
    * Azure Table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureTableDatasetTypeProperties;
 
   /**
@@ -5189,6 +5209,7 @@ model AzureSqlTableDataset extends Dataset {
   /**
    * Azure SQL dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AzureSqlTableDatasetTypeProperties;
 
   /**
@@ -5224,6 +5245,7 @@ model AzureSqlMITableDataset extends Dataset {
   /**
    * Azure SQL Managed Instance dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AzureSqlMITableDatasetTypeProperties;
 
   /**
@@ -5259,6 +5281,7 @@ model AzureSqlDWTableDataset extends Dataset {
   /**
    * Azure SQL Data Warehouse dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AzureSqlDWTableDatasetTypeProperties;
 
   /**
@@ -5294,6 +5317,7 @@ model CassandraTableDataset extends Dataset {
   /**
    * Cassandra dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: CassandraTableDatasetTypeProperties;
 
   /**
@@ -5324,6 +5348,7 @@ model CustomDataset extends Dataset {
   /**
    * Custom dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: Record<unknown>;
 
   /**
@@ -5339,6 +5364,7 @@ model CosmosDbSqlApiCollectionDataset extends Dataset {
   /**
    * CosmosDB (SQL API) Collection dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CosmosDbSqlApiCollectionDatasetTypeProperties;
 
   /**
@@ -5364,6 +5390,7 @@ model DocumentDbCollectionDataset extends Dataset {
   /**
    * DocumentDB Collection dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DocumentDbCollectionDatasetTypeProperties;
 
   /**
@@ -5389,6 +5416,7 @@ model DynamicsEntityDataset extends Dataset {
   /**
    * Dynamics entity dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: DynamicsEntityDatasetTypeProperties;
 
   /**
@@ -5414,6 +5442,7 @@ model DynamicsCrmEntityDataset extends Dataset {
   /**
    * Dynamics CRM entity dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: DynamicsCrmEntityDatasetTypeProperties;
 
   /**
@@ -5439,6 +5468,7 @@ model CommonDataServiceForAppsEntityDataset extends Dataset {
   /**
    * Common Data Service for Apps entity dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: CommonDataServiceForAppsEntityDatasetTypeProperties;
 
   /**
@@ -5464,6 +5494,7 @@ model AzureDataLakeStoreDataset extends Dataset {
   /**
    * Azure Data Lake Store dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AzureDataLakeStoreDatasetTypeProperties;
 
   /**
@@ -5504,6 +5535,7 @@ model AzureBlobFSDataset extends Dataset {
   /**
    * Azure Data Lake Storage Gen2 dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AzureBlobFSDatasetTypeProperties;
 
   /**
@@ -5544,6 +5576,7 @@ model Office365Dataset extends Dataset {
   /**
    * Office365 dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: Office365DatasetTypeProperties;
 
   /**
@@ -5574,6 +5607,7 @@ model FileShareDataset extends Dataset {
   /**
    * On-premises file system dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: FileShareDatasetTypeProperties;
 
   /**
@@ -5629,6 +5663,7 @@ model MongoDbCollectionDataset extends Dataset {
   /**
    * MongoDB database dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MongoDbCollectionDatasetTypeProperties;
 
   /**
@@ -5654,6 +5689,7 @@ model MongoDbAtlasCollectionDataset extends Dataset {
   /**
    * MongoDB Atlas database dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MongoDbAtlasCollectionDatasetTypeProperties;
 
   /**
@@ -5679,6 +5715,7 @@ model MongoDbV2CollectionDataset extends Dataset {
   /**
    * MongoDB database dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MongoDbV2CollectionDatasetTypeProperties;
 
   /**
@@ -5704,6 +5741,7 @@ model CosmosDbMongoDbApiCollectionDataset extends Dataset {
   /**
    * CosmosDB (MongoDB API) database dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CosmosDbMongoDbApiCollectionDatasetTypeProperties;
 
   /**
@@ -5729,6 +5767,7 @@ model ODataResourceDataset extends Dataset {
   /**
    * OData dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: ODataResourceDatasetTypeProperties;
 
   /**
@@ -5754,6 +5793,7 @@ model OracleTableDataset extends Dataset {
   /**
    * On-premises Oracle dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: OracleTableDatasetTypeProperties;
 
   /**
@@ -5789,6 +5829,7 @@ model AmazonRdsForOracleTableDataset extends Dataset {
   /**
    * AmazonRdsForOracle dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AmazonRdsForOracleTableDatasetTypeProperties;
 
   /**
@@ -5819,6 +5860,7 @@ model TeradataTableDataset extends Dataset {
   /**
    * Teradata dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: TeradataTableDatasetTypeProperties;
 
   /**
@@ -5849,6 +5891,7 @@ model AzureMySqlTableDataset extends Dataset {
   /**
    * Azure MySQL database dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureMySqlTableDatasetTypeProperties;
 
   /**
@@ -5879,6 +5922,7 @@ model AmazonRedshiftTableDataset extends Dataset {
   /**
    * Amazon Redshift table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AmazonRedshiftTableDatasetTypeProperties;
 
   /**
@@ -5914,6 +5958,7 @@ model Db2TableDataset extends Dataset {
   /**
    * Db2 table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: Db2TableDatasetTypeProperties;
 
   /**
@@ -5949,6 +5994,7 @@ model RelationalTableDataset extends Dataset {
   /**
    * Relational table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: RelationalTableDatasetTypeProperties;
 
   /**
@@ -5974,6 +6020,7 @@ model InformixTableDataset extends Dataset {
   /**
    * Informix table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: InformixTableDatasetTypeProperties;
 
   /**
@@ -5999,6 +6046,7 @@ model OdbcTableDataset extends Dataset {
   /**
    * ODBC table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: OdbcTableDatasetTypeProperties;
 
   /**
@@ -6024,6 +6072,7 @@ model MySqlTableDataset extends Dataset {
   /**
    * MySQL table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: MySqlTableDatasetTypeProperties;
 
   /**
@@ -6049,6 +6098,7 @@ model PostgreSqlTableDataset extends Dataset {
   /**
    * PostgreSQL table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: PostgreSqlTableDatasetTypeProperties;
 
   /**
@@ -6084,6 +6134,7 @@ model MicrosoftAccessTableDataset extends Dataset {
   /**
    * Microsoft Access table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: MicrosoftAccessTableDatasetTypeProperties;
 
   /**
@@ -6109,6 +6160,7 @@ model SalesforceObjectDataset extends Dataset {
   /**
    * Salesforce object dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: SalesforceObjectDatasetTypeProperties;
 
   /**
@@ -6134,6 +6186,7 @@ model SalesforceServiceCloudObjectDataset extends Dataset {
   /**
    * Salesforce Service Cloud object dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: SalesforceServiceCloudObjectDatasetTypeProperties;
 
   /**
@@ -6159,6 +6212,7 @@ model SybaseTableDataset extends Dataset {
   /**
    * Sybase table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: SybaseTableDatasetTypeProperties;
 
   /**
@@ -6194,6 +6248,7 @@ model SapCloudForCustomerResourceDataset extends Dataset {
   /**
    * SAP Cloud For Customer OData resource dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapCloudForCustomerResourceDatasetTypeProperties;
 
   /**
@@ -6219,6 +6274,7 @@ model SapEccResourceDataset extends Dataset {
   /**
    * SAP ECC OData resource dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapEccResourceDatasetTypeProperties;
 
   /**
@@ -6244,6 +6300,7 @@ model SapHanaTableDataset extends Dataset {
   /**
    * SAP HANA Table properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: SapHanaTableDatasetTypeProperties;
 
   /**
@@ -6274,6 +6331,7 @@ model SapOpenHubTableDataset extends Dataset {
   /**
    * Sap Business Warehouse Open Hub Destination Table properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapOpenHubTableDatasetTypeProperties;
 
   /**
@@ -6309,6 +6367,7 @@ model SqlServerTableDataset extends Dataset {
   /**
    * On-premises SQL Server dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: SqlServerTableDatasetTypeProperties;
 
   /**
@@ -6344,6 +6403,7 @@ model AmazonRdsForSqlServerTableDataset extends Dataset {
   /**
    * The Amazon RDS for SQL Server dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AmazonRdsForSqlServerTableDatasetTypeProperties;
 
   /**
@@ -6374,6 +6434,7 @@ model RestResourceDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: RestResourceDatasetTypeProperties;
 
   /**
@@ -6419,6 +6480,7 @@ model SapTableResourceDataset extends Dataset {
   /**
    * SAP Table Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapTableResourceDatasetTypeProperties;
 
   /**
@@ -6444,6 +6506,7 @@ model SapOdpResourceDataset extends Dataset {
   /**
    * SAP ODP Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapOdpResourceDatasetTypeProperties;
 
   /**
@@ -6474,6 +6537,7 @@ model WebTableDataset extends Dataset {
   /**
    * Web table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: WebTableDatasetTypeProperties;
 
   /**
@@ -6504,6 +6568,7 @@ model AzureSearchIndexDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureSearchIndexDatasetTypeProperties;
 
   /**
@@ -6529,6 +6594,7 @@ model HttpDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: HttpDatasetTypeProperties;
 
   /**
@@ -6557,10 +6623,10 @@ model HttpDatasetTypeProperties {
   requestBody?: Record<unknown>;
 
   /**
-* The headers for the HTTP Request. e.g. request-header-name-1:request-header-value-1
-...
-request-header-name-n:request-header-value-n Type: string (or Expression with resultType string).
-*/
+   * The headers for the HTTP Request. e.g. request-header-name-1:request-header-value-1
+   * ...
+   * request-header-name-n:request-header-value-n Type: string (or Expression with resultType string).
+   */
   additionalHeaders?: Record<unknown>;
 
   /**
@@ -6591,6 +6657,7 @@ model AmazonMWSObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6606,6 +6673,7 @@ model AzurePostgreSqlTableDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AzurePostgreSqlTableDatasetTypeProperties;
 
   /**
@@ -6641,6 +6709,7 @@ model ConcurObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6656,6 +6725,7 @@ model CouchbaseTableDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6671,6 +6741,7 @@ model DrillTableDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: DrillDatasetTypeProperties;
 
   /**
@@ -6706,6 +6777,7 @@ model EloquaObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6721,6 +6793,7 @@ model GoogleBigQueryObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GoogleBigQueryDatasetTypeProperties;
 
   /**
@@ -6756,6 +6829,7 @@ model GreenplumTableDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GreenplumDatasetTypeProperties;
 
   /**
@@ -6791,6 +6865,7 @@ model HBaseObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6806,6 +6881,7 @@ model HiveObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: HiveDatasetTypeProperties;
 
   /**
@@ -6841,6 +6917,7 @@ model HubspotObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6856,6 +6933,7 @@ model ImpalaObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: ImpalaDatasetTypeProperties;
 
   /**
@@ -6891,6 +6969,7 @@ model JiraObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6906,6 +6985,7 @@ model MagentoObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6921,6 +7001,7 @@ model MariaDBTableDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6936,6 +7017,7 @@ model AzureMariaDBTableDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6951,6 +7033,7 @@ model MarketoObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6966,6 +7049,7 @@ model PaypalObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -6981,6 +7065,7 @@ model PhoenixObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: PhoenixDatasetTypeProperties;
 
   /**
@@ -7016,6 +7101,7 @@ model PrestoObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: PrestoDatasetTypeProperties;
 
   /**
@@ -7051,6 +7137,7 @@ model QuickBooksObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -7066,6 +7153,7 @@ model ServiceNowObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -7081,6 +7169,7 @@ model ShopifyObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -7096,6 +7185,7 @@ model SparkObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: SparkDatasetTypeProperties;
 
   /**
@@ -7131,6 +7221,7 @@ model SquareObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -7146,6 +7237,7 @@ model XeroObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -7161,6 +7253,7 @@ model ZohoObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -7176,6 +7269,7 @@ model NetezzaTableDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: NetezzaTableDatasetTypeProperties;
 
   /**
@@ -7211,6 +7305,7 @@ model VerticaTableDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: VerticaDatasetTypeProperties;
 
   /**
@@ -7246,6 +7341,7 @@ model SalesforceMarketingCloudObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -7261,6 +7357,7 @@ model ResponsysObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -7276,6 +7373,7 @@ model DynamicsAXResourceDataset extends Dataset {
   /**
    * Dynamics AX OData resource dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DynamicsAXResourceDatasetTypeProperties;
 
   /**
@@ -7301,6 +7399,7 @@ model OracleServiceCloudObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -7316,6 +7415,7 @@ model AzureDataExplorerTableDataset extends Dataset {
   /**
    * Azure Data Explorer (Kusto) dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureDataExplorerDatasetTypeProperties;
 
   /**
@@ -7341,6 +7441,7 @@ model GoogleAdWordsObjectDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: GenericDatasetTypeProperties;
 
   /**
@@ -7356,6 +7457,7 @@ model SnowflakeDataset extends Dataset {
   /**
    * Snowflake dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SnowflakeDatasetTypeProperties;
 
   /**
@@ -7386,6 +7488,7 @@ model SharePointOnlineListResourceDataset extends Dataset {
   /**
    * Sharepoint online list dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: SharePointOnlineListDatasetTypeProperties;
 
   /**
@@ -7411,6 +7514,7 @@ model AzureDatabricksDeltaLakeDataset extends Dataset {
   /**
    * Properties specific to this dataset type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: AzureDatabricksDeltaLakeDatasetTypeProperties;
 
   /**
@@ -7441,6 +7545,7 @@ model LakeHouseTableDataset extends Dataset {
   /**
    * Microsoft Fabric LakeHouse Table dataset properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: LakeHouseTableDatasetTypeProperties;
 
   /**
@@ -7472,6 +7577,7 @@ model ManagedIntegrationRuntime extends IntegrationRuntime {
   /**
    * Managed integration runtime properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ManagedIntegrationRuntimeTypeProperties;
 
   /**
@@ -7826,6 +7932,7 @@ model CmdkeySetup extends CustomSetupBase {
   /**
    * Cmdkey command custom setup type properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CmdkeySetupTypeProperties;
 
   /**
@@ -7861,6 +7968,7 @@ model EnvironmentVariableSetup extends CustomSetupBase {
   /**
    * Add environment variable type properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: EnvironmentVariableSetupTypeProperties;
 
   /**
@@ -7891,6 +7999,7 @@ model ComponentSetup extends CustomSetupBase {
   /**
    * Install 3rd party component type properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: LicensedComponentSetupTypeProperties;
 
   /**
@@ -7921,6 +8030,7 @@ model AzPowerShellSetup extends CustomSetupBase {
   /**
    * Install Azure PowerShell type properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzPowerShellSetupTypeProperties;
 
   /**
@@ -7946,6 +8056,7 @@ model SelfHostedIntegrationRuntime extends IntegrationRuntime {
   /**
    * When this property is not null, means this is a linked integration runtime. The property is used to access original integration runtime.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: SelfHostedIntegrationRuntimeTypeProperties;
 
   /**
@@ -8019,6 +8130,7 @@ model ManagedIntegrationRuntimeStatus extends IntegrationRuntimeStatus {
   /**
    * Managed integration runtime status type properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ManagedIntegrationRuntimeStatusTypeProperties;
 
   /**
@@ -8158,6 +8270,7 @@ model SelfHostedIntegrationRuntimeStatus extends IntegrationRuntimeStatus {
   /**
    * Self-hosted integration runtime status type properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SelfHostedIntegrationRuntimeStatusTypeProperties;
 
   /**
@@ -8537,6 +8650,7 @@ model AzureStorageLinkedService extends LinkedService {
   /**
    * Azure Storage linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureStorageLinkedServiceTypeProperties;
 
   /**
@@ -8582,6 +8696,7 @@ model AzureBlobStorageLinkedService extends LinkedService {
   /**
    * Azure Blob Storage linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureBlobStorageLinkedServiceTypeProperties;
 
   /**
@@ -8672,6 +8787,7 @@ model AzureTableStorageLinkedService extends LinkedService {
   /**
    * Azure Table Storage linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureStorageLinkedServiceTypeProperties;
 
   /**
@@ -8687,6 +8803,7 @@ model AzureSqlDWLinkedService extends LinkedService {
   /**
    * Azure SQL Data Warehouse linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureSqlDWLinkedServiceTypeProperties;
 
   /**
@@ -8747,6 +8864,7 @@ model SqlServerLinkedService extends LinkedService {
   /**
    * SQL Server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SqlServerLinkedServiceTypeProperties;
 
   /**
@@ -8817,6 +8935,7 @@ model AmazonRdsForSqlServerLinkedService extends LinkedService {
   /**
    * Amazon RDS for SQL Server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AmazonRdsForSqlServerLinkedServiceTypeProperties;
 
   /**
@@ -8862,6 +8981,7 @@ model AzureSqlDatabaseLinkedService extends LinkedService {
   /**
    * Azure SQL Database linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureSqlDatabaseLinkedServiceTypeProperties;
 
   /**
@@ -8927,6 +9047,7 @@ model AzureSqlMILinkedService extends LinkedService {
   /**
    * Azure SQL Managed Instance linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureSqlMILinkedServiceTypeProperties;
 
   /**
@@ -8992,6 +9113,7 @@ model AzureBatchLinkedService extends LinkedService {
   /**
    * Azure Batch linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureBatchLinkedServiceTypeProperties;
 
   /**
@@ -9047,6 +9169,7 @@ model AzureKeyVaultLinkedService extends LinkedService {
   /**
    * Azure Key Vault linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureKeyVaultLinkedServiceTypeProperties;
 
   /**
@@ -9077,6 +9200,7 @@ model CosmosDbLinkedService extends LinkedService {
   /**
    * CosmosDB linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CosmosDbLinkedServiceTypeProperties;
 
   /**
@@ -9157,6 +9281,7 @@ model DynamicsLinkedService extends LinkedService {
   /**
    * Dynamics linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DynamicsLinkedServiceTypeProperties;
 
   /**
@@ -9242,6 +9367,7 @@ model DynamicsCrmLinkedService extends LinkedService {
   /**
    * Dynamics CRM linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DynamicsCrmLinkedServiceTypeProperties;
 
   /**
@@ -9322,6 +9448,7 @@ model CommonDataServiceForAppsLinkedService extends LinkedService {
   /**
    * Common Data Service for Apps linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CommonDataServiceForAppsLinkedServiceTypeProperties;
 
   /**
@@ -9402,6 +9529,7 @@ model HDInsightLinkedService extends LinkedService {
   /**
    * HDInsight linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HDInsightLinkedServiceTypeProperties;
 
   /**
@@ -9462,6 +9590,7 @@ model FileServerLinkedService extends LinkedService {
   /**
    * File system linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: FileServerLinkedServiceTypeProperties;
 
   /**
@@ -9502,6 +9631,7 @@ model AzureFileStorageLinkedService extends LinkedService {
   /**
    * Azure File Storage linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureFileStorageLinkedServiceTypeProperties;
 
   /**
@@ -9572,6 +9702,7 @@ model AmazonS3CompatibleLinkedService extends LinkedService {
   /**
    * Amazon S3 Compatible linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AmazonS3CompatibleLinkedServiceTypeProperties;
 
   /**
@@ -9617,6 +9748,7 @@ model OracleCloudStorageLinkedService extends LinkedService {
   /**
    * Oracle Cloud Storage linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: OracleCloudStorageLinkedServiceTypeProperties;
 
   /**
@@ -9657,6 +9789,7 @@ model GoogleCloudStorageLinkedService extends LinkedService {
   /**
    * Google Cloud Storage linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: GoogleCloudStorageLinkedServiceTypeProperties;
 
   /**
@@ -9697,6 +9830,7 @@ model OracleLinkedService extends LinkedService {
   /**
    * Oracle database linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: OracleLinkedServiceTypeProperties;
 
   /**
@@ -9732,6 +9866,7 @@ model AmazonRdsForOracleLinkedService extends LinkedService {
   /**
    * AmazonRdsForOracle database linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AmazonRdsForLinkedServiceTypeProperties;
 
   /**
@@ -9767,6 +9902,7 @@ model AzureMySqlLinkedService extends LinkedService {
   /**
    * Azure MySQL database linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureMySqlLinkedServiceTypeProperties;
 
   /**
@@ -9802,6 +9938,7 @@ model MySqlLinkedService extends LinkedService {
   /**
    * MySQL linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MySqlLinkedServiceTypeProperties;
 
   /**
@@ -9837,6 +9974,7 @@ model PostgreSqlLinkedService extends LinkedService {
   /**
    * PostgreSQL linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: PostgreSqlLinkedServiceTypeProperties;
 
   /**
@@ -9872,6 +10010,7 @@ model SybaseLinkedService extends LinkedService {
   /**
    * Sybase linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SybaseLinkedServiceTypeProperties;
 
   /**
@@ -9927,6 +10066,7 @@ model Db2LinkedService extends LinkedService {
   /**
    * DB2 linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: Db2LinkedServiceTypeProperties;
 
   /**
@@ -9992,6 +10132,7 @@ model TeradataLinkedService extends LinkedService {
   /**
    * Teradata linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: TeradataLinkedServiceTypeProperties;
 
   /**
@@ -10042,6 +10183,7 @@ model AzureMLLinkedService extends LinkedService {
   /**
    * Azure ML Studio Web Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureMLLinkedServiceTypeProperties;
 
   /**
@@ -10102,6 +10244,7 @@ model AzureMLServiceLinkedService extends LinkedService {
   /**
    * Azure ML Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureMLServiceLinkedServiceTypeProperties;
 
   /**
@@ -10162,6 +10305,7 @@ model OdbcLinkedService extends LinkedService {
   /**
    * ODBC linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: OdbcLinkedServiceTypeProperties;
 
   /**
@@ -10212,6 +10356,7 @@ model InformixLinkedService extends LinkedService {
   /**
    * Informix linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: InformixLinkedServiceTypeProperties;
 
   /**
@@ -10262,6 +10407,7 @@ model MicrosoftAccessLinkedService extends LinkedService {
   /**
    * Microsoft Access linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MicrosoftAccessLinkedServiceTypeProperties;
 
   /**
@@ -10312,6 +10458,7 @@ model HdfsLinkedService extends LinkedService {
   /**
    * HDFS linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HdfsLinkedServiceTypeProperties;
 
   /**
@@ -10357,6 +10504,7 @@ model ODataLinkedService extends LinkedService {
   /**
    * OData linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ODataLinkedServiceTypeProperties;
 
   /**
@@ -10524,6 +10672,7 @@ model CassandraLinkedService extends LinkedService {
   /**
    * Cassandra linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CassandraLinkedServiceTypeProperties;
 
   /**
@@ -10574,6 +10723,7 @@ model MongoDbLinkedService extends LinkedService {
   /**
    * MongoDB linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MongoDbLinkedServiceTypeProperties;
 
   /**
@@ -10644,6 +10794,7 @@ model MongoDbAtlasLinkedService extends LinkedService {
   /**
    * MongoDB Atlas linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MongoDbAtlasLinkedServiceTypeProperties;
 
   /**
@@ -10679,6 +10830,7 @@ model MongoDbV2LinkedService extends LinkedService {
   /**
    * MongoDB linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MongoDbV2LinkedServiceTypeProperties;
 
   /**
@@ -10709,6 +10861,7 @@ model CosmosDbMongoDbApiLinkedService extends LinkedService {
   /**
    * CosmosDB (MongoDB API) linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CosmosDbMongoDbApiLinkedServiceTypeProperties;
 
   /**
@@ -10744,6 +10897,7 @@ model AzureDataLakeStoreLinkedService extends LinkedService {
   /**
    * Azure Data Lake Store linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureDataLakeStoreLinkedServiceTypeProperties;
 
   /**
@@ -10814,6 +10968,7 @@ model AzureBlobFSLinkedService extends LinkedService {
   /**
    * Azure Data Lake Storage Gen2 linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureBlobFSLinkedServiceTypeProperties;
 
   /**
@@ -10894,6 +11049,7 @@ model Office365LinkedService extends LinkedService {
   /**
    * Office365 linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: Office365LinkedServiceTypeProperties;
 
   /**
@@ -10939,6 +11095,7 @@ model SalesforceLinkedService extends LinkedService {
   /**
    * Salesforce linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SalesforceLinkedServiceTypeProperties;
 
   /**
@@ -10989,6 +11146,7 @@ model SalesforceServiceCloudLinkedService extends LinkedService {
   /**
    * Salesforce Service Cloud linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SalesforceServiceCloudLinkedServiceTypeProperties;
 
   /**
@@ -11044,6 +11202,7 @@ model SapCloudForCustomerLinkedService extends LinkedService {
   /**
    * SAP Cloud for Customer linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapCloudForCustomerLinkedServiceTypeProperties;
 
   /**
@@ -11084,6 +11243,7 @@ model SapEccLinkedService extends LinkedService {
   /**
    * SAP ECC linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapEccLinkedServiceTypeProperties;
 
   /**
@@ -11124,6 +11284,7 @@ model SapOpenHubLinkedService extends LinkedService {
   /**
    * Properties specific to SAP Business Warehouse Open Hub Destination linked service type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapOpenHubLinkedServiceTypeProperties;
 
   /**
@@ -11199,6 +11360,7 @@ model SapOdpLinkedService extends LinkedService {
   /**
    * Properties specific to SAP ODP linked service type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapOdpLinkedServiceTypeProperties;
 
   /**
@@ -11309,6 +11471,7 @@ model RestServiceLinkedService extends LinkedService {
   /**
    * Rest Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: RestServiceLinkedServiceTypeProperties;
 
   /**
@@ -11419,6 +11582,7 @@ model TeamDeskLinkedService extends LinkedService {
   /**
    * TeamDesk linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: TeamDeskLinkedServiceTypeProperties;
 
   /**
@@ -11469,6 +11633,7 @@ model QuickbaseLinkedService extends LinkedService {
   /**
    * Quickbase linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: QuickbaseLinkedServiceTypeProperties;
 
   /**
@@ -11504,6 +11669,7 @@ model SmartsheetLinkedService extends LinkedService {
   /**
    * Smartsheet linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SmartsheetLinkedServiceTypeProperties;
 
   /**
@@ -11534,6 +11700,7 @@ model ZendeskLinkedService extends LinkedService {
   /**
    * Zendesk linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ZendeskLinkedServiceTypeProperties;
 
   /**
@@ -11584,6 +11751,7 @@ model DataworldLinkedService extends LinkedService {
   /**
    * Dataworld linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DataworldLinkedServiceTypeProperties;
 
   /**
@@ -11614,6 +11782,7 @@ model AppFiguresLinkedService extends LinkedService {
   /**
    * AppFigures linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AppFiguresLinkedServiceTypeProperties;
 
   /**
@@ -11649,6 +11818,7 @@ model AsanaLinkedService extends LinkedService {
   /**
    * Asana linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AsanaLinkedServiceTypeProperties;
 
   /**
@@ -11679,6 +11849,7 @@ model TwilioLinkedService extends LinkedService {
   /**
    * Twilio linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: TwilioLinkedServiceTypeProperties;
 
   /**
@@ -11709,6 +11880,7 @@ model GoogleSheetsLinkedService extends LinkedService {
   /**
    * GoogleSheets linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: GoogleSheetsLinkedServiceTypeProperties;
 
   /**
@@ -11739,6 +11911,7 @@ model AmazonS3LinkedService extends LinkedService {
   /**
    * Amazon S3 linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AmazonS3LinkedServiceTypeProperties;
 
   /**
@@ -11789,6 +11962,7 @@ model AmazonRedshiftLinkedService extends LinkedService {
   /**
    * Amazon Redshift linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AmazonRedshiftLinkedServiceTypeProperties;
 
   /**
@@ -11839,6 +12013,7 @@ model CustomDataSourceLinkedService extends LinkedService {
   /**
    * Custom linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: Record<unknown>;
 
   /**
@@ -11854,6 +12029,7 @@ model AzureSearchLinkedService extends LinkedService {
   /**
    * Windows Azure Search Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureSearchLinkedServiceTypeProperties;
 
   /**
@@ -11889,6 +12065,7 @@ model HttpLinkedService extends LinkedService {
   /**
    * Properties specific to this linked service type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HttpLinkedServiceTypeProperties;
 
   /**
@@ -11954,6 +12131,7 @@ model FtpServerLinkedService extends LinkedService {
   /**
    * Properties specific to this linked service type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: FtpServerLinkedServiceTypeProperties;
 
   /**
@@ -12014,6 +12192,7 @@ model SftpServerLinkedService extends LinkedService {
   /**
    * Properties specific to this linked service type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SftpServerLinkedServiceTypeProperties;
 
   /**
@@ -12089,6 +12268,7 @@ model SapBWLinkedService extends LinkedService {
   /**
    * Properties specific to this linked service type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapBWLinkedServiceTypeProperties;
 
   /**
@@ -12139,6 +12319,7 @@ model SapHanaLinkedService extends LinkedService {
   /**
    * Properties specific to this linked service type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapHanaLinkedServiceProperties;
 
   /**
@@ -12189,6 +12370,7 @@ model AmazonMWSLinkedService extends LinkedService {
   /**
    * Amazon Marketplace Web Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AmazonMWSLinkedServiceTypeProperties;
 
   /**
@@ -12259,6 +12441,7 @@ model AzurePostgreSqlLinkedService extends LinkedService {
   /**
    * Azure PostgreSQL linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzurePostgreSqlLinkedServiceTypeProperties;
 
   /**
@@ -12294,6 +12477,7 @@ model ConcurLinkedService extends LinkedService {
   /**
    * Concur Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ConcurLinkedServiceTypeProperties;
 
   /**
@@ -12354,6 +12538,7 @@ model CouchbaseLinkedService extends LinkedService {
   /**
    * Couchbase server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CouchbaseLinkedServiceTypeProperties;
 
   /**
@@ -12389,6 +12574,7 @@ model DrillLinkedService extends LinkedService {
   /**
    * Drill server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DrillLinkedServiceTypeProperties;
 
   /**
@@ -12424,6 +12610,7 @@ model EloquaLinkedService extends LinkedService {
   /**
    * Eloqua server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: EloquaLinkedServiceTypeProperties;
 
   /**
@@ -12479,6 +12666,7 @@ model GoogleBigQueryLinkedService extends LinkedService {
   /**
    * Google BigQuery service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: GoogleBigQueryLinkedServiceTypeProperties;
 
   /**
@@ -12559,6 +12747,7 @@ model GreenplumLinkedService extends LinkedService {
   /**
    * Greenplum Database linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: GreenplumLinkedServiceTypeProperties;
 
   /**
@@ -12594,6 +12783,7 @@ model HBaseLinkedService extends LinkedService {
   /**
    * HBase server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HBaseLinkedServiceTypeProperties;
 
   /**
@@ -12669,6 +12859,7 @@ model HiveLinkedService extends LinkedService {
   /**
    * Hive Server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HiveLinkedServiceTypeProperties;
 
   /**
@@ -12774,6 +12965,7 @@ model HubspotLinkedService extends LinkedService {
   /**
    * Hubspot Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HubspotLinkedServiceTypeProperties;
 
   /**
@@ -12834,6 +13026,7 @@ model ImpalaLinkedService extends LinkedService {
   /**
    * Impala server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ImpalaLinkedServiceTypeProperties;
 
   /**
@@ -12909,6 +13102,7 @@ model JiraLinkedService extends LinkedService {
   /**
    * Jira Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: JiraLinkedServiceTypeProperties;
 
   /**
@@ -12969,6 +13163,7 @@ model MagentoLinkedService extends LinkedService {
   /**
    * Magento server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MagentoLinkedServiceTypeProperties;
 
   /**
@@ -13019,6 +13214,7 @@ model MariaDBLinkedService extends LinkedService {
   /**
    * MariaDB server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MariaDBLinkedServiceTypeProperties;
 
   /**
@@ -13054,6 +13250,7 @@ model AzureMariaDBLinkedService extends LinkedService {
   /**
    * Azure Database for MariaDB linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureMariaDBLinkedServiceTypeProperties;
 
   /**
@@ -13089,6 +13286,7 @@ model MarketoLinkedService extends LinkedService {
   /**
    * Marketo server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: MarketoLinkedServiceTypeProperties;
 
   /**
@@ -13144,6 +13342,7 @@ model PaypalLinkedService extends LinkedService {
   /**
    * Paypal Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: PaypalLinkedServiceTypeProperties;
 
   /**
@@ -13199,6 +13398,7 @@ model PhoenixLinkedService extends LinkedService {
   /**
    * Phoenix server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: PhoenixLinkedServiceTypeProperties;
 
   /**
@@ -13279,6 +13479,7 @@ model PrestoLinkedService extends LinkedService {
   /**
    * Presto server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: PrestoLinkedServiceTypeProperties;
 
   /**
@@ -13369,6 +13570,7 @@ model QuickBooksLinkedService extends LinkedService {
   /**
    * QuickBooks server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: QuickBooksLinkedServiceTypeProperties;
 
   /**
@@ -13434,6 +13636,7 @@ model ServiceNowLinkedService extends LinkedService {
   /**
    * ServiceNow server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ServiceNowLinkedServiceTypeProperties;
 
   /**
@@ -13504,6 +13707,7 @@ model ShopifyLinkedService extends LinkedService {
   /**
    * Shopify Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ShopifyLinkedServiceTypeProperties;
 
   /**
@@ -13554,6 +13758,7 @@ model SparkLinkedService extends LinkedService {
   /**
    * Spark Server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SparkLinkedServiceTypeProperties;
 
   /**
@@ -13644,6 +13849,7 @@ model SquareLinkedService extends LinkedService {
   /**
    * Square Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SquareLinkedServiceTypeProperties;
 
   /**
@@ -13709,6 +13915,7 @@ model XeroLinkedService extends LinkedService {
   /**
    * Xero Service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: XeroLinkedServiceTypeProperties;
 
   /**
@@ -13737,9 +13944,9 @@ model XeroLinkedServiceTypeProperties {
   consumerKey?: SecretBase;
 
   /**
-* The private key from the .pem file that was generated for your Xero private application. You must include all the text from the .pem file, including the Unix line endings(
-).
-*/
+   * The private key from the .pem file that was generated for your Xero private application. You must include all the text from the .pem file, including the Unix line endings(
+   * ).
+   */
   privateKey?: SecretBase;
 
   /**
@@ -13770,6 +13977,7 @@ model ZohoLinkedService extends LinkedService {
   /**
    * Zoho server linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ZohoLinkedServiceTypeProperties;
 
   /**
@@ -13825,6 +14033,7 @@ model VerticaLinkedService extends LinkedService {
   /**
    * Vertica linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: VerticaLinkedServiceTypeProperties;
 
   /**
@@ -13860,6 +14069,7 @@ model NetezzaLinkedService extends LinkedService {
   /**
    * Netezza linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: NetezzaLinkedServiceTypeProperties;
 
   /**
@@ -13895,6 +14105,7 @@ model SalesforceMarketingCloudLinkedService extends LinkedService {
   /**
    * Salesforce Marketing Cloud linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SalesforceMarketingCloudLinkedServiceTypeProperties;
 
   /**
@@ -13950,6 +14161,7 @@ model HDInsightOnDemandLinkedService extends LinkedService {
   /**
    * HDInsight ondemand linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HDInsightOnDemandLinkedServiceTypeProperties;
 
   /**
@@ -14165,6 +14377,7 @@ model AzureDataLakeAnalyticsLinkedService extends LinkedService {
   /**
    * Azure Data Lake Analytics linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureDataLakeAnalyticsLinkedServiceTypeProperties;
 
   /**
@@ -14225,6 +14438,7 @@ model AzureDatabricksLinkedService extends LinkedService {
   /**
    * Azure Databricks linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureDatabricksLinkedServiceTypeProperties;
 
   /**
@@ -14340,6 +14554,7 @@ model AzureDatabricksDeltaLakeLinkedService extends LinkedService {
   /**
    * Azure Databricks Delta Lake linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureDatabricksDetltaLakeLinkedServiceTypeProperties;
 
   /**
@@ -14390,6 +14605,7 @@ model ResponsysLinkedService extends LinkedService {
   /**
    * Responsys linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ResponsysLinkedServiceTypeProperties;
 
   /**
@@ -14445,6 +14661,7 @@ model DynamicsAXLinkedService extends LinkedService {
   /**
    * Dynamics AX linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DynamicsAXLinkedServiceTypeProperties;
 
   /**
@@ -14495,6 +14712,7 @@ model OracleServiceCloudLinkedService extends LinkedService {
   /**
    * Oracle Service Cloud linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: OracleServiceCloudLinkedServiceTypeProperties;
 
   /**
@@ -14550,6 +14768,7 @@ model GoogleAdWordsLinkedService extends LinkedService {
   /**
    * Google AdWords service linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: GoogleAdWordsLinkedServiceTypeProperties;
 
   /**
@@ -14650,6 +14869,7 @@ model SapTableLinkedService extends LinkedService {
   /**
    * Properties specific to this linked service type.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SapTableLinkedServiceTypeProperties;
 
   /**
@@ -14750,6 +14970,7 @@ model AzureDataExplorerLinkedService extends LinkedService {
   /**
    * Azure Data Explorer (Kusto) linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureDataExplorerLinkedServiceTypeProperties;
 
   /**
@@ -14800,6 +15021,7 @@ model AzureFunctionLinkedService extends LinkedService {
   /**
    * Azure Function linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureFunctionLinkedServiceTypeProperties;
 
   /**
@@ -14850,6 +15072,7 @@ model SnowflakeLinkedService extends LinkedService {
   /**
    * Snowflake linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SnowflakeLinkedServiceTypeProperties;
 
   /**
@@ -14885,6 +15108,7 @@ model SharePointOnlineListLinkedService extends LinkedService {
   /**
    * SharePoint Online List linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SharePointOnlineListLinkedServiceTypeProperties;
 
   /**
@@ -14930,6 +15154,7 @@ model AzureSynapseArtifactsLinkedService extends LinkedService {
   /**
    * Azure Synapse Analytics (Artifacts) linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureSynapseArtifactsLinkedServiceTypeProperties;
 
   /**
@@ -14965,6 +15190,7 @@ model LakeHouseLinkedService extends LinkedService {
   /**
    * Microsoft Fabric LakeHouse linked service properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: LakeHouseLinkedServiceTypeProperties;
 
   /**
@@ -16596,6 +16822,7 @@ model CopyActivity extends ExecutionActivity {
   /**
    * Copy activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CopyActivityTypeProperties;
 
   /**
@@ -20205,6 +20432,7 @@ model HDInsightHiveActivity extends ExecutionActivity {
   /**
    * HDInsight Hive activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HDInsightHiveActivityTypeProperties;
 
   /**
@@ -20265,6 +20493,7 @@ model HDInsightPigActivity extends ExecutionActivity {
   /**
    * HDInsight Pig activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HDInsightPigActivityTypeProperties;
 
   /**
@@ -20315,6 +20544,7 @@ model HDInsightMapReduceActivity extends ExecutionActivity {
   /**
    * HDInsight MapReduce activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HDInsightMapReduceActivityTypeProperties;
 
   /**
@@ -20375,6 +20605,7 @@ model HDInsightStreamingActivity extends ExecutionActivity {
   /**
    * HDInsight streaming activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HDInsightStreamingActivityTypeProperties;
 
   /**
@@ -20455,6 +20686,7 @@ model HDInsightSparkActivity extends ExecutionActivity {
   /**
    * HDInsight spark activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: HDInsightSparkActivityTypeProperties;
 
   /**
@@ -20515,6 +20747,7 @@ model ExecuteSsisPackageActivity extends ExecutionActivity {
   /**
    * Execute SSIS package activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ExecuteSsisPackageActivityTypeProperties;
 
   /**
@@ -20605,6 +20838,7 @@ model SsisPackageLocation {
   /**
    * SSIS package location properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties?: SsisPackageLocationTypeProperties;
 }
 
@@ -20760,6 +20994,7 @@ model SsisLogLocation {
   /**
    * SSIS package execution log location properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SsisLogLocationTypeProperties;
 }
 
@@ -20785,6 +21020,7 @@ model CustomActivity extends ExecutionActivity {
   /**
    * Custom activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CustomActivityTypeProperties;
 
   /**
@@ -20855,6 +21091,7 @@ model SqlServerStoredProcedureActivity extends ExecutionActivity {
   /**
    * SQL stored procedure activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SqlServerStoredProcedureActivityTypeProperties;
 
   /**
@@ -20890,6 +21127,7 @@ model ExecutePipelineActivity extends ControlActivity {
   /**
    * Execute pipeline activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ExecutePipelineActivityTypeProperties;
 
   /**
@@ -20935,6 +21173,7 @@ model DeleteActivity extends ExecutionActivity {
   /**
    * Delete activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DeleteActivityTypeProperties;
 
   /**
@@ -20986,6 +21225,7 @@ model AzureDataExplorerCommandActivity extends ExecutionActivity {
   /**
    * Azure Data Explorer command activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureDataExplorerCommandActivityTypeProperties;
 
   /**
@@ -21016,6 +21256,7 @@ model LookupActivity extends ExecutionActivity {
   /**
    * Lookup activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: LookupActivityTypeProperties;
 
   /**
@@ -21051,6 +21292,7 @@ model WebActivity extends ExecutionActivity {
   /**
    * Web activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: WebActivityTypeProperties;
 
   /**
@@ -21156,6 +21398,7 @@ model GetMetadataActivity extends ExecutionActivity {
   /**
    * GetMetadata activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: GetMetadataActivityTypeProperties;
 
   /**
@@ -21196,6 +21439,7 @@ model IfConditionActivity extends ControlActivity {
   /**
    * IfCondition activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: IfConditionActivityTypeProperties;
 
   /**
@@ -21231,6 +21475,7 @@ model SwitchActivity extends ControlActivity {
   /**
    * Switch activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SwitchActivityTypeProperties;
 
   /**
@@ -21281,6 +21526,7 @@ model ForEachActivity extends ControlActivity {
   /**
    * ForEach activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ForEachActivityTypeProperties;
 
   /**
@@ -21322,6 +21568,7 @@ model AzureMLBatchExecutionActivity extends ExecutionActivity {
   /**
    * Azure ML Batch Execution activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureMLBatchExecutionActivityTypeProperties;
 
   /**
@@ -21372,6 +21619,7 @@ model AzureMLUpdateResourceActivity extends ExecutionActivity {
   /**
    * Azure ML Update Resource management activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureMLUpdateResourceActivityTypeProperties;
 
   /**
@@ -21407,6 +21655,7 @@ model AzureMLExecutePipelineActivity extends ExecutionActivity {
   /**
    * Azure ML Execute Pipeline activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureMLExecutePipelineActivityTypeProperties;
 
   /**
@@ -21467,6 +21716,7 @@ model DataLakeAnalyticsUsqlActivity extends ExecutionActivity {
   /**
    * Data Lake Analytics U-SQL activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DataLakeAnalyticsUsqlActivityTypeProperties;
 
   /**
@@ -21522,6 +21772,7 @@ model WaitActivity extends ControlActivity {
   /**
    * Wait activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: WaitActivityTypeProperties;
 
   /**
@@ -21547,6 +21798,7 @@ model FailActivity extends ControlActivity {
   /**
    * Fail activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: FailActivityTypeProperties;
 
   /**
@@ -21577,6 +21829,7 @@ model UntilActivity extends ControlActivity {
   /**
    * Until activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: UntilActivityTypeProperties;
 
   /**
@@ -21612,6 +21865,7 @@ model ValidationActivity extends ControlActivity {
   /**
    * Validation activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ValidationActivityTypeProperties;
 
   /**
@@ -21657,6 +21911,7 @@ model FilterActivity extends ControlActivity {
   /**
    * Filter activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: FilterActivityTypeProperties;
 
   /**
@@ -21687,6 +21942,7 @@ model DatabricksNotebookActivity extends ExecutionActivity {
   /**
    * Databricks Notebook activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DatabricksNotebookActivityTypeProperties;
 
   /**
@@ -21722,6 +21978,7 @@ model DatabricksSparkJarActivity extends ExecutionActivity {
   /**
    * Databricks SparkJar activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DatabricksSparkJarActivityTypeProperties;
 
   /**
@@ -21757,6 +22014,7 @@ model DatabricksSparkPythonActivity extends ExecutionActivity {
   /**
    * Databricks SparkPython activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: DatabricksSparkPythonActivityTypeProperties;
 
   /**
@@ -21792,6 +22050,7 @@ model SetVariableActivity extends ControlActivity {
   /**
    * Set Variable activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SetVariableActivityTypeProperties;
 
   /**
@@ -21847,6 +22106,7 @@ model AppendVariableActivity extends ControlActivity {
   /**
    * Append Variable activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AppendVariableActivityTypeProperties;
 
   /**
@@ -21877,6 +22137,7 @@ model AzureFunctionActivity extends ExecutionActivity {
   /**
    * Azure Function activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: AzureFunctionActivityTypeProperties;
 
   /**
@@ -21917,6 +22178,7 @@ model WebHookActivity extends ControlActivity {
   /**
    * WebHook activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: WebHookActivityTypeProperties;
 
   /**
@@ -21977,6 +22239,7 @@ model ExecuteDataFlowActivity extends ExecutionActivity {
   /**
    * Execute data flow activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ExecuteDataFlowActivityTypeProperties;
 
   /**
@@ -22052,6 +22315,7 @@ model ExecuteWranglingDataflowActivity extends Activity {
   /**
    * Execute power query activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ExecutePowerQueryActivityTypeProperties;
 
   /**
@@ -22103,6 +22367,7 @@ model ScriptActivity extends ExecutionActivity {
   /**
    * Script activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ScriptActivityTypeProperties;
 
   /**
@@ -22223,6 +22488,7 @@ model SynapseNotebookActivity extends ExecutionActivity {
   /**
    * Execute Synapse notebook activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SynapseNotebookActivityTypeProperties;
 
   /**
@@ -22353,6 +22619,7 @@ model SynapseSparkJobDefinitionActivity extends ExecutionActivity {
   /**
    * Execute spark job activity properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: SynapseSparkJobActivityTypeProperties;
 
   /**
@@ -22480,6 +22747,7 @@ model ScheduleTrigger extends MultiplePipelineTrigger {
   /**
    * Schedule Trigger properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ScheduleTriggerTypeProperties;
 
   /**
@@ -22587,6 +22855,7 @@ model BlobTrigger extends MultiplePipelineTrigger {
   /**
    * Blob Trigger properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: BlobTriggerTypeProperties;
 
   /**
@@ -22622,6 +22891,7 @@ model BlobEventsTrigger extends MultiplePipelineTrigger {
   /**
    * Blob Events Trigger properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: BlobEventsTriggerTypeProperties;
 
   /**
@@ -22667,6 +22937,7 @@ model CustomEventsTrigger extends MultiplePipelineTrigger {
   /**
    * Custom Events Trigger properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: CustomEventsTriggerTypeProperties;
 
   /**
@@ -22712,6 +22983,7 @@ model TumblingWindowTrigger extends Trigger {
   /**
    * Tumbling Window Trigger properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: TumblingWindowTriggerTypeProperties;
 
   /**
@@ -22878,6 +23150,7 @@ model RerunTumblingWindowTrigger extends Trigger {
   /**
    * Rerun Trigger properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: RerunTumblingWindowTriggerTypeProperties;
 
   /**
@@ -22927,6 +23200,7 @@ model ChainingTrigger extends Trigger {
   /**
    * Chaining Trigger properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ChainingTriggerTypeProperties;
 
   /**
@@ -22957,6 +23231,7 @@ model ServicePrincipalCredential extends Credential {
   /**
    * Service Principal credential properties.
    */
+  @extension("x-ms-client-flatten", true)
   typeProperties: ServicePrincipalCredentialTypeProperties;
 
   /**

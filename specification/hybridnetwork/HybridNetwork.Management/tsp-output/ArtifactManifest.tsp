@@ -15,8 +15,14 @@ namespace Microsoft.HybridNetwork;
 /**
  * Artifact manifest properties.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ArtifactStore)
-model ArtifactManifest is TrackedResource<ArtifactManifestPropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ArtifactManifestPropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model ArtifactManifest extends TrackedResourceBase {
   /**
    * The name of the artifact manifest.
    */
@@ -26,6 +32,12 @@ model ArtifactManifest is TrackedResource<ArtifactManifestPropertiesFormat> {
   @key("artifactManifestName")
   @segment("artifactManifests")
   name: string;
+
+  /**
+   * Artifact manifest properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ArtifactManifestPropertiesFormat;
 }
 
 @armResourceOperations

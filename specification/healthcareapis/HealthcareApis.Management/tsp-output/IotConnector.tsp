@@ -15,8 +15,12 @@ namespace Microsoft.HealthcareApis;
 /**
  * IoT Connector definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model IotConnector is TrackedResource<IotConnectorProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(IotConnectorProperties)
+@includeInapplicableMetadataInPayload(false)
+model IotConnector extends TrackedResourceBase {
   /**
    * The name of IoT Connector resource.
    */
@@ -26,6 +30,12 @@ model IotConnector is TrackedResource<IotConnectorProperties> {
   @key("iotConnectorName")
   @segment("iotconnectors")
   name: string;
+
+  /**
+   * IoT Connector configuration.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: IotConnectorProperties;
 }
 
 @armResourceOperations

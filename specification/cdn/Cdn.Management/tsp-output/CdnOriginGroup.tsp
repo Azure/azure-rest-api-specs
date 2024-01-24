@@ -15,8 +15,12 @@ namespace Microsoft.Cdn;
 /**
  * Origin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CdnEndpoint)
-model CdnOriginGroup is ProxyResource<OriginGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(OriginGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model CdnOriginGroup extends ProxyResource {
   /**
    * Name of the origin group which is unique within the endpoint.
    */
@@ -24,6 +28,12 @@ model CdnOriginGroup is ProxyResource<OriginGroupProperties> {
   @key("originGroupName")
   @segment("originGroups")
   name: string;
+
+  /**
+   * The JSON object that contains the properties of the origin group.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: OriginGroupProperties;
 }
 
 @armResourceOperations

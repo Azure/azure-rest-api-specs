@@ -12,7 +12,11 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevSpaces;
 
-model Controller is TrackedResource<ControllerProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ControllerProperties)
+@includeInapplicableMetadataInPayload(false)
+model Controller extends TrackedResource {
   /**
    * Name of the resource.
    */
@@ -24,7 +28,13 @@ model Controller is TrackedResource<ControllerProperties> {
   @segment("controllers")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Model representing SKU for Azure Dev Spaces Controller.
+   */
+  sku: Sku;
+
+  @extension("x-ms-client-flatten", true)
+  properties: ControllerProperties;
 }
 
 @armResourceOperations

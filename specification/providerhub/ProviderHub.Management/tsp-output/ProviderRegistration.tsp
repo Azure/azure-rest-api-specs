@@ -12,8 +12,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ProviderHub;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model ProviderRegistration is ProxyResource<ProviderRegistrationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ProviderRegistrationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ProviderRegistration extends ProxyResourceBase {
   /**
    * The name of the resource provider hosted within ProviderHub.
    */
@@ -21,6 +27,9 @@ model ProviderRegistration is ProxyResource<ProviderRegistrationProperties> {
   @key("providerNamespace")
   @segment("providerRegistrations")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: ProviderRegistrationProperties;
 }
 
 @armResourceOperations

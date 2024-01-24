@@ -15,8 +15,14 @@ namespace Microsoft.Support;
 /**
  * Object that represents a Communication resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SupportTicketDetails)
-model CommunicationDetails is ProxyResource<CommunicationDetailsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  CommunicationDetailsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model CommunicationDetails extends ProxyResourceBase {
   /**
    * Communication name.
    */
@@ -24,6 +30,12 @@ model CommunicationDetails is ProxyResource<CommunicationDetailsProperties> {
   @key("communicationName")
   @segment("communications")
   name: string;
+
+  /**
+   * Properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CommunicationDetailsProperties;
 }
 
 @armResourceOperations

@@ -15,9 +15,14 @@ namespace Microsoft.SignalRService;
 /**
  * Describes a Shared Private Link Resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WebPubSub)
-model WebPubSubSharedPrivateLink
-  is ProxyResource<SharedPrivateLinkResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SharedPrivateLinkResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WebPubSubSharedPrivateLink extends ProxyResourceBase {
   /**
    * The name of the shared private link resource
    */
@@ -25,6 +30,12 @@ model WebPubSubSharedPrivateLink
   @key("sharedPrivateLinkResourceName")
   @segment("sharedPrivateLinkResources")
   name: string;
+
+  /**
+   * Describes the properties of an existing Shared Private Link Resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SharedPrivateLinkResourceProperties;
 }
 
 @armResourceOperations

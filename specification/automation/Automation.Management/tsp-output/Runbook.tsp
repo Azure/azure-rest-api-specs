@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the runbook type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model Runbook is TrackedResource<RunbookProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RunbookProperties)
+@includeInapplicableMetadataInPayload(false)
+model Runbook extends TrackedResourceBase {
   /**
    * The runbook name.
    */
@@ -29,6 +33,12 @@ model Runbook is TrackedResource<RunbookProperties> {
    * Gets or sets the etag of the resource.
    */
   etag?: string;
+
+  /**
+   * Gets or sets the runbook properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RunbookProperties;
 }
 
 @armResourceOperations

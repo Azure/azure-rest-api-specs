@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
  * Microsoft Device Update resource provider.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "DeviceUpdate",
 })

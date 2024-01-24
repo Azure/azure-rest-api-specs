@@ -14,7 +14,11 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The Network Tap resource definition.
  */
-model NetworkTap is TrackedResource<NetworkTapProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(NetworkTapProperties)
+@includeInapplicableMetadataInPayload(false)
+model NetworkTap extends TrackedResourceBase {
   /**
    * Name of the Network Tap.
    */
@@ -22,6 +26,12 @@ model NetworkTap is TrackedResource<NetworkTapProperties> {
   @key("networkTapName")
   @segment("networkTaps")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: NetworkTapProperties;
 }
 
 @armResourceOperations

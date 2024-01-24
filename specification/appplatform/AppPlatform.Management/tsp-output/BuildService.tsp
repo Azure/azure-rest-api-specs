@@ -15,8 +15,12 @@ namespace Microsoft.AppPlatform;
 /**
  * Build service resource payload
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-model BuildService is ProxyResource<BuildServiceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(BuildServiceProperties)
+@includeInapplicableMetadataInPayload(false)
+model BuildService extends ProxyResource {
   /**
    * The name of the build service resource.
    */
@@ -24,6 +28,12 @@ model BuildService is ProxyResource<BuildServiceProperties> {
   @key("buildServiceName")
   @segment("buildServices")
   name: string;
+
+  /**
+   * Properties of the build resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BuildServiceProperties;
 }
 
 @armResourceOperations

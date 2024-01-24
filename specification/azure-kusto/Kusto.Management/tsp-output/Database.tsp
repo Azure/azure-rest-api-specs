@@ -27,7 +27,10 @@ model Database is ProxyResource<{}> {
   @segment("databases")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Kind of the database
+   */
+  kind: Kind;
 }
 
 @armResourceOperations

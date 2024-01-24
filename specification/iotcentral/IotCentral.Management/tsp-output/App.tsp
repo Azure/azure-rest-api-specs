@@ -14,7 +14,11 @@ namespace Microsoft.IoTCentral;
 /**
  * The IoT Central application.
  */
-model App is TrackedResource<AppProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AppProperties)
+@includeInapplicableMetadataInPayload(false)
+model App extends TrackedResourceBase {
   /**
    * The ARM resource name of the IoT Central application.
    */
@@ -22,6 +26,12 @@ model App is TrackedResource<AppProperties> {
   @key("resourceName")
   @segment("iotApps")
   name: string;
+
+  /**
+   * The common properties of an IoT Central application.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AppProperties;
 
   ...Azure.ResourceManager.ManagedSystemAssignedIdentity;
   ...Azure.ResourceManager.ResourceSku;

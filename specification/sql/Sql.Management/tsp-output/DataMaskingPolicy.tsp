@@ -15,14 +15,28 @@ namespace Microsoft.Sql;
 /**
  * Represents a database data masking policy.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("Default")
 @parentResource(Database)
-model DataMaskingPolicy is ProxyResource<DataMaskingPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DataMaskingPolicyProperties)
+@includeInapplicableMetadataInPayload(false)
+model DataMaskingPolicy extends ProxyResource {
   @key("dataMaskingPolicy")
   @segment("dataMaskingPolicies")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * The kind of data masking policy. Metadata, used for Azure portal.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * The properties of the data masking policy.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataMaskingPolicyProperties;
 }
 
 @armResourceOperations

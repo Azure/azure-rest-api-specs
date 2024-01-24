@@ -15,8 +15,12 @@ namespace Microsoft.MobileNetwork;
 /**
  * Data network resource. Must be created in the same location as its parent mobile network.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MobileNetwork)
-model DataNetwork is TrackedResource<DataNetworkPropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(DataNetworkPropertiesFormat)
+@includeInapplicableMetadataInPayload(false)
+model DataNetwork extends TrackedResourceBase {
   /**
    * The name of the data network.
    */
@@ -26,6 +30,12 @@ model DataNetwork is TrackedResource<DataNetworkPropertiesFormat> {
   @key("dataNetworkName")
   @segment("dataNetworks")
   name: string;
+
+  /**
+   * Data network properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataNetworkPropertiesFormat;
 }
 
 @armResourceOperations

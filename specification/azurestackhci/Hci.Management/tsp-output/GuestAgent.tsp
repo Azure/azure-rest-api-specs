@@ -15,12 +15,22 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Defines the GuestAgent.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(VirtualMachineInstance)
-model GuestAgent is ProxyResource<GuestAgentProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(GuestAgentProperties)
+@includeInapplicableMetadataInPayload(false)
+model GuestAgent extends ProxyResourceBase {
   @key("guestAgent")
   @segment("guestAgents")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: GuestAgentProperties;
 }
 
 @armResourceOperations

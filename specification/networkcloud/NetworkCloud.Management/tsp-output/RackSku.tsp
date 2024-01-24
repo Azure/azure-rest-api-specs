@@ -14,8 +14,12 @@ namespace Microsoft.NetworkCloud;
 /**
  * RackSku represents the SKU information of the rack.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model RackSku is ProxyResource<RackSkuProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RackSkuProperties)
+@includeInapplicableMetadataInPayload(false)
+model RackSku extends ProxyResourceBase {
   /**
    * The name of the rack SKU.
    */
@@ -23,6 +27,12 @@ model RackSku is ProxyResource<RackSkuProperties> {
   @key("rackSkuName")
   @segment("rackSkus")
   name: string;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: RackSkuProperties;
 }
 
 @armResourceOperations

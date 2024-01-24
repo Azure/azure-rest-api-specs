@@ -14,8 +14,12 @@ namespace Microsoft.DataShare;
 /**
  * A consumer Invitation data transfer object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model ConsumerInvitation is ProxyResource<ConsumerInvitationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ConsumerInvitationProperties)
+@includeInapplicableMetadataInPayload(false)
+model ConsumerInvitation extends ProxyDto {
   /**
    * An invitation id
    */
@@ -23,6 +27,12 @@ model ConsumerInvitation is ProxyResource<ConsumerInvitationProperties> {
   @key("invitationId")
   @segment("consumerInvitations")
   name: string;
+
+  /**
+   * Properties on the account
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ConsumerInvitationProperties;
 }
 
 @armResourceOperations

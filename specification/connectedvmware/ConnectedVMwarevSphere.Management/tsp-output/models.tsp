@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -169,44 +171,44 @@ model ResourcePoolProperties {
   moName?: string;
 
   /**
-* Gets or sets CPUSharesLevel which specifies the CPU allocation level for this pool.
-This property is used in relative allocation between resource consumers.
-*/
+   * Gets or sets CPUSharesLevel which specifies the CPU allocation level for this pool.
+   * This property is used in relative allocation between resource consumers.
+   */
   @visibility("read")
   cpuSharesLevel?: string;
 
   /**
-* Gets or sets CPUReservationMHz which specifies the CPU size in MHz that is guaranteed
-to be available.
-*/
+   * Gets or sets CPUReservationMHz which specifies the CPU size in MHz that is guaranteed
+   * to be available.
+   */
   @visibility("read")
   cpuReservationMHz?: int64;
 
   /**
-* Gets or sets CPULimitMHz which specifies a CPU usage limit in MHz.
-Utilization will not exceed this limit even if there are available resources.
-*/
+   * Gets or sets CPULimitMHz which specifies a CPU usage limit in MHz.
+   * Utilization will not exceed this limit even if there are available resources.
+   */
   @visibility("read")
   cpuLimitMHz?: int64;
 
   /**
-* Gets or sets CPUSharesLevel which specifies the memory allocation level for this pool.
-This property is used in relative allocation between resource consumers.
-*/
+   * Gets or sets CPUSharesLevel which specifies the memory allocation level for this pool.
+   * This property is used in relative allocation between resource consumers.
+   */
   @visibility("read")
   memSharesLevel?: string;
 
   /**
-* Gets or sets MemReservationMB which specifies the guaranteed available memory in
-megabytes.
-*/
+   * Gets or sets MemReservationMB which specifies the guaranteed available memory in
+   * megabytes.
+   */
   @visibility("read")
   memReservationMB?: int64;
 
   /**
-* Gets or sets MemLimitMB specifies a memory usage limit in megabytes.
-Utilization will not exceed the specified limit even if there are available resources.
-*/
+   * Gets or sets MemLimitMB specifies a memory usage limit in megabytes.
+   * Utilization will not exceed the specified limit even if there are available resources.
+   */
   @visibility("read")
   memLimitMB?: int64;
 
@@ -662,9 +664,9 @@ model VirtualMachineTemplateProperties {
   vCenterId?: string;
 
   /**
-* Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine
-template.
-*/
+   * Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine
+   * template.
+   */
   moRefId?: string;
 
   /**
@@ -691,9 +693,9 @@ template.
   numCPUs?: int32;
 
   /**
-* Gets or sets the number of cores per socket for the template.
-Defaults to 1 if unspecified.
-*/
+   * Gets or sets the number of cores per socket for the template.
+   * Defaults to 1 if unspecified.
+   */
   @visibility("read")
   numCoresPerSocket?: int32;
 
@@ -807,9 +809,9 @@ model NetworkInterface {
   powerOnBoot?: PowerOnBootOption;
 
   /**
-* Gets or sets the vCenter MoRef (Managed Object Reference) ID of the virtual network
-that the nic is connected to.
-*/
+   * Gets or sets the vCenter MoRef (Managed Object Reference) ID of the virtual network
+   * that the nic is connected to.
+   */
   @visibility("read")
   networkMoRefId?: string;
 
@@ -1389,6 +1391,7 @@ model VirtualMachineInstanceUpdate {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineInstanceUpdateProperties;
 }
 
@@ -1777,9 +1780,9 @@ model VirtualMachineTemplateInventoryItem extends InventoryItemProperties {
   numCPUs?: int32;
 
   /**
-* Gets or sets the number of cores per socket for the template.
-Defaults to 1 if unspecified.
-*/
+   * Gets or sets the number of cores per socket for the template.
+   * Defaults to 1 if unspecified.
+   */
   numCoresPerSocket?: int32;
 
   /**

@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1543,6 +1545,7 @@ model AFDDomainUpdateParameters {
   /**
    * The JSON object that contains the properties of the domain to create.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AFDDomainUpdatePropertiesParameters;
 }
 
@@ -1593,6 +1596,7 @@ model AFDEndpointUpdateParameters {
   /**
    * The JSON object containing endpoint update parameters.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AFDEndpointPropertiesUpdateParameters;
 }
 
@@ -1743,6 +1747,7 @@ model AFDOriginGroupUpdateParameters {
   /**
    * The JSON object that contains the properties of the origin group.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AFDOriginGroupUpdatePropertiesParameters;
 }
 
@@ -1861,6 +1866,7 @@ model AFDOriginUpdateParameters {
   /**
    * The JSON object that contains the properties of the origin.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AFDOriginUpdatePropertiesParameters;
 }
 
@@ -1996,6 +2002,7 @@ model RouteUpdateParameters {
   /**
    * The JSON object that contains the properties of the domain to create.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RouteUpdatePropertiesParameters;
 }
 
@@ -2068,6 +2075,7 @@ model RuleUpdateParameters {
   /**
    * The JSON object that contains the properties of the rule to update.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RuleUpdatePropertiesParameters;
 }
 
@@ -2101,6 +2109,7 @@ model SecurityPolicyUpdateParameters {
   /**
    * The json object that contains properties required to update a security policy
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SecurityPolicyUpdateProperties;
 }
 
@@ -2305,21 +2314,21 @@ model ComponentsKpo1PjSchemasWafrankingsresponsePropertiesDataItemsPropertiesMet
 }
 
 /**
-* Standard_Verizon = The SKU name for a Standard Verizon CDN profile.
-Premium_Verizon = The SKU name for a Premium Verizon CDN profile.
-Custom_Verizon = The SKU name for a Custom Verizon CDN profile.
-Standard_Akamai = The SKU name for an Akamai CDN profile.
-Standard_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using GB based billing model.
-Standard_Microsoft = The SKU name for a Standard Microsoft CDN profile.
-Standard_AzureFrontDoor =  The SKU name for an Azure Front Door Standard profile.
-Premium_AzureFrontDoor = The SKU name for an Azure Front Door Premium profile.
-Standard_955BandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using 95-5 peak bandwidth billing model.
-Standard_AvgBandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using monthly average peak bandwidth billing model.
-StandardPlus_ChinaCdn = The SKU name for a China CDN profile for live-streaming using GB based billing model.
-StandardPlus_955BandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using 95-5 peak bandwidth billing model.
-StandardPlus_AvgBandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using monthly average peak bandwidth billing model.
-
-*/
+ * Standard_Verizon = The SKU name for a Standard Verizon CDN profile.
+ * Premium_Verizon = The SKU name for a Premium Verizon CDN profile.
+ * Custom_Verizon = The SKU name for a Custom Verizon CDN profile.
+ * Standard_Akamai = The SKU name for an Akamai CDN profile.
+ * Standard_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using GB based billing model.
+ * Standard_Microsoft = The SKU name for a Standard Microsoft CDN profile.
+ * Standard_AzureFrontDoor =  The SKU name for an Azure Front Door Standard profile.
+ * Premium_AzureFrontDoor = The SKU name for an Azure Front Door Premium profile.
+ * Standard_955BandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using 95-5 peak bandwidth billing model.
+ * Standard_AvgBandWidth_ChinaCdn = The SKU name for a China CDN profile for VOD, Web and download scenarios using monthly average peak bandwidth billing model.
+ * StandardPlus_ChinaCdn = The SKU name for a China CDN profile for live-streaming using GB based billing model.
+ * StandardPlus_955BandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using 95-5 peak bandwidth billing model.
+ * StandardPlus_AvgBandWidth_ChinaCdn = The SKU name for a China CDN live-streaming profile using monthly average peak bandwidth billing model.
+ *
+ */
 model Sku {
   /**
    * Name of the pricing tier.
@@ -2368,6 +2377,7 @@ model ProfileUpdateParameters {
   /**
    * The JSON object containing profile update parameters.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ProfilePropertiesUpdateParameters;
 }
 
@@ -2490,6 +2500,7 @@ model DeepCreatedOrigin {
   /**
    * Properties of the origin created on the CDN endpoint.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeepCreatedOriginProperties;
 }
 
@@ -2579,6 +2590,7 @@ model DeepCreatedOriginGroup {
   /**
    * Properties of the origin group created on the CDN endpoint.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeepCreatedOriginGroupProperties;
 }
 
@@ -2926,6 +2938,7 @@ model EndpointUpdateParameters {
   /**
    * The JSON object containing endpoint update parameters.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EndpointPropertiesUpdateParameters;
 }
 
@@ -3047,6 +3060,7 @@ model OriginUpdateParameters {
   /**
    * The JSON object that contains the properties of the origin.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OriginUpdatePropertiesParameters;
 }
 
@@ -3100,6 +3114,7 @@ model OriginGroupUpdateParameters {
   /**
    * The JSON object that contains the properties of the origin group.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OriginGroupUpdatePropertiesParameters;
 }
 
@@ -3110,6 +3125,7 @@ model CustomDomainParameters {
   /**
    * The JSON object that contains the properties of the custom domain to create.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CustomDomainPropertiesParameters;
 }
 
@@ -3321,6 +3337,7 @@ model EdgeNode extends ProxyResource {
   /**
    * The JSON object that contains the properties required to create an edgenode.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EdgeNodeProperties;
 }
 
@@ -3651,6 +3668,7 @@ model ManagedRuleSetDefinition extends Resource {
   /**
    * Describes managed rule set definition properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ManagedRuleSetDefinitionProperties;
 
   /**

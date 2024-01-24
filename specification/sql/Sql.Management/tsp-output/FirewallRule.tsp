@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A server firewall rule.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model FirewallRule is ProxyResource<ServerFirewallRuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ServerFirewallRuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model FirewallRule extends ProxyResourceWithWritableName {
   /**
    * The name of the firewall rule.
    */
@@ -24,6 +28,12 @@ model FirewallRule is ProxyResource<ServerFirewallRuleProperties> {
   @key("firewallRuleName")
   @segment("firewallRules")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerFirewallRuleProperties;
 }
 
 @armResourceOperations

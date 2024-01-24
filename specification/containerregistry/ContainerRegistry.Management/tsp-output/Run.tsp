@@ -15,8 +15,12 @@ namespace Microsoft.ContainerRegistry;
 /**
  * Run resource properties
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model Run is ProxyResource<RunProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RunProperties)
+@includeInapplicableMetadataInPayload(false)
+model Run extends ProxyResourceBase {
   /**
    * The run ID.
    */
@@ -24,6 +28,12 @@ model Run is ProxyResource<RunProperties> {
   @key("runId")
   @segment("runs")
   name: string;
+
+  /**
+   * The properties of a run.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RunProperties;
 }
 
 @armResourceOperations

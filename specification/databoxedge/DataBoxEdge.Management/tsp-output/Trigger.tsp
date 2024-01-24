@@ -26,7 +26,10 @@ model Trigger is ProxyResource<{}> {
   @segment("triggers")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Trigger Kind.
+   */
+  kind: TriggerEventType;
 }
 
 @armResourceOperations

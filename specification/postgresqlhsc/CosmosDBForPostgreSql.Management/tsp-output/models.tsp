@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -262,6 +264,7 @@ model SimplePrivateEndpointConnection extends ProxyResource {
   /**
    * Properties of the private endpoint connection.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateEndpointConnectionSimpleProperties;
 }
 
@@ -351,6 +354,7 @@ model ClusterForUpdate {
   /**
    * Properties of the cluster.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterPropertiesForUpdate;
 
   /**

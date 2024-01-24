@@ -15,8 +15,12 @@ namespace Microsoft.StorageSync;
 /**
  * Server Endpoint object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SyncGroup)
-model ServerEndpoint is ProxyResource<ServerEndpointProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ServerEndpointProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServerEndpoint extends ProxyResourceBase {
   /**
    * Name of Server Endpoint object.
    */
@@ -24,6 +28,12 @@ model ServerEndpoint is ProxyResource<ServerEndpointProperties> {
   @key("serverEndpointName")
   @segment("serverEndpoints")
   name: string;
+
+  /**
+   * Server Endpoint properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerEndpointProperties;
 }
 
 @armResourceOperations

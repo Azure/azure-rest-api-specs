@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the source control.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model SourceControl is ProxyResource<SourceControlProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SourceControlProperties)
+@includeInapplicableMetadataInPayload(false)
+model SourceControl extends ProxyResourceBase {
   /**
    * The name of source control.
    */
@@ -24,6 +28,12 @@ model SourceControl is ProxyResource<SourceControlProperties> {
   @key("sourceControlName")
   @segment("sourceControls")
   name: string;
+
+  /**
+   * The properties of the source control.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SourceControlProperties;
 }
 
 @armResourceOperations

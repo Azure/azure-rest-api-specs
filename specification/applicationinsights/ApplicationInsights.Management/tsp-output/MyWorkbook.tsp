@@ -14,7 +14,11 @@ namespace Microsoft.Insights;
 /**
  * An Application Insights private workbook definition.
  */
-model MyWorkbook is ProxyResource<MyWorkbookProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(MyWorkbookProperties)
+@includeInapplicableMetadataInPayload(false)
+model MyWorkbook extends ProxyResourceBase {
   /**
    * The name of the Application Insights component resource.
    */
@@ -23,7 +27,16 @@ model MyWorkbook is ProxyResource<MyWorkbookProperties> {
   @segment("myWorkbooks")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * The kind of workbook. Choices are user and shared.
+   */
+  kind?: Kind;
+
+  /**
+   * Metadata describing a workbook for an Azure resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MyWorkbookProperties;
 }
 
 @armResourceOperations

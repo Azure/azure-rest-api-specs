@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * Workload classifier operations for a data warehouse
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WorkloadGroup)
-model WorkloadClassifier is ProxyResource<WorkloadClassifierProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WorkloadClassifierProperties)
+@includeInapplicableMetadataInPayload(false)
+model WorkloadClassifier extends ProxyResource {
   /**
    * The name of the workload classifier.
    */
@@ -24,6 +28,12 @@ model WorkloadClassifier is ProxyResource<WorkloadClassifierProperties> {
   @key("workloadClassifierName")
   @segment("workloadClassifiers")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkloadClassifierProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.DataFactory;
 /**
  * Dataset resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-model DatasetResource is ProxyResource<Dataset> {
+@Azure.ResourceManager.Private.armResourceInternal(Dataset)
+@includeInapplicableMetadataInPayload(false)
+model DatasetResource extends SubResource {
   /**
    * The dataset name.
    */
@@ -27,6 +31,12 @@ model DatasetResource is ProxyResource<Dataset> {
   @key("datasetName")
   @segment("datasets")
   name: string;
+
+  /**
+   * Dataset properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: Dataset;
 }
 
 @armResourceOperations

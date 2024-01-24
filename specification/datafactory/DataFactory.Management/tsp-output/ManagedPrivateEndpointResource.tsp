@@ -15,8 +15,12 @@ namespace Microsoft.DataFactory;
 /**
  * Managed private endpoint resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedVirtualNetworkResource)
-model ManagedPrivateEndpointResource is ProxyResource<ManagedPrivateEndpoint> {
+@Azure.ResourceManager.Private.armResourceInternal(ManagedPrivateEndpoint)
+@includeInapplicableMetadataInPayload(false)
+model ManagedPrivateEndpointResource extends SubResource {
   /**
    * Managed private endpoint name
    */
@@ -27,6 +31,12 @@ model ManagedPrivateEndpointResource is ProxyResource<ManagedPrivateEndpoint> {
   @key("managedPrivateEndpointName")
   @segment("managedPrivateEndpoints")
   name: string;
+
+  /**
+   * Managed private endpoint properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ManagedPrivateEndpoint;
 }
 
 @armResourceOperations

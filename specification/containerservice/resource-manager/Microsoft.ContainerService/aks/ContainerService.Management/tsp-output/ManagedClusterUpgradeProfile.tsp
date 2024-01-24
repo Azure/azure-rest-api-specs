@@ -15,13 +15,24 @@ namespace Microsoft.ContainerService;
 /**
  * The list of available upgrades for compute pools.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(ManagedCluster)
-model ManagedClusterUpgradeProfile
-  is ProxyResource<ManagedClusterUpgradeProfileProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedClusterUpgradeProfileProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedClusterUpgradeProfile extends ProxyResourceBase {
   @key("upgradeProfile")
   @segment("upgradeProfiles")
   name: string;
+
+  /**
+   * The properties of the upgrade profile.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ManagedClusterUpgradeProfileProperties;
 }
 
 @armResourceOperations

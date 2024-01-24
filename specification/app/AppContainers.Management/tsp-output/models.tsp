@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -83,9 +85,9 @@ enum ContainerAppProvisioningState {
 }
 
 /**
-* ActiveRevisionsMode controls how active revisions are handled for the Container app:
-<list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>
-*/
+ * ActiveRevisionsMode controls how active revisions are handled for the Container app:
+ * <list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>
+ */
 enum ActiveRevisionsMode {
   Multiple,
   Single,
@@ -377,9 +379,9 @@ model AuthPlatform {
   IsEnabled?: boolean;
 
   /**
-* The RuntimeVersion of the Authentication / Authorization feature in use for the current app.
-The setting in this value can control the behavior of certain features in the Authentication / Authorization module.
-*/
+   * The RuntimeVersion of the Authentication / Authorization feature in use for the current app.
+   * The setting in this value can control the behavior of certain features in the Authentication / Authorization module.
+   */
   runtimeVersion?: string;
 }
 
@@ -393,10 +395,10 @@ model GlobalValidation {
   unauthenticatedClientAction?: UnauthenticatedClientActionV2;
 
   /**
-* The default authentication provider to use when multiple providers are configured.
-This setting is only needed if multiple providers are configured and the unauthenticated client
-action is set to "RedirectToLoginPage".
-*/
+   * The default authentication provider to use when multiple providers are configured.
+   * This setting is only needed if multiple providers are configured and the unauthenticated client
+   * action is set to "RedirectToLoginPage".
+   */
   redirectToProvider?: string;
 
   /**
@@ -445,9 +447,9 @@ model IdentityProviders {
   azureStaticWebApps?: AzureStaticWebApps;
 
   /**
-* The map of the name of the alias of each custom Open ID Connect provider to the
-configuration settings of the custom Open ID Connect provider.
-*/
+   * The map of the name of the alias of each custom Open ID Connect provider to the
+   * configuration settings of the custom Open ID Connect provider.
+   */
   customOpenIdConnectProviders?: Record<CustomOpenIdConnectProvider>;
 }
 
@@ -477,10 +479,10 @@ model AzureActiveDirectory {
   validation?: AzureActiveDirectoryValidation;
 
   /**
-* Gets a value indicating whether the Azure AD configuration was auto-provisioned using 1st party tooling.
-This is an internal flag primarily intended to support the Azure Management Portal. Users should not
-read or write to this property.
-*/
+   * Gets a value indicating whether the Azure AD configuration was auto-provisioned using 1st party tooling.
+   * This is an internal flag primarily intended to support the Azure Management Portal. Users should not
+   * read or write to this property.
+   */
   isAutoProvisioned?: boolean;
 }
 
@@ -489,19 +491,19 @@ read or write to this property.
  */
 model AzureActiveDirectoryRegistration {
   /**
-* The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.
-When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/.
-This URI is a case-sensitive identifier for the token issuer.
-More information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html
-*/
+   * The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.
+   * When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/.
+   * This URI is a case-sensitive identifier for the token issuer.
+   * More information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html
+   */
   openIdIssuer?: string;
 
   /**
-* The Client ID of this relying party application, known as the client_id.
-This setting is required for enabling OpenID Connection authentication with Azure Active Directory or 
-other 3rd party OpenID Connect providers.
-More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html
-*/
+   * The Client ID of this relying party application, known as the client_id.
+   * This setting is required for enabling OpenID Connection authentication with Azure Active Directory or
+   * other 3rd party OpenID Connect providers.
+   * More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html
+   */
   clientId?: string;
 
   /**
@@ -510,21 +512,21 @@ More information on OpenID Connect: http://openid.net/specs/openid-connect-core-
   clientSecretSettingName?: string;
 
   /**
-* An alternative to the client secret, that is the thumbprint of a certificate used for signing purposes. This property acts as
-a replacement for the Client Secret. It is also optional.
-*/
+   * An alternative to the client secret, that is the thumbprint of a certificate used for signing purposes. This property acts as
+   * a replacement for the Client Secret. It is also optional.
+   */
   clientSecretCertificateThumbprint?: string;
 
   /**
-* An alternative to the client secret thumbprint, that is the subject alternative name of a certificate used for signing purposes. This property acts as
-a replacement for the Client Secret Certificate Thumbprint. It is also optional.
-*/
+   * An alternative to the client secret thumbprint, that is the subject alternative name of a certificate used for signing purposes. This property acts as
+   * a replacement for the Client Secret Certificate Thumbprint. It is also optional.
+   */
   clientSecretCertificateSubjectAlternativeName?: string;
 
   /**
-* An alternative to the client secret thumbprint, that is the issuer of a certificate used for signing purposes. This property acts as
-a replacement for the Client Secret Certificate Thumbprint. It is also optional.
-*/
+   * An alternative to the client secret thumbprint, that is the issuer of a certificate used for signing purposes. This property acts as
+   * a replacement for the Client Secret Certificate Thumbprint. It is also optional.
+   */
   clientSecretCertificateIssuer?: string;
 }
 
@@ -533,9 +535,9 @@ a replacement for the Client Secret Certificate Thumbprint. It is also optional.
  */
 model AzureActiveDirectoryLogin {
   /**
-* Login parameters to send to the OpenID Connect authorization endpoint when
-a user logs in. Each parameter must be in the form "key=value".
-*/
+   * Login parameters to send to the OpenID Connect authorization endpoint when
+   * a user logs in. Each parameter must be in the form "key=value".
+   */
   loginParameters?: string[];
 
   /**
@@ -753,16 +755,16 @@ model Twitter {
  */
 model TwitterRegistration {
   /**
-* The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-This setting is required for enabling Twitter Sign-In.
-Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
-*/
+   * The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+   * This setting is required for enabling Twitter Sign-In.
+   * Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
+   */
   consumerKey?: string;
 
   /**
-* The app setting name that contains the OAuth 1.0a consumer secret of the Twitter
-application used for sign-in.
-*/
+   * The app setting name that contains the OAuth 1.0a consumer secret of the Twitter
+   * application used for sign-in.
+   */
   consumerSecretSettingName?: string;
 }
 
@@ -944,10 +946,10 @@ model Login {
   preserveUrlFragmentsForLogins?: boolean;
 
   /**
-* External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.
-This is an advanced setting typically only needed by Windows Store application backends.
-Note that URLs within the current domain are always implicitly allowed.
-*/
+   * External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.
+   * This is an advanced setting typically only needed by Windows Store application backends.
+   * Note that URLs within the current domain are always implicitly allowed.
+   */
   allowedExternalRedirectUrls?: string[];
 
   /**
@@ -1699,9 +1701,9 @@ model Configuration {
   secrets?: Secret[];
 
   /**
-* ActiveRevisionsMode controls how active revisions are handled for the Container app:
-<list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>
-*/
+   * ActiveRevisionsMode controls how active revisions are handled for the Container app:
+   * <list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>
+   */
   activeRevisionsMode?: ActiveRevisionsMode = ActiveRevisionsMode.Single;
 
   /**
@@ -1993,10 +1995,10 @@ model Service {
 }
 
 /**
-* Container App versioned application definition.
-Defines the desired state of an immutable revision.
-Any changes to this section Will result in a new revision being created
-*/
+ * Container App versioned application definition.
+ * Defines the desired state of an immutable revision.
+ * Any changes to this section Will result in a new revision being created
+ */
 model Template {
   /**
    * User friendly suffix that is appended to the revision name
@@ -2350,9 +2352,9 @@ model ScaleRuleAuth {
  */
 model CustomScaleRule {
   /**
-* Type of the custom scale rule
-eg: azure-servicebus, redis etc.
-*/
+   * Type of the custom scale rule
+   * eg: azure-servicebus, redis etc.
+   */
   type?: string;
 
   /**
@@ -2625,6 +2627,7 @@ model ContainerAppAuthToken extends TrackedResource {
   /**
    * Container App auth token resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ContainerAppAuthTokenProperties;
 }
 
@@ -2651,9 +2654,9 @@ model ContainerAppAuthTokenProperties {
  */
 model RevisionProperties {
   /**
-* Timestamp describing when the revision was created
-by controller
-*/
+   * Timestamp describing when the revision was created
+   * by controller
+   */
   @visibility("read")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdTime?: utcDateTime;
@@ -2672,10 +2675,10 @@ by controller
   fqdn?: string;
 
   /**
-* Container App Revision Template with all possible settings and the
-defaults if user did not provide them. The defaults are populated
-as they were at the creation time
-*/
+   * Container App Revision Template with all possible settings and the
+   * defaults if user did not provide them. The defaults are populated
+   * as they were at the creation time
+   */
   @visibility("read")
   template?: Template;
 
@@ -3078,10 +3081,10 @@ model ManagedEnvironmentProperties {
   staticIp?: string;
 
   /**
-* Cluster configuration which enables the log daemon to export
-app logs to a destination. Currently only "log-analytics" is
-supported
-*/
+   * Cluster configuration which enables the log daemon to export
+   * app logs to a destination. Currently only "log-analytics" is
+   * supported
+   */
   appLogsConfiguration?: AppLogsConfiguration;
 
   /**
@@ -3466,9 +3469,9 @@ model JobScaleRule {
   name?: string;
 
   /**
-* Type of the scale rule
-eg: azure-servicebus, redis etc.
-*/
+   * Type of the scale rule
+   * eg: azure-servicebus, redis etc.
+   */
   type?: string;
 
   /**
@@ -3678,6 +3681,7 @@ model EnvironmentAuthToken extends TrackedResource {
   /**
    * Environment auth token resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EnvironmentAuthTokenProperties;
 }
 
@@ -3765,10 +3769,10 @@ model SourceControlProperties {
   branch?: string;
 
   /**
-* Container App Revision Template with all possible settings and the
-defaults if user did not provide them. The defaults are populated
-as they were at the creation time
-*/
+   * Container App Revision Template with all possible settings and the
+   * defaults if user did not provide them. The defaults are populated
+   * as they were at the creation time
+   */
   githubActionConfiguration?: GithubActionConfiguration;
 }
 

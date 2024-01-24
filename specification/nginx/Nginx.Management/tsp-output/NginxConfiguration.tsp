@@ -13,8 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Nginx.NginxPlus;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NginxDeployment)
-model NginxConfiguration is ProxyResource<NginxConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(NginxConfigurationProperties)
+@includeInapplicableMetadataInPayload(false)
+model NginxConfiguration extends ProxyResourceBase {
   /**
    * The name of configuration, only 'default' is supported value due to the singleton of NGINX conf
    */
@@ -22,6 +26,9 @@ model NginxConfiguration is ProxyResource<NginxConfigurationProperties> {
   @key("configurationName")
   @segment("configurations")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: NginxConfigurationProperties;
 }
 
 @armResourceOperations

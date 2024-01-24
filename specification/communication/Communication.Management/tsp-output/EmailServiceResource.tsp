@@ -14,7 +14,11 @@ namespace Microsoft.Communication;
 /**
  * A class representing an EmailService resource.
  */
-model EmailServiceResource is TrackedResource<EmailServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(EmailServiceProperties)
+@includeInapplicableMetadataInPayload(false)
+model EmailServiceResource extends TrackedResourceBase {
   /**
    * The name of the EmailService resource.
    */
@@ -25,6 +29,12 @@ model EmailServiceResource is TrackedResource<EmailServiceProperties> {
   @key("emailServiceName")
   @segment("emailServices")
   name: string;
+
+  /**
+   * The properties of the service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: EmailServiceProperties;
 }
 
 @armResourceOperations

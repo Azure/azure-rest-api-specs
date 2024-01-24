@@ -15,9 +15,14 @@ namespace Microsoft.HybridNetwork;
 /**
  * Configuration group schema resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Publisher)
-model ConfigurationGroupSchema
-  is TrackedResource<ConfigurationGroupSchemaPropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ConfigurationGroupSchemaPropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model ConfigurationGroupSchema extends TrackedResourceBase {
   /**
    * The name of the configuration group schema.
    */
@@ -27,6 +32,12 @@ model ConfigurationGroupSchema
   @key("configurationGroupSchemaName")
   @segment("configurationGroupSchemas")
   name: string;
+
+  /**
+   * Configuration group schema properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConfigurationGroupSchemaPropertiesFormat;
 }
 
 @armResourceOperations

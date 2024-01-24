@@ -15,8 +15,12 @@ namespace Microsoft.StorageMover;
 /**
  * The Endpoint resource, which contains information about file sources and targets.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageMover)
-model Endpoint is ProxyResource<EndpointBaseProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(EndpointBaseProperties)
+@includeInapplicableMetadataInPayload(false)
+model Endpoint extends ProxyResourceBase {
   /**
    * The name of the Endpoint resource.
    */
@@ -24,6 +28,12 @@ model Endpoint is ProxyResource<EndpointBaseProperties> {
   @key("endpointName")
   @segment("endpoints")
   name: string;
+
+  /**
+   * The resource specific properties for the Storage Mover resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: EndpointBaseProperties;
 }
 
 @armResourceOperations

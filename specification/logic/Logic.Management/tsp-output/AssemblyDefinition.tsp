@@ -15,8 +15,12 @@ namespace Microsoft.Logic;
 /**
  * The assembly definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationAccount)
-model AssemblyDefinition is TrackedResource<AssemblyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AssemblyProperties)
+@includeInapplicableMetadataInPayload(false)
+model AssemblyDefinition extends Resource {
   /**
    * The assembly artifact name.
    */
@@ -24,6 +28,12 @@ model AssemblyDefinition is TrackedResource<AssemblyProperties> {
   @key("assemblyArtifactName")
   @segment("assemblies")
   name: string;
+
+  /**
+   * The assembly properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: AssemblyProperties;
 }
 
 @armResourceOperations

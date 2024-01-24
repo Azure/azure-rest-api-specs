@@ -14,8 +14,12 @@ namespace Microsoft.Peering;
 /**
  * The essential information related to the peer's ASN.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model PeerAsn is ProxyResource<PeerAsnProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PeerAsnProperties)
+@includeInapplicableMetadataInPayload(false)
+model PeerAsn extends Resource {
   /**
    * The peer ASN name.
    */
@@ -23,6 +27,12 @@ model PeerAsn is ProxyResource<PeerAsnProperties> {
   @key("peerAsnName")
   @segment("peerAsns")
   name: string;
+
+  /**
+   * The properties that define a peer's ASN.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PeerAsnProperties;
 }
 
 @armResourceOperations

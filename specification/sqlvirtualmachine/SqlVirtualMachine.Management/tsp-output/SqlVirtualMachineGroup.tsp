@@ -14,8 +14,13 @@ namespace Microsoft.SqlVirtualMachine;
 /**
  * A SQL virtual machine group.
  */
-model SqlVirtualMachineGroup
-  is TrackedResource<SqlVirtualMachineGroupProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  SqlVirtualMachineGroupProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SqlVirtualMachineGroup extends TrackedResourceBase {
   /**
    * Name of the SQL virtual machine group.
    */
@@ -23,6 +28,12 @@ model SqlVirtualMachineGroup
   @key("sqlVirtualMachineGroupName")
   @segment("sqlVirtualMachineGroups")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SqlVirtualMachineGroupProperties;
 }
 
 @armResourceOperations

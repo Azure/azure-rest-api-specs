@@ -14,8 +14,13 @@ namespace Microsoft.NetworkFunction;
 /**
  * Azure Traffic Collector resource.
  */
-model AzureTrafficCollector
-  is TrackedResource<AzureTrafficCollectorPropertiesFormat> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  AzureTrafficCollectorPropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model AzureTrafficCollector extends TrackedResource {
   /**
    * Azure Traffic Collector name
    */
@@ -29,6 +34,12 @@ model AzureTrafficCollector
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * Properties of the Azure Traffic Collector.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AzureTrafficCollectorPropertiesFormat;
 }
 
 @armResourceOperations

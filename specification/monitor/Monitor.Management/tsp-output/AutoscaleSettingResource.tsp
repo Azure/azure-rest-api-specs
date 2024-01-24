@@ -14,7 +14,11 @@ namespace Microsoft.Insights;
 /**
  * The autoscale setting resource.
  */
-model AutoscaleSettingResource is TrackedResource<AutoscaleSetting> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AutoscaleSetting)
+@includeInapplicableMetadataInPayload(false)
+model AutoscaleSettingResource extends TrackedResourceBase {
   /**
    * The autoscale setting name.
    */
@@ -22,6 +26,12 @@ model AutoscaleSettingResource is TrackedResource<AutoscaleSetting> {
   @key("autoscaleSettingName")
   @segment("autoscalesettings")
   name: string;
+
+  /**
+   * The autoscale setting of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: AutoscaleSetting;
 }
 
 @armResourceOperations

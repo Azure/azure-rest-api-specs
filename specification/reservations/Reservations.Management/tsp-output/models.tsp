@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -536,6 +538,7 @@ model AppliedReservations {
   /**
    * Properties for applied reservations returned
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AppliedReservationsProperties;
 }
 
@@ -579,6 +582,7 @@ model PurchaseRequest {
   /**
    * Properties of reservation purchase request
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PurchaseRequestProperties;
 }
 
@@ -1297,6 +1301,7 @@ model SplitRequest {
   /**
    * Properties for reservation split
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SplitProperties;
 }
 
@@ -1322,6 +1327,7 @@ model MergeRequest {
   /**
    * Properties for reservation merge
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MergeProperties;
 }
 
@@ -1342,6 +1348,7 @@ model Patch {
   /**
    * Properties for reservation patch
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PatchProperties;
 }
 
@@ -1659,6 +1666,7 @@ model SavingsPlanPurchaseRequest {
   /**
    * Properties of a savings plan purchase
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SavingsPlanPurchaseRequestProperties;
 }
 
@@ -2341,6 +2349,7 @@ model QuotaRequestSubmitResponse201 {
   /**
    * Quota request status.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QuotaRequestStatusDetails;
 }
 
@@ -2482,11 +2491,13 @@ model CurrentQuotaLimit {
   /**
    * Quota details.
    */
+  @extension("x-ms-client-flatten", true)
   quotaInformation?: CurrentQuotaLimitBase;
 
   /**
    * Additional properties for the quota status for the resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QuotaRequestStatusDetails;
 }
 
@@ -2540,6 +2551,7 @@ model QuotaRequestOneResourceSubmitResponse {
   /**
    * The details for quota request.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QuotaRequestOneResourceProperties;
 }
 
@@ -2569,6 +2581,7 @@ model QuotaRequestOneResourceProperties {
   /**
    * The quota request addition properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CurrentQuotaLimitBase;
 }
 

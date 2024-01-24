@@ -15,8 +15,12 @@ namespace Microsoft.DBforPostgreSQL;
 /**
  * Represents a cluster role.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model Role is ProxyResource<RoleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RoleProperties)
+@includeInapplicableMetadataInPayload(false)
+model Role extends ProxyResourceBase {
   /**
    * The name of the cluster role.
    */
@@ -25,6 +29,12 @@ model Role is ProxyResource<RoleProperties> {
   @key("roleName")
   @segment("roles")
   name: string;
+
+  /**
+   * The properties of a role.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: RoleProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.EdgeOrder;
 /**
  * Represents order item contract
  */
-model OrderItemResource is TrackedResource<OrderItemProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(OrderItemProperties)
+@includeInapplicableMetadataInPayload(false)
+model OrderItemResource extends TrackedResourceBase {
   /**
    * The name of the order item
    */
@@ -22,6 +26,12 @@ model OrderItemResource is TrackedResource<OrderItemProperties> {
   @key("orderItemName")
   @segment("orderItems")
   name: string;
+
+  /**
+   * Order item properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: OrderItemProperties;
 }
 
 @armResourceOperations

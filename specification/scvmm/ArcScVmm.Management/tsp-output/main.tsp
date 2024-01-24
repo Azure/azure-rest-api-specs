@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
  * The Microsoft.ScVmm Rest API spec.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "SCVMM",
 })

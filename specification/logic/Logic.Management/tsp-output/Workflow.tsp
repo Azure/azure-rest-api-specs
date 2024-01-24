@@ -14,7 +14,11 @@ namespace Microsoft.Logic;
 /**
  * The workflow type.
  */
-model Workflow is TrackedResource<WorkflowProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WorkflowProperties)
+@includeInapplicableMetadataInPayload(false)
+model Workflow extends Resource {
   /**
    * The workflow name.
    */
@@ -23,7 +27,16 @@ model Workflow is TrackedResource<WorkflowProperties> {
   @segment("workflows")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  /**
+   * Managed service identity properties.
+   */
+  identity?: ManagedServiceIdentity;
+
+  /**
+   * The workflow properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkflowProperties;
 }
 
 @armResourceOperations

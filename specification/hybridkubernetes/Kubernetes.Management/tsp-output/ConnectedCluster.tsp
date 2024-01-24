@@ -14,7 +14,11 @@ namespace Microsoft.Kubernetes;
 /**
  * Represents a connected cluster.
  */
-model ConnectedCluster is TrackedResource<ConnectedClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ConnectedClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model ConnectedCluster extends TrackedResourceBase {
   /**
    * The name of the Kubernetes cluster on which get is called.
    */
@@ -22,6 +26,12 @@ model ConnectedCluster is TrackedResource<ConnectedClusterProperties> {
   @key("clusterName")
   @segment("connectedClusters")
   name: string;
+
+  /**
+   * Describes the connected cluster resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ConnectedClusterProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

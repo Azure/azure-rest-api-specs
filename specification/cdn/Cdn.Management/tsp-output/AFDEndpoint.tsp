@@ -15,8 +15,12 @@ namespace Microsoft.Cdn;
 /**
  * CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The AzureFrontDoor endpoint uses the URL format <endpointname>.azureedge.net.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Profile)
-model AFDEndpoint is TrackedResource<AFDEndpointProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AFDEndpointProperties)
+@includeInapplicableMetadataInPayload(false)
+model AFDEndpoint extends TrackedResource {
   /**
    * Name of the endpoint under the profile which is unique globally.
    */
@@ -24,6 +28,12 @@ model AFDEndpoint is TrackedResource<AFDEndpointProperties> {
   @key("endpointName")
   @segment("afdEndpoints")
   name: string;
+
+  /**
+   * The JSON object that contains the properties required to create an endpoint.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AFDEndpointProperties;
 }
 
 @armResourceOperations

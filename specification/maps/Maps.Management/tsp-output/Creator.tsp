@@ -15,8 +15,12 @@ namespace Microsoft.Maps;
 /**
  * An Azure resource which represents Maps Creator product and provides ability to manage private location data.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MapsAccount)
-model Creator is TrackedResource<CreatorProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CreatorProperties)
+@includeInapplicableMetadataInPayload(false)
+model Creator extends TrackedResourceBase {
   /**
    * The name of the Maps Creator instance.
    */
@@ -24,6 +28,12 @@ model Creator is TrackedResource<CreatorProperties> {
   @key("creatorName")
   @segment("creators")
   name: string;
+
+  /**
+   * The Creator resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: CreatorProperties;
 }
 
 @armResourceOperations

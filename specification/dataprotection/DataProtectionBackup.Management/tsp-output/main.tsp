@@ -23,6 +23,7 @@ using TypeSpec.Versioning;
  * Open API 2.0 Specs for Azure Data Protection service
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Data Protection Client",
 })

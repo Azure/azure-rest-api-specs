@@ -14,8 +14,13 @@ namespace Microsoft.MachineLearningCompute;
 /**
  * Instance of an Azure ML Operationalization Cluster resource.
  */
-model OperationalizationCluster
-  is TrackedResource<OperationalizationClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  OperationalizationClusterProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model OperationalizationCluster extends Resource {
   /**
    * The name of the cluster.
    */
@@ -26,6 +31,12 @@ model OperationalizationCluster
   @key("clusterName")
   @segment("operationalizationClusters")
   name: string;
+
+  /**
+   * Properties of an operationalization cluster.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: OperationalizationClusterProperties;
 }
 
 @armResourceOperations

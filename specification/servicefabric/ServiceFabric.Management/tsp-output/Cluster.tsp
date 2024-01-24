@@ -12,10 +12,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 /**
-* The cluster resource
-
-*/
-model Cluster is TrackedResource<ClusterProperties> {
+ * The cluster resource
+ *
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cluster extends Resource {
   /**
    * The name of the cluster resource.
    */
@@ -23,6 +27,12 @@ model Cluster is TrackedResource<ClusterProperties> {
   @key("clusterName")
   @segment("clusters")
   name: string;
+
+  /**
+   * The cluster resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterProperties;
 }
 
 @armResourceOperations

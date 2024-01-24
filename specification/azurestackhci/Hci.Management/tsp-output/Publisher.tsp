@@ -15,8 +15,12 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Publisher details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model Publisher is ProxyResource<PublisherProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PublisherProperties)
+@includeInapplicableMetadataInPayload(false)
+model Publisher extends ProxyResourceBase {
   /**
    * The name of the publisher available within HCI cluster.
    */
@@ -24,6 +28,12 @@ model Publisher is ProxyResource<PublisherProperties> {
   @key("publisherName")
   @segment("publishers")
   name: string;
+
+  /**
+   * Publisher properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PublisherProperties;
 }
 
 @armResourceOperations

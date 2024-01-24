@@ -15,9 +15,14 @@ namespace Microsoft.AVS;
 /**
  * NSX VM Group
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model WorkloadNetworkVMGroup
-  is ProxyResource<WorkloadNetworkVMGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  WorkloadNetworkVMGroupProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WorkloadNetworkVMGroup extends ProxyResourceBase {
   /**
    * NSX VM Group identifier. Generally the same as the VM Group's display name
    */
@@ -25,6 +30,12 @@ model WorkloadNetworkVMGroup
   @key("vmGroupId")
   @segment("vmGroups")
   name: string;
+
+  /**
+   * VM Group properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkloadNetworkVMGroupProperties;
 }
 
 @armResourceOperations

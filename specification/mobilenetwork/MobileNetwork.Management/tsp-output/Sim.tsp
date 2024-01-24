@@ -15,8 +15,12 @@ namespace Microsoft.MobileNetwork;
 /**
  * SIM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SimGroup)
-model Sim is ProxyResource<SimPropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(SimPropertiesFormat)
+@includeInapplicableMetadataInPayload(false)
+model Sim extends ProxyResourceBase {
   /**
    * The name of the SIM.
    */
@@ -26,6 +30,12 @@ model Sim is ProxyResource<SimPropertiesFormat> {
   @key("simName")
   @segment("sims")
   name: string;
+
+  /**
+   * SIM Properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: SimPropertiesFormat;
 }
 
 @armResourceOperations

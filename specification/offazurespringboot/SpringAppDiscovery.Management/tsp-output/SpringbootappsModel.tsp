@@ -15,8 +15,12 @@ namespace Microsoft.OffAzureSpringBoot;
 /**
  * The springbootapps envelope resource definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SpringbootsitesModel)
-model SpringbootappsModel is ProxyResource<SpringbootappsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SpringbootappsProperties)
+@includeInapplicableMetadataInPayload(false)
+model SpringbootappsModel extends ProxyResourceBase {
   /**
    * The springbootapps name.
    */
@@ -27,6 +31,12 @@ model SpringbootappsModel is ProxyResource<SpringbootappsProperties> {
   @key("springbootappsName")
   @segment("springbootapps")
   name: string;
+
+  /**
+   * The springbootapps resource definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SpringbootappsProperties;
 }
 
 @armResourceOperations

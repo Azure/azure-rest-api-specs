@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -200,6 +202,7 @@ model FirmwareUpdateDefinition {
   /**
    * The editable properties of a firmware
    */
+  @extension("x-ms-client-flatten", true)
   properties?: FirmwareProperties;
 }
 
@@ -323,6 +326,7 @@ model BinaryHardening {
   /**
    * Binary hardening features.
    */
+  @extension("x-ms-client-flatten", true)
   features?: BinaryHardeningFeatures;
 
   /**
@@ -886,6 +890,7 @@ model WorkspaceUpdateDefinition {
   /**
    * The editable workspace properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WorkspaceProperties;
 }
 

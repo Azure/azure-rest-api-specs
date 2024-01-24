@@ -15,8 +15,12 @@ namespace Microsoft.AVS;
 /**
  * NSX DHCP
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model WorkloadNetworkDhcp is ProxyResource<WorkloadNetworkDhcpEntity> {
+@Azure.ResourceManager.Private.armResourceInternal(WorkloadNetworkDhcpEntity)
+@includeInapplicableMetadataInPayload(false)
+model WorkloadNetworkDhcp extends ProxyResourceBase {
   /**
    * NSX DHCP identifier. Generally the same as the DHCP display name
    */
@@ -24,6 +28,12 @@ model WorkloadNetworkDhcp is ProxyResource<WorkloadNetworkDhcpEntity> {
   @key("dhcpId")
   @segment("dhcpConfigurations")
   name: string;
+
+  /**
+   * DHCP properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkloadNetworkDhcpEntity;
 }
 
 @armResourceOperations

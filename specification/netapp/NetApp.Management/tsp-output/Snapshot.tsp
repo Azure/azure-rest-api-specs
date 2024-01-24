@@ -15,8 +15,12 @@ namespace Microsoft.NetApp;
 /**
  * Snapshot of a Volume
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Volume)
-model Snapshot is ProxyResource<SnapshotProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SnapshotProperties)
+@includeInapplicableMetadataInPayload(false)
+model Snapshot extends ProxyResourceBase {
   /**
    * The name of the snapshot
    */
@@ -24,6 +28,12 @@ model Snapshot is ProxyResource<SnapshotProperties> {
   @key("snapshotName")
   @segment("snapshots")
   name: string;
+
+  /**
+   * Snapshot Properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SnapshotProperties;
 }
 
 @armResourceOperations

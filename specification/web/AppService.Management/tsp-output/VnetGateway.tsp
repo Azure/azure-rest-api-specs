@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * The Virtual Network gateway contract. This is used to give the Virtual Network gateway access to the VPN package.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VnetInfoResource)
-model VnetGateway is ProxyResource<VnetGatewayProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VnetGatewayProperties)
+@includeInapplicableMetadataInPayload(false)
+model VnetGateway extends ProxyOnlyResource {
   /**
    * Name of the gateway. Only the 'primary' gateway is supported.
    */
@@ -24,6 +28,12 @@ model VnetGateway is ProxyResource<VnetGatewayProperties> {
   @key("gatewayName")
   @segment("gateways")
   name: string;
+
+  /**
+   * VnetGateway resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VnetGatewayProperties;
 }
 
 @armResourceOperations

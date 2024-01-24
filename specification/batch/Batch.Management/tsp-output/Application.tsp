@@ -15,8 +15,12 @@ namespace Microsoft.Batch;
 /**
  * Contains information about an application in a Batch account.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BatchAccount)
-model Application is ProxyResource<ApplicationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ApplicationProperties)
+@includeInapplicableMetadataInPayload(false)
+model Application extends ProxyResource {
   /**
    * The name of the application. This must be unique within the account.
    */
@@ -27,6 +31,12 @@ model Application is ProxyResource<ApplicationProperties> {
   @key("applicationName")
   @segment("applications")
   name: string;
+
+  /**
+   * The properties associated with the Application.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApplicationProperties;
 }
 
 @armResourceOperations

@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
  * REST APIs for Defender for DevOps
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Microsoft.SecurityDevOps",
 })

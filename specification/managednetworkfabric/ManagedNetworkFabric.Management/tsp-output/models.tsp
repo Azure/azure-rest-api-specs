@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -139,14 +141,14 @@ enum Action {
 }
 
 /**
-* 
-`Internet` - Advertise routes to internet community.
- `LocalAS` - Advertise routes to only localAS peers.
- `NoAdvertise` - Don't advertise routes to any peer.
-`NoExport` - Don't export to next AS.
-`GShut` - Graceful Shutdown (GSHUT) withdraw routes before terminating BGP connection.
-
-*/
+ *
+ * `Internet` - Advertise routes to internet community.
+ *  `LocalAS` - Advertise routes to only localAS peers.
+ *  `NoAdvertise` - Don't advertise routes to any peer.
+ * `NoExport` - Don't export to next AS.
+ * `GShut` - Graceful Shutdown (GSHUT) withdraw routes before terminating BGP connection.
+ *
+ */
 enum WellKnownCommunities {
   Internet,
   LocalAS,
@@ -786,6 +788,7 @@ model AccessControlListPatch extends TagsUpdate {
   /**
    * Access Control Lists patch properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AccessControlListPatchProperties;
 }
 
@@ -915,6 +918,7 @@ model InternetGatewayPatch extends TagsUpdate {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: InternetGatewayPatchableProperties;
 }
 
@@ -1030,6 +1034,7 @@ model IpCommunityPatch extends TagsUpdate {
   /**
    * IP Community patchable properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IpCommunityPatchableProperties;
 }
 
@@ -1098,6 +1103,7 @@ model IpExtendedCommunityPatch extends TagsUpdate {
   /**
    * IP Extended Community patchable properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IpExtendedCommunityPatchProperties;
 }
 
@@ -1184,6 +1190,7 @@ model IpPrefixPatch extends TagsUpdate {
   /**
    * IP Prefix patchable properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IpPrefixPatchProperties;
 }
 
@@ -1248,6 +1255,7 @@ model L2IsolationDomainPatch extends TagsUpdate {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: L2IsolationDomainPatchProperties;
 }
 
@@ -1420,6 +1428,7 @@ model L3IsolationDomainPatch extends TagsUpdate {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: L3IsolationDomainPatchProperties;
 }
 
@@ -1768,6 +1777,7 @@ model InternalNetworkPatch {
   /**
    * InternalNetwork Patch properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: InternalNetworkPatchProperties;
 }
 
@@ -2011,6 +2021,7 @@ model ExternalNetworkPatch {
   /**
    * External Network Patch properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ExternalNetworkPatchProperties;
 }
 
@@ -2111,6 +2122,7 @@ model NeighborGroupPatch extends TagsUpdate {
   /**
    * Neighbor Group Patch properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NeighborGroupPatchProperties;
 }
 
@@ -2304,6 +2316,7 @@ model NetworkDevicePatchParameters extends TagsUpdate {
   /**
    * Network Device Patch properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkDevicePatchParametersProperties;
 }
 
@@ -2369,6 +2382,7 @@ model NetworkInterfacePatch {
   /**
    * Network Interface Patch properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkInterfacePatchProperties;
 }
 
@@ -2557,6 +2571,7 @@ model NetworkFabricControllerPatch extends TagsUpdate {
   /**
    * Network Fabric Controller patch properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkFabricControllerPatchableProperties;
 }
 
@@ -2865,6 +2880,7 @@ model NetworkFabricPatch extends TagsUpdate {
   /**
    * Network Fabric Patch properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkFabricPatchProperties;
 }
 
@@ -3200,6 +3216,7 @@ model NetworkToNetworkInterconnectPatch extends ProxyResource {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkToNetworkInterconnectPatchableProperties;
 }
 
@@ -3515,6 +3532,7 @@ model NetworkTapRulePatch extends TagsUpdate {
   /**
    * Network Tap Rule Patch properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkTapRulePatchProperties;
 }
 
@@ -3652,6 +3670,7 @@ model NetworkTapPatch extends TagsUpdate {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkTapPatchableParameters;
 }
 
@@ -3902,6 +3921,7 @@ model RoutePolicyPatch extends TagsUpdate {
   /**
    * The RoutePolicy patchable properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RoutePolicyPatchableProperties;
 }
 

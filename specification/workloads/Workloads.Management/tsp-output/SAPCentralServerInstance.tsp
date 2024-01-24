@@ -15,8 +15,12 @@ namespace Microsoft.Workloads;
 /**
  * Define the SAP Central Services Instance resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SAPVirtualInstance)
-model SAPCentralServerInstance is TrackedResource<SAPCentralServerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SAPCentralServerProperties)
+@includeInapplicableMetadataInPayload(false)
+model SAPCentralServerInstance extends TrackedResourceBase {
   /**
    * Central Services Instance resource name string modeled as parameter for auto generation to work correctly.
    */
@@ -24,6 +28,12 @@ model SAPCentralServerInstance is TrackedResource<SAPCentralServerProperties> {
   @key("centralInstanceName")
   @segment("centralInstances")
   name: string;
+
+  /**
+   * Defines the SAP Central Services Instance properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SAPCentralServerProperties;
 }
 
 @armResourceOperations

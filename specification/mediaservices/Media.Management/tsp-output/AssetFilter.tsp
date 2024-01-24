@@ -15,8 +15,12 @@ namespace Microsoft.Media;
 /**
  * An Asset Filter.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Asset)
-model AssetFilter is ProxyResource<MediaFilterProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MediaFilterProperties)
+@includeInapplicableMetadataInPayload(false)
+model AssetFilter extends ProxyResourceBase {
   /**
    * The Asset Filter name
    */
@@ -24,6 +28,12 @@ model AssetFilter is ProxyResource<MediaFilterProperties> {
   @key("filterName")
   @segment("assetFilters")
   name: string;
+
+  /**
+   * The Media Filter properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MediaFilterProperties;
 }
 
 @armResourceOperations

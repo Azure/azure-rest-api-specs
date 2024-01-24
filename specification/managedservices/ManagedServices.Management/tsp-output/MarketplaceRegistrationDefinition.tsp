@@ -12,8 +12,13 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedServices;
 
-model MarketplaceRegistrationDefinition
-  is ExtensionResource<MarketplaceRegistrationDefinitionProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  MarketplaceRegistrationDefinitionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model MarketplaceRegistrationDefinition extends ExtensionResourceBase {
   /**
    * The Azure Marketplace identifier. Expected formats: {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher}).
    */
@@ -21,6 +26,12 @@ model MarketplaceRegistrationDefinition
   @key("marketplaceIdentifier")
   @segment("marketplaceRegistrationDefinitions")
   name: string;
+
+  /**
+   * The properties of the marketplace registration definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MarketplaceRegistrationDefinitionProperties;
 
   ...Azure.ResourceManager.ResourcePlan;
 }

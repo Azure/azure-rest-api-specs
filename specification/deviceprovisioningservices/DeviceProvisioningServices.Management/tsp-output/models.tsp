@@ -250,9 +250,9 @@ model IotDpsPropertiesDescription {
   authorizationPolicies?: SharedAccessSignatureAuthorizationRuleAccessRightsDescription[];
 
   /**
-* Optional.
-Indicates if the DPS instance has Data Residency enabled, removing the cross geo-pair disaster recovery.
-*/
+   * Optional.
+   * Indicates if the DPS instance has Data Residency enabled, removing the cross geo-pair disaster recovery.
+   */
   enableDataResidency?: boolean;
 }
 

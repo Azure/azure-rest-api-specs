@@ -15,8 +15,12 @@ namespace Microsoft.ProviderHub;
 /**
  * Rollout details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ProviderRegistration)
-model CustomRollout is ProxyResource<CustomRolloutProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CustomRolloutProperties)
+@includeInapplicableMetadataInPayload(false)
+model CustomRollout extends ProxyResourceBase {
   /**
    * The rollout name.
    */
@@ -24,6 +28,12 @@ model CustomRollout is ProxyResource<CustomRolloutProperties> {
   @key("rolloutName")
   @segment("customRollouts")
   name: string;
+
+  /**
+   * Properties of the rollout.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: CustomRolloutProperties;
 }
 
 @armResourceOperations

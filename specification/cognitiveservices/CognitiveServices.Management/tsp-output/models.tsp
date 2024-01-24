@@ -506,7 +506,7 @@ model Encryption {
   /**
    * Enumerates the possible value of keySource for Encryption
    */
-  keySource?: KeySource = KeySource.Microsoft.KeyVault;
+  keySource?: KeySource = KeySource.`Microsoft.KeyVault`;
 }
 
 /**

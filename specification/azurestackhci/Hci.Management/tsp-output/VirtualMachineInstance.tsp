@@ -14,9 +14,14 @@ namespace Microsoft.AzureStackHCI;
 /**
  * The virtual machine instance resource definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
-model VirtualMachineInstance
-  is ExtensionResource<VirtualMachineInstanceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  VirtualMachineInstanceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachineInstance extends ExtensionResourceBase {
   @key("virtualMachineInstance")
   @segment("virtualMachineInstances")
   name: string;
@@ -25,6 +30,12 @@ model VirtualMachineInstance
    * The extendedLocation of the resource.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties under the virtual machine instance resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineInstanceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

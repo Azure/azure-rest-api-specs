@@ -14,7 +14,11 @@ namespace Microsoft.NetworkCloud;
 /**
  * L3Network represents a network that utilizes a single isolation domain set up for layer-3 resources.
  */
-model L3Network is TrackedResource<L3NetworkProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(L3NetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model L3Network extends TrackedResourceBase {
   /**
    * The name of the L3 network.
    */
@@ -28,6 +32,12 @@ model L3Network is TrackedResource<L3NetworkProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: L3NetworkProperties;
 }
 
 @armResourceOperations

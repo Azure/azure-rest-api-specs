@@ -15,9 +15,14 @@ namespace Microsoft.EventHub;
 /**
  * Properties of the PrivateEndpointConnection.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EventHubsNamespace)
-model PrivateEndpointConnection
-  is ProxyResource<PrivateEndpointConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateEndpointConnectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnection extends ProxyResource {
   /**
    * The PrivateEndpointConnection name
    */
@@ -25,6 +30,12 @@ model PrivateEndpointConnection
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
+
+  /**
+   * Properties of the PrivateEndpointConnection.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.Insights;
 /**
  * An Application Insights workbook template definition.
  */
-model WorkbookTemplate is TrackedResource<WorkbookTemplateProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WorkbookTemplateProperties)
+@includeInapplicableMetadataInPayload(false)
+model WorkbookTemplate extends TrackedResourceBase {
   /**
    * The name of the Application Insights component resource.
    */
@@ -22,6 +26,12 @@ model WorkbookTemplate is TrackedResource<WorkbookTemplateProperties> {
   @key("resourceName")
   @segment("workbooktemplates")
   name: string;
+
+  /**
+   * Metadata describing a workbook template for an Azure resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkbookTemplateProperties;
 }
 
 @armResourceOperations

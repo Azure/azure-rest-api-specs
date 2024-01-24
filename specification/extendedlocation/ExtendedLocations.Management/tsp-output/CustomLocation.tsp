@@ -14,7 +14,11 @@ namespace Microsoft.ExtendedLocation;
 /**
  * Custom Locations definition.
  */
-model CustomLocation is TrackedResource<CustomLocationProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(CustomLocationProperties)
+@includeInapplicableMetadataInPayload(false)
+model CustomLocation extends TrackedResourceBase {
   /**
    * Custom Locations name.
    */
@@ -25,6 +29,12 @@ model CustomLocation is TrackedResource<CustomLocationProperties> {
   @key("resourceName")
   @segment("customLocations")
   name: string;
+
+  /**
+   * The set of properties specific to a Custom Location
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CustomLocationProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

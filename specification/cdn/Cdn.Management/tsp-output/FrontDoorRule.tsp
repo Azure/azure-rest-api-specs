@@ -15,8 +15,12 @@ namespace Microsoft.Cdn;
 /**
  * Friendly Rules name mapping to the any Rules or secret related information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FrontDoorRuleSet)
-model FrontDoorRule is ProxyResource<RuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model FrontDoorRule extends ProxyResource {
   /**
    * Name of the delivery rule which is unique within the endpoint.
    */
@@ -24,6 +28,12 @@ model FrontDoorRule is ProxyResource<RuleProperties> {
   @key("ruleName")
   @segment("rules")
   name: string;
+
+  /**
+   * The JSON object that contains the properties of the Rules to create.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RuleProperties;
 }
 
 @armResourceOperations

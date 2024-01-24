@@ -15,9 +15,14 @@ namespace Microsoft.DevCenter;
 /**
  * Represents an attached NetworkConnection.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Project)
-model AttachedNetworkConnection
-  is ProxyResource<AttachedNetworkConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  AttachedNetworkConnectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AttachedNetworkConnection extends ProxyResourceBase {
   /**
    * The name of the attached NetworkConnection.
    */
@@ -25,6 +30,12 @@ model AttachedNetworkConnection
   @key("attachedNetworkConnectionName")
   @segment("attachednetworks")
   name: string;
+
+  /**
+   * Attached NetworkConnection properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AttachedNetworkConnectionProperties;
 }
 
 @armResourceOperations

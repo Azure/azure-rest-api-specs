@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A Service Fabric.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(User)
-model ServiceFabric is TrackedResource<ServiceFabricProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ServiceFabricProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServiceFabric extends Resource {
   /**
    * The name of the service fabric.
    */
@@ -24,6 +28,12 @@ model ServiceFabric is TrackedResource<ServiceFabricProperties> {
   @key("name")
   @segment("servicefabrics")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ServiceFabricProperties;
 }
 
 @armResourceOperations

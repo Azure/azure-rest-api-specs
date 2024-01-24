@@ -1500,6 +1500,83 @@ model NodeMonitoringData {
 model ResourceSkusResult is Azure.Core.Page<ResourceSku>;
 
 /**
+ * Describes an available DMS SKU.
+ */
+model ResourceSku {
+  /**
+   * The type of resource the SKU applies to.
+   */
+  @visibility("read")
+  resourceType?: string;
+
+  /**
+   * The name of SKU.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Specifies the tier of DMS in a scale set.
+   */
+  @visibility("read")
+  tier?: string;
+
+  /**
+   * The Size of the SKU.
+   */
+  @visibility("read")
+  size?: string;
+
+  /**
+   * The Family of this particular SKU.
+   */
+  @visibility("read")
+  family?: string;
+
+  /**
+   * The Kind of resources that are supported in this SKU.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * Not used.
+   */
+  @visibility("read")
+  capacity?: ResourceSkuCapacity;
+
+  /**
+   * The set of locations that the SKU is available.
+   */
+  @visibility("read")
+  locations?: string[];
+
+  /**
+   * The api versions that support this SKU.
+   */
+  @visibility("read")
+  apiVersions?: string[];
+
+  /**
+   * Metadata for retrieving price info.
+   */
+  @visibility("read")
+  costs?: ResourceSkuCosts[];
+
+  /**
+   * A name value pair to describe the capability.
+   */
+  @visibility("read")
+  capabilities?: ResourceSkuCapabilities[];
+
+  /**
+   * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
+   */
+  @visibility("read")
+  restrictions?: ResourceSkuRestrictions[];
+}
+
+/**
  * Describes scaling information of a SKU.
  */
 model ResourceSkuCapacity {
@@ -4881,8 +4958,8 @@ model MigrateSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
 
   /**
    * Options for enabling various post migration validations. Available options,
-   * 1.) Data Integrity Check: Performs a checksum based comparison on source and target tables after the migration to ensure the correctness of the data.
-   * 2.) Schema Validation: Performs a thorough schema comparison between the source and target tables and provides a list of differences between the source and target database, 3.) Query Analysis: Executes a set of queries picked up automatically either from the Query Plan Cache or Query Store and execute them and compares the execution time between the source and target database.
+   *  1.) Data Integrity Check: Performs a checksum based comparison on source and target tables after the migration to ensure the correctness of the data.
+   *  2.) Schema Validation: Performs a thorough schema comparison between the source and target tables and provides a list of differences between the source and target database, 3.) Query Analysis: Executes a set of queries picked up automatically either from the Query Plan Cache or Query Store and execute them and compares the execution time between the source and target database.
    */
   validationOptions?: MigrationValidationOptions;
 

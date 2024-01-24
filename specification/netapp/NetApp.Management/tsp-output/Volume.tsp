@@ -15,8 +15,12 @@ namespace Microsoft.NetApp;
 /**
  * Volume resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CapacityPool)
-model Volume is TrackedResource<VolumeProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VolumeProperties)
+@includeInapplicableMetadataInPayload(false)
+model Volume extends TrackedResourceBase {
   /**
    * The name of the volume
    */
@@ -39,6 +43,12 @@ model Volume is TrackedResource<VolumeProperties> {
    */
   @visibility("read", "create")
   zones?: string[];
+
+  /**
+   * Volume properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: VolumeProperties;
 }
 
 @armResourceOperations

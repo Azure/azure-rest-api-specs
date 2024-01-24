@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Site Extension Information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model SiteExtensionInfo is ProxyResource<SiteExtensionInfoProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SiteExtensionInfoProperties)
+@includeInapplicableMetadataInPayload(false)
+model SiteExtensionInfo extends ProxyOnlyResource {
   /**
    * Site extension name.
    */
@@ -24,6 +28,12 @@ model SiteExtensionInfo is ProxyResource<SiteExtensionInfoProperties> {
   @key("siteExtensionId")
   @segment("siteextensions")
   name: string;
+
+  /**
+   * SiteExtensionInfo resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SiteExtensionInfoProperties;
 }
 
 @armResourceOperations

@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -816,6 +818,50 @@ model WorkflowParameter {
    * The description.
    */
   description?: string;
+}
+
+/**
+ * Managed service identity properties.
+ */
+model ManagedServiceIdentity {
+  /**
+   * Type of managed service identity. The type 'SystemAssigned' includes an implicitly created identity. The type 'None' will remove any identities from the resource.
+   */
+  type: ManagedServiceIdentityType;
+
+  /**
+   * Tenant of managed service identity.
+   */
+  @visibility("read")
+  tenantId?: string;
+
+  /**
+   * Principal Id of managed service identity.
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}
+   */
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
+ * User Assigned identity properties.
+ */
+model UserAssignedIdentity {
+  /**
+   * Principal Id of user assigned identity
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * Client Id of user assigned identity
+   */
+  @visibility("read")
+  clientId?: string;
 }
 
 /**
@@ -2131,6 +2177,7 @@ model KeyVaultKey {
   /**
    * The key attributes.
    */
+  @extension("x-ms-client-flatten", true)
   attributes?: KeyVaultKeyAttributes;
 }
 
@@ -4260,6 +4307,7 @@ model KeyVaultKeyReference {
   /**
    * The key vault reference.
    */
+  @extension("x-ms-client-flatten", true)
   keyVault: KeyVaultKeyReferenceKeyVault;
 
   /**
@@ -5057,6 +5105,7 @@ model SwaggerSchema {
   /**
    * The object properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<SwaggerSchema>;
 
   /**

@@ -14,7 +14,11 @@ namespace Microsoft.Maintenance;
 /**
  * Apply Update request
  */
-model ApplyUpdate is ProxyResource<ApplyUpdateProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ApplyUpdateProperties)
+@includeInapplicableMetadataInPayload(false)
+model ApplyUpdate extends ProxyResourceBase {
   /**
    * applyUpdate Id
    */
@@ -22,6 +26,12 @@ model ApplyUpdate is ProxyResource<ApplyUpdateProperties> {
   @key("applyUpdateName")
   @segment("applyUpdates")
   name: string;
+
+  /**
+   * Properties of the apply update
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApplyUpdateProperties;
 }
 
 @armResourceOperations

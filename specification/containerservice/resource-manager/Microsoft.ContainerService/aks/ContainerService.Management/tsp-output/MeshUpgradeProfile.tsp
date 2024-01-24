@@ -15,8 +15,12 @@ namespace Microsoft.ContainerService;
 /**
  * Upgrade profile for given mesh.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedCluster)
-model MeshUpgradeProfile is ProxyResource<MeshUpgradeProfileProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MeshUpgradeProfileProperties)
+@includeInapplicableMetadataInPayload(false)
+model MeshUpgradeProfile extends ProxyResourceBase {
   /**
    * The mode of the mesh.
    */
@@ -27,6 +31,12 @@ model MeshUpgradeProfile is ProxyResource<MeshUpgradeProfileProperties> {
   @key("mode")
   @segment("meshUpgradeProfiles")
   name: string;
+
+  /**
+   * Mesh upgrade profile properties for a major.minor release.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MeshUpgradeProfileProperties;
 }
 
 @armResourceOperations

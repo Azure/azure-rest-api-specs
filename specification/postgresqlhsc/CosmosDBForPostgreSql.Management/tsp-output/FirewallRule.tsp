@@ -15,8 +15,12 @@ namespace Microsoft.DBforPostgreSQL;
 /**
  * Represents a cluster firewall rule.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model FirewallRule is ProxyResource<FirewallRuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FirewallRuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model FirewallRule extends ProxyResourceBase {
   /**
    * The name of the cluster firewall rule.
    */
@@ -25,6 +29,12 @@ model FirewallRule is ProxyResource<FirewallRuleProperties> {
   @key("firewallRuleName")
   @segment("firewallRules")
   name: string;
+
+  /**
+   * The properties of a firewall rule.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: FirewallRuleProperties;
 }
 
 @armResourceOperations

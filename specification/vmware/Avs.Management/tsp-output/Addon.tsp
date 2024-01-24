@@ -15,8 +15,12 @@ namespace Microsoft.AVS;
 /**
  * An addon resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model Addon is ProxyResource<AddonProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AddonProperties)
+@includeInapplicableMetadataInPayload(false)
+model Addon extends ProxyResourceBase {
   /**
    * Name of the addon for the private cloud
    */
@@ -25,6 +29,12 @@ model Addon is ProxyResource<AddonProperties> {
   @key("addonName")
   @segment("addons")
   name: string;
+
+  /**
+   * The properties of an addon resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AddonProperties;
 }
 
 @armResourceOperations

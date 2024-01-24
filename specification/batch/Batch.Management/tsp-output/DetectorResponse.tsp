@@ -15,8 +15,12 @@ namespace Microsoft.Batch;
 /**
  * Contains the information for a detector.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BatchAccount)
-model DetectorResponse is ProxyResource<DetectorResponseProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DetectorResponseProperties)
+@includeInapplicableMetadataInPayload(false)
+model DetectorResponse extends ProxyResource {
   /**
    * The name of the detector.
    */
@@ -24,6 +28,12 @@ model DetectorResponse is ProxyResource<DetectorResponseProperties> {
   @key("detectorId")
   @segment("detectors")
   name: string;
+
+  /**
+   * The properties associated with the detector.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DetectorResponseProperties;
 }
 
 @armResourceOperations

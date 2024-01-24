@@ -26,7 +26,10 @@ model Role is ProxyResource<{}> {
   @segment("roles")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Role type.
+   */
+  kind: RoleTypes;
 }
 
 @armResourceOperations

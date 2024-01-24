@@ -19,6 +19,7 @@ using TypeSpec.Versioning;
  * Azure Benefits RP let users create and manage benefits like savings plan.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Billing benefits RP",
 })

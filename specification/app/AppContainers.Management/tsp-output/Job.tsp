@@ -14,7 +14,11 @@ namespace Microsoft.App;
 /**
  * Container App Job
  */
-model Job is TrackedResource<JobProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
+@includeInapplicableMetadataInPayload(false)
+model Job extends TrackedResourceBase {
   /**
    * Job Name
    */
@@ -23,6 +27,12 @@ model Job is TrackedResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   name: string;
+
+  /**
+   * Container Apps Job resource specific properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

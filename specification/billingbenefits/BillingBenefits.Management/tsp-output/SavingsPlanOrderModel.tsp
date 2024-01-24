@@ -14,8 +14,14 @@ namespace Microsoft.BillingBenefits;
 /**
  * Savings plan order
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model SavingsPlanOrderModel is ProxyResource<SavingsPlanOrderModelProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SavingsPlanOrderModelProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SavingsPlanOrderModel extends ProxyResourceBase {
   /**
    * Order ID of the savings plan
    */
@@ -23,6 +29,12 @@ model SavingsPlanOrderModel is ProxyResource<SavingsPlanOrderModelProperties> {
   @key("savingsPlanOrderId")
   @segment("savingsPlanOrders")
   name: string;
+
+  /**
+   * Savings plan order properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SavingsPlanOrderModelProperties;
 
   ...Azure.ResourceManager.ResourceSku;
 }

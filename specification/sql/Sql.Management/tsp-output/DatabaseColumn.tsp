@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A database column resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DatabaseTable)
-model DatabaseColumn is ProxyResource<DatabaseColumnProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DatabaseColumnProperties)
+@includeInapplicableMetadataInPayload(false)
+model DatabaseColumn extends ProxyResource {
   /**
    * The name of the column.
    */
@@ -24,6 +28,12 @@ model DatabaseColumn is ProxyResource<DatabaseColumnProperties> {
   @key("columnName")
   @segment("columns")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DatabaseColumnProperties;
 }
 
 @armResourceOperations

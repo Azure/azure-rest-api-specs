@@ -15,8 +15,12 @@ namespace Microsoft.Relay;
 /**
  * Single item in a List or Get AuthorizationRule operation
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(RelayNamespace)
-model AuthorizationRule is ProxyResource<AuthorizationRuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AuthorizationRuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model AuthorizationRule extends ProxyResourceBase {
   /**
    * The authorization rule name.
    */
@@ -25,6 +29,12 @@ model AuthorizationRule is ProxyResource<AuthorizationRuleProperties> {
   @key("authorizationRuleName")
   @segment("authorizationRules")
   name: string;
+
+  /**
+   * Properties supplied to create or update AuthorizationRule
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AuthorizationRuleProperties;
 }
 
 @armResourceOperations

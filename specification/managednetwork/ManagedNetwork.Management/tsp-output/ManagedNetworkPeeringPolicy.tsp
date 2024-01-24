@@ -15,9 +15,14 @@ namespace Microsoft.ManagedNetwork;
 /**
  * The Managed Network Peering Policy resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedNetwork)
-model ManagedNetworkPeeringPolicy
-  is ProxyResource<ManagedNetworkPeeringPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedNetworkPeeringPolicyProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedNetworkPeeringPolicy extends ProxyResource {
   /**
    * The name of the Managed Network Peering Policy.
    */
@@ -25,6 +30,12 @@ model ManagedNetworkPeeringPolicy
   @key("managedNetworkPeeringPolicyName")
   @segment("managedNetworkPeeringPolicies")
   name: string;
+
+  /**
+   * Gets or sets the properties of a Managed Network Policy
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedNetworkPeeringPolicyProperties;
 }
 
 @armResourceOperations

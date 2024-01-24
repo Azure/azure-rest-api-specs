@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -39,12 +41,12 @@ enum Scheme {
 }
 
 /**
-* Restart policy for all containers within the container group. 
-- `Always` Always restart
-- `OnFailure` Restart on failure
-- `Never` Never restart
-
-*/
+ * Restart policy for all containers within the container group.
+ * - `Always` Always restart
+ * - `OnFailure` Restart on failure
+ * - `Never` Never restart
+ *
+ */
 enum ContainerGroupRestartPolicy {
   Always,
   OnFailure,
@@ -180,6 +182,7 @@ model ContainerGroupProperties {
   /**
    * The container group properties
    */
+  @extension("x-ms-client-flatten", true)
   properties: ContainerGroupPropertiesProperties;
 }
 
@@ -248,12 +251,12 @@ model ContainerGroupPropertiesProperties {
   imageRegistryCredentials?: ImageRegistryCredential[];
 
   /**
-* Restart policy for all containers within the container group. 
-- `Always` Always restart
-- `OnFailure` Restart on failure
-- `Never` Never restart
-
-*/
+   * Restart policy for all containers within the container group.
+   * - `Always` Always restart
+   * - `OnFailure` Restart on failure
+   * - `Never` Never restart
+   *
+   */
   restartPolicy?: ContainerGroupRestartPolicy;
 
   /**
@@ -335,6 +338,7 @@ model Container {
   /**
    * The properties of the container instance.
    */
+  @extension("x-ms-client-flatten", true)
   properties: ContainerProperties;
 }
 
@@ -1053,6 +1057,7 @@ model InitContainerDefinition {
   /**
    * The properties for the init container.
    */
+  @extension("x-ms-client-flatten", true)
   properties: InitContainerPropertiesDefinition;
 }
 
@@ -1133,6 +1138,7 @@ model DeploymentExtensionSpec {
   /**
    * Extension specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeploymentExtensionSpecProperties;
 }
 

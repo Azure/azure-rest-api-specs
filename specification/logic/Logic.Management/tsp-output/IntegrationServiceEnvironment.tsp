@@ -14,8 +14,13 @@ namespace Microsoft.Logic;
 /**
  * The integration service environment.
  */
-model IntegrationServiceEnvironment
-  is TrackedResource<IntegrationServiceEnvironmentProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  IntegrationServiceEnvironmentProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model IntegrationServiceEnvironment extends Resource {
   /**
    * The integration service environment name.
    */
@@ -24,8 +29,21 @@ model IntegrationServiceEnvironment
   @segment("integrationServiceEnvironments")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The sku.
+   */
+  sku?: IntegrationServiceEnvironmentSku;
+
+  /**
+   * Managed service identity properties.
+   */
+  identity?: ManagedServiceIdentity;
+
+  /**
+   * The integration service environment properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: IntegrationServiceEnvironmentProperties;
 }
 
 @armResourceOperations

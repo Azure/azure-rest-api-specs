@@ -12,7 +12,11 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.OpenEnergyPlatform;
 
-model EnergyService is TrackedResource<EnergyServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(EnergyServiceProperties)
+@includeInapplicableMetadataInPayload(false)
+model EnergyService extends TrackedResourceBase {
   /**
    * The resource name.
    */
@@ -20,6 +24,9 @@ model EnergyService is TrackedResource<EnergyServiceProperties> {
   @key("resourceName")
   @segment("energyServices")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: EnergyServiceProperties;
 }
 
 @armResourceOperations

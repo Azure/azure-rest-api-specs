@@ -15,8 +15,12 @@ namespace Microsoft.CustomerInsights;
 /**
  * The interaction resource format.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Hub)
-model InteractionResourceFormat is ProxyResource<InteractionTypeDefinition> {
+@Azure.ResourceManager.Private.armResourceInternal(InteractionTypeDefinition)
+@includeInapplicableMetadataInPayload(false)
+model InteractionResourceFormat extends ProxyResource {
   /**
    * The name of the interaction.
    */
@@ -24,6 +28,12 @@ model InteractionResourceFormat is ProxyResource<InteractionTypeDefinition> {
   @key("interactionName")
   @segment("interactions")
   name: string;
+
+  /**
+   * The Interaction Type Definition
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: InteractionTypeDefinition;
 }
 
 @armResourceOperations

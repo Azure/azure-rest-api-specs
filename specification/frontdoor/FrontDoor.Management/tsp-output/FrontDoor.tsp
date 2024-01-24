@@ -14,7 +14,11 @@ namespace Microsoft.Network;
 /**
  * Front Door represents a collection of backend endpoints to route traffic to along with rules that specify how traffic is sent there.
  */
-model FrontDoor is TrackedResource<FrontDoorProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(FrontDoorProperties)
+@includeInapplicableMetadataInPayload(false)
+model FrontDoor extends FrontDoorResourceModel {
   /**
    * Name of the Front Door which is globally unique.
    */
@@ -25,6 +29,12 @@ model FrontDoor is TrackedResource<FrontDoorProperties> {
   @key("frontDoorName")
   @segment("frontDoors")
   name: string;
+
+  /**
+   * Properties of the Front Door Load Balancer
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FrontDoorProperties;
 }
 
 @armResourceOperations

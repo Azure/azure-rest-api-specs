@@ -15,8 +15,12 @@ namespace Microsoft.Datadog;
 /**
  * Capture logs and metrics of Azure resources based on ARM tags.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DatadogMonitorResource)
-model MonitoringTagRules is ProxyResource<MonitoringTagRulesProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MonitoringTagRulesProperties)
+@includeInapplicableMetadataInPayload(false)
+model MonitoringTagRules extends ProxyResourceBase {
   /**
    * Rule set name
    */
@@ -24,6 +28,12 @@ model MonitoringTagRules is ProxyResource<MonitoringTagRulesProperties> {
   @key("ruleSetName")
   @segment("tagRules")
   name: string;
+
+  /**
+   * Definition of the properties for a TagRules resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MonitoringTagRulesProperties;
 }
 
 @armResourceOperations

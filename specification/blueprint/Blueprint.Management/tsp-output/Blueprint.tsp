@@ -14,7 +14,11 @@ namespace Microsoft.Blueprint;
 /**
  * Represents a Blueprint definition.
  */
-model Blueprint is ExtensionResource<BlueprintProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(BlueprintProperties)
+@includeInapplicableMetadataInPayload(false)
+model Blueprint extends ExtensionResourceBase {
   /**
    * Name of the blueprint definition.
    */
@@ -22,6 +26,12 @@ model Blueprint is ExtensionResource<BlueprintProperties> {
   @key("blueprintName")
   @segment("blueprints")
   name: string;
+
+  /**
+   * Detailed properties for blueprint definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: BlueprintProperties;
 }
 
 @armResourceOperations

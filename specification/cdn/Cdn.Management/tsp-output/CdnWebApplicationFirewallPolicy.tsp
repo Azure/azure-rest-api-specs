@@ -14,8 +14,13 @@ namespace Microsoft.Cdn;
 /**
  * Defines web application firewall policy for Azure CDN.
  */
-model CdnWebApplicationFirewallPolicy
-  is TrackedResource<CdnWebApplicationFirewallPolicyProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  CdnWebApplicationFirewallPolicyProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model CdnWebApplicationFirewallPolicy extends TrackedResource {
   /**
    * The name of the CdnWebApplicationFirewallPolicy.
    */
@@ -30,7 +35,16 @@ model CdnWebApplicationFirewallPolicy
    */
   etag?: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The pricing tier (defines a CDN provider, feature list and rate) of the CdnWebApplicationFirewallPolicy.
+   */
+  sku: Sku;
+
+  /**
+   * Properties of the web application firewall policy.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CdnWebApplicationFirewallPolicyProperties;
 }
 
 @armResourceOperations

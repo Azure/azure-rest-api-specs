@@ -14,7 +14,11 @@ namespace Microsoft.DataReplication;
 /**
  * Vault model.
  */
-model VaultModel is TrackedResource<VaultModelProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(VaultModelProperties)
+@includeInapplicableMetadataInPayload(false)
+model VaultModel extends TrackedResourceBase {
   /**
    * The vault name.
    */
@@ -23,6 +27,12 @@ model VaultModel is TrackedResource<VaultModelProperties> {
   @key("vaultName")
   @segment("replicationVaults")
   name: string;
+
+  /**
+   * Vault properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VaultModelProperties;
 }
 
 @armResourceOperations

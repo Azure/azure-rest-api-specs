@@ -15,8 +15,12 @@ namespace Microsoft.MobileNetwork;
 /**
  * Service resource. Must be created in the same location as its parent mobile network.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MobileNetwork)
-model Service is TrackedResource<ServicePropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(ServicePropertiesFormat)
+@includeInapplicableMetadataInPayload(false)
+model Service extends TrackedResourceBase {
   /**
    * The name of the service. You must not use any of the following reserved strings - `default`, `requested` or `service`
    */
@@ -26,6 +30,12 @@ model Service is TrackedResource<ServicePropertiesFormat> {
   @key("serviceName")
   @segment("services")
   name: string;
+
+  /**
+   * Service Properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ServicePropertiesFormat;
 }
 
 @armResourceOperations

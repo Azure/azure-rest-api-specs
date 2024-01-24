@@ -14,7 +14,11 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Web Job Information.
  */
-model WebJob is ProxyResource<WebJobProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WebJobProperties)
+@includeInapplicableMetadataInPayload(false)
+model WebJob extends ProxyOnlyResource {
   /**
    * Name of the web job.
    */
@@ -22,6 +26,12 @@ model WebJob is ProxyResource<WebJobProperties> {
   @key("webJobName")
   @segment("webjobs")
   name: string;
+
+  /**
+   * WebJob resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WebJobProperties;
 }
 
 @armResourceOperations

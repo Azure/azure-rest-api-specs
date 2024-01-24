@@ -14,7 +14,11 @@ namespace Microsoft.ManagedNetwork;
 /**
  * The Managed Network resource
  */
-model ManagedNetwork is TrackedResource<ManagedNetworkProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ManagedNetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model ManagedNetwork extends TrackedResource {
   /**
    * The name of the Managed Network.
    */
@@ -22,6 +26,12 @@ model ManagedNetwork is TrackedResource<ManagedNetworkProperties> {
   @key("managedNetworkName")
   @segment("managedNetworks")
   name: string;
+
+  /**
+   * The MNC properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedNetworkProperties;
 }
 
 @armResourceOperations

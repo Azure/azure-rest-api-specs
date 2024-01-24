@@ -15,8 +15,12 @@ namespace Microsoft.StreamAnalytics;
 /**
  * A function object, containing all information associated with the named function. All functions are contained under a streaming job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StreamingJob)
-model Function is ProxyResource<FunctionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FunctionProperties)
+@includeInapplicableMetadataInPayload(false)
+model Function extends SubResource {
   /**
    * The name of the function.
    */
@@ -24,6 +28,12 @@ model Function is ProxyResource<FunctionProperties> {
   @key("functionName")
   @segment("functions")
   name: string;
+
+  /**
+   * The properties that are associated with a function.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FunctionProperties;
 }
 
 @armResourceOperations

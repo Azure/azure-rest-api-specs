@@ -14,7 +14,11 @@ namespace Microsoft.DevCenter;
 /**
  * Represents a project resource.
  */
-model Project is TrackedResource<ProjectProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ProjectProperties)
+@includeInapplicableMetadataInPayload(false)
+model Project extends TrackedResourceBase {
   /**
    * The name of the project.
    */
@@ -22,6 +26,12 @@ model Project is TrackedResource<ProjectProperties> {
   @key("projectName")
   @segment("projects")
   name: string;
+
+  /**
+   * Properties of a project.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProjectProperties;
 }
 
 @armResourceOperations

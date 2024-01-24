@@ -14,13 +14,26 @@ namespace Microsoft.App;
 /**
  * An environment for hosting container apps
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("rootApi")
-model ManagedEnvironment is TrackedResource<ManagedEnvironmentProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ManagedEnvironmentProperties)
+@includeInapplicableMetadataInPayload(false)
+model ManagedEnvironment extends TrackedResourceBase {
   @key("detectorProperty")
   @segment("detectorProperties")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Kind of the Environment.
+   */
+  kind?: string;
+
+  /**
+   * Managed environment resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedEnvironmentProperties;
 }
 
 @armResourceOperations

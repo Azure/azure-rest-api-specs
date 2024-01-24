@@ -14,7 +14,11 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Full view of network features for an app (presently VNET integration and Hybrid Connections).
  */
-model NetworkFeatures is ProxyResource<NetworkFeaturesProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(NetworkFeaturesProperties)
+@includeInapplicableMetadataInPayload(false)
+model NetworkFeatures extends ProxyOnlyResource {
   /**
    * The type of view. Only "summary" is supported at this time.
    */
@@ -22,6 +26,12 @@ model NetworkFeatures is ProxyResource<NetworkFeaturesProperties> {
   @key("view")
   @segment("networkFeatures")
   name: string;
+
+  /**
+   * NetworkFeatures resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NetworkFeaturesProperties;
 }
 
 @armResourceOperations

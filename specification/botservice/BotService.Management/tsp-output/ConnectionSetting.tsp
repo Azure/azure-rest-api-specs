@@ -15,8 +15,12 @@ namespace Microsoft.BotService;
 /**
  * Bot channel resource definition
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Bot)
-model ConnectionSetting is TrackedResource<ConnectionSettingProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ConnectionSettingProperties)
+@includeInapplicableMetadataInPayload(false)
+model ConnectionSetting extends TrackedResourceBase {
   /**
    * The name of the Bot Service Connection Setting resource.
    */
@@ -27,6 +31,12 @@ model ConnectionSetting is TrackedResource<ConnectionSettingProperties> {
   @key("connectionName")
   @segment("connections")
   name: string;
+
+  /**
+   * The set of properties specific to bot channel resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConnectionSettingProperties;
 }
 
 @armResourceOperations

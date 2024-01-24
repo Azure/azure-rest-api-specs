@@ -15,13 +15,24 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL managed instance administrator.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model ManagedInstanceAdministrator
-  is ProxyResource<ManagedInstanceAdministratorProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedInstanceAdministratorProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedInstanceAdministrator extends ProxyResource {
   @path
   @key("administratorName")
   @segment("administrators")
   name: AdministratorName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedInstanceAdministratorProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * Defines the NetworkInterface resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetworkDevice)
-model NetworkInterface is ProxyResource<NetworkInterfaceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(NetworkInterfaceProperties)
+@includeInapplicableMetadataInPayload(false)
+model NetworkInterface extends ProxyResourceBase {
   /**
    * Name of the Network Interface.
    */
@@ -24,6 +28,12 @@ model NetworkInterface is ProxyResource<NetworkInterfaceProperties> {
   @key("networkInterfaceName")
   @segment("networkInterfaces")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: NetworkInterfaceProperties;
 }
 
 @armResourceOperations

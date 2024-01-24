@@ -15,8 +15,12 @@ namespace Microsoft.AVS;
 /**
  * A cmdlet available for script execution
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ScriptPackage)
-model ScriptCmdlet is ProxyResource<ScriptCmdletProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ScriptCmdletProperties)
+@includeInapplicableMetadataInPayload(false)
+model ScriptCmdlet extends ProxyResourceBase {
   /**
    * Name of the script cmdlet resource in the script package in the private cloud
    */
@@ -25,6 +29,12 @@ model ScriptCmdlet is ProxyResource<ScriptCmdletProperties> {
   @key("scriptCmdletName")
   @segment("scriptCmdlets")
   name: string;
+
+  /**
+   * The properties of a script cmdlet resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ScriptCmdletProperties;
 }
 
 @armResourceOperations

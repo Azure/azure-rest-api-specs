@@ -15,8 +15,12 @@ namespace Microsoft.NetworkCloud;
 /**
  * AgentPool represents the agent pool of Kubernetes cluster.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(KubernetesCluster)
-model AgentPool is TrackedResource<AgentPoolProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AgentPoolProperties)
+@includeInapplicableMetadataInPayload(false)
+model AgentPool extends TrackedResourceBase {
   /**
    * The name of the Kubernetes cluster agent pool.
    */
@@ -30,6 +34,12 @@ model AgentPool is TrackedResource<AgentPoolProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: AgentPoolProperties;
 }
 
 @armResourceOperations

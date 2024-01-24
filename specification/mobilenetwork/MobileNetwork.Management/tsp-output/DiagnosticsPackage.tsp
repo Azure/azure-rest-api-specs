@@ -15,8 +15,14 @@ namespace Microsoft.MobileNetwork;
 /**
  * Diagnostics package resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PacketCoreControlPlane)
-model DiagnosticsPackage is ProxyResource<DiagnosticsPackagePropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DiagnosticsPackagePropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model DiagnosticsPackage extends ProxyResourceBase {
   /**
    * The name of the diagnostics package.
    */
@@ -26,6 +32,12 @@ model DiagnosticsPackage is ProxyResource<DiagnosticsPackagePropertiesFormat> {
   @key("diagnosticsPackageName")
   @segment("diagnosticsPackages")
   name: string;
+
+  /**
+   * Diagnostics package properties. A diagnostics package file derived from the name of this resource will be uploaded to the Storage Account Container URL in the packet core control plane properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DiagnosticsPackagePropertiesFormat;
 }
 
 @armResourceOperations

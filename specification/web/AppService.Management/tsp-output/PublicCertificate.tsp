@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Public certificate object
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model PublicCertificate is ProxyResource<PublicCertificateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PublicCertificateProperties)
+@includeInapplicableMetadataInPayload(false)
+model PublicCertificate extends ProxyOnlyResource {
   /**
    * Public certificate name.
    */
@@ -24,6 +28,12 @@ model PublicCertificate is ProxyResource<PublicCertificateProperties> {
   @key("publicCertificateName")
   @segment("publicCertificates")
   name: string;
+
+  /**
+   * PublicCertificate resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PublicCertificateProperties;
 }
 
 @armResourceOperations

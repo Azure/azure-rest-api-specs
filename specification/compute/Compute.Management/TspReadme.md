@@ -12,6 +12,7 @@ require: https://github.com/Azure/azure-rest-api-specs/blob/d6665aaea57eb608c414
 skip-csproj: true
 modelerfour:
   flatten-payloads: false
+use-model-reader-writer: true
 
 update-required-copy:
   GalleryImage: OSType

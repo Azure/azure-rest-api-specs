@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model Job is ProxyResource<JobProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
+@includeInapplicableMetadataInPayload(false)
+model Job extends ProxyResourceBase {
   /**
    * The job name.
    */
@@ -24,6 +28,12 @@ model Job is ProxyResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   name: string;
+
+  /**
+   * The properties of the job.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobProperties;
 }
 
 @armResourceOperations

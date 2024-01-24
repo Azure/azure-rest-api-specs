@@ -14,9 +14,14 @@ namespace Microsoft.Orbital;
 /**
  * Ground Stations available to schedule Contacts.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model AvailableGroundStation
-  is ProxyResource<AvailableGroundStationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  AvailableGroundStationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AvailableGroundStation extends ProxyResourceBase {
   /**
    * Ground Station name.
    */
@@ -24,6 +29,12 @@ model AvailableGroundStation
   @key("groundStationName")
   @segment("availableGroundStations")
   name: string;
+
+  /**
+   * The properties bag for this resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AvailableGroundStationProperties;
 }
 
 @armResourceOperations

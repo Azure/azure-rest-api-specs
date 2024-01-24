@@ -15,8 +15,12 @@ namespace Microsoft.OperationalInsights;
 /**
  * The top level storage insight resource container.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model StorageInsight is ProxyResource<StorageInsightProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(StorageInsightProperties)
+@includeInapplicableMetadataInPayload(false)
+model StorageInsight extends ProxyResourceBase {
   /**
    * Name of the storageInsightsConfigs resource
    */
@@ -24,6 +28,12 @@ model StorageInsight is ProxyResource<StorageInsightProperties> {
   @key("storageInsightName")
   @segment("storageInsightConfigs")
   name: string;
+
+  /**
+   * Storage insight properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StorageInsightProperties;
 
   ...Azure.ResourceManager.EntityTag;
 }

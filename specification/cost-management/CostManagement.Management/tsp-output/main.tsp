@@ -21,12 +21,12 @@ using TypeSpec.Versioning;
  * CostManagement management client provides access to CostManagement resources for Azure Enterprise Subscriptions.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "CostManagementClient",
 })
 @versioned(Versions)
-// FIXME: Common type version v2 is not supported for now.
-// @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v2)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.CostManagement;
 
 /**

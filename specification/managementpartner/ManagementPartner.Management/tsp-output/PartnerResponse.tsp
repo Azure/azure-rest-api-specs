@@ -14,8 +14,12 @@ namespace Microsoft.ManagementPartner;
 /**
  * this is the management partner operations response
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model PartnerResponse is ProxyResource<PartnerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PartnerProperties)
+@includeInapplicableMetadataInPayload(false)
+model PartnerResponse extends ProxyResourceBase {
   /**
    * Id of the Partner
    */
@@ -28,6 +32,12 @@ model PartnerResponse is ProxyResource<PartnerProperties> {
    * Type of the partner
    */
   etag?: int32;
+
+  /**
+   * Properties of the partner
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PartnerProperties;
 }
 
 @armResourceOperations

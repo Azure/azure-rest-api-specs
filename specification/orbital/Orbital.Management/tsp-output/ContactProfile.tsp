@@ -14,7 +14,11 @@ namespace Microsoft.Orbital;
 /**
  * Customer creates a Contact Profile Resource, which will contain all of the configurations required for scheduling a contact.
  */
-model ContactProfile is TrackedResource<ContactProfileProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ContactProfileProperties)
+@includeInapplicableMetadataInPayload(false)
+model ContactProfile extends TrackedResourceBase {
   /**
    * Contact Profile name.
    */
@@ -28,6 +32,12 @@ model ContactProfile is TrackedResource<ContactProfileProperties> {
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * Properties of the contact profile resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ContactProfileProperties;
 }
 
 @armResourceOperations

@@ -15,13 +15,24 @@ namespace Microsoft.HybridContainerService;
 /**
  * Defines the hybridIdentityMetadata.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(ProvisionedCluster)
-model HybridIdentityMetadata
-  is ProxyResource<HybridIdentityMetadataProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  HybridIdentityMetadataProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model HybridIdentityMetadata extends ProxyResourceBase {
   @key("hybridIdentityMetadatum")
   @segment("hybridIdentityMetadata")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: HybridIdentityMetadataProperties;
 }
 
 @armResourceOperations

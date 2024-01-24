@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Key Vault container ARM resource for a certificate that is purchased through Azure.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AppServiceCertificateOrder)
-model AppServiceCertificateResource is TrackedResource<AppServiceCertificate> {
+@Azure.ResourceManager.Private.armResourceInternal(AppServiceCertificate)
+@includeInapplicableMetadataInPayload(false)
+model AppServiceCertificateResource extends Resource {
   /**
    * Name of the certificate.
    */
@@ -24,6 +28,12 @@ model AppServiceCertificateResource is TrackedResource<AppServiceCertificate> {
   @key("name")
   @segment("certificates")
   name: string;
+
+  /**
+   * Core resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AppServiceCertificate;
 }
 
 @armResourceOperations

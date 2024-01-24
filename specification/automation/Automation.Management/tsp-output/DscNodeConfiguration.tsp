@@ -15,8 +15,14 @@ namespace Microsoft.Automation;
 /**
  * Definition of the dsc node configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model DscNodeConfiguration is ProxyResource<DscNodeConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DscNodeConfigurationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DscNodeConfiguration extends ProxyResourceBase {
   /**
    * The Dsc node configuration name.
    */
@@ -24,6 +30,12 @@ model DscNodeConfiguration is ProxyResource<DscNodeConfigurationProperties> {
   @key("nodeConfigurationName")
   @segment("nodeConfigurations")
   name: string;
+
+  /**
+   * Gets or sets the configuration properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DscNodeConfigurationProperties;
 }
 
 @armResourceOperations

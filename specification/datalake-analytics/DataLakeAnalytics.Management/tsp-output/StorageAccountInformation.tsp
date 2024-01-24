@@ -15,9 +15,14 @@ namespace Microsoft.DataLakeAnalytics;
 /**
  * Azure Storage account information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataLakeAnalyticsAccount)
-model StorageAccountInformation
-  is ProxyResource<StorageAccountInformationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  StorageAccountInformationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model StorageAccountInformation extends ProxyResourceBase {
   /**
    * The name of the Azure Storage account for which to retrieve the details.
    */
@@ -25,6 +30,12 @@ model StorageAccountInformation
   @key("storageAccountName")
   @segment("storageAccounts")
   name: string;
+
+  /**
+   * The Azure Storage account properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StorageAccountInformationProperties;
 }
 
 @armResourceOperations

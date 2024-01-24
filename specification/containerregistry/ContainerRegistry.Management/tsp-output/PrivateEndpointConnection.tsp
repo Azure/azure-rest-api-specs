@@ -15,9 +15,14 @@ namespace Microsoft.ContainerRegistry;
 /**
  * An object that represents a private endpoint connection for a container registry.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model PrivateEndpointConnection
-  is ProxyResource<PrivateEndpointConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateEndpointConnectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnection extends ProxyResourceBase {
   /**
    * The name of the private endpoint connection.
    */
@@ -25,6 +30,12 @@ model PrivateEndpointConnection
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
+
+  /**
+   * The properties of a private endpoint connection.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations

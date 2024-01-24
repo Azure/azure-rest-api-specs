@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -162,6 +164,7 @@ model NamespaceCreateOrUpdateParameters extends Resource {
   /**
    * Properties of the Namespace.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NamespaceProperties;
 }
 
@@ -374,6 +377,7 @@ model NotificationHubCreateOrUpdateParameters extends Resource {
   /**
    * Properties of the NotificationHub.
    */
+  @extension("x-ms-client-flatten", true)
   properties: NotificationHubProperties;
 }
 
@@ -435,6 +439,7 @@ model ApnsCredential {
   /**
    * Properties of NotificationHub ApnsCredential.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApnsCredentialProperties;
 }
 
@@ -490,6 +495,7 @@ model WnsCredential {
   /**
    * Properties of NotificationHub WnsCredential.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WnsCredentialProperties;
 }
 
@@ -520,6 +526,7 @@ model GcmCredential {
   /**
    * Properties of NotificationHub GcmCredential.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GcmCredentialProperties;
 }
 
@@ -545,6 +552,7 @@ model MpnsCredential {
   /**
    * Properties of NotificationHub MpnsCredential.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MpnsCredentialProperties;
 }
 
@@ -575,6 +583,7 @@ model AdmCredential {
   /**
    * Properties of NotificationHub AdmCredential.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AdmCredentialProperties;
 }
 
@@ -605,6 +614,7 @@ model BaiduCredential {
   /**
    * Properties of NotificationHub BaiduCredential.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BaiduCredentialProperties;
 }
 
@@ -635,6 +645,7 @@ model NotificationHubPatchParameters extends Resource {
   /**
    * Properties of the NotificationHub.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NotificationHubProperties;
 }
 
@@ -645,6 +656,7 @@ model DebugSendResponse extends Resource {
   /**
    * Properties of the NotificationHub.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DebugSendResult;
 }
 
@@ -672,6 +684,7 @@ model PnsCredentialsResource extends Resource {
   /**
    * NotificationHub PNS Credentials.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PnsCredentialsProperties;
 }
 

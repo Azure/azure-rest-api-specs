@@ -14,8 +14,12 @@ namespace Microsoft.Capacity;
 /**
  * Details of a reservation order being returned.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model ReservationOrderResponse is ProxyResource<ReservationOrderProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ReservationOrderProperties)
+@includeInapplicableMetadataInPayload(false)
+model ReservationOrderResponse extends ProxyResourceBase {
   /**
    * Order Id of the reservation
    */
@@ -25,6 +29,12 @@ model ReservationOrderResponse is ProxyResource<ReservationOrderProperties> {
   name: string;
 
   etag?: int32;
+
+  /**
+   * Properties of a reservation order.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ReservationOrderProperties;
 }
 
 @armResourceOperations
@@ -103,9 +113,9 @@ interface ReservationOrderResponses {
   >;
 
   /**
-* Calculate price for returning `Reservations` if there are no policy errors.
-
-*/
+   * Calculate price for returning `Reservations` if there are no policy errors.
+   *
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("CalculateRefund_Post")
   post is ArmResourceActionSync<

@@ -15,9 +15,14 @@ namespace Microsoft.ManagedIdentity;
 /**
  * Describes a federated identity credential.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Identity)
-model FederatedIdentityCredential
-  is ProxyResource<FederatedIdentityCredentialProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  FederatedIdentityCredentialProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model FederatedIdentityCredential extends ProxyResourceBase {
   /**
    * The name of the federated identity credential resource.
    */
@@ -26,6 +31,12 @@ model FederatedIdentityCredential
   @key("federatedIdentityCredentialResourceName")
   @segment("federatedIdentityCredentials")
   name: string;
+
+  /**
+   * The properties associated with the federated identity credential.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FederatedIdentityCredentialProperties;
 }
 
 @armResourceOperations

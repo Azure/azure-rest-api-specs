@@ -15,8 +15,12 @@ namespace Microsoft.ProviderHub;
 /**
  * Default rollout definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ProviderRegistration)
-model DefaultRollout is ProxyResource<DefaultRolloutProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DefaultRolloutProperties)
+@includeInapplicableMetadataInPayload(false)
+model DefaultRollout extends ProxyResourceBase {
   /**
    * The rollout name.
    */
@@ -24,6 +28,12 @@ model DefaultRollout is ProxyResource<DefaultRolloutProperties> {
   @key("rolloutName")
   @segment("defaultRollouts")
   name: string;
+
+  /**
+   * Properties of the rollout.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DefaultRolloutProperties;
 }
 
 @armResourceOperations

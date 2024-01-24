@@ -15,8 +15,12 @@ namespace Microsoft.DataReplication;
 /**
  * Workflow model.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VaultModel)
-model WorkflowModel is ProxyResource<WorkflowModelProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WorkflowModelProperties)
+@includeInapplicableMetadataInPayload(false)
+model WorkflowModel extends ProxyResourceBase {
   /**
    * The job (workflow) name.
    */
@@ -25,6 +29,12 @@ model WorkflowModel is ProxyResource<WorkflowModelProperties> {
   @key("jobName")
   @segment("jobs")
   name: string;
+
+  /**
+   * Workflow model properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: WorkflowModelProperties;
 }
 
 @armResourceOperations

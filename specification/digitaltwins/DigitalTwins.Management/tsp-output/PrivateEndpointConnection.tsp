@@ -15,8 +15,12 @@ namespace Microsoft.DigitalTwins;
 /**
  * The private endpoint connection of a Digital Twin.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DigitalTwinsDescription)
-model PrivateEndpointConnection is ProxyResource<ConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ConnectionProperties)
+@includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnection extends ProxyResourceBase {
   /**
    * The name of the private endpoint connection.
    */
@@ -24,6 +28,12 @@ model PrivateEndpointConnection is ProxyResource<ConnectionProperties> {
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
+
+  /**
+   * The connection properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ConnectionProperties;
 }
 
 @armResourceOperations

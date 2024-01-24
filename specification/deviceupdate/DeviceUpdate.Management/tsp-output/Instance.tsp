@@ -15,8 +15,12 @@ namespace Microsoft.DeviceUpdate;
 /**
  * Device Update instance details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-model Instance is TrackedResource<InstanceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(InstanceProperties)
+@includeInapplicableMetadataInPayload(false)
+model Instance extends TrackedResourceBase {
   /**
    * Instance name.
    */
@@ -27,6 +31,12 @@ model Instance is TrackedResource<InstanceProperties> {
   @key("instanceName")
   @segment("instances")
   name: string;
+
+  /**
+   * Device Update instance properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: InstanceProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.PolicyInsights;
 /**
  * The remediation definition.
  */
-model Remediation is ExtensionResource<RemediationProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(RemediationProperties)
+@includeInapplicableMetadataInPayload(false)
+model Remediation extends ExtensionResourceBase {
   /**
    * The name of the remediation.
    */
@@ -22,6 +26,12 @@ model Remediation is ExtensionResource<RemediationProperties> {
   @key("remediationName")
   @segment("remediations")
   name: string;
+
+  /**
+   * Properties for the remediation.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RemediationProperties;
 }
 
 @armResourceOperations

@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -13,10 +15,10 @@ namespace Microsoft.SignalRService;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
-* Optional tier of this particular SKU. 'Standard' or 'Free'. 
-
-`Basic` is deprecated, use `Standard` instead.
-*/
+ * Optional tier of this particular SKU. 'Standard' or 'Free'.
+ *
+ * `Basic` is deprecated, use `Standard` instead.
+ */
 enum WebPubSubSkuTier {
   Free,
   Basic,
@@ -159,10 +161,10 @@ model MetricSpecification {
   aggregationType?: string;
 
   /**
-* Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published. 
-Ex. a metric that returns the number of times a particular error code was emitted. The error code may not appear 
-often, instead of the RP publishing 0, Shoebox can auto fill in 0s for time periods where nothing was emitted.
-*/
+   * Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.
+   * Ex. a metric that returns the number of times a particular error code was emitted. The error code may not appear
+   * often, instead of the RP publishing 0, Shoebox can auto fill in 0s for time periods where nothing was emitted.
+   */
   fillGapWithZero?: string;
 
   /**
@@ -306,17 +308,17 @@ model SignalRServiceUsageName {
  */
 model BillingInfoSku {
   /**
-* The name of the SKU. Required.
-
-Allowed values: Standard_S1, Free_F1
-*/
+   * The name of the SKU. Required.
+   *
+   * Allowed values: Standard_S1, Free_F1
+   */
   name: string;
 
   /**
-* Optional tier of this particular SKU. 'Standard' or 'Free'. 
-
-`Basic` is deprecated, use `Standard` instead.
-*/
+   * Optional tier of this particular SKU. 'Standard' or 'Free'.
+   *
+   * `Basic` is deprecated, use `Standard` instead.
+   */
   tier?: WebPubSubSkuTier;
 
   /**
@@ -332,12 +334,12 @@ Allowed values: Standard_S1, Free_F1
   family?: string;
 
   /**
-* Optional, integer. The unit count of the resource. 1 by default.
-
-If present, following values are allowed:
-    Free: 1
-    Standard: 1,2,5,10,20,50,100
-*/
+   * Optional, integer. The unit count of the resource. 1 by default.
+   *
+   * If present, following values are allowed:
+   *     Free: 1
+   *     Standard: 1,2,5,10,20,50,100
+   */
   capacity?: int32;
 }
 
@@ -420,25 +422,25 @@ model WebPubSubProperties {
   networkACLs?: WebPubSubNetworkACLs;
 
   /**
-* Enable or disable public network access. Default to "Enabled".
-When it's Enabled, network ACLs still apply.
-When it's Disabled, public network access is always disabled no matter what you set in network ACLs.
-*/
+   * Enable or disable public network access. Default to "Enabled".
+   * When it's Enabled, network ACLs still apply.
+   * When it's Disabled, public network access is always disabled no matter what you set in network ACLs.
+   */
   publicNetworkAccess?: string = "Enabled";
 
   /**
-* DisableLocalAuth
-Enable or disable local auth with AccessKey
-When set as true, connection with AccessKey=xxx won't work.
-*/
+   * DisableLocalAuth
+   * Enable or disable local auth with AccessKey
+   * When set as true, connection with AccessKey=xxx won't work.
+   */
   @projectedName("json", "disableLocalAuth")
   isLocalAuthDisabled?: boolean;
 
   /**
-* DisableLocalAuth
-Enable or disable aad auth
-When set as true, connection with AuthType=aad won't work.
-*/
+   * DisableLocalAuth
+   * Enable or disable aad auth
+   * When set as true, connection with AuthType=aad won't work.
+   */
   @projectedName("json", "disableAadAuth")
   isAadAuthDisabled?: boolean;
 }
@@ -571,12 +573,12 @@ model WebPubSubTlsSettings {
  */
 model LiveTraceConfiguration {
   /**
-* Indicates whether or not enable live trace.
-When it's set to true, live trace client can connect to the service.
-Otherwise, live trace client can't connect to the service, so that you are unable to receive any log, no matter what you configure in "categories".
-Available values: true, false.
-Case insensitive.
-*/
+   * Indicates whether or not enable live trace.
+   * When it's set to true, live trace client can connect to the service.
+   * Otherwise, live trace client can't connect to the service, so that you are unable to receive any log, no matter what you configure in "categories".
+   * Available values: true, false.
+   * Case insensitive.
+   */
   enabled?: string = "false";
 
   /**
@@ -590,17 +592,17 @@ Case insensitive.
  */
 model LiveTraceCategory {
   /**
-* Gets or sets the live trace category's name.
-Available values: ConnectivityLogs, MessagingLogs.
-Case insensitive.
-*/
+   * Gets or sets the live trace category's name.
+   * Available values: ConnectivityLogs, MessagingLogs.
+   * Case insensitive.
+   */
   name?: string;
 
   /**
-* Indicates whether or the live trace category is enabled.
-Available values: true, false.
-Case insensitive.
-*/
+   * Indicates whether or the live trace category is enabled.
+   * Available values: true, false.
+   * Case insensitive.
+   */
   enabled?: string;
 }
 
@@ -619,17 +621,17 @@ model ResourceLogConfiguration {
  */
 model ResourceLogCategory {
   /**
-* Gets or sets the resource log category's name.
-Available values: ConnectivityLogs, MessagingLogs.
-Case insensitive.
-*/
+   * Gets or sets the resource log category's name.
+   * Available values: ConnectivityLogs, MessagingLogs.
+   * Case insensitive.
+   */
   name?: string;
 
   /**
-* Indicates whether or the resource log category is enabled.
-Available values: true, false.
-Case insensitive.
-*/
+   * Indicates whether or the resource log category is enabled.
+   * Available values: true, false.
+   * Case insensitive.
+   */
   enabled?: string;
 }
 
@@ -693,16 +695,16 @@ model ManagedIdentity {
   userAssignedIdentities?: Record<UserAssignedIdentityProperty>;
 
   /**
-* Get the principal id for the system assigned identity.
-Only be used in response.
-*/
+   * Get the principal id for the system assigned identity.
+   * Only be used in response.
+   */
   @visibility("read")
   principalId?: string;
 
   /**
-* Get the tenant id for the system assigned identity.
-Only be used in response
-*/
+   * Get the tenant id for the system assigned identity.
+   * Only be used in response
+   */
   @visibility("read")
   tenantId?: string;
 }
@@ -744,18 +746,18 @@ model WebPubSubHubProperties {
  */
 model WebPubSubEventHandler {
   /**
-* Gets or sets the EventHandler URL template. You can use a predefined parameter {hub} and {event} inside the template, the value of the EventHandler URL is dynamically calculated when the client request comes in.
-For example, UrlTemplate can be `http://example.com/api/{hub}/{event}`. The host part can't contains parameters.
-*/
+   * Gets or sets the EventHandler URL template. You can use a predefined parameter {hub} and {event} inside the template, the value of the EventHandler URL is dynamically calculated when the client request comes in.
+   * For example, UrlTemplate can be `http://example.com/api/{hub}/{event}`. The host part can't contains parameters.
+   */
   urlTemplate: string;
 
   /**
-* Gets or sets the matching pattern for event names.
-There are 3 kind of patterns supported:
-    1. "*", it to matches any event name
-    2. Combine multiple events with ",", for example "event1,event2", it matches event "event1" and "event2"
-    3. The single event name, for example, "event1", it matches "event1"
-*/
+   * Gets or sets the matching pattern for event names.
+   * There are 3 kind of patterns supported:
+   *     1. "*", it to matches any event name
+   *     2. Combine multiple events with ",", for example "event1,event2", it matches event "event1" and "event2"
+   *     3. The single event name, for example, "event1", it matches "event1"
+   */
   userEventPattern?: string;
 
   /**
@@ -789,9 +791,9 @@ model UpstreamAuthSettings {
  */
 model ManagedIdentitySettings {
   /**
-* The Resource indicating the App ID URI of the target resource.
-It also appears in the aud (audience) claim of the issued token.
-*/
+   * The Resource indicating the App ID URI of the target resource.
+   * It also appears in the aud (audience) claim of the issued token.
+   */
   resource?: string;
 }
 
@@ -828,10 +830,11 @@ model PrivateLinkResourceList is Azure.Core.Page<WebPubSubPrivateLink>;
 /**
  * Private link resource
  */
-model WebPubSubPrivateLink{
+model WebPubSubPrivateLink extends ProxyResource {
   /**
    * Private link resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -917,9 +920,9 @@ model SkuList {
   value?: WebPubSubSku[];
 
   /**
-* The URL the client should use to fetch the next page (per server side paging).
-It's null for now, added for future use.
-*/
+   * The URL the client should use to fetch the next page (per server side paging).
+   * It's null for now, added for future use.
+   */
   @visibility("read")
   nextLink?: string;
 }

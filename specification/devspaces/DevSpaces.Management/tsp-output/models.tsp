@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -29,6 +31,13 @@ enum ProvisioningState {
  */
 enum SkuName {
   S1,
+}
+
+/**
+ * The tier of the SKU for Azure Dev Spaces Controller.
+ */
+enum SkuTier {
+  Standard,
 }
 
 /**
@@ -194,6 +203,7 @@ model ControllerUpdateParameters {
    */
   tags?: Record<string>;
 
+  @extension("x-ms-client-flatten", true)
   properties?: ControllerUpdateParametersProperties;
 }
 

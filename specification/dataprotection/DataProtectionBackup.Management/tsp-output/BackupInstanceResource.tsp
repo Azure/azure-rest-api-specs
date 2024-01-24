@@ -15,8 +15,12 @@ namespace Microsoft.DataProtection;
 /**
  * BackupInstance Resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BackupVaultResource)
-model BackupInstanceResource is ProxyResource<BackupInstance> {
+@Azure.ResourceManager.Private.armResourceInternal(BackupInstance)
+@includeInapplicableMetadataInPayload(false)
+model BackupInstanceResource extends ProxyResourceBase {
   /**
    * The name of the backup instance.
    */
@@ -24,6 +28,12 @@ model BackupInstanceResource is ProxyResource<BackupInstance> {
   @key("backupInstanceName")
   @segment("backupInstances")
   name: string;
+
+  /**
+   * BackupInstanceResource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BackupInstance;
 }
 
 @armResourceOperations
@@ -125,9 +135,9 @@ interface BackupInstanceResources {
   suspendBackups is ArmResourceActionAsync<BackupInstanceResource, void, void>;
 
   /**
-* Sync backup instance again in case of failure
-This action will retry last failed operation and will bring backup instance to valid state
-*/
+   * Sync backup instance again in case of failure
+   * This action will retry last failed operation and will bring backup instance to valid state
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("BackupInstances_SyncBackupInstance")
   syncBackupInstance is ArmResourceActionAsync<

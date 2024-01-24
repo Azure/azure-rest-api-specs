@@ -14,7 +14,11 @@ namespace Microsoft.AgFoodPlatform;
 /**
  * FarmBeats ARM Resource.
  */
-model FarmBeats is TrackedResource<FarmBeatsProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(FarmBeatsProperties)
+@includeInapplicableMetadataInPayload(false)
+model FarmBeats extends TrackedResourceBase {
   /**
    * FarmBeats resource name.
    */
@@ -22,6 +26,12 @@ model FarmBeats is TrackedResource<FarmBeatsProperties> {
   @key("farmBeatsResourceName")
   @segment("farmBeats")
   name: string;
+
+  /**
+   * FarmBeats ARM Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FarmBeatsProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }
@@ -74,9 +84,9 @@ interface FarmBeatsOperationGroup {
       ...BaseParameters<FarmBeats>;
 
       /**
-* Maximum number of items needed (inclusive).
-Minimum = 10, Maximum = 1000, Default value = 50.
-*/
+       * Maximum number of items needed (inclusive).
+       * Minimum = 10, Maximum = 1000, Default value = 50.
+       */
       @maxValue(1000)
       @minValue(10)
       @query("$maxPageSize")

@@ -14,7 +14,11 @@ namespace Microsoft.NetworkCloud;
 /**
  * StorageAppliance represents on-premises Network Cloud storage appliance.
  */
-model StorageAppliance is TrackedResource<StorageApplianceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(StorageApplianceProperties)
+@includeInapplicableMetadataInPayload(false)
+model StorageAppliance extends TrackedResourceBase {
   /**
    * The name of the storage appliance.
    */
@@ -28,6 +32,12 @@ model StorageAppliance is TrackedResource<StorageApplianceProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: StorageApplianceProperties;
 }
 
 @armResourceOperations
@@ -63,9 +73,10 @@ interface StorageAppliances {
   /**
    * Disable remote vendor management of the provided storage appliance.
    */
-  disableRemoteVendorManagement is ArmResourceActionNoResponseContentAsync<
+  disableRemoteVendorManagement is ArmResourceActionAsync<
     StorageAppliance,
     void,
+    OperationStatusResult,
     BaseParameters<StorageAppliance>,
     ArmLroLocationHeader
   >;
@@ -73,9 +84,10 @@ interface StorageAppliances {
   /**
    * Enable remote vendor management of the provided storage appliance.
    */
-  enableRemoteVendorManagement is ArmResourceActionNoResponseContentAsync<
+  enableRemoteVendorManagement is ArmResourceActionAsync<
     StorageAppliance,
     StorageApplianceEnableRemoteVendorManagementParameters,
+    OperationStatusResult,
     BaseParameters<StorageAppliance>,
     ArmLroLocationHeader
   >;

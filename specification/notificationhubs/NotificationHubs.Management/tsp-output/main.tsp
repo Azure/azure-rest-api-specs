@@ -19,6 +19,7 @@ using TypeSpec.Versioning;
  * Azure NotificationHub client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "NotificationHubsManagementClient",
 })

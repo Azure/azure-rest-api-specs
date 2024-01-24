@@ -15,12 +15,24 @@ namespace Microsoft.Sql;
 /**
  * A recoverable managed database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("current")
 @parentResource(ManagedInstance)
-model SqlAgentConfiguration is ProxyResource<SqlAgentConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SqlAgentConfigurationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SqlAgentConfiguration extends ProxyResource {
   @key("sqlAgent")
   @segment("sqlAgent")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SqlAgentConfigurationProperties;
 }
 
 @armResourceOperations

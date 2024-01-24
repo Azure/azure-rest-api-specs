@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A server configuration option
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model ServerConfigurationOption
-  is ProxyResource<ServerConfigurationOptionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ServerConfigurationOptionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ServerConfigurationOption extends ProxyResource {
   /**
    * The name of the server configuration option.
    */
@@ -25,6 +30,12 @@ model ServerConfigurationOption
   @key("serverConfigurationOptionName")
   @segment("serverConfigurationOptions")
   name: ServerConfigurationOptionName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerConfigurationOptionProperties;
 }
 
 @armResourceOperations

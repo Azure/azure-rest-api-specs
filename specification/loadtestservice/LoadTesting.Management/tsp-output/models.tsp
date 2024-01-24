@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -97,6 +99,7 @@ model QuotaBucketRequest extends Resource {
   /**
    * New quota request request properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QuotaBucketRequestProperties;
 }
 
@@ -149,6 +152,7 @@ model CheckQuotaAvailabilityResponse extends Resource {
   /**
    * Check quota availability response properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CheckQuotaAvailabilityResponseProperties;
 }
 
@@ -244,6 +248,7 @@ model LoadTestResourcePatchRequestBody {
   /**
    * Load Test resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LoadTestResourcePatchRequestBodyProperties;
 }
 

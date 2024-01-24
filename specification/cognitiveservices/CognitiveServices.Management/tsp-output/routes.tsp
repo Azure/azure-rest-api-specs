@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.CognitiveServices;
 
@@ -182,6 +184,7 @@ op checkSkuAvailability is Azure.Core.Foundations.Operation<
      * Check SKU Availability POST body.
      */
     @body
+    @extension("x-ms-client-flatten", true)
     parameters: CheckSkuAvailabilityParameter;
   },
   SkuAvailabilityListResult
@@ -205,6 +208,7 @@ op checkDomainAvailability is Azure.Core.Foundations.Operation<
      * Check Domain Availability parameter.
      */
     @body
+    @extension("x-ms-client-flatten", true)
     parameters: CheckDomainAvailabilityParameter;
   },
   DomainAvailability

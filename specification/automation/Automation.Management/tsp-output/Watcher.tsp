@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the watcher type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model Watcher is TrackedResource<WatcherProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WatcherProperties)
+@includeInapplicableMetadataInPayload(false)
+model Watcher extends TrackedResourceBase {
   /**
    * The watcher name.
    */
@@ -29,6 +33,12 @@ model Watcher is TrackedResource<WatcherProperties> {
    * Gets or sets the etag of the resource.
    */
   etag?: string;
+
+  /**
+   * Gets or sets the watcher properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WatcherProperties;
 }
 
 @armResourceOperations

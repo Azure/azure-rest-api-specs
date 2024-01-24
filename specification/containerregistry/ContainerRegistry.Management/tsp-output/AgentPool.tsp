@@ -13,11 +13,15 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerRegistry;
 /**
-* The agentpool that has the ARM resource and properties. 
-The agentpool will have all information to create an agent pool.
-*/
+ * The agentpool that has the ARM resource and properties.
+ * The agentpool will have all information to create an agent pool.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model AgentPool is TrackedResource<AgentPoolProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AgentPoolProperties)
+@includeInapplicableMetadataInPayload(false)
+model AgentPool extends TrackedResourceBase {
   /**
    * The name of the agent pool.
    */
@@ -28,6 +32,12 @@ model AgentPool is TrackedResource<AgentPoolProperties> {
   @key("agentPoolName")
   @segment("agentPools")
   name: string;
+
+  /**
+   * The properties associated with the agent pool
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AgentPoolProperties;
 }
 
 @armResourceOperations

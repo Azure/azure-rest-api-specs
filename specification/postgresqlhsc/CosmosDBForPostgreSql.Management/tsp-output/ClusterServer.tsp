@@ -15,8 +15,12 @@ namespace Microsoft.DBforPostgreSQL;
 /**
  * Represents a server in a cluster.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model ClusterServer is ProxyResource<ClusterServerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ClusterServerProperties)
+@includeInapplicableMetadataInPayload(false)
+model ClusterServer extends ProxyResourceBase {
   /**
    * The name of the server.
    */
@@ -27,6 +31,12 @@ model ClusterServer is ProxyResource<ClusterServerProperties> {
   @key("serverName")
   @segment("servers")
   name: string;
+
+  /**
+   * The properties of a server in a cluster.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterServerProperties;
 }
 
 @armResourceOperations

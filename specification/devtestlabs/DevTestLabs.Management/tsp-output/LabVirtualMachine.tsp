@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual machine.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model LabVirtualMachine is TrackedResource<LabVirtualMachineProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(LabVirtualMachineProperties)
+@includeInapplicableMetadataInPayload(false)
+model LabVirtualMachine extends Resource {
   /**
    * The name of the virtual machine.
    */
@@ -24,6 +28,12 @@ model LabVirtualMachine is TrackedResource<LabVirtualMachineProperties> {
   @key("name")
   @segment("virtualmachines")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LabVirtualMachineProperties;
 }
 
 @armResourceOperations

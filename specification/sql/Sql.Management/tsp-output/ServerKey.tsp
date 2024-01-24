@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A server key.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model ServerKey is ProxyResource<ServerKeyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ServerKeyProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServerKey extends ProxyResource {
   /**
    * The name of the server key to be retrieved.
    */
@@ -25,7 +29,17 @@ model ServerKey is ProxyResource<ServerKeyProperties> {
   @segment("keys")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Kind of encryption protector. This is metadata used for the Azure portal experience.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerKeyProperties;
 }
 
 @armResourceOperations

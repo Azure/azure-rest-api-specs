@@ -15,8 +15,12 @@ namespace Microsoft.DataReplication;
 /**
  * Policy model.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VaultModel)
-model PolicyModel is ProxyResource<PolicyModelProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PolicyModelProperties)
+@includeInapplicableMetadataInPayload(false)
+model PolicyModel extends ProxyResourceBase {
   /**
    * The policy name.
    */
@@ -25,6 +29,12 @@ model PolicyModel is ProxyResource<PolicyModelProperties> {
   @key("policyName")
   @segment("replicationPolicies")
   name: string;
+
+  /**
+   * Policy model properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: PolicyModelProperties;
 }
 
 @armResourceOperations

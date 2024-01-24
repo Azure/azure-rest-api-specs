@@ -15,8 +15,14 @@ namespace Microsoft.Peering;
 /**
  * The Connection Monitor Test class.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PeeringService)
-model ConnectionMonitorTest is ProxyResource<ConnectionMonitorTestProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ConnectionMonitorTestProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ConnectionMonitorTest extends Resource {
   /**
    * The name of the connection monitor test
    */
@@ -24,6 +30,12 @@ model ConnectionMonitorTest is ProxyResource<ConnectionMonitorTestProperties> {
   @key("connectionMonitorTestName")
   @segment("connectionMonitorTests")
   name: string;
+
+  /**
+   * The properties that define a Connection Monitor Test.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConnectionMonitorTestProperties;
 }
 
 @armResourceOperations

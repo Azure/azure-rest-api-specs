@@ -15,8 +15,12 @@ namespace Microsoft.Devices;
 /**
  * The X509 Certificate.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ProvisioningServiceDescription)
-model CertificateResponse is ProxyResource<CertificateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
+@includeInapplicableMetadataInPayload(false)
+model CertificateResponse extends ProxyResourceBase {
   /**
    * Name of the certificate to retrieve.
    */
@@ -30,6 +34,12 @@ model CertificateResponse is ProxyResource<CertificateProperties> {
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * properties of a certificate
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CertificateProperties;
 }
 
 @armResourceOperations

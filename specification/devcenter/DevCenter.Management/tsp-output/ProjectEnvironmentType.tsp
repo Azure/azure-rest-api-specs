@@ -15,9 +15,14 @@ namespace Microsoft.DevCenter;
 /**
  * Represents an environment type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Project)
-model ProjectEnvironmentType
-  is TrackedResource<ProjectEnvironmentTypeProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ProjectEnvironmentTypeProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ProjectEnvironmentType extends TrackedResourceBase {
   /**
    * The name of the environment type.
    */
@@ -25,6 +30,12 @@ model ProjectEnvironmentType
   @key("environmentTypeName")
   @segment("environmentTypes")
   name: string;
+
+  /**
+   * Properties of an environment type.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProjectEnvironmentTypeProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

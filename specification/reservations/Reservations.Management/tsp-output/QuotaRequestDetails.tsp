@@ -14,8 +14,12 @@ namespace Microsoft.Capacity;
 /**
  * Quota request details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model QuotaRequestDetails is ProxyResource<QuotaRequestProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(QuotaRequestProperties)
+@includeInapplicableMetadataInPayload(false)
+model QuotaRequestDetails extends ProxyResourceBase {
   /**
    * Quota Request ID.
    */
@@ -23,6 +27,12 @@ model QuotaRequestDetails is ProxyResource<QuotaRequestProperties> {
   @key("id")
   @segment("serviceLimitsRequests")
   name: string;
+
+  /**
+   * Quota request details.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: QuotaRequestProperties;
 }
 
 @armResourceOperations
@@ -46,10 +56,10 @@ interface QuotaRequestDetailsOperationGroup {
       ...BaseParameters<QuotaRequestDetails>;
 
       /**
-* | Field | Supported operators |
-|---------------------|------------------------|
-|requestSubmitTime | ge, le, eq, gt, lt |
-*/
+       * | Field | Supported operators |
+       * |---------------------|------------------------|
+       * |requestSubmitTime | ge, le, eq, gt, lt |
+       */
       @query("$filter")
       $filter?: string;
 

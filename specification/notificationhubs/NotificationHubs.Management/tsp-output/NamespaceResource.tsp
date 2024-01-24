@@ -14,7 +14,11 @@ namespace Microsoft.NotificationHubs;
 /**
  * Description of a Namespace resource.
  */
-model NamespaceResource is TrackedResource<NamespaceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(NamespaceProperties)
+@includeInapplicableMetadataInPayload(false)
+model NamespaceResource extends Resource {
   /**
    * The namespace name.
    */
@@ -22,6 +26,12 @@ model NamespaceResource is TrackedResource<NamespaceProperties> {
   @key("namespaceName")
   @segment("namespaces")
   name: string;
+
+  /**
+   * Properties of the Namespace.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NamespaceProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Virtual Network information ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AppServicePlan)
-model VnetInfoResource is ProxyResource<VnetInfo> {
+@Azure.ResourceManager.Private.armResourceInternal(VnetInfo)
+@includeInapplicableMetadataInPayload(false)
+model VnetInfoResource extends ProxyOnlyResource {
   /**
    * Name of the Virtual Network.
    */
@@ -24,6 +28,12 @@ model VnetInfoResource is ProxyResource<VnetInfo> {
   @key("vnetName")
   @segment("virtualNetworkConnections")
   name: string;
+
+  /**
+   * Core resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VnetInfo;
 }
 
 @armResourceOperations

@@ -14,8 +14,12 @@ namespace Microsoft.Support;
 /**
  * Object that represents a Service resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model Service is ProxyResource<ServiceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ServiceProperties)
+@includeInapplicableMetadataInPayload(false)
+model Service extends ProxyResourceBase {
   /**
    * Name of the Azure service.
    */
@@ -23,6 +27,12 @@ model Service is ProxyResource<ServiceProperties> {
   @key("serviceName")
   @segment("services")
   name: string;
+
+  /**
+   * Properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServiceProperties;
 }
 
 @armResourceOperations

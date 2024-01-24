@@ -15,9 +15,14 @@ namespace Microsoft.Insights;
 /**
  * An Application Insights component linked storage accounts
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApplicationInsightsComponent)
-model ComponentLinkedStorageAccounts
-  is ProxyResource<LinkedStorageAccountsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  LinkedStorageAccountsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ComponentLinkedStorageAccounts extends ProxyResourceBase {
   /**
    * The type of the Application Insights component data source for the linked storage account.
    */
@@ -25,6 +30,12 @@ model ComponentLinkedStorageAccounts
   @key("storageType")
   @segment("linkedStorageAccounts")
   name: StorageType;
+
+  /**
+   * The properties of the linked storage accounts.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: LinkedStorageAccountsProperties;
 }
 
 @armResourceOperations

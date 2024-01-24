@@ -15,8 +15,12 @@ namespace Microsoft.StorageSync;
 /**
  * Registered Server resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageSyncService)
-model RegisteredServer is ProxyResource<RegisteredServerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RegisteredServerProperties)
+@includeInapplicableMetadataInPayload(false)
+model RegisteredServer extends ProxyResourceBase {
   /**
    * GUID identifying the on-premises server.
    */
@@ -24,6 +28,12 @@ model RegisteredServer is ProxyResource<RegisteredServerProperties> {
   @key("serverId")
   @segment("registeredServers")
   name: string;
+
+  /**
+   * RegisteredServer properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RegisteredServerProperties;
 }
 
 @armResourceOperations

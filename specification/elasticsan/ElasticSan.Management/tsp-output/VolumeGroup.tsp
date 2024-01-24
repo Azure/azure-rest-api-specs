@@ -15,8 +15,12 @@ namespace Microsoft.ElasticSan;
 /**
  * Response for Volume Group request.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ElasticSan)
-model VolumeGroup is ProxyResource<VolumeGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VolumeGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model VolumeGroup extends ProxyResourceBase {
   /**
    * The name of the VolumeGroup.
    */
@@ -27,6 +31,12 @@ model VolumeGroup is ProxyResource<VolumeGroupProperties> {
   @key("volumeGroupName")
   @segment("volumegroups")
   name: string;
+
+  /**
+   * Properties of VolumeGroup.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VolumeGroupProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

@@ -15,12 +15,22 @@ namespace Microsoft.EventHub;
 /**
  * Description of topic resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(EventHubsNamespace)
-model EventHubsNetworkRuleSet is ProxyResource<NetworkRuleSetProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(NetworkRuleSetProperties)
+@includeInapplicableMetadataInPayload(false)
+model EventHubsNetworkRuleSet extends ProxyResource {
   @key("networkRuleSet")
   @segment("networkRuleSets")
   name: string;
+
+  /**
+   * NetworkRuleSet properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NetworkRuleSetProperties;
 }
 
 @armResourceOperations

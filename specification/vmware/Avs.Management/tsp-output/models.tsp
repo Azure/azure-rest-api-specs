@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -1077,6 +1079,7 @@ model PrivateCloudUpdate {
   /**
    * The updatable properties of a private cloud resource
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateCloudUpdateProperties;
 
   /**
@@ -1097,6 +1100,7 @@ model ClusterUpdate {
   /**
    * The properties of a cluster resource that may be updated
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterUpdateProperties;
 }
 
@@ -1732,6 +1736,7 @@ model PlacementPolicyUpdate {
   /**
    * The properties of a placement policy resource that may be updated
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PlacementPolicyUpdateProperties;
 }
 

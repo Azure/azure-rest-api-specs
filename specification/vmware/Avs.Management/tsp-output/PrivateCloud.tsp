@@ -14,7 +14,11 @@ namespace Microsoft.AVS;
 /**
  * A private cloud resource
  */
-model PrivateCloud is TrackedResource<PrivateCloudProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(PrivateCloudProperties)
+@includeInapplicableMetadataInPayload(false)
+model PrivateCloud extends TrackedResourceBase {
   /**
    * Name of the private cloud
    */
@@ -23,6 +27,12 @@ model PrivateCloud is TrackedResource<PrivateCloudProperties> {
   @key("privateCloudName")
   @segment("privateClouds")
   name: string;
+
+  /**
+   * The properties of a private cloud resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateCloudProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;

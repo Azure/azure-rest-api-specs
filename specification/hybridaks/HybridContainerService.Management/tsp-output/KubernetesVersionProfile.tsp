@@ -14,9 +14,14 @@ namespace Microsoft.HybridContainerService;
 /**
  * The supported kubernetes versions.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
-model KubernetesVersionProfile
-  is ExtensionResource<KubernetesVersionProfileProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  KubernetesVersionProfileProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model KubernetesVersionProfile extends ExtensionResourceBase {
   @key("kubernetesVersion")
   @segment("kubernetesVersions")
   name: string;
@@ -25,6 +30,9 @@ model KubernetesVersionProfile
    * Extended location pointing to the underlying infrastructure
    */
   extendedLocation?: ExtendedLocation;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: KubernetesVersionProfileProperties;
 }
 
 @armResourceOperations

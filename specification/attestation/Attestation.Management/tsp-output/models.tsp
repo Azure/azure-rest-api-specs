@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -263,23 +265,23 @@ model AttestationServiceCreationSpecificParams {
 
 model JsonWebKeySet {
   /**
-* The value of the "keys" parameter is an array of JWK values.  By
-default, the order of the JWK values within the array does not imply
-an order of preference among them, although applications of JWK Sets
-can choose to assign a meaning to the order for their purposes, if
-desired.
-*/
+   * The value of the "keys" parameter is an array of JWK values.  By
+   * default, the order of the JWK values within the array does not imply
+   * an order of preference among them, although applications of JWK Sets
+   * can choose to assign a meaning to the order for their purposes, if
+   * desired.
+   */
   keys?: JsonWebKey[];
 }
 
 model JsonWebKey {
   /**
-* The "alg" (algorithm) parameter identifies the algorithm intended for
-use with the key.  The values used should either be registered in the
-IANA "JSON Web Signature and Encryption Algorithms" registry
-established by [JWA] or be a value that contains a Collision-
-Resistant Name.
-*/
+   * The "alg" (algorithm) parameter identifies the algorithm intended for
+   * use with the key.  The values used should either be registered in the
+   * IANA "JSON Web Signature and Encryption Algorithms" registry
+   * established by [JWA] or be a value that contains a Collision-
+   * Resistant Name.
+   */
   alg?: string;
 
   /**
@@ -313,25 +315,25 @@ Resistant Name.
   k?: string;
 
   /**
-* The "kid" (key ID) parameter is used to match a specific key.  This
-is used, for instance, to choose among a set of keys within a JWK Set
-during key rollover.  The structure of the "kid" value is
-unspecified.  When "kid" values are used within a JWK Set, different
-keys within the JWK Set SHOULD use distinct "kid" values.  (One
-example in which different keys might use the same "kid" value is if
-they have different "kty" (key type) values but are considered to be
-equivalent alternatives by the application using them.)  The "kid"
-value is a case-sensitive string.
-*/
+   * The "kid" (key ID) parameter is used to match a specific key.  This
+   * is used, for instance, to choose among a set of keys within a JWK Set
+   * during key rollover.  The structure of the "kid" value is
+   * unspecified.  When "kid" values are used within a JWK Set, different
+   * keys within the JWK Set SHOULD use distinct "kid" values.  (One
+   * example in which different keys might use the same "kid" value is if
+   * they have different "kty" (key type) values but are considered to be
+   * equivalent alternatives by the application using them.)  The "kid"
+   * value is a case-sensitive string.
+   */
   kid?: string;
 
   /**
-* The "kty" (key type) parameter identifies the cryptographic algorithm
-family used with the key, such as "RSA" or "EC". "kty" values should
-either be registered in the IANA "JSON Web Key Types" registry
-established by [JWA] or be a value that contains a Collision-
-Resistant Name.  The "kty" value is a case-sensitive string.
-*/
+   * The "kty" (key type) parameter identifies the cryptographic algorithm
+   * family used with the key, such as "RSA" or "EC". "kty" values should
+   * either be registered in the IANA "JSON Web Key Types" registry
+   * established by [JWA] or be a value that contains a Collision-
+   * Resistant Name.  The "kty" value is a case-sensitive string.
+   */
   kty: string;
 
   /**
@@ -355,11 +357,11 @@ Resistant Name.  The "kty" value is a case-sensitive string.
   qi?: string;
 
   /**
-* Use ("public key use") identifies the intended use of
-the public key. The "use" parameter is employed to indicate whether
-a public key is used for encrypting data or verifying the signature
-on data. Values are commonly "sig" (signature) or "enc" (encryption).
-*/
+   * Use ("public key use") identifies the intended use of
+   * the public key. The "use" parameter is employed to indicate whether
+   * a public key is used for encrypting data or verifying the signature
+   * on data. Values are commonly "sig" (signature) or "enc" (encryption).
+   */
   use?: string;
 
   /**
@@ -368,14 +370,14 @@ on data. Values are commonly "sig" (signature) or "enc" (encryption).
   x?: string;
 
   /**
-* The "x5c" (X.509 certificate chain) parameter contains a chain of one
-or more PKIX certificates [RFC5280].  The certificate chain is
-represented as a JSON array of certificate value strings.  Each
-string in the array is a base64-encoded (Section 4 of [RFC4648] --
-not base64url-encoded) DER [ITU.X690.1994] PKIX certificate value.
-The PKIX certificate containing the key value MUST be the first
-certificate.
-*/
+   * The "x5c" (X.509 certificate chain) parameter contains a chain of one
+   * or more PKIX certificates [RFC5280].  The certificate chain is
+   * represented as a JSON array of certificate value strings.  Each
+   * string in the array is a base64-encoded (Section 4 of [RFC4648] --
+   * not base64url-encoded) DER [ITU.X690.1994] PKIX certificate value.
+   * The PKIX certificate containing the key value MUST be the first
+   * certificate.
+   */
   @projectedName("json", "x5c")
   x5C?: string[];
 
@@ -427,6 +429,7 @@ model PrivateLinkResource extends Resource {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 }
 

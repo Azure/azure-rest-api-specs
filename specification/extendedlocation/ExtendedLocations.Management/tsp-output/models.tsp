@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -140,6 +142,7 @@ model PatchableCustomLocations {
   /**
    * The Custom Locations patchable properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CustomLocationProperties;
 
   /**
@@ -160,6 +163,7 @@ model EnabledResourceType extends ProxyResource {
   /**
    * The set of properties for EnabledResourceType specific to a Custom Location
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EnabledResourceTypeProperties;
 
   /**
@@ -216,6 +220,7 @@ model CustomLocationOperation {
   /**
    * Describes the properties of a Custom Locations Operation Value Display.
    */
+  @extension("x-ms-client-flatten", true)
   display?: CustomLocationOperationValueDisplay;
 
   /**

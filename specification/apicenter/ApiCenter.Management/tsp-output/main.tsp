@@ -15,6 +15,7 @@ using TypeSpec.Versioning;
  * Azure API Center Resource Provider.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure API Center",
 })

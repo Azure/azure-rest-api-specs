@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Process Information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WebSiteInstanceStatus)
-model ProcessInfo is ProxyResource<ProcessInfoProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ProcessInfoProperties)
+@includeInapplicableMetadataInPayload(false)
+model ProcessInfo extends ProxyOnlyResource {
   /**
    * PID.
    */
@@ -24,6 +28,12 @@ model ProcessInfo is ProxyResource<ProcessInfoProperties> {
   @key("processId")
   @segment("processes")
   name: string;
+
+  /**
+   * ProcessInfo resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProcessInfoProperties;
 }
 
 @armResourceOperations

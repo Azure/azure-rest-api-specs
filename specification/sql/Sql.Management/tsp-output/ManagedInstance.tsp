@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL managed instance.
  */
-model ManagedInstance is TrackedResource<ManagedInstanceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ManagedInstanceProperties)
+@includeInapplicableMetadataInPayload(false)
+model ManagedInstance extends TrackedResource {
   /**
    * The name of the managed instance.
    */
@@ -23,8 +27,22 @@ model ManagedInstance is TrackedResource<ManagedInstanceProperties> {
   @segment("managedInstances")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The Azure Active Directory identity of the managed instance.
+   */
+  @visibility("read", "create")
+  identity?: ResourceIdentity;
+
+  /**
+   * Managed instance SKU. Allowed values for sku.name: GP_Gen5, GP_G8IM, GP_G8IH, BC_Gen5, BC_G8IM, BC_G8IH
+   */
+  sku?: Sku;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedInstanceProperties;
 }
 
 @armResourceOperations

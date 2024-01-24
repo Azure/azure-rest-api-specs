@@ -15,8 +15,14 @@ namespace Microsoft.MobileNetwork;
 /**
  * Packet capture session resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PacketCoreControlPlane)
-model PacketCapture is ProxyResource<PacketCapturePropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PacketCapturePropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model PacketCapture extends ProxyResourceBase {
   /**
    * The name of the packet capture session.
    */
@@ -26,6 +32,12 @@ model PacketCapture is ProxyResource<PacketCapturePropertiesFormat> {
   @key("packetCaptureName")
   @segment("packetCaptures")
   name: string;
+
+  /**
+   * Packet capture session properties. Packet capture file(s) derived from the name of this session will be uploaded to the Storage Account Container URL in the packet core control plane properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: PacketCapturePropertiesFormat;
 }
 
 @armResourceOperations

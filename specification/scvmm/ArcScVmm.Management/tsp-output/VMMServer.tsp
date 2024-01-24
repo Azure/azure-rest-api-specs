@@ -14,7 +14,11 @@ namespace Microsoft.ScVmm;
 /**
  * The VmmServers resource definition.
  */
-model VMMServer is TrackedResource<VMMServerProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(VMMServerProperties)
+@includeInapplicableMetadataInPayload(false)
+model VMMServer extends TrackedResourceBase {
   /**
    * Name of the VMMServer.
    */
@@ -27,6 +31,12 @@ model VMMServer is TrackedResource<VMMServerProperties> {
    * The extended location.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: VMMServerProperties;
 }
 
 @armResourceOperations

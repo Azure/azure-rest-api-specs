@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A Disk.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(User)
-model Disk is TrackedResource<DiskProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DiskProperties)
+@includeInapplicableMetadataInPayload(false)
+model Disk extends Resource {
   /**
    * The name of the disk.
    */
@@ -24,6 +28,12 @@ model Disk is TrackedResource<DiskProperties> {
   @key("name")
   @segment("disks")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DiskProperties;
 }
 
 @armResourceOperations

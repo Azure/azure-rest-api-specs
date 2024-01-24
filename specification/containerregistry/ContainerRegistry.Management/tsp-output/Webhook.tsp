@@ -15,8 +15,12 @@ namespace Microsoft.ContainerRegistry;
 /**
  * An object that represents a webhook for a container registry.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model Webhook is TrackedResource<WebhookProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WebhookProperties)
+@includeInapplicableMetadataInPayload(false)
+model Webhook extends TrackedResourceBase {
   /**
    * The name of the webhook.
    */
@@ -27,6 +31,12 @@ model Webhook is TrackedResource<WebhookProperties> {
   @key("webhookName")
   @segment("webhooks")
   name: string;
+
+  /**
+   * The properties of the webhook.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WebhookProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.Workloads;
 /**
  * Define the Database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SAPVirtualInstance)
-model SAPDatabaseInstance is TrackedResource<SAPDatabaseProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SAPDatabaseProperties)
+@includeInapplicableMetadataInPayload(false)
+model SAPDatabaseInstance extends TrackedResourceBase {
   /**
    * Database resource name string modeled as parameter for auto generation to work correctly.
    */
@@ -24,6 +28,12 @@ model SAPDatabaseInstance is TrackedResource<SAPDatabaseProperties> {
   @key("databaseInstanceName")
   @segment("databaseInstances")
   name: string;
+
+  /**
+   * Defines the Database properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SAPDatabaseProperties;
 }
 
 @armResourceOperations

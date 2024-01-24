@@ -14,7 +14,11 @@ namespace Microsoft.ScVmm;
 /**
  * The VirtualMachines resource definition.
  */
-model VirtualMachine is TrackedResource<VirtualMachineProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(VirtualMachineProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachine extends TrackedResourceBase {
   /**
    * Name of the VirtualMachine.
    */
@@ -27,6 +31,12 @@ model VirtualMachine is TrackedResource<VirtualMachineProperties> {
    * The extended location.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: VirtualMachineProperties;
 }
 
 @armResourceOperations

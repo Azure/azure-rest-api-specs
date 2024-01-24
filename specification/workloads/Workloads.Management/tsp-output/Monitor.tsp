@@ -14,7 +14,11 @@ namespace Microsoft.Workloads;
 /**
  * SAP monitor info on Azure (ARM properties and SAP monitor properties)
  */
-model Monitor is TrackedResource<MonitorProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(MonitorProperties)
+@includeInapplicableMetadataInPayload(false)
+model Monitor extends TrackedResourceBase {
   /**
    * Name of the SAP monitor resource.
    */
@@ -22,6 +26,12 @@ model Monitor is TrackedResource<MonitorProperties> {
   @key("monitorName")
   @segment("monitors")
   name: string;
+
+  /**
+   * SAP monitor properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MonitorProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

@@ -15,8 +15,12 @@ namespace Microsoft.DataProtection;
 /**
  * Deleted Backup Instance
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BackupVaultResource)
-model DeletedBackupInstanceResource is ProxyResource<DeletedBackupInstance> {
+@Azure.ResourceManager.Private.armResourceInternal(DeletedBackupInstance)
+@includeInapplicableMetadataInPayload(false)
+model DeletedBackupInstanceResource extends ProxyResourceBase {
   /**
    * The name of the deleted backup instance
    */
@@ -24,6 +28,12 @@ model DeletedBackupInstanceResource is ProxyResource<DeletedBackupInstance> {
   @key("backupInstanceName")
   @segment("deletedBackupInstances")
   name: string;
+
+  /**
+   * DeletedBackupInstanceResource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeletedBackupInstance;
 }
 
 @armResourceOperations

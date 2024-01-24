@@ -26,7 +26,10 @@ model Addon is ProxyResource<{}> {
   @segment("addons")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Addon type.
+   */
+  kind: AddonType;
 }
 
 @armResourceOperations

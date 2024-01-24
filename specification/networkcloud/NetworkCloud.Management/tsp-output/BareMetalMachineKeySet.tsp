@@ -15,9 +15,14 @@ namespace Microsoft.NetworkCloud;
 /**
  * BareMetalMachineKeySet represents the bare metal machine key set.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model BareMetalMachineKeySet
-  is TrackedResource<BareMetalMachineKeySetProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  BareMetalMachineKeySetProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model BareMetalMachineKeySet extends TrackedResourceBase {
   /**
    * The name of the bare metal machine key set.
    */
@@ -31,6 +36,12 @@ model BareMetalMachineKeySet
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: BareMetalMachineKeySetProperties;
 }
 
 @armResourceOperations

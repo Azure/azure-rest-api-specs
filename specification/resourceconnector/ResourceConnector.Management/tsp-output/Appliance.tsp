@@ -14,7 +14,11 @@ namespace Microsoft.ResourceConnector;
 /**
  * Appliances definition.
  */
-model Appliance is TrackedResource<ApplianceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ApplianceProperties)
+@includeInapplicableMetadataInPayload(false)
+model Appliance extends TrackedResourceBase {
   /**
    * Appliances name.
    */
@@ -25,6 +29,12 @@ model Appliance is TrackedResource<ApplianceProperties> {
   @key("resourceName")
   @segment("appliances")
   name: string;
+
+  /**
+   * The set of properties specific to an Appliance
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApplianceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

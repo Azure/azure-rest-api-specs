@@ -14,7 +14,11 @@ namespace Microsoft.AzureStackHCI;
 /**
  * The storage container resource definition.
  */
-model StorageContainers is TrackedResource<StorageContainerProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(StorageContainerProperties)
+@includeInapplicableMetadataInPayload(false)
+model StorageContainers extends TrackedResourceBase {
   /**
    * Name of the storage container
    */
@@ -30,6 +34,12 @@ model StorageContainers is TrackedResource<StorageContainerProperties> {
    * The extendedLocation of the resource.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties under the storage container resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StorageContainerProperties;
 }
 
 @armResourceOperations

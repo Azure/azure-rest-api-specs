@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * A hostname binding object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model HostNameBinding is ProxyResource<HostNameBindingProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(HostNameBindingProperties)
+@includeInapplicableMetadataInPayload(false)
+model HostNameBinding extends ProxyOnlyResource {
   /**
    * Hostname in the hostname binding.
    */
@@ -24,6 +28,12 @@ model HostNameBinding is ProxyResource<HostNameBindingProperties> {
   @key("hostName")
   @segment("hostNameBindings")
   name: string;
+
+  /**
+   * HostNameBinding resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: HostNameBindingProperties;
 }
 
 @armResourceOperations

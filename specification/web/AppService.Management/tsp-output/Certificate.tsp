@@ -14,7 +14,11 @@ namespace Microsoft.CertificateRegistration;
 /**
  * SSL certificate for an app.
  */
-model Certificate is TrackedResource<CertificateProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
+@includeInapplicableMetadataInPayload(false)
+model Certificate extends Resource {
   /**
    * Name of the certificate.
    */
@@ -22,6 +26,12 @@ model Certificate is TrackedResource<CertificateProperties> {
   @key("name")
   @segment("certificates")
   name: string;
+
+  /**
+   * Certificate resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CertificateProperties;
 }
 
 @armResourceOperations

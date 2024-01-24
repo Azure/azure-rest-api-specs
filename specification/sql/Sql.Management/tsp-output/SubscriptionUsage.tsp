@@ -14,8 +14,12 @@ namespace Microsoft.Sql;
 /**
  * Usage Metric of a Subscription in a Location.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model SubscriptionUsage is ProxyResource<SubscriptionUsageProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SubscriptionUsageProperties)
+@includeInapplicableMetadataInPayload(false)
+model SubscriptionUsage extends ProxyResource {
   /**
    * Name of usage metric to return.
    */
@@ -23,6 +27,12 @@ model SubscriptionUsage is ProxyResource<SubscriptionUsageProperties> {
   @key("usageName")
   @segment("usages")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SubscriptionUsageProperties;
 }
 
 @armResourceOperations

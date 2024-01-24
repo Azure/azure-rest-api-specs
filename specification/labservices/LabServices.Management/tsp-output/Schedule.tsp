@@ -15,8 +15,12 @@ namespace Microsoft.LabServices;
 /**
  * Schedule for automatically turning virtual machines in a lab on and off at specified times.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model Schedule is ProxyResource<ScheduleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ScheduleProperties)
+@includeInapplicableMetadataInPayload(false)
+model Schedule extends ProxyResourceBase {
   /**
    * The name of the schedule that uniquely identifies it within containing lab. Used in resource URIs.
    */
@@ -27,6 +31,12 @@ model Schedule is ProxyResource<ScheduleProperties> {
   @key("scheduleName")
   @segment("schedules")
   name: string;
+
+  /**
+   * Schedule resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ScheduleProperties;
 }
 
 @armResourceOperations

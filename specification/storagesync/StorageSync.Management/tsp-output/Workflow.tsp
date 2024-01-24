@@ -15,8 +15,12 @@ namespace Microsoft.StorageSync;
 /**
  * Workflow resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageSyncService)
-model Workflow is ProxyResource<WorkflowProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WorkflowProperties)
+@includeInapplicableMetadataInPayload(false)
+model Workflow extends ProxyResourceBase {
   /**
    * workflow Id
    */
@@ -24,6 +28,12 @@ model Workflow is ProxyResource<WorkflowProperties> {
   @key("workflowId")
   @segment("workflows")
   name: string;
+
+  /**
+   * Workflow properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkflowProperties;
 }
 
 @armResourceOperations

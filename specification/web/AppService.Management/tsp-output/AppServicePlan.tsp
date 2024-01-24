@@ -14,7 +14,11 @@ namespace Microsoft.CertificateRegistration;
 /**
  * App Service plan.
  */
-model AppServicePlan is TrackedResource<AppServicePlanProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AppServicePlanProperties)
+@includeInapplicableMetadataInPayload(false)
+model AppServicePlan extends Resource {
   /**
    * Name of the App Service plan.
    */
@@ -24,11 +28,20 @@ model AppServicePlan is TrackedResource<AppServicePlanProperties> {
   name: string;
 
   /**
+   * Description of a SKU for a scalable resource.
+   */
+  sku?: SkuDescription;
+
+  /**
    * Extended Location.
    */
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * AppServicePlan resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AppServicePlanProperties;
 }
 
 @armResourceOperations

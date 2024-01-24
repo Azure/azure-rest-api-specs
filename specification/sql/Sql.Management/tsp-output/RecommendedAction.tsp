@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * Database, Server or Elastic Pool Recommended Action.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Advisor)
-model RecommendedAction is ProxyResource<RecommendedActionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RecommendedActionProperties)
+@includeInapplicableMetadataInPayload(false)
+model RecommendedAction extends ProxyResource {
   /**
    * The name of Database Recommended Action.
    */
@@ -25,7 +29,17 @@ model RecommendedAction is ProxyResource<RecommendedActionProperties> {
   @segment("recommendedActions")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Resource kind.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RecommendedActionProperties;
 }
 
 @armResourceOperations

@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A private endpoint connection
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model ManagedInstancePrivateEndpointConnection
-  is ProxyResource<ManagedInstancePrivateEndpointConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedInstancePrivateEndpointConnectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedInstancePrivateEndpointConnection extends ProxyResource {
   /**
    * The name of the private endpoint connection.
    */
@@ -25,6 +30,12 @@ model ManagedInstancePrivateEndpointConnection
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedInstancePrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.Insights;
 /**
  * An Activity Log Alert rule resource.
  */
-model ActivityLogAlertResource is TrackedResource<AlertRuleProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AlertRuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model ActivityLogAlertResource extends TrackedResourceBase {
   /**
    * The name of the Activity Log Alert rule.
    */
@@ -22,6 +26,12 @@ model ActivityLogAlertResource is TrackedResource<AlertRuleProperties> {
   @key("activityLogAlertName")
   @segment("activityLogAlerts")
   name: string;
+
+  /**
+   * The Activity Log Alert rule properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AlertRuleProperties;
 }
 
 @armResourceOperations

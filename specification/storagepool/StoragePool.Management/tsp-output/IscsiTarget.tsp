@@ -15,8 +15,12 @@ namespace Microsoft.StoragePool;
 /**
  * Response for iSCSI Target requests.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DiskPool)
-model IscsiTarget is ProxyResource<IscsiTargetProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(IscsiTargetProperties)
+@includeInapplicableMetadataInPayload(false)
+model IscsiTarget extends ProxyResource {
   /**
    * The name of the iSCSI Target.
    */
@@ -26,12 +30,22 @@ model IscsiTarget is ProxyResource<IscsiTargetProperties> {
   name: string;
 
   /**
+   * Azure resource id. Indicates if this resource is managed by another Azure resource.
+   */
+  @visibility("read")
+  managedBy?: string;
+
+  /**
    * List of Azure resource ids that manage this resource.
    */
   @visibility("read")
   managedByExtended?: string[];
 
-  ...Azure.ResourceManager.ManagedBy;
+  /**
+   * Properties for iSCSI Target operations.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: IscsiTargetProperties;
 }
 
 @armResourceOperations

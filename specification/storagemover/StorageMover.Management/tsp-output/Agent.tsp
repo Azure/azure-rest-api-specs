@@ -15,8 +15,12 @@ namespace Microsoft.StorageMover;
 /**
  * The Agent resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageMover)
-model Agent is ProxyResource<AgentProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AgentProperties)
+@includeInapplicableMetadataInPayload(false)
+model Agent extends ProxyResourceBase {
   /**
    * The name of the Agent resource.
    */
@@ -24,6 +28,9 @@ model Agent is ProxyResource<AgentProperties> {
   @key("agentName")
   @segment("agents")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  properties: AgentProperties;
 }
 
 @armResourceOperations

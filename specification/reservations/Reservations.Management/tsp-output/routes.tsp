@@ -118,9 +118,9 @@ op getAppliedReservationList is Azure.Core.Foundations.Operation<
 
 interface CalculateExchangeOperations {
   /**
-* Calculates price for exchanging `Reservations` if there are no policy errors.
-
-*/
+   * Calculates price for exchanging `Reservations` if there are no policy errors.
+   *
+   */
   @summary("Calculates the refund amounts and price of the new purchases.")
   @route("/providers/Microsoft.Capacity/calculateExchange")
   @post
@@ -132,9 +132,9 @@ interface CalculateExchangeOperations {
 
 interface ExchangeOperations {
   /**
-* Returns one or more `Reservations` in exchange for one or more `Reservation` purchases.
-
-*/
+   * Returns one or more `Reservations` in exchange for one or more `Reservation` purchases.
+   *
+   */
   @summary("Exchange Reservation(s)")
   @route("/providers/Microsoft.Capacity/exchange")
   @post

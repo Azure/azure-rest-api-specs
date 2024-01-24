@@ -14,7 +14,11 @@ namespace Microsoft.Peering;
 /**
  * Peering is a logical representation of a set of connections to the Microsoft Cloud Edge at a location.
  */
-model Peering is TrackedResource<PeeringProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(PeeringProperties)
+@includeInapplicableMetadataInPayload(false)
+model Peering extends Resource {
   /**
    * The name of the peering.
    */
@@ -23,8 +27,21 @@ model Peering is TrackedResource<PeeringProperties> {
   @segment("peerings")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * The SKU that defines the tier and kind of the peering.
+   */
+  sku: PeeringSku;
+
+  /**
+   * The kind of the peering.
+   */
+  kind: Kind;
+
+  /**
+   * The properties that define a peering.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PeeringProperties;
 }
 
 @armResourceOperations

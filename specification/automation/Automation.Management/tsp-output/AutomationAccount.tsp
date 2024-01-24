@@ -14,7 +14,11 @@ namespace Microsoft.Automation;
 /**
  * Definition of the automation account type.
  */
-model AutomationAccount is TrackedResource<AutomationAccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AutomationAccountProperties)
+@includeInapplicableMetadataInPayload(false)
+model AutomationAccount extends TrackedResourceBase {
   /**
    * The name of the automation account.
    */
@@ -27,6 +31,12 @@ model AutomationAccount is TrackedResource<AutomationAccountProperties> {
    * Gets or sets the etag of the resource.
    */
   etag?: string;
+
+  /**
+   * Gets or sets the automation account properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AutomationAccountProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

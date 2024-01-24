@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -124,6 +126,7 @@ model TaskResource extends ProxyResource {
   /**
    * Task properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TaskResourceProperties;
 }
 

@@ -280,9 +280,9 @@ model IdentityModel {
   tenantId: string;
 
   /**
-* Gets or sets the client/application Id of the SPN with which Dra communicates to
-service.
-*/
+   * Gets or sets the client/application Id of the SPN with which Dra communicates to
+   * service.
+   */
   @minLength(1)
   applicationId: string;
 
@@ -315,10 +315,10 @@ model HealthErrorModel {
   affectedResourceType?: string;
 
   /**
-* Gets or sets the list of affected resource correlation Ids. This can be used to
-uniquely identify the count of items affected by a specific category and severity
-as well as count of item affected by an specific issue.
-*/
+   * Gets or sets the list of affected resource correlation Ids. This can be used to
+   * uniquely identify the count of items affected by a specific category and severity
+   * as well as count of item affected by an specific issue.
+   */
   affectedResourceCorrelationIds?: string[];
 
   /**
@@ -484,9 +484,9 @@ model SystemDataModel {
   createdBy?: string;
 
   /**
-* Gets or sets the type of identity that created the resource: user, application,
-managedIdentity.
-*/
+   * Gets or sets the type of identity that created the resource: user, application,
+   * managedIdentity.
+   */
   createdByType?: string;
 
   /**
@@ -501,9 +501,9 @@ managedIdentity.
   lastModifiedBy?: string;
 
   /**
-* Gets or sets the type of identity that last modified the resource: user, application,
-managedIdentity.
-*/
+   * Gets or sets the type of identity that last modified the resource: user, application,
+   * managedIdentity.
+   */
   lastModifiedByType?: string;
 
   /**
@@ -1609,9 +1609,9 @@ model HyperVToAzStackHCIDiskInput {
   storageContainerId?: string;
 
   /**
-* Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard
-disk.
-*/
+   * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard
+   * disk.
+   */
   isDynamic?: boolean;
 
   /**
@@ -1632,10 +1632,10 @@ disk.
 }
 
 /**
-* HyperV to  AzStackHCI event model custom properties. This class provides provider specific
-details for events of type DataContract.HealthEvents.HealthEventType.ProtectedItemHealth and
-DataContract.HealthEvents.HealthEventType.AgentHealth.
-*/
+ * HyperV to  AzStackHCI event model custom properties. This class provides provider specific
+ * details for events of type DataContract.HealthEvents.HealthEventType.ProtectedItemHealth and
+ * DataContract.HealthEvents.HealthEventType.AgentHealth.
+ */
 model HyperVToAzStackHCIEventModelCustomProperties
   extends EventModelCustomProperties {
   /**
@@ -1730,9 +1730,9 @@ model HyperVToAzStackHCIPlannedFailoverModelCustomProperties
 model HyperVToAzStackHCIPolicyModelCustomProperties
   extends PolicyModelCustomProperties {
   /**
-* Gets or sets the duration in minutes until which the recovery points need to be
-stored.
-*/
+   * Gets or sets the duration in minutes until which the recovery points need to be
+   * stored.
+   */
   recoveryPointHistoryInMinutes: int32;
 
   /**
@@ -1810,9 +1810,9 @@ model HyperVToAzStackHCIProtectedDiskProperties {
   capacityInBytes?: int64;
 
   /**
-* Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard
-disk.
-*/
+   * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard
+   * disk.
+   */
   @visibility("read")
   isDynamic?: boolean;
 
@@ -2019,16 +2019,16 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   lastRecoveryPointId?: string;
 
   /**
-* Gets or sets the initial replication progress percentage. This is calculated based on
-total bytes processed for all disks in the source VM.
-*/
+   * Gets or sets the initial replication progress percentage. This is calculated based on
+   * total bytes processed for all disks in the source VM.
+   */
   @visibility("read")
   initialReplicationProgressPercentage?: int32;
 
   /**
-* Gets or sets the resync progress percentage. This is calculated based on total bytes
-processed for all disks in the source VM.
-*/
+   * Gets or sets the resync progress percentage. This is calculated based on total bytes
+   * processed for all disks in the source VM.
+   */
   @visibility("read")
   resyncProgressPercentage?: int32;
 
@@ -2256,9 +2256,9 @@ model OperationModel {
   name?: string;
 
   /**
-* Gets or sets a value indicating whether the action is specific to data plane or
-control plane.
-*/
+   * Gets or sets a value indicating whether the action is specific to data plane or
+   * control plane.
+   */
   isDataAction?: boolean;
 
   /**
@@ -2327,9 +2327,9 @@ model OperationStatus {
   name?: string;
 
   /**
-* Gets or sets the status of the operation. ARM expects the terminal status to be one of
-Succeeded/ Failed/ Canceled. All other values imply that the operation is still running.
-*/
+   * Gets or sets the status of the operation. ARM expects the terminal status to be one of
+   * Succeeded/ Failed/ Canceled. All other values imply that the operation is still running.
+   */
   status?: string;
 
   /**
@@ -2437,9 +2437,9 @@ model VMwareToAzStackHCIDiskInput {
   storageContainerId?: string;
 
   /**
-* Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard
-disk.
-*/
+   * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard
+   * disk.
+   */
   isDynamic?: boolean;
 
   /**
@@ -2521,9 +2521,9 @@ model VMwareToAzStackHCIPlannedFailoverModelCustomProperties
 model VMwareToAzStackHCIPolicyModelCustomProperties
   extends PolicyModelCustomProperties {
   /**
-* Gets or sets the duration in minutes until which the recovery points need to be
-stored.
-*/
+   * Gets or sets the duration in minutes until which the recovery points need to be
+   * stored.
+   */
   recoveryPointHistoryInMinutes: int32;
 
   /**
@@ -2601,9 +2601,9 @@ model VMwareToAzStackHCIProtectedDiskProperties {
   capacityInBytes?: int64;
 
   /**
-* Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard
-disk.
-*/
+   * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard
+   * disk.
+   */
   @visibility("read")
   isDynamic?: boolean;
 
@@ -2828,9 +2828,9 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   lastRecoveryPointId?: string;
 
   /**
-* Gets or sets the initial replication progress percentage. This is calculated based on
-total bytes processed for all disks in the source VM.
-*/
+   * Gets or sets the initial replication progress percentage. This is calculated based on
+   * total bytes processed for all disks in the source VM.
+   */
   @visibility("read")
   initialReplicationProgressPercentage?: int32;
 
@@ -2847,9 +2847,9 @@ total bytes processed for all disks in the source VM.
   resumeProgressPercentage?: int32;
 
   /**
-* Gets or sets the resync progress percentage. This is calculated based on total bytes
-processed for all disks in the source VM.
-*/
+   * Gets or sets the resync progress percentage. This is calculated based on total bytes
+   * processed for all disks in the source VM.
+   */
   @visibility("read")
   resyncProgressPercentage?: int32;
 

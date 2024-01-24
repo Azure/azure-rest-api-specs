@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
  * FrontDoor Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "FrontDoorManagementClient",
 })

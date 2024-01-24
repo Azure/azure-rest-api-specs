@@ -15,13 +15,24 @@ namespace Microsoft.Sql;
 /**
  * Maintenance window options.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("current")
 @parentResource(Database)
-model MaintenanceWindowOptions
-  is ProxyResource<MaintenanceWindowOptionsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  MaintenanceWindowOptionsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model MaintenanceWindowOptions extends ProxyResource {
   @key("maintenanceWindowOption")
   @segment("maintenanceWindowOptions")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MaintenanceWindowOptionsProperties;
 }
 
 @armResourceOperations

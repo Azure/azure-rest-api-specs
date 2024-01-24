@@ -15,9 +15,14 @@ namespace Microsoft.AVS;
 /**
  * NSX Segment
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model WorkloadNetworkSegment
-  is ProxyResource<WorkloadNetworkSegmentProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  WorkloadNetworkSegmentProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WorkloadNetworkSegment extends ProxyResourceBase {
   /**
    * NSX Segment identifier. Generally the same as the Segment's display name
    */
@@ -25,6 +30,12 @@ model WorkloadNetworkSegment
   @key("segmentId")
   @segment("segments")
   name: string;
+
+  /**
+   * The properties of a Workload Segment proxy resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkloadNetworkSegmentProperties;
 }
 
 @armResourceOperations

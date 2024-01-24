@@ -28,6 +28,7 @@ using TypeSpec.Versioning;
  * The Azure Data Factory V2 management API provides a RESTful set of web services that interact with Azure Data Factory V2 services.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "DataFactoryManagementClient",
 })

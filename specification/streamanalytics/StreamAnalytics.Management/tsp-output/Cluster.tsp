@@ -14,7 +14,11 @@ namespace Microsoft.StreamAnalytics;
 /**
  * A Stream Analytics Cluster object
  */
-model Cluster is TrackedResource<ClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cluster extends TrackedResource {
   /**
    * The name of the cluster.
    */
@@ -24,12 +28,21 @@ model Cluster is TrackedResource<ClusterProperties> {
   name: string;
 
   /**
+   * The SKU of the cluster. This determines the size/capacity of the cluster. Required on PUT (CreateOrUpdate) requests.
+   */
+  sku?: ClusterSku;
+
+  /**
    * The current entity tag for the cluster. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency.
    */
   @visibility("read")
   etag?: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The properties associated with a Stream Analytics cluster.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterProperties;
 }
 
 @armResourceOperations

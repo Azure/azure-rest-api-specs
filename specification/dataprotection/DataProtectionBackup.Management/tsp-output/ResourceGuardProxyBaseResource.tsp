@@ -15,8 +15,12 @@ namespace Microsoft.DataProtection;
 /**
  * ResourceGuardProxyBaseResource object, used for response and request bodies for ResourceGuardProxy APIs
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BackupVaultResource)
-model ResourceGuardProxyBaseResource is ProxyResource<ResourceGuardProxyBase> {
+@Azure.ResourceManager.Private.armResourceInternal(ResourceGuardProxyBase)
+@includeInapplicableMetadataInPayload(false)
+model ResourceGuardProxyBaseResource extends ProxyResourceBase {
   /**
    * name of the resource guard proxy
    */
@@ -25,6 +29,12 @@ model ResourceGuardProxyBaseResource is ProxyResource<ResourceGuardProxyBase> {
   @key("resourceGuardProxyName")
   @segment("backupResourceGuardProxies")
   name: string;
+
+  /**
+   * ResourceGuardProxyBaseResource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ResourceGuardProxyBase;
 }
 
 @armResourceOperations

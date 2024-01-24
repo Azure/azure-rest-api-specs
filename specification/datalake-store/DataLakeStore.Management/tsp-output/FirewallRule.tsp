@@ -15,8 +15,12 @@ namespace Microsoft.DataLakeStore;
 /**
  * Data Lake Store firewall rule information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataLakeStoreAccount)
-model FirewallRule is ProxyResource<FirewallRuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FirewallRuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model FirewallRule extends SubResource {
   /**
    * The name of the firewall rule to retrieve.
    */
@@ -24,6 +28,12 @@ model FirewallRule is ProxyResource<FirewallRuleProperties> {
   @key("firewallRuleName")
   @segment("firewallRules")
   name: string;
+
+  /**
+   * The firewall rule properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FirewallRuleProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.DataReplication;
 /**
  * Dra model.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FabricModel)
-model DraModel is ProxyResource<DraModelProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DraModelProperties)
+@includeInapplicableMetadataInPayload(false)
+model DraModel extends ProxyResourceBase {
   /**
    * The fabric agent (Dra) name.
    */
@@ -25,6 +29,12 @@ model DraModel is ProxyResource<DraModelProperties> {
   @key("fabricAgentName")
   @segment("fabricAgents")
   name: string;
+
+  /**
+   * Dra model properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DraModelProperties;
 }
 
 @armResourceOperations

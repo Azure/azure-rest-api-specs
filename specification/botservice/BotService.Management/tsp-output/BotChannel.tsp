@@ -15,8 +15,12 @@ namespace Microsoft.BotService;
 /**
  * Bot channel resource definition
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Bot)
-model BotChannel is TrackedResource<Channel> {
+@Azure.ResourceManager.Private.armResourceInternal(Channel)
+@includeInapplicableMetadataInPayload(false)
+model BotChannel extends TrackedResourceBase {
   /**
    * The name of the Channel resource.
    */
@@ -24,6 +28,12 @@ model BotChannel is TrackedResource<Channel> {
   @key("channelName")
   @segment("channels")
   name: ChannelName;
+
+  /**
+   * The set of properties specific to bot channel resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: Channel;
 }
 
 @armResourceOperations

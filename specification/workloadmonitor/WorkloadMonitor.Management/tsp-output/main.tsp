@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
  * Workload Monitor API
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Workload Monitor API",
 })

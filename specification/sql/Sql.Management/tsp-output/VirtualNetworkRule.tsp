@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A virtual network rule.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model VirtualNetworkRule is ProxyResource<VirtualNetworkRuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkRuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualNetworkRule extends ProxyResource {
   /**
    * The name of the virtual network rule.
    */
@@ -24,6 +28,12 @@ model VirtualNetworkRule is ProxyResource<VirtualNetworkRuleProperties> {
   @key("virtualNetworkRuleName")
   @segment("virtualNetworkRules")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualNetworkRuleProperties;
 }
 
 @armResourceOperations

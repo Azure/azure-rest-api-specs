@@ -15,8 +15,12 @@ namespace Microsoft.Media;
 /**
  * A Content Key Policy resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MediaService)
-model ContentKeyPolicy is ProxyResource<ContentKeyPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ContentKeyPolicyProperties)
+@includeInapplicableMetadataInPayload(false)
+model ContentKeyPolicy extends ProxyResourceBase {
   /**
    * The Content Key Policy name.
    */
@@ -24,6 +28,12 @@ model ContentKeyPolicy is ProxyResource<ContentKeyPolicyProperties> {
   @key("contentKeyPolicyName")
   @segment("contentKeyPolicies")
   name: string;
+
+  /**
+   * The properties of the Content Key Policy.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ContentKeyPolicyProperties;
 }
 
 @armResourceOperations

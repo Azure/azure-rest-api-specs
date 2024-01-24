@@ -15,13 +15,24 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Used for getting ResourceHealthCheck settings.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(Site)
-model ResourceHealthMetadata
-  is ProxyResource<ResourceHealthMetadataProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ResourceHealthMetadataProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ResourceHealthMetadata extends ProxyOnlyResource {
   @key("resourceHealthMetadatum")
   @segment("resourceHealthMetadata")
   name: string;
+
+  /**
+   * ResourceHealthMetadata resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ResourceHealthMetadataProperties;
 }
 
 @armResourceOperations

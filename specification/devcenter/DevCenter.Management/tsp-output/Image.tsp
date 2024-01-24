@@ -15,8 +15,12 @@ namespace Microsoft.DevCenter;
 /**
  * Represents an image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Gallery)
-model Image is ProxyResource<ImageProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ImageProperties)
+@includeInapplicableMetadataInPayload(false)
+model Image extends ProxyResourceBase {
   /**
    * The name of the image.
    */
@@ -24,6 +28,12 @@ model Image is ProxyResource<ImageProperties> {
   @key("imageName")
   @segment("images")
   name: string;
+
+  /**
+   * Image properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ImageProperties;
 }
 
 @armResourceOperations

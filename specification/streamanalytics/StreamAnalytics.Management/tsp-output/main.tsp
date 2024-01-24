@@ -22,6 +22,7 @@ using TypeSpec.Versioning;
  * Stream Analytics Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Stream Analytics Management Client",
 })

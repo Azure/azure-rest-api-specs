@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -232,6 +234,7 @@ model PrivateEndpointConnectionReference {
   /**
    * The properties of a private endpoint connection.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateEndpointConnectionProperties;
 }
 
@@ -350,6 +353,7 @@ model ConfigurationStoreUpdateParameters {
   /**
    * The properties for updating a configuration store.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ConfigurationStorePropertiesUpdateParameters;
 
   /**
@@ -682,16 +686,16 @@ model PrivateLinkResourceProperties {
  */
 model KeyValueProperties {
   /**
-* The primary identifier of a key-value.
-The key is used in unison with the label to uniquely identify a key-value.
-*/
+   * The primary identifier of a key-value.
+   * The key is used in unison with the label to uniquely identify a key-value.
+   */
   @visibility("read")
   key?: string;
 
   /**
-* A value used to group key-values.
-The label is used in unison with the key to uniquely identify a key-value.
-*/
+   * A value used to group key-values.
+   * The label is used in unison with the key to uniquely identify a key-value.
+   */
   @visibility("read")
   label?: string;
 
@@ -701,9 +705,9 @@ The label is used in unison with the key to uniquely identify a key-value.
   value?: string;
 
   /**
-* The content type of the key-value's value.
-Providing a proper content-type can enable transformations of values when they are retrieved by applications.
-*/
+   * The content type of the key-value's value.
+   * Providing a proper content-type can enable transformations of values when they are retrieved by applications.
+   */
   contentType?: string;
 
   /**
@@ -720,9 +724,9 @@ Providing a proper content-type can enable transformations of values when they a
   lastModified?: utcDateTime;
 
   /**
-* A value indicating whether the key-value is locked.
-A locked key-value may not be modified until it is unlocked.
-*/
+   * A value indicating whether the key-value is locked.
+   * A locked key-value may not be modified until it is unlocked.
+   */
   @visibility("read")
   locked?: boolean;
 

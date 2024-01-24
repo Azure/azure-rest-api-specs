@@ -14,7 +14,11 @@ namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
-model ManagedHsm is TrackedResource<ManagedHsmProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ManagedHsmProperties)
+@includeInapplicableMetadataInPayload(false)
+model ManagedHsm extends ManagedHsmResource {
   /**
    * The name of the managed HSM Pool.
    */
@@ -22,6 +26,12 @@ model ManagedHsm is TrackedResource<ManagedHsmProperties> {
   @key("name")
   @segment("managedHSMs")
   name: string;
+
+  /**
+   * Properties of the managed HSM
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedHsmProperties;
 }
 
 @armResourceOperations

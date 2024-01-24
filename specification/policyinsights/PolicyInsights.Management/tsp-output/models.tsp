@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1295,6 +1297,7 @@ model SlimPolicyMetadata {
   /**
    * Properties of the policy metadata.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PolicyMetadataSlimProperties;
 
   /**

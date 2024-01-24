@@ -14,7 +14,11 @@ namespace Microsoft.Chaos;
 /**
  * Model that represents a Experiment resource.
  */
-model Experiment is TrackedResource<ExperimentProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ExperimentProperties)
+@includeInapplicableMetadataInPayload(false)
+model Experiment extends TrackedResourceBase {
   /**
    * String that represents a Experiment resource name.
    */
@@ -24,6 +28,12 @@ model Experiment is TrackedResource<ExperimentProperties> {
   @key("experimentName")
   @segment("experiments")
   name: string;
+
+  /**
+   * The properties of the experiment resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ExperimentProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

@@ -36,6 +36,7 @@ using TypeSpec.Versioning;
  * // FIXME: (missing-service-description) Add service description
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ContainerApps API Client",
 })

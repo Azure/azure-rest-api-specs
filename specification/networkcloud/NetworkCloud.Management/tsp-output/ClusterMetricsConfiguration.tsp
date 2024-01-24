@@ -15,9 +15,14 @@ namespace Microsoft.NetworkCloud;
 /**
  * ClusterMetricsConfiguration represents the metrics configuration of an on-premises Network Cloud cluster.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model ClusterMetricsConfiguration
-  is TrackedResource<ClusterMetricsConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ClusterMetricsConfigurationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ClusterMetricsConfiguration extends TrackedResourceBase {
   /**
    * The name of the metrics configuration for the cluster.
    */
@@ -31,6 +36,12 @@ model ClusterMetricsConfiguration
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ClusterMetricsConfigurationProperties;
 }
 
 @armResourceOperations

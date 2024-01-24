@@ -14,7 +14,11 @@ namespace Microsoft.Quota;
 /**
  * List of quota requests with details.
  */
-model QuotaRequestDetails is ExtensionResource<QuotaRequestProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(QuotaRequestProperties)
+@includeInapplicableMetadataInPayload(false)
+model QuotaRequestDetails extends ExtensionResourceBase {
   /**
    * Quota request ID.
    */
@@ -22,6 +26,12 @@ model QuotaRequestDetails is ExtensionResource<QuotaRequestProperties> {
   @key("id")
   @segment("quotaRequests")
   name: string;
+
+  /**
+   * Quota request details.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: QuotaRequestProperties;
 }
 
 @armResourceOperations
@@ -45,14 +55,14 @@ interface QuotaRequestDetailsOperationGroup {
       ...BaseParameters<QuotaRequestDetails>;
 
       /**
-* | Field                    | Supported operators  
-|---------------------|------------------------
-
-|requestSubmitTime | ge, le, eq, gt, lt
- |provisioningState eq {QuotaRequestState}
- |resourceName eq {resourceName}
-
-*/
+       * | Field                    | Supported operators
+       * |---------------------|------------------------
+       *
+       * |requestSubmitTime | ge, le, eq, gt, lt
+       *  |provisioningState eq {QuotaRequestState}
+       *  |resourceName eq {resourceName}
+       *
+       */
       @query("$filter")
       $filter?: string;
 

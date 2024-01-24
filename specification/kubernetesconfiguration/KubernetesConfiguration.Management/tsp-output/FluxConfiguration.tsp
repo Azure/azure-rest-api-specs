@@ -14,7 +14,11 @@ namespace Microsoft.KubernetesConfiguration;
 /**
  * The Flux Configuration object returned in Get & Put response.
  */
-model FluxConfiguration is ProxyResource<FluxConfigurationProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(FluxConfigurationProperties)
+@includeInapplicableMetadataInPayload(false)
+model FluxConfiguration extends ProxyResourceBase {
   /**
    * Name of the Flux Configuration.
    */
@@ -22,6 +26,12 @@ model FluxConfiguration is ProxyResource<FluxConfigurationProperties> {
   @key("fluxConfigurationName")
   @segment("fluxConfigurations")
   name: string;
+
+  /**
+   * Properties to create a Flux Configuration resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FluxConfigurationProperties;
 }
 
 @armResourceOperations

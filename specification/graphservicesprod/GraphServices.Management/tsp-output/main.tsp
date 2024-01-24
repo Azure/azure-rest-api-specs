@@ -15,6 +15,7 @@ using TypeSpec.Versioning;
  * Self service experience for Microsoft Graph metered services
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "GraphServices",
 })

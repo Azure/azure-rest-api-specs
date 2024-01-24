@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
  * The Managed Service Identity Client.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ManagedServiceIdentityClient",
 })

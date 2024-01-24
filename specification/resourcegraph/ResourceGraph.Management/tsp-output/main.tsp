@@ -15,6 +15,7 @@ using TypeSpec.Versioning;
  * Azure Resource Graph API Reference
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ResourceGraphClient",
 })

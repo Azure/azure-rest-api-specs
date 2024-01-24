@@ -15,8 +15,12 @@ namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Vault)
-model Secret is ProxyResource<SecretProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SecretProperties)
+@includeInapplicableMetadataInPayload(false)
+model Secret extends Resource {
   /**
    * The name of the secret.
    */
@@ -24,6 +28,12 @@ model Secret is ProxyResource<SecretProperties> {
   @key("secretName")
   @segment("secrets")
   name: string;
+
+  /**
+   * Properties of the secret
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: SecretProperties;
 }
 
 @armResourceOperations

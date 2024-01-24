@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A short term retention policy.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedDatabase)
-model ManagedBackupShortTermRetentionPolicy
-  is ProxyResource<ManagedBackupShortTermRetentionPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedBackupShortTermRetentionPolicyProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedBackupShortTermRetentionPolicy extends ProxyResource {
   /**
    * The policy name.
    */
@@ -25,6 +30,12 @@ model ManagedBackupShortTermRetentionPolicy
   @key("policyName")
   @segment("backupShortTermRetentionPolicies")
   name: ManagedShortTermRetentionPolicyName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedBackupShortTermRetentionPolicyProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.DataFactory;
 /**
  * Linked service resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-model LinkedServiceResource is ProxyResource<LinkedService> {
+@Azure.ResourceManager.Private.armResourceInternal(LinkedService)
+@includeInapplicableMetadataInPayload(false)
+model LinkedServiceResource extends SubResource {
   /**
    * The linked service name.
    */
@@ -27,6 +31,12 @@ model LinkedServiceResource is ProxyResource<LinkedService> {
   @key("linkedServiceName")
   @segment("linkedservices")
   name: string;
+
+  /**
+   * Properties of linked service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LinkedService;
 }
 
 @armResourceOperations

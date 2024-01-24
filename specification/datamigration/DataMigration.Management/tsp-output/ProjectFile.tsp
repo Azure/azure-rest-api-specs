@@ -15,8 +15,12 @@ namespace Microsoft.DataMigration;
 /**
  * A file resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Project)
-model ProjectFile is ProxyResource<ProjectFileProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ProjectFileProperties)
+@includeInapplicableMetadataInPayload(false)
+model ProjectFile extends Resource {
   /**
    * Name of the File
    */
@@ -29,6 +33,12 @@ model ProjectFile is ProxyResource<ProjectFileProperties> {
    * HTTP strong entity tag value. This is ignored if submitted.
    */
   etag?: string;
+
+  /**
+   * Custom file properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProjectFileProperties;
 }
 
 @armResourceOperations

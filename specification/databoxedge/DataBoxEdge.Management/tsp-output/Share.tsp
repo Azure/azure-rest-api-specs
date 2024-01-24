@@ -15,8 +15,12 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Represents a share on the  Data Box Edge/Gateway device.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataBoxEdgeDevice)
-model Share is ProxyResource<ShareProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ShareProperties)
+@includeInapplicableMetadataInPayload(false)
+model Share extends ProxyResourceBase {
   /**
    * The share name.
    */
@@ -24,6 +28,12 @@ model Share is ProxyResource<ShareProperties> {
   @key("name")
   @segment("shares")
   name: string;
+
+  /**
+   * The share properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ShareProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.Capacity;
 /**
  * The definition of the reservation.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ReservationOrderResponse)
-model ReservationResponse is ProxyResource<ReservationsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ReservationsProperties)
+@includeInapplicableMetadataInPayload(false)
+model ReservationResponse extends ProxyResourceBase {
   /**
    * Id of the reservation item
    */
@@ -26,8 +30,19 @@ model ReservationResponse is ProxyResource<ReservationsProperties> {
   name: string;
 
   etag?: int32;
+
+  /**
+   * Resource Provider type to be reserved.
+   */
+  kind?: "Microsoft.Compute";
+
+  /**
+   * The properties associated to this reservation
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ReservationsProperties;
+
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
@@ -78,9 +93,9 @@ interface ReservationResponses {
   listAll is ArmListBySubscription<ReservationResponse>;
 
   /**
-* Check whether the scopes from request is valid for `Reservation`.
-
-*/
+   * Check whether the scopes from request is valid for `Reservation`.
+   *
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reservation_AvailableScopes")
   availableScopes is ArmResourceActionAsync<
@@ -97,9 +112,9 @@ interface ReservationResponses {
   archive is ArmResourceActionSync<ReservationResponse, void, void>;
 
   /**
-* Restores a `Reservation` to the state it was before archiving.
-
-*/
+   * Restores a `Reservation` to the state it was before archiving.
+   *
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reservation_Unarchive")
   unarchive is ArmResourceActionSync<ReservationResponse, void, void>;

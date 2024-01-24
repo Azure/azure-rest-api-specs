@@ -15,9 +15,14 @@ namespace Microsoft.EventHub;
 /**
  * Single item in List or Get Alias(Disaster Recovery configuration) operation
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EventHubsNamespace)
-model EventHubsDisasterRecovery
-  is ProxyResource<ArmDisasterRecoveryProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ArmDisasterRecoveryProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model EventHubsDisasterRecovery extends ProxyResource {
   /**
    * The Disaster Recovery configuration name
    */
@@ -27,6 +32,12 @@ model EventHubsDisasterRecovery
   @key("alias")
   @segment("disasterRecoveryConfigs")
   name: string;
+
+  /**
+   * Properties required to the Create Or Update Alias(Disaster Recovery configurations)
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ArmDisasterRecoveryProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.DataFactory;
 /**
  * Factory resource type.
  */
-model Factory is TrackedResource<FactoryProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(FactoryProperties)
+@includeInapplicableMetadataInPayload(false)
+model Factory extends Resource {
   /**
    * The factory name.
    */
@@ -26,7 +30,16 @@ model Factory is TrackedResource<FactoryProperties> {
   @segment("factories")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  /**
+   * Managed service identity of the factory.
+   */
+  identity?: FactoryIdentity;
+
+  /**
+   * Properties of the factory.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FactoryProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A secret.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(User)
-model Secret is TrackedResource<SecretProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SecretProperties)
+@includeInapplicableMetadataInPayload(false)
+model Secret extends Resource {
   /**
    * The name of the secret.
    */
@@ -24,6 +28,12 @@ model Secret is TrackedResource<SecretProperties> {
   @key("name")
   @segment("secrets")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: SecretProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Qumulo.Storage;
 /**
  * A FileSystem Resource by Qumulo
  */
-model FileSystemResource is TrackedResource<FileSystemResourceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(FileSystemResourceProperties)
+@includeInapplicableMetadataInPayload(false)
+model FileSystemResource extends TrackedResourceBase {
   /**
    * Name of the File System resource
    */
@@ -22,6 +26,13 @@ model FileSystemResource is TrackedResource<FileSystemResourceProperties> {
   @key("fileSystemName")
   @segment("fileSystems")
   name: string;
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties: FileSystemResourceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

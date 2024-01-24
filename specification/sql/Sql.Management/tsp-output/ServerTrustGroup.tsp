@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * A server trust group.
  */
-model ServerTrustGroup is ProxyResource<ServerTrustGroupProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ServerTrustGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServerTrustGroup extends ProxyResource {
   /**
    * The name of the server trust group.
    */
@@ -22,6 +26,12 @@ model ServerTrustGroup is ProxyResource<ServerTrustGroupProperties> {
   @key("serverTrustGroupName")
   @segment("serverTrustGroups")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerTrustGroupProperties;
 }
 
 @armResourceOperations

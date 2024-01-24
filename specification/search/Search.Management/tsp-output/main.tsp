@@ -18,6 +18,7 @@ using TypeSpec.Versioning;
  * Client that can be used to manage Azure Cognitive Search services and API keys.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "SearchManagementClient",
 })

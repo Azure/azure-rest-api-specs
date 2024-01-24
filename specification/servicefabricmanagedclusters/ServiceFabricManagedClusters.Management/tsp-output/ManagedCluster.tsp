@@ -12,10 +12,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 /**
-* The managed cluster resource
-
-*/
-model ManagedCluster is TrackedResource<ManagedClusterProperties> {
+ * The managed cluster resource
+ *
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ManagedClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model ManagedCluster extends Resource {
   /**
    * The name of the cluster resource.
    */
@@ -24,7 +28,16 @@ model ManagedCluster is TrackedResource<ManagedClusterProperties> {
   @segment("managedClusters")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The sku of the managed cluster
+   */
+  sku: Sku;
+
+  /**
+   * The managed cluster resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedClusterProperties;
 }
 
 @armResourceOperations

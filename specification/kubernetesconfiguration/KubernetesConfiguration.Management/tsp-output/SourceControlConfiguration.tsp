@@ -14,8 +14,13 @@ namespace Microsoft.KubernetesConfiguration;
 /**
  * The SourceControl Configuration object returned in Get & Put response.
  */
-model SourceControlConfiguration
-  is ProxyResource<SourceControlConfigurationProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  SourceControlConfigurationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SourceControlConfiguration extends ProxyResourceBase {
   /**
    * Name of the Source Control Configuration.
    */
@@ -23,6 +28,12 @@ model SourceControlConfiguration
   @key("sourceControlConfigurationName")
   @segment("sourceControlConfigurations")
   name: string;
+
+  /**
+   * Properties to create a Source Control Configuration resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SourceControlConfigurationProperties;
 }
 
 @armResourceOperations

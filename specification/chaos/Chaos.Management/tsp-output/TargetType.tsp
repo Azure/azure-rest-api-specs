@@ -14,8 +14,12 @@ namespace Microsoft.Chaos;
 /**
  * Model that represents a Target Type resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model TargetType is ProxyResource<TargetTypeProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(TargetTypeProperties)
+@includeInapplicableMetadataInPayload(false)
+model TargetType extends ProxyResourceBase {
   /**
    * String that represents a Target Type resource name.
    */
@@ -24,6 +28,12 @@ model TargetType is ProxyResource<TargetTypeProperties> {
   @key("targetTypeName")
   @segment("targetTypes")
   name: string;
+
+  /**
+   * The properties of the target type resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: TargetTypeProperties;
 }
 
 @armResourceOperations

@@ -16,8 +16,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A container for a managed identity to execute DevTest lab services.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model ServiceRunner is TrackedResource<{}> {
+@Azure.ResourceManager.Private.armResourceInternal({})
+@includeInapplicableMetadataInPayload(false)
+model ServiceRunner extends Resource {
   /**
    * The name of the service runner.
    */
@@ -26,7 +30,14 @@ model ServiceRunner is TrackedResource<{}> {
   @segment("servicerunners")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  /**
+   * The identity of the resource.
+   */
+  identity?: IdentityProperties;
+
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties?: {};
 }
 
 @armResourceOperations

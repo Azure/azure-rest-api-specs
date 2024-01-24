@@ -15,8 +15,12 @@ namespace Microsoft.CustomerInsights;
 /**
  * The view resource format.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Hub)
-model ViewResourceFormat is ProxyResource<View> {
+@Azure.ResourceManager.Private.armResourceInternal(View)
+@includeInapplicableMetadataInPayload(false)
+model ViewResourceFormat extends ProxyResource {
   /**
    * The name of the view.
    */
@@ -24,6 +28,12 @@ model ViewResourceFormat is ProxyResource<View> {
   @key("viewName")
   @segment("views")
   name: string;
+
+  /**
+   * The view in Customer 360 web application.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: View;
 }
 
 @armResourceOperations

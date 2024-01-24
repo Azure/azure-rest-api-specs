@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -369,11 +371,11 @@ enum EncryptionKeySource {
 }
 
 /**
-* coolAccessRetrievalPolicy determines the data retrieval behavior from the cool tier to standard storage based on the read pattern for cool access enabled volumes. The possible values for this field are:
-* Default - Data will be pulled from cool tier to standard storage on random reads. This policy is the default.
- OnRead - All client-driven data read is pulled from cool tier to standard storage on both sequential and random reads.
- Never - No client-driven data is pulled from cool tier to standard storage.
-*/
+ * coolAccessRetrievalPolicy determines the data retrieval behavior from the cool tier to standard storage based on the read pattern for cool access enabled volumes. The possible values for this field are:
+ *  Default - Data will be pulled from cool tier to standard storage on random reads. This policy is the default.
+ *  OnRead - All client-driven data read is pulled from cool tier to standard storage on both sequential and random reads.
+ *  Never - No client-driven data is pulled from cool tier to standard storage.
+ */
 enum CoolAccessRetrievalPolicy {
   Default,
   OnRead,
@@ -723,6 +725,7 @@ model SubscriptionQuotaItem extends ProxyResource {
   /**
    * SubscriptionQuotaItem properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SubscriptionQuotaItemProperties;
 }
 
@@ -1104,7 +1107,7 @@ model AccountEncryption {
   /**
    * The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.NetApp, Microsoft.KeyVault
    */
-  keySource?: KeySource = KeySource.Microsoft.NetApp;
+  keySource?: KeySource = KeySource.`Microsoft.NetApp`;
 
   /**
    * Properties provided by KeVault. Applicable if keySource is 'Microsoft.KeyVault'.
@@ -1203,6 +1206,7 @@ model NetAppAccountPatch {
   /**
    * NetApp Account properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AccountProperties;
 
   /**
@@ -1330,6 +1334,7 @@ model CapacityPoolPatch {
   /**
    * Capacity pool properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PoolPatchProperties;
 }
 
@@ -1521,7 +1526,7 @@ model VolumeProperties {
   /**
    * Source of key used to encrypt data in volume. Applicable if NetApp account has encryption.keySource = 'Microsoft.KeyVault'. Possible values (case-insensitive) are: 'Microsoft.NetApp, Microsoft.KeyVault'
    */
-  encryptionKeySource?: EncryptionKeySource = EncryptionKeySource.Microsoft.NetApp;
+  encryptionKeySource?: EncryptionKeySource = EncryptionKeySource.`Microsoft.NetApp`;
 
   /**
    * The resource ID of private endpoint for KeyVault. It must reside in the same VNET as the volume. Only applicable if encryptionKeySource = 'Microsoft.KeyVault'.
@@ -1546,11 +1551,11 @@ model VolumeProperties {
   coolnessPeriod?: int32;
 
   /**
-* coolAccessRetrievalPolicy determines the data retrieval behavior from the cool tier to standard storage based on the read pattern for cool access enabled volumes. The possible values for this field are:
-* Default - Data will be pulled from cool tier to standard storage on random reads. This policy is the default.
- OnRead - All client-driven data read is pulled from cool tier to standard storage on both sequential and random reads.
- Never - No client-driven data is pulled from cool tier to standard storage.
-*/
+   * coolAccessRetrievalPolicy determines the data retrieval behavior from the cool tier to standard storage based on the read pattern for cool access enabled volumes. The possible values for this field are:
+   *  Default - Data will be pulled from cool tier to standard storage on random reads. This policy is the default.
+   *  OnRead - All client-driven data read is pulled from cool tier to standard storage on both sequential and random reads.
+   *  Never - No client-driven data is pulled from cool tier to standard storage.
+   */
   coolAccessRetrievalPolicy?: CoolAccessRetrievalPolicy;
 
   /**
@@ -1919,6 +1924,7 @@ model VolumePatch {
   /**
    * Patchable volume properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VolumePatchProperties;
 }
 
@@ -1988,11 +1994,11 @@ model VolumePatchProperties {
   coolnessPeriod?: int32;
 
   /**
-* coolAccessRetrievalPolicy determines the data retrieval behavior from the cool tier to standard storage based on the read pattern for cool access enabled volumes. The possible values for this field are:
-* Default - Data will be pulled from cool tier to standard storage on random reads. This policy is the default.
- OnRead - All client-driven data read is pulled from cool tier to standard storage on both sequential and random reads.
- Never - No client-driven data is pulled from cool tier to standard storage.
-*/
+   * coolAccessRetrievalPolicy determines the data retrieval behavior from the cool tier to standard storage based on the read pattern for cool access enabled volumes. The possible values for this field are:
+   *  Default - Data will be pulled from cool tier to standard storage on random reads. This policy is the default.
+   *  OnRead - All client-driven data read is pulled from cool tier to standard storage on both sequential and random reads.
+   *  Never - No client-driven data is pulled from cool tier to standard storage.
+   */
   coolAccessRetrievalPolicy?: CoolAccessRetrievalPolicy;
 
   /**
@@ -2414,6 +2420,7 @@ model SnapshotPolicyPatch {
   /**
    * Snapshot Policy properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SnapshotPolicyProperties;
 }
 
@@ -2573,6 +2580,7 @@ model BackupPolicyPatch {
   /**
    * Backup policy Properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BackupPolicyProperties;
 }
 
@@ -2616,6 +2624,7 @@ model VolumeQuotaRulePatch {
   /**
    * Volume Quota Rule Properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VolumeQuotaRulesProperties;
 }
 
@@ -2662,6 +2671,7 @@ model VolumeGroup {
   /**
    * Volume group properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VolumeGroupListProperties;
 }
 
@@ -2773,6 +2783,7 @@ model VolumeGroupVolumeProperties {
   /**
    * Volume properties
    */
+  @extension("x-ms-client-flatten", true)
   properties: VolumeProperties;
 }
 
@@ -2810,6 +2821,7 @@ model SubvolumePatchRequest {
   /**
    * Subvolume Properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SubvolumePatchParams;
 }
 
@@ -2853,6 +2865,7 @@ model SubvolumeModel {
   /**
    * It represents the minimal properties of the subvolume.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SubvolumeModelProperties;
 }
 
@@ -2967,11 +2980,13 @@ model MountTarget {
   /**
    * Resource tags
    */
+  @extension("x-ms-client-flatten", true)
   tags?: Record<string>;
 
   /**
    * Mount Target Properties
    */
+  @extension("x-ms-client-flatten", true)
   properties: MountTargetProperties;
 }
 
@@ -3011,5 +3026,6 @@ model SnapshotPolicyDetails {
   /**
    * Snapshot policy Properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SnapshotPolicyProperties;
 }

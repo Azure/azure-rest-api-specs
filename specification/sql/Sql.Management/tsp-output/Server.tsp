@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database server.
  */
-model Server is TrackedResource<ServerProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ServerProperties)
+@includeInapplicableMetadataInPayload(false)
+model Server extends TrackedResource {
   /**
    * The name of the server.
    */
@@ -23,8 +27,22 @@ model Server is TrackedResource<ServerProperties> {
   @segment("servers")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * The Azure Active Directory identity of the server.
+   */
+  identity?: ResourceIdentity;
+
+  /**
+   * Kind of sql server. This is metadata used for the Azure portal experience.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerProperties;
 }
 
 @armResourceOperations

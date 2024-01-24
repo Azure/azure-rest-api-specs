@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Premier add-on.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model PremierAddOn is TrackedResource<PremierAddOnProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PremierAddOnProperties)
+@includeInapplicableMetadataInPayload(false)
+model PremierAddOn extends Resource {
   /**
    * Add-on name.
    */
@@ -24,6 +28,12 @@ model PremierAddOn is TrackedResource<PremierAddOnProperties> {
   @key("premierAddOnName")
   @segment("premieraddons")
   name: string;
+
+  /**
+   * PremierAddOn resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PremierAddOnProperties;
 }
 
 @armResourceOperations

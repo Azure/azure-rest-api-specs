@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
  * The Hybrid Compute Management Client.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "HybridComputeManagementClient",
 })

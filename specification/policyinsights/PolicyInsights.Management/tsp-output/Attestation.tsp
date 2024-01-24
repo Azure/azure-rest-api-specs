@@ -14,7 +14,11 @@ namespace Microsoft.PolicyInsights;
 /**
  * An attestation resource.
  */
-model Attestation is ExtensionResource<AttestationProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AttestationProperties)
+@includeInapplicableMetadataInPayload(false)
+model Attestation extends ExtensionResourceBase {
   /**
    * The name of the attestation.
    */
@@ -22,6 +26,12 @@ model Attestation is ExtensionResource<AttestationProperties> {
   @key("attestationName")
   @segment("attestations")
   name: string;
+
+  /**
+   * Properties for the attestation.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: AttestationProperties;
 }
 
 @armResourceOperations

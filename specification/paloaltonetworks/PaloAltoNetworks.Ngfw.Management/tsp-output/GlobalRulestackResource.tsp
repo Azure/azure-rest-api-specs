@@ -14,8 +14,12 @@ namespace PaloAltoNetworks.Cloudngfw;
 /**
  * PaloAltoNetworks GlobalRulestack
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model GlobalRulestackResource is ProxyResource<RulestackProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RulestackProperties)
+@includeInapplicableMetadataInPayload(false)
+model GlobalRulestackResource extends ProxyResourceBase {
   /**
    * GlobalRulestack resource name
    */
@@ -23,6 +27,13 @@ model GlobalRulestackResource is ProxyResource<RulestackProperties> {
   @key("globalRulestackName")
   @segment("globalRulestacks")
   name: string;
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties: RulestackProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

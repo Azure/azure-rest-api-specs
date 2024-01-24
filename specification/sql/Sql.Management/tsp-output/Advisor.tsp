@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * Database, Server or Elastic Pool Advisor.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model Advisor is ProxyResource<AdvisorProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AdvisorProperties)
+@includeInapplicableMetadataInPayload(false)
+model Advisor extends ProxyResource {
   /**
    * The name of the Database Advisor.
    */
@@ -25,7 +29,17 @@ model Advisor is ProxyResource<AdvisorProperties> {
   @segment("advisors")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Resource kind.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AdvisorProperties;
 }
 
 @armResourceOperations

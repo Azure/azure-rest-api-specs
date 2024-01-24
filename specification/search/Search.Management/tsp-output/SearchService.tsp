@@ -14,7 +14,11 @@ namespace Microsoft.Search;
 /**
  * Describes an Azure Cognitive Search service and its current state.
  */
-model SearchService is TrackedResource<SearchServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(SearchServiceProperties)
+@includeInapplicableMetadataInPayload(false)
+model SearchService extends TrackedResourceBase {
   /**
    * The name of the Azure Cognitive Search service associated with the specified resource group.
    */
@@ -22,6 +26,12 @@ model SearchService is TrackedResource<SearchServiceProperties> {
   @key("searchServiceName")
   @segment("searchServices")
   name: string;
+
+  /**
+   * Properties of the search service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SearchServiceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;

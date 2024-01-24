@@ -18,7 +18,11 @@ namespace Microsoft.AVS;
 * An instance of a script executed by a user - custom or AVS
 */
 @parentResource(PrivateCloud)
-model ScriptExecution is ProxyResource<ScriptExecutionProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ScriptExecutionProperties)
+@includeInapplicableMetadataInPayload(false)
+model ScriptExecution extends ProxyResourceBase {
 /**
 * Name of the user-invoked script execution resource
 */
@@ -27,6 +31,11 @@ model ScriptExecution is ProxyResource<ScriptExecutionProperties> {
 @key("scriptExecutionName")
 @segment("scriptExecutions")
 "name": string;
+/**
+* The properties of a script execution resource
+*/
+@extension("x-ms-client-flatten", true)
+properties?: ScriptExecutionProperties
 }
 
 
@@ -64,9 +73,9 @@ getExecutionLogs is ArmResourceActionSync<ScriptExecution,paths·hl4gv6·subscri
 
 
 
-@@projectedName(ScriptExecutions.createOrUpdate::parameters.resource, "json", "scriptExecution");
-@@extension(ScriptExecutions.createOrUpdate::parameters.resource, "x-ms-client-name", "scriptExecution");
-@@doc(ScriptExecutions.createOrUpdate::parameters.resource, "A script running in the private cloud");
-@@projectedName(ScriptExecutions.getExecutionLogs::parameters.body, "json", "scriptOutputStreamType");
-@@extension(ScriptExecutions.getExecutionLogs::parameters.body, "x-ms-client-name", "scriptOutputStreamType");
-@@doc(ScriptExecutions.getExecutionLogs::parameters.body, "Name of the desired output stream to return. If not provided, will return all. An empty array will return nothing");
+@@projectedName(ScriptExecutions.`createOrUpdate`::parameters.resource, "json", "scriptExecution");
+@@extension(ScriptExecutions.`createOrUpdate`::parameters.resource, "x-ms-client-name", "scriptExecution");
+@@doc(ScriptExecutions.`createOrUpdate`::parameters.resource, "A script running in the private cloud");
+@@projectedName(ScriptExecutions.`getExecutionLogs`::parameters.body, "json", "scriptOutputStreamType");
+@@extension(ScriptExecutions.`getExecutionLogs`::parameters.body, "x-ms-client-name", "scriptOutputStreamType");
+@@doc(ScriptExecutions.`getExecutionLogs`::parameters.body, "Name of the desired output stream to return. If not provided, will return all. An empty array will return nothing");

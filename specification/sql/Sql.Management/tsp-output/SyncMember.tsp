@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database sync member.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SyncGroup)
-model SyncMember is ProxyResource<SyncMemberProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SyncMemberProperties)
+@includeInapplicableMetadataInPayload(false)
+model SyncMember extends ProxyResource {
   /**
    * The name of the sync member.
    */
@@ -24,6 +28,12 @@ model SyncMember is ProxyResource<SyncMemberProperties> {
   @key("syncMemberName")
   @segment("syncMembers")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SyncMemberProperties;
 }
 
 @armResourceOperations

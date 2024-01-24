@@ -15,8 +15,12 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for Application properties.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApplicationGroup)
-model Application is ProxyResource<ApplicationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ApplicationProperties)
+@includeInapplicableMetadataInPayload(false)
+model Application extends ProxyResourceBase {
   /**
    * The name of the application within the specified application group
    */
@@ -26,6 +30,12 @@ model Application is ProxyResource<ApplicationProperties> {
   @key("applicationName")
   @segment("applications")
   name: string;
+
+  /**
+   * Detailed properties for Application
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ApplicationProperties;
 }
 
 @armResourceOperations

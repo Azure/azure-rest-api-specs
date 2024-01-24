@@ -15,9 +15,14 @@ namespace Microsoft.Workloads;
 /**
  * Define the SAP Application Server Instance resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SAPVirtualInstance)
-model SAPApplicationServerInstance
-  is TrackedResource<SAPApplicationServerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SAPApplicationServerProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SAPApplicationServerInstance extends TrackedResourceBase {
   /**
    * The name of SAP Application Server instance resource.
    */
@@ -25,6 +30,12 @@ model SAPApplicationServerInstance
   @key("applicationInstanceName")
   @segment("applicationInstances")
   name: string;
+
+  /**
+   * Defines the SAP Application Server instance properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SAPApplicationServerProperties;
 }
 
 @armResourceOperations

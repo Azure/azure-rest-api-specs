@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the module type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model Module is TrackedResource<ModuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ModuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model Module extends TrackedResourceBase {
   /**
    * The python package name.
    */
@@ -29,6 +33,12 @@ model Module is TrackedResource<ModuleProperties> {
    * Gets or sets the etag of the resource.
    */
   etag?: string;
+
+  /**
+   * Gets or sets the module properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ModuleProperties;
 }
 
 @armResourceOperations

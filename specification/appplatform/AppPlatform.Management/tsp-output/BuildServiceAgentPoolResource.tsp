@@ -15,9 +15,14 @@ namespace Microsoft.AppPlatform;
 /**
  * The build service agent pool resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BuildService)
-model BuildServiceAgentPoolResource
-  is ProxyResource<BuildServiceAgentPoolProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  BuildServiceAgentPoolProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model BuildServiceAgentPoolResource extends ProxyResource {
   /**
    * The name of the build service agent pool resource.
    */
@@ -25,6 +30,12 @@ model BuildServiceAgentPoolResource
   @key("agentPoolName")
   @segment("agentPools")
   name: string;
+
+  /**
+   * build service agent pool properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BuildServiceAgentPoolProperties;
 }
 
 @armResourceOperations

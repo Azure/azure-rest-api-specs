@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database sync group.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model SyncGroup is ProxyResource<SyncGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SyncGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model SyncGroup extends ProxyResource {
   /**
    * The name of the sync group.
    */
@@ -25,7 +29,16 @@ model SyncGroup is ProxyResource<SyncGroupProperties> {
   @segment("syncGroups")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The name and capacity of the SKU.
+   */
+  sku?: Sku;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SyncGroupProperties;
 }
 
 @armResourceOperations

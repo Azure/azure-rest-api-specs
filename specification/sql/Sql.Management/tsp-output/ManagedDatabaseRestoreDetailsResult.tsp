@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A managed database restore details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedDatabase)
-model ManagedDatabaseRestoreDetailsResult
-  is ProxyResource<ManagedDatabaseRestoreDetailsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedDatabaseRestoreDetailsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedDatabaseRestoreDetailsResult extends ProxyResource {
   /**
    * The name of the restore details to retrieve.
    */
@@ -25,6 +30,12 @@ model ManagedDatabaseRestoreDetailsResult
   @key("restoreDetailsName")
   @segment("restoreDetails")
   name: RestoreDetailsName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedDatabaseRestoreDetailsProperties;
 }
 
 @armResourceOperations

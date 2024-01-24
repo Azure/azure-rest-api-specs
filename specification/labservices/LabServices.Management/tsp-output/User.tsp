@@ -15,8 +15,12 @@ namespace Microsoft.LabServices;
 /**
  * User of a lab that can register for and use virtual machines within the lab.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model User is ProxyResource<UserProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(UserProperties)
+@includeInapplicableMetadataInPayload(false)
+model User extends ProxyResourceBase {
   /**
    * The name of the user that uniquely identifies it within containing lab. Used in resource URIs.
    */
@@ -27,6 +31,12 @@ model User is ProxyResource<UserProperties> {
   @key("userName")
   @segment("users")
   name: string;
+
+  /**
+   * User resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: UserProperties;
 }
 
 @armResourceOperations

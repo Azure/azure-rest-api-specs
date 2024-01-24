@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1045,6 +1047,7 @@ model ImpactedResourceStatus extends ProxyResource {
   /**
    * Properties of impacted resource status.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ImpactedResourceStatusProperties;
 }
 

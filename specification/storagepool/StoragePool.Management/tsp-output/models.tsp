@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -276,6 +278,7 @@ model DiskPoolCreate {
   /**
    * Properties for Disk Pool create request.
    */
+  @extension("x-ms-client-flatten", true)
   properties: DiskPoolCreateProperties;
 
   /**
@@ -362,6 +365,7 @@ model DiskPoolUpdate {
   /**
    * Properties for Disk Pool update request.
    */
+  @extension("x-ms-client-flatten", true)
   properties: DiskPoolUpdateProperties;
 
   /**
@@ -725,6 +729,7 @@ model IscsiTargetCreate extends ProxyResource {
   /**
    * Properties for iSCSI Target create request.
    */
+  @extension("x-ms-client-flatten", true)
   properties: IscsiTargetCreateProperties;
 
   /**
@@ -770,6 +775,7 @@ model IscsiTargetUpdate extends ProxyResource {
   /**
    * Properties for iSCSI Target update request.
    */
+  @extension("x-ms-client-flatten", true)
   properties: IscsiTargetUpdateProperties;
 
   /**

@@ -14,7 +14,11 @@ namespace Microsoft.Insights;
 /**
  * The diagnostic setting resource.
  */
-model DiagnosticSettingsResource is ExtensionResource<DiagnosticSettings> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DiagnosticSettings)
+@includeInapplicableMetadataInPayload(false)
+model DiagnosticSettingsResource extends ExtensionResourceBase {
   /**
    * The name of the diagnostic setting.
    */
@@ -22,6 +26,12 @@ model DiagnosticSettingsResource is ExtensionResource<DiagnosticSettings> {
   @key("name")
   @segment("diagnosticSettings")
   name: string;
+
+  /**
+   * Properties of a Diagnostic Settings Resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DiagnosticSettings;
 }
 
 @armResourceOperations

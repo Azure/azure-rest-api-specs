@@ -18,6 +18,7 @@ using TypeSpec.Versioning;
  * Help RP provider
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "HelpRP",
 })

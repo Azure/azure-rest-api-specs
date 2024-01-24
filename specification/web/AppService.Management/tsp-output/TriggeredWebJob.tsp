@@ -14,7 +14,11 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Triggered Web Job Information.
  */
-model TriggeredWebJob is ProxyResource<TriggeredWebJobProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(TriggeredWebJobProperties)
+@includeInapplicableMetadataInPayload(false)
+model TriggeredWebJob extends ProxyOnlyResource {
   /**
    * Name of Web Job.
    */
@@ -22,6 +26,12 @@ model TriggeredWebJob is ProxyResource<TriggeredWebJobProperties> {
   @key("webJobName")
   @segment("triggeredwebjobs")
   name: string;
+
+  /**
+   * TriggeredWebJob resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TriggeredWebJobProperties;
 }
 
 @armResourceOperations

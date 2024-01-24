@@ -14,8 +14,13 @@ namespace Microsoft.Communication;
 /**
  * A class representing a CommunicationService resource.
  */
-model CommunicationServiceResource
-  is TrackedResource<CommunicationServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  CommunicationServiceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model CommunicationServiceResource extends TrackedResourceBase {
   /**
    * The name of the CommunicationService resource.
    */
@@ -26,6 +31,12 @@ model CommunicationServiceResource
   @key("communicationServiceName")
   @segment("communicationServices")
   name: string;
+
+  /**
+   * The properties of the service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CommunicationServiceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

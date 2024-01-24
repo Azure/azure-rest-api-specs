@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
  * Microsoft Storage Sync Service API
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Microsoft Storage Sync",
 })

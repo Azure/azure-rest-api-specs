@@ -15,8 +15,12 @@ namespace Microsoft.CustomerInsights;
 /**
  * The WidgetTypeResourceFormat
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Hub)
-model WidgetTypeResourceFormat is ProxyResource<WidgetType> {
+@Azure.ResourceManager.Private.armResourceInternal(WidgetType)
+@includeInapplicableMetadataInPayload(false)
+model WidgetTypeResourceFormat extends ProxyResource {
   /**
    * The name of the widget type.
    */
@@ -24,6 +28,12 @@ model WidgetTypeResourceFormat is ProxyResource<WidgetType> {
   @key("widgetTypeName")
   @segment("widgetTypes")
   name: string;
+
+  /**
+   * Definition of WidgetType.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WidgetType;
 }
 
 @armResourceOperations

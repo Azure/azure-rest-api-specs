@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A stored credential that can be used by a job to connect to target databases.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(JobAgent)
-model JobCredential is ProxyResource<JobCredentialProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobCredentialProperties)
+@includeInapplicableMetadataInPayload(false)
+model JobCredential extends ProxyResource {
   /**
    * The name of the credential.
    */
@@ -24,6 +28,12 @@ model JobCredential is ProxyResource<JobCredentialProperties> {
   @key("credentialName")
   @segment("credentials")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobCredentialProperties;
 }
 
 @armResourceOperations

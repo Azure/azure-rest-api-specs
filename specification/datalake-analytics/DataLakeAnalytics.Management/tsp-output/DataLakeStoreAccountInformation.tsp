@@ -15,9 +15,14 @@ namespace Microsoft.DataLakeAnalytics;
 /**
  * Data Lake Store account information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataLakeAnalyticsAccount)
-model DataLakeStoreAccountInformation
-  is ProxyResource<DataLakeStoreAccountInformationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DataLakeStoreAccountInformationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DataLakeStoreAccountInformation extends ProxyResourceBase {
   /**
    * The name of the Data Lake Store account to retrieve
    */
@@ -25,6 +30,12 @@ model DataLakeStoreAccountInformation
   @key("dataLakeStoreAccountName")
   @segment("dataLakeStoreAccounts")
   name: string;
+
+  /**
+   * The Data Lake Store account properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataLakeStoreAccountInformationProperties;
 }
 
 @armResourceOperations

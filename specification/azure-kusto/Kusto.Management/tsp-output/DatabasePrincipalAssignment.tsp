@@ -15,9 +15,12 @@ namespace Microsoft.Kusto;
 /**
  * Class representing a database principal assignment.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model DatabasePrincipalAssignment
-  is ProxyResource<DatabasePrincipalProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DatabasePrincipalProperties)
+@includeInapplicableMetadataInPayload(false)
+model DatabasePrincipalAssignment extends ProxyResourceBase {
   /**
    * The name of the Kusto principalAssignment.
    */
@@ -26,6 +29,12 @@ model DatabasePrincipalAssignment
   @key("principalAssignmentName")
   @segment("principalAssignments")
   name: string;
+
+  /**
+   * The database principal.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DatabasePrincipalProperties;
 }
 
 @armResourceOperations

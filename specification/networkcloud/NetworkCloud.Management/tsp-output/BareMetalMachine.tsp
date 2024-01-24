@@ -14,7 +14,11 @@ namespace Microsoft.NetworkCloud;
 /**
  * BareMetalMachine represents the physical machine in the rack.
  */
-model BareMetalMachine is TrackedResource<BareMetalMachineProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(BareMetalMachineProperties)
+@includeInapplicableMetadataInPayload(false)
+model BareMetalMachine extends TrackedResourceBase {
   /**
    * The name of the bare metal machine.
    */
@@ -28,6 +32,12 @@ model BareMetalMachine is TrackedResource<BareMetalMachineProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: BareMetalMachineProperties;
 }
 
 @armResourceOperations
@@ -63,9 +73,10 @@ interface BareMetalMachines {
   /**
    * Cordon the provided bare metal machine's Kubernetes node.
    */
-  cordon is ArmResourceActionNoResponseContentAsync<
+  cordon is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineCordonParameters,
+    OperationStatusResult,
     BaseParameters<BareMetalMachine>,
     ArmLroLocationHeader
   >;
@@ -73,9 +84,10 @@ interface BareMetalMachines {
   /**
    * Power off the provided bare metal machine.
    */
-  powerOff is ArmResourceActionNoResponseContentAsync<
+  powerOff is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachinePowerOffParameters,
+    OperationStatusResult,
     BaseParameters<BareMetalMachine>,
     ArmLroLocationHeader
   >;
@@ -83,9 +95,10 @@ interface BareMetalMachines {
   /**
    * Reimage the provided bare metal machine.
    */
-  reimage is ArmResourceActionNoResponseContentAsync<
+  reimage is ArmResourceActionAsync<
     BareMetalMachine,
     void,
+    OperationStatusResult,
     BaseParameters<BareMetalMachine>,
     ArmLroLocationHeader
   >;
@@ -93,9 +106,10 @@ interface BareMetalMachines {
   /**
    * Replace the provided bare metal machine.
    */
-  replace is ArmResourceActionNoResponseContentAsync<
+  replace is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineReplaceParameters,
+    OperationStatusResult,
     BaseParameters<BareMetalMachine>,
     ArmLroLocationHeader
   >;
@@ -103,9 +117,10 @@ interface BareMetalMachines {
   /**
    * Restart the provided bare metal machine.
    */
-  restart is ArmResourceActionNoResponseContentAsync<
+  restart is ArmResourceActionAsync<
     BareMetalMachine,
     void,
+    OperationStatusResult,
     BaseParameters<BareMetalMachine>,
     ArmLroLocationHeader
   >;
@@ -113,9 +128,10 @@ interface BareMetalMachines {
   /**
    * Run the command or the script on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
-  runCommand is ArmResourceActionNoResponseContentAsync<
+  runCommand is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineRunCommandParameters,
+    OperationStatusResult,
     BaseParameters<BareMetalMachine>,
     ArmLroLocationHeader
   >;
@@ -123,9 +139,10 @@ interface BareMetalMachines {
   /**
    * Run one or more data extractions on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
-  runDataExtracts is ArmResourceActionNoResponseContentAsync<
+  runDataExtracts is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineRunDataExtractsParameters,
+    OperationStatusResult,
     BaseParameters<BareMetalMachine>,
     ArmLroLocationHeader
   >;
@@ -133,9 +150,10 @@ interface BareMetalMachines {
   /**
    * Run one or more read-only commands on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
    */
-  runReadCommands is ArmResourceActionNoResponseContentAsync<
+  runReadCommands is ArmResourceActionAsync<
     BareMetalMachine,
     BareMetalMachineRunReadCommandsParameters,
+    OperationStatusResult,
     BaseParameters<BareMetalMachine>,
     ArmLroLocationHeader
   >;
@@ -143,9 +161,10 @@ interface BareMetalMachines {
   /**
    * Start the provided bare metal machine.
    */
-  start is ArmResourceActionNoResponseContentAsync<
+  start is ArmResourceActionAsync<
     BareMetalMachine,
     void,
+    OperationStatusResult,
     BaseParameters<BareMetalMachine>,
     ArmLroLocationHeader
   >;
@@ -153,9 +172,10 @@ interface BareMetalMachines {
   /**
    * Uncordon the provided bare metal machine's Kubernetes node.
    */
-  uncordon is ArmResourceActionNoResponseContentAsync<
+  uncordon is ArmResourceActionAsync<
     BareMetalMachine,
     void,
+    OperationStatusResult,
     BaseParameters<BareMetalMachine>,
     ArmLroLocationHeader
   >;

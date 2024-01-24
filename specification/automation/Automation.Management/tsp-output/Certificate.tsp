@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the certificate.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model Certificate is ProxyResource<CertificateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
+@includeInapplicableMetadataInPayload(false)
+model Certificate extends ProxyResourceBase {
   /**
    * The name of certificate.
    */
@@ -24,6 +28,12 @@ model Certificate is ProxyResource<CertificateProperties> {
   @key("certificateName")
   @segment("certificates")
   name: string;
+
+  /**
+   * Gets or sets the properties of the certificate.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CertificateProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.Cdn;
 /**
  * A profile is a logical grouping of endpoints that share the same settings.
  */
-model Profile is TrackedResource<ProfileProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ProfileProperties)
+@includeInapplicableMetadataInPayload(false)
+model Profile extends TrackedResource {
   /**
    * Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.
    */
@@ -23,8 +27,22 @@ model Profile is TrackedResource<ProfileProperties> {
   @segment("profiles")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * The pricing tier (defines Azure Front Door Standard or Premium or a CDN provider, feature list and rate) of the profile.
+   */
+  sku: Sku;
+
+  /**
+   * Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * The JSON object that contains the properties required to create a profile.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProfileProperties;
 }
 
 @armResourceOperations

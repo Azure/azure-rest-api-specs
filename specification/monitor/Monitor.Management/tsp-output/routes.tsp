@@ -143,18 +143,18 @@ interface MetricsOperations {
       aggregation?: string;
 
       /**
-* The maximum number of records to retrieve.
-Valid only if $filter is specified.
-Defaults to 10.
-*/
+       * The maximum number of records to retrieve.
+       * Valid only if $filter is specified.
+       * Defaults to 10.
+       */
       @query("top")
       top?: int32;
 
       /**
-* The aggregation to use for sorting results and the direction of the sort.
-Only one order can be specified.
-Examples: sum asc.
-*/
+       * The aggregation to use for sorting results and the direction of the sort.
+       * Only one order can be specified.
+       * Examples: sum asc.
+       */
       @query("orderby")
       orderby?: string;
 
@@ -236,18 +236,18 @@ Examples: sum asc.
       aggregation?: string;
 
       /**
-* The maximum number of records to retrieve.
-Valid only if $filter is specified.
-Defaults to 10.
-*/
+       * The maximum number of records to retrieve.
+       * Valid only if $filter is specified.
+       * Defaults to 10.
+       */
       @query("top")
       top?: int32;
 
       /**
-* The aggregation to use for sorting results and the direction of the sort.
-Only one order can be specified.
-Examples: sum asc.
-*/
+       * The aggregation to use for sorting results and the direction of the sort.
+       * Only one order can be specified.
+       * Examples: sum asc.
+       */
       @query("orderby")
       orderby?: string;
 
@@ -328,18 +328,18 @@ Examples: sum asc.
       aggregation?: string;
 
       /**
-* The maximum number of records to retrieve.
-Valid only if $filter is specified.
-Defaults to 10.
-*/
+       * The maximum number of records to retrieve.
+       * Valid only if $filter is specified.
+       * Defaults to 10.
+       */
       @query("top")
       top?: int32;
 
       /**
-* The aggregation to use for sorting results and the direction of the sort.
-Only one order can be specified.
-Examples: sum asc.
-*/
+       * The aggregation to use for sorting results and the direction of the sort.
+       * Only one order can be specified.
+       * Examples: sum asc.
+       */
       @query("orderby")
       orderby?: string;
 

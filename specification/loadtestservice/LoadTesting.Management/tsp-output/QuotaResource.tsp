@@ -14,8 +14,12 @@ namespace Microsoft.LoadTestService;
 /**
  * Quota bucket details object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model QuotaResource is ProxyResource<QuotaResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(QuotaResourceProperties)
+@includeInapplicableMetadataInPayload(false)
+model QuotaResource extends ProxyResourceBase {
   /**
    * Quota Bucket name.
    */
@@ -23,6 +27,12 @@ model QuotaResource is ProxyResource<QuotaResourceProperties> {
   @key("quotaBucketName")
   @segment("quotas")
   name: string;
+
+  /**
+   * Quota bucket resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: QuotaResourceProperties;
 }
 
 @armResourceOperations

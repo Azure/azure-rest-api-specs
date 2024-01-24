@@ -23,6 +23,7 @@ using TypeSpec.Versioning;
  * Batch Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "BatchManagementClient",
 })

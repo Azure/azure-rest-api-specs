@@ -15,8 +15,12 @@ namespace Microsoft.Network;
 /**
  * Defines the properties of an Experiment
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Profile)
-model Experiment is TrackedResource<ExperimentProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ExperimentProperties)
+@includeInapplicableMetadataInPayload(false)
+model Experiment extends FrontDoorResourceModel {
   /**
    * The Experiment identifier associated with the Experiment
    */
@@ -25,6 +29,12 @@ model Experiment is TrackedResource<ExperimentProperties> {
   @key("experimentName")
   @segment("Experiments")
   name: string;
+
+  /**
+   * The properties of an Experiment
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ExperimentProperties;
 }
 
 @armResourceOperations

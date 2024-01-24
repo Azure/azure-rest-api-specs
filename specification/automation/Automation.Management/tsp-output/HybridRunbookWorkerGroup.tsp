@@ -15,9 +15,14 @@ namespace Microsoft.Automation;
 /**
  * Definition of hybrid runbook worker group.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model HybridRunbookWorkerGroup
-  is ProxyResource<HybridRunbookWorkerGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  HybridRunbookWorkerGroupProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model HybridRunbookWorkerGroup extends ProxyResourceBase {
   /**
    * The hybrid runbook worker group name
    */
@@ -25,6 +30,12 @@ model HybridRunbookWorkerGroup
   @key("hybridRunbookWorkerGroupName")
   @segment("hybridRunbookWorkerGroups")
   name: string;
+
+  /**
+   * Gets or sets the hybrid worker group properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: HybridRunbookWorkerGroupProperties;
 }
 
 @armResourceOperations

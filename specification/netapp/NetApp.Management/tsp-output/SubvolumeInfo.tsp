@@ -15,8 +15,12 @@ namespace Microsoft.NetApp;
 /**
  * Subvolume Information properties
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Volume)
-model SubvolumeInfo is ProxyResource<SubvolumeProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SubvolumeProperties)
+@includeInapplicableMetadataInPayload(false)
+model SubvolumeInfo extends ProxyResourceBase {
   /**
    * The name of the subvolume.
    */
@@ -27,6 +31,12 @@ model SubvolumeInfo is ProxyResource<SubvolumeProperties> {
   @key("subvolumeName")
   @segment("subvolumes")
   name: string;
+
+  /**
+   * Subvolume Properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SubvolumeProperties;
 }
 
 @armResourceOperations

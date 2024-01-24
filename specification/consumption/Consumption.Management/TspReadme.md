@@ -9,6 +9,7 @@ require: https://github.com/Azure/azure-rest-api-specs/blob/6b08774c89877269e73e
 skip-csproj: true
 modelerfour:
   flatten-payloads: false
+use-model-reader-writer: true
 
 request-path-is-non-resource:
   - /subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/default

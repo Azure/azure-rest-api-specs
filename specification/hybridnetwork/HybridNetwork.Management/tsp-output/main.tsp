@@ -27,6 +27,7 @@ using TypeSpec.Versioning;
  * The definitions in this swagger specification will be used to manage the Hybrid Network resources.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "HybridNetworkManagementClient",
 })

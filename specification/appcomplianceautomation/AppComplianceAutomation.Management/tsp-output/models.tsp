@@ -162,9 +162,9 @@ model ReportProperties {
   offerGuid?: string;
 
   /**
-* Report collection trigger time's time zone, the available list can be obtained by executing "Get-TimeZone -ListAvailable" in PowerShell.
-An example of valid timezone id is "Pacific Standard Time".
-*/
+   * Report collection trigger time's time zone, the available list can be obtained by executing "Get-TimeZone -ListAvailable" in PowerShell.
+   * An example of valid timezone id is "Pacific Standard Time".
+   */
   timeZone: string;
 
   /**

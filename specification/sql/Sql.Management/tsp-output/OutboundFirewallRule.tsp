@@ -15,12 +15,24 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL DB Server Outbound Firewall Rule.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model OutboundFirewallRule is ProxyResource<OutboundFirewallRuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  OutboundFirewallRuleProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model OutboundFirewallRule extends ProxyResource {
   @path
   @key("outboundRuleFqdn")
   @segment("outboundFirewallRules")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: OutboundFirewallRuleProperties;
 }
 
 @armResourceOperations

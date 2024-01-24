@@ -93,9 +93,9 @@ enum Reason {
  */
 model AccountProperties {
   /**
-* Cloud connectors.
-External cloud identifier used as part of scanning configuration.
-*/
+   * Cloud connectors.
+   * External cloud identifier used as part of scanning configuration.
+   */
   cloudConnectors?: CloudConnectors;
 
   /**
@@ -164,9 +164,9 @@ External cloud identifier used as part of scanning configuration.
  */
 model CloudConnectors {
   /**
-* AWS external identifier.
-Configured in AWS to allow use of the role arn used for scanning
-*/
+   * AWS external identifier.
+   * Configured in AWS to allow use of the role arn used for scanning
+   */
   @visibility("read")
   awsExternalId?: string;
 }
@@ -308,6 +308,23 @@ model Identity {
    * User Assigned Identities
    */
   userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
+ * Uses client ID and Principal ID
+ */
+model UserAssignedIdentity {
+  /**
+   * Gets or Sets Client ID
+   */
+  @visibility("read")
+  clientId?: string;
+
+  /**
+   * Gets or Sets Principal ID
+   */
+  @visibility("read")
+  principalId?: string;
 }
 
 /**
@@ -531,10 +548,10 @@ model OperationMetaMetricSpecification {
   resourceIdDimensionNameOverride?: string;
 
   /**
-* Metric namespace.
-Only set the namespace if different from the default value, 
-leaving it empty makes it use the value from the ARM manifest.
-*/
+   * Metric namespace.
+   * Only set the namespace if different from the default value,
+   * leaving it empty makes it use the value from the ARM manifest.
+   */
   sourceMdmNamespace?: string;
 
   /**

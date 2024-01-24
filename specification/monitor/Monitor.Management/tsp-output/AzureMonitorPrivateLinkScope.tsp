@@ -14,8 +14,13 @@ namespace Microsoft.Insights;
 /**
  * An Azure Monitor PrivateLinkScope definition.
  */
-model AzureMonitorPrivateLinkScope
-  is TrackedResource<AzureMonitorPrivateLinkScopeProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  AzureMonitorPrivateLinkScopeProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AzureMonitorPrivateLinkScope extends TrackedResourceBase {
   /**
    * The name of the Azure Monitor PrivateLinkScope resource.
    */
@@ -23,6 +28,12 @@ model AzureMonitorPrivateLinkScope
   @key("scopeName")
   @segment("privateLinkScopes")
   name: string;
+
+  /**
+   * Properties that define a Azure Monitor PrivateLinkScope resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: AzureMonitorPrivateLinkScopeProperties;
 }
 
 @armResourceOperations

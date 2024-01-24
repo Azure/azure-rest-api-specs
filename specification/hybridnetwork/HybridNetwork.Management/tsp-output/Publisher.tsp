@@ -14,7 +14,11 @@ namespace Microsoft.HybridNetwork;
 /**
  * publisher resource.
  */
-model Publisher is TrackedResource<PublisherPropertiesFormat> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(PublisherPropertiesFormat)
+@includeInapplicableMetadataInPayload(false)
+model Publisher extends TrackedResourceBase {
   /**
    * The name of the publisher.
    */
@@ -24,6 +28,12 @@ model Publisher is TrackedResource<PublisherPropertiesFormat> {
   @key("publisherName")
   @segment("publishers")
   name: string;
+
+  /**
+   * Publisher properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PublisherPropertiesFormat;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

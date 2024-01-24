@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
  * The Azure Storage Mover REST API.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "StorageMoverClient",
 })

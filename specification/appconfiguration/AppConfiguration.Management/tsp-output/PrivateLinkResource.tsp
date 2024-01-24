@@ -15,8 +15,14 @@ namespace Microsoft.AppConfiguration;
 /**
  * A resource that supports private link capabilities.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ConfigurationStore)
-model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateLinkResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateLinkResource extends ProxyResourceBase {
   /**
    * The name of the private link resource group.
    */
@@ -24,6 +30,12 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   @key("groupName")
   @segment("privateLinkResources")
   name: string;
+
+  /**
+   * Private link resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateLinkResourceProperties;
 }
 
 @armResourceOperations

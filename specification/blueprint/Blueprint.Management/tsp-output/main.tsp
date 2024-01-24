@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
  * Blueprint Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "BlueprintManagementClient",
 })

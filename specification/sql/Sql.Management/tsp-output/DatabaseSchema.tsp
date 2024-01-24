@@ -16,8 +16,12 @@ namespace Microsoft.Sql;
 /**
  * A database schema resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model DatabaseSchema is ProxyResource<{}> {
+@Azure.ResourceManager.Private.armResourceInternal({})
+@includeInapplicableMetadataInPayload(false)
+model DatabaseSchema extends ProxyResource {
   /**
    * The name of the schema.
    */
@@ -25,6 +29,10 @@ model DatabaseSchema is ProxyResource<{}> {
   @key("schemaName")
   @segment("schemas")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties?: {};
 }
 
 @armResourceOperations

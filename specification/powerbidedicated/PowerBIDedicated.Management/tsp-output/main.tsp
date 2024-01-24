@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
  * PowerBI Dedicated Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Power BI dedicated capacities
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "PowerBIDedicated",
 })

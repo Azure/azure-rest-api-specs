@@ -15,8 +15,12 @@ namespace Microsoft.AppComplianceAutomation;
 /**
  * A class represent a AppComplianceAutomation snapshot resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ReportResource)
-model SnapshotResource is ProxyResource<SnapshotProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SnapshotProperties)
+@includeInapplicableMetadataInPayload(false)
+model SnapshotResource extends ProxyResourceBase {
   /**
    * Snapshot Name.
    */
@@ -24,6 +28,12 @@ model SnapshotResource is ProxyResource<SnapshotProperties> {
   @key("snapshotName")
   @segment("snapshots")
   name: string;
+
+  /**
+   * Snapshot's property'.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SnapshotProperties;
 }
 
 @armResourceOperations

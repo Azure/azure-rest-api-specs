@@ -14,7 +14,11 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The IP Community resource definition.
  */
-model IpCommunity is TrackedResource<IpCommunityProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(IpCommunityProperties)
+@includeInapplicableMetadataInPayload(false)
+model IpCommunity extends TrackedResourceBase {
   /**
    * Name of the IP Community.
    */
@@ -22,6 +26,12 @@ model IpCommunity is TrackedResource<IpCommunityProperties> {
   @key("ipCommunityName")
   @segment("ipCommunities")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: IpCommunityProperties;
 }
 
 @armResourceOperations

@@ -13,8 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ProviderHub;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ResourceTypeRegistration)
-model SkuResource is ProxyResource<ResourceTypeSku> {
+@Azure.ResourceManager.Private.armResourceInternal(ResourceTypeSku)
+@includeInapplicableMetadataInPayload(false)
+model SkuResource extends ProxyResourceBase {
   /**
    * The SKU.
    */
@@ -22,6 +26,9 @@ model SkuResource is ProxyResource<ResourceTypeSku> {
   @key("sku")
   @segment("skus")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: ResourceTypeSku;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.Migrate;
 /**
  * Defines the move resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MoveCollection)
-model MoveResource is ProxyResource<MoveResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MoveResourceProperties)
+@includeInapplicableMetadataInPayload(false)
+model MoveResource extends ProxyResourceBase {
   /**
    * The Move Resource Name.
    */
@@ -24,6 +28,12 @@ model MoveResource is ProxyResource<MoveResourceProperties> {
   @key("moveResourceName")
   @segment("moveResources")
   name: string;
+
+  /**
+   * Defines the move resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MoveResourceProperties;
 }
 
 @armResourceOperations

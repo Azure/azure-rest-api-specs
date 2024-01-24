@@ -14,7 +14,11 @@ namespace Microsoft.StoragePool;
 /**
  * Response for Disk Pool request.
  */
-model DiskPool is TrackedResource<DiskPoolProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DiskPoolProperties)
+@includeInapplicableMetadataInPayload(false)
+model DiskPool extends TrackedResource {
   /**
    * The name of the Disk Pool.
    */
@@ -24,13 +28,27 @@ model DiskPool is TrackedResource<DiskPoolProperties> {
   name: string;
 
   /**
+   * Determines the SKU of the Disk pool
+   */
+  sku?: Sku;
+
+  /**
+   * Azure resource id. Indicates if this resource is managed by another Azure resource.
+   */
+  @visibility("read")
+  managedBy?: string;
+
+  /**
    * List of Azure resource ids that manage this resource.
    */
   @visibility("read")
   managedByExtended?: string[];
 
-  ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ManagedBy;
+  /**
+   * Properties of Disk Pool.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DiskPoolProperties;
 }
 
 @armResourceOperations

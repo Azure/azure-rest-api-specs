@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
  * Service Fabric Management Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ServiceFabricManagementClient",
 })

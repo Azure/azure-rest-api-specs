@@ -14,7 +14,11 @@ namespace Microsoft.EdgeOrder;
 /**
  * Address Resource.
  */
-model AddressResource is TrackedResource<AddressProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AddressProperties)
+@includeInapplicableMetadataInPayload(false)
+model AddressResource extends TrackedResourceBase {
   /**
    * The name of the address Resource within the specified resource group. address names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
    */
@@ -25,6 +29,12 @@ model AddressResource is TrackedResource<AddressProperties> {
   @key("addressName")
   @segment("addresses")
   name: string;
+
+  /**
+   * Properties of an address.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: AddressProperties;
 }
 
 @armResourceOperations

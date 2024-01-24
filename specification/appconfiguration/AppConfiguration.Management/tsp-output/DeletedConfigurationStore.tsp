@@ -14,9 +14,14 @@ namespace Microsoft.AppConfiguration;
 /**
  * Deleted configuration store information with extended details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model DeletedConfigurationStore
-  is ProxyResource<DeletedConfigurationStoreProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DeletedConfigurationStoreProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DeletedConfigurationStore extends ProxyResourceBase {
   /**
    * The name of the configuration store.
    */
@@ -27,6 +32,12 @@ model DeletedConfigurationStore
   @key("configStoreName")
   @segment("deletedConfigurationStores")
   name: string;
+
+  /**
+   * Properties of the deleted configuration store
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeletedConfigurationStoreProperties;
 }
 
 @armResourceOperations

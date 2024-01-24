@@ -15,8 +15,12 @@ namespace Microsoft.MobileNetwork;
 /**
  * SIM policy resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MobileNetwork)
-model SimPolicy is TrackedResource<SimPolicyPropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(SimPolicyPropertiesFormat)
+@includeInapplicableMetadataInPayload(false)
+model SimPolicy extends TrackedResourceBase {
   /**
    * The name of the SIM policy.
    */
@@ -26,6 +30,12 @@ model SimPolicy is TrackedResource<SimPolicyPropertiesFormat> {
   @key("simPolicyName")
   @segment("simPolicies")
   name: string;
+
+  /**
+   * SIM policy Properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: SimPolicyPropertiesFormat;
 }
 
 @armResourceOperations

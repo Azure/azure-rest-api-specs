@@ -15,8 +15,12 @@ namespace Microsoft.Orbital;
 /**
  * Customer creates a contact resource for a spacecraft resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Spacecraft)
-model Contact is ProxyResource<ContactsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ContactsProperties)
+@includeInapplicableMetadataInPayload(false)
+model Contact extends ProxyResourceBase {
   /**
    * Contact name.
    */
@@ -30,6 +34,12 @@ model Contact is ProxyResource<ContactsProperties> {
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * Properties of the Contact Resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ContactsProperties;
 }
 
 @armResourceOperations

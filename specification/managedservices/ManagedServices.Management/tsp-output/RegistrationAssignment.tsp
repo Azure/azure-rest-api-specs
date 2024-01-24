@@ -14,8 +14,13 @@ namespace Microsoft.ManagedServices;
 /**
  * The registration assignment.
  */
-model RegistrationAssignment
-  is ExtensionResource<RegistrationAssignmentProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  RegistrationAssignmentProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model RegistrationAssignment extends ExtensionResourceBase {
   /**
    * The GUID of the registration assignment.
    */
@@ -23,6 +28,12 @@ model RegistrationAssignment
   @key("registrationAssignmentId")
   @segment("registrationAssignments")
   name: string;
+
+  /**
+   * The properties of a registration assignment.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RegistrationAssignmentProperties;
 }
 
 @armResourceOperations

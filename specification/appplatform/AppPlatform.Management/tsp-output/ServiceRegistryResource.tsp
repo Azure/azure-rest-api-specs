@@ -15,8 +15,12 @@ namespace Microsoft.AppPlatform;
 /**
  * Service Registry resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-model ServiceRegistryResource is ProxyResource<ServiceRegistryProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ServiceRegistryProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServiceRegistryResource extends ProxyResource {
   /**
    * The name of Service Registry.
    */
@@ -24,6 +28,12 @@ model ServiceRegistryResource is ProxyResource<ServiceRegistryProperties> {
   @key("serviceRegistryName")
   @segment("serviceRegistries")
   name: string;
+
+  /**
+   * Service Registry properties payload
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServiceRegistryProperties;
 }
 
 @armResourceOperations

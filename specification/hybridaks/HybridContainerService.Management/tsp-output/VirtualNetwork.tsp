@@ -14,7 +14,11 @@ namespace Microsoft.HybridContainerService;
 /**
  * The Virtual Network resource definition.
  */
-model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualNetwork extends TrackedResourceBase {
   /**
    * Parameter for the name of the virtual network
    */
@@ -30,6 +34,12 @@ model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
    * Extended location pointing to the underlying infrastructure
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties of the virtual network resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualNetworkProperties;
 }
 
 @armResourceOperations

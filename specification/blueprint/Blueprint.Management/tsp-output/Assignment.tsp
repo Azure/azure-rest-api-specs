@@ -14,7 +14,11 @@ namespace Microsoft.Blueprint;
 /**
  * Represents a blueprint assignment.
  */
-model Assignment is ExtensionResource<AssignmentProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AssignmentProperties)
+@includeInapplicableMetadataInPayload(false)
+model Assignment extends ExtensionResourceBase {
   /**
    * Name of the blueprint assignment.
    */
@@ -22,6 +26,12 @@ model Assignment is ExtensionResource<AssignmentProperties> {
   @key("assignmentName")
   @segment("blueprintAssignments")
   name: string;
+
+  /**
+   * Properties for blueprint assignment object.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: AssignmentProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

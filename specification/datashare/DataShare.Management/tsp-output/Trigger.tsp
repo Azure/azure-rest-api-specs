@@ -16,8 +16,12 @@ namespace Microsoft.DataShare;
 /**
  * A Trigger data transfer object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ShareSubscription)
-model Trigger is ProxyResource<{}> {
+@Azure.ResourceManager.Private.armResourceInternal({})
+@includeInapplicableMetadataInPayload(false)
+model Trigger extends ProxyDto {
   /**
    * The name of the trigger.
    */
@@ -26,7 +30,14 @@ model Trigger is ProxyResource<{}> {
   @segment("triggers")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Kind of synchronization on trigger.
+   */
+  kind: TriggerKind;
+
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties?: {};
 }
 
 @armResourceOperations

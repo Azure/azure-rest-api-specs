@@ -15,8 +15,12 @@ namespace Microsoft.HealthcareApis;
 /**
  * IoT Connector FHIR destination definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IotConnector)
-model IotFhirDestination is ProxyResource<IotFhirDestinationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(IotFhirDestinationProperties)
+@includeInapplicableMetadataInPayload(false)
+model IotFhirDestination extends ProxyResourceBase {
   /**
    * The name of IoT Connector FHIR destination resource.
    */
@@ -26,6 +30,12 @@ model IotFhirDestination is ProxyResource<IotFhirDestinationProperties> {
   @key("fhirDestinationName")
   @segment("fhirdestinations")
   name: string;
+
+  /**
+   * IoT FHIR Destination settings.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: IotFhirDestinationProperties;
 }
 
 @armResourceOperations

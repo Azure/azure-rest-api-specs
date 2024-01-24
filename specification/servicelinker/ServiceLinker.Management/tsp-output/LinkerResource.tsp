@@ -14,7 +14,11 @@ namespace Microsoft.ServiceLinker;
 /**
  * Linker of source and target resource
  */
-model LinkerResource is ExtensionResource<LinkerProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(LinkerProperties)
+@includeInapplicableMetadataInPayload(false)
+model LinkerResource extends ExtensionResourceBase {
   /**
    * The name Linker resource.
    */
@@ -22,6 +26,12 @@ model LinkerResource is ExtensionResource<LinkerProperties> {
   @key("linkerName")
   @segment("linkers")
   name: string;
+
+  /**
+   * The properties of the linker.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LinkerProperties;
 }
 
 @armResourceOperations

@@ -8,8 +8,9 @@ require: https://github.com/Azure/azure-rest-api-specs/blob/765b345bc5f1acecc0b1
 skip-csproj: true
 modelerfour:
   flatten-payloads: false
+use-model-reader-writer: true
 
-# mgmt-debug: 
+# mgmt-debug:
 #  show-serialized-names: true
 
 format-by-name-rules:

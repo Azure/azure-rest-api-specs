@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual network.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualNetwork extends Resource {
   /**
    * The name of the virtual network.
    */
@@ -24,6 +28,12 @@ model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
   @key("name")
   @segment("virtualnetworks")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualNetworkProperties;
 }
 
 @armResourceOperations

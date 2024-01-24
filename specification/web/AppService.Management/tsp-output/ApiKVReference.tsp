@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Description of site key vault references.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model ApiKVReference is ProxyResource<ApiKVReferenceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ApiKVReferenceProperties)
+@includeInapplicableMetadataInPayload(false)
+model ApiKVReference extends ProxyOnlyResource {
   /**
    * App Setting key name.
    */
@@ -24,6 +28,12 @@ model ApiKVReference is ProxyResource<ApiKVReferenceProperties> {
   @key("appSettingKey")
   @segment("appsettings")
   name: string;
+
+  /**
+   * ApiKVReference resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApiKVReferenceProperties;
 }
 
 @armResourceOperations

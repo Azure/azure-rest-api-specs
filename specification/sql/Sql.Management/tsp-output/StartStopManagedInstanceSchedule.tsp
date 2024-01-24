@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * Managed instance's Start/Stop schedule.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model StartStopManagedInstanceSchedule
-  is ProxyResource<StartStopManagedInstanceScheduleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  StartStopManagedInstanceScheduleProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model StartStopManagedInstanceSchedule extends ProxyResource {
   /**
    * Name of the managed instance Start/Stop schedule.
    */
@@ -25,6 +30,12 @@ model StartStopManagedInstanceSchedule
   @key("startStopScheduleName")
   @segment("startStopSchedules")
   name: StartStopScheduleName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StartStopManagedInstanceScheduleProperties;
 }
 
 @armResourceOperations

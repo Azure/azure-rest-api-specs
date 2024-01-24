@@ -12,7 +12,11 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DataProtection;
 
-model ResourceGuardResource is TrackedResource<ResourceGuard> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ResourceGuard)
+@includeInapplicableMetadataInPayload(false)
+model ResourceGuardResource extends TrackedResourceBase {
   /**
    * The name of ResourceGuard
    */
@@ -20,6 +24,12 @@ model ResourceGuardResource is TrackedResource<ResourceGuard> {
   @key("resourceGuardsName")
   @segment("resourceGuards")
   name: string;
+
+  /**
+   * ResourceGuardResource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ResourceGuard;
 }
 
 @armResourceOperations

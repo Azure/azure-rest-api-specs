@@ -15,8 +15,12 @@ namespace Microsoft.HybridNetwork;
 /**
  * The component sub resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetworkFunction)
-model Component is ProxyResource<ComponentProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ComponentProperties)
+@includeInapplicableMetadataInPayload(false)
+model Component extends ProxyResourceBase {
   /**
    * The name of the component.
    */
@@ -26,6 +30,12 @@ model Component is ProxyResource<ComponentProperties> {
   @key("componentName")
   @segment("components")
   name: string;
+
+  /**
+   * The component properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ComponentProperties;
 }
 
 @armResourceOperations

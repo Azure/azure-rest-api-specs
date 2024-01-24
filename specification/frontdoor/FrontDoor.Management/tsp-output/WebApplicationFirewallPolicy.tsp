@@ -14,8 +14,13 @@ namespace Microsoft.Network;
 /**
  * Defines web application firewall policy.
  */
-model WebApplicationFirewallPolicy
-  is TrackedResource<WebApplicationFirewallPolicyProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  WebApplicationFirewallPolicyProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WebApplicationFirewallPolicy extends FrontDoorResourceModel {
   /**
    * The name of the Web Application Firewall Policy.
    */
@@ -30,7 +35,16 @@ model WebApplicationFirewallPolicy
    */
   etag?: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.
+   */
+  sku?: Sku;
+
+  /**
+   * Properties of the web application firewall policy.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WebApplicationFirewallPolicyProperties;
 }
 
 @armResourceOperations

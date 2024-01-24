@@ -15,9 +15,14 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Static Site Build ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StaticSiteARMResource)
-model StaticSiteBuildARMResource
-  is ProxyResource<StaticSiteBuildARMResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  StaticSiteBuildARMResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model StaticSiteBuildARMResource extends ProxyOnlyResource {
   /**
    * The stage site identifier.
    */
@@ -25,6 +30,12 @@ model StaticSiteBuildARMResource
   @key("environmentName")
   @segment("builds")
   name: string;
+
+  /**
+   * StaticSiteBuildARMResource resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StaticSiteBuildARMResourceProperties;
 }
 
 @armResourceOperations

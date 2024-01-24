@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -607,9 +609,9 @@ model ClusterConfigFile {
   path?: string;
 
   /**
-* List of key value pairs
-where key represents a valid service configuration name and value represents the value of the config.
-*/
+   * List of key value pairs
+   * where key represents a valid service configuration name and value represents the value of the config.
+   */
   values?: Record<string>;
 }
 
@@ -936,6 +938,7 @@ model TrinoCoordinator {
   /**
    * Trino debug configuration.
    */
+  @extension("x-ms-client-flatten", true)
   debug?: TrinoDebugConfig;
 
   /**
@@ -1041,6 +1044,7 @@ model TrinoWorker {
   /**
    * Trino debug configuration.
    */
+  @extension("x-ms-client-flatten", true)
   debug?: TrinoDebugConfig;
 }
 
@@ -1265,6 +1269,7 @@ model ClusterResizeData extends TrackedResource {
   /**
    * Sets the properties. Define cluster resize specific properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterResizeProperties;
 }
 
@@ -1285,6 +1290,7 @@ model ClusterPatch extends TrackedResource {
   /**
    * Define cluster patch specific properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterPatchProperties;
 }
 
@@ -1371,6 +1377,7 @@ model ServiceConfigResult {
   /**
    * Cluster instance service config properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ServiceConfigResultProperties;
 }
 
@@ -1491,6 +1498,7 @@ model ClusterInstanceViewResult {
   /**
    * Properties of the instance view.
    */
+  @extension("x-ms-client-flatten", true)
   properties: ClusterInstanceViewResultProperties;
 }
 
@@ -1567,6 +1575,7 @@ model ClusterPoolVersion extends ProxyResource {
   /**
    * Cluster pool version properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterPoolVersionProperties;
 }
 
@@ -1603,6 +1612,7 @@ model ClusterVersion extends ProxyResource {
   /**
    * Cluster version properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterVersionProperties;
 }
 

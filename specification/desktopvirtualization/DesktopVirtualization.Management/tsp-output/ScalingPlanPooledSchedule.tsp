@@ -15,9 +15,14 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a ScalingPlanPooledSchedule definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ScalingPlan)
-model ScalingPlanPooledSchedule
-  is ProxyResource<ScalingPlanPooledScheduleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ScalingPlanPooledScheduleProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ScalingPlanPooledSchedule extends ProxyResourceBase {
   /**
    * The name of the ScalingPlanSchedule
    */
@@ -27,6 +32,12 @@ model ScalingPlanPooledSchedule
   @key("scalingPlanScheduleName")
   @segment("pooledSchedules")
   name: string;
+
+  /**
+   * Detailed properties for ScalingPlanPooledSchedule
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ScalingPlanPooledScheduleProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,14 @@ namespace Microsoft.ContainerService;
 /**
  * Agent Pool.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedCluster)
-model AgentPool is ProxyResource<ManagedClusterAgentPoolProfileProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedClusterAgentPoolProfileProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AgentPool extends ProxyResourceBase {
   /**
    * The name of the agent pool.
    */
@@ -27,6 +33,12 @@ model AgentPool is ProxyResource<ManagedClusterAgentPoolProfileProperties> {
   @key("agentPoolName")
   @segment("agentPools")
   name: string;
+
+  /**
+   * Properties of an agent pool.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedClusterAgentPoolProfileProperties;
 }
 
 @armResourceOperations

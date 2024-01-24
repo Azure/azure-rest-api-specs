@@ -14,7 +14,11 @@ namespace Microsoft.DataBox;
 /**
  * Job Resource.
  */
-model JobResource is TrackedResource<JobProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
+@includeInapplicableMetadataInPayload(false)
+model JobResource extends Resource {
   /**
    * The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only
    */
@@ -25,6 +29,12 @@ model JobResource is TrackedResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   name: string;
+
+  /**
+   * Properties of a job.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: JobProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.CustomerInsights;
 /**
  * The KPI resource format.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Hub)
-model KpiResourceFormat is ProxyResource<KpiDefinition> {
+@Azure.ResourceManager.Private.armResourceInternal(KpiDefinition)
+@includeInapplicableMetadataInPayload(false)
+model KpiResourceFormat extends ProxyResource {
   /**
    * The name of the KPI.
    */
@@ -24,6 +28,12 @@ model KpiResourceFormat is ProxyResource<KpiDefinition> {
   @key("kpiName")
   @segment("kpi")
   name: string;
+
+  /**
+   * Defines the KPI Threshold limits.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: KpiDefinition;
 }
 
 @armResourceOperations

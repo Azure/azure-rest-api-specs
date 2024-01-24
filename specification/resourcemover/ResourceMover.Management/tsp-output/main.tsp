@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
  * A first party Azure service orchestrating the move of Azure resources from one Azure region to another or between zones within a region.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Resource Mover Service API",
 })

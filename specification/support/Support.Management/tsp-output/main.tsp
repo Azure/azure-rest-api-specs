@@ -27,6 +27,7 @@ using TypeSpec.Versioning;
  * Microsoft Azure Support Resource Provider.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Microsoft.Support",
 })

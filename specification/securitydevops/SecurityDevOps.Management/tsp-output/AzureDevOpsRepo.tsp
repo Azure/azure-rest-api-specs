@@ -15,8 +15,12 @@ namespace Microsoft.SecurityDevOps;
 /**
  * Azure DevOps Repo Proxy Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AzureDevOpsProject)
-model AzureDevOpsRepo is ProxyResource<AzureDevOpsRepoProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AzureDevOpsRepoProperties)
+@includeInapplicableMetadataInPayload(false)
+model AzureDevOpsRepo extends ProxyResourceBase {
   /**
    * Name of the AzureDevOps Repo.
    */
@@ -24,6 +28,12 @@ model AzureDevOpsRepo is ProxyResource<AzureDevOpsRepoProperties> {
   @key("azureDevOpsRepoName")
   @segment("repos")
   name: string;
+
+  /**
+   * AzureDevOps Repo properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AzureDevOpsRepoProperties;
 }
 
 @armResourceOperations

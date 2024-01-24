@@ -14,7 +14,11 @@ namespace Microsoft.StorageMover;
 /**
  * The Storage Mover resource, which is a container for a group of Agents, Projects, and Endpoints.
  */
-model StorageMover is TrackedResource<StorageMoverProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(StorageMoverProperties)
+@includeInapplicableMetadataInPayload(false)
+model StorageMover extends TrackedResourceBase {
   /**
    * The name of the Storage Mover resource.
    */
@@ -22,6 +26,12 @@ model StorageMover is TrackedResource<StorageMoverProperties> {
   @key("storageMoverName")
   @segment("storageMovers")
   name: string;
+
+  /**
+   * The resource specific properties for the Storage Mover resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StorageMoverProperties;
 }
 
 @armResourceOperations

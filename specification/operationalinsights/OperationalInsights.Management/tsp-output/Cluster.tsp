@@ -14,7 +14,11 @@ namespace Microsoft.OperationalInsights;
 /**
  * The top level Log Analytics cluster resource container.
  */
-model Cluster is TrackedResource<ClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cluster extends TrackedResourceBase {
   /**
    * Name of the Log Analytics Cluster.
    */
@@ -22,6 +26,12 @@ model Cluster is TrackedResource<ClusterProperties> {
   @key("clusterName")
   @segment("clusters")
   name: string;
+
+  /**
+   * Log Analytics cluster properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;

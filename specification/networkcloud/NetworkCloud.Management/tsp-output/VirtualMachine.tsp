@@ -14,7 +14,11 @@ namespace Microsoft.NetworkCloud;
 /**
  * VirtualMachine represents the on-premises Network Cloud virtual machine.
  */
-model VirtualMachine is TrackedResource<VirtualMachineProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(VirtualMachineProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachine extends TrackedResourceBase {
   /**
    * The name of the virtual machine.
    */
@@ -28,6 +32,12 @@ model VirtualMachine is TrackedResource<VirtualMachineProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: VirtualMachineProperties;
 }
 
 @armResourceOperations
@@ -81,9 +91,10 @@ interface VirtualMachines {
   /**
    * Power off the provided virtual machine.
    */
-  powerOff is ArmResourceActionNoResponseContentAsync<
+  powerOff is ArmResourceActionAsync<
     VirtualMachine,
     VirtualMachinePowerOffParameters,
+    OperationStatusResult,
     BaseParameters<VirtualMachine>,
     ArmLroLocationHeader
   >;
@@ -91,9 +102,10 @@ interface VirtualMachines {
   /**
    * Reimage the provided virtual machine.
    */
-  reimage is ArmResourceActionNoResponseContentAsync<
+  reimage is ArmResourceActionAsync<
     VirtualMachine,
     void,
+    OperationStatusResult,
     BaseParameters<VirtualMachine>,
     ArmLroLocationHeader
   >;
@@ -101,9 +113,10 @@ interface VirtualMachines {
   /**
    * Restart the provided virtual machine.
    */
-  restart is ArmResourceActionNoResponseContentAsync<
+  restart is ArmResourceActionAsync<
     VirtualMachine,
     void,
+    OperationStatusResult,
     BaseParameters<VirtualMachine>,
     ArmLroLocationHeader
   >;
@@ -111,9 +124,10 @@ interface VirtualMachines {
   /**
    * Start the provided virtual machine.
    */
-  start is ArmResourceActionNoResponseContentAsync<
+  start is ArmResourceActionAsync<
     VirtualMachine,
     void,
+    OperationStatusResult,
     BaseParameters<VirtualMachine>,
     ArmLroLocationHeader
   >;

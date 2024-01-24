@@ -15,9 +15,14 @@ namespace Microsoft.DeviceUpdate;
 /**
  * Private endpoint connection proxy details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-model PrivateEndpointConnectionProxy
-  is ProxyResource<PrivateEndpointConnectionProxyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateEndpointConnectionProxyProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnectionProxy extends ProxyResourceBase {
   /**
    * The ID of the private endpoint connection proxy object.
    */
@@ -25,6 +30,12 @@ model PrivateEndpointConnectionProxy
   @key("privateEndpointConnectionProxyId")
   @segment("privateEndpointConnectionProxies")
   name: string;
+
+  /**
+   * Private endpoint connection proxy object property bag.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateEndpointConnectionProxyProperties;
 }
 
 @armResourceOperations

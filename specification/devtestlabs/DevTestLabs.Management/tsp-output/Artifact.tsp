@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * An artifact.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ArtifactSource)
-model Artifact is TrackedResource<ArtifactProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ArtifactProperties)
+@includeInapplicableMetadataInPayload(false)
+model Artifact extends Resource {
   /**
    * The name of the artifact.
    */
@@ -24,6 +28,12 @@ model Artifact is TrackedResource<ArtifactProperties> {
   @key("name")
   @segment("artifacts")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ArtifactProperties;
 }
 
 @armResourceOperations

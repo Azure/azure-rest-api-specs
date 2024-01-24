@@ -14,7 +14,11 @@ namespace Microsoft.ConnectedVMwarevSphere;
 /**
  * Define the datastore.
  */
-model Datastore is TrackedResource<DatastoreProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DatastoreProperties)
+@includeInapplicableMetadataInPayload(false)
+model Datastore extends TrackedResourceBase {
   /**
    * Name of the datastore.
    */
@@ -28,7 +32,16 @@ model Datastore is TrackedResource<DatastoreProperties> {
    */
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.
+   */
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DatastoreProperties;
 }
 
 @armResourceOperations

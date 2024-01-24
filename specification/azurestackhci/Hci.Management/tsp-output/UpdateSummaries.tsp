@@ -15,12 +15,22 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Get the update summaries for the cluster
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(Cluster)
-model UpdateSummaries is ProxyResource<UpdateSummariesProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(UpdateSummariesProperties)
+@includeInapplicableMetadataInPayload(false)
+model UpdateSummaries extends ProxyResourceBase {
   @key("updateSummary")
   @segment("updateSummaries")
   name: string;
+
+  /**
+   * Update summaries properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: UpdateSummariesProperties;
 }
 
 @armResourceOperations

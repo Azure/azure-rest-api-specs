@@ -14,7 +14,11 @@ namespace Microsoft.NetworkCloud;
 /**
  * Cluster represents the on-premises Network Cloud cluster.
  */
-model Cluster is TrackedResource<ClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cluster extends TrackedResourceBase {
   /**
    * The name of the cluster.
    */
@@ -28,6 +32,12 @@ model Cluster is TrackedResource<ClusterProperties> {
    * The extended location of the cluster manager associated with the cluster.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ClusterProperties;
 }
 
 @armResourceOperations
@@ -81,9 +91,10 @@ interface Clusters {
   /**
    * Deploy the cluster to the provided rack.
    */
-  deploy is ArmResourceActionNoResponseContentAsync<
+  deploy is ArmResourceActionAsync<
     Cluster,
     ClusterDeployParameters,
+    OperationStatusResult,
     BaseParameters<Cluster>,
     ArmLroLocationHeader
   >;
@@ -91,9 +102,10 @@ interface Clusters {
   /**
    * Update the version of the provided cluster to one of the available supported versions.
    */
-  updateVersion is ArmResourceActionNoResponseContentAsync<
+  updateVersion is ArmResourceActionAsync<
     Cluster,
     ClusterUpdateVersionParameters,
+    OperationStatusResult,
     BaseParameters<Cluster>,
     ArmLroLocationHeader
   >;

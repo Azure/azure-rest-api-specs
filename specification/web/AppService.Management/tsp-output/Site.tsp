@@ -14,7 +14,11 @@ namespace Microsoft.CertificateRegistration;
 /**
  * A web app, a mobile app backend, or an API app.
  */
-model Site is TrackedResource<SiteProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(SiteProperties)
+@includeInapplicableMetadataInPayload(false)
+model Site extends Resource {
   /**
    * Name of the app.
    */
@@ -24,11 +28,20 @@ model Site is TrackedResource<SiteProperties> {
   name: string;
 
   /**
+   * Managed service identity.
+   */
+  identity?: ManagedServiceIdentity;
+
+  /**
    * Extended Location.
    */
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  /**
+   * Site resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SiteProperties;
 }
 
 @armResourceOperations

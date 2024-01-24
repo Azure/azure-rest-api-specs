@@ -18,7 +18,11 @@ namespace Microsoft.Sql;
 * A database resource.
 */
 @parentResource(Server)
-model Database is TrackedResource<DatabaseProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DatabaseProperties)
+@includeInapplicableMetadataInPayload(false)
+model Database extends TrackedResource {
 /**
 * The name of the database.
 */
@@ -26,14 +30,41 @@ model Database is TrackedResource<DatabaseProperties> {
 @key("databaseName")
 @segment("databases")
 "name": string;
-
-...Azure.ResourceManager.ManagedServiceIdentity
-
-...Azure.ResourceManager.ResourceSku
-
-...Azure.ResourceManager.ResourceKind
-
-...Azure.ResourceManager.ManagedBy
+/**
+* The database SKU.
+* 
+* The list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or one of the following commands:
+* 
+* ```azurecli
+* az sql db list-editions -l <location> -o table
+* ````
+* 
+* ```powershell
+* Get-AzSqlServerServiceObjective -Location <location>
+* ````
+* 
+*/
+"sku"?: Sku;
+/**
+* Kind of database. This is metadata used for the Azure portal experience.
+*/
+@visibility("read")
+"kind"?: string;
+/**
+* Resource that manages the database.
+*/
+@visibility("read")
+"managedBy"?: string;
+/**
+* The Azure Active Directory identity of the database.
+*/
+@visibility("read", "create")
+"identity"?: DatabaseIdentity;
+/**
+* Resource properties.
+*/
+@extension("x-ms-client-flatten", true)
+properties?: DatabaseProperties
 }
 
 
@@ -44,12 +75,12 @@ interface Databases {
 * Gets a database.
 */
 get is ArmResourceRead<Database,{
-    ...BaseParameters<Database>,
+    ...BaseParameters<Database>;
     /**
 * The child resources to include in the response.
 */
 @query("$expand")
-"$expand"?: string
+"$expand"?: string;
 /**
 * An OData filter expression that filters elements in the collection.
 */
@@ -79,7 +110,7 @@ delete is ArmResourceDeleteAsync<Database,BaseParameters<Database>,ArmLroLocatio
 @operationId("Databases_ListByServer")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 listByServer is ArmResourceListByParent<Database,{
-    ...BaseParameters<Database>,
+    ...BaseParameters<Database>;
     
 @query("$skipToken")
 "$skipToken"?: string
@@ -98,7 +129,7 @@ create is ArmResourceActionAsync<Database,CreateDatabaseRestorePointDefinition,R
 @operationId("DatabaseOperations_Cancel")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 cancel is ArmResourceActionSync<Database,void,void,{
-    ...BaseParameters<Database>,
+    ...BaseParameters<Database>;
     /**
 * The operation identifier.
 */
@@ -112,7 +143,7 @@ cancel is ArmResourceActionSync<Database,void,void,{
 @operationId("DatabaseEncryptionProtectors_Revalidate")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 revalidate is ArmResourceActionAsync<Database,void,void,{
-    ...BaseParameters<Database>,
+    ...BaseParameters<Database>;
     /**
 * The name of the encryption protector to be updated.
 */
@@ -126,7 +157,7 @@ revalidate is ArmResourceActionAsync<Database,void,void,{
 @operationId("DatabaseEncryptionProtectors_Revert")
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 revert is ArmResourceActionAsync<Database,void,void,{
-    ...BaseParameters<Database>,
+    ...BaseParameters<Database>;
     /**
 * The name of the encryption protector to be updated.
 */
@@ -143,7 +174,7 @@ export is ArmResourceActionAsync<Database,ExportDatabaseDefinition,ImportExportO
 * Failovers a database.
 */
 failover is ArmResourceActionAsync<Database,void,void,{
-    ...BaseParameters<Database>,
+    ...BaseParameters<Database>;
     /**
 * The type of replica to be failed over.
 */
@@ -505,21 +536,21 @@ upgradeDataWarehouse is ArmResourceActionAsync<Database,void,void>
 
 
 
-@@projectedName(Databases.createOrUpdate::parameters.resource, "json", "parameters");
-@@extension(Databases.createOrUpdate::parameters.resource, "x-ms-client-name", "parameters");
-@@doc(Databases.createOrUpdate::parameters.resource, "The requested database resource state.");
-@@projectedName(Databases.update::parameters.properties, "json", "parameters");
-@@extension(Databases.update::parameters.properties, "x-ms-client-name", "parameters");
-@@doc(Databases.update::parameters.properties, "The requested database resource state.");
-@@projectedName(Databases.create::parameters.body, "json", "parameters");
-@@extension(Databases.create::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.create::parameters.body, "The definition for creating the restore point of this database.");
-@@projectedName(Databases.export::parameters.body, "json", "parameters");
-@@extension(Databases.export::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.export::parameters.body, "The database export request parameters.");
-@@projectedName(Databases.import::parameters.body, "json", "parameters");
-@@extension(Databases.import::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.import::parameters.body, "The database import request parameters.");
-@@projectedName(Databases.rename::parameters.body, "json", "parameters");
-@@extension(Databases.rename::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.rename::parameters.body, "The resource move definition for renaming this database.");
+@@projectedName(Databases.`createOrUpdate`::parameters.resource, "json", "parameters");
+@@extension(Databases.`createOrUpdate`::parameters.resource, "x-ms-client-name", "parameters");
+@@doc(Databases.`createOrUpdate`::parameters.resource, "The requested database resource state.");
+@@projectedName(Databases.`update`::parameters.properties, "json", "parameters");
+@@extension(Databases.`update`::parameters.properties, "x-ms-client-name", "parameters");
+@@doc(Databases.`update`::parameters.properties, "The requested database resource state.");
+@@projectedName(Databases.`create`::parameters.body, "json", "parameters");
+@@extension(Databases.`create`::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.`create`::parameters.body, "The definition for creating the restore point of this database.");
+@@projectedName(Databases.`export`::parameters.body, "json", "parameters");
+@@extension(Databases.`export`::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.`export`::parameters.body, "The database export request parameters.");
+@@projectedName(Databases.`import`::parameters.body, "json", "parameters");
+@@extension(Databases.`import`::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.`import`::parameters.body, "The database import request parameters.");
+@@projectedName(Databases.`rename`::parameters.body, "json", "parameters");
+@@extension(Databases.`rename`::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.`rename`::parameters.body, "The resource move definition for renaming this database.");

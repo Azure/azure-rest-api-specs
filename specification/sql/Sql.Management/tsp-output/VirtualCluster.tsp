@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL virtual cluster.
  */
-model VirtualCluster is TrackedResource<VirtualClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(VirtualClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualCluster extends TrackedResource {
   /**
    * The name of the virtual cluster.
    */
@@ -22,6 +26,12 @@ model VirtualCluster is TrackedResource<VirtualClusterProperties> {
   @key("virtualClusterName")
   @segment("virtualClusters")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualClusterProperties;
 }
 
 @armResourceOperations

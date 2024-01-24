@@ -15,8 +15,14 @@ namespace Microsoft.Sql;
 /**
  * Certificate used on an endpoint on the Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model EndpointCertificate is ProxyResource<EndpointCertificateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  EndpointCertificateProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model EndpointCertificate extends ProxyResource {
   /**
    * Type of the endpoint whose certificate the customer is looking for.
    */
@@ -24,6 +30,12 @@ model EndpointCertificate is ProxyResource<EndpointCertificateProperties> {
   @key("endpointType")
   @segment("endpointCertificates")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: EndpointCertificateProperties;
 }
 
 @armResourceOperations

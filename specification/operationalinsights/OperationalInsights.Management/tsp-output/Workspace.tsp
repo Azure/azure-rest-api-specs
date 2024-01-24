@@ -14,7 +14,11 @@ namespace Microsoft.OperationalInsights;
 /**
  * The top level Workspace resource container.
  */
-model Workspace is TrackedResource<WorkspaceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WorkspaceProperties)
+@includeInapplicableMetadataInPayload(false)
+model Workspace extends TrackedResourceBase {
   /**
    * The name of the workspace.
    */
@@ -30,6 +34,12 @@ model Workspace is TrackedResource<WorkspaceProperties> {
    * The etag of the workspace.
    */
   etag?: string;
+
+  /**
+   * Workspace properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkspaceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }
@@ -142,11 +152,11 @@ interface Workspaces {
   get is ArmResourceActionSync<Workspace, void, SearchGetSchemaResponse>;
 
   /**
-* Purges data in an Log Analytics workspace by a set of user-defined filters.
-
-In order to manage system resources, purge requests are throttled at 50 requests per hour. You should batch the execution of purge requests by sending a single command whose predicate includes all user identities that require purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge request to verify that the results are expected.
-Log Analytics only supports purge operations required for compliance with GDPR. The Log Analytics product team reserves the right to reject requests for purge operations that are not for the purpose of GDPR compliance. In the event of a dispute, please create a support ticket
-*/
+   * Purges data in an Log Analytics workspace by a set of user-defined filters.
+   *
+   * In order to manage system resources, purge requests are throttled at 50 requests per hour. You should batch the execution of purge requests by sending a single command whose predicate includes all user identities that require purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge request to verify that the results are expected.
+   * Log Analytics only supports purge operations required for compliance with GDPR. The Log Analytics product team reserves the right to reject requests for purge operations that are not for the purpose of GDPR compliance. In the event of a dispute, please create a support ticket
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("WorkspacePurge_Purge")
   purge is ArmResourceActionNoContentSync<Workspace, WorkspacePurgeBody>;

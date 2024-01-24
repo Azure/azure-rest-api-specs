@@ -14,8 +14,12 @@ namespace Microsoft.CostManagement;
 /**
  * Scheduled action definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model ScheduledAction is ProxyResource<ScheduledActionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ScheduledActionProperties)
+@includeInapplicableMetadataInPayload(false)
+model ScheduledAction extends ProxyResourceBase {
   /**
    * Scheduled action name.
    */
@@ -23,6 +27,12 @@ model ScheduledAction is ProxyResource<ScheduledActionProperties> {
   @key("name")
   @segment("scheduledActions")
   name: string;
+
+  /**
+   * The properties of the scheduled action.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ScheduledActionProperties;
 }
 
 @armResourceOperations

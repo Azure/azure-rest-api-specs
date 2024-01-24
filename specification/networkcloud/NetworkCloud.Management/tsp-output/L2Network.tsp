@@ -14,7 +14,11 @@ namespace Microsoft.NetworkCloud;
 /**
  * L2Network represents a network that utilizes a single isolation domain set up for layer-2 resources.
  */
-model L2Network is TrackedResource<L2NetworkProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(L2NetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model L2Network extends TrackedResourceBase {
   /**
    * The name of the L2 network.
    */
@@ -28,6 +32,12 @@ model L2Network is TrackedResource<L2NetworkProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: L2NetworkProperties;
 }
 
 @armResourceOperations

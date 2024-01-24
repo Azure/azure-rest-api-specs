@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the Dsc Compilation job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model DscCompilationJob is ProxyResource<DscCompilationJobProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DscCompilationJobProperties)
+@includeInapplicableMetadataInPayload(false)
+model DscCompilationJob extends ProxyResourceBase {
   /**
    * The DSC configuration Id.
    */
@@ -24,6 +28,12 @@ model DscCompilationJob is ProxyResource<DscCompilationJobProperties> {
   @key("compilationJobName")
   @segment("compilationjobs")
   name: string;
+
+  /**
+   * Gets or sets the properties of the Dsc Compilation job.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DscCompilationJobProperties;
 }
 
 @armResourceOperations

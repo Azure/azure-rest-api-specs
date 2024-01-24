@@ -15,9 +15,12 @@ namespace Microsoft.DataFactory;
 /**
  * Credential resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-model ManagedIdentityCredentialResource
-  is ProxyResource<ManagedIdentityCredential> {
+@Azure.ResourceManager.Private.armResourceInternal(ManagedIdentityCredential)
+@includeInapplicableMetadataInPayload(false)
+model ManagedIdentityCredentialResource extends SubResource {
   /**
    * Credential name
    */
@@ -28,6 +31,12 @@ model ManagedIdentityCredentialResource
   @key("credentialName")
   @segment("credentials")
   name: string;
+
+  /**
+   * Managed Identity Credential properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ManagedIdentityCredential;
 }
 
 @armResourceOperations

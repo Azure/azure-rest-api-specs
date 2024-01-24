@@ -14,7 +14,11 @@ namespace Microsoft.NetworkCloud;
 /**
  * Rack represents the hardware of the rack and is dependent upon the cluster for lifecycle.
  */
-model Rack is TrackedResource<RackProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(RackProperties)
+@includeInapplicableMetadataInPayload(false)
+model Rack extends TrackedResourceBase {
   /**
    * The name of the rack.
    */
@@ -28,6 +32,12 @@ model Rack is TrackedResource<RackProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: RackProperties;
 }
 
 @armResourceOperations

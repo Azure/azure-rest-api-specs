@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the credential.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model Credential is ProxyResource<CredentialProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CredentialProperties)
+@includeInapplicableMetadataInPayload(false)
+model Credential extends ProxyResourceBase {
   /**
    * The name of credential.
    */
@@ -24,6 +28,12 @@ model Credential is ProxyResource<CredentialProperties> {
   @key("credentialName")
   @segment("credentials")
   name: string;
+
+  /**
+   * Gets or sets the properties of the credential.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CredentialProperties;
 }
 
 @armResourceOperations

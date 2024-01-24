@@ -15,13 +15,24 @@ namespace Microsoft.DataBoxEdge;
 /**
  * The remote support settings of a device.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(DataBoxEdgeDevice)
-model DiagnosticRemoteSupportSettings
-  is ProxyResource<DiagnosticRemoteSupportSettingsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DiagnosticRemoteSupportSettingsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DiagnosticRemoteSupportSettings extends ProxyResourceBase {
   @key("diagnosticRemoteSupportSetting")
   @segment("diagnosticRemoteSupportSettings")
   name: string;
+
+  /**
+   * Properties of the remote support  settings.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DiagnosticRemoteSupportSettingsProperties;
 }
 
 @armResourceOperations

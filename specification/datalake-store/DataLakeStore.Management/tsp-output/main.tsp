@@ -19,6 +19,7 @@ using TypeSpec.Versioning;
  * Creates an Azure Data Lake Store account management client.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "DataLakeStoreAccountManagementClient",
 })

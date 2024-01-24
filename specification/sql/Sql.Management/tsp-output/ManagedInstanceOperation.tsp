@@ -15,13 +15,24 @@ namespace Microsoft.Sql;
 /**
  * A managed instance operation.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model ManagedInstanceOperation
-  is ProxyResource<ManagedInstanceOperationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedInstanceOperationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedInstanceOperation extends ProxyResource {
   @path
   @key("operationId")
   @segment("operations")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedInstanceOperationProperties;
 }
 
 @armResourceOperations

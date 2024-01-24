@@ -1,10 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -218,9 +221,9 @@ enum ServiceScalingTriggerKind {
 }
 
 /**
-* The current state of the cluster.
-
-*/
+ * The current state of the cluster.
+ *
+ */
 enum ClusterState {
   /**
    * Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.
@@ -316,9 +319,9 @@ enum ManagedResourceProvisioningState {
 }
 
 /**
-* The upgrade mode of the cluster when new Service Fabric runtime version is available.
-
-*/
+ * The upgrade mode of the cluster when new Service Fabric runtime version is available.
+ *
+ */
 enum ClusterUpgradeMode {
   /**
    * The cluster will be automatically upgraded to the latest Service Fabric runtime version, **clusterUpgradeCadence** will determine when the upgrade starts after the new version becomes available.
@@ -435,9 +438,9 @@ enum ManagedClusterVersionEnvironment {
 }
 
 /**
-* Managed data disk type. IOPS and throughput are given by the disk size, to see more information go to https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types.
-
-*/
+ * Managed data disk type. IOPS and throughput are given by the disk size, to see more information go to https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types.
+ *
+ */
 enum DiskType {
   /**
    * Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access.
@@ -456,9 +459,9 @@ enum DiskType {
 }
 
 /**
-* The IP address type.
-
-*/
+ * The IP address type.
+ *
+ */
 enum IPAddressType {
   /**
    * IPv4 address type.
@@ -527,9 +530,9 @@ enum UpdateType {
 }
 
 /**
-* Node type capacity scale type.
-
-*/
+ * Node type capacity scale type.
+ *
+ */
 enum NodeTypeSkuScaleType {
   /**
    * Node count is not adjustable in any way (e.g. it is fixed).
@@ -545,6 +548,32 @@ enum NodeTypeSkuScaleType {
    * Automatic scale is allowed.
    */
   Automatic,
+}
+
+/**
+ * The type of managed identity for the resource.
+ */
+@fixed
+enum ManagedIdentityType {
+  /**
+   * Indicates that no identity is associated with the resource.
+   */
+  None,
+
+  /**
+   * Indicates that system assigned identity is associated with the resource.
+   */
+  SystemAssigned,
+
+  /**
+   * Indicates that user assigned identity is associated with the resource.
+   */
+  UserAssigned,
+
+  /**
+   * Indicates that both system assigned and user assigned identity are associated with the resource.
+   */
+  `SystemAssigned, UserAssigned`,
 }
 
 /**
@@ -642,11 +671,25 @@ model ManagedIdentity {
   type?: ManagedIdentityType;
 
   /**
-* The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:
-'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-
-*/
+   * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:
+   * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   *
+   */
   userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+model UserAssignedIdentity {
+  /**
+   * The principal id of user assigned identity.
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * The client id of user assigned identity.
+   */
+  @visibility("read")
+  clientId?: string;
 }
 
 /**
@@ -660,10 +703,10 @@ model ApplicationResourceProperties {
   provisioningState?: string;
 
   /**
-* The version of the application type as defined in the application manifest.
-This name must be the full Arm Resource ID for the referenced application type version.
-
-*/
+   * The version of the application type as defined in the application manifest.
+   * This name must be the full Arm Resource ID for the referenced application type version.
+   *
+   */
   version?: string;
 
   /**
@@ -687,9 +730,9 @@ This name must be the full Arm Resource ID for the referenced application type v
  */
 model ApplicationUpgradePolicy {
   /**
-* Defines a health policy used to evaluate the health of an application or one of its children entities.
-
-*/
+   * Defines a health policy used to evaluate the health of an application or one of its children entities.
+   *
+   */
   applicationHealthPolicy?: ApplicationHealthPolicy;
 
   /**
@@ -724,9 +767,9 @@ model ApplicationUpgradePolicy {
 }
 
 /**
-* Defines a health policy used to evaluate the health of an application or one of its children entities.
-
-*/
+ * Defines a health policy used to evaluate the health of an application or one of its children entities.
+ *
+ */
 model ApplicationHealthPolicy {
   /**
    * Indicates whether warnings are treated with the same severity as errors.
@@ -734,12 +777,12 @@ model ApplicationHealthPolicy {
   considerWarningAsError: boolean;
 
   /**
-* The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.
-The percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.
-This is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.
-The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
-
-*/
+   * The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.
+   * The percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.
+   * This is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.
+   * The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
+   *
+   */
   maxPercentUnhealthyDeployedApplications: int32;
 
   /**
@@ -754,43 +797,43 @@ The computation rounds up to tolerate one failure on small numbers of nodes. Def
 }
 
 /**
-* Represents the health policy used to evaluate the health of services belonging to a service type.
-
-*/
+ * Represents the health policy used to evaluate the health of services belonging to a service type.
+ *
+ */
 model ServiceTypeHealthPolicy {
   /**
-* The maximum allowed percentage of unhealthy services.
-
-The percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.
-If the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.
-This is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.
-The computation rounds up to tolerate one failure on small numbers of services.
-
-*/
+   * The maximum allowed percentage of unhealthy services.
+   *
+   * The percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.
+   * If the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.
+   * This is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.
+   * The computation rounds up to tolerate one failure on small numbers of services.
+   *
+   */
   @maxValue(100)
   maxPercentUnhealthyServices: int32;
 
   /**
-* The maximum allowed percentage of unhealthy partitions per service.
-
-The percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.
-If the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.
-The percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.
-The computation rounds up to tolerate one failure on small numbers of partitions.
-
-*/
+   * The maximum allowed percentage of unhealthy partitions per service.
+   *
+   * The percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.
+   * If the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.
+   * The computation rounds up to tolerate one failure on small numbers of partitions.
+   *
+   */
   @maxValue(100)
   maxPercentUnhealthyPartitionsPerService: int32;
 
   /**
-* The maximum allowed percentage of unhealthy replicas per partition.
-
-The percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.
-If the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.
-The percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.
-The computation rounds up to tolerate one failure on small numbers of replicas.
-
-*/
+   * The maximum allowed percentage of unhealthy replicas per partition.
+   *
+   * The percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.
+   * If the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.
+   * The percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.
+   * The computation rounds up to tolerate one failure on small numbers of replicas.
+   *
+   */
   @maxValue(100)
   maxPercentUnhealthyReplicasPerPartition: int32;
 }
@@ -879,11 +922,11 @@ model ServiceResourceProperties extends ServiceResourcePropertiesBase {
   servicePackageActivationMode?: ServicePackageActivationMode;
 
   /**
-* Dns name used for the service. If this is specified, then the DNS name can be used to return the IP addresses of service endpoints for application layer protocols (e.g., HTTP).
-When updating serviceDnsName, old name may be temporarily resolvable. However, rely on new name.
-When removing serviceDnsName, removed name may temporarily be resolvable. Do not rely on the name being unresolvable.
-
-*/
+   * Dns name used for the service. If this is specified, then the DNS name can be used to return the IP addresses of service endpoints for application layer protocols (e.g., HTTP).
+   * When updating serviceDnsName, old name may be temporarily resolvable. However, rely on new name.
+   * When removing serviceDnsName, removed name may temporarily be resolvable. Do not rely on the name being unresolvable.
+   *
+   */
   serviceDnsName?: string;
 }
 
@@ -1118,9 +1161,9 @@ model ManagedClusterProperties {
   clusterCodeVersion?: string;
 
   /**
-* The upgrade mode of the cluster when new Service Fabric runtime version is available.
-
-*/
+   * The upgrade mode of the cluster when new Service Fabric runtime version is available.
+   *
+   */
   clusterUpgradeMode?: ClusterUpgradeMode = ClusterUpgradeMode.Automatic;
 
   /**
@@ -1599,6 +1642,7 @@ model ManagedClusterCodeVersionResult {
   /**
    * The detail of the Service Fabric runtime version result
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ManagedClusterVersionDetails;
 }
 
@@ -2039,6 +2083,7 @@ model VmssExtension {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
+  @extension("x-ms-client-flatten", true)
   properties: VmssExtensionProperties;
 }
 
@@ -2513,16 +2558,16 @@ model ServicePlacementNonPartiallyPlaceServicePolicy
 }
 
 /**
-* Describes the policy to be used for placement of a Service Fabric service where the service's 
-Primary replicas should optimally be placed in a particular domain.
-
-This placement policy is usually used with fault domains in scenarios where the Service Fabric
-cluster is geographically distributed in order to indicate that a service's primary replica should
-be located in a particular fault domain, which in geo-distributed scenarios usually aligns with regional
-or datacenter boundaries. Note that since this is an optimization it is possible that the Primary replica
-may not end up located in this domain due to failures, capacity limits, or other constraints.
-
-*/
+ * Describes the policy to be used for placement of a Service Fabric service where the service's
+ * Primary replicas should optimally be placed in a particular domain.
+ *
+ * This placement policy is usually used with fault domains in scenarios where the Service Fabric
+ * cluster is geographically distributed in order to indicate that a service's primary replica should
+ * be located in a particular fault domain, which in geo-distributed scenarios usually aligns with regional
+ * or datacenter boundaries. Note that since this is an optimization it is possible that the Primary replica
+ * may not end up located in this domain due to failures, capacity limits, or other constraints.
+ *
+ */
 model ServicePlacementPreferPrimaryDomainPolicy extends ServicePlacementPolicy {
   /**
    * The name of the domain that should used for placement as per this policy.
@@ -2551,17 +2596,17 @@ model ServicePlacementRequiredDomainPolicy extends ServicePlacementPolicy {
 }
 
 /**
-* Describes the policy to be used for placement of a Service Fabric service where two replicas
-from the same partition should never be placed in the same fault or upgrade domain.
-
-While this is not common it can expose the service to an increased risk of concurrent failures
-due to unplanned outages or other cases of subsequent/concurrent failures. As an example, consider
-a case where replicas are deployed across different data center, with one replica per location.
-In the event that one of the datacenters goes offline, normally the replica that was placed in that
-datacenter will be packed into one of the remaining datacenters. If this is not desirable then this
-policy should be set.
-
-*/
+ * Describes the policy to be used for placement of a Service Fabric service where two replicas
+ * from the same partition should never be placed in the same fault or upgrade domain.
+ *
+ * While this is not common it can expose the service to an increased risk of concurrent failures
+ * due to unplanned outages or other cases of subsequent/concurrent failures. As an example, consider
+ * a case where replicas are deployed across different data center, with one replica per location.
+ * In the event that one of the datacenters goes offline, normally the replica that was placed in that
+ * datacenter will be packed into one of the remaining datacenters. If this is not desirable then this
+ * policy should be set.
+ *
+ */
 model ServicePlacementRequireDomainDistributionPolicy
   extends ServicePlacementPolicy {
   /**
@@ -2668,17 +2713,17 @@ model UniformInt64RangePartitionScheme extends Partition {
   count: int32;
 
   /**
-* The lower bound of the partition key range that
-should be split between the partition ‘Count’
-
-*/
+   * The lower bound of the partition key range that
+   * should be split between the partition ‘Count’
+   *
+   */
   lowKey: int64;
 
   /**
-* The upper bound of the partition key range that
-should be split between the partition ‘Count’
-
-*/
+   * The upper bound of the partition key range that
+   * should be split between the partition ‘Count’
+   *
+   */
   highKey: int64;
 
   /**

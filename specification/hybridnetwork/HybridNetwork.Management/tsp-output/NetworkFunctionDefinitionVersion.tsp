@@ -15,9 +15,14 @@ namespace Microsoft.HybridNetwork;
 /**
  * Network function definition version.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetworkFunctionDefinitionGroup)
-model NetworkFunctionDefinitionVersion
-  is TrackedResource<NetworkFunctionDefinitionVersionPropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  NetworkFunctionDefinitionVersionPropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model NetworkFunctionDefinitionVersion extends TrackedResourceBase {
   /**
    * The name of the network function definition version. The name should conform to the SemVer 2.0.0 specification: https://semver.org/spec/v2.0.0.html.
    */
@@ -27,6 +32,12 @@ model NetworkFunctionDefinitionVersion
   @key("networkFunctionDefinitionVersionName")
   @segment("networkFunctionDefinitionVersions")
   name: string;
+
+  /**
+   * Network function definition version properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NetworkFunctionDefinitionVersionPropertiesFormat;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.OperationalInsights;
 /**
  * Value object for saved search results.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model SavedSearch is ProxyResource<SavedSearchProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SavedSearchProperties)
+@includeInapplicableMetadataInPayload(false)
+model SavedSearch extends ProxyResourceBase {
   /**
    * The id of the saved search.
    */
@@ -29,6 +33,12 @@ model SavedSearch is ProxyResource<SavedSearchProperties> {
    * The ETag of the saved search. To override an existing saved search, use "*" or specify the current Etag
    */
   etag?: string;
+
+  /**
+   * The properties of the saved search.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: SavedSearchProperties;
 }
 
 @armResourceOperations

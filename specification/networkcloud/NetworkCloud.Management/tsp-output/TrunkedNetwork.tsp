@@ -14,7 +14,11 @@ namespace Microsoft.NetworkCloud;
 /**
  * TrunkedNetwork represents a network that utilizes multiple isolation domains and specified VLANs to create a trunked network.
  */
-model TrunkedNetwork is TrackedResource<TrunkedNetworkProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(TrunkedNetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model TrunkedNetwork extends TrackedResourceBase {
   /**
    * The name of the trunked network.
    */
@@ -28,6 +32,12 @@ model TrunkedNetwork is TrackedResource<TrunkedNetworkProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: TrunkedNetworkProperties;
 }
 
 @armResourceOperations

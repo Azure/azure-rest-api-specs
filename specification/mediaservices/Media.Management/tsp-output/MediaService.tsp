@@ -14,7 +14,11 @@ namespace Microsoft.Media;
 /**
  * A Media Services account.
  */
-model MediaService is TrackedResource<MediaServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(MediaServiceProperties)
+@includeInapplicableMetadataInPayload(false)
+model MediaService extends TrackedResourceBase {
   /**
    * The Media Services account name.
    */
@@ -22,6 +26,12 @@ model MediaService is TrackedResource<MediaServiceProperties> {
   @key("accountName")
   @segment("mediaservices")
   name: string;
+
+  /**
+   * The resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MediaServiceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

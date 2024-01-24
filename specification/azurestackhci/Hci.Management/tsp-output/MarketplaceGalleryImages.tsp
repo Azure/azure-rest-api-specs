@@ -14,8 +14,13 @@ namespace Microsoft.AzureStackHCI;
 /**
  * The marketplace gallery image resource definition.
  */
-model MarketplaceGalleryImages
-  is TrackedResource<MarketplaceGalleryImageProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  MarketplaceGalleryImageProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model MarketplaceGalleryImages extends TrackedResourceBase {
   /**
    * Name of the marketplace gallery image
    */
@@ -31,6 +36,12 @@ model MarketplaceGalleryImages
    * The extendedLocation of the resource.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties under the marketplace gallery image resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MarketplaceGalleryImageProperties;
 }
 
 @armResourceOperations

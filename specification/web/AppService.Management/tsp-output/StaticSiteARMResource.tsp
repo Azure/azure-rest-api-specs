@@ -14,7 +14,11 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Static Site ARM resource.
  */
-model StaticSiteARMResource is TrackedResource<StaticSite> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(StaticSite)
+@includeInapplicableMetadataInPayload(false)
+model StaticSiteARMResource extends Resource {
   /**
    * Name of the static site.
    */
@@ -23,8 +27,21 @@ model StaticSiteARMResource is TrackedResource<StaticSite> {
   @segment("staticSites")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Description of a SKU for a scalable resource.
+   */
+  sku?: SkuDescription;
+
+  /**
+   * Managed service identity.
+   */
+  identity?: ManagedServiceIdentity;
+
+  /**
+   * Core resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StaticSite;
 }
 
 @armResourceOperations

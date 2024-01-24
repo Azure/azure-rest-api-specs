@@ -14,7 +14,11 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The Network Fabric resource definition.
  */
-model NetworkFabric is TrackedResource<NetworkFabricProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricProperties)
+@includeInapplicableMetadataInPayload(false)
+model NetworkFabric extends TrackedResourceBase {
   /**
    * Name of the Network Fabric.
    */
@@ -22,6 +26,12 @@ model NetworkFabric is TrackedResource<NetworkFabricProperties> {
   @key("networkFabricName")
   @segment("networkFabrics")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: NetworkFabricProperties;
 }
 
 @armResourceOperations

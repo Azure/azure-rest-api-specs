@@ -14,8 +14,12 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The Network Fabric SKU resource definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model NetworkFabricSku is ProxyResource<NetworkFabricSkuProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricSkuProperties)
+@includeInapplicableMetadataInPayload(false)
+model NetworkFabricSku extends ProxyResourceBase {
   /**
    * Name of the Network Fabric SKU.
    */
@@ -23,6 +27,12 @@ model NetworkFabricSku is ProxyResource<NetworkFabricSkuProperties> {
   @key("networkFabricSkuName")
   @segment("networkFabricSkus")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: NetworkFabricSkuProperties;
 }
 
 @armResourceOperations

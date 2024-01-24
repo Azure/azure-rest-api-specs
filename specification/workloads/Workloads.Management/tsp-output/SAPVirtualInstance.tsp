@@ -14,7 +14,11 @@ namespace Microsoft.Workloads;
 /**
  * Define the Virtual Instance for SAP solutions resource.
  */
-model SAPVirtualInstance is TrackedResource<SAPVirtualInstanceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(SAPVirtualInstanceProperties)
+@includeInapplicableMetadataInPayload(false)
+model SAPVirtualInstance extends TrackedResourceBase {
   /**
    * The name of the Virtual Instances for SAP solutions resource
    */
@@ -22,6 +26,12 @@ model SAPVirtualInstance is TrackedResource<SAPVirtualInstanceProperties> {
   @key("sapVirtualInstanceName")
   @segment("sapVirtualInstances")
   name: string;
+
+  /**
+   * Defines the Virtual Instance for SAP solutions resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: SAPVirtualInstanceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

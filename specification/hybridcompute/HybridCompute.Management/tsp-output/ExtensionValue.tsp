@@ -14,8 +14,12 @@ namespace Microsoft.HybridCompute;
 /**
  * Describes a Extension Metadata
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model ExtensionValue is ProxyResource<ExtensionValueProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ExtensionValueProperties)
+@includeInapplicableMetadataInPayload(false)
+model ExtensionValue extends ProxyResourceBase {
   /**
    * The version of the Extension being received.
    */
@@ -23,6 +27,12 @@ model ExtensionValue is ProxyResource<ExtensionValueProperties> {
   @key("version")
   @segment("versions")
   name: string;
+
+  /**
+   * The single extension based on search criteria
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ExtensionValueProperties;
 }
 
 @armResourceOperations

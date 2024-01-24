@@ -15,8 +15,12 @@ namespace Microsoft.DataReplication;
 /**
  * Recovery point model.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ProtectedItemModel)
-model RecoveryPointModel is ProxyResource<RecoveryPointModelProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RecoveryPointModelProperties)
+@includeInapplicableMetadataInPayload(false)
+model RecoveryPointModel extends ProxyResourceBase {
   /**
    * The recovery point name.
    */
@@ -25,6 +29,12 @@ model RecoveryPointModel is ProxyResource<RecoveryPointModelProperties> {
   @key("recoveryPointName")
   @segment("recoveryPoints")
   name: string;
+
+  /**
+   * Recovery point model properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: RecoveryPointModelProperties;
 }
 
 @armResourceOperations

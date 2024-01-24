@@ -15,8 +15,12 @@ namespace Microsoft.Cdn;
 /**
  * Friendly Secret name mapping to the any Secret or secret related information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Profile)
-model FrontDoorSecret is ProxyResource<SecretDetails> {
+@Azure.ResourceManager.Private.armResourceInternal(SecretDetails)
+@includeInapplicableMetadataInPayload(false)
+model FrontDoorSecret extends ProxyResource {
   /**
    * Name of the Secret under the profile.
    */
@@ -24,6 +28,12 @@ model FrontDoorSecret is ProxyResource<SecretDetails> {
   @key("secretName")
   @segment("secrets")
   name: string;
+
+  /**
+   * The JSON object that contains the properties of the Secret to create.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SecretDetails;
 }
 
 @armResourceOperations

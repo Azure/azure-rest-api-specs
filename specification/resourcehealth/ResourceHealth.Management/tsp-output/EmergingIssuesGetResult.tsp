@@ -14,8 +14,12 @@ namespace Microsoft.ResourceHealth;
 /**
  * The Get EmergingIssues operation response.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model EmergingIssuesGetResult is ProxyResource<EmergingIssue> {
+@Azure.ResourceManager.Private.armResourceInternal(EmergingIssue)
+@includeInapplicableMetadataInPayload(false)
+model EmergingIssuesGetResult extends ProxyResourceBase {
   /**
    * The name of the emerging issue.
    */
@@ -23,6 +27,12 @@ model EmergingIssuesGetResult is ProxyResource<EmergingIssue> {
   @key("issueName")
   @segment("emergingIssues")
   name: IssueNameParameter;
+
+  /**
+   * The emerging issue entity properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: EmergingIssue;
 }
 
 @armResourceOperations

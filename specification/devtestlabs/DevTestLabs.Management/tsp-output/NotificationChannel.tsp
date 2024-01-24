@@ -15,8 +15,14 @@ namespace Microsoft.DevTestLab;
 /**
  * A notification.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model NotificationChannel is TrackedResource<NotificationChannelProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  NotificationChannelProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model NotificationChannel extends Resource {
   /**
    * The name of the notification channel.
    */
@@ -24,6 +30,12 @@ model NotificationChannel is TrackedResource<NotificationChannelProperties> {
   @key("name")
   @segment("notificationchannels")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: NotificationChannelProperties;
 }
 
 @armResourceOperations

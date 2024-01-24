@@ -15,8 +15,12 @@ namespace Microsoft.AVS;
 /**
  * A vSphere Distributed Resource Scheduler (DRS) placement policy
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model PlacementPolicy is ProxyResource<PlacementPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PlacementPolicyProperties)
+@includeInapplicableMetadataInPayload(false)
+model PlacementPolicy extends ProxyResourceBase {
   /**
    * Name of the VMware vSphere Distributed Resource Scheduler (DRS) placement policy
    */
@@ -25,6 +29,12 @@ model PlacementPolicy is ProxyResource<PlacementPolicyProperties> {
   @key("placementPolicyName")
   @segment("placementPolicies")
   name: string;
+
+  /**
+   * placement policy properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PlacementPolicyProperties;
 }
 
 @armResourceOperations

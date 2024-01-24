@@ -14,7 +14,13 @@ namespace Microsoft.App;
 /**
  * An environment for Kubernetes cluster specialized for web workloads by Azure App Service
  */
-model ConnectedEnvironment is TrackedResource<ConnectedEnvironmentProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  ConnectedEnvironmentProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ConnectedEnvironment extends TrackedResourceBase {
   /**
    * Name of the connectedEnvironment.
    */
@@ -27,6 +33,12 @@ model ConnectedEnvironment is TrackedResource<ConnectedEnvironmentProperties> {
    * The complex type of the extended location.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * ConnectedEnvironment resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConnectedEnvironmentProperties;
 }
 
 @armResourceOperations

@@ -15,9 +15,14 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Static Site Custom Domain Overview ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StaticSiteARMResource)
-model StaticSiteCustomDomainOverviewARMResource
-  is ProxyResource<StaticSiteCustomDomainOverviewARMResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  StaticSiteCustomDomainOverviewARMResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model StaticSiteCustomDomainOverviewARMResource extends ProxyOnlyResource {
   /**
    * The custom domain name.
    */
@@ -25,6 +30,12 @@ model StaticSiteCustomDomainOverviewARMResource
   @key("domainName")
   @segment("customDomains")
   name: string;
+
+  /**
+   * StaticSiteCustomDomainOverviewARMResource resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StaticSiteCustomDomainOverviewARMResourceProperties;
 }
 
 @armResourceOperations

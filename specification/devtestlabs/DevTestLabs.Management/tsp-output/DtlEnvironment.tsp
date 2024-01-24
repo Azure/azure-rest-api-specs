@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * An environment, which is essentially an ARM template deployment.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(User)
-model DtlEnvironment is TrackedResource<EnvironmentProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(EnvironmentProperties)
+@includeInapplicableMetadataInPayload(false)
+model DtlEnvironment extends Resource {
   /**
    * The name of the environment.
    */
@@ -24,6 +28,12 @@ model DtlEnvironment is TrackedResource<EnvironmentProperties> {
   @key("name")
   @segment("environments")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: EnvironmentProperties;
 }
 
 @armResourceOperations

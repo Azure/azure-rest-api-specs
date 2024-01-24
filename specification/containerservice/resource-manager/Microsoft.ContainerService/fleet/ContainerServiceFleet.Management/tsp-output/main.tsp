@@ -18,6 +18,7 @@ using TypeSpec.Versioning;
  * Azure Kubernetes Fleet Manager api client.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ContainerServiceFleetClient",
 })

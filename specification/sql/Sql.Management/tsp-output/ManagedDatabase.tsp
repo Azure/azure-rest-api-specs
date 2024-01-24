@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A managed database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model ManagedDatabase is TrackedResource<ManagedDatabaseProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ManagedDatabaseProperties)
+@includeInapplicableMetadataInPayload(false)
+model ManagedDatabase extends TrackedResource {
   /**
    * The name of the database.
    */
@@ -24,6 +28,12 @@ model ManagedDatabase is TrackedResource<ManagedDatabaseProperties> {
   @key("databaseName")
   @segment("databases")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedDatabaseProperties;
 }
 
 @armResourceOperations

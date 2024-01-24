@@ -15,8 +15,12 @@ namespace Microsoft.Devices;
 /**
  * The X509 Certificate.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IotHubDescription)
-model CertificateDescription is ProxyResource<CertificateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
+@includeInapplicableMetadataInPayload(false)
+model CertificateDescription extends ProxyResourceBase {
   /**
    * The name of the certificate
    */
@@ -31,6 +35,12 @@ model CertificateDescription is ProxyResource<CertificateProperties> {
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * The description of an X509 CA Certificate.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CertificateProperties;
 }
 
 @armResourceOperations

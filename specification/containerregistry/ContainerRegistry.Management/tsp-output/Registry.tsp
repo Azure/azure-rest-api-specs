@@ -14,7 +14,11 @@ namespace Microsoft.ContainerRegistry;
 /**
  * An object that represents a container registry.
  */
-model Registry is TrackedResource<RegistryProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(RegistryProperties)
+@includeInapplicableMetadataInPayload(false)
+model Registry extends TrackedResourceBase {
   /**
    * The name of the container registry.
    */
@@ -25,6 +29,12 @@ model Registry is TrackedResource<RegistryProperties> {
   @key("registryName")
   @segment("registries")
   name: string;
+
+  /**
+   * The properties of the container registry.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RegistryProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;

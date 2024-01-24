@@ -15,8 +15,12 @@ namespace Microsoft.DataMigration;
 /**
  * A task resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Project)
-model ProjectTask is ProxyResource<ProjectTaskProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ProjectTaskProperties)
+@includeInapplicableMetadataInPayload(false)
+model ProjectTask extends Resource {
   /**
    * Name of the Task
    */
@@ -29,6 +33,12 @@ model ProjectTask is ProxyResource<ProjectTaskProperties> {
    * HTTP strong entity tag value. This is ignored if submitted.
    */
   etag?: string;
+
+  /**
+   * Custom task properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProjectTaskProperties;
 }
 
 @armResourceOperations

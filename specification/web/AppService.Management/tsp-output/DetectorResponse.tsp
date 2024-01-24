@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Class representing Response from Detector
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AppServiceCertificateOrder)
-model DetectorResponse is ProxyResource<DetectorResponseProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DetectorResponseProperties)
+@includeInapplicableMetadataInPayload(false)
+model DetectorResponse extends ProxyOnlyResource {
   /**
    * The detector name which needs to be run.
    */
@@ -24,6 +28,12 @@ model DetectorResponse is ProxyResource<DetectorResponseProperties> {
   @key("detectorName")
   @segment("detectors")
   name: string;
+
+  /**
+   * DetectorResponse resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DetectorResponseProperties;
 }
 
 @armResourceOperations

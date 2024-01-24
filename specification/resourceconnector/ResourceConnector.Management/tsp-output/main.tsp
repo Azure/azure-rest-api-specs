@@ -15,6 +15,7 @@ using TypeSpec.Versioning;
  * The appliances Rest API spec.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "appliances",
 })

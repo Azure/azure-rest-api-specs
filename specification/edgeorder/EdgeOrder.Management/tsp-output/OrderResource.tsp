@@ -14,7 +14,11 @@ namespace Microsoft.EdgeOrder;
 /**
  * Specifies the properties or parameters for an order. Order is a grouping of one or more order items.
  */
-model OrderResource is ProxyResource<OrderProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(OrderProperties)
+@includeInapplicableMetadataInPayload(false)
+model OrderResource extends ProxyResourceBase {
   /**
    * The name of the order
    */
@@ -22,6 +26,12 @@ model OrderResource is ProxyResource<OrderProperties> {
   @key("orderName")
   @segment("orders")
   name: string;
+
+  /**
+   * Order properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: OrderProperties;
 }
 
 @armResourceOperations

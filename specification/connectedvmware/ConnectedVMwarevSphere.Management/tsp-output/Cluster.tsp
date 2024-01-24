@@ -14,7 +14,11 @@ namespace Microsoft.ConnectedVMwarevSphere;
 /**
  * Define the cluster.
  */
-model Cluster is TrackedResource<ClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cluster extends TrackedResourceBase {
   /**
    * Name of the cluster.
    */
@@ -28,7 +32,16 @@ model Cluster is TrackedResource<ClusterProperties> {
    */
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.
+   */
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ClusterProperties;
 }
 
 @armResourceOperations

@@ -14,9 +14,14 @@ namespace Microsoft.Maintenance;
 /**
  * Maintenance configuration record type
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model MaintenanceConfiguration
-  is TrackedResource<MaintenanceConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  MaintenanceConfigurationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model MaintenanceConfiguration extends TrackedResourceBase {
   /**
    * Maintenance Configuration Name
    */
@@ -24,6 +29,12 @@ model MaintenanceConfiguration
   @key("resourceName")
   @segment("publicMaintenanceConfigurations")
   name: string;
+
+  /**
+   * Gets or sets properties of the resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MaintenanceConfigurationProperties;
 }
 
 @armResourceOperations

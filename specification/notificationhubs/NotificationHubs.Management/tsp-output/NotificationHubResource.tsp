@@ -15,8 +15,12 @@ namespace Microsoft.NotificationHubs;
 /**
  * Description of a NotificationHub Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NamespaceResource)
-model NotificationHubResource is TrackedResource<NotificationHubProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(NotificationHubProperties)
+@includeInapplicableMetadataInPayload(false)
+model NotificationHubResource extends Resource {
   /**
    * The notification hub name.
    */
@@ -24,6 +28,12 @@ model NotificationHubResource is TrackedResource<NotificationHubProperties> {
   @key("notificationHubName")
   @segment("notificationHubs")
   name: string;
+
+  /**
+   * Properties of the NotificationHub.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NotificationHubProperties;
 }
 
 @armResourceOperations

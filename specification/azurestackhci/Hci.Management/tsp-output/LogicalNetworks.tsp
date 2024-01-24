@@ -14,7 +14,11 @@ namespace Microsoft.AzureStackHCI;
 /**
  * The logical network resource definition.
  */
-model LogicalNetworks is TrackedResource<LogicalNetworkProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(LogicalNetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model LogicalNetworks extends TrackedResourceBase {
   /**
    * Name of the logical network
    */
@@ -30,6 +34,12 @@ model LogicalNetworks is TrackedResource<LogicalNetworkProperties> {
    * The extendedLocation of the resource.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties under the logical network resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: LogicalNetworkProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.DevCenter;
 /**
  * Represents a definition for a Developer Machine.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DevCenter)
-model DevBoxDefinition is TrackedResource<DevBoxDefinitionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DevBoxDefinitionProperties)
+@includeInapplicableMetadataInPayload(false)
+model DevBoxDefinition extends TrackedResourceBase {
   /**
    * The name of the Dev Box definition.
    */
@@ -24,6 +28,12 @@ model DevBoxDefinition is TrackedResource<DevBoxDefinitionProperties> {
   @key("devBoxDefinitionName")
   @segment("devboxdefinitions")
   name: string;
+
+  /**
+   * Dev Box definition properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DevBoxDefinitionProperties;
 }
 
 @armResourceOperations

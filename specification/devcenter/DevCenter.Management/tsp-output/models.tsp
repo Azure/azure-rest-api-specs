@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -313,6 +315,7 @@ model ProjectUpdate extends TrackedResourceUpdate {
   /**
    * Properties of a project to be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ProjectUpdateProperties;
 }
 
@@ -556,6 +559,7 @@ model CatalogUpdate {
   /**
    * Catalog properties for update.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CatalogUpdateProperties;
 
   /**
@@ -678,6 +682,7 @@ model ProjectEnvironmentTypeUpdate {
   /**
    * Properties to configure an environment type.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ProjectEnvironmentTypeUpdateProperties;
 
   /**
@@ -813,6 +818,7 @@ model DevBoxDefinitionUpdate extends TrackedResourceUpdate {
   /**
    * Properties of a Dev Box definition to be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DevBoxDefinitionUpdateProperties;
 }
 
@@ -1050,6 +1056,7 @@ model PoolUpdate extends TrackedResourceUpdate {
   /**
    * Properties of a pool to be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PoolUpdateProperties;
 }
 
@@ -1102,6 +1109,7 @@ model ScheduleUpdate extends TrackedResourceUpdate {
   /**
    * Properties of a schedule resource to be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ScheduleUpdateProperties;
 }
 
@@ -1171,6 +1179,7 @@ model NetworkConnectionUpdate extends TrackedResourceUpdate {
   /**
    * Properties of a network connection resource to be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkConnectionUpdateProperties;
 }
 

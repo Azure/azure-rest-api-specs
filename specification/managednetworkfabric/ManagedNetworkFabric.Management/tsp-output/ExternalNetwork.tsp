@@ -15,8 +15,12 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * Defines the External Network resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(L3IsolationDomain)
-model ExternalNetwork is ProxyResource<ExternalNetworkProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ExternalNetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model ExternalNetwork extends ProxyResourceBase {
   /**
    * Name of the External Network.
    */
@@ -24,6 +28,12 @@ model ExternalNetwork is ProxyResource<ExternalNetworkProperties> {
   @key("externalNetworkName")
   @segment("externalNetworks")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ExternalNetworkProperties;
 }
 
 @armResourceOperations

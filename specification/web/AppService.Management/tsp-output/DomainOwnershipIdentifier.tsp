@@ -15,9 +15,14 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Domain ownership Identifier.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Domain)
-model DomainOwnershipIdentifier
-  is ProxyResource<DomainOwnershipIdentifierProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DomainOwnershipIdentifierProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DomainOwnershipIdentifier extends ProxyOnlyResource {
   /**
    * Name of identifier.
    */
@@ -25,6 +30,12 @@ model DomainOwnershipIdentifier
   @key("name")
   @segment("domainOwnershipIdentifiers")
   name: string;
+
+  /**
+   * DomainOwnershipIdentifier resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DomainOwnershipIdentifierProperties;
 }
 
 @armResourceOperations

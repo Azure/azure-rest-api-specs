@@ -14,7 +14,11 @@ namespace Microsoft.SignalRService;
 /**
  * A class represent a resource.
  */
-model WebPubSub is TrackedResource<WebPubSubProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WebPubSubProperties)
+@includeInapplicableMetadataInPayload(false)
+model WebPubSub extends TrackedResourceBase {
   /**
    * The name of the resource.
    */
@@ -22,6 +26,12 @@ model WebPubSub is TrackedResource<WebPubSubProperties> {
   @key("resourceName")
   @segment("webPubSub")
   name: string;
+
+  /**
+   * A class that describes the properties of the resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WebPubSubProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;

@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -877,6 +879,7 @@ model ManagedRuleSetDefinition extends FrontDoorResourceModel {
   /**
    * Properties for a managed rule set definition.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ManagedRuleSetDefinitionProperties;
 }
 
@@ -1230,6 +1233,7 @@ model RoutingRule extends FrontDoorResourceData {
   /**
    * Properties of the Front Door Routing Rule
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RoutingRuleProperties;
 }
 
@@ -1332,6 +1336,7 @@ model LoadBalancingSettingsModel extends FrontDoorResourceData {
   /**
    * Properties of the load balancing settings
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LoadBalancingSettingsProperties;
 }
 
@@ -1374,6 +1379,7 @@ model HealthProbeSettingsModel extends FrontDoorResourceData {
   /**
    * Properties of the health probe settings
    */
+  @extension("x-ms-client-flatten", true)
   properties?: HealthProbeSettingsProperties;
 }
 
@@ -1426,6 +1432,7 @@ model BackendPool extends FrontDoorResourceData {
   /**
    * Properties of the Front Door Backend Pool
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BackendPoolProperties;
 }
 
@@ -1585,11 +1592,13 @@ model CustomHttpsConfiguration {
   /**
    * KeyVault certificate source parameters (if certificateSource=AzureKeyVault)
    */
+  @extension("x-ms-client-flatten", true)
   keyVaultCertificateSourceParameters?: KeyVaultCertificateSourceParameters;
 
   /**
    * Parameters required for enabling SSL with Front Door-managed certificates (if certificateSource=FrontDoor)
    */
+  @extension("x-ms-client-flatten", true)
   frontDoorCertificateSourceParameters?: FrontDoorCertificateSourceParameters;
 }
 
@@ -1751,6 +1760,7 @@ model ProfileUpdateModel {
   /**
    * The properties of a Profile
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ProfileUpdateProperties;
 
   /**
@@ -1781,6 +1791,7 @@ model PreconfiguredEndpoint extends FrontDoorResourceModel {
   /**
    * The properties of a preconfiguredEndpoint
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PreconfiguredEndpointProperties;
 }
 
@@ -1879,6 +1890,7 @@ model ExperimentUpdateModel {
   /**
    * The properties of a Profile
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ExperimentUpdateProperties;
 }
 
@@ -1904,6 +1916,7 @@ model LatencyScorecard extends FrontDoorResourceModel {
   /**
    * The properties of a latency scorecard
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LatencyScorecardProperties;
 }
 
@@ -2040,6 +2053,7 @@ model Timeseries extends FrontDoorResourceModel {
   /**
    * The properties of a Timeseries
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TimeseriesProperties;
 }
 

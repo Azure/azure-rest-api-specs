@@ -24,6 +24,7 @@ using TypeSpec.Versioning;
  * Microsoft NetApp Files Azure Resource Provider specification
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "NetAppManagementClient",
 })

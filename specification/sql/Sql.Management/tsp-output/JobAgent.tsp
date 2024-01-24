@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL job agent.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model JobAgent is TrackedResource<JobAgentProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobAgentProperties)
+@includeInapplicableMetadataInPayload(false)
+model JobAgent extends TrackedResource {
   /**
    * The name of the job agent to be retrieved.
    */
@@ -25,7 +29,16 @@ model JobAgent is TrackedResource<JobAgentProperties> {
   @segment("jobAgents")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The name and tier of the SKU.
+   */
+  sku?: Sku;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobAgentProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.DBforPostgreSQL;
 /**
  * Represents configuration details for coordinator and node.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model Configuration is ProxyResource<ConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ConfigurationProperties)
+@includeInapplicableMetadataInPayload(false)
+model Configuration extends ProxyResourceBase {
   /**
    * The name of the cluster configuration.
    */
@@ -27,6 +31,12 @@ model Configuration is ProxyResource<ConfigurationProperties> {
   @key("configurationName")
   @segment("configurations")
   name: string;
+
+  /**
+   * The properties of configuration.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConfigurationProperties;
 }
 
 @armResourceOperations

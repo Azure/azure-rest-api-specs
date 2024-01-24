@@ -15,8 +15,12 @@ namespace Microsoft.DataShare;
 /**
  * A share subscription data transfer object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-model ShareSubscription is ProxyResource<ShareSubscriptionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ShareSubscriptionProperties)
+@includeInapplicableMetadataInPayload(false)
+model ShareSubscription extends ProxyDto {
   /**
    * The name of the shareSubscription.
    */
@@ -24,6 +28,12 @@ model ShareSubscription is ProxyResource<ShareSubscriptionProperties> {
   @key("shareSubscriptionName")
   @segment("shareSubscriptions")
   name: string;
+
+  /**
+   * Properties on the share subscription
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ShareSubscriptionProperties;
 }
 
 @armResourceOperations

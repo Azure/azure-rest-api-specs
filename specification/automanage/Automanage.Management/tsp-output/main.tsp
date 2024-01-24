@@ -24,6 +24,7 @@ using TypeSpec.Versioning;
  * Automanage Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "AutomanageClient",
 })

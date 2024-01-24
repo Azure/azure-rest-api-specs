@@ -24,6 +24,7 @@ using TypeSpec.Versioning;
  * Azure Cosmos DB for PostgreSQL database service resource provider REST APIs
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Cosmos DB for PostgreSQL",
 })

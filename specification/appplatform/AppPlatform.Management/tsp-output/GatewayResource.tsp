@@ -15,8 +15,12 @@ namespace Microsoft.AppPlatform;
 /**
  * Spring Cloud Gateway resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-model GatewayResource is ProxyResource<GatewayProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(GatewayProperties)
+@includeInapplicableMetadataInPayload(false)
+model GatewayResource extends ProxyResource {
   /**
    * The name of Spring Cloud Gateway.
    */
@@ -25,7 +29,16 @@ model GatewayResource is ProxyResource<GatewayProperties> {
   @segment("gateways")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Sku of the Spring Cloud Gateway resource
+   */
+  sku?: Sku;
+
+  /**
+   * Spring Cloud Gateway properties payload
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GatewayProperties;
 }
 
 @armResourceOperations

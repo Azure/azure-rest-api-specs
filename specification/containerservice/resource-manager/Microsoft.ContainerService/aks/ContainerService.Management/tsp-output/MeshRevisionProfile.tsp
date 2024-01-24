@@ -14,8 +14,14 @@ namespace Microsoft.ContainerService;
 /**
  * Mesh revision profile for a mesh.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model MeshRevisionProfile is ProxyResource<MeshRevisionProfileProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  MeshRevisionProfileProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model MeshRevisionProfile extends ProxyResourceBase {
   /**
    * The mode of the mesh.
    */
@@ -26,6 +32,12 @@ model MeshRevisionProfile is ProxyResource<MeshRevisionProfileProperties> {
   @key("mode")
   @segment("meshRevisionProfiles")
   name: string;
+
+  /**
+   * Mesh revision profile properties for a mesh
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MeshRevisionProfileProperties;
 }
 
 @armResourceOperations

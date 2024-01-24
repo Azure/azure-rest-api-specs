@@ -15,8 +15,12 @@ namespace Microsoft.LabServices;
 /**
  * A lab virtual machine resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model VirtualMachine is ProxyResource<VirtualMachineProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VirtualMachineProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachine extends ProxyResourceBase {
   /**
    * The ID of the virtual machine that uniquely identifies it within the containing lab. Used in resource URIs.
    */
@@ -27,6 +31,12 @@ model VirtualMachine is ProxyResource<VirtualMachineProperties> {
   @key("virtualMachineName")
   @segment("virtualMachines")
   name: string;
+
+  /**
+   * Virtual machine resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: VirtualMachineProperties;
 }
 
 @armResourceOperations

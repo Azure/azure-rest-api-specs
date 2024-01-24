@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
  * HDInsight Containers Management Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["https://management.azure.com/.default"]>)
 @service({
   title: "HDInsightContainersManagementClient",
 })

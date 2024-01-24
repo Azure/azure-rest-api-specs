@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * Server trust certificate imported from box to enable connection between box and Sql Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model ServerTrustCertificate
-  is ProxyResource<ServerTrustCertificateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ServerTrustCertificateProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ServerTrustCertificate extends ProxyResource {
   /**
    * Name of of the certificate to get.
    */
@@ -25,6 +30,12 @@ model ServerTrustCertificate
   @key("certificateName")
   @segment("serverTrustCertificates")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerTrustCertificateProperties;
 }
 
 @armResourceOperations

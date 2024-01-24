@@ -15,8 +15,12 @@ namespace Microsoft.Logic;
 /**
  * The request history.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WorkflowRunActionRepetitionDefinition)
-model RequestHistory is TrackedResource<RequestHistoryProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RequestHistoryProperties)
+@includeInapplicableMetadataInPayload(false)
+model RequestHistory extends Resource {
   /**
    * The request history name.
    */
@@ -24,6 +28,12 @@ model RequestHistory is TrackedResource<RequestHistoryProperties> {
   @key("requestHistoryName")
   @segment("requestHistories")
   name: string;
+
+  /**
+   * The request history properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RequestHistoryProperties;
 }
 
 @armResourceOperations

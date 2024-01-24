@@ -14,7 +14,11 @@ namespace Microsoft.DevTestLab;
 /**
  * A schedule.
  */
-model Schedule is TrackedResource<ScheduleProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ScheduleProperties)
+@includeInapplicableMetadataInPayload(false)
+model Schedule extends Resource {
   /**
    * The name of the schedule.
    */
@@ -22,6 +26,12 @@ model Schedule is TrackedResource<ScheduleProperties> {
   @key("name")
   @segment("schedules")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ScheduleProperties;
 }
 
 @armResourceOperations

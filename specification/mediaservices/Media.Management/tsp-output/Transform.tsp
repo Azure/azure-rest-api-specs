@@ -15,8 +15,12 @@ namespace Microsoft.Media;
 /**
  * A Transform encapsulates the rules or instructions for generating desired outputs from input media, such as by transcoding or by extracting insights. After the Transform is created, it can be applied to input media by creating Jobs.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MediaService)
-model Transform is ProxyResource<TransformProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(TransformProperties)
+@includeInapplicableMetadataInPayload(false)
+model Transform extends ProxyResourceBase {
   /**
    * The Transform name.
    */
@@ -24,6 +28,12 @@ model Transform is ProxyResource<TransformProperties> {
   @key("transformName")
   @segment("transforms")
   name: string;
+
+  /**
+   * The resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TransformProperties;
 }
 
 @armResourceOperations

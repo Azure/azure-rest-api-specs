@@ -15,9 +15,14 @@ namespace Microsoft.Compute;
 /**
  * Describes a virtual machine scale set virtual machine.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VirtualMachineScaleSet)
-model VirtualMachineScaleSetVM
-  is TrackedResource<VirtualMachineScaleSetVMProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  VirtualMachineScaleSetVMProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachineScaleSetVM extends Resource {
   /**
    * The instance ID of the virtual machine.
    */
@@ -33,6 +38,17 @@ model VirtualMachineScaleSetVM
   instanceId?: string;
 
   /**
+   * The virtual machine SKU.
+   */
+  @visibility("read")
+  sku?: Sku;
+
+  /**
+   * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
+   */
+  plan?: Plan;
+
+  /**
    * The virtual machine child extension resources.
    */
   @visibility("read")
@@ -45,14 +61,21 @@ model VirtualMachineScaleSetVM
   zones?: string[];
 
   /**
+   * The identity of the virtual machine, if configured.
+   */
+  identity?: VirtualMachineIdentity;
+
+  /**
    * Etag is property returned in Update/Get response of the VMSS VM, so that customer can supply it in the header to ensure optimistic updates.
    */
   @visibility("read")
   etag?: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourcePlan;
+  /**
+   * Describes the properties of a virtual machine scale set virtual machine.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineScaleSetVMProperties;
 }
 
 @armResourceOperations

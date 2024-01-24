@@ -14,8 +14,12 @@ namespace Microsoft.KeyVault;
 /**
  * Deleted vault information with extended details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model DeletedVault is ProxyResource<DeletedVaultProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DeletedVaultProperties)
+@includeInapplicableMetadataInPayload(false)
+model DeletedVault extends ProxyResourceBase {
   /**
    * The name of the vault.
    */
@@ -23,6 +27,12 @@ model DeletedVault is ProxyResource<DeletedVaultProperties> {
   @key("vaultName")
   @segment("deletedVaults")
   name: string;
+
+  /**
+   * Properties of the vault
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeletedVaultProperties;
 }
 
 @armResourceOperations

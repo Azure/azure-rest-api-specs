@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -344,6 +346,7 @@ model FunctionProperties {
   @visibility("read")
   etag?: string;
 
+  @extension("x-ms-client-flatten", true)
   properties?: FunctionConfiguration;
 }
 
@@ -422,6 +425,7 @@ model StreamAnalyticsError {
   /**
    * Error definition properties.
    */
+  @extension("x-ms-client-flatten", true)
   error?: ErrorError;
 }
 
@@ -484,6 +488,7 @@ model ResourceTestStatus {
    * Describes the error that occurred.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   error?: ErrorResponse;
 }
 
@@ -1026,6 +1031,7 @@ model SubscriptionQuota extends SubResource {
    * Describes the properties of the quota.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: SubscriptionQuotaProperties;
 }
 
@@ -1053,6 +1059,7 @@ model TestQuery {
   /**
    * Diagnostics information related to query testing.
    */
+  @extension("x-ms-client-flatten", true)
   diagnostics?: TestQueryDiagnostics;
 
   /**
@@ -1433,6 +1440,7 @@ model PrivateLinkServiceConnection {
   /**
    * Bag of properties defining a privatelinkServiceConnection.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkServiceConnectionProperties;
 }
 
@@ -1502,6 +1510,7 @@ model AzureMachineLearningStudioFunctionBinding extends FunctionBinding {
   /**
    * The binding properties associated with an Azure Machine learning Studio.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AzureMachineLearningStudioFunctionBindingProperties;
 
   /**
@@ -1597,6 +1606,7 @@ model JavaScriptFunctionBinding extends FunctionBinding {
   /**
    * The binding properties associated with a JavaScript function.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: JavaScriptFunctionBindingProperties;
 
   /**
@@ -1622,6 +1632,7 @@ model CSharpFunctionBinding extends FunctionBinding {
   /**
    * The binding properties associated with a CSharp function.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CSharpFunctionBindingProperties;
 
   /**
@@ -1663,6 +1674,7 @@ model AzureMachineLearningStudioFunctionRetrieveDefaultDefinitionParameters
   /**
    * The binding retrieval properties associated with an Azure Machine learning Studio.
    */
+  @extension("x-ms-client-flatten", true)
   bindingRetrievalProperties?: AzureMachineLearningStudioFunctionBindingRetrievalProperties;
 
   /**
@@ -1694,6 +1706,7 @@ model AzureMachineLearningServiceFunctionRetrieveDefaultDefinitionParameters
   /**
    * The binding retrieval properties associated with an Azure Machine learning web service.
    */
+  @extension("x-ms-client-flatten", true)
   bindingRetrievalProperties?: AzureMachineLearningServiceFunctionBindingRetrievalProperties;
 
   /**
@@ -1725,6 +1738,7 @@ model JavaScriptFunctionRetrieveDefaultDefinitionParameters
   /**
    * The binding retrieval properties associated with a JavaScript function.
    */
+  @extension("x-ms-client-flatten", true)
   bindingRetrievalProperties?: JavaScriptFunctionBindingRetrievalProperties;
 
   /**
@@ -1756,6 +1770,7 @@ model CSharpFunctionRetrieveDefaultDefinitionParameters
   /**
    * The binding retrieval properties associated with a CSharp function.
    */
+  @extension("x-ms-client-flatten", true)
   bindingRetrievalProperties?: CSharpFunctionBindingRetrievalProperties;
 
   /**
@@ -1786,6 +1801,7 @@ model AzureMachineLearningServiceFunctionBinding extends FunctionBinding {
   /**
    * The binding properties associated with an Azure Machine learning web service.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AzureMachineLearningServiceFunctionBindingProperties;
 
   /**
@@ -1953,6 +1969,7 @@ model BlobStreamInputDataSource extends StreamInputDataSource {
   /**
    * The properties that are associated with a blob input containing stream data. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BlobStreamInputDataSourceProperties;
 
   /**
@@ -2013,6 +2030,7 @@ model EventHubStreamInputDataSource extends StreamInputDataSource {
   /**
    * The properties that are associated with an Event Hub input containing stream data. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EventHubStreamInputDataSourceProperties;
 
   /**
@@ -2084,6 +2102,7 @@ model EventHubV2StreamInputDataSource extends StreamInputDataSource {
   /**
    * The properties that are associated with an Event Hub input containing stream data. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EventHubStreamInputDataSourceProperties;
 
   /**
@@ -2099,6 +2118,7 @@ model IoTHubStreamInputDataSource extends StreamInputDataSource {
   /**
    * The properties that are associated with an IoT Hub input containing stream data. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IoTHubStreamInputDataSourceProperties;
 
   /**
@@ -2144,6 +2164,7 @@ model RawStreamInputDataSource extends StreamInputDataSource {
   /**
    * The properties that are associated with a raw input. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RawInputDatasourceProperties;
 
   /**
@@ -2174,6 +2195,7 @@ model BlobReferenceInputDataSource extends ReferenceInputDataSource {
   /**
    * The properties that are associated with a blob input containing reference data. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BlobReferenceInputDataSourceProperties;
 
   /**
@@ -2221,6 +2243,7 @@ model RawReferenceInputDataSource extends ReferenceInputDataSource {
   /**
    * The properties that are associated with a raw input containing reference data. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RawInputDatasourceProperties;
 
   /**
@@ -2236,6 +2259,7 @@ model ParquetSerialization extends Serialization {
   /**
    * The properties that are associated with the Parquet serialization type. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<unknown>;
 
   /**
@@ -2251,6 +2275,7 @@ model CustomClrSerialization extends Serialization {
   /**
    * The properties that are associated with the CustomClr serialization type. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CustomClrSerializationProperties;
 
   /**
@@ -2281,6 +2306,7 @@ model CsvSerialization extends Serialization {
   /**
    * The properties that are associated with the CSV serialization type. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CsvSerializationProperties;
 
   /**
@@ -2311,6 +2337,7 @@ model JsonSerialization extends Serialization {
   /**
    * The properties that are associated with the JSON serialization type. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: JsonSerializationProperties;
 
   /**
@@ -2341,6 +2368,7 @@ model AvroSerialization extends Serialization {
   /**
    * The properties that are associated with the Avro serialization type. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<unknown>;
 
   /**
@@ -2356,6 +2384,7 @@ model AzureSqlReferenceInputDataSource extends ReferenceInputDataSource {
   /**
    * The properties that are associated with SQL DB input containing reference data. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AzureSqlReferenceInputDataSourceProperties;
 
   /**
@@ -2422,6 +2451,7 @@ model GatewayMessageBusStreamInputDataSource extends StreamInputDataSource {
   /**
    * The properties that are associated with a gateway message bus input containing stream data.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GatewayMessageBusStreamInputDataSourceProperties;
 
   /**
@@ -2453,6 +2483,7 @@ model EventGridStreamInputDataSource extends StreamInputDataSource {
   /**
    * The properties that are associated with an event grid input containing stream data.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EventGridStreamInputDataSourceProperties;
 
   /**
@@ -2493,6 +2524,7 @@ model RawOutputDatasource extends OutputDataSource {
   /**
    * The properties that are associated with a raw output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RawOutputDatasourceProperties;
 
   /**
@@ -2518,6 +2550,7 @@ model BlobOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with a blob output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BlobOutputDataSourceProperties;
 
   /**
@@ -2548,6 +2581,7 @@ model AzureTableOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with an Azure Table output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AzureTableOutputDataSourceProperties;
 
   /**
@@ -2603,6 +2637,7 @@ model EventHubOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with an Event Hub output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EventHubOutputDataSourceProperties;
 
   /**
@@ -2633,6 +2668,7 @@ model EventHubV2OutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with an Event Hub output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EventHubOutputDataSourceProperties;
 
   /**
@@ -2648,6 +2684,7 @@ model AzureSqlDatabaseOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with an Azure SQL database output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AzureSqlDatabaseOutputDataSourceProperties;
 
   /**
@@ -2714,6 +2751,7 @@ model AzureSynapseOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with an Azure Synapse output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AzureSynapseOutputDataSourceProperties;
 
   /**
@@ -2770,6 +2808,7 @@ model PostgreSQLOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with a PostgreSQL output data source. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PostgreSQLOutputDataSourceProperties;
 
   /**
@@ -2831,6 +2870,7 @@ model DocumentDbOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with a DocumentDB output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DocumentDbOutputDataSourceProperties;
 
   /**
@@ -2886,6 +2926,7 @@ model AzureFunctionOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with a Azure Function output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AzureFunctionOutputDataSourceProperties;
 
   /**
@@ -2931,6 +2972,7 @@ model ServiceBusQueueOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with a Service Bus Queue output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ServiceBusQueueOutputDataSourceProperties;
 
   /**
@@ -2967,6 +3009,7 @@ model ServiceBusTopicOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with a Service Bus Topic output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ServiceBusTopicOutputDataSourceProperties;
 
   /**
@@ -3003,6 +3046,7 @@ model PowerBIOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with a Power BI output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PowerBIOutputDataSourceProperties;
 
   /**
@@ -3068,6 +3112,7 @@ model AzureDataLakeStoreOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with an Azure Data Lake Store output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AzureDataLakeStoreOutputDataSourceProperties;
 
   /**
@@ -3119,6 +3164,7 @@ model GatewayMessageBusOutputDataSource extends OutputDataSource {
   /**
    * The properties that are associated with a Gateway Message Bus output. Required on PUT (CreateOrReplace) requests.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GatewayMessageBusOutputDataSourceProperties;
 
   /**

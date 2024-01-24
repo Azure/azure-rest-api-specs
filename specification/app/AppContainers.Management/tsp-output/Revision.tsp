@@ -15,8 +15,12 @@ namespace Microsoft.App;
 /**
  * Container App Revision.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ContainerApp)
-model Revision is ProxyResource<RevisionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RevisionProperties)
+@includeInapplicableMetadataInPayload(false)
+model Revision extends ProxyResourceBase {
   /**
    * Name of the Container App Revision.
    */
@@ -24,6 +28,12 @@ model Revision is ProxyResource<RevisionProperties> {
   @key("revisionName")
   @segment("revisions")
   name: string;
+
+  /**
+   * Revision resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RevisionProperties;
 }
 
 @armResourceOperations

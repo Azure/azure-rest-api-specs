@@ -15,13 +15,24 @@ namespace Microsoft.DevCenter;
 /**
  * Health Check details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("latest")
 @parentResource(NetworkConnection)
-model HealthCheckStatusDetails
-  is ProxyResource<HealthCheckStatusDetailsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  HealthCheckStatusDetailsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model HealthCheckStatusDetails extends ProxyResourceBase {
   @key("healthCheck")
   @segment("healthChecks")
   name: string;
+
+  /**
+   * Health check status details properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: HealthCheckStatusDetailsProperties;
 }
 
 @armResourceOperations

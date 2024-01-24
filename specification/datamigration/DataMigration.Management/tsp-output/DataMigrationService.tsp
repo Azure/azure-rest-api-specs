@@ -14,7 +14,13 @@ namespace Microsoft.DataMigration;
 /**
  * A Database Migration Service resource
  */
-model DataMigrationService is TrackedResource<DataMigrationServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  DataMigrationServiceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DataMigrationService extends TrackedResource {
   /**
    * Name of the service
    */
@@ -28,8 +34,21 @@ model DataMigrationService is TrackedResource<DataMigrationServiceProperties> {
    */
   etag?: string;
 
-  ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * The resource kind. Only 'vm' (the default) is supported.
+   */
+  kind?: string;
+
+  /**
+   * Service SKU
+   */
+  sku?: ServiceSku;
+
+  /**
+   * Custom service properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataMigrationServiceProperties;
 }
 
 @armResourceOperations

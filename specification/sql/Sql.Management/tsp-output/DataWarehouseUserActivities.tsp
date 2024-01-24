@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * User activities of a data warehouse
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model DataWarehouseUserActivities
-  is ProxyResource<DataWarehouseUserActivitiesProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DataWarehouseUserActivitiesProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DataWarehouseUserActivities extends ProxyResource {
   /**
    * The activity name of the data warehouse.
    */
@@ -25,6 +30,12 @@ model DataWarehouseUserActivities
   @key("dataWarehouseUserActivityName")
   @segment("dataWarehouseUserActivities")
   name: DataWarehouseUserActivityName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataWarehouseUserActivitiesProperties;
 }
 
 @armResourceOperations

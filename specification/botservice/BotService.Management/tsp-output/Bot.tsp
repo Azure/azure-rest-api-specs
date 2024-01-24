@@ -14,7 +14,11 @@ namespace Microsoft.BotService;
 /**
  * Bot resource definition
  */
-model Bot is TrackedResource<BotProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(BotProperties)
+@includeInapplicableMetadataInPayload(false)
+model Bot extends TrackedResourceBase {
   /**
    * The name of the Bot resource.
    */
@@ -25,6 +29,12 @@ model Bot is TrackedResource<BotProperties> {
   @key("resourceName")
   @segment("botServices")
   name: string;
+
+  /**
+   * The set of properties specific to bot resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BotProperties;
 }
 
 @armResourceOperations

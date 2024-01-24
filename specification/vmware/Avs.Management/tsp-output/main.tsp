@@ -38,6 +38,7 @@ using TypeSpec.Versioning;
  * Azure VMware Solution API
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure VMware Solution API",
 })

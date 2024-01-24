@@ -15,8 +15,12 @@ namespace Microsoft.StorageMover;
 /**
  * The Job Run resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(JobDefinition)
-model JobRun is ProxyResource<JobRunProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobRunProperties)
+@includeInapplicableMetadataInPayload(false)
+model JobRun extends ProxyResourceBase {
   /**
    * The name of the Job Run resource.
    */
@@ -24,6 +28,12 @@ model JobRun is ProxyResource<JobRunProperties> {
   @key("jobRunName")
   @segment("jobRuns")
   name: string;
+
+  /**
+   * Job run properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobRunProperties;
 }
 
 @armResourceOperations

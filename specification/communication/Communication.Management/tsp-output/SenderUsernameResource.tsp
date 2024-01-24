@@ -15,8 +15,12 @@ namespace Microsoft.Communication;
 /**
  * A class representing a SenderUsername resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DomainResource)
-model SenderUsernameResource is ProxyResource<SenderUsernameProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SenderUsernameProperties)
+@includeInapplicableMetadataInPayload(false)
+model SenderUsernameResource extends ProxyResourceBase {
   /**
    * The valid sender Username.
    */
@@ -26,6 +30,12 @@ model SenderUsernameResource is ProxyResource<SenderUsernameProperties> {
   @key("senderUsername")
   @segment("senderUsernames")
   name: string;
+
+  /**
+   * The properties of a SenderUsername resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SenderUsernameProperties;
 }
 
 @armResourceOperations

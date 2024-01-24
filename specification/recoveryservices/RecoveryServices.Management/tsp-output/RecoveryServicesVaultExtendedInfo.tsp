@@ -15,13 +15,22 @@ namespace Microsoft.RecoveryServices;
 /**
  * Vault extended information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("vaultExtendedInfo")
 @parentResource(Vault)
-model RecoveryServicesVaultExtendedInfo
-  is ProxyResource<VaultExtendedInfoProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VaultExtendedInfoProperties)
+@includeInapplicableMetadataInPayload(false)
+model RecoveryServicesVaultExtendedInfo extends ProxyResourceBase {
   @key("extendedInformation")
   @segment("extendedInformation")
   name: string;
+
+  /**
+   * Vault extended information.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VaultExtendedInfoProperties;
 }
 
 @armResourceOperations

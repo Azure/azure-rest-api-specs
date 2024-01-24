@@ -15,8 +15,12 @@ namespace Microsoft.AppPlatform;
 /**
  * Deployment resource payload
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AppResource)
-model DeploymentResource is ProxyResource<DeploymentResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DeploymentResourceProperties)
+@includeInapplicableMetadataInPayload(false)
+model DeploymentResource extends ProxyResource {
   /**
    * The name of the Deployment resource.
    */
@@ -25,7 +29,16 @@ model DeploymentResource is ProxyResource<DeploymentResourceProperties> {
   @segment("deployments")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Sku of the Deployment resource
+   */
+  sku?: Sku;
+
+  /**
+   * Properties of the Deployment resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeploymentResourceProperties;
 }
 
 @armResourceOperations

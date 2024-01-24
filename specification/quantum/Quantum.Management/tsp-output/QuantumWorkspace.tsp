@@ -14,7 +14,11 @@ namespace Microsoft.Quantum;
 /**
  * The resource proxy definition object for quantum workspace.
  */
-model QuantumWorkspace is TrackedResource<WorkspaceResourceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WorkspaceResourceProperties)
+@includeInapplicableMetadataInPayload(false)
+model QuantumWorkspace extends TrackedResourceBase {
   /**
    * The name of the quantum workspace resource.
    */
@@ -22,6 +26,12 @@ model QuantumWorkspace is TrackedResource<WorkspaceResourceProperties> {
   @key("workspaceName")
   @segment("workspaces")
   name: string;
+
+  /**
+   * Gets or sets the properties. Define quantum workspace's specific properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkspaceResourceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

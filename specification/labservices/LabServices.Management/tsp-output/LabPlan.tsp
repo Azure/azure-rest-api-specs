@@ -14,7 +14,11 @@ namespace Microsoft.LabServices;
 /**
  * Lab Plans act as a permission container for creating labs via labs.azure.com. Additionally, they can provide a set of default configurations that will apply at the time of creating a lab, but these defaults can still be overwritten.
  */
-model LabPlan is TrackedResource<LabPlanProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(LabPlanProperties)
+@includeInapplicableMetadataInPayload(false)
+model LabPlan extends TrackedResourceBase {
   /**
    * The name of the lab plan that uniquely identifies it within containing resource group. Used in resource URIs and in UI.
    */
@@ -24,6 +28,12 @@ model LabPlan is TrackedResource<LabPlanProperties> {
   @key("labPlanName")
   @segment("labPlans")
   name: string;
+
+  /**
+   * Lab plan resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LabPlanProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1054,6 +1056,7 @@ model AutoscaleSettingResourcePatch {
   /**
    * The autoscale setting properties of the update operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AutoscaleSetting;
 }
 
@@ -1288,6 +1291,7 @@ model AlertRuleResourcePatch {
   /**
    * The properties of an alert rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AlertRule;
 }
 
@@ -1348,6 +1352,7 @@ model LogProfileResourcePatch {
   /**
    * The log profile properties for an update operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LogProfileProperties;
 }
 
@@ -1913,6 +1918,7 @@ model ActionGroupPatchBody {
   /**
    * The action group settings for an update operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ActionGroupPatch;
 }
 
@@ -2601,17 +2607,17 @@ model SubscriptionScopeMetricsRequestBodyParameters {
   filter?: string;
 
   /**
-* The maximum number of records to retrieve.
-Valid only if $filter is specified.
-Defaults to 10.
-*/
+   * The maximum number of records to retrieve.
+   * Valid only if $filter is specified.
+   * Defaults to 10.
+   */
   top?: int32;
 
   /**
-* The aggregation to use for sorting results and the direction of the sort.
-Only one order can be specified.
-Examples: sum asc.
-*/
+   * The aggregation to use for sorting results and the direction of the sort.
+   * Only one order can be specified.
+   * Examples: sum asc.
+   */
   orderBy?: string;
 
   /**
@@ -2754,6 +2760,7 @@ model SingleMetricBaseline {
   /**
    * The metric baseline properties of the metric.
    */
+  @extension("x-ms-client-flatten", true)
   properties: MetricBaselinesProperties;
 }
 
@@ -2968,6 +2975,7 @@ model MetricAlertResourcePatch {
   /**
    * The alert rule properties of the resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MetricAlertPropertiesPatch;
 }
 
@@ -3383,6 +3391,7 @@ model ScheduledQueryRuleResourcePatch {
   /**
    * The scheduled query rule properties of the resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ScheduledQueryRuleProperties;
 }
 
@@ -3490,6 +3499,7 @@ model WorkspaceInfo {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: WorkspaceInfoProperties;
 }
 
@@ -3837,15 +3847,15 @@ model AlertRuleAllOfCondition {
 }
 
 /**
-* An Activity Log Alert rule condition that is met when all its member conditions are met.
-Each condition can be of one of the following types:
-__Important__: Each type has its unique subset of properties. Properties from different types CANNOT exist in one condition.
-   * __Leaf Condition -__ must contain 'field' and either 'equals' or 'containsAny'.
-  _Please note, 'anyOf' should __not__ be set in a Leaf Condition._
-  * __AnyOf Condition -__ must contain __only__ 'anyOf' (which is an array of Leaf Conditions).
-  _Please note, 'field', 'equals' and 'containsAny' should __not__ be set in an AnyOf Condition._
-
-*/
+ * An Activity Log Alert rule condition that is met when all its member conditions are met.
+ * Each condition can be of one of the following types:
+ * __Important__: Each type has its unique subset of properties. Properties from different types CANNOT exist in one condition.
+ *    * __Leaf Condition -__ must contain 'field' and either 'equals' or 'containsAny'.
+ *   _Please note, 'anyOf' should __not__ be set in a Leaf Condition._
+ *   * __AnyOf Condition -__ must contain __only__ 'anyOf' (which is an array of Leaf Conditions).
+ *   _Please note, 'field', 'equals' and 'containsAny' should __not__ be set in an AnyOf Condition._
+ *
+ */
 model AlertRuleAnyOfOrLeafCondition extends AlertRuleLeafCondition {
   /**
    * An Activity Log Alert rule condition that is met when at least one of its member leaf conditions are met.
@@ -3854,14 +3864,14 @@ model AlertRuleAnyOfOrLeafCondition extends AlertRuleLeafCondition {
 }
 
 /**
-* An Activity Log Alert rule condition that is met by comparing the field and value of an Activity Log event.
-This condition must contain 'field' and either 'equals' or 'containsAny'.
-*/
+ * An Activity Log Alert rule condition that is met by comparing the field and value of an Activity Log event.
+ * This condition must contain 'field' and either 'equals' or 'containsAny'.
+ */
 model AlertRuleLeafCondition {
   /**
-* The name of the Activity Log event's field that this condition will examine.
-The possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties'.
-*/
+   * The name of the Activity Log event's field that this condition will examine.
+   * The possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties'.
+   */
   field?: string;
 
   /**
@@ -3964,6 +3974,7 @@ model AlertRulePatchObject {
   /**
    * The activity log alert settings for an update operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AlertRulePatchProperties;
 }
 
@@ -4297,9 +4308,9 @@ model DataCollectionRule {
   streamDeclarations?: Record<StreamDeclaration>;
 
   /**
-* The specification of data sources. 
-This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
-*/
+   * The specification of data sources.
+   * This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
+   */
   dataSources?: DataCollectionRuleDataSources;
 
   /**
@@ -4350,9 +4361,9 @@ model ColumnDefinition {
 }
 
 /**
-* The specification of data sources. 
-This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
-*/
+ * The specification of data sources.
+ * This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
+ */
 model DataCollectionRuleDataSources extends DataSourcesSpec {}
 
 /**
@@ -4411,14 +4422,14 @@ model DataSourcesSpec {
 }
 
 /**
-* Definition of which performance counters will be collected and how they will be collected by this data collection rule.
-Collected from both Windows and Linux machines where the counter is present.
-*/
+ * Definition of which performance counters will be collected and how they will be collected by this data collection rule.
+ * Collected from both Windows and Linux machines where the counter is present.
+ */
 model PerfCounterDataSource {
   /**
-* List of streams that this data source will be sent to.
-A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
-*/
+   * List of streams that this data source will be sent to.
+   * A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
+   */
   streams?: KnownPerfCounterDataSourceStreams[];
 
   /**
@@ -4427,28 +4438,28 @@ A stream indicates what schema will be used for this data and usually what table
   samplingFrequencyInSeconds?: int32;
 
   /**
-* A list of specifier names of the performance counters you want to collect.
-Use a wildcard (*) to collect a counter for all instances.
-To get a list of performance counters on Windows, run the command 'typeperf'.
-*/
+   * A list of specifier names of the performance counters you want to collect.
+   * Use a wildcard (*) to collect a counter for all instances.
+   * To get a list of performance counters on Windows, run the command 'typeperf'.
+   */
   counterSpecifiers?: string[];
 
   /**
-* A friendly name for the data source. 
-This name should be unique across all data sources (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
 /**
-* Definition of which Windows Event Log events will be collected and how they will be collected.
-Only collected from Windows machines.
-*/
+ * Definition of which Windows Event Log events will be collected and how they will be collected.
+ * Only collected from Windows machines.
+ */
 model WindowsEventLogDataSource {
   /**
-* List of streams that this data source will be sent to.
-A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
-*/
+   * List of streams that this data source will be sent to.
+   * A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
+   */
   streams?: KnownWindowsEventLogDataSourceStreams[];
 
   /**
@@ -4457,21 +4468,21 @@ A stream indicates what schema will be used for this data and usually what table
   xPathQueries?: string[];
 
   /**
-* A friendly name for the data source. 
-This name should be unique across all data sources (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
 /**
-* Definition of which syslog data will be collected and how it will be collected.
-Only collected from Linux machines.
-*/
+ * Definition of which syslog data will be collected and how it will be collected.
+ * Only collected from Linux machines.
+ */
 model SyslogDataSource {
   /**
-* List of streams that this data source will be sent to.
-A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
-*/
+   * List of streams that this data source will be sent to.
+   * A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
+   */
   streams?: KnownSyslogDataSourceStreams[];
 
   /**
@@ -4485,21 +4496,21 @@ A stream indicates what schema will be used for this data and usually what table
   logLevels?: KnownSyslogDataSourceLogLevels[];
 
   /**
-* A friendly name for the data source. 
-This name should be unique across all data sources (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
 /**
-* Definition of which data will be collected from a separate VM extension that integrates with the Azure Monitor Agent.
-Collected from either Windows and Linux machines, depending on which extension is defined.
-*/
+ * Definition of which data will be collected from a separate VM extension that integrates with the Azure Monitor Agent.
+ * Collected from either Windows and Linux machines, depending on which extension is defined.
+ */
 model ExtensionDataSource {
   /**
-* List of streams that this data source will be sent to.
-A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
-*/
+   * List of streams that this data source will be sent to.
+   * A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
+   */
   streams?: KnownExtensionDataSourceStreams[];
 
   /**
@@ -4518,9 +4529,9 @@ A stream indicates what schema will be used for this data and usually what table
   inputDataSources?: string[];
 
   /**
-* A friendly name for the data source. 
-This name should be unique across all data sources (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4529,9 +4540,9 @@ This name should be unique across all data sources (regardless of type) within t
  */
 model LogFilesDataSource {
   /**
-* List of streams that this data source will be sent to.
-A stream indicates what schema will be used for this data source
-*/
+   * List of streams that this data source will be sent to.
+   * A stream indicates what schema will be used for this data source
+   */
   streams: string[];
 
   /**
@@ -4550,9 +4561,9 @@ A stream indicates what schema will be used for this data source
   settings?: LogFilesDataSourceSettings;
 
   /**
-* A friendly name for the data source. 
-This name should be unique across all data sources (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4601,9 +4612,9 @@ model IisLogsDataSource {
   logDirectories?: string[];
 
   /**
-* A friendly name for the data source. 
-This name should be unique across all data sources (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4617,9 +4628,9 @@ model WindowsFirewallLogsDataSource {
   streams: string[];
 
   /**
-* A friendly name for the data source. 
-This name should be unique across all data sources (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4633,16 +4644,16 @@ model PrometheusForwarderDataSource {
   streams?: KnownPrometheusForwarderDataSourceStreams[];
 
   /**
-* The list of label inclusion filters in the form of label "name-value" pairs.
-Currently only one label is supported: 'microsoft_metrics_include_label'.
-Label values are matched case-insensitively.
-*/
+   * The list of label inclusion filters in the form of label "name-value" pairs.
+   * Currently only one label is supported: 'microsoft_metrics_include_label'.
+   * Label values are matched case-insensitively.
+   */
   labelIncludeFilter?: Record<string>;
 
   /**
-* A friendly name for the data source. 
-This name should be unique across all data sources (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4656,9 +4667,9 @@ model PlatformTelemetryDataSource {
   streams: string[];
 
   /**
-* A friendly name for the data source. 
-This name should be unique across all data sources (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4681,9 +4692,9 @@ model DataImportSourcesEventHub extends EventHubDataSource {}
 
 model EventHubDataSource {
   /**
-* A friendly name for the data source. 
-This name should be unique across all data sources (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the data source.
+   * This name should be unique across all data sources (regardless of type) within the data collection rule.
+   */
   name?: string;
 
   /**
@@ -4763,9 +4774,9 @@ model LogAnalyticsDestination {
   workspaceId?: string;
 
   /**
-* A friendly name for the destination. 
-This name should be unique across all destinations (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the destination.
+   * This name should be unique across all destinations (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4785,9 +4796,9 @@ model MonitoringAccountDestination {
   accountId?: string;
 
   /**
-* A friendly name for the destination. 
-This name should be unique across all destinations (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the destination.
+   * This name should be unique across all destinations (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4802,9 +4813,9 @@ model DestinationsSpecAzureMonitorMetrics
  */
 model AzureMonitorMetricsDestination {
   /**
-* A friendly name for the destination. 
-This name should be unique across all destinations (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the destination.
+   * This name should be unique across all destinations (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4815,9 +4826,9 @@ model EventHubDestination {
   eventHubResourceId?: string;
 
   /**
-* A friendly name for the destination. 
-This name should be unique across all destinations (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the destination.
+   * This name should be unique across all destinations (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4828,9 +4839,9 @@ model EventHubDirectDestination {
   eventHubResourceId?: string;
 
   /**
-* A friendly name for the destination. 
-This name should be unique across all destinations (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the destination.
+   * This name should be unique across all destinations (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4846,9 +4857,9 @@ model StorageBlobDestination {
   storageAccountResourceId?: string;
 
   /**
-* A friendly name for the destination. 
-This name should be unique across all destinations (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the destination.
+   * This name should be unique across all destinations (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -4864,9 +4875,9 @@ model StorageTableDestination {
   storageAccountResourceId?: string;
 
   /**
-* A friendly name for the destination. 
-This name should be unique across all destinations (regardless of type) within the data collection rule.
-*/
+   * A friendly name for the destination.
+   * This name should be unique across all destinations (regardless of type) within the data collection rule.
+   */
   name?: string;
 }
 
@@ -5007,6 +5018,7 @@ model MonitorWorkspacePrivateEndpointConnection extends CommonResourceV4 {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MonitorWorkspacePrivateEndpointConnectionProperties;
 }
 

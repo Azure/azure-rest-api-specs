@@ -15,8 +15,12 @@ namespace Microsoft.AppConfiguration;
 /**
  * The key-value resource along with all resource properties.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ConfigurationStore)
-model KeyValue is ProxyResource<KeyValueProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(KeyValueProperties)
+@includeInapplicableMetadataInPayload(false)
+model KeyValue extends ProxyResourceBase {
   /**
    * Identifier of key and label combination. Key and label are joined by $ character. Label is optional.
    */
@@ -24,6 +28,12 @@ model KeyValue is ProxyResource<KeyValueProperties> {
   @key("keyValueName")
   @segment("keyValues")
   name: string;
+
+  /**
+   * All key-value properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: KeyValueProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.AzureStackHCI;
 /**
  * The virtual hard disk resource definition.
  */
-model VirtualHardDisks is TrackedResource<VirtualHardDiskProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(VirtualHardDiskProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualHardDisks extends TrackedResourceBase {
   /**
    * Name of the virtual hard disk
    */
@@ -30,6 +34,12 @@ model VirtualHardDisks is TrackedResource<VirtualHardDiskProperties> {
    * The extendedLocation of the resource.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties under the virtual hard disk resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualHardDiskProperties;
 }
 
 @armResourceOperations

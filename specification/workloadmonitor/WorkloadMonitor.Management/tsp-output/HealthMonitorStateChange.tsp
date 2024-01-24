@@ -15,9 +15,14 @@ namespace Microsoft.WorkloadMonitor;
 /**
  * Information about the monitor’s health state change at the provided timestamp.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(HealthMonitor)
-model HealthMonitorStateChange
-  is ProxyResource<HealthMonitorStateChangeProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  HealthMonitorStateChangeProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model HealthMonitorStateChange extends Resource {
   /**
    * The timestamp of the state change (unix format).
    */
@@ -25,6 +30,12 @@ model HealthMonitorStateChange
   @key("timestampUnix")
   @segment("history")
   name: string;
+
+  /**
+   * Properties of the monitor's state change.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: HealthMonitorStateChangeProperties;
 }
 
 @armResourceOperations

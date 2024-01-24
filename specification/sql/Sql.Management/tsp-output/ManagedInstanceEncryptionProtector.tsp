@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * The managed instance encryption protector.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model ManagedInstanceEncryptionProtector
-  is ProxyResource<ManagedInstanceEncryptionProtectorProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedInstanceEncryptionProtectorProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedInstanceEncryptionProtector extends ProxyResource {
   /**
    * The name of the encryption protector to be retrieved.
    */
@@ -26,7 +31,17 @@ model ManagedInstanceEncryptionProtector
   @segment("encryptionProtector")
   name: EncryptionProtectorName;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Kind of encryption protector. This is metadata used for the Azure portal experience.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedInstanceEncryptionProtectorProperties;
 }
 
 @armResourceOperations

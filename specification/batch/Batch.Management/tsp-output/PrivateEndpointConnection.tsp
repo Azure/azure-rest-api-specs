@@ -15,9 +15,14 @@ namespace Microsoft.Batch;
 /**
  * Contains information about a private link resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BatchAccount)
-model PrivateEndpointConnection
-  is ProxyResource<PrivateEndpointConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateEndpointConnectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnection extends ProxyResource {
   /**
    * The private endpoint connection name. This must be unique within the account.
    */
@@ -28,6 +33,12 @@ model PrivateEndpointConnection
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
+
+  /**
+   * The properties associated with the private endpoint connection.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations

@@ -18,6 +18,7 @@ using TypeSpec.Versioning;
  * Edge Order API's
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "EdgeOrderManagementClient",
 })

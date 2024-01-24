@@ -15,8 +15,12 @@ namespace Microsoft.App;
 /**
  * Certificate used for Custom Domain bindings of Container Apps in a Managed Environment
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ConnectedEnvironment)
-model Certificate is TrackedResource<CertificateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
+@includeInapplicableMetadataInPayload(false)
+model Certificate extends TrackedResourceBase {
   /**
    * Name of the Certificate.
    */
@@ -24,6 +28,12 @@ model Certificate is TrackedResource<CertificateProperties> {
   @key("certificateName")
   @segment("certificates")
   name: string;
+
+  /**
+   * Certificate resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CertificateProperties;
 }
 
 @armResourceOperations

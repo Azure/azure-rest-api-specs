@@ -14,8 +14,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * A deleted app.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model DeletedSite is ProxyResource<DeletedSiteProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DeletedSiteProperties)
+@includeInapplicableMetadataInPayload(false)
+model DeletedSite extends ProxyOnlyResource {
   /**
    * The numeric ID of the deleted app, e.g. 12345
    */
@@ -23,6 +27,12 @@ model DeletedSite is ProxyResource<DeletedSiteProperties> {
   @key("deletedSiteId")
   @segment("deletedSites")
   name: string;
+
+  /**
+   * DeletedSite resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeletedSiteProperties;
 }
 
 @armResourceOperations

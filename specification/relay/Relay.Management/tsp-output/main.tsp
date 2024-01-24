@@ -24,6 +24,7 @@ using TypeSpec.Versioning;
  * Use these API to manage Azure Relay resources through Azure Resource Manager.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Relay API",
 })

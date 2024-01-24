@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(JobAgent)
-model Job is ProxyResource<JobProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
+@includeInapplicableMetadataInPayload(false)
+model Job extends ProxyResource {
   /**
    * The name of the job to get.
    */
@@ -24,6 +28,12 @@ model Job is ProxyResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobProperties;
 }
 
 @armResourceOperations

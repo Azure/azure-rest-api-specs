@@ -14,8 +14,14 @@ namespace Microsoft.Support;
 /**
  * Object that represents FileWorkspaceDetails resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model FileWorkspaceDetails is ProxyResource<FileWorkspaceDetailsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  FileWorkspaceDetailsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model FileWorkspaceDetails extends ProxyResourceBase {
   /**
    * File Workspace Name
    */
@@ -23,6 +29,12 @@ model FileWorkspaceDetails is ProxyResource<FileWorkspaceDetailsProperties> {
   @key("fileWorkspaceName")
   @segment("fileWorkspaces")
   name: string;
+
+  /**
+   * Properties of the resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FileWorkspaceDetailsProperties;
 }
 
 @armResourceOperations

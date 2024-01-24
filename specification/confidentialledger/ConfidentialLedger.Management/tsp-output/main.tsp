@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
  * Microsoft Azure Confidential Compute Ledger Control Plane REST API version 2020-12-01-preview.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ConfidentialLedger",
 })

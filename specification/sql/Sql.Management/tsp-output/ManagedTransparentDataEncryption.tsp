@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A managed database transparent data encryption state.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedDatabase)
-model ManagedTransparentDataEncryption
-  is ProxyResource<ManagedTransparentDataEncryptionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedTransparentDataEncryptionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedTransparentDataEncryption extends ProxyResource {
   /**
    * The name of the transparent data encryption configuration.
    */
@@ -25,6 +30,12 @@ model ManagedTransparentDataEncryption
   @key("tdeName")
   @segment("transparentDataEncryption")
   name: TransparentDataEncryptionName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedTransparentDataEncryptionProperties;
 }
 
 @armResourceOperations

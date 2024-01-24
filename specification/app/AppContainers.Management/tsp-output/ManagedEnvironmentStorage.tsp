@@ -14,8 +14,13 @@ namespace Microsoft.App;
 /**
  * Storage resource for managedEnvironment.
  */
-model ManagedEnvironmentStorage
-  is ProxyResource<ManagedEnvironmentStorageProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedEnvironmentStorageProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedEnvironmentStorage extends ProxyResourceBase {
   /**
    * Name of the storage.
    */
@@ -23,6 +28,12 @@ model ManagedEnvironmentStorage
   @key("storageName")
   @segment("storages")
   name: string;
+
+  /**
+   * Storage properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedEnvironmentStorageProperties;
 }
 
 @armResourceOperations

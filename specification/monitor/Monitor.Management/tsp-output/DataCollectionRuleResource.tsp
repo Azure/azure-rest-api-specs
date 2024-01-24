@@ -14,8 +14,13 @@ namespace Microsoft.Insights;
 /**
  * Definition of ARM tracked top level resource.
  */
-model DataCollectionRuleResource
-  is TrackedResource<DataCollectionRuleResourceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  DataCollectionRuleResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DataCollectionRuleResource extends TrackedResourceBase {
   /**
    * The name of the data collection rule. The name is case insensitive.
    */
@@ -25,13 +30,23 @@ model DataCollectionRuleResource
   name: string;
 
   /**
+   * The kind of the resource.
+   */
+  kind?: KnownDataCollectionRuleResourceKind;
+
+  /**
    * Resource entity tag (ETag).
    */
   @visibility("read")
   etag?: string;
 
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataCollectionRuleResourceProperties;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations

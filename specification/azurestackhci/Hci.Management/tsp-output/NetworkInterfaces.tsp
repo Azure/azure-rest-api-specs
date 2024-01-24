@@ -14,7 +14,11 @@ namespace Microsoft.AzureStackHCI;
 /**
  * The network interface resource definition.
  */
-model NetworkInterfaces is TrackedResource<NetworkInterfaceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(NetworkInterfaceProperties)
+@includeInapplicableMetadataInPayload(false)
+model NetworkInterfaces extends TrackedResourceBase {
   /**
    * Name of the network interface
    */
@@ -30,6 +34,12 @@ model NetworkInterfaces is TrackedResource<NetworkInterfaceProperties> {
    * The extendedLocation of the resource.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties under the network interface resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NetworkInterfaceProperties;
 }
 
 @armResourceOperations

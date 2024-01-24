@@ -15,8 +15,14 @@ namespace Microsoft.Sql;
 /**
  * The server encryption protector.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model EncryptionProtector is ProxyResource<EncryptionProtectorProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  EncryptionProtectorProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model EncryptionProtector extends ProxyResource {
   /**
    * The name of the encryption protector to be retrieved.
    */
@@ -25,7 +31,17 @@ model EncryptionProtector is ProxyResource<EncryptionProtectorProperties> {
   @segment("encryptionProtector")
   name: EncryptionProtectorName;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Kind of encryption protector. This is metadata used for the Azure portal experience.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: EncryptionProtectorProperties;
 }
 
 @armResourceOperations

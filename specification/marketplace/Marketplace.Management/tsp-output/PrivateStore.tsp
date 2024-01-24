@@ -14,8 +14,12 @@ namespace Microsoft.Marketplace;
 /**
  * The PrivateStore data structure.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model PrivateStore is ProxyResource<PrivateStoreProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PrivateStoreProperties)
+@includeInapplicableMetadataInPayload(false)
+model PrivateStore extends Resource {
   /**
    * The store ID - must use the tenant ID
    */
@@ -23,6 +27,12 @@ model PrivateStore is ProxyResource<PrivateStoreProperties> {
   @key("privateStoreId")
   @segment("privateStores")
   name: string;
+
+  /**
+   * The PrivateStore data structure.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateStoreProperties;
 }
 
 @armResourceOperations

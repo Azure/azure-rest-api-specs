@@ -14,7 +14,11 @@ namespace Microsoft.ManagedNetwork;
 /**
  * The Managed Network resource
  */
-model ScopeAssignment is ExtensionResource<ScopeAssignmentProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ScopeAssignmentProperties)
+@includeInapplicableMetadataInPayload(false)
+model ScopeAssignment extends ProxyResource {
   /**
    * The name of the scope assignment to get.
    */
@@ -22,6 +26,12 @@ model ScopeAssignment is ExtensionResource<ScopeAssignmentProperties> {
   @key("scopeAssignmentName")
   @segment("scopeAssignments")
   name: string;
+
+  /**
+   * The Scope Assignment properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ScopeAssignmentProperties;
 }
 
 @armResourceOperations

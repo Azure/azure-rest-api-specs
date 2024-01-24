@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
  * Billing Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "BillingManagementClient",
 })

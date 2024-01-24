@@ -14,9 +14,14 @@ namespace Microsoft.Sql;
 /**
  * A long term retention backup for a managed database.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model ManagedInstanceLongTermRetentionBackup
-  is ProxyResource<ManagedInstanceLongTermRetentionBackupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedInstanceLongTermRetentionBackupProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedInstanceLongTermRetentionBackup extends ProxyResource {
   /**
    * The backup name.
    */
@@ -24,6 +29,12 @@ model ManagedInstanceLongTermRetentionBackup
   @key("backupName")
   @segment("longTermRetentionManagedInstanceBackups")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedInstanceLongTermRetentionBackupProperties;
 }
 
 @armResourceOperations

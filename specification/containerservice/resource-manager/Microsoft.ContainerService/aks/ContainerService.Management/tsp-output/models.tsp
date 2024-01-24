@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -699,6 +701,7 @@ model OperationValue {
   /**
    * Describes the properties of a Operation Value Display.
    */
+  @extension("x-ms-client-flatten", true)
   display?: OperationValueDisplay;
 }
 
@@ -2979,6 +2982,7 @@ model ManagedClusterAccessProfile extends TrackedResource {
   /**
    * AccessProfile of a managed cluster.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AccessProfile;
 }
 
@@ -3318,6 +3322,7 @@ model AgentPoolAvailableVersions {
   /**
    * Properties of agent pool available versions.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AgentPoolAvailableVersionsProperties;
 }
 
@@ -3438,6 +3443,7 @@ model RunCommandResult {
   /**
    * Properties of command result.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CommandResultProperties;
 }
 

@@ -269,9 +269,9 @@ enum ExistingResourcePolicy {
 }
 
 /**
-* Denotes the target location where the data will be restored,
-string value for the enum {Microsoft.Internal.AzureBackup.DataProtection.Common.Interface.RestoreTargetLocationType}
-*/
+ * Denotes the target location where the data will be restored,
+ * string value for the enum {Microsoft.Internal.AzureBackup.DataProtection.Common.Interface.RestoreTargetLocationType}
+ */
 enum RestoreTargetLocationType {
   Invalid,
   AzureBlobs,
@@ -825,9 +825,9 @@ model BackupInstance {
   validationType?: ValidationType;
 
   /**
-* Contains information of the Identity Details for the BI.
-If it is null, default will be considered as System Assigned.
-*/
+   * Contains information of the Identity Details for the BI.
+   * If it is null, default will be considered as System Assigned.
+   */
   identityDetails?: IdentityDetails;
 
   objectType: string;
@@ -1174,10 +1174,10 @@ model ValidateForBackupRequest {
 model AzureBackupRecoveryPoint {}
 
 /**
-* Information about BI whose secondary RecoveryPoints are requested
-Source region and
-BI ARM path
-*/
+ * Information about BI whose secondary RecoveryPoints are requested
+ * Source region and
+ * BI ARM path
+ */
 model FetchSecondaryRPsRequestParameters {
   /**
    * Source region in which BackupInstance is located
@@ -1226,9 +1226,9 @@ model AzureBackupRestoreRequest {
   sourceResourceId?: string;
 
   /**
-* Contains information of the Identity Details for the BI.
-If it is null, default will be considered as System Assigned.
-*/
+   * Contains information of the Identity Details for the BI.
+   * If it is null, default will be considered as System Assigned.
+   */
   identityDetails?: IdentityDetails;
 }
 
@@ -2610,9 +2610,9 @@ model OperationResource {
   endTime?: utcDateTime;
 
   /**
-* Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines.
-The full set of optional properties (e.g. inner errors / details) can be found in the "Error Response" section.
-*/
+   * Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines.
+   * The full set of optional properties (e.g. inner errors / details) can be found in the "Error Response" section.
+   */
   error?: Error;
 
   /**
@@ -2854,15 +2854,15 @@ model RestoreFilesTargetInfo extends RestoreTargetInfoBase {
  */
 model TargetDetails {
   /**
-* Restore operation may create multiple files inside location pointed by Url
-Below will be the common prefix for all of them
-*/
+   * Restore operation may create multiple files inside location pointed by Url
+   * Below will be the common prefix for all of them
+   */
   filePrefix: string;
 
   /**
-* Denotes the target location where the data will be restored,
-string value for the enum {Microsoft.Internal.AzureBackup.DataProtection.Common.Interface.RestoreTargetLocationType}
-*/
+   * Denotes the target location where the data will be restored,
+   * string value for the enum {Microsoft.Internal.AzureBackup.DataProtection.Common.Interface.RestoreTargetLocationType}
+   */
   restoreTargetLocationType: RestoreTargetLocationType;
 
   /**
@@ -2871,10 +2871,10 @@ string value for the enum {Microsoft.Internal.AzureBackup.DataProtection.Common.
   url: string;
 
   /**
-* Full ARM Id denoting the restore destination. It is the ARM Id pointing to container / file share
-This is optional if the target subscription can be identified with the URL field. If not
-then this is needed if CrossSubscriptionRestore field of BackupVault is in any of the disabled states
-*/
+   * Full ARM Id denoting the restore destination. It is the ARM Id pointing to container / file share
+   * This is optional if the target subscription can be identified with the URL field. If not
+   * then this is needed if CrossSubscriptionRestore field of BackupVault is in any of the disabled states
+   */
   targetResourceArmId?: string;
 }
 
@@ -2908,9 +2908,9 @@ model RestoreTargetInfo extends RestoreTargetInfoBase {
  */
 model ScheduleBasedBackupCriteria extends BackupCriteria {
   /**
-* it contains absolute values like "AllBackup" / "FirstOfDay" / "FirstOfWeek" / "FirstOfMonth"
-and should be part of AbsoluteMarker enum
-*/
+   * it contains absolute values like "AllBackup" / "FirstOfDay" / "FirstOfWeek" / "FirstOfMonth"
+   * and should be part of AbsoluteMarker enum
+   */
   absoluteCriteria?: AbsoluteMarker[];
 
   /**

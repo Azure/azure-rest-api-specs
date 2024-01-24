@@ -14,7 +14,11 @@ namespace Microsoft.Devices;
 /**
  * The description of the IoT hub.
  */
-model IotHubDescription is TrackedResource<IotHubProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(IotHubProperties)
+@includeInapplicableMetadataInPayload(false)
+model IotHubDescription extends Resource {
   /**
    * The name of the IoT hub.
    */
@@ -28,8 +32,21 @@ model IotHubDescription is TrackedResource<IotHubProperties> {
    */
   etag?: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * IotHub SKU info
+   */
+  sku: IotHubSkuInfo;
+
+  /**
+   * The managed identities for the IotHub.
+   */
+  identity?: ArmIdentity;
+
+  /**
+   * IotHub properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: IotHubProperties;
 }
 
 @armResourceOperations

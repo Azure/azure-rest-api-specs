@@ -14,7 +14,11 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Information about a domain.
  */
-model Domain is TrackedResource<DomainProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DomainProperties)
+@includeInapplicableMetadataInPayload(false)
+model Domain extends Resource {
   /**
    * Name of the domain.
    */
@@ -22,6 +26,12 @@ model Domain is TrackedResource<DomainProperties> {
   @key("domainName")
   @segment("domains")
   name: string;
+
+  /**
+   * Domain resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DomainProperties;
 }
 
 @armResourceOperations

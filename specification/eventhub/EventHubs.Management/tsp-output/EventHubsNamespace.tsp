@@ -14,7 +14,11 @@ namespace Microsoft.EventHub;
 /**
  * Single Namespace item in List or Get Operation
  */
-model EventHubsNamespace is TrackedResource<EHNamespaceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(EHNamespaceProperties)
+@includeInapplicableMetadataInPayload(false)
+model EventHubsNamespace extends TrackedResource {
   /**
    * The Namespace name
    */
@@ -25,8 +29,21 @@ model EventHubsNamespace is TrackedResource<EHNamespaceProperties> {
   @segment("namespaces")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Properties of sku resource
+   */
+  sku?: Sku;
+
+  /**
+   * Properties of BYOK Identity description
+   */
+  identity?: Identity;
+
+  /**
+   * Namespace properties supplied for create namespace operation.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: EHNamespaceProperties;
 }
 
 @armResourceOperations

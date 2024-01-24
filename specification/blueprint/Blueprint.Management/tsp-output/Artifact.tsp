@@ -26,7 +26,10 @@ model Artifact is ProxyResource<{}> {
   @segment("artifacts")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Specifies the kind of blueprint artifact.
+   */
+  kind: ArtifactKind;
 }
 
 @armResourceOperations

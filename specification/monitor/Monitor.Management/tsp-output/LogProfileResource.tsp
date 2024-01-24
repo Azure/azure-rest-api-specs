@@ -14,8 +14,12 @@ namespace Microsoft.Insights;
 /**
  * The log profile resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model LogProfileResource is TrackedResource<LogProfileProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(LogProfileProperties)
+@includeInapplicableMetadataInPayload(false)
+model LogProfileResource extends TrackedResourceBase {
   /**
    * The name of the log profile.
    */
@@ -23,6 +27,12 @@ model LogProfileResource is TrackedResource<LogProfileProperties> {
   @key("logProfileName")
   @segment("logprofiles")
   name: string;
+
+  /**
+   * The log profile properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LogProfileProperties;
 }
 
 @armResourceOperations

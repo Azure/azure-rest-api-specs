@@ -15,8 +15,12 @@ namespace Microsoft.Easm;
 /**
  * Label details
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WorkspaceResource)
-model LabelResource is ProxyResource<LabelResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(LabelResourceProperties)
+@includeInapplicableMetadataInPayload(false)
+model LabelResource extends ProxyResourceBase {
   /**
    * The name of the Label.
    */
@@ -24,6 +28,12 @@ model LabelResource is ProxyResource<LabelResourceProperties> {
   @key("labelName")
   @segment("labels")
   name: string;
+
+  /**
+   * Label properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: LabelResourceProperties;
 }
 
 @armResourceOperations

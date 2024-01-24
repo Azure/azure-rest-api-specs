@@ -15,9 +15,14 @@ namespace Microsoft.AppPlatform;
 /**
  * Custom domain of the API portal
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApiPortalResource)
-model ApiPortalCustomDomainResource
-  is ProxyResource<ApiPortalCustomDomainProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ApiPortalCustomDomainProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ApiPortalCustomDomainResource extends ProxyResource {
   /**
    * The name of the API portal custom domain.
    */
@@ -25,6 +30,12 @@ model ApiPortalCustomDomainResource
   @key("domainName")
   @segment("domains")
   name: string;
+
+  /**
+   * The properties of custom domain for API portal
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApiPortalCustomDomainProperties;
 }
 
 @armResourceOperations

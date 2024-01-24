@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
  * Use this API to manage IoT Central Applications in your Azure subscription.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "IotCentralClient",
 })

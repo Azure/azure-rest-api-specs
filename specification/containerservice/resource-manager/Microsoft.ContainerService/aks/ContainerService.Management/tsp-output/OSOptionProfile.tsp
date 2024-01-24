@@ -14,12 +14,22 @@ namespace Microsoft.ContainerService;
 /**
  * The OS option profile.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @locationResource
-model OSOptionProfile is ProxyResource<OSOptionPropertyList> {
+@Azure.ResourceManager.Private.armResourceInternal(OSOptionPropertyList)
+@includeInapplicableMetadataInPayload(false)
+model OSOptionProfile extends ProxyResourceBase {
   @key("osOption")
   @segment("osOptions")
   name: string;
+
+  /**
+   * The list of OS options.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: OSOptionPropertyList;
 }
 
 @armResourceOperations

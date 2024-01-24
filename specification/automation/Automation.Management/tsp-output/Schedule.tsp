@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the schedule.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model Schedule is ProxyResource<ScheduleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ScheduleProperties)
+@includeInapplicableMetadataInPayload(false)
+model Schedule extends ProxyResourceBase {
   /**
    * The schedule name.
    */
@@ -24,6 +28,12 @@ model Schedule is ProxyResource<ScheduleProperties> {
   @key("scheduleName")
   @segment("schedules")
   name: string;
+
+  /**
+   * Gets or sets the properties of the schedule.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ScheduleProperties;
 }
 
 @armResourceOperations

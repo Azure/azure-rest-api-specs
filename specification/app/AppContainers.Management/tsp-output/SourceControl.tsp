@@ -15,8 +15,12 @@ namespace Microsoft.App;
 /**
  * Container App SourceControl.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ContainerApp)
-model SourceControl is ProxyResource<SourceControlProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SourceControlProperties)
+@includeInapplicableMetadataInPayload(false)
+model SourceControl extends ProxyResourceBase {
   /**
    * Name of the Container App SourceControl.
    */
@@ -24,6 +28,12 @@ model SourceControl is ProxyResource<SourceControlProperties> {
   @key("sourceControlName")
   @segment("sourcecontrols")
   name: string;
+
+  /**
+   * SourceControl resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SourceControlProperties;
 }
 
 @armResourceOperations

@@ -14,8 +14,13 @@ namespace Microsoft.Insights;
 /**
  * An Azure Monitor Workspace definition
  */
-model AzureMonitorWorkspaceResource
-  is TrackedResource<AzureMonitorWorkspaceResourceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  AzureMonitorWorkspaceResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AzureMonitorWorkspaceResource extends TrackedResourceBase {
   /**
    * The name of the Azure Monitor workspace.  The name is case insensitive
    */
@@ -30,6 +35,12 @@ model AzureMonitorWorkspaceResource
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * Resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AzureMonitorWorkspaceResourceProperties;
 }
 
 @armResourceOperations

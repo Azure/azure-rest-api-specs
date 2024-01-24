@@ -15,8 +15,12 @@ namespace Microsoft.ContainerRegistry;
 /**
  * An object that represents a replication for a container registry.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model Replication is TrackedResource<ReplicationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ReplicationProperties)
+@includeInapplicableMetadataInPayload(false)
+model Replication extends TrackedResourceBase {
   /**
    * The name of the replication.
    */
@@ -27,6 +31,12 @@ model Replication is TrackedResource<ReplicationProperties> {
   @key("replicationName")
   @segment("replications")
   name: string;
+
+  /**
+   * The properties of the replication.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ReplicationProperties;
 }
 
 @armResourceOperations

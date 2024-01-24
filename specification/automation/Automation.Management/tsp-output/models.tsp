@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -465,6 +467,7 @@ model PrivateLinkResource extends ProxyResource {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -604,6 +607,7 @@ model PythonPackageCreateParameters {
   /**
    * Gets or sets the module create properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: PythonPackageCreateProperties;
 
   /**
@@ -711,6 +715,7 @@ model DscNodeProperties {
   /**
    * Gets or sets the configuration of the node.
    */
+  @extension("x-ms-client-flatten", true)
   nodeConfiguration?: DscNodeConfigurationAssociationProperty;
 
   /**
@@ -780,6 +785,7 @@ model DscNodeUpdateParametersProperties {
   /**
    * Gets or sets the configuration of the node.
    */
+  @extension("x-ms-client-flatten", true)
   nodeConfiguration?: DscNodeConfigurationAssociationProperty;
 }
 
@@ -1086,6 +1092,7 @@ model DscNodeConfigurationCreateOrUpdateParameters {
   /**
    * Node configuration properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DscNodeConfigurationCreateOrUpdateParametersProperties;
 
   /**
@@ -1151,6 +1158,7 @@ model DscCompilationJobCreateParameters {
   /**
    * Gets or sets the list of compilation job properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: DscCompilationJobCreateProperties;
 
   /**
@@ -1294,6 +1302,7 @@ model JobStream {
   /**
    * Gets or sets the id of the job stream.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: JobStreamProperties;
 }
 
@@ -1374,6 +1383,7 @@ model SourceControlCreateOrUpdateParameters {
   /**
    * The properties of the source control.
    */
+  @extension("x-ms-client-flatten", true)
   properties: SourceControlCreateOrUpdateProperties;
 }
 
@@ -1504,6 +1514,7 @@ model SourceControlUpdateParameters {
   /**
    * The value of the source control.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SourceControlUpdateProperties;
 }
 
@@ -1549,6 +1560,7 @@ model SourceControlSyncJobCreateParameters {
   /**
    * The properties of the source control sync job.
    */
+  @extension("x-ms-client-flatten", true)
   properties: SourceControlSyncJobCreateProperties;
 }
 
@@ -1587,6 +1599,7 @@ model SourceControlSyncJob {
   /**
    * The properties of the source control sync job.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SourceControlSyncJobProperties;
 }
 
@@ -1643,6 +1656,7 @@ model SourceControlSyncJobById {
   /**
    * The properties of the source control sync job.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SourceControlSyncJobByIdProperties;
 }
 
@@ -1716,6 +1730,7 @@ model SourceControlSyncJobStream {
   /**
    * The properties of the source control sync job stream.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SourceControlSyncJobStreamProperties;
 }
 
@@ -1759,6 +1774,7 @@ model SourceControlSyncJobStreamById {
   /**
    * The properties of the source control sync job stream.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SourceControlSyncJobStreamByIdProperties;
 }
 
@@ -1806,6 +1822,7 @@ model AutomationAccountUpdateParameters {
   /**
    * Gets or sets account update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AutomationAccountUpdateProperties;
 
   /**
@@ -2037,6 +2054,7 @@ model AutomationAccountCreateOrUpdateParameters {
   /**
    * Gets or sets account create or update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AutomationAccountCreateOrUpdateProperties;
 
   /**
@@ -2286,6 +2304,7 @@ model CertificateCreateOrUpdateParameters {
   /**
    * Gets or sets the properties of the certificate.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CertificateCreateOrUpdateProperties;
 }
 
@@ -2326,6 +2345,7 @@ model CertificateUpdateParameters {
   /**
    * Gets or sets the properties of the certificate.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CertificateUpdateProperties;
 }
 
@@ -2396,6 +2416,7 @@ model ConnectionCreateOrUpdateParameters {
   /**
    * Gets or sets the properties of the connection.
    */
+  @extension("x-ms-client-flatten", true)
   properties: ConnectionCreateOrUpdateProperties;
 }
 
@@ -2431,6 +2452,7 @@ model ConnectionUpdateParameters {
   /**
    * Gets or sets the properties of the connection.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ConnectionUpdateProperties;
 }
 
@@ -2515,6 +2537,7 @@ model ConnectionTypeCreateOrUpdateParameters {
   /**
    * Gets or sets the value of the connection type.
    */
+  @extension("x-ms-client-flatten", true)
   properties: ConnectionTypeCreateOrUpdateProperties;
 }
 
@@ -2575,6 +2598,7 @@ model CredentialCreateOrUpdateParameters {
   /**
    * Gets or sets the properties of the credential.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CredentialCreateOrUpdateProperties;
 }
 
@@ -2610,6 +2634,7 @@ model CredentialUpdateParameters {
   /**
    * Gets or sets the properties of the variable.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CredentialUpdateProperties;
 }
 
@@ -2690,6 +2715,7 @@ model JobScheduleCreateParameters {
   /**
    * Gets or sets the list of job schedule properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: JobScheduleCreateProperties;
 }
 
@@ -2747,6 +2773,7 @@ model Activity {
   /**
    * Gets or sets the properties of the activity.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ActivityProperties;
 }
 
@@ -2894,6 +2921,7 @@ model ModuleCreateOrUpdateParameters {
   /**
    * Gets or sets the module create properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: ModuleCreateOrUpdateProperties;
 
   /**
@@ -2929,6 +2957,7 @@ model ModuleUpdateParameters {
   /**
    * Gets or sets the module update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ModuleUpdateProperties;
 
   /**
@@ -2996,6 +3025,7 @@ model ScheduleCreateOrUpdateParameters {
   /**
    * Gets or sets the list of schedule properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: ScheduleCreateOrUpdateProperties;
 }
 
@@ -3169,6 +3199,7 @@ model ScheduleUpdateParameters {
   /**
    * Gets or sets the list of schedule properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ScheduleUpdateProperties;
 }
 
@@ -3199,6 +3230,7 @@ model VariableCreateOrUpdateParameters {
   /**
    * Gets or sets the properties of the variable.
    */
+  @extension("x-ms-client-flatten", true)
   properties: VariableCreateOrUpdateProperties;
 }
 
@@ -3266,6 +3298,7 @@ model VariableUpdateParameters {
   /**
    * Gets or sets the value of the variable.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VariableUpdateProperties;
 }
 
@@ -3344,6 +3377,7 @@ model WatcherUpdateParameters {
   /**
    * Gets or sets the watcher update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WatcherUpdateProperties;
 
   /**
@@ -3451,6 +3485,7 @@ model DscConfigurationCreateOrUpdateParameters {
   /**
    * Gets or sets configuration create or update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: DscConfigurationCreateOrUpdateProperties;
 
   /**
@@ -3506,6 +3541,7 @@ model DscConfigurationUpdateParameters {
   /**
    * Gets or sets configuration create or update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DscConfigurationCreateOrUpdateProperties;
 
   /**
@@ -3606,6 +3642,7 @@ model JobCreateParameters {
   /**
    * Gets or sets the list of job properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: JobCreateProperties;
 }
 
@@ -3633,6 +3670,7 @@ model JobCollectionItem extends ProxyResource {
   /**
    * Job properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: JobCollectionItemProperties;
 }
 
@@ -4075,6 +4113,7 @@ model SoftwareUpdateConfigurationCollectionItem {
   /**
    * Software update configuration properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: SoftwareUpdateConfigurationCollectionItemProperties;
 }
 
@@ -4149,6 +4188,7 @@ model SoftwareUpdateConfigurationRun {
   /**
    * Software update configuration Run properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SoftwareUpdateConfigurationRunProperties;
 }
 
@@ -4317,6 +4357,7 @@ model SoftwareUpdateConfigurationMachineRun {
   /**
    * Software update configuration machine run properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateConfigurationMachineRunProperties;
 }
 
@@ -4604,6 +4645,7 @@ model RunbookCreateOrUpdateParameters {
   /**
    * Gets or sets runbook create or update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: RunbookCreateOrUpdateProperties;
 
   /**
@@ -4669,6 +4711,7 @@ model RunbookUpdateParameters {
   /**
    * Gets or sets the runbook update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RunbookUpdateProperties;
 
   /**
@@ -4868,6 +4911,7 @@ model WebhookCreateOrUpdateParameters {
   /**
    * Gets or sets the properties of the webhook.
    */
+  @extension("x-ms-client-flatten", true)
   properties: WebhookCreateOrUpdateProperties;
 }
 
@@ -4919,6 +4963,7 @@ model WebhookUpdateParameters {
   /**
    * Gets or sets the value of the webhook.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WebhookUpdateProperties;
 }
 
@@ -4991,6 +5036,7 @@ model HybridRunbookWorkerCreateParameters {
   /**
    * Gets or sets hybrid runbook worker group create or update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: HybridRunbookWorkerCreateOrUpdateParameters;
 
   /**
@@ -5036,6 +5082,7 @@ model DeletedAutomationAccount {
   /**
    * Gets or sets the automation account properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeletedAutomationAccountProperties;
 
   /**
@@ -5118,6 +5165,7 @@ model HybridRunbookWorkerGroupCreateOrUpdateParameters {
   /**
    * Gets or sets hybrid runbook worker group create or update properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: HybridRunbookWorkerGroupCreateOrUpdateProperties;
 
   /**

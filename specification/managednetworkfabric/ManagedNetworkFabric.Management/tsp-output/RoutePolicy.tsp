@@ -14,7 +14,11 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The RoutePolicy resource definition.
  */
-model RoutePolicy is TrackedResource<RoutePolicyProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(RoutePolicyProperties)
+@includeInapplicableMetadataInPayload(false)
+model RoutePolicy extends TrackedResourceBase {
   /**
    * Name of the Route Policy.
    */
@@ -22,6 +26,12 @@ model RoutePolicy is TrackedResource<RoutePolicyProperties> {
   @key("routePolicyName")
   @segment("routePolicies")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: RoutePolicyProperties;
 }
 
 @armResourceOperations

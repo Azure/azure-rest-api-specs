@@ -14,7 +14,11 @@ namespace Microsoft.OffAzureSpringBoot;
 /**
  * The springbootsites envelope resource definition.
  */
-model SpringbootsitesModel is TrackedResource<SpringbootsitesProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(SpringbootsitesProperties)
+@includeInapplicableMetadataInPayload(false)
+model SpringbootsitesModel extends TrackedResourceBase {
   /**
    * The springbootsites name.
    */
@@ -30,6 +34,12 @@ model SpringbootsitesModel is TrackedResource<SpringbootsitesProperties> {
    * The extended location definition.
    */
   extendedLocation?: SpringbootsitesModelExtendedLocation;
+
+  /**
+   * The springbootsites resource definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SpringbootsitesProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace NewRelic.Observability;
 /**
  * A tag rule belonging to NewRelic account
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NewRelicMonitorResource)
-model TagRule is ProxyResource<MonitoringTagRulesProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MonitoringTagRulesProperties)
+@includeInapplicableMetadataInPayload(false)
+model TagRule extends ProxyResourceBase {
   /**
    * Name of the TagRule
    */
@@ -24,6 +28,13 @@ model TagRule is ProxyResource<MonitoringTagRulesProperties> {
   @key("ruleSetName")
   @segment("tagRules")
   name: string;
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties: MonitoringTagRulesProperties;
 }
 
 @armResourceOperations

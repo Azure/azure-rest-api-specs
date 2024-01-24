@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * Distributed availability group between box and Sql Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model DistributedAvailabilityGroup
-  is ProxyResource<DistributedAvailabilityGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DistributedAvailabilityGroupProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DistributedAvailabilityGroup extends ProxyResource {
   /**
    * The distributed availability group name.
    */
@@ -25,6 +30,12 @@ model DistributedAvailabilityGroup
   @key("distributedAvailabilityGroupName")
   @segment("distributedAvailabilityGroups")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DistributedAvailabilityGroupProperties;
 }
 
 @armResourceOperations

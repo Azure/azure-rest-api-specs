@@ -27,6 +27,7 @@ using TypeSpec.Versioning;
  * Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "EventHubManagementClient",
 })

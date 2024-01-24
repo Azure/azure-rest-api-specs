@@ -12,7 +12,13 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityDevOps;
 
-model AzureDevOpsConnector is TrackedResource<AzureDevOpsConnectorProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  AzureDevOpsConnectorProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AzureDevOpsConnector extends TrackedResourceBase {
   /**
    * Name of the AzureDevOps Connector.
    */
@@ -20,6 +26,9 @@ model AzureDevOpsConnector is TrackedResource<AzureDevOpsConnectorProperties> {
   @key("azureDevOpsConnectorName")
   @segment("azureDevOpsConnectors")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: AzureDevOpsConnectorProperties;
 }
 
 @armResourceOperations

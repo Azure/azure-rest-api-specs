@@ -15,9 +15,14 @@ namespace Microsoft.DigitalTwins;
 /**
  * DigitalTwinsInstance endpoint resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DigitalTwinsDescription)
-model DigitalTwinsEndpointResource
-  is ProxyResource<DigitalTwinsEndpointResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DigitalTwinsEndpointResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DigitalTwinsEndpointResource extends ExternalResource {
   /**
    * Name of Endpoint Resource.
    */
@@ -28,6 +33,12 @@ model DigitalTwinsEndpointResource
   @key("endpointName")
   @segment("endpoints")
   name: string;
+
+  /**
+   * DigitalTwinsInstance endpoint resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DigitalTwinsEndpointResourceProperties;
 }
 
 @armResourceOperations

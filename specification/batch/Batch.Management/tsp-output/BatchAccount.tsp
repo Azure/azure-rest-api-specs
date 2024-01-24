@@ -14,7 +14,11 @@ namespace Microsoft.Batch;
 /**
  * Contains information about an Azure Batch account.
  */
-model BatchAccount is ProxyResource<BatchAccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(BatchAccountProperties)
+@includeInapplicableMetadataInPayload(false)
+model BatchAccount extends Resource {
   /**
    * The name of the Batch account.
    */
@@ -26,7 +30,16 @@ model BatchAccount is ProxyResource<BatchAccountProperties> {
   @segment("batchAccounts")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  /**
+   * The identity of the Batch account.
+   */
+  identity?: BatchAccountIdentity;
+
+  /**
+   * The properties associated with the account.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BatchAccountProperties;
 }
 
 @armResourceOperations

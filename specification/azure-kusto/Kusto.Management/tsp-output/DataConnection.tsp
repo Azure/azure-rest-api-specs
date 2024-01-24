@@ -27,7 +27,10 @@ model DataConnection is ProxyResource<{}> {
   @segment("dataConnections")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Kind of the endpoint for the data connection
+   */
+  kind: DataConnectionKind;
 }
 
 @armResourceOperations

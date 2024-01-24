@@ -14,7 +14,11 @@ namespace Microsoft.Insights;
 /**
  * A workbook definition.
  */
-model Workbook is TrackedResource<WorkbookProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WorkbookProperties)
+@includeInapplicableMetadataInPayload(false)
+model Workbook extends TrackedResourceBase {
   /**
    * The name of the resource.
    */
@@ -22,6 +26,12 @@ model Workbook is TrackedResource<WorkbookProperties> {
   @key("resourceName")
   @segment("workbooks")
   name: string;
+
+  /**
+   * Metadata describing a workbook for an Azure resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkbookProperties;
 }
 
 @armResourceOperations

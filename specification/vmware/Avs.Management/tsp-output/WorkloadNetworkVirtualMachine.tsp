@@ -15,9 +15,14 @@ namespace Microsoft.AVS;
 /**
  * NSX Virtual Machine
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model WorkloadNetworkVirtualMachine
-  is ProxyResource<WorkloadNetworkVirtualMachineProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  WorkloadNetworkVirtualMachineProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WorkloadNetworkVirtualMachine extends ProxyResourceBase {
   /**
    * Virtual Machine identifier
    */
@@ -25,6 +30,12 @@ model WorkloadNetworkVirtualMachine
   @key("virtualMachineId")
   @segment("virtualMachines")
   name: string;
+
+  /**
+   * Virtual machine properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkloadNetworkVirtualMachineProperties;
 }
 
 @armResourceOperations

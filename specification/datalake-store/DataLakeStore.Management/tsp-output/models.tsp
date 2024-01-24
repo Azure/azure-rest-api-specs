@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -156,6 +158,7 @@ model DataLakeStoreAccountBasic extends Resource {
    * The basic Data Lake Store account properties.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: DataLakeStoreAccountPropertiesBasic;
 }
 
@@ -256,6 +259,7 @@ model CreateDataLakeStoreAccountParameters {
   /**
    * The Data Lake Store account properties to use for creating.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CreateDataLakeStoreAccountProperties;
 }
 
@@ -380,6 +384,7 @@ model CreateFirewallRuleWithAccountParameters {
   /**
    * The firewall rule properties to use when creating a new firewall rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateOrUpdateFirewallRuleProperties;
 }
 
@@ -410,6 +415,7 @@ model CreateVirtualNetworkRuleWithAccountParameters {
   /**
    * The virtual network rule properties to use when creating a new virtual network rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateOrUpdateVirtualNetworkRuleProperties;
 }
 
@@ -435,6 +441,7 @@ model CreateTrustedIdProviderWithAccountParameters {
   /**
    * The trusted identity provider properties to use when creating a new trusted identity provider.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateOrUpdateTrustedIdProviderProperties;
 }
 
@@ -600,6 +607,7 @@ model UpdateDataLakeStoreAccountParameters {
   /**
    * The Data Lake Store account properties to update.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateDataLakeStoreAccountProperties;
 }
 
@@ -685,6 +693,7 @@ model UpdateFirewallRuleWithAccountParameters {
   /**
    * The firewall rule properties to use when updating a firewall rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateFirewallRuleProperties;
 }
 
@@ -715,6 +724,7 @@ model UpdateVirtualNetworkRuleWithAccountParameters {
   /**
    * The virtual network rule properties to use when updating a virtual network rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateVirtualNetworkRuleProperties;
 }
 
@@ -740,6 +750,7 @@ model UpdateTrustedIdProviderWithAccountParameters {
   /**
    * The trusted identity provider properties to use when updating a trusted identity provider.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateTrustedIdProviderProperties;
 }
 
@@ -760,6 +771,7 @@ model CreateOrUpdateFirewallRuleParameters {
   /**
    * The firewall rule properties to use when creating a new firewall rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateOrUpdateFirewallRuleProperties;
 }
 
@@ -770,6 +782,7 @@ model UpdateFirewallRuleParameters {
   /**
    * The firewall rule properties to use when updating a firewall rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateFirewallRuleProperties;
 }
 
@@ -780,6 +793,7 @@ model CreateOrUpdateVirtualNetworkRuleParameters {
   /**
    * The virtual network rule properties to use when creating a new virtual network rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateOrUpdateVirtualNetworkRuleProperties;
 }
 
@@ -790,6 +804,7 @@ model UpdateVirtualNetworkRuleParameters {
   /**
    * The virtual network rule properties to use when updating a virtual network rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateVirtualNetworkRuleProperties;
 }
 
@@ -800,6 +815,7 @@ model CreateOrUpdateTrustedIdProviderParameters {
   /**
    * The trusted identity provider properties to use when creating a new trusted identity provider.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateOrUpdateTrustedIdProviderProperties;
 }
 
@@ -810,6 +826,7 @@ model UpdateTrustedIdProviderParameters {
   /**
    * The trusted identity provider properties to use when updating a trusted identity provider.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateTrustedIdProviderProperties;
 }
 

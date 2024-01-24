@@ -15,8 +15,14 @@ namespace Microsoft.Sql;
 /**
  * An IPv6 server firewall rule.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model IPv6FirewallRule is ProxyResource<IPv6ServerFirewallRuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  IPv6ServerFirewallRuleProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model IPv6FirewallRule extends ProxyResourceWithWritableName {
   /**
    * The name of the firewall rule.
    */
@@ -24,6 +30,12 @@ model IPv6FirewallRule is ProxyResource<IPv6ServerFirewallRuleProperties> {
   @key("firewallRuleName")
   @segment("ipv6FirewallRules")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: IPv6ServerFirewallRuleProperties;
 }
 
 @armResourceOperations

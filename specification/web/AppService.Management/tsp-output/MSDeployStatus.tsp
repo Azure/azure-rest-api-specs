@@ -15,12 +15,22 @@ namespace Microsoft.CertificateRegistration;
 /**
  * MSDeploy ARM response
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("MSDeploy")
 @parentResource(Site)
-model MSDeployStatus is ProxyResource<MSDeployStatusProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MSDeployStatusProperties)
+@includeInapplicableMetadataInPayload(false)
+model MSDeployStatus extends ProxyOnlyResource {
   @key("extension")
   @segment("extensions")
   name: string;
+
+  /**
+   * MSDeployStatus resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MSDeployStatusProperties;
 }
 
 @armResourceOperations

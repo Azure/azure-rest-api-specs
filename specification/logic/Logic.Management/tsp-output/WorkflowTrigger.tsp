@@ -15,8 +15,12 @@ namespace Microsoft.Logic;
 /**
  * The workflow trigger.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workflow)
-model WorkflowTrigger is ProxyResource<WorkflowTriggerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WorkflowTriggerProperties)
+@includeInapplicableMetadataInPayload(false)
+model WorkflowTrigger extends SubResource {
   /**
    * The workflow trigger name.
    */
@@ -24,6 +28,12 @@ model WorkflowTrigger is ProxyResource<WorkflowTriggerProperties> {
   @key("triggerName")
   @segment("triggers")
   name: string;
+
+  /**
+   * The workflow trigger properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkflowTriggerProperties;
 }
 
 @armResourceOperations

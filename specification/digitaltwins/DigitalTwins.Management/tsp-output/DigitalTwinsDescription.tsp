@@ -14,7 +14,11 @@ namespace Microsoft.DigitalTwins;
 /**
  * The description of the DigitalTwins service.
  */
-model DigitalTwinsDescription is TrackedResource<DigitalTwinsProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DigitalTwinsProperties)
+@includeInapplicableMetadataInPayload(false)
+model DigitalTwinsDescription extends DigitalTwinsResource {
   /**
    * The name of the DigitalTwinsInstance.
    */
@@ -25,6 +29,12 @@ model DigitalTwinsDescription is TrackedResource<DigitalTwinsProperties> {
   @key("resourceName")
   @segment("digitalTwinsInstances")
   name: string;
+
+  /**
+   * DigitalTwins instance properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DigitalTwinsProperties;
 }
 
 @armResourceOperations

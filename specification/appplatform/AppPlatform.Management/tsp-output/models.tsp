@@ -219,6 +219,16 @@ enum BackendProtocol {
 }
 
 /**
+ * Type of the managed identity
+ */
+enum ManagedIdentityType {
+  None,
+  SystemAssigned,
+  UserAssigned,
+  `SystemAssigned,UserAssigned`,
+}
+
+/**
  * The type of the storage.
  */
 enum StorageType {
@@ -348,12 +358,12 @@ enum ApiPortalProvisioningState {
 }
 
 /**
-* Scheme to use for connecting to the host. Defaults to HTTP.
-
-Possible enum values:
- - `"HTTP"` means that the scheme used will be http://
- - `"HTTPS"` means that the scheme used will be https://
-*/
+ * Scheme to use for connecting to the host. Defaults to HTTP.
+ *
+ * Possible enum values:
+ *  - `"HTTP"` means that the scheme used will be http://
+ *  - `"HTTPS"` means that the scheme used will be https://
+ */
 enum HttpSchemeType {
   HTTP,
   HTTPS,
@@ -1198,15 +1208,15 @@ model TriggeredBuildResult {
  */
 model BuildResourceRequests {
   /**
-* Optional Cpu allocated to the build resource. 1 core can be represented by 1 or 1000m. 
-The default value is 1, this should not exceed build service agent pool cpu size.
-*/
+   * Optional Cpu allocated to the build resource. 1 core can be represented by 1 or 1000m.
+   * The default value is 1, this should not exceed build service agent pool cpu size.
+   */
   cpu?: string = "1";
 
   /**
-* Optional Memory allocated to the build resource. 1 GB can be represented by 1Gi or 1024Mi. 
-The default value is 2Gi, this should not exceed build service agent pool memory size.
-*/
+   * Optional Memory allocated to the build resource. 1 GB can be represented by 1Gi or 1024Mi.
+   * The default value is 2Gi, this should not exceed build service agent pool memory size.
+   */
   memory?: string = "2Gi";
 }
 
@@ -1709,6 +1719,31 @@ model IngressSettingsClientAuth {
    * Collection of certificate resource id.
    */
   certificates?: string[];
+}
+
+/**
+ * Managed identity properties retrieved from ARM request headers.
+ */
+model ManagedIdentityProperties {
+  /**
+   * Type of the managed identity
+   */
+  type?: ManagedIdentityType;
+
+  /**
+   * Principal Id of system-assigned managed identity.
+   */
+  principalId?: string;
+
+  /**
+   * Tenant Id of system-assigned managed identity.
+   */
+  tenantId?: string;
+
+  /**
+   * Properties of user-assigned managed identities
+   */
+  userAssignedIdentities?: Record<UserAssignedManagedIdentity>;
 }
 
 /**
@@ -2403,6 +2438,47 @@ model SupportedRuntimeVersion {
 model ResourceSkuCollection is Azure.Core.Page<ResourceSku>;
 
 /**
+ * Describes an available Azure Spring Apps SKU.
+ */
+model ResourceSku {
+  /**
+   * Gets the type of resource the SKU applies to.
+   */
+  resourceType?: string;
+
+  /**
+   * Gets the name of SKU.
+   */
+  name?: string;
+
+  /**
+   * Gets the tier of SKU.
+   */
+  tier?: string;
+
+  /**
+   * Gets the capacity of SKU.
+   */
+  capacity?: SkuCapacity;
+
+  /**
+   * Gets the set of locations that the SKU is available.
+   */
+  locations?: string[];
+
+  /**
+   * Gets a list of locations and availability zones in those locations where the SKU is available.
+   */
+  locationInfo?: ResourceSkuLocationInfo[];
+
+  /**
+   * Gets the restrictions because of which SKU cannot be used. This is
+   * empty if there are no restrictions.
+   */
+  restrictions?: ResourceSkuRestrictions[];
+}
+
+/**
  * The SKU capacity
  */
 model SkuCapacity {
@@ -2452,15 +2528,15 @@ model ResourceSkuLocationInfo {
  */
 model ResourceSkuZoneDetails {
   /**
-* Gets the set of zones that the SKU is available in with the
-specified capabilities.
-*/
+   * Gets the set of zones that the SKU is available in with the
+   * specified capabilities.
+   */
   name?: string[];
 
   /**
-* Gets a list of capabilities that are available for the SKU in the
-specified list of zones.
-*/
+   * Gets a list of capabilities that are available for the SKU in the
+   * specified list of zones.
+   */
   capabilities?: ResourceSkuCapabilities[];
 }
 
@@ -2486,9 +2562,9 @@ model ResourceSkuRestrictions {
   type?: ResourceSkuRestrictionsType;
 
   /**
-* Gets the value of restrictions. If the restriction type is set to
-location. This would be different locations where the SKU is restricted.
-*/
+   * Gets the value of restrictions. If the restriction type is set to
+   * location. This would be different locations where the SKU is restricted.
+   */
   values?: string[];
 
   /**
@@ -3055,9 +3131,9 @@ model JarUploadedUserSourceInfo extends UploadedUserSourceInfo {
  */
 model SourceUploadedUserSourceInfo extends UploadedUserSourceInfo {
   /**
-* Selector for the artifact to be used for the deployment for multi-module projects. This should be
-the relative path to the target module/project.
-*/
+   * Selector for the artifact to be used for the deployment for multi-module projects. This should be
+   * the relative path to the target module/project.
+   */
   artifactSelector?: string;
 
   /**
@@ -3181,12 +3257,12 @@ model HttpGetAction extends ProbeAction {
   path?: string;
 
   /**
-* Scheme to use for connecting to the host. Defaults to HTTP.
-
-Possible enum values:
- - `"HTTP"` means that the scheme used will be http://
- - `"HTTPS"` means that the scheme used will be https://
-*/
+   * Scheme to use for connecting to the host. Defaults to HTTP.
+   *
+   * Possible enum values:
+   *  - `"HTTP"` means that the scheme used will be http://
+   *  - `"HTTPS"` means that the scheme used will be https://
+   */
   scheme?: HttpSchemeType;
 
   /**

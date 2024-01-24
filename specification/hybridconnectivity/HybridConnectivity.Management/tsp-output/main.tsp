@@ -15,6 +15,7 @@ using TypeSpec.Versioning;
  * REST API for Hybrid Connectivity
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Hybrid Connectivity Management API",
 })

@@ -15,12 +15,22 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Slot Config names azure resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("slotConfigNames")
 @parentResource(Site)
-model SlotConfigNamesResource is ProxyResource<SlotConfigNames> {
+@Azure.ResourceManager.Private.armResourceInternal(SlotConfigNames)
+@includeInapplicableMetadataInPayload(false)
+model SlotConfigNamesResource extends ProxyOnlyResource {
   @key("config")
   @segment("config")
   name: string;
+
+  /**
+   * Core resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SlotConfigNames;
 }
 
 @armResourceOperations

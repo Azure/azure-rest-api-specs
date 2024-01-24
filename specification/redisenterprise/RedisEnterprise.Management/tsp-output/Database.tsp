@@ -18,7 +18,11 @@ namespace Microsoft.Cache;
 * Describes a database on the RedisEnterprise cluster
 */
 @parentResource(Cluster)
-model Database is ProxyResource<DatabaseProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DatabaseProperties)
+@includeInapplicableMetadataInPayload(false)
+model Database extends ProxyResourceBase {
 /**
 * The name of the database.
 */
@@ -26,6 +30,11 @@ model Database is ProxyResource<DatabaseProperties> {
 @key("databaseName")
 @segment("databases")
 "name": string;
+/**
+* Other properties of the database.
+*/
+@extension("x-ms-client-flatten", true)
+properties?: DatabaseProperties
 }
 
 
@@ -94,24 +103,24 @@ flush is ArmResourceActionAsync<Database,FlushParameters,void,BaseParameters<Dat
 
 
 
-@@projectedName(Databases.create::parameters.resource, "json", "parameters");
-@@extension(Databases.create::parameters.resource, "x-ms-client-name", "parameters");
-@@doc(Databases.create::parameters.resource, "Parameters supplied to the create or update database operation.");
-@@projectedName(Databases.update::parameters.properties, "json", "parameters");
-@@extension(Databases.update::parameters.properties, "x-ms-client-name", "parameters");
-@@doc(Databases.update::parameters.properties, "Parameters supplied to the create or update database operation.");
-@@projectedName(Databases.regenerateKey::parameters.body, "json", "parameters");
-@@extension(Databases.regenerateKey::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.regenerateKey::parameters.body, "Specifies which key to regenerate.");
-@@projectedName(Databases.import::parameters.body, "json", "parameters");
-@@extension(Databases.import::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.import::parameters.body, "Storage information for importing into the cluster");
-@@projectedName(Databases.export::parameters.body, "json", "parameters");
-@@extension(Databases.export::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.export::parameters.body, "Storage information for exporting into the cluster");
-@@projectedName(Databases.forceUnlink::parameters.body, "json", "parameters");
-@@extension(Databases.forceUnlink::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.forceUnlink::parameters.body, "Information identifying the database to be unlinked.");
-@@projectedName(Databases.flush::parameters.body, "json", "parameters");
-@@extension(Databases.flush::parameters.body, "x-ms-client-name", "parameters");
-@@doc(Databases.flush::parameters.body, "Information identifying the databases to be flushed");
+@@projectedName(Databases.`create`::parameters.resource, "json", "parameters");
+@@extension(Databases.`create`::parameters.resource, "x-ms-client-name", "parameters");
+@@doc(Databases.`create`::parameters.resource, "Parameters supplied to the create or update database operation.");
+@@projectedName(Databases.`update`::parameters.properties, "json", "parameters");
+@@extension(Databases.`update`::parameters.properties, "x-ms-client-name", "parameters");
+@@doc(Databases.`update`::parameters.properties, "Parameters supplied to the create or update database operation.");
+@@projectedName(Databases.`regenerateKey`::parameters.body, "json", "parameters");
+@@extension(Databases.`regenerateKey`::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.`regenerateKey`::parameters.body, "Specifies which key to regenerate.");
+@@projectedName(Databases.`import`::parameters.body, "json", "parameters");
+@@extension(Databases.`import`::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.`import`::parameters.body, "Storage information for importing into the cluster");
+@@projectedName(Databases.`export`::parameters.body, "json", "parameters");
+@@extension(Databases.`export`::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.`export`::parameters.body, "Storage information for exporting into the cluster");
+@@projectedName(Databases.`forceUnlink`::parameters.body, "json", "parameters");
+@@extension(Databases.`forceUnlink`::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.`forceUnlink`::parameters.body, "Information identifying the database to be unlinked.");
+@@projectedName(Databases.`flush`::parameters.body, "json", "parameters");
+@@extension(Databases.`flush`::parameters.body, "x-ms-client-name", "parameters");
+@@doc(Databases.`flush`::parameters.body, "Information identifying the databases to be flushed");

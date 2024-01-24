@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A group of job targets.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(JobAgent)
-model JobTargetGroup is ProxyResource<JobTargetGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobTargetGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model JobTargetGroup extends ProxyResource {
   /**
    * The name of the target group.
    */
@@ -24,6 +28,12 @@ model JobTargetGroup is ProxyResource<JobTargetGroupProperties> {
   @key("targetGroupName")
   @segment("targetGroups")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobTargetGroupProperties;
 }
 
 @armResourceOperations

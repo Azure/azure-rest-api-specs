@@ -15,8 +15,12 @@ namespace Microsoft.App;
 /**
  * Container App Revision Replica.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Revision)
-model Replica is ProxyResource<ReplicaProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ReplicaProperties)
+@includeInapplicableMetadataInPayload(false)
+model Replica extends ProxyResourceBase {
   /**
    * Name of the Container App Revision Replica.
    */
@@ -24,6 +28,12 @@ model Replica is ProxyResource<ReplicaProperties> {
   @key("replicaName")
   @segment("replicas")
   name: string;
+
+  /**
+   * Replica resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ReplicaProperties;
 }
 
 @armResourceOperations

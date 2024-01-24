@@ -15,8 +15,12 @@ namespace Microsoft.Kusto;
 /**
  * Class representing a Kusto sandbox custom image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model SandboxCustomImage is ProxyResource<SandboxCustomImageProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SandboxCustomImageProperties)
+@includeInapplicableMetadataInPayload(false)
+model SandboxCustomImage extends ProxyResourceBase {
   /**
    * The name of the sandbox custom image.
    */
@@ -25,6 +29,12 @@ model SandboxCustomImage is ProxyResource<SandboxCustomImageProperties> {
   @key("sandboxCustomImageName")
   @segment("sandboxCustomImages")
   name: string;
+
+  /**
+   * A sandbox custom image.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SandboxCustomImageProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the job schedule.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model JobSchedule is ProxyResource<JobScheduleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobScheduleProperties)
+@includeInapplicableMetadataInPayload(false)
+model JobSchedule extends ProxyResourceBase {
   /**
    * The job schedule name.
    */
@@ -24,6 +28,12 @@ model JobSchedule is ProxyResource<JobScheduleProperties> {
   @key("jobScheduleId")
   @segment("jobSchedules")
   name: string;
+
+  /**
+   * Gets or sets the properties of the job schedule.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobScheduleProperties;
 }
 
 @armResourceOperations

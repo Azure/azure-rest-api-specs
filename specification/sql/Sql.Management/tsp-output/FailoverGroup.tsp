@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A failover group.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model FailoverGroup is ProxyResource<FailoverGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FailoverGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model FailoverGroup extends ProxyResource {
   /**
    * The name of the failover group.
    */
@@ -24,6 +28,12 @@ model FailoverGroup is ProxyResource<FailoverGroupProperties> {
   @key("failoverGroupName")
   @segment("failoverGroups")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FailoverGroupProperties;
 }
 
 @armResourceOperations

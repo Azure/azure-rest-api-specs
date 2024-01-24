@@ -15,8 +15,14 @@ namespace Microsoft.Purview;
 /**
  * A privately linkable resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateLinkResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateLinkResource extends ProxyResourceBase {
   /**
    * The group identifier.
    */
@@ -24,6 +30,12 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   @key("groupId")
   @segment("privateLinkResources")
   name: string;
+
+  /**
+   * The private link resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateLinkResourceProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.AppConfiguration;
 /**
  * The configuration store along with all resource properties. The Configuration Store will have all information to begin utilizing it.
  */
-model ConfigurationStore is TrackedResource<ConfigurationStoreProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ConfigurationStoreProperties)
+@includeInapplicableMetadataInPayload(false)
+model ConfigurationStore extends TrackedResourceBase {
   /**
    * The name of the configuration store.
    */
@@ -25,6 +29,12 @@ model ConfigurationStore is TrackedResource<ConfigurationStoreProperties> {
   @key("configStoreName")
   @segment("configurationStores")
   name: string;
+
+  /**
+   * The properties of a configuration store.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConfigurationStoreProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;

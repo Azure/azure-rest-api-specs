@@ -188,11 +188,11 @@ model FarmBeatsExtensionProperties {
   extensionApiDocsLink?: string;
 
   /**
-* Detailed information which shows summary of requested data.
-Used in descriptive get extension metadata call.
-Information for weather category per api included are apisSupported,
-customParameters, PlatformParameters and Units supported.
-*/
+   * Detailed information which shows summary of requested data.
+   * Used in descriptive get extension metadata call.
+   * Information for weather category per api included are apisSupported,
+   * customParameters, PlatformParameters and Units supported.
+   */
   @visibility("read")
   detailedInformation?: DetailedInformation[];
 }
@@ -413,9 +413,9 @@ model FarmBeatsUpdateProperties {
 }
 
 /**
-* Arm async operation class.
-Ref: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.
-*/
+ * Arm async operation class.
+ * Ref: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.
+ */
 model ArmAsyncOperation {
   /**
    * Status of the async operation.

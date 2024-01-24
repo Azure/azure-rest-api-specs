@@ -14,8 +14,12 @@ namespace Microsoft.HybridContainerService;
 /**
  * The provisioned cluster resource definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
-model ProvisionedCluster is ExtensionResource<ProvisionedClusterProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ProvisionedClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model ProvisionedCluster extends ExtensionResourceBase {
   @key("provisionedClusterInstance")
   @segment("provisionedClusterInstances")
   name: string;
@@ -24,6 +28,12 @@ model ProvisionedCluster is ExtensionResource<ProvisionedClusterProperties> {
    * Extended location pointing to the underlying infrastructure
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties of the provisioned cluster.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProvisionedClusterProperties;
 }
 
 @armResourceOperations

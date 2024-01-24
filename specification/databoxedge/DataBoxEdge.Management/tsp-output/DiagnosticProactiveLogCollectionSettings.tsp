@@ -15,13 +15,24 @@ namespace Microsoft.DataBoxEdge;
 /**
  * The diagnostic proactive log collection settings of a device.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(DataBoxEdgeDevice)
-model DiagnosticProactiveLogCollectionSettings
-  is ProxyResource<ProactiveLogCollectionSettingsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ProactiveLogCollectionSettingsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DiagnosticProactiveLogCollectionSettings extends ProxyResourceBase {
   @key("diagnosticProactiveLogCollectionSetting")
   @segment("diagnosticProactiveLogCollectionSettings")
   name: string;
+
+  /**
+   * Properties of the diagnostic proactive log collection settings.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ProactiveLogCollectionSettingsProperties;
 }
 
 @armResourceOperations

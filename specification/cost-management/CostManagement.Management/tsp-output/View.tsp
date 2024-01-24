@@ -14,8 +14,12 @@ namespace Microsoft.CostManagement;
 /**
  * States and configurations of Cost Analysis.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model View is ProxyResource<ViewProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ViewProperties)
+@includeInapplicableMetadataInPayload(false)
+model View extends ProxyResourceBase {
   /**
    * View name
    */
@@ -23,6 +27,12 @@ model View is ProxyResource<ViewProperties> {
   @key("viewName")
   @segment("views")
   name: string;
+
+  /**
+   * The properties of the view.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ViewProperties;
 }
 
 @armResourceOperations

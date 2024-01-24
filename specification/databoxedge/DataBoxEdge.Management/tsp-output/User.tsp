@@ -15,8 +15,12 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Represents a user who has access to one or more shares on the Data Box Edge/Gateway device.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataBoxEdgeDevice)
-model User is ProxyResource<UserProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(UserProperties)
+@includeInapplicableMetadataInPayload(false)
+model User extends ProxyResourceBase {
   /**
    * The user name.
    */
@@ -24,6 +28,12 @@ model User is ProxyResource<UserProperties> {
   @key("name")
   @segment("users")
   name: string;
+
+  /**
+   * The storage account credential properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: UserProperties;
 }
 
 @armResourceOperations

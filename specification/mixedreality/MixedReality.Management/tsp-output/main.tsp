@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
  * Mixed Reality Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "MixedRealityClient",
 })

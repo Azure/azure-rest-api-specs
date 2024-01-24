@@ -15,8 +15,12 @@ namespace Microsoft.DeviceUpdate;
 /**
  * The group information for creating a private endpoint on an Account
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-model GroupInformation is ProxyResource<GroupInformationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(GroupInformationProperties)
+@includeInapplicableMetadataInPayload(false)
+model GroupInformation extends ProxyResourceBase {
   /**
    * The group ID of the private link resource.
    */
@@ -24,6 +28,12 @@ model GroupInformation is ProxyResource<GroupInformationProperties> {
   @key("groupId")
   @segment("privateLinkResources")
   name: string;
+
+  /**
+   * The properties for a group information object
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: GroupInformationProperties;
 }
 
 @armResourceOperations

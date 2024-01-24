@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -139,6 +141,7 @@ model StorageMoverUpdateParameters {
   /**
    * The resource specific properties for the Storage Mover resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StorageMoverUpdateProperties;
 
   /**
@@ -244,6 +247,7 @@ model AgentPropertiesErrorDetails {
  * The Agent resource.
  */
 model AgentUpdateParameters {
+  @extension("x-ms-client-flatten", true)
   properties?: AgentUpdateProperties;
 }
 
@@ -315,6 +319,7 @@ model ProjectUpdateParameters {
   /**
    * Project properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ProjectUpdateProperties;
 }
 
@@ -421,6 +426,7 @@ model JobDefinitionUpdateParameters {
   /**
    * Job definition properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: JobDefinitionUpdateProperties;
 }
 

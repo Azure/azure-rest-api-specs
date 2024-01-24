@@ -14,8 +14,11 @@ namespace Microsoft.Insights;
 /**
  * The scheduled query rule resource.
  */
-model ScheduledQueryRuleResource
-  is TrackedResource<ScheduledQueryRuleProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ScheduledQueryRuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model ScheduledQueryRuleResource extends TrackedResourceBase {
   /**
    * The name of the rule.
    */
@@ -25,12 +28,21 @@ model ScheduledQueryRuleResource
   name: string;
 
   /**
+   * Indicates the type of scheduled query rule. The default is LogAlert.
+   */
+  kind?: Kind;
+
+  /**
    * The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.
    */
   @visibility("read")
   etag?: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * The rule properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ScheduledQueryRuleProperties;
 }
 
 @armResourceOperations

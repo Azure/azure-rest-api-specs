@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Represents a recommendation rule that the recommendation engine can perform.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AppServiceEnvironmentResource)
-model RecommendationRule is ProxyResource<RecommendationRuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RecommendationRuleProperties)
+@includeInapplicableMetadataInPayload(false)
+model RecommendationRule extends ProxyOnlyResource {
   /**
    * Name of the recommendation.
    */
@@ -24,6 +28,12 @@ model RecommendationRule is ProxyResource<RecommendationRuleProperties> {
   @key("name")
   @segment("recommendations")
   name: string;
+
+  /**
+   * RecommendationRule resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RecommendationRuleProperties;
 }
 
 @armResourceOperations

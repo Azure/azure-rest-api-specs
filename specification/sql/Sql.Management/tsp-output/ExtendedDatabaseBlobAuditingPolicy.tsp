@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * An extended database blob auditing policy.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model ExtendedDatabaseBlobAuditingPolicy
-  is ProxyResource<ExtendedDatabaseBlobAuditingPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ExtendedDatabaseBlobAuditingPolicyProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ExtendedDatabaseBlobAuditingPolicy extends ProxyResource {
   /**
    * The name of the blob auditing policy.
    */
@@ -25,6 +30,12 @@ model ExtendedDatabaseBlobAuditingPolicy
   @key("blobAuditingPolicyName")
   @segment("extendedAuditingSettings")
   name: BlobAuditingPolicyName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ExtendedDatabaseBlobAuditingPolicyProperties;
 }
 
 @armResourceOperations

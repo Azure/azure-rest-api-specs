@@ -15,9 +15,12 @@ namespace PaloAltoNetworks.Cloudngfw;
 /**
  * LocalRulestack Certificate Object
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(LocalRulestackResource)
-model CertificateObjectLocalRulestackResource
-  is ProxyResource<CertificateObject> {
+@Azure.ResourceManager.Private.armResourceInternal(CertificateObject)
+@includeInapplicableMetadataInPayload(false)
+model CertificateObjectLocalRulestackResource extends ProxyResourceBase {
   /**
    * certificate name
    */
@@ -25,6 +28,13 @@ model CertificateObjectLocalRulestackResource
   @key("name")
   @segment("certificates")
   name: string;
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties: CertificateObject;
 }
 
 @armResourceOperations

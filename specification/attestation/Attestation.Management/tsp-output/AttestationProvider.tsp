@@ -14,7 +14,11 @@ namespace Microsoft.Attestation;
 /**
  * Attestation service response message.
  */
-model AttestationProvider is TrackedResource<StatusResult> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(StatusResult)
+@includeInapplicableMetadataInPayload(false)
+model AttestationProvider extends TrackedResourceBase {
   /**
    * Name of the attestation provider.
    */
@@ -22,6 +26,12 @@ model AttestationProvider is TrackedResource<StatusResult> {
   @key("providerName")
   @segment("attestationProviders")
   name: string;
+
+  /**
+   * Describes Attestation service status.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StatusResult;
 }
 
 @armResourceOperations

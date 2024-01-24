@@ -14,8 +14,12 @@ namespace Microsoft.Advisor;
 /**
  * The metadata entity contract.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model MetadataEntity is ProxyResource<MetadataEntityProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MetadataEntityProperties)
+@includeInapplicableMetadataInPayload(false)
+model MetadataEntity extends ProxyResourceBase {
   /**
    * Name of metadata entity.
    */
@@ -23,6 +27,12 @@ model MetadataEntity is ProxyResource<MetadataEntityProperties> {
   @key("name")
   @segment("metadata")
   name: string;
+
+  /**
+   * The metadata entity properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MetadataEntityProperties;
 }
 
 @armResourceOperations

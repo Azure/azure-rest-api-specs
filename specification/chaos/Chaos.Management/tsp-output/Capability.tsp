@@ -15,8 +15,12 @@ namespace Microsoft.Chaos;
 /**
  * Model that represents a Capability resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Target)
-model Capability is ProxyResource<CapabilityProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CapabilityProperties)
+@includeInapplicableMetadataInPayload(false)
+model Capability extends ProxyResourceBase {
   /**
    * String that represents a Capability resource name.
    */
@@ -25,6 +29,12 @@ model Capability is ProxyResource<CapabilityProperties> {
   @key("capabilityName")
   @segment("capabilities")
   name: string;
+
+  /**
+   * The properties of a capability resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CapabilityProperties;
 }
 
 @armResourceOperations

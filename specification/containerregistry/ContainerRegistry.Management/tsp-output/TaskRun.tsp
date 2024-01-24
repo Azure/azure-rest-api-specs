@@ -13,11 +13,15 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerRegistry;
 /**
-* The task run that has the ARM resource and properties. 
-The task run will have the information of request and result of a run.
-*/
+ * The task run that has the ARM resource and properties.
+ * The task run will have the information of request and result of a run.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model TaskRun is ProxyResource<TaskRunProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(TaskRunProperties)
+@includeInapplicableMetadataInPayload(false)
+model TaskRun extends ProxyResourceBase {
   /**
    * The name of the task run.
    */
@@ -28,6 +32,12 @@ model TaskRun is ProxyResource<TaskRunProperties> {
   @key("taskRunName")
   @segment("taskRuns")
   name: string;
+
+  /**
+   * The properties associated with the task run, i.e., request and result of the run
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TaskRunProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

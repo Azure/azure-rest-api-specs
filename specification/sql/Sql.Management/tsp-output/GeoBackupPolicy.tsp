@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A database geo backup policy.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model GeoBackupPolicy is ProxyResource<GeoBackupPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(GeoBackupPolicyProperties)
+@includeInapplicableMetadataInPayload(false)
+model GeoBackupPolicy extends ProxyResource {
   /**
    * The name of the geo backup policy.
    */
@@ -25,7 +29,17 @@ model GeoBackupPolicy is ProxyResource<GeoBackupPolicyProperties> {
   @segment("geoBackupPolicies")
   name: GeoBackupPolicyName;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Kind of geo backup policy.  This is metadata used for the Azure portal experience.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * The properties of the geo backup policy.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: GeoBackupPolicyProperties;
 }
 
 @armResourceOperations

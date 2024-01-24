@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A formula for creating a VM, specifying an image base and other parameters
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model Formula is TrackedResource<FormulaProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FormulaProperties)
+@includeInapplicableMetadataInPayload(false)
+model Formula extends Resource {
   /**
    * The name of the formula.
    */
@@ -24,6 +28,12 @@ model Formula is TrackedResource<FormulaProperties> {
   @key("name")
   @segment("formulas")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: FormulaProperties;
 }
 
 @armResourceOperations

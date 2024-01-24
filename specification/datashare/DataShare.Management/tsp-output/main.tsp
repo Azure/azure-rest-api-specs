@@ -25,6 +25,7 @@ using TypeSpec.Versioning;
  * Creates a Microsoft.DataShare management client.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "DataShareManagementClient",
 })

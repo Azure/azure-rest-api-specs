@@ -14,8 +14,12 @@ namespace Microsoft.Capacity;
 /**
  * Quota properties.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model CurrentQuotaLimitBase is ProxyResource<QuotaProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(QuotaProperties)
+@includeInapplicableMetadataInPayload(false)
+model CurrentQuotaLimitBase extends ProxyResourceBase {
   /**
    * The resource name for a resource provider, such as SKU name for Microsoft.Compute, Sku or TotalLowPriorityCores for Microsoft.MachineLearningServices
    */
@@ -23,6 +27,12 @@ model CurrentQuotaLimitBase is ProxyResource<QuotaProperties> {
   @key("resourceName")
   @segment("serviceLimits")
   name: string;
+
+  /**
+   * Quota properties for the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: QuotaProperties;
 }
 
 @armResourceOperations
@@ -35,24 +45,24 @@ interface CurrentQuotaLimitBases {
   get is ArmResourceRead<CurrentQuotaLimitBase>;
 
   /**
-* Create or update the quota (service limits) of a resource to the requested value.
- Steps:
-  1. Make the Get request to get the quota information for specific resource.
-  2. To increase the quota, update the limit field in the response from Get request to new value.
-  3. Submit the JSON to the quota request API to update the quota.
-  The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.
-*/
+   * Create or update the quota (service limits) of a resource to the requested value.
+   *  Steps:
+   *   1. Make the Get request to get the quota information for specific resource.
+   *   2. To increase the quota, update the limit field in the response from Get request to new value.
+   *   3. Submit the JSON to the quota request API to update the quota.
+   *   The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Quota_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<CurrentQuotaLimitBase>;
 
   /**
-* Update the quota (service limits) of this resource to the requested value.
-  • To get the quota information for specific resource, send a GET request.
-  • To increase the quota, update the limit field from the GET response to a new value.
-  • To update the quota value, submit the JSON response to the quota request API to update the quota.
-  • To update the quota. use the PATCH operation.
-*/
+   * Update the quota (service limits) of this resource to the requested value.
+   *   • To get the quota information for specific resource, send a GET request.
+   *   • To increase the quota, update the limit field from the GET response to a new value.
+   *   • To update the quota value, submit the JSON response to the quota request API to update the quota.
+   *   • To update the quota. use the PATCH operation.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
   @operationId("Quota_Update")

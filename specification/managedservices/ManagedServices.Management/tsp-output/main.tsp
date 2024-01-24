@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
  * The specification for ManagedServices.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ManagedServicesClient",
 })

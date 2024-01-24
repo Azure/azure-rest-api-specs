@@ -15,8 +15,12 @@ namespace Microsoft.HybridCompute;
 /**
  * Describes a Run Command
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Machine)
-model MachineRunCommand is TrackedResource<MachineRunCommandProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MachineRunCommandProperties)
+@includeInapplicableMetadataInPayload(false)
+model MachineRunCommand extends TrackedResourceBase {
   /**
    * The name of the run command.
    */
@@ -25,6 +29,12 @@ model MachineRunCommand is TrackedResource<MachineRunCommandProperties> {
   @key("runCommandName")
   @segment("runCommands")
   name: string;
+
+  /**
+   * Describes Run Command Properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MachineRunCommandProperties;
 }
 
 @armResourceOperations

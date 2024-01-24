@@ -15,9 +15,14 @@ namespace Microsoft.DataFactory;
 /**
  * Private Endpoint Connection ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-model PrivateEndpointConnectionResource
-  is ProxyResource<RemotePrivateEndpointConnection> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  RemotePrivateEndpointConnection
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnectionResource extends SubResource {
   /**
    * The private endpoint connection name.
    */
@@ -25,6 +30,12 @@ model PrivateEndpointConnectionResource
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
+
+  /**
+   * Core resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RemotePrivateEndpointConnection;
 }
 
 @armResourceOperations

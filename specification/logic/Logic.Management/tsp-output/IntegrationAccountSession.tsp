@@ -15,9 +15,14 @@ namespace Microsoft.Logic;
 /**
  * The integration account session.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationAccount)
-model IntegrationAccountSession
-  is TrackedResource<IntegrationAccountSessionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  IntegrationAccountSessionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model IntegrationAccountSession extends Resource {
   /**
    * The integration account session name.
    */
@@ -25,6 +30,12 @@ model IntegrationAccountSession
   @key("sessionName")
   @segment("sessions")
   name: string;
+
+  /**
+   * The integration account session properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: IntegrationAccountSessionProperties;
 }
 
 @armResourceOperations

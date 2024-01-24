@@ -14,7 +14,11 @@ namespace Microsoft.SecurityDevOps;
 /**
  * Represents an ARM resource for /subscriptions/xxx/resourceGroups/xxx/providers/Microsoft.SecurityDevOps/gitHubConnectors.
  */
-model GitHubConnector is TrackedResource<GitHubConnectorProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(GitHubConnectorProperties)
+@includeInapplicableMetadataInPayload(false)
+model GitHubConnector extends TrackedResourceBase {
   /**
    * Name of the GitHub Connector.
    */
@@ -22,6 +26,12 @@ model GitHubConnector is TrackedResource<GitHubConnectorProperties> {
   @key("gitHubConnectorName")
   @segment("gitHubConnectors")
   name: string;
+
+  /**
+   * Properties of the ARM resource for /subscriptions/xxx/resourceGroups/xxx/providers/Microsoft.SecurityDevOps/gitHubConnectors.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GitHubConnectorProperties;
 }
 
 @armResourceOperations

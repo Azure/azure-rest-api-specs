@@ -14,7 +14,11 @@ namespace Microsoft.Elastic;
 /**
  * Monitor resource.
  */
-model ElasticMonitorResource is TrackedResource<MonitorProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(MonitorProperties)
+@includeInapplicableMetadataInPayload(false)
+model ElasticMonitorResource extends TrackedResourceBase {
   /**
    * Monitor resource name
    */
@@ -22,6 +26,12 @@ model ElasticMonitorResource is TrackedResource<MonitorProperties> {
   @key("monitorName")
   @segment("monitors")
   name: string;
+
+  /**
+   * Properties of the monitor resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MonitorProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;

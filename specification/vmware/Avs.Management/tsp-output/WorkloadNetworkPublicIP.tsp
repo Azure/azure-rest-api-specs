@@ -15,9 +15,14 @@ namespace Microsoft.AVS;
 /**
  * NSX Public IP Block
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model WorkloadNetworkPublicIP
-  is ProxyResource<WorkloadNetworkPublicIPProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  WorkloadNetworkPublicIPProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WorkloadNetworkPublicIP extends ProxyResourceBase {
   /**
    * NSX Public IP Block identifier. Generally the same as the Public IP Block's display name
    */
@@ -25,6 +30,12 @@ model WorkloadNetworkPublicIP
   @key("publicIPId")
   @segment("publicIPs")
   name: string;
+
+  /**
+   * Public IP Block properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkloadNetworkPublicIPProperties;
 }
 
 @armResourceOperations

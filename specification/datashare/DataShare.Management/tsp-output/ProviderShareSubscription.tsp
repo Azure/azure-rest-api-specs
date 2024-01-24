@@ -15,9 +15,14 @@ namespace Microsoft.DataShare;
 /**
  * A provider side share subscription data transfer object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Share)
-model ProviderShareSubscription
-  is ProxyResource<ProviderShareSubscriptionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ProviderShareSubscriptionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ProviderShareSubscription extends ProxyDto {
   /**
    * To locate shareSubscription
    */
@@ -25,6 +30,12 @@ model ProviderShareSubscription
   @key("providerShareSubscriptionId")
   @segment("providerShareSubscriptions")
   name: string;
+
+  /**
+   * properties of providerShareSubscription
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProviderShareSubscriptionProperties;
 }
 
 @armResourceOperations

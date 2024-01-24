@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A server DNS alias.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model ServerDnsAlias is ProxyResource<ServerDnsAliasProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ServerDnsAliasProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServerDnsAlias extends ProxyResource {
   /**
    * The name of the server dns alias.
    */
@@ -24,6 +28,12 @@ model ServerDnsAlias is ProxyResource<ServerDnsAliasProperties> {
   @key("dnsAliasName")
   @segment("dnsAliases")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerDnsAliasProperties;
 }
 
 @armResourceOperations

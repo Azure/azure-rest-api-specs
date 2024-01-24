@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * Server communication link.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model ServerCommunicationLink
-  is ProxyResource<ServerCommunicationLinkProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ServerCommunicationLinkProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ServerCommunicationLink extends ProxyResource {
   /**
    * The name of the server communication link.
    */
@@ -26,7 +31,17 @@ model ServerCommunicationLink
   @segment("communicationLinks")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Communication link kind.  This property is used for Azure Portal metadata.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * The properties of resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerCommunicationLinkProperties;
 }
 
 @armResourceOperations

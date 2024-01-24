@@ -14,7 +14,13 @@ namespace Microsoft.Confluent;
 /**
  * Organization resource.
  */
-model OrganizationResource is TrackedResource<OrganizationResourceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  OrganizationResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model OrganizationResource extends TrackedResourceBase {
   /**
    * Organization resource name
    */
@@ -22,6 +28,12 @@ model OrganizationResource is TrackedResource<OrganizationResourceProperties> {
   @key("organizationName")
   @segment("organizations")
   name: string;
+
+  /**
+   * Organization resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: OrganizationResourceProperties;
 }
 
 @armResourceOperations

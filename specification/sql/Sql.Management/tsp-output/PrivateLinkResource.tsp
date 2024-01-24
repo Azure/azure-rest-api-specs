@@ -15,8 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A private link resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateLinkResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateLinkResource extends ProxyResource {
   /**
    * The name of the private link resource.
    */
@@ -24,6 +30,12 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   @key("groupName")
   @segment("privateLinkResources")
   name: string;
+
+  /**
+   * The private link resource group id.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateLinkResourceProperties;
 }
 
 @armResourceOperations

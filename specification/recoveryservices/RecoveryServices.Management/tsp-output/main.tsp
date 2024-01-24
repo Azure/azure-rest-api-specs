@@ -18,6 +18,7 @@ using TypeSpec.Versioning;
  * Recovery Services Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "RecoveryServicesClient",
 })

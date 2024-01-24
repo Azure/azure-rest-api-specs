@@ -15,8 +15,12 @@ namespace Microsoft.SignalRService;
 /**
  * A hub setting
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WebPubSub)
-model WebPubSubHub is ProxyResource<WebPubSubHubProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WebPubSubHubProperties)
+@includeInapplicableMetadataInPayload(false)
+model WebPubSubHub extends ProxyResourceBase {
   /**
    * The hub name.
    */
@@ -24,6 +28,12 @@ model WebPubSubHub is ProxyResource<WebPubSubHubProperties> {
   @key("hubName")
   @segment("hubs")
   name: string;
+
+  /**
+   * Properties of a hub.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: WebPubSubHubProperties;
 }
 
 @armResourceOperations

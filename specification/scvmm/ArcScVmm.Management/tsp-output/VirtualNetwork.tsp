@@ -14,7 +14,11 @@ namespace Microsoft.ScVmm;
 /**
  * The VirtualNetworks resource definition.
  */
-model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualNetwork extends TrackedResourceBase {
   /**
    * Name of the VirtualNetwork.
    */
@@ -27,6 +31,12 @@ model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
    * The extended location.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: VirtualNetworkProperties;
 }
 
 @armResourceOperations

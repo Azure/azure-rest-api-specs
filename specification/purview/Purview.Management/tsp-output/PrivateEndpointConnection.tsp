@@ -15,9 +15,14 @@ namespace Microsoft.Purview;
 /**
  * A private endpoint connection class.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-model PrivateEndpointConnection
-  is ProxyResource<PrivateEndpointConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateEndpointConnectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnection extends ProxyResource {
   /**
    * Name of the private endpoint connection.
    */
@@ -25,6 +30,12 @@ model PrivateEndpointConnection
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
+
+  /**
+   * The connection identifier.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations

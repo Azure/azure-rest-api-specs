@@ -15,8 +15,12 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services account commitment plan.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-model CommitmentPlan is TrackedResource<CommitmentPlanProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CommitmentPlanProperties)
+@includeInapplicableMetadataInPayload(false)
+model CommitmentPlan extends TrackedResourceBase {
   /**
    * The name of the commitmentPlan associated with the Cognitive Services Account
    */
@@ -31,8 +35,18 @@ model CommitmentPlan is TrackedResource<CommitmentPlanProperties> {
   @visibility("read")
   etag?: string;
 
+  /**
+   * The Kind of the resource.
+   */
+  kind?: string;
+
+  /**
+   * Properties of Cognitive Services account commitment plan.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CommitmentPlanProperties;
+
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations

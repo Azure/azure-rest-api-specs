@@ -14,7 +14,11 @@ namespace Microsoft.HybridCompute;
 /**
  * Describes a hybrid machine.
  */
-model Machine is TrackedResource<MachineProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(MachineProperties)
+@includeInapplicableMetadataInPayload(false)
+model Machine extends TrackedResourceBase {
   /**
    * The name of the hybrid machine.
    */
@@ -32,8 +36,18 @@ model Machine is TrackedResource<MachineProperties> {
   @visibility("read")
   resources?: MachineExtension[];
 
+  /**
+   * Indicates which kind of Arc machine placement on-premises, such as HCI, SCVMM or VMware etc.
+   */
+  kind?: ArcKindEnum;
+
+  /**
+   * Hybrid Compute Machine properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MachineProperties;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations

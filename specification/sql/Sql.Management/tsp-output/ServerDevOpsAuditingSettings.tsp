@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A server DevOps auditing settings.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model ServerDevOpsAuditingSettings
-  is ProxyResource<ServerDevOpsAuditSettingsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ServerDevOpsAuditSettingsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ServerDevOpsAuditingSettings extends ProxyResource {
   /**
    * The name of the devops audit settings. This should always be Default.
    */
@@ -25,6 +30,12 @@ model ServerDevOpsAuditingSettings
   @key("devOpsAuditingSettingsName")
   @segment("devOpsAuditingSettings")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerDevOpsAuditSettingsProperties;
 }
 
 @armResourceOperations

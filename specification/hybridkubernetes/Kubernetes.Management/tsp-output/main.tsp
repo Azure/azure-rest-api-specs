@@ -15,6 +15,7 @@ using TypeSpec.Versioning;
  * Azure Connected Cluster Resource Provider API for adopting any Kubernetes Cluster
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ConnectedKubernetesClient",
 })

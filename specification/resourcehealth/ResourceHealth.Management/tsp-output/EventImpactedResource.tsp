@@ -15,8 +15,14 @@ namespace Microsoft.ResourceHealth;
 /**
  * Impacted resource for an event.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Event)
-model EventImpactedResource is ProxyResource<EventImpactedResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  EventImpactedResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model EventImpactedResource extends ProxyResourceBase {
   /**
    * Name of the Impacted Resource.
    */
@@ -25,6 +31,12 @@ model EventImpactedResource is ProxyResource<EventImpactedResourceProperties> {
   @key("impactedResourceName")
   @segment("impactedResources")
   name: string;
+
+  /**
+   * Properties of impacted resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: EventImpactedResourceProperties;
 }
 
 @armResourceOperations

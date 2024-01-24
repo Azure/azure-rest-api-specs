@@ -15,8 +15,14 @@ namespace Microsoft.Support;
 /**
  * ProblemClassification resource object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Service)
-model ProblemClassification is ProxyResource<ProblemClassificationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ProblemClassificationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ProblemClassification extends ProxyResourceBase {
   /**
    * Name of problem classification.
    */
@@ -24,6 +30,12 @@ model ProblemClassification is ProxyResource<ProblemClassificationProperties> {
   @key("problemClassificationName")
   @segment("problemClassifications")
   name: string;
+
+  /**
+   * Properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProblemClassificationProperties;
 }
 
 @armResourceOperations

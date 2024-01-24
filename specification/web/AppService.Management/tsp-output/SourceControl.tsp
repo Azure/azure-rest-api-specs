@@ -14,8 +14,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * The source control OAuth token.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model SourceControl is ProxyResource<SourceControlProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SourceControlProperties)
+@includeInapplicableMetadataInPayload(false)
+model SourceControl extends ProxyOnlyResource {
   /**
    * Type of source control
    */
@@ -23,6 +27,12 @@ model SourceControl is ProxyResource<SourceControlProperties> {
   @key("sourceControlType")
   @segment("sourcecontrols")
   name: string;
+
+  /**
+   * SourceControl resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SourceControlProperties;
 }
 
 @armResourceOperations

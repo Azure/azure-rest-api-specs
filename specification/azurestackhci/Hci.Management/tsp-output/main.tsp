@@ -32,6 +32,7 @@ using TypeSpec.Versioning;
  * The Microsoft.AzureStackHCI Rest API spec.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "AzureStackHCI",
 })

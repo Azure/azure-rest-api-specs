@@ -14,7 +14,11 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The L3 Isolation Domain resource definition.
  */
-model L3IsolationDomain is TrackedResource<L3IsolationDomainProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(L3IsolationDomainProperties)
+@includeInapplicableMetadataInPayload(false)
+model L3IsolationDomain extends TrackedResourceBase {
   /**
    * Name of the L3 Isolation Domain.
    */
@@ -22,6 +26,12 @@ model L3IsolationDomain is TrackedResource<L3IsolationDomainProperties> {
   @key("l3IsolationDomainName")
   @segment("l3IsolationDomains")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: L3IsolationDomainProperties;
 }
 
 @armResourceOperations

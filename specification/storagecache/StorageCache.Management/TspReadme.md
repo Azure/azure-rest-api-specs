@@ -5,7 +5,7 @@
 library-name: StorageCache
 isAzureSpec: true
 isArm: true
-require: https://github.com/Azure/azure-rest-api-specs/blob/6c157d49894462320db6603bb8e7b3077861b2d7/specification/storagecache/resource-manager/readme.md
+require: https://github.com/Azure/azure-rest-api-specs/blob/907b79c0a6a660826e54dc1f16ea14b831b201d2/specification/storagecache/resource-manager/readme.md
 skip-csproj: true
 modelerfour:
   flatten-payloads: false

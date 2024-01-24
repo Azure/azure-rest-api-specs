@@ -15,9 +15,14 @@ namespace Microsoft.ContainerService;
 /**
  * Defines binding between a resource and role
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedCluster)
-model TrustedAccessRoleBinding
-  is ProxyResource<TrustedAccessRoleBindingProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  TrustedAccessRoleBindingProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model TrustedAccessRoleBinding extends ProxyResourceBase {
   /**
    * The name of trusted access role binding.
    */
@@ -28,6 +33,12 @@ model TrustedAccessRoleBinding
   @key("trustedAccessRoleBindingName")
   @segment("trustedAccessRoleBindings")
   name: string;
+
+  /**
+   * Properties for trusted access role binding
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: TrustedAccessRoleBindingProperties;
 }
 
 @armResourceOperations

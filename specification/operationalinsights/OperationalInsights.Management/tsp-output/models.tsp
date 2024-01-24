@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -636,6 +638,7 @@ model DataExportProperties {
   /**
    * destination properties.
    */
+  @extension("x-ms-client-flatten", true)
   destination?: Destination;
 
   /**
@@ -673,6 +676,7 @@ model Destination {
   /**
    * destination meta data.
    */
+  @extension("x-ms-client-flatten", true)
   metaData?: DestinationMetaData;
 }
 
@@ -784,6 +788,7 @@ model ManagementGroup {
   /**
    * The properties of the management group.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ManagementGroupProperties;
 }
 
@@ -1520,6 +1525,7 @@ model ClusterPatch {
   /**
    * Log Analytics cluster properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterPatchProperties;
 
   /**
@@ -1724,6 +1730,7 @@ model WorkspacePatch extends AzureEntityResource {
   /**
    * Workspace properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WorkspaceProperties;
 
   /**

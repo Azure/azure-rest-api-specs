@@ -14,9 +14,14 @@ namespace Microsoft.MobileNetwork;
 /**
  * Packet core control plane version resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model PacketCoreControlPlaneVersion
-  is ProxyResource<PacketCoreControlPlaneVersionPropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PacketCoreControlPlaneVersionPropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model PacketCoreControlPlaneVersion extends ProxyResourceBase {
   /**
    * The name of the packet core control plane version.
    */
@@ -24,6 +29,12 @@ model PacketCoreControlPlaneVersion
   @key("versionName")
   @segment("packetCoreControlPlaneVersions")
   name: string;
+
+  /**
+   * Packet core control plane version properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: PacketCoreControlPlaneVersionPropertiesFormat;
 }
 
 @armResourceOperations

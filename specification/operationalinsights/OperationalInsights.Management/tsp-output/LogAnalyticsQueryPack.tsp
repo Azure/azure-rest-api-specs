@@ -14,8 +14,13 @@ namespace Microsoft.OperationalInsights;
 /**
  * An Log Analytics QueryPack definition.
  */
-model LogAnalyticsQueryPack
-  is TrackedResource<LogAnalyticsQueryPackProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  LogAnalyticsQueryPackProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model LogAnalyticsQueryPack extends TrackedResourceBase {
   /**
    * The name of the Log Analytics QueryPack resource.
    */
@@ -23,6 +28,12 @@ model LogAnalyticsQueryPack
   @key("queryPackName")
   @segment("queryPacks")
   name: string;
+
+  /**
+   * Properties that define a Log Analytics QueryPack resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LogAnalyticsQueryPackProperties;
 }
 
 @armResourceOperations

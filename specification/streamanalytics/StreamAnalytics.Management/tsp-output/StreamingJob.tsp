@@ -14,7 +14,11 @@ namespace Microsoft.StreamAnalytics;
 /**
  * A streaming job object, containing all information associated with the named streaming job.
  */
-model StreamingJob is TrackedResource<StreamingJobProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(StreamingJobProperties)
+@includeInapplicableMetadataInPayload(false)
+model StreamingJob extends TrackedResource {
   /**
    * The name of the streaming job.
    */
@@ -23,7 +27,16 @@ model StreamingJob is TrackedResource<StreamingJobProperties> {
   @segment("streamingjobs")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  /**
+   * Describes the managed identity assigned to this job that can be used to authenticate with inputs and outputs.
+   */
+  identity?: Identity;
+
+  /**
+   * The properties that are associated with a streaming job.  Required on PUT (CreateOrReplace) requests.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StreamingJobProperties;
 }
 
 @armResourceOperations

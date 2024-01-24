@@ -15,8 +15,12 @@ namespace Microsoft.Cdn;
 /**
  * CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AFDOriginGroup)
-model AFDOrigin is ProxyResource<AFDOriginProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AFDOriginProperties)
+@includeInapplicableMetadataInPayload(false)
+model AFDOrigin extends ProxyResource {
   /**
    * Name of the origin which is unique within the profile.
    */
@@ -24,6 +28,12 @@ model AFDOrigin is ProxyResource<AFDOriginProperties> {
   @key("originName")
   @segment("origins")
   name: string;
+
+  /**
+   * The JSON object that contains the properties of the origin.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AFDOriginProperties;
 }
 
 @armResourceOperations

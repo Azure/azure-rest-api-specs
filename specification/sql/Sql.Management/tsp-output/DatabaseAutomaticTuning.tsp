@@ -15,13 +15,24 @@ namespace Microsoft.Sql;
 /**
  * Database-level Automatic Tuning.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("current")
 @parentResource(Database)
-model DatabaseAutomaticTuning
-  is ProxyResource<DatabaseAutomaticTuningProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DatabaseAutomaticTuningProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DatabaseAutomaticTuning extends ProxyResource {
   @key("automaticTuning")
   @segment("automaticTuning")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DatabaseAutomaticTuningProperties;
 }
 
 @armResourceOperations

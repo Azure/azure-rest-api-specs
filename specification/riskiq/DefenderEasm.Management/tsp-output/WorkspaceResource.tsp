@@ -14,7 +14,11 @@ namespace Microsoft.Easm;
 /**
  * Workspace details.
  */
-model WorkspaceResource is TrackedResource<WorkspaceResourceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WorkspaceResourceProperties)
+@includeInapplicableMetadataInPayload(false)
+model WorkspaceResource extends TrackedResourceBase {
   /**
    * The name of the Workspace.
    */
@@ -22,6 +26,12 @@ model WorkspaceResource is TrackedResource<WorkspaceResourceProperties> {
   @key("workspaceName")
   @segment("workspaces")
   name: string;
+
+  /**
+   * Workspace properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkspaceResourceProperties;
 }
 
 @armResourceOperations

@@ -15,13 +15,24 @@ namespace Microsoft.Sql;
 /**
  * A restorable dropped managed database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model RestorableDroppedManagedDatabase
-  is TrackedResource<RestorableDroppedManagedDatabaseProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  RestorableDroppedManagedDatabaseProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model RestorableDroppedManagedDatabase extends TrackedResource {
   @path
   @key("restorableDroppedDatabaseId")
   @segment("restorableDroppedDatabases")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RestorableDroppedManagedDatabaseProperties;
 }
 
 @armResourceOperations

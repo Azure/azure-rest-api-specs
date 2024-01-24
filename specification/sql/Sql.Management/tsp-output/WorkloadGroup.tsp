@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * Workload group operations for a data warehouse
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model WorkloadGroup is ProxyResource<WorkloadGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WorkloadGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model WorkloadGroup extends ProxyResource {
   /**
    * The name of the workload group.
    */
@@ -24,6 +28,12 @@ model WorkloadGroup is ProxyResource<WorkloadGroupProperties> {
   @key("workloadGroupName")
   @segment("workloadGroups")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkloadGroupProperties;
 }
 
 @armResourceOperations

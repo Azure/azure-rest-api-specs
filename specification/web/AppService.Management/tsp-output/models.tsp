@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -83,13 +85,13 @@ enum FtpsState {
 }
 
 /**
-* The type of route this is:
-DEFAULT - By default, every app has routes to the local address ranges specified by RFC1918
-INHERITED - Routes inherited from the real Virtual Network routes
-STATIC - Static route set on the app only
-
-These values will be used for syncing an app's routes with those from a Virtual Network.
-*/
+ * The type of route this is:
+ * DEFAULT - By default, every app has routes to the local address ranges specified by RFC1918
+ * INHERITED - Routes inherited from the real Virtual Network routes
+ * STATIC - Static route set on the app only
+ *
+ * These values will be used for syncing an app's routes with those from a Virtual Network.
+ */
 enum RouteType {
   DEFAULT,
   INHERITED,
@@ -210,11 +212,11 @@ enum DatabaseType {
 }
 
 /**
-* Name of the format. Valid values are: 
-FileZilla3
-WebDeploy -- default
-Ftp
-*/
+ * Name of the format. Valid values are:
+ * FileZilla3
+ * WebDeploy -- default
+ * Ftp
+ */
 enum PublishingProfileFormat {
   FileZilla3,
   WebDeploy,
@@ -596,11 +598,11 @@ enum AzureStorageState {
 }
 
 /**
-* This composes with ClientCertEnabled setting.
-- ClientCertEnabled: false means ClientCert is ignored.
-- ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
-- ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted.
-*/
+ * This composes with ClientCertEnabled setting.
+ * - ClientCertEnabled: false means ClientCert is ignored.
+ * - ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
+ * - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted.
+ */
 @fixed
 enum ClientCertMode {
   Required,
@@ -797,10 +799,10 @@ enum UnauthenticatedClientAction {
 }
 
 /**
-* The default authentication provider to use when multiple providers are configured.
-This setting is only needed if multiple providers are configured and the unauthenticated client
-action is set to "RedirectToLoginPage".
-*/
+ * The default authentication provider to use when multiple providers are configured.
+ * This setting is only needed if multiple providers are configured and the unauthenticated client
+ * action is set to "RedirectToLoginPage".
+ */
 @fixed
 enum BuiltInAuthenticationProvider {
   AzureActiveDirectory,
@@ -1292,6 +1294,7 @@ model AppServiceCertificateOrderPatchResource extends ProxyOnlyResource {
   /**
    * AppServiceCertificateOrderPatchResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AppServiceCertificateOrderPatchResourceProperties;
 }
 
@@ -1456,6 +1459,7 @@ model AppServiceCertificatePatchResource extends ProxyOnlyResource {
   /**
    * Core resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AppServiceCertificate;
 }
 
@@ -1466,6 +1470,7 @@ model ReissueCertificateOrderRequest extends ProxyOnlyResource {
   /**
    * ReissueCertificateOrderRequest resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ReissueCertificateOrderRequestProperties;
 }
 
@@ -1501,6 +1506,7 @@ model RenewCertificateOrderRequest extends ProxyOnlyResource {
   /**
    * RenewCertificateOrderRequest resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RenewCertificateOrderRequestProperties;
 }
 
@@ -1556,6 +1562,7 @@ model SiteSeal {
   /**
    * HTML snippet
    */
+  @extension("x-ms-client-flatten", true)
   html: string;
 }
 
@@ -1566,6 +1573,7 @@ model CertificateOrderAction extends ProxyOnlyResource {
   /**
    * CertificateOrderAction resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CertificateOrderActionProperties;
 }
 
@@ -1594,6 +1602,7 @@ model CertificateEmail extends ProxyOnlyResource {
   /**
    * CertificateEmail resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CertificateEmailProperties;
 }
 
@@ -1955,9 +1964,9 @@ model MetricSpecification {
 }
 
 /**
-* Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app, 
-where instance name is dimension of the metric HTTP request
-*/
+ * Dimension of a resource metric. For e.g. instance specific HTTP requests for a web app,
+ * where instance name is dimension of the metric HTTP request
+ */
 model Dimension {
   name?: string;
   displayName?: string;
@@ -2082,7 +2091,7 @@ model DomainProperties {
 
   /**
    * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and
-   * it is hosted on name servers Azure has programmatic access to.
+   *  it is hosted on name servers Azure has programmatic access to.
    */
   @visibility("read")
   readyForDnsRecordManagement?: boolean;
@@ -2125,9 +2134,9 @@ model DomainProperties {
 }
 
 /**
-* Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois 
-directories as per ICANN requirements.
-*/
+ * Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois
+ * directories as per ICANN requirements.
+ */
 model Contact {
   /**
    * Mailing address.
@@ -2316,6 +2325,7 @@ model DomainPatchResource extends ProxyOnlyResource {
   /**
    * DomainPatchResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DomainPatchResourceProperties;
 }
 
@@ -2398,7 +2408,7 @@ model DomainPatchResourceProperties {
 
   /**
    * <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and
-   * it is hosted on name servers Azure has programmatic access to.
+   *  it is hosted on name servers Azure has programmatic access to.
    */
   @visibility("read")
   readyForDnsRecordManagement?: boolean;
@@ -2564,9 +2574,9 @@ model AppServiceEnvironment {
   frontEndScaleFactor?: int32;
 
   /**
-* <code>true</code> if the App Service Environment is suspended; otherwise, <code>false</code>. The environment can be suspended, e.g. when the management endpoint is no longer available
- (most likely because NSG blocked the incoming traffic).
-*/
+   * <code>true</code> if the App Service Environment is suspended; otherwise, <code>false</code>. The environment can be suspended, e.g. when the management endpoint is no longer available
+   *  (most likely because NSG blocked the incoming traffic).
+   */
   @visibility("read")
   suspended?: boolean;
 
@@ -2646,6 +2656,7 @@ model AppServiceEnvironmentPatchResource extends ProxyOnlyResource {
   /**
    * Core resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AppServiceEnvironment;
 }
 
@@ -2689,17 +2700,17 @@ model StampCapacity {
   workerSize?: WorkerSizeOptions;
 
   /**
-* Size ID of machines: 
-0 - Small
-1 - Medium
-2 - Large
-*/
+   * Size ID of machines:
+   * 0 - Small
+   * 1 - Medium
+   * 2 - Large
+   */
   workerSizeId?: int32;
 
   /**
-* If <code>true</code>, it includes basic apps.
-Basic apps are not used for capacity allocation.
-*/
+   * If <code>true</code>, it includes basic apps.
+   * Basic apps are not used for capacity allocation.
+   */
   excludeFromCapacityAllocation?: boolean;
 
   /**
@@ -2725,6 +2736,7 @@ model AddressResponse extends ProxyOnlyResource {
   /**
    * AddressResponse resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AddressResponseProperties;
 }
 
@@ -2985,6 +2997,7 @@ model ResourceMetricDefinition extends ProxyOnlyResource {
   /**
    * ResourceMetricDefinition resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ResourceMetricDefinitionProperties;
 }
 
@@ -3077,6 +3090,7 @@ model Usage extends ProxyOnlyResource {
   /**
    * Usage resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UsageProperties;
 }
 
@@ -3298,6 +3312,7 @@ model PrivateLinkConnectionApprovalRequestResource extends ProxyOnlyResource {
   /**
    * Core resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkConnectionApprovalRequest;
 }
 
@@ -3400,9 +3415,9 @@ model AppServicePlanProperties {
   geoRegion?: string;
 
   /**
-* If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
-If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.
-*/
+   * If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
+   * If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.
+   */
   perSiteScaling?: boolean;
 
   /**
@@ -3484,9 +3499,9 @@ If <code>false</code>, apps assigned to this App Service plan will scale to all 
   kubeEnvironmentProfile?: KubeEnvironmentProfile;
 
   /**
-* If <code>true</code>, this App Service Plan will perform availability zone balancing.
-If <code>false</code>, this App Service Plan will not perform availability zone balancing.
-*/
+   * If <code>true</code>, this App Service Plan will perform availability zone balancing.
+   * If <code>false</code>, this App Service Plan will not perform availability zone balancing.
+   */
   zoneRedundant?: boolean;
 }
 
@@ -3584,9 +3599,9 @@ model SiteProperties {
   enabled?: boolean;
 
   /**
-* Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,
-the app is not served on those hostnames.
-*/
+   * Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,
+   * the app is not served on those hostnames.
+   */
   @visibility("read")
   enabledHostNames?: string[];
 
@@ -3670,11 +3685,11 @@ the app is not served on those hostnames.
   clientCertEnabled?: boolean;
 
   /**
-* This composes with ClientCertEnabled setting.
-- ClientCertEnabled: false means ClientCert is ignored.
-- ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
-- ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted.
-*/
+   * This composes with ClientCertEnabled setting.
+   * - ClientCertEnabled: false means ClientCert is ignored.
+   * - ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
+   * - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted.
+   */
   clientCertMode?: ClientCertMode;
 
   /**
@@ -3683,9 +3698,9 @@ the app is not served on those hostnames.
   clientCertExclusionPaths?: string;
 
   /**
-* <code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.
- If <code>true</code>, the app is only accessible via API management process.
-*/
+   * <code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.
+   *  If <code>true</code>, the app is only accessible via API management process.
+   */
   hostNamesDisabled?: boolean;
 
   /**
@@ -3723,9 +3738,9 @@ the app is not served on those hostnames.
   suspendedTill?: utcDateTime;
 
   /**
-* Maximum number of workers.
-This only applies to Functions container.
-*/
+   * Maximum number of workers.
+   * This only applies to Functions container.
+   */
   @visibility("read")
   maxNumberOfWorkers?: int32;
 
@@ -3760,9 +3775,9 @@ This only applies to Functions container.
   slotSwapStatus?: SlotSwapStatus;
 
   /**
-* HttpsOnly: configures a web site to accept only https requests. Issues redirect for
-http requests
-*/
+   * HttpsOnly: configures a web site to accept only https requests. Issues redirect for
+   * http requests
+   */
   httpsOnly?: boolean;
 
   /**
@@ -3787,9 +3802,9 @@ http requests
   keyVaultReferenceIdentity?: string;
 
   /**
-* Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration.
-This must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}
-*/
+   * Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration.
+   * This must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}
+   */
   virtualNetworkSubnetId?: string;
 }
 
@@ -4131,16 +4146,16 @@ model SiteConfigProperties {
   ftpsState?: FtpsState;
 
   /**
-* Number of preWarmed instances.
-This setting only applies to the Consumption and Elastic Plans
-*/
+   * Number of preWarmed instances.
+   * This setting only applies to the Consumption and Elastic Plans
+   */
   @maxValue(10)
   preWarmedInstanceCount?: int32;
 
   /**
-* Maximum number of workers that a site can scale out to.
-This setting only applies to the Consumption and Elastic Premium Plans
-*/
+   * Maximum number of workers that a site can scale out to.
+   * This setting only applies to the Consumption and Elastic Premium Plans
+   */
   functionAppScaleLimit?: int32;
 
   /**
@@ -4149,10 +4164,10 @@ This setting only applies to the Consumption and Elastic Premium Plans
   healthCheckPath?: string;
 
   /**
-* Gets or sets a value indicating whether functions runtime scale monitoring is enabled. When enabled,
-the ScaleController will not monitor event sources directly, but will instead call to the
-runtime to get scale status.
-*/
+   * Gets or sets a value indicating whether functions runtime scale monitoring is enabled. When enabled,
+   * the ScaleController will not monitor event sources directly, but will instead call to the
+   * runtime to get scale status.
+   */
   functionsRuntimeScaleMonitoringEnabled?: boolean;
 
   /**
@@ -4161,9 +4176,9 @@ runtime to get scale status.
   websiteTimeZone?: string;
 
   /**
-* Number of minimum instance count for a site
-This setting only applies to the Elastic Plans
-*/
+   * Number of minimum instance count for a site
+   * This setting only applies to the Elastic Plans
+   */
   @maxValue(20)
   minimumElasticInstanceCount?: int32;
 
@@ -4224,9 +4239,9 @@ model SiteMachineKey {
 }
 
 /**
-* The IIS handler mappings used to define which handler processes HTTP requests with certain extension. 
-For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.
-*/
+ * The IIS handler mappings used to define which handler processes HTTP requests with certain extension.
+ * For example, it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension.
+ */
 model HandlerMapping {
   /**
    * Requests with this extension will be handled using the specified FastCGI application.
@@ -4309,10 +4324,10 @@ model RampUpRule {
   reroutePercentage?: float64;
 
   /**
-* In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or 
-<code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specified in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm 
-can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.
-*/
+   * In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or
+   * <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specified in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm
+   * can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.
+   */
   changeStep?: float64;
 
   /**
@@ -4331,9 +4346,9 @@ can be provided in TiPCallback site extension which URL can be specified in <cod
   maxReroutePercentage?: float64;
 
   /**
-* Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.
-https://www.siteextensions.net/packages/TiPCallback/
-*/
+   * Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified. See TiPCallback site extension for the scaffold and contracts.
+   * https://www.siteextensions.net/packages/TiPCallback/
+   */
   changeDecisionCallbackUrl?: string;
 
   /**
@@ -4524,16 +4539,16 @@ model AutoHealActions {
   customAction?: AutoHealCustomAction;
 
   /**
-* Minimum time the process must execute
-before taking the action
-*/
+   * Minimum time the process must execute
+   * before taking the action
+   */
   minProcessExecutionTime?: string;
 }
 
 /**
-* Custom action to be executed
-when an auto heal rule is triggered.
-*/
+ * Custom action to be executed
+ * when an auto heal rule is triggered.
+ */
 model AutoHealCustomAction {
   /**
    * Executable to be run.
@@ -4551,16 +4566,16 @@ model AutoHealCustomAction {
  */
 model CorsSettings {
   /**
-* Gets or sets the list of origins that should be allowed to make cross-origin
-calls (for example: http://example.com:12345). Use "*" to allow all.
-*/
+   * Gets or sets the list of origins that should be allowed to make cross-origin
+   * calls (for example: http://example.com:12345). Use "*" to allow all.
+   */
   allowedOrigins?: string[];
 
   /**
-* Gets or sets whether CORS requests with credentials are allowed. See 
-https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
-for more details.
-*/
+   * Gets or sets whether CORS requests with credentials are allowed. See
+   * https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
+   * for more details.
+   */
   supportCredentials?: boolean;
 }
 
@@ -4571,6 +4586,7 @@ model PushSettings extends ProxyOnlyResource {
   /**
    * PushSettings resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PushSettingsProperties;
 }
 
@@ -4589,11 +4605,11 @@ model PushSettingsProperties {
   tagWhitelistJson?: string;
 
   /**
-* Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.
-Tags can consist of alphanumeric characters and the following:
-'_', '@', '#', '.', ':', '-'. 
-Validation should be performed at the PushRequestHandler.
-*/
+   * Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.
+   * Tags can consist of alphanumeric characters and the following:
+   * '_', '@', '#', '.', ':', '-'.
+   * Validation should be performed at the PushRequestHandler.
+   */
   tagsRequiringAuth?: string;
 
   /**
@@ -4627,11 +4643,11 @@ model ApiManagementConfig {
  */
 model IpSecurityRestriction {
   /**
-* IP address the security restriction is valid for.
-It can be in form of pure ipv4 address (required SubnetMask property) or
-CIDR notation such as ipv4/mask (leading bit match). For CIDR,
-SubnetMask property must not be specified.
-*/
+   * IP address the security restriction is valid for.
+   * It can be in form of pure ipv4 address (required SubnetMask property) or
+   * CIDR notation such as ipv4/mask (leading bit match). For CIDR,
+   * SubnetMask property must not be specified.
+   */
   ipAddress?: string;
 
   /**
@@ -4680,23 +4696,23 @@ SubnetMask property must not be specified.
   description?: string;
 
   /**
-* IP restriction rule headers.
-X-Forwarded-Host (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples). 
-The matching logic is ..
-- If the property is null or empty (default), all hosts(or lack of) are allowed.
-- A value is compared using ordinal-ignore-case (excluding port number).
-- Subdomain wildcards are permitted but don't match the root domain. For example, *.contoso.com matches the subdomain foo.contoso.com
- but not the root domain contoso.com or multi-level foo.bar.contoso.com
-- Unicode host names are allowed but are converted to Punycode for matching.
-
-X-Forwarded-For (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples).
-The matching logic is ..
-- If the property is null or empty (default), any forwarded-for chains (or lack of) are allowed.
-- If any address (excluding port number) in the chain (comma separated) matches the CIDR defined by the property.
-
-X-Azure-FDID and X-FD-HealthProbe.
-The matching logic is exact match.
-*/
+   * IP restriction rule headers.
+   * X-Forwarded-Host (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples).
+   * The matching logic is ..
+   * - If the property is null or empty (default), all hosts(or lack of) are allowed.
+   * - A value is compared using ordinal-ignore-case (excluding port number).
+   * - Subdomain wildcards are permitted but don't match the root domain. For example, *.contoso.com matches the subdomain foo.contoso.com
+   *  but not the root domain contoso.com or multi-level foo.bar.contoso.com
+   * - Unicode host names are allowed but are converted to Punycode for matching.
+   *
+   * X-Forwarded-For (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples).
+   * The matching logic is ..
+   * - If the property is null or empty (default), any forwarded-for chains (or lack of) are allowed.
+   * - If any address (excluding port number) in the chain (comma separated) matches the CIDR defined by the property.
+   *
+   * X-Azure-FDID and X-FD-HealthProbe.
+   * The matching logic is exact match.
+   */
   headers?: Record<string[]>;
 }
 
@@ -4741,9 +4757,9 @@ model AzureStorageInfoValue {
  */
 model CloningInfo {
   /**
-* Correlation ID of cloning operation. This ID ties multiple cloning operations
-together to use the same snapshot.
-*/
+   * Correlation ID of cloning operation. This ID ties multiple cloning operations
+   * together to use the same snapshot.
+   */
   correlationId?: string;
 
   /**
@@ -4762,10 +4778,10 @@ together to use the same snapshot.
   cloneSourceControl?: boolean;
 
   /**
-* ARM resource ID of the source app. App resource ID is of the form 
-/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
-/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
-*/
+   * ARM resource ID of the source app. App resource ID is of the form
+   * /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and
+   * /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+   */
   sourceWebAppId: string;
 
   /**
@@ -4779,9 +4795,9 @@ together to use the same snapshot.
   hostingEnvironment?: string;
 
   /**
-* Application setting overrides for cloned app. If specified, these settings override the settings cloned 
-from source app. Otherwise, application settings from source app are retained.
-*/
+   * Application setting overrides for cloned app. If specified, these settings override the settings cloned
+   * from source app. Otherwise, application settings from source app are retained.
+   */
   appSettingsOverrides?: Record<string>;
 
   /**
@@ -4790,9 +4806,9 @@ from source app. Otherwise, application settings from source app are retained.
   configureLoadBalancing?: boolean;
 
   /**
-* ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form 
-/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.
-*/
+   * ARM resource ID of the Traffic Manager profile to use, if it exists. Traffic Manager resource ID is of the form
+   * /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.
+   */
   trafficManagerProfileId?: string;
 
   /**
@@ -4823,6 +4839,50 @@ model SlotSwapStatus {
    */
   @visibility("read")
   destinationSlotName?: string;
+}
+
+/**
+ * Managed service identity.
+ */
+model ManagedServiceIdentity {
+  /**
+   * Type of managed service identity.
+   */
+  type?: ManagedServiceIdentityType;
+
+  /**
+   * Tenant of managed service identity.
+   */
+  @visibility("read")
+  tenantId?: string;
+
+  /**
+   * Principal Id of managed service identity.
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}
+   */
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
+ * User Assigned identity.
+ */
+model UserAssignedIdentity {
+  /**
+   * Principal Id of user assigned identity
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * Client Id of user assigned identity
+   */
+  @visibility("read")
+  clientId?: string;
 }
 
 /**
@@ -4883,6 +4943,7 @@ model AppServicePlanPatchResource extends ProxyOnlyResource {
   /**
    * AppServicePlanPatchResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AppServicePlanPatchResourceProperties;
 }
 
@@ -4926,9 +4987,9 @@ model AppServicePlanPatchResourceProperties {
   geoRegion?: string;
 
   /**
-* If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
-If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.
-*/
+   * If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
+   * If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.
+   */
   perSiteScaling?: boolean;
 
   /**
@@ -5010,9 +5071,9 @@ If <code>false</code>, apps assigned to this App Service plan will scale to all 
   kubeEnvironmentProfile?: KubeEnvironmentProfile;
 
   /**
-* If <code>true</code>, this App Service Plan will perform availability zone balancing.
-If <code>false</code>, this App Service Plan will not perform availability zone balancing.
-*/
+   * If <code>true</code>, this App Service Plan will perform availability zone balancing.
+   * If <code>false</code>, this App Service Plan will not perform availability zone balancing.
+   */
   zoneRedundant?: boolean;
 }
 
@@ -5053,9 +5114,9 @@ model HybridConnectionProperties {
   sendKeyName?: string;
 
   /**
-* The value of the Service Bus key. This is used to authenticate to Service Bus. In ARM this key will not be returned
-normally, use the POST /listKeys API instead.
-*/
+   * The value of the Service Bus key. This is used to authenticate to Service Bus. In ARM this key will not be returned
+   * normally, use the POST /listKeys API instead.
+   */
   sendKeyValue?: string;
 
   /**
@@ -5071,6 +5132,7 @@ model HybridConnectionKey extends ProxyOnlyResource {
   /**
    * HybridConnectionKey resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: HybridConnectionKeyProperties;
 }
 
@@ -5134,9 +5196,9 @@ model VnetInfo {
   certThumbprint?: string;
 
   /**
-* A certificate file (.cer) blob containing the public key of the private key used to authenticate a 
-Point-To-Site VPN connection.
-*/
+   * A certificate file (.cer) blob containing the public key of the private key used to authenticate a
+   * Point-To-Site VPN connection.
+   */
   certBlob?: string;
 
   /**
@@ -5169,6 +5231,7 @@ model VnetRoute extends ProxyOnlyResource {
   /**
    * VnetRoute resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VnetRouteProperties;
 }
 
@@ -5187,13 +5250,13 @@ model VnetRouteProperties {
   endAddress?: string;
 
   /**
-* The type of route this is:
-DEFAULT - By default, every app has routes to the local address ranges specified by RFC1918
-INHERITED - Routes inherited from the real Virtual Network routes
-STATIC - Static route set on the app only
-
-These values will be used for syncing an app's routes with those from a Virtual Network.
-*/
+   * The type of route this is:
+   * DEFAULT - By default, every app has routes to the local address ranges specified by RFC1918
+   * INHERITED - Routes inherited from the real Virtual Network routes
+   * STATIC - Static route set on the app only
+   *
+   * These values will be used for syncing an app's routes with those from a Virtual Network.
+   */
   routeType?: RouteType;
 }
 
@@ -5347,6 +5410,7 @@ model CertificatePatchResource extends ProxyOnlyResource {
   /**
    * CertificatePatchResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CertificatePatchResourceProperties;
 }
 
@@ -5558,6 +5622,7 @@ model DiagnosticAnalysis extends ProxyOnlyResource {
   /**
    * DiagnosticAnalysis resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DiagnosticAnalysisProperties;
 }
 
@@ -5814,11 +5879,11 @@ model DiagnosticMetricSample {
   timestamp?: utcDateTime;
 
   /**
-* Role Instance. Null if this counter is not per instance 
-This is returned and should be whichever instance name we desire to be returned
-i.e. CPU and Memory return RDWORKERNAME (LargeDed..._IN_0) 
-where RDWORKERNAME is Machine name below and RoleInstance name in parenthesis
-*/
+   * Role Instance. Null if this counter is not per instance
+   * This is returned and should be whichever instance name we desire to be returned
+   * i.e. CPU and Memory return RDWORKERNAME (LargeDed..._IN_0)
+   * where RDWORKERNAME is Machine name below and RoleInstance name in parenthesis
+   */
   roleInstance?: string;
 
   /**
@@ -5871,6 +5936,7 @@ model DiagnosticDetectorResponse extends ProxyOnlyResource {
   /**
    * DiagnosticDetectorResponse resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DiagnosticDetectorResponseProperties;
 }
 
@@ -5928,6 +5994,7 @@ model Snapshot extends ProxyOnlyResource {
   /**
    * Snapshot resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SnapshotProperties;
 }
 
@@ -5977,17 +6044,17 @@ model KubeEnvironmentProperties {
   staticIp?: string;
 
   /**
-* Cluster configuration which determines the ARC cluster
-components types. Eg: Choosing between BuildService kind,
-FrontEnd Service ArtifactsStorageType etc.
-*/
+   * Cluster configuration which determines the ARC cluster
+   * components types. Eg: Choosing between BuildService kind,
+   * FrontEnd Service ArtifactsStorageType etc.
+   */
   arcConfiguration?: ArcConfiguration;
 
   /**
-* Cluster configuration which enables the log daemon to export
-app logs to a destination. Currently only "log-analytics" is
-supported
-*/
+   * Cluster configuration which enables the log daemon to export
+   * app logs to a destination. Currently only "log-analytics" is
+   * supported
+   */
   appLogsConfiguration?: AppLogsConfiguration;
 
   @visibility("read", "create")
@@ -6039,6 +6106,7 @@ model KubeEnvironmentPatchResource extends ProxyOnlyResource {
   /**
    * KubeEnvironmentPatchResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: KubeEnvironmentPatchResourceProperties;
 }
 
@@ -6077,17 +6145,17 @@ model KubeEnvironmentPatchResourceProperties {
   staticIp?: string;
 
   /**
-* Cluster configuration which determines the ARC cluster
-components types. Eg: Choosing between BuildService kind,
-FrontEnd Service ArtifactsStorageType etc.
-*/
+   * Cluster configuration which determines the ARC cluster
+   * components types. Eg: Choosing between BuildService kind,
+   * FrontEnd Service ArtifactsStorageType etc.
+   */
   arcConfiguration?: ArcConfiguration;
 
   /**
-* Cluster configuration which enables the log daemon to export
-app logs to a destination. Currently only "log-analytics" is
-supported
-*/
+   * Cluster configuration which enables the log daemon to export
+   * app logs to a destination. Currently only "log-analytics" is
+   * supported
+   */
   appLogsConfiguration?: AppLogsConfiguration;
 
   @visibility("read", "create")
@@ -6106,6 +6174,7 @@ model ApplicationStackResource extends ProxyOnlyResource {
   /**
    * Core resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApplicationStack;
 }
 
@@ -6189,19 +6258,19 @@ model StackMajorVersion {
   isHidden?: boolean;
 
   /**
-* <appSettings>
- <appSetting name="FUNCTIONS_WORKER_RUNTIME" value="dotnet" />
-</appSettings>
- Example: All the function apps need AppSetting: "FUNCTIONS_WORKER_RUNTIME" to be set stack name
-*/
+   * <appSettings>
+   *  <appSetting name="FUNCTIONS_WORKER_RUNTIME" value="dotnet" />
+   * </appSettings>
+   *  Example: All the function apps need AppSetting: "FUNCTIONS_WORKER_RUNTIME" to be set stack name
+   */
   appSettingsDictionary?: Record<Record<unknown>>;
 
   /**
-* <siteConfigProperties>
- <siteConfigProperty name="Use32BitWorkerProcess" value="false" />
-</siteConfigProperties>
- Example: All Linux Function Apps, need Use32BitWorkerProcess to be set to 0
-*/
+   * <siteConfigProperties>
+   *  <siteConfigProperty name="Use32BitWorkerProcess" value="false" />
+   * </siteConfigProperties>
+   *  Example: All Linux Function Apps, need Use32BitWorkerProcess to be set to 0
+   */
   siteConfigPropertiesDictionary?: Record<Record<unknown>>;
 }
 
@@ -6248,6 +6317,7 @@ model FunctionAppStack extends ProxyOnlyResource {
   /**
    * FunctionAppStack resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: FunctionAppStackProperties;
 }
 
@@ -6514,6 +6584,7 @@ model WebAppStack extends ProxyOnlyResource {
   /**
    * WebAppStack resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WebAppStackProperties;
 }
 
@@ -6807,6 +6878,7 @@ model Recommendation extends ProxyOnlyResource {
   /**
    * Recommendation resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RecommendationProperties;
 }
 
@@ -6957,9 +7029,9 @@ model RecommendationRuleProperties {
   message?: string;
 
   /**
-* Recommendation ID of an associated recommendation object tied to the rule, if exists.
-If such an object doesn't exist, it is set to null.
-*/
+   * Recommendation ID of an associated recommendation object tied to the rule, if exists.
+   * If such an object doesn't exist, it is set to null.
+   */
   recommendationId?: string;
 
   /**
@@ -7095,6 +7167,7 @@ model BillingMeter extends ProxyOnlyResource {
   /**
    * BillingMeter resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BillingMeterProperties;
 }
 
@@ -7179,9 +7252,9 @@ model ResourceNameAvailability {
 }
 
 /**
-* List of available locations (regions or App Service Environments) for
-deployment of App Service resources.
-*/
+ * List of available locations (regions or App Service Environments) for
+ * deployment of App Service resources.
+ */
 model DeploymentLocations {
   /**
    * Available regions.
@@ -7206,6 +7279,7 @@ model GeoRegion extends ProxyOnlyResource {
   /**
    * GeoRegion resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GeoRegionProperties;
 }
 
@@ -7275,6 +7349,7 @@ model PremierAddOnOffer extends ProxyOnlyResource {
   /**
    * PremierAddOnOffer resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PremierAddOnOfferProperties;
 }
 
@@ -7395,6 +7470,7 @@ model VnetParameters extends ProxyOnlyResource {
   /**
    * VnetParameters resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VnetParametersProperties;
 }
 
@@ -7430,6 +7506,7 @@ model VnetValidationFailureDetails extends ProxyOnlyResource {
   /**
    * VnetValidationFailureDetails resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VnetValidationFailureDetailsProperties;
 }
 
@@ -7465,6 +7542,7 @@ model VnetValidationTestFailure extends ProxyOnlyResource {
   /**
    * VnetValidationTestFailure resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: VnetValidationTestFailureProperties;
 }
 
@@ -7505,6 +7583,7 @@ model ValidateRequest {
   /**
    * Properties of the resource to validate.
    */
+  @extension("x-ms-client-flatten", true)
   properties: ValidateProperties;
 }
 
@@ -7621,6 +7700,7 @@ model StaticSitesWorkflowPreviewRequest extends ProxyOnlyResource {
   /**
    * StaticSitesWorkflowPreviewRequest resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSitesWorkflowPreviewRequestProperties;
 }
 
@@ -7696,6 +7776,7 @@ model StaticSitesWorkflowPreview extends ProxyOnlyResource {
   /**
    * StaticSitesWorkflowPreview resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSitesWorkflowPreviewProperties;
 }
 
@@ -7803,10 +7884,10 @@ model StaticSite {
  */
 model ResponseMessageEnvelopeRemotePrivateEndpointConnection {
   /**
-* Resource Id. Typically ID is populated only for responses to GET requests. Caller is responsible for passing in this
-value for GET requests only.
-For example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupId}/providers/Microsoft.Web/sites/{sitename}
-*/
+   * Resource Id. Typically ID is populated only for responses to GET requests. Caller is responsible for passing in this
+   * value for GET requests only.
+   * For example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupId}/providers/Microsoft.Web/sites/{sitename}
+   */
   id?: string;
 
   /**
@@ -7902,6 +7983,7 @@ model RemotePrivateEndpointConnection extends ProxyOnlyResource {
   /**
    * RemotePrivateEndpointConnection resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RemotePrivateEndpointConnectionProperties;
 }
 
@@ -7987,6 +8069,7 @@ model StaticSitePatchResource extends ProxyOnlyResource {
   /**
    * Core resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSite;
 }
 
@@ -8002,6 +8085,7 @@ model StaticSiteUserARMResource extends ProxyOnlyResource {
   /**
    * StaticSiteUserARMResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSiteUserARMResourceProperties;
 }
 
@@ -8095,6 +8179,7 @@ model StringDictionary extends ProxyOnlyResource {
   /**
    * Settings.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<string>;
 }
 
@@ -8111,6 +8196,7 @@ model StaticSiteFunctionOverviewARMResource extends ProxyOnlyResource {
   /**
    * StaticSiteFunctionOverviewARMResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSiteFunctionOverviewARMResourceProperties;
 }
 
@@ -8138,6 +8224,7 @@ model StaticSiteZipDeploymentARMResource extends ProxyOnlyResource {
   /**
    * Core resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSiteZipDeployment;
 }
 
@@ -8178,6 +8265,7 @@ model StaticSiteUserInvitationRequestResource extends ProxyOnlyResource {
   /**
    * StaticSiteUserInvitationRequestResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSiteUserInvitationRequestResourceProperties;
 }
 
@@ -8218,6 +8306,7 @@ model StaticSiteUserInvitationResponseResource extends ProxyOnlyResource {
   /**
    * StaticSiteUserInvitationResponseResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSiteUserInvitationResponseResourceProperties;
 }
 
@@ -8280,6 +8369,7 @@ model StaticSiteCustomDomainRequestPropertiesARMResource
   /**
    * StaticSiteCustomDomainRequestPropertiesARMResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSiteCustomDomainRequestPropertiesARMResourceProperties;
 }
 
@@ -8310,6 +8400,7 @@ model StaticSiteResetPropertiesARMResource extends ProxyOnlyResource {
   /**
    * StaticSiteResetPropertiesARMResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSiteResetPropertiesARMResourceProperties;
 }
 
@@ -8335,6 +8426,7 @@ model SitePatchResource extends ProxyOnlyResource {
   /**
    * SitePatchResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SitePatchResourceProperties;
 
   /**
@@ -8377,9 +8469,9 @@ model SitePatchResourceProperties {
   enabled?: boolean;
 
   /**
-* Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,
-the app is not served on those hostnames.
-*/
+   * Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,
+   * the app is not served on those hostnames.
+   */
   @visibility("read")
   enabledHostNames?: string[];
 
@@ -8463,11 +8555,11 @@ the app is not served on those hostnames.
   clientCertEnabled?: boolean;
 
   /**
-* This composes with ClientCertEnabled setting.
-- ClientCertEnabled: false means ClientCert is ignored.
-- ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
-- ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted.
-*/
+   * This composes with ClientCertEnabled setting.
+   * - ClientCertEnabled: false means ClientCert is ignored.
+   * - ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.
+   * - ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted.
+   */
   clientCertMode?: ClientCertMode;
 
   /**
@@ -8476,9 +8568,9 @@ the app is not served on those hostnames.
   clientCertExclusionPaths?: string;
 
   /**
-* <code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.
- If <code>true</code>, the app is only accessible via API management process.
-*/
+   * <code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.
+   *  If <code>true</code>, the app is only accessible via API management process.
+   */
   hostNamesDisabled?: boolean;
 
   /**
@@ -8516,9 +8608,9 @@ the app is not served on those hostnames.
   suspendedTill?: utcDateTime;
 
   /**
-* Maximum number of workers.
-This only applies to Functions container.
-*/
+   * Maximum number of workers.
+   * This only applies to Functions container.
+   */
   @visibility("read")
   maxNumberOfWorkers?: int32;
 
@@ -8553,9 +8645,9 @@ This only applies to Functions container.
   slotSwapStatus?: SlotSwapStatus;
 
   /**
-* HttpsOnly: configures a web site to accept only https requests. Issues redirect for
-http requests
-*/
+   * HttpsOnly: configures a web site to accept only https requests. Issues redirect for
+   * http requests
+   */
   httpsOnly?: boolean;
 
   /**
@@ -8580,9 +8672,9 @@ http requests
   keyVaultReferenceIdentity?: string;
 
   /**
-* Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration.
-This must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}
-*/
+   * Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration.
+   * This must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}
+   */
   virtualNetworkSubnetId?: string;
 }
 
@@ -8593,6 +8685,7 @@ model CustomHostnameAnalysisResult extends ProxyOnlyResource {
   /**
    * CustomHostnameAnalysisResult resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CustomHostnameAnalysisResultProperties;
 }
 
@@ -8684,6 +8777,7 @@ model BackupRequest extends ProxyOnlyResource {
   /**
    * BackupRequest resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BackupRequestProperties;
 }
 
@@ -8767,9 +8861,9 @@ model DatabaseBackupSetting {
   name?: string;
 
   /**
-* Contains a connection string name that is linked to the SiteConfig.ConnectionStrings.
-This is used during restore with overwrite connection strings options.
-*/
+   * Contains a connection string name that is linked to the SiteConfig.ConnectionStrings.
+   * This is used during restore with overwrite connection strings options.
+   */
   connectionStringName?: string;
 
   /**
@@ -8878,6 +8972,7 @@ model RestoreRequest extends ProxyOnlyResource {
   /**
    * RestoreRequest resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RestoreRequestProperties;
 }
 
@@ -8911,9 +9006,9 @@ model RestoreRequestProperties {
   databases?: DatabaseBackupSetting[];
 
   /**
-* Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to 
-the app's object when it is being restored, but that might fail due to conflicts during the operation.
-*/
+   * Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to
+   * the app's object when it is being restored, but that might fail due to conflicts during the operation.
+   */
   ignoreConflictingHostNames?: boolean;
 
   /**
@@ -8959,6 +9054,7 @@ model SiteAuthSettings extends ProxyOnlyResource {
   /**
    * SiteAuthSettings resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SiteAuthSettingsProperties;
 }
 
@@ -8972,9 +9068,9 @@ model SiteAuthSettingsProperties {
   enabled?: boolean;
 
   /**
-* The RuntimeVersion of the Authentication / Authorization feature in use for the current app.
-The setting in this value can control the behavior of certain features in the Authentication / Authorization module.
-*/
+   * The RuntimeVersion of the Authentication / Authorization feature in use for the current app.
+   * The setting in this value can control the behavior of certain features in the Authentication / Authorization module.
+   */
   runtimeVersion?: string;
 
   /**
@@ -8983,45 +9079,45 @@ The setting in this value can control the behavior of certain features in the Au
   unauthenticatedClientAction?: UnauthenticatedClientAction;
 
   /**
-* <code>true</code> to durably store platform-specific security tokens that are obtained during login flows; otherwise, <code>false</code>.
- The default is <code>false</code>.
-*/
+   * <code>true</code> to durably store platform-specific security tokens that are obtained during login flows; otherwise, <code>false</code>.
+   *  The default is <code>false</code>.
+   */
   tokenStoreEnabled?: boolean;
 
   /**
-* External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.
-This is an advanced setting typically only needed by Windows Store application backends.
-Note that URLs within the current domain are always implicitly allowed.
-*/
+   * External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.
+   * This is an advanced setting typically only needed by Windows Store application backends.
+   * Note that URLs within the current domain are always implicitly allowed.
+   */
   allowedExternalRedirectUrls?: string[];
 
   /**
-* The default authentication provider to use when multiple providers are configured.
-This setting is only needed if multiple providers are configured and the unauthenticated client
-action is set to "RedirectToLoginPage".
-*/
+   * The default authentication provider to use when multiple providers are configured.
+   * This setting is only needed if multiple providers are configured and the unauthenticated client
+   * action is set to "RedirectToLoginPage".
+   */
   defaultProvider?: BuiltInAuthenticationProvider;
 
   /**
-* The number of hours after session token expiration that a session token can be used to
-call the token refresh API. The default is 72 hours.
-*/
+   * The number of hours after session token expiration that a session token can be used to
+   * call the token refresh API. The default is 72 hours.
+   */
   tokenRefreshExtensionHours?: float64;
 
   /**
-* The Client ID of this relying party application, known as the client_id.
-This setting is required for enabling OpenID Connection authentication with Azure Active Directory or 
-other 3rd party OpenID Connect providers.
-More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html
-*/
+   * The Client ID of this relying party application, known as the client_id.
+   * This setting is required for enabling OpenID Connection authentication with Azure Active Directory or
+   * other 3rd party OpenID Connect providers.
+   * More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html
+   */
   clientId?: string;
 
   /**
-* The Client Secret of this relying party application (in Azure Active Directory, this is also referred to as the Key).
-This setting is optional. If no client secret is configured, the OpenID Connect implicit auth flow is used to authenticate end users.
-Otherwise, the OpenID Connect Authorization Code Flow is used to authenticate end users.
-More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html
-*/
+   * The Client Secret of this relying party application (in Azure Active Directory, this is also referred to as the Key).
+   * This setting is optional. If no client secret is configured, the OpenID Connect implicit auth flow is used to authenticate end users.
+   * Otherwise, the OpenID Connect Authorization Code Flow is used to authenticate end users.
+   * More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html
+   */
   clientSecret?: string;
 
   /**
@@ -9030,17 +9126,17 @@ More information on OpenID Connect: http://openid.net/specs/openid-connect-core-
   clientSecretSettingName?: string;
 
   /**
-* An alternative to the client secret, that is the thumbprint of a certificate used for signing purposes. This property acts as
-a replacement for the Client Secret. It is also optional.
-*/
+   * An alternative to the client secret, that is the thumbprint of a certificate used for signing purposes. This property acts as
+   * a replacement for the Client Secret. It is also optional.
+   */
   clientSecretCertificateThumbprint?: string;
 
   /**
-* The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.
-When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://sts.windows.net/{tenant-guid}/.
-This URI is a case-sensitive identifier for the token issuer.
-More information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html
-*/
+   * The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.
+   * When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://sts.windows.net/{tenant-guid}/.
+   * This URI is a case-sensitive identifier for the token issuer.
+   * More information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html
+   */
   issuer?: string;
 
   /**
@@ -9049,16 +9145,16 @@ More information on OpenID Connect Discovery: http://openid.net/specs/openid-con
   validateIssuer?: boolean;
 
   /**
-* Allowed audience values to consider when validating JWTs issued by 
-Azure Active Directory. Note that the <code>ClientID</code> value is always considered an
-allowed audience, regardless of this setting.
-*/
+   * Allowed audience values to consider when validating JWTs issued by
+   * Azure Active Directory. Note that the <code>ClientID</code> value is always considered an
+   * allowed audience, regardless of this setting.
+   */
   allowedAudiences?: string[];
 
   /**
-* Login parameters to send to the OpenID Connect authorization endpoint when
-a user logs in. Each parameter must be in the form "key=value".
-*/
+   * Login parameters to send to the OpenID Connect authorization endpoint when
+   * a user logs in. Each parameter must be in the form "key=value".
+   */
   additionalLoginParams?: string[];
 
   /**
@@ -9067,44 +9163,44 @@ a user logs in. Each parameter must be in the form "key=value".
   aadClaimsAuthorization?: string;
 
   /**
-* The OpenID Connect Client ID for the Google web application.
-This setting is required for enabling Google Sign-In.
-Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/
-*/
+   * The OpenID Connect Client ID for the Google web application.
+   * This setting is required for enabling Google Sign-In.
+   * Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/
+   */
   googleClientId?: string;
 
   /**
-* The client secret associated with the Google web application.
-This setting is required for enabling Google Sign-In.
-Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/
-*/
+   * The client secret associated with the Google web application.
+   * This setting is required for enabling Google Sign-In.
+   * Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/
+   */
   googleClientSecret?: string;
 
   /**
-* The app setting name that contains the client secret associated with 
-the Google web application.
-*/
+   * The app setting name that contains the client secret associated with
+   * the Google web application.
+   */
   googleClientSecretSettingName?: string;
 
   /**
-* The OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication.
-This setting is optional. If not specified, "openid", "profile", and "email" are used as default scopes.
-Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/
-*/
+   * The OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication.
+   * This setting is optional. If not specified, "openid", "profile", and "email" are used as default scopes.
+   * Google Sign-In documentation: https://developers.google.com/identity/sign-in/web/
+   */
   googleOAuthScopes?: string[];
 
   /**
-* The App ID of the Facebook app used for login.
-This setting is required for enabling Facebook Login.
-Facebook Login documentation: https://developers.facebook.com/docs/facebook-login
-*/
+   * The App ID of the Facebook app used for login.
+   * This setting is required for enabling Facebook Login.
+   * Facebook Login documentation: https://developers.facebook.com/docs/facebook-login
+   */
   facebookAppId?: string;
 
   /**
-* The App Secret of the Facebook app used for Facebook Login.
-This setting is required for enabling Facebook Login.
-Facebook Login documentation: https://developers.facebook.com/docs/facebook-login
-*/
+   * The App Secret of the Facebook app used for Facebook Login.
+   * This setting is required for enabling Facebook Login.
+   * Facebook Login documentation: https://developers.facebook.com/docs/facebook-login
+   */
   facebookAppSecret?: string;
 
   /**
@@ -9113,99 +9209,99 @@ Facebook Login documentation: https://developers.facebook.com/docs/facebook-logi
   facebookAppSecretSettingName?: string;
 
   /**
-* The OAuth 2.0 scopes that will be requested as part of Facebook Login authentication.
-This setting is optional.
-Facebook Login documentation: https://developers.facebook.com/docs/facebook-login
-*/
+   * The OAuth 2.0 scopes that will be requested as part of Facebook Login authentication.
+   * This setting is optional.
+   * Facebook Login documentation: https://developers.facebook.com/docs/facebook-login
+   */
   facebookOAuthScopes?: string[];
 
   /**
-* The Client Id of the GitHub app used for login.
-This setting is required for enabling Github login
-*/
+   * The Client Id of the GitHub app used for login.
+   * This setting is required for enabling Github login
+   */
   gitHubClientId?: string;
 
   /**
-* The Client Secret of the GitHub app used for Github Login.
-This setting is required for enabling Github login.
-*/
+   * The Client Secret of the GitHub app used for Github Login.
+   * This setting is required for enabling Github login.
+   */
   gitHubClientSecret?: string;
 
   /**
-* The app setting name that contains the client secret of the Github
-app used for GitHub Login.
-*/
+   * The app setting name that contains the client secret of the Github
+   * app used for GitHub Login.
+   */
   gitHubClientSecretSettingName?: string;
 
   /**
-* The OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
-This setting is optional
-*/
+   * The OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
+   * This setting is optional
+   */
   gitHubOAuthScopes?: string[];
 
   /**
-* The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-This setting is required for enabling Twitter Sign-In.
-Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
-*/
+   * The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+   * This setting is required for enabling Twitter Sign-In.
+   * Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
+   */
   twitterConsumerKey?: string;
 
   /**
-* The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-This setting is required for enabling Twitter Sign-In.
-Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
-*/
+   * The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+   * This setting is required for enabling Twitter Sign-In.
+   * Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
+   */
   twitterConsumerSecret?: string;
 
   /**
-* The app setting name that contains the OAuth 1.0a consumer secret of the Twitter
-application used for sign-in.
-*/
+   * The app setting name that contains the OAuth 1.0a consumer secret of the Twitter
+   * application used for sign-in.
+   */
   twitterConsumerSecretSettingName?: string;
 
   /**
-* The OAuth 2.0 client ID that was created for the app used for authentication.
-This setting is required for enabling Microsoft Account authentication.
-Microsoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm
-*/
+   * The OAuth 2.0 client ID that was created for the app used for authentication.
+   * This setting is required for enabling Microsoft Account authentication.
+   * Microsoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm
+   */
   microsoftAccountClientId?: string;
 
   /**
-* The OAuth 2.0 client secret that was created for the app used for authentication.
-This setting is required for enabling Microsoft Account authentication.
-Microsoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm
-*/
+   * The OAuth 2.0 client secret that was created for the app used for authentication.
+   * This setting is required for enabling Microsoft Account authentication.
+   * Microsoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm
+   */
   microsoftAccountClientSecret?: string;
 
   /**
-* The app setting name containing the OAuth 2.0 client secret that was created for the
-app used for authentication.
-*/
+   * The app setting name containing the OAuth 2.0 client secret that was created for the
+   * app used for authentication.
+   */
   microsoftAccountClientSecretSettingName?: string;
 
   /**
-* The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication.
-This setting is optional. If not specified, "wl.basic" is used as the default scope.
-Microsoft Account Scopes and permissions documentation: https://msdn.microsoft.com/en-us/library/dn631845.aspx
-*/
+   * The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication.
+   * This setting is optional. If not specified, "wl.basic" is used as the default scope.
+   * Microsoft Account Scopes and permissions documentation: https://msdn.microsoft.com/en-us/library/dn631845.aspx
+   */
   microsoftAccountOAuthScopes?: string[];
 
   /**
-* "true" if the auth config settings should be read from a file,
-"false" otherwise
-*/
+   * "true" if the auth config settings should be read from a file,
+   * "false" otherwise
+   */
   isAuthFromFile?: string;
 
   /**
-* The path of the config file containing auth settings.
-If the path is relative, base will the site's root directory.
-*/
+   * The path of the config file containing auth settings.
+   * If the path is relative, base will the site's root directory.
+   */
   authFilePath?: string;
 
   /**
-* The ConfigVersion of the Authentication / Authorization feature in use for the current app.
-The setting in this value can control the behavior of the control plane for Authentication / Authorization.
-*/
+   * The ConfigVersion of the Authentication / Authorization feature in use for the current app.
+   * The setting in this value can control the behavior of the control plane for Authentication / Authorization.
+   */
   configVersion?: string;
 }
 
@@ -9216,6 +9312,7 @@ model SiteAuthSettingsV2 extends ProxyOnlyResource {
   /**
    * SiteAuthSettingsV2 resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SiteAuthSettingsV2Properties;
 }
 
@@ -9259,15 +9356,15 @@ model AuthPlatform {
   enabled?: boolean;
 
   /**
-* The RuntimeVersion of the Authentication / Authorization feature in use for the current app.
-The setting in this value can control the behavior of certain features in the Authentication / Authorization module.
-*/
+   * The RuntimeVersion of the Authentication / Authorization feature in use for the current app.
+   * The setting in this value can control the behavior of certain features in the Authentication / Authorization module.
+   */
   runtimeVersion?: string;
 
   /**
-* The path of the config file containing auth settings if they come from a file.
-If the path is relative, base will the site's root directory.
-*/
+   * The path of the config file containing auth settings if they come from a file.
+   * If the path is relative, base will the site's root directory.
+   */
   configFilePath?: string;
 }
 
@@ -9286,10 +9383,10 @@ model GlobalValidation {
   unauthenticatedClientAction?: UnauthenticatedClientActionV2;
 
   /**
-* The default authentication provider to use when multiple providers are configured.
-This setting is only needed if multiple providers are configured and the unauthenticated client
-action is set to "RedirectToLoginPage".
-*/
+   * The default authentication provider to use when multiple providers are configured.
+   * This setting is only needed if multiple providers are configured and the unauthenticated client
+   * action is set to "RedirectToLoginPage".
+   */
   redirectToProvider?: string;
 
   /**
@@ -9343,9 +9440,9 @@ model IdentityProviders {
   azureStaticWebApps?: AzureStaticWebApps;
 
   /**
-* The map of the name of the alias of each custom Open ID Connect provider to the
-configuration settings of the custom Open ID Connect provider.
-*/
+   * The map of the name of the alias of each custom Open ID Connect provider to the
+   * configuration settings of the custom Open ID Connect provider.
+   */
   customOpenIdConnectProviders?: Record<CustomOpenIdConnectProvider>;
 }
 
@@ -9374,10 +9471,10 @@ model AzureActiveDirectory {
   validation?: AzureActiveDirectoryValidation;
 
   /**
-* Gets a value indicating whether the Azure AD configuration was auto-provisioned using 1st party tooling.
-This is an internal flag primarily intended to support the Azure Management Portal. Users should not
-read or write to this property.
-*/
+   * Gets a value indicating whether the Azure AD configuration was auto-provisioned using 1st party tooling.
+   * This is an internal flag primarily intended to support the Azure Management Portal. Users should not
+   * read or write to this property.
+   */
   isAutoProvisioned?: boolean;
 }
 
@@ -9386,19 +9483,19 @@ read or write to this property.
  */
 model AzureActiveDirectoryRegistration {
   /**
-* The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.
-When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/.
-This URI is a case-sensitive identifier for the token issuer.
-More information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html
-*/
+   * The OpenID Connect Issuer URI that represents the entity which issues access tokens for this application.
+   * When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/.
+   * This URI is a case-sensitive identifier for the token issuer.
+   * More information on OpenID Connect Discovery: http://openid.net/specs/openid-connect-discovery-1_0.html
+   */
   openIdIssuer?: string;
 
   /**
-* The Client ID of this relying party application, known as the client_id.
-This setting is required for enabling OpenID Connection authentication with Azure Active Directory or 
-other 3rd party OpenID Connect providers.
-More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html
-*/
+   * The Client ID of this relying party application, known as the client_id.
+   * This setting is required for enabling OpenID Connection authentication with Azure Active Directory or
+   * other 3rd party OpenID Connect providers.
+   * More information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html
+   */
   clientId?: string;
 
   /**
@@ -9407,21 +9504,21 @@ More information on OpenID Connect: http://openid.net/specs/openid-connect-core-
   clientSecretSettingName?: string;
 
   /**
-* An alternative to the client secret, that is the thumbprint of a certificate used for signing purposes. This property acts as
-a replacement for the Client Secret. It is also optional.
-*/
+   * An alternative to the client secret, that is the thumbprint of a certificate used for signing purposes. This property acts as
+   * a replacement for the Client Secret. It is also optional.
+   */
   clientSecretCertificateThumbprint?: string;
 
   /**
-* An alternative to the client secret thumbprint, that is the subject alternative name of a certificate used for signing purposes. This property acts as
-a replacement for the Client Secret Certificate Thumbprint. It is also optional.
-*/
+   * An alternative to the client secret thumbprint, that is the subject alternative name of a certificate used for signing purposes. This property acts as
+   * a replacement for the Client Secret Certificate Thumbprint. It is also optional.
+   */
   clientSecretCertificateSubjectAlternativeName?: string;
 
   /**
-* An alternative to the client secret thumbprint, that is the issuer of a certificate used for signing purposes. This property acts as
-a replacement for the Client Secret Certificate Thumbprint. It is also optional.
-*/
+   * An alternative to the client secret thumbprint, that is the issuer of a certificate used for signing purposes. This property acts as
+   * a replacement for the Client Secret Certificate Thumbprint. It is also optional.
+   */
   clientSecretCertificateIssuer?: string;
 }
 
@@ -9430,9 +9527,9 @@ a replacement for the Client Secret Certificate Thumbprint. It is also optional.
  */
 model AzureActiveDirectoryLogin {
   /**
-* Login parameters to send to the OpenID Connect authorization endpoint when
-a user logs in. Each parameter must be in the form "key=value".
-*/
+   * Login parameters to send to the OpenID Connect authorization endpoint when
+   * a user logs in. Each parameter must be in the form "key=value".
+   */
   loginParameters?: string[];
 
   /**
@@ -9671,16 +9768,16 @@ model Twitter {
  */
 model TwitterRegistration {
   /**
-* The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-This setting is required for enabling Twitter Sign-In.
-Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
-*/
+   * The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+   * This setting is required for enabling Twitter Sign-In.
+   * Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
+   */
   consumerKey?: string;
 
   /**
-* The app setting name that contains the OAuth 1.0a consumer secret of the Twitter
-application used for sign-in.
-*/
+   * The app setting name that contains the OAuth 1.0a consumer secret of the Twitter
+   * application used for sign-in.
+   */
   consumerSecretSettingName?: string;
 }
 
@@ -9864,10 +9961,10 @@ model Login {
   preserveUrlFragmentsForLogins?: boolean;
 
   /**
-* External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.
-This is an advanced setting typically only needed by Windows Store application backends.
-Note that URLs within the current domain are always implicitly allowed.
-*/
+   * External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part of the URL is ignored.
+   * This is an advanced setting typically only needed by Windows Store application backends.
+   * Note that URLs within the current domain are always implicitly allowed.
+   */
   allowedExternalRedirectUrls?: string[];
 
   /**
@@ -9896,15 +9993,15 @@ model LoginRoutes {
  */
 model TokenStore {
   /**
-* <code>true</code> to durably store platform-specific security tokens that are obtained during login flows; otherwise, <code>false</code>.
- The default is <code>false</code>.
-*/
+   * <code>true</code> to durably store platform-specific security tokens that are obtained during login flows; otherwise, <code>false</code>.
+   *  The default is <code>false</code>.
+   */
   enabled?: boolean;
 
   /**
-* The number of hours after session token expiration that a session token can be used to
-call the token refresh API. The default is 72 hours.
-*/
+   * The number of hours after session token expiration that a session token can be used to
+   * call the token refresh API. The default is 72 hours.
+   */
   tokenRefreshExtensionHours?: float64;
 
   /**
@@ -10025,6 +10122,7 @@ model AzureStoragePropertyDictionaryResource extends ProxyOnlyResource {
   /**
    * Azure storage accounts.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<AzureStorageInfoValue>;
 }
 
@@ -10055,6 +10153,7 @@ model ConnectionStringDictionary extends ProxyOnlyResource {
   /**
    * Connection strings.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<ConnStringValueTypePair>;
 }
 
@@ -10158,10 +10257,10 @@ model AzureBlobStorageApplicationLogsConfig {
   sasUrl?: string;
 
   /**
-* Retention in days.
-Remove blobs older than X days.
-0 or lower means no retention.
-*/
+   * Retention in days.
+   * Remove blobs older than X days.
+   * 0 or lower means no retention.
+   */
   retentionInDays?: int32;
 }
 
@@ -10185,19 +10284,19 @@ model HttpLogsConfig {
  */
 model FileSystemHttpLogsConfig {
   /**
-* Maximum size in megabytes that http log files can use.
-When reached old log files will be removed to make space for new ones.
-Value can range between 25 and 100.
-*/
+   * Maximum size in megabytes that http log files can use.
+   * When reached old log files will be removed to make space for new ones.
+   * Value can range between 25 and 100.
+   */
   @maxValue(100)
   @minValue(25)
   retentionInMb?: int32;
 
   /**
-* Retention in days.
-Remove files older than X days.
-0 or lower means no retention.
-*/
+   * Retention in days.
+   * Remove files older than X days.
+   * 0 or lower means no retention.
+   */
   retentionInDays?: int32;
 
   /**
@@ -10216,10 +10315,10 @@ model AzureBlobStorageHttpLogsConfig {
   sasUrl?: string;
 
   /**
-* Retention in days.
-Remove blobs older than X days.
-0 or lower means no retention.
-*/
+   * Retention in days.
+   * Remove blobs older than X days.
+   * 0 or lower means no retention.
+   */
   retentionInDays?: int32;
 
   /**
@@ -10239,10 +10338,10 @@ model EnabledConfig {
 }
 
 /**
-* Names for connection strings, application settings, and external Azure storage account configuration
-identifiers to be marked as sticky to the deployment slot and not moved during a swap operation.
-This is valid for all deployment slots in an app.
-*/
+ * Names for connection strings, application settings, and external Azure storage account configuration
+ * identifiers to be marked as sticky to the deployment slot and not moved during a swap operation.
+ * This is valid for all deployment slots in an app.
+ */
 model SlotConfigNames {
   /**
    * List of connection string names.
@@ -10273,6 +10372,7 @@ model SiteConfigurationSnapshotInfo extends ProxyOnlyResource {
   /**
    * SiteConfigurationSnapshotInfo resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SiteConfigurationSnapshotInfoProperties;
 }
 
@@ -10454,6 +10554,7 @@ model MSDeploy extends ProxyOnlyResource {
   /**
    * Core resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MSDeployCore;
 }
 
@@ -10487,17 +10588,17 @@ model MSDeployCore {
   setParameters?: Record<string>;
 
   /**
-* Controls whether the MSDeploy operation skips the App_Data directory.
-If set to <code>true</code>, the existing App_Data directory on the destination
-will not be deleted, and any App_Data directory in the source will be ignored.
-Setting is <code>false</code> by default.
-*/
+   * Controls whether the MSDeploy operation skips the App_Data directory.
+   * If set to <code>true</code>, the existing App_Data directory on the destination
+   * will not be deleted, and any App_Data directory in the source will be ignored.
+   * Setting is <code>false</code> by default.
+   */
   skipAppData?: boolean;
 
   /**
-* Sets the AppOffline rule while the MSDeploy operation executes.
-Setting is <code>false</code> by default.
-*/
+   * Sets the AppOffline rule while the MSDeploy operation executes.
+   * Setting is <code>false</code> by default.
+   */
   appOffline?: boolean;
 }
 
@@ -10508,6 +10609,7 @@ model MSDeployLog extends ProxyOnlyResource {
   /**
    * MSDeployLog resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MSDeployLogProperties;
 }
 
@@ -11064,6 +11166,7 @@ model ProcessThreadInfo extends ProxyOnlyResource {
   /**
    * ProcessThreadInfo resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ProcessThreadInfoProperties;
 }
 
@@ -11230,9 +11333,9 @@ model SiteCloneability {
   blockingFeatures?: SiteCloneabilityCriterion[];
 
   /**
-* List of features enabled on app that are non-blocking but cannot be cloned. The app can still be cloned
-but the features in this list will not be set up on cloned app.
-*/
+   * List of features enabled on app that are non-blocking but cannot be cloned. The app can still be cloned
+   * but the features in this list will not be set up on cloned app.
+   */
   unsupportedFeatures?: SiteCloneabilityCriterion[];
 
   /**
@@ -11263,6 +11366,7 @@ model StorageMigrationOptions extends ProxyOnlyResource {
   /**
    * StorageMigrationOptions resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StorageMigrationOptionsProperties;
 }
 
@@ -11302,6 +11406,7 @@ model StorageMigrationResponse extends ProxyOnlyResource {
   /**
    * StorageMigrationResponse resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StorageMigrationResponseProperties;
 }
 
@@ -11323,6 +11428,7 @@ model MigrateMySqlRequest extends ProxyOnlyResource {
   /**
    * MigrateMySqlRequest resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MigrateMySqlRequestProperties;
 }
 
@@ -11513,6 +11619,7 @@ model SitePhpErrorLogFlag extends ProxyOnlyResource {
   /**
    * SitePhpErrorLogFlag resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SitePhpErrorLogFlagProperties;
 }
 
@@ -11578,6 +11685,7 @@ model PremierAddOnPatchResource extends ProxyOnlyResource {
   /**
    * PremierAddOnPatchResource resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PremierAddOnPatchResourceProperties;
 }
 
@@ -11692,11 +11800,11 @@ model PublicCertificateProperties {
  */
 model CsmPublishingProfileOptions {
   /**
-* Name of the format. Valid values are: 
-FileZilla3
-WebDeploy -- default
-Ftp
-*/
+   * Name of the format. Valid values are:
+   * FileZilla3
+   * WebDeploy -- default
+   * Ftp
+   */
   format?: PublishingProfileFormat;
 
   /**
@@ -11712,6 +11820,7 @@ model DeletedAppRestoreRequest extends ProxyOnlyResource {
   /**
    * DeletedAppRestoreRequest resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeletedAppRestoreRequestProperties;
 }
 
@@ -11720,9 +11829,9 @@ model DeletedAppRestoreRequest extends ProxyOnlyResource {
  */
 model DeletedAppRestoreRequestProperties {
   /**
-* ARM resource ID of the deleted app. Example:
-/subscriptions/{subId}/providers/Microsoft.Web/deletedSites/{deletedSiteId}
-*/
+   * ARM resource ID of the deleted app. Example:
+   * /subscriptions/{subId}/providers/Microsoft.Web/deletedSites/{deletedSiteId}
+   */
   deletedSiteId?: string;
 
   /**
@@ -11731,9 +11840,9 @@ model DeletedAppRestoreRequestProperties {
   recoverConfiguration?: boolean;
 
   /**
-* Point in time to restore the deleted app from, formatted as a DateTime string. 
-If unspecified, default value is the time that the app was deleted.
-*/
+   * Point in time to restore the deleted app from, formatted as a DateTime string.
+   * If unspecified, default value is the time that the app was deleted.
+   */
   snapshotTime?: string;
 
   /**
@@ -11749,6 +11858,7 @@ model SnapshotRestoreRequest extends ProxyOnlyResource {
   /**
    * SnapshotRestoreRequest resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SnapshotRestoreRequestProperties;
 }
 
@@ -11762,9 +11872,9 @@ model SnapshotRestoreRequestProperties {
   snapshotTime?: string;
 
   /**
-* Optional. Specifies the web app that snapshot contents will be retrieved from.
-If empty, the targeted web app will be used as the source.
-*/
+   * Optional. Specifies the web app that snapshot contents will be retrieved from.
+   * If empty, the targeted web app will be used as the source.
+   */
   recoverySource?: SnapshotRecoverySource;
 
   /**
@@ -11778,9 +11888,9 @@ If empty, the targeted web app will be used as the source.
   recoverConfiguration?: boolean;
 
   /**
-* If true, custom hostname conflicts will be ignored when recovering to a target web app.
-This setting is only necessary when RecoverConfiguration is enabled.
-*/
+   * If true, custom hostname conflicts will be ignored when recovering to a target web app.
+   * This setting is only necessary when RecoverConfiguration is enabled.
+   */
   ignoreConflictingHostNames?: boolean;
 
   /**
@@ -11799,10 +11909,10 @@ model SnapshotRecoverySource {
   location?: string;
 
   /**
-* ARM resource ID of the source app. 
-/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and 
-/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
-*/
+   * ARM resource ID of the source app.
+   * /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and
+   * /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.
+   */
   id?: string;
 }
 
@@ -11935,6 +12045,7 @@ model SlotDifference extends ProxyOnlyResource {
   /**
    * SlotDifference resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SlotDifferenceProperties;
 }
 
@@ -12350,6 +12461,7 @@ model StaticSiteUserProvidedFunctionApp extends ProxyOnlyResource {
   /**
    * StaticSiteUserProvidedFunctionApp resource specific properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StaticSiteUserProvidedFunctionAppProperties;
 }
 

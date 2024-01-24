@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -178,6 +180,7 @@ model MaintenanceConfigurationProperties {
   /**
    * Definition of a MaintenanceWindow
    */
+  @extension("x-ms-client-flatten", true)
   maintenanceWindow?: MaintenanceWindow;
 
   /**
@@ -374,6 +377,7 @@ model ConfigurationAssignment extends Resource {
   /**
    * Properties of the configuration assignment
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ConfigurationAssignmentProperties;
 }
 
@@ -524,6 +528,7 @@ model Update {
   /**
    * Properties of the apply update
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateProperties;
 }
 

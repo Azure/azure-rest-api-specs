@@ -18,6 +18,7 @@ using TypeSpec.Versioning;
  * REST API for managing Redis Enterprise resources in Azure.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "RedisEnterpriseManagementClient",
 })

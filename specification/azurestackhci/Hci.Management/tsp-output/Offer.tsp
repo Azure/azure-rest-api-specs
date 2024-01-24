@@ -15,8 +15,12 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Offer details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Publisher)
-model Offer is ProxyResource<OfferProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(OfferProperties)
+@includeInapplicableMetadataInPayload(false)
+model Offer extends ProxyResourceBase {
   /**
    * The name of the offer available within HCI cluster.
    */
@@ -24,6 +28,12 @@ model Offer is ProxyResource<OfferProperties> {
   @key("offerName")
   @segment("offers")
   name: string;
+
+  /**
+   * Offer properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: OfferProperties;
 }
 
 @armResourceOperations

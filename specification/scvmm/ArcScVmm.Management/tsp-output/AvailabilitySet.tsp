@@ -14,7 +14,11 @@ namespace Microsoft.ScVmm;
 /**
  * The AvailabilitySets resource definition.
  */
-model AvailabilitySet is TrackedResource<AvailabilitySetProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AvailabilitySetProperties)
+@includeInapplicableMetadataInPayload(false)
+model AvailabilitySet extends TrackedResourceBase {
   /**
    * Name of the AvailabilitySet.
    */
@@ -27,6 +31,12 @@ model AvailabilitySet is TrackedResource<AvailabilitySetProperties> {
    * The extended location.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AvailabilitySetProperties;
 }
 
 @armResourceOperations

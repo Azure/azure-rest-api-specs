@@ -14,8 +14,13 @@ namespace Microsoft.DataMigration;
 /**
  * Database Migration Resource for SQL Virtual Machine.
  */
-model DatabaseMigrationSqlVm
-  is ProxyResource<DatabaseMigrationSqlVmProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  DatabaseMigrationSqlVmProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DatabaseMigrationSqlVm extends ProxyResource {
   /**
    * The name of the target database.
    */
@@ -23,6 +28,12 @@ model DatabaseMigrationSqlVm
   @key("targetDbName")
   @segment("databaseMigrations")
   name: string;
+
+  /**
+   * Database Migration Resource properties for SQL Virtual Machine.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DatabaseMigrationSqlVmProperties;
 }
 
 @armResourceOperations

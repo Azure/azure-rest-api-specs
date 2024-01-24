@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -13,10 +15,10 @@ namespace Microsoft.SignalRService;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
-* Optional tier of this particular SKU. 'Standard' or 'Free'. 
-
-`Basic` is deprecated, use `Standard` instead.
-*/
+ * Optional tier of this particular SKU. 'Standard' or 'Free'.
+ *
+ * `Basic` is deprecated, use `Standard` instead.
+ */
 enum SignalRSkuTier {
   Free,
   Basic,
@@ -61,12 +63,12 @@ enum SharedPrivateLinkResourceStatus {
 }
 
 /**
-* FeatureFlags is the supported features of Azure SignalR service.
-- ServiceMode: Flag for backend server for SignalR service. Values allowed: "Default": have your own backend server; "Serverless": your application doesn't have a backend server; "Classic": for backward compatibility. Support both Default and Serverless mode but not recommended; "PredefinedOnly": for future use.
-- EnableConnectivityLogs: "true"/"false", to enable/disable the connectivity log category respectively.
-- EnableMessagingLogs: "true"/"false", to enable/disable the connectivity log category respectively.
-- EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: "true"/"false", to enable/disable live trace feature.
-*/
+ * FeatureFlags is the supported features of Azure SignalR service.
+ * - ServiceMode: Flag for backend server for SignalR service. Values allowed: "Default": have your own backend server; "Serverless": your application doesn't have a backend server; "Classic": for backward compatibility. Support both Default and Serverless mode but not recommended; "PredefinedOnly": for future use.
+ * - EnableConnectivityLogs: "true"/"false", to enable/disable the connectivity log category respectively.
+ * - EnableMessagingLogs: "true"/"false", to enable/disable the connectivity log category respectively.
+ * - EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: "true"/"false", to enable/disable live trace feature.
+ */
 enum FeatureFlags {
   ServiceMode,
   EnableConnectivityLogs,
@@ -181,10 +183,10 @@ model MetricSpecification {
   aggregationType?: string;
 
   /**
-* Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published. 
-Ex. a metric that returns the number of times a particular error code was emitted. The error code may not appear 
-often, instead of the RP publishing 0, Shoebox can auto fill in 0s for time periods where nothing was emitted.
-*/
+   * Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.
+   * Ex. a metric that returns the number of times a particular error code was emitted. The error code may not appear
+   * often, instead of the RP publishing 0, Shoebox can auto fill in 0s for time periods where nothing was emitted.
+   */
   fillGapWithZero?: string;
 
   /**
@@ -387,13 +389,13 @@ model SignalRProperties {
   hostNamePrefix?: string;
 
   /**
-* List of the featureFlags.
-
-FeatureFlags that are not included in the parameters for the update operation will not be modified.
-And the response will only include featureFlags that are explicitly set. 
-When a featureFlag is not explicitly set, its globally default value will be used
-But keep in mind, the default value doesn't mean "false". It varies in terms of different FeatureFlags.
-*/
+   * List of the featureFlags.
+   *
+   * FeatureFlags that are not included in the parameters for the update operation will not be modified.
+   * And the response will only include featureFlags that are explicitly set.
+   * When a featureFlag is not explicitly set, its globally default value will be used
+   * But keep in mind, the default value doesn't mean "false". It varies in terms of different FeatureFlags.
+   */
   features?: SignalRFeature[];
 
   /**
@@ -422,24 +424,24 @@ But keep in mind, the default value doesn't mean "false". It varies in terms of 
   networkACLs?: SignalRNetworkACLs;
 
   /**
-* Enable or disable public network access. Default to "Enabled".
-When it's Enabled, network ACLs still apply.
-When it's Disabled, public network access is always disabled no matter what you set in network ACLs.
-*/
+   * Enable or disable public network access. Default to "Enabled".
+   * When it's Enabled, network ACLs still apply.
+   * When it's Disabled, public network access is always disabled no matter what you set in network ACLs.
+   */
   publicNetworkAccess?: string = "Enabled";
 
   /**
-* DisableLocalAuth
-Enable or disable local auth with AccessKey
-When set as true, connection with AccessKey=xxx won't work.
-*/
+   * DisableLocalAuth
+   * Enable or disable local auth with AccessKey
+   * When set as true, connection with AccessKey=xxx won't work.
+   */
   disableLocalAuth?: boolean;
 
   /**
-* DisableLocalAuth
-Enable or disable aad auth
-When set as true, connection with AuthType=aad won't work.
-*/
+   * DisableLocalAuth
+   * Enable or disable aad auth
+   * When set as true, connection with AuthType=aad won't work.
+   */
   disableAadAuth?: boolean;
 }
 
@@ -570,12 +572,12 @@ model SignalRTlsSettings {
  */
 model SignalRFeature {
   /**
-* FeatureFlags is the supported features of Azure SignalR service.
-- ServiceMode: Flag for backend server for SignalR service. Values allowed: "Default": have your own backend server; "Serverless": your application doesn't have a backend server; "Classic": for backward compatibility. Support both Default and Serverless mode but not recommended; "PredefinedOnly": for future use.
-- EnableConnectivityLogs: "true"/"false", to enable/disable the connectivity log category respectively.
-- EnableMessagingLogs: "true"/"false", to enable/disable the connectivity log category respectively.
-- EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: "true"/"false", to enable/disable live trace feature.
-*/
+   * FeatureFlags is the supported features of Azure SignalR service.
+   * - ServiceMode: Flag for backend server for SignalR service. Values allowed: "Default": have your own backend server; "Serverless": your application doesn't have a backend server; "Classic": for backward compatibility. Support both Default and Serverless mode but not recommended; "PredefinedOnly": for future use.
+   * - EnableConnectivityLogs: "true"/"false", to enable/disable the connectivity log category respectively.
+   * - EnableMessagingLogs: "true"/"false", to enable/disable the connectivity log category respectively.
+   * - EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: "true"/"false", to enable/disable live trace feature.
+   */
   flag: FeatureFlags;
 
   /**
@@ -596,12 +598,12 @@ model SignalRFeature {
  */
 model LiveTraceConfiguration {
   /**
-* Indicates whether or not enable live trace.
-When it's set to true, live trace client can connect to the service.
-Otherwise, live trace client can't connect to the service, so that you are unable to receive any log, no matter what you configure in "categories".
-Available values: true, false.
-Case insensitive.
-*/
+   * Indicates whether or not enable live trace.
+   * When it's set to true, live trace client can connect to the service.
+   * Otherwise, live trace client can't connect to the service, so that you are unable to receive any log, no matter what you configure in "categories".
+   * Available values: true, false.
+   * Case insensitive.
+   */
   enabled?: string = "false";
 
   /**
@@ -615,17 +617,17 @@ Case insensitive.
  */
 model LiveTraceCategory {
   /**
-* Gets or sets the live trace category's name.
-Available values: ConnectivityLogs, MessagingLogs.
-Case insensitive.
-*/
+   * Gets or sets the live trace category's name.
+   * Available values: ConnectivityLogs, MessagingLogs.
+   * Case insensitive.
+   */
   name?: string;
 
   /**
-* Indicates whether or the live trace category is enabled.
-Available values: true, false.
-Case insensitive.
-*/
+   * Indicates whether or the live trace category is enabled.
+   * Available values: true, false.
+   * Case insensitive.
+   */
   enabled?: string;
 }
 
@@ -644,17 +646,17 @@ model ResourceLogConfiguration {
  */
 model ResourceLogCategory {
   /**
-* Gets or sets the resource log category's name.
-Available values: ConnectivityLogs, MessagingLogs.
-Case insensitive.
-*/
+   * Gets or sets the resource log category's name.
+   * Available values: ConnectivityLogs, MessagingLogs.
+   * Case insensitive.
+   */
   name?: string;
 
   /**
-* Indicates whether or the resource log category is enabled.
-Available values: true, false.
-Case insensitive.
-*/
+   * Indicates whether or the resource log category is enabled.
+   * Available values: true, false.
+   * Case insensitive.
+   */
   enabled?: string;
 }
 
@@ -679,41 +681,41 @@ model ServerlessUpstreamSettings {
 }
 
 /**
-* Upstream template item settings. It defines the Upstream URL of the incoming requests.
-The template defines the pattern of the event, the hub or the category of the incoming request that matches current URL template.
-*/
+ * Upstream template item settings. It defines the Upstream URL of the incoming requests.
+ * The template defines the pattern of the event, the hub or the category of the incoming request that matches current URL template.
+ */
 model UpstreamTemplate {
   /**
-* Gets or sets the matching pattern for hub names. If not set, it matches any hub.
-There are 3 kind of patterns supported:
-    1. "*", it to matches any hub name.
-    2. Combine multiple hubs with ",", for example "hub1,hub2", it matches "hub1" and "hub2".
-    3. The single hub name, for example, "hub1", it matches "hub1".
-*/
+   * Gets or sets the matching pattern for hub names. If not set, it matches any hub.
+   * There are 3 kind of patterns supported:
+   *     1. "*", it to matches any hub name.
+   *     2. Combine multiple hubs with ",", for example "hub1,hub2", it matches "hub1" and "hub2".
+   *     3. The single hub name, for example, "hub1", it matches "hub1".
+   */
   hubPattern?: string;
 
   /**
-* Gets or sets the matching pattern for event names. If not set, it matches any event.
-There are 3 kind of patterns supported:
-    1. "*", it to matches any event name.
-    2. Combine multiple events with ",", for example "connect,disconnect", it matches event "connect" and "disconnect".
-    3. The single event name, for example, "connect", it matches "connect".
-*/
+   * Gets or sets the matching pattern for event names. If not set, it matches any event.
+   * There are 3 kind of patterns supported:
+   *     1. "*", it to matches any event name.
+   *     2. Combine multiple events with ",", for example "connect,disconnect", it matches event "connect" and "disconnect".
+   *     3. The single event name, for example, "connect", it matches "connect".
+   */
   eventPattern?: string;
 
   /**
-* Gets or sets the matching pattern for category names. If not set, it matches any category.
-There are 3 kind of patterns supported:
-    1. "*", it to matches any category name.
-    2. Combine multiple categories with ",", for example "connections,messages", it matches category "connections" and "messages".
-    3. The single category name, for example, "connections", it matches the category "connections".
-*/
+   * Gets or sets the matching pattern for category names. If not set, it matches any category.
+   * There are 3 kind of patterns supported:
+   *     1. "*", it to matches any category name.
+   *     2. Combine multiple categories with ",", for example "connections,messages", it matches category "connections" and "messages".
+   *     3. The single category name, for example, "connections", it matches the category "connections".
+   */
   categoryPattern?: string;
 
   /**
-* Gets or sets the Upstream URL template. You can use 3 predefined parameters {hub}, {category} {event} inside the template, the value of the Upstream URL is dynamically calculated when the client request comes in.
-For example, if the urlTemplate is `http://example.com/{hub}/api/{event}`, with a client request from hub `chat` connects, it will first POST to this URL: `http://example.com/chat/api/connect`.
-*/
+   * Gets or sets the Upstream URL template. You can use 3 predefined parameters {hub}, {category} {event} inside the template, the value of the Upstream URL is dynamically calculated when the client request comes in.
+   * For example, if the urlTemplate is `http://example.com/{hub}/api/{event}`, with a client request from hub `chat` connects, it will first POST to this URL: `http://example.com/chat/api/connect`.
+   */
   urlTemplate: string;
 
   /**
@@ -742,9 +744,9 @@ model UpstreamAuthSettings {
  */
 model ManagedIdentitySettings {
   /**
-* The Resource indicating the App ID URI of the target resource.
-It also appears in the aud (audience) claim of the issued token.
-*/
+   * The Resource indicating the App ID URI of the target resource.
+   * It also appears in the aud (audience) claim of the issued token.
+   */
   resource?: string;
 }
 
@@ -808,16 +810,16 @@ model ManagedIdentity {
   userAssignedIdentities?: Record<UserAssignedIdentityProperty>;
 
   /**
-* Get the principal id for the system assigned identity.
-Only be used in response.
-*/
+   * Get the principal id for the system assigned identity.
+   * Only be used in response.
+   */
   @visibility("read")
   principalId?: string;
 
   /**
-* Get the tenant id for the system assigned identity.
-Only be used in response
-*/
+   * Get the tenant id for the system assigned identity.
+   * Only be used in response
+   */
   @visibility("read")
   tenantId?: string;
 }
@@ -936,6 +938,7 @@ model PrivateLinkResource extends ProxyResource {
   /**
    * Private link resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -1020,9 +1023,9 @@ model SkuList {
   value?: Sku[];
 
   /**
-* The URL the client should use to fetch the next page (per server side paging).
-It's null for now, added for future use.
-*/
+   * The URL the client should use to fetch the next page (per server side paging).
+   * It's null for now, added for future use.
+   */
   @visibility("read")
   nextLink?: string;
 }

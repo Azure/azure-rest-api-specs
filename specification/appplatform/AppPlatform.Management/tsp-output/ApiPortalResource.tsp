@@ -15,8 +15,12 @@ namespace Microsoft.AppPlatform;
 /**
  * API portal resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-model ApiPortalResource is ProxyResource<ApiPortalProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ApiPortalProperties)
+@includeInapplicableMetadataInPayload(false)
+model ApiPortalResource extends ProxyResource {
   /**
    * The name of API portal.
    */
@@ -25,7 +29,16 @@ model ApiPortalResource is ProxyResource<ApiPortalProperties> {
   @segment("apiPortals")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Sku of the API portal resource
+   */
+  sku?: Sku;
+
+  /**
+   * API portal properties payload
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApiPortalProperties;
 }
 
 @armResourceOperations

@@ -15,13 +15,24 @@ namespace Microsoft.ContainerService;
 /**
  * The list of available upgrades for an agent pool.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(AgentPool)
-model AgentPoolUpgradeProfile
-  is ProxyResource<AgentPoolUpgradeProfileProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  AgentPoolUpgradeProfileProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AgentPoolUpgradeProfile extends ProxyResourceBase {
   @key("upgradeProfile")
   @segment("upgradeProfiles")
   name: string;
+
+  /**
+   * The properties of the agent pool upgrade profile.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: AgentPoolUpgradeProfileProperties;
 }
 
 @armResourceOperations

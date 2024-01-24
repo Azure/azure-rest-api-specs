@@ -15,9 +15,14 @@ namespace Microsoft.Peering;
 /**
  * The customer's prefix that is registered by the peering service provider.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Peering)
-model PeeringRegisteredPrefix
-  is ProxyResource<PeeringRegisteredPrefixProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PeeringRegisteredPrefixProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PeeringRegisteredPrefix extends Resource {
   /**
    * The name of the registered prefix.
    */
@@ -25,6 +30,12 @@ model PeeringRegisteredPrefix
   @key("registeredPrefixName")
   @segment("registeredPrefixes")
   name: string;
+
+  /**
+   * The properties that define a registered prefix.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PeeringRegisteredPrefixProperties;
 }
 
 @armResourceOperations

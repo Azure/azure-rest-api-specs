@@ -15,9 +15,14 @@ namespace Microsoft.AppPlatform;
 /**
  * Custom domain of the Spring Cloud Gateway
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GatewayResource)
-model GatewayCustomDomainResource
-  is ProxyResource<GatewayCustomDomainProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  GatewayCustomDomainProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model GatewayCustomDomainResource extends ProxyResource {
   /**
    * The name of the Spring Cloud Gateway custom domain.
    */
@@ -25,6 +30,12 @@ model GatewayCustomDomainResource
   @key("domainName")
   @segment("domains")
   name: string;
+
+  /**
+   * The properties of custom domain for Spring Cloud Gateway
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GatewayCustomDomainProperties;
 }
 
 @armResourceOperations

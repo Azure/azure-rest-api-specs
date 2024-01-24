@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
  * APIs documentation for Azure AgFoodPlatform Resource Provider Service.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure AgFoodPlatform RP Service",
 })

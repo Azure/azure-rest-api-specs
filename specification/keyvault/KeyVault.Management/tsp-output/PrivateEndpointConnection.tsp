@@ -15,9 +15,14 @@ namespace Microsoft.KeyVault;
 /**
  * Private endpoint connection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Vault)
-model PrivateEndpointConnection
-  is ProxyResource<PrivateEndpointConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateEndpointConnectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnection extends Resource {
   /**
    * Name of the private endpoint connection associated with the key vault.
    */
@@ -30,6 +35,12 @@ model PrivateEndpointConnection
    * Modified whenever there is a change in the state of private endpoint connection.
    */
   etag?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations

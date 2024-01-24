@@ -15,8 +15,12 @@ namespace Microsoft.Logic;
 /**
  * The workflow run action.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WorkflowRun)
-model WorkflowRunAction is ProxyResource<WorkflowRunActionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WorkflowRunActionProperties)
+@includeInapplicableMetadataInPayload(false)
+model WorkflowRunAction extends SubResource {
   /**
    * The workflow action name.
    */
@@ -24,6 +28,12 @@ model WorkflowRunAction is ProxyResource<WorkflowRunActionProperties> {
   @key("actionName")
   @segment("actions")
   name: string;
+
+  /**
+   * The workflow run action properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkflowRunActionProperties;
 }
 
 @armResourceOperations

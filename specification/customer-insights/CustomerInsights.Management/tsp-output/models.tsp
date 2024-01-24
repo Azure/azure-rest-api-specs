@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -540,6 +542,7 @@ model DataSourcePrecedence {
   /**
    * Data Source is a way for us to know the source of instances. A single type can have data coming in from multiple places. In activities we use this to determine precedence rules.
    */
+  @extension("x-ms-client-flatten", true)
   dataSource?: DataSource;
 
   /**
@@ -836,6 +839,7 @@ model InteractionTypeDefinition extends EntityTypeDefinition {
   /**
    * Default data source is specifically used in cases where data source is not specified in an instance.
    */
+  @extension("x-ms-client-flatten", true)
   defaultDataSource?: DataSource;
 
   /**
@@ -1682,6 +1686,7 @@ model RoleResourceFormat extends ProxyResource {
   /**
    * The Role definition.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Role;
 }
 

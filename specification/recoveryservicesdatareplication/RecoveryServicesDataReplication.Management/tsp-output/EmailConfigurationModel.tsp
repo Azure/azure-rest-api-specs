@@ -15,9 +15,14 @@ namespace Microsoft.DataReplication;
 /**
  * Email configuration model.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VaultModel)
-model EmailConfigurationModel
-  is ProxyResource<EmailConfigurationModelProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  EmailConfigurationModelProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model EmailConfigurationModel extends ProxyResourceBase {
   /**
    * The email configuration name.
    */
@@ -26,6 +31,12 @@ model EmailConfigurationModel
   @key("emailConfigurationName")
   @segment("alertSettings")
   name: string;
+
+  /**
+   * Email configuration model properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: EmailConfigurationModelProperties;
 }
 
 @armResourceOperations

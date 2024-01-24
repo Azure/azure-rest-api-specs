@@ -14,8 +14,12 @@ namespace Microsoft.HybridContainerService;
 /**
  * The list of supported VM SKUs.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
-model VmSkuProfile is ExtensionResource<VmSkuProfileProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VmSkuProfileProperties)
+@includeInapplicableMetadataInPayload(false)
+model VmSkuProfile extends ExtensionResourceBase {
   @key("skus")
   @segment("skus")
   name: string;
@@ -24,6 +28,9 @@ model VmSkuProfile is ExtensionResource<VmSkuProfileProperties> {
    * Extended location pointing to the underlying infrastructure
    */
   extendedLocation?: ExtendedLocation;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: VmSkuProfileProperties;
 }
 
 @armResourceOperations

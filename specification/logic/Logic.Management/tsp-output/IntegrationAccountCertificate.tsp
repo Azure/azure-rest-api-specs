@@ -15,9 +15,14 @@ namespace Microsoft.Logic;
 /**
  * The integration account certificate.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationAccount)
-model IntegrationAccountCertificate
-  is TrackedResource<IntegrationAccountCertificateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  IntegrationAccountCertificateProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model IntegrationAccountCertificate extends Resource {
   /**
    * The integration account certificate name.
    */
@@ -25,6 +30,12 @@ model IntegrationAccountCertificate
   @key("certificateName")
   @segment("certificates")
   name: string;
+
+  /**
+   * The integration account certificate properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: IntegrationAccountCertificateProperties;
 }
 
 @armResourceOperations

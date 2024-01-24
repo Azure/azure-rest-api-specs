@@ -14,7 +14,11 @@ namespace Microsoft.ConnectedVMwarevSphere;
 /**
  * Define the resourcePool.
  */
-model ResourcePool is TrackedResource<ResourcePoolProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ResourcePoolProperties)
+@includeInapplicableMetadataInPayload(false)
+model ResourcePool extends TrackedResourceBase {
   /**
    * Name of the resourcePool.
    */
@@ -28,7 +32,16 @@ model ResourcePool is TrackedResource<ResourcePoolProperties> {
    */
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.
+   */
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ResourcePoolProperties;
 }
 
 @armResourceOperations

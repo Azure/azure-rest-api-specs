@@ -15,8 +15,12 @@ namespace Microsoft.Kusto;
 /**
  * Class representing a cluster principal assignment.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model ClusterPrincipalAssignment is ProxyResource<ClusterPrincipalProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ClusterPrincipalProperties)
+@includeInapplicableMetadataInPayload(false)
+model ClusterPrincipalAssignment extends ProxyResourceBase {
   /**
    * The name of the Kusto principalAssignment.
    */
@@ -25,6 +29,12 @@ model ClusterPrincipalAssignment is ProxyResource<ClusterPrincipalProperties> {
   @key("principalAssignmentName")
   @segment("principalAssignments")
   name: string;
+
+  /**
+   * The cluster principal.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterPrincipalProperties;
 }
 
 @armResourceOperations

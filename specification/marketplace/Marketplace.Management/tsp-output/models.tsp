@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -136,6 +138,7 @@ model PrivateStoreProperties {
   /**
    * Gets or sets notifications settings
    */
+  @extension("x-ms-client-flatten", true)
   notificationsSettings?: NotificationsSettingsProperties;
 }
 
@@ -356,6 +359,7 @@ model QueryUserOffersProperties {
   /**
    * Query user's offers details
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QueryUserOffersDetails;
 }
 
@@ -381,6 +385,7 @@ model QueryUserRulesProperties {
   /**
    * Query user's rules details
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QueryUserRulesDetails;
 }
 
@@ -536,6 +541,7 @@ model TransferOffersProperties {
   /**
    * transfer offers properties details
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TransferOffersDetails;
 }
 
@@ -596,6 +602,7 @@ model QueryApprovedPlansPayload {
   /**
    * Query approved plans details
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QueryApprovedPlans;
 }
 
@@ -656,6 +663,7 @@ model BulkCollectionsPayload {
   /**
    * bulk collections properties details
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BulkCollectionsDetails;
 }
 
@@ -696,6 +704,7 @@ model CollectionOffersByAllContextsPayload {
   /**
    * Subscriptions ids list
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CollectionOffersByAllContextsProperties;
 }
 
@@ -728,6 +737,7 @@ model CollectionOffersByContext {
   /**
    * List of offers
    */
+  @extension("x-ms-client-flatten", true)
   offers?: CollectionOffersByContextOffers;
 }
 
@@ -754,6 +764,7 @@ model MultiContextAndPlansPayload {
   /**
    * Object describes multiple context and plans.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MultiContextAndPlansProperties;
 }
 
@@ -870,6 +881,7 @@ model QueryRequestApprovalProperties {
   /**
    * The details to get the request plans statuses
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RequestDetails;
 }
 
@@ -1168,6 +1180,7 @@ model AcknowledgeOfferNotificationProperties {
   /**
    * Notification update request payload details
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AcknowledgeOfferNotificationDetails;
 }
 
@@ -1208,6 +1221,7 @@ model WithdrawProperties {
   /**
    * Withdraw properties details
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WithdrawDetails;
 }
 

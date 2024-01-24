@@ -25,6 +25,7 @@ using TypeSpec.Versioning;
  * Self service experience for VMware.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure Arc VMware Management Service API",
 })

@@ -15,8 +15,12 @@ namespace Microsoft.StreamAnalytics;
 /**
  * An output object, containing all information associated with the named output. All outputs are contained under a streaming job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StreamingJob)
-model Output is ProxyResource<OutputProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(OutputProperties)
+@includeInapplicableMetadataInPayload(false)
+model Output extends SubResource {
   /**
    * The name of the output.
    */
@@ -24,6 +28,12 @@ model Output is ProxyResource<OutputProperties> {
   @key("outputName")
   @segment("outputs")
   name: string;
+
+  /**
+   * The properties that are associated with an output. Required on PUT (CreateOrReplace) requests.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: OutputProperties;
 }
 
 @armResourceOperations

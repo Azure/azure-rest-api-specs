@@ -15,8 +15,12 @@ namespace Microsoft.AppPlatform;
 /**
  * Build result resource payload
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Build)
-model BuildResult is ProxyResource<BuildResultProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(BuildResultProperties)
+@includeInapplicableMetadataInPayload(false)
+model BuildResult extends ProxyResource {
   /**
    * The name of the build result resource.
    */
@@ -24,6 +28,12 @@ model BuildResult is ProxyResource<BuildResultProperties> {
   @key("buildResultName")
   @segment("results")
   name: string;
+
+  /**
+   * Properties of the build result resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BuildResultProperties;
 }
 
 @armResourceOperations

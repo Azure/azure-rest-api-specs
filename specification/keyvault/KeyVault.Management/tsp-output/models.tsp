@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -621,6 +623,7 @@ model PrivateEndpointConnectionItem {
   /**
    * Private endpoint connection properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateEndpointConnectionProperties;
 }
 
@@ -969,6 +972,7 @@ model PrivateLinkResource extends Resource {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -1165,6 +1169,7 @@ model MhsmPrivateEndpointConnectionItem {
   /**
    * Private endpoint connection properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MhsmPrivateEndpointConnectionProperties;
 }
 
@@ -1398,6 +1403,7 @@ model MhsmPrivateLinkResource extends ManagedHsmResource {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MhsmPrivateLinkResourceProperties;
 }
 

@@ -1,12 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -26,6 +28,13 @@ interface Operations extends Azure.ResourceManager.Operations {}
 * Name of this SKU.
 */
     enum SkuName {
+        "Basic", "Standard", "Premium"
+    }
+
+/**
+* The billing tier of this particular SKU.
+*/
+    enum SkuTier {
         "Basic", "Standard", "Premium"
     }
 
@@ -328,6 +337,22 @@ model Identity {
 }
 
 /**
+* Recognized Dictionary value.
+*/
+model UserAssignedIdentity {
+/**
+* Principal Id of user assigned identity
+*/
+@visibility("read")
+"principalId"?: string;
+/**
+* Client Id of user assigned identity
+*/
+@visibility("read")
+"clientId"?: string;
+}
+
+/**
 * Namespace properties supplied for create namespace operation.
 */
 model EHNamespaceProperties {
@@ -378,7 +403,7 @@ model EHNamespaceProperties {
 /**
 * This determines if traffic is allowed over public network. By default it is enabled.
 */
-"publicNetworkAccess"?: PublicNetworkAccess = PublicNetworkAccess.Enabled;
+"publicNetworkAccess"?: PublicNetworkAccess = PublicNetworkAccess.`Enabled`;
 /**
 * Upper limit of throughput units when AutoInflate is enabled, value should be within 0 to 20 throughput units. ( '0' if AutoInflateEnabled = true)
 */
@@ -420,7 +445,7 @@ model EventHubsEncryption {
 /**
 * Enumerates the possible value of keySource for Encryption
 */
-"keySource"?: "Microsoft.KeyVault" = "Microsoft.KeyVault".Microsoft.KeyVault;
+"keySource"?: "Microsoft.KeyVault" = "Microsoft.KeyVault".`Microsoft.KeyVault`;
 /**
 * Enable Infrastructure Encryption (Double Encryption)
 */
@@ -517,6 +542,7 @@ model EventHubsPrivateLinkResourceData {
 /**
 * Properties of the private link resource.
 */
+@extension("x-ms-client-flatten", true)
 "properties"?: PrivateLinkResourceProperties;
 /**
 * Fully qualified identifier of the resource.
@@ -569,6 +595,7 @@ model NetworkSecurityPerimeterConfiguration extends TrackedResource {
 * Properties of the Network Security Perimeter Configuration
 */
 @visibility("read")
+@extension("x-ms-client-flatten", true)
 "properties"?: NetworkSecurityPerimeterConfigurationProperties;
 }
 
@@ -774,7 +801,7 @@ model NetworkRuleSetProperties {
 /**
 * This determines if traffic is allowed over public network. By default it is enabled. If value is SecuredByPerimeter then Inbound and Outbound communication is controlled by the network security perimeter and profile's access rules. 
 */
-"publicNetworkAccess"?: EventHubsPublicNetworkAccessFlag = EventHubsPublicNetworkAccessFlag.Enabled;
+"publicNetworkAccess"?: EventHubsPublicNetworkAccessFlag = EventHubsPublicNetworkAccessFlag.`Enabled`;
 }
 
 /**
@@ -1041,6 +1068,7 @@ model EventHubDestination {
 /**
 * Properties describing the storage account, blob container and archive name format for capture destination
 */
+@extension("x-ms-client-flatten", true)
 "properties"?: DestinationProperties;
 }
 

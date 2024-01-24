@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -511,6 +513,7 @@ model StorageSyncServiceCreateParameters {
   /**
    * The parameters used to create the storage sync service.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StorageSyncServiceCreateParametersProperties;
 }
 
@@ -663,6 +666,7 @@ model StorageSyncServiceUpdateParameters {
   /**
    * The properties of the server endpoint.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StorageSyncServiceUpdateProperties;
 }
 
@@ -693,6 +697,7 @@ model PrivateLinkResource extends Resource {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -742,6 +747,7 @@ model SyncGroupCreateParameters extends ProxyResource {
   /**
    * The parameters used to create the sync group
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<unknown>;
 }
 
@@ -752,6 +758,7 @@ model CloudEndpointCreateParameters extends ProxyResource {
   /**
    * The parameters used to create the cloud endpoint.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CloudEndpointCreateParametersProperties;
 }
 
@@ -1011,6 +1018,7 @@ model PostBackupResponse {
   /**
    * Post Backup Response Properties
    */
+  @extension("x-ms-client-flatten", true)
   backupMetadata?: PostBackupResponseProperties;
 }
 
@@ -1179,6 +1187,7 @@ model ServerEndpointCreateParameters extends ProxyResource {
   /**
    * The parameters used to create the server endpoint.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ServerEndpointCreateParametersProperties;
 }
 
@@ -1911,6 +1920,7 @@ model ServerEndpointUpdateParameters {
   /**
    * The properties of the server endpoint.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ServerEndpointUpdateProperties;
 }
 
@@ -2097,6 +2107,7 @@ model RegisteredServerCreateParameters extends ProxyResource {
   /**
    * The parameters used to create the registered server.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RegisteredServerCreateParametersProperties;
 }
 
@@ -2228,6 +2239,7 @@ model SubscriptionState {
   /**
    * Subscription state properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<unknown>;
 }
 

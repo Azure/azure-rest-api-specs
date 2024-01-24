@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1597,9 +1599,9 @@ model ReverseShippingDetails {
   shippingAddress?: ShippingAddress;
 
   /**
-* A flag to indicate whether Reverse Shipping details are updated or not after device has been prepared.
-Read only field
-*/
+   * A flag to indicate whether Reverse Shipping details are updated or not after device has been prepared.
+   * Read only field
+   */
   @visibility("read")
   isUpdated?: boolean;
 }
@@ -1715,9 +1717,9 @@ model LastMitigationActionOnJob {
   actionDateTimeInUtc?: utcDateTime;
 
   /**
-* Action performed by customer,
-possibility is that mitigation might happen by customer or service or by ops
-*/
+   * Action performed by customer,
+   * possibility is that mitigation might happen by customer or service or by ops
+   */
   isPerformedByCustomer?: boolean;
 
   /**
@@ -1829,6 +1831,23 @@ model ResourceIdentity {
 }
 
 /**
+ * Class defining User assigned identity details.
+ */
+model UserAssignedIdentity {
+  /**
+   * The principal id of user assigned identity.
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * The client id of user assigned identity.
+   */
+  @visibility("read")
+  clientId?: string;
+}
+
+/**
  * The Mitigate Job captured from request body for Mitigate API
  */
 model MitigateJobRequest {
@@ -1918,6 +1937,7 @@ model SkuInformation {
    * Properties of the sku.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: SkuProperties;
 }
 
@@ -2070,6 +2090,7 @@ model AddressValidationOutput {
    * The address validation properties.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: AddressValidationProperties;
 }
 
@@ -2126,6 +2147,7 @@ model ValidationResponse {
    * Properties of pre job creation validation response.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: ValidationResponseProperties;
 }
 
@@ -2153,6 +2175,7 @@ model JobResourceUpdateParameter {
   /**
    * Properties of a job to be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateJobProperties;
 
   /**
@@ -2669,9 +2692,9 @@ model CopyProgress {
   invalidDirectoriesProcessed?: int64;
 
   /**
-* To indicate if enumeration of data is in progress. 
-Until this is true, the TotalBytesToProcess may not be valid.
-*/
+   * To indicate if enumeration of data is in progress.
+   * Until this is true, the TotalBytesToProcess may not be valid.
+   */
   @visibility("read")
   isEnumerationInProgress?: boolean;
 
@@ -2777,9 +2800,9 @@ model GranularCopyProgress {
   invalidDirectoriesProcessed?: int64;
 
   /**
-* To indicate if enumeration of data is in progress. 
-Until this is true, the TotalBytesToProcess may not be valid.
-*/
+   * To indicate if enumeration of data is in progress.
+   * Until this is true, the TotalBytesToProcess may not be valid.
+   */
   @visibility("read")
   isEnumerationInProgress?: boolean;
 

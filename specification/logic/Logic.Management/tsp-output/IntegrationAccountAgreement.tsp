@@ -15,9 +15,14 @@ namespace Microsoft.Logic;
 /**
  * The integration account agreement.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationAccount)
-model IntegrationAccountAgreement
-  is TrackedResource<IntegrationAccountAgreementProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  IntegrationAccountAgreementProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model IntegrationAccountAgreement extends Resource {
   /**
    * The integration account agreement name.
    */
@@ -25,6 +30,12 @@ model IntegrationAccountAgreement
   @key("agreementName")
   @segment("agreements")
   name: string;
+
+  /**
+   * The integration account agreement properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: IntegrationAccountAgreementProperties;
 }
 
 @armResourceOperations

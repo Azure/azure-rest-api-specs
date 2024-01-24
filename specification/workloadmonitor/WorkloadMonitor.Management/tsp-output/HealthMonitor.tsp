@@ -14,7 +14,11 @@ namespace Microsoft.WorkloadMonitor;
 /**
  * Information about the monitor’s current health status.
  */
-model HealthMonitor is ProxyResource<HealthMonitorProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(HealthMonitorProperties)
+@includeInapplicableMetadataInPayload(false)
+model HealthMonitor extends Resource {
   /**
    * The monitor Id of the virtual machine.
    */
@@ -22,6 +26,12 @@ model HealthMonitor is ProxyResource<HealthMonitorProperties> {
   @key("monitorId")
   @segment("monitors")
   name: string;
+
+  /**
+   * Properties of the monitor's health status.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: HealthMonitorProperties;
 }
 
 @armResourceOperations

@@ -663,9 +663,9 @@ model ManualResolutionProperties {
  */
 model AutomaticResolutionProperties {
   /**
-* Gets the MoveResource ARM ID of
-the dependent resource if the resolution type is Automatic.
-*/
+   * Gets the MoveResource ARM ID of
+   * the dependent resource if the resolution type is Automatic.
+   */
   moveResourceId?: string;
 }
 
@@ -679,9 +679,9 @@ model MoveResourceDependencyOverride {
   id?: string;
 
   /**
-* Gets or sets the resource ARM id of either the MoveResource or the resource ARM ID of
-the dependent resource.
-*/
+   * Gets or sets the resource ARM id of either the MoveResource or the resource ARM ID of
+   * the dependent resource.
+   */
   targetId?: string;
 }
 
@@ -777,29 +777,29 @@ model BulkRemoveRequest {
  */
 model OperationsDiscovery {
   /**
-* Gets or sets Name of the API.
-The name of the operation being performed on this particular object. It should
-match the action name that appears in RBAC / the event service.
-Examples of operations include:
-* Microsoft.Compute/virtualMachine/capture/action
-* Microsoft.Compute/virtualMachine/restart/action
-* Microsoft.Compute/virtualMachine/write
-* Microsoft.Compute/virtualMachine/read
-* Microsoft.Compute/virtualMachine/delete
-Each action should include, in order:
-(1) Resource Provider Namespace
-(2) Type hierarchy for which the action applies (e.g. server/databases for a SQL
-Azure database)
-(3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH
-on a collection or named value, Write should be used.
-If it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it
-is a POST, Action should be used.
-As a note: all resource providers would need to include the "{Resource Provider
-Namespace}/register/action" operation in their response.
-This API is used to register for their service, and should include details about the
-operation (e.g. a localized name for the resource provider + any special
-considerations like PII release).
-*/
+   * Gets or sets Name of the API.
+   * The name of the operation being performed on this particular object. It should
+   * match the action name that appears in RBAC / the event service.
+   * Examples of operations include:
+   * * Microsoft.Compute/virtualMachine/capture/action
+   * * Microsoft.Compute/virtualMachine/restart/action
+   * * Microsoft.Compute/virtualMachine/write
+   * * Microsoft.Compute/virtualMachine/read
+   * * Microsoft.Compute/virtualMachine/delete
+   * Each action should include, in order:
+   * (1) Resource Provider Namespace
+   * (2) Type hierarchy for which the action applies (e.g. server/databases for a SQL
+   * Azure database)
+   * (3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH
+   * on a collection or named value, Write should be used.
+   * If it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it
+   * is a POST, Action should be used.
+   * As a note: all resource providers would need to include the "{Resource Provider
+   * Namespace}/register/action" operation in their response.
+   * This API is used to register for their service, and should include details about the
+   * operation (e.g. a localized name for the resource provider + any special
+   * considerations like PII release).
+   */
   name?: string;
 
   /**
@@ -808,20 +808,20 @@ considerations like PII release).
   isDataAction?: boolean;
 
   /**
-* Contains the localized display information for this particular operation / action. These
-value will be used by several clients for
-(1) custom role definitions for RBAC;
-(2) complex query filters for the event service; and
-(3) audit history / records for management operations.
-*/
+   * Contains the localized display information for this particular operation / action. These
+   * value will be used by several clients for
+   * (1) custom role definitions for RBAC;
+   * (2) complex query filters for the event service; and
+   * (3) audit history / records for management operations.
+   */
   display?: Display;
 
   /**
-* Gets or sets Origin.
-The intended executor of the operation; governs the display of the operation in the
-RBAC UX and the audit logs UX.
-Default value is "user,system".
-*/
+   * Gets or sets Origin.
+   * The intended executor of the operation; governs the display of the operation in the
+   * RBAC UX and the audit logs UX.
+   * Default value is "user,system".
+   */
   origin?: string;
 
   /**
@@ -831,57 +831,57 @@ Default value is "user,system".
 }
 
 /**
-* Contains the localized display information for this particular operation / action. These
-value will be used by several clients for
-(1) custom role definitions for RBAC;
-(2) complex query filters for the event service; and
-(3) audit history / records for management operations.
-*/
+ * Contains the localized display information for this particular operation / action. These
+ * value will be used by several clients for
+ * (1) custom role definitions for RBAC;
+ * (2) complex query filters for the event service; and
+ * (3) audit history / records for management operations.
+ */
 model Display {
   /**
-* Gets or sets the provider.
-The localized friendly form of the resource provider name – it is expected to also
-include the publisher/company responsible.
-It should use Title Casing and begin with "Microsoft" for 1st party services.
-e.g. "Microsoft Monitoring Insights" or "Microsoft Compute.".
-*/
+   * Gets or sets the provider.
+   * The localized friendly form of the resource provider name – it is expected to also
+   * include the publisher/company responsible.
+   * It should use Title Casing and begin with "Microsoft" for 1st party services.
+   * e.g. "Microsoft Monitoring Insights" or "Microsoft Compute.".
+   */
   provider?: string;
 
   /**
-* Gets or sets the resource.
-The localized friendly form of the resource related to this action/operation – it
-should match the public documentation for the resource provider.
-It should use Title Casing.
-This value should be unique for a particular URL type (e.g. nested types should *not*
-reuse their parent’s display.resource field)
-e.g. "Virtual Machines" or "Scheduler Job Collections", or "Virtual Machine VM Sizes"
-or "Scheduler Jobs".
-*/
+   * Gets or sets the resource.
+   * The localized friendly form of the resource related to this action/operation – it
+   * should match the public documentation for the resource provider.
+   * It should use Title Casing.
+   * This value should be unique for a particular URL type (e.g. nested types should *not*
+   * reuse their parent’s display.resource field)
+   * e.g. "Virtual Machines" or "Scheduler Job Collections", or "Virtual Machine VM Sizes"
+   * or "Scheduler Jobs".
+   */
   resource?: string;
 
   /**
-* Gets or sets the operation.
-The localized friendly name for the operation, as it should be shown to the user.
-It should be concise (to fit in drop downs) but clear (i.e. self-documenting).
-It should use Title Casing.
-Prescriptive guidance: Read Create or Update Delete 'ActionName'.
-*/
+   * Gets or sets the operation.
+   * The localized friendly name for the operation, as it should be shown to the user.
+   * It should be concise (to fit in drop downs) but clear (i.e. self-documenting).
+   * It should use Title Casing.
+   * Prescriptive guidance: Read Create or Update Delete 'ActionName'.
+   */
   operation?: string;
 
   /**
-* Gets or sets the description.
-The localized friendly description for the operation, as it should be shown to the
-user.
-It should be thorough, yet concise – it will be used in tool tips and detailed views.
-Prescriptive guidance for namespace:
-Read any 'display.provider'  resource
-Create or Update any  'display.provider'  resource
-Delete any  'display.provider'  resource
-Perform any other action on any  'display.provider'  resource
-Prescriptive guidance for namespace:
-Read any 'display.resource' Create or Update any  'display.resource' Delete any
- 'display.resource' 'ActionName' any 'display.resources'.
-*/
+   * Gets or sets the description.
+   * The localized friendly description for the operation, as it should be shown to the
+   * user.
+   * It should be thorough, yet concise – it will be used in tool tips and detailed views.
+   * Prescriptive guidance for namespace:
+   * Read any 'display.provider'  resource
+   * Create or Update any  'display.provider'  resource
+   * Delete any  'display.provider'  resource
+   * Perform any other action on any  'display.provider'  resource
+   * Prescriptive guidance for namespace:
+   * Read any 'display.resource' Create or Update any  'display.resource' Delete any
+   *  'display.resource' 'ActionName' any 'display.resources'.
+   */
   description?: string;
 }
 
@@ -1031,9 +1031,9 @@ model VirtualNetworkResourceSettings extends ResourceSettings {
   tags?: Record<string>;
 
   /**
-* Gets or sets a value indicating whether gets or sets whether the
-DDOS protection should be switched on.
-*/
+   * Gets or sets a value indicating whether gets or sets whether the
+   * DDOS protection should be switched on.
+   */
   enableDdosProtection?: boolean;
 
   /**
@@ -1042,9 +1042,9 @@ DDOS protection should be switched on.
   addressSpace?: string[];
 
   /**
-* Gets or sets DHCPOptions that contains an array of DNS servers available to VMs
-deployed in the virtual network.
-*/
+   * Gets or sets DHCPOptions that contains an array of DNS servers available to VMs
+   * deployed in the virtual network.
+   */
   dnsServers?: string[];
 
   /**
@@ -1168,9 +1168,9 @@ model NsgSecurityRule {
   name?: string;
 
   /**
-* Gets or sets whether network traffic is allowed or denied.
-Possible values are “Allow” and “Deny”.
-*/
+   * Gets or sets whether network traffic is allowed or denied.
+   * Possible values are “Allow” and “Deny”.
+   */
   access?: string;
 
   /**
@@ -1179,29 +1179,29 @@ Possible values are “Allow” and “Deny”.
   description?: string;
 
   /**
-* Gets or sets destination address prefix. CIDR or source IP range.
- A “*” can also be used to match all source IPs. Default tags such
-as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used.
-*/
+   * Gets or sets destination address prefix. CIDR or source IP range.
+   *  A “*” can also be used to match all source IPs. Default tags such
+   * as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used.
+   */
   destinationAddressPrefix?: string;
 
   /**
-* Gets or sets Destination Port or Range. Integer or range between
-0 and 65535. A “*” can also be used to match all ports.
-*/
+   * Gets or sets Destination Port or Range. Integer or range between
+   * 0 and 65535. A “*” can also be used to match all ports.
+   */
   destinationPortRange?: string;
 
   /**
-* Gets or sets the direction of the rule.InBound or Outbound. The
-direction specifies if rule will be evaluated on incoming or outgoing traffic.
-*/
+   * Gets or sets the direction of the rule.InBound or Outbound. The
+   * direction specifies if rule will be evaluated on incoming or outgoing traffic.
+   */
   direction?: string;
 
   /**
-* Gets or sets the priority of the rule. The value can be between
-100 and 4096. The priority number must be unique for each rule in the collection.
-The lower the priority number, the higher the priority of the rule.
-*/
+   * Gets or sets the priority of the rule. The value can be between
+   * 100 and 4096. The priority number must be unique for each rule in the collection.
+   * The lower the priority number, the higher the priority of the rule.
+   */
   priority?: int32;
 
   /**
@@ -1210,17 +1210,17 @@ The lower the priority number, the higher the priority of the rule.
   protocol?: string;
 
   /**
-* Gets or sets source address prefix. CIDR or source IP range. A
-“*” can also be used to match all source IPs.  Default tags such as ‘VirtualNetwork’,
-‘AzureLoadBalancer’ and ‘Internet’ can also be used. If this is an ingress
-rule, specifies where network traffic originates from.
-*/
+   * Gets or sets source address prefix. CIDR or source IP range. A
+   * “*” can also be used to match all source IPs.  Default tags such as ‘VirtualNetwork’,
+   * ‘AzureLoadBalancer’ and ‘Internet’ can also be used. If this is an ingress
+   * rule, specifies where network traffic originates from.
+   */
   sourceAddressPrefix?: string;
 
   /**
-* Gets or sets Source Port or Range. Integer or range between 0 and
-65535. A “*” can also be used to match all ports.
-*/
+   * Gets or sets Source Port or Range. Integer or range between 0 and
+   * 65535. A “*” can also be used to match all ports.
+   */
   sourcePortRange?: string;
 }
 
@@ -1254,9 +1254,9 @@ model LBFrontendIPConfigurationResourceSettings {
   name?: string;
 
   /**
-* Gets or sets the IP address of the Load Balancer.This is only specified if a specific
-private IP address shall be allocated from the subnet specified in subnetRef.
-*/
+   * Gets or sets the IP address of the Load Balancer.This is only specified if a specific
+   * private IP address shall be allocated from the subnet specified in subnetRef.
+   */
   privateIpAddress?: string;
 
   /**
@@ -1310,9 +1310,9 @@ model LoadBalancerResourceSettings extends ResourceSettings {
   backendAddressPools?: LBBackendAddressPoolResourceSettings[];
 
   /**
-* Gets or sets the csv list of zones common for all frontend IP configurations. Note this is given
- precedence only if frontend IP configurations settings are not present.
-*/
+   * Gets or sets the csv list of zones common for all frontend IP configurations. Note this is given
+   *  precedence only if frontend IP configurations settings are not present.
+   */
   zones?: string;
 
   /**

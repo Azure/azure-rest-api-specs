@@ -15,8 +15,12 @@ namespace Microsoft.Marketplace;
 /**
  * The Collection data structure.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateStore)
-model Collection is ProxyResource<CollectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CollectionProperties)
+@includeInapplicableMetadataInPayload(false)
+model Collection extends Resource {
   /**
    * The collection ID
    */
@@ -24,6 +28,12 @@ model Collection is ProxyResource<CollectionProperties> {
   @key("collectionId")
   @segment("collections")
   name: string;
+
+  /**
+   * The collection data structure.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CollectionProperties;
 }
 
 @armResourceOperations

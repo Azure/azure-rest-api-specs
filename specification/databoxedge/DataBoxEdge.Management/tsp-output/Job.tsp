@@ -15,8 +15,12 @@ namespace Microsoft.DataBoxEdge;
 /**
  * A device job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataBoxEdgeDevice)
-model Job is ProxyResource<JobProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
+@includeInapplicableMetadataInPayload(false)
+model Job extends ProxyResourceBase {
   /**
    * The job name.
    */
@@ -56,6 +60,12 @@ model Job is ProxyResource<JobProperties> {
    */
   @visibility("read")
   error?: JobErrorDetails;
+
+  /**
+   * The properties of the job.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobProperties;
 }
 
 @armResourceOperations

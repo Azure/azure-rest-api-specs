@@ -15,8 +15,12 @@ namespace Microsoft.ElasticSan;
 /**
  * Response for Volume Snapshot request.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VolumeGroup)
-model Snapshot is ProxyResource<SnapshotProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SnapshotProperties)
+@includeInapplicableMetadataInPayload(false)
+model Snapshot extends ProxyResourceBase {
   /**
    * The name of the volume snapshot within the given volume group.
    */
@@ -27,6 +31,12 @@ model Snapshot is ProxyResource<SnapshotProperties> {
   @key("snapshotName")
   @segment("snapshots")
   name: string;
+
+  /**
+   * Properties of Volume Snapshot.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: SnapshotProperties;
 }
 
 @armResourceOperations

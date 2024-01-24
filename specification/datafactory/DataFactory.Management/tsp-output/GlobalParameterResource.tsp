@@ -15,8 +15,12 @@ namespace Microsoft.DataFactory;
 /**
  * Global parameters resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-model GlobalParameterResource is ProxyResource<Record<unknown>> {
+@Azure.ResourceManager.Private.armResourceInternal(Record<unknown>)
+@includeInapplicableMetadataInPayload(false)
+model GlobalParameterResource extends SubResource {
   /**
    * The global parameter name.
    */
@@ -27,6 +31,10 @@ model GlobalParameterResource is ProxyResource<Record<unknown>> {
   @key("globalParameterName")
   @segment("globalParameters")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties?: Record<unknown>;
 }
 
 @armResourceOperations

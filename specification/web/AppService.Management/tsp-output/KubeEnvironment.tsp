@@ -14,7 +14,11 @@ namespace Microsoft.CertificateRegistration;
 /**
  * A Kubernetes cluster specialized for web workloads by Azure App Service
  */
-model KubeEnvironment is TrackedResource<KubeEnvironmentProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(KubeEnvironmentProperties)
+@includeInapplicableMetadataInPayload(false)
+model KubeEnvironment extends Resource {
   /**
    * Name of the Kubernetes Environment.
    */
@@ -27,6 +31,12 @@ model KubeEnvironment is TrackedResource<KubeEnvironmentProperties> {
    * Extended Location.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * KubeEnvironment resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: KubeEnvironmentProperties;
 }
 
 @armResourceOperations

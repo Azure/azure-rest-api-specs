@@ -15,12 +15,22 @@ namespace Microsoft.AppPlatform;
 /**
  * Config Server resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(ServiceResource)
-model ConfigServerResource is ProxyResource<ConfigServerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ConfigServerProperties)
+@includeInapplicableMetadataInPayload(false)
+model ConfigServerResource extends ProxyResource {
   @key("configServer")
   @segment("configServers")
   name: string;
+
+  /**
+   * Properties of the Config Server resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConfigServerProperties;
 }
 
 @armResourceOperations

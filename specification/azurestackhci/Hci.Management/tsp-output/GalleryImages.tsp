@@ -14,7 +14,11 @@ namespace Microsoft.AzureStackHCI;
 /**
  * The gallery images resource definition.
  */
-model GalleryImages is TrackedResource<GalleryImageProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(GalleryImageProperties)
+@includeInapplicableMetadataInPayload(false)
+model GalleryImages extends TrackedResourceBase {
   /**
    * Name of the gallery image
    */
@@ -30,6 +34,12 @@ model GalleryImages is TrackedResource<GalleryImageProperties> {
    * The extendedLocation of the resource.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties under the gallery image resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GalleryImageProperties;
 }
 
 @armResourceOperations

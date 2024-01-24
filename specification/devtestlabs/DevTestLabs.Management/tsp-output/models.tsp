@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -22,10 +24,10 @@ enum StorageType {
 }
 
 /**
-* The setting to enable usage of premium data disks.
-When its value is 'Enabled', creation of standard or premium data disks is allowed.
-When its value is 'Disabled', only creation of standard data disks is allowed.
-*/
+ * The setting to enable usage of premium data disks.
+ * When its value is 'Enabled', creation of standard or premium data disks is allowed.
+ * When its value is 'Disabled', only creation of standard data disks is allowed.
+ */
 enum PremiumDataDisk {
   Disabled,
   Enabled,
@@ -235,6 +237,16 @@ enum PolicyEvaluatorType {
 }
 
 /**
+ * Managed identity.
+ */
+enum ManagedIdentityType {
+  None,
+  SystemAssigned,
+  UserAssigned,
+  `SystemAssigned,UserAssigned`,
+}
+
+/**
  * Tells source of creation of lab virtual machine. Output property only.
  */
 enum VirtualMachineCreationSource {
@@ -309,10 +321,10 @@ model LabProperties {
   createdDate?: utcDateTime;
 
   /**
-* The setting to enable usage of premium data disks.
-When its value is 'Enabled', creation of standard or premium data disks is allowed.
-When its value is 'Disabled', only creation of standard data disks is allowed.
-*/
+   * The setting to enable usage of premium data disks.
+   * When its value is 'Enabled', creation of standard or premium data disks is allowed.
+   * When its value is 'Disabled', only creation of standard data disks is allowed.
+   */
   premiumDataDisks?: PremiumDataDisk;
 
   /**
@@ -1367,6 +1379,7 @@ model LabVirtualMachineCreationParameter {
   /**
    * The properties of the resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LabVirtualMachineCreationParameterProperties;
 
   /**
@@ -1735,6 +1748,7 @@ model ScheduleCreationParameter {
   /**
    * The properties of the schedule.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ScheduleCreationParameterProperties;
 
   /**
@@ -1826,6 +1840,7 @@ model GalleryImage extends Resource {
   /**
    * The properties of the resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties: GalleryImageProperties;
 }
 
@@ -2433,6 +2448,7 @@ model ApplicableSchedule extends Resource {
   /**
    * The properties of the resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties: ApplicableScheduleProperties;
 }
 

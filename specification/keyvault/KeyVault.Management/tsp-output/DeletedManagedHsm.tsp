@@ -12,8 +12,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model DeletedManagedHsm is ProxyResource<DeletedManagedHsmProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DeletedManagedHsmProperties)
+@includeInapplicableMetadataInPayload(false)
+model DeletedManagedHsm extends ProxyResourceBase {
   /**
    * The name of the deleted managed HSM.
    */
@@ -21,6 +25,12 @@ model DeletedManagedHsm is ProxyResource<DeletedManagedHsmProperties> {
   @key("name")
   @segment("deletedManagedHSMs")
   name: string;
+
+  /**
+   * Properties of the deleted managed HSM
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeletedManagedHsmProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.NetworkCloud;
 /**
  * KubernetesCluster represents the Kubernetes cluster hosted on Network Cloud.
  */
-model KubernetesCluster is TrackedResource<KubernetesClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(KubernetesClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model KubernetesCluster extends TrackedResourceBase {
   /**
    * The name of the Kubernetes cluster.
    */
@@ -28,6 +32,12 @@ model KubernetesCluster is TrackedResource<KubernetesClusterProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: KubernetesClusterProperties;
 }
 
 @armResourceOperations
@@ -81,9 +91,10 @@ interface KubernetesClusters {
   /**
    * Restart a targeted node of a Kubernetes cluster.
    */
-  restartNode is ArmResourceActionNoResponseContentAsync<
+  restartNode is ArmResourceActionAsync<
     KubernetesCluster,
     KubernetesClusterRestartNodeParameters,
+    OperationStatusResult,
     BaseParameters<KubernetesCluster>,
     ArmLroLocationHeader
   >;

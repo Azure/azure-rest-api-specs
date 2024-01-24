@@ -15,8 +15,12 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Represents a container on the  Data Box Edge/Gateway device.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccount)
-model Container is ProxyResource<ContainerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ContainerProperties)
+@includeInapplicableMetadataInPayload(false)
+model Container extends ProxyResourceBase {
   /**
    * The container Name
    */
@@ -24,6 +28,12 @@ model Container is ProxyResource<ContainerProperties> {
   @key("containerName")
   @segment("containers")
   name: string;
+
+  /**
+   * The container properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ContainerProperties;
 }
 
 @armResourceOperations

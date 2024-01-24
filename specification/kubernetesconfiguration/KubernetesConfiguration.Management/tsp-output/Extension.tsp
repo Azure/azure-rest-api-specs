@@ -14,7 +14,11 @@ namespace Microsoft.KubernetesConfiguration;
 /**
  * The Extension object.
  */
-model Extension is ProxyResource<ExtensionProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ExtensionProperties)
+@includeInapplicableMetadataInPayload(false)
+model Extension extends ProxyResourceBase {
   /**
    * Name of the Extension.
    */
@@ -22,6 +26,12 @@ model Extension is ProxyResource<ExtensionProperties> {
   @key("extensionName")
   @segment("extensions")
   name: string;
+
+  /**
+   * Properties of an Extension resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ExtensionProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourcePlan;

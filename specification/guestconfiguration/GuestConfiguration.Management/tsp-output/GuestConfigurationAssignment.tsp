@@ -14,8 +14,13 @@ namespace Microsoft.GuestConfiguration;
 /**
  * Guest configuration assignment is an association between a machine and guest configuration.
  */
-model GuestConfigurationAssignment
-  is ExtensionResource<GuestConfigurationAssignmentProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  GuestConfigurationAssignmentProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model GuestConfigurationAssignment extends ExtensionResourceBase {
   /**
    * The guest configuration assignment name.
    */
@@ -23,6 +28,12 @@ model GuestConfigurationAssignment
   @key("guestConfigurationAssignmentName")
   @segment("guestConfigurationAssignments")
   name: string;
+
+  /**
+   * Properties of the Guest configuration assignment.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GuestConfigurationAssignmentProperties;
 }
 
 @armResourceOperations

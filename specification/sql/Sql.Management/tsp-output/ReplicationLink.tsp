@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A replication link.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model ReplicationLink is ProxyResource<ReplicationLinkProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ReplicationLinkProperties)
+@includeInapplicableMetadataInPayload(false)
+model ReplicationLink extends ProxyResource {
   /**
    * The name of the replication link.
    */
@@ -24,6 +28,12 @@ model ReplicationLink is ProxyResource<ReplicationLinkProperties> {
   @key("linkId")
   @segment("replicationLinks")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ReplicationLinkProperties;
 }
 
 @armResourceOperations

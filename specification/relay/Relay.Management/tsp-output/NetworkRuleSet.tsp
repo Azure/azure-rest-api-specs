@@ -15,12 +15,22 @@ namespace Microsoft.Relay;
 /**
  * Description of topic resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(RelayNamespace)
-model NetworkRuleSet is ProxyResource<NetworkRuleSetProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(NetworkRuleSetProperties)
+@includeInapplicableMetadataInPayload(false)
+model NetworkRuleSet extends ProxyResourceBase {
   @key("networkRuleSet")
   @segment("networkRuleSets")
   name: string;
+
+  /**
+   * NetworkRuleSet properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NetworkRuleSetProperties;
 }
 
 @armResourceOperations

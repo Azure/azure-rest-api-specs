@@ -15,9 +15,14 @@ namespace Microsoft.ServiceFabric;
 /**
  * An application type version resource for the specified application type name resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApplicationTypeResource)
-model ApplicationTypeVersionResource
-  is TrackedResource<ApplicationTypeVersionResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ApplicationTypeVersionResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ApplicationTypeVersionResource extends ProxyResource {
   /**
    * The application type version.
    */
@@ -25,6 +30,12 @@ model ApplicationTypeVersionResource
   @key("version")
   @segment("versions")
   name: string;
+
+  /**
+   * The properties of the application type version resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ApplicationTypeVersionResourceProperties;
 }
 
 @armResourceOperations

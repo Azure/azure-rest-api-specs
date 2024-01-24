@@ -15,8 +15,12 @@ namespace Microsoft.HybridCompute;
 /**
  * Describes a Machine Extension.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Machine)
-model MachineExtension is TrackedResource<MachineExtensionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MachineExtensionProperties)
+@includeInapplicableMetadataInPayload(false)
+model MachineExtension extends TrackedResourceBase {
   /**
    * The name of the machine extension.
    */
@@ -24,6 +28,12 @@ model MachineExtension is TrackedResource<MachineExtensionProperties> {
   @key("extensionName")
   @segment("extensions")
   name: string;
+
+  /**
+   * Describes Machine Extension Properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MachineExtensionProperties;
 }
 
 @armResourceOperations

@@ -14,8 +14,13 @@ namespace Microsoft.CognitiveServices;
 /**
  * The commitment plan association.
  */
-model CommitmentPlanAccountAssociation
-  is ProxyResource<CommitmentPlanAccountAssociationProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  CommitmentPlanAccountAssociationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model CommitmentPlanAccountAssociation extends ProxyResourceBase {
   /**
    * The name of the commitment plan association with the Cognitive Services Account
    */
@@ -30,6 +35,12 @@ model CommitmentPlanAccountAssociation
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * Properties of Cognitive Services account commitment plan association.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CommitmentPlanAccountAssociationProperties;
 }
 
 @armResourceOperations

@@ -15,13 +15,24 @@ namespace Microsoft.Sql;
 /**
  * Azure SQL Database ledger digest upload settings.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedDatabase)
-model ManagedLedgerDigestUploads
-  is ProxyResource<ManagedLedgerDigestUploadsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedLedgerDigestUploadsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedLedgerDigestUploads extends ProxyResource {
   @path
   @key("ledgerDigestUploads")
   @segment("ledgerDigestUploads")
   name: ManagedLedgerDigestUploadsName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedLedgerDigestUploadsProperties;
 }
 
 @armResourceOperations

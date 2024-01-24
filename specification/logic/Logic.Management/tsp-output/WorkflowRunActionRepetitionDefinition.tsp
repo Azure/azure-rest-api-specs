@@ -15,9 +15,14 @@ namespace Microsoft.Logic;
 /**
  * The workflow run action repetition definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WorkflowRunAction)
-model WorkflowRunActionRepetitionDefinition
-  is TrackedResource<WorkflowRunActionRepetitionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  WorkflowRunActionRepetitionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WorkflowRunActionRepetitionDefinition extends Resource {
   /**
    * The workflow repetition.
    */
@@ -25,6 +30,12 @@ model WorkflowRunActionRepetitionDefinition
   @key("repetitionName")
   @segment("repetitions")
   name: string;
+
+  /**
+   * The workflow run action repetition properties definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: WorkflowRunActionRepetitionProperties;
 }
 
 @armResourceOperations

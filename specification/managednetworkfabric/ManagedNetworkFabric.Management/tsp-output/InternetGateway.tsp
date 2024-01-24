@@ -14,7 +14,11 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The Internet Gateway resource definition.
  */
-model InternetGateway is TrackedResource<InternetGatewayProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(InternetGatewayProperties)
+@includeInapplicableMetadataInPayload(false)
+model InternetGateway extends TrackedResourceBase {
   /**
    * Name of the Internet Gateway.
    */
@@ -22,6 +26,12 @@ model InternetGateway is TrackedResource<InternetGatewayProperties> {
   @key("internetGatewayName")
   @segment("internetGateways")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: InternetGatewayProperties;
 }
 
 @armResourceOperations

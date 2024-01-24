@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -71,12 +73,12 @@ model UsagesProperties {
   resourceType?: string;
 
   /**
-* The time period for the summary of the quota usage values. For example:
-*P1D (per one day)
-*PT1M (per one minute)
-*PT1S (per one second).
-This parameter is optional because it is not relevant for all resources such as compute.
-*/
+   * The time period for the summary of the quota usage values. For example:
+   * *P1D (per one day)
+   * *PT1M (per one minute)
+   * *PT1S (per one second).
+   * This parameter is optional because it is not relevant for all resources such as compute.
+   */
   @visibility("read")
   quotaPeriod?: duration;
 
@@ -198,12 +200,12 @@ model QuotaProperties {
   resourceType?: string;
 
   /**
-* The time period over which the quota usage values are summarized. For example:
-*P1D (per one day)
-*PT1M (per one minute)
-*PT1S (per one second).
-This parameter is optional because, for some resources like compute, the period is irrelevant.
-*/
+   * The time period over which the quota usage values are summarized. For example:
+   * *P1D (per one day)
+   * *PT1M (per one minute)
+   * *PT1S (per one second).
+   * This parameter is optional because, for some resources like compute, the period is irrelevant.
+   */
   @visibility("read")
   quotaPeriod?: duration;
 
@@ -402,6 +404,7 @@ model QuotaRequestOneResourceSubmitResponse {
   /**
    * Quota request details.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QuotaRequestOneResourceProperties;
 }
 
@@ -455,12 +458,12 @@ model QuotaRequestOneResourceProperties {
   resourceType?: string;
 
   /**
-* The time period over which the quota usage values are summarized. For example:
-*P1D (per one day)
-*PT1M (per one minute)
-*PT1S (per one second).
-This parameter is optional because, for some resources like compute, the period is irrelevant.
-*/
+   * The time period over which the quota usage values are summarized. For example:
+   * *P1D (per one day)
+   * *PT1M (per one minute)
+   * *PT1S (per one second).
+   * This parameter is optional because, for some resources like compute, the period is irrelevant.
+   */
   @visibility("read")
   quotaPeriod?: string;
 
@@ -534,6 +537,7 @@ model QuotaRequestSubmitResponse202 {
   /**
    * Quota request status.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QuotaRequestStatusDetails;
 }
 
@@ -574,12 +578,12 @@ model QuotaRequestStatusDetails {
   resourceType?: string;
 
   /**
-* The time period over which the quota usage values are summarized. For example:
-*P1D (per one day)
-*PT1M (per one minute)
-*PT1S (per one second).
-This parameter is optional because, for some resources like compute, the period is irrelevant.
-*/
+   * The time period over which the quota usage values are summarized. For example:
+   * *P1D (per one day)
+   * *PT1M (per one minute)
+   * *PT1S (per one second).
+   * This parameter is optional because, for some resources like compute, the period is irrelevant.
+   */
   @visibility("read")
   quotaPeriod?: string;
 

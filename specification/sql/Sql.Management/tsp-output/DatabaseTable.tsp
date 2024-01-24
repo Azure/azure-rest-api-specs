@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A database table resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DatabaseSchema)
-model DatabaseTable is ProxyResource<DatabaseTableProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DatabaseTableProperties)
+@includeInapplicableMetadataInPayload(false)
+model DatabaseTable extends ProxyResource {
   /**
    * The name of the table.
    */
@@ -24,6 +28,12 @@ model DatabaseTable is ProxyResource<DatabaseTableProperties> {
   @key("tableName")
   @segment("tables")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DatabaseTableProperties;
 }
 
 @armResourceOperations

@@ -15,6 +15,7 @@ using TypeSpec.Versioning;
  * Microsoft.ServiceLinker provider
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ServiceLinkerManagementClient",
 })

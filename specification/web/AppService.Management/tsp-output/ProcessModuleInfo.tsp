@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Process Module Information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ProcessInfo)
-model ProcessModuleInfo is ProxyResource<ProcessModuleInfoProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ProcessModuleInfoProperties)
+@includeInapplicableMetadataInPayload(false)
+model ProcessModuleInfo extends ProxyOnlyResource {
   /**
    * Module base address.
    */
@@ -24,6 +28,12 @@ model ProcessModuleInfo is ProxyResource<ProcessModuleInfoProperties> {
   @key("baseAddress")
   @segment("modules")
   name: string;
+
+  /**
+   * ProcessModuleInfo resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProcessModuleInfoProperties;
 }
 
 @armResourceOperations

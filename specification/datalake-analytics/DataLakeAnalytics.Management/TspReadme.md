@@ -11,8 +11,9 @@ tag: package-2016-11
 skip-csproj: true
 modelerfour:
   flatten-payloads: false
+use-model-reader-writer: true
 
-mgmt-debug: 
+mgmt-debug:
   show-serialized-names: true
 
 request-path-to-parent:

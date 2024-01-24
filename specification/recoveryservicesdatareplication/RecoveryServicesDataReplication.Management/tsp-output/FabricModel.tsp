@@ -14,7 +14,11 @@ namespace Microsoft.DataReplication;
 /**
  * Fabric model.
  */
-model FabricModel is TrackedResource<FabricModelProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(FabricModelProperties)
+@includeInapplicableMetadataInPayload(false)
+model FabricModel extends TrackedResourceBase {
   /**
    * The fabric name.
    */
@@ -23,6 +27,12 @@ model FabricModel is TrackedResource<FabricModelProperties> {
   @key("fabricName")
   @segment("replicationFabrics")
   name: string;
+
+  /**
+   * Fabric model properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: FabricModelProperties;
 }
 
 @armResourceOperations

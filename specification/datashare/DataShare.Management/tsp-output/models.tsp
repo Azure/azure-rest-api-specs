@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -557,10 +559,10 @@ model InvitationProperties {
   targetEmail?: string;
 
   /**
-* The target user or application Id that invitation is being sent to.
-Must be specified along TargetActiveDirectoryId. This enables sending
-invitations to specific users or applications in an AD tenant.
-*/
+   * The target user or application Id that invitation is being sent to.
+   * Must be specified along TargetActiveDirectoryId. This enables sending
+   * invitations to specific users or applications in an AD tenant.
+   */
   targetObjectId?: string;
 
   /**
@@ -598,6 +600,7 @@ model OperationModel {
   /**
    * properties for the operation meta info
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OperationMetaPropertyInfo;
 }
 
@@ -1088,6 +1091,7 @@ model ConsumerSourceDataSet extends ProxyDto {
   /**
    * source dataSet properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ConsumerSourceDataSetProperties;
 }
 
@@ -1255,6 +1259,7 @@ model AdlsGen1FileDataSet extends DataSet {
   /**
    * ADLS Gen 1 file data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AdlsGen1FileProperties;
 
   /**
@@ -1306,6 +1311,7 @@ model AdlsGen1FolderDataSet extends DataSet {
   /**
    * ADLS Gen 1 folder data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AdlsGen1FolderProperties;
 
   /**
@@ -1352,6 +1358,7 @@ model AdlsGen2FileDataSet extends DataSet {
   /**
    * ADLS Gen 2 file data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AdlsGen2FileProperties;
 
   /**
@@ -1403,6 +1410,7 @@ model AdlsGen2FileDataSetMapping extends DataSetMapping {
   /**
    * ADLS Gen2 file data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AdlsGen2FileDataSetMappingProperties;
 
   /**
@@ -1470,6 +1478,7 @@ model AdlsGen2FileSystemDataSet extends DataSet {
   /**
    * ADLS Gen 2 file system data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AdlsGen2FileSystemProperties;
 
   /**
@@ -1516,6 +1525,7 @@ model AdlsGen2FileSystemDataSetMapping extends DataSetMapping {
   /**
    * ADLS Gen2 file system data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AdlsGen2FileSystemDataSetMappingProperties;
 
   /**
@@ -1573,6 +1583,7 @@ model AdlsGen2FolderDataSet extends DataSet {
   /**
    * ADLS Gen 2 folder data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AdlsGen2FolderProperties;
 
   /**
@@ -1624,6 +1635,7 @@ model AdlsGen2FolderDataSetMapping extends DataSetMapping {
   /**
    * ADLS Gen2 folder data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AdlsGen2FolderDataSetMappingProperties;
 
   /**
@@ -1686,6 +1698,7 @@ model BlobContainerDataSet extends DataSet {
   /**
    * Blob container data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: BlobContainerProperties;
 
   /**
@@ -1732,6 +1745,7 @@ model BlobContainerDataSetMapping extends DataSetMapping {
   /**
    * Blob container data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: BlobContainerMappingProperties;
 
   /**
@@ -1789,6 +1803,7 @@ model BlobDataSet extends DataSet {
   /**
    * Blob data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: BlobProperties;
 
   /**
@@ -1840,6 +1855,7 @@ model BlobDataSetMapping extends DataSetMapping {
   /**
    * Blob data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: BlobMappingProperties;
 
   /**
@@ -1907,6 +1923,7 @@ model BlobFolderDataSet extends DataSet {
   /**
    * Blob folder data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: BlobFolderProperties;
 
   /**
@@ -1958,6 +1975,7 @@ model BlobFolderDataSetMapping extends DataSetMapping {
   /**
    * Blob folder data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: BlobFolderMappingProperties;
 
   /**
@@ -2020,6 +2038,7 @@ model KustoClusterDataSet extends DataSet {
   /**
    * Kusto cluster data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: KustoClusterDataSetProperties;
 
   /**
@@ -2063,6 +2082,7 @@ model KustoClusterDataSetMapping extends DataSetMapping {
   /**
    * Kusto cluster data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: KustoClusterDataSetMappingProperties;
 
   /**
@@ -2111,6 +2131,7 @@ model KustoDatabaseDataSet extends DataSet {
   /**
    * Kusto database data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: KustoDatabaseDataSetProperties;
 
   /**
@@ -2154,6 +2175,7 @@ model KustoDatabaseDataSetMapping extends DataSetMapping {
   /**
    * Kusto database data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: KustoDatabaseDataSetMappingProperties;
 
   /**
@@ -2202,6 +2224,7 @@ model KustoTableDataSet extends DataSet {
   /**
    * Kusto table data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: KustoTableDataSetProperties;
 
   /**
@@ -2285,6 +2308,7 @@ model KustoTableDataSetMapping extends DataSetMapping {
   /**
    * Kusto database data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: KustoTableDataSetMappingProperties;
 
   /**
@@ -2350,6 +2374,7 @@ model ScheduledSourceSynchronizationSetting
   /**
    * Properties of scheduled synchronization
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ScheduledSourceShareSynchronizationSettingProperties;
 
   /**
@@ -2365,6 +2390,7 @@ model ScheduledSynchronizationSetting extends SynchronizationSetting {
   /**
    * Properties of scheduled synchronization
    */
+  @extension("x-ms-client-flatten", true)
   properties: ScheduledSynchronizationSettingProperties;
 
   /**
@@ -2415,6 +2441,7 @@ model ScheduledTrigger extends Trigger {
   /**
    * Properties of scheduled synchronization
    */
+  @extension("x-ms-client-flatten", true)
   properties: ScheduledTriggerProperties;
 
   /**
@@ -2476,6 +2503,7 @@ model SqlDBTableDataSet extends DataSet {
   /**
    * SQL DB table data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SqlDBTableProperties;
 
   /**
@@ -2522,6 +2550,7 @@ model SqlDBTableDataSetMapping extends DataSetMapping {
   /**
    * Sql DB data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: SqlDBTableDataSetMappingProperties;
 
   /**
@@ -2579,6 +2608,7 @@ model SqlDWTableDataSet extends DataSet {
   /**
    * SQL DW table data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SqlDWTableProperties;
 
   /**
@@ -2625,6 +2655,7 @@ model SqlDWTableDataSetMapping extends DataSetMapping {
   /**
    * Sql DW data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: SqlDWTableDataSetMappingProperties;
 
   /**
@@ -2682,6 +2713,7 @@ model SynapseWorkspaceSqlPoolTableDataSet extends DataSet {
   /**
    * Synapse Workspace Sql Pool Table data set properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: SynapseWorkspaceSqlPoolTableDataSetProperties;
 
   /**
@@ -2713,6 +2745,7 @@ model SynapseWorkspaceSqlPoolTableDataSetMapping extends DataSetMapping {
   /**
    * A Synapse Workspace Sql Pool Table data set mapping properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: SynapseWorkspaceSqlPoolTableDataSetMappingProperties;
 
   /**

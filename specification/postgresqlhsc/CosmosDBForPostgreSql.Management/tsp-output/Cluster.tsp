@@ -14,7 +14,11 @@ namespace Microsoft.DBforPostgreSQL;
 /**
  * Represents a cluster.
  */
-model Cluster is TrackedResource<ClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cluster extends TrackedResourceBase {
   /**
    * The name of the cluster.
    */
@@ -25,6 +29,12 @@ model Cluster is TrackedResource<ClusterProperties> {
   @key("clusterName")
   @segment("serverGroupsv2")
   name: string;
+
+  /**
+   * Properties of the cluster.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterProperties;
 }
 
 @armResourceOperations

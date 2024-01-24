@@ -76,11 +76,28 @@ model Identity {
   type?: ResourceIdentityType;
 
   /**
-* The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:
-'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-
-*/
+   * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:
+   * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   *
+   */
   userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
+ * The details of the user assigned managed identity used by the Video Analyzer resource.
+ */
+model UserAssignedIdentity {
+  /**
+   * The principal ID of user assigned identity.
+   */
+  @visibility("read")
+  principalId?: string;
+
+  /**
+   * The client ID of user assigned identity.
+   */
+  @visibility("read")
+  clientId?: string;
 }
 
 /**

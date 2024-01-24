@@ -19,6 +19,7 @@ using TypeSpec.Versioning;
  * REST API for Azure WebPubSub Service
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "WebPubSubManagementClient",
 })

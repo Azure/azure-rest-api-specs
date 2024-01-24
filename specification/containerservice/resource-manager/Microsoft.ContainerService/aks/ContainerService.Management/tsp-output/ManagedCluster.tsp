@@ -14,7 +14,11 @@ namespace Microsoft.ContainerService;
 /**
  * Managed cluster.
  */
-model ManagedCluster is TrackedResource<ManagedClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ManagedClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model ManagedCluster extends TrackedResourceBase {
   /**
    * The name of the managed cluster resource.
    */
@@ -30,6 +34,12 @@ model ManagedCluster is TrackedResource<ManagedClusterProperties> {
    * The extended location of the Virtual Machine.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties of a managed cluster.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedClusterProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;

@@ -10,6 +10,7 @@ tag: package-2022-12
 skip-csproj: true
 modelerfour:
   flatten-payloads: false
+use-model-reader-writer: true
 
 # mgmt-debug:
 #   show-serialized-names: true

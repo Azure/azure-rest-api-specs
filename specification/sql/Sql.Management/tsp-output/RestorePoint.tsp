@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * Database restore points.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model RestorePoint is ProxyResource<RestorePointProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RestorePointProperties)
+@includeInapplicableMetadataInPayload(false)
+model RestorePoint extends ProxyResource {
   /**
    * The name of the restore point.
    */
@@ -24,6 +28,12 @@ model RestorePoint is ProxyResource<RestorePointProperties> {
   @key("restorePointName")
   @segment("restorePoints")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RestorePointProperties;
 }
 
 @armResourceOperations

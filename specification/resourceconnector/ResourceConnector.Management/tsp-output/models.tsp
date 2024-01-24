@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -475,6 +477,7 @@ model ApplianceOperation {
   /**
    * Describes the properties of an Appliances Operation Value Display.
    */
+  @extension("x-ms-client-flatten", true)
   display?: ApplianceOperationValueDisplay;
 
   /**

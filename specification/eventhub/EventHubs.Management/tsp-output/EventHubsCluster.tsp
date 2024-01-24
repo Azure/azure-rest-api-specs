@@ -14,7 +14,11 @@ namespace Microsoft.EventHub;
 /**
  * Single Event Hubs Cluster resource in List or Get operations.
  */
-model EventHubsCluster is TrackedResource<ClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model EventHubsCluster extends TrackedResource {
   /**
    * The name of the Event Hubs Cluster.
    */
@@ -25,7 +29,16 @@ model EventHubsCluster is TrackedResource<ClusterProperties> {
   @segment("clusters")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Properties of the cluster SKU.
+   */
+  sku?: EventHubsClusterSku;
+
+  /**
+   * Event Hubs Cluster properties supplied in responses in List or Get operations.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterProperties;
 }
 
 @armResourceOperations

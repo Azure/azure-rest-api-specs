@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Continuous Web Job Information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model ContinuousWebJob is ProxyResource<ContinuousWebJobProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ContinuousWebJobProperties)
+@includeInapplicableMetadataInPayload(false)
+model ContinuousWebJob extends ProxyOnlyResource {
   /**
    * Name of Web Job.
    */
@@ -24,6 +28,12 @@ model ContinuousWebJob is ProxyResource<ContinuousWebJobProperties> {
   @key("webJobName")
   @segment("continuouswebjobs")
   name: string;
+
+  /**
+   * ContinuousWebJob resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ContinuousWebJobProperties;
 }
 
 @armResourceOperations

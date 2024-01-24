@@ -14,11 +14,21 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Source control configuration for an app.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("web")
-model SiteSourceControl is ProxyResource<SiteSourceControlProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SiteSourceControlProperties)
+@includeInapplicableMetadataInPayload(false)
+model SiteSourceControl extends ProxyOnlyResource {
   @key("sourcecontrol")
   @segment("sourcecontrols")
   name: string;
+
+  /**
+   * SiteSourceControl resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SiteSourceControlProperties;
 }
 
 @armResourceOperations

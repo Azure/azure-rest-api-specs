@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -309,19 +311,19 @@ enum UpdateTriggerPayloadType {
 }
 
 /**
-* The authentication mode which determines the source registry login scope. The credentials for the source registry
-will be generated using the given scope. These credentials will be used to login to
-the source registry during the run.
-*/
+ * The authentication mode which determines the source registry login scope. The credentials for the source registry
+ * will be generated using the given scope. These credentials will be used to login to
+ * the source registry during the run.
+ */
 enum SourceRegistryLoginMode {
   None,
   Default,
 }
 
 /**
-* The type of the secret object which determines how the value of the secret object has to be
-interpreted.
-*/
+ * The type of the secret object which determines how the value of the secret object has to be
+ * interpreted.
+ */
 enum SecretObjectType {
   Opaque,
   Vaultsecret,
@@ -386,11 +388,11 @@ model ImportSource {
   credentials?: ImportSourceCredentials;
 
   /**
-* Repository name of the source image.
-Specify an image by repository ('hello-world'). This will use the 'latest' tag.
-Specify an image by tag ('hello-world:latest').
-Specify an image by sha256-based manifest digest ('hello-world@sha256:abc123').
-*/
+   * Repository name of the source image.
+   * Specify an image by repository ('hello-world'). This will use the 'latest' tag.
+   * Specify an image by tag ('hello-world:latest').
+   * Specify an image by sha256-based manifest digest ('hello-world@sha256:abc123').
+   */
   sourceImage: string;
 }
 
@@ -428,12 +430,13 @@ model OperationDefinition {
   /**
    * The properties information for the container registry operation.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OperationPropertiesDefinition;
 
   /**
-* This property indicates if the operation is an action or a data action
-ref: https://docs.microsoft.com/en-us/azure/role-based-access-control/role-definitions#management-and-data-operations
-*/
+   * This property indicates if the operation is an action or a data action
+   * ref: https://docs.microsoft.com/en-us/azure/role-based-access-control/role-definitions#management-and-data-operations
+   */
   isDataAction?: boolean;
 }
 
@@ -669,11 +672,11 @@ model IdentityProperties {
   type?: ResourceIdentityType;
 
   /**
-* The list of user identities associated with the resource. The user identity 
-dictionary key references will be ARM resource ids in the form: 
-'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/
-    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-*/
+   * The list of user identities associated with the resource. The user identity
+   * dictionary key references will be ARM resource ids in the form:
+   * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/
+   *     providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   */
   userAssignedIdentities?: Record<UserIdentityProperties>;
 }
 
@@ -1015,6 +1018,7 @@ model RegistryUpdateParameters {
   /**
    * The properties that the container registry will be updated with.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RegistryPropertiesUpdateParameters;
 }
 
@@ -1237,6 +1241,7 @@ model ReplicationUpdateParameters {
   /**
    * The parameters for updating a replication's properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ReplicationUpdateParametersProperties;
 }
 
@@ -1276,10 +1281,10 @@ model ScopeMapProperties {
   provisioningState?: ProvisioningState;
 
   /**
-* The list of scoped permissions for registry artifacts.
-E.g. repositories/repository-name/content/read,
-repositories/repository-name/metadata/write
-*/
+   * The list of scoped permissions for registry artifacts.
+   * E.g. repositories/repository-name/content/read,
+   * repositories/repository-name/metadata/write
+   */
   actions: string[];
 }
 
@@ -1290,6 +1295,7 @@ model ScopeMapUpdateParameters {
   /**
    * The update parameters for scope map properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ScopeMapPropertiesUpdateParameters;
 }
 
@@ -1303,10 +1309,10 @@ model ScopeMapPropertiesUpdateParameters {
   description?: string;
 
   /**
-* The list of scope permissions for registry artifacts.
-E.g. repositories/repository-name/pull, 
-repositories/repository-name/delete
-*/
+   * The list of scope permissions for registry artifacts.
+   * E.g. repositories/repository-name/pull,
+   * repositories/repository-name/delete
+   */
   actions?: string[];
 }
 
@@ -1411,6 +1417,7 @@ model TokenUpdateParameters {
   /**
    * The properties of the token update parameters.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TokenUpdateProperties;
 }
 
@@ -1514,6 +1521,7 @@ model WebhookCreateParameters {
   /**
    * The properties that the webhook will be created with.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WebhookPropertiesCreateParameters;
 }
 
@@ -1559,6 +1567,7 @@ model WebhookUpdateParameters {
   /**
    * The properties that the webhook will be updated with.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WebhookPropertiesUpdateParameters;
 }
 
@@ -1881,6 +1890,7 @@ model AgentPoolUpdateParameters {
   /**
    * The properties associated with the agent pool
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AgentPoolPropertiesUpdateParameters;
 
   /**
@@ -2255,6 +2265,7 @@ model TaskRunUpdateParameters {
   /**
    * The properties for updating a task run.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TaskRunPropertiesUpdateParameters;
 
   /**
@@ -2490,9 +2501,9 @@ model SourceProperties {
   branch?: string;
 
   /**
-* The authorization properties for accessing the source code repository and to set up
-webhooks for notifications.
-*/
+   * The authorization properties for accessing the source code repository and to set up
+   * webhooks for notifications.
+   */
   sourceControlAuthProperties?: AuthInfo;
 }
 
@@ -2566,10 +2577,10 @@ model Credentials {
   sourceRegistry?: SourceRegistryCredentials;
 
   /**
-* Describes the credential parameters for accessing other custom registries. The key
-for the dictionary item will be the registry login server (myregistry.azurecr.io) and
-the value of the item will be the registry credentials for accessing the registry.
-*/
+   * Describes the credential parameters for accessing other custom registries. The key
+   * for the dictionary item will be the registry login server (myregistry.azurecr.io) and
+   * the value of the item will be the registry credentials for accessing the registry.
+   */
   customRegistries?: Record<CustomRegistryCredentials>;
 }
 
@@ -2578,10 +2589,10 @@ the value of the item will be the registry credentials for accessing the registr
  */
 model SourceRegistryCredentials {
   /**
-* The authentication mode which determines the source registry login scope. The credentials for the source registry
-will be generated using the given scope. These credentials will be used to login to
-the source registry during the run.
-*/
+   * The authentication mode which determines the source registry login scope. The credentials for the source registry
+   * will be generated using the given scope. These credentials will be used to login to
+   * the source registry during the run.
+   */
   loginMode?: SourceRegistryLoginMode;
 }
 
@@ -2595,18 +2606,18 @@ model CustomRegistryCredentials {
   userName?: SecretObject;
 
   /**
-* The password for logging into the custom registry. The password is a secret 
-object that allows multiple ways of providing the value for it.
-*/
+   * The password for logging into the custom registry. The password is a secret
+   * object that allows multiple ways of providing the value for it.
+   */
   password?: SecretObject;
 
   /**
-* Indicates the managed identity assigned to the custom credential. If a user-assigned identity
-this value is the Client ID. If a system-assigned identity, the value will be `system`. In
-the case of a system-assigned identity, the Client ID will be determined by the runner. This
-identity may be used to authenticate to key vault to retrieve credentials or it may be the only 
-source of authentication used for accessing the registry.
-*/
+   * Indicates the managed identity assigned to the custom credential. If a user-assigned identity
+   * this value is the Client ID. If a system-assigned identity, the value will be `system`. In
+   * the case of a system-assigned identity, the Client ID will be determined by the runner. This
+   * identity may be used to authenticate to key vault to retrieve credentials or it may be the only
+   * source of authentication used for accessing the registry.
+   */
   identity?: string;
 }
 
@@ -2615,16 +2626,16 @@ source of authentication used for accessing the registry.
  */
 model SecretObject {
   /**
-* The value of the secret. The format of this value will be determined
-based on the type of the secret object. If the type is Opaque, the value will be
-used as is without any modification.
-*/
+   * The value of the secret. The format of this value will be determined
+   * based on the type of the secret object. If the type is Opaque, the value will be
+   * used as is without any modification.
+   */
   value?: string;
 
   /**
-* The type of the secret object which determines how the value of the secret object has to be
-interpreted.
-*/
+   * The type of the secret object which determines how the value of the secret object has to be
+   * interpreted.
+   */
   type?: SecretObjectType;
 }
 
@@ -2640,6 +2651,7 @@ model TaskUpdateParameters {
   /**
    * The properties for updating a task.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TaskPropertiesUpdateParameters;
 
   /**
@@ -2819,9 +2831,9 @@ model SourceUpdateParameters {
   branch?: string;
 
   /**
-* The authorization properties for accessing the source code repository and to set up
-webhooks for notifications.
-*/
+   * The authorization properties for accessing the source code repository and to set up
+   * webhooks for notifications.
+   */
   sourceControlAuthProperties?: AuthInfoUpdateParameters;
 }
 
@@ -2958,9 +2970,9 @@ model RunFilter {
   finishTime?: utcDateTime;
 
   /**
-* The list of comma-separated image manifests that were generated from the run. This is applicable if the run is of
-build type.
-*/
+   * The list of comma-separated image manifests that were generated from the run. This is applicable if the run is of
+   * build type.
+   */
   outputImageManifests?: string;
 
   /**
@@ -3031,9 +3043,9 @@ model DockerBuildRequest extends RunRequest {
   agentConfiguration?: AgentProperties;
 
   /**
-* The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.
-If it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.
-*/
+   * The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.
+   * If it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.
+   */
   sourceLocation?: string;
 
   /**
@@ -3104,9 +3116,9 @@ model FileTaskRunRequest extends RunRequest {
   agentConfiguration?: AgentProperties;
 
   /**
-* The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.
-If it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.
-*/
+   * The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.
+   * If it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.
+   */
   sourceLocation?: string;
 
   /**
@@ -3172,9 +3184,9 @@ model OverrideTaskStepProperties {
   file?: string;
 
   /**
-* Gets or sets the collection of override arguments to be used when
-executing a build step.
-*/
+   * Gets or sets the collection of override arguments to be used when
+   * executing a build step.
+   */
   arguments?: Argument[];
 
   /**
@@ -3230,9 +3242,9 @@ model EncodedTaskRunRequest extends RunRequest {
   agentConfiguration?: AgentProperties;
 
   /**
-* The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.
-If it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.
-*/
+   * The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.
+   * If it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API.
+   */
   sourceLocation?: string;
 
   /**

@@ -15,8 +15,12 @@ namespace Microsoft.MobileNetwork;
 /**
  * Network slice resource. Must be created in the same location as its parent mobile network.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MobileNetwork)
-model Slice is TrackedResource<SlicePropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(SlicePropertiesFormat)
+@includeInapplicableMetadataInPayload(false)
+model Slice extends TrackedResourceBase {
   /**
    * The name of the network slice.
    */
@@ -26,6 +30,12 @@ model Slice is TrackedResource<SlicePropertiesFormat> {
   @key("sliceName")
   @segment("slices")
   name: string;
+
+  /**
+   * Slice properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: SlicePropertiesFormat;
 }
 
 @armResourceOperations

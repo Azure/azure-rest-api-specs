@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -519,6 +521,7 @@ model GalleryImageVersion {
   /**
    * Describes the properties of a gallery image version.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: GalleryImageVersionProperties;
 }
 
@@ -707,6 +710,7 @@ model Subnet {
   /**
    * Properties of the subnet.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SubnetPropertiesFormat;
 
   /**
@@ -791,6 +795,7 @@ model RouteTable {
   /**
    * Properties of the route table.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RouteTablePropertiesFormat;
 }
 
@@ -811,6 +816,7 @@ model Route {
   /**
    * Properties of the route.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: RoutePropertiesFormat;
 
   /**
@@ -2073,6 +2079,7 @@ model ArcSettingsPatch {
   /**
    * ArcSettings properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ArcSettingsPatchProperties;
 }
 
@@ -2105,6 +2112,7 @@ model ArcIdentityResponse {
    * ArcIdentity properties.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: ArcIdentityResponseProperties;
 }
 
@@ -2416,11 +2424,13 @@ model ClusterPatch {
   /**
    * Identity of Cluster resource
    */
+  @extension("x-ms-client-flatten", true)
   identity?: ManagedServiceIdentity;
 
   /**
    * Cluster properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterPatchProperties;
 }
 
@@ -2465,6 +2475,7 @@ model ClusterIdentityResponse {
    * Cluster identity properties.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterIdentityResponseProperties;
 }
 
@@ -2499,6 +2510,7 @@ model ExtensionProperties {
   /**
    * Parameters specific to this extension type.
    */
+  @extension("x-ms-client-flatten", true)
   extensionParameters?: ExtensionParameters;
 
   /**
@@ -2793,6 +2805,7 @@ model UpdateRunProperties {
   /**
    * Progress representation of the update run steps.
    */
+  @extension("x-ms-client-flatten", true)
   progress?: Step;
 }
 
@@ -2867,6 +2880,7 @@ model UpdateSummariesProperties {
   /**
    * Current version of each updatable component.
    */
+  @extension("x-ms-client-flatten", true)
   packageVersions?: PackageVersionInfo[];
 
   /**
@@ -2889,11 +2903,13 @@ model UpdateSummariesProperties {
   /**
    * Overall health state for update-specific health checks.
    */
+  @extension("x-ms-client-flatten", true)
   healthState?: HealthState;
 
   /**
    * An array of pre-check result objects.
    */
+  @extension("x-ms-client-flatten", true)
   healthCheckResult?: PrecheckResult[];
 
   /**
@@ -3041,18 +3057,22 @@ model UpdateProperties {
   /**
    * An array of component versions for a Solution Bundle update, and an empty array otherwise.
    */
+  @extension("x-ms-client-flatten", true)
   componentVersions?: PackageVersionInfo[];
 
+  @extension("x-ms-client-flatten", true)
   rebootRequired?: RebootRequirement;
 
   /**
    * Overall health state for update-specific health checks.
    */
+  @extension("x-ms-client-flatten", true)
   healthState?: HealthState;
 
   /**
    * An array of PrecheckResult objects.
    */
+  @extension("x-ms-client-flatten", true)
   healthCheckResult?: PrecheckResult[];
 
   /**
@@ -3109,6 +3129,7 @@ model UpdateProperties {
   /**
    * Additional information regarding the state of the update. See definition of UpdateStateProperties type below for more details on this property.
    */
+  @extension("x-ms-client-flatten", true)
   updateStateProperties?: UpdateStateProperties;
 }
 

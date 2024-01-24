@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
  * Use this API to manage the IoT hubs in your Azure subscription.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "iotHubClient",
 })

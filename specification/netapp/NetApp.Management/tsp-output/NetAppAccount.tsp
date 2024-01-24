@@ -14,7 +14,11 @@ namespace Microsoft.NetApp;
 /**
  * NetApp account resource
  */
-model NetAppAccount is TrackedResource<AccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AccountProperties)
+@includeInapplicableMetadataInPayload(false)
+model NetAppAccount extends TrackedResourceBase {
   /**
    * The name of the NetApp account
    */
@@ -29,6 +33,12 @@ model NetAppAccount is TrackedResource<AccountProperties> {
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * NetApp Account properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AccountProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

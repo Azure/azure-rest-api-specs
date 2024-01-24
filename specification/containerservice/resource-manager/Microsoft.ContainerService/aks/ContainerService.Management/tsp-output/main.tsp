@@ -26,6 +26,7 @@ using TypeSpec.Versioning;
  * The Container Service Client.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ContainerServiceClient",
 })

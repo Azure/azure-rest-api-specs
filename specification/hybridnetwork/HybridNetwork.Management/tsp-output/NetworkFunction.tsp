@@ -14,7 +14,13 @@ namespace Microsoft.HybridNetwork;
 /**
  * Network function resource response.
  */
-model NetworkFunction is TrackedResource<NetworkFunctionPropertiesFormat> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  NetworkFunctionPropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model NetworkFunction extends TrackedResourceBase {
   /**
    * The name of the network function resource.
    */
@@ -27,6 +33,12 @@ model NetworkFunction is TrackedResource<NetworkFunctionPropertiesFormat> {
    * A unique read-only string that changes whenever the resource is updated.
    */
   etag?: string;
+
+  /**
+   * Network function properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NetworkFunctionPropertiesFormat;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

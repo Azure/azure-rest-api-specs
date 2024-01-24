@@ -14,7 +14,11 @@ namespace Microsoft.DeviceUpdate;
 /**
  * Device Update account details.
  */
-model Account is TrackedResource<AccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AccountProperties)
+@includeInapplicableMetadataInPayload(false)
+model Account extends TrackedResourceBase {
   /**
    * Account name.
    */
@@ -25,6 +29,12 @@ model Account is TrackedResource<AccountProperties> {
   @key("accountName")
   @segment("accounts")
   name: string;
+
+  /**
+   * Device Update account properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AccountProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

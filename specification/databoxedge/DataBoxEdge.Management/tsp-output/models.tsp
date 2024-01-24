@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1145,6 +1147,8 @@ model EdgeProfileSubscription {
   state?: SubscriptionState;
   registrationDate?: string;
   subscriptionId?: string;
+
+  @extension("x-ms-client-flatten", true)
   properties?: SubscriptionProperties;
 }
 
@@ -1211,6 +1215,7 @@ model DataBoxEdgeDevicePatch {
   /**
    * The properties associated with the Data Box Edge/Gateway resource
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DataBoxEdgeDevicePropertiesPatch;
 }
 
@@ -1347,6 +1352,7 @@ model DeviceCapacityRequestInfo {
   /**
    * The properties of the Device Capacity Request.
    */
+  @extension("x-ms-client-flatten", true)
   properties: DeviceCapacityRequestInfoProperties;
 }
 
@@ -1397,6 +1403,7 @@ model DeviceCapacityInfo extends ARMBaseModel {
   /**
    * The device capacity properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeviceCapacityInfoProperties;
 
   /**
@@ -1694,15 +1701,15 @@ model RemoteSupportSettings {
  */
 model GenerateCertResponse {
   /**
-* Gets or sets base64 encoded certificate raw data,
-this is the public part needed to be uploaded to cert vault
-*/
+   * Gets or sets base64 encoded certificate raw data,
+   * this is the public part needed to be uploaded to cert vault
+   */
   publicKey?: string;
 
   /**
-* Gets or sets base64 encoded private part of the certificate,
-needed to form the activation key
-*/
+   * Gets or sets base64 encoded private part of the certificate,
+   * needed to form the activation key
+   */
   privateKey?: string;
 
   /**
@@ -1719,6 +1726,7 @@ model DataBoxEdgeDeviceExtendedInfo extends ARMBaseModel {
   /**
    * The extended info properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DataBoxEdgeDeviceExtendedInfoProperties;
 
   /**
@@ -2021,6 +2029,7 @@ model NetworkSettings extends ARMBaseModel {
    * The properties of network settings of a device.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkSettingsProperties;
 
   /**
@@ -2203,15 +2212,16 @@ model Ipv6Config {
 model NodeList is Azure.Core.Page<Node>;
 
 /**
-* Represents a single node in a Data box Edge/Gateway device
-Gateway devices, standalone Edge devices and a single node cluster Edge device will all have 1 node
-Multi-node Edge devices will have more than 1 nodes
-*/
+ * Represents a single node in a Data box Edge/Gateway device
+ * Gateway devices, standalone Edge devices and a single node cluster Edge device will all have 1 node
+ * Multi-node Edge devices will have more than 1 nodes
+ */
 model Node extends ARMBaseModel {
   /**
    * The properties of the node
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: NodeProperties;
 }
 
@@ -2411,9 +2421,9 @@ model OrderStatus {
   trackingInformation?: TrackingInfo;
 
   /**
-* Dictionary to hold generic information which is not stored
-by the already existing properties
-*/
+   * Dictionary to hold generic information which is not stored
+   * by the already existing properties
+   */
   @visibility("read")
   additionalOrderDetails?: Record<string>;
 }
@@ -2450,6 +2460,7 @@ model DCAccessCode {
   /**
    * DCAccessCode properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DCAccessCodeProperties;
 }
 
@@ -2555,6 +2566,7 @@ model SecuritySettings extends ARMBaseModel {
   /**
    * Properties of the security settings.
    */
+  @extension("x-ms-client-flatten", true)
   properties: SecuritySettingsProperties;
 }
 
@@ -2852,6 +2864,7 @@ model TriggerSupportPackageRequest extends ARMBaseModel {
   /**
    * The TriggerSupportPackageRequest properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: SupportPackageRequestProperties;
 }
 
@@ -2872,10 +2885,10 @@ model SupportPackageRequestProperties {
   maximumTimeStamp?: utcDateTime;
 
   /**
-* Type of files, which need to be included in the logs
-This will contain the type of logs (Default/DefaultWithDumps/None/All/DefaultWithArchived)
-or a comma separated list of log types that are required
-*/
+   * Type of files, which need to be included in the logs
+   * This will contain the type of logs (Default/DefaultWithDumps/None/All/DefaultWithArchived)
+   * or a comma separated list of log types that are required
+   */
   include?: string;
 }
 
@@ -2916,6 +2929,7 @@ model UpdateSummary extends ARMBaseModel {
   /**
    * The device update information summary.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateSummaryProperties;
 
   /**
@@ -3139,6 +3153,7 @@ model UploadCertificateRequest {
   /**
    * The Base 64 encoded certificate raw data.
    */
+  @extension("x-ms-client-flatten", true)
   properties: RawCertificateData;
 }
 
@@ -3252,6 +3267,7 @@ model ArcAddon extends Addon {
   /**
    * Properties specific to Arc addon.
    */
+  @extension("x-ms-client-flatten", true)
   properties: ArcAddonProperties;
 
   /**
@@ -3330,14 +3346,15 @@ model SymmetricKey {
 }
 
 /**
-* The preview of Virtual Machine Cloud Management from the Azure supports deploying and managing VMs on your Azure Stack Edge device from Azure Portal. 
-For more information, refer to: https://docs.microsoft.com/en-us/azure/databox-online/azure-stack-edge-gpu-virtual-machine-overview
-By using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/ for additional details.
-*/
+ * The preview of Virtual Machine Cloud Management from the Azure supports deploying and managing VMs on your Azure Stack Edge device from Azure Portal.
+ * For more information, refer to: https://docs.microsoft.com/en-us/azure/databox-online/azure-stack-edge-gpu-virtual-machine-overview
+ * By using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/ for additional details.
+ */
 model CloudEdgeManagementRole extends Role {
   /**
    * Properties specific to CloudEdgeManagementRole role.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CloudEdgeManagementRoleProperties;
 
   /**
@@ -3451,6 +3468,7 @@ model FileEventTrigger extends Trigger {
   /**
    * File trigger properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: FileTriggerProperties;
 
   /**
@@ -3527,6 +3545,7 @@ model IoTAddon extends Addon {
   /**
    * Properties specific to IOT addon.
    */
+  @extension("x-ms-client-flatten", true)
   properties: IoTAddonProperties;
 
   /**
@@ -3626,6 +3645,7 @@ model IoTRole extends Role {
   /**
    * Properties specific to IoT role.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IoTRoleProperties;
 
   /**
@@ -3741,19 +3761,20 @@ model KubernetesIPConfiguration {
 }
 
 /**
-* The limited preview of Kubernetes Cluster Management from the Azure supports:
-1. Using a simple turn-key option in Azure Portal, deploy a Kubernetes cluster on your Azure Stack Edge device. 
-2. Configure Kubernetes cluster running on your device with Arc enabled Kubernetes with a click of a button in the Azure Portal.
-* Azure Arc enables organizations to view, manage, and govern their on-premises Kubernetes clusters using the Azure Portal, command line tools, and APIs.
-3. Easily configure Persistent Volumes using SMB and NFS shares for storing container data.
-* For more information, refer to the document here: https://databoxupdatepackages.blob.core.windows.net/documentation/Microsoft-Azure-Stack-Edge-K8-Cloud-Management-20210323.pdf
-* Or Demo: https://databoxupdatepackages.blob.core.windows.net/documentation/Microsoft-Azure-Stack-Edge-K8S-Cloud-Management-20210323.mp4
- By using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/
-*/
+ * The limited preview of Kubernetes Cluster Management from the Azure supports:
+ * 1. Using a simple turn-key option in Azure Portal, deploy a Kubernetes cluster on your Azure Stack Edge device.
+ * 2. Configure Kubernetes cluster running on your device with Arc enabled Kubernetes with a click of a button in the Azure Portal.
+ *  Azure Arc enables organizations to view, manage, and govern their on-premises Kubernetes clusters using the Azure Portal, command line tools, and APIs.
+ * 3. Easily configure Persistent Volumes using SMB and NFS shares for storing container data.
+ *  For more information, refer to the document here: https://databoxupdatepackages.blob.core.windows.net/documentation/Microsoft-Azure-Stack-Edge-K8-Cloud-Management-20210323.pdf
+ *  Or Demo: https://databoxupdatepackages.blob.core.windows.net/documentation/Microsoft-Azure-Stack-Edge-K8S-Cloud-Management-20210323.mp4
+ *  By using this feature, you agree to the preview legal terms. See the https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/
+ */
 model KubernetesRole extends Role {
   /**
    * Properties specific to Kubernetes role.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: KubernetesRoleProperties;
 
   /**
@@ -3922,6 +3943,7 @@ model MECRole extends Role {
   /**
    * Properties specific to MEC role.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MECRoleProperties;
 
   /**
@@ -3962,6 +3984,7 @@ model PeriodicTimerEventTrigger extends Trigger {
   /**
    * Periodic timer trigger properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: PeriodicTimerProperties;
 
   /**

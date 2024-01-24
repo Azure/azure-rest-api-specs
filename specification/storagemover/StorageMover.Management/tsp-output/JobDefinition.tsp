@@ -15,8 +15,12 @@ namespace Microsoft.StorageMover;
 /**
  * The Job Definition resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Project)
-model JobDefinition is ProxyResource<JobDefinitionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobDefinitionProperties)
+@includeInapplicableMetadataInPayload(false)
+model JobDefinition extends ProxyResourceBase {
   /**
    * The name of the Job Definition resource.
    */
@@ -24,6 +28,12 @@ model JobDefinition is ProxyResource<JobDefinitionProperties> {
   @key("jobDefinitionName")
   @segment("jobDefinitions")
   name: string;
+
+  /**
+   * Job definition properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: JobDefinitionProperties;
 }
 
 @armResourceOperations

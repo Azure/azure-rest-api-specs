@@ -14,7 +14,11 @@ namespace Microsoft.CostManagement;
 /**
  * An individual alert.
  */
-model Alert is ExtensionResource<AlertProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
+@includeInapplicableMetadataInPayload(false)
+model Alert extends ExtensionResourceBase {
   /**
    * Alert ID
    */
@@ -22,6 +26,12 @@ model Alert is ExtensionResource<AlertProperties> {
   @key("alertId")
   @segment("alerts")
   name: string;
+
+  /**
+   * Alert properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AlertProperties;
 }
 
 @armResourceOperations

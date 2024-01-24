@@ -15,8 +15,12 @@ namespace Microsoft.AppPlatform;
 /**
  * Certificate resource payload.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-model CertificateResource is ProxyResource<CertificateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CertificateProperties)
+@includeInapplicableMetadataInPayload(false)
+model CertificateResource extends ProxyResource {
   /**
    * The name of the certificate resource.
    */
@@ -24,6 +28,12 @@ model CertificateResource is ProxyResource<CertificateProperties> {
   @key("certificateName")
   @segment("certificates")
   name: string;
+
+  /**
+   * Properties of the certificate resource payload.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CertificateProperties;
 }
 
 @armResourceOperations

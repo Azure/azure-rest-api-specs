@@ -14,8 +14,13 @@ namespace Microsoft.MobileNetwork;
 /**
  * Packet core control plane resource.
  */
-model PacketCoreControlPlane
-  is TrackedResource<PacketCoreControlPlanePropertiesFormat> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  PacketCoreControlPlanePropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model PacketCoreControlPlane extends TrackedResourceBase {
   /**
    * The name of the packet core control plane.
    */
@@ -25,6 +30,12 @@ model PacketCoreControlPlane
   @key("packetCoreControlPlaneName")
   @segment("packetCoreControlPlanes")
   name: string;
+
+  /**
+   * Packet core control plane Properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: PacketCoreControlPlanePropertiesFormat;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

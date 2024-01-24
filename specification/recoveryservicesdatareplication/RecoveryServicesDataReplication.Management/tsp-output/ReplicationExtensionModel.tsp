@@ -15,9 +15,14 @@ namespace Microsoft.DataReplication;
 /**
  * Replication extension model.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VaultModel)
-model ReplicationExtensionModel
-  is ProxyResource<ReplicationExtensionModelProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ReplicationExtensionModelProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ReplicationExtensionModel extends ProxyResourceBase {
   /**
    * The replication extension name.
    */
@@ -26,6 +31,12 @@ model ReplicationExtensionModel
   @key("replicationExtensionName")
   @segment("replicationExtensions")
   name: string;
+
+  /**
+   * Replication extension model properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ReplicationExtensionModelProperties;
 }
 
 @armResourceOperations

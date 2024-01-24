@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -204,6 +206,7 @@ model MapsAccountUpdateParameters {
   /**
    * The map account properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MapsAccountProperties;
 }
 
@@ -323,6 +326,7 @@ model CreatorUpdateParameters {
   /**
    * Creator resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CreatorProperties;
 }
 
@@ -337,9 +341,9 @@ model MapsOperations {
   value?: OperationDetail[];
 
   /**
-* URL client should use to fetch the next page (per server side paging).
-It's null for now, added for future use.
-*/
+   * URL client should use to fetch the next page (per server side paging).
+   * It's null for now, added for future use.
+   */
   nextLink?: string;
 }
 
@@ -370,6 +374,7 @@ model OperationDetail {
   /**
    * Properties of the operation
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OperationProperties;
 }
 

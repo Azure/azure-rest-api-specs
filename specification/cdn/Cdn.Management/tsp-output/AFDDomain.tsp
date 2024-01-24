@@ -15,8 +15,12 @@ namespace Microsoft.Cdn;
 /**
  * Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Profile)
-model AFDDomain is ProxyResource<AFDDomainProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AFDDomainProperties)
+@includeInapplicableMetadataInPayload(false)
+model AFDDomain extends ProxyResource {
   /**
    * Name of the domain under the profile which is unique globally.
    */
@@ -24,6 +28,12 @@ model AFDDomain is ProxyResource<AFDDomainProperties> {
   @key("customDomainName")
   @segment("customDomains")
   name: string;
+
+  /**
+   * The JSON object that contains the properties of the domain to create.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AFDDomainProperties;
 }
 
 @armResourceOperations

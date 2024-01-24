@@ -15,8 +15,12 @@ namespace Microsoft.DataFactory;
 /**
  * Data flow resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-model DataFlowResource is ProxyResource<DataFlow> {
+@Azure.ResourceManager.Private.armResourceInternal(DataFlow)
+@includeInapplicableMetadataInPayload(false)
+model DataFlowResource extends SubResource {
   /**
    * The data flow name.
    */
@@ -27,6 +31,12 @@ model DataFlowResource is ProxyResource<DataFlow> {
   @key("dataFlowName")
   @segment("dataflows")
   name: string;
+
+  /**
+   * Data flow properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: DataFlow;
 }
 
 @armResourceOperations

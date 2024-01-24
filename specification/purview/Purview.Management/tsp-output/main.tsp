@@ -18,6 +18,7 @@ using TypeSpec.Versioning;
  * Creates a Microsoft.Purview management client.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "PurviewManagementClient",
 })

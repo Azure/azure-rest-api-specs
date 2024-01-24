@@ -14,7 +14,11 @@ namespace Microsoft.Insights;
 /**
  * The metric alert resource.
  */
-model MetricAlertResource is TrackedResource<MetricAlertProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(MetricAlertProperties)
+@includeInapplicableMetadataInPayload(false)
+model MetricAlertResource extends TrackedResourceBase {
   /**
    * The name of the rule.
    */
@@ -22,6 +26,12 @@ model MetricAlertResource is TrackedResource<MetricAlertProperties> {
   @key("ruleName")
   @segment("metricAlerts")
   name: string;
+
+  /**
+   * The alert rule properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: MetricAlertProperties;
 }
 
 @armResourceOperations

@@ -15,9 +15,14 @@ namespace Microsoft.ContainerService;
 /**
  * See [planned maintenance](https://docs.microsoft.com/azure/aks/planned-maintenance) for more information about planned maintenance.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedCluster)
-model MaintenanceConfiguration
-  is ProxyResource<MaintenanceConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  MaintenanceConfigurationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model MaintenanceConfiguration extends ProxyResourceBase {
   /**
    * The name of the maintenance configuration.
    */
@@ -25,6 +30,12 @@ model MaintenanceConfiguration
   @key("configName")
   @segment("maintenanceConfigurations")
   name: string;
+
+  /**
+   * Properties of a default maintenance configuration.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MaintenanceConfigurationProperties;
 }
 
 @armResourceOperations

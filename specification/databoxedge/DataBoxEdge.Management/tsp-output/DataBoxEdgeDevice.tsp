@@ -14,7 +14,11 @@ namespace Microsoft.DataBoxEdge;
 /**
  * The Data Box Edge/Gateway device.
  */
-model DataBoxEdgeDevice is TrackedResource<DataBoxEdgeDeviceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DataBoxEdgeDeviceProperties)
+@includeInapplicableMetadataInPayload(false)
+model DataBoxEdgeDevice extends TrackedResourceBase {
   /**
    * The device name.
    */
@@ -28,9 +32,20 @@ model DataBoxEdgeDevice is TrackedResource<DataBoxEdgeDeviceProperties> {
    */
   etag?: string;
 
+  /**
+   * The kind of the device.
+   */
+  @visibility("read")
+  kind?: DataBoxEdgeDeviceKind;
+
+  /**
+   * The properties of the Data Box Edge/Gateway device.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataBoxEdgeDeviceProperties;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations

@@ -19,6 +19,7 @@ using TypeSpec.Versioning;
  * Azure Digital Twins Client for managing DigitalTwinsInstance
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "AzureDigitalTwinsManagementClient",
 })

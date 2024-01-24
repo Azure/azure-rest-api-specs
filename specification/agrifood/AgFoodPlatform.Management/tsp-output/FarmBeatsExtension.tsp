@@ -14,8 +14,12 @@ namespace Microsoft.AgFoodPlatform;
 /**
  * FarmBeats extension resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model FarmBeatsExtension is ProxyResource<FarmBeatsExtensionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FarmBeatsExtensionProperties)
+@includeInapplicableMetadataInPayload(false)
+model FarmBeatsExtension extends ProxyResourceBase {
   /**
    * farmBeatsExtensionId to be queried.
    */
@@ -24,6 +28,12 @@ model FarmBeatsExtension is ProxyResource<FarmBeatsExtensionProperties> {
   @key("farmBeatsExtensionId")
   @segment("farmBeatsExtensionDefinitions")
   name: string;
+
+  /**
+   * FarmBeatsExtension properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FarmBeatsExtensionProperties;
 }
 
 @armResourceOperations
@@ -80,9 +90,9 @@ interface FarmBeatsExtensions {
       publisherIds?: string[];
 
       /**
-* Maximum number of items needed (inclusive).
-Minimum = 10, Maximum = 1000, Default value = 50.
-*/
+       * Maximum number of items needed (inclusive).
+       * Minimum = 10, Maximum = 1000, Default value = 50.
+       */
       @maxValue(1000)
       @minValue(10)
       @query("$maxPageSize")

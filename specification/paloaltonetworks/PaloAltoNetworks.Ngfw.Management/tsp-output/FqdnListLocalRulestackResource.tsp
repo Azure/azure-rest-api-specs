@@ -15,8 +15,12 @@ namespace PaloAltoNetworks.Cloudngfw;
 /**
  * LocalRulestack fqdnList
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(LocalRulestackResource)
-model FqdnListLocalRulestackResource is ProxyResource<FqdnObject> {
+@Azure.ResourceManager.Private.armResourceInternal(FqdnObject)
+@includeInapplicableMetadataInPayload(false)
+model FqdnListLocalRulestackResource extends ProxyResourceBase {
   /**
    * fqdn list name
    */
@@ -24,6 +28,13 @@ model FqdnListLocalRulestackResource is ProxyResource<FqdnObject> {
   @key("name")
   @segment("fqdnlists")
   name: string;
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties: FqdnObject;
 }
 
 @armResourceOperations

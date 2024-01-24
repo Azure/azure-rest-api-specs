@@ -14,7 +14,11 @@ namespace Microsoft.PowerBIDedicated;
 /**
  * Represents an instance of a Dedicated Capacity resource.
  */
-model DedicatedCapacity is ProxyResource<DedicatedCapacityProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DedicatedCapacityProperties)
+@includeInapplicableMetadataInPayload(false)
+model DedicatedCapacity extends Resource {
   /**
    * The name of the dedicated capacity. It must be a minimum of 3 characters, and a maximum of 63.
    */
@@ -26,7 +30,16 @@ model DedicatedCapacity is ProxyResource<DedicatedCapacityProperties> {
   @segment("capacities")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The SKU of the PowerBI Dedicated capacity resource.
+   */
+  sku: CapacitySku;
+
+  /**
+   * Properties of the provision operation request.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DedicatedCapacityProperties;
 }
 
 @armResourceOperations

@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -148,6 +150,7 @@ model DataLakeAnalyticsAccountBasic extends Resource {
    * The properties defined by Data Lake Analytics all properties are specific to each resource provider.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: DataLakeAnalyticsAccountPropertiesBasic;
 }
 
@@ -246,6 +249,7 @@ model CreateDataLakeAnalyticsAccountParameters {
   /**
    * The Data Lake Analytics account properties to use for creating.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateDataLakeAnalyticsAccountProperties;
 }
 
@@ -334,6 +338,7 @@ model AddDataLakeStoreWithAccountParameters {
   /**
    * The Data Lake Store account properties to use when adding a new Data Lake Store account.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AddDataLakeStoreProperties;
 }
 
@@ -359,6 +364,7 @@ model AddStorageAccountWithAccountParameters {
   /**
    * The Azure Storage account properties to use when adding a new Azure Storage account.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AddStorageAccountProperties;
 }
 
@@ -389,6 +395,7 @@ model CreateComputePolicyWithAccountParameters {
   /**
    * The compute policy properties to use when creating a new compute policy.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateOrUpdateComputePolicyProperties;
 }
 
@@ -431,6 +438,7 @@ model CreateFirewallRuleWithAccountParameters {
   /**
    * The firewall rule properties to use when creating a new firewall rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateOrUpdateFirewallRuleProperties;
 }
 
@@ -672,6 +680,7 @@ model HiveMetastore extends SubResource {
    * The  HiveMetastoreProperties rule properties.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: HiveMetastoreProperties;
 }
 
@@ -724,6 +733,7 @@ model VirtualNetworkRule extends SubResource {
    * The  VirtualNetwork rule properties.
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: VirtualNetworkRuleProperties;
 }
 
@@ -773,6 +783,7 @@ model UpdateDataLakeAnalyticsAccountParameters {
   /**
    * The properties that can be updated in an existing Data Lake Analytics account.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateDataLakeAnalyticsAccountProperties;
 }
 
@@ -859,6 +870,7 @@ model UpdateDataLakeStoreWithAccountParameters {
   /**
    * The Data Lake Store account properties to use when updating a Data Lake Store account.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateDataLakeStoreProperties;
 }
 
@@ -884,6 +896,7 @@ model UpdateStorageAccountWithAccountParameters {
   /**
    * The Azure Storage account properties to use when updating an Azure Storage account.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateStorageAccountProperties;
 }
 
@@ -914,6 +927,7 @@ model UpdateComputePolicyWithAccountParameters {
   /**
    * The compute policy properties to use when updating a compute policy.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateComputePolicyProperties;
 }
 
@@ -956,6 +970,7 @@ model UpdateFirewallRuleWithAccountParameters {
   /**
    * The firewall rule properties to use when updating a firewall rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateFirewallRuleProperties;
 }
 
@@ -981,6 +996,7 @@ model AddDataLakeStoreParameters {
   /**
    * The Data Lake Store account properties to use when adding a new Data Lake Store account.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AddDataLakeStoreProperties;
 }
 
@@ -991,6 +1007,7 @@ model AddStorageAccountParameters {
   /**
    * The Azure Storage account properties to use when adding a new Azure Storage account.
    */
+  @extension("x-ms-client-flatten", true)
   properties: AddStorageAccountProperties;
 }
 
@@ -1001,6 +1018,7 @@ model UpdateStorageAccountParameters {
   /**
    * The Azure Storage account properties to use when updating an Azure Storage account.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateStorageAccountProperties;
 }
 
@@ -1039,6 +1057,7 @@ model CreateOrUpdateComputePolicyParameters {
   /**
    * The compute policy properties to use when creating a new compute policy.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateOrUpdateComputePolicyProperties;
 }
 
@@ -1049,6 +1068,7 @@ model UpdateComputePolicyParameters {
   /**
    * The compute policy properties to use when updating a compute policy.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateComputePolicyProperties;
 }
 
@@ -1059,6 +1079,7 @@ model CreateOrUpdateFirewallRuleParameters {
   /**
    * The firewall rule properties to use when creating a new firewall rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties: CreateOrUpdateFirewallRuleProperties;
 }
 
@@ -1069,6 +1090,7 @@ model UpdateFirewallRuleParameters {
   /**
    * The firewall rule properties to use when updating a firewall rule.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UpdateFirewallRuleProperties;
 }
 

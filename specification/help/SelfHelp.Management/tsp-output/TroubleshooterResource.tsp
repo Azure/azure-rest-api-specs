@@ -14,8 +14,13 @@ namespace Microsoft.Help;
 /**
  * Troubleshooter response.
  */
-model TroubleshooterResource
-  is ExtensionResource<TroubleshooterInstanceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  TroubleshooterInstanceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model TroubleshooterResource extends ExtensionResourceBase {
   /**
    * Troubleshooter resource Name.
    */
@@ -26,6 +31,12 @@ model TroubleshooterResource
   @key("troubleshooterName")
   @segment("troubleshooters")
   name: string;
+
+  /**
+   * Troubleshooter Instance properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TroubleshooterInstanceProperties;
 }
 
 @armResourceOperations

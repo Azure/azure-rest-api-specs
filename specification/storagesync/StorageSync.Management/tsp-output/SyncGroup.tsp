@@ -15,8 +15,12 @@ namespace Microsoft.StorageSync;
 /**
  * Sync Group object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageSyncService)
-model SyncGroup is ProxyResource<SyncGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SyncGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model SyncGroup extends ProxyResourceBase {
   /**
    * Name of Sync Group resource.
    */
@@ -24,6 +28,12 @@ model SyncGroup is ProxyResource<SyncGroupProperties> {
   @key("syncGroupName")
   @segment("syncGroups")
   name: string;
+
+  /**
+   * SyncGroup properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SyncGroupProperties;
 }
 
 @armResourceOperations

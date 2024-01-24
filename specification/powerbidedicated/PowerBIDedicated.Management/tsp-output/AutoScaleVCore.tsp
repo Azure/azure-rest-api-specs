@@ -14,7 +14,11 @@ namespace Microsoft.PowerBIDedicated;
 /**
  * Represents an instance of an auto scale v-core resource.
  */
-model AutoScaleVCore is ProxyResource<AutoScaleVCoreProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AutoScaleVCoreProperties)
+@includeInapplicableMetadataInPayload(false)
+model AutoScaleVCore extends Resource {
   /**
    * The name of the auto scale v-core. It must be a minimum of 3 characters, and a maximum of 63.
    */
@@ -26,7 +30,16 @@ model AutoScaleVCore is ProxyResource<AutoScaleVCoreProperties> {
   @segment("autoScaleVCores")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The SKU of the auto scale v-core resource.
+   */
+  sku: AutoScaleVCoreSku;
+
+  /**
+   * Properties of an auto scale v-core resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AutoScaleVCoreProperties;
 }
 
 @armResourceOperations

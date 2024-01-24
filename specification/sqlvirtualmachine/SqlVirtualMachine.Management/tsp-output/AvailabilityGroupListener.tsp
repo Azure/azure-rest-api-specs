@@ -15,9 +15,14 @@ namespace Microsoft.SqlVirtualMachine;
 /**
  * A SQL Server availability group listener.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SqlVirtualMachineGroup)
-model AvailabilityGroupListener
-  is ProxyResource<AvailabilityGroupListenerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  AvailabilityGroupListenerProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AvailabilityGroupListener extends ProxyResourceBase {
   /**
    * Name of the availability group listener.
    */
@@ -25,6 +30,12 @@ model AvailabilityGroupListener
   @key("availabilityGroupListenerName")
   @segment("availabilityGroupListeners")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AvailabilityGroupListenerProperties;
 }
 
 @armResourceOperations

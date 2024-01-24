@@ -15,13 +15,24 @@ namespace Microsoft.DataBoxEdge;
 /**
  * The metric setting details for the role
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(Role)
-model MonitoringMetricConfiguration
-  is ProxyResource<MonitoringMetricConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  MonitoringMetricConfigurationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model MonitoringMetricConfiguration extends ProxyResourceBase {
   @key("monitoringConfig")
   @segment("monitoringConfig")
   name: string;
+
+  /**
+   * The metric setting properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: MonitoringMetricConfigurationProperties;
 }
 
 @armResourceOperations

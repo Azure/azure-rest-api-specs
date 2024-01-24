@@ -16,8 +16,12 @@ namespace Microsoft.DataShare;
 /**
  * A data set mapping data transfer object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ShareSubscription)
-model DataSetMapping is ProxyResource<{}> {
+@Azure.ResourceManager.Private.armResourceInternal({})
+@includeInapplicableMetadataInPayload(false)
+model DataSetMapping extends ProxyDto {
   /**
    * The name of the dataSetMapping.
    */
@@ -26,7 +30,14 @@ model DataSetMapping is ProxyResource<{}> {
   @segment("dataSetMappings")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Kind of data set mapping.
+   */
+  kind: DataSetMappingKind;
+
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties?: {};
 }
 
 @armResourceOperations

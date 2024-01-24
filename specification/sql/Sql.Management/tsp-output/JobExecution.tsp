@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * An execution of a job
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Job)
-model JobExecution is ProxyResource<JobExecutionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobExecutionProperties)
+@includeInapplicableMetadataInPayload(false)
+model JobExecution extends ProxyResource {
   /**
    * The id of the job execution
    */
@@ -24,6 +28,12 @@ model JobExecution is ProxyResource<JobExecutionProperties> {
   @key("jobExecutionId")
   @segment("executions")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobExecutionProperties;
 }
 
 @armResourceOperations

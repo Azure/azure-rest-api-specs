@@ -15,9 +15,14 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Static Site User Provided Function App ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StaticSiteBuildARMResource)
-model StaticSiteUserProvidedFunctionAppARMResource
-  is ProxyResource<StaticSiteUserProvidedFunctionAppARMResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  StaticSiteUserProvidedFunctionAppARMResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model StaticSiteUserProvidedFunctionAppARMResource extends ProxyOnlyResource {
   /**
    * Name of the function app registered with the static site build.
    */
@@ -25,6 +30,12 @@ model StaticSiteUserProvidedFunctionAppARMResource
   @key("functionAppName")
   @segment("userProvidedFunctionApps")
   name: string;
+
+  /**
+   * StaticSiteUserProvidedFunctionAppARMResource resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StaticSiteUserProvidedFunctionAppARMResourceProperties;
 }
 
 @armResourceOperations

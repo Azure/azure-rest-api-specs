@@ -15,13 +15,24 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Full view of networking configuration for an ASE.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("networking")
 @parentResource(AppServiceEnvironmentResource)
-model AseV3NetworkingConfiguration
-  is ProxyResource<AseV3NetworkingConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  AseV3NetworkingConfigurationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AseV3NetworkingConfiguration extends ProxyOnlyResource {
   @key("configuration")
   @segment("configurations")
   name: string;
+
+  /**
+   * AseV3NetworkingConfiguration resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AseV3NetworkingConfigurationProperties;
 }
 
 @armResourceOperations

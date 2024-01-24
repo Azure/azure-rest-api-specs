@@ -15,8 +15,12 @@ namespace Microsoft.AppPlatform;
 /**
  * Storage resource payload.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-model StorageResource is ProxyResource<StorageProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(StorageProperties)
+@includeInapplicableMetadataInPayload(false)
+model StorageResource extends ProxyResource {
   /**
    * The name of the storage resource.
    */
@@ -24,6 +28,12 @@ model StorageResource is ProxyResource<StorageProperties> {
   @key("storageName")
   @segment("storages")
   name: string;
+
+  /**
+   * Properties of the storage resource payload.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StorageProperties;
 }
 
 @armResourceOperations

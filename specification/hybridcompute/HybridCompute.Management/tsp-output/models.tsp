@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -410,6 +412,7 @@ model MachineUpdate extends ResourceUpdate {
   /**
    * Hybrid Compute Machine properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MachineUpdateProperties;
 }
 
@@ -524,6 +527,7 @@ model OSProfileWindowsConfiguration {
   /**
    * Specifies the patch settings.
    */
+  @extension("x-ms-client-flatten", true)
   patchSettings?: PatchSettings;
 }
 
@@ -549,6 +553,7 @@ model OSProfileLinuxConfiguration {
   /**
    * Specifies the patch settings.
    */
+  @extension("x-ms-client-flatten", true)
   patchSettings?: PatchSettings;
 }
 
@@ -915,6 +920,7 @@ model LicenseProfileMachineInstanceView {
   licenseChannel?: string;
 
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   softwareAssurance?: LicenseProfileMachineInstanceViewSoftwareAssurance;
 
   /**
@@ -926,6 +932,7 @@ model LicenseProfileMachineInstanceView {
    * Hybrid Compute Product Profile properties
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   productProfile?: LicenseProfileArmProductProfileProperties;
 }
 
@@ -959,6 +966,7 @@ model License extends TrackedResource {
   /**
    * Hybrid Compute License properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LicenseProperties;
 }
 
@@ -1660,6 +1668,7 @@ model MachineExtensionUpdate extends ResourceUpdate {
   /**
    * Describes Machine Extension Update Properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MachineExtensionUpdateProperties;
 }
 
@@ -2251,6 +2260,7 @@ model LicenseUpdate extends ResourceUpdate {
   /**
    * License Update properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LicenseUpdateProperties;
 }
 
@@ -2263,6 +2273,7 @@ model LicenseUpdateProperties {
    */
   licenseType?: LicenseType;
 
+  @extension("x-ms-client-flatten", true)
   licenseDetails?: LicenseUpdatePropertiesLicenseDetails;
 }
 
@@ -2315,6 +2326,7 @@ model LicenseProfile extends TrackedResource {
   /**
    * Describe the properties of a license profile.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LicenseProfileProperties;
 }
 
@@ -2322,16 +2334,19 @@ model LicenseProfile extends TrackedResource {
  * Describe the properties of a license profile.
  */
 model LicenseProfileProperties {
+  @extension("x-ms-client-flatten", true)
   softwareAssurance?: LicenseProfilePropertiesSoftwareAssurance;
 
   /**
    * Hybrid Compute ESU Profile properties
    */
+  @extension("x-ms-client-flatten", true)
   esuProfile?: LicenseProfileArmEsuProperties;
 
   /**
    * Hybrid Compute Product Profile properties
    */
+  @extension("x-ms-client-flatten", true)
   productProfile?: LicenseProfileArmProductProfileProperties;
 
   /**
@@ -2366,6 +2381,7 @@ model LicenseProfileUpdate extends ResourceUpdate {
   /**
    * Describe the Update properties of a license profile.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LicenseProfileUpdateProperties;
 }
 
@@ -2373,16 +2389,19 @@ model LicenseProfileUpdate extends ResourceUpdate {
  * Describe the Update properties of a license profile.
  */
 model LicenseProfileUpdateProperties {
+  @extension("x-ms-client-flatten", true)
   softwareAssurance?: LicenseProfileUpdatePropertiesSoftwareAssurance;
 
   /**
    * Hybrid Compute ESU Profile Update properties
    */
+  @extension("x-ms-client-flatten", true)
   esuProfile?: EsuProfileUpdateProperties;
 
   /**
    * Hybrid Compute Product Profile Update properties
    */
+  @extension("x-ms-client-flatten", true)
   productProfile?: ProductProfileUpdateProperties;
 }
 
@@ -2475,6 +2494,7 @@ model HybridIdentityMetadata extends ProxyResource {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties: HybridIdentityMetadataProperties;
 }
 
@@ -2543,6 +2563,7 @@ model NetworkConfiguration extends ProxyResource {
   /**
    * Network configuration properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkConfigurationProperties;
 }
 
@@ -2650,6 +2671,7 @@ model NetworkSecurityPerimeterConfiguration {
   /**
    * Properties that define a Network Security Perimeter resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NetworkSecurityPerimeterConfigurationProperties;
 }
 
@@ -2699,6 +2721,7 @@ model ProvisioningIssue {
    * Provisioning issue properties
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: ProvisioningIssueProperties;
 }
 
@@ -2751,6 +2774,7 @@ model AccessRule {
    * Access rule properties
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: AccessRuleProperties;
 }
 

@@ -15,9 +15,14 @@ namespace Microsoft.AppPlatform;
 /**
  * Application Configuration Service resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ServiceResource)
-model ConfigurationServiceResource
-  is ProxyResource<ConfigurationServiceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ConfigurationServiceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ConfigurationServiceResource extends ProxyResource {
   /**
    * The name of Application Configuration Service.
    */
@@ -25,6 +30,12 @@ model ConfigurationServiceResource
   @key("configurationServiceName")
   @segment("configurationServices")
   name: string;
+
+  /**
+   * Application Configuration Service properties payload
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConfigurationServiceProperties;
 }
 
 @armResourceOperations

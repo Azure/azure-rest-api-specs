@@ -14,7 +14,11 @@ namespace Microsoft.Cache;
 /**
  * Describes the RedisEnterprise cluster
  */
-model Cluster is TrackedResource<ClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cluster extends TrackedResourceBase {
   /**
    * The name of the RedisEnterprise cluster.
    */
@@ -27,6 +31,12 @@ model Cluster is TrackedResource<ClusterProperties> {
    * The Availability Zones where this cluster will be deployed.
    */
   zones?: string[];
+
+  /**
+   * Other properties of the cluster.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;

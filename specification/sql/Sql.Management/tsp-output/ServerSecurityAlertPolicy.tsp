@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A server security alert policy.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model ServerSecurityAlertPolicy
-  is ProxyResource<SecurityAlertsPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SecurityAlertsPolicyProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ServerSecurityAlertPolicy extends ProxyResource {
   /**
    * The name of the security alert policy.
    */
@@ -25,6 +30,12 @@ model ServerSecurityAlertPolicy
   @key("securityAlertPolicyName")
   @segment("securityAlertPolicies")
   name: SecurityAlertPolicyName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SecurityAlertsPolicyProperties;
 }
 
 @armResourceOperations

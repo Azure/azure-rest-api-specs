@@ -15,13 +15,24 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Publishing Credentials Policies parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("ftp")
 @parentResource(Site)
-model CsmPublishingCredentialsPoliciesEntity
-  is ProxyResource<CsmPublishingCredentialsPoliciesEntityProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  CsmPublishingCredentialsPoliciesEntityProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model CsmPublishingCredentialsPoliciesEntity extends ProxyOnlyResource {
   @key("basicPublishingCredentialsPolicy")
   @segment("basicPublishingCredentialsPolicies")
   name: string;
+
+  /**
+   * CsmPublishingCredentialsPoliciesEntity resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CsmPublishingCredentialsPoliciesEntityProperties;
 }
 
 @armResourceOperations

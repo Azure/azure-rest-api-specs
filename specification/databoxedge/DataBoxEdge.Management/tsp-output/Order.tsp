@@ -15,14 +15,28 @@ namespace Microsoft.DataBoxEdge;
 /**
  * The order details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(DataBoxEdgeDevice)
-model Order is ProxyResource<OrderProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(OrderProperties)
+@includeInapplicableMetadataInPayload(false)
+model Order extends ProxyResourceBase {
   @key("order")
   @segment("orders")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * It specify the order api version.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * The order properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: OrderProperties;
 }
 
 @armResourceOperations

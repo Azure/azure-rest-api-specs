@@ -14,7 +14,11 @@ namespace Microsoft.Peering;
 /**
  * Peering Service
  */
-model PeeringService is TrackedResource<PeeringServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(PeeringServiceProperties)
+@includeInapplicableMetadataInPayload(false)
+model PeeringService extends Resource {
   /**
    * The name of the peering.
    */
@@ -23,7 +27,16 @@ model PeeringService is TrackedResource<PeeringServiceProperties> {
   @segment("peeringServices")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The SKU that defines the type of the peering service.
+   */
+  sku?: PeeringServiceSku;
+
+  /**
+   * The properties that define a peering service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PeeringServiceProperties;
 }
 
 @armResourceOperations

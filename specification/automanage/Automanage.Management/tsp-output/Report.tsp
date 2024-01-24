@@ -15,8 +15,12 @@ namespace Microsoft.Automanage;
 /**
  * Definition of the report.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ConfigurationProfileAssignment)
-model Report is ProxyResource<AssignmentReportProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AssignmentReportProperties)
+@includeInapplicableMetadataInPayload(false)
+model Report extends ProxyResourceBase {
   /**
    * The report name.
    */
@@ -24,6 +28,12 @@ model Report is ProxyResource<AssignmentReportProperties> {
   @key("reportName")
   @segment("reports")
   name: string;
+
+  /**
+   * The properties for the report.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AssignmentReportProperties;
 }
 
 @armResourceOperations

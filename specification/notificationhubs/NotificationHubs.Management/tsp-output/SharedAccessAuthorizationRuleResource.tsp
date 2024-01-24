@@ -15,9 +15,14 @@ namespace Microsoft.NotificationHubs;
 /**
  * Description of a Namespace AuthorizationRules.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NamespaceResource)
-model SharedAccessAuthorizationRuleResource
-  is TrackedResource<SharedAccessAuthorizationRuleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SharedAccessAuthorizationRuleProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SharedAccessAuthorizationRuleResource extends Resource {
   /**
    * Authorization rule name.
    */
@@ -25,6 +30,12 @@ model SharedAccessAuthorizationRuleResource
   @key("authorizationRuleName")
   @segment("AuthorizationRules")
   name: string;
+
+  /**
+   * Properties of the Namespace AuthorizationRule.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SharedAccessAuthorizationRuleProperties;
 }
 
 @armResourceOperations

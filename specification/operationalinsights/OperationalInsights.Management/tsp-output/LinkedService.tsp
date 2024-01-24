@@ -15,8 +15,12 @@ namespace Microsoft.OperationalInsights;
 /**
  * The top level Linked service resource container.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model LinkedService is ProxyResource<LinkedServiceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(LinkedServiceProperties)
+@includeInapplicableMetadataInPayload(false)
+model LinkedService extends ProxyResourceBase {
   /**
    * Name of the linked service.
    */
@@ -24,6 +28,12 @@ model LinkedService is ProxyResource<LinkedServiceProperties> {
   @key("linkedServiceName")
   @segment("linkedServices")
   name: string;
+
+  /**
+   * The properties of the linked service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LinkedServiceProperties;
 }
 
 @armResourceOperations

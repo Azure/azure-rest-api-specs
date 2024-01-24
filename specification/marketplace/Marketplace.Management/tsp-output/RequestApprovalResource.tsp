@@ -15,8 +15,12 @@ namespace Microsoft.Marketplace;
 /**
  * Request approval resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateStore)
-model RequestApprovalResource is ProxyResource<RequestApprovalProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RequestApprovalProperties)
+@includeInapplicableMetadataInPayload(false)
+model RequestApprovalResource extends Resource {
   /**
    * The request approval ID to get create or update
    */
@@ -24,6 +28,12 @@ model RequestApprovalResource is ProxyResource<RequestApprovalProperties> {
   @key("requestApprovalId")
   @segment("requestApprovals")
   name: string;
+
+  /**
+   * The privateStore approval request data structure.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RequestApprovalProperties;
 }
 
 @armResourceOperations

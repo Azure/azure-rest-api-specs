@@ -15,12 +15,22 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Configuration of App Service site logs.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("logs")
 @parentResource(Site)
-model SiteLogsConfig is ProxyResource<SiteLogsConfigProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SiteLogsConfigProperties)
+@includeInapplicableMetadataInPayload(false)
+model SiteLogsConfig extends ProxyOnlyResource {
   @key("config")
   @segment("config")
   name: string;
+
+  /**
+   * SiteLogsConfig resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SiteLogsConfigProperties;
 }
 
 @armResourceOperations

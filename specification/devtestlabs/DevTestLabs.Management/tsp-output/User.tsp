@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * Profile of a lab user.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model User is TrackedResource<UserProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(UserProperties)
+@includeInapplicableMetadataInPayload(false)
+model User extends Resource {
   /**
    * The name of the user profile.
    */
@@ -24,6 +28,12 @@ model User is TrackedResource<UserProperties> {
   @key("name")
   @segment("users")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: UserProperties;
 }
 
 @armResourceOperations

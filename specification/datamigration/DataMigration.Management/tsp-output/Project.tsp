@@ -15,8 +15,12 @@ namespace Microsoft.DataMigration;
 /**
  * A project resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataMigrationService)
-model Project is TrackedResource<ProjectProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ProjectProperties)
+@includeInapplicableMetadataInPayload(false)
+model Project extends TrackedResource {
   /**
    * Name of the project
    */
@@ -29,6 +33,12 @@ model Project is TrackedResource<ProjectProperties> {
    * HTTP strong entity tag value. This is ignored if submitted.
    */
   etag?: string;
+
+  /**
+   * Project properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProjectProperties;
 }
 
 @armResourceOperations

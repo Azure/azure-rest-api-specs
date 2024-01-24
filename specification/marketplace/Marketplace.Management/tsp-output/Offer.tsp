@@ -15,8 +15,12 @@ namespace Microsoft.Marketplace;
 /**
  * The privateStore offer data structure.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Collection)
-model Offer is ProxyResource<OfferProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(OfferProperties)
+@includeInapplicableMetadataInPayload(false)
+model Offer extends Resource {
   /**
    * The offer ID to update or delete
    */
@@ -24,6 +28,12 @@ model Offer is ProxyResource<OfferProperties> {
   @key("offerId")
   @segment("offers")
   name: string;
+
+  /**
+   * The privateStore offer data structure.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: OfferProperties;
 }
 
 @armResourceOperations

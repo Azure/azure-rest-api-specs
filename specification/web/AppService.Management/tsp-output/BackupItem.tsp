@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Backup description.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model BackupItem is ProxyResource<BackupItemProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(BackupItemProperties)
+@includeInapplicableMetadataInPayload(false)
+model BackupItem extends ProxyOnlyResource {
   /**
    * ID of the backup.
    */
@@ -24,6 +28,12 @@ model BackupItem is ProxyResource<BackupItemProperties> {
   @key("backupId")
   @segment("backups")
   name: string;
+
+  /**
+   * BackupItem resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BackupItemProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.App;
 /**
  * Diagnostics data for a resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ContainerApp)
-model Diagnostics is ProxyResource<DiagnosticsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DiagnosticsProperties)
+@includeInapplicableMetadataInPayload(false)
+model Diagnostics extends ProxyResourceBase {
   /**
    * Name of the Container App Detector.
    */
@@ -24,6 +28,12 @@ model Diagnostics is ProxyResource<DiagnosticsProperties> {
   @key("detectorName")
   @segment("detectors")
   name: string;
+
+  /**
+   * Diagnostics resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DiagnosticsProperties;
 }
 
 @armResourceOperations

@@ -15,9 +15,14 @@ namespace Microsoft.Logic;
 /**
  * The workflow trigger history.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(WorkflowTrigger)
-model WorkflowTriggerHistory
-  is ProxyResource<WorkflowTriggerHistoryProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  WorkflowTriggerHistoryProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WorkflowTriggerHistory extends SubResource {
   /**
    * The workflow trigger history name. Corresponds to the run name for triggers that resulted in a run.
    */
@@ -25,6 +30,12 @@ model WorkflowTriggerHistory
   @key("historyName")
   @segment("histories")
   name: string;
+
+  /**
+   * Gets the workflow trigger history properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkflowTriggerHistoryProperties;
 }
 
 @armResourceOperations

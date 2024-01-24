@@ -14,8 +14,12 @@ namespace Microsoft.PolicyInsights;
 /**
  * Policy metadata resource definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model PolicyMetadata is ProxyResource<PolicyMetadataProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PolicyMetadataProperties)
+@includeInapplicableMetadataInPayload(false)
+model PolicyMetadata extends ProxyResourceBase {
   /**
    * The name of the policy metadata resource.
    */
@@ -23,6 +27,12 @@ model PolicyMetadata is ProxyResource<PolicyMetadataProperties> {
   @key("resourceName")
   @segment("policyMetadata")
   name: string;
+
+  /**
+   * Properties of the policy metadata.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PolicyMetadataProperties;
 }
 
 @armResourceOperations

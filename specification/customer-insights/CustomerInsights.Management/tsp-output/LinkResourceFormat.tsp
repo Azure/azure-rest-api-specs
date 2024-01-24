@@ -15,8 +15,12 @@ namespace Microsoft.CustomerInsights;
 /**
  * The link resource format.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Hub)
-model LinkResourceFormat is ProxyResource<LinkDefinition> {
+@Azure.ResourceManager.Private.armResourceInternal(LinkDefinition)
+@includeInapplicableMetadataInPayload(false)
+model LinkResourceFormat extends ProxyResource {
   /**
    * The name of the link.
    */
@@ -24,6 +28,12 @@ model LinkResourceFormat is ProxyResource<LinkDefinition> {
   @key("linkName")
   @segment("links")
   name: string;
+
+  /**
+   * The definition of Link.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: LinkDefinition;
 }
 
 @armResourceOperations

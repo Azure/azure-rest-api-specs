@@ -15,13 +15,24 @@ namespace Microsoft.HybridContainerService;
 /**
  * The list of available kubernetes version upgrades for the provisioned cluster.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(ProvisionedCluster)
-model ProvisionedClusterUpgradeProfile
-  is ProxyResource<ProvisionedClusterUpgradeProfileProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ProvisionedClusterUpgradeProfileProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ProvisionedClusterUpgradeProfile extends ProxyResourceBase {
   @key("upgradeProfile")
   @segment("upgradeProfiles")
   name: string;
+
+  /**
+   * The properties of the upgrade profile.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ProvisionedClusterUpgradeProfileProperties;
 }
 
 @armResourceOperations

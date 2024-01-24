@@ -13,11 +13,15 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerRegistry;
 /**
-* The task that has the ARM resource and task properties. 
-The task will have all information to schedule a run against it.
-*/
+ * The task that has the ARM resource and task properties.
+ * The task will have all information to schedule a run against it.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model Task is TrackedResource<TaskProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(TaskProperties)
+@includeInapplicableMetadataInPayload(false)
+model Task extends TrackedResourceBase {
   /**
    * The name of the container registry task.
    */
@@ -28,6 +32,12 @@ model Task is TrackedResource<TaskProperties> {
   @key("taskName")
   @segment("tasks")
   name: string;
+
+  /**
+   * The properties of a task.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TaskProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

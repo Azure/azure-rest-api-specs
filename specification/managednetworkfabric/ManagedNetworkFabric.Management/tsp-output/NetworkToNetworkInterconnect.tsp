@@ -15,9 +15,14 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The Network To Network Interconnect resource definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetworkFabric)
-model NetworkToNetworkInterconnect
-  is ProxyResource<NetworkToNetworkInterconnectProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  NetworkToNetworkInterconnectProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model NetworkToNetworkInterconnect extends ProxyResourceBase {
   /**
    * Name of the Network to Network Interconnect.
    */
@@ -25,6 +30,12 @@ model NetworkToNetworkInterconnect
   @key("networkToNetworkInterconnectName")
   @segment("networkToNetworkInterconnects")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: NetworkToNetworkInterconnectProperties;
 }
 
 @armResourceOperations

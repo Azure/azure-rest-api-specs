@@ -15,8 +15,12 @@ namespace Microsoft.DataFactory;
 /**
  * Managed Virtual Network resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-model ManagedVirtualNetworkResource is ProxyResource<ManagedVirtualNetwork> {
+@Azure.ResourceManager.Private.armResourceInternal(ManagedVirtualNetwork)
+@includeInapplicableMetadataInPayload(false)
+model ManagedVirtualNetworkResource extends SubResource {
   /**
    * Managed virtual network name
    */
@@ -27,6 +31,12 @@ model ManagedVirtualNetworkResource is ProxyResource<ManagedVirtualNetwork> {
   @key("managedVirtualNetworkName")
   @segment("managedVirtualNetworks")
   name: string;
+
+  /**
+   * Managed Virtual Network properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ManagedVirtualNetwork;
 }
 
 @armResourceOperations

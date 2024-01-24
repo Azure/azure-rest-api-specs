@@ -15,8 +15,12 @@ namespace Microsoft.Communication;
 /**
  * A class representing a SuppressionList resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DomainResource)
-model SuppressionListResource is ProxyResource<SuppressionListProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SuppressionListProperties)
+@includeInapplicableMetadataInPayload(false)
+model SuppressionListResource extends ProxyResourceBase {
   /**
    * The name of the suppression list.
    */
@@ -27,6 +31,12 @@ model SuppressionListResource is ProxyResource<SuppressionListProperties> {
   @key("suppressionListName")
   @segment("suppressionLists")
   name: string;
+
+  /**
+   * The properties of a SuppressionList resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SuppressionListProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.EventHub;
 /**
  * Single item in List or Get Schema Group operation
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EventHubsNamespace)
-model EventHubsSchemaGroup is ProxyResource<SchemaGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SchemaGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model EventHubsSchemaGroup extends ProxyResource {
   /**
    * The Schema Group name
    */
@@ -26,6 +30,9 @@ model EventHubsSchemaGroup is ProxyResource<SchemaGroupProperties> {
   @key("schemaGroupName")
   @segment("schemagroups")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: SchemaGroupProperties;
 }
 
 @armResourceOperations

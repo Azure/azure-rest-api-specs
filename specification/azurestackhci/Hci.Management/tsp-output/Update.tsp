@@ -15,8 +15,12 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Update details
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model Update is ProxyResource<UpdateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(UpdateProperties)
+@includeInapplicableMetadataInPayload(false)
+model Update extends ProxyResourceBase {
   /**
    * The name of the Update
    */
@@ -24,6 +28,12 @@ model Update is ProxyResource<UpdateProperties> {
   @key("updateName")
   @segment("updates")
   name: string;
+
+  /**
+   * Update properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: UpdateProperties;
 }
 
 @armResourceOperations

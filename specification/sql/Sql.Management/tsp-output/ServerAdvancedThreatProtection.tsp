@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A server Advanced Threat Protection.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model ServerAdvancedThreatProtection
-  is ProxyResource<AdvancedThreatProtectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  AdvancedThreatProtectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ServerAdvancedThreatProtection extends ProxyResource {
   /**
    * The name of the Advanced Threat Protection state.
    */
@@ -25,6 +30,12 @@ model ServerAdvancedThreatProtection
   @key("advancedThreatProtectionName")
   @segment("advancedThreatProtectionSettings")
   name: AdvancedThreatProtectionName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AdvancedThreatProtectionProperties;
 }
 
 @armResourceOperations

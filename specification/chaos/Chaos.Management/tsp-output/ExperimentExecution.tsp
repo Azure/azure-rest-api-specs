@@ -15,8 +15,14 @@ namespace Microsoft.Chaos;
 /**
  * Model that represents the execution of a Experiment.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Experiment)
-model ExperimentExecution is ProxyResource<ExperimentExecutionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ExperimentExecutionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ExperimentExecution extends ProxyResourceBase {
   /**
    * GUID that represents a Experiment execution detail.
    */
@@ -25,6 +31,12 @@ model ExperimentExecution is ProxyResource<ExperimentExecutionProperties> {
   @key("executionId")
   @segment("executions")
   name: string;
+
+  /**
+   * The properties of experiment execution status.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ExperimentExecutionProperties;
 }
 
 @armResourceOperations

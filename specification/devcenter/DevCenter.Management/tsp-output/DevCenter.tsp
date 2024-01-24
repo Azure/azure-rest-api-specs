@@ -14,7 +14,11 @@ namespace Microsoft.DevCenter;
 /**
  * Represents a devcenter resource.
  */
-model DevCenter is TrackedResource<DevCenterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(DevCenterProperties)
+@includeInapplicableMetadataInPayload(false)
+model DevCenter extends TrackedResourceBase {
   /**
    * The name of the devcenter.
    */
@@ -22,6 +26,12 @@ model DevCenter is TrackedResource<DevCenterProperties> {
   @key("devCenterName")
   @segment("devcenters")
   name: string;
+
+  /**
+   * DevCenter properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DevCenterProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

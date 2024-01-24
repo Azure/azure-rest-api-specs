@@ -15,8 +15,12 @@ namespace Microsoft.DataProtection;
 /**
  * AzureBackup Job Resource Class
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BackupVaultResource)
-model AzureBackupJobResource is ProxyResource<AzureBackupJob> {
+@Azure.ResourceManager.Private.armResourceInternal(AzureBackupJob)
+@includeInapplicableMetadataInPayload(false)
+model AzureBackupJobResource extends ProxyResourceBase {
   /**
    * The Job ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
    */
@@ -24,6 +28,12 @@ model AzureBackupJobResource is ProxyResource<AzureBackupJob> {
   @key("jobId")
   @segment("backupJobs")
   name: string;
+
+  /**
+   * AzureBackupJobResource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AzureBackupJob;
 }
 
 @armResourceOperations

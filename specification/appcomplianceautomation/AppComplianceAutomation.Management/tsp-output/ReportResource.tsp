@@ -14,8 +14,12 @@ namespace Microsoft.AppComplianceAutomation;
 /**
  * A class represent an AppComplianceAutomation report resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model ReportResource is ProxyResource<ReportProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
+@includeInapplicableMetadataInPayload(false)
+model ReportResource extends ProxyResourceBase {
   /**
    * Report Name.
    */
@@ -24,6 +28,12 @@ model ReportResource is ProxyResource<ReportProperties> {
   @key("reportName")
   @segment("reports")
   name: string;
+
+  /**
+   * Report property.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ReportProperties;
 }
 
 @armResourceOperations

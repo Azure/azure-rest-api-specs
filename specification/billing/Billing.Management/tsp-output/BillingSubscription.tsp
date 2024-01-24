@@ -14,8 +14,14 @@ namespace Microsoft.Billing;
 /**
  * A billing subscription.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model BillingSubscription is ProxyResource<BillingSubscriptionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  BillingSubscriptionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model BillingSubscription extends Resource {
   /**
    * The ID that uniquely identifies a subscription.
    */
@@ -23,6 +29,12 @@ model BillingSubscription is ProxyResource<BillingSubscriptionProperties> {
   @key("billingSubscriptionName")
   @segment("billingSubscriptions")
   name: string;
+
+  /**
+   * The billing properties of a subscription.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BillingSubscriptionProperties;
 }
 
 @armResourceOperations

@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
  * App Compliance Automation Tool for Microsoft 365 API spec
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "App Compliance Automation Tool for Microsoft 365",
 })

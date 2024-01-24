@@ -15,8 +15,12 @@ namespace Microsoft.Media;
 /**
  * A Job resource type. The progress and state can be obtained by polling a Job or subscribing to events using EventGrid.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Transform)
-model Job is ProxyResource<JobProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(JobProperties)
+@includeInapplicableMetadataInPayload(false)
+model Job extends ProxyResourceBase {
   /**
    * The Job name.
    */
@@ -24,6 +28,12 @@ model Job is ProxyResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   name: string;
+
+  /**
+   * The resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: JobProperties;
 }
 
 @armResourceOperations

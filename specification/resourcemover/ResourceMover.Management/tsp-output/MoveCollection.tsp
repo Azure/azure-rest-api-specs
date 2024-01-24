@@ -14,7 +14,11 @@ namespace Microsoft.Migrate;
 /**
  * Define the move collection.
  */
-model MoveCollection is TrackedResource<MoveCollectionProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(MoveCollectionProperties)
+@includeInapplicableMetadataInPayload(false)
+model MoveCollection extends TrackedResourceBase {
   /**
    * The Move Collection Name.
    */
@@ -28,6 +32,12 @@ model MoveCollection is TrackedResource<MoveCollectionProperties> {
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * Defines the move collection properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MoveCollectionProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

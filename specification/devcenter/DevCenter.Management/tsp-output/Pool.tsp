@@ -15,8 +15,12 @@ namespace Microsoft.DevCenter;
 /**
  * A pool of Virtual Machines.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Project)
-model Pool is TrackedResource<PoolProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PoolProperties)
+@includeInapplicableMetadataInPayload(false)
+model Pool extends TrackedResourceBase {
   /**
    * Name of the pool.
    */
@@ -24,6 +28,12 @@ model Pool is TrackedResource<PoolProperties> {
   @key("poolName")
   @segment("pools")
   name: string;
+
+  /**
+   * Pool properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PoolProperties;
 }
 
 @armResourceOperations

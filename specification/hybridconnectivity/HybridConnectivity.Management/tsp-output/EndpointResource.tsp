@@ -14,7 +14,11 @@ namespace Microsoft.HybridConnectivity;
 /**
  * The endpoint for the target resource.
  */
-model EndpointResource is ExtensionResource<EndpointProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(EndpointProperties)
+@includeInapplicableMetadataInPayload(false)
+model EndpointResource extends ExtensionResourceBase {
   /**
    * The endpoint name.
    */
@@ -22,6 +26,12 @@ model EndpointResource is ExtensionResource<EndpointProperties> {
   @key("endpointName")
   @segment("endpoints")
   name: string;
+
+  /**
+   * The endpoint properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: EndpointProperties;
 }
 
 @armResourceOperations

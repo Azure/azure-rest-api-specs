@@ -15,9 +15,14 @@ namespace Microsoft.ProviderHub;
 /**
  * The notification registration definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ProviderRegistration)
-model NotificationRegistration
-  is ProxyResource<NotificationRegistrationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  NotificationRegistrationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model NotificationRegistration extends ProxyResourceBase {
   /**
    * The notification registration.
    */
@@ -25,6 +30,9 @@ model NotificationRegistration
   @key("notificationRegistrationName")
   @segment("notificationRegistrations")
   name: string;
+
+  @extension("x-ms-client-flatten", true)
+  properties?: NotificationRegistrationProperties;
 }
 
 @armResourceOperations

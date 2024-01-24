@@ -15,8 +15,12 @@ namespace Microsoft.SignalRService;
 /**
  * A custom certificate.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SignalRResource)
-model CustomCertificate is ProxyResource<CustomCertificateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CustomCertificateProperties)
+@includeInapplicableMetadataInPayload(false)
+model CustomCertificate extends ProxyResourceBase {
   /**
    * Custom certificate name
    */
@@ -24,6 +28,12 @@ model CustomCertificate is ProxyResource<CustomCertificateProperties> {
   @key("certificateName")
   @segment("customCertificates")
   name: string;
+
+  /**
+   * Custom certificate properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: CustomCertificateProperties;
 }
 
 @armResourceOperations

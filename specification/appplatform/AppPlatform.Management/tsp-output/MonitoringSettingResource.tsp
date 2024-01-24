@@ -15,12 +15,22 @@ namespace Microsoft.AppPlatform;
 /**
  * Monitoring Setting resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(ServiceResource)
-model MonitoringSettingResource is ProxyResource<MonitoringSettingProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MonitoringSettingProperties)
+@includeInapplicableMetadataInPayload(false)
+model MonitoringSettingResource extends ProxyResource {
   @key("monitoringSetting")
   @segment("monitoringSettings")
   name: string;
+
+  /**
+   * Properties of the Monitoring Setting resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MonitoringSettingProperties;
 }
 
 @armResourceOperations

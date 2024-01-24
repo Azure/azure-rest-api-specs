@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL instance pool.
  */
-model InstancePool is TrackedResource<InstancePoolProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(InstancePoolProperties)
+@includeInapplicableMetadataInPayload(false)
+model InstancePool extends TrackedResource {
   /**
    * The name of the instance pool to be retrieved.
    */
@@ -23,7 +27,16 @@ model InstancePool is TrackedResource<InstancePoolProperties> {
   @segment("instancePools")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The name and tier of the SKU.
+   */
+  sku?: Sku;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: InstancePoolProperties;
 }
 
 @armResourceOperations

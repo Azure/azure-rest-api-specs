@@ -15,9 +15,12 @@ namespace Microsoft.CustomerInsights;
 /**
  * The relationship link resource format.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Hub)
-model RelationshipLinkResourceFormat
-  is ProxyResource<RelationshipLinkDefinition> {
+@Azure.ResourceManager.Private.armResourceInternal(RelationshipLinkDefinition)
+@includeInapplicableMetadataInPayload(false)
+model RelationshipLinkResourceFormat extends ProxyResource {
   /**
    * The name of the relationship link.
    */
@@ -25,6 +28,12 @@ model RelationshipLinkResourceFormat
   @key("relationshipLinkName")
   @segment("relationshipLinks")
   name: string;
+
+  /**
+   * The definition of relationship link.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RelationshipLinkDefinition;
 }
 
 @armResourceOperations

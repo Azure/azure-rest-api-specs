@@ -14,7 +14,11 @@ namespace Microsoft.NetworkCloud;
 /**
  * ClusterManager represents a control-plane to manage one or more on-premises clusters.
  */
-model ClusterManager is TrackedResource<ClusterManagerProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterManagerProperties)
+@includeInapplicableMetadataInPayload(false)
+model ClusterManager extends TrackedResourceBase {
   /**
    * The name of the cluster manager.
    */
@@ -23,6 +27,12 @@ model ClusterManager is TrackedResource<ClusterManagerProperties> {
   @key("clusterManagerName")
   @segment("clusterManagers")
   name: string;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ClusterManagerProperties;
 }
 
 @armResourceOperations

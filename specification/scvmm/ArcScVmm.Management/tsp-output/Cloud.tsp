@@ -14,7 +14,11 @@ namespace Microsoft.ScVmm;
 /**
  * The Clouds resource definition.
  */
-model Cloud is TrackedResource<CloudProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(CloudProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cloud extends TrackedResourceBase {
   /**
    * Name of the Cloud.
    */
@@ -27,6 +31,12 @@ model Cloud is TrackedResource<CloudProperties> {
    * The extended location.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: CloudProperties;
 }
 
 @armResourceOperations

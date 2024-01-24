@@ -15,8 +15,12 @@ namespace Microsoft.CustomerInsights;
 /**
  * The Role Assignment resource format.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Hub)
-model RoleAssignmentResourceFormat is ProxyResource<RoleAssignment> {
+@Azure.ResourceManager.Private.armResourceInternal(RoleAssignment)
+@includeInapplicableMetadataInPayload(false)
+model RoleAssignmentResourceFormat extends ProxyResource {
   /**
    * The name of the role assignment.
    */
@@ -24,6 +28,12 @@ model RoleAssignmentResourceFormat is ProxyResource<RoleAssignment> {
   @key("assignmentName")
   @segment("roleAssignments")
   name: string;
+
+  /**
+   * The Role Assignment definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RoleAssignment;
 }
 
 @armResourceOperations

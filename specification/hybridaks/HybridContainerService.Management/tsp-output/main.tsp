@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
  * The Microsoft.HybridContainerService Rest API spec.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "HybridContainerService",
 })

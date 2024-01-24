@@ -14,7 +14,11 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a ApplicationGroup definition.
  */
-model ApplicationGroup is TrackedResource<ApplicationGroupProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ApplicationGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model ApplicationGroup extends TrackedResourceBase {
   /**
    * The name of the application group
    */
@@ -24,6 +28,12 @@ model ApplicationGroup is TrackedResource<ApplicationGroupProperties> {
   @key("applicationGroupName")
   @segment("applicationGroups")
   name: string;
+
+  /**
+   * Detailed properties for ApplicationGroup
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ApplicationGroupProperties;
 }
 
 @armResourceOperations

@@ -14,12 +14,22 @@ namespace Microsoft.CertificateRegistration;
 /**
  * User credentials used for publishing activity.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("web")
 @tenantResource
-model User is ProxyResource<UserProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(UserProperties)
+@includeInapplicableMetadataInPayload(false)
+model User extends ProxyOnlyResource {
   @key("publishingUser")
   @segment("publishingUsers")
   name: string;
+
+  /**
+   * User resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: UserProperties;
 }
 
 @armResourceOperations

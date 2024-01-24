@@ -15,8 +15,12 @@ namespace Microsoft.Relay;
 /**
  * Description of the WCF relay resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(RelayNamespace)
-model WcfRelay is ProxyResource<WcfRelayProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WcfRelayProperties)
+@includeInapplicableMetadataInPayload(false)
+model WcfRelay extends ProxyResourceBase {
   /**
    * The relay name.
    */
@@ -25,6 +29,12 @@ model WcfRelay is ProxyResource<WcfRelayProperties> {
   @key("relayName")
   @segment("wcfRelays")
   name: string;
+
+  /**
+   * Properties of the WCF relay.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WcfRelayProperties;
 }
 
 @armResourceOperations

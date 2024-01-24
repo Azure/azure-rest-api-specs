@@ -15,8 +15,12 @@ namespace Microsoft.StreamAnalytics;
 /**
  * A transformation object, containing all information associated with the named transformation. All transformations are contained under a streaming job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StreamingJob)
-model Transformation is ProxyResource<TransformationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(TransformationProperties)
+@includeInapplicableMetadataInPayload(false)
+model Transformation extends SubResource {
   /**
    * The name of the transformation.
    */
@@ -24,6 +28,12 @@ model Transformation is ProxyResource<TransformationProperties> {
   @key("transformationName")
   @segment("transformations")
   name: string;
+
+  /**
+   * The properties that are associated with a transformation. Required on PUT (CreateOrReplace) requests.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TransformationProperties;
 }
 
 @armResourceOperations

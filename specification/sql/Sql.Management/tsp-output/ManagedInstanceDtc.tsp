@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * SQL Managed Instance DTC
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model ManagedInstanceDtc is ProxyResource<ManagedInstanceDtcProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ManagedInstanceDtcProperties)
+@includeInapplicableMetadataInPayload(false)
+model ManagedInstanceDtc extends ProxyResource {
   /**
    * The name of the managed instance DTC.
    */
@@ -24,6 +28,12 @@ model ManagedInstanceDtc is ProxyResource<ManagedInstanceDtcProperties> {
   @key("dtcName")
   @segment("dtc")
   name: DtcName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedInstanceDtcProperties;
 }
 
 @armResourceOperations

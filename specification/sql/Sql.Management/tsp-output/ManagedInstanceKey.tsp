@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * A managed instance key.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model ManagedInstanceKey is ProxyResource<ManagedInstanceKeyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ManagedInstanceKeyProperties)
+@includeInapplicableMetadataInPayload(false)
+model ManagedInstanceKey extends ProxyResource {
   /**
    * The name of the managed instance key to be retrieved.
    */
@@ -25,7 +29,17 @@ model ManagedInstanceKey is ProxyResource<ManagedInstanceKeyProperties> {
   @segment("keys")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Kind of encryption protector. This is metadata used for the Azure portal experience.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedInstanceKeyProperties;
 }
 
 @armResourceOperations

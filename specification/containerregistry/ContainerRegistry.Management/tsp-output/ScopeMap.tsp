@@ -15,8 +15,12 @@ namespace Microsoft.ContainerRegistry;
 /**
  * An object that represents a scope map for a container registry.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model ScopeMap is ProxyResource<ScopeMapProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ScopeMapProperties)
+@includeInapplicableMetadataInPayload(false)
+model ScopeMap extends ProxyResourceBase {
   /**
    * The name of the scope map.
    */
@@ -27,6 +31,12 @@ model ScopeMap is ProxyResource<ScopeMapProperties> {
   @key("scopeMapName")
   @segment("scopeMaps")
   name: string;
+
+  /**
+   * The properties of the scope map.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ScopeMapProperties;
 }
 
 @armResourceOperations

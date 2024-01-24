@@ -15,9 +15,14 @@ namespace Microsoft.Search;
 /**
  * Describes a Shared Private Link Resource managed by the Azure Cognitive Search service.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SearchService)
-model SharedPrivateLinkResource
-  is ProxyResource<SharedPrivateLinkResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SharedPrivateLinkResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SharedPrivateLinkResource extends ProxyResourceBase {
   /**
    * The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.
    */
@@ -25,6 +30,12 @@ model SharedPrivateLinkResource
   @key("sharedPrivateLinkResourceName")
   @segment("sharedPrivateLinkResources")
   name: string;
+
+  /**
+   * Describes the properties of a Shared Private Link Resource managed by the Azure Cognitive Search service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SharedPrivateLinkResourceProperties;
 }
 
 @armResourceOperations

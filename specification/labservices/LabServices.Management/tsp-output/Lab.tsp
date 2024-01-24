@@ -14,7 +14,11 @@ namespace Microsoft.LabServices;
 /**
  * The lab resource.
  */
-model Lab is TrackedResource<LabProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(LabProperties)
+@includeInapplicableMetadataInPayload(false)
+model Lab extends TrackedResourceBase {
   /**
    * The name of the lab that uniquely identifies it within containing lab plan. Used in resource URIs.
    */
@@ -24,6 +28,12 @@ model Lab is TrackedResource<LabProperties> {
   @key("labName")
   @segment("labs")
   name: string;
+
+  /**
+   * Lab resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LabProperties;
 }
 
 @armResourceOperations

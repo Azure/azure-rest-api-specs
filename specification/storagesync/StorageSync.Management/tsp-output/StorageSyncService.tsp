@@ -14,7 +14,11 @@ namespace Microsoft.StorageSync;
 /**
  * Storage Sync Service object.
  */
-model StorageSyncService is TrackedResource<StorageSyncServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(StorageSyncServiceProperties)
+@includeInapplicableMetadataInPayload(false)
+model StorageSyncService extends TrackedResourceBase {
   /**
    * Name of Storage Sync Service resource.
    */
@@ -22,6 +26,12 @@ model StorageSyncService is TrackedResource<StorageSyncServiceProperties> {
   @key("storageSyncServiceName")
   @segment("storageSyncServices")
   name: string;
+
+  /**
+   * Storage Sync Service properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StorageSyncServiceProperties;
 }
 
 @armResourceOperations

@@ -14,8 +14,13 @@ namespace Microsoft.HybridNetwork;
 /**
  * Hybrid configuration group value resource.
  */
-model ConfigurationGroupValue
-  is TrackedResource<ConfigurationGroupValuePropertiesFormat> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  ConfigurationGroupValuePropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model ConfigurationGroupValue extends TrackedResourceBase {
   /**
    * The name of the configuration group value.
    */
@@ -25,6 +30,12 @@ model ConfigurationGroupValue
   @key("configurationGroupValueName")
   @segment("configurationGroupValues")
   name: string;
+
+  /**
+   * Hybrid configuration group value properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConfigurationGroupValuePropertiesFormat;
 }
 
 @armResourceOperations

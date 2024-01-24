@@ -14,9 +14,14 @@ namespace Microsoft.ConnectedVMwarevSphere;
 /**
  * Define the virtualMachineInstance.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
-model VirtualMachineInstance
-  is ExtensionResource<VirtualMachineInstanceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  VirtualMachineInstanceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachineInstance extends ExtensionResourceBase {
   @key("virtualMachineInstance")
   @segment("virtualMachineInstances")
   name: string;
@@ -25,6 +30,12 @@ model VirtualMachineInstance
    * Gets or sets the extended location.
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: VirtualMachineInstanceProperties;
 }
 
 @armResourceOperations

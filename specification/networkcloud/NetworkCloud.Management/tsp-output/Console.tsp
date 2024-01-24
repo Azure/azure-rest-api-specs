@@ -15,8 +15,12 @@ namespace Microsoft.NetworkCloud;
 /**
  * Console represents the console of an on-premises Network Cloud virtual machine.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(VirtualMachine)
-model Console is TrackedResource<ConsoleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ConsoleProperties)
+@includeInapplicableMetadataInPayload(false)
+model Console extends TrackedResourceBase {
   /**
    * The name of the virtual machine console.
    */
@@ -30,6 +34,12 @@ model Console is TrackedResource<ConsoleProperties> {
    * The extended location of the cluster manager associated with the cluster this virtual machine is created on.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ConsoleProperties;
 }
 
 @armResourceOperations

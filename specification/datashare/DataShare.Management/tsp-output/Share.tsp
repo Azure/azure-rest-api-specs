@@ -15,8 +15,12 @@ namespace Microsoft.DataShare;
 /**
  * A share data transfer object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Account)
-model Share is ProxyResource<ShareProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ShareProperties)
+@includeInapplicableMetadataInPayload(false)
+model Share extends ProxyDto {
   /**
    * The name of the share to retrieve.
    */
@@ -24,6 +28,12 @@ model Share is ProxyResource<ShareProperties> {
   @key("shareName")
   @segment("shares")
   name: string;
+
+  /**
+   * Properties on the share
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ShareProperties;
 }
 
 @armResourceOperations

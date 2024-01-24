@@ -15,8 +15,12 @@ namespace Microsoft.SignalRService;
 /**
  * A custom domain
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SignalRResource)
-model CustomDomain is ProxyResource<CustomDomainProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CustomDomainProperties)
+@includeInapplicableMetadataInPayload(false)
+model CustomDomain extends ProxyResourceBase {
   /**
    * Custom domain name.
    */
@@ -24,6 +28,12 @@ model CustomDomain is ProxyResource<CustomDomainProperties> {
   @key("name")
   @segment("customDomains")
   name: string;
+
+  /**
+   * Properties of a custom domain.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: CustomDomainProperties;
 }
 
 @armResourceOperations

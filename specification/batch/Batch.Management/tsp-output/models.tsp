@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -715,6 +717,7 @@ model BatchAccountCreateParameters {
   /**
    * The properties of the Batch account.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BatchAccountCreateProperties;
 
   /**
@@ -881,12 +884,12 @@ model EncryptionProperties {
  */
 model KeyVaultProperties {
   /**
-* Full path to the secret with or without version. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053. or https://mykeyvault.vault.azure.net/keys/testkey. To be usable the following prerequisites must be met:
-
- The Batch Account has a System Assigned identity
- The account identity has been granted Key/Get, Key/Unwrap and Key/Wrap permissions
- The KeyVault has soft-delete and purge protection enabled
-*/
+   * Full path to the secret with or without version. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053. or https://mykeyvault.vault.azure.net/keys/testkey. To be usable the following prerequisites must be met:
+   *
+   *  The Batch Account has a System Assigned identity
+   *  The account identity has been granted Key/Get, Key/Unwrap and Key/Wrap permissions
+   *  The KeyVault has soft-delete and purge protection enabled
+   */
   keyIdentifier?: string;
 }
 
@@ -1209,6 +1212,7 @@ model BatchAccountUpdateParameters {
   /**
    * The properties of the account.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: BatchAccountUpdateProperties;
 
   /**
@@ -1533,6 +1537,7 @@ model CertificateCreateOrUpdateParameters extends ProxyResource {
   /**
    * The properties associated with the certificate.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CertificateCreateOrUpdateProperties;
 }
 
@@ -1703,10 +1708,10 @@ model PoolProperties {
   startTask?: StartTask;
 
   /**
-* For Windows compute nodes, the Batch service installs the certificates to the specified certificate store and location. For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory.
-
-Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
-*/
+   * For Windows compute nodes, the Batch service installs the certificates to the specified certificate store and location. For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory.
+   *
+   * Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
+   */
   certificates?: CertificateReference[];
 
   /**
@@ -1802,12 +1807,12 @@ model VirtualMachineConfiguration {
   dataDisks?: DataDisk[];
 
   /**
-* This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:
-
- Windows_Server - The on-premises license is for Windows Server.
- Windows_Client - The on-premises license is for Windows Client.
-
-*/
+   * This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:
+   *
+   *  Windows_Server - The on-premises license is for Windows Server.
+   *  Windows_Client - The on-premises license is for Windows Client.
+   *
+   */
   licenseType?: string;
 
   /**
@@ -1896,14 +1901,14 @@ model DataDisk {
   lun: int32;
 
   /**
-* Values are:
-
- none - The caching mode for the disk is not enabled.
- readOnly - The caching mode for the disk is read only.
- readWrite - The caching mode for the disk is read and write.
-
- The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
-*/
+   * Values are:
+   *
+   *  none - The caching mode for the disk is not enabled.
+   *  readOnly - The caching mode for the disk is read only.
+   *  readWrite - The caching mode for the disk is read and write.
+   *
+   *  The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
+   */
   caching?: CachingType;
 
   /**
@@ -1912,11 +1917,11 @@ model DataDisk {
   diskSizeGB: int32;
 
   /**
-* If omitted, the default is "Standard_LRS". Values are:
-
- Standard_LRS - The data disk should use standard locally redundant storage.
- Premium_LRS - The data disk should use premium locally redundant storage.
-*/
+   * If omitted, the default is "Standard_LRS". Values are:
+   *
+   *  Standard_LRS - The data disk should use standard locally redundant storage.
+   *  Premium_LRS - The data disk should use premium locally redundant storage.
+   */
   storageAccountType?: StorageAccountType;
 }
 

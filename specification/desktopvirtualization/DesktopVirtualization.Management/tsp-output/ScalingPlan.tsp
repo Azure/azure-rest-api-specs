@@ -14,7 +14,11 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a scaling plan definition.
  */
-model ScalingPlan is TrackedResource<ScalingPlanProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ScalingPlanProperties)
+@includeInapplicableMetadataInPayload(false)
+model ScalingPlan extends TrackedResourceBase {
   /**
    * The name of the scaling plan.
    */
@@ -24,6 +28,12 @@ model ScalingPlan is TrackedResource<ScalingPlanProperties> {
   @key("scalingPlanName")
   @segment("scalingPlans")
   name: string;
+
+  /**
+   * Detailed properties for scaling plan.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ScalingPlanProperties;
 }
 
 @armResourceOperations

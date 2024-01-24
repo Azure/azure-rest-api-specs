@@ -14,7 +14,13 @@ namespace Microsoft.Automanage;
 /**
  * Definition of the configuration profile.
  */
-model ConfigurationProfile is TrackedResource<ConfigurationProfileProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  ConfigurationProfileProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ConfigurationProfile extends TrackedResourceBase {
   /**
    * The configuration profile name.
    */
@@ -22,6 +28,12 @@ model ConfigurationProfile is TrackedResource<ConfigurationProfileProperties> {
   @key("configurationProfileName")
   @segment("configurationProfiles")
   name: string;
+
+  /**
+   * Properties of the configuration profile.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConfigurationProfileProperties;
 }
 
 @armResourceOperations

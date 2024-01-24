@@ -12,12 +12,18 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetworkCloud;
 /**
-* Upon creation, the additional services that are provided by the platform will be allocated and
-represented in the status of this resource. All resources associated with this cloud services network will be part
-of the same layer 2 (L2) isolation domain. At least one service network must be created but may be reused across many
-virtual machines and/or Hybrid AKS clusters.
-*/
-model CloudServicesNetwork is TrackedResource<CloudServicesNetworkProperties> {
+ * Upon creation, the additional services that are provided by the platform will be allocated and
+ * represented in the status of this resource. All resources associated with this cloud services network will be part
+ * of the same layer 2 (L2) isolation domain. At least one service network must be created but may be reused across many
+ * virtual machines and/or Hybrid AKS clusters.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  CloudServicesNetworkProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model CloudServicesNetwork extends TrackedResourceBase {
   /**
    * The name of the cloud services network.
    */
@@ -31,6 +37,12 @@ model CloudServicesNetwork is TrackedResource<CloudServicesNetworkProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CloudServicesNetworkProperties;
 }
 
 @armResourceOperations

@@ -15,9 +15,14 @@ namespace Microsoft.AVS;
 /**
  * NSX DNS Zone
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model WorkloadNetworkDnsZone
-  is ProxyResource<WorkloadNetworkDnsZoneProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  WorkloadNetworkDnsZoneProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WorkloadNetworkDnsZone extends ProxyResourceBase {
   /**
    * NSX DNS Zone identifier. Generally the same as the DNS Zone's display name
    */
@@ -25,6 +30,12 @@ model WorkloadNetworkDnsZone
   @key("dnsZoneId")
   @segment("dnsZones")
   name: string;
+
+  /**
+   * DNS Zone properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkloadNetworkDnsZoneProperties;
 }
 
 @armResourceOperations

@@ -14,8 +14,14 @@ namespace Microsoft.Insights;
 /**
  * Definition of generic ARM proxy resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  DataCollectionRuleAssociationProxyOnlyResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
 model DataCollectionRuleAssociationProxyOnlyResource
-  is ExtensionResource<DataCollectionRuleAssociationProxyOnlyResourceProperties> {
+  extends ExtensionResourceBase {
   /**
    * The name of the association. The name is case insensitive.
    */
@@ -29,6 +35,12 @@ model DataCollectionRuleAssociationProxyOnlyResource
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataCollectionRuleAssociationProxyOnlyResourceProperties;
 }
 
 @armResourceOperations

@@ -25,6 +25,7 @@ using TypeSpec.Versioning;
  * Azure Healthcare APIs Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["https://management.azure.com/.default"]>)
 @service({
   title: "HealthcareApisManagementClient",
 })

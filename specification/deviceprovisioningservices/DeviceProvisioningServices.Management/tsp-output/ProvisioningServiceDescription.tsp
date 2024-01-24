@@ -14,8 +14,11 @@ namespace Microsoft.Devices;
 /**
  * The description of the provisioning service.
  */
-model ProvisioningServiceDescription
-  is TrackedResource<IotDpsPropertiesDescription> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(IotDpsPropertiesDescription)
+@includeInapplicableMetadataInPayload(false)
+model ProvisioningServiceDescription extends TrackedResourceBase {
   /**
    * Name of the provisioning service to retrieve.
    */
@@ -28,6 +31,12 @@ model ProvisioningServiceDescription
    * The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.
    */
   etag?: string;
+
+  /**
+   * Service specific properties for a provisioning service
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: IotDpsPropertiesDescription;
 
   ...Azure.ResourceManager.ResourceSku;
 }

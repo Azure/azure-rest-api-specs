@@ -18,6 +18,7 @@ using TypeSpec.Versioning;
  * REST APIs for Azure Advisor
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "AdvisorManagementClient",
 })

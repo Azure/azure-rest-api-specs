@@ -15,8 +15,12 @@ namespace Microsoft.DataFactory;
 /**
  * Trigger resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-model TriggerResource is ProxyResource<Trigger> {
+@Azure.ResourceManager.Private.armResourceInternal(Trigger)
+@includeInapplicableMetadataInPayload(false)
+model TriggerResource extends SubResource {
   /**
    * The trigger name.
    */
@@ -27,6 +31,12 @@ model TriggerResource is ProxyResource<Trigger> {
   @key("triggerName")
   @segment("triggers")
   name: string;
+
+  /**
+   * Properties of the trigger.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: Trigger;
 }
 
 @armResourceOperations

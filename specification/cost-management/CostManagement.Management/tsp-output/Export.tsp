@@ -14,7 +14,11 @@ namespace Microsoft.CostManagement;
 /**
  * An export resource.
  */
-model Export is ExtensionResource<ExportProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ExportProperties)
+@includeInapplicableMetadataInPayload(false)
+model Export extends ExtensionResourceBase {
   /**
    * Export Name.
    */
@@ -22,6 +26,12 @@ model Export is ExtensionResource<ExportProperties> {
   @key("exportName")
   @segment("exports")
   name: string;
+
+  /**
+   * The properties of the export.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ExportProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.NetApp;
 /**
  * Snapshot policy information
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetAppAccount)
-model SnapshotPolicy is TrackedResource<SnapshotPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SnapshotPolicyProperties)
+@includeInapplicableMetadataInPayload(false)
+model SnapshotPolicy extends TrackedResourceBase {
   /**
    * The name of the snapshot policy
    */
@@ -30,6 +34,12 @@ model SnapshotPolicy is TrackedResource<SnapshotPolicyProperties> {
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * Snapshot policy Properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: SnapshotPolicyProperties;
 }
 
 @armResourceOperations

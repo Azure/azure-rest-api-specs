@@ -15,12 +15,23 @@ namespace PaloAltoNetworks.Cloudngfw;
 /**
  * Firewall Status
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
 @parentResource(FirewallResource)
-model FirewallStatusResource is ProxyResource<FirewallStatusProperty> {
+@Azure.ResourceManager.Private.armResourceInternal(FirewallStatusProperty)
+@includeInapplicableMetadataInPayload(false)
+model FirewallStatusResource extends ProxyResourceBase {
   @key("status")
   @segment("statuses")
   name: string;
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties: FirewallStatusProperty;
 }
 
 @armResourceOperations

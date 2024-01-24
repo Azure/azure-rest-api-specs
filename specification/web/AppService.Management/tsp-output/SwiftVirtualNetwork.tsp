@@ -15,12 +15,24 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("virtualNetwork")
 @parentResource(Site)
-model SwiftVirtualNetwork is ProxyResource<SwiftVirtualNetworkProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SwiftVirtualNetworkProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SwiftVirtualNetwork extends ProxyOnlyResource {
   @key("networkConfig")
   @segment("networkConfig")
   name: string;
+
+  /**
+   * SwiftVirtualNetwork resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SwiftVirtualNetworkProperties;
 }
 
 @armResourceOperations
@@ -33,17 +45,17 @@ interface SwiftVirtualNetworks {
   getSwiftVirtualNetworkConnection is ArmResourceRead<SwiftVirtualNetwork>;
 
   /**
-* Description for Integrates this Web App with a Virtual Network. This requires that 1) "swiftSupported" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not
-in use by another App Service Plan other than the one this App is in.
-*/
+   * Description for Integrates this Web App with a Virtual Network. This requires that 1) "swiftSupported" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not
+   * in use by another App Service Plan other than the one this App is in.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("WebApps_CreateOrUpdateSwiftVirtualNetworkConnectionWithCheck")
   createOrUpdateSwiftVirtualNetworkConnectionWithCheck is ArmResourceCreateOrReplaceSync<SwiftVirtualNetwork>;
 
   /**
-* Description for Integrates this Web App with a Virtual Network. This requires that 1) "swiftSupported" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not
-in use by another App Service Plan other than the one this App is in.
-*/
+   * Description for Integrates this Web App with a Virtual Network. This requires that 1) "swiftSupported" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not
+   * in use by another App Service Plan other than the one this App is in.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
   @operationId("WebApps_UpdateSwiftVirtualNetworkConnectionWithCheck")

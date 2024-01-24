@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -320,6 +322,7 @@ model FleetMemberUpdate {
   /**
    * The updatable properties of the FleetMember.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: FleetMemberUpdateProperties;
 }
 
@@ -347,19 +350,19 @@ model UpdateRunProperties {
   provisioningState?: UpdateRunProvisioningState;
 
   /**
-* The resource id of the FleetUpdateStrategy resource to reference.
-
-When creating a new run, there are three ways to define a strategy for the run:
-1. Define a new strategy in place: Set the "strategy" field.
-2. Use an existing strategy: Set the "updateStrategyId" field. (since 2023-08-15-preview)
-3. Use the default strategy to update all the members one by one: Leave both "updateStrategyId" and "strategy" unset. (since 2023-08-15-preview)
-
-Setting both "updateStrategyId" and "strategy" is invalid.
-
-UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field. 
-Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate. 
-UpdateRunStrategy changes can be made directly on the "strategy" field before launching the UpdateRun.
-*/
+   * The resource id of the FleetUpdateStrategy resource to reference.
+   *
+   * When creating a new run, there are three ways to define a strategy for the run:
+   * 1. Define a new strategy in place: Set the "strategy" field.
+   * 2. Use an existing strategy: Set the "updateStrategyId" field. (since 2023-08-15-preview)
+   * 3. Use the default strategy to update all the members one by one: Leave both "updateStrategyId" and "strategy" unset. (since 2023-08-15-preview)
+   *
+   * Setting both "updateStrategyId" and "strategy" is invalid.
+   *
+   * UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field.
+   * Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate.
+   * UpdateRunStrategy changes can be made directly on the "strategy" field before launching the UpdateRun.
+   */
   updateStrategyId?: ResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/fleets/updateStrategies";
@@ -367,10 +370,10 @@ UpdateRunStrategy changes can be made directly on the "strategy" field before la
   ]>;
 
   /**
-* The strategy defines the order in which the clusters will be updated. 
-If not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.
-The strategy of the UpdateRun can be modified until the run is started.
-*/
+   * The strategy defines the order in which the clusters will be updated.
+   * If not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.
+   * The strategy of the UpdateRun can be modified until the run is started.
+   */
   strategy?: UpdateRunStrategy;
 
   /**
@@ -386,14 +389,14 @@ The strategy of the UpdateRun can be modified until the run is started.
 }
 
 /**
-* Defines the update sequence of the clusters via stages and groups.
-
-Stages within a run are executed sequentially one after another.
-Groups within a stage are executed in parallel.
-Member clusters within a group are updated sequentially one after another.
-
-A valid strategy contains no duplicate groups within or across stages.
-*/
+ * Defines the update sequence of the clusters via stages and groups.
+ *
+ * Stages within a run are executed sequentially one after another.
+ * Groups within a stage are executed in parallel.
+ * Member clusters within a group are updated sequentially one after another.
+ *
+ * A valid strategy contains no duplicate groups within or across stages.
+ */
 model UpdateRunStrategy {
   /**
    * The list of stages that compose this update run. Min size: 1.
@@ -429,9 +432,9 @@ model UpdateStage {
  */
 model UpdateGroup {
   /**
-* Name of the group.
-It must match a group name of an existing fleet member. 
-*/
+   * Name of the group.
+   * It must match a group name of an existing fleet member.
+   */
   @maxLength(50)
   @minLength(1)
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
@@ -459,10 +462,10 @@ model ManagedClusterUpdate {
  */
 model ManagedClusterUpgradeSpec {
   /**
-* The upgrade type.
-Full requires the KubernetesVersion property to be set.
-NodeImageOnly requires the KubernetesVersion property not to be set.
-*/
+   * The upgrade type.
+   * Full requires the KubernetesVersion property to be set.
+   * NodeImageOnly requires the KubernetesVersion property not to be set.
+   */
   type: ManagedClusterUpgradeType;
 
   /**

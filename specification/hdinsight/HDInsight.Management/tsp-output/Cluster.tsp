@@ -14,7 +14,11 @@ namespace Microsoft.HDInsight;
 /**
  * The HDInsight cluster.
  */
-model Cluster is TrackedResource<ClusterGetProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterGetProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cluster extends TrackedResourceBase {
   /**
    * The name of the cluster.
    */
@@ -32,6 +36,12 @@ model Cluster is TrackedResource<ClusterGetProperties> {
    * The availability zones.
    */
   zones?: string[];
+
+  /**
+   * The properties of the cluster.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterGetProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

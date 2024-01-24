@@ -15,8 +15,12 @@ namespace Microsoft.Workloads;
 /**
  * A provider instance associated with SAP monitor.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Monitor)
-model ProviderInstance is ProxyResource<ProviderInstanceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ProviderInstanceProperties)
+@includeInapplicableMetadataInPayload(false)
+model ProviderInstance extends ProxyResourceBase {
   /**
    * Name of the provider instance.
    */
@@ -24,6 +28,12 @@ model ProviderInstance is ProxyResource<ProviderInstanceProperties> {
   @key("providerInstanceName")
   @segment("providerInstances")
   name: string;
+
+  /**
+   * Provider Instance properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProviderInstanceProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

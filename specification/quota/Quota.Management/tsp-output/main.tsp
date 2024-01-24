@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
  * Microsoft Azure Quota Resource Provider
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure Quota Extension API",
 })

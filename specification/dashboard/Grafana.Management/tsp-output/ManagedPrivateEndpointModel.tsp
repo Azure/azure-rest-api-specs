@@ -15,9 +15,14 @@ namespace Microsoft.Dashboard;
 /**
  * The managed private endpoint resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedGrafana)
-model ManagedPrivateEndpointModel
-  is TrackedResource<ManagedPrivateEndpointModelProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedPrivateEndpointModelProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedPrivateEndpointModel extends TrackedResourceBase {
   /**
    * The managed private endpoint name of Azure Managed Grafana.
    */
@@ -25,6 +30,12 @@ model ManagedPrivateEndpointModel
   @key("managedPrivateEndpointName")
   @segment("managedPrivateEndpoints")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedPrivateEndpointModelProperties;
 }
 
 @armResourceOperations

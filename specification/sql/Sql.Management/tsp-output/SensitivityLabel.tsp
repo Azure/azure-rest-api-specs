@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * A sensitivity label.
  */
-model SensitivityLabel is ProxyResource<SensitivityLabelProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(SensitivityLabelProperties)
+@includeInapplicableMetadataInPayload(false)
+model SensitivityLabel extends ProxyResource {
   /**
    * The source of the sensitivity label.
    */
@@ -23,7 +27,17 @@ model SensitivityLabel is ProxyResource<SensitivityLabelProperties> {
   @segment("sensitivityLabels")
   name: SensitivityLabelSource;
 
-  ...Azure.ResourceManager.ManagedBy;
+  /**
+   * Resource that manages the sensitivity label.
+   */
+  @visibility("read")
+  managedBy?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SensitivityLabelProperties;
 }
 
 @armResourceOperations

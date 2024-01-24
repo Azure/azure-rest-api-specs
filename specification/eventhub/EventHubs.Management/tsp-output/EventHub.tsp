@@ -15,8 +15,12 @@ namespace Microsoft.EventHub;
 /**
  * Single item in List or Get Event Hub operation
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EventHubsNamespace)
-model EventHub is ProxyResource<EventhubProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(EventhubProperties)
+@includeInapplicableMetadataInPayload(false)
+model EventHub extends ProxyResource {
   /**
    * The Event Hub name
    */
@@ -26,6 +30,12 @@ model EventHub is ProxyResource<EventhubProperties> {
   @key("eventHubName")
   @segment("eventhubs")
   name: string;
+
+  /**
+   * Properties supplied to the Create Or Update Event Hub operation.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: EventhubProperties;
 }
 
 @armResourceOperations

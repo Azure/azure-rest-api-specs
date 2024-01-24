@@ -15,8 +15,12 @@ namespace Microsoft.Blueprint;
 /**
  * Represents a published blueprint.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Blueprint)
-model PublishedBlueprint is ProxyResource<PublishedBlueprintProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PublishedBlueprintProperties)
+@includeInapplicableMetadataInPayload(false)
+model PublishedBlueprint extends ProxyResourceBase {
   /**
    * Version of the published blueprint definition.
    */
@@ -24,6 +28,12 @@ model PublishedBlueprint is ProxyResource<PublishedBlueprintProperties> {
   @key("versionId")
   @segment("versions")
   name: string;
+
+  /**
+   * Detailed properties for published blueprint.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: PublishedBlueprintProperties;
 }
 
 @armResourceOperations

@@ -15,9 +15,14 @@ namespace Microsoft.MobileNetwork;
 /**
  * Attached data network resource. Must be created in the same location as its parent packet core data plane.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PacketCoreDataPlane)
-model AttachedDataNetwork
-  is TrackedResource<AttachedDataNetworkPropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  AttachedDataNetworkPropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model AttachedDataNetwork extends TrackedResourceBase {
   /**
    * The name of the attached data network.
    */
@@ -27,6 +32,12 @@ model AttachedDataNetwork
   @key("attachedDataNetworkName")
   @segment("attachedDataNetworks")
   name: string;
+
+  /**
+   * Attached data network properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: AttachedDataNetworkPropertiesFormat;
 }
 
 @armResourceOperations

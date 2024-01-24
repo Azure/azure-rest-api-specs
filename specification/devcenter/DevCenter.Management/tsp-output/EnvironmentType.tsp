@@ -15,8 +15,12 @@ namespace Microsoft.DevCenter;
 /**
  * Represents an environment type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DevCenter)
-model EnvironmentType is ProxyResource<EnvironmentTypeProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(EnvironmentTypeProperties)
+@includeInapplicableMetadataInPayload(false)
+model EnvironmentType extends ProxyResourceBase {
   /**
    * The name of the environment type.
    */
@@ -24,6 +28,12 @@ model EnvironmentType is ProxyResource<EnvironmentTypeProperties> {
   @key("environmentTypeName")
   @segment("environmentTypes")
   name: string;
+
+  /**
+   * Properties of an environment type.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: EnvironmentTypeProperties;
 }
 
 @armResourceOperations

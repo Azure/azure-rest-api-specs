@@ -15,8 +15,12 @@ namespace Microsoft.DataLakeAnalytics;
 /**
  * Data Lake Analytics compute policy information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataLakeAnalyticsAccount)
-model ComputePolicy is ProxyResource<ComputePolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ComputePolicyProperties)
+@includeInapplicableMetadataInPayload(false)
+model ComputePolicy extends ProxyResourceBase {
   /**
    * The name of the compute policy to retrieve.
    */
@@ -24,6 +28,12 @@ model ComputePolicy is ProxyResource<ComputePolicyProperties> {
   @key("computePolicyName")
   @segment("computePolicies")
   name: string;
+
+  /**
+   * The compute policy properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ComputePolicyProperties;
 }
 
 @armResourceOperations

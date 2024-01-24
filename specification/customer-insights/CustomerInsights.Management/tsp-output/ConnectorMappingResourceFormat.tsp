@@ -15,8 +15,12 @@ namespace Microsoft.CustomerInsights;
 /**
  * The connector mapping resource format.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ConnectorResourceFormat)
-model ConnectorMappingResourceFormat is ProxyResource<ConnectorMapping> {
+@Azure.ResourceManager.Private.armResourceInternal(ConnectorMapping)
+@includeInapplicableMetadataInPayload(false)
+model ConnectorMappingResourceFormat extends ProxyResource {
   /**
    * The name of the connector mapping.
    */
@@ -24,6 +28,12 @@ model ConnectorMappingResourceFormat is ProxyResource<ConnectorMapping> {
   @key("mappingName")
   @segment("mappings")
   name: string;
+
+  /**
+   * The connector mapping definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConnectorMapping;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.DataShare;
 /**
  * A Invitation data transfer object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Share)
-model Invitation is ProxyResource<InvitationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(InvitationProperties)
+@includeInapplicableMetadataInPayload(false)
+model Invitation extends ProxyDto {
   /**
    * The name of the invitation.
    */
@@ -24,6 +28,12 @@ model Invitation is ProxyResource<InvitationProperties> {
   @key("invitationName")
   @segment("invitations")
   name: string;
+
+  /**
+   * Properties on the Invitation
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: InvitationProperties;
 }
 
 @armResourceOperations

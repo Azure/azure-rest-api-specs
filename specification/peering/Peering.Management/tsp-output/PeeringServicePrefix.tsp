@@ -15,8 +15,14 @@ namespace Microsoft.Peering;
 /**
  * The peering service prefix class.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PeeringService)
-model PeeringServicePrefix is ProxyResource<PeeringServicePrefixProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PeeringServicePrefixProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PeeringServicePrefix extends Resource {
   /**
    * The name of the prefix.
    */
@@ -24,6 +30,12 @@ model PeeringServicePrefix is ProxyResource<PeeringServicePrefixProperties> {
   @key("prefixName")
   @segment("prefixes")
   name: string;
+
+  /**
+   * Gets or sets the peering prefix properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PeeringServicePrefixProperties;
 }
 
 @armResourceOperations

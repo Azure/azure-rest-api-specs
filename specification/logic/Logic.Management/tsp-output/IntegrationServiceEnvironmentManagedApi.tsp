@@ -15,9 +15,14 @@ namespace Microsoft.Logic;
 /**
  * The integration service environment managed api.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationServiceEnvironment)
-model IntegrationServiceEnvironmentManagedApi
-  is TrackedResource<IntegrationServiceEnvironmentManagedApiProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  IntegrationServiceEnvironmentManagedApiProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model IntegrationServiceEnvironmentManagedApi extends Resource {
   /**
    * The api name.
    */
@@ -25,6 +30,12 @@ model IntegrationServiceEnvironmentManagedApi
   @key("apiName")
   @segment("managedApis")
   name: string;
+
+  /**
+   * The integration service environment managed api properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: IntegrationServiceEnvironmentManagedApiProperties;
 }
 
 @armResourceOperations

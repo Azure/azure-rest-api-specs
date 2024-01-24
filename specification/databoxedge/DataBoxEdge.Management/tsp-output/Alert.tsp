@@ -15,8 +15,12 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Alert on the data box edge/gateway device.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataBoxEdgeDevice)
-model Alert is ProxyResource<AlertProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AlertProperties)
+@includeInapplicableMetadataInPayload(false)
+model Alert extends ProxyResourceBase {
   /**
    * The alert name.
    */
@@ -24,6 +28,12 @@ model Alert is ProxyResource<AlertProperties> {
   @key("name")
   @segment("alerts")
   name: string;
+
+  /**
+   * Properties of alert.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AlertProperties;
 }
 
 @armResourceOperations

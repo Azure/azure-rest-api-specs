@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
  * REST API for Azure SignalR Service
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "SignalRManagementClient",
 })

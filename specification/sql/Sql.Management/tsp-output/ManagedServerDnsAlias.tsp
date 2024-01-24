@@ -15,12 +15,24 @@ namespace Microsoft.Sql;
 /**
  * A managed server DNS alias.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model ManagedServerDnsAlias is ProxyResource<ManagedServerDnsAliasProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedServerDnsAliasProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedServerDnsAlias extends ProxyResource {
   @path
   @key("dnsAliasName")
   @segment("dnsAliases")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedServerDnsAliasProperties;
 }
 
 @armResourceOperations

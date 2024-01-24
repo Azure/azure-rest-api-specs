@@ -15,8 +15,12 @@ namespace Microsoft.Logic;
 /**
  * The workflow version.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workflow)
-model WorkflowVersion is TrackedResource<WorkflowVersionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WorkflowVersionProperties)
+@includeInapplicableMetadataInPayload(false)
+model WorkflowVersion extends Resource {
   /**
    * The workflow versionId.
    */
@@ -24,6 +28,12 @@ model WorkflowVersion is TrackedResource<WorkflowVersionProperties> {
   @key("versionId")
   @segment("versions")
   name: string;
+
+  /**
+   * The workflow version properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WorkflowVersionProperties;
 }
 
 @armResourceOperations

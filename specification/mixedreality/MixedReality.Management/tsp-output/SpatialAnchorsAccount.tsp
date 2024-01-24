@@ -14,7 +14,13 @@ namespace Microsoft.MixedReality;
 /**
  * SpatialAnchorsAccount Response.
  */
-model SpatialAnchorsAccount is TrackedResource<MixedRealityAccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  MixedRealityAccountProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SpatialAnchorsAccount extends TrackedResourceBase {
   /**
    * Name of an Mixed Reality Account.
    */
@@ -26,10 +32,20 @@ model SpatialAnchorsAccount is TrackedResource<MixedRealityAccountProperties> {
   @segment("spatialAnchorsAccounts")
   name: string;
 
+  /**
+   * The kind of account, if supported
+   */
+  kind?: Sku;
+
+  /**
+   * Property bag.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MixedRealityAccountProperties;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
   ...Azure.ResourceManager.ResourcePlan;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations

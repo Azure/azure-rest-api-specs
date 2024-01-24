@@ -14,7 +14,11 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services account is an Azure resource representing the provisioned account, it's type, location and SKU.
  */
-model Account is TrackedResource<AccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(AccountProperties)
+@includeInapplicableMetadataInPayload(false)
+model Account extends TrackedResourceBase {
   /**
    * The name of Cognitive Services account.
    */
@@ -26,9 +30,19 @@ model Account is TrackedResource<AccountProperties> {
   @segment("accounts")
   name: string;
 
+  /**
+   * The Kind of the resource.
+   */
+  kind?: string;
+
+  /**
+   * Properties of Cognitive Services account.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AccountProperties;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations

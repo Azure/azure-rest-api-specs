@@ -15,9 +15,12 @@ namespace Microsoft.Sql;
 /**
  * Azure Active Directory only authentication.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model ServerAzureADOnlyAuthentication
-  is ProxyResource<AzureADOnlyAuthProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AzureADOnlyAuthProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServerAzureADOnlyAuthentication extends ProxyResource {
   /**
    * The name of server azure active directory only authentication.
    */
@@ -25,6 +28,12 @@ model ServerAzureADOnlyAuthentication
   @key("authenticationName")
   @segment("azureADOnlyAuthentications")
   name: AuthenticationName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AzureADOnlyAuthProperties;
 }
 
 @armResourceOperations

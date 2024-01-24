@@ -15,8 +15,14 @@ namespace Microsoft.Support;
 /**
  * Object that represents a Chat Transcript resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SupportTicketDetails)
-model ChatTranscriptDetails is ProxyResource<ChatTranscriptDetailsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ChatTranscriptDetailsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ChatTranscriptDetails extends ProxyResourceBase {
   /**
    * ChatTranscript name.
    */
@@ -24,6 +30,12 @@ model ChatTranscriptDetails is ProxyResource<ChatTranscriptDetailsProperties> {
   @key("chatTranscriptName")
   @segment("chatTranscripts")
   name: string;
+
+  /**
+   * Properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ChatTranscriptDetailsProperties;
 }
 
 @armResourceOperations

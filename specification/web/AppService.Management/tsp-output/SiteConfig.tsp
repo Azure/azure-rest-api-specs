@@ -15,12 +15,22 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Web app configuration ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("web")
 @parentResource(Site)
-model SiteConfig is ProxyResource<SiteConfigProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SiteConfigProperties)
+@includeInapplicableMetadataInPayload(false)
+model SiteConfig extends ProxyOnlyResource {
   @key("config")
   @segment("config")
   name: string;
+
+  /**
+   * Core resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SiteConfigProperties;
 }
 
 @armResourceOperations

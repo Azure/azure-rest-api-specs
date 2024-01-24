@@ -15,9 +15,14 @@ namespace Microsoft.Marketplace;
 /**
  * Admin request approval resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateStore)
-model AdminRequestApprovalsResource
-  is ProxyResource<AdminRequestApprovalProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  AdminRequestApprovalProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AdminRequestApprovalsResource extends Resource {
   /**
    * The admin request approval ID to get create or update
    */
@@ -25,6 +30,12 @@ model AdminRequestApprovalsResource
   @key("adminRequestApprovalId")
   @segment("adminRequestApprovals")
   name: string;
+
+  /**
+   * The privateStore admin Approval request data structure.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AdminRequestApprovalProperties;
 }
 
 @armResourceOperations

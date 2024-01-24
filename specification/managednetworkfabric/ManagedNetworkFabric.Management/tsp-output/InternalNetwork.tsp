@@ -15,8 +15,12 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * Defines the Internal Network resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(L3IsolationDomain)
-model InternalNetwork is ProxyResource<InternalNetworkProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(InternalNetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model InternalNetwork extends ProxyResourceBase {
   /**
    * Name of the Internal Network.
    */
@@ -24,6 +28,12 @@ model InternalNetwork is ProxyResource<InternalNetworkProperties> {
   @key("internalNetworkName")
   @segment("internalNetworks")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: InternalNetworkProperties;
 }
 
 @armResourceOperations

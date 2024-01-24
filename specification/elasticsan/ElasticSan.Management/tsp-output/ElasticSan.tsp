@@ -14,7 +14,11 @@ namespace Microsoft.ElasticSan;
 /**
  * Response for ElasticSan request.
  */
-model ElasticSan is TrackedResource<ElasticSanProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ElasticSanProperties)
+@includeInapplicableMetadataInPayload(false)
+model ElasticSan extends TrackedResourceBase {
   /**
    * The name of the ElasticSan.
    */
@@ -25,6 +29,12 @@ model ElasticSan is TrackedResource<ElasticSanProperties> {
   @key("elasticSanName")
   @segment("elasticSans")
   name: string;
+
+  /**
+   * Properties of ElasticSan.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ElasticSanProperties;
 }
 
 @armResourceOperations

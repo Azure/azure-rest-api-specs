@@ -14,7 +14,11 @@ namespace Microsoft.DevTestLab;
 /**
  * A lab.
  */
-model Lab is TrackedResource<LabProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(LabProperties)
+@includeInapplicableMetadataInPayload(false)
+model Lab extends Resource {
   /**
    * The name of the lab.
    */
@@ -22,6 +26,12 @@ model Lab is TrackedResource<LabProperties> {
   @key("name")
   @segment("labs")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: LabProperties;
 }
 
 @armResourceOperations

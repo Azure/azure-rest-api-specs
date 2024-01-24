@@ -15,13 +15,24 @@ namespace Microsoft.Sql;
 /**
  * A recoverable managed database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedInstance)
-model RecoverableManagedDatabase
-  is ProxyResource<RecoverableManagedDatabaseProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  RecoverableManagedDatabaseProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model RecoverableManagedDatabase extends ProxyResource {
   @path
   @key("recoverableDatabaseName")
   @segment("recoverableDatabases")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RecoverableManagedDatabaseProperties;
 }
 
 @armResourceOperations

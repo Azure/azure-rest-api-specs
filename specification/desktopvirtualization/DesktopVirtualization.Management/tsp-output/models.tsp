@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -589,6 +591,7 @@ model PrivateEndpointConnection extends Resource {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateEndpointConnectionProperties;
 }
 
@@ -828,6 +831,7 @@ model WorkspacePatch {
   /**
    * Detailed properties for Workspace
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WorkspacePatchProperties;
 }
 
@@ -868,6 +872,7 @@ model PrivateLinkResource extends Resource {
   /**
    * Resource properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -1084,6 +1089,7 @@ model ScalingPlanPatch {
   /**
    * Detailed properties for scaling plan
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ScalingPlanPatchProperties;
 }
 
@@ -1225,6 +1231,7 @@ model ScalingPlanPooledSchedulePatch extends Resource {
   /**
    * Detailed properties for ScalingPlanPooledSchedule
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ScalingPlanPooledScheduleProperties;
 }
 
@@ -1370,6 +1377,7 @@ model ScalingPlanPersonalSchedulePatch {
   /**
    * Detailed properties for ScalingPlanPersonalSchedule
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ScalingPlanPersonalScheduleProperties;
 }
 
@@ -1433,6 +1441,7 @@ model ApplicationGroupPatch extends Resource {
   /**
    * ApplicationGroup properties that can be patched.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApplicationGroupPatchProperties;
 }
 
@@ -1468,6 +1477,7 @@ model StartMenuItem extends Resource {
   /**
    * Detailed properties for StartMenuItem
    */
+  @extension("x-ms-client-flatten", true)
   properties?: StartMenuItemProperties;
 }
 
@@ -1594,6 +1604,7 @@ model ApplicationPatch {
   /**
    * Detailed properties for Application
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ApplicationPatchProperties;
 }
 
@@ -1702,6 +1713,7 @@ model DesktopPatch {
   /**
    * Detailed properties for Desktop
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DesktopPatchProperties;
 }
 
@@ -1917,6 +1929,7 @@ model HostPoolPatch extends Resource {
   /**
    * HostPool properties that can be patched.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: HostPoolPatchProperties;
 }
 
@@ -2261,6 +2274,7 @@ model SessionHostPatch extends Resource {
   /**
    * Detailed properties for SessionHost
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SessionHostPatchProperties;
 }
 
@@ -2412,6 +2426,7 @@ model MsixPackagePatch extends Resource {
   /**
    * Detailed properties for MSIX Package
    */
+  @extension("x-ms-client-flatten", true)
   properties?: MsixPackagePatchProperties;
 }
 
@@ -2457,6 +2472,7 @@ model ExpandMsixImage extends Resource {
   /**
    * Detailed properties for ExpandMsixImage
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ExpandMsixImageProperties;
 }
 

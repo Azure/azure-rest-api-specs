@@ -15,8 +15,12 @@ namespace Microsoft.Cdn;
 /**
  * Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(CdnEndpoint)
-model CdnCustomDomain is ProxyResource<CustomDomainProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CustomDomainProperties)
+@includeInapplicableMetadataInPayload(false)
+model CdnCustomDomain extends ProxyResource {
   /**
    * Name of the custom domain within an endpoint.
    */
@@ -24,6 +28,12 @@ model CdnCustomDomain is ProxyResource<CustomDomainProperties> {
   @key("customDomainName")
   @segment("customDomains")
   name: string;
+
+  /**
+   * The JSON object that contains the properties of the custom domain to create.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CustomDomainProperties;
 }
 
 @armResourceOperations

@@ -14,8 +14,13 @@ namespace Microsoft.DataLakeAnalytics;
 /**
  * A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account.
  */
-model DataLakeAnalyticsAccount
-  is ProxyResource<DataLakeAnalyticsAccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  DataLakeAnalyticsAccountProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DataLakeAnalyticsAccount extends ProxyResourceBase {
   /**
    * The name of the Data Lake Analytics account.
    */
@@ -23,6 +28,12 @@ model DataLakeAnalyticsAccount
   @key("accountName")
   @segment("accounts")
   name: string;
+
+  /**
+   * The properties defined by Data Lake Analytics all properties are specific to each resource provider.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataLakeAnalyticsAccountProperties;
 }
 
 @armResourceOperations

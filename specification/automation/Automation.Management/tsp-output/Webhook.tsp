@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the webhook type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model Webhook is ProxyResource<WebhookProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WebhookProperties)
+@includeInapplicableMetadataInPayload(false)
+model Webhook extends ProxyResourceBase {
   /**
    * The webhook name.
    */
@@ -24,6 +28,12 @@ model Webhook is ProxyResource<WebhookProperties> {
   @key("webhookName")
   @segment("webhooks")
   name: string;
+
+  /**
+   * Gets or sets the webhook properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WebhookProperties;
 }
 
 @armResourceOperations

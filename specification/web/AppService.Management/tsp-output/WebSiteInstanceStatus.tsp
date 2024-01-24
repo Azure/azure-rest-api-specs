@@ -13,12 +13,24 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.CertificateRegistration;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model WebSiteInstanceStatus is ProxyResource<WebSiteInstanceStatusProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  WebSiteInstanceStatusProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model WebSiteInstanceStatus extends ProxyOnlyResource {
   @path
   @key("instanceId")
   @segment("instances")
   name: string;
+
+  /**
+   * WebSiteInstanceStatus resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WebSiteInstanceStatusProperties;
 }
 
 @armResourceOperations

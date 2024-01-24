@@ -15,15 +15,29 @@ namespace Microsoft.Sql;
 /**
  * A restorable dropped database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model RestorableDroppedDatabase
-  is TrackedResource<RestorableDroppedDatabaseProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  RestorableDroppedDatabaseProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model RestorableDroppedDatabase extends ProxyResource {
   @path
   @key("restorableDroppedDatabaseId")
   @segment("restorableDroppedDatabases")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The name and tier of the SKU.
+   */
+  sku?: Sku;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RestorableDroppedDatabaseProperties;
 }
 
 @armResourceOperations

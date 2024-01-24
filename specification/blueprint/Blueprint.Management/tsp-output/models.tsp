@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -141,6 +143,7 @@ model ParameterDefinition {
 /**
 * User-friendly properties for this parameter.
 */
+@extension("x-ms-client-flatten", true)
 "metadata"?: ParameterDefinitionMetadata;
 /**
 * Default Value for this parameter.
@@ -188,6 +191,7 @@ model ResourceGroupDefinition {
 /**
 * User-friendly properties for this resource group.
 */
+@extension("x-ms-client-flatten", true)
 "metadata"?: ParameterDefinitionMetadata;
 /**
 * Artifacts which need to be deployed before this resource group.
@@ -584,6 +588,7 @@ model TemplateArtifact extends Artifact {
 /**
 * Properties for a Resource Manager template blueprint artifact.
 */
+@extension("x-ms-client-flatten", true)
 "properties": TemplateArtifactProperties;
 /**
 * Specifies the kind of blueprint artifact.
@@ -618,6 +623,7 @@ model RoleAssignmentArtifact extends Artifact {
 /**
 * Properties for a Role assignment blueprint artifact.
 */
+@extension("x-ms-client-flatten", true)
 "properties": RoleAssignmentArtifactProperties;
 /**
 * Specifies the kind of blueprint artifact.
@@ -652,6 +658,7 @@ model PolicyAssignmentArtifact extends Artifact {
 /**
 * properties for policyAssignment Artifact
 */
+@extension("x-ms-client-flatten", true)
 "properties": PolicyAssignmentArtifactProperties;
 /**
 * Specifies the kind of blueprint artifact.

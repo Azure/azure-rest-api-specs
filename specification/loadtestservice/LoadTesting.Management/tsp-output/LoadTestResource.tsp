@@ -14,7 +14,11 @@ namespace Microsoft.LoadTestService;
 /**
  * LoadTest details
  */
-model LoadTestResource is TrackedResource<LoadTestProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(LoadTestProperties)
+@includeInapplicableMetadataInPayload(false)
+model LoadTestResource extends TrackedResourceBase {
   /**
    * Load Test name.
    */
@@ -22,6 +26,12 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   @key("loadTestName")
   @segment("loadTests")
   name: string;
+
+  /**
+   * Load Test resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: LoadTestProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

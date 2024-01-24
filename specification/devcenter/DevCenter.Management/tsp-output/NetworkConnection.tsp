@@ -14,7 +14,11 @@ namespace Microsoft.DevCenter;
 /**
  * Network related settings
  */
-model NetworkConnection is TrackedResource<NetworkProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(NetworkProperties)
+@includeInapplicableMetadataInPayload(false)
+model NetworkConnection extends TrackedResourceBase {
   /**
    * Name of the Network Connection that can be applied to a Pool.
    */
@@ -22,6 +26,12 @@ model NetworkConnection is TrackedResource<NetworkProperties> {
   @key("networkConnectionName")
   @segment("networkConnections")
   name: string;
+
+  /**
+   * Properties of a Network Connection
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NetworkProperties;
 }
 
 @armResourceOperations

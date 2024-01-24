@@ -15,8 +15,12 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a UserSession definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SessionHost)
-model UserSession is ProxyResource<UserSessionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(UserSessionProperties)
+@includeInapplicableMetadataInPayload(false)
+model UserSession extends ProxyResourceBase {
   /**
    * The name of the user session within the specified session host
    */
@@ -26,6 +30,12 @@ model UserSession is ProxyResource<UserSessionProperties> {
   @key("userSessionId")
   @segment("userSessions")
   name: string;
+
+  /**
+   * Detailed properties for UserSession
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: UserSessionProperties;
 }
 
 @armResourceOperations

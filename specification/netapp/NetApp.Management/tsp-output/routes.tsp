@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetApp;
 
@@ -36,6 +38,7 @@ interface NetAppResourceOperations {
        * Name availability request.
        */
       @body
+      @extension("x-ms-client-flatten", true)
       body: ResourceNameAvailabilityRequest;
     },
     CheckAvailabilityResponse
@@ -67,6 +70,7 @@ interface NetAppResourceOperations {
        * File path availability request.
        */
       @body
+      @extension("x-ms-client-flatten", true)
       body: FilePathAvailabilityRequest;
     },
     CheckAvailabilityResponse
@@ -98,6 +102,7 @@ interface NetAppResourceOperations {
        * Quota availability request.
        */
       @body
+      @extension("x-ms-client-flatten", true)
       body: QuotaAvailabilityRequest;
     },
     CheckAvailabilityResponse
@@ -154,6 +159,7 @@ interface NetAppResourceOperations {
        * Network sibling set to query.
        */
       @body
+      @extension("x-ms-client-flatten", true)
       body: QueryNetworkSiblingSetRequest;
     },
     NetworkSiblingSet
@@ -185,6 +191,7 @@ interface NetAppResourceOperations {
        * Update for the specified network sibling set.
        */
       @body
+      @extension("x-ms-client-flatten", true)
       body: UpdateNetworkSiblingSetRequest;
     },
     NetworkSiblingSet | void

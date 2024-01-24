@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the variable.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model Variable is ProxyResource<VariableProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VariableProperties)
+@includeInapplicableMetadataInPayload(false)
+model Variable extends ProxyResourceBase {
   /**
    * The name of variable.
    */
@@ -24,6 +28,12 @@ model Variable is ProxyResource<VariableProperties> {
   @key("variableName")
   @segment("variables")
   name: string;
+
+  /**
+   * Gets or sets the properties of the variable.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VariableProperties;
 }
 
 @armResourceOperations

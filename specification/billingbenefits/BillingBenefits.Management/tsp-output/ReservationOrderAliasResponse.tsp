@@ -14,9 +14,14 @@ namespace Microsoft.BillingBenefits;
 /**
  * Reservation order alias
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model ReservationOrderAliasResponse
-  is ProxyResource<ReservationOrderAliasResponseProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ReservationOrderAliasResponseProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ReservationOrderAliasResponse extends ProxyResourceBase {
   /**
    * Name of the reservation order alias
    */
@@ -25,6 +30,12 @@ model ReservationOrderAliasResponse
   @key("reservationOrderAliasName")
   @segment("reservationOrderAliases")
   name: string;
+
+  /**
+   * Reservation order alias response properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ReservationOrderAliasResponseProperties;
 
   ...Azure.ResourceManager.ResourceSku;
 }

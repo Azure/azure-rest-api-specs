@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Hybrid Connection contract. This is used to configure a Hybrid Connection.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AppServicePlan)
-model HybridConnection is ProxyResource<HybridConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(HybridConnectionProperties)
+@includeInapplicableMetadataInPayload(false)
+model HybridConnection extends ProxyOnlyResource {
   /**
    * Name of the Service Bus relay.
    */
@@ -24,6 +28,12 @@ model HybridConnection is ProxyResource<HybridConnectionProperties> {
   @key("relayName")
   @segment("relays")
   name: string;
+
+  /**
+   * HybridConnection resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: HybridConnectionProperties;
 }
 
 @armResourceOperations

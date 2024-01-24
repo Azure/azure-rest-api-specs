@@ -14,7 +14,11 @@ namespace Microsoft.Help;
 /**
  * Solution response.
  */
-model SolutionResource is ExtensionResource<SolutionResourceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(SolutionResourceProperties)
+@includeInapplicableMetadataInPayload(false)
+model SolutionResource extends ExtensionResourceBase {
   /**
    * Solution resource Name.
    */
@@ -25,6 +29,12 @@ model SolutionResource is ExtensionResource<SolutionResourceProperties> {
   @key("solutionResourceName")
   @segment("solutions")
   name: string;
+
+  /**
+   * Solution result
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SolutionResourceProperties;
 }
 
 @armResourceOperations

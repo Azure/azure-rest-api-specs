@@ -14,7 +14,11 @@ namespace Microsoft.ConfidentialLedger;
 /**
  * Managed CCF. Contains the properties of Managed CCF Resource.
  */
-model ManagedCCF is TrackedResource<ManagedCCFProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ManagedCCFProperties)
+@includeInapplicableMetadataInPayload(false)
+model ManagedCCF extends TrackedResourceBase {
   /**
    * Name of the Managed CCF
    */
@@ -23,6 +27,12 @@ model ManagedCCF is TrackedResource<ManagedCCFProperties> {
   @key("appName")
   @segment("managedCCFs")
   name: string;
+
+  /**
+   * Properties of Managed CCF Resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedCCFProperties;
 }
 
 @armResourceOperations

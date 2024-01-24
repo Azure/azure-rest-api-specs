@@ -15,8 +15,12 @@ namespace Microsoft.Batch;
 /**
  * Contains information about a pool.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BatchAccount)
-model Pool is ProxyResource<PoolProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PoolProperties)
+@includeInapplicableMetadataInPayload(false)
+model Pool extends ProxyResource {
   /**
    * The pool name. This must be unique within the account.
    */
@@ -28,7 +32,16 @@ model Pool is ProxyResource<PoolProperties> {
   @segment("pools")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  /**
+   * The type of identity used for the Batch Pool.
+   */
+  identity?: BatchPoolIdentity;
+
+  /**
+   * The properties associated with the pool.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PoolProperties;
 }
 
 @armResourceOperations
@@ -118,20 +131,20 @@ interface Pools {
       $select?: string;
 
       /**
-* OData filter expression. Valid properties for filtering are:
-
- name
- properties/allocationState
- properties/allocationStateTransitionTime
- properties/creationTime
- properties/provisioningState
- properties/provisioningStateTransitionTime
- properties/lastModified
- properties/vmSize
- properties/interNodeCommunication
- properties/scaleSettings/autoScale
- properties/scaleSettings/fixedScale
-*/
+       * OData filter expression. Valid properties for filtering are:
+       *
+       *  name
+       *  properties/allocationState
+       *  properties/allocationStateTransitionTime
+       *  properties/creationTime
+       *  properties/provisioningState
+       *  properties/provisioningStateTransitionTime
+       *  properties/lastModified
+       *  properties/vmSize
+       *  properties/interNodeCommunication
+       *  properties/scaleSettings/autoScale
+       *  properties/scaleSettings/fixedScale
+       */
       @query("$filter")
       $filter?: string;
     }

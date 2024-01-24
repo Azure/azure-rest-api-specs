@@ -15,8 +15,12 @@ namespace Microsoft.Advisor;
 /**
  * The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ResourceRecommendationBase)
-model SuppressionContract is ProxyResource<SuppressionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SuppressionProperties)
+@includeInapplicableMetadataInPayload(false)
+model SuppressionContract extends Resource {
   /**
    * The name of the suppression.
    */
@@ -24,6 +28,12 @@ model SuppressionContract is ProxyResource<SuppressionProperties> {
   @key("name")
   @segment("suppressions")
   name: string;
+
+  /**
+   * The properties of the suppression.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SuppressionProperties;
 }
 
 @armResourceOperations

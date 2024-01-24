@@ -15,8 +15,12 @@ namespace Microsoft.Media;
 /**
  * An Asset Track resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Asset)
-model AssetTrack is ProxyResource<AssetTrackProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AssetTrackProperties)
+@includeInapplicableMetadataInPayload(false)
+model AssetTrack extends ProxyResourceBase {
   /**
    * The Asset Track name.
    */
@@ -24,6 +28,12 @@ model AssetTrack is ProxyResource<AssetTrackProperties> {
   @key("trackName")
   @segment("tracks")
   name: string;
+
+  /**
+   * The resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AssetTrackProperties;
 }
 
 @armResourceOperations

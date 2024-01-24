@@ -15,6 +15,7 @@ using TypeSpec.Versioning;
  * The customLocations Rest API spec.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "customLocations",
 })

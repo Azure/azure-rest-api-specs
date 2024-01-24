@@ -15,9 +15,14 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Hybrid Connection for an App Service app.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model RelayServiceConnectionEntity
-  is ProxyResource<RelayServiceConnectionEntityProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  RelayServiceConnectionEntityProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model RelayServiceConnectionEntity extends ProxyOnlyResource {
   /**
    * Name of the hybrid connection.
    */
@@ -25,6 +30,12 @@ model RelayServiceConnectionEntity
   @key("entityName")
   @segment("hybridconnection")
   name: string;
+
+  /**
+   * RelayServiceConnectionEntity resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RelayServiceConnectionEntityProperties;
 }
 
 @armResourceOperations

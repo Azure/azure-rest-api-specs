@@ -15,9 +15,14 @@ namespace Microsoft.ElasticSan;
 /**
  *  Response for PrivateEndpoint Connection object
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ElasticSan)
-model PrivateEndpointConnection
-  is ProxyResource<PrivateEndpointConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateEndpointConnectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnection extends ProxyResourceBase {
   /**
    * The name of the Private Endpoint connection.
    */
@@ -25,6 +30,12 @@ model PrivateEndpointConnection
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
+
+  /**
+   * Private Endpoint Connection Properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: PrivateEndpointConnectionProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.Relay;
 /**
  * Description of a namespace resource.
  */
-model RelayNamespace is TrackedResource<RelayNamespaceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(RelayNamespaceProperties)
+@includeInapplicableMetadataInPayload(false)
+model RelayNamespace extends TrackedResourceBase {
   /**
    * The namespace name
    */
@@ -24,6 +28,12 @@ model RelayNamespace is TrackedResource<RelayNamespaceProperties> {
   @key("namespaceName")
   @segment("namespaces")
   name: string;
+
+  /**
+   * Description of Relay namespace
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RelayNamespaceProperties;
 
   ...Azure.ResourceManager.ResourceSku;
 }

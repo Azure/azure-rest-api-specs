@@ -14,7 +14,11 @@ namespace NewRelic.Observability;
 /**
  * A Monitor Resource by NewRelic
  */
-model NewRelicMonitorResource is TrackedResource<MonitorProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(MonitorProperties)
+@includeInapplicableMetadataInPayload(false)
+model NewRelicMonitorResource extends TrackedResourceBase {
   /**
    * Name of the Monitors resource
    */
@@ -22,6 +26,13 @@ model NewRelicMonitorResource is TrackedResource<MonitorProperties> {
   @key("monitorName")
   @segment("monitors")
   name: string;
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties: MonitorProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

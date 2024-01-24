@@ -15,8 +15,12 @@ namespace Microsoft.ServiceFabric;
 /**
  * The service resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApplicationResource)
-model ServiceResource is TrackedResource<ServiceResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ServiceResourceProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServiceResource extends ProxyResource {
   /**
    * The name of the service resource in the format of {applicationName}~{serviceName}.
    */
@@ -24,6 +28,12 @@ model ServiceResource is TrackedResource<ServiceResourceProperties> {
   @key("serviceName")
   @segment("services")
   name: string;
+
+  /**
+   * The service resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServiceResourceProperties;
 }
 
 @armResourceOperations

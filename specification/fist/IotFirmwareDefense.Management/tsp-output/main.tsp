@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
  * The definitions and parameters in this swagger specification will be used to manage the IoT Firmware Defense resources.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "fist",
 })

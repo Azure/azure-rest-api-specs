@@ -15,8 +15,12 @@ namespace Microsoft.HybridContainerService;
 /**
  * The agentPool resource definition
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ProvisionedCluster)
-model AgentPool is ProxyResource<AgentPoolProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AgentPoolProperties)
+@includeInapplicableMetadataInPayload(false)
+model AgentPool extends ProxyResourceBase {
   /**
    * Parameter for the name of the agent pool in the provisioned cluster.
    */
@@ -32,6 +36,12 @@ model AgentPool is ProxyResource<AgentPoolProperties> {
    * Extended location pointing to the underlying infrastructure
    */
   extendedLocation?: ExtendedLocation;
+
+  /**
+   * Properties of the agent pool resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AgentPoolProperties;
 }
 
 @armResourceOperations

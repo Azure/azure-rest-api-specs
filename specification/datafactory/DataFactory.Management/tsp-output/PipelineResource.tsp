@@ -15,8 +15,12 @@ namespace Microsoft.DataFactory;
 /**
  * Pipeline resource type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Factory)
-model PipelineResource is ProxyResource<Pipeline> {
+@Azure.ResourceManager.Private.armResourceInternal(Pipeline)
+@includeInapplicableMetadataInPayload(false)
+model PipelineResource extends SubResource {
   /**
    * The pipeline name.
    */
@@ -27,6 +31,12 @@ model PipelineResource is ProxyResource<Pipeline> {
   @key("pipelineName")
   @segment("pipelines")
   name: string;
+
+  /**
+   * Properties of the pipeline.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: Pipeline;
 }
 
 @armResourceOperations

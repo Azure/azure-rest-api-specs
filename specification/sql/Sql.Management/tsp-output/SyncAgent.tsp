@@ -15,8 +15,12 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database sync agent.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model SyncAgent is ProxyResource<SyncAgentProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SyncAgentProperties)
+@includeInapplicableMetadataInPayload(false)
+model SyncAgent extends ProxyResource {
   /**
    * The name of the sync agent.
    */
@@ -24,6 +28,12 @@ model SyncAgent is ProxyResource<SyncAgentProperties> {
   @key("syncAgentName")
   @segment("syncAgents")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SyncAgentProperties;
 }
 
 @armResourceOperations

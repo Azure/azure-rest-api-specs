@@ -15,8 +15,14 @@ namespace Microsoft.Peering;
 /**
  * The customer's ASN that is registered by the peering service provider.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Peering)
-model PeeringRegisteredAsn is ProxyResource<PeeringRegisteredAsnProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PeeringRegisteredAsnProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PeeringRegisteredAsn extends Resource {
   /**
    * The name of the registered ASN.
    */
@@ -24,6 +30,12 @@ model PeeringRegisteredAsn is ProxyResource<PeeringRegisteredAsnProperties> {
   @key("registeredAsnName")
   @segment("registeredAsns")
   name: string;
+
+  /**
+   * The properties that define a registered ASN.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PeeringRegisteredAsnProperties;
 }
 
 @armResourceOperations

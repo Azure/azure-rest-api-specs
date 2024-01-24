@@ -15,9 +15,14 @@ namespace Microsoft.AppPlatform;
 /**
  * Supported stack resource payload
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BuildService)
-model SupportedStackResource
-  is ProxyResource<SupportedStackResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SupportedStackResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SupportedStackResource extends ProxyResource {
   /**
    * The name of the stack resource.
    */
@@ -25,6 +30,12 @@ model SupportedStackResource
   @key("stackName")
   @segment("supportedStacks")
   name: string;
+
+  /**
+   * Supported stack resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SupportedStackResourceProperties;
 }
 
 @armResourceOperations

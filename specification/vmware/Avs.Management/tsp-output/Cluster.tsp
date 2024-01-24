@@ -15,8 +15,12 @@ namespace Microsoft.AVS;
 /**
  * A cluster resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model Cluster is ProxyResource<ClusterProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cluster extends ProxyResourceBase {
   /**
    * Name of the cluster in the private cloud
    */
@@ -25,6 +29,12 @@ model Cluster is ProxyResource<ClusterProperties> {
   @key("clusterName")
   @segment("clusters")
   name: string;
+
+  /**
+   * The properties of a cluster resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterProperties;
 
   ...Azure.ResourceManager.ResourceSku;
 }

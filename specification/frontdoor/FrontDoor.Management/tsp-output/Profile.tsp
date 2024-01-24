@@ -14,7 +14,11 @@ namespace Microsoft.Network;
 /**
  * Defines an Network Experiment Profile and lists of Experiments
  */
-model Profile is TrackedResource<ProfileProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ProfileProperties)
+@includeInapplicableMetadataInPayload(false)
+model Profile extends FrontDoorResourceModel {
   /**
    * The Profile identifier associated with the Tenant and Partner
    */
@@ -28,6 +32,12 @@ model Profile is TrackedResource<ProfileProperties> {
    * Gets a unique read-only string that changes whenever the resource is updated.
    */
   etag?: string;
+
+  /**
+   * The properties of a Profile
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProfileProperties;
 }
 
 @armResourceOperations

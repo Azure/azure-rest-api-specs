@@ -15,9 +15,14 @@ namespace Dynatrace.Observability;
 /**
  * Single sign-on configurations for a given monitor resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MonitorResource)
-model DynatraceSingleSignOnResource
-  is ProxyResource<DynatraceSingleSignOnProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  DynatraceSingleSignOnProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DynatraceSingleSignOnResource extends ProxyResourceBase {
   /**
    * Single Sign On Configuration Name
    */
@@ -25,6 +30,13 @@ model DynatraceSingleSignOnResource
   @key("configurationName")
   @segment("singleSignOnConfigurations")
   name: string;
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties: DynatraceSingleSignOnProperties;
 }
 
 @armResourceOperations

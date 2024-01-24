@@ -15,8 +15,12 @@ namespace Microsoft.AppPlatform;
 /**
  * Custom domain resource payload.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AppResource)
-model CustomDomainResource is ProxyResource<CustomDomainProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CustomDomainProperties)
+@includeInapplicableMetadataInPayload(false)
+model CustomDomainResource extends ProxyResource {
   /**
    * The name of the custom domain resource.
    */
@@ -24,6 +28,12 @@ model CustomDomainResource is ProxyResource<CustomDomainProperties> {
   @key("domainName")
   @segment("domains")
   name: string;
+
+  /**
+   * Properties of the custom domain resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: CustomDomainProperties;
 }
 
 @armResourceOperations

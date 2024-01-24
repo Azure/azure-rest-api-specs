@@ -14,7 +14,11 @@ namespace Microsoft.AppPlatform;
 /**
  * Service resource
  */
-model ServiceResource is TrackedResource<ClusterResourceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterResourceProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServiceResource extends TrackedResource {
   /**
    * The name of the Service resource.
    */
@@ -23,7 +27,16 @@ model ServiceResource is TrackedResource<ClusterResourceProperties> {
   @segment("Spring")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * Sku of the Service resource
+   */
+  sku?: Sku;
+
+  /**
+   * Properties of the Service resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterResourceProperties;
 }
 
 @armResourceOperations

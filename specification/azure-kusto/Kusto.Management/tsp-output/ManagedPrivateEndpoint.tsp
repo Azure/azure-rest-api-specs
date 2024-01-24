@@ -15,9 +15,14 @@ namespace Microsoft.Kusto;
 /**
  * Class representing a managed private endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model ManagedPrivateEndpoint
-  is ProxyResource<ManagedPrivateEndpointProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ManagedPrivateEndpointProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ManagedPrivateEndpoint extends ProxyResourceBase {
   /**
    * The name of the managed private endpoint.
    */
@@ -26,6 +31,12 @@ model ManagedPrivateEndpoint
   @key("managedPrivateEndpointName")
   @segment("managedPrivateEndpoints")
   name: string;
+
+  /**
+   * A managed private endpoint.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ManagedPrivateEndpointProperties;
 }
 
 @armResourceOperations

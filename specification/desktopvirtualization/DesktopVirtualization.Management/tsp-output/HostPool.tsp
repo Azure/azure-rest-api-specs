@@ -14,7 +14,11 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a HostPool definition.
  */
-model HostPool is TrackedResource<HostPoolProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(HostPoolProperties)
+@includeInapplicableMetadataInPayload(false)
+model HostPool extends TrackedResourceBase {
   /**
    * The name of the host pool within the specified resource group
    */
@@ -24,6 +28,12 @@ model HostPool is TrackedResource<HostPoolProperties> {
   @key("hostPoolName")
   @segment("hostPools")
   name: string;
+
+  /**
+   * Detailed properties for HostPool
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: HostPoolProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,14 @@ namespace Microsoft.Batch;
 /**
  * Contains information about a private link resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BatchAccount)
-model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  PrivateLinkResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model PrivateLinkResource extends ProxyResource {
   /**
    * The private link resource name. This must be unique within the account.
    */
@@ -27,6 +33,12 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   @key("privateLinkResourceName")
   @segment("privateLinkResources")
   name: string;
+
+  /**
+   * The properties associated with the private link resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateLinkResourceProperties;
 }
 
 @armResourceOperations

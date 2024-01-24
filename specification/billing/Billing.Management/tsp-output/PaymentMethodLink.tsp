@@ -14,8 +14,12 @@ namespace Microsoft.Billing;
 /**
  * A payment method link.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @tenantResource
-model PaymentMethodLink is ProxyResource<PaymentMethodLinkProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PaymentMethodLinkProperties)
+@includeInapplicableMetadataInPayload(false)
+model PaymentMethodLink extends Resource {
   /**
    * The ID that uniquely identifies a payment method.
    */
@@ -23,6 +27,12 @@ model PaymentMethodLink is ProxyResource<PaymentMethodLinkProperties> {
   @key("paymentMethodName")
   @segment("paymentMethodLinks")
   name: string;
+
+  /**
+   * The properties of a payment method link.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PaymentMethodLinkProperties;
 }
 
 @armResourceOperations

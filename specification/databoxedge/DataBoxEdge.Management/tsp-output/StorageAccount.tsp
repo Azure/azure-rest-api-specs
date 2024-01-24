@@ -15,8 +15,12 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Represents a Storage Account on the  Data Box Edge/Gateway device.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataBoxEdgeDevice)
-model StorageAccount is ProxyResource<StorageAccountProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(StorageAccountProperties)
+@includeInapplicableMetadataInPayload(false)
+model StorageAccount extends ProxyResourceBase {
   /**
    * The storage account name.
    */
@@ -24,6 +28,12 @@ model StorageAccount is ProxyResource<StorageAccountProperties> {
   @key("storageAccountName")
   @segment("storageAccounts")
   name: string;
+
+  /**
+   * The Storage Account properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: StorageAccountProperties;
 }
 
 @armResourceOperations

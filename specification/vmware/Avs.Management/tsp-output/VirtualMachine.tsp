@@ -15,8 +15,12 @@ namespace Microsoft.AVS;
 /**
  * Virtual Machine
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model VirtualMachine is ProxyResource<VirtualMachineProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(VirtualMachineProperties)
+@includeInapplicableMetadataInPayload(false)
+model VirtualMachine extends ProxyResourceBase {
   /**
    * Virtual Machine identifier
    */
@@ -24,6 +28,12 @@ model VirtualMachine is ProxyResource<VirtualMachineProperties> {
   @key("virtualMachineId")
   @segment("virtualMachines")
   name: string;
+
+  /**
+   * Virtual machine properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineProperties;
 }
 
 @armResourceOperations

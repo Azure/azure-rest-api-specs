@@ -15,8 +15,12 @@ namespace PaloAltoNetworks.Cloudngfw;
 /**
  * PreRulestack rule list
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(GlobalRulestackResource)
-model PreRulesResource is ProxyResource<RuleEntry> {
+@Azure.ResourceManager.Private.armResourceInternal(RuleEntry)
+@includeInapplicableMetadataInPayload(false)
+model PreRulesResource extends ProxyResourceBase {
   /**
    * Pre Rule priority
    */
@@ -24,6 +28,13 @@ model PreRulesResource is ProxyResource<RuleEntry> {
   @key("priority")
   @segment("preRules")
   name: string;
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  @visibility("read,create")
+  properties: RuleEntry;
 }
 
 @armResourceOperations

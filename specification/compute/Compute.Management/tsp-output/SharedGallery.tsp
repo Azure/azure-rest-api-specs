@@ -14,8 +14,12 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the Shared Gallery that you want to create or update.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model SharedGallery is ProxyResource<SharedGalleryProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SharedGalleryProperties)
+@includeInapplicableMetadataInPayload(false)
+model SharedGallery extends PirSharedGalleryResource {
   /**
    * The unique name of the Shared Gallery.
    */
@@ -23,6 +27,12 @@ model SharedGallery is ProxyResource<SharedGalleryProperties> {
   @key("galleryUniqueName")
   @segment("sharedGalleries")
   name: string;
+
+  /**
+   * Specifies the properties of a shared gallery
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SharedGalleryProperties;
 }
 
 @armResourceOperations

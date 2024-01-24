@@ -15,8 +15,12 @@ namespace Microsoft.Media;
 /**
  * A Streaming Policy resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MediaService)
-model StreamingPolicy is ProxyResource<StreamingPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(StreamingPolicyProperties)
+@includeInapplicableMetadataInPayload(false)
+model StreamingPolicy extends ProxyResourceBase {
   /**
    * The Streaming Policy name.
    */
@@ -24,6 +28,12 @@ model StreamingPolicy is ProxyResource<StreamingPolicyProperties> {
   @key("streamingPolicyName")
   @segment("streamingPolicies")
   name: string;
+
+  /**
+   * Class to specify properties of Streaming Policy
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StreamingPolicyProperties;
 }
 
 @armResourceOperations

@@ -22,6 +22,7 @@ using TypeSpec.Versioning;
  * Composite Swagger for Application Insights Management Client
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ApplicationInsightsManagementClient",
 })

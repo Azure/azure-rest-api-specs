@@ -14,7 +14,11 @@ namespace Microsoft.HealthcareApis;
 /**
  * The description of the service.
  */
-model ServicesDescription is TrackedResource<ServicesProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ServicesProperties)
+@includeInapplicableMetadataInPayload(false)
+model ServicesDescription extends TrackedResourceBase {
   /**
    * The name of the service instance.
    */
@@ -24,6 +28,12 @@ model ServicesDescription is TrackedResource<ServicesProperties> {
   @key("resourceName")
   @segment("services")
   name: string;
+
+  /**
+   * The common properties of a service.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServicesProperties;
 }
 
 @armResourceOperations

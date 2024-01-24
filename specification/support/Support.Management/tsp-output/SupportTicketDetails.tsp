@@ -14,8 +14,14 @@ namespace Microsoft.Support;
 /**
  * Object that represents SupportTicketDetails resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model SupportTicketDetails is ProxyResource<SupportTicketDetailsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SupportTicketDetailsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SupportTicketDetails extends ProxyResourceBase {
   /**
    * Support ticket name.
    */
@@ -23,6 +29,12 @@ model SupportTicketDetails is ProxyResource<SupportTicketDetailsProperties> {
   @key("supportTicketName")
   @segment("supportTickets")
   name: string;
+
+  /**
+   * Properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SupportTicketDetailsProperties;
 }
 
 @armResourceOperations

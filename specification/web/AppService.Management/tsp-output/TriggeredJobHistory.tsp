@@ -15,8 +15,14 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Triggered Web Job History. List of Triggered Web Job Run Information elements.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(TriggeredWebJob)
-model TriggeredJobHistory is ProxyResource<TriggeredJobHistoryProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  TriggeredJobHistoryProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model TriggeredJobHistory extends ProxyOnlyResource {
   /**
    * History ID.
    */
@@ -24,6 +30,12 @@ model TriggeredJobHistory is ProxyResource<TriggeredJobHistoryProperties> {
   @key("id")
   @segment("history")
   name: string;
+
+  /**
+   * TriggeredJobHistory resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TriggeredJobHistoryProperties;
 }
 
 @armResourceOperations

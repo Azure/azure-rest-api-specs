@@ -15,8 +15,12 @@ namespace Microsoft.Logic;
 /**
  * The batch configuration resource definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationAccount)
-model BatchConfiguration is TrackedResource<BatchConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(BatchConfigurationProperties)
+@includeInapplicableMetadataInPayload(false)
+model BatchConfiguration extends Resource {
   /**
    * The batch configuration name.
    */
@@ -24,6 +28,12 @@ model BatchConfiguration is TrackedResource<BatchConfigurationProperties> {
   @key("batchConfigurationName")
   @segment("batchConfigurations")
   name: string;
+
+  /**
+   * The batch configuration properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: BatchConfigurationProperties;
 }
 
 @armResourceOperations

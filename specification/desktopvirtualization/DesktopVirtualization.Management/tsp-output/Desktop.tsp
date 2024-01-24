@@ -15,8 +15,12 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for Desktop properties.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ApplicationGroup)
-model Desktop is ProxyResource<DesktopProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DesktopProperties)
+@includeInapplicableMetadataInPayload(false)
+model Desktop extends ProxyResourceBase {
   /**
    * The name of the desktop within the specified desktop group
    */
@@ -26,6 +30,12 @@ model Desktop is ProxyResource<DesktopProperties> {
   @key("desktopName")
   @segment("desktops")
   name: string;
+
+  /**
+   * Detailed properties for Desktop
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DesktopProperties;
 }
 
 @armResourceOperations

@@ -14,8 +14,12 @@ namespace Microsoft.Sql;
 /**
  * A deleted server.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @locationResource
-model DeletedServer is ProxyResource<DeletedServerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DeletedServerProperties)
+@includeInapplicableMetadataInPayload(false)
+model DeletedServer extends ProxyResource {
   /**
    * The name of the deleted server.
    */
@@ -23,6 +27,12 @@ model DeletedServer is ProxyResource<DeletedServerProperties> {
   @key("deletedServerName")
   @segment("deletedServers")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeletedServerProperties;
 }
 
 @armResourceOperations

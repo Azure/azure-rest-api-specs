@@ -15,8 +15,12 @@ namespace Microsoft.DevCenter;
 /**
  * Represents a gallery.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DevCenter)
-model Gallery is ProxyResource<GalleryProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(GalleryProperties)
+@includeInapplicableMetadataInPayload(false)
+model Gallery extends ProxyResourceBase {
   /**
    * The name of the gallery.
    */
@@ -24,6 +28,12 @@ model Gallery is ProxyResource<GalleryProperties> {
   @key("galleryName")
   @segment("galleries")
   name: string;
+
+  /**
+   * Gallery properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GalleryProperties;
 }
 
 @armResourceOperations

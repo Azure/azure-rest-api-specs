@@ -15,9 +15,14 @@ namespace Microsoft.OperationalInsights;
 /**
  * A Log Analytics QueryPack-Query definition.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(LogAnalyticsQueryPack)
-model LogAnalyticsQueryPackQuery
-  is ProxyResource<LogAnalyticsQueryPackQueryProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  LogAnalyticsQueryPackQueryProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model LogAnalyticsQueryPackQuery extends ProxyResourceBase {
   /**
    * The id of a specific query defined in the Log Analytics QueryPack
    */
@@ -25,6 +30,12 @@ model LogAnalyticsQueryPackQuery
   @key("id")
   @segment("queries")
   name: string;
+
+  /**
+   * Properties that define an Log Analytics QueryPack-Query resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: LogAnalyticsQueryPackQueryProperties;
 }
 
 @armResourceOperations

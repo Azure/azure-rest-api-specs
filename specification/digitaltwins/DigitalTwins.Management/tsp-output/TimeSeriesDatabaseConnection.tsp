@@ -15,9 +15,14 @@ namespace Microsoft.DigitalTwins;
 /**
  * Describes a time series database connection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DigitalTwinsDescription)
-model TimeSeriesDatabaseConnection
-  is ProxyResource<TimeSeriesDatabaseConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  TimeSeriesDatabaseConnectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model TimeSeriesDatabaseConnection extends ExternalResource {
   /**
    * Name of time series database connection.
    */
@@ -28,6 +33,12 @@ model TimeSeriesDatabaseConnection
   @key("timeSeriesDatabaseConnectionName")
   @segment("timeSeriesDatabaseConnections")
   name: string;
+
+  /**
+   * Properties of a specific time series database connection.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TimeSeriesDatabaseConnectionProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.Insights;
 /**
  * An Application Insights WebTest definition.
  */
-model WebTest is TrackedResource<WebTestProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WebTestProperties)
+@includeInapplicableMetadataInPayload(false)
+model WebTest extends TrackedResourceBase {
   /**
    * The name of the Application Insights WebTest resource.
    */
@@ -23,7 +27,16 @@ model WebTest is TrackedResource<WebTestProperties> {
   @segment("webtests")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * The kind of WebTest that this web test watches. Choices are ping, multistep and standard.
+   */
+  kind?: WebTestKind;
+
+  /**
+   * Metadata describing a web test for an Azure resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: WebTestProperties;
 }
 
 @armResourceOperations

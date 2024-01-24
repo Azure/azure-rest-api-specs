@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * An Azure Resource Manager template.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ArtifactSource)
-model ArmTemplate is TrackedResource<ArmTemplateProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ArmTemplateProperties)
+@includeInapplicableMetadataInPayload(false)
+model ArmTemplate extends Resource {
   /**
    * The name of the azure resource manager template.
    */
@@ -24,6 +28,12 @@ model ArmTemplate is TrackedResource<ArmTemplateProperties> {
   @key("name")
   @segment("armtemplates")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ArmTemplateProperties;
 }
 
 @armResourceOperations

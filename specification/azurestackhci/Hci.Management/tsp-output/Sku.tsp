@@ -15,8 +15,12 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Sku details.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Offer)
-model Sku is ProxyResource<SkuProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(SkuProperties)
+@includeInapplicableMetadataInPayload(false)
+model Sku extends ProxyResourceBase {
   /**
    * The name of the SKU available within HCI cluster.
    */
@@ -24,6 +28,12 @@ model Sku is ProxyResource<SkuProperties> {
   @key("skuName")
   @segment("skus")
   name: string;
+
+  /**
+   * SKU properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SkuProperties;
 }
 
 @armResourceOperations

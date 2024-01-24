@@ -14,7 +14,11 @@ namespace Microsoft.MobileNetwork;
 /**
  * SIM group resource.
  */
-model SimGroup is TrackedResource<SimGroupPropertiesFormat> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(SimGroupPropertiesFormat)
+@includeInapplicableMetadataInPayload(false)
+model SimGroup extends TrackedResourceBase {
   /**
    * The name of the SIM Group.
    */
@@ -24,6 +28,12 @@ model SimGroup is TrackedResource<SimGroupPropertiesFormat> {
   @key("simGroupName")
   @segment("simGroups")
   name: string;
+
+  /**
+   * SIM group Properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: SimGroupPropertiesFormat;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }

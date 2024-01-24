@@ -15,8 +15,12 @@ namespace Microsoft.NetworkCloud;
 /**
  * BmcKeySet represents the baseboard management controller key set.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Cluster)
-model BmcKeySet is TrackedResource<BmcKeySetProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(BmcKeySetProperties)
+@includeInapplicableMetadataInPayload(false)
+model BmcKeySet extends TrackedResourceBase {
   /**
    * The name of the baseboard management controller key set.
    */
@@ -30,6 +34,12 @@ model BmcKeySet is TrackedResource<BmcKeySetProperties> {
    * The extended location of the cluster associated with the resource.
    */
   extendedLocation: ExtendedLocation;
+
+  /**
+   * The list of the resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: BmcKeySetProperties;
 }
 
 @armResourceOperations

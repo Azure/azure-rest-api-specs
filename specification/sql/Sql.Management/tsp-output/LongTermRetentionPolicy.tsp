@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A long term retention policy.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Database)
-model LongTermRetentionPolicy
-  is ProxyResource<BaseLongTermRetentionPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  BaseLongTermRetentionPolicyProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model LongTermRetentionPolicy extends ProxyResource {
   /**
    * The policy name. Should always be Default.
    */
@@ -25,6 +30,12 @@ model LongTermRetentionPolicy
   @key("policyName")
   @segment("backupLongTermRetentionPolicies")
   name: LongTermRetentionPolicyName;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BaseLongTermRetentionPolicyProperties;
 }
 
 @armResourceOperations

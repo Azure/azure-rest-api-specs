@@ -15,8 +15,12 @@ namespace Microsoft.Media;
 /**
  * The Live Output.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(LiveEvent)
-model LiveOutput is ProxyResource<LiveOutputProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(LiveOutputProperties)
+@includeInapplicableMetadataInPayload(false)
+model LiveOutput extends ProxyResourceBase {
   /**
    * The name of the live output.
    */
@@ -27,6 +31,12 @@ model LiveOutput is ProxyResource<LiveOutputProperties> {
   @key("liveOutputName")
   @segment("liveOutputs")
   name: string;
+
+  /**
+   * Live output properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: LiveOutputProperties;
 }
 
 @armResourceOperations

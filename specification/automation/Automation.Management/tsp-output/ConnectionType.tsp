@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the connection type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model ConnectionType is ProxyResource<ConnectionTypeProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ConnectionTypeProperties)
+@includeInapplicableMetadataInPayload(false)
+model ConnectionType extends ProxyResourceBase {
   /**
    * The name of connection type.
    */
@@ -24,6 +28,12 @@ model ConnectionType is ProxyResource<ConnectionTypeProperties> {
   @key("connectionTypeName")
   @segment("connectionTypes")
   name: string;
+
+  /**
+   * Gets or sets the properties of the connection type.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConnectionTypeProperties;
 }
 
 @armResourceOperations

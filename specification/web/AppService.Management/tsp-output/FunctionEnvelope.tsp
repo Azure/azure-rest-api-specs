@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Function information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model FunctionEnvelope is ProxyResource<FunctionEnvelopeProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FunctionEnvelopeProperties)
+@includeInapplicableMetadataInPayload(false)
+model FunctionEnvelope extends ProxyOnlyResource {
   /**
    * Function name.
    */
@@ -24,6 +28,12 @@ model FunctionEnvelope is ProxyResource<FunctionEnvelopeProperties> {
   @key("functionName")
   @segment("functions")
   name: string;
+
+  /**
+   * FunctionEnvelope resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FunctionEnvelopeProperties;
 }
 
 @armResourceOperations

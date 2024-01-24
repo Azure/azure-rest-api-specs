@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
  * Creates an Azure Data Lake Analytics account management client.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "DataLakeAnalyticsAccountManagementClient",
 })

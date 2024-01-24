@@ -15,8 +15,12 @@ namespace Microsoft.OperationalInsights;
 /**
  * The top level data export resource container.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model DataExport is ProxyResource<DataExportProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DataExportProperties)
+@includeInapplicableMetadataInPayload(false)
+model DataExport extends ProxyResourceBase {
   /**
    * The data export rule name.
    */
@@ -24,6 +28,12 @@ model DataExport is ProxyResource<DataExportProperties> {
   @key("dataExportName")
   @segment("dataExports")
   name: string;
+
+  /**
+   * data export properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataExportProperties;
 }
 
 @armResourceOperations

@@ -15,13 +15,24 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Hybrid Connection limits contract. This is used to return the plan limits of Hybrid Connections.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("limit")
 @parentResource(AppServicePlan)
-model HybridConnectionLimits
-  is ProxyResource<HybridConnectionLimitsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  HybridConnectionLimitsProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model HybridConnectionLimits extends ProxyOnlyResource {
   @key("hybridConnectionPlanLimit")
   @segment("hybridConnectionPlanLimits")
   name: string;
+
+  /**
+   * HybridConnectionLimits resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: HybridConnectionLimitsProperties;
 }
 
 @armResourceOperations

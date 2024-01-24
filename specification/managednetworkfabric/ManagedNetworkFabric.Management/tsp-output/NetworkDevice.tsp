@@ -14,7 +14,11 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The Network Device resource definition.
  */
-model NetworkDevice is TrackedResource<NetworkDeviceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(NetworkDeviceProperties)
+@includeInapplicableMetadataInPayload(false)
+model NetworkDevice extends TrackedResourceBase {
   /**
    * Name of the Network Device.
    */
@@ -22,6 +26,12 @@ model NetworkDevice is TrackedResource<NetworkDeviceProperties> {
   @key("networkDeviceName")
   @segment("networkDevices")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: NetworkDeviceProperties;
 }
 
 @armResourceOperations

@@ -14,8 +14,13 @@ namespace Microsoft.Automanage;
 /**
  * Configuration profile assignment is an association between a VM and automanage profile configuration.
  */
-model ConfigurationProfileAssignment
-  is ExtensionResource<ConfigurationProfileAssignmentProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  ConfigurationProfileAssignmentProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ConfigurationProfileAssignment extends ExtensionResourceBase {
   /**
    * The configuration profile assignment name.
    */
@@ -24,7 +29,17 @@ model ConfigurationProfileAssignment
   @segment("configurationProfileAssignments")
   name: string;
 
-  ...Azure.ResourceManager.ManagedBy;
+  /**
+   * Azure resource id. Indicates if this resource is managed by another Azure resource.
+   */
+  @visibility("read")
+  managedBy?: string;
+
+  /**
+   * Properties of the configuration profile assignment.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConfigurationProfileAssignmentProperties;
 }
 
 @armResourceOperations

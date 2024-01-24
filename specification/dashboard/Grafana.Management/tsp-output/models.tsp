@@ -81,9 +81,9 @@ enum MarketplaceAutoRenew {
 }
 
 /**
-* The StartTLSPolicy setting of the SMTP configuration
-https://pkg.go.dev/github.com/go-mail/mail#StartTLSPolicy
-*/
+ * The StartTLSPolicy setting of the SMTP configuration
+ * https://pkg.go.dev/github.com/go-mail/mail#StartTLSPolicy
+ */
 enum StartTLSPolicy {
   OpportunisticStartTLS,
   MandatoryStartTLS,
@@ -323,16 +323,16 @@ model EnterpriseConfigurations {
  */
 model GrafanaConfigurations {
   /**
-* Email server settings.
-https://grafana.com/docs/grafana/v9.0/setup-grafana/configure-grafana/#smtp
-*/
+   * Email server settings.
+   * https://grafana.com/docs/grafana/v9.0/setup-grafana/configure-grafana/#smtp
+   */
   smtp?: Smtp;
 }
 
 /**
-* Email server settings.
-https://grafana.com/docs/grafana/v9.0/setup-grafana/configure-grafana/#smtp
-*/
+ * Email server settings.
+ * https://grafana.com/docs/grafana/v9.0/setup-grafana/configure-grafana/#smtp
+ */
 model Smtp {
   /**
    * Enable this to allow Grafana to send email. Default is false
@@ -355,27 +355,27 @@ model Smtp {
   password?: string;
 
   /**
-* Address used when sending out emails
-https://pkg.go.dev/net/mail#Address
-*/
+   * Address used when sending out emails
+   * https://pkg.go.dev/net/mail#Address
+   */
   fromAddress?: string;
 
   /**
-* Name to be used when sending out emails. Default is "Azure Managed Grafana Notification"
-https://pkg.go.dev/net/mail#Address
-*/
+   * Name to be used when sending out emails. Default is "Azure Managed Grafana Notification"
+   * https://pkg.go.dev/net/mail#Address
+   */
   fromName?: string;
 
   /**
-* The StartTLSPolicy setting of the SMTP configuration
-https://pkg.go.dev/github.com/go-mail/mail#StartTLSPolicy
-*/
+   * The StartTLSPolicy setting of the SMTP configuration
+   * https://pkg.go.dev/github.com/go-mail/mail#StartTLSPolicy
+   */
   startTLSPolicy?: StartTLSPolicy;
 
   /**
-* Verify SSL for SMTP server. Default is false
-https://pkg.go.dev/crypto/tls#Config
-*/
+   * Verify SSL for SMTP server. Default is false
+   * https://pkg.go.dev/crypto/tls#Config
+   */
   skipVerify?: boolean;
 }
 

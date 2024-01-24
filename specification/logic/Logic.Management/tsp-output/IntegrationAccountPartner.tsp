@@ -15,9 +15,14 @@ namespace Microsoft.Logic;
 /**
  * The integration account partner.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(IntegrationAccount)
-model IntegrationAccountPartner
-  is TrackedResource<IntegrationAccountPartnerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  IntegrationAccountPartnerProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model IntegrationAccountPartner extends Resource {
   /**
    * The integration account partner name.
    */
@@ -25,6 +30,12 @@ model IntegrationAccountPartner
   @key("partnerName")
   @segment("partners")
   name: string;
+
+  /**
+   * The integration account partner properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: IntegrationAccountPartnerProperties;
 }
 
 @armResourceOperations

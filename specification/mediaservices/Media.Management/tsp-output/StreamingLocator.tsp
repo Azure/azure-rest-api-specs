@@ -15,8 +15,12 @@ namespace Microsoft.Media;
 /**
  * A Streaming Locator resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MediaService)
-model StreamingLocator is ProxyResource<StreamingLocatorProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(StreamingLocatorProperties)
+@includeInapplicableMetadataInPayload(false)
+model StreamingLocator extends ProxyResourceBase {
   /**
    * The Streaming Locator name.
    */
@@ -24,6 +28,12 @@ model StreamingLocator is ProxyResource<StreamingLocatorProperties> {
   @key("streamingLocatorName")
   @segment("streamingLocators")
   name: string;
+
+  /**
+   * Properties of the Streaming Locator.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StreamingLocatorProperties;
 }
 
 @armResourceOperations

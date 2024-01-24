@@ -163,10 +163,10 @@ model ActionableRemediation {
  */
 model TargetBranchConfiguration {
   /**
-* Gets or sets branches that should have annotations.
-
-For Ignite, we will be supporting a single default branch configuration in the UX.
-*/
+   * Gets or sets branches that should have annotations.
+   *
+   * For Ignite, we will be supporting a single default branch configuration in the UX.
+   */
   names?: string[];
 }
 

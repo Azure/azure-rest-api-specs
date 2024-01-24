@@ -14,7 +14,11 @@ namespace Microsoft.Maps;
 /**
  * An Azure resource which represents access to a suite of Maps REST APIs.
  */
-model MapsAccount is TrackedResource<MapsAccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(MapsAccountProperties)
+@includeInapplicableMetadataInPayload(false)
+model MapsAccount extends TrackedResourceBase {
   /**
    * The name of the Maps Account.
    */
@@ -23,9 +27,19 @@ model MapsAccount is TrackedResource<MapsAccountProperties> {
   @segment("accounts")
   name: string;
 
+  /**
+   * Get or Set Kind property.
+   */
+  kind?: Kind = Kind.Gen1;
+
+  /**
+   * The map account properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MapsAccountProperties;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations
@@ -74,12 +88,12 @@ interface MapsAccounts {
   listBySubscription is ArmListBySubscription<MapsAccount>;
 
   /**
-* Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token. 
-
-Prerequisites:
-1. Create or have an existing User Assigned Managed Identity in the same Azure region as the account. 
-2. Create or update an Azure Map account with the same Azure region as the User Assigned Managed Identity is placed.
-*/
+   * Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token.
+   *
+   * Prerequisites:
+   * 1. Create or have an existing User Assigned Managed Identity in the same Azure region as the account.
+   * 2. Create or update an Azure Map account with the same Azure region as the User Assigned Managed Identity is placed.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Accounts_ListSas")
   listSas is ArmResourceActionSync<

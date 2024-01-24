@@ -15,8 +15,12 @@ namespace Microsoft.EventHub;
 /**
  * Single item in List or Get Consumer group operation
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EventHub)
-model EventHubsConsumerGroup is ProxyResource<ConsumerGroupProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ConsumerGroupProperties)
+@includeInapplicableMetadataInPayload(false)
+model EventHubsConsumerGroup extends ProxyResource {
   /**
    * The consumer group name
    */
@@ -26,6 +30,12 @@ model EventHubsConsumerGroup is ProxyResource<ConsumerGroupProperties> {
   @key("consumerGroupName")
   @segment("consumergroups")
   name: string;
+
+  /**
+   * Single item in List or Get Consumer group operation
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ConsumerGroupProperties;
 }
 
 @armResourceOperations

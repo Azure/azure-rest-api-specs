@@ -14,8 +14,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * A top level domain object.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @subscriptionResource
-model TopLevelDomain is ProxyResource<TopLevelDomainProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(TopLevelDomainProperties)
+@includeInapplicableMetadataInPayload(false)
+model TopLevelDomain extends ProxyOnlyResource {
   /**
    * Name of the top-level domain.
    */
@@ -23,6 +27,12 @@ model TopLevelDomain is ProxyResource<TopLevelDomainProperties> {
   @key("name")
   @segment("topLevelDomains")
   name: string;
+
+  /**
+   * TopLevelDomain resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TopLevelDomainProperties;
 }
 
 @armResourceOperations

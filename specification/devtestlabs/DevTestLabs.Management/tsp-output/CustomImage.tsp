@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A custom image.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model CustomImage is TrackedResource<CustomImageProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(CustomImageProperties)
+@includeInapplicableMetadataInPayload(false)
+model CustomImage extends Resource {
   /**
    * The name of the custom image.
    */
@@ -24,6 +28,12 @@ model CustomImage is TrackedResource<CustomImageProperties> {
   @key("name")
   @segment("customimages")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: CustomImageProperties;
 }
 
 @armResourceOperations

@@ -9,6 +9,7 @@ require: https://github.com/Azure/azure-rest-api-specs/blob/066eb8c81e14e0f3b22b
 skip-csproj: true
 modelerfour:
   flatten-payloads: false
+use-model-reader-writer: true
 
 format-by-name-rules:
   'tenantId': 'uuid'

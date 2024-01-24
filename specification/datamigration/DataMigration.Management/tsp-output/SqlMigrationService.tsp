@@ -14,7 +14,13 @@ namespace Microsoft.DataMigration;
 /**
  * A SQL Migration Service.
  */
-model SqlMigrationService is TrackedResource<SqlMigrationServiceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  SqlMigrationServiceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SqlMigrationService extends TrackedResource {
   /**
    * Name of the SQL Migration Service.
    */
@@ -22,6 +28,12 @@ model SqlMigrationService is TrackedResource<SqlMigrationServiceProperties> {
   @key("sqlMigrationServiceName")
   @segment("sqlMigrationServices")
   name: string;
+
+  /**
+   * The SQL Migration Service properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SqlMigrationServiceProperties;
 }
 
 @armResourceOperations

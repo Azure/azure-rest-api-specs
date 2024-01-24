@@ -14,17 +14,27 @@ namespace Microsoft.Quota;
 /**
  * Resource usage.
  */
-model CurrentUsagesBase is ExtensionResource<UsagesProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(UsagesProperties)
+@includeInapplicableMetadataInPayload(false)
+model CurrentUsagesBase extends ExtensionResourceBase {
   /**
-* Resource name for a given resource provider. For example:
-- SKU name for Microsoft.Compute
-- SKU or TotalLowPriorityCores for Microsoft.MachineLearningServices
- For Microsoft.Network PublicIPAddresses.
-*/
+   * Resource name for a given resource provider. For example:
+   * - SKU name for Microsoft.Compute
+   * - SKU or TotalLowPriorityCores for Microsoft.MachineLearningServices
+   *  For Microsoft.Network PublicIPAddresses.
+   */
   @path
   @key("resourceName")
   @segment("usages")
   name: string;
+
+  /**
+   * Usage properties for the specified resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: UsagesProperties;
 }
 
 @armResourceOperations

@@ -37,6 +37,7 @@ using TypeSpec.Versioning;
  * REST API for Azure Logic Apps.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "LogicManagementClient",
 })

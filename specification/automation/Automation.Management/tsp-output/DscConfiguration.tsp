@@ -15,8 +15,12 @@ namespace Microsoft.Automation;
 /**
  * Definition of the configuration type.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AutomationAccount)
-model DscConfiguration is TrackedResource<DscConfigurationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DscConfigurationProperties)
+@includeInapplicableMetadataInPayload(false)
+model DscConfiguration extends TrackedResourceBase {
   /**
    * The configuration name.
    */
@@ -29,6 +33,12 @@ model DscConfiguration is TrackedResource<DscConfigurationProperties> {
    * Gets or sets the etag of the resource.
    */
   etag?: string;
+
+  /**
+   * Gets or sets the configuration properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DscConfigurationProperties;
 }
 
 @armResourceOperations

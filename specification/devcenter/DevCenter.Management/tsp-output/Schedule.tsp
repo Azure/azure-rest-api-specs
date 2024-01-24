@@ -15,8 +15,12 @@ namespace Microsoft.DevCenter;
 /**
  * Represents a Schedule to execute a task.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Pool)
-model Schedule is ProxyResource<ScheduleProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ScheduleProperties)
+@includeInapplicableMetadataInPayload(false)
+model Schedule extends ProxyResourceBase {
   /**
    * The name of the schedule that uniquely identifies it.
    */
@@ -27,6 +31,12 @@ model Schedule is ProxyResource<ScheduleProperties> {
   @key("scheduleName")
   @segment("schedules")
   name: string;
+
+  /**
+   * Properties of a Schedule resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ScheduleProperties;
 }
 
 @armResourceOperations

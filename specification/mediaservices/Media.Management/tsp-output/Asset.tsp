@@ -15,8 +15,12 @@ namespace Microsoft.Media;
 /**
  * An Asset.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(MediaService)
-model Asset is ProxyResource<AssetProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AssetProperties)
+@includeInapplicableMetadataInPayload(false)
+model Asset extends ProxyResourceBase {
   /**
    * The Asset name.
    */
@@ -24,6 +28,12 @@ model Asset is ProxyResource<AssetProperties> {
   @key("assetName")
   @segment("assets")
   name: string;
+
+  /**
+   * The resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AssetProperties;
 }
 
 @armResourceOperations

@@ -14,7 +14,11 @@ namespace Microsoft.ConfidentialLedger;
 /**
  * Confidential Ledger. Contains the properties of Confidential Ledger Resource.
  */
-model ConfidentialLedger is TrackedResource<LedgerProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(LedgerProperties)
+@includeInapplicableMetadataInPayload(false)
+model ConfidentialLedger extends TrackedResourceBase {
   /**
    * Name of the Confidential Ledger
    */
@@ -23,6 +27,12 @@ model ConfidentialLedger is TrackedResource<LedgerProperties> {
   @key("ledgerName")
   @segment("ledgers")
   name: string;
+
+  /**
+   * Properties of Confidential Ledger Resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: LedgerProperties;
 }
 
 @armResourceOperations

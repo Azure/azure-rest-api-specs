@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -233,6 +235,7 @@ model DedicatedCapacityUpdateParameters {
   /**
    * Properties of the provision operation request.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DedicatedCapacityMutableProperties;
 }
 
@@ -466,5 +469,6 @@ model AutoScaleVCoreUpdateParameters {
   /**
    * Properties of the update operation request.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AutoScaleVCoreMutableProperties;
 }

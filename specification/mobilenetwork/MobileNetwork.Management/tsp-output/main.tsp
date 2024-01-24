@@ -30,6 +30,7 @@ using TypeSpec.Versioning;
  * The resources in this API specification will be used to manage attached data network resources in mobile network attached to a particular packet core instance
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "MobileNetworkManagementClient",
 })

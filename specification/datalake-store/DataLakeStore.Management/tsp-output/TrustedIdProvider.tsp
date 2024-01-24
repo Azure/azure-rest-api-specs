@@ -15,8 +15,12 @@ namespace Microsoft.DataLakeStore;
 /**
  * Data Lake Store trusted identity provider information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DataLakeStoreAccount)
-model TrustedIdProvider is ProxyResource<TrustedIdProviderProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(TrustedIdProviderProperties)
+@includeInapplicableMetadataInPayload(false)
+model TrustedIdProvider extends SubResource {
   /**
    * The name of the trusted identity provider to retrieve.
    */
@@ -24,6 +28,12 @@ model TrustedIdProvider is ProxyResource<TrustedIdProviderProperties> {
   @key("trustedIdProviderName")
   @segment("trustedIdProviders")
   name: string;
+
+  /**
+   * The trusted identity provider properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TrustedIdProviderProperties;
 }
 
 @armResourceOperations

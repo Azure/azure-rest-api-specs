@@ -15,8 +15,12 @@ namespace Microsoft.LabServices;
 /**
  * Lab services virtual machine image
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(LabPlan)
-model Image is ProxyResource<ImageProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ImageProperties)
+@includeInapplicableMetadataInPayload(false)
+model Image extends ProxyResourceBase {
   /**
    * The image name.
    */
@@ -27,6 +31,12 @@ model Image is ProxyResource<ImageProperties> {
   @key("imageName")
   @segment("images")
   name: string;
+
+  /**
+   * Image resource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: ImageProperties;
 }
 
 @armResourceOperations

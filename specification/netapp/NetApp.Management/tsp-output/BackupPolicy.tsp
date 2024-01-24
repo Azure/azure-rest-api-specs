@@ -15,8 +15,12 @@ namespace Microsoft.NetApp;
 /**
  * Backup policy information
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(NetAppAccount)
-model BackupPolicy is TrackedResource<BackupPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(BackupPolicyProperties)
+@includeInapplicableMetadataInPayload(false)
+model BackupPolicy extends TrackedResourceBase {
   /**
    * Backup policy Name which uniquely identify backup policy.
    */
@@ -30,6 +34,12 @@ model BackupPolicy is TrackedResource<BackupPolicyProperties> {
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * Backup policy Properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: BackupPolicyProperties;
 }
 
 @armResourceOperations

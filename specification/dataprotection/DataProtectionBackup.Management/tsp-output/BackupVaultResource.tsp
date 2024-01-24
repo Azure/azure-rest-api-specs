@@ -14,7 +14,11 @@ namespace Microsoft.DataProtection;
 /**
  * Backup Vault Resource
  */
-model BackupVaultResource is TrackedResource<BackupVault> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(BackupVault)
+@includeInapplicableMetadataInPayload(false)
+model BackupVaultResource extends TrackedResourceBase {
   /**
    * The name of the backup vault.
    */
@@ -22,6 +26,12 @@ model BackupVaultResource is TrackedResource<BackupVault> {
   @key("vaultName")
   @segment("backupVaults")
   name: string;
+
+  /**
+   * BackupVaultResource properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: BackupVault;
 }
 
 @armResourceOperations

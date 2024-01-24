@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -844,14 +846,14 @@ model Resource {
 }
 
 /**
-* Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. 
-
-Some Error responses: 
-
- * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "x-ms-ratelimit-microsoft.consumption-retry-after" header. 
-
- * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
-*/
+ * Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+ *
+ * Some Error responses:
+ *
+ *  * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "x-ms-ratelimit-microsoft.consumption-retry-after" header.
+ *
+ *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
+ */
 @error
 model OperationErrorResponse {
   /**
@@ -1186,6 +1188,7 @@ model ExportRun extends CostManagementProxyResource {
   /**
    * The properties of the export run.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ExportRunProperties;
 }
 
@@ -1318,6 +1321,7 @@ model ViewProperties {
   /**
    * Query body configuration. Required.
    */
+  @extension("x-ms-client-flatten", true)
   query?: ReportConfigDefinition;
 
   /**
@@ -1765,6 +1769,7 @@ model DismissAlertPayload {
   /**
    * Alert properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AlertProperties;
 }
 
@@ -1922,6 +1927,7 @@ model ForecastResult extends CostManagementResource {
   /**
    * Forecast properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ForecastProperties;
 }
 
@@ -2027,6 +2033,7 @@ model Dimension extends CostManagementResource {
   /**
    * Dimension properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DimensionProperties;
 }
 
@@ -2254,6 +2261,7 @@ model QueryResult extends CostManagementResource {
   /**
    * Query properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: QueryProperties;
 }
 
@@ -2304,6 +2312,7 @@ model OperationStatus {
   /**
    * The properties of the resource generated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ReportURL;
 }
 
@@ -2501,14 +2510,14 @@ model ScheduledActionProxyResource extends ProxyResource {
 }
 
 /**
-* Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. 
-
-Some Error responses: 
-
- * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "x-ms-ratelimit-microsoft.consumption-retry-after" header. 
-
- * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
-*/
+ * Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+ *
+ * Some Error responses:
+ *
+ *  * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "x-ms-ratelimit-microsoft.consumption-retry-after" header.
+ *
+ *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
+ */
 @error
 model ErrorResponseWithNestedDetails {
   /**
@@ -2650,6 +2659,7 @@ model IncludedQuantityUtilizationSummary extends BenefitUtilizationSummary {
   /**
    * Included Quantity utilization summary properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IncludedQuantityUtilizationSummaryProperties;
 
   /**
@@ -2677,6 +2687,7 @@ model SavingsPlanUtilizationSummary extends BenefitUtilizationSummary {
   /**
    * Savings plan utilization summary properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: SavingsPlanUtilizationSummaryProperties;
 
   /**
@@ -2710,22 +2721,22 @@ model SavingsPlanUtilizationSummaryProperties
 }
 
 /**
-* Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. 
-
-Some Error responses: 
-
- * 400 Bad Request - Invalid Request Payload. Request payload provided is not in a json format or had an invalid member not accepted in the request payload. 
-
- * 400 Bad Request - Invalid request payload:  can only have either timePeriod or invoiceId or billingPeriod. API only allows data to be pulled for either timePeriod or invoiceId or billingPeriod. Customer should provide only one of these parameters. 
-
- * 400 Bad Request - Start date must be after . API only allows data to be pulled no older than 13 months from now. 
-
- * 400 Bad Request - The maximum allowed date range is 1 months. API only allows data to be pulled for 1 month or less. 
-
- * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "retry-after" header. 
-
- * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
-*/
+ * Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+ *
+ * Some Error responses:
+ *
+ *  * 400 Bad Request - Invalid Request Payload. Request payload provided is not in a json format or had an invalid member not accepted in the request payload.
+ *
+ *  * 400 Bad Request - Invalid request payload:  can only have either timePeriod or invoiceId or billingPeriod. API only allows data to be pulled for either timePeriod or invoiceId or billingPeriod. Customer should provide only one of these parameters.
+ *
+ *  * 400 Bad Request - Start date must be after . API only allows data to be pulled no older than 13 months from now.
+ *
+ *  * 400 Bad Request - The maximum allowed date range is 1 months. API only allows data to be pulled for 1 month or less.
+ *
+ *  * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "retry-after" header.
+ *
+ *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
+ */
 model GenerateCostDetailsReportErrorResponse {
   /**
    * The details of the error.
@@ -2800,6 +2811,7 @@ model CostDetailsOperationResults {
   /**
    * The manifest of the report generated by the operation.
    */
+  @extension("x-ms-client-flatten", true)
   manifest?: ReportManifest;
 
   /**
@@ -2846,6 +2858,7 @@ model ReportManifest {
   /**
    * The context of the Cost Details request.
    */
+  @extension("x-ms-client-flatten", true)
   requestContext?: RequestContext;
 
   /**
@@ -2885,16 +2898,16 @@ model BlobInfo {
 }
 
 /**
-* Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. 
-
-Some Error responses: 
-
- * 413 Request Entity Too Large - Request is throttled. The amount of data required to fulfill the request exceeds the maximum size permitted of 2Gb. Please utilize our Exports feature instead. 
-
- * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "x-ms-ratelimit-microsoft.consumption-retry-after" header. 
-
- * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
-*/
+ * Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+ *
+ * Some Error responses:
+ *
+ *  * 413 Request Entity Too Large - Request is throttled. The amount of data required to fulfill the request exceeds the maximum size permitted of 2Gb. Please utilize our Exports feature instead.
+ *
+ *  * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the "x-ms-ratelimit-microsoft.consumption-retry-after" header.
+ *
+ *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
+ */
 model GenerateDetailedCostReportErrorResponse {
   /**
    * The details of the error.
@@ -2989,6 +3002,7 @@ model GenerateDetailedCostReportOperationStatuses {
   /**
    * The properties of the usage file generated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DownloadURL;
 }
 
@@ -3024,5 +3038,6 @@ model GenerateDetailedCostReportOperationResult {
   /**
    * The properties of the resource generated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DownloadURL;
 }

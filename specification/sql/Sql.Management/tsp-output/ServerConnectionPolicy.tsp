@@ -15,9 +15,14 @@ namespace Microsoft.Sql;
 /**
  * A server connection policy
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Server)
-model ServerConnectionPolicy
-  is ProxyResource<ServerConnectionPolicyProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ServerConnectionPolicyProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ServerConnectionPolicy extends ProxyResource {
   /**
    * The name of the connection policy.
    */
@@ -26,7 +31,17 @@ model ServerConnectionPolicy
   @segment("connectionPolicies")
   name: ConnectionPolicyName;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /**
+   * Metadata used for the Azure portal experience.
+   */
+  @visibility("read")
+  kind?: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ServerConnectionPolicyProperties;
 }
 
 @armResourceOperations

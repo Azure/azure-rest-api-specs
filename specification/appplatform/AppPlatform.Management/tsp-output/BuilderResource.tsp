@@ -15,8 +15,12 @@ namespace Microsoft.AppPlatform;
 /**
  * KPack Builder resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(BuildService)
-model BuilderResource is ProxyResource<BuilderProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(BuilderProperties)
+@includeInapplicableMetadataInPayload(false)
+model BuilderResource extends ProxyResource {
   /**
    * The name of the builder resource.
    */
@@ -24,6 +28,12 @@ model BuilderResource is ProxyResource<BuilderProperties> {
   @key("builderName")
   @segment("builders")
   name: string;
+
+  /**
+   * Property of the Builder resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: BuilderProperties;
 }
 
 @armResourceOperations

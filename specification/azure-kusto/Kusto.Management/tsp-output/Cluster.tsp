@@ -14,7 +14,11 @@ namespace Microsoft.Kusto;
 /**
  * Class representing a Kusto cluster.
  */
-model Cluster is TrackedResource<ClusterProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
+@includeInapplicableMetadataInPayload(false)
+model Cluster extends TrackedResourceBase {
   /**
    * The name of the Kusto cluster.
    */
@@ -34,6 +38,12 @@ model Cluster is TrackedResource<ClusterProperties> {
    */
   @visibility("read")
   etag?: string;
+
+  /**
+   * The cluster properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterProperties;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
   ...Azure.ResourceManager.ResourceSku;

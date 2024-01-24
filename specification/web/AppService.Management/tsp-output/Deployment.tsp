@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * User credentials used for publishing activity.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Site)
-model Deployment is ProxyResource<DeploymentProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DeploymentProperties)
+@includeInapplicableMetadataInPayload(false)
+model Deployment extends ProxyOnlyResource {
   /**
    * Deployment ID.
    */
@@ -24,6 +28,12 @@ model Deployment is ProxyResource<DeploymentProperties> {
   @key("id")
   @segment("deployments")
   name: string;
+
+  /**
+   * Deployment resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DeploymentProperties;
 }
 
 @armResourceOperations

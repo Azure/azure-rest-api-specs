@@ -14,7 +14,11 @@ namespace Microsoft.CustomerInsights;
 /**
  * Hub resource.
  */
-model Hub is TrackedResource<HubPropertiesFormat> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(HubPropertiesFormat)
+@includeInapplicableMetadataInPayload(false)
+model Hub extends Resource {
   /**
    * The name of the hub.
    */
@@ -22,6 +26,12 @@ model Hub is TrackedResource<HubPropertiesFormat> {
   @key("hubName")
   @segment("hubs")
   name: string;
+
+  /**
+   * Properties of hub.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: HubPropertiesFormat;
 }
 
 @armResourceOperations

@@ -15,9 +15,14 @@ namespace Microsoft.AVS;
 /**
  * ExpressRoute Circuit Authorization
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model ExpressRouteAuthorization
-  is ProxyResource<ExpressRouteAuthorizationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  ExpressRouteAuthorizationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model ExpressRouteAuthorization extends ProxyResourceBase {
   /**
    * Name of the ExpressRoute Circuit Authorization in the private cloud
    */
@@ -26,6 +31,12 @@ model ExpressRouteAuthorization
   @key("authorizationName")
   @segment("authorizations")
   name: string;
+
+  /**
+   * The properties of an ExpressRoute Circuit Authorization resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ExpressRouteAuthorizationProperties;
 }
 
 @armResourceOperations

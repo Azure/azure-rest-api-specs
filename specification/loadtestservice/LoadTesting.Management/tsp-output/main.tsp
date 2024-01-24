@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
  * LoadTest client provides access to LoadTest Resource and it's status operations.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "LoadTest Client",
 })

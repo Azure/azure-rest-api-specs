@@ -15,8 +15,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A cost item.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Lab)
-model LabCost is TrackedResource<LabCostProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(LabCostProperties)
+@includeInapplicableMetadataInPayload(false)
+model LabCost extends Resource {
   /**
    * The name of the cost.
    */
@@ -24,6 +28,12 @@ model LabCost is TrackedResource<LabCostProperties> {
   @key("name")
   @segment("costs")
   name: string;
+
+  /**
+   * The properties of the resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: LabCostProperties;
 }
 
 @armResourceOperations

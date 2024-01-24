@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
  * Open Energy Platform Management Service APIs
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Open Energy Platform Management Service APIs",
 })

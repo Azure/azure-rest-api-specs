@@ -42,6 +42,10 @@ warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongsid
 warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > KustoPoolPrivateLinkResources > properties > systemData)
   keys: [ [32m'type'[39m ]
     - https://github.com/Azure/azure-rest-api-specs/blob/340d577969b7bff5ad0488d79543314bc17daa50/specification/synapse/resource-manager/Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json:3951:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > OperationResource_Common > properties > status)
+  keys: [ [32m'type'[39m ]
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > OperationResource_Common > properties > error)
+  keys: [ [32m'type'[39m ]
 warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateLinkServiceProxyBase > properties > remotePrivateLinkServiceConnectionState)
   keys: [ [32m'type'[39m ]
 warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateLinkServiceProxyBase > properties > remotePrivateEndpointConnection)
@@ -53,10 +57,6 @@ warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongsid
 warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateEndpointConnectionProxyBase > properties > remotePrivateEndpoint)
   keys: [ [32m'type'[39m ]
 warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PrivateEndpointConnectionForPrivateLinkHubProxyBase > properties > remotePrivateEndpoint)
-  keys: [ [32m'type'[39m ]
-warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > OperationResource_Common > properties > status)
-  keys: [ [32m'type'[39m ]
-warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > OperationResource_Common > properties > error)
   keys: [ [32m'type'[39m ]
 warning | PreCheck/SchemaMissingType | The schema 'LibraryResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
     - https://github.com/Azure/azure-rest-api-specs/blob/340d577969b7bff5ad0488d79543314bc17daa50/specification/synapse/resource-manager/Microsoft.Synapse/preview/2021-06-01-preview/library.json:158:5
@@ -72,18 +72,18 @@ warning | PreCheck/CheckDuplicateSchemas | Checking for duplicate schemas, this 
 warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ErrorResponse' (7 differences):
   - title: "Error response" => "Error Response"
   - properties.error: {"description":"The error object.","$ref":"#/components/schemas/schemas:1323"} => <none>
-  - properties.code: <none> => {"$ref":"#/components/schemas/schemas:1500","description":"The error code.","readOnly":true}
-  - properties.message: <none> => {"$ref":"#/components/schemas/schemas:1501","description":"The error message.","readOnly":true}
-  - properties.target: <none> => {"$ref":"#/components/schemas/schemas:1502","description":"The error target.","readOnly":true}
-  - properties.details: <none> => {"x-ms-identifiers":["message","target"],"$ref":"#/components/schemas/schemas:1503","description":"The error details.","readOnly":true}
-  - properties.additionalInfo: <none> => {"x-ms-identifiers":[],"$ref":"#/components/schemas/schemas:1504","description":"The error additional info.","readOnly":true}
+  - properties.code: <none> => {"$ref":"#/components/schemas/schemas:1422","description":"The error code.","readOnly":true}
+  - properties.message: <none> => {"$ref":"#/components/schemas/schemas:1423","description":"The error message.","readOnly":true}
+  - properties.target: <none> => {"$ref":"#/components/schemas/schemas:1424","description":"The error target.","readOnly":true}
+  - properties.details: <none> => {"x-ms-identifiers":["message","target"],"$ref":"#/components/schemas/schemas:1425","description":"The error details.","readOnly":true}
+  - properties.additionalInfo: <none> => {"x-ms-identifiers":[],"$ref":"#/components/schemas/schemas:1426","description":"The error additional info.","readOnly":true}
 warning | PreCheck/PropertyRedeclarationWarning | Schema 'ReplicationLink' has a property 'type' that is already declared the parent schema 'Resource' but isn't significantly different. The property has been removed from ReplicationLink
 warning | Modeler/MissingType | The schema 'KekIdentityProperties-useSystemAssignedIdentity' has no type or format information whatsoever. Location:
    https://github.com/Azure/azure-rest-api-specs/blob/340d577969b7bff5ad0488d79543314bc17daa50/specification/synapse/resource-manager/Microsoft.Synapse/stable/2021-06-01/workspace.json#/components/schemas/KekIdentityProperties-useSystemAssignedIdentity
 warning | PreNamer/DeduplicateName | Deduplicating schema name: 'ErrorResponse' -> 'ErrorResponseAutoGenerated'
-info    | Autorest completed in 124.47s. 1 files generated.
-##Converting from swagger to tsp with in C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\synapse\Synapse.Management with https://chenjieshistorage.blob.core.windows.net/package-store/autorest-openapi-to-typespec-0.7.0-ci.d37d9d750.tgz
-autorest --openapi-to-typespec --isArm --use="https://chenjieshistorage.blob.core.windows.net/package-store/autorest-openapi-to-typespec-0.7.0-ci.d37d9d750.tgz" --output-folder=C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\synapse\Synapse.Management --src-path=tsp-output C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\synapse\Synapse.Management\TspReadme.md
+info    | Autorest completed in 97.74s. 1 files generated.
+##Converting from swagger to tsp with in C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\synapse\Synapse.Management with https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvMzQzMzIxMS9hcnRpZmFjdE5hbWUvcGFja2FnZXM1/content?format=file&subPath=%2Fautorest-openapi-to-typespec-0.7.0-ci.03c2e0c13.tgz
+autorest --openapi-to-typespec --isArm --use="https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvMzQzMzIxMS9hcnRpZmFjdE5hbWUvcGFja2FnZXM1/content?format=file&subPath=%2Fautorest-openapi-to-typespec-0.7.0-ci.03c2e0c13.tgz" --output-folder=C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\synapse\Synapse.Management --src-path=tsp-output C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\synapse\Synapse.Management\TspReadme.md
 AutoRest code generation utility [cli version: 3.6.3; node: v20.9.0]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
@@ -92,8 +92,8 @@ There is a new version of AutoRest available (3.7.1).
  > You can install the newer version with with npm install -g autorest@latest
 
 info    |    Loading AutoRest core      'C:\Users\v-cruan\.autorest\@autorestcore@3.9.7\nodemodules\@autorest\core\dist' (3.9.7)
-info    |    Loading AutoRest extension '@autorest/openapi-to-typespec' (https://chenjieshistorage.blob.core.windows.net/package-store/autorest-openapi-to-typespec-0.7.0-ci.d37d9d750.tgz->0.7.0-ci.d37d9d750)
-info    |    Loading AutoRest extension '@autorest/modelerfour' (^4.23.5->4.25.0)
+info    |    Loading AutoRest extension '@autorest/openapi-to-typespec' (https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvMzQzMzIxMS9hcnRpZmFjdE5hbWUvcGFja2FnZXM1/content?format=file&subPath=%2Fautorest-openapi-to-typespec-0.7.0-ci.03c2e0c13.tgz->0.7.0-ci.03c2e0c13)
+info    |    Loading AutoRest extension '@autorest/modelerfour' (^4.27.0->4.27.0)
 warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > KustoPoolProperties > properties > optimizedAutoscale)
   keys: [ [32m'type'[39m ]
     - https://github.com/Azure/azure-rest-api-specs/blob/340d577969b7bff5ad0488d79543314bc17daa50/specification/synapse/resource-manager/Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json:2647:9

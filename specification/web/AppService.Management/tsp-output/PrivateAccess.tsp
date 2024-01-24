@@ -15,12 +15,22 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Description of the parameters of Private Access for a Web Site.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("virtualNetworks")
 @parentResource(Site)
-model PrivateAccess is ProxyResource<PrivateAccessProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(PrivateAccessProperties)
+@includeInapplicableMetadataInPayload(false)
+model PrivateAccess extends ProxyOnlyResource {
   @key("privateAccess")
   @segment("privateAccess")
   name: string;
+
+  /**
+   * PrivateAccess resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: PrivateAccessProperties;
 }
 
 @armResourceOperations

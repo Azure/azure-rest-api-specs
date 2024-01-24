@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1970,6 +1972,7 @@ model WorkbookTemplateUpdateParameters {
   /**
    * Metadata describing a workbook for an Azure resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WorkbookTemplateProperties;
 }
 
@@ -2310,6 +2313,7 @@ model WorkbookUpdateParameters {
   /**
    * Metadata describing a workbook for an Azure resource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: WorkbookPropertiesUpdateParameters;
 }
 
@@ -2401,6 +2405,7 @@ model ComponentLinkedStorageAccountsPatch {
   /**
    * The properties of the linked storage accounts.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LinkedStorageAccountsProperties;
 }
 
@@ -2457,6 +2462,7 @@ model OperationLive {
   /**
    * Properties of the operation
    */
+  @extension("x-ms-client-flatten", true)
   properties?: Record<unknown>;
 }
 

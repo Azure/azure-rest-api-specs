@@ -15,8 +15,12 @@ namespace Microsoft.IoTFirmwareDefense;
 /**
  * Firmware definition
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Workspace)
-model Firmware is ProxyResource<FirmwareProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FirmwareProperties)
+@includeInapplicableMetadataInPayload(false)
+model Firmware extends ProxyResourceBase {
   /**
    * The id of the firmware.
    */
@@ -24,6 +28,12 @@ model Firmware is ProxyResource<FirmwareProperties> {
   @key("firmwareId")
   @segment("firmwares")
   name: string;
+
+  /**
+   * The properties of a firmware
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FirmwareProperties;
 }
 
 @armResourceOperations

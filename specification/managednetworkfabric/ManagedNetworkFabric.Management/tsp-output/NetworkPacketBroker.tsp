@@ -14,7 +14,13 @@ namespace Microsoft.ManagedNetworkFabric;
 /**
  * The NetworkPacketBroker resource definition.
  */
-model NetworkPacketBroker is TrackedResource<NetworkPacketBrokerProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  NetworkPacketBrokerProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model NetworkPacketBroker extends TrackedResourceBase {
   /**
    * Name of the Network Packet Broker.
    */
@@ -22,6 +28,12 @@ model NetworkPacketBroker is TrackedResource<NetworkPacketBrokerProperties> {
   @key("networkPacketBrokerName")
   @segment("networkPacketBrokers")
   name: string;
+
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: NetworkPacketBrokerProperties;
 }
 
 @armResourceOperations

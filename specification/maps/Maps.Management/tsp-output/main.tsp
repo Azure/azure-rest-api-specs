@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
  * Azure Maps
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "AzureMapsManagementClient",
 })

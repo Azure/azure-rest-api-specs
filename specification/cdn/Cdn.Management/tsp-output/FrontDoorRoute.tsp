@@ -15,8 +15,12 @@ namespace Microsoft.Cdn;
 /**
  * Friendly Routes name mapping to the any Routes or secret related information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AFDEndpoint)
-model FrontDoorRoute is ProxyResource<RouteProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(RouteProperties)
+@includeInapplicableMetadataInPayload(false)
+model FrontDoorRoute extends ProxyResource {
   /**
    * Name of the routing rule.
    */
@@ -24,6 +28,12 @@ model FrontDoorRoute is ProxyResource<RouteProperties> {
   @key("routeName")
   @segment("routes")
   name: string;
+
+  /**
+   * The JSON object that contains the properties of the Routes to create.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RouteProperties;
 }
 
 @armResourceOperations

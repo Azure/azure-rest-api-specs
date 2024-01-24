@@ -15,8 +15,14 @@ namespace Microsoft.Blueprint;
 /**
  * Represents underlying deployment detail for each update to the blueprint assignment.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Assignment)
-model AssignmentOperation is ProxyResource<AssignmentOperationProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  AssignmentOperationProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AssignmentOperation extends ProxyResourceBase {
   /**
    * Name of the blueprint assignment operation.
    */
@@ -24,6 +30,12 @@ model AssignmentOperation is ProxyResource<AssignmentOperationProperties> {
   @key("assignmentOperationName")
   @segment("assignmentOperations")
   name: string;
+
+  /**
+   * Properties for AssignmentOperation.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AssignmentOperationProperties;
 }
 
 @armResourceOperations

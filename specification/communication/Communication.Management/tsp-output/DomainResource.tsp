@@ -15,8 +15,12 @@ namespace Microsoft.Communication;
 /**
  * A class representing a Domains resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(EmailServiceResource)
-model DomainResource is TrackedResource<DomainProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(DomainProperties)
+@includeInapplicableMetadataInPayload(false)
+model DomainResource extends TrackedResourceBase {
   /**
    * The name of the Domains resource.
    */
@@ -26,6 +30,12 @@ model DomainResource is TrackedResource<DomainProperties> {
   @key("domainName")
   @segment("domains")
   name: string;
+
+  /**
+   * The properties of a Domains resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DomainProperties;
 }
 
 @armResourceOperations

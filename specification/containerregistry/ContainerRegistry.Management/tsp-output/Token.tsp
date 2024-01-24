@@ -15,8 +15,12 @@ namespace Microsoft.ContainerRegistry;
 /**
  * An object that represents a token for a container registry.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Registry)
-model Token is ProxyResource<TokenProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(TokenProperties)
+@includeInapplicableMetadataInPayload(false)
+model Token extends ProxyResourceBase {
   /**
    * The name of the token.
    */
@@ -27,6 +31,12 @@ model Token is ProxyResource<TokenProperties> {
   @key("tokenName")
   @segment("tokens")
   name: string;
+
+  /**
+   * The properties of the token.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: TokenProperties;
 }
 
 @armResourceOperations

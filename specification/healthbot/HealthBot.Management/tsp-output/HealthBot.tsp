@@ -14,7 +14,11 @@ namespace Microsoft.HealthBot;
 /**
  * Azure Health Bot resource definition
  */
-model HealthBot is TrackedResource<HealthBotProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(HealthBotProperties)
+@includeInapplicableMetadataInPayload(false)
+model HealthBot extends TrackedResource {
   /**
    * The name of the Bot resource.
    */
@@ -26,8 +30,21 @@ model HealthBot is TrackedResource<HealthBotProperties> {
   @segment("healthBots")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * SKU of the Azure Health Bot.
+   */
+  sku: Sku;
+
+  /**
+   * The identity of the Azure Health Bot.
+   */
+  identity?: Identity;
+
+  /**
+   * The set of properties specific to Azure Health Bot resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: HealthBotProperties;
 }
 
 @armResourceOperations

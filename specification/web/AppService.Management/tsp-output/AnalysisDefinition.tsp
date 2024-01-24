@@ -15,8 +15,12 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Definition of Analysis
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(DiagnosticCategory)
-model AnalysisDefinition is ProxyResource<AnalysisDefinitionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(AnalysisDefinitionProperties)
+@includeInapplicableMetadataInPayload(false)
+model AnalysisDefinition extends ProxyOnlyResource {
   /**
    * Analysis Name
    */
@@ -24,6 +28,12 @@ model AnalysisDefinition is ProxyResource<AnalysisDefinitionProperties> {
   @key("analysisName")
   @segment("analyses")
   name: string;
+
+  /**
+   * AnalysisDefinition resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AnalysisDefinitionProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.Support;
 /**
  * Object that represents File Details resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FileWorkspaceDetails)
-model FileDetails is ProxyResource<FileDetailsProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FileDetailsProperties)
+@includeInapplicableMetadataInPayload(false)
+model FileDetails extends ProxyResourceBase {
   /**
    * File Name
    */
@@ -24,6 +28,12 @@ model FileDetails is ProxyResource<FileDetailsProperties> {
   @key("fileName")
   @segment("files")
   name: string;
+
+  /**
+   * Properties of the resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FileDetailsProperties;
 }
 
 @armResourceOperations

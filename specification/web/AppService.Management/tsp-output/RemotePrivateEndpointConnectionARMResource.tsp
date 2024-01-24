@@ -15,9 +15,14 @@ namespace Microsoft.CertificateRegistration;
 /**
  * Remote Private Endpoint Connection ARM resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(AppServiceEnvironmentResource)
-model RemotePrivateEndpointConnectionARMResource
-  is ProxyResource<RemotePrivateEndpointConnectionARMResourceProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  RemotePrivateEndpointConnectionARMResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model RemotePrivateEndpointConnectionARMResource extends ProxyOnlyResource {
   /**
    * Name of the private endpoint connection.
    */
@@ -25,6 +30,12 @@ model RemotePrivateEndpointConnectionARMResource
   @key("privateEndpointConnectionName")
   @segment("privateEndpointConnections")
   name: string;
+
+  /**
+   * RemotePrivateEndpointConnectionARMResource resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: RemotePrivateEndpointConnectionARMResourceProperties;
 }
 
 @armResourceOperations

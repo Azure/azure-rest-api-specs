@@ -15,8 +15,12 @@ namespace Microsoft.CustomerInsights;
 /**
  * The profile resource format.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Hub)
-model ProfileResourceFormat is ProxyResource<ProfileTypeDefinition> {
+@Azure.ResourceManager.Private.armResourceInternal(ProfileTypeDefinition)
+@includeInapplicableMetadataInPayload(false)
+model ProfileResourceFormat extends ProxyResource {
   /**
    * The name of the profile.
    */
@@ -24,6 +28,12 @@ model ProfileResourceFormat is ProxyResource<ProfileTypeDefinition> {
   @key("profileName")
   @segment("profiles")
   name: string;
+
+  /**
+   * The profile type definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: ProfileTypeDefinition;
 }
 
 @armResourceOperations

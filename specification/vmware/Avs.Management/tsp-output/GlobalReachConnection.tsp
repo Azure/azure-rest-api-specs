@@ -15,8 +15,14 @@ namespace Microsoft.AVS;
 /**
  * A global reach connection resource
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(PrivateCloud)
-model GlobalReachConnection is ProxyResource<GlobalReachConnectionProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  GlobalReachConnectionProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model GlobalReachConnection extends ProxyResourceBase {
   /**
    * Name of the global reach connection in the private cloud
    */
@@ -25,6 +31,12 @@ model GlobalReachConnection is ProxyResource<GlobalReachConnectionProperties> {
   @key("globalReachConnectionName")
   @segment("globalReachConnections")
   name: string;
+
+  /**
+   * The properties of a global reach connection resource
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GlobalReachConnectionProperties;
 }
 
 @armResourceOperations

@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -714,6 +716,7 @@ model ProductFamily {
    * Properties of product family
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: ProductFamilyProperties;
 }
 
@@ -741,6 +744,7 @@ model ProductLine {
    * Properties of product line
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: ProductLineProperties;
 }
 
@@ -763,6 +767,7 @@ model EdgeOrderProduct {
    * Properties of product
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: ProductProperties;
 }
 
@@ -785,6 +790,7 @@ model ProductConfiguration {
    * Properties of configuration
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: ConfigurationProperties;
 }
 
@@ -1168,6 +1174,7 @@ model ProductFamiliesMetadataDetails {
    * Product family properties
    */
   @visibility("read")
+  @extension("x-ms-client-flatten", true)
   properties?: ProductFamilyProperties;
 }
 
@@ -1583,6 +1590,7 @@ model AddressUpdateParameter {
   /**
    * Properties of a address to be updated.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: AddressUpdateProperties;
 
   /**
@@ -1613,6 +1621,7 @@ model OrderItemUpdateParameter {
   /**
    * Order item update properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OrderItemUpdateProperties;
 
   /**

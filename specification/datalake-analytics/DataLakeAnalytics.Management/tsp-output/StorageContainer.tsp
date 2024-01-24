@@ -15,8 +15,12 @@ namespace Microsoft.DataLakeAnalytics;
 /**
  * Azure Storage blob container information.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StorageAccountInformation)
-model StorageContainer is ProxyResource<StorageContainerProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(StorageContainerProperties)
+@includeInapplicableMetadataInPayload(false)
+model StorageContainer extends ProxyResourceBase {
   /**
    * The name of the Azure storage container to retrieve
    */
@@ -24,6 +28,12 @@ model StorageContainer is ProxyResource<StorageContainerProperties> {
   @key("containerName")
   @segment("containers")
   name: string;
+
+  /**
+   * The properties of the blob container.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: StorageContainerProperties;
 }
 
 @armResourceOperations

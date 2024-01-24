@@ -14,8 +14,13 @@ namespace Microsoft.Insights;
 /**
  * Definition of ARM tracked top level resource.
  */
-model DataCollectionEndpointResource
-  is TrackedResource<DataCollectionEndpointResourceProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  DataCollectionEndpointResourceProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model DataCollectionEndpointResource extends TrackedResourceBase {
   /**
    * The name of the data collection endpoint. The name is case insensitive.
    */
@@ -25,13 +30,23 @@ model DataCollectionEndpointResource
   name: string;
 
   /**
+   * The kind of the resource.
+   */
+  kind?: KnownDataCollectionEndpointResourceKind;
+
+  /**
    * Resource entity tag (ETag).
    */
   @visibility("read")
   etag?: string;
 
+  /**
+   * Resource properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: DataCollectionEndpointResourceProperties;
+
   ...Azure.ResourceManager.ManagedServiceIdentity;
-  ...Azure.ResourceManager.ResourceKind;
 }
 
 @armResourceOperations

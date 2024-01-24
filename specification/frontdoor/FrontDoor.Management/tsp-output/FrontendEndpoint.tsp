@@ -15,8 +15,12 @@ namespace Microsoft.Network;
 /**
  * A frontend endpoint used for routing.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(FrontDoor)
-model FrontendEndpoint is ProxyResource<FrontendEndpointProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(FrontendEndpointProperties)
+@includeInapplicableMetadataInPayload(false)
+model FrontendEndpoint extends FrontDoorResourceData {
   /**
    * Name of the Frontend endpoint which is unique within the Front Door.
    */
@@ -27,6 +31,12 @@ model FrontendEndpoint is ProxyResource<FrontendEndpointProperties> {
   @key("frontendEndpointName")
   @segment("frontendEndpoints")
   name: string;
+
+  /**
+   * Properties of the Frontend endpoint
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: FrontendEndpointProperties;
 }
 
 @armResourceOperations

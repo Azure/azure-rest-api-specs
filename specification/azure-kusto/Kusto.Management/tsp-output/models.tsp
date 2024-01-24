@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -892,6 +894,7 @@ model ClusterUpdate extends Resource {
   /**
    * The cluster properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ClusterProperties;
 }
 
@@ -1601,6 +1604,7 @@ model OutboundNetworkDependenciesEndpoint extends ProxyResource {
   /**
    * The outbound environment endpoint properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OutboundNetworkDependenciesEndpointProperties;
 
   /**
@@ -2165,6 +2169,7 @@ model ReadWriteDatabase extends Database {
   /**
    * The database properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ReadWriteDatabaseProperties;
 
   /**
@@ -2180,6 +2185,7 @@ model ReadOnlyFollowingDatabase extends Database {
   /**
    * The database properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ReadOnlyFollowingDatabaseProperties;
 
   /**
@@ -2195,6 +2201,7 @@ model EventHubDataConnection extends DataConnection {
   /**
    * The Event Hub data connection properties to validate.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EventHubConnectionProperties;
 
   /**
@@ -2210,6 +2217,7 @@ model IotHubDataConnection extends DataConnection {
   /**
    * The Iot Hub data connection properties.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: IotHubConnectionProperties;
 
   /**
@@ -2225,6 +2233,7 @@ model EventGridDataConnection extends DataConnection {
   /**
    * The properties of the Event Grid data connection.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: EventGridConnectionProperties;
 
   /**
@@ -2240,6 +2249,7 @@ model CosmosDbDataConnection extends DataConnection {
   /**
    * The properties of the CosmosDb data connection.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: CosmosDbDataConnectionProperties;
 
   /**
@@ -2291,11 +2301,13 @@ model OperationResult {
   /**
    * Properties of the operation results
    */
+  @extension("x-ms-client-flatten", true)
   properties?: OperationResultProperties;
 
   /**
    * Object that contains the error code and message if the operation failed.
    */
+  @extension("x-ms-client-flatten", true)
   error?: OperationResultErrorProperties;
 }
 

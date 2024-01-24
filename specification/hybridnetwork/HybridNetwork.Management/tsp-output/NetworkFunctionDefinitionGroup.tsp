@@ -15,9 +15,14 @@ namespace Microsoft.HybridNetwork;
 /**
  * Network function definition group resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(Publisher)
-model NetworkFunctionDefinitionGroup
-  is TrackedResource<NetworkFunctionDefinitionGroupPropertiesFormat> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  NetworkFunctionDefinitionGroupPropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model NetworkFunctionDefinitionGroup extends TrackedResourceBase {
   /**
    * The name of the network function definition group.
    */
@@ -27,6 +32,12 @@ model NetworkFunctionDefinitionGroup
   @key("networkFunctionDefinitionGroupName")
   @segment("networkFunctionDefinitionGroups")
   name: string;
+
+  /**
+   * Network function definition group properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NetworkFunctionDefinitionGroupPropertiesFormat;
 }
 
 @armResourceOperations

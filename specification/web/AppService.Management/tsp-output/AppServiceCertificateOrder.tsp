@@ -14,8 +14,13 @@ namespace Microsoft.CertificateRegistration;
 /**
  * SSL certificate purchase order.
  */
-model AppServiceCertificateOrder
-  is TrackedResource<AppServiceCertificateOrderProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  AppServiceCertificateOrderProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model AppServiceCertificateOrder extends Resource {
   /**
    * Name of the certificate order..
    */
@@ -23,6 +28,12 @@ model AppServiceCertificateOrder
   @key("certificateOrderName")
   @segment("certificateOrders")
   name: string;
+
+  /**
+   * AppServiceCertificateOrder resource specific properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: AppServiceCertificateOrderProperties;
 }
 
 @armResourceOperations

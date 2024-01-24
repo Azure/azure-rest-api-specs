@@ -15,8 +15,12 @@ namespace Microsoft.StreamAnalytics;
 /**
  * An input object, containing all information associated with the named input. All inputs are contained under a streaming job.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(StreamingJob)
-model Input is ProxyResource<InputProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(InputProperties)
+@includeInapplicableMetadataInPayload(false)
+model Input extends SubResource {
   /**
    * The name of the input.
    */
@@ -24,6 +28,12 @@ model Input is ProxyResource<InputProperties> {
   @key("inputName")
   @segment("inputs")
   name: string;
+
+  /**
+   * The properties that are associated with an input. Required on PUT (CreateOrReplace) requests.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: InputProperties;
 }
 
 @armResourceOperations

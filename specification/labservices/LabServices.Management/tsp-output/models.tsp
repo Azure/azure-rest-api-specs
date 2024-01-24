@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -532,6 +534,7 @@ model ImageUpdate {
   /**
    * Image resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ImageUpdateProperties;
 }
 
@@ -714,6 +717,7 @@ model LabPlanUpdate extends TrackedResourceUpdate {
   /**
    * Lab plan resource update properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LabPlanUpdateProperties;
 
   /**
@@ -1039,6 +1043,7 @@ model LabUpdate extends TrackedResourceUpdate {
   /**
    * Lab resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: LabUpdateProperties;
 }
 
@@ -1122,6 +1127,7 @@ model ScheduleUpdate {
   /**
    * Schedule resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ScheduleUpdateProperties;
 }
 
@@ -1408,6 +1414,7 @@ model UserUpdate {
   /**
    * User resource properties
    */
+  @extension("x-ms-client-flatten", true)
   properties?: UserUpdateProperties;
 }
 

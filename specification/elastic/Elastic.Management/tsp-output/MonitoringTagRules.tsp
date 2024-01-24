@@ -15,8 +15,12 @@ namespace Microsoft.Elastic;
 /**
  * Capture logs and metrics of Azure resources based on ARM tags.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ElasticMonitorResource)
-model MonitoringTagRules is ProxyResource<MonitoringTagRulesProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(MonitoringTagRulesProperties)
+@includeInapplicableMetadataInPayload(false)
+model MonitoringTagRules extends ProxyResourceBase {
   /**
    * Tag Rule Set resource name
    */
@@ -24,6 +28,12 @@ model MonitoringTagRules is ProxyResource<MonitoringTagRulesProperties> {
   @key("ruleSetName")
   @segment("tagRules")
   name: string;
+
+  /**
+   * Properties of the monitoring tag rules.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: MonitoringTagRulesProperties;
 }
 
 @armResourceOperations

@@ -108,9 +108,9 @@ model ChangeProperties {
   timeStamp?: utcDateTime;
 
   /**
-* The list of identities who might initiated the change.
-The identity could be user name (email address) or the object ID of the Service Principal.
-*/
+   * The list of identities who might initiated the change.
+   * The identity could be user name (email address) or the object ID of the Service Principal.
+   */
   initiatedByList?: string[];
 
   /**

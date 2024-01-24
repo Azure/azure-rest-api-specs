@@ -37,6 +37,7 @@ using TypeSpec.Versioning;
  * Self service experience for Azure Network Fabric API.
  */
 @armProviderNamespace
+@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Azure Network Fabric Management Service API",
 })

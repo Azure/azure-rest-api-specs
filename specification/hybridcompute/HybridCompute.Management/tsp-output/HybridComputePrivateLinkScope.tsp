@@ -14,8 +14,13 @@ namespace Microsoft.HybridCompute;
 /**
  * An Azure Arc PrivateLinkScope definition.
  */
-model HybridComputePrivateLinkScope
-  is TrackedResource<HybridComputePrivateLinkScopeProperties> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  HybridComputePrivateLinkScopeProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model HybridComputePrivateLinkScope extends TrackedResourceBase {
   /**
    * The name of the Azure Arc PrivateLinkScope resource.
    */
@@ -24,6 +29,12 @@ model HybridComputePrivateLinkScope
   @key("scopeName")
   @segment("privateLinkScopes")
   name: string;
+
+  /**
+   * Properties that define a Azure Arc PrivateLinkScope resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: HybridComputePrivateLinkScopeProperties;
 }
 
 @armResourceOperations

@@ -15,8 +15,12 @@ namespace Microsoft.ServiceFabric;
 /**
  * Describes a node type in the cluster, each node type represents sub set of nodes in the cluster.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ManagedCluster)
-model NodeType is ProxyResource<NodeTypeProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(NodeTypeProperties)
+@includeInapplicableMetadataInPayload(false)
+model NodeType extends ManagedProxyResource {
   /**
    * The name of the node type.
    */
@@ -25,7 +29,16 @@ model NodeType is ProxyResource<NodeTypeProperties> {
   @segment("nodeTypes")
   name: string;
 
-  ...Azure.ResourceManager.ResourceSku;
+  /**
+   * The node type sku.
+   */
+  sku?: NodeTypeSku;
+
+  /**
+   * The node type properties
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: NodeTypeProperties;
 }
 
 @armResourceOperations

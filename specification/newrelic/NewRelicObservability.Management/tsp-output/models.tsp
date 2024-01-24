@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -266,6 +268,7 @@ model AccountResource extends ProxyResource {
    * The resource-specific properties for this resource.
    */
   @visibility("read", "create")
+  @extension("x-ms-client-flatten", true)
   properties?: AccountProperties;
 }
 
@@ -543,6 +546,7 @@ model OrganizationResource extends ProxyResource {
    * The resource-specific properties for this resource.
    */
   @visibility("read", "create")
+  @extension("x-ms-client-flatten", true)
   properties?: OrganizationProperties;
 }
 
@@ -579,6 +583,7 @@ model PlanDataResource extends ProxyResource {
    * The resource-specific properties for this resource.
    */
   @visibility("read", "create")
+  @extension("x-ms-client-flatten", true)
   properties?: PlanDataProperties;
 }
 
@@ -619,6 +624,7 @@ model NewRelicMonitorResourceUpdate {
   /**
    * The updatable properties of the NewRelicMonitorResource.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: NewRelicMonitorResourceUpdateProperties;
 }
 
@@ -914,9 +920,9 @@ model LogRules {
   sendActivityLogs?: SendActivityLogsStatus;
 
   /**
-* List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.
-If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.
-*/
+   * List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.
+   * If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.
+   */
   filteringTags?: FilteringTag[];
 }
 
@@ -927,6 +933,7 @@ model TagRuleUpdate {
   /**
    * The updatable properties of the TagRule.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: TagRuleUpdateProperties;
 }
 

@@ -14,7 +14,13 @@ namespace Microsoft.MobileNetwork;
 /**
  * Mobile network resource.
  */
-model MobileNetwork is TrackedResource<MobileNetworkPropertiesFormat> {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  MobileNetworkPropertiesFormat
+)
+@includeInapplicableMetadataInPayload(false)
+model MobileNetwork extends TrackedResourceBase {
   /**
    * The name of the mobile network.
    */
@@ -24,6 +30,12 @@ model MobileNetwork is TrackedResource<MobileNetworkPropertiesFormat> {
   @key("mobileNetworkName")
   @segment("mobileNetworks")
   name: string;
+
+  /**
+   * Mobile network properties.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties: MobileNetworkPropertiesFormat;
 }
 
 @armResourceOperations

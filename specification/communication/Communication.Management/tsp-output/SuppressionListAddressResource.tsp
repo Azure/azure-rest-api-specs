@@ -15,9 +15,14 @@ namespace Microsoft.Communication;
 /**
  * A object that represents a SuppressionList record.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(SuppressionListResource)
-model SuppressionListAddressResource
-  is ProxyResource<SuppressionListAddressProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  SuppressionListAddressProperties
+)
+@includeInapplicableMetadataInPayload(false)
+model SuppressionListAddressResource extends ProxyResourceBase {
   /**
    * The id of the address in a suppression list.
    */
@@ -28,6 +33,12 @@ model SuppressionListAddressResource
   @key("addressId")
   @segment("suppressionListAddresses")
   name: string;
+
+  /**
+   * The properties of a SuppressionListAddress resource.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: SuppressionListAddressProperties;
 }
 
 @armResourceOperations
