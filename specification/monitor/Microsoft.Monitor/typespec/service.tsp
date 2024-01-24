@@ -27,10 +27,10 @@ enum ProvisioningState {
   ...ResourceProvisioningState,
 
   @doc("The resource is being created.")
-  Creating;
+  Creating,
 
   @doc("The resource is being deleted.")
-  Deleting;
+  Deleting,
 }
 
 @doc("The extended location info.")
@@ -45,7 +45,7 @@ model ExtendedLocation {
 @doc("The extended location type.")
 enum ExtendedLocationType {
   @doc("CustomLocation.")
-  CustomLocation;
+  CustomLocation,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
