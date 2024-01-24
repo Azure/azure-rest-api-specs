@@ -82,6 +82,15 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/RoutePolicies.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/common.json
 ```
+### Tag: package-2024-01-15
+
+These settings apply only when `--tag=package-2024-01-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-02-01-preview'
+input-file:
+  - Microsoft.ManagedNetworkFabric/stable/2024-01-15/InternetGatewayRules.json
+  - Microsoft.ManagedNetworkFabric/stable/2024-01-15/common.json
+```
 
 ---
 
