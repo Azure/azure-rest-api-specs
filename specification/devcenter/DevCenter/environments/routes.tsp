@@ -12,6 +12,7 @@ namespace DevCenterService;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface EnvironmentsOperations {
+  @summary("Lists the environments for a project.")
   @doc("Lists the environments for a project.")
   @route("/projects/{projectName}/environments")
   @get
@@ -28,6 +29,7 @@ interface EnvironmentsOperations {
     EnvironmentListResult
   >;
 
+  @summary("Lists the environments for a project and user.")
   @doc("Lists the environments for a project and user.")
   @route("/projects/{projectName}/users/{userId}/environments")
   @get
@@ -48,6 +50,7 @@ interface EnvironmentsOperations {
     EnvironmentListResult
   >;
 
+  @summary("Gets an environment")
   @doc("Gets an environment")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @get
@@ -68,6 +71,7 @@ interface EnvironmentsOperations {
     Environment
   >;
 
+  @summary("Creates or updates an environment.")
   @doc("Creates or updates an environment.")
   @finalOperation(EnvironmentsOperations.getEnvironment)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
@@ -104,6 +108,7 @@ interface EnvironmentsOperations {
   >;
 
   // FIXME
+  @summary("Deletes an environment and all its associated resources")
   @doc("Deletes an environment and all its associated resources")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
@@ -139,6 +144,7 @@ interface EnvironmentsOperations {
     statusCode: 204;
   } | Azure.Core.Foundations.ErrorResponse;
 
+  @summary("Lists all of the catalogs available for a project.")
   @doc("Lists all of the catalogs available for a project.")
   @route("/projects/{projectName}/catalogs")
   @get
@@ -155,6 +161,7 @@ interface EnvironmentsOperations {
     CatalogListResult
   >;
 
+  @summary("Gets the specified catalog within the project")
   @doc("Gets the specified catalog within the project")
   @route("/projects/{projectName}/catalogs/{catalogName}")
   @get
@@ -171,6 +178,7 @@ interface EnvironmentsOperations {
     Catalog
   >;
 
+  @summary("Lists all environment definitions available for a project.")
   @doc("Lists all environment definitions available for a project.")
   @route("/projects/{projectName}/environmentDefinitions")
   @get
@@ -187,6 +195,7 @@ interface EnvironmentsOperations {
     EnvironmentDefinitionListResult
   >;
 
+  @summary("Lists all environment definitions available within a catalog.")
   @doc("Lists all environment definitions available within a catalog.")
   @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions")
   @get
@@ -207,6 +216,7 @@ interface EnvironmentsOperations {
     EnvironmentDefinitionListResult
   >;
 
+  @summary("Get an environment definition from a catalog.")
   @doc("Get an environment definition from a catalog.")
   @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{definitionName}")
   @get
@@ -227,6 +237,7 @@ interface EnvironmentsOperations {
     EnvironmentDefinition
   >;
 
+  @summary("Lists all environment types configured for a project.")
   @doc("Lists all environment types configured for a project.")
   @route("/projects/{projectName}/environmentTypes")
   @get

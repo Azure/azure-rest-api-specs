@@ -15,6 +15,7 @@ interface DevCenterOperations {
   @get
   listProjects is Azure.Core.Foundations.Operation<
     {
+      @summary("An OData filter clause to apply to the operation.")
       @doc("An OData filter clause to apply to the operation.")
       @query
       filter?: string;
@@ -31,6 +32,7 @@ interface DevCenterOperations {
   @get
   getProject is Azure.Core.Foundations.Operation<
     {
+      @summary("The DevCenter Project upon which to execute operations.")
       @doc("The DevCenter Project upon which to execute operations.")
       @path
       projectName: string;

@@ -11,6 +11,7 @@ namespace DevCenterService;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface DevBoxesOperations {
+  @summary("Lists available pools")
   @doc("Lists available pools")
   @route("/projects/{projectName}/pools")
   @get
@@ -31,6 +32,7 @@ interface DevBoxesOperations {
     PoolListResult
   >;
 
+  @summary("Gets a pool")
   @doc("Gets a pool")
   @route("/projects/{projectName}/pools/{poolName}")
   @get
@@ -47,6 +49,7 @@ interface DevBoxesOperations {
     Pool
   >;
 
+  @summary("Lists available schedules for a pool.")
   @doc("Lists available schedules for a pool.")
   @route("/projects/{projectName}/pools/{poolName}/schedules")
   @get
@@ -71,6 +74,7 @@ interface DevBoxesOperations {
     ScheduleListResult
   >;
 
+  @summary("Gets a schedule.")
   @doc("Gets a schedule.")
   @route("/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}")
   @get
@@ -91,6 +95,7 @@ interface DevBoxesOperations {
     Schedule
   >;
 
+  @summary("Lists Dev Boxes in the project for a particular user.")
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
   @get
@@ -115,6 +120,7 @@ interface DevBoxesOperations {
     DevBoxListResult
   >;
 
+  @summary("Gets a Dev Box")
   @doc("Gets a Dev Box")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @get
@@ -135,6 +141,7 @@ interface DevBoxesOperations {
     DevBox
   >;
 
+  @summary("Creates or replaces a Dev Box.")
   @doc("Creates or replaces a Dev Box.")
   @finalOperation(DevBoxesOperations.getDevBox)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
@@ -172,6 +179,7 @@ interface DevBoxesOperations {
     }
   >;
 
+  @summary("Deletes a Dev Box.")
   @doc("Deletes a Dev Box.")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
@@ -206,6 +214,7 @@ interface DevBoxesOperations {
     }
   >;
 
+  @summary("Starts a Dev Box")
   @doc("Starts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start")
@@ -233,6 +242,7 @@ interface DevBoxesOperations {
     }
   >;
 
+  @summary("Stops a Dev Box")
   @doc("Stops a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:stop")
@@ -264,6 +274,7 @@ interface DevBoxesOperations {
     }
   >;
 
+  @summary("Restarts a Dev Box")
   @doc("Restarts a Dev Box")
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart")
@@ -291,6 +302,7 @@ interface DevBoxesOperations {
     }
   >;
 
+  @summary("Gets RDP Connection info")
   @doc("Gets RDP Connection info")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection")
   @get
@@ -311,6 +323,7 @@ interface DevBoxesOperations {
     RemoteConnection
   >;
 
+  @summary("Lists actions on a Dev Box.")
   @doc("Lists actions on a Dev Box.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions")
   @get
@@ -331,6 +344,7 @@ interface DevBoxesOperations {
     DevBoxActionsListResult
   >;
 
+  @summary("Gets an action.")
   @doc("Gets an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}")
   @get
@@ -355,6 +369,7 @@ interface DevBoxesOperations {
     DevBoxAction
   >;
 
+  @summary("Skips an occurrence of an action.")
   @doc("Skips an occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip")
   @post
@@ -379,6 +394,7 @@ interface DevBoxesOperations {
     void
   >;
 
+  @summary("Delays the occurrence of an action.")
   @doc("Delays the occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:delay")
   @post
@@ -407,6 +423,7 @@ interface DevBoxesOperations {
     DevBoxAction
   >;
 
+  @summary("Delays all actions.")
   @doc("Delays all actions.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay")
   @post
@@ -434,6 +451,7 @@ interface DevBoxesOperations {
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 interface DevBoxesDevCenterOperations {
+  @summary("Lists Dev Boxes that the caller has access to in the DevCenter.")
   @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
   @route("/devboxes")
   @get
@@ -450,6 +468,7 @@ interface DevBoxesDevCenterOperations {
     DevBoxListResult
   >;
 
+  @summary("Lists Dev Boxes in the Dev Center for a particular user.")
   @doc("Lists Dev Boxes in the Dev Center for a particular user.")
   @route("/users/{userId}/devboxes")
   @get
